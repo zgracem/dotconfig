@@ -1,0 +1,50 @@
+# -----------------------------------------------------------------------------
+# start SSH agent
+# based on: https://help.github.com/articles/working-with-ssh-key-passphrases
+# -----------------------------------------------------------------------------
+
+# don't use ~/.ssh/environment; it already has a different purpose in SSH
+envFile=$HOME/.ssh/agent.env
+
+# don't bother checking SSH_AGENT_PID: SSH itself doesn't use it, and it may be
+# incorrect (e.g., when using agent forwarding)
+
+agent_is_running()
+{
+    [[ $SSH_AUTH_SOCK ]] && {
+        ssh-add -l &>/dev/null || [[ $? -eq 1 ]]
+        # ssh-add returns:
+        #   0 = agent running w/ keys
+        #   1 = agent running w/out keys
+        #   2 = agent not running
+    } || {
+        return 1
+    }
+}
+
+agent_has_keys() {
+    ssh-add -l &>/dev/null
+}
+
+load_environment()
+{
+    source "$envFile" >/dev/null
+}
+
+start_agent()
+{
+    ssh-agent | sed 's/^echo/# echo/' >| "$envFile"
+    chmod 600 "$envFile"
+    source "$envFile" &>/dev/null
+}
+
+agent_is_running || load_environment
+
+agent_is_running && {
+    agent_has_keys || ssh-add
+} || {
+    start_agent
+    ssh-add
+}
+
+unset envFile
