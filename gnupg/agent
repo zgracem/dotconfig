@@ -1,0 +1,25 @@
+# -----------------------------------------------------------------------------
+# start GPG agent
+# -----------------------------------------------------------------------------
+
+type -P gpg-agent &>/dev/null ||
+    return
+
+GPG_ENV=${GNUPGHOME:-/tmp}/.gpg-agent-info
+
+start_gpg_agent()
+{
+    export GPG_TTY=$(tty)
+    gpg-agent --daemon --write-env-file $GPG_ENV &>/dev/null
+    chmod 600 $GPG_ENV
+}
+
+if [[ -f $GPG_ENV ]]; then
+    . "$GPG_ENV" &>/dev/null
+    export GPG_AGENT_INFO
+
+    command ps -ef | grep gpg-agent$ &>/dev/null ||
+        start_gpg_agent
+else
+    start_gpg_agent
+fi

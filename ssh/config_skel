@@ -1,0 +1,21 @@
+# -----------------------------------------------------------------------------
+# ~zozo/.ssh/config_skel
+# vim:ft=conf:fo-=a:fo-=t:
+# -----------------------------------------------------------------------------
+
+Host *
+    User zozo
+    SendEnv LANG LC_* TZ GIT_* TERM_PROGRAM solarizedBG
+    HashKnownHosts yes
+    VisualHostKey yes
+    Compression yes
+
+    #ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:8080 %h %p
+
+# -----------------------------------------------------------------------------
+# Back to My Mac
+# -----------------------------------------------------------------------------
+
+Host *.BTMM
+    AddressFamily inet6
+    Protocol 2
