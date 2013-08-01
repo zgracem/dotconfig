@@ -1,0 +1,4 @@
+source $HOME/.config/screenrc
+
+# if solarizedBG=light
+hardstatus string '%{= Wd} %-w%{+r}%n %t%{-}%+w %=%d/%m %{k}%0c%{-} '

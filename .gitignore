@@ -1,0 +1,40 @@
+# -----------------------------------------------------------------------------
+# ~zozo/.config/.gitignore
+# say hello: printf "zozo\x40inescapable\x2eorg"
+# -----------------------------------------------------------------------------
+
+# private bash configuration files
+**/private*
+
+# email
+alpine/.alpine-smime/
+alpine/addressbook
+alpine/alpine-passfile*
+alpine/signature
+**/email.conf
+
+# custom spellcheck dictionaries
+aspell/
+
+# GPG
+gnupg/
+!gnupg/agent
+!gnupg/gpg.conf
+
+# assorted crap
+local/
+misc/
+
+# SSH
+ssh/
+!ssh/agent
+!ssh/config_skel
+
+# http://ljcharm.sourceforge.net/
+charmrc
+
+# http://maebert.github.io/jrnl/
+jrnl_config
+
+# http://www.floodgap.com/software/ttytter/
+ttytter*

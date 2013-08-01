@@ -1,0 +1,30 @@
+# ------------------------------------------------------------------------------
+# ~zozo/.config/nethackrc
+# say hello: printf "zozo\x40inescapable\x2eorg"
+# ------------------------------------------------------------------------------
+
+# Controls
+
+OPTIONS=number_pad=0,!rest_on_space
+
+# Shhhh...
+
+OPTIONS=!cmdassist,!news,!splash_screen
+
+# Display
+
+OPTIONS=boulder:0,color,lit_corridor,sparkle,statuscolors
+OPTIONS=scores:5t 2a o
+
+# Interface
+
+OPTIONS=msghistory:100,msg_window:combination,player_selection:prompts
+OPTIONS=showexp,showscore,time
+
+# Gameplay
+
+OPTIONS=autodig,!autopickup,autoquiver,fruit:pomegranate,!mail,pushweapon
+
+# Pets
+
+OPTIONS=hilite_pet,pettype:cat,catname:Catface Meowmers,dogname:Toby
