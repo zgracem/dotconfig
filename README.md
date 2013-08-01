@@ -1,7 +1,10 @@
 dotfiles
 ========
-<<<<<<< HEAD
 
+These are the (redacted) contents of my `~/.config` directory.
 
-=======
->>>>>>> db71103b5a317fe890724108c6a99f255b6fc525
+I use OS X at home and Cygwin at work. These files should safely, sanely 
+operate on both, degrading and/or failing gracefully where they don't.
+
+I'm new to both `git` and GitHub; your patience is appreciated while I fumble
+my way through figuring all this out.
