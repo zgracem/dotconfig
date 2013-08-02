@@ -9,6 +9,7 @@ Host *
     HashKnownHosts yes
     VisualHostKey yes
     Compression yes
+    ConnectionAttempts 5
 
     #ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:8080 %h %p
 
