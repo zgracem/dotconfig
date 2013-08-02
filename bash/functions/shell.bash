@@ -14,6 +14,7 @@ theseFunctions=(
     lspath
     today
     flatten
+    relink
 )
 
 unset -f ${theseFunctions[@]}
@@ -90,6 +91,31 @@ flatten()
 
     find $targetDir -type f -mindepth 2 -exec mv {} $targetDir \;
     find $targetDir -type d -d -depth 1 -exec rm -rf {} \;
+}
+
+relink()
+{   # change the target of a symbolic link
+    declare link="$1" target="$2" error
+
+    # nothing to see here, folks...
+    [[ $link -ef $target ]] && return 0
+
+    # sanity checking
+    [[ -h $link ]]   || error="$link: not a symbolic link"
+    [[ -e $link ]]   || error="$link: not found"
+    [[ -e $target ]] || error="$target: not found"
+
+    [[ $error ]] && {
+        printf "%s: %s\n" "$FUNCNAME" "$error" 1>&2
+        return 1
+    }
+
+    command ln -s "$target" "$link.$$.tmp" &&
+    command mv -f "$link.$$.tmp" "$link" || {
+        command rm -f "$link.$$.tmp"
+        printf "%s: relink failed\n" "$FUNCNAME" "$error" 1>&2
+        return 1
+    }
 }
 
 # ------------------------------------------------------------------------------
