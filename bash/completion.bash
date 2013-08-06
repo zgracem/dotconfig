@@ -37,16 +37,18 @@ complete -aev -A function       unset
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
 
 # kill running processes
-__complete_killall()
-{
-    declare processes=($(command ps -cxo command))
-    declare cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $(compgen -W "${processes[*]}" -- $cur) )
-}
+_inPath killall && {
+    __complete_killall()
+    {
+        declare processes=($(command ps -cxo command))
+        declare cur=${COMP_WORDS[COMP_CWORD]}
+        COMPREPLY=( $(compgen -W "${processes[*]}" -- $cur) )
+    }
 
-complete -o default -o nospace \
-         -F __complete_killall \
-         killall
+    complete -o default -o nospace \
+             -F __complete_killall \
+             killall
+}
 
 # -----------------------------------------------------------------------------
 # misc. custom completions
