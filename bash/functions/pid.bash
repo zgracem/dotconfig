@@ -8,16 +8,21 @@ case $OSTYPE in
 esac
 
 pidof()
-{   # return the PID of process $1
-    declare proc="$1"
-    command ps $flags_pid |
-    egrep -io "\<[[:digit:]]+ .*\<$proc[^\\]*(\.exe)?$" |
-    cut -d" " -f1
+{   # return the PID of process $1 or exit false
+    declare proc="$1" pid
+
+    pid=$(command ps $flags_pid |
+        egrep -io "\<[[:digit:]]+ .*\<$proc[^\\]*(\.exe)?$" |
+        cut -d" " -f1)
+    
+    [[ $pid ]] && echo "$pid"
 }
 
 pidis()
-{   # return the process with PID $1
-    declare pid="$1"
-    command ps ${flags_pid/pid,/} -p $pid  |
-    tail -n+2
+{   # return the process with PID $1 or exit false
+    declare pid="$1" proc
+    proc=$(command ps ${flags_pid/pid,/} -p $pid  |
+        tail -n+2)
+
+    [[ $proc ]] && echo "$proc"
 }
