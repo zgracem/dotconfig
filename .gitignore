@@ -17,6 +17,7 @@ aspell/
 gnupg/*
 !gnupg/agent
 !gnupg/gpg.conf
+!gnupg/gpg-agent.conf
 
 # assorted crap
 local/
