@@ -6,7 +6,7 @@ _inPath gpg || return
 
 encrypt()
 {   # encrypt a file for my own use
-    declare inFile="$1" outFile="${inFile}.gpg"
+    declare inFile="$1" outFile="$1.gpg"
 
     gpg --recipient "$EMAIL" --output "$outFile" --encrypt "$inFile" &&
         echo "$inFile -> $outFile"
@@ -14,7 +14,7 @@ encrypt()
 
 decrypt()
 {   # corresponding decrypt function
-    declare inFile="$1" outFile="${inFile%.gpg}"
+    declare inFile="$1" outFile="${1%.gpg}"
 
     gpg --output "$outFile" --decrypt "$inFile" &&
         echo "$inFile -> $outFile"
