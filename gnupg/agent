@@ -37,3 +37,5 @@ if gpg_agent_is_running; then
 else
     start_gpg_agent
 fi
+
+unset envFile
