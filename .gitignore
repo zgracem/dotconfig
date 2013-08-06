@@ -1,16 +1,13 @@
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------
 # ~zozo/.config/.gitignore
 # say hello: printf "zozo\x40inescapable\x2eorg"
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------
 
 # private bash configuration files
 **/private*
 
 # email
-alpine/.alpine-smime/
-alpine/addressbook
-alpine/alpine-passfile*
-alpine/signature
+alpine/
 **/email.conf
 
 # custom spellcheck dictionaries
