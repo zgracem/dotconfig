@@ -31,24 +31,38 @@ fprint()
     }
 }
 
-whichfunction()
-{
+where()
+{   # ...was this function defined?
+    declare func="$1" sourceFile lineNo
+
+    declare -f $func 1>/dev/null || {
+        printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
+        return 1
+    }
+
     [[ $BASHOPTS =~ extdebug ]] || {
         declare extdebug=true
         shopt -s extdebug
     }
 
-    declare func="$1" sourceFile lineNo
     sourceFile="$(declare -F $func | cut -d" " -f3-)"
     lineNo="$(declare -F $func | cut -d" " -f2)"
 
-    fprint "${sourceFile}:${lineNo}" "(.+):([0-9]+)" \
-        $colour_functionFile,$colour_functionLine normal
-
-    fprint "$(declare -f "$func" | tail -n +1)" -s bash
+    printf "%s:%d\n" $sourceFile $lineNo
 
     [[ $extdebug ]] &&
         shopt -u extdebug
+}
+
+whichfunction()
+{
+    declare func="$1" location
+    location="$(where "$func")"
+
+    fprint "$location" "(.+):([0-9]+)" \
+        $colour_functionFile,$colour_functionLine normal
+
+    fprint "$(declare -f "$func" | tail -n +1)" -s bash
 }
 
 whichalias()
