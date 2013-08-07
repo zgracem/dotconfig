@@ -67,7 +67,6 @@ done
 
 alias curl="curl -K $dir_config/curlrc "
 
-export GNUPGHOME="$dir_config/gnupg"
 export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"
 export SCREENRC="$dir_config/screenrc"
