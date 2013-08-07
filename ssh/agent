@@ -9,7 +9,7 @@ envFile=$HOME/.ssh/agent.env
 # don't bother checking SSH_AGENT_PID: SSH itself doesn't use it, and it may be
 # incorrect (e.g., when using agent forwarding)
 
-ssh_agent_is_running()
+agent_is_running()
 {
     [[ $SSH_AUTH_SOCK ]] && {
         ssh-add -l &>/dev/null || [[ $? -eq 1 ]]
@@ -22,33 +22,29 @@ ssh_agent_is_running()
     }
 }
 
-ssh_agent_has_keys() {
+agent_has_keys() {
     ssh-add -l &>/dev/null
 }
 
-load_ssh_environment()
+load_environment()
 {
-    source "$envFile" &>/dev/null
+    source "$envFile" >/dev/null
 }
 
-start_ssh_agent()
+start_agent()
 {
     ssh-agent | sed 's/^echo/# echo/' >| "$envFile"
     chmod 600 "$envFile"
-    load_ssh_environment
+    source "$envFile" &>/dev/null
 }
 
-if ssh_agent_is_running; then
-    load_ssh_environment
-fi
+agent_is_running || load_environment
 
-if ssh_agent_is_running; then
-    if ssh_agent_has_keys; then
-        ssh-add
-    fi
-else
-    start_ssh_agent
+agent_is_running && {
+    agent_has_keys || ssh-add
+} || {
+    start_agent
     ssh-add
-fi
+}
 
 unset envFile

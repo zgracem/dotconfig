@@ -5,35 +5,21 @@
 type -P gpg-agent &>/dev/null ||
     return
 
-envFile=${GNUPGHOME:-/tmp}/agent.env
-
-gpg_agent_is_running()
-{
-    declare gpgPID=$(echo $GPG_AGENT_INFO | cut -d: -f2)
-    [[ $gpgPID ]] && {
-        command ps -p "$gpgPID" &>/dev/null
-    } || {
-        return 1
-    }
-}
-
-load_gpg_environment()
-{
-    source "$envFile" &>/dev/null
-}
+GPG_ENV=${GNUPGHOME:-/tmp}/.gpg-agent-info
 
 start_gpg_agent()
 {
+    export GPG_TTY=$(tty)
     gpg-agent --daemon --write-env-file $GPG_ENV &>/dev/null
-    chmod 600 "$envFile"
-    load_gpg_environment
-
-    export GPG_AGENT_INFO
-    export GPG_TTY=$(tty) # for PIN entry program, if any
+    chmod 600 $GPG_ENV
 }
 
-if gpg_agent_is_running; then
-    load_gpg_environment
+if [[ -f $GPG_ENV ]]; then
+    . "$GPG_ENV" &>/dev/null
+    export GPG_AGENT_INFO
+
+    command ps -ef | grep gpg-agent$ &>/dev/null ||
+        start_gpg_agent
 else
     start_gpg_agent
 fi
