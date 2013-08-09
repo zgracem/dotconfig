@@ -6,9 +6,9 @@
 
 set nocompatible                " use vim settings, rather than vi settings
 
-" set runtimepath =$HOME/.vim
-" set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
-" set runtimepath+=$HOME/.vim/after
+set runtimepath =$HOME/.vim
+set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
+set runtimepath+=$HOME/.vim/after
 
 silent! call pathogen#infect()
 silent! call pathogen#helptags()
