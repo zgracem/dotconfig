@@ -32,7 +32,10 @@ _isGNU()
 
 getPath()
 {   # returns the full path to $1
-    declare bin=$(builtin type -P "$1" 2>/dev/null) || return 1
+    declare bin
+    
+    bin=$(builtin type -P "$1" 2>/dev/null) || 
+        return 1
 
     printf "%q" "$bin"
 }
