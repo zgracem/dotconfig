@@ -110,18 +110,19 @@ export ${!LESS_TERMCAP_*}
 # ls
 # -----------------------------------------------------------------------------
 
-dir_colours="$HOME/.dir_colors"
+colourDir="$HOME/share/dircolors"
 
-if _inPath dircolors && [[ -d $dir_colours ]]; then
+if _inPath dircolors && [[ -d $colourDir ]]; then
     case $solarizedBG in
         light|dark)
-            colourFile="$dir_colours/solarized.$solarizedBG"
+            colourFile="$colourDir/solarized.$solarizedBG"
             ;;
         *)
-            colourFile="$dir_colours/default"
+            colourFile="$colourDir/default"
             ;;
     esac
 
+    # sets and exports $LS_COLORS
     eval $(dircolors -b $colourFile)
 else
     # http://geoff.greer.fm/lscolors/
