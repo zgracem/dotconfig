@@ -67,9 +67,9 @@ HISTFILE="$HOME/.bash_history"
 HISTSIZE=4096               # remember 2^8 commands per session
 HISTFILESIZE=65536          # store 2^16 lines in .bash_history
 HISTCONTROL=ignoredups:ignorespace:erasedups
-HISTIGNORE='-:*..*:[bf]g:cd:clear:exit:hist*:ls:pwd:rl:which *:wtf:* --help:\:wq'
+HISTIGNORE='-:..:[bf]g:cd:clear:exit:hist*:ls:pwd:rl:which *:wtf:* --help:\:wq'
 HISTTIMEFORMAT="%F %T "
-PROMPT_COMMAND="history -n; history -a"
+PROMPT_COMMAND="history -a; history -n"
 
 # -----------------------------------------------------------------------------
 # start agents
