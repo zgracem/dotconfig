@@ -1,7 +1,7 @@
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # ~zozo/.config/inputrc
 # say hello: printf "zozo\x40inescapable\x2eorg"
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 # vi mode
 set editing-mode vi
@@ -42,6 +42,9 @@ set convert-meta off
 
 # readline uses a visible bell if available
 set bell-style visible
+
+# don't echo ^C when aborting commands
+set echo-control-characters off
 
 # -----------
 # keybindings
