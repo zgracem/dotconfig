@@ -4,26 +4,29 @@
 # -----------------------------------------------------------------------------
 
 # user's personal calendar
-calUserFile="$HOME/.calendar"
+calendarFile="$HOME/.local/calendar"
 
 # do we have calendar(1) + a calendar file?
-if calBin=$(getPath calendar) && [[ -e $calUserFile ]]; then
-    calToday=$(command date +"%y%m%d0000")
-
+if _inPath calendar && [[ -e $calendarFile ]]; then
     # set up reference files
-    calRefFile="$HOME/share/calendar/.last"
-    calCheckFile="$HOME/share/calendar/.today"
+    referenceFile="$HOME/.local/.calendar.last"
+    checkFile="$HOME/.local/.calendar.today"
 
-    command touch -t "$calToday" "$calCheckFile"
+    # set last-modified date of comparison file to today at midnight
+    dateToday=$(command date +"%y%m%d0000")
+    command touch -t "$dateToday" "$checkFile"
 
     # have we done this yet today?
-    [[ $calCheckFile -nt $calRefFile ]] && {
-        "$calBin" -A0 -f "$calUserFile" && {
-            command touch -t "$calToday" "$calRefFile"
-            command rm "$calCheckFile"
+    [[ $checkFile -nt $referenceFile ]] && {
+        # get "this day in history"
+        calendar -A0 -f "$calendarFile" && {
+            # set last-modified date of reference file to today at midnight
+            command touch -t "$dateToday" "$referenceFile"
+            # delete comparison file
+            command rm -f "$checkFile"
         }
     }
 
 fi
 
-unset calUserFile calBin calToday calRefFile calCheckFile
+unset dateToday {calendar,reference,check}File
