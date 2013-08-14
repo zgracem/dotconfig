@@ -25,7 +25,7 @@ alias tophist="history | awk '{print \$4}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | 
 # -----------------------------------------------------------------------------
 
 # lazy
-alias c="$dir_scripts/countdown.sh '2013-10-01 00:00:00 -0500'"
+alias c="$dir_scripts/countdown.sh '2013-09-05 20:13:00 -0500'"
 alias e="echo"
 alias psi="python setup.py install"
 alias qpb='q "$(pbpaste)"'
