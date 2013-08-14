@@ -159,12 +159,10 @@ what()
         file)
             case $(file --mime --dereference --brief --preserve-date $(type -p "$thing")) in
                 application/*)
-                    if command man -w "$thing" &>/dev/null; then
-                        man "$thing"
-                    else
+                    man "$thing" 2>/dev/null || {
                         printf "%s: '%s' compiled executable or unsupported format\n" $FUNCNAME "$thing" 1>&2
                         printf "No man page installed for %s. Try \`%s --help\` or \`-h\`." "$thing" 1>&2
-                    fi
+                    }
                     ;;
                 *)  file --no-dereference --preserve-date --uncompress "$thing"
                     ;;
