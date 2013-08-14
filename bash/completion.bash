@@ -28,6 +28,7 @@ done
 complete -bck                   command
 complete -abcfk -A function -A helptopic \
                                 man type what which
+complete -A function            fe where
 complete -defv -A hostname      scp sftp ssh
 complete -abcf -A function      sudo
 complete -defv                  trash
