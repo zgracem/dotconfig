@@ -4,15 +4,17 @@
 # colour definitions (requires colout: https://github.com/nojhan/colout)
 # ------------------------------------------------------------------------------
 
+colour_functionName=blue
 colour_functionFile=blue
 colour_functionLine=cyan
 colour_aliasName=green
-colour_aliasValue=yellow
-colour_builtin=cyan
-colour_keyword=blue
+colour_aliasValue=cyan
+colour_specialName=yellow
+colour_builtin=$colour_specialName
+colour_keyword=$colour_specialName
 colour_specialDef=none
 colour_fileName=none
-colour_filePath=green
+colour_filePath=cyan
 
 # ------------------------------------------------------------------------------
 # which(): a better version of `type` -- with colouring!
@@ -33,7 +35,7 @@ fprint()
 
 where()
 {   # ...was this function defined?
-    declare func="$1" sourceFile lineNo
+    declare func="$1"
 
     declare -f $func 1>/dev/null || {
         printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
@@ -45,10 +47,7 @@ where()
         shopt -s extdebug
     }
 
-    sourceFile="$(declare -F $func | cut -d" " -f3-)"
-    lineNo="$(declare -F $func | cut -d" " -f2)"
-
-    printf "%s:%d\n" $sourceFile $lineNo
+    declare -F $func | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/"
 
     [[ $extdebug ]] &&
         shopt -u extdebug
@@ -57,7 +56,7 @@ where()
 whichfunction()
 {
     declare func="$1" location
-    location="$(where "$func")"
+    location="$(where "$func")" || return 1
 
     fprint "$location" "(.+):([0-9]+)" \
         $colour_functionFile,$colour_functionLine normal
@@ -67,14 +66,12 @@ whichfunction()
 
 whichalias()
 {
-    declare name="$1" target ERE
+    declare name="$1" target
 
-    _isGNU sed && ERE=r || ERE=E
+    target="$(alias $name 2>/dev/null |
+        sed -E "s/(^.+=')|(\\\'')|('$)//g")" # strip and unescape single quotes
 
-    target="$(alias $name | sed -$ERE \
-        -e "s/^.+='//" \
-        -e "s/'$//" \
-        -e "s/\\\''//g")"
+    [[ $target ]] || return 1
 
     fprint "$name is aliased to \`$target'" "(^$name).*\`(.+)'$" \
         $colour_aliasName,$colour_aliasValue normal
@@ -110,6 +107,8 @@ whichfile()
     declare name="$1" fileName
     declare -a fileNames=($(builtin type -ap $name))
 
+    [[ ${#fileNames[@]} -gt 0 ]] || return 1
+
     for fileName in ${fileNames[@]}; do
         fprint "$name is $fileName" "(^$name) is (.+)$" \
             $colour_fileName,$colour_filePath normal
@@ -127,48 +126,55 @@ which()
     }
 
     for thingType in ${thingTypes[@]}; do
-        case $thingType in
-            function|alias|builtin|keyword)
-                which${thingType} "$thing"
-                ;;
-            file)
-                whichfile "$thing"
-                ;;
-        esac
+        which${thingType} "$thing"
     done
 }
 
 # ------------------------------------------------------------------------------
 
 what()
-{   # automatic documentation for shell commands
-    # based on http://crunchbanglinux.org/forums/post/131229/#p131229
+{   # provide a synopsis of $1
     declare thing="$1"
-    declare thingType="$(type -t "$thing")" || {
-        printf "%s: '%s' not recognized\n" $FUNCNAME "$thing" 1>&2
+    declare helpString failString='nothing appropriate$'
+
+    # is it in the whatis database?
+    helpString="$(whatis "$thing" |
+        grep "^$thing\>" -m1 |
+        sed -E "s/^($thing)[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/\1\2: \3/g")"
+
+    [[ $helpString && ! $helpString =~ $failString ]] && {
+        fprint "$helpString" "^$thing" \
+            $colour_fileName normal
+        return 0
+    }
+
+    # then what is it?
+    declare -a thingTypes=($(builtin type -at $thing | uniq))
+
+    [[ ${#thingTypes[@]} -gt 0 ]] || {
+        printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
         return 1
     }
 
-    case "$thingType" in
-        alias|function)
-            which "$thing"
-            ;;
-        builtin|keyword)
-            help -m "$thing" | $PAGER
-            ;;
-        file)
-            case $(file --mime --dereference --brief --preserve-date $(type -p "$thing")) in
-                application/*)
-                    man "$thing" 2>/dev/null || {
-                        printf "%s: '%s' compiled executable or unsupported format\n" $FUNCNAME "$thing" 1>&2
-                        printf "No man page installed for %s. Try \`%s --help\` or \`-h\`." "$thing" 1>&2
-                    }
-                    ;;
-                *)  file --no-dereference --preserve-date --uncompress "$thing"
-                    ;;
-            esac
-            ;;
-    esac
+    for thingType in ${thingTypes[@]}; do
+        case "$thingType" in
+            alias)
+                whichalias "$thing"
+                ;;
+            function)
+                fprint "$thing is a function" "^$thing" \
+                    $colour_functionName normal
+                ;;
+            builtin|keyword)
+                helpString="$(builtin help -d "$thing" 2>/dev/null)" &&
+                    fprint "$thing ($thingType): ${helpString#* - }" "^$thing" \
+                        $colour_specialName normal
+                ;;
+            file)
+                whichfile "$thing"
+                ;;
+        esac
+    done
 }
 
 vimhelp()
