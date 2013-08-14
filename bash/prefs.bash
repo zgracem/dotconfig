@@ -65,7 +65,7 @@ done
 # settings -- config files
 # -----------------------------------------------------------------------------
 
-alias curl="curl -K $dir_config/curlrc "
+alias curl="curl -K $dir_config/curlrc"
 
 export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"

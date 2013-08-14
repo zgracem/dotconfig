@@ -32,12 +32,12 @@ alias qpb='q "$(pbpaste)"'
 alias s="screen -d -R "
 alias t="tmux attach 2>&- || tmux -2 new-session"
 
-# open in a new window if GNU screen is running (see functions/window.bash)
+# open in a new window if GNU screen is running (see functions/newwin.bash)
 alias alpine="newwin alpine $flags_alpine"
 alias bt="newwin --title transmission $dir_mybin/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
-alias twitter="newwin $dir_mybin/ttytter.pl"
-alias vim='newwin vim '
+alias twitter="newwin --title twitter $dir_mybin/ttytter.pl"
+alias vim='newwin vim'
 
 # misc.
 alias :wq="exit"
@@ -51,8 +51,8 @@ alias pingg="ping -c 4 google.com"  # check network connection
 alias rootme="sudo STY=$STY TMOUT=180 -s"   # logout after 3 min. inactivity
 alias unmount="umount"
 
-alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g' "
-alias newpw="$dir_scripts/newpassword.sh -l 16 -d $(((RANDOM%3)+4)) -s $(((RANDOM%3)+2)) -bc "
+alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
+alias newpw="$dir_scripts/newpassword.sh -l 16 -d $(((RANDOM%3)+4)) -s $(((RANDOM%3)+2)) -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 
 # alias foo='~/scripts/foo.sh'
