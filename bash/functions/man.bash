@@ -5,11 +5,11 @@
 
 man()
 {   # open man page in a new window with a helpful title
-    declare switchRegex='\<-.*[dfhkwW]'
 
     # some switches don't open a manpage; pass those through
+    declare switchRegex="[[:space:]]?-[[:alpha:]]*[dfhkwW]"
     [[ $@ =~ $switchRegex ]] && {
-        command man "$@"
+        command man $@
         return $?
     }
 
@@ -27,8 +27,9 @@ man()
     declare manpageTitle=$(command man "$@" 2>&- |
         grep ^. |                       # ignore leading blank line
         head -n1 |                      # get first line of manpage
-        cut -d" " -f1 |                 # get first "field" in line
-        tr '[[:upper:]]' '[[:lower:]]') # lowercase for aesthetics
+        cut -d" " -f1)                  # get first "field" in line
+
+    manpageTitle="${manpageTitle,,}"    # lowercase for aesthetics
 
     # open the new window
     if [[ $STY ]]; then
