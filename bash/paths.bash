@@ -44,11 +44,6 @@ INFOPATH=/usr/share/info
         MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
     }
 
-    [[ -d $(brew --prefix findutils)/bin ]] && {
-        PATH="$(brew --prefix findutils)/bin:$PATH"
-        MANPATH="$(brew --prefix findutils)/share/man:$MANPATH"
-    }
-
     [[ -d $(brew --prefix gnu-sed)/libexec/gnubin ]] && {
         PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
         MANPATH="$(brew --prefix gnu-sed)/libexec/gnuman:$MANPATH"
@@ -59,6 +54,11 @@ INFOPATH=/usr/share/info
 [[ -d /usr/X11 ]] && {
     PATH=$PATH:/usr/X11/bin
     MANPATH=$MANPATH:/usr/X11/share/man
+}
+
+[[ -d /usr/X11R6 ]] && {
+    PATH=$PATH:/usr/X11R6/bin
+    MANPATH=$MANPATH:/usr/X11R6/share/man
 }
 
 # gcc tools
