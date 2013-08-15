@@ -1,24 +1,22 @@
 # ------------------------------------------------------------------------------
 # ~zozo/.config/bash/functions/help.bash
 # ------------------------------------------------------------------------------
-# colour definitions (requires colout: https://github.com/nojhan/colout)
+# colour -- requires colout: https://github.com/nojhan/colout
 # ------------------------------------------------------------------------------
 
-colour_functionName=blue
-colour_functionFile=blue
-colour_functionLine=cyan
-colour_aliasName=green
-colour_aliasValue=cyan
-colour_specialName=yellow
-colour_builtin=$colour_specialName
-colour_keyword=$colour_specialName
-colour_specialDef=none
-colour_fileName=none
-colour_filePath=cyan
-
-# ------------------------------------------------------------------------------
-# which(): a better version of `type` -- with colouring!
-# ------------------------------------------------------------------------------
+_inPath colout && {
+    colour_functionName=blue
+    colour_functionFile=blue
+    colour_functionLine=cyan
+    colour_aliasName=green
+    colour_aliasValue=cyan
+    colour_specialName=yellow
+    colour_builtin=$colour_specialName
+    colour_keyword=$colour_specialName
+    colour_specialDef=none
+    colour_fileName=none
+    colour_filePath=cyan
+}
 
 fprint()
 {   # fancy print function
@@ -27,48 +25,21 @@ fprint()
     declare output="$1" regex="$2"; shift 2
 
     _inPath colout && {
-        builtin printf "%s\n" "$output" | colout "$regex" $*
+        printf "%s\n" "$output" | colout "$regex" $*
     } || {
-        builtin printf "%s\n" "$output"
+        printf "%s\n" "$output"
     }
 }
 
-where()
-{   # ...was this function defined?
-    declare func="$1"
-
-    declare -f $func 1>/dev/null || {
-        printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
-        return 1
-    }
-
-    [[ $BASHOPTS =~ extdebug ]] || {
-        declare extdebug=true
-        shopt -s extdebug
-    }
-
-    declare -F $func | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/"
-
-    [[ $extdebug ]] &&
-        shopt -u extdebug
-}
-
-whichfunction()
-{
-    declare func="$1" location
-    location="$(where "$func")" || return 1
-
-    fprint "$location" "(.+):([0-9]+)" \
-        $colour_functionFile,$colour_functionLine normal
-
-    fprint "$(declare -f "$func" | tail -n +1)" -s bash
-}
+# -----------------------------------------------------------------------------
+# support functions
+# -----------------------------------------------------------------------------
 
 whichalias()
-{
+{   # like `type [alias]`, but prettier
     declare name="$1" target
 
-    target="$(alias $name 2>/dev/null |
+    target="$(alias "$name" 2>/dev/null |
         sed -E "s/(^.+=')|(\\\'')|('$)//g")" # strip and unescape single quotes
 
     [[ $target ]] || return 1
@@ -78,34 +49,24 @@ whichalias()
 }
 
 whichspecial()
-{
-    declare name="$1" thingType="$2" desc colour
+{   # like `type [name]`, but prettier
+    declare name="$1" desc
+    declare thingType="$(type -t $name)"
+    declare colour=$(eval "echo -n \$colour_$thingType")
 
-    case $thingType in
-        builtin)
-            thingType="shell builtin"
-            colour=$colour_builtin
-            ;;
-        keyword)
-            colour=$colour_keyword
-            ;;
-    esac
+    desc="$name is a shell $thingType"
 
-    desc="$name is a $thingType"
-
+    # so colout doesn't choke on `[[`
     printf -v name "%q" "$name"
 
     fprint "$desc" "(^$name) is a (.+)$" \
         $colour,$colour_specialDef normal
 }
 
-whichbuiltin() { whichspecial "$1" builtin; }
-whichkeyword() { whichspecial "$1" keyword; }
-
 whichfile()
-{
+{   # like `type -p [file]`, but... you get the idea
     declare name="$1" fileName
-    declare -a fileNames=($(builtin type -ap $name))
+    declare -a fileNames=($(type -ap $name))
 
     [[ ${#fileNames[@]} -gt 0 ]] || return 1
 
@@ -115,41 +76,79 @@ whichfile()
     done
 }
 
-which()
-{
-    declare thing="$1" thingType
-    declare -a thingTypes=($(builtin type -at $thing | uniq))
+gethelp()
+{   # return a short description of builtin command $1
+    declare topic="$1" helpString
 
-    [[ ${#thingTypes[@]} -gt 0 ]] || {
-        printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
+    helpString="$(help -d "$topic" 2>/dev/null)" ||
         return 1
-    }
 
-    for thingType in ${thingTypes[@]}; do
-        which${thingType} "$thing"
+    echo "${helpString#* - }"
+}
+
+synopsis()
+{   # return a short description of system command $1
+    declare thing="$1" line
+    declare goodString="^$thing[^[:alnum:]]" failString='nothing appropriate$'
+
+    whatis "$thing" | while read line; do
+        # if not found in whatis database
+        [[ $line =~ $failString ]] &&
+            return 1
+
+        # skip builtins and non-whole-word matches
+        [[ $line =~ "bash built-in command" || ! $line =~ $goodString ]] &&
+            continue
+
+        # output e.g. "grep(1): blah blah blah..."
+        echo "$line" |
+            sed -E "s/^($thing)[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/\1\2: \3/g"
     done
 }
 
-# ------------------------------------------------------------------------------
+where()
+{   # return filename and line number where function $1 was defined
+    declare func="$1"
 
-what()
-{   # provide a synopsis of $1
-    declare thing="$1"
-    declare helpString failString='nothing appropriate$'
-
-    # is it in the whatis database?
-    helpString="$(whatis "$thing" |
-        grep "^$thing\>" -m1 |
-        sed -E "s/^($thing)[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/\1\2: \3/g")"
-
-    [[ $helpString && ! $helpString =~ $failString ]] && {
-        fprint "$helpString" "^$thing" \
-            $colour_fileName normal
-        return 0
+    declare -f "$func" 1>/dev/null || {
+        printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
+        return 1
     }
 
-    # then what is it?
-    declare -a thingTypes=($(builtin type -at $thing | uniq))
+    # enable debugging behaviour if not
+    [[ $BASHOPTS =~ extdebug ]] || {
+        declare extdebug=true
+        shopt -s extdebug
+    }
+
+    # [name] [line] [file] -> [file]:[line]
+    declare -F "$func" | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/"
+
+    # back to normal debugging behaviour
+    [[ $extdebug ]] &&
+        shopt -u extdebug
+}
+
+functionsrc()
+{   # return location and source code of function $1
+    declare func="$1" location
+    location="$(where "$func")" || return 1
+
+    fprint "${location/#$HOME/~}" "(.+):([0-9]+)" \
+        $colour_functionFile,$colour_functionLine normal
+
+    # skip "$1 is a function" line and colourize source
+    fprint "$(declare -f "$func" | tail -n+1)" -s bash
+}
+
+# ------------------------------------------------------------------------------
+# which(): a better version of `type`
+# ------------------------------------------------------------------------------
+
+which()
+{   # return location/nature of $1
+    declare thing="$1" thingType
+    declare -a thingTypes=($(type -at $thing | uniq))
 
     [[ ${#thingTypes[@]} -gt 0 ]] || {
         printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
@@ -166,9 +165,7 @@ what()
                     $colour_functionName normal
                 ;;
             builtin|keyword)
-                helpString="$(builtin help -d "$thing" 2>/dev/null)" &&
-                    fprint "$thing ($thingType): ${helpString#* - }" "^$thing" \
-                        $colour_specialName normal
+                whichspecial "$thing"
                 ;;
             file)
                 whichfile "$thing"
@@ -176,6 +173,73 @@ what()
         esac
     done
 }
+
+# -----------------------------------------------------------------------------
+# what(): a brief synopsis of commands, programs and topics
+# -----------------------------------------------------------------------------
+
+what()
+{   # Usage: what [topic]    -- first result
+    #        what -a [topic] -- all results
+
+    declare thing thingType helpString showAll
+    declare -a thingTypes
+
+    [[ $1 == "-a" ]] && {
+        showAll=true
+        shift
+    }
+
+    thing="$1"
+
+    # is it in the whatis database?
+    helpString="$(synopsis "$thing")"
+
+    [[ $showAll ]] && {
+        thingTypes=($(type -at $thing | uniq))
+    } || {
+        thingTypes=($(type -t "$thing"))
+    }
+
+    [[ ${#thingTypes[@]} -gt 0 ]] && {
+        for thingType in ${thingTypes[@]}; do
+            case "$thingType" in
+                alias)
+                    whichalias "$thing"
+                    ;;
+                function)
+                    functionsrc "$thing"
+                    ;;
+                builtin|keyword)
+                    helpString="$(gethelp "$thing")" &&
+                        fprint "$thing ($thingType): $helpString" "^$thing" \
+                            $colour_specialName normal
+                    ;;
+                file)
+                    helpString="$(synopsis "$thing")" && {
+                        fprint "$helpString" "^$thing" \
+                            $colour_fileName normal
+                    } || {
+                        whichfile "$thing"
+                    }
+                    ;;
+            esac
+        done
+    } || {
+        # system libraries and non-command man pages
+        [[ $helpString ]] && {
+            fprint "$helpString" "^$thing" $colour_fileName normal
+            return 0
+        } || {
+            printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
+            return 1
+        }
+    }
+}
+
+# -----------------------------------------------------------------------------
+# other "helpful" functions
+# -----------------------------------------------------------------------------
 
 vimhelp()
 {   # load vim's inline help for topic $1

@@ -17,6 +17,8 @@ done
 
 fe()
 {   # find and edit a function
+    [[ $# -eq 1 ]] || return 1
+
     declare func="$1" sourceFile
 
     declare -f "$func" &>/dev/null || {
@@ -24,7 +26,7 @@ fe()
         return 1
     }
 
-    sourceFile="$(whichfunction "$func" | colourstrip | head -n1 | cut -d: -f1)"
+    sourceFile="$(where "$func" | cut -d: -f1)"
 
     _edit "$sourceFile"
 }
