@@ -5,8 +5,8 @@
 
 newsh()
 {   # create a new shell script
-    declare name="${1%.sh}"
-    declare script="$dir_dev/$name.sh"
+    declare name="${1:-myscript_$(date +%y%m%d)}"
+    declare script="$dir_dev/${name%.sh}.sh"
 
     [[ ! -f $script ]] && {
         command cp "$dir_dev/.new.sh" "$script" &>/dev/null
@@ -25,7 +25,7 @@ newsh()
 edsh()
 {   # edit a script
     declare checkDir script
-    
+
     for checkDir in $dir_scripts/**; do
         script="$checkDir/${1%.sh}.sh"
         if [[ -f $script ]]; then
