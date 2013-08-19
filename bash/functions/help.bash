@@ -97,7 +97,7 @@ synopsis()
             return 1
 
         # skip builtins and non-whole-word matches
-        [[ $line =~ "bash built-in command" || ! $line =~ $goodString ]] &&
+        [[ $line =~ "built-in command" || ! $line =~ $goodString ]] &&
             continue
 
         # output e.g. "grep(1): blah blah blah..."
