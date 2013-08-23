@@ -62,10 +62,11 @@ escape()
 }
 
 pluralize()
-{
-    declare num=$1 text=$2
+{   # add trailing 's' where appropriate
+    declare count="$1" text="$2"
 
-    [[ $num -ge 2 ]] && text+='s'
+    [[ $count -ne 1 ]] && text+='s'
 
-    echo "$num $text"
+    printf "%'d %s\n" "$count" "$text"
 }
+
