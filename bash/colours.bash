@@ -51,8 +51,8 @@ colour_user="${blue}"     # see prompt.bash
     colour_true="${cyan}"
     colour_false="${orange}"
 
-    colour_hi="${base02}"     
-    colour_2d="${base0}"      
+    colour_hi="${base02}"
+    colour_2d="${base0}"
 }
 
 # Prompt (iPhone SSH app)
@@ -75,9 +75,9 @@ GREP_COLORS+="cx=${null}:"     # whole context lines
 GREP_COLORS+="mt=${orange}:"   # matching text
 GREP_COLORS+="ms=${orange}:"   # matching text in a selected line
 GREP_COLORS+="mc=${orange}:"   # matching text in a context line
-GREP_COLORS+="fn=${blue}:"     # filenames
-GREP_COLORS+="ln=${green}:"    # line numbers
-GREP_COLORS+="bn=${yellow}:"   # byte offsets
+GREP_COLORS+="fn=${green}:"    # filenames
+GREP_COLORS+="ln=${yellow}:"   # line numbers
+GREP_COLORS+="bn=${cyan}:"     # byte offsets
 GREP_COLORS+="se=${colour_hi}" # separators
 
 # deprecated
