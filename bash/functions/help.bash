@@ -5,17 +5,25 @@
 # ------------------------------------------------------------------------------
 
 _inPath colout && {
-    colour_functionName=blue
-    colour_functionFile=blue
-    colour_functionLine=cyan
-    colour_aliasName=green
+    colour_punct=white
+
+    colour_aliasName=yellow
     colour_aliasValue=cyan
-    colour_specialName=yellow
+
+    colour_functionName=blue
+    colour_functionFile=green
+    colour_functionLine=yellow
+
+    colour_specialName=magenta
+    colour_specialDef=none
     colour_builtin=$colour_specialName
     colour_keyword=$colour_specialName
-    colour_specialDef=none
-    colour_fileName=none
-    colour_filePath=cyan
+
+    colour_fileName=yellow
+    colour_filePath=green
+
+    colour_varName=blue
+    colour_varValue=cyan
 }
 
 fprint()
@@ -64,7 +72,7 @@ whichspecial()
 }
 
 whichfile()
-{   # like `type -p [file]`, but... you get the idea
+{   # like `type -p [file]`, but...
     declare name="$1" fileName
     declare -a fileNames=($(type -ap $name))
 
@@ -74,6 +82,41 @@ whichfile()
         fprint "$name is $fileName" "(^$name) is (.+)$" \
             $colour_fileName,$colour_filePath normal
     done
+}
+
+where()
+{   # return filename and line number where function $1 was defined
+    declare func="$1" location
+
+    declare -f "$func" 1>/dev/null || {
+        printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
+        return 1
+    }
+
+    # enable debugging behaviour if not
+    [[ $BASHOPTS =~ extdebug ]] || {
+        declare extdebug=true
+        shopt -s extdebug
+    }
+
+    # [name] [line] [file] -> [file]:[line]
+    location="$(declare -F "$func" | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/")"
+
+    fprint "${location/#$HOME/~}" "(.+)(:)([0-9]+)" \
+        $colour_functionFile,$colour_punct,$colour_functionLine normal
+
+    # back to normal debugging behaviour
+    [[ $extdebug ]] &&
+        shopt -u extdebug
+}
+
+functionsrc()
+{   # display location and source code of function $1
+    declare func="$1"
+    where "$func" || return 1
+
+    # skip "$1 is a function" line and colourize source
+    fprint "$(declare -f "$func" | tail -n+1)" -s bash
 }
 
 gethelp()
@@ -106,39 +149,85 @@ synopsis()
     done
 }
 
-where()
-{   # return filename and line number where function $1 was defined
-    declare func="$1"
+typevar()
+{   # like `type`, but for variables
+    declare varName="$1" varFlags varNature
+    declare varType="variable" varProperty varContent
+    declare article="a" string nocaseSwitched
 
-    declare -f "$func" 1>/dev/null || {
-        printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
+    [[ $BASHOPTS =~ nocasematch ]] && {
+        # case-sensitive matching
+        shopt -u nocasematch && nocaseSwitched=true
+    }
+
+    string=$(declare -p "$varName" 2>/dev/null) || {
+        printf "%s: %s: not set\n" $FUNCNAME $varName 1>&2
+        [[ $nocaseSwitched ]] && shopt -s nocasematch
         return 1
     }
 
-    # enable debugging behaviour if not
-    [[ $BASHOPTS =~ extdebug ]] || {
-        declare extdebug=true
-        shopt -s extdebug
-    }
+    string="${string/#declare /}"
+    varFlags="${string%% *}"
+    varValue="${string#*=}"
 
-    # [name] [line] [file] -> [file]:[line]
-    declare -F "$func" | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/"
+    case $varFlags in
+        *a*)    varType="indexed array"     ;;&
+        *A*)    varType="associative array" ;;&
+        *i*)    varContent="integer"   ;;&
+        *r*)    varProperty+="${varProperty:+, }read-only" ;;&
+        *t*)    varProperty+="${varProperty:+, }traced"    ;;&
+        *x*)    varProperty+="${varProperty:+, }exported"  ;;&
+        *l*)    varContent="lowercase" ;;&
+        *u*)    varContent="uppercase" ;;&
+        *)      true ;;
+    esac
 
-    # back to normal debugging behaviour
-    [[ $extdebug ]] &&
-        shopt -u extdebug
+    varNature="${varProperty:+$varProperty }${varContent:+$varContent }${varType}"
+
+    [[ ${varNature:0:1} =~ [aeiou] ]] && article+="n"
+
+    echo "$varName is $article $varNature"
+
+    [[ $nocaseSwitched ]] && shopt -s nocasematch
 }
 
-functionsrc()
-{   # return location and source code of function $1
-    declare func="$1" location
-    location="$(where "$func")" || return 1
+expand_array()
+{   # does what it says on the tin
+    declare arrayName="$1" arrayType arrayContents
+    declare key keys value
 
-    fprint "${location/#$HOME/~}" "(.+):([0-9]+)" \
-        $colour_functionFile,$colour_functionLine normal
+    arrayType="$(typevar "$arrayName" 2>/dev/null)"
 
-    # skip "$1 is a function" line and colourize source
-    fprint "$(declare -f "$func" | tail -n+1)" -s bash
+    [[ $arrayType =~ array$ ]] || {
+        printf "%s: %s: not an array\n" $FUNCNAME $varName 1>&2
+        return 1
+    }
+
+    for key in $(eval "echo -n \${!${arrayName}[@]}"); do
+        eval "echo [$key]=\${${arrayName}[$key]}"
+    done
+}
+
+whatvar()
+{   # display the contents of a variable
+    declare varName="$1" varType varValue
+
+    varType="$(typevar "$varName" 2>/dev/null)" &&
+       echo "$varType"
+
+    case $varType in
+        *variable)
+            varValue="${!varName//\\e}"
+            echo "$varValue"
+            ;;
+        *array)
+            expand_array "$varName"
+            ;;
+        *)
+            printf "%s: %s: not set\n" $FUNCNAME $varName 1>&2
+            return 1
+            ;;
+    esac
 }
 
 # ------------------------------------------------------------------------------
@@ -231,10 +320,39 @@ what()
             fprint "$helpString" "^$thing" $colour_fileName normal
             return 0
         } || {
-            printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
-            return 1
+            # variables
+            declare -p "$thing" &>/dev/null && {
+                whatvar "$thing"
+            } || {
+                printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
+                return 1
+            }
         }
     }
+}
+
+# -----------------------------------------------------------------------------
+# h(): context-sensitive help
+# -----------------------------------------------------------------------------
+
+h()
+{
+    declare thing="$1"
+    declare thingType="$(type -t "$thing")"
+
+    case "$thingType" in
+        builtin|keyword)
+            help -m "$thing" | $PAGER
+            return 0
+            ;;
+        file)
+            man "$thing" 2>/dev/null
+            return 0
+            ;;
+    esac
+
+    printf "$thing: help not found\n" 1>&2
+    return 1
 }
 
 # -----------------------------------------------------------------------------
