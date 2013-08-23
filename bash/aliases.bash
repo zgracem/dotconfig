@@ -29,6 +29,7 @@ alias e="echo"
 alias psi="python setup.py install"
 alias qpb='q "$(pbpaste)"'
 alias s="screen -d -R "
+alias svim="sudo vim"
 alias t="tmux attach 2>&- || tmux -2 new-session"
 
 # open in a new window if GNU screen is running (see functions/newwin.bash)
