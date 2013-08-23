@@ -32,7 +32,6 @@ alias s="screen -d -R "
 alias t="tmux attach 2>&- || tmux -2 new-session"
 
 # open in a new window if GNU screen is running (see functions/newwin.bash)
-alias alpine="newwin alpine $flags_alpine"
 alias bt="newwin --title transmission $dir_mybin/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
 alias twitter="newwin --title twitter $dir_mybin/ttytter.pl"
