@@ -10,7 +10,7 @@
     colour_user=${red}
 
 # add prompt escape codes
-for index in $colours ${!colour_*}; do
+for index in ${colours[@]}; do
     eval "esc_${index#*_}=\"\[${!index}\]\""
     unset index
 done

@@ -15,7 +15,7 @@
 # setup
 # -----------------------------------------------------------------------------
 
-colours="null black red green yellow blue magenta cyan white "
+declare -a colours=(null black red green yellow blue magenta cyan white)
 
    null="0"
   black="30"
@@ -28,7 +28,7 @@ magenta="35"
   white="37"
 
 [[ $solarizedBG =~ dark|light ]] && {
-  colours+="base03 base02 base01 base00 base0 base1 base2 base3 orange violet "
+  colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
     base03="1;${black}"
     base02="0;${black}"
     base01="1;${green}"
@@ -40,7 +40,7 @@ magenta="35"
     orange="1;${red}"
     violet="1;${magenta}"
 } || {
-   colours+="brblack brred brgreen bryellow brblue brmagenta brcyan brwhite "
+   colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
     brblack="1;${black}"
       brred="1;${red}"
     brgreen="1;${green}"
@@ -55,7 +55,7 @@ magenta="35"
 # preferred colours
 # -----------------------------------------------------------------------------
 
-colours+="colour_reset colour_true colour_false colour_user colour_hi colour_2d "
+colours+=(colour_reset colour_true colour_false colour_user colour_hi colour_2d)
 
 colour_reset="${null}"
 
@@ -86,11 +86,11 @@ esac
 # Prompt (iPhone SSH app)
 [[ $COLUMNS -eq 71 && $LINES -le 26 ]] && {
     colour_2d="${blue}"
-    colour_hi="${base3}"   # bright white
+    colour_hi="${brwrite}"
     colour_user="${cyan}"
 }
 
-export $colours
+export ${colours[@]}
 
 # -----------------------------------------------------------------------------
 # grep
@@ -115,7 +115,7 @@ export GREP_COLOR="${orange}"
 # add escape codes
 # ------------------------------------------------------------------------------
 
-for index in $colours; do
+for index in ${colours[@]}; do
     eval "$index=\"[${!index}m\""
     unset index
 done

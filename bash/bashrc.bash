@@ -40,7 +40,7 @@ shopt -s extglob        # enable extended pattern matching
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
 shopt -s histappend     # append to the history file, don't overwrite it
 shopt -s mailwarn       # alert on new mail
-shopt -s no_empty_cmd_completion 
+shopt -s no_empty_cmd_completion
                         # don't search PATH when completion is attempted on an empty line
 shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
 shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
@@ -124,18 +124,18 @@ dotfiles=(
 # platform-specific
 case $OSTYPE in
     darwin*)
-        dotfiles=("${dotfiles[@]}" osx)
+        dotfiles+=(osx)
         ;;
     cygwin)
-        dotfiles=("${dotfiles[@]}" cygwin)
+        dotfiles+=(cygwin)
         ;;
     linux*)
-        dotfiles=("${dotfiles[@]}" linux)
+        dotfiles+=(linux)
         ;;
 esac
 
 # this day in history...
-dotfiles=("${dotfiles[@]}" calendar)
+dotfiles+=(calendar)
 
 # source them all
 confsrc ${dotfiles[@]}
