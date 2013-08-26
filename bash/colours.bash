@@ -8,52 +8,80 @@
 # should be set by terminal emulator
 : ${solarizedBG:="dark"}
 
-if [[ $ITERM_PROFILE =~ light ]]; then
+[[ $ITERM_PROFILE =~ light ]] &&
     solarizedBG=light
-fi
 
-# basic setup
-colours="base03 base02 base01 base00 base0 base1 base2 base3 "
-colours+="red orange green yellow blue magenta violet cyan null "
+# -----------------------------------------------------------------------------
+# setup
+# -----------------------------------------------------------------------------
 
- base03="1;30"
- base02="0;30"
- base01="1;32"
- base00="1;33"
-  base0="1;34"
-  base1="1;36"
-  base2="0;37"
-  base3="1;37"
-    red="0;31"
- orange="1;31"
-  green="0;32"
- yellow="0;33"
-   blue="0;34"
-magenta="0;35"
- violet="1;35"
-   cyan="0;36"
+colours="null black red green yellow blue magenta cyan white "
+
    null="0"
+  black="30"
+    red="31"
+  green="32"
+ yellow="33"
+   blue="34"
+magenta="35"
+   cyan="36"
+  white="37"
 
-# set preferred colour values
-colours+="colour_true colour_false colour_hi colour_2d colour_user colour_reset"
+[[ $solarizedBG =~ dark|light ]] && {
+  colours+="base03 base02 base01 base00 base0 base1 base2 base3 orange violet "
+    base03="1;${black}"
+    base02="0;${black}"
+    base01="1;${green}"
+    base00="1;${yellow}"
+     base0="1;${blue}"
+     base1="1;${cyan}"
+     base2="0;${white}"
+     base3="1;${white}"
+    orange="1;${red}"
+    violet="1;${magenta}"
+} || {
+   colours+="brblack brred brgreen bryellow brblue brmagenta brcyan brwhite "
+    brblack="1;${black}"
+      brred="1;${red}"
+    brgreen="1;${green}"
+   bryellow="1;${yellow}"
+     brblue="1;${blue}"
+  brmagenta="1;${magenta}"
+     brcyan="1;${cyan}"
+    brwhite="1;${white}"
+}
+
+# -----------------------------------------------------------------------------
+# preferred colours
+# -----------------------------------------------------------------------------
+
+colours+="colour_reset colour_true colour_false colour_user colour_hi colour_2d "
 
 colour_reset="${null}"
 
 colour_true="${green}"
 colour_false="${red}"
 
-colour_hi="${base2}"      # highlight colour
-colour_2d="${base01}"     # secondary colour
-
 colour_user="${blue}"     # see prompt.bash
 
-[[ $solarizedBG == light ]] && {
-    colour_true="${cyan}"
-    colour_false="${orange}"
+case $solarizedBG in
+    dark)
+        colour_hi="${base2}"      # highlight colour
+        colour_2d="${base01}"     # secondary colour
+        ;;
+    light)
+        colour_hi="${base02}"
+        colour_2d="${base0}"
 
-    colour_hi="${base02}"
-    colour_2d="${base0}"
-}
+        colour_true="${cyan}"
+        colour_false="${orange}"
+        ;;
+    *)
+        colour_hi="${brwhite}"
+        colour_2d="${brblack}"
+        colour_user="${brblue}"
+        ;;
+esac
 
 # Prompt (iPhone SSH app)
 [[ $COLUMNS -eq 71 && $LINES -le 26 ]] && {
