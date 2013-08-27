@@ -15,7 +15,7 @@
 # setup
 # -----------------------------------------------------------------------------
 
-declare -a colours=(null black red green yellow blue magenta cyan white)
+colours=(null black red green yellow blue magenta cyan white)
 
    null="0"
   black="30"
@@ -86,11 +86,11 @@ esac
 # Prompt (iPhone SSH app)
 [[ $COLUMNS -eq 71 && $LINES -le 26 ]] && {
     colour_2d="${blue}"
-    colour_hi="${brwrite}"
+    colour_hi="${brwhite}"
     colour_user="${cyan}"
 }
 
-export ${colours[@]}
+export colours ${colours[@]}
 
 # -----------------------------------------------------------------------------
 # grep

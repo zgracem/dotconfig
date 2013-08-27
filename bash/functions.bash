@@ -28,7 +28,7 @@ fe()
 
     sourceFile="$(where "$func" | cut -d: -f1)"
 
-    _edit "$sourceFile"
+    _edit "${sourceFile/#~/$HOME}"
 }
 
 lesserOf()

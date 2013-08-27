@@ -27,17 +27,17 @@ _isFunction()
 
 _isGNU()
 {   # exits 0 if $1 uses GNU switches
-    command $1 --version &>/dev/null
+    "$(getPath "$1")" --version &>/dev/null
 }
 
 getPath()
 {   # returns the full path to $1
     declare bin
-    
-    bin=$(builtin type -P "$1" 2>/dev/null) || 
+
+    bin=$(builtin type -P "$1" 2>/dev/null) ||
         return 1
 
-    printf "%q" "$bin"
+    printf "%s" "$bin"
 }
 
 getGNU()
@@ -49,8 +49,10 @@ getGNU()
     _isGNU "$bin" || {
         bin="$(getPath g$1)" || return 1
     }
-    
-    printf "%q" "$bin"
+
+    printf -v bin "%s" "$bin"
+
+    echo "$bin"
 }
 
 maketmp()

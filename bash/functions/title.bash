@@ -1,5 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~zozo/.config/bash/functions/title.bash
+# functions to manipulate the xterm-compatible window title
 # ------------------------------------------------------------------------------
 
 : ${USER:=$(id -un)}
