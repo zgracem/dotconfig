@@ -13,14 +13,14 @@ GIT_EDITOR=$EDITOR
 SUDO_EDITOR=$EDITOR
 
 if [[ ! $SSH_TTY ]]; then
-    VISUAL=$dir_scripts/subl.sh
-
     case $OSTYPE in
         darwin*)
             BROWSER=/usr/bin/open
+            VISUAL=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
             ;;
         cygwin)
             BROWSER=$dir_scripts/chrome.sh
+            VISUAL=$dir_scripts/subl.sh
             ;;
     esac
 fi
