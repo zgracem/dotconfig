@@ -79,7 +79,7 @@ INFOPATH=/usr/share/info
 
 # remove duplicates in $PATH while preserving order
 # https://sites.google.com/site/jdisnard/etc-skel/dot-profile
-PATH=$(echo $PATH | awk -F: '{ for (i=1;i<=NF;i++) { if ( !x[$i]++ ) printf("%s:",$i); } }')
+# PATH=$(echo $PATH | awk -F: '{ for (i=1;i<=NF;i++) { if ( !x[$i]++ ) printf("%s:",$i); } }')
 
 # -----------------------------------------------------------------------------
 
