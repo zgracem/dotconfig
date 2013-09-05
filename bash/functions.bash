@@ -12,8 +12,6 @@ for subFile in $dir_config/bash/functions/*; do
 done
 
 # -----------------------------------------------------------------------------
-# misc.
-# -----------------------------------------------------------------------------
 
 fe()
 {   # find and edit a function
@@ -29,26 +27,4 @@ fe()
     sourceFile="$(where "$func" | cut -d: -f1)"
 
     _edit "${sourceFile/#~/$HOME}"
-}
-
-lesserOf()
-{   # return the lesser of two numbers
-    [[ $# -eq 2 ]] || return 1
-
-    declare x="$1" y="$2" answer
-
-    answer=$(( (x < y) ? x : y ))
-
-    echo $answer
-}
-
-greaterOf()
-{   # return the greater of two numbers
-    [[ $# -eq 2 ]] || return 1
-
-    declare x="$1" y="$2" answer
-
-    answer=$(( (x > y) ? x : y ))
-
-    echo $answer
 }
