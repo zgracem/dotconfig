@@ -16,7 +16,10 @@ set completion-query-items 200
 # complete things that have been typed in the wrong case
 set completion-ignore-case on
 
-# list all matches in case multiple possible completions are possible
+# treat hyphens and underscores as equivalent when case-insensitive completing
+set completion-map-case on
+
+# list all matches when multiple possible completions are possible
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
 
@@ -58,9 +61,6 @@ set echo-control-characters off
 # smarter history search w/ up and down arrows
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-
-# tilde expansion
-"M-~": tilde-expand
 
 # vi mode
 $if mode=vi

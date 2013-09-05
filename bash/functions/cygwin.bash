@@ -13,12 +13,15 @@ f()
 
 findDrive()
 {   # given a drive label, return its path under /cygdrive
-    declare drive
+    declare label="$1" drive
+
     for drive in /cygdrive/*; do
-        if $(cygpath --sysdir)/cmd /c vol ${drive##*/}: 2>/dev/null | grep -i " $1$" &>/dev/null; then
+        $(cygpath --sysdir)/cmd /c vol ${drive##*/}: |
+        grep -i "${label}$" &>/dev/null && {
             echo "$drive"
             return 0
-        fi
+        }
     done
+
     return 1
 }

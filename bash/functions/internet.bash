@@ -95,20 +95,19 @@ urldecode()
 tweet()
 {   # post a tweet with TTYtter
     declare status="$@"
-    declare app="$dir_mybin/ttytter.pl"
 
-    if   [[ ! -e $app ]]; then
+    if ! _inPath ttytter.pl; then
         printf "%s: ttytter not installed\n" $FUNCNAME 1>&2
         return 1
     elif [[ $# -ne 1 ]]; then
-        printf "%s: Invalid input\n" $FUNCNAME 1>&2
+        printf "%s: invalid input\n" $FUNCNAME 1>&2
         return 1
-    elif [[ ${#status} -ge 140 ]]; then
-        printf "%s: Input > 140 characters\n" $FUNCNAME 1>&2
+    elif [[ ${#status} -gt 140 ]]; then
+        printf "%s: input > 140 characters\n" $FUNCNAME 1>&2
         return 1
     fi
 
-    "$app" -silent -hold -status="$status"
+    ttytter.pl -silent -hold -status="$status"
 }
 
 [[ $OSTYPE =~ darwin ]] && {

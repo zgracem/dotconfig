@@ -11,7 +11,7 @@ ssaver()
 
 div()
 {   # print a bright divider across the terminal
-    declare colour line=" " p="="
+    declare colour line p="${1:-=}"
 
     printf -v line '%*s' $COLUMNS
 

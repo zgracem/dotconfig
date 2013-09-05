@@ -11,7 +11,8 @@ _edit()
         # working remotely; use a console editor
         declare windowTitle="$(basename "$EDITOR")"
 
-        newwin "$EDITOR" "$file"    # see functions/newwin.bash
+        # see functions/newwin.bash
+        newwin --title "$windowTitle" "$EDITOR" "$file"
         return
 
     } || {
@@ -51,6 +52,13 @@ rot13()
 
     # standard input
     tr $mask
+}
+
+flip()
+{
+    echo "$@" |
+    sed "y/abcdefghijklmnopqrstuvwxyz,'?!./ɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnΛmxλz',¿¡˙/" |
+    rev
 }
 
 pluralize()
