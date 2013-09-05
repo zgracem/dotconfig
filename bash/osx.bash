@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 [[ $OSTYPE =~ darwin ]] || {
-    printf "%s: Cannot source on this OS\n" "$(basename ${BASH_SOURCE[0]} .sh)" 1>&2
+    printf "%s: cannot source on this OS\n" "$(basename ${BASH_SOURCE[0]} .sh)" 1>&2
     return 1
 }
 
@@ -35,8 +35,7 @@ export ARCHFLAGS="-arch $(sysctl -n hw.machine)"
     }
 
     update_terminal_cwd()
-    {
-        # Identify the directory using a "file:" scheme URL,
+    {   # Identify the directory using a "file:" scheme URL,
         # including the host name to disambiguate local vs.
         # remote connections. Percent-escape spaces.
 
@@ -125,6 +124,7 @@ alias emptytrash="sudo rm -rf /Volumes/*/.Trashes/*; sudo rm -rf ~/.Trash/*"
 alias plist2bin="plutil -convert binary1"
 alias plist2xml="plutil -convert xml1"
 alias reveal="open -R" # show $1 in Finder
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # change file flags
 alias hide="chflags hidden"
@@ -143,6 +143,10 @@ alias cgibin="cd /Library/WebServer/CGI-Executables/"
 
 alias fixopenwith="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister \
     -kill -r -domain local -domain system -domain user"
+
+# fallbacks
+_inPath md5sum  || alias md5sum="md5"
+_inPath sha1sum || alias sha1sum="shasum"
 
 # -----------------------------------------------------------------------------
 # MacPorts/Homebrew
