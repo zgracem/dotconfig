@@ -4,13 +4,13 @@
 # -----------------------------------------------------------------------------
 
 [[ $OSTYPE =~ cygwin ]] || {
-    printf "%s: Cannot source on this OS\n" "$(basename ${BASH_SOURCE[0]} .sh)" 1>&2
+    printf "%s: cannot source on this OS\n" "$(basename ${BASH_SOURCE[0]} .sh)" 1>&2
     return 1
 }
 
 # -----------------------------------------------------------------------------
 # shell variables
-# ------------------------------------------------------------------------------    
+# ------------------------------------------------------------------------------
 
 # create Windows-native symlinks when possible
 export CYGWIN="$CYGWIN${CYGWIN+ }winsymlinks:native"

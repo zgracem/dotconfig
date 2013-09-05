@@ -2,18 +2,24 @@
 # ~zozo/.config/bash/places
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
 # variables
 # -----------------------------------------------------------------------------
 
 # universal
 dir_config="$HOME/.config"
 dir_local="$HOME/.local"
+
 dir_dropbox="$HOME/Dropbox"
+dir_poems="$dir_dropbox/Writing/p"
+dir_proj="$dir_dropbox/Projects"
+
 dir_mybin="$HOME/bin"
-dir_scripts="$HOME/scripts"
-dir_dev="$dir_scripts/_dev"
 dir_mytmp="$HOME/tmp"
 dir_notes="$HOME/txt"
+dir_scripts="$HOME/scripts"
+dir_dev="$dir_scripts/_dev"
 
 # platform-specific
 case $OSTYPE in
@@ -22,7 +28,7 @@ case $OSTYPE in
         dir_desktop="$HOME/Desktop"
         dir_docs="$HOME/Documents"
         dir_downloads="$HOME/Downloads"
-        dir_music="$HOME/Music/iTunes/iTunes Media/Music/"
+        dir_music="$HOME/Music/iTunes/iTunes Media/Music"
         dir_prefs="$HOME/Library/Preferences"
         dir_drive="/Volumes/RED"
         ;;
@@ -32,7 +38,7 @@ case $OSTYPE in
         dir_docs="$(cygpath --mydocs)"
         dir_downloads="$dir_docs/Downloads"
         dir_dropbox="$dir_docs/Dropbox"
-        dir_winHome="$(cygpath -au "$USERPROFILE")" 
+        dir_winHome="$(cygpath -au "$USERPROFILE")"
         ;;
 esac
 
@@ -54,23 +60,8 @@ case $HOSTNAME in
         dir_dropbox="$HOME/Dropbox"
         ;;
 
-    minerva-xp|Athena)
-        dir_mytmp="$TEMP"
-        dir_dropbox="$dir_docs/My Dropbox"
-        dir_notes="$dir_dropbox/txt"
-
-        dir_altHome="/cygdrive/d/Users/zozo"
-        ;;
-
     WTL2)
         dir_music="$dir_docs/My Music/iTunes/iTunes Media/Music"
-        ;;
-esac
-
-case $HOSTNAME in
-    Erato|Minerva|ws144966)
-        dir_poems="$dir_dropbox/Writing/p"
-        dir_proj="$dir_dropbox/Projects"
         ;;
 esac
 
@@ -89,9 +80,10 @@ alias .....='cd ../../../..'
 dirAlias()
 {
     declare name="$1" value="$2"
-    if [[ $value && -d $value ]]; then
+
+    [[ -d $value ]] && {
         alias "$name"="cd \"$value\""
-    fi
+    }
 }
 
 dirAlias apps     "$dir_apps"

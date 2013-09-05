@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 # abort if this isn't an interactive shell
-[[ $PS1 && $- =~ i ]] || {
+[[ $PS1 && $- =~ i ]] || [[ $timeTest ]] || {
     return
 }
 
@@ -72,13 +72,6 @@ HISTTIMEFORMAT="%F %T "
 PROMPT_COMMAND="history -a; history -n"
 
 # -----------------------------------------------------------------------------
-# start agents
-# -----------------------------------------------------------------------------
-
-_source "$HOME/.ssh/agent"
-_source "$HOME/.gnupg/agent"
-
-# -----------------------------------------------------------------------------
 # miscellany
 # -----------------------------------------------------------------------------
 
@@ -137,10 +130,16 @@ esac
 # this day in history...
 dotfiles+=(calendar)
 
+# plus local .bashrc, if any
+dotfiles+=(local)
+
 # source them all
 confsrc ${dotfiles[@]}
 
-# plus local .bashrc, if any
-_source "$HOME/.local/bashrc.bash"
+# -----------------------------------------------------------------------------
+# start agents
+# -----------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------
+_source "$HOME/.ssh/agent"
+_source "$HOME/.gnupg/agent"
+
