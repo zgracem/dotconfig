@@ -51,7 +51,7 @@ alias rootme="sudo STY=$STY TMOUT=180 -s"   # logout after 3 min. inactivity
 alias unmount="umount"
 
 alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
-alias newpw="$dir_scripts/newpassword.sh -l 16 -d $(((RANDOM%3)+4)) -s $(((RANDOM%3)+2)) -bc"
+alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 
 # alias foo='~/scripts/foo.sh'
