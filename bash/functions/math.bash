@@ -47,7 +47,7 @@ leastOf()
 
     for num in "$@"; do
         : ${least:=$num}
-        least=$(lesserOf $num $least)
+        least=$(( (num < least) ? num : least ))
     done
 
     echo $least
@@ -59,7 +59,7 @@ greatestOf()
 
     for num in "$@"; do
         : ${greatest:=$num}
-        greatest=$(greaterOf $num $greatest)
+        greatest=$(( (greatest > num) ? greatest : num ))
     done
 
     echo $greatest
