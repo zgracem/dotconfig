@@ -42,7 +42,7 @@ etym()
 
         curl -sS "$url" | grep "<dd " |
         sed -e 's/<a[^>]*>\([^<]*\)<[^>]*>/:\1:/g' -e 's/<[^>]*>//g' |
-        fold -sw $(smallerOf $COLUMNS $maxwidth) |
+        fold -sw $(lesserOf $COLUMNS $maxwidth) |
         recode html..utf-8
     done
 }

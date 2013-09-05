@@ -27,45 +27,35 @@ _isFunction()
 
 _isGNU()
 {   # exits 0 if $1 uses GNU switches
-    "$(getPath "$1")" --version &>/dev/null
+    command "$1" --version &>/dev/null
 }
 
 getPath()
 {   # returns the full path to $1
-    declare bin
-
-    bin=$(builtin type -P "$1" 2>/dev/null) ||
-        return 1
-
-    printf "%s" "$bin"
+    builtin type -P "$1" 2>/dev/null
 }
 
 getGNU()
 {   # return the path to the GNU version of $1, if available
-    declare bin
+    declare bin="$1"
 
-    bin="$(getPath $1)" || return 1
-
-    _isGNU "$bin" || {
-        bin="$(getPath g$1)" || return 1
+    _isGNU "$bin" && {
+        echo "$bin"
+    } || {
+        getPath "g$bin"
     }
-
-    printf -v bin "%s" "$bin"
-
-    echo "$bin"
 }
 
 maketmp()
 {   # GNU/BSD agnostic tempdir function
-    declare defaultTemplate="${this:-$0}.$$"
+    declare template defaultTemplate="${this:-$0}.$$"
 
     # for GNU
-    _isGNU mktemp &&
-        defaultTemplate+='.XXXXXX'
+    _isGNU mktemp && defaultTemplate+='.XXXXXX'
 
-    declare template="${1:-$defaultTemplate}"
+    template="${1:-$defaultTemplate}"
 
-    command mktemp -d -q -t "${1:-$template}" ||
+    command mktemp -d -q -t "$template" ||
         return 1
 }
 
