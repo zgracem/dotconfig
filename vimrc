@@ -50,7 +50,7 @@ if has("unix")
   set backupdir=$HOME/tmp/.vim,$TMPDIR
 elseif has("win32") || has("win64")
   set backupdir=$HOME/tmp/.vim,$TEMP
-endif                          
+endif
 
 " swap files
 set swapfile                    " make swapfiles
@@ -60,7 +60,7 @@ if has("unix")
   set directory=$HOME/tmp/.vim//,$TMPDIR//
 elseif has("win32") || has("win64")
   set directory=$HOME/tmp/.vim//,$TEMP//
-endif                          
+endif
 
 " // = include path in name of swap file
 
@@ -308,7 +308,7 @@ if exists("#vimrc")
       \ setlocal ft=tiddlywiki
 
     " strip trailing whitespace on save
-    autocmd BufWrite bash_*,*.css,*.html,*.md,*.js,*.sh,*.txt
+    autocmd BufWrite *.bash,*.css,*.html,*.js,*.sh,*.txt
       \ :StripTrailingWhitespaces
   augroup END
 endif
