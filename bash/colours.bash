@@ -62,7 +62,7 @@ colour_reset="${null}"
 colour_true="${green}"
 colour_false="${red}"
 
-colour_user="${blue}"     # see prompt.bash
+colour_user="${blue}"             # see prompt.bash
 
 case $solarizedBG in
     dark)

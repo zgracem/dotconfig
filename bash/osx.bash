@@ -149,7 +149,7 @@ _inPath md5sum  || alias md5sum="md5"
 _inPath sha1sum || alias sha1sum="shasum"
 
 # -----------------------------------------------------------------------------
-# MacPorts/Homebrew
+# MacPorts
 # -----------------------------------------------------------------------------
 
 if [[ -e /opt/local/bin/port ]]; then
@@ -159,9 +159,4 @@ if [[ -e /opt/local/bin/port ]]; then
     alias pui='sudo port uninstall'
     alias pfiles='port contents'
     alias portupdate='sudo port selfupdate && sudo port upgrade outdated'
-fi
-
-if [[ -e /usr/local/bin/brew ]]; then
-    alias b='brew'
-    alias brewupdate='brew update && brew upgrade'
 fi

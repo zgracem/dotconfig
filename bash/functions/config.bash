@@ -45,7 +45,6 @@ rl()
  alias bcol='confed colours.bash'
  alias bcom='confed completion.bash'
  alias bcyg='confed cygwin.bash'
- alias bexp='confed exports.bash'
  alias bloc='confed "../local/$HOSTNAME/bashrc.bash"'
  alias bmac='confed osx.bash'
 alias bpath='confed paths.bash'

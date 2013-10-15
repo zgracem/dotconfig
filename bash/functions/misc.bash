@@ -17,3 +17,8 @@ div()
 
     printf "\n${colour_hi}${line// /$p}${colour_reset}\n\n"
 }
+
+coinflip()
+{   # randomly returns 0 or 1
+    return $(( RANDOM % 2 ))
+}
