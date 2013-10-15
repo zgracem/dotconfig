@@ -25,7 +25,7 @@ newwin()
             ((i++))
             shift
         done
-        tmux new-window -n "$title" "$bin ${args[@]}"
+        tmux new-window -n "$title" "$bin ${args[*]}"
     elif [[ $STY ]]; then
         screen -t "$title" $bin "$@"
     else
