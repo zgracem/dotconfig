@@ -2,6 +2,19 @@
 # ~zozo/.config/bash/completion
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
+# shell options
+# -----------------------------------------------------------------------------
+
+# include .dotfiles in filename expansion
+shopt -s dotglob
+
+# perform hostname completion on strings containing '@'
+shopt -s hostcomplete
+
+# don't search PATH when completion is attempted on an empty line
+shopt -s no_empty_cmd_completion
+
+# -----------------------------------------------------------------------------
 # bash-completion
 # -----------------------------------------------------------------------------
 
@@ -10,6 +23,7 @@ for checkFile in /{{usr,opt}/local/,}etc/bash_completion; do
         export BASH_COMPLETION_SOURCED="$checkFile"
         break
     }
+
     unset checkFile
 done
 
@@ -67,5 +81,5 @@ _inPath killall && {
 [[ -x /usr/local/bin/brew ]] &&
     _source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 
-# other 
+# other
 _source "$dir_mybin/transmission-remote-cli/transmission-remote-cli-bash-completion.sh"
