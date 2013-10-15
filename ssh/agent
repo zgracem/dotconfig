@@ -28,17 +28,21 @@ ssh_agent_has_keys() {
 
 load_ssh_environment()
 {
-    _source "$envFile" &>/dev/null
+    . "$envFile" &>/dev/null
 }
 
 start_ssh_agent()
 {
-    ssh-agent | sed 's/^echo/# echo/' >| "$envFile"
+    ssh-agent >| "$envFile"
     chmod 600 "$envFile"
-    _source "$envFile" &>/dev/null
+    load_ssh_environment
 }
 
-ssh_agent_is_running || load_ssh_environment
+# -----------------------------------------------------------------------------
+
+ssh_agent_is_running || {
+    load_ssh_environment
+}
 
 ssh_agent_is_running && {
     ssh_agent_has_keys || ssh-add
@@ -47,4 +51,5 @@ ssh_agent_is_running && {
     ssh-add
 }
 
+rm -f "$envFile" &>/dev/null
 unset envFile
