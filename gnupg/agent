@@ -2,14 +2,15 @@
 # start GPG agent
 # -----------------------------------------------------------------------------
 
-type -P gpg-agent &>/dev/null ||
-    return
+# stop sourcing if gpg-agent isn't in $PATH
+type -P gpg-agent &>/dev/null || return
 
 envFile=$HOME/.gnupg/agent.env
 
 gpg_agent_is_running()
 {
     declare gpgPID=$(echo $GPG_AGENT_INFO | cut -d: -f2)
+
     [[ $gpgPID ]] && {
         command ps -p "$gpgPID" &>/dev/null
     } || {
@@ -19,7 +20,7 @@ gpg_agent_is_running()
 
 load_gpg_environment()
 {
-    _source "$envFile" &>/dev/null
+    . "$envFile" &>/dev/null
 }
 
 start_gpg_agent()
@@ -32,6 +33,11 @@ start_gpg_agent()
     export GPG_TTY=$(tty) # for PIN entry program, if any
 }
 
-gpg_agent_is_running || start_gpg_agent
+# -----------------------------------------------------------------------------
 
+gpg_agent_is_running || {
+    start_gpg_agent
+}
+
+rm -f "$envFile" &>/dev/null
 unset envFile
