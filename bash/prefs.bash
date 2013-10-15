@@ -7,7 +7,7 @@
 
 flags_alpine='-i -p $dir_config/alpine/pinerc -passfile $dir_config/alpine/alpine-passfile'
 flags_calendar='-A0 -f $HOME/.calendar'
-flags_cp='-ipRv'    # interactive; preserve attribs; recursive; verbose
+flags_cp='-aiv'     # archive mode; interactive; verbose
 flags_curl='-K $dir_config/curlrc'
 flags_dos2unix='-k' # copy date stamp to output file
 flags_file='-p'     # don't touch last-accessed time
@@ -70,6 +70,8 @@ done
 export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"
 export SCREENRC="$dir_config/screenrc"
+
+alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 
 # -----------------------------------------------------------------------------
 # settings -- environment variables

@@ -3,8 +3,9 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # ----------------------------------------------------------
 
-# private bash configuration files
+# private configuration files
 **/private*
+dropbox_uploader
 
 # email
 alpine/

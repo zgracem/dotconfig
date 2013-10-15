@@ -95,6 +95,11 @@ flatten()
 
 relink()
 {   # change the target of a symbolic link
+    [[ $# -eq 2 ]] || {
+        echo "Usage: $FUNCNAME old_link new_target"
+        return 1
+    }
+
     declare link="$1" target="$2" error
 
     # nothing to see here, folks...
@@ -113,7 +118,7 @@ relink()
     command ln -s "$target" "$link.$$.tmp" &&
     command mv -f "$link.$$.tmp" "$link" || {
         command rm -f "$link.$$.tmp"
-        printf "%s: relink failed\n" "$FUNCNAME" "$error" 1>&2
+        printf "%s: relink failed\n" "$FUNCNAME" 1>&2
         return 1
     }
 }
@@ -123,7 +128,7 @@ relink()
 _inPath sudo || {
     unset -f sudo
     unalias sudo 2>/dev/null
-    
+
     sudo()
     {   # pass through commands (for cygwin)
         $*

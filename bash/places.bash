@@ -19,7 +19,7 @@ dir_mybin="$HOME/bin"
 dir_mytmp="$HOME/tmp"
 dir_notes="$HOME/txt"
 dir_scripts="$HOME/scripts"
-dir_dev="$dir_scripts/_dev"
+dir_dev="$dir_scripts/dev"
 
 # platform-specific
 case $OSTYPE in
@@ -30,7 +30,7 @@ case $OSTYPE in
         dir_downloads="$HOME/Downloads"
         dir_music="$HOME/Music/iTunes/iTunes Media/Music"
         dir_prefs="$HOME/Library/Preferences"
-        dir_drive="/Volumes/RED"
+        dir_drive="/Volumes/SILVER"
         ;;
 
     cygwin)
@@ -47,6 +47,7 @@ case $HOSTNAME in
     Minerva)
         dir_oldRoot="/Volumes/Minerva HD"
         dir_oldHome="$dir_oldRoot$HOME"
+        dir_oldApps="$dir_oldHome/Applications"
         dir_oldMusic="$dir_oldHome/Music/iTunes/iTunes Music/Music"
         ;;
 
@@ -100,6 +101,7 @@ dirAlias music    "$dir_music"
 dirAlias notes    "$dir_notes"
 dirAlias oldroot  "$dir_oldRoot"
 dirAlias oldhome  "$dir_oldHome"
+dirAlias oldapps  "$dir_oldApps"
 dirAlias oldmusic "$dir_oldMusic"
 dirAlias poems    "$dir_poems"
 dirAlias prefs    "$dir_prefs"
