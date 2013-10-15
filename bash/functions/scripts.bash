@@ -34,3 +34,28 @@ edsh()
     done
     return 1
 }
+
+draft()
+{   # save a draft
+    declare scriptName="${1%.sh}" draftDir="$dir_dev/drafts"
+    declare script="$dir_scripts/$scriptName.sh"
+    declare draft lmSeconds lmDate i=2
+
+    [[ -f $script ]] || {
+        scold $FUNCNAME "$scriptName: not found"
+        return 1
+    }
+
+    lmSeconds=$(lm $script)
+    lmDate=$(parseEpoch $lmSeconds "%y%m%d")
+    draft="${draftDir}/${scriptName}.${lmDate}.sh"
+
+    while [[ -f $draft ]]; do
+        draft="${draft%.sh}"
+        draft="${draft%_*}_${i}.sh"
+        ((i++))
+    done
+
+    command cp -a "$script" "$draft"
+    printf "'%s' -> '%s'\n" "${script/#$HOME/~}" "${draft/#$HOME/~}"
+}
