@@ -34,6 +34,24 @@ clip()
     fi
 }
 
+pastenote()
+{   # paste the contents of the clipboard to a text file
+    [[ -d $dir_notes ]] || {
+        scold $FUNCNAME "can't find notes directory"
+        return 1
+    }
+
+    declare fileName="${1:-"Note $(date '+%F at %H.%M.%S')"}"
+    declare filePath="$dir_notes/${fileName%.txt}.txt"
+
+    [[ -f $filePath ]] && {
+        scold $FUNCNAME "$fileName.txt: already exists"
+        return 1
+    }
+
+    pbpaste > "$filePath"
+}
+
 rot13()
 {   # translate text to or from ROT13
     declare mask='a-zA-Z n-za-mN-ZA-M'
