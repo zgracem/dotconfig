@@ -23,11 +23,11 @@ export ${!esc_*}
 
 unset PS1 PS2 PS4
 
-PS1+="${esc_2d}${HOSTNAME}${esc_null}:" # hostname, muted
-PS1+="${esc_hi}\$(pwdTrim)${esc_null} " # current path, highlighted
-PS1+="${esc_user}\\\$${esc_null} "      # blue $ for me, red # for root
+PS1+="${esc_2d}${HOSTNAME}${esc_null}:"     # hostname, muted
+PS1+="${esc_hi}\$(pwdTrim)${esc_null} "     # current path, highlighted
+PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
 
-PS2+="${esc_hi}"$'\xC2\xBB'"${esc_null} " # bright white right guillemet
+PS2+="${esc_hi}"$'\xC2\xBB'"${esc_null} "   # bright white right guillemet
 
 PS4+="${esc_blue}\${LINENO}${esc_null} "
 PS4+="${esc_hi}+${esc_null} "

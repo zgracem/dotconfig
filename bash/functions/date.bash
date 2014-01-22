@@ -38,10 +38,10 @@ lmcp()
 
 lm()
 {   # return last-modified date of $1 in POSIX seconds
-    declare bin
+    declare statBin
 
-    bin=$(getGNU stat) && {
-        $bin -c %Y "$@"
+    statBin=$(getGNU stat) && {
+        $statBin -c %Y "$@"
     } || {
         stat -f %m -t %s "$@"
     }

@@ -53,6 +53,7 @@ alias unmount="umount"
 alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
+alias ttest="$dir_scripts/dev/test.sh"
 
 # alias foo='~/scripts/foo.sh'
 [[ -d $dir_scripts ]] && {

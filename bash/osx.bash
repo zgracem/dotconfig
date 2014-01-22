@@ -16,9 +16,11 @@ hardware=$(sysctl -n hw.model)
 # WiFi card
 netcard=$(echo list | scutil | grep -m 1 AirPort | grep -o 'en[0-9]')
 
+# AirPort utilities
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
 # WiFi network
-airportUtility='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
-network="$($airportUtility -I | egrep '\<SSID' | sed -E 's/^ +SSID: //g')"
+network="$(airport -I | egrep '\<SSID' | sed -E 's/^ +SSID: //g')"
 
 # compiler flags
 export ARCHFLAGS="-arch $(sysctl -n hw.machine)"
@@ -77,9 +79,6 @@ alias router="netstat -rn | grep default | awk '{print \$2}'"
 # MAC address of WiFi card
 alias getmac="ifconfig en1 | grep ether | awk '{print \$2}'"
 
-# AirPort utilities
-alias airport="$airportUtility"
-
 # flush DNS cache
 alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder 2>/dev/null"
 
@@ -120,6 +119,7 @@ alias unquar="xattr -d -r com.apple.quarantine" # recurses into directories
 # Misc. shortcuts
 # -----------------------------------------------------------------------------
 
+alias ds="$dir_scripts/displaysleep.sh"
 alias emptytrash="sudo rm -rf /Volumes/*/.Trashes/*; sudo rm -rf ~/.Trash/*"
 alias plist2bin="plutil -convert binary1"
 alias plist2xml="plutil -convert xml1"
@@ -141,12 +141,19 @@ alias spliteral="mdfind -interpret"
 # http://localhost/cgi-bin/
 alias cgibin="cd /Library/WebServer/CGI-Executables/"
 
-alias fixopenwith="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister \
-    -kill -r -domain local -domain system -domain user"
-
 # fallbacks
 _inPath md5sum  || alias md5sum="md5"
 _inPath sha1sum || alias sha1sum="shasum"
+
+alias fixopenwith="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister \
+    -kill -r -domain local -domain system -domain user"
+
+# list all apps downloaded from the Mac App Store
+alias allstoreapps="find /Applications \
+    -path '*Contents/_MASReceipt/receipt' \
+    -maxdepth 4 \
+    -print | \
+    sed 's#.app/Contents/_MASReceipt/receipt#.app#g;s#/Applications/##'"
 
 # -----------------------------------------------------------------------------
 # MacPorts
@@ -160,3 +167,14 @@ if [[ -e /opt/local/bin/port ]]; then
     alias pfiles='port contents'
     alias portupdate='sudo port selfupdate && sudo port upgrade outdated'
 fi
+
+# -----------------------------------------------------------------------------
+
+# # get a list of all iOS IPSW files
+# curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa/wa/com.apple.jingle.appserver.client.MZITunesClientCheck/version |
+    # grep ipsw |
+    # sort -u |
+    # sed 's/<string>//g' |
+    # sed 's/<\/string>//g' |
+    # grep -v protected
+
