@@ -195,11 +195,15 @@ if has("statusline")
 "   set titlestring=%{$USER}@%{$HOSTNAME}:\ 
     set titlestring=
   endif
+
   set titlestring+=%(%h\ %)     " help flag
   set titlestring+=%F           " full path to file
   set titlestring+=%(\ [%M%R]%) " modified/readonly flags
 
-  if &term =~ "screen"
+  if expand($TMUX) != ""
+    let &t_ts = "\<Esc>Ptmux;\<Esc>\<Esc>]0;"
+    let &t_fs = "\<Esc>\\"
+  elseif &term =~ "screen"
     let &t_ts = "\<Esc>P\<Esc>]0;"
     let &t_fs = "\<Esc>\\"
   endif
@@ -414,6 +418,9 @@ nmap <silent> <leader>fa :call FOtoggleA()<CR>
 " ,h hides highlighting
 nmap <silent> <leader>h :nohlsearch<CR>
 
+" ,md changes filetype to Markdown
+nmap <silent> <leader>md :set filetype=markdown<CR>
+
 " ,s makes tabs and trailing spaces visible
 nmap <silent> <leader>s :set nolist!<CR>
 
@@ -488,6 +495,9 @@ nnoremap <leader>2 :set fo-=a<CR>yypVr-
 
 " <F2> allows for pasting without an autoindent clusterfuck
 set pastetoggle=<F2>
+
+" <F5> quicksaves
+map <silent> <F5> <C-O>:w!<CR>
 
 " <F6> inserts the current date
 map  <silent> <F6> "=strftime("%Y-%m-%d")<CR>P

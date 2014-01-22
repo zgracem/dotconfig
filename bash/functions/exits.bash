@@ -5,16 +5,16 @@
 
 wtf()
 {   # return/colourize exit status of last command
-    declare lastExit=$?
+    declare lastExit=$? colour
 
     case $lastExit in
-        0)  declare col="${colour_true}"  # green (set in colours.bash)
+        0)  colour="${colour_true}"  # green (set in colours.bash)
             ;;
-        *)  declare col="${colour_false}" # red
+        *)  colour="${colour_false}" # red
             ;;
     esac
 
-    printf "${col}$lastExit${colour_reset}\n"
+    printf "%b%d%b\n" "$colour" $lastExit "\e[0m"
 }
 
 q()
