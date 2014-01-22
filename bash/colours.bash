@@ -11,6 +11,17 @@
 [[ $ITERM_PROFILE =~ light ]] &&
     solarizedBG=light
 
+bgflip()
+{
+    case $solarizedBG in
+        dark)   solarizedBG=light ;;
+        light)  solarizedBG=dark  ;;
+        *)      return 1 ;;
+    esac
+
+    rl colours prompt
+}
+
 # -----------------------------------------------------------------------------
 # setup
 # -----------------------------------------------------------------------------
