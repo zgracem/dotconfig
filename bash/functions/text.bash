@@ -49,7 +49,7 @@ pastenote()
         return 1
     }
 
-    pbpaste > "$filePath"
+    pbpaste > "$filePath" && echo "$filePath"
 }
 
 rot13()
@@ -108,12 +108,15 @@ codepoint()
     declare char="$1" hexByte binByte codeBin codeHex
 
     # get UTF-8 byte sequence
-    declare -a hexBytes=($(printf "%s " $(printf "$char" | xxd -p -c1 -u)))
+    declare -a hexBytes=($(printf "$char" | xxd -p -c1 -u))
 
     # convert byte sequence to binary
     for hexByte in ${hexBytes[@]}; do
-        printf -v binByte "%08d" $(hex2bin $hexByte) # zero-pad to 8 digits
-        codeBin+="${binByte#*0}"    # remove metadata in high bits
+        # zero-pad to 8 digits
+        printf -v binByte "%08d" $(hex2bin $hexByte)
+
+        # remove metadata in high bits
+        codeBin+="${binByte#*0}"
     done
 
     # convert to hexidecimal UTF-16 codepoint
@@ -128,7 +131,10 @@ ugrep()
 
     declare h d searchFile="$(locate -l1 CharName.pm)"
 
-    [[ -r $searchFile ]] || return 69
+    [[ -r $searchFile ]] || {
+        scold "$FUNCNAME" "CharName.pm not found"
+        return 69
+    }
 
     egrep -i "^[0-9a-f]{4,} .*$*" "$searchFile" |
     while read h d; do
