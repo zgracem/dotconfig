@@ -26,7 +26,7 @@ edsh()
 {   # edit a script
     declare checkDir script
 
-    for checkDir in $dir_scripts/**; do
+    for checkDir in $dir_scripts{,/dev}; do
         script="$checkDir/${1%.sh}.sh"
         if [[ -f $script ]]; then
             _edit "$script"
