@@ -4,6 +4,13 @@
 
 lipsum()
 {   # return a paragraph of lorem ipsum text
+    declare regex_help='-?-h(elp)?'
+
+    [[ $1 =~ $regex_help ]] && {
+        printf "Usage: %s [COUNT] [short|medium|long|verylong]\n" "$FUNCNAME"
+        return
+    }
+
     declare count="${1:-1}"
     declare length="${2:-medium}"
 
@@ -11,12 +18,12 @@ lipsum()
     sed -e 's#<[^>]*>##g'
 
     # API parameters:
-    # (integer) - The number of paragraphs to generate.
-    # short, medium, long, verylong - The average length of a paragraph.
-    # decorate - Add bold, italic and marked text.
-    # link - Add links.
-    # ul/ol/dl - Add unordered/numbered/description lists.
-    # bq/code/headers - Add blockquotes/code samples/headers.
+    #   (integer) - The number of paragraphs to generate.
+    #   short, medium, long, verylong - The average length of a paragraph.
+    #   decorate - Add bold, italic and marked text.
+    #   link - Add links.
+    #   ul/ol/dl - Add unordered/numbered/description lists.
+    #   bq/code/headers - Add blockquotes/code samples/headers.
 }
 
 solveword()
