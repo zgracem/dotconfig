@@ -39,6 +39,25 @@ fprint()
     }
 }
 
+cprint()
+{
+    [[ $# -ge 2 ]] || {
+        printf "%s: syntax error\n" $FUNCNAME 1>&2
+        printf "Usage: %s <colour> <string>\n" $FUNCNAME 1>&2
+        return 1
+    }
+
+    declare regex='^\[[[:digit:];]+m$'
+    declare colour="$1"; shift
+
+    [[ ${!colour} =~ $regex ]] || {
+        printf "%s: %s: invalid ANSI colour sequence\n" $FUNCNAME $colour 1>&2
+        return 1
+    }
+
+    printf "%b%b%b" "${!colour}" "$@" "\e[0m"
+}
+
 # -----------------------------------------------------------------------------
 # support functions
 # -----------------------------------------------------------------------------
@@ -54,13 +73,18 @@ whichalias()
 
     fprint "$name is aliased to \`$target'" "(^$name).*\`(.+)'$" \
         $colour_aliasName,$colour_aliasValue normal
+
+    # cprint $colour_aliasName  "$name"
+    # cprint null " is aliased to \`"
+    # cprint $colour_aliasValue "$target"
+    # cprint null "'\n"
 }
 
 whichspecial()
 {   # like `type [name]`, but prettier
     declare name="$1" desc
     declare thingType="$(type -t $name)"
-    declare colour=$(eval "echo -n \$colour_$thingType")
+    #declare colour=$(eval "echo -n \$colour_$thingType")
 
     desc="$name is a shell $thingType"
 
@@ -68,7 +92,11 @@ whichspecial()
     printf -v name "%q" "$name"
 
     fprint "$desc" "(^$name) is a (.+)$" \
-        $colour,$colour_specialDef normal
+        $colour_specialName,$colour_specialDef normal
+
+    # cprint $colour_specialName "$name"
+    # cprint null " is a shell "
+    # cprint $colour_specialDef "$thingType\n"
 }
 
 whichfile()
@@ -81,6 +109,10 @@ whichfile()
     for fileName in ${fileNames[@]}; do
         fprint "$name is $fileName" "(^$name) is (.+)$" \
             $colour_fileName,$colour_filePath normal
+
+        # cprint $colour_fileName "$name"
+        # cprint null " is "
+        # cprint $colour_filePath "$fileName\n"
     done
 }
 
@@ -94,7 +126,7 @@ where()
     }
 
     # enable debugging behaviour if not
-    [[ $BASHOPTS =~ extdebug ]] || {
+    _shoptSet extdebug || {
         declare extdebug=true
         shopt -s extdebug
     }
@@ -104,6 +136,10 @@ where()
 
     fprint "${location/#$HOME/~}" "(.+)(:)([0-9]+)" \
         $colour_functionFile,$colour_punct,$colour_functionLine normal
+
+    # cprint $colour_functionFile "${location%:*}"
+    # cprint $colour_punct ":"
+    # cprint $colour_functionLine "${location#*:}\n"
 
     # back to normal debugging behaviour
     [[ $extdebug ]] &&
@@ -116,7 +152,11 @@ functionsrc()
     where "$func" || return 1
 
     # skip "$1 is a function" line and colourize source
-    fprint "$(declare -f "$func" | tail -n+1)" -s bash
+    _inPath colout && {
+        declare -f "$func" | tail -n+1 | colout -s bash
+    } || {
+        declare -f "$func" | tail -n+1
+    }
 }
 
 gethelp()
@@ -155,7 +195,7 @@ typevar()
     declare varType="variable" varProperty varContent
     declare article="a" string nocaseSwitched
 
-    [[ $BASHOPTS =~ nocasematch ]] && {
+    _shoptSet nocasematch && {
         # case-sensitive matching
         shopt -u nocasematch && nocaseSwitched=true
     }
@@ -199,7 +239,7 @@ expand_array()
     arrayType="$(typevar "$arrayName" 2>/dev/null)"
 
     [[ $arrayType =~ array$ ]] || {
-        printf "%s: %s: not an array\n" $FUNCNAME $varName 1>&2
+        printf "%s: %s: not an array\n" $FUNCNAME $arrayName 1>&2
         return 1
     }
 
@@ -250,6 +290,8 @@ which()
                 whichalias "$thing"
                 ;;
             function)
+                # cprint $colour_functionName "$thing"
+                # cprint null " is a function\n"
                 fprint "$thing is a function" "^$thing" \
                     $colour_functionName normal
                 ;;
@@ -264,7 +306,7 @@ which()
 }
 
 # -----------------------------------------------------------------------------
-# what(): a brief synopsis of commands, programs and topics
+# what(): a brief synopsis of commands, programs, topics and variables
 # -----------------------------------------------------------------------------
 
 what()
@@ -300,9 +342,13 @@ what()
                     functionsrc "$thing"
                     ;;
                 builtin|keyword)
-                    helpString="$(gethelp "$thing")" &&
+                    helpString="$(gethelp "$thing")" && {
                         fprint "$thing ($thingType): $helpString" "^$thing" \
                             $colour_specialName normal
+                        # cprint $colour_specialName "$thing"
+                        # cprint null " ($thingType): $helpString\n"
+                        # printf "%s (%s): %s\n" $thing $thingType $helpString
+                    }
                     ;;
                 file)
                     helpString="$(synopsis "$thing")" && {
