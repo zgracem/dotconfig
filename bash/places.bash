@@ -34,11 +34,11 @@ case $OSTYPE in
         ;;
 
     cygwin)
-        dir_desktop="$(cygpath --desktop)"
-        dir_docs="$(cygpath --mydocs)"
+        : ${dir_desktop:="$(cygpath --desktop)"}
+        : ${dir_docs:="$(cygpath --mydocs)"}
+        : ${dir_winHome:="$(cygpath -au "$USERPROFILE")"}
         dir_downloads="$dir_docs/Downloads"
         dir_dropbox="$dir_docs/Dropbox"
-        dir_winHome="$(cygpath -au "$USERPROFILE")"
         ;;
 esac
 
