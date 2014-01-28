@@ -1,11 +1,13 @@
 # ------------------------------------------------------------------------------
 # ~zozo/.config/bash/functions/help.bash
 # ------------------------------------------------------------------------------
-# colour -- requires colout: https://github.com/nojhan/colout
-# ------------------------------------------------------------------------------
 
-_inPath colout && {
-    colour_punct=white
+# enable colours if $colours is an array (see colours.bash)
+[[ ${#colours[@]} -gt 1 ]] && {
+    case solarizedBG in
+        light)  colour_punct=base2 ;;
+        *)      colour_punct=base02 ;;
+    esac
 
     colour_aliasName=yellow
     colour_aliasValue=cyan
@@ -15,7 +17,7 @@ _inPath colout && {
     colour_functionLine=yellow
 
     colour_specialName=magenta
-    colour_specialDef=none
+    colour_specialDef=null
     colour_builtin=$colour_specialName
     colour_keyword=$colour_specialName
 
@@ -23,39 +25,40 @@ _inPath colout && {
     colour_filePath=green
 
     colour_varName=blue
-    colour_varValue=cyan
-}
-
-fprint()
-{   # fancy print function
-    # Usage: fprint "output string" [colout options]
-
-    declare output="$1" regex="$2"; shift 2
-
-    _inPath colout && {
-        printf "%s\n" "$output" | colout "$regex" $*
-    } || {
-        printf "%s\n" "$output"
-    }
+    colour_varValue=null
 }
 
 cprint()
-{
-    [[ $# -ge 2 ]] || {
-        printf "%s: syntax error\n" $FUNCNAME 1>&2
-        printf "Usage: %s <colour> <string>\n" $FUNCNAME 1>&2
+{   # print in colour!
+
+    # require an even number of arguments
+    [[ $(( $# % 2 )) -eq 0 ]] || {
+        scold "Usage: $FUNCNAME colour string [colour string] [...]"
         return 1
     }
 
     declare regex='^\[[[:digit:];]+m$'
-    declare colour="$1"; shift
+    declare colour string
 
-    [[ ${!colour} =~ $regex ]] || {
-        printf "%s: %s: invalid ANSI colour sequence\n" $FUNCNAME $colour 1>&2
-        return 1
-    }
+    until [[ $# -eq 0 ]]; do
+        colour="${!1}" string="$2"
 
-    printf "%b%b%b" "${!colour}" "$@" "\e[0m"
+        # only print colour to stdout
+        [[ -t 1 ]] && {
+            [[ $colour =~ $regex ]] || {
+                scold "$FUNCNAME" "invalid ANSI colour sequence: $colour"
+                return 1
+            }
+
+            printf "%b%b%b" "${colour}" "$string" "[0m"
+        } || {
+            printf "%b" "$string"
+        }
+
+        shift 2
+    done
+
+    printf "%b" "\n"
 }
 
 # -----------------------------------------------------------------------------
@@ -83,7 +86,7 @@ fancy_whatis()
 {   # return a short description of $1 (via the whatis database)
 
     declare thing="$1" thingType
-    declare regexPass="^$thing[[:space:]]"
+    declare regexPass="^$thing[[:space:](]"
     declare regexFail='nothing appropriate$'
 
     # check whatis database
@@ -105,13 +108,18 @@ fancy_whatis()
         # output e.g. "grep(1): blah blah blah..."
         echo "$line" |
             sed -E "s/^($thing)[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/\1\2: \3/g"
+
+        found=true
     done
+
+    [[ $found ]] || return 1
 }
 
 synopsis()
-{   # return a short description of $1 if available, or return false
+{   # return a short description of $1 if available
     fancy_whatis "$1" ||
-    fancy_help "$1"
+    fancy_help "$1" ||
+    return 1
 }
 
 # aliases
@@ -125,13 +133,14 @@ whichalias()
 
     [[ $target ]] || return 1
 
-    fprint "$name is aliased to \`$target'" "(^$name).*\`(.+)'$" \
-        $colour_aliasName,$colour_aliasValue normal
+    # fprint "$name is aliased to \`$target'" "(^$name).*\`(.+)'$" \
+    #     $colour_aliasName,$colour_aliasValue normal
 
-    # cprint $colour_aliasName  "$name"
-    # cprint null " is aliased to \`"
-    # cprint $colour_aliasValue "$target"
-    # cprint null "'\n"
+    cprint \
+        $colour_aliasName "$name" \
+        null " is aliased to \`" \
+        $colour_aliasValue "$target" \
+        null '"'
 }
 
 # shell builtins and keywords
@@ -147,12 +156,13 @@ whichspecial()
     # so colout doesn't choke on `[[`
     printf -v name "%q" "$name"
 
-    fprint "$desc" "(^$name) is a (.+)$" \
-        $colour_specialName,$colour_specialDef normal
+    # fprint "$desc" "(^$name) is a (.+)$" \
+    #     $colour_specialName,$colour_specialDef normal
 
-    # cprint $colour_specialName "$name"
-    # cprint null " is a shell "
-    # cprint $colour_specialDef "$thingType\n"
+    cprint \
+        $colour_specialName "$name" \
+        null " is a shell " \
+        $colour_specialDef "$thingType"
 }
 
 # files
@@ -165,12 +175,13 @@ whichfile()
     [[ ${#fileNames[@]} -gt 0 ]] || return 1
 
     for fileName in ${fileNames[@]}; do
-        fprint "$name is $fileName" "(^$name) is (.+)$" \
-            $colour_fileName,$colour_filePath normal
+        # fprint "$name is $fileName" "(^$name) is (.+)$" \
+        #     $colour_fileName,$colour_filePath normal
 
-        # cprint $colour_fileName "$name"
-        # cprint null " is "
-        # cprint $colour_filePath "$fileName\n"
+        cprint \
+            $colour_fileName "$name" \
+            null " is " \
+            $colour_filePath "$fileName"
     done
 }
 
@@ -181,7 +192,7 @@ where()
     declare func="$1" location
 
     declare -f "$func" 1>/dev/null || {
-        printf "%s: %s: function not found\n" $FUNCNAME $func 1>&2
+        scold "$FUNCNAME" "$func: function not found"
         return 1
     }
 
@@ -194,12 +205,13 @@ where()
     # [name] [line] [file] -> [file]:[line]
     location="$(declare -F "$func" | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/")"
 
-    fprint "${location/#$HOME/~}" "(.+)(:)([0-9]+)" \
-        $colour_functionFile,$colour_punct,$colour_functionLine normal
+    # fprint "${location/#$HOME/~}" "(.+)(:)([0-9]+)" \
+    #     $colour_functionFile,$colour_punct,$colour_functionLine normal
 
-    # cprint $colour_functionFile "${location%:*}"
-    # cprint $colour_punct ":"
-    # cprint $colour_functionLine "${location#*:}\n"
+    cprint \
+        $colour_functionFile "${location%:*}" \
+        $colour_punct ":" \
+        $colour_functionLine "${location#*:}"
 
     # back to normal debugging behaviour
     [[ $extdebug ]] &&
@@ -223,17 +235,17 @@ functionsrc()
 
 typevar()
 {   # like `type`, but for variables
-    declare varName="$1" varFlags varNature
-    declare varType="variable" varProperty varContent
-    declare article="a" string nocaseSwitched
+    declare varName="$1"
+    declare article="a" varType="variable"
+    declare varFlags varNature varProperty varContent string
 
     _shoptSet nocasematch && {
         # case-sensitive matching
-        shopt -u nocasematch && nocaseSwitched=true
+        shopt -u nocasematch && declare nocaseSwitched=true
     }
 
     string=$(declare -p "$varName" 2>/dev/null) || {
-        printf "%s: %s: not set\n" $FUNCNAME $varName 1>&2
+        scold "$FUNCNAME" "$varName: not set"
         [[ $nocaseSwitched ]] && shopt -s nocasematch
         return 1
     }
@@ -258,7 +270,10 @@ typevar()
 
     [[ ${varNature:0:1} =~ [aeiou] ]] && article+="n"
 
-    echo "$varName is $article $varNature"
+    cprint \
+        $colour_varName "$varName" \
+        null " is $article " \
+        $colour_varValue "$varNature"
 
     [[ $nocaseSwitched ]] && shopt -s nocasematch
 }
@@ -271,7 +286,7 @@ expand_array()
     arrayType="$(typevar "$arrayName" 2>/dev/null)"
 
     [[ $arrayType =~ array$ ]] || {
-        printf "%s: %s: not an array\n" $FUNCNAME $arrayName 1>&2
+        scold "$FUNCNAME" "$arrayName: not an array"
         return 1
     }
 
@@ -285,7 +300,7 @@ whatvar()
     declare varName="$1" varType varValue
 
     varType="$(typevar "$varName" 2>/dev/null)" &&
-       echo "$varType"
+       typevar "$varName"
 
     case $varType in
         *variable)
@@ -296,7 +311,7 @@ whatvar()
             expand_array "$varName"
             ;;
         *)
-            printf "%s: %s: not set\n" $FUNCNAME $varName 1>&2
+            scold "$FUNCNAME" "$varName: not set"
             return 1
             ;;
     esac
@@ -312,7 +327,7 @@ which()
     declare -a thingTypes=($(type -at $thing | uniq))
 
     [[ ${#thingTypes[@]} -gt 0 ]] || {
-        printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
+        scold "$FUNCNAME" "$thing: not found"
         return 1
     }
 
@@ -322,10 +337,12 @@ which()
                 whichalias "$thing"
                 ;;
             function)
-                # cprint $colour_functionName "$thing"
-                # cprint null " is a function\n"
-                fprint "$thing is a function" "^$thing" \
-                    $colour_functionName normal
+                # fprint "$thing is a function" "^$thing" \
+                #     $colour_functionName normal
+
+                cprint \
+                    $colour_functionName "$thing" \
+                    null " is a function"
                 ;;
             builtin|keyword)
                 whichspecial "$thing"
@@ -376,19 +393,23 @@ what()
                 builtin|keyword)
                     helpString=$(fancy_help "$thing")
 
-                    fprint "$helpString" "^$thing" \
-                        $colour_specialName normal
+                    # fprint "$helpString" "^$thing" \
+                    #     $colour_specialName normal
 
-                    # cprint $colour_specialName "$thing"
-                    # cprint null " ($thingType): ${helpString#*: }\n"
-                    # printf "%s (%s): %s\n" $thing $thingType $helpString
+                    cprint \
+                        $colour_specialName "$thing" \
+                        null " ($thingType): ${helpString#*: }"
                     ;;
                 file)
                     helpString=$(fancy_whatis "$thing")
 
                     [[ $helpString ]] && {
-                        fprint "$helpString" "^$thing" \
-                            $colour_fileName normal
+                        # fprint "$helpString" "^$thing" \
+                        #     $colour_fileName normal
+
+                        cprint \
+                            $colour_fileName "$thing" \
+                            null "${helpString:${#thing}}"
                     } || {
                         whichfile "$thing"
                     }
@@ -398,14 +419,19 @@ what()
     } || {
         # system libraries and non-command man pages
         [[ $helpString ]] && {
-            fprint "$helpString" "^$thing" $colour_fileName normal
+            # fprint "$helpString" "^$thing" $colour_fileName normal
+
+            cprint \
+                $colour_fileName "$thing" \
+                null "${helpString:${#thing}}"
+
             return 0
         } || {
             # variables
             declare -p "$thing" &>/dev/null && {
                 whatvar "$thing"
             } || {
-                printf "%s: %s: not found\n" $FUNCNAME "$thing" 1>&2
+                scold "$FUNCNAME" "$thing: not found"
                 return 1
             }
         }
@@ -418,21 +444,26 @@ what()
 
 h()
 {
-    declare thing="$1"
-    declare thingType="$(type -t "$thing")"
+    declare thing="$1" thingType
+    declare -a thingTypes=($(type -at $thing | uniq))
 
-    case "$thingType" in
-        builtin|keyword)
-            help -m "$thing" | $PAGER
-            return 0
-            ;;
-        file)
-            man "$thing" 2>/dev/null
-            return 0
-            ;;
-    esac
+    for thingType in ${thingTypes[@]}; do
+        case "$thingType" in
+            builtin|keyword)
+                help -m "$thing" | $PAGER
+                return 0
+                ;;
+            file)
+                man "$thing" 2>/dev/null
+                return 0
+                ;;
+            *)
+                continue
+                ;;
+        esac
+    done
 
-    printf "$thing: help not found\n" 1>&2
+    scold "$thing" "help not found"
     return 1
 }
 
