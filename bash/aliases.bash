@@ -47,7 +47,6 @@ alias headers="curl -Is"            # HTTP headers for $1
 alias ls1="command ls -A1"          # just the filenames
 alias myip="curl -S icanhazip.com"  # external IP address
 alias pingg="ping -c 4 google.com"  # check network connection
-alias rootme="sudo STY=$STY TMOUT=180 -s"   # logout after 3 min. inactivity
 alias unmount="umount"
 
 alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
