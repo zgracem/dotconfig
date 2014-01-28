@@ -14,7 +14,6 @@ theseFunctions=(
     lspath
     today
     flatten
-    relink
 )
 
 unset -f ${theseFunctions[@]}
@@ -93,34 +92,29 @@ flatten()
     find $targetDir -type d -d -depth 1 -exec rm -rf {} \;
 }
 
-relink()
-{   # change the target of a symbolic link
-    [[ $# -eq 2 ]] || {
-        echo "Usage: $FUNCNAME old_link new_target"
+rootme()
+{   # temporarily become root for $1 minutes (default is 3)
+
+    declare timeout=$(( ${1:-3} * 60 ))
+
+    _inPath sudo || {
+        scold $FUNCNAME "this system does not support sudo"
         return 1
     }
 
-    declare link="$1" target="$2" error
+    # rename window, if applicable
+    [[ $STY  ]] && echo -ne "\eksudo\e\\"
+    [[ $TMUX ]] && tmux rename-window sudo
 
-    # nothing to see here, folks...
-    [[ $link -ef $target ]] && return 0
+    sudo \
+        ${STY:+STY=$STY} \
+        ${TMUX:+TMUX=$TMUX} \
+        TMOUT=$timeout \
+        -s
 
-    # sanity checking
-    [[ -h $link ]]   || error="$link: not a symbolic link"
-    [[ -e $link ]]   || error="$link: not found"
-    [[ -e $target ]] || error="$target: not found"
-
-    [[ $error ]] && {
-        printf "%s: %s\n" "$FUNCNAME" "$error" 1>&2
-        return 1
-    }
-
-    command ln -s "$target" "$link.$$.tmp" &&
-    command mv -f "$link.$$.tmp" "$link" || {
-        command rm -f "$link.$$.tmp"
-        printf "%s: relink failed\n" "$FUNCNAME" 1>&2
-        return 1
-    }
+    # restore window name
+    [[ $STY  ]] && echo -ne "\ekbash\e\\"
+    [[ $TMUX ]] && tmux set-window-option automatic-rename on >/dev/null
 }
 
 # ------------------------------------------------------------------------------
