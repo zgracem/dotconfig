@@ -44,13 +44,6 @@ esac
 
 # machine-specific
 case $HOSTNAME in
-    Minerva)
-        dir_oldRoot="/Volumes/Minerva HD"
-        dir_oldHome="$dir_oldRoot$HOME"
-        dir_oldApps="$dir_oldHome/Applications"
-        dir_oldMusic="$dir_oldHome/Music/iTunes/iTunes Music/Music"
-        ;;
-
     Erato)
         dir_docs="$dir_dropbox/Documents"
         ;;
@@ -99,10 +92,6 @@ dirAlias dls      "$dir_downloads"
 dirAlias docs     "$dir_docs"
 dirAlias music    "$dir_music"
 dirAlias notes    "$dir_notes"
-dirAlias oldroot  "$dir_oldRoot"
-dirAlias oldhome  "$dir_oldHome"
-dirAlias oldapps  "$dir_oldApps"
-dirAlias oldmusic "$dir_oldMusic"
 dirAlias poems    "$dir_poems"
 dirAlias prefs    "$dir_prefs"
 dirAlias proj     "$dir_proj"
