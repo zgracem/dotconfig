@@ -62,6 +62,60 @@ cprint()
 # support functions
 # -----------------------------------------------------------------------------
 
+fancy_help()
+{   # return a short description of $1 (via `help`)
+    declare thing="$1" thingType
+
+    thingType=$(type -t "$thing") || return 1
+
+    case $thingType in
+        builtin|keyword)
+            help -d "$thing" 2>/dev/null |
+            sed -E "s/^($thing) - /\1 ($thingType): /g"
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+fancy_whatis()
+{   # return a short description of $1 (via the whatis database)
+
+    declare thing="$1" thingType
+    declare regexPass="^$thing[[:space:]]"
+    declare regexFail='nothing appropriate$'
+
+    # check whatis database
+    whatis "$thing" | while read line; do
+        # if not found in whatis database
+        [[ $line =~ $regexFail ]] &&
+            return 1
+
+        # skip non-whole-word matches
+        [[ ! $line =~ $regexPass ]] &&
+            continue
+
+        # for builtins
+        [[ $line =~ "built-in command" ]] && {
+            # fancy_help "$thing"
+            continue
+        }
+
+        # output e.g. "grep(1): blah blah blah..."
+        echo "$line" |
+            sed -E "s/^($thing)[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/\1\2: \3/g"
+    done
+}
+
+synopsis()
+{   # return a short description of $1 if available, or return false
+    fancy_whatis "$1" ||
+    fancy_help "$1"
+}
+
+# aliases
+
 whichalias()
 {   # like `type [alias]`, but prettier
     declare name="$1" target
@@ -79,6 +133,8 @@ whichalias()
     # cprint $colour_aliasValue "$target"
     # cprint null "'\n"
 }
+
+# shell builtins and keywords
 
 whichspecial()
 {   # like `type [name]`, but prettier
@@ -99,6 +155,8 @@ whichspecial()
     # cprint $colour_specialDef "$thingType\n"
 }
 
+# files
+
 whichfile()
 {   # like `type -p [file]`, but...
     declare name="$1" fileName
@@ -115,6 +173,8 @@ whichfile()
         # cprint $colour_filePath "$fileName\n"
     done
 }
+
+# functions
 
 where()
 {   # return filename and line number where function $1 was defined
@@ -159,35 +219,7 @@ functionsrc()
     }
 }
 
-gethelp()
-{   # return a short description of builtin command $1
-    declare topic="$1" helpString
-
-    helpString="$(help -d "$topic" 2>/dev/null)" ||
-        return 1
-
-    echo "${helpString#* - }"
-}
-
-synopsis()
-{   # return a short description of system command $1
-    declare thing="$1" line
-    declare goodString="^$thing[^[:alnum:]]" failString='nothing appropriate$'
-
-    whatis "$thing" | while read line; do
-        # if not found in whatis database
-        [[ $line =~ $failString ]] &&
-            return 1
-
-        # skip builtins and non-whole-word matches
-        [[ $line =~ "built-in command" || ! $line =~ $goodString ]] &&
-            continue
-
-        # output e.g. "grep(1): blah blah blah..."
-        echo "$line" |
-            sed -E "s/^($thing)[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/\1\2: \3/g"
-    done
-}
+# variables
 
 typevar()
 {   # like `type`, but for variables
@@ -342,16 +374,19 @@ what()
                     functionsrc "$thing"
                     ;;
                 builtin|keyword)
-                    helpString="$(gethelp "$thing")" && {
-                        fprint "$thing ($thingType): $helpString" "^$thing" \
-                            $colour_specialName normal
-                        # cprint $colour_specialName "$thing"
-                        # cprint null " ($thingType): $helpString\n"
-                        # printf "%s (%s): %s\n" $thing $thingType $helpString
-                    }
+                    helpString=$(fancy_help "$thing")
+
+                    fprint "$helpString" "^$thing" \
+                        $colour_specialName normal
+
+                    # cprint $colour_specialName "$thing"
+                    # cprint null " ($thingType): ${helpString#*: }\n"
+                    # printf "%s (%s): %s\n" $thing $thingType $helpString
                     ;;
                 file)
-                    helpString="$(synopsis "$thing")" && {
+                    helpString=$(fancy_whatis "$thing")
+
+                    [[ $helpString ]] && {
                         fprint "$helpString" "^$thing" \
                             $colour_fileName normal
                     } || {
