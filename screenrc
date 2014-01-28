@@ -107,4 +107,4 @@ altscreen on
 
 # configure hard status line
 hardstatus alwayslastline
-hardstatus string '%{= kd}  %-w%{+r}%n %t%{-}%+w %=%d/%m %{w}%0c%{-} '
+hardstatus string '%{= kd}  %-w%{+r}%n %t%{-}%+w %=%d/%m %{w}%0c%{-}  '
