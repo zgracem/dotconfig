@@ -13,6 +13,16 @@ _isGNU()
     command "$1" --version &>/dev/null
 }
 
+_isFunction()
+{   # exits 0 if $1 is defined as a function
+    declare -f "$1" &>/dev/null
+}
+
+_isAlias()
+{   # exits 0 if $1 is defined as an alias
+    builtin alias "$1" &>/dev/null
+}
+
 _shoptSet()
 {   # exits 0 if shell option $1 is set
     [[ $BASHOPTS =~ $1 ]]
@@ -39,6 +49,29 @@ scold()
     # Usage: scold [source] "message"
 
     printf "%b\n" >&2 "${2+$1: }${2-$1}"
+}
+
+z_require()
+{
+    declare switches='^-[adg]$'
+    declare switch="$1" object="$2"
+
+    [[ $switch =~ $switches ]] && [[ $# -eq 2 ]] || {
+        scold "Usage: $FUNCNAME [-a application] [-d directory] [-g gnu_application]"
+        return 1
+    }
+
+    case $1 in
+        -a)
+            _inPath "$object" || return 1
+            ;;
+        -d)
+            [[ -d "$object" ]] || return 1
+            ;;
+        -g)
+            getGNU "$object" &>/dev/null || return 1
+            ;;
+    esac
 }
 
 # -----------------------------------------------------------------------------
