@@ -129,3 +129,14 @@ tweet()
         esac
     }
 }
+
+apachelogs()
+{
+    declare logType
+
+    [[ -d /var/log/apache2 ]] && [[ $STY || $TMUX ]] && {
+        for logType in access error; do
+            newwin --title ${logType}_log tail -f /var/log/apache2/${logType}_log
+        done
+    }
+}
