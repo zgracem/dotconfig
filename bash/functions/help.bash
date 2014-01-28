@@ -112,7 +112,7 @@ fancy_whatis()
         found=true
     done
 
-    [[ $found ]] || return 1
+    [[ $found ]] && return 0
 }
 
 synopsis()
