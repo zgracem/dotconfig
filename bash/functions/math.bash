@@ -101,3 +101,8 @@ bin2hex()
 {
     echo "obase=16; ibase=2; $1" | bc
 }
+
+coinflip()
+{   # randomly returns 0 or 1
+    return $(( RANDOM % 2 ))
+}
