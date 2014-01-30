@@ -2,31 +2,28 @@
 # ~zozo/.config/bash/functions/help.bash
 # ------------------------------------------------------------------------------
 
-# enable colours if $colours is an array (see colours.bash)
-[[ ${#colours[@]} -gt 1 ]] && {
-    case solarizedBG in
-        light)  colour_punct=base2 ;;
-        *)      colour_punct=base02 ;;
-    esac
+case solarizedBG in
+    light)  colour_punct=base02 ;;
+    *)      colour_punct=base2 ;;
+esac
 
-    colour_aliasName=yellow
-    colour_aliasValue=cyan
+colour_aliasName=yellow
+colour_aliasValue=cyan
 
-    colour_functionName=blue
-    colour_functionFile=green
-    colour_functionLine=yellow
+colour_functionName=blue
+colour_functionFile=green
+colour_functionLine=yellow
 
-    colour_specialName=magenta
-    colour_specialDef=null
-    colour_builtin=$colour_specialName
-    colour_keyword=$colour_specialName
+colour_specialName=magenta
+colour_specialDef=null
+colour_builtin=$colour_specialName
+colour_keyword=$colour_specialName
 
-    colour_fileName=yellow
-    colour_filePath=green
+colour_fileName=yellow
+colour_filePath=green
 
-    colour_varName=blue
-    colour_varValue=null
-}
+colour_varName=blue
+colour_varValue=null
 
 cprint()
 {   # print in colour!
@@ -372,9 +369,6 @@ what()
 
     thing="$1"
 
-    # is it in the whatis database?
-    helpString="$(synopsis "$thing")"
-
     [[ $showAll ]] && {
         thingTypes=($(type -at $thing | uniq))
     } || {
@@ -417,8 +411,8 @@ what()
             esac
         done
     } || {
-        # system libraries and non-command man pages
-        [[ $helpString ]] && {
+        # system libraries & other non-command man pages
+        helpString="$(synopsis "$thing")" && {
             # fprint "$helpString" "^$thing" $colour_fileName normal
 
             cprint \
