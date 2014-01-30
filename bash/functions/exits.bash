@@ -3,20 +3,6 @@
 # check and generate useful exit codes
 # ------------------------------------------------------------------------------
 
-wtf()
-{   # return/colourize exit status of last command
-    declare lastExit=$? colour
-
-    case $lastExit in
-        0)  colour="${colour_true}"  # green (set in colours.bash)
-            ;;
-        *)  colour="${colour_false}" # red
-            ;;
-    esac
-
-    printf "%b%d%b\n" "$colour" $lastExit "\e[0m"
-}
-
 q()
 {   # exit code tester / wrapper for [[ ... ]]
     # Usage: q '-d /path/to/dir'
@@ -33,7 +19,7 @@ q()
             expr="$@"
             ;;
         *)
-            printf "Usage: %s [EXPRESSION]\n'EXPRESSION' uses [[ ... ]] syntax\n" $FUNCNAME 1>&2
+            scold "Usage: $FUNCNAME [EXPRESSION]\n'EXPRESSION' uses [[ ... ]] syntax"
             return 1
             ;;
     esac
@@ -46,7 +32,7 @@ q()
 
     # check for syntax errors
     eval "[[ $expr ]]" 2>&1 | grep -q error && {
-        printf "%s: bad expression\n" $FUNCNAME 1>&2
+        scold "$FUNCNAME" "bad expression"
         [[ $pipefailChanged ]] && set -o pipefail
         return 64
     }
