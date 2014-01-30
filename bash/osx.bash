@@ -14,13 +14,13 @@
 hardware=$(sysctl -n hw.model)
 
 # WiFi card
-netcard=$(echo list | scutil | grep -m 1 AirPort | grep -o 'en[0-9]')
+netcard=$(echo list | scutil | sed -nE 's#^.*Setup:/Network/Interface/(en[[:digit:]])/AirPort$#\1#p')
 
 # AirPort utilities
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 
 # WiFi network
-network="$(airport -I | egrep '\<SSID' | sed -E 's/^ +SSID: //g')"
+network="$(airport -I | sed -nE 's/^ +SSID: (.*)$/\1/p')"
 
 # compiler flags
 export ARCHFLAGS="-arch $(sysctl -n hw.machine)"
@@ -62,8 +62,8 @@ alias btoff="blueutil off"
 alias bton="blueutil on"
 
 # toggle WiFi
-alias wifioff="networksetup -setairportpower $netcard off"
-alias wifion="networksetup -setairportpower $netcard on"
+alias wifioff="networksetup -setairportpower ${netcard} off"
+alias wifion="networksetup -setairportpower ${netcard} on"
 
 # number of users connected to AirPort (vars set in private.bash)
 alias aeusers="snmpget -v 2c -c $snmp_community -M $snmp_mibPath -m+${snmp_mib} \
@@ -71,13 +71,13 @@ alias aeusers="snmpget -v 2c -c $snmp_community -M $snmp_mibPath -m+${snmp_mib} 
     grep -o --color=never '[[:digit:]+]$'"
 
 # local IP address
-alias localip="ipconfig getifaddr $netcard"
+alias localip="ipconfig getifaddr ${netcard}"
 
 # IP address of router
-alias router="netstat -rn | grep default | awk '{print \$2}'"
+alias router="netstat -rn | sed -nE 's/^default +([[:digit:].]+).*$/\1/p'"
 
 # MAC address of WiFi card
-alias getmac="ifconfig en1 | grep ether | awk '{print \$2}'"
+alias getmac="ifconfig ${netcard} | sed -nE 's/^[[:space:]]+ether ([[:xdigit:]:]+).*$/\1/p'"
 
 # flush DNS cache
 alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder 2>/dev/null"
