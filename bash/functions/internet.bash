@@ -110,26 +110,6 @@ tweet()
     ttytter.pl -silent -hold -status="$status"
 }
 
-[[ $OSTYPE =~ darwin ]] && {
-    scan()
-    {   # scan the local network
-        # TODO: add 'file' option; move to functions/osx
-        declare usage="$FUNCNAME ssh|wifi"
-        case $1 in
-            ssh) # list all SSH-enabled hosts on the domain
-                /usr/bin/dns-sd -B _ssh._tcp
-                ;;
-            [Ww]i[Ff]i) # scan for WiFi networks
-                /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s
-                ;;
-            *)
-                printf "Usage: %s\n" "$usage" 1>&2
-                return 1
-                ;;
-        esac
-    }
-}
-
 apachelogs()
 {
     declare logType
