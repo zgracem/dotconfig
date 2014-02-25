@@ -156,6 +156,19 @@ alias allstoreapps="find /Applications \
     sed 's#.app/Contents/_MASReceipt/receipt#.app#g;s#/Applications/##'"
 
 # -----------------------------------------------------------------------------
+# Homebrew
+# -----------------------------------------------------------------------------
+
+if [[ -x /usr/local/bin/brew ]]; then
+    alias bdoc='brew doctor'
+    alias binfo='brew info'
+    alias binst='brew install'
+    alias bls='brew list'
+    alias brm='brew uninstall'
+    alias bs='brew search'
+fi
+
+# -----------------------------------------------------------------------------
 # MacPorts
 # -----------------------------------------------------------------------------
 
