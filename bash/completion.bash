@@ -48,7 +48,7 @@ complete -abcf -A function      sudo
 complete -defv                  trash
 complete -aev -A function       unset
 
-# reloading config files
+# reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
 
 # kill running processes
@@ -65,6 +65,19 @@ _inPath killall && {
              killall
 }
 
+# edit scripts
+__complete_edsh()
+{
+    declare cur=${COMP_WORDS[COMP_CWORD]}
+    declare scripts=( $(find -H "$dir_scripts" -maxdepth 2 -type f -name '*.sh' | sed -nE 's#^.*/(.*)\.sh$#\1#p') )
+
+    COMPREPLY=( $(compgen -W "${scripts[*]}" -- $cur) )
+}
+
+complete -o default -o nospace \
+    -F __complete_edsh \
+    edsh
+
 # -----------------------------------------------------------------------------
 # misc. custom completions
 # -----------------------------------------------------------------------------
@@ -73,7 +86,7 @@ _inPath killall && {
 # https://github.com/pahen/dotfiles/blob/master/.completions
 [[ -f $HOME/.ssh/config ]] && {
     complete -o default -o nospace \
-             -W "$(grep "^Host" $HOME/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" \
+             -W "$(sed -nE 's/Host (.*[^?*])$/\1/p' $HOME/.ssh/config)" \
              scp sftp ssh
 }
 
@@ -81,5 +94,6 @@ _inPath killall && {
 [[ -x /usr/local/bin/brew ]] &&
     _source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 
-# other
+# Transmission
 _source "$dir_mybin/transmission-remote-cli/transmission-remote-cli-bash-completion.sh"
+
