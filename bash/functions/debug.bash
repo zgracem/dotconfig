@@ -1,10 +1,19 @@
 # ------------------------------------------------------------------------------
-# ~zozo/.config/bash/functions/exits.bash
-# check and generate useful exit codes
+# ~zozo/.config/bash/functions/debug.bash
+# handy functions for debugging and development
 # ------------------------------------------------------------------------------
 
+xtrace()
+{   # toggle xtrace
+    if [[ $SHELLOPTS =~ xtrace ]]; then
+        set +o xtrace
+    else
+        set -o xtrace
+    fi
+}
+
 q()
-{   # exit code tester / wrapper for [[ ... ]]
+{   # exit code tester and wrapper for [[ ... ]]
     # Usage: q '-d /path/to/dir'
     #        q '-n $SSH_TTY'
     #        some_command; q
