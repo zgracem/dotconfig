@@ -66,12 +66,12 @@ greatestOf()
 }
 
 randInt()
-{   # return a random integer
+{   # return a random integer within a range
     declare int=-1 min max bound="$@"
     declare regex='^([[:digit:]]+)?(-| )?([[:digit:]]+)?$'
 
     [[ $bound =~ $regex ]] || {
-        printf "Usage: %s [MIN-][MAX]\n" "$FUNCNAME" 1>&2
+        scold "Usage: $FUNCNAME [MIN-][MAX]"
         return 1
     }
 

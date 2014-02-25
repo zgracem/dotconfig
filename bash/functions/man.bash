@@ -7,7 +7,7 @@ man()
 {   # open man page in a new window with a helpful title
 
     # some switches don't open a manpage; pass those through
-    declare switchRegex="[[:space:]]?-[[:alpha:]]*[dfhkwW]"
+    declare switchRegex='[[:space:]]?-[[:alpha:]]*[dfhkwW]'
     [[ $@ =~ $switchRegex ]] && {
         command man $@
         return $?
@@ -84,9 +84,9 @@ manpdf()
         # open in default PDF viewer if not logged in remotely
         [[ ! $SSH_TTY ]] &&
             $viewer "$pdf"
-
-        return 0
     done
+
+    return 0
 }
 
 macman()
