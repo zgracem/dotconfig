@@ -448,7 +448,8 @@ h()
                 return 0
                 ;;
             file)
-                man "$thing" 2>/dev/null
+                man "$thing" 2>/dev/null ||
+                    "$thing" --help 2>/dev/null || break
                 return 0
                 ;;
             *)

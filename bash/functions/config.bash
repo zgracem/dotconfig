@@ -11,10 +11,6 @@ confed()
     [[ -f $file ]] ||
         return 1
 
-    # convert to Windows-style path if necessary
-    [[ $OSTYPE =~ cygwin ]] &&
-        file="$(cygpath -aw "$file")"
-
     _edit "$file"
 }
 
@@ -51,6 +47,7 @@ alias bpath='confed paths.bash'
  alias bpla='confed places.bash'
 alias bpref='confed prefs.bash'
  alias bpri='confed private.bash'
+ alias b750='confed private_750.bash'
  alias bpro='confed profile.bash'
 alias bprog='confed programs.bash'
  alias bps1='confed prompt.bash'
