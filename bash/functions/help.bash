@@ -2,7 +2,7 @@
 # ~zozo/.config/bash/functions/help.bash
 # ------------------------------------------------------------------------------
 
-case solarizedBG in
+case $solarizedBG in
     light)  colour_punct=base02 ;;
     *)      colour_punct=base2 ;;
 esac
