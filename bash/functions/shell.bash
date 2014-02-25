@@ -14,6 +14,8 @@ theseFunctions=(
     lspath
     today
     flatten
+    rootme
+    pause
 )
 
 unset -f ${theseFunctions[@]}
@@ -115,6 +117,18 @@ rootme()
     # restore window name
     [[ $STY  ]] && echo -ne "\ekbash\e\\"
     [[ $TMUX ]] && tmux set-window-option automatic-rename on >/dev/null
+}
+
+pause()
+{   # hold for a single keypress
+    
+    declare anykey message="$@"
+
+    : ${message:=Press any key to continue...}
+
+    printf "%s" "$message"
+    read -s -n1 anykey
+    printf "%b" "\n"
 }
 
 # ------------------------------------------------------------------------------
