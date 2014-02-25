@@ -1,6 +1,6 @@
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # ~zozo/.config/bash/functions/images.bash
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 dim()
 {   # return image dimensions
@@ -11,17 +11,13 @@ dim()
 
     declare img width height
     for img in "$@"; do
-        if sips --getProperty format "$img" 2>&1 | grep ^Error &>/dev/null; then
+        if sips --getProperty format "$img" 2>&1 | grep -q '^Error'; then
             printf "%s: Not an image file\n" "$img"
         else
-            width=$(sips --getProperty pixelWidth "$img" | grep pixelWidth: | awk '{ print $2 }')
-            height=$(sips --getProperty pixelHeight "$img" | grep pixelHeight: | awk '{ print $2 }')
-            printf "%s: %s × %s\n" "${img##*/}" $width $height
+            printf "%s: " "${img##*/}"
+
+            sips --getProperty pixelWidth --getProperty pixelHeight "$img" |
+            sed -nzE 's/^.*pixelWidth: ([[:digit:]]+)\n.*pixelHeight: ([[:digit:]]+)/\1 × \2/p'
         fi
     done
-}
-
-optim()
-{   # optimize png/gif/jpg files
-    open -a $HOME/Applications/ImageOptim.app "$@"
 }
