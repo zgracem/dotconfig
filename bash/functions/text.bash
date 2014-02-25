@@ -5,18 +5,34 @@
 
 _edit()
 {   # open a file in the appropriate editor
-    declare file="$1"
+    # Usage: _edit FILE[@LINE]
+
+    declare file="$1" lineno_regex='@([[:digit:]]+)$' line
+
+    # get line number (if specified)
+    [[ $file =~ $lineno_regex ]] && {
+        line="${BASH_REMATCH[1]}"
+        file="${file%@*}"
+    }
 
     [[ $SSH_TTY ]] && {
         # working remotely; use a console editor
         declare windowTitle="$(basename "$EDITOR")"
 
-        # see functions/newwin.bash
-        newwin --title "$windowTitle" "$EDITOR" "$file"
-        return
+        [[ $EDITOR =~ vim && $line ]] && {
+            newwin --title "$windowTitle" "$EDITOR" +$line "$file"
+        } || {
+            # see functions/newwin.bash
+            newwin --title "$windowTitle" "$EDITOR" "$file"
+        }
 
+        return
     } || {
-        # GUI editor
+        # use a GUI editor
+
+        [[ $VISUAL =~ subl && $line ]] && 
+            file="$file:$line" # for Sublime Text
+
         "$VISUAL" "$file"
     }
 }

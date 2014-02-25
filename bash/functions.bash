@@ -96,15 +96,17 @@ fe()
 {   # find and edit a function
     [[ $# -eq 1 ]] || return 1
 
-    declare func="$1" sourceFile
+    declare func="$1" source{,File,Line}
 
     declare -f "$func" &>/dev/null || {
         printf "%s: %s: function not defined\n" "$FUNCNAME" "$func" 1>&2
         return 1
     }
 
-    sourceFile="$(where "$func" | colourstrip | cut -d: -f1)"
+    source="$(where "$func" | colourstrip)"
+    sourceFile="${source%:*}"
+    sourceLine="${source#*:}"
 
-    _edit "${sourceFile/#~/$HOME}"
+    _edit "${sourceFile/#~/$HOME}@${sourceLine}"
 }
 
