@@ -7,26 +7,27 @@
 calendarFile="$HOME/.local/calendar"
 
 # do we have calendar(1) + a calendar file?
-if _inPath calendar && [[ -e $calendarFile ]]; then
-    # set up reference files
-    referenceFile="$HOME/.local/.calendar.last"
-    checkFile="$HOME/.local/.calendar.today"
+z_require -a calendar -f "$calendarFile" || return
 
-    # set last-modified date of comparison file to today at midnight
-    dateToday=$(command date +"%y%m%d0000")
-    command touch -t "$dateToday" "$checkFile"
+# set up reference files
+referenceFile="$HOME/.local/.calendar.last"
+checkFile="$HOME/.local/.calendar.today"
 
-    # have we done this yet today?
-    [[ $checkFile -nt $referenceFile ]] && {
-        # get "this day in history"
-        calendar -A0 -f "$calendarFile" && {
-            # set last-modified date of reference file to today at midnight
-            command touch -t "$dateToday" "$referenceFile"
-            # delete comparison file
-            command rm -f "$checkFile"
-        }
-    }
+# set last-modified date of comparison file to today at midnight
+dateToday=$(command date +"%y%m%d0000")
+command touch -t "$dateToday" "$checkFile"
 
-fi
+# have we done this yet today?
+[[ $checkFile -nt $referenceFile ]] || return
+
+# get "this day in history"
+calendar -A0 -f "$calendarFile" && {
+
+    # set last-modified date of reference file to today at midnight
+    command touch -t "$dateToday" "$referenceFile"
+
+    # delete comparison file
+    command rm -f "$checkFile"
+}
 
 unset dateToday {calendar,reference,check}File

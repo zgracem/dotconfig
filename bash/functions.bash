@@ -53,25 +53,29 @@ scold()
 
 z_require()
 {
-    declare switches='^-[adg]$'
-    declare switch="$1" object="$2"
+    declare OPTIND OPTARG option
+    declare usage="$FUNCNAME [-a application] [-d directory] [-g gnu_application] [-q]"
 
-    [[ $switch =~ $switches ]] && [[ $# -eq 2 ]] || {
-        scold "Usage: $FUNCNAME [-a application] [-d directory] [-g gnu_application]"
-        return 1
-    }
-
-    case $1 in
-        -a)
-            _inPath "$object" || return 1
-            ;;
-        -d)
-            [[ -d "$object" ]] || return 1
-            ;;
-        -g)
-            getGNU "$object" &>/dev/null || return 1
-            ;;
-    esac
+    while getopts ':a:d:f:g:' option; do
+        case $option in
+            a)
+                _inPath "$OPTARG" || return 1
+                ;;
+            d)
+                [[ -d "$OPTARG" ]] || return 1
+                ;;
+            f)
+                [[ -f "$OPTARG" ]] || return 1
+                ;;
+            g)
+                getGNU "$OPTARG" &>/dev/null || return 1
+                ;;
+            *)
+                scold "Usage: $usage"
+                return 64
+                ;;
+        esac
+    done
 }
 
 # -----------------------------------------------------------------------------
