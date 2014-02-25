@@ -8,7 +8,6 @@
 flags_alpine='-i -p $dir_config/alpine/pinerc -passfile $dir_config/alpine/alpine-passfile'
 flags_calendar='-A0 -f $HOME/.calendar'
 flags_cp='-aiv'     # archive mode; interactive; verbose
-flags_curl='-K $dir_config/curlrc'
 flags_dos2unix='-k' # copy date stamp to output file
 flags_file='-p'     # don't touch last-accessed time
 flags_ln='-v'       # verbose
@@ -26,15 +25,13 @@ flags_top='-F -R -u -user $USER'
 
 _isGNU ls && {
     flags_ls+=' --color=auto'
-# } || {
-#     flags_ls+='G'     # redundant w/ CLICOLOR=1
 }
 
 _isGNU ps && {
-    flags_ps+='s'       # summary format
+    flags_ps+='s'   # summary format
 
-    [[ $OSTYPE =~ cygwin ]] &&
-        flags_ps+='W'   # also show Windows processes
+    # also show Windows processes
+    [[ $OSTYPE =~ cygwin ]] && flags_ps+='W'
 
 } || {
     flags_ps+='xo pid,user,start,command'
@@ -71,6 +68,7 @@ export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"
 export SCREENRC="$dir_config/screenrc"
 
+alias curl='curl -K $dir_config/curlrc'
 alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 
 # -----------------------------------------------------------------------------
@@ -107,13 +105,12 @@ export ZIPOPTS='-9 --symlinks'
 export SSL_CERT_FILE="/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt"
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 
-[[ -e $SSL_CERT_FILE ]] ||
-    unset SSL_CERT_FILE
+[[ -e $SSL_CERT_FILE ]] || unset SSL_CERT_FILE
 
 # Transmission
 export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-daemon/web"
-[[ -e $TRANSMISSION_WEB_HOME ]] ||
-    unset TRANSMISSION_WEB_HOME
+
+[[ -e $TRANSMISSION_WEB_HOME ]] || unset TRANSMISSION_WEB_HOME
 
 # -----------------------------------------------------------------------------
 # Homebrew
