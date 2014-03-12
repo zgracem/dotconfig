@@ -45,7 +45,7 @@ alias def="dict -d wn"              # dictionary definition of $1
 alias dl="curl -OJ"                 # download a file
 alias headers="curl -Is"            # HTTP headers for $1
 alias ls1="command ls -A1"          # just the filenames
-alias myip="curl -S icanhazip.com"  # external IP address
+alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg="ping -c 4 google.com"  # check network connection
 alias unmount="umount"
 
