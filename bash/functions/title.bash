@@ -31,17 +31,16 @@ export titlePrefix titleEsc{Ante,Post}
 setWindowTitle()
 {
     [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] && {
-        declare title="${1:-titlePrefix}"
+        declare title="${1:-$titlePrefix}"
         printf "%b" "$titleEscAnte" "$title" "$titleEscPost"
     }
 }
 
 updateWindowTitle()
 {
-    [[ $TERM_PROGRAM != "Apple_Terminal" ]] && {
-        # Terminal already has $PWD in the titlebar
+    # Terminal already shows $PWD in the title bar
+    [[ $TERM_PROGRAM != "Apple_Terminal" ]] &&
         declare titleSuffix=": ${PWD/#$HOME/~}"
-    }
-
-   setWindowTitle "${titlePrefix}${titleSuffix}"
+    
+    setWindowTitle "${titlePrefix}${titleSuffix}"
 }

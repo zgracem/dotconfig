@@ -4,30 +4,28 @@
 
 goclip()
 {   # go to the URL on the clipboard
-    declare url=$(cat /dev/clipboard)
+
+    declare url=$(pbpaste)
     if [[ $url =~ ^http ]]; then
         "$BROWSER" "$(urldecode $url)"
     else
-        printf "$0: no URL in clipboard\n" 1>&2
+        scold $FUNCNAME "no URL in clipboard"
         return 1
     fi
 }
 
 urlEncodeFile()
 {   # URL-encode an entire file; http://stackoverflow.com/a/10797966
-    declare targetFile="$1" output
+    declare targetFile="$1"
 
-    output="$("$(getPath curl)" -q \
+    command curl -q \
         --silent \
         --output /dev/null \
         --get --data-urlencode "$(cat "$targetFile")" \
         --write-out %{url_effective} \
-        "" |
-        command cut -c 3-)"
-
-    echo $output
+        "" \
+    | cut -c 3-
 }
-
 
 follow()
 {   # un-shorten a URL
@@ -39,7 +37,7 @@ follow()
         if [[ $1 =~ ^http ]]; then
             url="$1"
         else
-            printf "%s: invalid URL\n" $FUNCNAME 1>&2
+            scold $FUNCNAME "invalid URL"
             return 1
         fi
     else
@@ -51,7 +49,7 @@ follow()
         if [[ $pb =~ ^http ]]; then
             url="$pb"
         else
-            printf "%s: no URL found\n" $FUNCNAME 1>&2
+            scold $FUNCNAME "no URL found"
             return 1
         fi
     fi
@@ -62,8 +60,9 @@ follow()
 dataurl()
 {   # create a data URL from an image
     # https://github.com/mathiasbynens/dotfiles/blob/master/.functions
-    echo "data:image/${1##*.};base64,$(openssl base64 -in "$1")" |
-    tr -d "\n"
+
+    echo "data:image/${1##*.};base64,$(openssl base64 -in "$1")" \
+    | tr -d "\n"
     echo
 }
 
@@ -96,18 +95,18 @@ tweet()
 {   # post a tweet with TTYtter
     declare status="$@"
 
-    if ! _inPath ttytter.pl; then
-        printf "%s: ttytter not installed\n" $FUNCNAME 1>&2
+    if ! _inPath ttytter; then
+        scold $FUNCNAME "ttytter not installed"
         return 1
     elif [[ $# -ne 1 ]]; then
-        printf "%s: invalid input\n" $FUNCNAME 1>&2
+        scold $FUNCNAME "invalid input"
         return 1
     elif [[ ${#status} -gt 140 ]]; then
-        printf "%s: input > 140 characters\n" $FUNCNAME 1>&2
+        scold $FUNCNAME "input > 140 characters"
         return 1
     fi
 
-    ttytter.pl -silent -hold -status="$status"
+    ttytter -silent -hold -status="$status"
 }
 
 apachelogs()

@@ -71,7 +71,7 @@ manpdf()
         [[ ! -f $pdf ]] && {
             # does the man page exist?
             command man -w "$page" &>/dev/null || {
-                printf "No manual entry for %s\n" "$page"
+                scold "No manual entry for $page"
                 return 1
             }
 
