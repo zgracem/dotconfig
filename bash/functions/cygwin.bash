@@ -13,14 +13,19 @@ f()
 
 findDrive()
 {   # given a drive label, return its path under /cygdrive
-    declare drive label="$1" cmdexe="$(cygpath -au $COMSPEC)"
+    declare drive letter cmdexe="$(cygpath -au $COMSPEC)"
+    declare label="$1"
 
-    for drive in /cygdrive/*; do
-        "$cmdexe" /c vol ${drive##*/}: 2>/dev/null |
-        grep -iq "${label}$" && {
-            echo "$drive"
-            return 0
-        }
+    for letter in {d..l}; do
+        drive="/cygdrive/$letter"
+
+        if [[ -d $drive ]]; then
+            "$cmdexe" /c vol ${letter}: 2>/dev/null \
+            | grep -iq "${label}$" && {
+                echo "$drive"
+                return 0
+            }
+        fi
     done
 
     return 1
@@ -34,4 +39,9 @@ cygkill()
 killall()
 {   # kill a process by name
     cygkill $(pidof $1)
+}
+
+sudo()
+{   # pass through commands
+    $*
 }
