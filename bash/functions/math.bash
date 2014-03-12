@@ -3,6 +3,7 @@
 # ------------------------------------------------------------------------------
 
 digitRegex='^-?[[:digit:]]+$'
+xdigitRegex='^(0x)?[[:xdigit:]]+$'
 
 # -----------------------------------------------------------------------------
 # functions
@@ -110,4 +111,9 @@ hex2bin()
 bin2hex()
 {
     echo "obase=16; ibase=2; $1" | bc
+}
+
+_isHex()
+{   # returns 0 if $1 is a valid hexadecimal number
+    [[ $1 =~ $xdigitRegex ]]
 }
