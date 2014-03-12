@@ -23,9 +23,8 @@ flags_top='-F -R -u -user $USER'
 
 # platform-specific
 
-_isGNU ls && {
+_isGNU ls &&
     flags_ls+=' --color=auto'
-}
 
 _isGNU ps && {
     flags_ps+='s'   # summary format
@@ -53,11 +52,16 @@ export ${!flags_*}
 
 # add flags to aliases
 
-for flags in ${!flags_*}; do
-    app=${flags#flags_}
+for flag in ${!flags_*}; do
+    # get app name
+    app=${flag#flags_}
+
+    # if we have the app, create an alias with the preferred flags
     _inPath $app &&
-        eval "alias $app=\"$app \$$flags\""
-    unset app flags
+        alias $app="$app ${!flag}"
+    
+    # were you born in a barn?
+    unset app flag
 done
 
 # -----------------------------------------------------------------------------

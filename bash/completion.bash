@@ -2,6 +2,12 @@
 # ~zozo/.config/bash/completion
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
+
+# only run if we need to
+[[ $BASH_COMPLETION_SOURCED ]] &&
+    return
+
+# -----------------------------------------------------------------------------
 # shell options
 # -----------------------------------------------------------------------------
 
@@ -19,7 +25,7 @@ shopt -s no_empty_cmd_completion
 # -----------------------------------------------------------------------------
 
 for checkFile in /{{usr,opt}/local/,}etc/bash_completion; do
-    _source "$checkFile" && {
+    source "$checkFile" 2>/dev/null && {
         export BASH_COMPLETION_SOURCED="$checkFile"
         break
     }
