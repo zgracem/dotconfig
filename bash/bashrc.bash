@@ -132,10 +132,7 @@ case $OSTYPE in
         ;;
 esac
 
-# this day in history...
-dotfiles+=(calendar)
-
-# plus local .bashrc, if any
+# local .bashrc, if any
 dotfiles+=(local)
 
 # source them all
@@ -152,4 +149,12 @@ _source "$HOME/.ssh/agent"
 # misc.
 # -----------------------------------------------------------------------------
 
-c
+# this day in history...
+$dir_scripts/matins.sh
+
+# countdown (date set in private.bash)
+if [[ -n $countTo ]]; then
+    $dir_scripts/countdown.sh "$countTo"
+else
+    return 0
+fi
