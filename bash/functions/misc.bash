@@ -20,10 +20,7 @@ div()
 
 pdfcrack()
 {   # remove password protection from PDF documents
-    z_require -a gs || {
-        scold "$FUNCNAME requires ghostscript"
-        return 1
-    }
+    z_require -a gs || return $?
 
     declare dir_fonts threads
 
@@ -51,8 +48,6 @@ pdfcrack()
             -sOutputFile="${file%.*}_nopassword.pdf" \
             ${threads} \
             "$file"
-
-        unset file
     done
 }
 
@@ -72,4 +67,29 @@ songinfo()
             return 1
             ;;
     esac
+}
+
+md5check()
+{   # quickly verify MD5 checksums
+    # Usage: md5check CHECKSUM FILE
+    
+    declare checksum="$1" file="$2"
+    declare regex='[[:xdigit:]]{32}'
+
+    [[ $# -eq 2 ]] || {
+        scold "Usage: $FUNCNAME CHECKSUM FILE"
+        return 1
+    }
+
+    [[ $checksum =~ $regex ]] || {
+        scold "$FUNCNAME: $checksum: invalid checksum"
+        return 65
+    }
+
+    [[ -r $file ]] || {
+        scold "$FUNCNAME: $file: invalid file"
+        return 66
+    }
+
+    printf "%s %s" $checksum "$file" | md5sum -c
 }
