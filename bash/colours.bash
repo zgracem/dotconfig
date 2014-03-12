@@ -6,16 +6,16 @@
 # -----------------------------------------------------------------------------
 
 # should be set by terminal emulator
-: ${solarizedBG:="dark"}
+: ${solarized:="dark"}
 
 [[ $ITERM_PROFILE =~ light ]] &&
-    solarizedBG=light
+    solarized=light
 
 bgflip()
 {
-    case $solarizedBG in
-        dark)   solarizedBG=light ;;
-        light)  solarizedBG=dark  ;;
+    case $solarized in
+        dark)   solarized=light ;;
+        light)  solarized=dark  ;;
         *)      return 1 ;;
     esac
 
@@ -38,7 +38,7 @@ magenta="35"
    cyan="36"
   white="37"
 
-[[ $solarizedBG =~ dark|light ]] && {
+[[ $solarized =~ dark|light ]] && {
   colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
     base03="1;${black}"
     base02="0;${black}"
@@ -75,7 +75,7 @@ colour_false="${red}"
 
 colour_user="${blue}"             # see prompt.bash
 
-case $solarizedBG in
+case $solarized in
     dark)
         colour_hi="${base2}"      # highlight colour
         colour_2d="${base01}"     # secondary colour
@@ -152,9 +152,9 @@ export ${!LESS_TERMCAP_*}
 colourDir="$HOME/share/dircolors"
 
 if _inPath dircolors && [[ -d $colourDir ]]; then
-    case $solarizedBG in
+    case $solarized in
         light|dark)
-            colourFile="$colourDir/solarized.$solarizedBG"
+            colourFile="$colourDir/solarized.$solarized"
             ;;
         *)
             colourFile="$colourDir/default"
@@ -175,6 +175,6 @@ unset colour{Dir,File}
 # GNU screen
 # ------------------------------------------------------------------------------
 
-[[ $solarizedBG == light ]] && {
+[[ $solarized == light ]] && {
     SCREENRC="$dir_config/screenrc.light"
 }
