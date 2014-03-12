@@ -86,9 +86,9 @@ urlencode()
 urldecode()
 {   # corresponding decode function
     # http://stackoverflow.com/a/10660730
-    declare decoded
-    printf -v decoded '%b' "${1//%/\\x}"
-    echo $decoded
+
+    printf "%b" "${@//%/\\x}"
+    [[ -t 1 ]] && printf "%b" "\n"
 }
 
 tweet()
