@@ -100,10 +100,7 @@ z_require()
 
 for subFile in $dir_config/bash/functions/*; do
     _source "$subFile"
-    [[ $theseFunctions ]] && {
-        export -f ${theseFunctions[@]} &>/dev/null
-        unset theseFunctions
-    }
+    unset subFile
 done
 
 # -----------------------------------------------------------------------------

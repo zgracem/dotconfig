@@ -3,26 +3,6 @@
 # replacements for shell functions
 # ------------------------------------------------------------------------------
 
-theseFunctions=(
-    cd
-    mkcd
-    cdls
-    lsf
-    lsd
-    lsl
-    lsx
-    lspath
-    today
-    flatten
-    rootme
-    pause
-)
-
-unset -f ${theseFunctions[@]}
-unalias  ${theseFunctions[@]} 2>/dev/null
-
-# ------------------------------------------------------------------------------
-
 cd()
 {
     declare dir=${1:-$HOME}
