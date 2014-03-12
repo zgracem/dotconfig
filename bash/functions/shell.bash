@@ -130,17 +130,3 @@ pause()
     read -s -n1 anykey
     printf "%b" "\n"
 }
-
-# ------------------------------------------------------------------------------
-
-_inPath sudo || {
-    unset -f sudo
-    unalias sudo 2>/dev/null
-
-    sudo()
-    {   # pass through commands (for cygwin)
-        $*
-    }
-
-    export -f sudo
-}
