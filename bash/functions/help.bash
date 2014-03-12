@@ -261,19 +261,30 @@ typevar()
 
 expand_array()
 {   # does what it says on the tin
-    declare arrayName="$1" arrayType arrayContents
-    declare key keys value
+    declare arrayName="$1" cmd key
 
-    arrayType="$(typevar "$arrayName" 2>/dev/null)"
+    cmd="$(declare -p $arrayName 2>&1)"
 
-    [[ $arrayType =~ array$ ]] || {
-        scold "$FUNCNAME" "$arrayName: not an array"
-        return 1
-    }
+    case $cmd in
+        declare\ -[aA]*)
+            # transfer $1 to our own array
+            eval "${cmd/$arrayName/array}"
 
-    for key in $(eval "echo -n \${!${arrayName}[@]}"); do
-        eval "echo [$key]=\${${arrayName}[$key]}"
-    done
+            for key in ${!array[*]}; do
+                echo "[$key]=${array[$key]}"
+            done
+
+            return 0
+            ;;
+        declare*)
+            scold "$FUNCNAME" "$arrayName: not an array"
+            ;;
+        *not\ found)
+            scold "$FUNCNAME" "$arrayName: not found"
+            ;;
+    esac
+
+    return 1
 }
 
 whatvar()
