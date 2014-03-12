@@ -23,7 +23,7 @@ q()
     #        q '-n $SSH_TTY'
     #        some_command; q
 
-    declare lastExit=$? expr pipefailChanged qColour qAnswer
+    declare lastExit=$? expr result qAnswer qColour
 
     case $# in
         0)
@@ -34,36 +34,31 @@ q()
             ;;
         *)
             scold "Usage: $FUNCNAME [EXPRESSION]\n'EXPRESSION' uses [[ ... ]] syntax"
-            return 1
+            return 64
             ;;
     esac
 
-    # disable pipefail if it's on
-    [[ $SHELLOPTS =~ pipefail ]] && {
-        set +o pipefail &&
-        pipefailChanged=true
-    }
+    # test it
+    result="$(eval "[[ $expr ]] && echo true" 2>&1)"
 
-    # check for syntax errors
-    eval "[[ $expr ]]" 2>&1 | grep -q error && {
-        scold "$FUNCNAME" "bad expression"
-        [[ $pipefailChanged ]] && set -o pipefail
-        return 64
-    }
-
-    # finally, test it
-    if eval "[[ $expr ]]"; then
-        qAnswer="true"
-        qColour="${colour_true}"  # green (set in colours.bash)
-    else
-        qAnswer="false"
-        qColour="${colour_false}" # red
-    fi
+    case $result in
+        *error*)
+            # syntax error
+            scold "$FUNCNAME" "bad expression"       
+            return 64
+            ;;
+        *true*)
+            # true
+            qAnswer="true"
+            qColour="${colour_true}"  # green
+            ;;
+        *)  # false
+            qAnswer="false"
+            qColour="${colour_false}" # red (set in colours.bash)
+            ;;
+    esac
 
     printf "%b%b%b\n" $qColour $qAnswer $colour_reset
-
-    # turn pipefail back on if it was
-    [[ $pipefailChanged ]] && set -o pipefail
 
     return 0
 }
