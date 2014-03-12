@@ -8,6 +8,11 @@ digitRegex='^-?[[:digit:]]+$'
 # functions
 # -----------------------------------------------------------------------------
 
+calc()
+{
+    echo "$*" | bc -q 2>/dev/null
+}
+
 abs()
 {   # return the absolute value of a number
     [[ $# -eq 1 && $1 =~ $digitRegex ]] || return 1
@@ -47,7 +52,7 @@ leastOf()
 
     for num in "$@"; do
         : ${least:=$num}
-        least=$(( (num < least) ? num : least ))
+        least=$(lesserOf $num $least)
     done
 
     echo $least
@@ -59,7 +64,7 @@ greatestOf()
 
     for num in "$@"; do
         : ${greatest:=$num}
-        greatest=$(( (greatest > num) ? greatest : num ))
+        greatest=$(greaterOf $num $greatest)
     done
 
     echo $greatest
@@ -92,6 +97,11 @@ randInt()
     echo "$int"
 }
 
+coinflip()
+{   # randomly returns 0 or 1
+    return $(randInt 0-1)
+}
+
 hex2bin()
 {
     echo "obase=2; ibase=16; ${1^^}" | bc
@@ -100,9 +110,4 @@ hex2bin()
 bin2hex()
 {
     echo "obase=16; ibase=2; $1" | bc
-}
-
-coinflip()
-{   # randomly returns 0 or 1
-    return $(( RANDOM % 2 ))
 }
