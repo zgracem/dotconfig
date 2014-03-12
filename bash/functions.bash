@@ -23,11 +23,6 @@ _isAlias()
     builtin alias "$1" &>/dev/null
 }
 
-_shoptSet()
-{   # exits 0 if shell option $1 is set
-    [[ $BASHOPTS =~ $1 ]]
-}
-
 getPath()
 {   # returns the full path to $1
     builtin type -P "$1" 2>/dev/null
