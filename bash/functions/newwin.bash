@@ -3,21 +3,21 @@
 # ------------------------------------------------------------------------------
 
 newwin()
-{   # open in a new tmux/GNU screen window if applicable
-    # Usage: newwin [-t|--title TITLE] COMMAND ARGS ...
+{   # open in a new tmux/GNU screen window, if applicable
+    # Usage: newwin [-t|--title TITLE] COMMAND [ARGS]
 
-    declare bin arg i=0
-    declare title titleregex='^-?-t(itle)?$'
+    declare title_regex='^-?-t(itle)?$'
+    declare title cmd i=0
     declare -a args
 
-    [[ $1 =~ $titleregex ]] && {
+    if [[ $1 =~ $title_regex ]]; then
         title="$2"
         shift 2
-    } || {
-        title="$(basename "$1")"
-        printf -v bin "%q" "$1"
+    else
+        title="${1##*/}"
+        printf -v cmd "%q" "$1"
         shift
-    }
+    fi
 
     if [[ $TMUX ]]; then
         until [[ $# -eq 0 ]]; do
@@ -25,10 +25,11 @@ newwin()
             ((i++))
             shift
         done
-        tmux new-window -n "$title" "$bin ${args[*]}"
+
+        tmux new-window -n "$title" "$cmd ${args[*]}"
     elif [[ $STY ]]; then
-        screen -t "$title" $bin "$@"
+        screen -t "$title" $cmd "$@"
     else
-        $bin "$@"
+        $cmd "$@"
     fi
 }
