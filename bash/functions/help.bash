@@ -130,9 +130,6 @@ whichalias()
 
     [[ $target ]] || return 1
 
-    # fprint "$name is aliased to \`$target'" "(^$name).*\`(.+)'$" \
-    #     $colour_aliasName,$colour_aliasValue normal
-
     cprint \
         $colour_aliasName "$name" \
         null " is aliased to \`" \
@@ -146,15 +143,8 @@ whichspecial()
 {   # like `type [name]`, but prettier
     declare name="$1" desc
     declare thingType="$(type -t $name)"
-    #declare colour=$(eval "echo -n \$colour_$thingType")
 
     desc="$name is a shell $thingType"
-
-    # so colout doesn't choke on `[[`
-    printf -v name "%q" "$name"
-
-    # fprint "$desc" "(^$name) is a (.+)$" \
-    #     $colour_specialName,$colour_specialDef normal
 
     cprint \
         $colour_specialName "$name" \
@@ -172,9 +162,6 @@ whichfile()
     [[ ${#fileNames[@]} -gt 0 ]] || return 1
 
     for fileName in ${fileNames[@]}; do
-        # fprint "$name is $fileName" "(^$name) is (.+)$" \
-        #     $colour_fileName,$colour_filePath normal
-
         cprint \
             $colour_fileName "$name" \
             null " is " \
@@ -201,9 +188,6 @@ where()
 
     # [name] [line] [file] -> [file]:[line]
     location="$(declare -F "$func" | sed -E "s/^$func ([[:digit:]]+) (.*)$/\2:\1/")"
-
-    # fprint "${location/#$HOME/~}" "(.+)(:)([0-9]+)" \
-    #     $colour_functionFile,$colour_punct,$colour_functionLine normal
 
     cprint \
         $colour_functionFile "${location%:*}" \
@@ -334,9 +318,6 @@ which()
                 whichalias "$thing"
                 ;;
             function)
-                # fprint "$thing is a function" "^$thing" \
-                #     $colour_functionName normal
-
                 cprint \
                     $colour_functionName "$thing" \
                     null " is a function"
@@ -387,9 +368,6 @@ what()
                 builtin|keyword)
                     helpString=$(fancy_help "$thing")
 
-                    # fprint "$helpString" "^$thing" \
-                    #     $colour_specialName normal
-
                     cprint \
                         $colour_specialName "$thing" \
                         null " ($thingType): ${helpString#*: }"
@@ -398,9 +376,6 @@ what()
                     helpString=$(fancy_whatis "$thing")
 
                     [[ $helpString ]] && {
-                        # fprint "$helpString" "^$thing" \
-                        #     $colour_fileName normal
-
                         cprint \
                             $colour_fileName "$thing" \
                             null "${helpString:${#thing}}"
@@ -413,8 +388,6 @@ what()
     } || {
         # system libraries & other non-command man pages
         helpString="$(synopsis "$thing")" && {
-            # fprint "$helpString" "^$thing" $colour_fileName normal
-
             cprint \
                 $colour_fileName "$thing" \
                 null "${helpString:${#thing}}"
