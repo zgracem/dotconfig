@@ -3,6 +3,11 @@
 # handy functions for debugging and development
 # ------------------------------------------------------------------------------
 
+_shoptSet()
+{   # exits 0 if shell option $1 is set
+    [[ $BASHOPTS =~ $1 ]]
+}
+
 xtrace()
 {   # toggle xtrace
     if [[ $SHELLOPTS =~ xtrace ]]; then
