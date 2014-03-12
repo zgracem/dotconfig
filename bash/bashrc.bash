@@ -12,12 +12,19 @@
 hash stty 2>/dev/null && stty -ixon 2>/dev/null
 
 _source()
-{   # source file(s) if possible, exit 0 if all successfully sourced
-    declare file
+{   # source file(s) if possible
+    declare file error
+
     for file in "$@"; do
-        [[ -r $file ]] && . "$file"
+        if [[ -r $file ]]; then
+            . "$file" || error=true
+        else
+            error=true
+        fi
     done
-    return 0
+    
+    # return 0 if all were successfully sourced
+    [[ -z $error ]]
 }
 
 # -----------------------------------------------------------------------------
