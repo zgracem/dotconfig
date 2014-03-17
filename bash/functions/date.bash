@@ -27,3 +27,10 @@ lm()
         stat -f %m -t %s "$@"
     }
 }
+
+parseEpoch()
+{   # convert from UNIX epoch to human units
+    declare inputSeconds="$1" outputFormat="$2"
+
+    command date -u $z_dateFlags ${z_GNUdate+@}$inputSeconds +"$outputFormat"
+}
