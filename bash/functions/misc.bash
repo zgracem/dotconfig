@@ -93,3 +93,15 @@ md5check()
 
     printf "%s %s" $checksum "$file" | md5sum -c
 }
+
+_inPath lessc && {
+    lessc()
+    {   # quick wrapper for LESS (http://lesscss.org/)
+        declare less_file css_file
+
+        for less_file in "$@"; do
+            css_file="${less_file%.less}.css"
+            command lessc "$less_file" >| "$css_file"
+        done
+    }
+}
