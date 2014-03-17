@@ -121,9 +121,6 @@ export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-dae
 # -----------------------------------------------------------------------------
 
 [[ -x /usr/local/bin/brew ]] && {
-    # keep files in share/info
-    HOMEBREW_KEEP_INFO=true
-
     # don't print beer emoji when logged in remotely
     [[ $SSH_TTY ]] && HOMEBREW_NO_EMOJI=true
 
