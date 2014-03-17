@@ -37,17 +37,21 @@ PS4+="\${FUNCNAME[0]:+\${FUNCNAME[0]}():}"  # function name (if applicable)
 export PS{1..4}
 
 # -----------------------------------------------------------------------------
-# fires when a command is aborted with Ctrl+C
+# print a red "^C" when a command is aborted
 # -----------------------------------------------------------------------------
 
 trap 'echo -ne "${colour_false}^C${null}"' INT
 
 # -----------------------------------------------------------------------------
-# $PROMPT_COMMAND -- see ~/.config/bash/functions/prompt.bash
+# $PROMPT_COMMAND
 # -----------------------------------------------------------------------------
 
+# ~/.config/bash/functions/prompt.bash
 addPromptCmd -p printExit
 
+addPromptCmd iTermUpdate
+
+# ~/.config/bash/functions/title.bash
 [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] && {
     addPromptCmd updateWindowTitle
 }

@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 confed()
-{   # edit
+{   # edit a config file
     declare file="$dir_config/bash/$1"
 
     # does the file exist?
@@ -15,7 +15,7 @@ confed()
 }
 
 bf()
-{
+{   # edit a functions file
     [[ $# -eq 0 ]] && {
         confed functions.bash
     } || {
@@ -27,7 +27,7 @@ bf()
 }
 
 rl()
-{   # reload
+{   # reload a config file
     [[ $# -eq 0 ]] && {
         confsrc profile
     } || {
