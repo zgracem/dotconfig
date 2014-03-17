@@ -57,3 +57,8 @@ printExit()
         tput rc # restore cursor position
     }
 }
+
+iTermUpdate()
+{   # notify iTerm of the current directory
+    printf "%b%s%b" "\e]50;" "CurrentDir=$PWD" "\a"
+}
