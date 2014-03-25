@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 # only run if we need to
-[[ $SYSPATH ]] &&
+[[ -n $SYSPATH ]] &&
     return
 
 # get a reliable path prefix
@@ -99,8 +99,8 @@ CDPATH=.:$HOME      # also look in ~ when cd'ing
 }
 
 # Python
-[[ -e /usr/local/lib/python2.7/site-packages ]] && {
+[[ -d /usr/local/lib/python2.7/site-packages ]] && {
     PYTHONPATH=/usr/local/lib/python2.7/site-packages
 }
 
-export {CD,MAIL,MAN,INFO,PYTHON,}PATH
+export {,CD,MAIL,MAN,INFO,PYTHON}PATH

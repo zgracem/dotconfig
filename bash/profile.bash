@@ -12,13 +12,13 @@
 
 # locale settings: Canadian English, UTF-8
 LANGUAGE="en_CA:en"
-LANG="$(locale -a | grep -i 'en_CA.utf')"
+LANG="$(locale -a 2>/dev/null | grep -i 'en_CA.utf')"
 LC_ALL="$LANG"
 TZ="America/Edmonton"
 
 # # if you trust your terminal/environment to set these sensibly...
-# : ${LANG:="$(locale -a | grep -i 'en_CA.utf')"}
 # : ${LANGUAGE:="en_CA:en"}
+# : ${LANG:="$(locale -a 2>/dev/null | grep -i 'en_CA.utf')"}
 # : ${LC_ALL:="$LANG"}
 # : ${TZ:="America/Edmonton"}
 

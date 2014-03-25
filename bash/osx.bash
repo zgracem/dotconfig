@@ -23,41 +23,13 @@ alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/C
 network="$(airport -I | sed -nE 's/^ +SSID: (.*)$/\1/p')"
 
 # compiler flags
-export ARCHFLAGS="-arch $(sysctl -n hw.machine)"
-
-# -----------------------------------------------------------------------------
-# Terminal.app
-# -----------------------------------------------------------------------------
-
-# tell the terminal about the working directory at each prompt.
-[[ $TERM_PROGRAM == "Apple_Terminal" ]] && {
-    [[ $TMUX ]] && { # ANSI device control string
-        tmuxEscAnte="\ePtmux;\e"
-        tmuxEscPost="\e\\"
-    }
-
-    update_terminal_cwd()
-    {   # Identify the directory using a "file:" scheme URL,
-        # including the host name to disambiguate local vs.
-        # remote connections. Percent-escape spaces.
-
-        declare SEARCH=' '
-        declare REPLACE='%20'
-        declare PWD_URL="file://${HOSTNAME}${PWD//$SEARCH/$REPLACE}"
-
-        declare escAnte="\e]2;"
-
-        printf '%b\e]7;%b\a%b' "$tmuxEscAnte" "$PWD_URL" "$tmuxEscPost"
-    }
-
-    addPromptCmd update_terminal_cwd
-}
+export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch $(sysctl -n hw.machine)"
 
 # -----------------------------------------------------------------------------
 # Networking &c.
 # -----------------------------------------------------------------------------
 
-# toggle Bluetooth (http://frederikseiffert.de/blueutil)
+# toggle Bluetooth
 alias btoff="blueutil off"
 alias bton="blueutil on"
 
@@ -146,15 +118,18 @@ alias cgibin="cd /Library/WebServer/CGI-Executables/"
 _inPath md5sum  || alias md5sum="md5"
 _inPath sha1sum || alias sha1sum="shasum"
 
-alias fixopenwith="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister \
-    -kill -r -domain local -domain system -domain user"
-
 # list all apps downloaded from the Mac App Store
 alias allstoreapps="find /Applications \
     -path '*Contents/_MASReceipt/receipt' \
     -maxdepth 4 \
     -print | \
     sed 's#.app/Contents/_MASReceipt/receipt#.app#g;s#/Applications/##'"
+
+# list all available iOS IPSW files
+# adapted from http://osxdaily.com/2013/11/15/get-list-all-ipsw-files-from-apple/
+alias ipsw="curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa/wa/com.apple.jingle.appserver.client.MZITunesClientCheck/version \
+    | sed -nE 's#^\s*<string>(http://.+ipsw)</string>\$#\1#p' \
+    | sort -u"
 
 # -----------------------------------------------------------------------------
 # Homebrew
@@ -173,22 +148,11 @@ fi
 # MacPorts
 # -----------------------------------------------------------------------------
 
-if [[ -e /opt/local/bin/port ]]; then
-    alias psearch='port search'
-    alias pinfo='port info'
-    alias pi='sudo port install'
-    alias pui='sudo port uninstall'
-    alias pfiles='port contents'
-    alias portupdate='sudo port selfupdate && sudo port upgrade outdated'
-fi
-
-# -----------------------------------------------------------------------------
-
-# # get a list of all iOS IPSW files
-# curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa/wa/com.apple.jingle.appserver.client.MZITunesClientCheck/version |
-    # grep ipsw |
-    # sort -u |
-    # sed 's/<string>//g' |
-    # sed 's/<\/string>//g' |
-    # grep -v protected
-
+# if _inPath port; then
+#     alias psearch='port search'
+#     alias pinfo='port info'
+#     alias pi='sudo port install'
+#     alias pui='sudo port uninstall'
+#     alias pfiles='port contents'
+#     alias portupdate='sudo port selfupdate && sudo port upgrade outdated'
+# fi

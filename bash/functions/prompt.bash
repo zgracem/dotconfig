@@ -62,3 +62,28 @@ iTermUpdate()
 {   # notify iTerm of the current directory
     printf "%b%s%b" "\e]50;" "CurrentDir=$PWD" "\a"
 }
+
+# tell Terminal.app about the working directory at each prompt.
+[[ $TERM_PROGRAM == "Apple_Terminal" ]] && {
+    [[ $TMUX ]] && {
+        # ANSI device control string
+        tmuxEscAnte="\ePtmux;\e"
+        tmuxEscPost="\e\\"
+    }
+
+    update_terminal_cwd()
+    {   # Identify the directory using a "file:" scheme URL,
+        # including the host name to disambiguate local vs.
+        # remote connections. Percent-escape spaces.
+
+        declare SEARCH=' '
+        declare REPLACE='%20'
+        declare PWD_URL="file://${HOSTNAME}${PWD//$SEARCH/$REPLACE}"
+
+        declare escAnte="\e]2;"
+
+        printf '%b\e]7;%b\a%b' "$tmuxEscAnte" "$PWD_URL" "$tmuxEscPost"
+    }
+
+    addPromptCmd update_terminal_cwd
+}

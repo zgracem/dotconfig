@@ -80,7 +80,7 @@ EOF
 brewup()
 {   # update and upgrade installed Homebrew packages
     
-    z_require -a brew || return 1
+    _inPath brew || return 1
 
     brew update && pause
     brew upgrade

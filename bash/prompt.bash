@@ -18,7 +18,7 @@ done
 export ${!esc_*}
 
 # -----------------------------------------------------------------------------
-# prompts -- see ~/.config/bash/colours.bash
+# prompts -- see colours.bash and functions/prompt.bash
 # -----------------------------------------------------------------------------
 
 unset PS1 PS2 PS4
@@ -43,15 +43,14 @@ export PS{1..4}
 trap 'echo -ne "${colour_false}^C${null}"' INT
 
 # -----------------------------------------------------------------------------
-# $PROMPT_COMMAND
+# $PROMPT_COMMAND -- see functions/prompt.bash
 # -----------------------------------------------------------------------------
 
-# ~/.config/bash/functions/prompt.bash
 addPromptCmd -p printExit
 
 addPromptCmd iTermUpdate
 
-# ~/.config/bash/functions/title.bash
+# see functions/title.bash
 [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] && {
     addPromptCmd updateWindowTitle
 }

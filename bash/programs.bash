@@ -4,15 +4,19 @@
 # -----------------------------------------------------------------------------
 
 # set default values
-BROWSER=$(getPath links)
-EDITOR=$(getPath vim)
-PAGER=$(getPath less)
 
+BROWSER=$(getPath links)
+
+EDITOR=$(getPath vim)
 VISUAL=$EDITOR
 GIT_EDITOR=$EDITOR
 SUDO_EDITOR=$EDITOR
 
-if [[ ! $SSH_TTY ]]; then
+PAGER=$(getPath less)
+MANPAGER=$PAGER
+
+# use GUI apps if not logged in remotely
+if [[ -z $SSH_TTY ]]; then
     case $OSTYPE in
         darwin*)
             BROWSER=/usr/bin/open
@@ -25,4 +29,4 @@ if [[ ! $SSH_TTY ]]; then
     esac
 fi
 
-export BROWSER EDITOR GIT_EDITOR MANPAGER=$PAGER PAGER SUDO_EDITOR VISUAL
+export BROWSER EDITOR GIT_EDITOR MANPAGER PAGER SUDO_EDITOR VISUAL

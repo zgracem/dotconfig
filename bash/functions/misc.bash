@@ -20,7 +20,10 @@ div()
 
 pdfcrack()
 {   # remove password protection from PDF documents
-    z_require -a gs || return $?
+    _inPath gs || {
+        scold "$FUNCNAME: Ghostscript not found"
+        return 1
+    }
 
     declare dir_fonts threads
 
