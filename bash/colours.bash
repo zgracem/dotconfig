@@ -95,7 +95,7 @@ case $solarized in
 esac
 
 # Prompt (iPhone SSH app)
-[[ $COLUMNS -eq 71 && $LINES -le 26 ]] && {
+[[ $COLUMNS -eq 80 && $LINES -le 28 ]] && {
     colour_2d="${blue}"
     colour_hi="${brwhite}"
     colour_user="${cyan}"
