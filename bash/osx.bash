@@ -119,6 +119,7 @@ alias unquar="xattr -d -r com.apple.quarantine" # recurses into directories
 # Misc. shortcuts
 # -----------------------------------------------------------------------------
 
+alias ap="AtomicParsley"
 alias ds="$dir_scripts/displaysleep.sh"
 alias emptytrash="sudo rm -rf /Volumes/*/.Trashes/*; sudo rm -rf ~/.Trash/*"
 alias plist2bin="plutil -convert binary1"
