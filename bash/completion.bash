@@ -98,8 +98,8 @@ complete -o default -o nospace \
 
 # Homebrew
 [[ -x /usr/local/bin/brew ]] &&
-    _source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
+    . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 
 # Transmission
-_source "$dir_mybin/transmission-remote-cli/transmission-remote-cli-bash-completion.sh"
+. "$dir_mybin/transmission-remote-cli/transmission-remote-cli-bash-completion.sh"
 

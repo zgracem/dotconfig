@@ -99,7 +99,7 @@ z_require()
 # -----------------------------------------------------------------------------
 
 for subFile in $dir_config/bash/functions/*; do
-    _source "$subFile"
+    . "$subFile"
     unset subFile
 done
 
