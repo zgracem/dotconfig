@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 [[ $OSTYPE =~ linux ]] || {
-    printf "%s: cannot source on this OS\n" "$(basename ${BASH_SOURCE[0]} .sh)" 1>&2
+    scold "${BASH_SOURCE[0]}" "cannot source on this OS"
     return 1
 }
 
