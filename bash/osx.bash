@@ -160,7 +160,7 @@ alias allstoreapps="find /Applications \
 # Homebrew
 # -----------------------------------------------------------------------------
 
-if [[ -x /usr/local/bin/brew ]]; then
+if _inPath brew; then
     alias bdoc='brew doctor'
     alias binfo='brew info'
     alias binst='brew install'
