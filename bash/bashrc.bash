@@ -11,22 +11,6 @@
 # just say no to flow control
 hash stty 2>/dev/null && stty -ixon 2>/dev/null
 
-_source()
-{   # source file(s) if possible
-    declare file error
-
-    for file in "$@"; do
-        if [[ -r $file ]]; then
-            . "$file" || error=true
-        else
-            error=true
-        fi
-    done
-    
-    # return 0 if all were successfully sourced
-    [[ -z $error ]]
-}
-
 # -----------------------------------------------------------------------------
 # shell options
 # -----------------------------------------------------------------------------
@@ -106,7 +90,7 @@ confsrc()
 
     for what in "$@"; do
         file="$dir_config/bash/${what%.bash}.bash"
-        _source "$file"
+        [[ -r $file ]] && . "$file"
     done
 }
 
@@ -149,8 +133,8 @@ confsrc ${dotfiles[@]}
 # start agents
 # -----------------------------------------------------------------------------
 
-_source "$HOME/.ssh/agent"
-# _source "$HOME/.gnupg/agent"
+. "$HOME/.ssh/agent"
+# . "$HOME/.gnupg/agent"
 
 # -----------------------------------------------------------------------------
 # misc.
