@@ -163,13 +163,15 @@ if _inPath dircolors && [[ -d $colourDir ]]; then
 
     # sets and exports $LS_COLORS
     eval $(dircolors -b $colourFile)
-else
-    # http://geoff.greer.fm/lscolors/
-    export CLICOLOR=1
-    export LSCOLORS="exfxdeedbxaeGeabadhchd"
 fi
 
 unset colour{Dir,File}
+
+_isGNU ls || {
+    export CLICOLOR=1
+    # http://geoff.greer.fm/lscolors/
+    export LSCOLORS="exfxdeedbxaeGeabadhchd"
+}
 
 # ------------------------------------------------------------------------------
 # GNU screen
@@ -177,4 +179,6 @@ unset colour{Dir,File}
 
 [[ $solarized == light ]] && {
     SCREENRC="$dir_config/screenrc.light"
+} || {
+    return 0
 }

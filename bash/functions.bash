@@ -46,62 +46,15 @@ scold()
     printf "%b\n" >&2 "${2+$1: }${2-$1}"
 }
 
-z_require()
-{   # specify dependencies (OS, apps, GNU versions of apps, or directories) and
-    # return false if they don't exist
-
-    declare usage="$FUNCNAME [-a APPLICATION] [-d DIR] [-f FILE] [-g GNU_APP] [-o OS]"
-    declare OPTIND OPTARG option object error
-
-    while getopts ':a:d:f:g:o:' option; do
-        unset object
-
-        case $option in
-            a)
-                _inPath "$OPTARG" || object="application: $OPTARG"
-                ;;
-            d)
-                [[ -d "$OPTARG" ]] || object="directory: $OPTARG"
-                ;;
-            f)
-                [[ -f "$OPTARG" ]] || object="file: $OPTARG"
-                ;;
-            g)
-                getGNU "$OPTARG" &>/dev/null || object="application: GNU $OPTARG"
-                ;;
-            o)
-                [[ $OSTYPE =~ "$OPTARG" ]] || {
-                    scold "not supported on this OS"
-                    return 1
-                }
-            ;;
-            *)
-                scold "Usage: $usage"
-                return 64
-                ;;
-        esac
-
-    [[ $object ]] && {
-        scold "missing required $object"
-        error=true
-    }
-    done
-
-    if [[ $error ]]; then
-        return 69
-    else
-        return 0
-    fi
-}
-
 # -----------------------------------------------------------------------------
 # separate function files
 # -----------------------------------------------------------------------------
 
-for subFile in $dir_config/bash/functions/*; do
+for subFile in $dir_config/bash/functions/*.bash; do
     . "$subFile"
-    unset subFile
 done
+
+unset subFile
 
 # -----------------------------------------------------------------------------
 
@@ -112,7 +65,7 @@ fe()
     declare func="$1" source{,File,Line}
 
     declare -f "$func" &>/dev/null || {
-        printf "%s: %s: function not defined\n" "$FUNCNAME" "$func" 1>&2
+        scold "$FUNCNAME" "function not defined"
         return 1
     }
 
@@ -122,4 +75,3 @@ fe()
 
     _edit "${sourceFile/#~/$HOME}@${sourceLine}"
 }
-

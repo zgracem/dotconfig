@@ -15,7 +15,7 @@ alias sizes="du -s ./* | sort -rn"  # sort files & directories in $PWD by size
 # display/search all variable values & attributes
 alias vars="declare -p | colourstrip | sed -nE 's/^declare (.*)$/\1/p' | sort -k2"
 alias allvars="vars | command less"
-alias findvar="vars | grep -i"
+alias vgrep="vars | grep -i"
 
 # history sorted by frequency of use
 alias tophist="history | awk '{print \$4}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
@@ -32,16 +32,14 @@ alias s="screen -d -R "
 alias svim="sudo vim"
 alias t="tmux attach 2>&- || tmux -2 new-session"
 
-# open in a new window if GNU screen is running (see functions/newwin.bash)
+# open in a new window if tmux/GNU screen is running (see functions/newwin.bash)
 alias bt="newwin --title transmission $dir_mybin/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
 alias twitter="newwin ttytter"
 alias vim='newwin vim'
 
 # misc.
-alias :wq="exit"
 alias cronedit="crontab -e"
-alias def="dict -d wn"              # dictionary definition of $1
 alias dl="curl -OJ"                 # download a file
 alias headers="curl -Is"            # HTTP headers for $1
 alias ls1="command ls -A1"          # just the filenames
@@ -68,7 +66,7 @@ for mode in 400 600 644 700 755; do
     alias "$mode"="chmod $mode" && unset mode
 done
 
-# ssh (User/HostName settings in ~/.ssh/config)
+# ssh (user/hostname settings in ~/.ssh/config)
 alias m="newwin --title Minerva ssh Minerva"
 alias er="newwin --title Erato ssh Erato"
 alias dh="newwin --title Dreamhost ssh Dreamhost"

@@ -59,10 +59,10 @@ for flag in ${!flags_*}; do
     # if we have the app, create an alias with the preferred flags
     _inPath $app &&
         alias $app="$app ${!flag}"
-    
-    # were you born in a barn?
-    unset app flag
 done
+
+# were you born in a barn?
+unset app flag
 
 # -----------------------------------------------------------------------------
 # settings -- config files
@@ -78,8 +78,6 @@ alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 # -----------------------------------------------------------------------------
 # settings -- environment variables
 # -----------------------------------------------------------------------------
-
-export BLOCKSIZE=1024
 
 # git
 export GIT_AUTHOR_NAME="Zozo"
@@ -120,16 +118,11 @@ export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-dae
 # Homebrew
 # -----------------------------------------------------------------------------
 
-[[ -x /usr/local/bin/brew ]] && {
+_inPath brew && {
     # don't print beer emoji when logged in remotely
     [[ $SSH_TTY ]] && HOMEBREW_NO_EMOJI=true
 
-    # https://github.com/phinze/homebrew-cask/
-    HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
     export ${!HOMEBREW_*}
+} || {
+    return 0
 }
-
-# -----------------------------------------------------------------------------
-
-return 0
