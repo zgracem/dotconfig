@@ -97,7 +97,7 @@ complete -o default -o nospace \
 }
 
 # Homebrew
-[[ -x /usr/local/bin/brew ]] &&
+_inPath brew &&
     . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 
 # Transmission
