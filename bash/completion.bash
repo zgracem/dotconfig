@@ -101,5 +101,4 @@ _inPath brew &&
     . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 
 # Transmission
-. "$dir_mybin/transmission-remote-cli/transmission-remote-cli-bash-completion.sh"
-
+. "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
