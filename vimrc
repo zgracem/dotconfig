@@ -170,7 +170,7 @@ set t_ut=                       " disable BCE
 syntax on                       " syntax highlighting
 filetype plugin indent on       " filetype detection + plugins + indent prefs
 
-if $solarizedBG == "light" && ! has("gui_running")
+if $solarized == "light" && ! has("gui_running")
   set background=light          " formerly `hostname() ==? "ws144966"`
 else
   set background=dark
