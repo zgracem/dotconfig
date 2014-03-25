@@ -29,14 +29,6 @@ export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch $(sysctl -n hw.machine)"
 # Networking &c.
 # -----------------------------------------------------------------------------
 
-# toggle Bluetooth
-alias btoff="blueutil off"
-alias bton="blueutil on"
-
-# toggle WiFi
-alias wifioff="networksetup -setairportpower ${netcard} off"
-alias wifion="networksetup -setairportpower ${netcard} on"
-
 # number of users connected to AirPort (vars set in private.bash)
 alias aeusers="snmpget -v 2c -c $snmp_community -M $snmp_mibPath -m+${snmp_mib} \
     ${snmp_host}.local ${snmp_mib}::wirelessNumber.0 | \
