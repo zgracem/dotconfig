@@ -102,9 +102,9 @@ dotfiles=(
     functions
     places
     prefs
-    completion
     programs
     aliases
+    completion
     colours
     prompt
     private
