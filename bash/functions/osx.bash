@@ -106,3 +106,29 @@ scan()
             ;;
     esac
 }
+
+bluetooth()
+{   # toggle Bluetooth (http://frederikseiffert.de/blueutil)
+
+    _inPath blueutil || return 1
+
+    declare status="$(blueutil status)"
+
+    case $status in
+        *off)   blueutil on  ;;
+        *on)    blueutil off ;;
+        *)      return 1 ;;
+    esac
+}
+
+wifi()
+{   # toggle WiFi power
+    declare status="$(networksetup -getairportpower $netcard 2>/dev/null)"
+
+    case $status in
+        *Off)   networksetup -setairportpower $netcard on  ;;
+        *On)    networksetup -setairportpower $netcard off ;;
+        *)      return 1 ;;
+    esac
+}
+
