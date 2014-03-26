@@ -3,11 +3,8 @@
 # functions to manipulate the xterm-compatible window title
 # ------------------------------------------------------------------------------
 
-: ${USER:=$(id -un)}
-: ${HOSTNAME:=$(uname -n)}
-
 # default title string
-titlePrefix="${USER}@${HOSTNAME}"
+titlePrefix="${USER:-$(id -un)}@${HOSTNAME:-$(uname -n)}"
 
 # typical escape codes
 titleEscAnte="\e]2;"
