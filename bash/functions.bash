@@ -50,28 +50,4 @@ scold()
 # separate function files
 # -----------------------------------------------------------------------------
 
-for subFile in $dir_config/bash/functions/*.bash; do
-    . "$subFile"
-done
-
-unset subFile
-
-# -----------------------------------------------------------------------------
-
-fe()
-{   # find and edit a function
-    [[ $# -eq 1 ]] || return 1
-
-    declare func="$1" source{,File,Line}
-
-    declare -f "$func" &>/dev/null || {
-        scold "$FUNCNAME" "function not defined"
-        return 1
-    }
-
-    source="$(where "$func" | colourstrip)"
-    sourceFile="${source%:*}"
-    sourceLine="${source#*:}"
-
-    _edit "${sourceFile/#~/$HOME}@${sourceLine}"
-}
+_source $dir_config/bash/functions/*.bash
