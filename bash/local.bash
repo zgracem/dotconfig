@@ -3,5 +3,4 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
-[[ -r $HOME/.local/bashrc.bash ]] &&
-    . $HOME/.local/bashrc.bash
+_source $HOME/.local/local.bash

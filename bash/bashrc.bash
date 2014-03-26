@@ -82,17 +82,28 @@ fi
 
 export dir_config="$HOME/.config"
 
-[[ $timeTest ]] && return # ✁ · · · · · · · · · · · · · · · · · · · · · · · · ·
+_source()
+{   # source files if they exist; fail silently if they don't
+    
+    declare file
+
+    for file in "$@"; do
+        [[ -r $file ]] && . "$file"
+    done
+}
 
 confsrc()
-{
+{   # source a configuration file
+
     declare what file
 
     for what in "$@"; do
         file="$dir_config/bash/${what%.bash}.bash"
-        [[ -r $file ]] && . "$file"
+        _source "$file"
     done
 }
+
+[[ $timeTest ]] && return # ✁ · · · · · · · · · · · · · · · · · · · · · · · · ·
 
 # base set
 dotfiles=(
@@ -133,15 +144,17 @@ confsrc ${dotfiles[@]}
 # start agents
 # -----------------------------------------------------------------------------
 
-. "$HOME/.ssh/agent"
-# . "$HOME/.gnupg/agent"
+_source "$HOME/.ssh/agent"
+_source "$HOME/.gnupg/agent"
 
 # -----------------------------------------------------------------------------
 # misc.
 # -----------------------------------------------------------------------------
 
 # this day in history...
-$dir_scripts/matins.sh
+if [[ -x $dir_scripts/matins.sh ]]; then
+    $dir_scripts/matins.sh
+fi
 
 # countdown (date set in private.bash)
 if [[ -n $countTo ]]; then
