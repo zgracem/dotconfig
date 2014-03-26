@@ -25,13 +25,14 @@ shopt -s no_empty_cmd_completion
 # -----------------------------------------------------------------------------
 
 for checkFile in /{{usr,opt}/local/,}etc/bash_completion; do
-    source "$checkFile" 2>/dev/null && {
+    if [[ -r $checkFile ]]; then
+        . "$checkFile"
         export BASH_COMPLETION_SOURCED="$checkFile"
         break
-    }
-
-    unset checkFile
+    fi
 done
+
+unset checkFile
 
 # -----------------------------------------------------------------------------
 # my custom completions
@@ -40,19 +41,21 @@ done
 # complete actions:
 # -a    alias           #       function
 # -b    builtin         #       helptopic
-# -c    command         #       hostname (from $HOSTFILE)
-# -d    directory       # -j    job (name)
-# -e    export(ed var)  # -k    keyword
-# -f    file (names)    # -v    variable
+# -c    command         #       hostname [from $HOSTFILE]
+# -d    directory       # -j    job [name]
+# -e    export[ed var]  # -k    keyword
+# -f    file [names]    # -v    variable
 
 complete -bck                   command
-complete -abcfk -A function -A helptopic \
-                                man type what which
+complete -bk    -A helptopic    help
+complete -defv  -A hostname     scp sftp ssh
+complete -abcdf -A function     sudo
+complete -aev   -A function     unset
+
+complete -abcfk -A function \
+                -A helptopic    man type which what h
 complete -A function            fe where
-complete -defv -A hostname      scp sftp ssh
-complete -abcf -A function      sudo
 complete -defv                  trash
-complete -aev -A function       unset
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
@@ -98,7 +101,7 @@ complete -o default -o nospace \
 
 # Homebrew
 _inPath brew &&
-    . "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
+    _source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 
 # Transmission
-. "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
+_source "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
