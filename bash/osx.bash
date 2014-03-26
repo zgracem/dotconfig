@@ -120,7 +120,7 @@ alias allstoreapps="find /Applications \
 # list all available iOS IPSW files
 # adapted from http://osxdaily.com/2013/11/15/get-list-all-ipsw-files-from-apple/
 alias ipsw="curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa/wa/com.apple.jingle.appserver.client.MZITunesClientCheck/version \
-    | sed -nE 's#^\s*<string>(http://.+ipsw)</string>\$#\1#p' \
+    | sed -nE 's#^[[:space:]]*<string>(http.+ipsw)</string>\$#\1#p' \
     | sort -u"
 
 # -----------------------------------------------------------------------------
