@@ -5,12 +5,10 @@
 
 # revoke sudo privileges
 [[ $(who | grep -c "^$USER\>") -le 1 ]] && {
-    hash sudo &>/dev/null
-    sudo -k &>/dev/null
+    _inPath sudo && sudo -k
 }
 
 # clear screen
 [[ $SHLVL -eq 1 ]] && {
-    hash clear 2>/dev/null &&
-        : clear
+    _inPath clear && clear
 }
