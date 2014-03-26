@@ -3,41 +3,31 @@
 # -----------------------------------------------------------------------------
 
 # stop sourcing if gpg-agent isn't in $PATH
-type -P gpg-agent &>/dev/null || return
+if ! _inPath gpg-agent; then
+    return
+fi
 
-envFile=$HOME/.gnupg/agent.env
+# to set the environment variable with socket and PID
+gpg_env=$HOME/.gnupg/gpg-agent.environment
 
-gpg_agent_is_running()
-{
-    declare gpgPID=$(echo $GPG_AGENT_INFO | cut -d: -f2)
+_gpg_agent_is_running()
+{   # return 0 if the agent is already running
 
-    [[ $gpgPID ]] && {
-        command ps -p "$gpgPID" &>/dev/null
-    } || {
+    declare gpg_pid=$(echo $GPG_AGENT_INFO | cut -d: -f2)
+
+    if [[ -n $gpg_pid ]]; then
+        command ps -p "$gpg_pid" &>/dev/null
+        return $?
+    else
         return 1
-    }
-}
-
-load_gpg_environment()
-{
-    . "$envFile" &>/dev/null
-}
-
-start_gpg_agent()
-{
-    gpg-agent --daemon --write-env-file "$envFile" &>/dev/null
-    chmod 600 "$envFile"
-    load_gpg_environment
-
-    export GPG_AGENT_INFO
-    export GPG_TTY=$(tty) # for PIN entry program, if any
+    fi
 }
 
 # -----------------------------------------------------------------------------
 
-gpg_agent_is_running || {
-    start_gpg_agent
-}
-
-rm -f "$envFile" &>/dev/null
-unset envFile
+if ! _gpg_agent_is_running; then
+    gpg-agent --batch --daemon --quiet >| "$gpg_env"
+                                        # start the agent
+    . "$gpg_env" &>/dev/null            # set & export $GPG_AGENT_INFO
+    export GPG_TTY=$(tty)               # for PIN entry program, if any
+fi
