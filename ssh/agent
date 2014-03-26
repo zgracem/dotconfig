@@ -1,55 +1,25 @@
 # -----------------------------------------------------------------------------
 # start SSH agent
-# based on: https://help.github.com/articles/working-with-ssh-key-passphrases
 # -----------------------------------------------------------------------------
 
 # don't use ~/.ssh/environment; it already has a different purpose in SSH
-envFile=$HOME/.ssh/agent.env
+ssh_env="$HOME/.ssh/ssh-agent.environment"
 
-# don't bother checking SSH_AGENT_PID: SSH itself doesn't use it, and it may be
-# incorrect (e.g., when using agent forwarding)
+# check status of ssh-agent
+ssh-add -l &>/dev/null
 
-ssh_agent_is_running()
-{
-    [[ $SSH_AUTH_SOCK ]] && {
-        ssh-add -l &>/dev/null || [[ $? -eq 1 ]]
-        # ssh-add returns:
-        #   0 = agent running w/ keys
-        #   1 = agent running w/out keys
-        #   2 = agent not running
-    } || {
-        return 1
-    }
-}
+case $? in
+    0)  # agent running w/ keys -- do nothing
+        return 0
+        ;;
 
-ssh_agent_has_keys() {
-    ssh-add -l &>/dev/null
-}
+    1)  # agent running w/out keys -- add them
+        ssh-add
+        ;;
 
-load_ssh_environment()
-{
-    . "$envFile" &>/dev/null
-}
-
-start_ssh_agent()
-{
-    ssh-agent >| "$envFile"
-    chmod 600 "$envFile"
-    load_ssh_environment
-}
-
-# -----------------------------------------------------------------------------
-
-ssh_agent_is_running || {
-    load_ssh_environment
-}
-
-ssh_agent_is_running && {
-    ssh_agent_has_keys || ssh-add
-} || {
-    start_ssh_agent
-    ssh-add
-}
-
-rm -f "$envFile" &>/dev/null
-unset envFile
+    2)  # agent not running
+        ssh-agent >| "$ssh_env"     # start the agent
+        . "$ssh_env" &>/dev/null    # set $SSH_AUTH_SOCK and $SSH_AGENT_PID
+        ssh-add                     # add keys
+        ;;
+esac
