@@ -99,9 +99,5 @@ complete -o default -o nospace \
              scp sftp ssh
 }
 
-# Homebrew
-_inPath brew &&
-    _source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
-
 # Transmission
 _source "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
