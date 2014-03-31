@@ -8,7 +8,7 @@
     _inPath sudo && sudo -k
 }
 
-# clear screen
-[[ $SHLVL -eq 1 ]] && {
-    _inPath clear && clear
-}
+# # clear screen
+# [[ $SHLVL -eq 1 ]] && {
+#     _inPath clear && clear
+# }
