@@ -12,7 +12,7 @@
 
 # locale settings: Canadian English, UTF-8
 LANGUAGE="en_CA:en"
-LANG="$(locale -a 2>/dev/null | grep -i 'en_CA.utf')"
+LANG="$(locale -a 2>/dev/null | grep -i 'en_CA.utf')" # "en_CA.UTF-8" or "en_CA.utf8"
 LC_ALL="$LANG"
 TZ="America/Edmonton"
 
