@@ -10,6 +10,7 @@ flags_calendar='-A0 -f $HOME/.calendar'
 flags_cp='-aiv'     # archive mode; interactive; verbose
 flags_dos2unix='-k' # copy date stamp to output file
 flags_file='-p'     # don't touch last-accessed time
+flags_hexdump='-C'  # "canonical" display mode
 flags_ln='-v'       # verbose
 flags_ls='-lAgohp'
 flags_mkdir='-p -v' # create parents as required; verbose
