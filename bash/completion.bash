@@ -27,7 +27,7 @@ shopt -s no_empty_cmd_completion
 for checkFile in /{{usr,opt}/local/,}etc/bash_completion; do
     if [[ -r $checkFile ]]; then
         . "$checkFile"
-        export BASH_COMPLETION_SOURCED="$checkFile"
+        BASH_COMPLETION_SOURCED="$checkFile"
         break
     fi
 done
