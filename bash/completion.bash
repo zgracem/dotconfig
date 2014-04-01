@@ -46,16 +46,14 @@ unset checkFile
 # -e    export[ed var]  # -k    keyword
 # -f    file [names]    # -v    variable
 
-complete -bck                   command
 complete -bk    -A helptopic    help
 complete -defv  -A hostname     scp sftp ssh
 complete -abcdf -A function     sudo
 complete -aev   -A function     unset
-
 complete -abcfk -A function \
-                -A helptopic    man type which what h
+                -A helptopic    type which what h
 complete -A function            fe where
-complete -defv                  trash
+complete -def                   trash
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
