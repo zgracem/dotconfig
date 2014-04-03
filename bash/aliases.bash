@@ -33,6 +33,7 @@ alias svim="sudo vim"
 alias t="tmux attach 2>&- || tmux -2 new-session"
 
 # open in a new window if tmux/GNU screen is running (see functions/newwin.bash)
+alias alpine="newwin alpine $flags_alpine"
 alias bt="newwin --title transmission $dir_mybin/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
 alias twitter="newwin ttytter"
@@ -47,6 +48,7 @@ alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg="ping -c 4 google.com"  # check network connection
 alias unmount="umount"
 
+alias btadd='transmission-remote --add'
 alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
