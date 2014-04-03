@@ -71,7 +71,7 @@ fancy_help()
     case $thingType in
         builtin|keyword)
             help -d "$thing" 2>/dev/null |
-            sed -E "s/^($thing) - /\1 ($thingType): /g"
+            sed -E "s/^(${thing//[/\[}) - /\1 ($thingType): /g"
             ;;
         *)
             return 1
@@ -259,8 +259,8 @@ typevar()
     [[ $nocaseSwitched ]] && shopt -s nocasematch
 }
 
-expand_array()
-{   # does what it says on the tin
+explode()
+{   # expands and displays an array
     declare arrayName="$1" cmd key
 
     cmd="$(declare -p $arrayName 2>&1)"
@@ -300,7 +300,7 @@ whatvar()
             echo "$varValue"
             ;;
         *array)
-            expand_array "$varName"
+            explode "$varName"
             ;;
         *)
             scold "$FUNCNAME" "$varName: not set"

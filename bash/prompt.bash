@@ -77,7 +77,7 @@ printExit()
     }
 }
 
-iTermUpdate()
+update_iTerm()
 {   # notify iTerm of the current directory
 	# http://code.google.com/p/iterm2/wiki/ProprietaryEscapeCodes
 
@@ -92,18 +92,13 @@ iTermUpdate()
         tmuxEscPost="\e\\"
     }
 
-    update_terminal_cwd()
+    update_Terminal()
     {   # Identify the directory using a "file:" scheme URL,
         # including the host name to disambiguate local vs.
         # remote connections. Percent-escape spaces.
 
-        declare SEARCH=' '
-        declare REPLACE='%20'
-        declare PWD_URL="file://${HOSTNAME}${PWD//$SEARCH/$REPLACE}"
-
-        declare escAnte="\e]2;"
-
-        printf '%b\e]7;%b\a%b' "$tmuxEscAnte" "$PWD_URL" "$tmuxEscPost"
+        declare pwdURL="file://${HOSTNAME}${PWD// /%20}"
+        printf '%b\e]7;%b\a%b' "$tmuxEscAnte" "$pwdURL" "$tmuxEscPost"
     }
 }
 
@@ -111,14 +106,20 @@ iTermUpdate()
 # prompts -- see colours.bash
 # -----------------------------------------------------------------------------
 
-unset PS1 PS2 PS4
+unset PS{1..4}
 
+# primary prompt
 PS1+="${esc_2d}${HOSTNAME}:"                # hostname, muted
 PS1+="${esc_hi}\$(pwdTrim) "                # current path, highlighted
 PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
 
+# secondary prompt (for multi-line commands)
 PS2+="${esc_hi}"$'\xC2\xBB'"${esc_null} "   # bright white right guillemet
 
+# `select` prompt
+PS3+="${esc_blue}?${esc_null} "
+
+# prefix for xtrace output
 PS4+="${esc_green}\${BASH_SOURCE##*/}"      # green filename
 PS4+="${esc_hi}:${esc_yellow}\${LINENO}"    # yellow line number
 PS4+="${esc_hi}:${esc_null}"                # colon separator
@@ -138,10 +139,10 @@ trap 'echo -ne "${colour_false}^C${null}"' INT
 
 addPromptCmd -p printExit
 
-addPromptCmd iTermUpdate
+addPromptCmd update_iTerm
 
-_isFunction update_terminal_cwd &&
-	addPromptCmd update_terminal_cwd
+_isFunction update_Terminal &&
+	addPromptCmd update_Terminal
 
 # see functions/title.bash
 [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] &&
