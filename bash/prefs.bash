@@ -111,9 +111,22 @@ export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 [[ -e $SSL_CERT_FILE ]] || unset SSL_CERT_FILE
 
 # Transmission
+export TRANSMISSION_HOME="$HOME/.config/transmission"
 export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-daemon/web"
 
-[[ -e $TRANSMISSION_WEB_HOME ]] || unset TRANSMISSION_WEB_HOME
+# -----------------------------------------------------------------------------
+# multi-core processing
+# -----------------------------------------------------------------------------
+
+if _inPath sysctl; then
+    cores="$(sysctl -n hw.availcpu)"
+else
+    cores="$(getconf _NPROCESSORS_ONLN)"
+fi
+
+if [[ $cores -gt 1 ]]; then
+    export MAKEFLAGS="-j$cores"
+fi
 
 # -----------------------------------------------------------------------------
 # Homebrew
@@ -121,9 +134,9 @@ export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-dae
 
 _inPath brew && {
     # don't print beer emoji when logged in remotely
-    [[ $SSH_TTY ]] && HOMEBREW_NO_EMOJI=true
-
-    export ${!HOMEBREW_*}
-} || {
-    return 0
+    [[ $SSH_TTY ]] && export HOMEBREW_NO_EMOJI=true
 }
+
+# -----------------------------------------------------------------------------
+
+return 0
