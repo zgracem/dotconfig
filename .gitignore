@@ -1,7 +1,7 @@
-# ----------------------------------------------------------
+# -----------------------------------------------------------------------------
 # ~zozo/.config/.gitignore
 # say hello: printf "zozo\x40inescapable\x2eorg"
-# ----------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 # private configuration files
 **/private*
@@ -10,6 +10,7 @@ dropbox_uploader
 # email
 alpine/
 **/email.conf
+offlineimaprc
 
 # custom spellcheck dictionaries
 aspell/
@@ -29,11 +30,14 @@ ssh/*
 !ssh/agent
 !ssh/config_skel
 
-# http://ljcharm.sourceforge.net/
+# charm -- http://ljcharm.sourceforge.net/
 charmrc
 
-# http://maebert.github.io/jrnl/
+# jrnl -- http://maebert.github.io/jrnl/
 jrnl_config
 
-# http://www.floodgap.com/software/ttytter/
+# Transmission
+transmission/
+
+# TTYtter -- http://www.floodgap.com/software/ttytter/
 ttytter*
