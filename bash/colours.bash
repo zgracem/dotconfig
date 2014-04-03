@@ -142,8 +142,9 @@ LESS_TERMCAP_us="${yellow}"   # begin underline [variables]
 LESS_TERMCAP_ue="${null}"     # end underline
 LESS_TERMCAP_so="${orange}"   # begin standout [info box]
 LESS_TERMCAP_se="${null}"     # end standout
+LESS_TERMEND="${null}"        # reset colours
 
-export ${!LESS_TERMCAP_*}
+export ${!LESS_TERM*}
 
 # -----------------------------------------------------------------------------
 # ls
