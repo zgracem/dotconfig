@@ -28,7 +28,6 @@ shopt -s cdspell        # correct minor spelling errors in the cd command
 shopt -s checkhash      # check the hash table for a command before executing it
 shopt -s checkwinsize   # update LINES and COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
-shopt -s mailwarn       # alert on new mail
 
 shopt -s extglob        # enable extended pattern matching
 shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
@@ -52,13 +51,11 @@ if [[ $bashver -ge 40 ]]; then
     shopt -s globstar   # '**' matches all directories and their files recursively
 fi
 
-
 # -----------------------------------------------------------------------------
 # shell variables
 # -----------------------------------------------------------------------------
 
 IGNOREEOF=2             # require ^D x 3 to exit
-MAILCHECK=300           # check mail every 5 minutes
 TMOUT=28800             # logout after 8 hrs inactivity
 : ${TMPDIR:=/tmp}       # if it's not already set
 
@@ -89,6 +86,16 @@ else
 fi
 
 PROMPT_COMMAND="history -a"
+
+# -----------------------------------------------------------------------------
+# mail
+# -----------------------------------------------------------------------------
+
+if [[ -r $MAIL ]]; then
+    shopt -s mailwarn       # alert on new mail
+    MAILCHECK=300           # check mail every 5 minutes
+    MAILPATH=$MAIL?'New mail in $_'
+fi
 
 # -----------------------------------------------------------------------------
 # miscellany

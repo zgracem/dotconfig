@@ -93,14 +93,9 @@ INFOPATH=/usr/share/info
 
 CDPATH=.:$HOME      # also look in ~ when cd'ing
 
-# setup mail
-[[ -r /var/mail/$USER ]] && {
-    MAILPATH=/var/mail/$USER?'New mail in $_'
-}
-
 # Python
 [[ -d /usr/local/lib/python2.7/site-packages ]] && {
     PYTHONPATH=/usr/local/lib/python2.7/site-packages
 }
 
-export {,CD,MAIL,MAN,INFO,PYTHON}PATH
+export {,CD,MAN,INFO,PYTHON}PATH
