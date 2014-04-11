@@ -54,6 +54,7 @@ complete -abcfk -A function \
                 -A helptopic    type which what h
 complete -A function            fe where
 complete -def                   trash
+complete -A shopt               _shoptSet
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
@@ -91,7 +92,7 @@ complete -o default -o nospace \
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 # https://github.com/pahen/dotfiles/blob/master/.completions
-[[ -f $HOME/.ssh/config ]] && {
+[[ -r $HOME/.ssh/config ]] && {
     complete -o default -o nospace \
              -W "$(sed -nE 's/Host (.*[^?*])$/\1/p' $HOME/.ssh/config)" \
              scp sftp ssh

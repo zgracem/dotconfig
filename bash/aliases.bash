@@ -24,6 +24,7 @@ alias tophist="history | awk '{print \$4}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | 
 # -----------------------------------------------------------------------------
 
 # lazy
+alias btadd='transmission-remote --add'
 alias e="echo"
 alias psi="python setup.py install"
 alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
@@ -39,6 +40,7 @@ alias twitter="newwin ttytter"
 alias vim='newwin vim'
 
 # misc.
+alias colourstrip='sed -E "s/"$'\E'"\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g"'
 alias cronedit="crontab -e"
 alias dl="curl -OJ"                 # download a file
 alias headers="curl -Is"            # HTTP headers for $1
@@ -47,8 +49,6 @@ alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg="ping -c 4 google.com"  # check network connection
 alias unmount="umount"
 
-alias btadd='transmission-remote --add'
-alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 alias ttest="$dir_scripts/dev/test.sh"
