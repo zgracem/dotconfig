@@ -12,15 +12,9 @@
 
 # locale settings: Canadian English, UTF-8
 LANGUAGE="en_CA:en"
-LANG="$(locale -a 2>/dev/null | grep -ih 'en_CA.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
+LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
 LC_ALL="$LANG"
 TZ="America/Edmonton"
-
-# # if you trust your terminal/environment to set these sensibly...
-# : ${LANGUAGE:="en_CA:en"}
-# : ${LANG:="$(locale -a 2>/dev/null | grep -ih 'en_CA.utf-?8')"}
-# : ${LC_ALL:="$LANG"}
-# : ${TZ:="America/Edmonton"}
 
 export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
 
