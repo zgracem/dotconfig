@@ -109,6 +109,7 @@ update_iTerm()
 unset PS{1..4}
 
 # primary prompt
+
 PS1+="${esc_2d}${HOSTNAME}:"                # hostname, muted
 PS1+="${esc_hi}\$(pwdTrim) "                # current path, highlighted
 PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
@@ -117,18 +118,21 @@ PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
 PS2+="${esc_hi}"$'\xC2\xBB'"${esc_null} "   # bright white right guillemet
 
 # `select` prompt
-PS3+="${esc_blue}?${esc_null} "
+PS3+="${esc_blue}?${esc_null} "             # blue question mark
 
 # prefix for xtrace output
-PS4+="${esc_green}\${BASH_SOURCE##*/}"      # green filename
-PS4+="${esc_hi}:${esc_yellow}\${LINENO}"    # yellow line number
-PS4+="${esc_hi}:${esc_null}"                # colon separator
-PS4+="\${FUNCNAME[0]:+\${FUNCNAME[0]}():}"  # function name (if applicable)
 
-export PS{1..4}
+xse="${esc_hi}:"                            # separator
+
+PS4+="${esc_2d}\${BASH_SOURCE##*/}${xse}"   # muted filename
+PS4+="${esc_blue}\${LINENO}${xse}"          # blue line number
+PS4+="\${FUNCNAME[0]+${esc_2d}\${FUNCNAME[0]}()${xse}}"
+                                            # function name (if applicable)
+PS4+="${esc_null}"                          # reset
 
 # -----------------------------------------------------------------------------
 # print a red "^C" when a command is aborted
+# (.inputrc should have "set echo-control-characters off")
 # -----------------------------------------------------------------------------
 
 trap 'echo -ne "${colour_false}^C${null}"' INT
