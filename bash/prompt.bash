@@ -28,17 +28,17 @@ addPromptCmd()
         shift
     }
 
-    declare newCmd="$1"
+    declare newCmd="$@"
 
-    [[ ! $PROMPT_COMMAND =~ $newCmd ]] && {
-        [[ $pre == true ]] && {
+    if [[ ! $PROMPT_COMMAND =~ $newCmd ]]; then
+        if [[ $pre == true ]]; then
             PROMPT_COMMAND="${newCmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
-        } || {
+        else
             PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${newCmd}"
-        }
-    }
-    return 0
+        fi
+    fi
 
+    return 0
 }
 
 pwdTrim()
