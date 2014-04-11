@@ -4,8 +4,8 @@
 # ------------------------------------------------------------------------------
 
 _shoptSet()
-{   # exits 0 if shell option $1 is set
-    [[ $BASHOPTS =~ $1 ]]
+{   # exits 0 if all shell options in $@ are set
+    builtin shopt -pq $*
 }
 
 xtrace()
