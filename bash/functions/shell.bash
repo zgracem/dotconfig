@@ -145,3 +145,24 @@ numfiles()
     # print result
     printf '%d\t%s\n' "${#files[@]}" "$dir"
 }
+
+unalias sudo
+unset -f sudo
+
+if _inPath sudo; then
+    sudo()
+    {   # add -H to sudo calls (use the target user's $HOME)
+        
+        if [[ $1 == -v ]]; then
+            command sudo "$@"
+        else
+            command sudo -H "$@"
+        fi
+    }
+else
+    sudo()
+    {   # just pass through commands
+
+        $*
+    }
+fi
