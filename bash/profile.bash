@@ -12,19 +12,20 @@
 
 # locale settings: Canadian English, UTF-8
 LANGUAGE="en_CA:en"
-LANG="$(locale -a 2>/dev/null | grep -i 'en_CA.utf')" # "en_CA.UTF-8" or "en_CA.utf8"
+LANG="$(locale -a 2>/dev/null | grep -ih 'en_CA.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
 LC_ALL="$LANG"
 TZ="America/Edmonton"
 
 # # if you trust your terminal/environment to set these sensibly...
 # : ${LANGUAGE:="en_CA:en"}
-# : ${LANG:="$(locale -a 2>/dev/null | grep -i 'en_CA.utf')"}
+# : ${LANG:="$(locale -a 2>/dev/null | grep -ih 'en_CA.utf-?8')"}
 # : ${LC_ALL:="$LANG"}
 # : ${TZ:="America/Edmonton"}
 
 export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
 
-umask 0077              # default 'rwX------' permissions for new files
+# default 'rwX------' permissions for new files
+umask 0077
 
 # ------------------------------------------------------------------------------
 # shell options
