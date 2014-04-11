@@ -87,3 +87,10 @@ map()
         eval "${cmd//\\/\\\\} \"${i//\\/\\\\}\""
     done
 }
+
+ca()
+{   # count arguments
+    # https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/ca.bash
+
+    printf '%d\n' "$#"
+}
