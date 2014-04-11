@@ -13,7 +13,9 @@
 # ------------------------------------------------------------------------------
 
 # create Windows-native symlinks when possible
-export CYGWIN="$CYGWIN${CYGWIN+ }winsymlinks:native"
+if [[ ! $CYGWIN =~ winsymlinks ]]; then
+	export CYGWIN="$CYGWIN${CYGWIN+ }winsymlinks:native"
+fi
 
 # do not consider DLLs executable for completion purposes
 export EXECIGNORE="*.dll"
