@@ -29,6 +29,9 @@ man()
         cut -d" " -f1)"                 # get first "field" in line
 
     manpageTitle="${manpageTitle,,}"    # lowercase for aesthetics
+    
+    # see functions/title.bash
+    setWindowTitle "$titlePrefix: $manpageTitle"
 
     # open the new window
     if [[ $STY ]]; then
@@ -37,7 +40,6 @@ man()
         tmux new-window -n "$manpageTitle" "man $*"
     else
         # set the xterm title
-        setWindowTitle "$titlePrefix: $manpageTitle"
         command man "$@"
     fi
 }
