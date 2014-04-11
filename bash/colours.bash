@@ -82,7 +82,7 @@ case $solarized in
         ;;
     light)
         colour_hi="${base02}"
-        colour_2d="${base0}"
+        colour_2d="${base1}"
 
         colour_true="${cyan}"
         colour_false="${orange}"
@@ -109,18 +109,18 @@ export colours ${colours[@]}
 
 export GREP_COLORS=
 
-GREP_COLORS+="sl=${null}:"     # whole selected lines
-GREP_COLORS+="cx=${null}:"     # whole context lines
-GREP_COLORS+="mt=${orange}:"   # matching text
-GREP_COLORS+="ms=${orange}:"   # matching text in a selected line
-GREP_COLORS+="mc=${orange}:"   # matching text in a context line
-GREP_COLORS+="fn=${green}:"    # filenames
-GREP_COLORS+="ln=${yellow}:"   # line numbers
-GREP_COLORS+="bn=${cyan}:"     # byte offsets
-GREP_COLORS+="se=${colour_hi}" # separators
+GREP_COLORS+="sl=${null}:"      # whole selected lines
+GREP_COLORS+="cx=${colour_2d}:" # whole context lines
+GREP_COLORS+="mt=${orange}:"    # any matching text
+GREP_COLORS+="ms=4;${orange}:"  # matching text in a selected line
+GREP_COLORS+="mc=${orange}:"    # matching text in a context line
+GREP_COLORS+="fn=${colour_2d}:" # filenames
+GREP_COLORS+="ln=${blue}:"      # line numbers
+GREP_COLORS+="bn=${cyan}:"      # byte offsets
+GREP_COLORS+="se=${colour_hi}"  # separators
 
 # deprecated
-export GREP_COLOR="${orange}"
+export GREP_COLOR="4;${orange}"
 
 # ------------------------------------------------------------------------------
 # add escape codes
