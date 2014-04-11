@@ -86,8 +86,14 @@ export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 export GIT_AUTHOR_EMAIL="zozo@inescapable.org"
 export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
-# grep
-export GREP_OPTIONS='--colour=auto --directories=skip --extended-regexp'
+# grep (see also colours.bash)
+export GREP_OPTIONS=
+GREP_OPTIONS+='--extended-regexp '  # use ERE syntax (-E)
+GREP_OPTIONS+='--colour=auto '      # display results in colour
+GREP_OPTIONS+='--no-messages '      # no errors about missing/unreadable files (-s)
+GREP_OPTIONS+='--with-filename '    # prepend results with filename (-H)
+GREP_OPTIONS+='--directories=skip ' # silently skip directories by default (-d)
+GREP_OPTIONS+='--exclude-dir=.git'  # skip .git directories
 
 # less
 export LESS='--QUIET --ignore-case --squeeze-blank-lines --no-init'

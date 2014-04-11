@@ -3,14 +3,13 @@
 # ------------------------------------------------------------------------------
 
 g()
-{   # search files in the current directory
-    grep -inI "$@" *
-    # --ignore-case --line-number --binary-files=without-match
+{   # search files in the current directory (-i = case-insensitive)
+    grep -i --line-number "$@" *
 }
 
 gg()
 {   # search files in the current directory & recurse
-    grep -inIR "$@" *
+    grep -i --line-number --recursive "$@" *
 }
 
 ff()
