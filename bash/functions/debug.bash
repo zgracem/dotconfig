@@ -3,6 +3,16 @@
 # handy functions for debugging and development
 # ------------------------------------------------------------------------------
 
+_optSet()
+{   # exits 0 if all shell variables in $@ are set
+    
+    declare opt
+
+    for opt in "$@"; do
+        [[ :$SHELLOPTS: =~ :$opt: ]] || return 1
+    done
+}
+
 _shoptSet()
 {   # exits 0 if all shell options in $@ are set
     builtin shopt -pq $*
@@ -10,7 +20,7 @@ _shoptSet()
 
 xtrace()
 {   # toggle xtrace
-    if [[ $SHELLOPTS =~ xtrace ]]; then
+    if _optSet xtrace; then
         set +o xtrace
     else
         set -o xtrace
