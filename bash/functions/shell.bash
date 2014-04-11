@@ -9,8 +9,8 @@ cd()
     pushd "$dir" 1>/dev/null
 }
 
-alias --  -='pushd +1 1>/dev/null'
-alias -- --='pushd -0 1>/dev/null'
+alias --  -='pushd +1 1>/dev/null'  # -  = go back 1 dir
+alias -- --='pushd -0 1>/dev/null'  # -- = go forward 1 dir
 
 mkcd()
 {   # create a directory then move into it
@@ -109,4 +109,10 @@ pause()
     printf "%s" "$message"
     read -s -n1 anykey
     printf "%b" "\n"
+}
+
+numfiles()
+{   # return the number of files in $PWD (or $1)
+    
+    command ls -1 "${1-$PWD}" | wc -l
 }

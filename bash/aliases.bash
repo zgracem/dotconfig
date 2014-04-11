@@ -9,7 +9,6 @@
 alias cppwd='printf "%q" "$PWD" | pbcopy'   # copy $PWD to clipboard
 alias dirsize="du -sh"              # total size of $PWD
 alias disks="df -h"                 # all mounted disks (w/ human units)
-alias numfiles="ls -1 | wc -l"      # number of files in $PWD
 alias sizes="du -s ./* | sort -rn"  # sort files & directories in $PWD by size
 
 # display/search all variable values & attributes
