@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 # should be set by terminal emulator
-: ${solarized:="dark"}
+# : ${solarized:="dark"}
 
 [[ $ITERM_PROFILE =~ light ]] &&
     solarized=light
