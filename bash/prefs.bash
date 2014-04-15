@@ -95,11 +95,6 @@ GREP_OPTIONS+='--no-messages '      # no errors about missing/unreadable files (
 GREP_OPTIONS+='--directories=skip ' # silently skip directories by default (-d)
 GREP_OPTIONS+='--exclude-dir=.git'  # skip .git directories
 
-# less
-export LESS='--QUIET --ignore-case --squeeze-blank-lines --no-init'
-export LESSCHARSET=utf-8
-export LESSHISTFILE=/dev/null       # don't keep a history file
-
 # mailcaps
 export MAILCAPS=~/share/mailcap:~/.mailcap:/etc/mailcap
 
@@ -119,6 +114,27 @@ export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 # Transmission
 export TRANSMISSION_HOME="$HOME/.config/transmission"
 export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-daemon/web"
+
+# -----------------------------------------------------------------------------
+# less
+# -----------------------------------------------------------------------------
+
+LESS=
+LESS+='--QUIET '                    # never ring the terminal bell
+LESS+='--ignore-case '              # case-insensitive searching
+LESS+='--squeeze-blank-lines '      # combine consecutive blank lines
+LESS+='--no-init '                  # don't clear the screen on exit
+
+LESSCHARSET=utf-8
+LESSHISTFILE=/dev/null              # don't keep a history file
+
+lesspipe="$(getPath src-hilite-lesspipe.sh)" && {
+    LESSOPEN="| $lesspipe %s"       # source highlighting
+    LESS+='--RAW-CONTROL-CHARS'     # output raw ANSI (e.g. \e[1;31m)
+    unset lesspipe
+}
+
+export LESS{,CHARSET,HISTFILE,OPEN}
 
 # -----------------------------------------------------------------------------
 # multi-core processing
