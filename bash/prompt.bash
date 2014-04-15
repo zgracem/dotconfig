@@ -10,6 +10,7 @@
     colour_user=${red}
 
 # add prompt escape codes
+# ($green -> $esc_green, $colour_true -> $esc_true)
 for index in ${colours[@]}; do
     eval "esc_${index#*_}=\"\[${!index}\]\""
     unset index
@@ -50,7 +51,7 @@ pwdTrim()
     # if basename of $PWD is too long by itself, don't trim it
     max=$(( (max < ${#dir}) ? ${#dir} : max ))
 
-    _PWD="${PWD/#$HOME/~}"          # tilde-ify homedir
+    _PWD=${PWD/#$HOME/\~}            # tilde-ify homedir
 
     # if $PWD is too long, by how much?
     declare offset=$(( ${#_PWD} - max ))
