@@ -91,7 +91,7 @@ export GREP_OPTIONS=
 GREP_OPTIONS+='--extended-regexp '  # use ERE syntax (-E)
 GREP_OPTIONS+='--colour=auto '      # display results in colour
 GREP_OPTIONS+='--no-messages '      # no errors about missing/unreadable files (-s)
-GREP_OPTIONS+='--with-filename '    # prepend results with filename (-H)
+# GREP_OPTIONS+='--with-filename '    # prepend results with filename (-H)
 GREP_OPTIONS+='--directories=skip ' # silently skip directories by default (-d)
 GREP_OPTIONS+='--exclude-dir=.git'  # skip .git directories
 

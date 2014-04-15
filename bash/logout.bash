@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 # revoke sudo privileges
-[[ $(who | grep -c "^$USER\>") -le 1 ]] && {
+[[ $(who | grep -ch "^$USER\>") -le 1 ]] && {
     _inPath sudo && sudo -k
 }
 
