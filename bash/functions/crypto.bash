@@ -15,7 +15,8 @@ if _inPath keybase; then
             return 1
         fi
 
-        cat "$inFile" | keybase encrypt zozo > "$outFile"
+        keybase encrypt zozo < "$inFile" > "$outFile" &&
+            echo "$inFile -> $outFile"
     }
 
     decrypt()
@@ -30,7 +31,8 @@ if _inPath keybase; then
             return 1
         fi
 
-        keybase decrypt "$inFile" > "$outFile"
+        keybase decrypt "$inFile" > "$outFile" &&
+            echo "$inFile -> $outFile"
     }
 elif _inPath gpg; then
     encrypt()

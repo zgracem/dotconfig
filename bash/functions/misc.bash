@@ -4,8 +4,7 @@
 
 ssaver()
 {   # very serious-looking screensaver of nonsense
-    cat /dev/urandom |
-    hexdump -C |
+    hexdump -C < /dev/urandom |
     grep --color=auto 'c9 1f'
 }
 

@@ -75,7 +75,7 @@ rot13()
 
     # file
     [[ -f $1 ]] && {
-        cat "$1" | tr $mask
+        tr $mask < "$1"
         return
     }
 
