@@ -2,20 +2,52 @@
 # ~zozo/.config/bash/functions/crypto.bash
 # ------------------------------------------------------------------------------
 
-_inPath gpg || return
+if _inPath keybase; then
+    encrypt()
+    {   # encrypt a file for my own use
+        declare inFile="$1" outFile="$1.asc"
 
-encrypt()
-{   # encrypt a file for my own use
-    declare inFile="$1" outFile="$1.gpg"
+        if [[ ! -f $inFile ]]; then
+            scold "$FUNCNAME" "$inFile: not found"
+            return 1
+        elif [[ -e $outFile ]]; then
+            scold "$FUNCNAME" "$outFile: already exists"
+            return 1
+        fi
 
-    gpg --recipient "$EMAIL" --output "$outFile" --encrypt "$inFile" &&
-        echo "$inFile -> $outFile"
-}
+        cat "$inFile" | keybase encrypt zozo > "$outFile"
+    }
 
-decrypt()
-{   # corresponding decrypt function
-    declare inFile="$1" outFile="${1%.gpg}"
+    decrypt()
+    {   # corresponding decrypt function
+        declare inFile="$1" outFile="${1%.asc}"
 
-    gpg --output "$outFile" --decrypt "$inFile" &&
-        echo "$inFile -> $outFile"
-}
+        if [[ ! -f $inFile ]]; then
+            scold "$FUNCNAME" "$inFile: not found"
+            return 1
+        elif [[ -e $outFile ]]; then
+            scold "$FUNCNAME" "$outFile: already exists"
+            return 1
+        fi
+
+        keybase decrypt "$inFile" > "$outFile"
+    }
+elif _inPath gpg; then
+    encrypt()
+    {
+        declare inFile="$1" outFile="$1.gpg"
+
+        gpg --recipient "$EMAIL" --output "$outFile" --encrypt "$inFile" &&
+            echo "$inFile -> $outFile"
+    }
+
+    decrypt()
+    {
+        declare inFile="$1" outFile="${1%.gpg}"
+
+        gpg --output "$outFile" --decrypt "$inFile" &&
+            echo "$inFile -> $outFile"
+    }
+else
+    return 0
+fi
