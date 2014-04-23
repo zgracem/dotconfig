@@ -128,12 +128,13 @@ alias ipsw="curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa
 # -----------------------------------------------------------------------------
 
 if _inPath brew; then
-    alias bdoc='brew doctor'
-    alias binfo='brew info'
-    alias binst='brew install'
-    alias bls='brew list'
-    alias brm='brew uninstall'
-    alias bs='brew search'
+    alias brdoc='brew doctor'
+    alias brinfo='brew info'
+    alias brin='brew install'
+    alias brls='brew list'
+    alias brrm='brew uninstall'
+    alias brff='brew search'
+    alias brup='brew update && brew upgrade'
 fi
 
 # -----------------------------------------------------------------------------
