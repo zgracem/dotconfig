@@ -83,6 +83,34 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
     }
 fi
 
+updateWindowTitle()
+{
+    [[ $TERM_PROGRAM != "Apple_Terminal" ]] && {
+        # Terminal already shows $PWD in the title bar
+        declare titleSuffix=": "${PWD/#$HOME/\~}
+    }
+    
+    setWindowTitle "${titlePrefix}${titleSuffix}"
+}
+
+gitInfo()
+{
+    declare branch status
+
+    # get name of branch
+    branch="$(git branch --no-color 2>/dev/null | sed -nE 's/^\* (.+)$/\1/p')"
+
+    # bail out if no branch exists 
+    [[ -z $branch ]] && return
+
+    # $status = '*' if there's anything to commit
+    if git status --porcelain 2>/dev/null | grep -m1 -q '^.'; then
+        status='*'
+    fi
+
+    echo " on ${branch}${status} "
+}
+
 # -----------------------------------------------------------------------------
 # prompts -- see colours.bash
 # -----------------------------------------------------------------------------
@@ -93,6 +121,7 @@ unset PS{1..4}
 
 PS1+="${esc_2d}${HOSTNAME}:"                # hostname, muted
 PS1+="${esc_hi}\$(pwdTrim) "                # current path, highlighted
+# PS1+="\$(gitInfo)"
 PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
 
 # secondary prompt (for multi-line commands)
@@ -149,6 +178,5 @@ addPromptCmd update_iTerm
 _isFunction update_Terminal &&
 	addPromptCmd update_Terminal
 
-# see functions/title.bash
 [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] &&
     addPromptCmd updateWindowTitle

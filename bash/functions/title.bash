@@ -32,13 +32,3 @@ setWindowTitle()
         printf "%b" "$titleEscAnte" "$title" "$titleEscPost"
     }
 }
-
-updateWindowTitle()
-{
-    [[ $TERM_PROGRAM != "Apple_Terminal" ]] && {
-        # Terminal already shows $PWD in the title bar
-        declare titleSuffix=": "${PWD/#$HOME/\~}
-    }
-    
-    setWindowTitle "${titlePrefix}${titleSuffix}"
-}
