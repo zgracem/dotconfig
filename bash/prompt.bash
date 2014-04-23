@@ -22,26 +22,6 @@ export ${!esc_*}
 # functions
 # -----------------------------------------------------------------------------
 
-addPromptCmd()
-{   # append (or prepend with -p) to $PROMPT_COMMAND, avoiding duplicates
-    [[ $1 = "-p" ]] && {
-        declare pre=true
-        shift
-    }
-
-    declare newCmd="$@"
-
-    if [[ ! $PROMPT_COMMAND =~ $newCmd ]]; then
-        if [[ $pre == true ]]; then
-            PROMPT_COMMAND="${newCmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
-        else
-            PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${newCmd}"
-        fi
-    fi
-
-    return 0
-}
-
 pwdTrim()
 {   # fancy PWD display function
     declare leader=".."
@@ -86,7 +66,7 @@ update_iTerm()
 }
 
 # tell Terminal.app about the working directory at each prompt.
-[[ $TERM_PROGRAM == "Apple_Terminal" ]] && {
+if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
     [[ $TMUX ]] && {
         # ANSI device control string
         tmuxEscAnte="\ePtmux;\e"
@@ -101,7 +81,7 @@ update_iTerm()
         declare pwdURL="file://${HOSTNAME}${PWD// /%20}"
         printf '%b\e]7;%b\a%b' "$tmuxEscAnte" "$pwdURL" "$tmuxEscPost"
     }
-}
+fi
 
 # -----------------------------------------------------------------------------
 # prompts -- see colours.bash
@@ -141,6 +121,26 @@ trap 'echo -ne "${colour_false}^C${null}"' INT
 # -----------------------------------------------------------------------------
 # $PROMPT_COMMAND
 # -----------------------------------------------------------------------------
+
+addPromptCmd()
+{   # append (or prepend with -p) to $PROMPT_COMMAND, avoiding duplicates
+    [[ $1 = "-p" ]] && {
+        declare pre=true
+        shift
+    }
+
+    declare newCmd="$@"
+
+    if [[ ! $PROMPT_COMMAND =~ $newCmd ]]; then
+        if [[ $pre == true ]]; then
+            PROMPT_COMMAND="${newCmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
+        else
+            PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${newCmd}"
+        fi
+    fi
+
+    return 0
+}
 
 addPromptCmd -p printExit
 
