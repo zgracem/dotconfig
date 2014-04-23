@@ -25,6 +25,7 @@ alias tophist="history | awk '{print \$4}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | 
 
 # lazy
 alias btadd='transmission-remote --add'
+alias bye='exit'
 alias e="echo"
 alias psi="python setup.py install"
 alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
