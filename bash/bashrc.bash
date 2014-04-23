@@ -8,8 +8,20 @@
     return
 }
 
-# just say no to flow control
-hash stty 2>/dev/null && stty -ixon 2>/dev/null
+# who am I?
+: ${USER:=$(id -un)}
+: ${LOGNAME:=$USER}
+
+# where am I?
+: ${HOSTNAME:=$(hostname)}
+
+# locale settings: Canadian English, UTF-8
+LANGUAGE="en_CA:en"
+LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
+LC_ALL="$LANG"
+TZ="America/Edmonton"
+
+export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
 
 # bash version -- e.g. 32 for v3.2
 bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
@@ -17,6 +29,13 @@ bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 # -----------------------------------------------------------------------------
 # shell options
 # -----------------------------------------------------------------------------
+
+set -o noclobber        # output redirection won't overwrite (override with >|filename)
+
+shopt -s dotglob        # include .dotfiles in filename expansion
+shopt -s extglob        # enable extended pattern matching
+shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
+shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
 
 set +o monitor          # disable job control
 set +o notify           # disable instant job-termination notification (wait till next prompt)
@@ -57,7 +76,8 @@ fi
 
 IGNOREEOF=2             # require ^D x 3 to exit
 TMOUT=28800             # logout after 8 hrs inactivity
-: ${TMPDIR:=/tmp}       # if it's not already set
+
+export TMPDIR=${TMPDIR:-/tmp}
 
 # `time` prints only real time elapsed and CPU usage
 TIMEFORMAT=$'\nreal\t%Rs\ncpu\t%P%%'
@@ -100,6 +120,12 @@ fi
 # -----------------------------------------------------------------------------
 # miscellany
 # -----------------------------------------------------------------------------
+
+# default 'rwX------' permissions for new files
+umask 0077
+
+# just say no to flow control
+hash stty 2>/dev/null && stty -ixon 2>/dev/null
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
 if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then

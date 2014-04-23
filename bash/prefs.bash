@@ -80,6 +80,10 @@ alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 # settings -- environment variables
 # -----------------------------------------------------------------------------
 
+export BLOCKSIZE=1024
+export COPYFILE_DISABLE=true     # exclude ._resourceforks from tarballs
+export COMP_TAR_INTERNAL_PATHS=1 # avoid flattening contents of tar files
+
 # git
 export GIT_AUTHOR_NAME="Zozo"
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
