@@ -110,10 +110,16 @@ export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 export ZIPOPTS='-9 --symlinks'
 
 # OpenSSL
-export SSL_CERT_FILE="/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt"
-export GIT_SSL_CAINFO="$SSL_CERT_FILE"
+export SSL_CERT_DIR="$dir_brew/etc/openssl"
+export SSL_CERT_FILE="$SSL_CERT_DIR/cert.pem"
 
-[[ -e $SSL_CERT_FILE ]] || unset SSL_CERT_FILE
+for x in SSL_CERT_DIR SSL_CERT_FILE; do
+    if [[ ! -e ${!x} ]]; then
+        unset $x
+    fi
+done
+
+export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 
 # Transmission
 export TRANSMISSION_HOME="$HOME/.config/transmission"
