@@ -26,6 +26,7 @@ fi
 if [[ -x /usr/local/bin/brew ]]; then
     core_prefix="$(brew --prefix coreutils)"
     sed_prefix="$(brew --prefix gnu-sed)"
+    tar_prefix="$(brew --prefix gnu-tar)"
     
     if [[ -d $core_prefix ]]; then
         PATH=$core_prefix/libexec/gnubin:$PATH
@@ -39,7 +40,11 @@ if [[ -x /usr/local/bin/brew ]]; then
         INFOPATH=$sed_prefix/share/info:$INFOPATH
     fi
 
-    unset {core,sed}_prefix
+    if [[ -d $tar_prefix ]]; then
+        PATH=$tar_prefix/libexec/gnubin:$PATH
+    fi
+
+    unset {core,sed,tar}_prefix
 fi
 
 # # X11 apps
