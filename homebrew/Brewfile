@@ -71,7 +71,6 @@ install homebrew/dupes/whois
 
 # cURL
 install curl --with-ssh
-install curl-ca-bundle
 
 # email
 #install alpine

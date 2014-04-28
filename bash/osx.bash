@@ -151,6 +151,24 @@ if _inPath brew; then
             brew install $formula
         done
     }
+
+    relink()
+    {
+        declare formula forceflag
+
+        for formula in "$@"; do
+            if [[ $formula == --force ]]; then
+                forceflag=true
+                shift
+                continue
+            fi
+
+            brew unlink $formula &&
+            brew link ${forceflag+"--force"} $formula
+
+            unset forceflag
+        done
+    }
 fi
 
 # -----------------------------------------------------------------------------
