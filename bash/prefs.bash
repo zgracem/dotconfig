@@ -125,6 +125,11 @@ export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 export TRANSMISSION_HOME="$HOME/.config/transmission"
 export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-daemon/web"
 
+# XDG
+export XDG_DATA_HOME="$HOME/share"
+export XDG_CONFIG_HOME="$dir_config"
+export XDG_CACHE_HOME="$HOME/Library/Caches"
+
 # -----------------------------------------------------------------------------
 # less
 # -----------------------------------------------------------------------------
