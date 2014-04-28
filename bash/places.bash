@@ -29,6 +29,8 @@ case $OSTYPE in
         dir_music="$HOME/Music/iTunes/iTunes Media/Music"
         dir_prefs="$HOME/Library/Preferences"
         dir_drive="/Volumes/SILVER"
+
+        _inPath brew && dir_brew="$(brew --prefix)"
         ;;
 
     cygwin)
