@@ -130,10 +130,12 @@ install ssh-copy-id
 
 # audio/video
 install atomicparsley
+install ffmpeg --with-openssl --with-rtmpdump 
 install id3v2
 install lame
 install mp4v2
 install mplayer
+install youtube-dl --with-rtmpdump
 
 # pdf
 install ghostscript
