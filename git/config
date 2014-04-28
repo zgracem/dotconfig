@@ -16,3 +16,7 @@
     hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
     type = cat-file -t
     dump = cat-file -p
+[hub]
+	protocol = https
+[push]
+	default = simple
