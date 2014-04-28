@@ -78,10 +78,12 @@ map()
     # Usage: map COMMAND: ITEM [ITEM ...]
     # Based on: http://redd.it/aks3u
 
+    declare usage="$FUNCNAME COMMAND: ITEM [ITEM ...]"
     declare i cmd
 
     if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
-        scold "invalid syntax"
+        scold $FUNCNAME "invalid syntax"
+        scold "Usage: $usage"
         return 1
     fi
 
