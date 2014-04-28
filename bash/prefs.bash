@@ -81,8 +81,8 @@ alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 # -----------------------------------------------------------------------------
 
 export BLOCKSIZE=1024
-export COPYFILE_DISABLE=true     # exclude ._resourceforks from tarballs
-export COMP_TAR_INTERNAL_PATHS=1 # avoid flattening contents of tar files
+export COPYFILE_DISABLE=true        # exclude ._resourceforks from tarballs
+export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 
 # git
 export GIT_AUTHOR_NAME="Zozo"
@@ -159,6 +159,9 @@ fi
 # -----------------------------------------------------------------------------
 
 _inPath brew && {
+    # print developer warnings
+    HOMEBREW_DEVELOPER=true
+
     # don't print beer emoji when logged in remotely
     [[ $SSH_TTY ]] && export HOMEBREW_NO_EMOJI=true
 }
