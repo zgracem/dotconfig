@@ -30,7 +30,7 @@ case $OSTYPE in
         dir_prefs="$HOME/Library/Preferences"
         dir_drive="/Volumes/SILVER"
 
-        _inPath brew && dir_brew="$(brew --prefix)"
+        _inPath brew && HOMEBREW_PREFIX="$(brew --prefix)"
         ;;
 
     cygwin)
