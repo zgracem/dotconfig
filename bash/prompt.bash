@@ -22,7 +22,7 @@ export ${!esc_*}
 # functions
 # -----------------------------------------------------------------------------
 
-pwdTrim()
+PS1_trim_pwd()
 {   # fancy PWD display function
     declare leader=".."
     declare max=$((COLUMNS/4))      # maximum length of displayed path
@@ -44,7 +44,7 @@ pwdTrim()
     echo -n "${_PWD}"
 }
 
-printExit()
+PS1_print_exit()
 {   # print non-zero exit codes on the far right of the screen (zsh envy...)
     declare lastExit=$?
 
@@ -58,7 +58,7 @@ printExit()
     }
 }
 
-update_iTerm()
+PS1_update_iTerm()
 {   # notify iTerm of the current directory
 	# http://code.google.com/p/iterm2/wiki/ProprietaryEscapeCodes
 
@@ -73,7 +73,7 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
         tmuxEscPost="\e\\"
     }
 
-    update_Terminal()
+    PS1_update_Terminal()
     {   # Identify the directory using a "file:" scheme URL,
         # including the host name to disambiguate local vs.
         # remote connections. Percent-escape spaces.
@@ -83,7 +83,7 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
     }
 fi
 
-updateWindowTitle()
+PS1_update_wintitle()
 {
     [[ $TERM_PROGRAM != "Apple_Terminal" ]] && {
         # Terminal already shows $PWD in the title bar
@@ -93,7 +93,7 @@ updateWindowTitle()
     setWindowTitle "${titlePrefix}${titleSuffix}"
 }
 
-gitInfo()
+PS1_git_info()
 {
     declare branch status
 
@@ -120,8 +120,8 @@ unset PS{1..4}
 # primary prompt
 
 PS1+="${esc_2d}${HOSTNAME}:"                # hostname, muted
-PS1+="${esc_hi}\$(pwdTrim) "                # current path, highlighted
-# PS1+="\$(gitInfo)"
+PS1+="${esc_hi}\$(PS1_trim_pwd) "                # current path, highlighted
+# PS1+="\$(PS1_git_info)"
 PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
 
 # secondary prompt (for multi-line commands)
@@ -171,12 +171,12 @@ addPromptCmd()
     return 0
 }
 
-addPromptCmd -p printExit
+addPromptCmd -p PS1_print_exit
 
-addPromptCmd update_iTerm
+addPromptCmd PS1_update_iTerm
 
-_isFunction update_Terminal &&
-	addPromptCmd update_Terminal
+_isFunction PS1_update_Terminal &&
+	addPromptCmd PS1_update_Terminal
 
 [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] &&
-    addPromptCmd updateWindowTitle
+    addPromptCmd PS1_update_wintitle
