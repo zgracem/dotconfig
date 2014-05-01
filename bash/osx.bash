@@ -131,6 +131,17 @@ alias ipsw="curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa
 # -----------------------------------------------------------------------------
 
 if _inPath brew; then
+    # print developer warnings
+    HOMEBREW_DEVELOPER=true
+
+    # keep files in /usr/local/share/info
+    HOMEBREW_KEEP_INFO=true
+
+    # don't print beer emoji when logged in remotely
+    [[ $SSH_TTY ]] && HOMEBREW_NO_EMOJI=true
+
+    export ${!HOMEBREW_*}
+
     alias br='brew'
     alias brdoc='brew doctor'
     alias brinfo='brew info'
@@ -183,3 +194,7 @@ fi
 #     alias pfiles='port contents'
 #     alias portupdate='sudo port selfupdate && sudo port upgrade outdated'
 # fi
+
+# -----------------------------------------------------------------------------
+
+return 0
