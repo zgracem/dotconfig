@@ -69,6 +69,7 @@ unset app flag
 # settings -- config files
 # -----------------------------------------------------------------------------
 
+export GIT_CONFIG="$dir_local/gitconfig"
 export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"
 export SCREENRC="$dir_config/screenrc"
@@ -110,7 +111,7 @@ export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 export ZIPOPTS='-9 --symlinks'
 
 # OpenSSL
-export SSL_CERT_DIR="$dir_brew/etc/openssl"
+export SSL_CERT_DIR="$HOMEBREW_PREFIX/etc/openssl"
 export SSL_CERT_FILE="$SSL_CERT_DIR/cert.pem"
 export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
