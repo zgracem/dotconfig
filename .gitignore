@@ -3,6 +3,9 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
+# this file
+.gitignore
+
 # private configuration files
 **/private*
 dropbox_uploader
@@ -29,6 +32,9 @@ misc/
 ssh/*
 !ssh/agent
 !ssh/config_skel
+
+# not ready for primetime
+fish/
 
 # charm -- http://ljcharm.sourceforge.net/
 charmrc
