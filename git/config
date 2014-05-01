@@ -1,22 +1,24 @@
 [user]
-    name = Zozo
-    email = zozo@inescapable.org
+	name = Zozo
+	email = zozo@inescapable.org
 
 [core]
-    autocrlf = input
-    safecrlf = true
-	excludesfile = $HOME/.config/git/globalignore
+	autocrlf = input
+	safecrlf = true
+	excludesfile = ~/.config/git/globalignore
 
 [alias]
-    # http://gitimmersion.com/lab_11.html
-    co = checkout
-    cm = commit
-    st = status
-    br = branch
-    hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
-    type = cat-file -t
-    dump = cat-file -p
+	# http://gitimmersion.com/lab_11.html
+	co = checkout
+	cm = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+
 [hub]
 	protocol = https
+
 [push]
 	default = simple
