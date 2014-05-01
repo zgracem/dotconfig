@@ -167,17 +167,5 @@ if [[ $cores -gt 1 ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# Homebrew
-# -----------------------------------------------------------------------------
-
-_inPath brew && {
-    # print developer warnings
-    HOMEBREW_DEVELOPER=true
-
-    # don't print beer emoji when logged in remotely
-    [[ $SSH_TTY ]] && export HOMEBREW_NO_EMOJI=true
-}
-
-# -----------------------------------------------------------------------------
 
 return 0
