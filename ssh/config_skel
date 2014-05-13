@@ -25,5 +25,8 @@ Host *
     Compression yes
     ForwardAgent yes
     ConnectionAttempts 5
+    ControlMaster auto
+    ControlPath ~/.ssh/%r@%h:%p
 
     #ProxyCommand nc -X5 -x 127.0.0.1:8080 %h %p
+    #ProxyCommand socat - SOCKS:127.0.0.1:%h:%p,socksport=8080
