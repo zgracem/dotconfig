@@ -58,6 +58,13 @@ fi
 #     MANPATH=$MANPATH:/usr/X11R6/share/man
 # fi
 
+# Ruby gems (Homebrew)
+if [[ -d /usr/local/opt/ruby ]]; then
+    PATH=/usr/local/opt/ruby/bin:$PATH
+    MANPATH=/usr/local/opt/ruby/share/man:$MANPATH
+    export GEM_HOME=/usr/local/opt/ruby
+fi
+
 # gcc tools (cygwin)
 if [[ -d /opt/gcc-tools/bin ]]; then
     PATH=$PATH:/opt/gcc-tools/bin
