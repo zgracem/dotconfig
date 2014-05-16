@@ -13,13 +13,26 @@
 # ------------------------------------------------------------------------------
 
 # create Windows-native symlinks when possible
-export CYGWIN="$CYGWIN${CYGWIN+ }winsymlinks:native"
+if [[ ! $CYGWIN =~ winsymlinks ]]; then
+	export CYGWIN="$CYGWIN${CYGWIN+ }winsymlinks:native"
+fi
 
 # do not consider DLLs executable for completion purposes
 export EXECIGNORE="*.dll"
 
 # use the short name of programs when Tab-completing
 shopt -s completion_strip_exe
+
+# define default printer
+
+pkey="/proc/registry/HKEY_CURRENT_USER/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device"
+
+if [[ -z $PRINTER && -e $pkey ]]; then
+	read -r PRINTER < "$pkey"
+	export PRINTER="${PRINTER%%,*}"
+fi
+
+unset pkey
 
 # -----------------------------------------------------------------------------
 # aliases

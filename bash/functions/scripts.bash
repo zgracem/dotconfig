@@ -57,5 +57,5 @@ draft()
     done
 
     command cp -a "$script" "$draft"
-    printf "'%s' -> '%s'\n" "${script/#$HOME/~}" "${draft/#$HOME/~}"
+    printf "'%s' -> '%s'\n" "${script/#$HOME/\~}" "${draft/#$HOME/\~}"
 }

@@ -8,16 +8,38 @@
     return
 }
 
-# just say no to flow control
-hash stty 2>/dev/null && stty -ixon 2>/dev/null
+# who am I?
+: ${USER:=$(id -un)}
+: ${LOGNAME:=$USER}
+
+# where am I?
+: ${HOSTNAME:=$(hostname)}
+
+# locale settings: Canadian English, UTF-8
+LANGUAGE="en_CA:en"
+LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
+LC_ALL="$LANG"
+TZ="America/Edmonton"
+
+export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
+
+# bash version -- e.g. 32 for v3.2
+bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 
 # -----------------------------------------------------------------------------
 # shell options
 # -----------------------------------------------------------------------------
 
-set +o notify           # wait till next prompt to notify of job termination
 set -o noclobber        # output redirection won't overwrite (override with >|filename)
-set +o pipefail         # pipelines [don't] return rightmost >0, or 0 if all exit successfully
+
+shopt -s dotglob        # include .dotfiles in filename expansion
+shopt -s extglob        # enable extended pattern matching
+shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
+shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
+
+set +o monitor          # disable job control
+set +o notify           # disable instant job-termination notification (wait till next prompt)
+set -o noclobber        # output redirection won't overwrite (override with >|filename)
 set -o vi               # vi mode
 
 shopt -s cdable_vars    # enable cd'ing to bash variables (cd PWD)
@@ -25,28 +47,40 @@ shopt -s cdspell        # correct minor spelling errors in the cd command
 shopt -s checkhash      # check the hash table for a command before executing it
 shopt -s checkwinsize   # update LINES and COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
-shopt -s mailwarn       # alert on new mail
 
 shopt -s extglob        # enable extended pattern matching
 shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
 shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
 
-# bash-4.0+ only
-if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
+if [[ $bashver -ge 43 ]]; then
+    shopt -s direxpand  # expand vars in directory names like bash 4.1 did
+fi
+
+if [[ $bashver -ge 42 ]]; then
+    shopt -s lastpipe   # execute a pipeline's last cmd in the current shell context
+fi
+
+if [[ $bashver -ge 41 ]]; then
+    export BASHOPTS     # make shopt settings available to child processes
+fi
+
+if [[ $bashver -ge 40 ]]; then
     shopt -s autocd     # execute `/name/of/dir` as `cd /name/of/dir`
     shopt -s checkjobs  # list stopped/running jobs on shell exit
     shopt -s globstar   # '**' matches all directories and their files recursively
 fi
-
-export BASHOPTS
 
 # -----------------------------------------------------------------------------
 # shell variables
 # -----------------------------------------------------------------------------
 
 IGNOREEOF=2             # require ^D x 3 to exit
-MAILCHECK=300           # check mail every 5 minutes
 TMOUT=28800             # logout after 8 hrs inactivity
+
+export TMPDIR=${TMPDIR:-/tmp}
+
+# `time` prints only real time elapsed and CPU usage
+TIMEFORMAT=$'\nreal\t%Rs\ncpu\t%P%%'
 
 # -----------------------------------------------------------------------------
 # history
@@ -62,14 +96,36 @@ HISTIGNORE='-:..:[bf]g:cd:clear:exit:hist*:ls:pwd:rl'
 HISTTIMEFORMAT="%F %T "
 
 HISTFILE="$HOME/.bash_history"
-HISTSIZE=4096           # remember 2^8 commands per session
-HISTFILESIZE=65536      # store 2^16 lines in $HISTFILE
+
+if [[ $bashver -ge 43 ]]; then
+    HISTSIZE=-1         # unlimited session history
+    HISTFILESIZE=-1     # unlimited $HISTFILE size
+else
+    HISTSIZE=4096       # remember 2^8 commands per session
+    HISTFILESIZE=65536  # store 2^16 lines in $HISTFILE
+fi
 
 PROMPT_COMMAND="history -a"
 
 # -----------------------------------------------------------------------------
+# mail
+# -----------------------------------------------------------------------------
+
+if [[ -r $MAIL ]]; then
+    shopt -s mailwarn       # alert on new mail
+    MAILCHECK=300           # check mail every 5 minutes
+    MAILPATH=$MAIL?'New mail in $_'
+fi
+
+# -----------------------------------------------------------------------------
 # miscellany
 # -----------------------------------------------------------------------------
+
+# default 'rwX------' permissions for new files
+umask 0077
+
+# just say no to flow control
+hash stty 2>/dev/null && stty -ixon 2>/dev/null
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
 if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then

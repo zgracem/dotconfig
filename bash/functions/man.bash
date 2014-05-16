@@ -7,7 +7,7 @@ man()
 {   # open man page in a new window with a helpful title
 
     # some switches don't open a manpage; pass those through
-    declare switchRegex='[[:space:]]?-[[:alpha:]]*[dfhkwW]'
+    declare switchRegex='\<-[[:alpha:]]*[dfhkwW]'
     [[ $@ =~ $switchRegex ]] && {
         command man $@
         return $?
@@ -24,12 +24,14 @@ man()
     }
 
     # get title -- e.g. "cron(8)"
-    declare manpageTitle=$(command man "$@" 2>&- |
-        grep ^. |                       # ignore leading blank line
-        head -n1 |                      # get first line of manpage
-        cut -d" " -f1)                  # get first "field" in line
+    declare manpageTitle="$(command man "$@" 2>&- |
+        grep -h -m1 ^. |                # get first non-blank line
+        cut -d" " -f1)"                 # get first "field" in line
 
     manpageTitle="${manpageTitle,,}"    # lowercase for aesthetics
+    
+    # see functions/title.bash
+    setWindowTitle "$titlePrefix: $manpageTitle"
 
     # open the new window
     if [[ $STY ]]; then
@@ -38,7 +40,6 @@ man()
         tmux new-window -n "$manpageTitle" "man $*"
     else
         # set the xterm title
-        setWindowTitle "$titlePrefix: $manpageTitle"
         command man "$@"
     fi
 }

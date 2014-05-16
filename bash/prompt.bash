@@ -10,6 +10,7 @@
     colour_user=${red}
 
 # add prompt escape codes
+# ($green -> $esc_green, $colour_true -> $esc_true)
 for index in ${colours[@]}; do
     eval "esc_${index#*_}=\"\[${!index}\]\""
     unset index
@@ -21,27 +22,7 @@ export ${!esc_*}
 # functions
 # -----------------------------------------------------------------------------
 
-addPromptCmd()
-{   # append (or prepend with -p) to $PROMPT_COMMAND, avoiding duplicates
-    [[ $1 = "-p" ]] && {
-        declare pre=true
-        shift
-    }
-
-    declare newCmd="$1"
-
-    [[ ! $PROMPT_COMMAND =~ $newCmd ]] && {
-        [[ $pre == true ]] && {
-            PROMPT_COMMAND="${newCmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
-        } || {
-            PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${newCmd}"
-        }
-    }
-    return 0
-
-}
-
-pwdTrim()
+PS1_trim_pwd()
 {   # fancy PWD display function
     declare leader=".."
     declare max=$((COLUMNS/4))      # maximum length of displayed path
@@ -50,7 +31,7 @@ pwdTrim()
     # if basename of $PWD is too long by itself, don't trim it
     max=$(( (max < ${#dir}) ? ${#dir} : max ))
 
-    _PWD="${PWD/#$HOME/~}"          # tilde-ify homedir
+    _PWD=${PWD/#$HOME/\~}            # tilde-ify homedir
 
     # if $PWD is too long, by how much?
     declare offset=$(( ${#_PWD} - max ))
@@ -63,7 +44,7 @@ pwdTrim()
     echo -n "${_PWD}"
 }
 
-printExit()
+PS1_print_exit()
 {   # print non-zero exit codes on the far right of the screen (zsh envy...)
     declare lastExit=$?
 
@@ -77,7 +58,7 @@ printExit()
     }
 }
 
-update_iTerm()
+PS1_update_iTerm()
 {   # notify iTerm of the current directory
 	# http://code.google.com/p/iterm2/wiki/ProprietaryEscapeCodes
 
@@ -85,14 +66,14 @@ update_iTerm()
 }
 
 # tell Terminal.app about the working directory at each prompt.
-[[ $TERM_PROGRAM == "Apple_Terminal" ]] && {
+if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
     [[ $TMUX ]] && {
         # ANSI device control string
         tmuxEscAnte="\ePtmux;\e"
         tmuxEscPost="\e\\"
     }
 
-    update_Terminal()
+    PS1_update_Terminal()
     {   # Identify the directory using a "file:" scheme URL,
         # including the host name to disambiguate local vs.
         # remote connections. Percent-escape spaces.
@@ -100,6 +81,34 @@ update_iTerm()
         declare pwdURL="file://${HOSTNAME}${PWD// /%20}"
         printf '%b\e]7;%b\a%b' "$tmuxEscAnte" "$pwdURL" "$tmuxEscPost"
     }
+fi
+
+PS1_update_wintitle()
+{
+    [[ $TERM_PROGRAM != "Apple_Terminal" ]] && {
+        # Terminal already shows $PWD in the title bar
+        declare titleSuffix=": "${PWD/#$HOME/\~}
+    }
+    
+    setWindowTitle "${titlePrefix}${titleSuffix}"
+}
+
+PS1_git_info()
+{
+    declare branch status
+
+    # get name of branch
+    branch="$(git branch --no-color 2>/dev/null | sed -nE 's/^\* (.+)$/\1/p')"
+
+    # bail out if no branch exists 
+    [[ -z $branch ]] && return
+
+    # $status = '*' if there's anything to commit
+    if git status --porcelain 2>/dev/null | grep -m1 -q '^.'; then
+        status='*'
+    fi
+
+    echo " on ${branch}${status} "
 }
 
 # -----------------------------------------------------------------------------
@@ -109,26 +118,31 @@ update_iTerm()
 unset PS{1..4}
 
 # primary prompt
+
 PS1+="${esc_2d}${HOSTNAME}:"                # hostname, muted
-PS1+="${esc_hi}\$(pwdTrim) "                # current path, highlighted
+PS1+="${esc_hi}\$(PS1_trim_pwd) "                # current path, highlighted
+# PS1+="\$(PS1_git_info)"
 PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
 
 # secondary prompt (for multi-line commands)
 PS2+="${esc_hi}"$'\xC2\xBB'"${esc_null} "   # bright white right guillemet
 
 # `select` prompt
-PS3+="${esc_blue}?${esc_null} "
+PS3+="${esc_blue}?${esc_null} "             # blue question mark
 
 # prefix for xtrace output
-PS4+="${esc_green}\${BASH_SOURCE##*/}"      # green filename
-PS4+="${esc_hi}:${esc_yellow}\${LINENO}"    # yellow line number
-PS4+="${esc_hi}:${esc_null}"                # colon separator
-PS4+="\${FUNCNAME[0]:+\${FUNCNAME[0]}():}"  # function name (if applicable)
 
-export PS{1..4}
+xse="${esc_hi}:"                            # separator
+
+PS4+="${esc_2d}\${BASH_SOURCE##*/}${xse}"   # muted filename
+PS4+="${esc_blue}\${LINENO}${xse}"          # blue line number
+PS4+="\${FUNCNAME[0]+${esc_2d}\${FUNCNAME[0]}()${xse}}"
+                                            # function name (if applicable)
+PS4+="${esc_null}"                          # reset
 
 # -----------------------------------------------------------------------------
 # print a red "^C" when a command is aborted
+# (.inputrc should have "set echo-control-characters off")
 # -----------------------------------------------------------------------------
 
 trap 'echo -ne "${colour_false}^C${null}"' INT
@@ -137,13 +151,32 @@ trap 'echo -ne "${colour_false}^C${null}"' INT
 # $PROMPT_COMMAND
 # -----------------------------------------------------------------------------
 
-addPromptCmd -p printExit
+addPromptCmd()
+{   # append (or prepend with -p) to $PROMPT_COMMAND, avoiding duplicates
+    [[ $1 = "-p" ]] && {
+        declare pre=true
+        shift
+    }
 
-addPromptCmd update_iTerm
+    declare newCmd="$@"
 
-_isFunction update_Terminal &&
-	addPromptCmd update_Terminal
+    if [[ ! $PROMPT_COMMAND =~ $newCmd ]]; then
+        if [[ $pre == true ]]; then
+            PROMPT_COMMAND="${newCmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
+        else
+            PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${newCmd}"
+        fi
+    fi
 
-# see functions/title.bash
+    return 0
+}
+
+addPromptCmd -p PS1_print_exit
+
+addPromptCmd PS1_update_iTerm
+
+_isFunction PS1_update_Terminal &&
+	addPromptCmd PS1_update_Terminal
+
 [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] &&
-    addPromptCmd updateWindowTitle
+    addPromptCmd PS1_update_wintitle

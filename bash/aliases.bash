@@ -7,49 +7,49 @@
 
 # files/directories
 alias cppwd='printf "%q" "$PWD" | pbcopy'   # copy $PWD to clipboard
-alias dirsize="du -sh"              # total size of $PWD
-alias disks="df -h"                 # all mounted disks (w/ human units)
-alias numfiles="ls -1 | wc -l"      # number of files in $PWD
-alias sizes="du -s ./* | sort -rn"  # sort files & directories in $PWD by size
+alias dirsize='du -sh'              # total size of $PWD
+alias disks='df -h'                 # all mounted disks (w/ human units)
+alias sizes='du -s ./* | sort -rn'  # sort files & directories in $PWD by size
 
 # display/search all variable values & attributes
 alias vars="declare -p | colourstrip | sed -nE 's/^declare (.*)$/\1/p' | sort -k2"
-alias allvars="vars | command less"
-alias vgrep="vars | grep -i"
-
-# history sorted by frequency of use
-alias tophist="history | awk '{print \$4}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
+alias allvars='vars | command less'
+alias vgrep='vars | grep -i'
 
 # -----------------------------------------------------------------------------
 # Shortcuts
 # -----------------------------------------------------------------------------
 
 # lazy
-alias e="echo"
-alias psi="python setup.py install"
-alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
-alias s="screen -d -R "
-alias svim="sudo vim"
-alias t="tmux attach 2>&- || tmux -2 new-session"
+alias btadd='transmission-remote --add'
+alias bye='exit'
+alias e='echo'
+alias psi='python setup.py install'
+alias svim='sudo vim'
+alias unmount='umount'
+
+# screen & tmux
+alias s='screen -d -R '
+alias t='tmux attach 2>&- || tmux -2 new-session'
 
 # open in a new window if tmux/GNU screen is running (see functions/newwin.bash)
 alias alpine="newwin alpine $flags_alpine"
 alias bt="newwin --title transmission $dir_mybin/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
-alias twitter="newwin ttytter"
+alias twitter='newwin ttytter'
 alias vim='newwin vim'
 
 # misc.
-alias cronedit="crontab -e"
-alias dl="curl -OJ"                 # download a file
-alias headers="curl -Is"            # HTTP headers for $1
-alias ls1="command ls -A1"          # just the filenames
+alias bell='printf "\a"'
+alias colourstrip='sed -E "s/"$'\E'"\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g"'
+alias cronedit='crontab -e'
+alias dl='curl -OJ'                 # download a file
+alias headers='curl -Is'            # HTTP headers for $1
+alias ls1='command ls -A1'          # just the filenames
 alias myip='curl -S $ip_site'       # external IP address (see private.bash)
-alias pingg="ping -c 4 google.com"  # check network connection
-alias unmount="umount"
+alias pingg='ping -c 4 google.com'  # check network connection
+alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
 
-alias btadd='transmission-remote --add'
-alias colourstrip="perl -pe 's/\e\[?.*?[\@-~]//g'"
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 alias ttest="$dir_scripts/dev/test.sh"
@@ -62,6 +62,11 @@ alias ttest="$dir_scripts/dev/test.sh"
     done
     unset name script
 }
+
+# ~/bin
+alias jsawk="$HOME/bin/jsawk/jsawk"
+alias twee="$HOME/bin/twine/twee"
+alias untwee="$HOME/bin/twine/untwee"
 
 # chmod
 for mode in 400 600 644 700 755; do
