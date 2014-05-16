@@ -69,8 +69,10 @@ unset app flag
 # settings -- config files
 # -----------------------------------------------------------------------------
 
+export GIT_CONFIG="$dir_local/gitconfig"
 export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"
+export PIP_CONFIG_FILE=$dir_config/pip.conf
 export SCREENRC="$dir_config/screenrc"
 
 alias curl='curl -K $dir_config/curlrc'
@@ -80,19 +82,24 @@ alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 # settings -- environment variables
 # -----------------------------------------------------------------------------
 
+export BLOCKSIZE=1024
+export COPYFILE_DISABLE=true        # exclude ._resourceforks from tarballs
+export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
+
 # git
 export GIT_AUTHOR_NAME="Zozo"
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 export GIT_AUTHOR_EMAIL="zozo@inescapable.org"
 export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
-# grep
-export GREP_OPTIONS='--colour=auto --directories=skip --extended-regexp'
-
-# less
-export LESS='--QUIET --ignore-case --squeeze-blank-lines --no-init'
-export LESSCHARSET=utf-8
-export LESSHISTFILE=/dev/null       # don't keep a history file
+# grep (see also colours.bash)
+export GREP_OPTIONS=
+GREP_OPTIONS+='--extended-regexp '  # use ERE syntax (-E)
+GREP_OPTIONS+='--colour=auto '      # display results in colour
+GREP_OPTIONS+='--no-messages '      # no errors about missing/unreadable files (-s)
+# GREP_OPTIONS+='--with-filename '    # prepend results with filename (-H)
+GREP_OPTIONS+='--directories=skip ' # silently skip directories by default (-d)
+GREP_OPTIONS+='--exclude-dir=.git'  # skip .git directories
 
 # mailcaps
 export MAILCAPS=~/share/mailcap:~/.mailcap:/etc/mailcap
@@ -105,14 +112,47 @@ export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 export ZIPOPTS='-9 --symlinks'
 
 # OpenSSL
-export SSL_CERT_FILE="/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt"
-export GIT_SSL_CAINFO="$SSL_CERT_FILE"
+export SSL_CERT_DIR="$HOMEBREW_PREFIX/etc/openssl"
+export SSL_CERT_FILE="$SSL_CERT_DIR/cert.pem"
+export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
-[[ -e $SSL_CERT_FILE ]] || unset SSL_CERT_FILE
+for x in SSL_CERT_DIR SSL_CERT_FILE CURL_CA_BUNDLE; do
+    if [[ ! -e ${!x} ]]; then
+        unset $x
+    fi
+done
+
+export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 
 # Transmission
 export TRANSMISSION_HOME="$HOME/.config/transmission"
 export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-daemon/web"
+
+# XDG
+export XDG_DATA_HOME="$HOME/share"
+export XDG_CONFIG_HOME="$dir_config"
+export XDG_CACHE_HOME="$HOME/Library/Caches"
+
+# -----------------------------------------------------------------------------
+# less
+# -----------------------------------------------------------------------------
+
+LESS=
+LESS+='--QUIET '                    # never ring the terminal bell
+LESS+='--ignore-case '              # case-insensitive searching
+LESS+='--squeeze-blank-lines '      # combine consecutive blank lines
+LESS+='--no-init '                  # don't clear the screen on exit
+
+LESSCHARSET=utf-8
+LESSHISTFILE=/dev/null              # don't keep a history file
+
+lesspipe="$(getPath src-hilite-lesspipe.sh)" && {
+    LESSOPEN="| $lesspipe %s"       # source highlighting
+    LESS+='--RAW-CONTROL-CHARS'     # output raw ANSI (e.g. \e[1;31m)
+    unset lesspipe
+}
+
+export LESS{,CHARSET,HISTFILE,OPEN}
 
 # -----------------------------------------------------------------------------
 # multi-core processing
@@ -127,15 +167,6 @@ fi
 if [[ $cores -gt 1 ]]; then
     export MAKEFLAGS="-j$cores"
 fi
-
-# -----------------------------------------------------------------------------
-# Homebrew
-# -----------------------------------------------------------------------------
-
-_inPath brew && {
-    # don't print beer emoji when logged in remotely
-    [[ $SSH_TTY ]] && export HOMEBREW_NO_EMOJI=true
-}
 
 # -----------------------------------------------------------------------------
 
