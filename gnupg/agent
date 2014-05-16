@@ -26,8 +26,12 @@ _gpg_agent_is_running()
 # -----------------------------------------------------------------------------
 
 if ! _gpg_agent_is_running; then
-    gpg-agent --batch --daemon --quiet >| "$gpg_env"
-                                        # start the agent
-    . "$gpg_env" &>/dev/null            # set & export $GPG_AGENT_INFO
-    export GPG_TTY=$(tty)               # for PIN entry program, if any
+    # start the agent
+    gpg-agent --daemon >| "$gpg_env"
+
+    # set & export $GPG_AGENT_INFO
+    . "$gpg_env" &>/dev/null
+    
+    # for PIN entry program, if any
+    export GPG_TTY=$(tty)
 fi

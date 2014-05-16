@@ -34,12 +34,12 @@ if _inPath keybase; then
         keybase decrypt "$inFile" > "$outFile" &&
             echo "$inFile -> $outFile"
     }
-elif _inPath gpg; then
+elif _inPath gpg2; then
     encrypt()
     {
         declare inFile="$1" outFile="$1.gpg"
 
-        gpg --recipient "$EMAIL" --output "$outFile" --encrypt "$inFile" &&
+        gpg2 --recipient "$EMAIL" --output "$outFile" --encrypt "$inFile" &&
             echo "$inFile -> $outFile"
     }
 
@@ -47,7 +47,7 @@ elif _inPath gpg; then
     {
         declare inFile="$1" outFile="${1%.gpg}"
 
-        gpg --output "$outFile" --decrypt "$inFile" &&
+        gpg2 --output "$outFile" --decrypt "$inFile" &&
             echo "$inFile -> $outFile"
     }
 else
