@@ -41,7 +41,7 @@ magenta="35"
    cyan="36"
   white="37"
 
-[[ $solarized =~ dark|light ]] && {
+if [[ $solarized =~ dark|light ]]; then
   colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
     base03="1;${black}"
     base02="0;${black}"
@@ -53,7 +53,7 @@ magenta="35"
      base3="1;${white}"
     orange="1;${red}"
     violet="1;${magenta}"
-} || {
+else
    colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
     brblack="1;${black}"
       brred="1;${red}"
@@ -63,7 +63,7 @@ magenta="35"
   brmagenta="1;${magenta}"
      brcyan="1;${cyan}"
     brwhite="1;${white}"
-}
+fi
 
 # -----------------------------------------------------------------------------
 # preferred colours
@@ -98,11 +98,11 @@ case $solarized in
 esac
 
 # Prompt (iPhone SSH app)
-[[ $COLUMNS -eq 80 && $LINES -le 28 ]] && {
+if [[ $COLUMNS -eq 80 && $LINES -le 28 ]]; then
     colour_2d="${blue}"
     colour_hi="${brwhite}"
     colour_user="${cyan}"
-}
+fi
 
 export colours ${colours[@]}
 
@@ -112,15 +112,15 @@ export colours ${colours[@]}
 
 export GREP_COLORS=
 
-GREP_COLORS+="sl=${null}:"      # whole selected lines
-GREP_COLORS+="cx=${colour_2d}:" # whole context lines
-GREP_COLORS+="mt=${orange}:"    # any matching text
-GREP_COLORS+="ms=4;${orange}:"  # matching text in a selected line
-GREP_COLORS+="mc=${orange}:"    # matching text in a context line
-GREP_COLORS+="fn=${colour_2d}:" # filenames
-GREP_COLORS+="ln=${blue}:"      # line numbers
-GREP_COLORS+="bn=${cyan}:"      # byte offsets
-GREP_COLORS+="se=${colour_hi}"  # separators
+GREP_COLORS+="sl=${null}:"        # whole selected lines
+GREP_COLORS+="cx=${colour_2d}:"   # whole context lines
+GREP_COLORS+="mt=${orange}:"      # any matching text
+GREP_COLORS+="ms=4;${orange}:"    # matching text in a selected line
+GREP_COLORS+="mc=${orange}:"      # matching text in a context line
+GREP_COLORS+="fn=${colour_2d}:"   # filenames
+GREP_COLORS+="ln=${blue}:"        # line numbers
+GREP_COLORS+="bn=${cyan}:"        # byte offsets
+GREP_COLORS+="se=${colour_hi}"    # separators
 
 # deprecated
 export GREP_COLOR="4;${orange}"
@@ -138,14 +138,14 @@ done
 # man pages in less
 # -----------------------------------------------------------------------------
 
-LESS_TERMCAP_mb="${magenta}"  # begin blinking mode
-LESS_TERMCAP_md="${green}"    # begin bold mode [headers]
-LESS_TERMCAP_me="${null}"     # end blink/bold mode
-LESS_TERMCAP_us="${yellow}"   # begin underline [variables]
-LESS_TERMCAP_ue="${null}"     # end underline
-LESS_TERMCAP_so="${orange}"   # begin standout [info box]
-LESS_TERMCAP_se="${null}"     # end standout
-LESS_TERMEND="${null}"        # reset colours
+LESS_TERMCAP_mb="${magenta}"      # begin blinking mode
+LESS_TERMCAP_md="${green}"        # begin bold mode [headers]
+LESS_TERMCAP_me="${null}"         # end blink/bold mode
+LESS_TERMCAP_us="${yellow}"       # begin underline [variables]
+LESS_TERMCAP_ue="${null}"         # end underline
+LESS_TERMCAP_so="${orange}"       # begin standout [info box]
+LESS_TERMCAP_se="${null}"         # end standout
+LESS_TERMEND="${null}"            # reset colours
 
 export ${!LESS_TERM*}
 
@@ -155,7 +155,7 @@ export ${!LESS_TERM*}
 
 colourDir="$HOME/share/dircolors"
 
-if _inPath dircolors && [[ -d $colourDir ]]; then
+if [[ -d $colourDir ]] && _inPath dircolors; then
     case $solarized in
         light|dark)
             colourFile="$colourDir/solarized.$solarized"
@@ -171,18 +171,21 @@ fi
 
 unset colour{Dir,File}
 
-_isGNU ls || {
-    export CLICOLOR=1
+if ! _isGNU ls; then
     # http://geoff.greer.fm/lscolors/
     export LSCOLORS="exfxdeedbxaeGeabadhchd"
-}
+    export CLICOLOR=1
+fi
 
 # ------------------------------------------------------------------------------
 # GNU screen
 # ------------------------------------------------------------------------------
 
-[[ $solarized == light ]] && {
-    SCREENRC="$dir_config/screenrc.light"
-} || {
-    return 0
-}
+case $solarized in
+    light)
+        SCREENRC="$dir_config/screenrc.light"
+        ;;
+    *)
+        true
+        ;;
+esac
