@@ -54,6 +54,7 @@ complete -abcfk -A function \
                 -A helptopic    type which what h
 complete -A function            fe where
 complete -def                   trash
+complete -A shopt               _shoptSet
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
@@ -67,9 +68,7 @@ _inPath killall && {
         COMPREPLY=( $(compgen -W "${processes[*]}" -- $cur) )
     }
 
-    complete -o default -o nospace \
-             -F __complete_killall \
-             killall
+    complete -F __complete_killall killall
 }
 
 # edit scripts
@@ -81,21 +80,25 @@ __complete_edsh()
     COMPREPLY=( $(compgen -W "${scripts[*]}" -- $cur) )
 }
 
-complete -o default -o nospace \
-    -F __complete_edsh \
-    edsh
+complete -F __complete_edsh edsh
 
 # -----------------------------------------------------------------------------
 # misc. custom completions
 # -----------------------------------------------------------------------------
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+# SSH hostnames from ~/.ssh/config, ignoring wildcards
 # https://github.com/pahen/dotfiles/blob/master/.completions
-[[ -f $HOME/.ssh/config ]] && {
+if [[ -r $HOME/.ssh/config ]]; then
     complete -o default -o nospace \
              -W "$(sed -nE 's/Host (.*[^?*])$/\1/p' $HOME/.ssh/config)" \
              scp sftp ssh
-}
+fi
 
-# Transmission
+# transmission-remote-cli (https://github.com/fagga/transmission-remote-cli)
 _source "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
+
+# others
+for file in $dir_config/bash/completion/*.sh; do
+    _source "$file"
+    unset file
+done
