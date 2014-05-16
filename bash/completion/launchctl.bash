@@ -1,11 +1,5 @@
-#!/usr/bin/env bash
 # ------------------------------------------------------------------------------
-# Name    : launchctl-completion
-# Purpose : Bash completion support for launchctl
-# Date    : 2014-05-13
-#
-# Author  : Zozo
-# Email   : printf "zozo\x40inescapable\x2eorg"
+# ~zozo/.config/bash/completion/launchctl.bash
 # Based on: https://github.com/bobthecow/launchctl-completion
 # ------------------------------------------------------------------------------
 
