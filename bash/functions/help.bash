@@ -125,8 +125,8 @@ whichalias()
 {   # like `type [alias]`, but prettier
     declare name="$1" target
 
-    target="$(alias "$name" 2>/dev/null |
-        sed -E "s/(^.+=')|(\\\'')|('$)//g")" # strip and unescape single quotes
+    target="$(alias "$name" 2>/dev/null \
+        | sed -E "s/(^.+=')|(\\\'')|('$)//g")" # strip and unescape single quotes
 
     [[ $target ]] || return 1
 
@@ -205,8 +205,8 @@ functionsrc()
     where "$func" || return 1
 
     # skip "$1 is a function" line and colourize source
-    _inPath colout && {
-        declare -f "$func" | tail -n+1 | colout -s bash
+    _inPath pygmentize && {
+        declare -f "$func" | tail -n+1 | pygmentize -l bash -P "bg=${solarized:-dark}"
     } || {
         declare -f "$func" | tail -n+1
     }

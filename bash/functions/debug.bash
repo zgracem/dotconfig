@@ -3,14 +3,24 @@
 # handy functions for debugging and development
 # ------------------------------------------------------------------------------
 
+_optSet()
+{   # exits 0 if all shell variables in $@ are set
+    
+    declare opt
+
+    for opt in "$@"; do
+        [[ :$SHELLOPTS: =~ :$opt: ]] || return 1
+    done
+}
+
 _shoptSet()
-{   # exits 0 if shell option $1 is set
-    [[ $BASHOPTS =~ $1 ]]
+{   # exits 0 if all shell options in $@ are set
+    builtin shopt -pq $*
 }
 
 xtrace()
 {   # toggle xtrace
-    if [[ $SHELLOPTS =~ xtrace ]]; then
+    if _optSet xtrace; then
         set +o xtrace
     else
         set -o xtrace
@@ -68,10 +78,12 @@ map()
     # Usage: map COMMAND: ITEM [ITEM ...]
     # Based on: http://redd.it/aks3u
 
+    declare usage="$FUNCNAME COMMAND: ITEM [ITEM ...]"
     declare i cmd
 
     if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
-        scold "invalid syntax"
+        scold $FUNCNAME "invalid syntax"
+        scold "Usage: $usage"
         return 1
     fi
 
@@ -86,4 +98,11 @@ map()
     for i in "$@"; do
         eval "${cmd//\\/\\\\} \"${i//\\/\\\\}\""
     done
+}
+
+ca()
+{   # count arguments
+    # https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/ca.bash
+
+    printf '%d\n' "$#"
 }

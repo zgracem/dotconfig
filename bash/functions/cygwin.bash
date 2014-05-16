@@ -40,8 +40,3 @@ killall()
 {   # kill a process by name
     cygkill $(pidof $1)
 }
-
-sudo()
-{   # pass through commands
-    $*
-}
