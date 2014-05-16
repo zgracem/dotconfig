@@ -46,6 +46,7 @@ alias cronedit='crontab -e'
 alias dl='curl -OJ'                 # download a file
 alias headers='curl -Is'            # HTTP headers for $1
 alias ls1='command ls -A1'          # just the filenames
+alias lst='ls -rt'					# newest files last
 alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg='ping -c 4 google.com'  # check network connection
 alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
