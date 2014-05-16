@@ -78,9 +78,7 @@ install dovecot
 install offline-imap
 
 # GnuPG
-install gnupg
-install gpg-agent
-install pinentry
+install gpg2 --8192 --with-readline
 
 # -----------------------------------------------------------------------------
 # fun & games
