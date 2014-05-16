@@ -59,18 +59,6 @@ complete -A shopt               _shoptSet
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
 
-# kill running processes
-_inPath killall && {
-    __complete_killall()
-    {
-        declare processes=($(command ps -cxo command))
-        declare cur=${COMP_WORDS[COMP_CWORD]}
-        COMPREPLY=( $(compgen -W "${processes[*]}" -- $cur) )
-    }
-
-    complete -F __complete_killall killall
-}
-
 # edit scripts
 __complete_edsh()
 {
@@ -98,7 +86,4 @@ fi
 _source "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
 
 # others
-for file in $dir_config/bash/completion/*.sh; do
-    _source "$file"
-    unset file
-done
+_source "$dir_config"/bash/completion/*.bash
