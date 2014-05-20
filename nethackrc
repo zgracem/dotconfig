@@ -1,30 +1,116 @@
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # ~zozo/.config/nethackrc
 # say hello: printf "zozo\x40inescapable\x2eorg"
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-# Controls
+OPTIONS=name:Zozo
+OPTIONS=gender:female
 
-OPTIONS=number_pad=0,!rest_on_space
+# -----------------------------------------------------------------------------
+# system
+# -----------------------------------------------------------------------------
 
-# Shhhh...
+# save game state after each level change
+OPTIONS=checkpoint
 
-OPTIONS=!cmdassist,!news,!splash_screen
+# disable in-game mail delivery
+OPTIONS=!mail
 
-# Display
+# -----------------------------------------------------------------------------
+# display
+# -----------------------------------------------------------------------------
 
-OPTIONS=boulder:0,color,lit_corridor,sparkle,statuscolors
-OPTIONS=scores:5t 2a o
+# display colour
+OPTIONS=color
 
-# Interface
+# use "0" for boulders
+OPTIONS=boulder:0
 
-OPTIONS=msghistory:100,msg_window:combination,player_selection:prompts
+# show corridor squares seen by night vision or a light source as lit
+OPTIONS=lit_corridor
+
+# display a sparkly effect when you or a monster resists an attack
+OPTIONS=sparkle
+
+# visually distinguish pets from similar animals
+OPTIONS=hilite_pet
+
+# enable statuscolors patch if present
+OPTIONS=statuscolors
+
+# -----------------------------------------------------------------------------
+# interface
+# -----------------------------------------------------------------------------
+
+# prompt for character selection
+OPTIONS=player_selection:prompts
+
+# disable command assistance for new players
+OPTIONS=!cmdassist
+
+# quiet startup
+OPTIONS=!legacy,!news,!splash_screen,suppress_alert:3.4.3
+
+# show accumulated XP and score and elapsed turns
 OPTIONS=showexp,showscore,time
 
-# Gameplay
+# save 100 top line messages (and recall with ^P)
+OPTIONS=msghistory:100
 
-OPTIONS=autodig,!autopickup,autoquiver,fruit:pomegranate,!mail,pushweapon
+# display two recall messages single-line, then go full window
+OPTIONS=msg_window:combination
 
-# Pets
+# extended commands appear in pop-up menu
+OPTIONS=extmenu
 
-OPTIONS=hilite_pet,pettype:cat,catname:Catface Meowmers,dogname:Toby
+# inventory letters stick when objects are dropped
+OPTIONS=fixinv
+
+# score list at end of game
+OPTIONS=scores:5 top/2 around/own
+
+# -----------------------------------------------------------------------------
+# gameplay
+# -----------------------------------------------------------------------------
+
+# rename slime mold
+OPTIONS=fruit:pomegranate
+
+# use [yuhjklbn] to move instead of the number pad
+OPTIONS=number_pad=0
+
+# do not make the spacebar a synonym for `.` (rest)
+OPTIONS=!rest_on_space
+
+# auto-dig when wielding a digging tool
+OPTIONS=autodig
+
+# autopickup gold
+OPTIONS=autopickup,pickup_types=$
+
+# automatically fill when `f`iring with empty quiver
+OPTIONS=autoquiver
+
+# confirm attacks on peaceful creatures
+OPTIONS=confirm
+
+# confirm praying
+OPTIONS=prayconfirm
+
+# push primary weapon to secondary slot on `w`ielding new primary
+OPTIONS=pushweapon
+
+# -----------------------------------------------------------------------------
+# pets
+# -----------------------------------------------------------------------------
+
+# preferred pet type
+OPTIONS=pettype:cat
+
+# prevent attacks on pets
+OPTIONS=safe_pet
+
+# names
+OPTIONS=catname:Catface Meowmers
+OPTIONS=dogname:Toby
+OPTIONS=horsename:Silver
