@@ -200,8 +200,8 @@ confsrc ${dotfiles[@]}
 # start agents
 # -----------------------------------------------------------------------------
 
-_source "$HOME/.ssh/agent"
-_source "$HOME/.gnupg/agent"
+_source "$HOME/.ssh/ssh-agent.bash"
+_source "$HOME/.gnupg/gpg-agent.bash"
 
 # -----------------------------------------------------------------------------
 # misc.
