@@ -16,7 +16,7 @@ PAGER=$(getPath less)
 MANPAGER=$PAGER
 
 # use GUI apps if not logged in remotely
-if [[ -z $SSH_TTY ]]; then
+if [[ -z $SSH_CONNECTION ]]; then
     case $OSTYPE in
         darwin*)
             BROWSER=/usr/bin/open

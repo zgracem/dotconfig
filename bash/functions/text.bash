@@ -15,7 +15,7 @@ _edit()
         file="${file%@*}"
     }
 
-    [[ $SSH_TTY ]] && {
+    [[ $SSH_CONNECTION ]] && {
         # working remotely; use a console editor
         declare windowTitle="$(basename "$EDITOR")"
 

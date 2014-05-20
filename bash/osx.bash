@@ -141,7 +141,7 @@ if _inPath brew; then
     HOMEBREW_KEEP_INFO=true
 
     # don't print beer emoji when logged in remotely
-    [[ $SSH_TTY ]] && HOMEBREW_NO_EMOJI=true
+    [[ $SSH_CONNECTION ]] && HOMEBREW_NO_EMOJI=true
 
     export ${!HOMEBREW_*}
 

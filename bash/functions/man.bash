@@ -83,7 +83,7 @@ manpdf()
         }
 
         # open in default PDF viewer if not logged in remotely
-        [[ ! $SSH_TTY ]] &&
+        [[ ! $SSH_CONNECTION ]] &&
             $viewer "$pdf"
     done
 
