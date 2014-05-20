@@ -79,6 +79,9 @@ alias qudisable='defaults write com.apple.LaunchServices LSQuarantine -bool NO &
 alias quenable='defaults delete com.apple.LaunchServices LSQuarantine && echo "Restart for setting to take effect"'
 alias unquar='xattr -d -r com.apple.quarantine' # recurses into directories
 
+# Bluetooth mouse battery
+alias mousebatt="ioreg -n BNBMouseDevice | sed -nE 's/^.*BatteryPercent\" = ([[:digit:]]+)$/\1/p'"
+
 # -----------------------------------------------------------------------------
 # misc. shortcuts
 # -----------------------------------------------------------------------------
