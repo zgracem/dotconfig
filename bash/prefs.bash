@@ -109,10 +109,10 @@ export COPYFILE_DISABLE=true        # exclude ._resourceforks from tarballs
 export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 
 # zip
-export ZIPOPTS='-9 --symlinks'
+export ZIPOPTS='-9 --symlinks'      # max compression, store symlinks as symlinks
 
 # OpenSSL
-export SSL_CERT_DIR="$HOMEBREW_PREFIX/etc/openssl"
+export SSL_CERT_DIR="/usr/local/etc/openssl"
 export SSL_CERT_FILE="$SSL_CERT_DIR/cert.pem"
 export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
@@ -148,7 +148,7 @@ LESSHISTFILE=/dev/null              # don't keep a history file
 
 lesspipe="$(getPath src-hilite-lesspipe.sh)" && {
     LESSOPEN="| $lesspipe %s"       # source highlighting
-    LESS+='--RAW-CONTROL-CHARS'     # output raw ANSI (e.g. \e[1;31m)
+    LESS+='--RAW-CONTROL-CHARS '    # output raw ANSI (e.g. \e[1;31m)
     unset lesspipe
 }
 
