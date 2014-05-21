@@ -12,9 +12,14 @@
 # shell variables
 # ------------------------------------------------------------------------------
 
+# don't warn on using MS-DOS-style paths instead of POSIX-style
+if [[ ! $CYGWIN =~ dosfilewarning ]]; then
+	CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
+fi
+
 # create Windows-native symlinks when possible
 if [[ ! $CYGWIN =~ winsymlinks ]]; then
-	export CYGWIN="$CYGWIN${CYGWIN+ }winsymlinks:native"
+	CYGWIN="${CYGWIN+$CYGWIN }winsymlinks:native"
 fi
 
 # do not consider DLLs executable for completion purposes
