@@ -99,8 +99,15 @@ fi
 CDPATH=.:$HOME      # also look in ~ when cd'ing
 
 # Python
-if [[ -d /usr/local/lib/python2.7/site-packages ]]; then
-    PYTHONPATH=/usr/local/lib/python2.7/site-packages
-fi
+for dir in /usr/local /usr; do
+    PYTHONPATH="${dir}/lib/python2.7/site-packages"
+    unset dir
+
+    if [[ -d $PYTHONPATH ]]; then
+        break
+    else
+        unset PYTHONPATH
+    fi
+done
 
 export {,CD,MAN,INFO,PYTHON}PATH
