@@ -14,7 +14,7 @@ if [[ -n $SSH_AGENT_PID && $$ -eq $SSH_AGENT_PPID ]]; then
     ssh-add -D &>/dev/null
 
     # terminate the agent process
-    builtin kill $SSH_AGENT_PID && {
+    builtin kill $SSH_AGENT_PID &>/dev/null && {
         # clean up
         if [[ -d ${SSH_AUTH_SOCK%/*} ]]; then
             command rm -rf "${SSH_AUTH_SOCK%/*}" &>/dev/null
@@ -25,9 +25,9 @@ if [[ -n $SSH_AGENT_PID && $$ -eq $SSH_AGENT_PPID ]]; then
 fi
 
 # ditto for gpg-agent
-if _gpg_agent_is_running && [[ $$ -eq $GPG_AGENT_PPID ]]; then
+if [[ -n $GPG_AGENT_PID && [[ $$ -eq $GPG_AGENT_PPID ]]; then
     # terminate the agent process
-    builtin kill $GPG_AGENT_PID && {
+    builtin kill $GPG_AGENT_PID &>/dev/null && {
         # clean up
         if [[ -d ${GPG_AUTH_SOCK%/*} ]]; then
             command rm -rf "${GPG_AUTH_SOCK%/*}" &>/dev/null
