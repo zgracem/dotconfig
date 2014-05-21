@@ -37,6 +37,21 @@ if [[ -n $GPG_AGENT_PID && [[ $$ -eq $GPG_AGENT_PPID ]]; then
     }
 fi
 
+# archive ~/.bash_history if it's larger than 256 KB
+if _isGNU stat; then
+    flags='-c %s'
+else
+    flags='-f %z'
+fi
+
+history_size=$(command stat ${flags} "$HISTFILE" 2>/dev/null)
+
+if [[ $history_size -ge 262144 ]]; then
+    mv "$HISTFILE" "${HISTFILE}_$(date +%y%m%d)"
+fi
+
+unset flags history_size
+
 # # clear screen
 # if [[ $SHLVL -eq 1 ]]; then
 #     _inPath clear && clear
