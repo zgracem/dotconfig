@@ -71,13 +71,13 @@ manpdf()
         # if a PDF doesn't already exist...
         [[ ! -f $pdf ]] && {
             # does the man page exist?
-            command man -w "$page" &>/dev/null || {
+            quiet command man -w "$page" || {
                 scold "No manual entry for $page"
                 return 1
             }
 
             # generate the PDF
-            command man -ct "$page" | $processor "$pdf" &>/dev/null &&
+            quiet command man -ct "$page" | $processor "$pdf" &&
             # output the filename
             printf "$pdf\n"
         }
@@ -96,7 +96,7 @@ macman()
     declare baseURL='http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/'
 
     # do we already know where to look?
-    manPath=$(command man --path "$@" &>/dev/null) && {
+    manPath=$(command man --path "$@" 2>/dev/null) && {
         manPathTrimmed=$(echo $manPath | command grep -Eo 'man[1-8]/[^\.]+\.[^\.]+')
     } || { # try anyway
         [[ $# -eq 2 ]] && { # if the user specified a section

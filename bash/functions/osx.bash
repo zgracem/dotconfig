@@ -31,7 +31,7 @@ cdf()
 
 ql()
 {   # launch a QuickLook preview of a file
-    /usr/bin/qlmanage -p "$1" &>/dev/null
+    quiet /usr/bin/qlmanage -p "$1"
 }
 
 abspath()

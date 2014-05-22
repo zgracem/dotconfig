@@ -3,24 +3,29 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
+quiet()
+{   # execute a command silently
+    "$@" >/dev/null 2>&1
+}
+
 _inPath()
 {   # exits 0 if $1 is installed in $PATH
-    builtin type -P "$1" &>/dev/null
+    quiet builtin type -P "$1"
 }
 
 _isGNU()
 {   # exits 0 if $1 uses GNU switches
-    command "$1" --version &>/dev/null
+    quiet command "$1" --version
 }
 
 _isFunction()
 {   # exits 0 if $1 is defined as a function
-    declare -f "$1" &>/dev/null
+    quiet declare -f "$1"
 }
 
 _isAlias()
 {   # exits 0 if $1 is defined as an alias
-    builtin alias "$1" &>/dev/null
+    quiet builtin alias "$1"
 }
 
 getPath()
@@ -33,7 +38,7 @@ getGNU()
     declare bin="$1"
 
     _isGNU "$bin" && {
-        echo "$bin"
+        type -P "$bin"
     } || {
         getPath "g$bin"
     }
