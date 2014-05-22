@@ -406,7 +406,7 @@ what()
             return 0
         } || {
             # variables
-            declare -p "$thing" &>/dev/null && {
+            quiet declare -p "$thing" && {
                 whatvar "$thing"
             } || {
                 scold "$FUNCNAME" "$thing: not found"

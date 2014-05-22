@@ -32,7 +32,7 @@ fe()
 
     declare func="$1" source{,File,Line}
 
-    declare -f "$func" &>/dev/null || {
+    _isFunction "$func" || {
         scold "$FUNCNAME" "function not defined"
         return 1
     }

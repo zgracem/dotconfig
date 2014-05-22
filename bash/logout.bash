@@ -11,13 +11,13 @@ fi
 # stop ssh-agent if it was started by this shell
 if [[ -n $SSH_AGENT_PID && $$ -eq $SSH_AGENT_PPID ]]; then
     # delete all identities from the agent
-    ssh-add -D &>/dev/null
+    quiet ssh-add -D
 
     # terminate the agent process
-    builtin kill $SSH_AGENT_PID &>/dev/null && {
+    quiet builtin kill $SSH_AGENT_PID && {
         # clean up
         if [[ -d ${SSH_AUTH_SOCK%/*} ]]; then
-            command rm -rf "${SSH_AUTH_SOCK%/*}" &>/dev/null
+            quiet command rm -rf "${SSH_AUTH_SOCK%/*}"
         fi
 
         unset SSH_AUTH_SOCK SSH_AGENT_PID SSH_AGENT_PPID
@@ -27,10 +27,10 @@ fi
 # ditto for gpg-agent
 if [[ -n $GPG_AGENT_PID && $$ -eq $GPG_AGENT_PPID ]]; then
     # terminate the agent process
-    builtin kill $GPG_AGENT_PID &>/dev/null && {
+    quiet builtin kill $GPG_AGENT_PID && {
         # clean up
         if [[ -d ${GPG_AUTH_SOCK%/*} ]]; then
-            command rm -rf "${GPG_AUTH_SOCK%/*}" &>/dev/null
+            quiet command rm -rf "${GPG_AUTH_SOCK%/*}"
         fi
 
         unset GPG_AUTH_SOCK GPG_AGENT_PID GPG_AGENT_PPID GPG_TTY
