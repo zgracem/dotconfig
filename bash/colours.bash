@@ -2,6 +2,13 @@
 # ~zozo/.config/bash/colours
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
+
+# skip this file if the terminal can't support at least eight colours
+if [[ $(tput colors 2>/dev/null) -lt 8 ]]; then
+    return
+fi
+
+# -----------------------------------------------------------------------------
 # solarized -- http://ethanschoonover.com/solarized
 # -----------------------------------------------------------------------------
 
@@ -98,7 +105,7 @@ case $solarized in
 esac
 
 # Prompt (iPhone SSH app)
-if [[ $COLUMNS -eq 80 && $LINES -le 28 ]]; then
+if [[ $TERM_PROGRAM == Prompt ]]; then
     colour_2d="${blue}"
     colour_hi="${brwhite}"
     colour_user="${cyan}"
@@ -133,6 +140,12 @@ for index in ${colours[@]}; do
     eval "$index=\"[${!index}m\""
     unset index
 done
+
+# -----------------------------------------------------------------------------
+# shell history
+# -----------------------------------------------------------------------------
+
+HISTTIMEFORMAT="${colour_2d}${HISTTIMEFORMAT}${null}"
 
 # -----------------------------------------------------------------------------
 # man pages in less
