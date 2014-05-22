@@ -26,6 +26,19 @@ export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
 # bash version -- e.g. 32 for v3.2
 bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 
+# some obvious terminals I use
+if [[ -z $TERM_PROGRAM ]]; then
+    if [[ $TERM =~ putty* ]]; then
+        TERM_PROGRAM=PuTTY
+    elif [[ $TERM == putty-256color && $COLUMNS -eq 80 && $LINES == 2[78] ]]; then
+        TERM_PROGRAM=Prompt
+    elif [[ $TERM == vt100 && $(tty) == /dev/console ]]; then
+        TERM_PROGRAM=console
+    fi
+fi
+
+export TERM_PROGRAM
+
 # -----------------------------------------------------------------------------
 # shell options
 # -----------------------------------------------------------------------------
