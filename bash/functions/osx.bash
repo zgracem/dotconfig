@@ -77,15 +77,6 @@ remind()
 EOF
 }
 
-brewup()
-{   # update and upgrade installed Homebrew packages
-    
-    _inPath brew || return 1
-
-    brew update && pause
-    brew upgrade
-}
-
 scan()
 {
 

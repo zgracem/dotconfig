@@ -25,7 +25,7 @@ if [[ -n $SSH_AGENT_PID && $$ -eq $SSH_AGENT_PPID ]]; then
 fi
 
 # ditto for gpg-agent
-if [[ -n $GPG_AGENT_PID && [[ $$ -eq $GPG_AGENT_PPID ]]; then
+if [[ -n $GPG_AGENT_PID && $$ -eq $GPG_AGENT_PPID ]]; then
     # terminate the agent process
     builtin kill $GPG_AGENT_PID &>/dev/null && {
         # clean up
