@@ -20,6 +20,9 @@ shopt -s hostcomplete
 # don't search PATH when completion is attempted on an empty line
 shopt -s no_empty_cmd_completion
 
+# ignore these suffixes when searching for completions
+FIGNORE="DS_Store:~:.swp"
+
 # -----------------------------------------------------------------------------
 # bash-completion
 # -----------------------------------------------------------------------------
