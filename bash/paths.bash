@@ -96,8 +96,6 @@ fi
 
 # -----------------------------------------------------------------------------
 
-CDPATH=.:$HOME      # also look in ~ when cd'ing
-
 # Python
 for dir in /usr/local /usr; do
     PYTHONPATH="${dir}/lib/python2.7/site-packages"
