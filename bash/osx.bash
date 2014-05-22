@@ -173,7 +173,6 @@ if _inPath brew; then
         for formula in "$@"; do
             if [[ $formula == --force ]]; then
                 forceflag=true
-                shift
                 continue
             fi
 
