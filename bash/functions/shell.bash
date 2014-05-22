@@ -36,23 +36,23 @@ lsf()
 
 lsd()
 {   # list all subdirectories in $1/$PWD
-    find "${1-.}" -maxdepth 1 -type d -exec ls $flags_ls -d {} \;
+    find "${1-.}" -maxdepth 1 -type d | xargs ls -d ${flags_ls}
 }
 
 lsl()
 {   # list all symbolic links in $1/$PWD
-    find "${1-.}" -maxdepth 1 -type l -exec ls $flags_ls {} \;
+    find "${1-.}" -maxdepth 1 -type l | xargs ls ${flags_ls}
 }
 
 lsx()
 {   # list all files in $PWD that match *.$1
-    find . -maxdepth 1 -type f -iname '*.'${1}'' -exec ls $flags_ls {} \;
+    find . -maxdepth 1 -type f -iname '*.'${1}'' | xargs ls ${flags_ls}
 }
 
 lspath()
 {   # list path entries of $PATH or environment variable $1
-    declare listPath="${1-\$PATH}"
-    eval echo ${listPath} | tr : '\n'
+    declare listPath="${1-PATH}"
+    echo ${!listPath} | tr : '\n'
 }
 
 today()
@@ -150,9 +150,6 @@ if ! _inPath sudo; then
     unalias sudo 2>/dev/null
     unset -f sudo
 
-    sudo()
-    {   # just pass through commands
-
-        $*
-    }
+    # just pass through commands
+    sudo() { $*; }
 fi
