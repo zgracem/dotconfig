@@ -24,20 +24,21 @@ flags_top='-F -R -u -user $USER'
 
 # platform-specific
 
-_isGNU ls &&
+if _isGNU ls; then
     flags_ls+=' --color=auto'
+fi
 
-_isGNU ps && {
+if _isGNU ps; then
     flags_ps+='s'   # summary format
 
     # also show Windows processes
     [[ $OSTYPE =~ cygwin ]] && flags_ps+='W'
 
-} || {
+else
     flags_ps+='xo pid,user,start,command'
-}
+fi
 
-_isGNU stat && {
+if _isGNU stat; then
     flags_stat+=' --printf="  File: \"%n\"\n'
     flags_stat+='  Type: %F\t\tSize: %s\n'
     flags_stat+='  Mode: (%4a/%A)\tUid: (%u/%U)\tGid: (%g/%G)\n'
@@ -45,9 +46,9 @@ _isGNU stat && {
     flags_stat+='Access: %x\n'
     flags_stat+='Modify: %y\n'
     flags_stat+='Change: %z\n"'
-} || {
+else
     flags_stat+=' -x -t "%F %T"'
-}
+fi
 
 export ${!flags_*}
 
