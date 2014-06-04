@@ -8,7 +8,7 @@ set nocompatible                " use vim settings, rather than vi settings
 
 set runtimepath =$HOME/.vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
-set runtimepath+=$HOME/.vim/after
+set runtimepath+=$HOME/share/vim/after
 
 silent! call pathogen#infect()
 silent! call pathogen#helptags()
@@ -35,7 +35,7 @@ endif
 " spellcheck dictionaries
 if has("spell")
   set spelllang=en_ca           " Canadian English
-  set spellfile=$HOME/.vim/spell/en.utf-8.add
+  set spellfile=$HOME/share/vim/spell/en.utf-8.add
 endif
 
 " paths
@@ -57,9 +57,9 @@ set swapfile                    " make swapfiles
 set updatecount=80              " update swapfile after x characters
 
 if has("unix")
-  set directory=$HOME/tmp/.vim//,$TMPDIR//
+  set directory=$HOME/tmp/share/vim//,$TMPDIR//
 elseif has("win32") || has("win64")
-  set directory=$HOME/tmp/.vim//,$TEMP//
+  set directory=$HOME/tmp/share/vim//,$TEMP//
 endif
 
 " // = include path in name of swap file
@@ -192,7 +192,7 @@ if has("statusline")
     set titlestring=
   else
     let &titleold = expand("$USER") . "@" . expand("$HOSTNAME")
-"   set titlestring=%{$USER}@%{$HOSTNAME}:\ 
+"   set titlestring=%{$USER}@%{$HOSTNAME}:\
     set titlestring=
   endif
 
@@ -234,7 +234,7 @@ if has("statusline")
 
   " cursor position + percentage through file
   set statusline+=%l,%c%V\ 
-  set statusline+=%5.(%3.p%%\ %)
+  set statusline+=%5.(%3.p%%\ %) 
 endif
 
 "-----------------------------------------------------------------------------
@@ -242,8 +242,8 @@ endif
 "-----------------------------------------------------------------------------
 
 if has("gui_running")
-  set columns=132
-  set lines=38
+  set columns=167
+  set lines=52
 
   set guioptions+=a             " use "* in visual mode (system clipboard)
   set guioptions+=c             " use console dialogs for simple choices
@@ -323,18 +323,18 @@ endif
 
 if exists("#vimrc")
   augroup vimrc
-    autocmd BufNewFile *.sh so $HOME/.vim/templates/template.sh
+    autocmd BufNewFile *.sh so $HOME/share/vim/templates/template.sh
     autocmd BufNewFile *.sh exe "3g/$/s// " . expand("%:t:r")
     autocmd BufNewFile *.sh exe "5g/$/s// " . strftime("%Y-%m-%d")
     autocmd BufNewFile *.sh exe "9g/$/s//" . expand("%:t")
     autocmd BufNewFile *.sh exe "normal G"
 
-    autocmd BufNewFile *.css so $HOME/.vim/templates/template.css
+    autocmd BufNewFile *.css so $HOME/share/vim/templates/template.css
 
-    autocmd BufNewFile *.html so $HOME/.vim/templates/template.html
+    autocmd BufNewFile *.html so $HOME/share/vim/templates/template.html
     autocmd BufNewFile *.html exe "normal 8G$"
 
-    autocmd BufNewFile lj_draft_[0-9]* so $HOME/.vim/templates/lj_template.md
+    autocmd BufNewFile lj_draft_[0-9]* so $HOME/share/vim/templates/lj_template.md
     autocmd BufNewFile lj_draft_[0-9]* exe "setlocal ft=markdown"
     autocmd BufNewFile lj_draft_[0-9]* exe "set formatoptions-=a"
     autocmd BufNewFile lj_draft_[0-9]* exe "normal 1G$"
