@@ -1,0 +1,13 @@
+*~
+*.bak
+*.log
+*.swp
+
+.bundle
+.git
+log
+logs
+
+jquery*.js
+modernizr-*.js
+less-*.js
