@@ -22,6 +22,15 @@ flags_scp='-Cpr'    # compress; preserve times/modes; recursive
 flags_stat='-L'     # follow links
 flags_top='-F -R -u -user $USER'
 
+# Silver Searcher
+flags_ag='--path-to-agignore "$dir_config/agignore" '
+flags_ag+='--skip-vcs-ignores '
+flags_ag+='--color-line-number "0;34" '
+flags_ag+='--color-match "4;1;31" '
+flags_ag+='--color-path "1;32" '
+flags_ag+='--noheading '
+flags_ag+='--smart-case '
+
 # platform-specific
 
 if _isGNU ls; then
