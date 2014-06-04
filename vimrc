@@ -478,6 +478,9 @@ nmap <silent> <leader>qD :call MakeQuotesDumb()<CR>
 " ,S strips trailing whitespace
 nmap <silent> <leader>S :StripTrailingWhitespaces<CR>
 
+" ,T saves and executes the file
+nmap <silent> <leader>T :w\|:!./%<CR>
+
 " ,WP rewraps current paragraph
 nmap <leader>WP mzgqip`z
 
