@@ -4,14 +4,14 @@
 # -----------------------------------------------------------------------------
 
 # fetch the newest version of Homebrew and all formulae from GitHub
-update
+#update
 
 # -----------------------------------------------------------------------------
 # shells
 # -----------------------------------------------------------------------------
 
 # bash 4
-install bash
+install bash --HEAD || true
 install bash-completion
 
 # zsh
@@ -28,8 +28,8 @@ install python
 install vim --HEAD
 
 # git
-install git
-install hub
+install git || true
+install hub || true
 
 # tmux
 install tmux
