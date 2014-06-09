@@ -74,7 +74,7 @@ songinfo()
 md5check()
 {   # quickly verify MD5 checksums
     # Usage: md5check CHECKSUM FILE
-    
+
     declare checksum="$1" file="$2"
     declare regex='[[:xdigit:]]{32}'
 
@@ -103,7 +103,7 @@ _inPath lessc && {
 
         for less_file in "$@"; do
             css_file="${less_file%.less}.css"
-            command lessc "$less_file" >| "$css_file"
+            command lessc --compress "$less_file" >| "$css_file"
         done
     }
 }
