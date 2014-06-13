@@ -15,6 +15,7 @@ dir_proj="$dir_dropbox/Projects"
 
 dir_mybin="$HOME/bin"
 dir_mytmp="$HOME/tmp"
+dir_scratch="$dir_mytmp/_scratch"
 dir_notes="$HOME/txt"
 dir_scripts="$HOME/scripts"
 dir_dev="$dir_scripts/dev"
@@ -30,13 +31,15 @@ case $OSTYPE in
         dir_prefs="$HOME/Library/Preferences"
         dir_drive="/Volumes/SILVER"
 
-        _inPath brew && HOMEBREW_PREFIX="$(brew --prefix)"
+        if _inPath brew && [[ -z $HOMEBREW_PREFIX ]]; then
+            HOMEBREW_PREFIX="$(brew --prefix)"
+        fi
         ;;
 
     cygwin)
         : ${dir_desktop:="$(cygpath --desktop)"}
         : ${dir_docs:="$(cygpath --mydocs)"}
-        : ${dir_winHome:="$(cygpath -au "$USERPROFILE")"}
+        : ${dir_winhome:="$(cygpath -au "$USERPROFILE")"}
         dir_downloads="$dir_docs/Downloads"
         dir_dropbox="$dir_docs/Dropbox"
         ;;
@@ -49,7 +52,7 @@ case $HOSTNAME in
         ;;
 
     ws144966)
-        dir_apps="$dir_winHome/Applications"
+        dir_apps="$dir_winhome/Applications"
         dir_downloads="$HOME/tmp"
         dir_dropbox="$HOME/Dropbox"
         ;;
@@ -62,39 +65,57 @@ esac
 export ${!dir_*}
 
 # -----------------------------------------------------------------------------
-# aliases
+# go()
 # -----------------------------------------------------------------------------
 
-# alias --  -="cd -"      # just type "-"
-alias    ..='cd ..'
-alias   ...='cd ../..'
-alias  ....='cd ../../..'
-alias .....='cd ../../../..'
 
-dirAlias()
+go()
 {
-    declare name="$1" value="$2"
+    declare name="$1" place checkvar
 
-    [[ -d $value ]] &&
-        alias "$name"="cd \"$value\""
+    declare -A go_alias=(
+        [bash]="$dir_config/bash"
+        [bin]="$dir_mybin"
+        [conf]="$dir_config"
+        [dbox]="$dir_dropbox"
+        [ddocs]="$dir_dropbox/Documents"
+        [defunct]="$dir_dev/done/defunct"
+        [dls]="$dir_downloads"
+        [mydocs]="$dir_docs"
+        [itunes]="$dir_music"
+        [poetry]="$dir_poems"
+        [myproj]="$dir_proj"
+        [projects]="$dir_proj"
+        [scr]="$dir_scripts"
+        [tmp]="$dir_mytmp"
+        [txt]="$dir_notes"
+        [winhome]="$dir_winHome"
+    )
+    # first, see if we're trying to call a variable directly
+    checkvar="dir_${name}"
+
+    if [[ -n ${!checkvar} ]]; then
+        place="${!checkvar}"
+
+    # otherwise, see if there's an alias with that name
+    elif [[ -n ${go_alias[$name]} ]]; then
+        place="${go_alias[$name]}"
+    fi
+
+    # any luck?
+    if [[ -z $place ]]; then
+        scold "${FUNCNAME}: ${name}: not found"
+        return 1
+    fi
+
+    # make sure that directory exists & is accessible
+    if [[ ! -d $place ]]; then
+        scold "${FUNCNAME}: ${place}: not a directory"
+        return 1
+    elif [[ ! -r $place ]]; then
+        scold "${FUNCNAME}: ${place}: not readable"
+        return 1
+    else
+        cd "$place"
+    fi
 }
-
-dirAlias apps     "$dir_apps"
-dirAlias bin      "$dir_mybin"
-dirAlias conf     "$dir_config"
-dirAlias .bash    "$dir_config/bash"
-dirAlias dbox     "$dir_dropbox"
-dirAlias ddocs    "$dir_dropbox/Documents"
-dirAlias desk     "$dir_desktop"
-dirAlias dev      "$dir_dev"
-dirAlias dls      "$dir_downloads"
-dirAlias docs     "$dir_docs"
-dirAlias music    "$dir_music"
-dirAlias notes    "$dir_notes"
-dirAlias poems    "$dir_poems"
-dirAlias prefs    "$dir_prefs"
-dirAlias proj     "$dir_proj"
-dirAlias scr      "$dir_scripts"
-dirAlias tmp      "$dir_mytmp"
-dirAlias txt      "$dir_notes"
-dirAlias winhome  "$dir_winHome"
