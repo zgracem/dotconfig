@@ -128,8 +128,9 @@ export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
 for x in SSL_CERT_DIR SSL_CERT_FILE CURL_CA_BUNDLE; do
     if [[ ! -e ${!x} ]]; then
-        unset $x
+        unset ${!x}
     fi
+    unset x
 done
 
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"
@@ -142,6 +143,11 @@ export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-dae
 export XDG_DATA_HOME="$HOME/share"
 export XDG_CONFIG_HOME="$dir_config"
 export XDG_CACHE_HOME="$HOME/Library/Caches"
+
+# StarDict
+export STARDICT_DATA_DIR="$HOME/share/dict/stardict"
+export SDCV_HISTSIZE=0
+export SDCV_PAGER="${SDCV_PAGER:=$(getPath less)}"
 
 # -----------------------------------------------------------------------------
 # less
