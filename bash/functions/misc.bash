@@ -14,7 +14,7 @@ div()
 
     printf -v line '%*s' $COLUMNS
 
-    printf "\n${colour_hi}${line// /$p}${colour_reset}\n\n"
+    printf "\n${esc_hi}${line// /$p}${esc_reset}\n\n"
 }
 
 pdfcrack()

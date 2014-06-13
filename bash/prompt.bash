@@ -6,17 +6,18 @@
 # -----------------------------------------------------------------------------
 
 # root gets red prompt
-[[ $EUID -eq 0 ]] &&
-    colour_user=${red}
+if [[ $EUID -eq 0 ]]; then
+    esc_user=${esc_red}
+fi
 
 # add prompt escape codes
-# ($green -> $esc_green, $colour_true -> $esc_true)
-for index in ${colours[@]}; do
-    eval "esc_${index#*_}=\"\[${!index}\]\""
+# ($esc_green -> $PS1_green, $esc_true -> $PS1_true)
+for index in ${!esc_*}; do
+    eval "PS1_${index##*_}=\"\[${!index}\]\""
     unset index
 done
 
-export ${!esc_*}
+export ${!PS1_*}
 
 # -----------------------------------------------------------------------------
 # functions
@@ -35,11 +36,11 @@ PS1_trim_pwd()
 
     # if $PWD is too long, by how much?
     declare offset=$(( ${#_PWD} - max ))
-    [[ ${offset} -gt 0 ]] && {
+    if [[ ${offset} -gt 0 ]]; then
         _PWD="${_PWD:$offset:$max}" # cut to $max chars long
         _PWD="${_PWD#*/}"           # clean up any leading detritus
         _PWD="${leader}/${_PWD}"    # show that it's been trimmed
-    }
+    fi
 
     echo -n "${_PWD}"
 }
@@ -48,30 +49,32 @@ PS1_print_exit()
 {   # print non-zero exit codes on the far right of the screen (zsh envy...)
     declare lastExit=$?
 
-    [[ $lastExit -eq 0 ]] || {
+    if [[ $lastExit -ne 0 ]]; then
         declare screenWidth=${COLUMNS:-$(tput cols)}
         declare padding=$((screenWidth - 1))
 
         tput sc # save cursor position
-        printf "%b%*d%b" "$colour_false" $padding $lastExit "$colour_reset"
+        printf "%b%*d%b" "$esc_false" $padding $lastExit "$esc_reset"
         tput rc # restore cursor position
+    fi
+}
+
+# notify iTerm of the current directory
+# http://code.google.com/p/iterm2/wiki/ProprietaryEscapeCodes
+if [[ $TERM_PROGRAM =~ iTerm.app ]]; then
+    PS1_update_iTerm()
+    {   
+        printf "%b%s%b" "\e]50;" "CurrentDir=$PWD" "\a"
     }
-}
-
-PS1_update_iTerm()
-{   # notify iTerm of the current directory
-	# http://code.google.com/p/iterm2/wiki/ProprietaryEscapeCodes
-
-    printf "%b%s%b" "\e]50;" "CurrentDir=$PWD" "\a"
-}
+fi
 
 # tell Terminal.app about the working directory at each prompt.
 if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
-    [[ $TMUX ]] && {
+    if [[ -n $TMUX ]]; then
         # ANSI device control string
         tmuxEscAnte="\ePtmux;\e"
         tmuxEscPost="\e\\"
-    }
+    fi
 
     PS1_update_Terminal()
     {   # Identify the directory using a "file:" scheme URL,
@@ -83,15 +86,17 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
     }
 fi
 
-PS1_update_wintitle()
-{
-    [[ $TERM_PROGRAM != "Apple_Terminal" ]] && {
-        # Terminal already shows $PWD in the title bar
-        declare titleSuffix=": "${PWD/#$HOME/\~}
+if [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]]; then
+    PS1_update_wintitle()
+    {
+        if [[ $TERM_PROGRAM != "Apple_Terminal" ]]; then
+            # Terminal already shows $PWD in the title bar
+            declare titleSuffix=": "${PWD/#$HOME/\~}
+        fi
+
+        setWindowTitle "${titlePrefix}${titleSuffix}"
     }
-    
-    setWindowTitle "${titlePrefix}${titleSuffix}"
-}
+fi
 
 PS1_git_info()
 {
@@ -100,7 +105,7 @@ PS1_git_info()
     # get name of branch
     branch="$(git branch --no-color 2>/dev/null | sed -nE 's/^\* (.+)$/\1/p')"
 
-    # bail out if no branch exists 
+    # bail out if no branch exists
     [[ -z $branch ]] && return
 
     # $status = '*' if there's anything to commit
@@ -119,64 +124,69 @@ unset PS{1..4}
 
 # primary prompt
 
-PS1+="${esc_2d}${HOSTNAME}:"                # hostname, muted
-PS1+="${esc_hi}\$(PS1_trim_pwd) "                # current path, highlighted
+PS1+="${PS1_2d}${HOSTNAME}${PS1_null}:"     # hostname, muted
+PS1+="${PS1_hi}\$(PS1_trim_pwd) "           # current path, highlighted
 # PS1+="\$(PS1_git_info)"
-PS1+="${esc_user}\\\$${esc_null} "          # blue $ for me, red # for root
+PS1+="${PS1_user}\\\$${PS1_null} "          # blue $ for me, red # for root
 
 # secondary prompt (for multi-line commands)
-PS2+="${esc_hi}"$'\xC2\xBB'"${esc_null} "   # bright white right guillemet
+
+PS2+="${PS1_hi}"$'\xC2\xBB'"${PS1_null} "   # bright white right guillemet
 
 # `select` prompt
-PS3+="${esc_blue}?${esc_null} "             # blue question mark
+
+PS3+="${PS1_blue}?${PS1_null} "             # blue question mark
 
 # prefix for xtrace output
 
-xse="${esc_hi}:"                            # separator
+xse="${PS1_hi}:"                            # separator
 
-PS4+="${esc_2d}\${BASH_SOURCE##*/}${xse}"   # muted filename
-PS4+="${esc_blue}\${LINENO}${xse}"          # blue line number
-PS4+="\${FUNCNAME[0]+${esc_2d}\${FUNCNAME[0]}()${xse}}"
+PS4+="${PS1_2d}\${BASH_SOURCE##*/}${xse}"   # muted filename
+PS4+="${PS1_blue}\${LINENO}${xse}"          # blue line number
+PS4+="\${FUNCNAME[0]+${PS1_2d}\${FUNCNAME[0]}()${xse}}"
                                             # function name (if applicable)
-PS4+="${esc_null}"                          # reset
-
-# -----------------------------------------------------------------------------
-# print a red "^C" when a command is aborted
-# (.inputrc should have "set echo-control-characters off")
-# -----------------------------------------------------------------------------
-
-trap 'echo -ne "${colour_false}^C${null}"' INT
+PS4+="${PS1_null}"                          # reset
 
 # -----------------------------------------------------------------------------
 # $PROMPT_COMMAND
 # -----------------------------------------------------------------------------
 
-addPromptCmd()
+add_prompt_cmd()
 {   # append (or prepend with -p) to $PROMPT_COMMAND, avoiding duplicates
-    [[ $1 = "-p" ]] && {
-        declare pre=true
+    if [[ $1 = "-p" ]]; then
+        declare prepend=true
         shift
-    }
+    fi
 
-    declare newCmd="$@"
+    declare new_cmd="$@"
 
-    if [[ ! $PROMPT_COMMAND =~ $newCmd ]]; then
-        if [[ $pre == true ]]; then
-            PROMPT_COMMAND="${newCmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
+    if [[ ! $PROMPT_COMMAND =~ $new_cmd ]]; then
+        if [[ $prepend == true ]]; then
+            PROMPT_COMMAND="${new_cmd}${PROMPT_COMMAND:+; }${PROMPT_COMMAND}"
         else
-            PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${newCmd}"
+            PROMPT_COMMAND+="${PROMPT_COMMAND:+; }${new_cmd}"
         fi
     fi
 
     return 0
 }
 
-addPromptCmd -p PS1_print_exit
+add_prompt_cmd -p PS1_print_exit
 
-addPromptCmd PS1_update_iTerm
+if _isFunction PS1_update_iTerm; then
+    add_prompt_cmd PS1_update_iTerm
+fi
 
-_isFunction PS1_update_Terminal &&
-	addPromptCmd PS1_update_Terminal
+if _isFunction PS1_update_Terminal; then
+    add_prompt_cmd PS1_update_Terminal
+fi
 
-[[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] &&
-    addPromptCmd PS1_update_wintitle
+if _isFunction PS1_update_wintitle; then
+    add_prompt_cmd PS1_update_wintitle
+fi
+
+# for func in iTerm Terminal wintitle; do
+#     if _isFunction "PS1_update_${func}"; then
+#         add_prompt_cmd "PS1_update_${func}"
+#     fi
+# done

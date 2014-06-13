@@ -60,15 +60,15 @@ q()
         *true*)
             # true
             qAnswer="true"
-            qColour="${colour_true}"  # green
+            qColour="${esc_true}"  # green
             ;;
         *)  # false
             qAnswer="false"
-            qColour="${colour_false}" # red (set in colours.bash)
+            qColour="${esc_false}" # red (set in colours.bash)
             ;;
     esac
 
-    printf "%b%b%b\n" $qColour $qAnswer $colour_reset
+    printf "%b%b%b\n" $qColour $qAnswer $esc_reset
 
     return 0
 }
