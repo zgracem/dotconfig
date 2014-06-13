@@ -2,7 +2,7 @@
 # ~zozo/.config/bash/aliases
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
-# Get info
+# get info
 # -----------------------------------------------------------------------------
 
 # files/directories
@@ -17,7 +17,7 @@ alias allvars='vars | command less'
 alias vgrep='vars | grep -i'
 
 # -----------------------------------------------------------------------------
-# Shortcuts
+# shortcuts
 # -----------------------------------------------------------------------------
 
 # lazy
@@ -40,6 +40,11 @@ alias twitter='newwin ttytter'
 alias vim='newwin vim'
 
 # misc.
+alias    ..='cd ..'
+alias   ...='cd ../..'
+alias  ....='cd ../../..'
+alias .....='cd ../../../..'
+
 alias bell='printf "\a"'
 alias colourstrip='sed -E "s/"$'\E'"\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g"'
 alias cronedit='crontab -e'
