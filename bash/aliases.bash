@@ -45,8 +45,8 @@ alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'
 
-alias bell='printf "\a"'
-alias colourstrip='sed -E "s/"$'\E'"\[([0-9]{1,2}(;[0-9]{1,2})*)?m//g"'
+alias bell='tput bel'
+alias colourstrip='sed -E "s|\[[0-9;]*m?||g"'
 alias cronedit='crontab -e'
 alias dl='curl -OJ'                 # download a file
 alias headers='curl -Is'            # HTTP headers for $1
