@@ -16,10 +16,10 @@
 : ${HOSTNAME:=$(hostname)}
 
 # locale settings: Canadian English, UTF-8
-LANGUAGE="en_CA:en"
+LANGUAGE='en_CA:en'
 LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
 LC_ALL="$LANG"
-TZ="America/Edmonton"
+TZ='America/Edmonton'
 
 export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
 
@@ -29,11 +29,11 @@ bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 # some obvious terminals I use
 if [[ -z $TERM_PROGRAM ]]; then
     if [[ $TERM =~ putty* ]]; then
-        TERM_PROGRAM=PuTTY
-    elif [[ $TERM == putty-256color && $COLUMNS -eq 80 && $LINES == 2[78] ]]; then
-        TERM_PROGRAM=Prompt
+        TERM_PROGRAM='PuTTY'
+    elif [[ $TERM == xterm-256color && $COLUMNS -eq 80 && $LINES == 2[78] ]]; then
+        TERM_PROGRAM='Prompt'
     elif [[ $TERM == vt100 && $(tty) == /dev/console ]]; then
-        TERM_PROGRAM=console
+        TERM_PROGRAM='console'
     fi
 fi
 
