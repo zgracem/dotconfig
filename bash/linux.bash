@@ -3,10 +3,10 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
-[[ $OSTYPE =~ linux ]] || {
+if [[ ! $OSTYPE =~ linux ]]; then
     scold "${BASH_SOURCE[0]}" "cannot source on this OS"
     return 1
-}
+fi
 
 # -----------------------------------------------------------------------------
 
