@@ -2,6 +2,32 @@
 # ~zozo/.config/bash/functions/wordplay.bash
 # ------------------------------------------------------------------------------
 
+def()
+{   # dictionary wrapper
+
+    if ! _inPath dict; then
+        scold "dict not in \$PATH"
+        return 1
+    fi
+
+    dict -d wn "$@" \
+    | ${PAGER:-less}
+}
+
+webster()
+{   # wrapper for StarDict + Webster's 1913
+
+    declare dictionary="Webster's Revised Unabridged Dictionary (1913)"
+    
+    if ! _inPath sdcv; then
+        scold "sdcv not in \$PATH"
+        return 1
+    fi
+
+    sdcv --use-dict "$dictionary" --non-interactive "$@" \
+    | ${PAGER:-less}
+}
+
 lipsum()
 {   # return a paragraph of lorem ipsum text
     declare regex_help='-?-h(elp)?'
