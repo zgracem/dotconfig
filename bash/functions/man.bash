@@ -7,7 +7,7 @@ man()
 {   # open man page in a new window with a helpful title
 
     # some switches don't open a manpage; pass those through
-    declare switchRegex='\<-[[:alpha:]]*[dfhkwW]'
+    declare switchRegex='-[[:alpha:]]*[dfhkwW]'
     [[ $@ =~ $switchRegex ]] && {
         command man $@
         return $?
@@ -46,48 +46,42 @@ man()
 
 manpdf()
 {   # create a PDF from a man page
-    declare page pdf processor viewer pdfDir="$HOME/share/doc/manpdf"
+    # Based on: https://gist.github.com/phyllisstein/17ab8a9354cd7785736d
 
-    [[ $# -gt 0 ]] ||
-        cd "$pdfDir"
+    declare page title pdf_file ps_file pdf_dir="$HOME/share/doc/manpdf"
 
-    case $OSTYPE in
-        darwin*)
-            processor="pstopdf -i -o"
-            viewer="open"
-            ;;
-        cygwin)
-            processor="ps2pdf -"
-            viewer="cygstart"
-            ;;
-        *)
-            return 1
-            ;;
-    esac
+    [[ $# -gt 0 ]] || cd "$pdf_dir"
 
     for page in "$@"; do
-        pdf="$pdfDir/$page.pdf"
+        # get path to manpage or die trying
+        manpath="$(man -w "$page")" || continue
+
+        title="${manpath##*/}"  # strip path
+        title="${title%.gz}"    # strip extension (if any)
+
+        ps_file="$(mktemp -t $title.XXXXXX.ps)"
+        pdf_file="$pdf_dir/$title.pdf"
 
         # if a PDF doesn't already exist...
-        [[ ! -f $pdf ]] && {
-            # does the man page exist?
-            quiet command man -w "$page" || {
-                scold "No manual entry for $page"
-                return 1
-            }
+        if [[ ! -f $pdf_file ]]; then
+            # generate the PostScript file
+            command man -ct "$page" >| "$ps_file" || continue
 
-            # generate the PDF
-            quiet command man -ct "$page" | $processor "$pdf" &&
-            # output the filename
-            printf "$pdf\n"
-        }
+            if [[ -f $ps_file ]]; then
+                # generate the PDF file
+                gs -sOutputFile="$pdf_file" -dBATCH -dQUIET -dNOPAUSE -sDEVICE=pdfwrite "$ps_file" \
+                && printf "$pdf_file\n" # output the filename
+            else
+                scold "Failed to create PostScript file for $page"
+                continue
+            fi
+        fi
 
         # open in default PDF viewer if not logged in remotely
-        [[ ! $SSH_CONNECTION ]] &&
-            $viewer "$pdf"
+        if [[ ! $SSH_CONNECTION ]]; then
+            open "$pdf_file"
+        fi
     done
-
-    return 0
 }
 
 macman()
