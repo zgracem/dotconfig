@@ -203,11 +203,13 @@ dotfiles+=(local)
 confsrc ${dotfiles[@]}
 
 # -----------------------------------------------------------------------------
-# start agents
+# start keychain
 # -----------------------------------------------------------------------------
 
-_source "$HOME/.ssh/ssh-agent.bash"
-_source "$HOME/.gnupg/gpg-agent.bash"
+eval $(keychain --dir "$HOME/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
+
+# _source "$HOME/.ssh/ssh-agent.bash"
+# _source "$HOME/.gnupg/gpg-agent.bash"
 
 # -----------------------------------------------------------------------------
 # misc.

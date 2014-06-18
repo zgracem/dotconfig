@@ -71,10 +71,10 @@ fi
 
 export solarized
 
-if [[ $ITERM_PROFILE =~ ^Default ]]; then
-    solarized=dark
-elif [[ $ITERM_PROFILE =~ light ]]; then
+if [[ $ITERM_PROFILE =~ light ]]; then
     solarized=light
+elif [[ $ITERM_PROFILE =~ ^Default ]]; then
+    solarized=dark
 fi
 
 bgflip()
