@@ -6,6 +6,7 @@
 	autocrlf = input
 	safecrlf = true
 	excludesfile = ~/.config/git/globalignore
+	filemode = false
 
 [alias]
 	# http://gitimmersion.com/lab_11.html
@@ -13,6 +14,7 @@
 	cm = commit
 	st = status
 	br = branch
+	df = diff
 	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
@@ -20,5 +22,9 @@
 [hub]
 	protocol = https
 
-[push]
-	default = simple
+[color]
+	ui = true
+	branch = true
+	diff = true
+	interactive = true
+	status = true
