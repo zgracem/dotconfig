@@ -173,14 +173,16 @@ export LESS{,CHARSET,HISTFILE,OPEN}
 # multi-core processing
 # -----------------------------------------------------------------------------
 
-if _inPath sysctl; then
-    cores="$(sysctl -n hw.availcpu)"
-else
-    cores="$(getconf _NPROCESSORS_ONLN)"
+if [[ -z $NUMBER_OF_PROCESSORS ]]; then
+    if _inPath sysctl; then
+        NUMBER_OF_PROCESSORS="$(sysctl -n hw.availcpu)"
+    else
+        NUMBER_OF_PROCESSORS="$(getconf _NPROCESSORS_ONLN)"
+    fi
 fi
 
-if [[ $cores -gt 1 ]]; then
-    export MAKEFLAGS="-j$cores"
+if [[ $NUMBER_OF_PROCESSORS -gt 1 ]]; then
+    export MAKEFLAGS="-j${NUMBER_OF_PROCESSORS}"
 fi
 
 # -----------------------------------------------------------------------------
