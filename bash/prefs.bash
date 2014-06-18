@@ -79,7 +79,6 @@ unset app flag
 # settings -- config files
 # -----------------------------------------------------------------------------
 
-export GIT_CONFIG="$dir_local/gitconfig"
 export INPUTRC="$dir_config/inputrc"
 export NETHACKOPTIONS="@$dir_config/nethackrc"
 export PIP_CONFIG_FILE=$dir_config/pip.conf
