@@ -111,7 +111,7 @@ else
     HISTFILESIZE=65536  # store 2^16 lines in $HISTFILE
 fi
 
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="history -a; history -n"
 
 # -----------------------------------------------------------------------------
 # mail
