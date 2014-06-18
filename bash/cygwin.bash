@@ -3,7 +3,7 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
-if [[ $OSTYPE =~ cygwin ]]; then
+if [[ ! $OSTYPE =~ cygwin ]]; then
     scold "${BASH_SOURCE[0]}" "cannot source on this OS"
     return 1
 fi
