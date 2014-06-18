@@ -47,7 +47,7 @@ fe()
 rl()
 {   # reload a config file
     [[ $# -eq 0 ]] && {
-        unset BASH_COMPLETION_SOURCED
+        unset BASH_COMPLETION_SOURCED SYSPATH colourdepth
         confsrc profile
     } || {
         confsrc "$@"
