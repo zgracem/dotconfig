@@ -22,9 +22,6 @@ alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/C
 # WiFi network
 network="$(airport -I | sed -nE 's/^ +SSID: (.*)$/\1/p')"
 
-# compiler flags
-export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch $(sysctl -n hw.machine)"
-
 # -----------------------------------------------------------------------------
 # networking &c.
 # -----------------------------------------------------------------------------

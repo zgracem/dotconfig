@@ -170,20 +170,25 @@ lesspipe="$(getPath src-hilite-lesspipe.sh)" && {
 export LESS{,CHARSET,HISTFILE,OPEN}
 
 # -----------------------------------------------------------------------------
-# multi-core processing
+# architecture & multi-core processing
 # -----------------------------------------------------------------------------
 
-if [[ -z $NUMBER_OF_PROCESSORS ]]; then
-    if _inPath sysctl; then
-        NUMBER_OF_PROCESSORS="$(sysctl -n hw.availcpu)"
-    else
-        NUMBER_OF_PROCESSORS="$(getconf _NPROCESSORS_ONLN)"
-    fi
+if _inPath sysctl; then
+    PROCESSOR_ARCHITECTURE="${PROCESSOR_ARCHITECTURE:=$(sysctl -n hw.machine)}"
+    NUMBER_OF_PROCESSORS="${NUMBER_OF_PROCESSORS:=$(sysctl -n hw.availcpu)}"
+else
+    NUMBER_OF_PROCESSORS="${NUMBER_OF_PROCESSORS:=$(getconf _NPROCESSORS_ONLN)}"
+fi
+
+if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ -arch ]]; then
+    export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
 fi
 
 if [[ $NUMBER_OF_PROCESSORS -gt 1 ]]; then
     export MAKEFLAGS="-j${NUMBER_OF_PROCESSORS}"
 fi
+
+export PROCESSOR_ARCHITECTURE NUMBER_OF_PROCESSORS
 
 # -----------------------------------------------------------------------------
 
