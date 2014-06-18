@@ -106,3 +106,31 @@ ca()
 
     printf '%d\n' "$#"
 }
+
+explode()
+{   # expands and displays an array
+    declare arrayName="$1" cmd key
+
+    cmd="$(declare -p $arrayName 2>&1)"
+
+    case $cmd in
+        declare\ -[aA]*)
+            # transfer $1 to our own array
+            eval "${cmd/$arrayName/array}"
+
+            for key in ${!array[*]}; do
+                echo "[$key]=${array[$key]}"
+            done
+
+            return 0
+            ;;
+        declare*)
+            scold "$FUNCNAME" "$arrayName: not an array"
+            ;;
+        *not\ found)
+            scold "$FUNCNAME" "$arrayName: not found"
+            ;;
+    esac
+
+    return 1
+}
