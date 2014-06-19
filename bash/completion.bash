@@ -58,32 +58,14 @@ complete -abcfk -A function \
 complete -A function            fe where
 complete -def                   trash
 complete -A shopt               _shoptSet
+complete -v                     whatvar
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
 
-# edit scripts
-__complete_edsh()
-{
-    declare cur=${COMP_WORDS[COMP_CWORD]}
-    declare scripts=( $(find -H "$dir_scripts" -maxdepth 2 -type f -name '*.sh' | sed -nE 's#^.*/(.*)\.sh$#\1#p') )
-
-    COMPREPLY=( $(compgen -W "${scripts[*]}" -- $cur) )
-}
-
-complete -F __complete_edsh edsh
-
 # -----------------------------------------------------------------------------
 # misc. custom completions
 # -----------------------------------------------------------------------------
-
-# SSH hostnames from ~/.ssh/config, ignoring wildcards
-# https://github.com/pahen/dotfiles/blob/master/.completions
-if [[ -r $HOME/.ssh/config ]]; then
-    complete -o default -o nospace \
-             -W "$(sed -nE 's/Host (.*[^?*])$/\1/p' $HOME/.ssh/config)" \
-             scp sftp ssh
-fi
 
 # transmission-remote-cli (https://github.com/fagga/transmission-remote-cli)
 _source "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
