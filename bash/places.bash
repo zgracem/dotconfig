@@ -68,29 +68,29 @@ export ${!dir_*}
 # go()
 # -----------------------------------------------------------------------------
 
+declare -A go_alias=(
+    [bash]="$dir_config/bash"
+    [bin]="$dir_mybin"
+    [conf]="$dir_config"
+    [dbox]="$dir_dropbox"
+    [ddocs]="$dir_dropbox/Documents"
+    [defunct]="$dir_dev/done/defunct"
+    [dls]="$dir_downloads"
+    [mydocs]="$dir_docs"
+    [itunes]="$dir_music"
+    [poetry]="$dir_poems"
+    [myproj]="$dir_proj"
+    [projects]="$dir_proj"
+    [scr]="$dir_scripts"
+    [tmp]="$dir_mytmp"
+    [txt]="$dir_notes"
+    [winhome]="$dir_winHome"
+)
 
 go()
 {
     declare name="$1" place checkvar
 
-    declare -A go_alias=(
-        [bash]="$dir_config/bash"
-        [bin]="$dir_mybin"
-        [conf]="$dir_config"
-        [dbox]="$dir_dropbox"
-        [ddocs]="$dir_dropbox/Documents"
-        [defunct]="$dir_dev/done/defunct"
-        [dls]="$dir_downloads"
-        [mydocs]="$dir_docs"
-        [itunes]="$dir_music"
-        [poetry]="$dir_poems"
-        [myproj]="$dir_proj"
-        [projects]="$dir_proj"
-        [scr]="$dir_scripts"
-        [tmp]="$dir_mytmp"
-        [txt]="$dir_notes"
-        [winhome]="$dir_winHome"
-    )
     # first, see if we're trying to call a variable directly
     checkvar="dir_${name}"
 
