@@ -43,7 +43,7 @@ export TERM_PROGRAM
 # shell options
 # -----------------------------------------------------------------------------
 
-set +o monitor          # disable job control
+set -o monitor          # enable job control
 set +o notify           # disable instant job-termination notification (wait till next prompt)
 set -o noclobber        # output redirection won't overwrite (override with >|filename)
 set -o vi               # vi mode
@@ -56,6 +56,7 @@ shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
 shopt -s cdable_vars    # enable cd'ing to bash variables (cd PWD)
 shopt -s cdspell        # correct minor spelling errors in the cd command
 shopt -s checkhash      # check the hash table for a command before executing it
+shopt -s checkjobs      # warn when exiting shell with stopped/running jobs
 shopt -s checkwinsize   # update LINES and COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
 
