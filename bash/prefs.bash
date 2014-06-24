@@ -127,7 +127,7 @@ export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
 for x in SSL_CERT_DIR SSL_CERT_FILE CURL_CA_BUNDLE; do
     if [[ ! -e ${!x} ]]; then
-        unset ${!x}
+        unset $x
     fi
     unset x
 done

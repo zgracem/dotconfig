@@ -18,6 +18,7 @@
 	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
+	unstage = reset HEAD
 
 [hub]
 	protocol = https

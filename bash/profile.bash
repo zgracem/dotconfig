@@ -5,7 +5,5 @@
 # source .bashrc
 # -----------------------------------------------------------------------------
 
-[[ $timeTest ]] && return # ✁ · · · · · · · · · · · · · · · · · · · · · · · · ·
-
 [[ -r $HOME/.config/bash/bashrc.bash ]] &&
     . $HOME/.config/bash/bashrc.bash
