@@ -68,28 +68,10 @@ export ${!dir_*}
 # go()
 # -----------------------------------------------------------------------------
 
-declare -A go_alias=(
-    [bash]="$dir_config/bash"
-    [bin]="$dir_mybin"
-    [conf]="$dir_config"
-    [dbox]="$dir_dropbox"
-    [ddocs]="$dir_dropbox/Documents"
-    [defunct]="$dir_dev/done/defunct"
-    [dls]="$dir_downloads"
-    [mydocs]="$dir_docs"
-    [itunes]="$dir_music"
-    [poetry]="$dir_poems"
-    [myproj]="$dir_proj"
-    [projects]="$dir_proj"
-    [scr]="$dir_scripts"
-    [tmp]="$dir_mytmp"
-    [txt]="$dir_notes"
-    [winhome]="$dir_winHome"
-)
-
 go()
 {
     declare name="$1" place checkvar
+    declare alias_file="${dir_config}/bash/places/go_aliases"
 
     # first, see if we're trying to call a variable directly
     checkvar="dir_${name}"
@@ -98,8 +80,9 @@ go()
         place="${!checkvar}"
 
     # otherwise, see if there's an alias with that name
-    elif [[ -n ${go_alias[$name]} ]]; then
-        place="${go_alias[$name]}"
+    else
+        place="$(sed -nE "s/^${name}\t(.+)$/\1/p" "$alias_file")"
+        eval "place=\"$place\"" 
     fi
 
     # any luck?
