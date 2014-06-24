@@ -226,15 +226,12 @@ if has("statusline")
   set statusline+=%(%{&ff!='unix'?'['.&ff.']':''}%*\ %)
   set statusline+=%*
 
-  " value of byte under cursor
-  " set statusline+=%b/%B\ 
-
   " filetype
   set statusline+=%y\ 
 
   " cursor position + percentage through file
   set statusline+=%l,%c%V\ 
-  set statusline+=%5.(%3.p%%\ %) 
+  set statusline+=%5.(%3.p%%\ %)
 endif
 
 "-----------------------------------------------------------------------------
@@ -470,7 +467,7 @@ endif
 nmap <leader>O i<CR><CR><CR><CR><Esc>2ki
 
 " ,P inserts a paragraph break
-nmap <silent> <leader>P i<CR><CR><Esc>
+nmap <silent> <leader>P i<CR><CR><Esc>2k
 
 " ,qD makes smart quotes (and other punctuation) dumb
 nmap <silent> <leader>qD :call MakeQuotesDumb()<CR>
