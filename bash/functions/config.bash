@@ -46,12 +46,14 @@ fe()
 
 rl()
 {   # reload a config file
-    [[ $# -eq 0 ]] && {
+    if [[ $# -eq 0 ]]; then
         unset BASH_COMPLETION_SOURCED SYSPATH colourdepth
-        confsrc profile
-    } || {
-        confsrc "$@"
-    }
+        _source "$dir_config/bash/profile.bash"
+    else
+        for dotfile in "$@"; do
+            _source "$dir_config/bash/${dotfile}.bash"
+        done
+    fi
 }
 
    alias ba='confed aliases.bash'
