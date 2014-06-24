@@ -4,9 +4,9 @@
 # -----------------------------------------------------------------------------
 
 # abort if this isn't an interactive shell
-[[ $PS1 && $- =~ i ]] || [[ $timeTest ]] || {
+if ! [[ $PS1 && $- =~ i ]]; then
     return
-}
+fi
 
 # who am I?
 : ${USER:=$(id -un)}
@@ -19,9 +19,11 @@
 LANGUAGE='en_CA:en'
 LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
 LC_ALL="$LANG"
+LC_CTYPE="$LANG"
+LC_MESSAGES="$LANG"
 TZ='America/Edmonton'
 
-export USER LOGNAME HOSTNAME LANG LANGUAGE LC_ALL TZ
+export USER LOGNAME HOSTNAME LANG LANGUAGE ${!LC_*} TZ
 
 # bash version -- e.g. 32 for v3.2
 bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
@@ -100,7 +102,7 @@ shopt -s histverify     # review/change history substitutions before executing
 
 HISTCONTROL=ignoredups:ignorespace:erasedups
 HISTIGNORE='-:..:[bf]g:cd:clear:exit:hist*:ls:pwd:rl'
-HISTTIMEFORMAT="%F %T "
+HISTTIMEFORMAT='%F %T '
 
 HISTFILE="$HOME/.bash_history"
 
@@ -112,7 +114,7 @@ else
     HISTFILESIZE=65536  # store 2^16 lines in $HISTFILE
 fi
 
-PROMPT_COMMAND="history -a; history -n"
+PROMPT_COMMAND='history -a; history -n'
 
 # -----------------------------------------------------------------------------
 # mail
@@ -155,19 +157,6 @@ _source()
     done
 }
 
-confsrc()
-{   # source a configuration file
-
-    declare what file
-
-    for what in "$@"; do
-        file="$dir_config/bash/${what%.bash}.bash"
-        _source "$file"
-    done
-}
-
-[[ $timeTest ]] && return # ✁ · · · · · · · · · · · · · · · · · · · · · · · · ·
-
 # base set
 dotfiles=(
 #   profile
@@ -201,7 +190,10 @@ esac
 dotfiles+=(local)
 
 # source them all
-confsrc ${dotfiles[@]}
+for dotfile in "${dotfiles[@]}"; do
+    _source "$dir_config/bash/${dotfile}.bash"
+    unset dotfile
+done
 
 # -----------------------------------------------------------------------------
 # start keychain
@@ -209,8 +201,7 @@ confsrc ${dotfiles[@]}
 
 eval $(keychain --dir "$HOME/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
 
-# _source "$HOME/.ssh/ssh-agent.bash"
-# _source "$HOME/.gnupg/gpg-agent.bash"
+export GPG_TTY=$(tty)
 
 # -----------------------------------------------------------------------------
 # misc.
