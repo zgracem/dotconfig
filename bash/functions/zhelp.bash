@@ -198,7 +198,7 @@ zhelp::variable()
     declare var_{flags,nature,property,content} string
 
     # disable case-sensitive matching if necessary
-    if ! zhelp::shoptSet nocasematch; then
+    if zhelp::shoptSet nocasematch; then
         shopt -u nocasematch \
         && declare _nocasematch_toggled='true'
     fi
