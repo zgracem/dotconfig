@@ -53,10 +53,10 @@ colour_reset="${null}"
 
 colour_true="${green}"
 colour_false="${red}"
-colour_hi="${brwhite}"      # highlight colour
-colour_2d="${brblack}"      # secondary colour
+colour_hi="${white}"        # highlight colour
+colour_2d="${green}"        # secondary colour
 
-colour_user="${blue}"       # see prompt.bash
+colour_user="${brblue}"     # see prompt.bash
 
 # Prompt (iPhone SSH app) -- TERM_PROGRAM set in bashrc.bash
 if [[ $TERM_PROGRAM == Prompt ]]; then
@@ -102,6 +102,8 @@ if [[ -n $solarized ]]; then
      base3="${brwhite}"
     orange="${brred}"
     violet="${brmagenta}"
+
+    colour_user="${blue}"
 
     case $solarized in
         dark)
