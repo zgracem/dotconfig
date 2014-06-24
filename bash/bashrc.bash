@@ -32,7 +32,7 @@ bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 if [[ -z $TERM_PROGRAM ]]; then
     if [[ $TERM =~ putty* ]]; then
         TERM_PROGRAM='PuTTY'
-    elif [[ $TERM == xterm-256color && $COLUMNS -eq 80 && $LINES == 2[78] ]]; then
+    elif [[ $TERM == xterm* && $COLUMNS -eq 80 && $LINES == 2[78] ]]; then
         TERM_PROGRAM='Prompt'
     elif [[ $TERM == vt100 && $(tty) == /dev/console ]]; then
         TERM_PROGRAM='console'
