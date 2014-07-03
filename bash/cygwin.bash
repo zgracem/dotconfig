@@ -50,8 +50,8 @@ alias tar="/usr/bin/bsdtar"
 
 # be like OS X
 alias open='cygstart'
-alias pbcopy='cat > /dev/clipboard '
-alias pbpaste='cat /dev/clipboard'
+# alias pbcopy='cat > /dev/clipboard '	# } replaced w/ scripts
+# alias pbpaste='cat /dev/clipboard'	# } in /usr/local/bin
 
 alias emptytrash='command -p rm -rf ~/.Trash/* 1>/dev/null'
 alias mdclip='~/bin/Markdown.pl /dev/clipboard > /dev/clipboard'
