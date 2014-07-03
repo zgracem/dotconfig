@@ -146,6 +146,16 @@ numfiles()
     printf '%d\t%s\n' "${#files[@]}" "$dir"
 }
 
+escape()
+{   # escape UTF-8 characters into their three-byte format
+    # https://github.com/mathiasbynens/dotfiles/blob/master/.functions
+
+    printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u)
+
+    # print a newline if we're not piping to another program
+    [[ -t 1 ]] && echo
+}
+
 if ! _inPath sudo; then
     unalias sudo 2>/dev/null
     unset -f sudo
