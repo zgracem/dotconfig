@@ -27,6 +27,8 @@ alias e='echo'
 alias psi='python setup.py install'
 alias svim='sudo vim'
 alias unmount='umount'
+alias wv='map whatvar:' 			# see functions/{debug,zhelp}.bash
+alias yegw='weather edmonton'
 
 # screen & tmux
 alias s='screen -d -R '
@@ -55,6 +57,7 @@ alias lst='ls -rt'					# newest files last
 alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg='ping -c 4 google.com'  # check network connection
 alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
+alias sortpb='pbpaste | sort -u | pbcopy'
 
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
 alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"

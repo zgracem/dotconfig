@@ -199,18 +199,15 @@ done
 # start keychain
 # -----------------------------------------------------------------------------
 
-eval $(keychain --dir "$HOME/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
+if type -P keychain &>/dev/null; then
+    export GPG_TTY=$(tty)
 
-export GPG_TTY=$(tty)
+    eval $(keychain --dir "$HOME/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
+fi
 
 # -----------------------------------------------------------------------------
 # misc.
 # -----------------------------------------------------------------------------
-
-# this day in history...
-if [[ -x $dir_scripts/matins.sh ]]; then
-    $dir_scripts/matins.sh
-fi
 
 # countdown (date set in private.bash)
 if [[ -n $countTo ]]; then

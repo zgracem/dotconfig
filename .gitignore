@@ -40,7 +40,7 @@ fish/
 charmrc
 
 # jrnl -- http://maebert.github.io/jrnl/
-jrnl_config
+jrnl*
 
 # Transmission
 transmission/
