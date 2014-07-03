@@ -58,7 +58,7 @@ complete -abcfk -A function \
 complete -A function            fe where
 complete -def                   trash
 complete -A shopt               _shoptSet
-complete -v                     whatvar
+complete -v                     whatvar wv
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
