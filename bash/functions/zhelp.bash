@@ -9,7 +9,7 @@
 
 # configuration
 
-_z_bg='light'
+_z_bg="${solarized:-dark}"
 
 # -----------------------------------------------------------------------------
 # colours
@@ -17,7 +17,7 @@ _z_bg='light'
 
 if [[ -z $_z_rst ]] && _z_rst="$(tput sgr0 2>/dev/null)"; then
     read _z_{blk,red,grn,yel,blu,mag,cyn,wht} \
-    < <(for i in {0..7}; do tput setaf $i; printf '\t'; done)
+        < <(for i in {0..7}; do tput setaf $i; printf '\t'; done)
 fi
 
 _z_alias_name="$_z_blu"
@@ -30,6 +30,9 @@ _z_file_name="$_z_yel"
 _z_file_path="$_z_grn"
 _z_var_name="$_z_blu"
 _z_var_value="$_z_cyn"
+
+_z_man_cmd="${LESS_TERMCAP_md:-$_z_grn}"
+_z_man_var="${LESS_TERMCAP_us:-$_z_yel}"
 
 case $_z_bg in
     dark)   _z_punct="$_z_wht" ;;
@@ -160,9 +163,9 @@ zhelp::function()
 zhelp::whatis()
 {   # return a short description of $1 (via the whatis database)
 
-    declare thing="$1" line _extglob_toggled _found='true'
-    declare regex_pass="^${thing}[[:space:](]"
+    declare thing="$1" line _extglob_toggled _found='false'
     declare regex_fail='nothing appropriate$'
+    declare regex_pass="^${thing}[[:space:](]"
     declare regex_trouble='[]\[()]'
 
     # escape characters that sed won't like
@@ -173,19 +176,22 @@ zhelp::whatis()
     # check whatis database
     while read line; do
         # if not found in whatis database
-        [[ $line =~ $regex_fail ]] && {
-            _found=false
-            continue
-        }
+        [[ $line =~ $regex_fail ]] \
+        && continue
 
         # skip non-whole-word matches
-        [[ ! $line =~ $regex_pass ]] && continue
+        [[ ! $line =~ $regex_pass ]] \
+        && continue
 
         # skip builtins
-        [[ $line =~ 'built-in command' ]] && continue
+        [[ $line =~ 'built-in command' ]] \
+        && continue
+
+        _found='true'
 
         echo "$line" \
         | sed -E "s/^(${thing,,})[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/${_z_file_name}\1${_z_rst}\2${_z_punct}:${_z_rst} \3/g"
+
     done < <(command whatis "$thing")
     
     [[ $_found == true ]]
@@ -200,7 +206,7 @@ zhelp::variable()
     # disable case-sensitive matching if necessary
     if zhelp::shoptSet nocasematch; then
         shopt -u nocasematch \
-        && declare _nocasematch_toggled='true'
+            && declare _nocasematch_toggled='true'
     fi
 
     if ! string=$(declare -p "$var" 2>/dev/null); then
@@ -225,6 +231,12 @@ zhelp::variable()
     esac
 
     var_nature="${var_property:+$var_property }${var_content:+$var_content }${var_type}"
+
+    if [[ $string =~ \"\" ]]; then
+        var_nature="null ${var_nature}"
+    elif [[ $string =~ \'\(\)\' ]]; then
+        var_nature="empty ${var_nature}"
+    fi
 
     if [[ ${var_nature:0:1} =~ [aeiou] ]]; then
         article+="n"
@@ -368,12 +380,20 @@ where() {
 
 whatvar()
 {
+    if [[ $# -eq 0 ]]; then
+        zhelp::scold "Usage: ${_z_man_cmd}${FUNCNAME} ${_z_man_var}variable_name${_z_rst}"
+        return 1
+    fi
+
     declare var="$1" var_type array
 
     if zhelp::variable "$var"; then
         var_type="$(zhelp::variable "$var")"
 
         case $var_type in
+            *null*|*empty*)
+                return 0
+                ;;
             *variable)
                 zhelp::print "${_z_var_value}${!var//\\e}\n"
                 ;;
@@ -386,7 +406,7 @@ whatvar()
                 ;;
         esac
     else
-        scold "${FUNCNAME}: $var: not set"
+        zhelp::scold "${_z_red}${var}${_z_rst} is not set"
         return 1
     fi
 }
