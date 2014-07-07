@@ -160,6 +160,12 @@ set cmdheight=2                 " fewer "Press ENTER to continue" messages
 
 set listchars=eol:¶,tab:→\ ,trail:·,extends:»,precedes:«,nbsp:¬
 
+" disable concealing
+if v:version >= 703
+  set conceallevel=0
+  let g:vim_json_syntax_conceal = 0
+endif
+
 "-----------------------------------------------------------------------------
 " Colours and syntax highlighting
 "-----------------------------------------------------------------------------
