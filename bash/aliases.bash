@@ -60,7 +60,7 @@ alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
 alias sortpb='pbpaste | sort -u | pbcopy'
 
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
-alias pwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
+alias newpwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 alias ttest="$dir_scripts/dev/test.sh"
 
 # alias foo='~/scripts/foo.sh'
