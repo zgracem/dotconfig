@@ -7,19 +7,19 @@
 
 flags_alpine='-i -p $dir_config/alpine/pinerc -passfile $dir_config/alpine/alpine-passfile'
 flags_calendar='-A0 -f $HOME/.calendar'
-flags_cp='-aiv'     # archive mode; interactive; verbose
-flags_dos2unix='-k' # copy date stamp to output file
-flags_file='-p'     # don't touch last-accessed time
-flags_hexdump='-C'  # "canonical" display mode
-flags_ln='-v'       # verbose
+flags_cp='-aipv'        # archive mode; interactive; preserve attributes; verbose
+flags_dos2unix='-k'     # copy date stamp to output file
+flags_file='-p'         # don't touch last-accessed time
+flags_hexdump='-C'      # "canonical" display mode
+flags_ln='-v'           # verbose
 flags_ls='-lAgohp'
-flags_mkdir='-p -v' # create parents as required; verbose
-flags_mv='-iv'      # interactive; verbose
-flags_ps='-a'       # all users
-flags_rm='-iv'      # interactive; verbose
-flags_rsync='--compress --executability --human-readable --perms --times'
-flags_scp='-Cpr'    # compress; preserve times/modes; recursive
-flags_stat='-L'     # follow links
+flags_mkdir='-p -v'     # create parents as required; verbose
+flags_mv='-iv'          # interactive; verbose
+flags_ps='-a'           # all users
+flags_rm='-iv'          # interactive; verbose
+flags_rsync='-ahvzEX'   # archive mode; human sizes; verbose; compress; preserve exec/xattrs
+flags_scp='-CEpr'       # compress; preserve exec; & times/modes; recursive
+flags_stat='-L'         # follow links
 flags_top='-F -R -u -user $USER'
 
 # Silver Searcher
