@@ -227,11 +227,11 @@ if has("statusline")
   set statusline+=%*
 
   " filetype
-  set statusline+=%y\ 
+  set statusline+=%y
 
   " cursor position + percentage through file
-  set statusline+=%l,%c%V\ 
-  set statusline+=%5.(%3.p%%\ %)
+  set statusline+=\ %l,%c%V
+  set statusline+=\ %5.(%3.p%%\ %)
 endif
 
 "-----------------------------------------------------------------------------
