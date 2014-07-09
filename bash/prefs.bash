@@ -14,6 +14,7 @@ flags_hexdump='-C'      # "canonical" display mode
 flags_ln='-v'           # verbose
 flags_ls='-lAgohp'
 flags_mkdir='-p -v'     # create parents as required; verbose
+flags_mosh="--server=${HOMEBREW_PREFIX}/mosh-server"
 flags_mv='-iv'          # interactive; verbose
 flags_ps='-a'           # all users
 flags_rm='-iv'          # interactive; verbose
