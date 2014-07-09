@@ -31,6 +31,13 @@ flags_ag+='--color-path "1;32" '
 flags_ag+='--noheading '
 flags_ag+='--smart-case '
 
+# Google Chrome
+flags_chrome='--allow-file-access '
+flags_chrome+='--allow-file-access-from-files '
+if [[ -n $SOCKS5_SERVER ]]; then
+    flags_chrome+="--proxy-server='socks5://$SOCKS5_SERVER' "
+fi
+
 # platform-specific
 
 if _isGNU ls; then
@@ -153,17 +160,17 @@ export SDCV_PAGER="${SDCV_PAGER:=$(getPath less)}"
 # -----------------------------------------------------------------------------
 
 LESS=
-LESS+='--QUIET '                    # never ring the terminal bell
-LESS+='--ignore-case '              # case-insensitive searching
-LESS+='--squeeze-blank-lines '      # combine consecutive blank lines
-LESS+='--no-init '                  # don't clear the screen on exit
+LESS+='--QUIET '                    # never ring the terminal bell [-Q]
+LESS+='--ignore-case '              # case-insensitive searching [-i]
+LESS+='--squeeze-blank-lines '      # combine consecutive blank lines [-s]
+LESS+='--no-init '                  # don't clear the screen on exit [-X]
 
 LESSCHARSET=utf-8
 LESSHISTFILE=/dev/null              # don't keep a history file
 
 lesspipe="$(getPath src-hilite-lesspipe.sh)" && {
     LESSOPEN="| $lesspipe %s"       # source highlighting
-    LESS+='--RAW-CONTROL-CHARS '    # output raw ANSI (e.g. \e[1;31m)
+    LESS+='--RAW-CONTROL-CHARS '    # output raw ANSI (e.g. \e[1;31m) [-R]
     unset lesspipe
 }
 
