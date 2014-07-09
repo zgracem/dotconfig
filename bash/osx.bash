@@ -89,6 +89,8 @@ alias emptytrash="sudo rm -rf /Volumes/*/.Trashes/*; sudo rm -rf ~/.Trash/*"
 alias plist2bin='plutil -convert binary1'
 alias plist2xml='plutil -convert xml1'
 alias reveal='open -R' # show $1 in Finder
+
+alias chrome='open -a "Google Chrome" --args $flags_chrome'
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # change file flags
@@ -139,17 +141,6 @@ if _inPath brew; then
 
     export ${!HOMEBREW_*}
 
-    alias br='brew'
-    alias brdoc='brew doctor'
-    alias brinfo='brew info'
-    alias brin='brew install'
-    alias brls='brew list'
-    alias brrm='brew uninstall'
-    alias brff='brew search'
-    alias bruse='brew uses --installed'
-
-    alias brup='brew update && brew upgrade'
-
     reinstall()
     {
         declare formula
@@ -162,16 +153,16 @@ if _inPath brew; then
 
     relink()
     {
-        declare formula forceflag
+        declare formula
 
         for formula in "$@"; do
             if [[ $formula == --force ]]; then
-                forceflag=true
+                declare forceflag=true
                 continue
             fi
 
-            brew unlink $formula &&
-            brew link ${forceflag+"--force"} $formula
+            brew unlink $formula \
+                && brew link ${forceflag+"--force"} $formula
 
             unset forceflag
         done
