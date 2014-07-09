@@ -46,42 +46,52 @@ man()
 
 manpdf()
 {   # create a PDF from a man page
+    # Requires: GhostScript
     # Based on: https://gist.github.com/phyllisstein/17ab8a9354cd7785736d
 
-    declare page title pdf_file ps_file pdf_dir="$HOME/share/doc/manpdf"
+    declare page="$@" switches='ct' manpath title ps_file pdf_file
+    declare pdf_dir="$HOME/share/doc/manpdf"
 
-    [[ $# -gt 0 ]] || cd "$pdf_dir"
+    if [[ $# -eq 0 ]]; then
+        cd "$pdf_dir"
+        return 0
+    fi
 
-    for page in "$@"; do
-        # get path to manpage or die trying
-        manpath="$(man -w "$page")" || continue
+    _inPath mandb && switches='t'
+    _isGNU mktemp && declare gnu=true
 
-        title="${manpath##*/}"  # strip path
-        title="${title%.gz}"    # strip extension (if any)
+    # get path to manpage or die trying
+    manpath="$(man -w "$page")" \
+        || return $?
 
-        ps_file="$(mktemp -t $title.XXXXXX.ps)"
-        pdf_file="$pdf_dir/$title.pdf"
+    # get a nice title like "printf.1.pdf" or "cron.8.pdf"
+    title="${manpath##*/}"  # strip path
+    title="${title%.gz}"    # strip extension (if any)
 
-        # if a PDF doesn't already exist...
-        if [[ ! -f $pdf_file ]]; then
-            # generate the PostScript file
-            command man -ct "$page" >| "$ps_file" || continue
+    ps_file="$(mktemp -t "${title}${gnu:+.XXXXXX}.ps")"
+    pdf_file="${pdf_dir}/${title}.pdf"
 
-            if [[ -f $ps_file ]]; then
-                # generate the PDF file
-                gs -sOutputFile="$pdf_file" -dBATCH -dQUIET -dNOPAUSE -sDEVICE=pdfwrite "$ps_file" \
+    # if a PDF doesn't already exist...
+    if [[ ! -f $pdf_file ]]; then
+        # generate the PostScript file
+        command man -${switches} "$manpath" >| "$ps_file" 2>/dev/null
+
+        if [[ -s $ps_file ]]; then
+            # generate the PDF file
+            gs -sOutputFile="$pdf_file" -dBATCH -dQUIET -dNOPAUSE -sDEVICE=pdfwrite "$ps_file" \
                 && printf "$pdf_file\n" # output the filename
-            else
-                scold "Failed to create PostScript file for $page"
-                continue
-            fi
+        else
+            scold "failed to create PostScript file for ${title/./(})"
+            return 1
         fi
+    fi
 
-        # open in default PDF viewer if not logged in remotely
-        if [[ ! $SSH_CONNECTION ]]; then
-            open "$pdf_file"
-        fi
-    done
+    # open in default PDF viewer if not logged in remotely
+    if [[ -z $SSH_CONNECTION ]]; then
+        open "$pdf_file"
+    else
+        return 0
+    fi
 }
 
 macman()
