@@ -363,6 +363,19 @@ if exists("#vimrc")
 endif
 
 "-----------------------------------------------------------------------------
+" man pages
+"-----------------------------------------------------------------------------
+
+if exists("#vimrc")
+  augroup man
+    " Ensure man-db won't recursively invoke vim when ^['ing manpage references
+    " http://www.pixelbeat.org/settings/.vimrc
+    autocmd FileType man let $MANPAGER=""
+    autocmd FileType man set notitle
+  augroup END
+endif
+
+"-----------------------------------------------------------------------------
 " Remapping
 "-----------------------------------------------------------------------------
 
