@@ -232,9 +232,9 @@ zhelp::variable()
 
     var_nature="${var_property:+$var_property }${var_content:+$var_content }${var_type}"
 
-    if [[ $string =~ \"\" ]]; then
+    if [[ $var_value == '""' ]]; then
         var_nature="null ${var_nature}"
-    elif [[ $string =~ \'\(\)\' ]]; then
+    elif [[ $var_value == "'()'" ]]; then
         var_nature="empty ${var_nature}"
     fi
 
