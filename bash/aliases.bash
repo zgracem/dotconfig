@@ -21,8 +21,8 @@ alias vgrep='vars | grep -i'
 # -----------------------------------------------------------------------------
 
 if [[ $OSTYPE =~ darwin ]] && _isGNU mv; then
-	# http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
-	alias mv="/bin/mv $flags_mv"
+    # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+    alias mv="/bin/mv $flags_mv"
 fi
 
 # -----------------------------------------------------------------------------
@@ -36,7 +36,7 @@ alias e='echo'
 alias psi='python setup.py install'
 alias svim='sudo vim'
 alias unmount='umount'
-alias wv='map whatvar:' 			# see functions/{debug,zhelp}.bash
+alias wv='map whatvar:'             # see functions/{debug,zhelp}.bash
 alias yegw='weather edmonton'
 
 # screen & tmux
@@ -62,7 +62,7 @@ alias cronedit='crontab -e'
 alias dl='curl -OJ'                 # download a file
 alias headers='curl -Is'            # HTTP headers for $1
 alias ls1='command ls -A1'          # just the filenames
-alias lst='ls -rt'					# newest files last
+alias lst='ls -rt'                  # newest files last
 alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg='ping -c 4 google.com'  # check network connection
 alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
@@ -91,14 +91,24 @@ for mode in 400 600 644 700 755; do
     alias "$mode"="chmod $mode" && unset mode
 done
 
+# -----------------------------------------------------------------------------
 # ssh (user/hostname settings in ~/.ssh/config)
-alias m="newwin --title Minerva ssh Minerva"
-alias er="newwin --title Erato ssh Erato"
-alias dh="newwin --title Dreamhost ssh Dreamhost"
-alias mh="newwin --title Minerva ssh Minerva.remote"
+# -----------------------------------------------------------------------------
 
-alias dproxy="ssh -fCqND 8080 Dreamhost"
-alias mproxy="ssh -fCqND 8080 Minerva.remote"
+if _inPath mosh; then
+    alias m="newwin --title Minerva mosh ${flags_mosh} Minerva"
+    alias er="newwin --title Erato mosh ${flags_mosh} Erato"
+    alias mh="newwin --title Minerva mosh ${flags_mosh} Minerva.remote"
+else
+    alias m='newwin --title Minerva ssh Minerva'
+    alias er='newwin --title Erato ssh Erato'
+    alias mh='newwin --title Minerva ssh Minerva.remote'
+fi
+
+alias dh='newwin --title Dreamhost ssh Dreamhost'
+
+alias dproxy='ssh -fCqND 8080 Dreamhost'
+alias mproxy='ssh -fCqND 8080 Minerva.remote'
 
 # -f = go to background     -C = compress all data
 # -q = quiet mode           -N = don't exec remote command (fwd only)
