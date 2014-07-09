@@ -25,11 +25,7 @@ install bash-completion
 # -----------------------------------------------------------------------------
 
 install keychain
-install python
 install vim --HEAD
-
-# git
-install git || true
 
 # tmux
 install tmux
@@ -39,10 +35,7 @@ install reattach-to-user-namespace
 # GNU utilities
 # -----------------------------------------------------------------------------
 
-# core utilities
 install coreutils
-
-# more utilities
 install moreutils
 
 # find, locate, updatedb, and xargs (do not prepend 'g' to the binaries)
@@ -84,9 +77,6 @@ link --force openssl
 install homebrew/dupes/openssh --with-keychain-support
 install ssh-copy-id
 
-# GnuPG
-install gpg2 --8192 --with-readline
-
 # -----------------------------------------------------------------------------
 # fun & games
 # -----------------------------------------------------------------------------
@@ -100,25 +90,28 @@ install homebrew/games/unnethack
 # misc.
 # -----------------------------------------------------------------------------
 
-install ack
-install aspell
-install dos2unix
-install jq
-install multimarkdown
-install node
-install p7zip
-install recode
 install rename
-install sqlite
-install the_silver_searcher
 install tree
-install unrar
 install watch
 install homebrew/dupes/ncurses
+
+# archives
+install p7zip
+install unrar
+
+# development
+install python
+install git || true
+install jq
+install node
+install sqlite
 
 # dictionaries
 install dict
 install sdcv
+
+# GnuPG
+install gpg2 --8192 --with-readline
 
 # images
 install imagemagick
@@ -143,6 +136,16 @@ install mplayer
 install ghostscript
 install qpdf
 install xpdf
+
+# search
+install ack
+install the_silver_searcher
+
+# text
+install aspell
+install dos2unix
+install multimarkdown
+install recode
 
 # -----------------------------------------------------------------------------
 # casks
