@@ -15,6 +15,7 @@
 	st = status
 	br = branch
 	df = diff
+	dt = difftool
 	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
@@ -29,3 +30,9 @@
 	diff = true
 	interactive = true
 	status = true
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
