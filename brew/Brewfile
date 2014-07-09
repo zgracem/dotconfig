@@ -37,6 +37,8 @@ install reattach-to-user-namespace
 
 install coreutils
 install moreutils
+install gnu-getopt
+install gnu-tar
 
 # find, locate, updatedb, and xargs (do not prepend 'g' to the binaries)
 install findutils --default-names
@@ -46,9 +48,6 @@ install gnu-sed --default-names
 
 # grep (overwrite built-in)
 install homebrew/dupes/grep --default-names
-
-# tar
-install gnu-tar
 
 # -----------------------------------------------------------------------------
 # internet stuff
