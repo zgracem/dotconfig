@@ -48,6 +48,7 @@ export TERM_PROGRAM
 set -o monitor          # enable job control
 set +o notify           # disable instant job-termination notification (wait till next prompt)
 set -o noclobber        # output redirection won't overwrite (override with >|filename)
+set -o pipefail         # pipelines return the rightmost non-zero status, if any
 set -o vi               # vi mode
 
 shopt -s dotglob        # include .dotfiles in filename expansion
@@ -55,7 +56,6 @@ shopt -s extglob        # enable extended pattern matching
 shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
 shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
 
-shopt -s cdable_vars    # enable cd'ing to bash variables (cd PWD)
 shopt -s cdspell        # correct minor spelling errors in the cd command
 shopt -s checkhash      # check the hash table for a command before executing it
 shopt -s checkjobs      # warn when exiting shell with stopped/running jobs
