@@ -15,12 +15,17 @@ SUDO_EDITOR=$EDITOR
 PAGER=$(getPath less)
 MANPAGER=$PAGER
 
+if _inPath mandb; then
+    # don't let man-db use grotty to output SGR codes (preserves colour)
+    export GROFF_NO_SGR=1
+fi
+
 # use GUI apps if not logged in remotely
 if [[ -z $SSH_CONNECTION ]]; then
     case $OSTYPE in
         darwin*)
             BROWSER=/usr/bin/open
-            VISUAL=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
+            VISUAL="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
             ;;
         cygwin)
             BROWSER=$dir_scripts/chrome.sh
