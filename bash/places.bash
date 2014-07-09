@@ -70,17 +70,21 @@ export ${!dir_*}
 
 go()
 {
-    declare name="$1" place checkvar
+    declare name="$1" place checkvar child
     declare alias_file="${dir_config}/bash/places/go_aliases"
+
+    if [[ $name =~ / ]]; then
+        child="${name##*/}"
+        name="${name%%/*}"
+    fi
 
     # first, see if we're trying to call a variable directly
     checkvar="dir_${name}"
 
     if [[ -n ${!checkvar} ]]; then
         place="${!checkvar}"
-
-    # otherwise, see if there's an alias with that name
     else
+        # see if there's an alias with that name
         place="$(sed -nE "s/^${name}\t(.+)$/\1/p" "$alias_file")"
         eval "place=\"$place\"" 
     fi
@@ -99,6 +103,6 @@ go()
         scold "${FUNCNAME}: ${place}: not readable"
         return 1
     else
-        cd "$place"
+        cd "${place}${child:+/$child}"
     fi
 }
