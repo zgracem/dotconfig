@@ -39,6 +39,9 @@ alias unmount='umount'
 alias wv='map whatvar:'             # see functions/{debug,zhelp}.bash
 alias yegw='weather edmonton'
 
+alias gc='git commit'
+alias gd='git difftool'
+
 # screen & tmux
 alias s='screen -d -R '
 alias t='tmux attach 2>&- || tmux -2 new-session'
