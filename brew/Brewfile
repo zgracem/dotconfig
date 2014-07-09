@@ -105,6 +105,7 @@ install git || true
 install jq
 install node
 install sqlite
+install txt2man
 
 # dictionaries
 install dict
