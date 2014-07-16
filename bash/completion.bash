@@ -4,8 +4,8 @@
 # -----------------------------------------------------------------------------
 
 # only run if we need to
-[[ $BASH_COMPLETION_SOURCED ]] &&
-    return
+[[ $BASH_COMPLETION_SOURCED ]] \
+	&& return
 
 # -----------------------------------------------------------------------------
 # shell options
@@ -21,7 +21,7 @@ shopt -s hostcomplete
 shopt -s no_empty_cmd_completion
 
 # ignore these suffixes when searching for completions
-FIGNORE="DS_Store:~:.swp"
+FIGNORE="DS_Store:~:.swp:Application Scripts"
 
 # -----------------------------------------------------------------------------
 # bash-completion
