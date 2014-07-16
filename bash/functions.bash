@@ -37,11 +37,11 @@ getGNU()
 {   # return the path to the GNU version of $1, if available
     declare bin="$1"
 
-    _isGNU "$bin" && {
+    if _isGNU "$bin"; then
         type -P "$bin"
-    } || {
+    else
         getPath "g$bin"
-    }
+    fi
 }
 
 scold()
