@@ -5,41 +5,40 @@
 
 man()
 {   # open man page in a new window with a helpful title
+    declare manpath title
 
-    # some switches don't open a manpage; pass those through
-    declare switchRegex='-[[:alpha:]]*[dfhkwW]'
-    [[ $@ =~ $switchRegex ]] && {
-        command man $@
-        return $?
-    }
+    # some switches don't open a man page; pass those through
+    declare regex_switches='-[[:alpha:]]*[dfhkwW]'
 
-    # fail if manpage doesn't exist
-    command man -w "$@" 1>&- ||
-        return $?
+    if [[ $@ =~ $regex_switches ]]; then
+        command man "$@"
+        return
+    fi
+
+    # fail if man page doesn't exist
+    manpath="$(command man -w "$@")" \
+        || return
 
     # let Terminal.app be clever about this
-    [[ $TERM_PROGRAM == Apple_Terminal ]] && {
+    if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
         open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
-        return 0
-    }
+        return
+    fi
 
-    # get title -- e.g. "cron(8)"
-    declare manpageTitle="$(command man "$@" 2>&- |
-        grep -h -m1 ^. |                # get first non-blank line
-        cut -d" " -f1)"                 # get first "field" in line
+    # get a nice title like "printf(1)" or "cron(8)"
+    title="${manpath##*/}"  # strip path
+    title="${title%.gz}"    # strip extension (if any)
+    title="${title/./(})"   # title.section -> title(section)
 
-    manpageTitle="${manpageTitle,,}"    # lowercase for aesthetics
-    
     # see functions/title.bash
-    setWindowTitle "$titlePrefix: $manpageTitle"
+    setWindowTitle "$titlePrefix: $title"
 
     # open the new window
-    if [[ $STY ]]; then
-        screen -t "$manpageTitle" man "$@"
-    elif [[ $TMUX ]]; then
-        tmux new-window -n "$manpageTitle" "man $*"
+    if [[ -n $STY ]]; then
+        screen -t "$title" man "$@"
+    elif [[ -n $TMUX ]]; then
+        tmux new-window -n "$title" "MANLESS= man $*"
     else
-        # set the xterm title
         command man "$@"
     fi
 }
@@ -49,7 +48,7 @@ manpdf()
     # Requires: GhostScript
     # Based on: https://gist.github.com/phyllisstein/17ab8a9354cd7785736d
 
-    declare page="$@" switches='ct' manpath title ps_file pdf_file
+    declare page="$@" switches='t' manpath title ps_file pdf_file
     declare pdf_dir="$HOME/share/doc/manpdf"
 
     if [[ $# -eq 0 ]]; then
@@ -57,8 +56,11 @@ manpdf()
         return 0
     fi
 
-    _inPath mandb && switches='t'
-    _isGNU mktemp && declare gnu=true
+    _inPath mandb \
+        || switches+='c'    # man-db reformats anyway
+
+    _isGNU mktemp \
+        && declare gnu=true
 
     # get path to manpage or die trying
     manpath="$(man -w "$page")" \
