@@ -370,6 +370,10 @@ zhelp::wtf()
 
 # -----------------------------------------------------------------------------
 
+if _isAlias which; then
+    unalias which
+fi
+
 which() { zhelp::wtf "$@"; }
 what()  { zhelp::wtf "$@"; }
 
