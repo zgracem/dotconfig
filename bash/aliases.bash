@@ -39,6 +39,7 @@ alias unmount='umount'
 alias wv='map whatvar:'             # see functions/{debug,zhelp}.bash
 alias yegw='weather edmonton'
 
+# git
 alias gc='git commit'
 alias gd='git difftool'
 
@@ -48,7 +49,7 @@ alias t='tmux attach 2>&- || tmux -2 new-session'
 
 # open in a new window if tmux/GNU screen is running (see functions/newwin.bash)
 alias alpine="newwin alpine $flags_alpine"
-alias bt="newwin --title transmission $dir_mybin/transmission-remote-cli/transmission-remote-cli"
+alias bt="newwin --title transmission $dir_mybin/github/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
 alias twitter='newwin ttytter'
 alias vim='newwin vim'
@@ -85,9 +86,9 @@ alias ttest="$dir_scripts/dev/test.sh"
 }
 
 # ~/bin
-alias jsawk="$HOME/bin/jsawk/jsawk"
-alias twee="$HOME/bin/twine/twee"
-alias untwee="$HOME/bin/twine/untwee"
+alias jsawk="$dir_mybin/github/jsawk/jsawk"
+alias twee="$dir_mybin/github/twine/twee"
+alias untwee="$dir_mybin/github/twine/untwee"
 
 # chmod
 for mode in 400 600 644 700 755; do
@@ -98,20 +99,15 @@ done
 # ssh (user/hostname settings in ~/.ssh/config)
 # -----------------------------------------------------------------------------
 
-if _inPath mosh; then
-    alias m="newwin --title Minerva mosh ${flags_mosh} Minerva"
-    alias er="newwin --title Erato mosh ${flags_mosh} Erato"
-    alias mh="newwin --title Minerva mosh ${flags_mosh} Minerva.remote"
-else
-    alias m='newwin --title Minerva ssh Minerva'
-    alias er='newwin --title Erato ssh Erato'
-    alias mh='newwin --title Minerva ssh Minerva.remote'
-fi
-
+alias m='newwin --title Minerva ssh Minerva'
+alias er='newwin --title Erato ssh Erato'
+alias mh='newwin --title Minerva ssh Minerva.remote'
 alias dh='newwin --title Dreamhost ssh Dreamhost'
+alias wf='newwin --title WebFaction ssh WebFaction'
 
 alias dproxy='ssh -fCqND 8080 Dreamhost'
 alias mproxy='ssh -fCqND 8080 Minerva.remote'
+alias wfproxy='ssh -fCqND 8080 WebFaction'
 
 # -f = go to background     -C = compress all data
 # -q = quiet mode           -N = don't exec remote command (fwd only)
