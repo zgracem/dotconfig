@@ -54,7 +54,7 @@ install homebrew/dupes/grep --default-names
 # -----------------------------------------------------------------------------
 
 install links
-install mobile-shell
+install mobile-shell --HEAD
 install transmission
 install ttytter
 install wget --enable-iri
