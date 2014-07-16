@@ -123,3 +123,21 @@ wifi()
     esac
 }
 
+whereami()
+{   # echo the street address of your current location
+    # Based on: https://gist.github.com/ttscoff/76e5d7efb60d7ac04350
+    # Requires: jq (http://stedolan.github.io/jq/)
+    #           get-location (https://github.com/lindes/get-location)
+
+    declare latlong address
+
+    latlong=$($HOME/bin/get-location 2>/dev/null \
+        | sed -nE 's/.*<(.*)>.*/\1/p')
+
+    address=$(curl -s "http://maps.googleapis.com/maps/api/geocode/json?latlng=${latlong}&sensor=false" \
+          | jq -r .results[0].formatted_address)
+
+    if [[ -n $address ]]; then
+        echo "$address"
+    fi
+}
