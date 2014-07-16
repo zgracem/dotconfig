@@ -210,7 +210,7 @@ fi
 # -----------------------------------------------------------------------------
 
 # countdown (date set in private.bash)
-if [[ -n $countTo ]]; then
+if [[ -n $countTo && -x $dir_scripts/countdown.sh ]]; then
     $dir_scripts/countdown.sh "$countTo"
 else
     return 0
