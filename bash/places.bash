@@ -74,7 +74,7 @@ go()
     declare alias_file="${dir_config}/bash/places/go_aliases"
 
     if [[ $name =~ / ]]; then
-        child="${name##*/}"
+        child="${name#*/}"
         name="${name%%/*}"
     fi
 
