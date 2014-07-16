@@ -139,13 +139,13 @@ PS3+="${PS1_blue}?${PS1_null} "             # blue question mark
 
 # prefix for xtrace output
 
-xse="${PS1_hi}:"                            # separator
+xse="${PS1_null}${PS1_hi}:"                 # separator
 
 PS4+="${PS1_2d}\${BASH_SOURCE##*/}${xse}"   # muted filename
-PS4+="${PS1_blue}\${LINENO}${xse}"          # blue line number
-PS4+="\${FUNCNAME[0]+${PS1_2d}\${FUNCNAME[0]}()${xse}}"
+PS4+="${PS1_blue}\${LINENO}"                # blue line number
+PS4+="\${FUNCNAME[0]+${xse}${PS1_2d}\${FUNCNAME[0]}()}"
                                             # function name (if applicable)
-PS4+="${PS1_null}"                          # reset
+PS4+="${xse}${PS1_null}"                    # reset
 
 # -----------------------------------------------------------------------------
 # $PROMPT_COMMAND
