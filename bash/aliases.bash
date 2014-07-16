@@ -6,6 +6,7 @@
 # -----------------------------------------------------------------------------
 
 # files/directories
+alias cds='dirs -v'					# directory stack w/ positions
 alias cppwd='printf "%q" "$PWD" | pbcopy'   # copy $PWD to clipboard
 alias dirsize='du -sh'              # total size of $PWD
 alias disks='df -h'                 # all mounted disks (w/ human units)
@@ -51,6 +52,7 @@ alias t='tmux attach 2>&- || tmux -2 new-session'
 alias alpine="newwin alpine $flags_alpine"
 alias bt="newwin --title transmission $dir_mybin/github/transmission-remote-cli/transmission-remote-cli"
 alias l='newwin less'
+alias profanity='newwin profanity --account gtalk'
 alias twitter='newwin ttytter'
 alias vim='newwin vim'
 
