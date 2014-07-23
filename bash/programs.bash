@@ -18,6 +18,9 @@ MANPAGER=$PAGER
 if _inPath mandb; then
     # don't let man-db use grotty to output SGR codes (preserves colour)
     export GROFF_NO_SGR=1
+
+    # use less's default prompt in man pages
+    export MANLESS=
 fi
 
 # use GUI apps if not logged in remotely
