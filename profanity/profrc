@@ -2,6 +2,7 @@
 theme=zozo
 splash=false
 flash=true
+beep=false
 mouse=true
 intype=true
 statuses.console=online
@@ -23,3 +24,6 @@ autoaway.mode=idle
 autoaway.time=15
 autoaway.message=false
 autoaway.check=true
+
+[logging]
+chlog=true
