@@ -41,7 +41,7 @@ fe()
     sourceFile="${source%:*}"
     sourceLine="${source#*:}"
 
-    _edit "${sourceFile/#~/$HOME}@${sourceLine}"
+    _edit "${sourceFile/#~/$HOME}:${sourceLine}"
 }
 
 rl()
