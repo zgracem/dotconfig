@@ -163,3 +163,13 @@ if ! _inPath sudo; then
     # just pass through commands
     sudo() { $*; }
 fi
+
+newline()
+{   # print a newline if output is going to a terminal
+
+    if [[ -t 1 ]]; then
+        printf "%b" "\n"
+    else
+        return 0
+    fi
+}
