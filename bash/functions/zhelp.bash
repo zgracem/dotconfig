@@ -90,13 +90,23 @@ zhelp::help()
 zhelp::file()
 {
     declare name="$1" filename
-    declare -a filenames=($(type -ap "$name"))
+
+    if [[ $_all == true ]]; then
+        declare -a filenames=($(type -ap "$name"))
+    else
+        declare -a filenames=($(type -p "$name"))
+    fi
 
     for filename in ${filenames[@]}; do
-        zhelp::print "${_z_file_name}${name}"
-        zhelp::print " is "
-        zhelp::print "${_z_file_path}${filename}"
-        zhelp::print "\n"
+        if [[ $_short == true ]]; then
+            zhelp::print "${filename}"
+            newline
+        else
+            zhelp::print "${_z_file_name}${name}"
+            zhelp::print " is "
+            zhelp::print "${_z_file_path}${filename}"
+            zhelp::print "\n"
+        fi
     done
 }
 
@@ -112,10 +122,15 @@ zhelp::alias()
     target="${target//\\/\\\\}"     # escape backslashes
 
     if [[ -n $target ]]; then
-        zhelp::print "${_z_alias_name}${name} "
-        zhelp::print "is aliased to '"
-        zhelp::print "${_z_alias_value}${target}"
-        zhelp::print "'\n"
+        if [[ $_short == true ]]; then
+            zhelp::print "${target}"
+            newline
+        else
+            zhelp::print "${_z_alias_name}${name} "
+            zhelp::print "is aliased to '"
+            zhelp::print "${_z_alias_value}${target}"
+            zhelp::print "'\n"
+        fi
     fi
 }
 
@@ -321,10 +336,21 @@ zhelp::describe()
 
 zhelp::wtf()
 {
-    if [[ $1 =~ ^(-a|--all)$ ]]; then
-        declare _all='true'
-        shift
-    fi
+    while [[ $1 =~ ^- ]]; do
+        case $1 in
+            -a|--all)
+                declare _all='true'
+                shift
+                ;;
+            -s|--short)
+                declare _short='true'
+                shift
+                ;;
+            *)
+                break 2
+                ;;
+        esac           
+    done
 
     declare thing="$1" thing_type whatis_string
 
@@ -389,20 +415,20 @@ whatvar()
         return 1
     fi
 
-    declare var="$1" var_type array
+    declare objectvar="$1" var_type array
 
-    if zhelp::variable "$var"; then
-        var_type="$(zhelp::variable "$var")"
+    if zhelp::variable "$objectvar"; then
+        var_type="$(zhelp::variable "$objectvar")"
 
         case $var_type in
             *null*|*empty*)
                 return 0
                 ;;
             *variable)
-                zhelp::print "${_z_var_value}${!var//\\e}\n"
+                zhelp::print "${_z_var_value}${!objectvar//\\e}\n"
                 ;;
             *array)
-                array="$(declare -p "$var")"
+                array="$(declare -p "$objectvar")"
                 array="${array#*\'(}"    # strip leading info
                 array="${array%)\'}"     # strip trailing single-quote
 
@@ -410,7 +436,7 @@ whatvar()
                 ;;
         esac
     else
-        zhelp::scold "${_z_red}${var}${_z_rst} is not set"
+        zhelp::scold "${_z_red}${objectvar}${_z_rst} is not set"
         return 1
     fi
 }
