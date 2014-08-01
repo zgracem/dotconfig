@@ -257,6 +257,8 @@ if has("gui_running")
 
   set guicursor=a:blinkoff0-block
 
+  set clipboard=unnamed
+
   " Windows fonts
   if has('win32') || has('win64')
     set guifont=Consolas:h10,Courier\ New:h10
