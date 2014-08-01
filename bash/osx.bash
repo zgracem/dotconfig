@@ -134,39 +134,11 @@ alias ipsw="curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa
 
 if _inPath brew; then
     # print developer warnings
-    HOMEBREW_DEVELOPER=true
+    export HOMEBREW_DEVELOPER=true
 
     # don't print beer emoji when logged in remotely
-    [[ $SSH_CONNECTION ]] && HOMEBREW_NO_EMOJI=true
-
-    export ${!HOMEBREW_*}
-
-    reinstall()
-    {
-        declare formula
-
-        for formula in "$@"; do
-            brew uninstall $formula &&
-            brew install $formula
-        done
-    }
-
-    relink()
-    {
-        declare formula
-
-        for formula in "$@"; do
-            if [[ $formula == --force ]]; then
-                declare forceflag=true
-                continue
-            fi
-
-            brew unlink $formula \
-                && brew link ${forceflag+"--force"} $formula
-
-            unset forceflag
-        done
-    }
+    [[ -n $SSH_CONNECTION ]] \
+        && export HOMEBREW_NO_EMOJI=true
 fi
 
 # -----------------------------------------------------------------------------
