@@ -9,7 +9,7 @@ h()
     declare thing="$1"
 
     if quiet help "$thing"; then
-        help -m "$thing" | $PAGER
+        help -m "$thing" | less -F
         return 0
     elif quiet command man -w "$thing"; then
         man "$thing"
