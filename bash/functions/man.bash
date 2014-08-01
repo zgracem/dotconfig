@@ -88,6 +88,11 @@ manpdf()
         fi
     fi
 
+    # delete the PostScript file
+    if [[ -f $ps_file ]]; then
+        command rm -f "$ps_file"
+    fi
+
     # open in default PDF viewer if not logged in remotely
     if [[ -z $SSH_CONNECTION ]]; then
         open "$pdf_file"
