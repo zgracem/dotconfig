@@ -177,7 +177,7 @@ syntax on                       " syntax highlighting
 filetype plugin indent on       " filetype detection + plugins + indent prefs
 
 if $solarized == "light" && ! has("gui_running")
-  set background=light          " formerly `hostname() ==? "ws144966"`
+  set background=light
 else
   set background=dark
 endif
@@ -197,7 +197,7 @@ if has("statusline")
   if has("gui_running")
     set titlestring=
   else
-    let &titleold = expand("$USER") . "@" . expand("$HOSTNAME")
+    let &titleold = expand("$USER") . "@" . expand("$HOSTNAME") . ": " . expand("$PWD")
 "   set titlestring=%{$USER}@%{$HOSTNAME}:\
     set titlestring=
   endif
