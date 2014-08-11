@@ -33,3 +33,23 @@ newwin()
         $cmd "$@"
     fi
 }
+
+splitwin()
+{   # open in a new tmux windowpane, if applicable
+    # Usage: splitwin COMMAND [ARGS]
+
+    declare cmd i=0
+    declare -a args
+
+    if [[ $TMUX ]]; then
+        until [[ $# -eq 0 ]]; do
+            printf -v args[$i] "%q" "$1"
+            ((i++))
+            shift
+        done
+
+        tmux split-window -h "$cmd ${args[*]}"
+    else
+        $cmd "$@"
+    fi
+}
