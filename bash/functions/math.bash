@@ -113,6 +113,12 @@ bin2hex()
     echo "obase=16; ibase=2; $1" | bc
 }
 
+_isNumber()
+{   # returns 0 if $1 is a valid hexadecimal number
+    [[ $1 =~ $digitRegex ]]
+}
+
+
 _isHex()
 {   # returns 0 if $1 is a valid hexadecimal number
     [[ $1 =~ $xdigitRegex ]]
