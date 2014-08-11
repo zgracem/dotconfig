@@ -55,16 +55,6 @@ lspath()
     echo ${!listPath} | tr : '\n'
 }
 
-today()
-{   # list all files under $PWD changed today
-    declare findBin=$(getGNU find) || {
-            printf "%s: GNU find(1) required\n" $FUNCNAME 1>&2
-            return 1
-        }
-
-    "$findBin" . -maxdepth 1 -type f -daystart -mtime 0 -print
-}
-
 flatten()
 {   # flatten a directory structure
     # https://github.com/ymendel/dotfiles/blob/master/system/functions.bash
