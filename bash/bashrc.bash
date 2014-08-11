@@ -177,15 +177,9 @@ dotfiles=(
 
 # platform-specific
 case $OSTYPE in
-    darwin*)
-        dotfiles+=(osx)
-        ;;
-    cygwin)
-        dotfiles+=(cygwin)
-        ;;
-    linux*)
-        dotfiles+=(linux)
-        ;;
+    darwin*) dotfiles+=(osx) ;;
+    cygwin)  dotfiles+=(cygwin) ;;
+    linux*)  dotfiles+=(linux) ;;
 esac
 
 # local .bashrc, if any
