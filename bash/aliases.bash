@@ -10,7 +10,7 @@ alias cds='dirs -v'					# directory stack w/ positions
 alias cppwd='printf "%q" "$PWD" | pbcopy'   # copy $PWD to clipboard
 alias dirsize='du -sh'              # total size of $PWD
 alias disks='df -h'                 # all mounted disks (w/ human units)
-alias sizes='du -s ./* | sort -rn'  # sort files & directories in $PWD by size
+alias sizes='du -sh * | sort -rh'   # sort files & directories in $PWD by size
 
 # display/search all variable values & attributes
 alias vars="declare -p | colourstrip | sed -nE 's/^declare (.*)$/\1/p' | sort -k2"
