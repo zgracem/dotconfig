@@ -35,6 +35,7 @@ flags_ag+='--smart-case '
 # Google Chrome
 flags_chrome='--allow-file-access '
 flags_chrome+='--allow-file-access-from-files '
+
 if [[ -n $SOCKS5_SERVER ]]; then
     flags_chrome+="--proxy-server='socks5://$SOCKS5_SERVER' "
 fi
@@ -130,7 +131,7 @@ export ZIPOPTS='-9 --symlinks'      # max compression, store symlinks as symlink
 
 # OpenSSL
 export SSL_CERT_DIR="/usr/local/etc/openssl"
-export SSL_CERT_FILE="$SSL_CERT_DIR/cert.pem"
+export SSL_CERT_FILE="${SSL_CERT_DIR}/cert.pem"
 export CURL_CA_BUNDLE="$SSL_CERT_FILE"
 
 for x in SSL_CERT_DIR SSL_CERT_FILE CURL_CA_BUNDLE; do
@@ -169,11 +170,11 @@ LESS+='--no-init '                  # don't clear the screen on exit [-X]
 LESSCHARSET=utf-8
 LESSHISTFILE=/dev/null              # don't keep a history file
 
-lesspipe="$(getPath src-hilite-lesspipe.sh)" && {
+if lesspipe="$(getPath src-hilite-lesspipe.sh)"; then
     LESSOPEN="| $lesspipe %s"       # source highlighting
     LESS+='--RAW-CONTROL-CHARS '    # output raw ANSI (e.g. \e[1;31m) [-R]
     unset lesspipe
-}
+fi
 
 export LESS{,CHARSET,HISTFILE,OPEN}
 
@@ -181,19 +182,17 @@ export LESS{,CHARSET,HISTFILE,OPEN}
 # architecture & multi-core processing
 # -----------------------------------------------------------------------------
 
-if _inPath sysctl; then
-    PROCESSOR_ARCHITECTURE="${PROCESSOR_ARCHITECTURE:=$(sysctl -n hw.machine)}"
-    NUMBER_OF_PROCESSORS="${NUMBER_OF_PROCESSORS:=$(sysctl -n hw.availcpu)}"
-else
-    NUMBER_OF_PROCESSORS="${NUMBER_OF_PROCESSORS:=$(getconf _NPROCESSORS_ONLN)}"
-fi
-
-if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ -arch ]]; then
-    export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
-fi
+export NUMBER_OF_PROCESSORS="${NUMBER_OF_PROCESSORS:=$(getconf _NPROCESSORS_ONLN 2>&-)}"
 
 if [[ $NUMBER_OF_PROCESSORS -gt 1 ]]; then
     export MAKEFLAGS="-j${NUMBER_OF_PROCESSORS}"
+fi
+
+_inPath sysctl \
+    && PROCESSOR_ARCHITECTURE="${PROCESSOR_ARCHITECTURE:=$(sysctl -n hw.machine)}"
+
+if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ -arch ]]; then
+    export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
 fi
 
 export PROCESSOR_ARCHITECTURE NUMBER_OF_PROCESSORS
