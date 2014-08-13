@@ -17,8 +17,11 @@ _z_bg="${solarized:-dark}"
 
 if [[ -z $_z_rst ]] && _z_rst="$(tput sgr0 2>/dev/null)"; then
     read _z_{blk,red,grn,yel,blu,mag,cyn,wht} \
-        < <(for i in {0..7}; do tput setaf $i; printf '\t'; done)
+    < <(for i in {0..7}; do tput setaf $i; printf '\t'; done)
 fi
+
+_z_true="$_z_grn"
+_z_false="$_z_red"
 
 _z_alias_name="$_z_blu"
 _z_alias_value="$_z_cyn"
@@ -35,9 +38,16 @@ _z_man_cmd="${LESS_TERMCAP_md:-$_z_grn}"
 _z_man_var="${LESS_TERMCAP_us:-$_z_yel}"
 
 case $_z_bg in
-    dark)   _z_punct="$_z_wht" ;;
-    light)  _z_punct="$_z_blk" ;;
-    *)      _z_punct="$_z_rst" ;;
+    dark)   
+        _z_punct="$_z_wht"
+        ;;
+    light)  
+        _z_punct="$_z_blk"
+        _z_true="$_z_cyn"
+        ;;
+    *)      
+        _z_punct="$_z_rst"
+        ;;
 esac
 
 # -----------------------------------------------------------------------------
@@ -52,7 +62,8 @@ zhelp::print()
         printf "${_z_rst}%b${_z_rst}" "$@"
     else
         # strip colours if we're in a pipe or something
-        printf "%b" "$@" | sed -E "s|\[[0-9;]*m?||g"
+        printf "%b" "$@" \
+        | sed -E "s|\[[0-9;]*m?||g"
     fi
 }
 
@@ -63,7 +74,7 @@ zhelp::scold()
 
 zhelp::shoptSet()
 {   # return 0 if all shell options in $@ are set
-    builtin shopt -pq $*
+    shopt -pq $*
 }
 
 zhelp::isFunction()
@@ -78,7 +89,8 @@ zhelp::help()
 
     declare thing="$1" help_string name desc
 
-    builtin help -d "$thing" &>/dev/null || return
+    builtin help -d "$thing" &>/dev/null \
+        || return
 
     while read help_string; do
         name="${help_string% - *}"
@@ -104,8 +116,7 @@ zhelp::file()
 
     for filename in ${filenames[@]}; do
         if [[ $_short == true ]]; then
-            zhelp::print "${filename}"
-            newline
+            zhelp::print "${filename}\n"
         else
             zhelp::print "${_z_file_name}${name}"
             zhelp::print " is "
@@ -119,7 +130,8 @@ zhelp::alias()
 {
     declare name="$1" target
 
-    target="$(builtin alias "$name")" || return
+    target="$(builtin alias "$name")" \
+        || return
 
     target="${target#*=\'}"         # remove beginning
     target="${target%\'}"           # remove end
@@ -128,8 +140,7 @@ zhelp::alias()
 
     if [[ -n $target ]]; then
         if [[ $_short == true ]]; then
-            zhelp::print "${target}"
-            newline
+            zhelp::print "${target}\n"
         else
             zhelp::print "${_z_alias_name}${name} "
             zhelp::print "is aliased to '"
@@ -145,14 +156,14 @@ zhelp::where()
     declare func="$1" location line _extdebug_toggled
 
     if ! zhelp::isFunction "$func"; then
-        zhelp::scold "${func}: not a function"
+        zhelp::scold "${_z_false}${func}${_z_rst}: not a function"
         return 1
     fi
 
     # enable debugging behaviour if necessary
     if ! zhelp::shoptSet extdebug; then
         shopt -s extdebug \
-        && _extdebug_toggled='true'
+            && _extdebug_toggled='true'
     fi
 
     location="$(declare -F "$func")"    # get [name] [line no.] [file path]
@@ -202,15 +213,15 @@ zhelp::whatis()
     while read line; do
         # if not found in whatis database
         [[ $line =~ $regex_fail ]] \
-        && continue
+            && continue
 
         # skip non-whole-word matches
         [[ ! $line =~ $regex_pass ]] \
-        && continue
+            && continue
 
         # skip builtins
         [[ $line =~ 'built-in command' ]] \
-        && continue
+            && continue
 
         _found='true'
 
@@ -235,7 +246,8 @@ zhelp::variable()
     fi
 
     if ! string=$(declare -p "$var" 2>/dev/null); then
-        [[ $_nocasematch_toggled == true ]] && shopt -s nocasematch
+        [[ $_nocasematch_toggled == true ]] \
+            && shopt -s nocasematch
         return 1
     fi
 
@@ -389,18 +401,18 @@ zhelp::wtf()
     elif [[ ${FUNCNAME[1]} =~ what ]]; then
         # system libraries & other non-command man pages
         zhelp::whatis "$thing" \
-        && return 0
+            && return 0
 
         # edge-case shell syntax items
         zhelp::help "$thing" \
-        && return 0
+            && return 0
 
         # variables
         zhelp::variable "$thing" \
-        && return 0
+            && return 0
     fi
   
-    zhelp::scold "${FUNCNAME[1]}: ${thing}: not found"
+    zhelp::scold "${_z_false}${thing}${_z_rst}: not found"
     return 1
 }
 
@@ -414,8 +426,8 @@ which() { zhelp::wtf "$@"; }
 what()  { zhelp::wtf "$@"; }
 
 where() {
-    zhelp::where "$@";
-    echo
+    zhelp::where "$@" \
+        && zhelp::print "\n"
 }
 
 whatvar()
@@ -446,7 +458,7 @@ whatvar()
                 ;;
         esac
     else
-        zhelp::scold "${_z_red}${objectvar}${_z_rst} is not set"
+        zhelp::scold "${_z_false}${objectvar}${_z_rst} is not set"
         return 1
     fi
 }
