@@ -86,7 +86,7 @@ rootme()
 
     # restore window name
     [[ $STY  ]] && echo -ne "\ekbash\e\\"
-    [[ $TMUX ]] && quiet tmux set-window-option automatic-rename on
+    [[ $TMUX ]] && quietly tmux set-window-option automatic-rename on
 }
 
 pause()

@@ -8,10 +8,10 @@ h()
 {
     declare thing="$1"
 
-    if quiet help "$thing"; then
+    if quietly help "$thing"; then
         help -m "$thing" \
         | less -F
-    elif quiet command man -w "$thing"; then
+    elif quietly command man -w "$thing"; then
         man "$thing"
     else
         scold "${thing}: help not found"

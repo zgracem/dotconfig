@@ -9,7 +9,7 @@ newsh()
     declare script="$dir_dev/${name%.sh}.sh"
 
     [[ ! -f $script ]] && {
-        quiet command cp "$dir_dev/.new.sh" "$script"
+        quietly command cp "$dir_dev/.new.sh" "$script"
         command chmod 700 "$script"
         command vim -Es \
             -c "%s/\(^# Name[[:space:]]*:\).*$/\1 $name/" \
