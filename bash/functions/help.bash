@@ -9,15 +9,14 @@ h()
     declare thing="$1"
 
     if quiet help "$thing"; then
-        help -m "$thing" | less -F
-        return 0
+        help -m "$thing" \
+        | less -F
     elif quiet command man -w "$thing"; then
         man "$thing"
-        return 0
+    else
+        scold "${thing}: help not found"
+        return 1
     fi
-
-    scold "${thing}: help not found"
-    return 1
 }
 
 # -----------------------------------------------------------------------------
