@@ -66,6 +66,11 @@ zhelp::shoptSet()
     builtin shopt -pq $*
 }
 
+zhelp::isFunction()
+{   # return 0 if $1 is defined as a shell function
+    declare -f "$1" &>/dev/null
+}
+
 # info functions
 
 zhelp::help()
@@ -138,6 +143,11 @@ zhelp::where()
 {   # return filename and line number where function $1 was defined
     
     declare func="$1" location line _extdebug_toggled
+
+    if ! zhelp::isFunction "$func"; then
+        zhelp::scold "${func}: not a function"
+        return 1
+    fi
 
     # enable debugging behaviour if necessary
     if ! zhelp::shoptSet extdebug; then
@@ -390,7 +400,7 @@ zhelp::wtf()
         && return 0
     fi
   
-    scold "${FUNCNAME[1]}: ${thing}: not found"
+    zhelp::scold "${FUNCNAME[1]}: ${thing}: not found"
     return 1
 }
 
