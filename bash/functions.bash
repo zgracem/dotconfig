@@ -3,7 +3,7 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
-quiet()
+quietly()
 {   # execute a command silently
     "$@" >/dev/null 2>&1
 }

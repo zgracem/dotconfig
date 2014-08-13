@@ -49,5 +49,5 @@ maxWidth()
     newHeight=$(calc "scale=0;$newWidth/$aspectRatio")
 
     # resize image
-    quiet /usr/bin/sips -z $newHeight $newWidth "$imageFile"
+    quietly /usr/bin/sips -z $newHeight $newWidth "$imageFile"
 }
