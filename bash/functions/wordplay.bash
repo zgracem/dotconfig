@@ -25,7 +25,7 @@ webster()
     fi
 
     sdcv --use-dict "$dictionary" --non-interactive "$@" \
-    | ${PAGER:-less}
+    | less -F
 }
 
 lipsum()
