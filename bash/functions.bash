@@ -10,22 +10,22 @@ quietly()
 
 _inPath()
 {   # exits 0 if $1 is installed in $PATH
-    quiet builtin type -P "$1"
+    quietly builtin type -P "$1"
 }
 
 _isGNU()
 {   # exits 0 if $1 uses GNU switches
-    quiet command "$1" --version
+    quietly command "$1" --version
 }
 
 _isFunction()
 {   # exits 0 if $1 is defined as a function
-    quiet declare -f "$1"
+    quietly declare -f "$1"
 }
 
 _isAlias()
 {   # exits 0 if $1 is defined as an alias
-    quiet builtin alias "$1"
+    quietly builtin alias "$1"
 }
 
 getPath()
