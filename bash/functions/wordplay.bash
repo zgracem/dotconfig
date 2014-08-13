@@ -11,7 +11,7 @@ def()
     fi
 
     dict -d wn "$@" \
-    | ${PAGER:-less}
+    | less -F
 }
 
 webster()
@@ -40,8 +40,8 @@ lipsum()
     declare count="${1:-1}"
     declare length="${2:-medium}"
 
-    curl -sS "http://loripsum.net/api/${count}/prude/${length}" |
-    sed -e 's#<[^>]*>##g'
+    curl -sS "http://loripsum.net/api/${count}/prude/${length}" \
+    | sed -e 's#<[^>]*>##g'
 
     # API parameters:
     #   (integer) - The number of paragraphs to generate.
