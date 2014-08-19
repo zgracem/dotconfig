@@ -132,7 +132,7 @@ export ZIPOPTS='-9 --symlinks'      # max compression, store symlinks as symlink
 # OpenSSL
 export SSL_CERT_DIR="/usr/local/etc/openssl"
 export SSL_CERT_FILE="${SSL_CERT_DIR}/cert.pem"
-export CURL_CA_BUNDLE="$SSL_CERT_FILE"
+export CURL_CA_BUNDLE="${SSL_CERT_DIR}/certs/ca-bundle.crt"
 
 for x in SSL_CERT_DIR SSL_CERT_FILE CURL_CA_BUNDLE; do
     if [[ ! -e ${!x} ]]; then
