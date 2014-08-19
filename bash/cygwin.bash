@@ -14,12 +14,12 @@ fi
 
 # don't warn on using MS-DOS-style paths instead of POSIX-style
 if [[ ! $CYGWIN =~ dosfilewarning ]]; then
-	CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
+    CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
 
 # create Windows-native symlinks when possible
 if [[ ! $CYGWIN =~ winsymlinks ]]; then
-	CYGWIN="${CYGWIN+$CYGWIN }winsymlinks:native"
+    CYGWIN="${CYGWIN+$CYGWIN }winsymlinks:native"
 fi
 
 # do not consider DLLs executable for completion purposes
@@ -33,8 +33,8 @@ shopt -s completion_strip_exe
 pkey="/proc/registry/HKEY_CURRENT_USER/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device"
 
 if [[ -z $PRINTER && -e $pkey ]]; then
-	read -r PRINTER < "$pkey"
-	export PRINTER="${PRINTER%%,*}"
+    read -r PRINTER < "$pkey"
+    export PRINTER="${PRINTER%%,*}"
 fi
 
 unset pkey
@@ -50,8 +50,6 @@ alias tar="/usr/bin/bsdtar"
 
 # be like OS X
 alias open='cygstart'
-# alias pbcopy='cat > /dev/clipboard '	# } replaced w/ scripts
-# alias pbpaste='cat /dev/clipboard'	# } in /usr/local/bin
 
 alias emptytrash='command -p rm -rf ~/.Trash/* 1>/dev/null'
 alias mdclip='~/bin/Markdown.pl /dev/clipboard > /dev/clipboard'
