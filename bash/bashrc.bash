@@ -25,9 +25,6 @@ TZ='America/Edmonton'
 
 export USER LOGNAME HOSTNAME LANG LANGUAGE ${!LC_*} TZ
 
-# bash version -- e.g. 32 for v3.2
-bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
-
 # some obvious terminals I use
 if [[ -z $TERM_PROGRAM ]]; then
     if [[ $TERM =~ putty* ]]; then
@@ -62,6 +59,9 @@ shopt -s checkjobs      # warn when exiting shell with stopped/running jobs
 shopt -s checkwinsize   # update LINES and COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
 
+# bash version -- e.g. 32 for v3.2
+bashver="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
+
 if [[ $bashver -ge 43 ]]; then
     shopt -s direxpand  # expand vars in directory names like bash 4.1 did
 fi
@@ -86,7 +86,7 @@ fi
 IGNOREEOF=2             # require ^D x 3 to exit
 TMOUT=28800             # logout after 8 hrs inactivity
 
-export TMPDIR=${TMPDIR:-/tmp}
+export TMPDIR="${TMPDIR:-/tmp}"
 
 # `time` prints only real time elapsed and CPU usage
 TIMEFORMAT=$'\nreal\t%Rs\ncpu\t%P%%'
@@ -101,7 +101,7 @@ shopt -s histreedit     # re-edit failed history substitutions
 shopt -s histverify     # review/change history substitutions before executing
 
 HISTCONTROL=ignoredups:ignorespace:erasedups
-HISTIGNORE='-:..:[bf]g:cd:clear:exit:hist*:ls:pwd:rl'
+HISTIGNORE='-:--:..:[bf]g:cd:clear:exit:hist*:ls:pwd:rl'
 HISTTIMEFORMAT='%F %T '
 
 HISTFILE="$HOME/.bash_history"
@@ -132,11 +132,12 @@ fi
 # miscellany
 # -----------------------------------------------------------------------------
 
-# default 'rwX------' permissions for new files
-umask 0077
+# default 'rwXr-Xr-X' permissions for new files
+umask 0022
 
 # just say no to flow control
-hash stty 2>/dev/null && stty -ixon 2>/dev/null
+hash stty &>/dev/null \
+    && stty -ixon &>/dev/null
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
 if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then
@@ -187,18 +188,19 @@ dotfiles+=(local)
 
 # source them all
 for dotfile in "${dotfiles[@]}"; do
-    _source "$dir_config/bash/${dotfile}.bash"
-    unset dotfile
+    _source "${dir_config}/bash/${dotfile}.bash"
 done
+
+unset dotfile
 
 # -----------------------------------------------------------------------------
 # start keychain
 # -----------------------------------------------------------------------------
 
-if type -P keychain &>/dev/null; then
+if _inPath keychain; then
     export GPG_TTY=$(tty)
 
-    eval $(keychain --dir "$HOME/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
+    eval $(keychain --dir "${HOME}/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
 fi
 
 # -----------------------------------------------------------------------------
