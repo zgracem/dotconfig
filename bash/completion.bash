@@ -68,7 +68,10 @@ complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
 # -----------------------------------------------------------------------------
 
 # transmission-remote-cli (https://github.com/fagga/transmission-remote-cli)
-_source "$dir_mybin/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
+_source "${dir_mybin}/github/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
+
+# t (https://github.com/sferik/t)
+_source "${dir_mybin}/github/t/etc/t-completion.sh"
 
 # others
 _source "$dir_config"/bash/completion/*.bash
