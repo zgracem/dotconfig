@@ -314,9 +314,9 @@ zhelp::define()
         function)
             zhelp::print "${_z_function_name}${thing} "
             zhelp::print "is a function"
-            # zhelp::print " ("
-            # zhelp::where "$func"
-            # zhelp::print ")"
+            zhelp::print " ("
+            zhelp::where "$thing"
+            zhelp::print ")"
             zhelp::print "\n"
             ;;
         file)
@@ -418,9 +418,12 @@ zhelp::wtf()
 
 # -----------------------------------------------------------------------------
 
-if _isAlias which; then
-    unalias which
-fi
+for alias in which what where; do
+    alias $alias &>/dev/null \
+        && unalias $alias
+done
+
+unset alias
 
 which() { zhelp::wtf "$@"; }
 what()  { zhelp::wtf "$@"; }
