@@ -103,10 +103,14 @@ PS1_git_info()
     declare branch status
 
     # get name of branch
-    branch="$(git branch --no-color 2>/dev/null | sed -nE 's/^\* (.+)$/\1/p')"
+    read branch < <(
+        git branch --no-color 2>/dev/null \
+        | sed -nE 's/^\* (.+)$/\1/p'
+    )
 
     # bail out if no branch exists
-    [[ -z $branch ]] && return
+    [[ -z $branch ]] \
+        && return
 
     # $status = '*' if there's anything to commit
     if git status --porcelain 2>/dev/null | grep -m1 -q '^.'; then
@@ -114,6 +118,13 @@ PS1_git_info()
     fi
 
     echo " on ${branch}${status} "
+}
+
+PS1_git_status()
+{
+    if git status --porcelain 2>/dev/null | grep -m1 -q '^.'; then
+        echo "${esc_false}*${esc_null}"
+    fi
 }
 
 # -----------------------------------------------------------------------------
@@ -125,9 +136,10 @@ unset PS{1..4}
 # primary prompt
 
 PS1+="${PS1_2d}${HOSTNAME}${PS1_null}:"     # hostname, muted
-PS1+="${PS1_hi}\$(PS1_trim_pwd) "           # current path, highlighted
+PS1+="${PS1_hi}\$(PS1_trim_pwd)"            # current path, highlighted
 # PS1+="\$(PS1_git_info)"
-PS1+="${PS1_user}\\\$${PS1_null} "          # blue $ for me, red # for root
+PS1+="\$(PS1_git_status)"                   # red star for uncommitted changes
+PS1+=" ${PS1_user}\\\$${PS1_null} "         # blue $ for me, red # for root
 
 # secondary prompt (for multi-line commands)
 
