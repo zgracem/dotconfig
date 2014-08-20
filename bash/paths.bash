@@ -97,15 +97,16 @@ fi
 # -----------------------------------------------------------------------------
 
 # Python
-for dir in /usr/local /usr; do
-    PYTHONPATH="${dir}/lib/python2.7/site-packages"
-    unset dir
+PYTHONPATH=
 
-    if [[ -d $PYTHONPATH ]]; then
-        break
-    else
-        unset PYTHONPATH
+for dir in $HOME /usr/local /usr; do
+    python_dir="${dir}/lib/python2.7/site-packages"
+
+    if [[ -d $python_dir ]]; then
+        PYTHONPATH="${python_dir}${PYTHONPATH+:$PYTHONPATH}"
     fi
+
+    unset dir python_dir
 done
 
 export {,CD,MAN,INFO,PYTHON}PATH
