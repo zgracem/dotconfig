@@ -50,7 +50,8 @@ if _isGNU ps; then
     flags_ps+='s'   # summary format
 
     # also show Windows processes
-    [[ $OSTYPE =~ cygwin ]] && flags_ps+='W'
+    [[ $OSTYPE =~ cygwin ]] \
+        && flags_ps+='W'
 
 else
     flags_ps+='xo pid,user,start,command'
@@ -94,7 +95,6 @@ export PIP_CONFIG_FILE=$dir_config/pip.conf
 export SCREENRC="$dir_config/screenrc"
 
 alias curl='curl -K $dir_config/curlrc'
-alias dropbox="$dir_mybin/dropbox.sh -f $dir_config/dropbox_uploader"
 
 # -----------------------------------------------------------------------------
 # settings -- environment variables
