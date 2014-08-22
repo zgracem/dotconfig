@@ -8,6 +8,7 @@
 
 # skip this file if the terminal can't support at least eight colours
 if [[ $colourdepth -lt 8 ]]; then
+    unset colourdepth
     return
 fi
 
@@ -17,11 +18,17 @@ export colourdepth
 # basic colours
 # -----------------------------------------------------------------------------
 
+# reset
+unset colours ${colours[*]}
+
 colours=(null black red green yellow blue magenta cyan white)
 colours+=(bgblack bgred bggreen bgyellow bgblue bgmagenta bgcyan bgwhite)
 
+# properties
    null='0'
    bold='1;'; ul='4;'; blink='5;'; inv='7;'
+
+# basic ANSI colours
   black='30'; bgblack='40'
     red='31'; bgred='41'
   green='32'; bggreen='42'
@@ -31,6 +38,7 @@ magenta='35'; bgmagenta='45'
    cyan='36'; bgcyan='46'
   white='37'; bgwhite='47'
 
+# bright ANSI colours
 if [[ $colourdepth -ge 16 ]]; then
    colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
     brblack="${bold}${black}"
@@ -56,7 +64,7 @@ colour_false="${red}"
 colour_hi="${white}"        # highlight colour
 colour_2d="${green}"        # secondary colour
 
-colour_user="${brblue}"     # see prompt.bash
+colour_user="${brblue}"     # used in PS1 -- see prompt.bash
 
 # Prompt (iPhone SSH app) -- TERM_PROGRAM set in bashrc.bash
 if [[ $TERM_PROGRAM == Prompt ]]; then
@@ -68,8 +76,6 @@ fi
 # -----------------------------------------------------------------------------
 # solarized -- http://ethanschoonover.com/solarized
 # -----------------------------------------------------------------------------
-
-export solarized
 
 if [[ $ITERM_PROFILE =~ light ]]; then
     solarized=light
@@ -105,6 +111,7 @@ if [[ -n $solarized ]]; then
 
     colour_user="${blue}"
 
+    # re/define semantic colours
     case $solarized in
         dark)
             colour_bg="${bgblack}"
@@ -122,18 +129,31 @@ if [[ -n $solarized ]]; then
     esac
 fi
 
+export solarized
+
 # ------------------------------------------------------------------------------
 # add escape codes
 # ------------------------------------------------------------------------------
 
-export colours ${colours[@]}
+export colours ${colours[*]}
 
 # ($green -> $esc_green, $colour_true -> $esc_true)
-for index in ${colours[@]}; do
-    eval "esc_${index#*_}=\"[${!index}m\""
-    unset index
-done
+add_escape_codes()
+{
+    local -a strings=("$@")
+    local string
 
+    for string in "${strings[@]}"; do
+      if [[ -n ${!string} ]]; then
+        local var_name="${string#*_}"
+        local var_value="${!string}"
+      
+          eval "esc_${var_name}=\"[${var_value}m\""
+      fi
+    done
+}
+
+add_escape_codes ${colours[*]}
 export ${!esc_*}
 
 # -----------------------------------------------------------------------------
