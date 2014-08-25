@@ -214,11 +214,6 @@ if [[ -z $STY && -z $TMUX ]]; then
         $dir_scripts/loginbanner.sh
     fi
 
-    # countdown (date set in private.bash)
-    if [[ -x $dir_scripts/countdown.sh && -n $countTo ]]; then
-        $dir_scripts/countdown.sh "$countTo"
-    fi
-
     # local initialization script
     _source "${dir_local}/init.bash"
 else
