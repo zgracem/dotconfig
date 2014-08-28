@@ -34,6 +34,8 @@ newwin()
     fi
 }
 
+export -f newwin
+
 splitwin()
 {   # open in a new tmux windowpane, if applicable
     # Usage: splitwin COMMAND [ARGS]
