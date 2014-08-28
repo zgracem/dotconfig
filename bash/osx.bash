@@ -11,25 +11,32 @@ fi
 # -----------------------------------------------------------------------------
 
 # hardware identifier
-hardware=$(sysctl -n hw.model)
+read hardware < <(sysctl -n hw.model)
 
 # WiFi card
-netcard=$(echo list | scutil | sed -nE 's#^.*Setup:/Network/Interface/(en[[:digit:]])/AirPort$#\1#p')
+read netcard < <(
+    echo list \
+    | scutil \
+    | sed -nE 's#^.*Setup:/Network/Interface/(en[[:digit:]])/AirPort$#\1#p'
+)
 
 # AirPort utilities
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 
 # WiFi network
-network="$(airport -I | sed -nE 's/^ +SSID: (.*)$/\1/p')"
+read network < <(
+    airport -I \
+    | sed -nE 's/^ +SSID: (.*)$/\1/p'
+)
 
 # -----------------------------------------------------------------------------
 # networking &c.
 # -----------------------------------------------------------------------------
 
 # number of users connected to AirPort (vars set in private.bash)
-alias aeusers="snmpget -v 2c -c $snmp_community -M $snmp_mibPath -m+${snmp_mib} \
-    ${snmp_host}.local ${snmp_mib}::wirelessNumber.0 | \
-    grep -o --color=never '[[:digit:]+]$'"
+alias aeusers="snmpget -v 2c -c ${snmp_community} -M+${snmp_mib_path} -m+${snmp_mib} \
+    ${snmp_host}.local ${snmp_mib}::wirelessNumber.0 \
+    | grep -Eo --color=never '[[:digit:]+]$'"
 
 # local IP address
 alias localip="ipconfig getifaddr ${netcard}"
@@ -47,7 +54,11 @@ alias flushdns='dscacheutil -flushcache && killall -HUP mDNSResponder 2>/dev/nul
 alias webshare='python -m SimpleHTTPServer 7777'
 
 # Back to My Mac IPv6 address
-bttm=$(echo show Setup:/Network/BackToMyMac | scutil | sed -n 's/.* : *\(.*\).$/\1/p')
+read bttm < <(
+    echo show Setup:/Network/BackToMyMac \
+    | scutil \
+    | sed -n 's/.* : *\(.*\).$/\1/p'
+    )
 
 # screen sharing
 alias ssm='open "vnc://Minerva.$bttm"'
@@ -109,11 +120,15 @@ alias spliteral='mdfind -interpret'
 alias cgibin='cd /Library/WebServer/CGI-Executables/'
 
 # fallbacks
-_inPath md5sum  || alias md5sum='md5'
-_inPath sha1sum || alias sha1sum='shasum'
+_inPath md5sum  \
+    || alias md5sum='md5'
+
+_inPath sha1sum \
+    || alias sha1sum='shasum'
 
 # hub -- http://hub.github.com/
-_inPath hub || alias git='hub'
+_inPath hub \
+    || alias git='hub'
 
 # list all apps downloaded from the Mac App Store
 alias allstoreapps="find /Applications \
