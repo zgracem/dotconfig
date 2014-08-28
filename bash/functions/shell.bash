@@ -14,45 +14,52 @@ alias -- --='pushd -0 1>/dev/null'  # -- = go forward 1 dir
 
 mkcd()
 {   # create a directory then move into it
-    command mkdir -p "$1" && cd "$1"
+    command mkdir -p "$1" \
+        && cd "$1"
 }
 
 cdls()
 {   # change to, and immediately list, a directory
-    cd "$@" && ls $flags_ls
+    cd "$@" \
+        && ls $flags_ls
 }
 
 lsf()
 {   # "full" info
     declare flags="lAip" colourFlag=" --color=auto"
 
-    [[ $OSTYPE =~ darwin ]] && {
+    if [[ $OSTYPE =~ darwin ]]; then
         flags+="@O"
         colourFlag="G"
-    }
+    fi
 
     /bin/ls -$flags$colourFlag "$@"
 }
 
 lsd()
 {   # list all subdirectories in $1/$PWD
-    find "${1-.}" -maxdepth 1 -type d | xargs ls -d ${flags_ls}
+    find "${1-.}" -maxdepth 1 -type d \
+    | xargs ls -d ${flags_ls}
 }
 
 lsl()
 {   # list all symbolic links in $1/$PWD
-    find "${1-.}" -maxdepth 1 -type l | xargs ls ${flags_ls}
+    find "${1-.}" -maxdepth 1 -type l \
+    | xargs ls ${flags_ls}
 }
 
 lsx()
 {   # list all files in $PWD that match *.$1
-    find . -maxdepth 1 -type f -iname '*.'${1}'' | xargs ls ${flags_ls}
+    find . -maxdepth 1 -type f -iname '*.'${1}'' \
+    | xargs ls ${flags_ls}
 }
 
 lspath()
 {   # list path entries of $PATH or environment variable $1
     declare listPath="${1-PATH}"
-    echo ${!listPath} | tr : '\n'
+
+    echo ${!listPath} \
+    | tr : '\n'
 }
 
 flatten()
@@ -60,8 +67,11 @@ flatten()
     # https://github.com/ymendel/dotfiles/blob/master/system/functions.bash
     declare targetDir=${1-.}
 
-    find $targetDir -type f -mindepth 2 -exec mv {} $targetDir \;
-    find $targetDir -type d -d -depth 1 -exec rm -rf {} \;
+    find "$targetDir" -type f -mindepth 2 \
+        -exec mv {} "$targetDir" \;
+
+    find "$targetDir" -type d -d -depth 1
+        -exec rm -rf {} \;
 }
 
 rootme()
@@ -69,14 +79,17 @@ rootme()
 
     declare timeout=$(( ${1:-3} * 60 ))
 
-    _inPath sudo || {
+    if ! _inPath sudo; then
         scold $FUNCNAME "this system does not support sudo"
         return 1
-    }
+    fi
 
     # rename window, if applicable
-    [[ $STY  ]] && echo -ne "\eksudo\e\\"
-    [[ $TMUX ]] && tmux rename-window sudo
+    [[ $STY  ]] \
+        && echo -ne "\eksudo\e\\"
+
+    [[ $TMUX ]] \
+        && tmux rename-window sudo
 
     sudo \
         ${STY:+STY=$STY} \
@@ -85,8 +98,11 @@ rootme()
         -s
 
     # restore window name
-    [[ $STY  ]] && echo -ne "\ekbash\e\\"
-    [[ $TMUX ]] && quietly tmux set-window-option automatic-rename on
+    [[ $STY  ]] \
+        && echo -ne "\ekbash\e\\"
+
+    [[ $TMUX ]] \
+        && quietly tmux set-window-option automatic-rename on
 }
 
 pause()
@@ -121,16 +137,21 @@ numfiles()
     fi
 
     # capture glob settings
-    _shoptSet dotglob  && dotglob=true
-    _shoptSet nullglob && nullglob=true
+    _shoptSet dotglob \
+        && dotglob=true
+    _shoptSet nullglob \
+        && nullglob=true
 
     # populate files array
     shopt -s dotglob nullglob
     files=("$dir"/*)
 
     # reset options
-    [[ $dotglob == true ]]  || shopt -u dotglob
-    [[ $nullglob == true ]] || shopt -u nullglob
+    [[ $dotglob == true ]] \
+        || shopt -u dotglob
+
+    [[ $nullglob == true ]] \
+        || shopt -u nullglob
 
     # print result
     printf '%d\t%s\n' "${#files[@]}" "$dir"
@@ -141,9 +162,7 @@ escape()
     # https://github.com/mathiasbynens/dotfiles/blob/master/.functions
 
     printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u)
-
-    # print a newline if we're not piping to another program
-    [[ -t 1 ]] && echo
+    newline
 }
 
 if ! _inPath sudo; then
