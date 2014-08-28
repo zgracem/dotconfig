@@ -46,7 +46,7 @@ alias gd='git difftool'
 
 # screen & tmux
 alias s='screen -d -R '
-alias t='tmux attach 2>&- || tmux -2 new-session'
+alias tt='tmux attach 2>&- || tmux -2 new-session'
 
 # open in a new window if tmux/GNU screen is running (see functions/newwin.bash)
 alias alpine="newwin alpine $flags_alpine"
