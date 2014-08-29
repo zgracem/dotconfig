@@ -4,8 +4,8 @@
 # -----------------------------------------------------------------------------
 
 # only run if we need to
-[[ $BASH_COMPLETION_SOURCED ]] \
-	&& return
+# [[ -n $BASH_COMPLETION_SOURCED ]] \
+#   && return
 
 # -----------------------------------------------------------------------------
 # shell options
@@ -52,13 +52,14 @@ unset checkFile
 complete -bk    -A helptopic    help
 complete -defv  -A hostname     scp sftp ssh
 complete -abcdf -A function     sudo
-complete -aev   -A function     unset
-complete -abcfk -A function \
-                -A helptopic    type which what h
+complete -aev   -A function     export unset
+complete -abcfk -A function -A helptopic \
+                                type which what h
 complete -A function            fe where
 complete -def                   trash
 complete -A shopt               _shoptSet
 complete -v                     whatvar wv
+complete -a                     alias unalias
 
 # reloading config files with `rl`
 complete -o nospace -W "profile bashrc ${dotfiles[*]}" rl
