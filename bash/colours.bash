@@ -77,6 +77,9 @@ fi
 # solarized -- http://ethanschoonover.com/solarized
 # -----------------------------------------------------------------------------
 
+# if the terminal hasn't already set this...
+: ${solarized:=dark}
+
 if [[ $ITERM_PROFILE =~ light ]]; then
     solarized=light
 elif [[ $ITERM_PROFILE =~ ^Default ]]; then
@@ -147,7 +150,7 @@ add_escape_codes()
       if [[ -n ${!string} ]]; then
         local var_name="${string#*_}"
         local var_value="${!string}"
-      
+
           eval "esc_${var_name}=\"[${var_value}m\""
       fi
     done
