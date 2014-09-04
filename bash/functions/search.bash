@@ -21,6 +21,17 @@ ff()
     grep -i "$term"
 }
 
+ffe()
+{   # find and edit a file with fzf (https://github.com/junegunn/fzf)
+    _isFunction fzf || return 69
+
+    local file=$(fzf --query="$@" --select-1 --exit-0)
+
+    if [[ -n $file ]]; then
+        _edit "$file"
+    fi
+}
+
 _inPath mdfind && {
     sp()
     {   # find a file using Spotlight
