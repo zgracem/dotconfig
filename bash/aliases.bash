@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 # files/directories
-alias cds='dirs -v'					# directory stack w/ positions
+alias cds='dirs -v'                 # directory stack w/ positions
 alias cppwd='printf "%q" "$PWD" | pbcopy'   # copy $PWD to clipboard
 alias dirsize='du -sh'              # total size of $PWD
 alias disks='df -h'                 # all mounted disks (w/ human units)
@@ -45,7 +45,7 @@ alias gc='git commit'
 alias gd='git difftool'
 
 # screen & tmux
-alias s='screen -d -R '
+alias ss='screen -d -R '
 alias tt='tmux attach 2>&- || tmux -2 new-session'
 
 # open in a new window if tmux/GNU screen is running (see functions/newwin.bash)
@@ -64,14 +64,12 @@ alias .....='cd ../../../..'
 
 alias bell='tput bel'
 alias colourstrip='sed -E "s|\[[0-9;]*m?||g"'
-alias cronedit='crontab -e'
 alias dl='curl -OJ'                 # download a file
 alias headers='curl -Is'            # HTTP headers for $1
 alias ls1='command ls -A1'          # just the filenames
 alias lst='ls -rt'                  # newest files last
 alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias pingg='ping -c 4 google.com'  # check network connection
-alias qpb='_pb="$(pbpaste)";echo "[[ $_pb ]]";q "$_pb";unset _pb'
 alias sortpb='pbpaste | sort -u | pbcopy'
 
 alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
