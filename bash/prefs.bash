@@ -12,7 +12,7 @@ flags_dos2unix='-k'     # copy date stamp to output file
 flags_file='-p'         # don't touch last-accessed time
 flags_hexdump='-C'      # "canonical" display mode
 flags_ln='-v'           # verbose
-flags_ls='-lAgohp'
+flags_ls='-Ap'          # (almost) all files; append / to directories
 flags_mkdir='-p -v'     # create parents as required; verbose
 flags_mosh="--server=/usr/local/bin/mosh-server"
 flags_mv='-iv'          # interactive; verbose
