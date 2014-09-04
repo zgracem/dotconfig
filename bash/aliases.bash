@@ -69,6 +69,7 @@ alias headers='curl -Is'            # HTTP headers for $1
 alias ls1='command ls -A1'          # just the filenames
 alias lst='ls -rt'                  # newest files last
 alias myip='curl -S $ip_site'       # external IP address (see private.bash)
+alias nowz='date --utc +%FT%TZ'     # date & time in ISO 8601 format
 alias pingg='ping -c 4 google.com'  # check network connection
 alias sortpb='pbpaste | sort -u | pbcopy'
 
