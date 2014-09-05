@@ -5,17 +5,18 @@
 
 # revoke sudo privileges
 if [[ $(who | grep -ch "^$USER\>") -le 2 ]]; then
-    _inPath sudo && sudo -k
+    _inPath sudo \
+    	&& sudo -k
 fi
 
-# archive ~/.bash_history if it's larger than 256 KB
+# archive ~/.bash_history if it's larger than 128 KB
 if _isGNU stat; then
     flags='-c %s'
 else
     flags='-f %z'
 fi
 
-if [[ $(command stat ${flags} "$HISTFILE" 2>/dev/null) -ge 262144 ]]; then
+if [[ $(command stat ${flags} "$HISTFILE" 2>/dev/null) -ge 131072 ]]; then
     mv "$HISTFILE" "${HISTFILE}_$(date +%y%m%d)"
     touch "$HISTFILE"
 fi
