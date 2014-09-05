@@ -8,28 +8,55 @@ getProperty()
 
     declare property="$1" file="$2"
 
-    sips --getProperty $property "$file" |
-        sed -nE "s%^[[:space:]]+$property: (.+)\$%\\1%p"
+    sips --getProperty $property "$file" \
+    | sed -nE "s%^[[:space:]]+$property: (.+)\$%\\1%p"
 }
 
 dim()
 {   # return image dimensions
     if [[ $# -eq 0 ]]; then
-        printf "Usage: %s image ...\n" $FUNCNAME 1>&2
-        return 1
+        scold "Usage: ${FUNCNAME} IMAGE ..."
+        return 64
     fi
 
-    declare img width height
-    for img in "$@"; do
-        if getProperty format "$img" 2>&1 | grep -q '^Error'; then
-            scold "$img: Not an image file"
-        else
-            printf "%s: " "${img##*/}"
+    local -a images=("$@")
+    local image
+    local error
 
-            sips --getProperty pixelWidth --getProperty pixelHeight "$img" |
-            sed -nzE 's/^.*pixelWidth: ([[:digit:]]+)\n.*pixelHeight: ([[:digit:]]+)/\1 × \2/p'
+    local dim_regex='([[:digit:]]+) x ([[:digit:]]+)'
+
+    for image in "${images[@]}"; do
+        local info
+        read  info < <(file -bp "$image")
+
+        if [[ $info =~ "image data" ]]; then
+            local width= height=
+
+            if _inPath sips; then
+                read width  < <(getProperty pixelWidth  "$image")
+                read height < <(getProperty pixelHeight "$image")
+            elif [[ $info =~ $dim_regex ]]; then
+                width="${BASH_REMATCH[1]}"
+                height="${BASH_REMATCH[2]}"
+            fi
+
+            if [[ -n $width && -n $height ]]; then
+                echo "${image}: ${width} × ${height}"
+            else
+                scold "${image}: could not get dimensions"
+                error=true
+            fi
+        else
+            scold "${image}: not an image file"
+            error=true
         fi
     done
+
+    if [[ $error == true ]]; then
+        return 1
+    else
+        return 0
+    fi
 }
 
 maxWidth()
