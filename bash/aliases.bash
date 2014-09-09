@@ -41,7 +41,7 @@ alias wv='map whatvar:'             # see functions/{debug,zhelp}.bash
 alias yegw='weather edmonton'
 
 # ls
-alias ll='ls -lgoh'                 # long, sans group & owner, human sizes
+alias ll='ls -lgoh'                 # long, omit group & owner, human sizes
 alias ls1='command ls -A1'          # just the filenames
 alias lst='ll -rt'                  # newest files last
 

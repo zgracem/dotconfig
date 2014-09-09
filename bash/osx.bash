@@ -8,10 +8,12 @@ if [[ ! $OSTYPE =~ darwin ]]; then
     return 1
 fi
 
-# -----------------------------------------------------------------------------
-
 # hardware identifier
 read hardware < <(sysctl -n hw.model)
+
+# -----------------------------------------------------------------------------
+# networking &c.
+# -----------------------------------------------------------------------------
 
 # WiFi card
 read netcard < <(
@@ -28,10 +30,6 @@ read network < <(
     airport -I \
     | sed -nE 's/^ +SSID: (.*)$/\1/p'
 )
-
-# -----------------------------------------------------------------------------
-# networking &c.
-# -----------------------------------------------------------------------------
 
 # number of users connected to AirPort (vars set in private.bash)
 alias aeusers="snmpget -v 2c -c ${snmp_community} -M+${snmp_mib_path} -m+${snmp_mib} \

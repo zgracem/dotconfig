@@ -54,7 +54,7 @@ if _isGNU ps; then
         && flags_ps+='W'
 
 else
-    flags_ps+='xo pid,user,start,command'
+    flags_ps+='xo pid,ppid,user,start,command'
 fi
 
 if _isGNU stat; then

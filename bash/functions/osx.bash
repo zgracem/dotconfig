@@ -8,7 +8,7 @@
 
 f()
 {   # open a Finder window for the current/specified directory
-    declare here=${1-.}
+    declare here="${1-.}"
     open -a Finder "$here"
 }
 
@@ -31,7 +31,7 @@ cdf()
 
 ql()
 {   # launch a QuickLook preview of a file
-    quietly /usr/bin/qlmanage -p "$1"
+    quietly /usr/bin/qlmanage -p "$@"
 }
 
 abspath()
