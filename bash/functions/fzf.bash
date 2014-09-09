@@ -34,3 +34,12 @@ fkill()
     | awk '{print $2}' \
     | xargs kill -$sigspec
 }
+
+ffe()
+{   # find and edit a file with fzf (https://github.com/junegunn/fzf)
+    local file=$(fzf --query="$@" --select-1 --exit-0)
+
+    if [[ -n $file ]]; then
+        _edit "$file"
+    fi
+}

@@ -16,20 +16,9 @@ ff()
 {   # find a file whose name contains a given string
     declare scope="$PWD" term="$@"
 
-    find -H "$scope" -type f -iname '*'$term'*' 2>&- |
-    sed "s|^$HOME|~|g" |
-    grep -i "$term"
-}
-
-ffe()
-{   # find and edit a file with fzf (https://github.com/junegunn/fzf)
-    _isFunction fzf || return 69
-
-    local file=$(fzf --query="$@" --select-1 --exit-0)
-
-    if [[ -n $file ]]; then
-        _edit "$file"
-    fi
+    find -H "$scope" -type f -iname '*'$term'*' 2>&- \
+    | sed "s|^$HOME|~|g" \
+    | grep -i "$term"
 }
 
 _inPath mdfind && {
@@ -37,8 +26,8 @@ _inPath mdfind && {
     {   # find a file using Spotlight
         declare scope="$PWD" term="$@"
 
-        mdfind -onlyin "$scope" -name "$term" |
-        grep -i "$term"
+        mdfind -onlyin "$scope" -name "$term" \
+        | grep -i "$term"
     }
 }
 
