@@ -2,13 +2,30 @@
 # ~zozo/.config/bash/functions/cygwin.bash
 # ------------------------------------------------------------------------------
 
-[[ $OSTYPE =~ cygwin ]] || return 1
+[[ $OSTYPE =~ cygwin ]] \
+    || return 1
 
 # ------------------------------------------------------------------------------
 
 f()
 {   # open an Explorer window for the current/specified directory
-    cygstart --explore "${1-.}"
+    local here="${1-.}"
+    cygstart --explore "$here"
+}
+
+reveal()
+{   # reveal a file in Explorer instead of opening it
+
+    local item="$1"
+
+    if [[ -e $item ]]; then
+        $(cygpath --windir)/explorer /select, $(cygpath -w "$item")
+    elif [[ -z $item ]]; then
+        scold "Usage: ${FUNCNAME} FILE"
+        return 64
+    else
+        scold "${item}: not found"
+    fi
 }
 
 findDrive()
@@ -43,7 +60,7 @@ killall()
 
 whatpkg()
 {   # find the Cygwin package to which $1 belongs
-    
+
     declare file="$1" package error
 
     if [[ ! -f $file ]]; then
@@ -59,5 +76,14 @@ whatpkg()
         echo "$package"
     else
         scold "$file: does not seem to belong to a Cygwin package"
+    fi
+}
+
+cmd()
+{   # run a command from the Windows command line
+    if [[ $# -eq 0 ]]; then
+        cygstart $(cygpath -au $COMSPEC)
+    else
+        $(cygpath -au $COMSPEC) /c "$@"
     fi
 }
