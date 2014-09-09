@@ -21,7 +21,13 @@ mkcd()
 cdls()
 {   # change to, and immediately list, a directory
     cd "$@" \
-        && ls $flags_ls
+        && command ls $flags_ls
+}
+
+cdll()
+{   # change to, and immediately list (at length), a directory
+    cd "$@" \
+        && command ls -lgoh${flags_ls#-}
 }
 
 lsf()
