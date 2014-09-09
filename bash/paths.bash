@@ -65,6 +65,14 @@ if [[ -d /usr/local/opt/ruby ]]; then
     export GEM_HOME=/usr/local/opt/ruby
 fi
 
+# Xcode
+if [[ -x /usr/bin/xcode-select ]]; then
+    export XCODE=$('xcode-select' --print-path)
+
+    PATH=$PATH:$XCODE/bin
+    MANPATH=$MANPATH:$XCODE/share/man
+fi
+
 # gcc tools (cygwin)
 if [[ -d /opt/gcc-tools/bin ]]; then
     PATH=$PATH:/opt/gcc-tools/bin
