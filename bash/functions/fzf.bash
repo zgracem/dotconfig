@@ -39,8 +39,6 @@ fkill()
 
     if [[ -n $target_pid ]]; then
         $kill_cmd $target_pid
-    else
-        return 1
     fi
 }
 
