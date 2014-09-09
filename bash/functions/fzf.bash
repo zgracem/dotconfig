@@ -20,19 +20,28 @@ fkill()
 {   # find, then kill, a process
 
     local sigspec="${1:-9}"
+    local target_pid
+    
     local ps_flags='ef'
-    local kill_cmd='builtin kill'
+    local kill_cmd="builtin kill -${sigspec}"
 
     if [[ $OSTYPE == cygwin ]]; then
-        kill_cmd='/bin/kill --signal $sigspec'
         ps_flags+='W' # include Windows processes 
+        kill_cmd="/bin/kill --force --signal ${sigspec}"
     fi
-    
-    command ps -ef \
-    | sed 1d \
-    | fzf -m \
-    | awk '{print $2}' \
-    | xargs kill -$sigspec
+
+    target_pid=$(
+        command ps -$ps_flags \
+        | sed 1d \
+        | fzf -m \
+        | awk '{print $2}'
+    )
+
+    if [[ -n $target_pid ]]; then
+        $kill_cmd $target_pid
+    else
+        return 1
+    fi
 }
 
 ffe()
