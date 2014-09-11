@@ -31,7 +31,7 @@ if [[ -z $SSH_CONNECTION ]]; then
             VISUAL="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
             ;;
         cygwin)
-            BROWSER=$dir_scripts/chrome.sh
+            BROWSER=$dir_scripts/firefox.sh
             VISUAL=$dir_scripts/subl.sh
             ;;
     esac
