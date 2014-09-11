@@ -63,7 +63,7 @@ PS1_print_exit()
 # http://code.google.com/p/iterm2/wiki/ProprietaryEscapeCodes
 if [[ $TERM_PROGRAM =~ iTerm.app ]]; then
     PS1_update_iTerm()
-    {   
+    {
         printf "%b%s%b" "\e]50;" "CurrentDir=$PWD" "\a"
     }
 fi
@@ -158,6 +158,8 @@ PS4+="${PS1_blue}\${LINENO}"                # blue line number
 PS4+="\${FUNCNAME[0]+${xse}${PS1_2d}\${FUNCNAME[0]}()}"
                                             # function name (if applicable)
 PS4+="${xse}${PS1_null}"                    # reset
+
+export PS{1..4}
 
 # -----------------------------------------------------------------------------
 # $PROMPT_COMMAND
