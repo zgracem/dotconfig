@@ -4,39 +4,38 @@
 # ------------------------------------------------------------------------------
 
 _edit()
-{   # open a file in the appropriate editor
-    # Usage: _edit FILE[:LINE]
+{   # open file(s) in the appropriate editor
+    # Usage: _edit FILE[:LINE] [FILE[:LINE] ...]
 
-    declare line file="$1"
-    declare -r lineno_regex=':([[:digit:]]+)$'
+    local -a files=("$@")
+    local file line
+    local -r lineno_regex=':([[:digit:]]+)$'
 
-    # get line number (if specified)
-    if [[ $file =~ $lineno_regex ]]; then
-        line="${BASH_REMATCH[1]}"
-        file="${file%:*}"
-    fi
+    for file in "${files[@]}"; do
+        if [[ $file =~ $lineno_regex ]]; then
+            line="${BASH_REMATCH[1]}"
+            file="${file%:*}"
+        fi
 
-    if [[ -n $SSH_CONNECTION ]]; then
-        # working remotely; use a console editor
-        declare windowTitle="$(basename "$EDITOR")"
+        # use a console editor if working remotely
+        if [[ -n $SSH_CONNECTION ]]; then
+            local window_title
+            read  window_title < <(command basename "$EDITOR")
 
-        if [[ $EDITOR =~ vim && -n $line ]]; then
-            # see functions/newwin.bash
-            newwin --title "$windowTitle" "$EDITOR" +$line "$file"
+            if [[ $EDITOR =~ vim && -n $line ]]; then
+                newwin --title "$window_title" "$EDITOR" +$line "$file"
+            else
+                newwin --title "$window_title" "$EDITOR" "$file"
+            fi
         else
-            newwin --title "$windowTitle" "$EDITOR" "$file"
-        fi
-
-        return
-    else
         # use a GUI editor
+            if [[ $VISUAL =~ subl && -n $line ]]; then
+                file="${file}:${line}"
+            fi
 
-        if [[ $VISUAL =~ subl && $line ]]; then
-            file="$file:$line" # for Sublime Text
+            "$VISUAL" "$file"
         fi
-
-        "$VISUAL" "$file"
-    fi
+    done
 }
 
 export -f _edit
@@ -48,8 +47,9 @@ clip()
     declare textFile="$1"
 
     if file "$textFile" | grep -q text; then
-        cat "$textFile" | pbcopy \
-        && printf "Copied '%s' to clipboard\n" "$textFile"
+        cat "$textFile" \
+        | pbcopy \
+            && printf "Copied '%s' to clipboard\n" "$textFile"
     else
         scold $FUNCNAME "'$textFile' is not plain text"
         return 1
@@ -58,7 +58,7 @@ clip()
 
 pastenote()
 {   # paste the contents of the clipboard to a text file
-    
+
     if [[ ! -d $dir_notes ]]; then
         scold $FUNCNAME "can't find notes directory"
         return 1
@@ -73,14 +73,13 @@ pastenote()
     fi
 
     pbpaste > "$filePath" \
-    && echo "$filePath"
+        && echo "$filePath"
 }
 
 rot13()
 {   # translate text to or from ROT13
     declare mask='a-zA-Z n-za-mN-ZA-M'
 
-    # file
     if [[ -f $1 ]]; then
         # file
         tr $mask < "$1"
