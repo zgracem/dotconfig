@@ -8,22 +8,22 @@ confed()
     declare file="$dir_config/bash/$1"
 
     # does the file exist?
-    [[ -f $file ]] ||
-        return 1
+    [[ -f $file ]] \
+        || return 1
 
     _edit "$file"
 }
 
 bf()
 {   # edit a functions file
-    [[ $# -eq 0 ]] && {
+    if [[ $# -eq 0 ]]; then
         confed functions.bash
-    } || {
+    else
         declare file
         for file in "$@"; do
             confed "functions/$file.bash"
         done
-    }
+    fi
 }
 
 fe()

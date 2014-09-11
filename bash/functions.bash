@@ -10,7 +10,7 @@ quietly()
 
 _inPath()
 {   # exits 0 if $1 is installed in $PATH
-    quietly builtin type -P "$1"
+    quietly type -P "$1"
 }
 
 _isGNU()
@@ -25,12 +25,12 @@ _isFunction()
 
 _isAlias()
 {   # exits 0 if $1 is defined as an alias
-    quietly builtin alias "$1"
+    quietly alias "$1"
 }
 
 getPath()
 {   # returns the full path to $1
-    builtin type -P "$1" 2>/dev/null
+    type -P "$1" 2>/dev/null
 }
 
 getGNU()
