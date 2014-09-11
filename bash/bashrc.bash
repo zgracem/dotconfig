@@ -136,8 +136,7 @@ fi
 umask 0022
 
 # just say no to flow control
-hash stty &>/dev/null \
-    && stty -ixon &>/dev/null
+(hash stty && stty -ixon) &>/dev/null
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
 if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then
@@ -152,7 +151,7 @@ export dir_config="$HOME/.config"
 
 _source()
 {   # source files if they exist; fail silently if they don't
-    
+
     declare file
 
     for file in "$@"; do

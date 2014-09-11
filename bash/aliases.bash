@@ -76,7 +76,7 @@ alias nowz='date --utc +%FT%TZ'     # date & time in ISO 8601 format
 alias pingg='ping -c 4 google.com'  # check network connection
 alias sortpb='pbpaste | sort -u | pbcopy'
 
-alias newpw="$dir_scripts/newpassword.sh -l 16 -d 4-6 -s 3-5 -bc"
+alias newpw="$dir_scripts/newpassword.sh -c"
 alias newpwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 alias ttest="$dir_scripts/dev/test.sh"
 
