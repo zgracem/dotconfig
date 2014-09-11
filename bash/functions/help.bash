@@ -13,6 +13,8 @@ h()
         | less -F
     elif quietly command man -w "$thing"; then
         man "$thing"
+    elif _inPath "$thing" && "$thing" --help 2>/dev/null; then
+        return 0
     else
         scold "${thing}: help not found"
         return 1
