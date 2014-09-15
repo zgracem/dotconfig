@@ -38,7 +38,7 @@ alias psi='python setup.py install'
 alias svim='sudo vim'
 alias unmount='umount'
 alias wv='map whatvar:'             # see functions/{debug,zhelp}.bash
-alias yegw='weather edmonton'
+alias wyeg='weather edmonton'
 
 # ls
 alias ll='ls -lgoh'                 # long, omit group & owner, human sizes
