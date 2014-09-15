@@ -48,16 +48,16 @@ unset pkey
 # aliases
 # -----------------------------------------------------------------------------
 
-alias cpcd='cygpath -aw "$PWD" > /dev/clipboard'
+alias cpcd='cygpath -aw "$PWD" | putclip'
 alias eject="${SYSTEMROOT}/system32/rundll32 shell32.dll,Control_RunDLL hotplug.dll"
 
 alias tar='/usr/bin/bsdtar'
 
 # be like OS X
 alias open='cygstart'
-alias pbcopy='putclip'
-alias pbpaste='getclip'
+alias pbcopy='putclip '
+alias pbpaste='getclip '
 
 alias emptytrash='command -p rm -rf ~/.Trash/* 1>/dev/null'
-alias mdclip='~/bin/Markdown.pl /dev/clipboard > /dev/clipboard'
+alias mdclip='getclip | ~/bin/Markdown.pl | putclip'
 alias sp='ff'

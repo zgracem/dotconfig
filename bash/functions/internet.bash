@@ -43,8 +43,8 @@ follow()
     else
         # check the clipboard for a URL
         case $OSTYPE in
-            darwin*)    pb=$(/usr/bin/pbpaste)   ;;
-            cygwin)     pb=$(cat /dev/clipboard) ;;
+            darwin*)    pb=$(/usr/bin/pbpaste) ;;
+            cygwin)     pb=$(/usr/bin/getclip) ;;
         esac
         if [[ $pb =~ ^http ]]; then
             url="$pb"
@@ -54,7 +54,8 @@ follow()
         fi
     fi
 
-    curl -ILs "$url" | awk '/Location/ { print $2 }'
+    curl -ILs "$url" \
+    | awk '/Location/ { print $2 }'
 }
 
 dataurl()
