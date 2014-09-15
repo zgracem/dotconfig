@@ -3,4 +3,4 @@
 # say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
-_source $HOME/.local/local.bash
+_source "${HOME}/.local/local.bash"

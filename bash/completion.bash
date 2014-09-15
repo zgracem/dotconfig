@@ -4,8 +4,8 @@
 # -----------------------------------------------------------------------------
 
 # only run if we need to
-# [[ -n $BASH_COMPLETION_SOURCED ]] \
-#   && return
+[[ -n $BASH_COMPLETION_SOURCED ]] \
+    && return
 
 # -----------------------------------------------------------------------------
 # shell options
@@ -75,4 +75,4 @@ _source "${dir_mybin}/github/transmission-remote-cli/completion/bash/transmissio
 _source "${dir_mybin}/github/t/etc/t-completion.sh"
 
 # others
-_source "$dir_config"/bash/completion/*.bash
+_source "${dir_config}/bash/completion/"*.bash

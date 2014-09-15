@@ -4,12 +4,12 @@
 # -----------------------------------------------------------------------------
 
 # only run if we need to
-[[ -n $SYSPATH ]] &&
-    return
+[[ -n $SYSPATH ]] \
+    && return
 
 # get a reliable path prefix
 SYSPATH="$(command -p getconf PATH 2>/dev/null)"
-: ${SYSPATH:="/usr/bin:/bin:/usr/sbin:/sbin"}
+: ${SYSPATH:=/usr/bin:/bin:/usr/sbin:/sbin}
 
 PATH=$SYSPATH:/usr/games
 MANPATH=/usr/share/man:/usr/man
@@ -27,7 +27,7 @@ if [[ -x /usr/local/bin/brew ]]; then
     core_prefix="$(brew --prefix coreutils)"
     sed_prefix="$(brew --prefix gnu-sed)"
     tar_prefix="$(brew --prefix gnu-tar)"
-    
+
     if [[ -d $core_prefix ]]; then
         PATH=$core_prefix/libexec/gnubin:$PATH
         MANPATH=$core_prefix/libexec/gnuman:$MANPATH
@@ -59,10 +59,13 @@ fi
 # fi
 
 # Ruby gems (Homebrew)
-if [[ -d /usr/local/opt/ruby ]]; then
-    PATH=/usr/local/opt/ruby/bin:$PATH
-    MANPATH=/usr/local/opt/ruby/share/man:$MANPATH
-    export GEM_HOME=/usr/local/opt/ruby
+export GEM_HOME=/usr/local/opt/ruby
+
+if [[ -d $GEM_HOME ]]; then
+    PATH=$GEM_HOME/bin:$PATH
+    MANPATH=$GEM_HOME/share/man:$MANPATH
+else
+    unset GEM_HOME
 fi
 
 # Xcode
@@ -98,13 +101,10 @@ if [[ -d $HOME/share/info ]]; then
     INFOPATH=$HOME/share/info:$INFOPATH
 fi
 
-# remove duplicates in $PATH while preserving order
-# https://sites.google.com/site/jdisnard/etc-skel/dot-profile
-# PATH=$(echo $PATH | awk -F: '{ for (i=1;i<=NF;i++) { if ( !x[$i]++ ) printf("%s:",$i); } }')
-
+# -----------------------------------------------------------------------------
+# Python
 # -----------------------------------------------------------------------------
 
-# Python
 PYTHONPATH=
 
 for dir in $HOME /usr/local /usr; do
@@ -117,4 +117,6 @@ for dir in $HOME /usr/local /usr; do
     unset dir python_dir
 done
 
-export {,CD,MAN,INFO,PYTHON}PATH
+# -----------------------------------------------------------------------------
+
+export PATH MANPATH INFOPATH PYTHONPATH

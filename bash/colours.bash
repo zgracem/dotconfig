@@ -10,9 +10,9 @@
 if [[ $colourdepth -lt 8 ]]; then
     unset colourdepth
     return
+else
+    export colourdepth
 fi
-
-export colourdepth
 
 # -----------------------------------------------------------------------------
 # basic colours

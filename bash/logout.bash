@@ -4,9 +4,8 @@
 # -----------------------------------------------------------------------------
 
 # revoke sudo privileges
-if [[ $(who | grep -ch "^$USER\>") -le 2 ]]; then
-    _inPath sudo \
-    	&& sudo -k
+if _inPath sudo && [[ $(who | grep -ch "^$USER\>") -le 2 ]]; then
+    sudo -k
 fi
 
 # archive ~/.bash_history if it's larger than 128 KB

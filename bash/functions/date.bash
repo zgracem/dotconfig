@@ -14,18 +14,19 @@ _isGNU date && {
 lmcp()
 {   # copy last-modified date of $1 to $2
     declare sourceFile="$1" targetFile="$2"
+
     command touch -r "$sourceFile" "$targetFile"
 }
 
 lm()
 {   # return last-modified date of $1 in POSIX seconds
-    declare statBin
+    local statBin
 
-    statBin=$(getGNU stat) && {
+    if statBin=$(getGNU stat); then
         $statBin -c %Y "$@"
-    } || {
+    else
         stat -f %m -t %s "$@"
-    }
+    fi
 }
 
 parseEpoch()
