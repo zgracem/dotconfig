@@ -107,6 +107,30 @@ ca()
     printf '%d\n' "$#"
 }
 
+args()
+{   # count and display arguments
+    # http://mywiki.wooledge.org/WordSplitting
+
+    local num_args="$#"
+    local string
+
+    if [[ $num_args -eq 1 ]]; then
+        string='arg'
+    else
+        string='args'
+    fi
+
+    printf '%d %s:' "$num_args" "$string"
+
+    local arg
+    for arg in "$@"; do
+        printf ' %b<%b%s%b>%b' \
+            "$esc_magenta" "$esc_reset" "$arg" \
+            "$esc_magenta" "$esc_reset"
+    done
+    printf '\n'
+}
+
 explode()
 {   # expands and displays an array
     declare arrayName="$1" cmd key
