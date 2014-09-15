@@ -19,8 +19,7 @@ _edit()
 
         # use a console editor if working remotely
         if [[ -n $SSH_CONNECTION ]]; then
-            local window_title
-            read  window_title < <(command basename "$EDITOR")
+            window_title="$(basename "$EDITOR")"
 
             if [[ $EDITOR =~ vim && -n $line ]]; then
                 newwin --title "$window_title" "$EDITOR" +$line "$file"
