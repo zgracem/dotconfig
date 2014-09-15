@@ -6,6 +6,8 @@ getProperty()
 {   # wrapper for sips to strip all the non-property output
     # Usage: getProperty PROPERTY FILE
 
+    _inPath sips || return 1
+
     declare property="$1" file="$2"
 
     sips --getProperty $property "$file" \
@@ -61,7 +63,9 @@ dim()
 
 maxWidth()
 {   # resize image $1 to $2 pixels wide
-    
+
+    _inPath sips || return 1
+
     declare imageFile="$1" newWidth="$2" newHeight
     declare originalWidth originalHeight aspectRatio
 
