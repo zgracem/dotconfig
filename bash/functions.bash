@@ -40,7 +40,7 @@ getGNU()
     if _isGNU "$bin"; then
         type -P "$bin"
     else
-        getPath "g$bin"
+        getPath "g${bin}"
     fi
 }
 
@@ -48,7 +48,7 @@ scold()
 {   # echo to standard error
     # Usage: scold [source] "message"
 
-    printf "%b\n" >&2 "${2+$1: }${2-$1}"
+    printf '%b\n' >&2 "${2+$1: }${2-$1}"
 }
 
 # -----------------------------------------------------------------------------

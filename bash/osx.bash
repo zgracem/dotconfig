@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 if [[ ! $OSTYPE =~ darwin ]]; then
-    scold "${BASH_SOURCE[0]}" "cannot source on this OS"
+    scold "${BASH_SOURCE[0]}" 'cannot source on this OS'
     return 1
 fi
 
@@ -15,15 +15,15 @@ read hardware < <(sysctl -n hw.model)
 # networking &c.
 # -----------------------------------------------------------------------------
 
+# AirPort utilities
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
 # WiFi card
 read netcard < <(
     echo list \
     | scutil \
     | sed -nE 's#^.*Setup:/Network/Interface/(en[[:digit:]])/AirPort$#\1#p'
 )
-
-# AirPort utilities
-alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 
 # WiFi network
 read network < <(
@@ -40,13 +40,16 @@ alias aeusers="snmpget -v 2c -c ${snmp_community} -M+${snmp_mib_path} -m+${snmp_
 alias localip="ipconfig getifaddr ${netcard}"
 
 # IP address of router
-alias router="netstat -rn | sed -nE 's/^default +([[:digit:].]+).*$/\1/p'"
+alias router="netstat -rn \
+    | sed -nE 's/^default +([[:digit:].]+).*$/\1/p'"
 
 # MAC address of WiFi card
-alias getmac="ifconfig ${netcard} | sed -nE 's/^[[:space:]]+ether ([[:xdigit:]:]+).*$/\1/p'"
+alias getmac="ifconfig ${netcard} \
+    | sed -nE 's/^\s+ether ([[:xdigit:]:]+).*$/\1/p'"
 
 # flush DNS cache
-alias flushdns='dscacheutil -flushcache && killall -HUP mDNSResponder 2>/dev/null'
+alias flushdns='dscacheutil -flushcache \
+    && killall -HUP mDNSResponder 2>/dev/null'
 
 # share $PWD at localhost:7777
 alias webshare='python -m SimpleHTTPServer 7777'
@@ -86,15 +89,14 @@ alias quenable='defaults delete com.apple.LaunchServices LSQuarantine && echo "R
 alias unquar='xattr -d -r com.apple.quarantine' # recurses into directories
 
 # Bluetooth mouse battery
-alias mousebatt="ioreg -n BNBMouseDevice | sed -nE 's/^.*BatteryPercent\" = ([[:digit:]]+)$/\1/p'"
+alias mousebatt="ioreg -d 7 -n BNBMouseDevice | sed -nE 's/^.*\"BatteryPercent\" = ([[:digit:]]+)$/\1%/p'"
 
 # -----------------------------------------------------------------------------
 # misc. shortcuts
 # -----------------------------------------------------------------------------
 
-alias ap='AtomicParsley'
-alias ds="$dir_scripts/displaysleep.sh"
-alias emptytrash="sudo rm -rf /Volumes/*/.Trashes/*; sudo rm -rf ~/.Trash/*"
+alias ds="${dir_scripts}/displaysleep.sh"
+alias emptytrash='sudo rm -rf /Volumes/*/.Trashes/*; sudo rm -rf ~/.Trash/*'
 alias plist2bin='plutil -convert binary1'
 alias plist2xml='plutil -convert xml1'
 alias reveal='open -R' # show $1 in Finder
@@ -107,9 +109,6 @@ alias hide='chflags hidden'
 alias unhide='chflags nohidden'
 alias lockfile='sudo chflags uchg'
 alias unlockfile='sudo chflags nouchg'
-
-# copy $PWD to clipboard
-alias cppwd='printf $PWD | pbcopy'
 
 # interpret $1 as though it had been typed into the Spotlight menu
 alias spliteral='mdfind -interpret'
@@ -132,13 +131,13 @@ _inPath hub \
 alias allstoreapps="find /Applications \
     -path '*Contents/_MASReceipt/receipt' \
     -maxdepth 4 \
-    -print | \
-    sed 's#.app/Contents/_MASReceipt/receipt#.app#g;s#/Applications/##'"
+    -print \
+    | sed 's#.app/Contents/_MASReceipt/receipt#.app#g;s#/Applications/##'"
 
 # list all available iOS IPSW files
 # adapted from http://osxdaily.com/2013/11/15/get-list-all-ipsw-files-from-apple/
 alias ipsw="curl http://ax.phobos.apple.com.edgesuite.net/WebObjects/MZStore.woa/wa/com.apple.jingle.appserver.client.MZITunesClientCheck/version \
-    | sed -nE 's#^[[:space:]]*<string>(http.+ipsw)</string>\$#\1#p' \
+    | sed -nE 's#^\s*<string>(http.+ipsw)</string>\$#\1#p' \
     | sort -u"
 
 # -----------------------------------------------------------------------------
@@ -153,19 +152,6 @@ if _inPath brew; then
     [[ -n $SSH_CONNECTION ]] \
         && export HOMEBREW_NO_EMOJI=true
 fi
-
-# -----------------------------------------------------------------------------
-# MacPorts
-# -----------------------------------------------------------------------------
-
-# if _inPath port; then
-#     alias psearch='port search'
-#     alias pinfo='port info'
-#     alias pi='sudo port install'
-#     alias pui='sudo port uninstall'
-#     alias pfiles='port contents'
-#     alias portupdate='sudo port selfupdate && sudo port upgrade outdated'
-# fi
 
 # -----------------------------------------------------------------------------
 

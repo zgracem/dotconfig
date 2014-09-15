@@ -5,5 +5,6 @@
 # source .bashrc
 # -----------------------------------------------------------------------------
 
-[[ -r $HOME/.config/bash/bashrc.bash ]] &&
-    . $HOME/.config/bash/bashrc.bash
+if [[ -r $HOME/.config/bash/bashrc.bash ]]; then
+    source $HOME/.config/bash/bashrc.bash
+fi

@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 # abort if this isn't an interactive shell
-if ! [[ $PS1 && $- =~ i ]]; then
+if ! [[ -n $PS1 && $- =~ i ]]; then
     return
 fi
 

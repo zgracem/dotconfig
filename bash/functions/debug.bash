@@ -5,8 +5,8 @@
 
 _optSet()
 {   # exits 0 if all shell variables in $@ are set
-    
-    declare opt
+
+    local opt
 
     for opt in "$@"; do
         [[ :$SHELLOPTS: =~ :$opt: ]] || return 1
@@ -15,7 +15,7 @@ _optSet()
 
 _shoptSet()
 {   # exits 0 if all shell options in $@ are set
-    builtin shopt -pq $*
+    shopt -pq $*
 }
 
 xtrace()
@@ -54,7 +54,7 @@ q()
     case $result in
         *error*)
             # syntax error
-            scold "$FUNCNAME" "bad expression"       
+            scold "$FUNCNAME" "bad expression"
             return 64
             ;;
         *true*)

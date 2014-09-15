@@ -24,7 +24,7 @@ flags_stat='-L'         # follow links
 flags_top='-F -R -u -user $USER'
 
 # Silver Searcher
-flags_ag='--path-to-agignore "$dir_config/agignore" '
+flags_ag='--path-to-agignore "${dir_config}/agignore" '
 flags_ag+='--skip-vcs-ignores '
 flags_ag+='--color-line-number "0;34" '
 flags_ag+='--color-match "4;1;31" '
@@ -37,7 +37,7 @@ flags_chrome='--allow-file-access '
 flags_chrome+='--allow-file-access-from-files '
 
 if [[ -n $SOCKS5_SERVER ]]; then
-    flags_chrome+="--proxy-server='socks5://$SOCKS5_SERVER' "
+    flags_chrome+="--proxy-server='socks5://${SOCKS5_SERVER}' "
 fi
 
 # platform-specific
@@ -57,15 +57,7 @@ else
     flags_ps+='xo pid,ppid,user,start,command'
 fi
 
-if _isGNU stat; then
-    flags_stat+=' --printf="  File: \"%n\"\n'
-    flags_stat+='  Type: %F\t\tSize: %s\n'
-    flags_stat+='  Mode: (%4a/%A)\tUid: (%u/%U)\tGid: (%g/%G)\n'
-    flags_stat+='Device: %t,%T\tLinks: %h\tInode: %i\n'
-    flags_stat+='Access: %x\n'
-    flags_stat+='Modify: %y\n'
-    flags_stat+='Change: %z\n"'
-else
+if ! _isGNU stat; then
     flags_stat+=' -x -t "%F %T"'
 fi
 
@@ -78,8 +70,8 @@ for flag in ${!flags_*}; do
     app=${flag#flags_}
 
     # if we have the app, create an alias with the preferred flags
-    _inPath $app &&
-        alias $app="$app ${!flag}"
+    _inPath $app \
+        && alias $app="${app} ${!flag}"
 done
 
 # were you born in a barn?
@@ -89,25 +81,24 @@ unset app flag
 # settings -- config files
 # -----------------------------------------------------------------------------
 
-export INPUTRC="$dir_config/inputrc"
-export NETHACKOPTIONS="@$dir_config/nethackrc"
-export PIP_CONFIG_FILE=$dir_config/pip.conf
-export SCREENRC="$dir_config/screenrc"
+export CURLRC="${dir_config}/curlrc"
+export INPUTRC="${dir_config}/inputrc"
+export NETHACKOPTIONS="@${dir_config}/nethackrc"
+export PIP_CONFIG_FILE="${dir_config}/pip.conf"
+export SCREENRC="${dir_config}/screenrc"
 
-alias curl='curl -K $dir_config/curlrc'
+alias curl='curl -K "${CURLRC}"'
 
 # -----------------------------------------------------------------------------
 # settings -- environment variables
 # -----------------------------------------------------------------------------
 
 export BLOCKSIZE=1024
-export COPYFILE_DISABLE=true        # exclude ._resourceforks from tarballs
-export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 
 # git
-export GIT_AUTHOR_NAME="Zozo"
+export GIT_AUTHOR_NAME='Zozo'
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-export GIT_AUTHOR_EMAIL="zozo@inescapable.org"
+export GIT_AUTHOR_EMAIL='zozo@inescapable.org'
 export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
 # grep (see also colours.bash)
@@ -115,12 +106,11 @@ export GREP_OPTIONS=
 GREP_OPTIONS+='--extended-regexp '  # use ERE syntax (-E)
 GREP_OPTIONS+='--colour=auto '      # display results in colour
 GREP_OPTIONS+='--no-messages '      # no errors about missing/unreadable files (-s)
-# GREP_OPTIONS+='--with-filename '    # prepend results with filename (-H)
 GREP_OPTIONS+='--directories=skip ' # silently skip directories by default (-d)
 GREP_OPTIONS+='--exclude-dir=.git'  # skip .git directories
 
 # mailcaps
-export MAILCAPS=~/share/mailcap:~/.mailcap:/etc/mailcap
+export MAILCAPS="${HOME}/share/mailcap:${HOME}/.mailcap:/etc/mailcap"
 
 # tar
 export COPYFILE_DISABLE=true        # exclude ._resourceforks from tarballs
@@ -130,7 +120,7 @@ export COMP_TAR_INTERNAL_PATHS=1    # avoid flattening contents of tar files
 export ZIPOPTS='-9 --symlinks'      # max compression, store symlinks as symlinks
 
 # OpenSSL
-export SSL_CERT_DIR="/usr/local/etc/openssl"
+export SSL_CERT_DIR='/usr/local/etc/openssl'
 export SSL_CERT_FILE="${SSL_CERT_DIR}/cert.pem"
 export CURL_CA_BUNDLE="${SSL_CERT_DIR}/certs/ca-bundle.crt"
 
@@ -144,16 +134,20 @@ done
 export GIT_SSL_CAINFO="$SSL_CERT_FILE"
 
 # Transmission
-export TRANSMISSION_HOME="$HOME/.config/transmission"
-export TRANSMISSION_WEB_HOME="$HOME/Library/Application Support/transmission-daemon/web"
+export TRANSMISSION_HOME="${HOME}/.config/transmission"
+export TRANSMISSION_WEB_HOME="${HOME}/Library/Application Support/transmission-daemon/web"
+
+if [[ ! -d $TRANSMISSION_WEB_HOME ]]; then
+    unset TRANSMISSION_WEB_HOME
+fi
 
 # XDG
-export XDG_DATA_HOME="$HOME/share"
+export XDG_DATA_HOME="${HOME}/share"
 export XDG_CONFIG_HOME="$dir_config"
-export XDG_CACHE_HOME="$HOME/Library/Caches"
+export XDG_CACHE_HOME="${HOME}/Library/Caches"
 
 # StarDict
-export STARDICT_DATA_DIR="$HOME/share/dict/stardict"
+export STARDICT_DATA_DIR="${HOME}/share/dict/stardict"
 export SDCV_HISTSIZE=0
 export SDCV_PAGER="${SDCV_PAGER:=$(getPath less)}"
 
@@ -161,22 +155,20 @@ export SDCV_PAGER="${SDCV_PAGER:=$(getPath less)}"
 # less
 # -----------------------------------------------------------------------------
 
-LESS=
-LESS+='--QUIET '                    # never ring the terminal bell [-Q]
-LESS+='--ignore-case '              # case-insensitive searching [-i]
-LESS+='--squeeze-blank-lines '      # combine consecutive blank lines [-s]
-LESS+='--no-init '                  # don't clear the screen on exit [-X]
+export LESS=
+LESS+='--QUIET '                # never ring the terminal bell [-Q]
+LESS+='--ignore-case '          # case-insensitive searching [-i]
+LESS+='--squeeze-blank-lines '  # combine consecutive blank lines [-s]
+LESS+='--no-init '              # don't clear the screen on exit [-X]
 
-LESSCHARSET=utf-8
-LESSHISTFILE=/dev/null              # don't keep a history file
+export LESSCHARSET=utf-8
+export LESSHISTFILE=/dev/null   # don't keep a history file
 
 if lesspipe="$(getPath src-hilite-lesspipe.sh)"; then
-    LESSOPEN="| $lesspipe %s"       # source highlighting
-    LESS+='--RAW-CONTROL-CHARS '    # output raw ANSI (e.g. \e[1;31m) [-R]
+    export LESSOPEN="| ${lesspipe} %s"  # source highlighting
+    LESS+='--RAW-CONTROL-CHARS '        # output raw ANSI (e.g. \e[1;31m) [-R]
     unset lesspipe
 fi
-
-export LESS{,CHARSET,HISTFILE,OPEN}
 
 # -----------------------------------------------------------------------------
 # architecture & multi-core processing
@@ -188,14 +180,13 @@ if [[ $NUMBER_OF_PROCESSORS -gt 1 ]]; then
     export MAKEFLAGS="-j${NUMBER_OF_PROCESSORS}"
 fi
 
-_inPath sysctl \
-    && PROCESSOR_ARCHITECTURE="${PROCESSOR_ARCHITECTURE:=$(sysctl -n hw.machine)}"
+if _inPath sysctl; then
+    export PROCESSOR_ARCHITECTURE="${PROCESSOR_ARCHITECTURE:=$(sysctl -n hw.machine)}"
+fi
 
 if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ -arch ]]; then
     export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
 fi
-
-export PROCESSOR_ARCHITECTURE NUMBER_OF_PROCESSORS
 
 # -----------------------------------------------------------------------------
 
