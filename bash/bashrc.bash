@@ -15,17 +15,34 @@ fi
 # where am I?
 : ${HOSTNAME:=$(hostname)}
 
-# locale settings: Canadian English, UTF-8
+export USER LOGNAME HOSTNAME
+
+# -----------------------------------------------------------------------------
+# localization: Canadian English, UTF-8
+# -----------------------------------------------------------------------------
+
 LANGUAGE='en_CA:en'
-LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')" # "en_CA.UTF-8" or "en_CA.utf8"
-LC_ALL="$LANG"
-LC_CTYPE="$LANG"
-LC_MESSAGES="$LANG"
+
+# grep available locales to find 'en_CA.UTF-8' or 'en_CA.utf8'
+LANG="$(locale -a 2>/dev/null | GREP_OPTIONS= grep -Ei 'en_CA\.utf-?8')"
+
+LC_COLLATE="$LANG"  # collation information for regular expressions and sorting
+LC_CTYPE="$LANG"    # character type and classification information
+LC_MESSAGES="$LANG" # conventions for messages, incl. yes/no responses
+LC_MONETARY="$LANG" # money-related numeric formatting
+LC_NUMERIC="$LANG"  # other numeric formatting (e.g. thousands separator)
+LC_TIME="$LANG"     # date and time formatting
+LC_ALL="$LANG"      # overrides the above (in most cases)
+
+# time zone
 TZ='America/Edmonton'
 
-export USER LOGNAME HOSTNAME LANG LANGUAGE ${!LC_*} TZ
+export LANG LANGUAGE ${!LC_*} TZ
 
+# -----------------------------------------------------------------------------
 # some obvious terminals I use
+# -----------------------------------------------------------------------------
+
 if [[ -z $TERM_PROGRAM ]]; then
     if [[ $TERM =~ putty* ]]; then
         TERM_PROGRAM='PuTTY'
@@ -83,7 +100,7 @@ fi
 # shell variables
 # -----------------------------------------------------------------------------
 
-IGNOREEOF=2             # require ^D x 3 to exit
+IGNOREEOF=2             # require ^D × 3 to exit
 TMOUT=28800             # logout after 8 hrs inactivity
 
 export TMPDIR="${TMPDIR:-/tmp}"
@@ -101,7 +118,7 @@ shopt -s histreedit     # re-edit failed history substitutions
 shopt -s histverify     # review/change history substitutions before executing
 
 HISTCONTROL=ignoredups:ignorespace:erasedups
-HISTIGNORE='-:--:..:[bf]g:cd:clear:exit:hist*:ls:pwd:rl'
+HISTIGNORE='-:--:..:[bf]g:cd:clear:exit:hist*:l[sl]:pwd:rl'
 HISTTIMEFORMAT='%F %T '
 
 HISTFILE="$HOME/.bash_history"
@@ -147,7 +164,7 @@ fi
 # other config files
 # -----------------------------------------------------------------------------
 
-export dir_config="$HOME/.config"
+export dir_config="${HOME}/.config"
 
 _source()
 {   # source files if they exist; fail silently if they don't
@@ -216,7 +233,7 @@ _source "${HOME}/.fzf/pkg/.fzf.bash"
 if [[ -z $STY && -z $TMUX ]]; then
     # login banner
     if [[ -x $dir_scripts/loginbanner.sh ]]; then
-        $dir_scripts/loginbanner.sh
+        "$dir_scripts"/loginbanner.sh
     fi
 
     # local initialization script
