@@ -58,7 +58,7 @@ complete -abcfk -A function -A helptopic \
 complete -A function            fe where
 complete -def                   trash
 complete -A shopt               _shoptSet
-complete -v                     whatvar wv
+complete -v                     whatvar wv explode
 complete -a                     alias unalias
 
 # reloading config files with `rl`
