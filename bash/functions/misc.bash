@@ -17,42 +17,6 @@ div()
     printf "\n${esc_hi}${line// /$p}${esc_reset}\n\n"
 }
 
-pdfcrack()
-{   # remove password protection from PDF documents
-    _inPath gs || {
-        scold "$FUNCNAME: Ghostscript not found"
-        return 1
-    }
-
-    declare dir_fonts threads
-
-    case $OSTYPE in
-        cygwin)
-            dir_fonts="$WINDIR/Fonts" ;;
-        darwin*)
-            dir_fonts="/Library/Fonts"
-            threads="-dNumRenderingThreads=$(sysctl -n hw.availcpu)"
-            ;;
-        *)
-            scold "OS not supported"
-            return 1
-            ;;
-    esac
-
-    for file in "$@"; do
-        gs \
-            -dSAFER -dBATCH -dNOPAUSE \
-            -sDEVICE=pdfwrite \
-            -sPDFPassword= \
-            -sFONTPATH="$dir_fonts" \
-            -dPDFSETTINGS=/prepress \
-            -dPassThroughJPEGImages=true \
-            -sOutputFile="${file%.*}_nopassword.pdf" \
-            ${threads} \
-            "$file"
-    done
-}
-
 songinfo()
 {   # prints metadata for song files
     declare song="$1"
