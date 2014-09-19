@@ -12,13 +12,43 @@ gg()
     grep -i --line-number --recursive "$@" *
 }
 
+_find()
+{   # general finding function
+    # Usage: _find TYPE SCOPE STRING
+
+    local usage="${FUNCNAME[0]} TYPE SCOPE STRING"
+
+    local find_type="$1"; shift
+    local scope="$1"; shift
+    local term="$@"
+
+    case $find_type in
+        f|d)
+            continue
+            ;;
+        file|dir)
+            find_type="${find_type:0:1}"
+            ;;
+        *)
+            scold "Usage: ${usage}"
+            return 1
+            ;;
+    esac
+
+    find -H "$scope" -type $find_type -iname '*'"${term}"'*' 2>&- \
+    | sed "s|^${HOME}|~|g" \
+    | grep -i "$term"
+
+}
+
 ff()
 {   # find a file whose name contains a given string
-    declare scope="$PWD" term="$@"
+    _find file "$PWD" "$@"
+}
 
-    find -H "$scope" -type f -iname '*'$term'*' 2>&- \
-    | sed "s|^$HOME|~|g" \
-    | grep -i "$term"
+fd()
+{   # find a directory whose name contains a given string
+    _find dir "$PWD" "$@"
 }
 
 _inPath mdfind && {
@@ -33,7 +63,7 @@ _inPath mdfind && {
 
 _find_daysold()
 {   # list all files under $PWD changed in the last $1 days
-    
+
     declare days="$1" find_bin
 
     if ! _isNumber "$days"; then

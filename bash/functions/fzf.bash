@@ -4,7 +4,7 @@
 
 _isFunction fzf || return 69
 
-fd()
+fcd()
 {   # cd to selected directory
 
     local dir
@@ -21,12 +21,12 @@ fkill()
 
     local sigspec="${1:-9}"
     local target_pid
-    
+
     local ps_flags='ef'
     local kill_cmd="builtin kill -${sigspec}"
 
     if [[ $OSTYPE == cygwin ]]; then
-        ps_flags+='W' # include Windows processes 
+        ps_flags+='W' # include Windows processes
         kill_cmd="/bin/kill --force --signal ${sigspec}"
     fi
 
