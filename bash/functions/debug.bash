@@ -114,13 +114,8 @@ args()
     local num_args="$#"
     local string
 
-    if [[ $num_args -eq 1 ]]; then
-        string='arg'
-    else
-        string='args'
-    fi
-
-    printf '%d %s:' "$num_args" "$string"
+    printf '%b%d%b:' \
+        "$esc_hi" "$num_args" "$esc_reset"
 
     local arg
     for arg in "$@"; do
