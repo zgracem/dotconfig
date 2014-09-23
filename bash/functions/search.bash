@@ -12,9 +12,9 @@ gg()
     grep -i --line-number --recursive "$@" *
 }
 
-_find()
+_zfind()
 {   # general finding function
-    # Usage: _find TYPE SCOPE STRING
+    # Usage: _zfind TYPE SCOPE STRING
 
     local usage="${FUNCNAME[0]} TYPE SCOPE STRING"
 
@@ -43,12 +43,12 @@ _find()
 
 ff()
 {   # find a file whose name contains a given string
-    _find file "$PWD" "$@"
+    _zfind file "$PWD" "$@"
 }
 
 fd()
 {   # find a directory whose name contains a given string
-    _find dir "$PWD" "$@"
+    _zfind dir "$PWD" "$@"
 }
 
 _inPath mdfind && {
