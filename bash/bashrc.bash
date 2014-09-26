@@ -198,6 +198,9 @@ case $OSTYPE in
     linux*)  dotfiles+=(linux) ;;
 esac
 
+# local .bashrc, if any
+dotfiles+=(local)
+
 # source them all
 for dotfile in "${dotfiles[@]}"; do
     _source "${dir_config}/bash/${dotfile}.bash"
