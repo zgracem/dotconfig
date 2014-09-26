@@ -72,7 +72,6 @@ shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
 
 shopt -s cdspell        # correct minor spelling errors in the cd command
 shopt -s checkhash      # check the hash table for a command before executing it
-shopt -s checkjobs      # warn when exiting shell with stopped/running jobs
 shopt -s checkwinsize   # update LINES and COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
 
@@ -92,7 +91,7 @@ if [[ $bashver -ge 41 ]]; then
 fi
 
 if [[ $bashver -ge 40 ]]; then
-    shopt -s checkjobs  # list stopped/running jobs on shell exit
+    shopt -s checkjobs  # warn when exiting shell with stopped/running jobs
     shopt -s globstar   # '**' matches all directories and their files recursively
 fi
 
