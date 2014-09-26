@@ -48,6 +48,11 @@ esac
 
 # machine-specific
 case $HOSTNAME in
+    Minerva)
+        dir_old="/Volumes/Minerva HD"
+        dir_oldhome="${dir_old}${HOME}"
+        ;;
+
     Erato)
         dir_docs="${dir_dropbox}/Documents"
         ;;
