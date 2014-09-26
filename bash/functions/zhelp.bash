@@ -2,6 +2,10 @@
 # header
 # -----------------------------------------------------------------------------
 
+if [[ ${BASH_VERSINFO[0]} -lt 4 ]]; then
+    return
+fi
+
 # TODO:
 # - comments
 
@@ -38,14 +42,14 @@ _z_man_cmd="${LESS_TERMCAP_md:-$_z_grn}"
 _z_man_var="${LESS_TERMCAP_us:-$_z_yel}"
 
 case $_z_bg in
-    dark)   
+    dark)
         _z_punct="$_z_wht"
         ;;
-    light)  
+    light)
         _z_punct="$_z_blk"
         _z_true="$_z_cyn"
         ;;
-    *)      
+    *)
         _z_punct="$_z_rst"
         ;;
 esac
@@ -152,7 +156,7 @@ zhelp::alias()
 
 zhelp::where()
 {   # return filename and line number where function $1 was defined
-    
+
     declare func="$1" location line _extdebug_toggled
 
     if ! zhelp::isFunction "$func"; then
@@ -190,7 +194,7 @@ zhelp::function()
     # display source file and line number
     zhelp::where "$func"
     zhelp::print "\n"
-    
+
     # print source, colourizing function name
     declare -f "$func" \
     | sed -E "s/^${func}\b/${_z_function_name}\0${_z_rst}/"
@@ -229,13 +233,13 @@ zhelp::whatis()
         | sed -E "s/^(${thing,,})[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/${_z_file_name}\1${_z_rst}\2${_z_punct}:${_z_rst} \3/g"
 
     done < <(command whatis "$thing")
-    
+
     [[ $_found == true ]]
 }
 
 zhelp::variable()
 {   # like `type`, but for variables
-    
+
     declare var="$1" article="a" var_type="variable"
     declare var_{flags,nature,property,content} string
 
@@ -302,7 +306,7 @@ zhelp::define()
         # get the type (alias/keyword/function/builtin/file)
         thing_type=$(type -t "$thing" 2>/dev/null)
     fi
-    
+
     case $thing_type in
         keyword|builtin)
             zhelp::print "${_z_special_name}${thing}"
@@ -336,7 +340,7 @@ zhelp::describe()
         # get the type (alias/keyword/function/builtin/file)
         thing_type=$(type -t "$thing" 2>/dev/null)
     fi
-    
+
     case $thing_type in
         keyword|builtin)
             zhelp::help "$thing"
@@ -371,7 +375,7 @@ zhelp::wtf()
             *)
                 break 2
                 ;;
-        esac           
+        esac
     done
 
     declare thing="$1" thing_type whatis_string
@@ -385,10 +389,10 @@ zhelp::wtf()
     if [[ ${#thing_types[@]} -gt 0 ]]; then
         for thing_type in ${thing_types[@]}; do
             case ${FUNCNAME[1]} in
-                *which) 
+                *which)
                     zhelp::define "$thing" "$thing_type"
                     ;;
-                *what) 
+                *what)
                     zhelp::describe "$thing" "$thing_type"
                     ;;
                 *)
@@ -411,7 +415,7 @@ zhelp::wtf()
         zhelp::variable "$thing" \
             && return 0
     fi
-  
+
     zhelp::scold "${_z_false}${thing}${_z_rst}: not found"
     return 1
 }
