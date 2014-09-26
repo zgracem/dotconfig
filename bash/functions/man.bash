@@ -95,7 +95,14 @@ manpdf()
 
     # open in default PDF viewer if not logged in remotely
     if [[ -z $SSH_CONNECTION ]]; then
-        open "$pdf_file"
+        case $OSTYPE in
+            cygwin)
+                cygstart "$pdf_file"
+                ;;
+            darwin*)
+                open "$pdf_file"
+                ;;
+        esac
     else
         return 0
     fi
