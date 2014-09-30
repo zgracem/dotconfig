@@ -62,7 +62,7 @@ ex()
                 *.bz2)      bunzip2 "$archive" ;;
                 *.gz)       gunzip "$archive"  ;;
                 *.jar)      jar xf "$archive"  ;;
-                *.pkg)      pkgutil --expand "$archive" . ;;
+                *.pkg)      pkgutil --expand "$archive" "${archive%.pkg}" ;;
                 *.rar)      unrar x "$archive" ;;
                 *.tar)      tar xf "$archive"  ;;
                 *.tbz2)     tar xjf "$archive" ;;
@@ -70,6 +70,8 @@ ex()
                 *.xz)       unxz -k "$archive" ;;
                 *.Z)        uncompress "$archive" ;;
                 *.zip)      unzip "$archive"   ;;
+                Payload)    gunzip -dc "$archive" \
+                            cpio -i ;;
                 *)          scold "${FUNCNAME[0]}: ${archive}: not a recognized archive"
                             return 1 ;;
             esac
