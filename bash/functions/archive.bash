@@ -38,7 +38,7 @@ tarup()
     roll "${dir}.tar.gz" "${dir%/}/"
 }
 
-tarup()
+zipup()
 {   # zip an entire directory
 
     local dir="${1%/}"
