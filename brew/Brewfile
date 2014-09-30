@@ -89,6 +89,7 @@ install homebrew/games/unnethack
 # misc.
 # -----------------------------------------------------------------------------
 
+install pv
 install rename
 install tree
 install watch
