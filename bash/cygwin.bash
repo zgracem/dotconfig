@@ -48,7 +48,7 @@ unset pkey
 # aliases
 # -----------------------------------------------------------------------------
 
-alias cpcd='cygpath -aw "$PWD" | putclip'
+alias cpcd='cygpath -aw "$PWD" | tr -d "\n" | putclip'
 alias eject="${SYSTEMROOT}/system32/rundll32 shell32.dll,Control_RunDLL hotplug.dll"
 
 alias tar='/usr/bin/bsdtar'
