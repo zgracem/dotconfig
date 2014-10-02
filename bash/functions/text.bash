@@ -37,7 +37,7 @@ _edit()
     done
 }
 
-export -f _edit
+# export -f _edit
 
 clip()
 {   # copy a plain text file to the clipboard
