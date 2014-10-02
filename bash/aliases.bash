@@ -69,9 +69,6 @@ alias .....='cd ../../../..'
 
 alias bell='tput bel'
 alias colourstrip='sed -E "s|\[[0-9;]*m?||g"'
-alias dl='curl -OJ'                 # download a file
-alias headers='curl -Is'            # HTTP headers for $1
-alias myip='curl -S $ip_site'       # external IP address (see private.bash)
 alias nowz='date --utc +%FT%TZ'     # date & time in ISO 8601 format
 alias pingg='ping -c 4 google.com'  # check network connection
 alias sortpb='pbpaste | sort -u | pbcopy'
@@ -79,6 +76,17 @@ alias sortpb='pbpaste | sort -u | pbcopy'
 alias newpw="$dir_scripts/newpassword.sh -c"
 alias newpwclip="newpw | colourstrip | tr -d '\n' | pbcopy"
 alias ttest="$dir_scripts/dev/test.sh"
+
+# wget and curl
+if _inPath wget; then
+    alias dl='wget -c'                  # download a file
+    alias headers='wget --spider -Snv'  # get HTTP headers
+    alias myip='wget -qO - $ip_site'    # external IP address (see private.bash)
+elif _inPath curl; then
+    alias dl='curl -OJ'
+    alias headers='curl -Is'
+    alias myip='curl -S $ip_site'
+fi
 
 # alias foo='~/scripts/foo.sh'
 [[ -d $dir_scripts ]] && {
