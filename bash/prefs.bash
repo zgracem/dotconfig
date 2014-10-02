@@ -87,7 +87,7 @@ export NETHACKOPTIONS="@${dir_config}/nethackrc"
 export PIP_CONFIG_FILE="${dir_config}/pip.conf"
 export SCREENRC="${dir_config}/screenrc"
 
-alias curl='curl -K "${CURLRC}"'
+alias curl='curl -K "${CURLRC}" '
 
 # -----------------------------------------------------------------------------
 # settings -- environment variables
