@@ -153,3 +153,13 @@ explode()
 
     return 1
 }
+
+screensize()
+{   # output the screen dimensions
+
+    local x=$'\xc3\x97'
+    local w="${COLUMNS:-$(tput cols)}"
+    local h="${LINES:-$(tput lines)}"
+
+    printf '%d %b %d\n' "$w" "$x" "$h"
+}
