@@ -84,7 +84,7 @@ unset app flag
 export CURLRC="${dir_config}/curlrc"
 export INPUTRC="${dir_config}/inputrc"
 export NETHACKOPTIONS="@${dir_config}/nethackrc"
-export PIP_CONFIG_FILE="${dir_config}/pip.conf"
+export PIP_CONFIG_FILE="${dir_local}/pip.conf"
 export SCREENRC="${dir_config}/screenrc"
 
 alias curl='curl -K "${CURLRC}" '
