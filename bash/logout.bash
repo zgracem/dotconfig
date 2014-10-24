@@ -16,8 +16,11 @@ else
 fi
 
 if [[ $(command stat ${flags} "$HISTFILE" 2>/dev/null) -ge 131072 ]]; then
-    mv "$HISTFILE" "${HISTFILE}_$(date +%y%m%d)"
-    touch "$HISTFILE"
+	mkdir -p "${HOME}/Archive" \
+	&& {
+	    mv "$HISTFILE" "${HOME}/Archive/${HISTFILE}_$(date +%y%m%d)"
+	    touch "$HISTFILE"
+	}
 fi
 
 unset flags
