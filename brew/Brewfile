@@ -36,7 +36,7 @@ install reattach-to-user-namespace
 # -----------------------------------------------------------------------------
 
 install coreutils
-install moreutils
+install moreutils || true
 install gnu-getopt
 install gnu-tar
 
@@ -54,7 +54,7 @@ install homebrew/dupes/grep --default-names
 # -----------------------------------------------------------------------------
 
 install links
-install mobile-shell --HEAD
+install mobile-shell --HEAD || true
 install transmission
 install ttytter
 install wget --enable-iri
@@ -103,7 +103,7 @@ install unrar
 install python
 install git || true
 install jq
-install node
+install node || true
 install sqlite
 install txt2man
 
