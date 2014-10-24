@@ -23,6 +23,7 @@ gnupg/*
 !gnupg/agent
 !gnupg/gpg.conf
 !gnupg/gpg-agent.conf
+keybase/*
 
 # assorted crap
 local/
