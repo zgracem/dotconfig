@@ -59,8 +59,6 @@ export TERM_PROGRAM
 # shell options
 # -----------------------------------------------------------------------------
 
-set -o monitor          # enable job control
-set +o notify           # disable instant job-termination notification (wait till next prompt)
 set -o noclobber        # output redirection won't overwrite (override with >|filename)
 set -o pipefail         # pipelines return the rightmost non-zero status, if any
 set -o vi               # vi mode
@@ -70,8 +68,6 @@ shopt -s extglob        # enable extended pattern matching
 shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
 shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
 
-shopt -s cdspell        # correct minor spelling errors in the cd command
-shopt -s checkhash      # check the hash table for a command before executing it
 shopt -s checkwinsize   # update LINES and COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in the standard GNU format
 
@@ -117,7 +113,7 @@ shopt -s histreedit     # re-edit failed history substitutions
 shopt -s histverify     # review/change history substitutions before executing
 
 HISTCONTROL=ignoredups:ignorespace:erasedups
-HISTIGNORE='-:--:..:[bf]g:cd:clear:exit:hist*:l[sl]:pwd:rl'
+HISTIGNORE='-:--:..*:[bf]g:cd:exit:history:l[sl]:pwd:rl'
 HISTTIMEFORMAT='%F %T '
 
 HISTFILE="$HOME/.bash_history"
