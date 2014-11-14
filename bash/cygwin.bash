@@ -58,6 +58,9 @@ alias open='cygstart'
 alias pbcopy='putclip '
 alias pbpaste='getclip '
 
+alias hide='"${SYSTEMROOT}/system32/attrib" +H'
+alias unhide='"${SYSTEMROOT}/system32/attrib" -H'
+
 alias emptytrash='command -p rm -rf ~/.Trash/* 1>/dev/null'
 alias mdclip='getclip | ~/bin/Markdown.pl | putclip'
 alias sp='ff'
