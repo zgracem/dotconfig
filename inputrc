@@ -64,11 +64,19 @@ set echo-control-characters off
 
 # vi mode
 $if mode=vi
-    set keymap vi-command
+    set keymap vi
     "\C-x\C-r": re-read-init-file
     "\C-x\C-e": edit-and-execute-command
+    "\eu": upcase-word
+    "\el": downcase-word
+
+    set keymap vi-command
+    "\C-t": transpose-chars
+    "\et": transpose-words
 
     set keymap vi-insert
+    "\C-x\C-e": edit-and-execute-command
+
     "\C-a": beginning-of-line
     "\C-e": end-of-line
     "\C-l": clear-screen
