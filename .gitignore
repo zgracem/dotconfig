@@ -1,6 +1,5 @@
 # -----------------------------------------------------------------------------
 # ~zozo/.config/.gitignore
-# say hello: printf "zozo\x40inescapable\x2eorg"
 # -----------------------------------------------------------------------------
 
 # this file
@@ -8,6 +7,11 @@
 
 # private configuration files
 **/private*
+bash/bashrc.d/1pass.bash
+bash/bashrc.d/config.bash
+bash/bashrc.d/jrnl.bash
+bash/bashrc.d/snmp.bash
+bash/private.bash
 dropbox_uploader
 
 # email
@@ -15,26 +19,20 @@ alpine/
 **/email.conf
 offlineimaprc
 
-# custom spellcheck dictionaries
-aspell/
-
-# GPG
+# GPG/SSH
 gnupg/*
-!gnupg/agent
 !gnupg/gpg.conf
 !gnupg/gpg-agent.conf
-keybase/*
+keybase/
+ssh/
 
 # assorted crap
+aspell/
+bash.old/
 local/
 misc/
 
-# SSH
-ssh/*
-!ssh/agent
-!ssh/config_skel
-
-# not ready for primetime
+# fish -- http://fishshell.com/
 fish/
 
 # charm -- http://ljcharm.sourceforge.net/
@@ -43,7 +41,7 @@ charmrc
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*
 
-# Transmission
+# Transmission -- https://transmissionbt.com/
 transmission/
 
 # TTYtter -- http://www.floodgap.com/software/ttytter/

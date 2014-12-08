@@ -1,10 +1,10 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/bash/logout                                  executed on logout
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~zozo/.config/bash/logout
+# executed on logout
 # -----------------------------------------------------------------------------
 
 # revoke sudo privileges
-if _inPath sudo && [[ $(who | grep -ch "^$USER\>") -le 2 ]]; then
+if _inPath sudo && (( $(who | command grep -chw "^$USER") < 2 )); then
     sudo -k
 fi
 
@@ -15,12 +15,12 @@ else
     flags='-f %z'
 fi
 
-if [[ $(command stat ${flags} "$HISTFILE" 2>/dev/null) -ge 131072 ]]; then
-	mkdir -p "${HOME}/Archive" \
-	&& {
-	    mv "$HISTFILE" "${HOME}/Archive/${HISTFILE}_$(date +%y%m%d)"
-	    touch "$HISTFILE"
-	}
+if (( $(command stat ${flags} "$HISTFILE" 2>/dev/null) >= (128 * 1024) )); then
+    command mkdir -p "${HOME}/Archive" \
+        && {
+            command mv "$HISTFILE" "${HOME}/Archive/${HISTFILE}_$(date +%y%m%d)"
+            command touch "$HISTFILE"
+        }
 fi
 
-unset flags
+unset -v flags

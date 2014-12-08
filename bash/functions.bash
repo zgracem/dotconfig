@@ -1,12 +1,31 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/bash/functions
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~zozo/.config/bash/functions.bash
 # -----------------------------------------------------------------------------
 
 quietly()
 {   # execute a command silently
     "$@" >/dev/null 2>&1
 }
+
+scold()
+{   # echo to standard error
+    printf '%b\n' >&2 "$@"
+}
+
+z_newline()
+{   # print a newline if output is going to a terminal (force with -f)
+    # Usage: z_newline [-f]
+
+    if [[ -t 1 || $1 == -f ]]; then
+        printf '%b' '\n'
+    else
+        return 0
+    fi
+}
+
+# -----------------------------------------------------------------------------
+# true/false functions
+# -----------------------------------------------------------------------------
 
 _inPath()
 {   # exits 0 if $1 is installed in $PATH
@@ -28,6 +47,24 @@ _isAlias()
     quietly alias "$1"
 }
 
+_optSet()
+{   # exits 0 if all shell variables in $@ are set
+
+    local opt
+    for opt in "$@"; do
+        [[ :$SHELLOPTS: =~ :$opt: ]] || return 1
+    done
+}
+
+_shoptSet()
+{   # exits 0 if all shell options in $@ are set
+    shopt -pq $*
+}
+
+# -----------------------------------------------------------------------------
+# $PATH-related functions
+# -----------------------------------------------------------------------------
+
 getPath()
 {   # returns the full path to $1
     type -P "$1" 2>/dev/null
@@ -35,7 +72,8 @@ getPath()
 
 getGNU()
 {   # return the path to the GNU version of $1, if available
-    declare bin="$1"
+
+    local bin="$1"
 
     if _isGNU "$bin"; then
         type -P "$bin"
@@ -43,16 +81,3 @@ getGNU()
         getPath "g${bin}"
     fi
 }
-
-scold()
-{   # echo to standard error
-    # Usage: scold [source] "message"
-
-    printf '%b\n' >&2 "${2+$1: }${2-$1}"
-}
-
-# -----------------------------------------------------------------------------
-# separate function files
-# -----------------------------------------------------------------------------
-
-_source $dir_config/bash/functions/*.bash
