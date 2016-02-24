@@ -1,0 +1,70 @@
+require 'rubygems'
+require 'irb/completion'  # double-Tab completion for methods
+require 'pp'              # pretty print
+
+require 'what_methods'    # object.what?(result) => method(s) that will produce result
+
+# -----------------------------------------------------------------------------
+# settings
+# -----------------------------------------------------------------------------
+
+IRB.conf[:AUTO_INDENT]  = true
+
+IRB.conf[:USE_READLINE] = true
+
+# IRB.conf[:HISTORY_FILE] = File::expand_path("~/.irb_history")
+# IRB.conf[:SAVE_HISTORY] = 1024
+# IRB.conf[:EVAL_HISTORY] = 256
+
+# -----------------------------------------------------------------------------
+# prompt
+# -----------------------------------------------------------------------------
+
+case ENV["solarized"]
+  when "dark"
+    colour = "37"   # white
+  when "light"
+    colour = "30"   # black
+  else
+    colour = "1;37" # brwhite
+end
+
+on  = "\001\e[" + colour + "m\002"
+off = "\001\e[0m\002"
+
+IRB.conf[:PROMPT][:ZGM] = {
+  # normal prompt
+  PROMPT_I: "#{on}>>#{off} ",
+
+  # prompt when continuing a string
+  PROMPT_S: "#{on}>%l#{off} ",
+
+  # prompt when continuing a statement
+  PROMPT_C: "#{on}>*#{off} ",
+
+  # prompt when indenting code
+  PROMPT_N: "#{on}>>>>#{off} ",
+
+  # prefix to statement output
+  RETURN:   "\001\e[34m\002=>#{off} %s\n"
+}
+
+IRB.conf[:PROMPT_MODE]  = :ZGM
+
+# -----------------------------------------------------------------------------
+# proxy
+# -----------------------------------------------------------------------------
+
+if ENV["HOSTNAME"].to_s =~ /WS144966/
+  require "socksify"
+  TCPSocket.socks_server = "127.0.0.1"
+  TCPSocket.socks_port   = 8080
+end
+
+# -----------------------------------------------------------------------------
+# helper methods
+# -----------------------------------------------------------------------------
+
+def echo
+  conf.echo = !(conf.echo)
+end
