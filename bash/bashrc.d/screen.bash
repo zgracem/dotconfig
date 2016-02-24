@@ -1,11 +1,26 @@
-# reattach a session; detach/create it first if necessary
-alias ss='screen -d -R '
+_inPath screen || return
+
+# set socket directory
+export SCREENDIR="$HOME/tmp/.screens"
 
 # Solarized Light colour scheme
 if [[ $solarized == light ]]; then
-    SCREENRC="${dir_config}/screenrc.light"
+    export SCREENRC="${dir_config}/screenrc.light"
 else
-	SCREENRC="${dir_config}/screenrc"
+    export SCREENRC="${dir_config}/screenrc"
 fi
 
-export SCREENRC
+# -----------------------------------------------------------------------------
+
+ss()
+{   # reattach a session; detach/create it first if necessary
+    if [[ -n $SCREENDIR && ! -d $SCREENDIR ]]; then
+        command mkdir -p -m 700 "$SCREENDIR"
+    else
+        chmod 700 "$SCREENDIR"
+    fi
+
+    command screen -d -R "$@"
+    #               │  └─ reattach a session if one exists, otherwise create it
+    #               └──── detach existing session if necessary
+}

@@ -2,16 +2,16 @@ lipsum()
 {   # return a paragraph of lorem ipsum text
     local regex_help='-?-h(elp)?'
 
-    [[ $1 =~ $regex_help ]] && {
-        printf "Usage: %s [COUNT] [short|medium|long|verylong]\n" "$FUNCNAME"
-        return
-    }
+    if [[ $1 =~ $regex_help ]]; then
+        echo "Usage: ${FUNCNAME[0]} [COUNT] [short|medium|long|verylong]"
+        return $EX_OK
+    fi
 
     local count="${1:-1}"
     local length="${2:-medium}"
 
     curl -sS "http://loripsum.net/api/${count}/prude/${length}" \
-    | sed -e 's#<[^>]*>##g'
+    | sed -E 's#<[^>]*>##g'
 
     # API parameters:
     #   (integer) - The number of paragraphs to generate.

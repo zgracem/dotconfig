@@ -7,7 +7,7 @@ if [[ -r $MAIL ]]; then
     MAILCHECK=300           # check mail every 5 minutes
     MAILPATH=$MAIL?'New mail in $_'
 else
-    unset -v MAILCHECK
+    unset -v MAIL MAILCHECK MAILPATH
 fi
 
 # mailcaps

@@ -1,9 +1,5 @@
-# ------------------------------------------------------------------------------
-# ~zozo/.config/bash/functions.d/math.bash
-# ------------------------------------------------------------------------------
-
 _isNumber()
-{   # returns 0 if $1 is a valid hexadecimal number
+{   # returns 0 if $1 is a valid number
     local digitRegex='^-?[[:digit:]]+$'
     [[ $1 =~ $digitRegex ]]
 }
@@ -17,8 +13,7 @@ _isHex()
 
 calc()
 {
-    echo "$*" \
-    | bc -q 2>/dev/null
+    bc -q 2>/dev/null <<< "$*"
 }
 
 min()

@@ -1,7 +1,9 @@
-case $OSTYPE in
-    cygwin)  flags_pid='-asW' ;;
-    *)       flags_pid='-cx -o pid,command' ;;
-esac
+if [[ -z $flags_pid ]]; then
+    case $OSTYPE in
+        cygwin)  flags_pid='-asW' ;;
+        *)       flags_pid='-cx -o pid,command' ;;
+    esac
+fi
 
 pidof()
 {   # return the PID of process $1 or exit false

@@ -5,11 +5,8 @@ rot13()
     if [[ -f $1 ]]; then
         # file
         tr $mask < "$1"
-    elif [[ -t 0 ]]; then
-        # string
-        echo "$1" | tr $mask
     else
-        # standard input
-        tr $mask
+        # string or standard input
+        tr $mask <<< "${@:-$(</dev/stdin)}"
     fi
 }

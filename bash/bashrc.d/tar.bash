@@ -5,5 +5,5 @@ export COPYFILE_DISABLE=true
 export COMP_TAR_INTERNAL_PATHS=1
 
 if [[ $OSTYPE =~ cygwin ]]; then
-	alias tar='/usr/bin/bsdtar'
+	tar() { /usr/bin/bsdtar "$@"; }
 fi

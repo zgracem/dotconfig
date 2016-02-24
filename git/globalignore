@@ -1,6 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/git/globalignore
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~/.config/git/globalignore
 # -----------------------------------------------------------------------------
 
 !.gitignore

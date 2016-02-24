@@ -2,35 +2,38 @@
 # flags
 # -----------------------------------------------------------------------------
 
-export flags_grep=
-flags_grep+='--extended-regexp '  # use ERE syntax (-E)
-flags_grep+='--colour=auto '      # display results in colour
-flags_grep+='--no-messages '      # no errors about missing/unreadable files (-s)
-flags_grep+='--directories=skip ' # silently skip directories by default (-d)
-flags_grep+='--exclude-dir=.git'  # skip .git directories
+quietly unalias grep
 
 grep()
 {
-    command grep $flags_grep "$@"
+    command grep -EsId skip --colour=auto --exclude-dir=.git "$@"
+    #             ││││      │             └─ skip .git directories
+    #             ││││      └─────────────── display results in colour
+    #             │││└────────────────────── silently skip directories by default
+    #             ││└─────────────────────── ignore binary files
+    #             │└──────────────────────── no errors about missing/unreadable files
+    #             └───────────────────────── use ERE syntax
 }
 
-export -f grep
-
 # -----------------------------------------------------------------------------
-# colours
+# function wrappers
 # -----------------------------------------------------------------------------
 
-export GREP_COLORS=
+g()
+{   # search files in the current directory
 
-GREP_COLORS+="sl=${null}:"        # whole selected lines
-GREP_COLORS+="cx=${colour_2d}:"   # whole context lines
-GREP_COLORS+="mt=${orange}:"      # any matching text
-GREP_COLORS+="ms=${ul}${orange}:" # matching text in a selected line
-GREP_COLORS+="mc=${orange}:"      # matching text in a context line
-GREP_COLORS+="fn=${colour_2d}:"   # filenames
-GREP_COLORS+="ln=${blue}:"        # line numbers
-GREP_COLORS+="bn=${cyan}:"        # byte offsets
-GREP_COLORS+="se=${null}"         # separators
+    local opts='in'
+    #           │└─ output line numbers
+    #           └── case-insensitive matching
 
-# deprecated
-export GREP_COLOR="${ul}${orange}"
+    grep -$opts "$@" *
+}
+
+gg()
+{   # search files and directories in the current directory
+
+    local opts='R'
+    #           └─ recursive
+
+    g -$opts "$@"
+}

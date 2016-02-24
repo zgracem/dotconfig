@@ -3,14 +3,13 @@ map()
     # Usage: map COMMAND: ITEM [ITEM ...]
     # Based on: http://redd.it/aks3u
 
-    declare usage="$FUNCNAME COMMAND: ITEM [ITEM ...]"
-    declare i cmd
-
     if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
-        scold $FUNCNAME "invalid syntax"
-        scold "Usage: $usage"
-        return 1
+        scold "${FUNCNAME[0]}: invalid syntax"
+        scold "Usage: ${FUNCNAME[0]} COMMAND: ITEM [ITEM ...]"
+        return $EX_USAGE
     fi
+
+    local cmd
 
     until [[ $1 =~ :$ ]]; do
         cmd+="$1 "
@@ -20,6 +19,7 @@ map()
     cmd+="${1%:} "
     shift
 
+    local i
     for i in "$@"; do
         eval "${cmd//\\/\\\\} \"${i//\\/\\\\}\""
     done

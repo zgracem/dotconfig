@@ -1,14 +1,29 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/inputrc
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~/.config/inputrc
 # -----------------------------------------------------------------------------
 
 # vi mode
 set editing-mode vi
 set keymap vi
 
+# allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# readline uses a visible bell if available
+set bell-style visible
+
+# -----------------------------------------------------------------------------
+# completion
+# -----------------------------------------------------------------------------
+
 # display a screenful of possible completions at a time
 set page-completions on
+
+# instead of vertically
+set print-completions-horizontally on
 
 # ask to view possible completions if >= x
 set completion-query-items 200
@@ -33,25 +48,12 @@ set mark-symlinked-directories on
 # don't autocomplete dotfiles unless the pattern explicitly begins with a dot
 set match-hidden-files on
 
-# be more intelligent when autocompleting by also looking at the text after
-# the cursor.
+# don't re-complete already-completed text after the cursor.
 set skip-completed-text on
 
-# allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
-set meta-flag on
-set input-meta on
-set output-meta on
-set convert-meta off
-
-# readline uses a visible bell if available
-set bell-style visible
-
-# don't echo ^C when aborting commands
-set echo-control-characters off
-
-# -----------
+# -----------------------------------------------------------------------------
 # keybindings
-# -----------
+# -----------------------------------------------------------------------------
 
 # Home, End, and Del
 "\e[1~": beginning-of-line
@@ -64,27 +66,32 @@ set echo-control-characters off
 
 # vi mode
 $if mode=vi
-    set keymap vi
-    "\C-x\C-r": re-read-init-file
-    "\C-x\C-e": edit-and-execute-command
-    "\eu": upcase-word
-    "\el": downcase-word
-
     set keymap vi-command
+    "\eu": upcase-word -1
+    "\el": downcase-word -1
     "\C-t": transpose-chars
     "\et": transpose-words
 
     set keymap vi-insert
-    "\C-x\C-e": edit-and-execute-command
-
     "\C-a": beginning-of-line
     "\C-e": end-of-line
     "\C-l": clear-screen
     "\C-w": backward-kill-word
-
-    "C-'": yank-last-arg
-
+    "\C-x\C-r": re-read-init-file
+    "\C-x\C-e": edit-and-execute-command
     # auto-complete from the history
     "\C-p": history-search-backward
     "\C-n": history-search-forward
+$endif
+
+$if Bash
+    # expand ! history with a spacebar press
+    Space: magic-space
+
+    ### ZGM disabled 2015-10-16 -- doesn't seem to help much
+    # # prevent garbage in terminal
+    # "\e[": skip−csi−sequence
+
+    # F10 exits
+    "\e[21~": ""
 $endif

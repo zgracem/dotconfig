@@ -1,94 +1,124 @@
-PATH=/usr/bin:/bin:/usr/sbin:/sbin
-MANPATH=/usr/share/man:/usr/man
-INFOPATH=/usr/share/info
-CDPATH=.:$HOME
+# -----------------------------------------------------------------------------
+# paths
+# -----------------------------------------------------------------------------
+
+# TODO: check dirs and write semi-static ~/etc/paths files?
+
+# only run if we need to
+# [[ -z $SYSPATH && -z $z_reloading ]] || return 0
+
+# get a reliable base path
+# export SYSPATH="$(command -p getconf PATH 2>/dev/null)"
+: ${SYSPATH:=/usr/bin:/bin:/usr/sbin:/sbin}
+
+# base paths
+export PATH=$SYSPATH
+export MANPATH=/usr/share/man:/usr/man
+export INFOPATH=/usr/share/info
+export CDPATH=.:$HOME
 
 # /usr/local
-if test -d /usr/local; then
-    PATH=/usr/local/bin:/usr/local/sbin:$PATH
-    MANPATH=/usr/local/share/man:$MANPATH
-    INFOPATH=/usr/local/share/info:$INFOPATH
-fi
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+MANPATH=/usr/local/share/man:$MANPATH
+INFOPATH=/usr/local/share/info:$INFOPATH
 
-# GNU tools (from Homebrew)
-if test -x /usr/local/bin/brew; then
-    core_prefix="`brew --prefix coreutils`"
-    sed_prefix="`brew --prefix gnu-sed`"
-    tar_prefix="`brew --prefix gnu-tar`"
+# -----------------------------------------------------------------------------
+# Ruby & Python
+# -----------------------------------------------------------------------------
 
-    if test -d $core_prefix; then
-        PATH=$core_prefix/libexec/gnubin:$PATH
-        MANPATH=$core_prefix/libexec/gnuman:$MANPATH
-        INFOPATH=$core_prefix/share/info:$INFOPATH
-    fi
+export RBENV_ROOT="$HOME/.rbenv"
 
-    if test -d $sed_prefix; then
-        PATH=$sed_prefix/libexec/gnubin:$PATH
-        MANPATH=$sed_prefix/libexec/gnuman:$MANPATH
-        INFOPATH=$sed_prefix/share/info:$INFOPATH
-    fi
-
-    if test -d $tar_prefix; then
-        PATH=$tar_prefix/libexec/gnubin:$PATH
-    fi
-
-    unset -v core_prefix sed_prefix tar_prefix
-fi
-
-# X11 apps
-if test -d /usr/X11; then
-    PATH=$PATH:/usr/X11/bin
-    MANPATH=$MANPATH:/usr/X11/share/man
-fi
-
-if test -d /usr/X11R6; then
-    PATH=$PATH:/usr/X11R6/bin
-    MANPATH=$MANPATH:/usr/X11R6/share/man
-fi
-
-# Ruby gems (Homebrew)
-GEM_HOME=/usr/local/opt/ruby
-
-if test -d $GEM_HOME; then
-    PATH=$GEM_HOME/bin:$PATH
-    MANPATH=$GEM_HOME/share/man:$MANPATH
-    export GEM_HOME
+if [[ -d $RBENV_ROOT ]]; then
+    export RBENV_ROOT
+    PATH=$RBENV_ROOT/bin:$PATH
+    eval "$(rbenv init -)"
 else
-    unset -v GEM_HOME
+    unset -v RBENV_ROOT
+fi
+
+# export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+
+### ZGM disabled 2015-10-04 -- not sure how this will interact w/ Homebrew pip
+# export PYTHONUSERBASE="$HOME/.pip"
+
+# if [[ -d $PYTHONUSERBASE ]]; then
+#     PATH=$PYTHONUSERBASE/bin:$PATH
+# else
+#     unset -v PYTHONUSERBASE
+# fi
+
+# -----------------------------------------------------------------------------
+# OS X
+# -----------------------------------------------------------------------------
+
+# Homebrew
+if [[ -x /usr/local/bin/brew ]]; then
+    # GNU coreutils
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+    MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+    INFOPATH=/usr/local/opt/coreutils/share/info:$INFOPATH
+
+    # GNU sed
+    PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+    MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH
+    INFOPATH=/usr/local/opt/gnu-sed/share/info:$INFOPATH
+
+    # GNU tar
+    PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+
+    # OpenSSL
+    PATH=/usr/local/opt/openssl/bin:$PATH
+    MANPATH=/usr/local/opt/openssl/share/man:$MANPATH
 fi
 
 # Xcode
-if test -x '/usr/bin/xcode-select'; then
-    export XCODE=`'/usr/bin/xcode-select' --print-path`
+if [[ -x /usr/bin/xcode-select ]]; then
+    case $HOSTNAME in
+        Athena|Minerva)
+            DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+            ;;
+        Erato)
+            ### ZGM removed 2016-02-13 -- broken since El Cap
+            : DEVELOPER_DIR="/Library/Developer/CommandLineTools"
+            ;;
+        Hiroko)
+            DEVELOPER_DIR="/Developer"
+            ;;
+        *)
+            DEVELOPER_DIR=$(xcode-select -print-path)
+            ;;
+    esac
 
-    PATH=$PATH:$XCODE/bin
-    MANPATH=$MANPATH:$XCODE/share/man
+    export DEVELOPER_DIR
+
+    darwin_ver=$(uname -r)
+
+    if (( ${darwin_ver%%.*} >= 15 )); then
+        # PATH=$PATH:$DEVELOPER_DIR/usr/bin
+        # PATH=$PATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/bin
+        # PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
+        MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
+        MANPATH=$MANPATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man
+        MANPATH=$MANPATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/share/man
+    else
+        PATH=$DEVELOPER_DIR/usr/share/man:$PATH
+        MANPATH=$DEVELOPER_DIR/usr/bin:$MANPATH
+    fi
+
+    unset -v darwin_ver
 fi
 
-# gcc tools (cygwin)
-if test -d /opt/gcc-tools/bin; then
-    PATH=$PATH:/opt/gcc-tools/bin
-    MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man
-    INFOPATH=$INFOPATH:/opt/gcc-tools/epoch2/share/info
-fi
+# calibre
+PATH=$PATH:$HOME/Applications/calibre.app/Contents/MacOS
 
-# OpenSSL
-if test -d /usr/ssl/man; then
-    MANPATH=$MANPATH:/usr/ssl/man
-fi
+# -----------------------------------------------------------------------------
+# cygwin
+# -----------------------------------------------------------------------------
 
-# ~/bin
-if test -d $HOME/bin; then
-    PATH=$HOME/bin:$PATH
-fi
-
-if test -d $HOME/share/man; then
-    MANPATH=$HOME/share/man:$MANPATH
-fi
-
-if test -d $HOME/share/info; then
-    INFOPATH=$HOME/share/info:$INFOPATH
-fi
+# gcc tools
+PATH=$PATH:/opt/gcc-tools/bin
+MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man
+INFOPATH=$INFOPATH:/opt/gcc-tools/epoch2/share/info
 
 # add Windows' %PATH% if available (cygwin)
 if [[ -n $ORIGINAL_PATH ]]; then
@@ -96,21 +126,35 @@ if [[ -n $ORIGINAL_PATH ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# Python
+# ~
 # -----------------------------------------------------------------------------
 
-unset -v PYTHONPATH
-
-for dir in $HOME /usr/local /usr; do
-    python_dir="$dir/lib/python2.7/site-packages"
-
-    if test -d $python_dir; then
-        PYTHONPATH="$python_dir:$PYTHONPATH"
-    fi
-
-    unset -v dir python_dir
-done
+PATH=$HOME/bin:$HOME/opt/bin:$PATH
+MANPATH=$HOME/share/man:$HOME/opt/share/man:$MANPATH
+INFOPATH=$HOME/share/info:$HOME/opt/share/info:$INFOPATH
 
 # -----------------------------------------------------------------------------
+# remove nonexistent directories
+# -----------------------------------------------------------------------------
 
-export PATH MANPATH INFOPATH CDPATH PYTHONPATH
+fixpath()
+{
+    local d p IFS=:
+
+    for d in $@; do
+        [[ ! :$p: =~ :$d: ]] && [[ -d $d ]] && p+="${p:+:}$d"
+    done
+
+    printf "$p"
+}
+
+PATH=$(    fixpath "$PATH")
+MANPATH=$( fixpath "$MANPATH")
+INFOPATH=$(fixpath "$INFOPATH")
+
+### ZGM -- why would I do this instead of the above?
+# printf -v PATH     "%s" "$(fixpath "$PATH")"
+# printf -v MANPATH  "%s" "$(fixpath "$MANPATH")"
+# printf -v INFOPATH "%s" "$(fixpath "$INFOPATH")"
+
+return 0

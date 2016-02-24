@@ -1,6 +1,6 @@
 flip()
 {
-    echo "$@" \
-    | sed "y/abcdefghijklmnopqrstuvwxyz,'?!./?q?p????i??l?uodb?s?n?mx?z',��?/" \
+    <<< "${@:-$(</dev/stdin)}" \
+    sed "y/abcdefghijklmnopqrstuvwxyz,'?!./ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz',¿¡?/" \
     | rev
 }

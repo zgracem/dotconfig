@@ -1,195 +1,178 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/homebrew/Brewfile
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~/.config/brew/Brewfile
 # -----------------------------------------------------------------------------
 
-# fetch the newest version of Homebrew and all formulae from GitHub
-#update
+tap 'homebrew/bundle' # needs to be installed before this can run, though...
 
-# -----------------------------------------------------------------------------
-# shells
-# -----------------------------------------------------------------------------
+tap 'homebrew/dupes'
+tap 'homebrew/versions'
 
-# bash 4
-install bash --HEAD || true
-install bash-completion
-
-# zsh
-#install zsh
-
-# fish
-#install fish
+# command_not_found_handle() assistant
+tap 'homebrew/command-not-found'
 
 # -----------------------------------------------------------------------------
 # essentials
 # -----------------------------------------------------------------------------
 
-install keychain
-install vim
+# for Homebrew
+brew 'curl'
+brew 'openssl'
+brew 'git', args: ['with-brewed-curl', 'with-brewed-openssl']
+
+# bash 4
+brew 'bash'
+brew 'homebrew/versions/bash-completion2'
 
 # tmux
-install tmux
-install reattach-to-user-namespace
+brew 'tmux'
+brew 'reattach-to-user-namespace'
+
+# other
+brew 'direnv', args: ['force-bottle']
+brew 'fpp'
+brew 'midnight-commander'
+# brew 'sift' ### ZGM 2015-10-27 -- it never works properly
+brew 'vim', args: ['HEAD', 'override-system-vi']
+brew 'homebrew/dupes/less', args: ['with-pcre']
+brew 'homebrew/dupes/ncurses'
 
 # -----------------------------------------------------------------------------
 # GNU utilities
 # -----------------------------------------------------------------------------
 
-install coreutils
-install moreutils || true
-install gnu-getopt
-install gnu-tar
+brew 'coreutils', args: ['HEAD']
+brew 'moreutils', args: ['HEAD']
+brew 'gawk'
+brew 'gnu-tar'
 
 # find, locate, updatedb, and xargs (do not prepend 'g' to the binaries)
-install findutils --default-names
+brew 'findutils', args: ['default-names']
 
 # sed (overwrite built-in)
-install gnu-sed --default-names
+brew 'gnu-sed', args: ['default-names']
 
 # grep (overwrite built-in)
-install homebrew/dupes/grep --default-names
+brew 'homebrew/dupes/grep', args: ['with-default-names']
 
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
-install links
-install mobile-shell --HEAD || true
-install transmission
-install ttytter
-install wget --enable-iri
-install youtube-dl --with-rtmpdump
-install homebrew/dupes/rsync
-install homebrew/dupes/whois
+brew 'links'
+brew 'ngrep'
+brew 'transmission'
+brew 'wget', args: ['HEAD', 'enable-iri', 'with-pcre']
+brew 'youtube-dl', args: ['HEAD', 'with-rtmpdump']
+brew 'homebrew/dupes/rsync'
+brew 'homebrew/dupes/whois'
 
-# cURL
-install curl --with-ssh
+# OpenSSH
+
+brew 'ssh-copy-id'
+brew 'homebrew/dupes/openssh'
+brew 'keychain'
 
 # email
-#install alpine
-install dovecot
-install offline-imap
 
-# OpenSSL/OpenSSH
-install openssl
-link --force openssl
-install homebrew/dupes/openssh --with-keychain-support
-install ssh-copy-id
+brew 'getmail'
+# brew 'mu'
+brew 'offline-imap'
+
+# -----------------------------------------------------------------------------
+# media
+# -----------------------------------------------------------------------------
+
+# audio/video
+
+brew 'atomicparsley'
+brew 'ffmpeg', args: ['with-openssl', 'with-rtmpdump']
+brew 'id3v2'
+brew 'lame'
+brew 'mp4v2'
+brew 'mplayer'
+
+# images
+
+brew 'exif'
+brew 'exiftool'
+brew 'imagemagick', args: ['with-ghostscript']
+brew 'pngcrush'
+brew 'qrencode'
+brew 'webkit2png'
+
+# imagesnap requires full Xcode to compile
+brew 'imagesnap' if system '[[ -x /Applications/Xcode.app ]]'
+
+# -----------------------------------------------------------------------------
+# development
+# -----------------------------------------------------------------------------
+
+brew 'rbenv'
+brew 'ruby-build'
+
+brew 'python'
+
+brew 'jq'
+brew 'node'
+
+# https://github.com/zoltan-dulac/css3FontConverter
+brew 'fontforge'
+tap 'bramstein/webfonttools'
+brew 'sfnt2woff-zopfli'
+brew 'sfnt2woff'
+brew 'sfntly'
+brew 'ttf2eot'
+brew 'woff2'
 
 # -----------------------------------------------------------------------------
 # fun & games
 # -----------------------------------------------------------------------------
 
-install cowsay
-install figlet
-install homebrew/games/nethack
-install homebrew/games/unnethack
+tap  'homebrew/games'
+brew 'homebrew/games/nethack'
+# brew 'homebrew/games/unnethack', args: ['with-curses-graphics']
+
+brew 'cowsay'
+brew 'figlet'
 
 # -----------------------------------------------------------------------------
 # misc.
 # -----------------------------------------------------------------------------
 
-install pv
-install rename
-install tree
-install watch
-install homebrew/dupes/ncurses
+brew 'jrnl'
 
-# archives
-install p7zip
-install unrar
+brew 'pv'
+brew 'rename'
+brew 'source-highlight' # for less
+brew 'tree'
+brew 'watch'
 
-# development
-install python
-install git || true
-install jq
-install node || true
-install sqlite
-install txt2man
+# archives & compression
+brew 'dtrx', args: ['with-cabextract', 'with-lha', 'with-unshield']
+brew 'p7zip'
+brew 'unrar'
 
 # dictionaries
-install dict
-install sdcv
+brew 'dict'
+brew 'sdcv'
 
-# GnuPG
-install gpg2 --8192 --with-readline
-
-# images
-install imagemagick
-install imagesnap || true # (imagesnap won't compile w/out Xcode.app)
-install pngcrush
-install qrencode
-install webkit2png
-
-# less
-install homebrew/dupes/less
-install source-highlight
-
-# audio/video
-install atomicparsley
-install ffmpeg --with-openssl --with-rtmpdump
-install id3v2
-install lame
-install mp4v2
-install mplayer
+# GnuPG & friends
+# brew 'gnupg2', args: ['with-readline']
+# brew 'gpg-agent'
+brew 'pinentry'
+brew 'keybase'
 
 # pdf
-install ghostscript
-install qpdf
-install xpdf
+brew 'ghostscript'
 
-# search
-install ack
-install the_silver_searcher
+# shells
+# brew 'fish'
+# brew 'zsh'
 
 # text
-install aspell
-install dos2unix
-install multimarkdown
-install recode
-
-# -----------------------------------------------------------------------------
-# casks
-# -----------------------------------------------------------------------------
-
-#install phinze/cask/brew-cask
-
-#cask install adium
-#cask install alfred
-#cask install back-in-time
-#cask install betterzipql
-#cask install disk-inventory-x
-#cask install dropbox
-#cask install fission
-#cask install flux
-#cask install github
-#cask install google-chrome
-#cask install google-drive
-#cask install grandperspective
-#cask install handbrake
-#cask install id3-editor
-#cask install imageoptim
-#cask install ios7-screensaver
-#cask install istat-menus
-#cask install iterm2
-#cask install jawbone-updater
-#cask install monolingual
-#cask install name-mangler
-#cask install nvalt
-#cask install onepassword
-#cask install qlcolorcode
-#cask install qlmarkdown
-#cask install rdio
-#cask install skype
-#cask install transmission
-#cask install transmit
-#cask install vlc
-
-#cask alfred link
-
-# -----------------------------------------------------------------------------
-# done
-# -----------------------------------------------------------------------------
-
-# remove old versions from the cellar
-#cleanup
+brew 'aspell', args: ['with-lang-en']
+brew 'dos2unix'
+brew 'multimarkdown'
+brew 'pandoc'
+brew 'recode'
+brew 'txt2man'

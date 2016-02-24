@@ -1,6 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/nethackrc
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~/.config/nethackrc
 # -----------------------------------------------------------------------------
 
 OPTIONS=name:Zozo
@@ -20,11 +19,15 @@ OPTIONS=!mail
 # display
 # -----------------------------------------------------------------------------
 
+# use IBM extended characters
+OPTIONS=IBMgraphics
+OPTIONS=eight_bit_tty
+
 # display colour
 OPTIONS=color
 
 # use "0" for boulders
-OPTIONS=boulder:0
+BOULDER=48
 
 # show corridor squares seen by night vision or a light source as lit
 OPTIONS=lit_corridor
@@ -35,8 +38,14 @@ OPTIONS=sparkle
 # visually distinguish pets from similar animals
 OPTIONS=hilite_pet
 
-# enable statuscolors patch if present
-OPTIONS=statuscolors
+# -----------------------------------------------------------------------------
+# statushilites
+# -----------------------------------------------------------------------------
+
+OPTIONS=statushilites
+
+OPTIONS=hilite_status:armor-class/updown/green/red hitpoints/33%/red/normal
+# OPTIONS=hilite_status: hunger/150/red/normal
 
 # -----------------------------------------------------------------------------
 # interface
@@ -76,8 +85,9 @@ OPTIONS=scores:5 top/2 around/own
 # rename slime mold
 OPTIONS=fruit:pomegranate
 
-# use [yuhjklbn] to move instead of the number pad
-OPTIONS=number_pad=0
+# 0 = use [yuhjklbn] to move
+# 1 = use number pad to move
+OPTIONS=number_pad=1
 
 # do not make the spacebar a synonym for `.` (rest)
 OPTIONS=!rest_on_space
@@ -85,8 +95,8 @@ OPTIONS=!rest_on_space
 # auto-dig when wielding a digging tool
 OPTIONS=autodig
 
-# autopickup gold
-OPTIONS=autopickup,pickup_types=$
+# (don't) autopickup gold
+OPTIONS=!autopickup,pickup_types=$
 
 # automatically fill when `f`iring with empty quiver
 OPTIONS=autoquiver
@@ -114,3 +124,11 @@ OPTIONS=safe_pet
 OPTIONS=catname:Catface Meowmers
 OPTIONS=dogname:Toby
 OPTIONS=horsename:Silver
+
+# -----------------------------------------------------------------------------
+# messages
+# -----------------------------------------------------------------------------
+
+# silent when climbing stairs
+MSGTYPE=hide "You descend .*"
+MSGTYPE=hide "You climb .*"

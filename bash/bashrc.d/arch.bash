@@ -11,9 +11,9 @@ if (( NUMBER_OF_PROCESSORS > 1 )); then
 fi
 
 if _inPath sysctl && [[ -z $PROCESSOR_ARCHITECTURE ]]; then
-    export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine)"
+    export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)"
 fi
 
-if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ -arch ]]; then
+if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ \-arch ]]; then
     export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
 fi

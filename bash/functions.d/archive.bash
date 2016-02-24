@@ -1,17 +1,13 @@
 # ------------------------------------------------------------------------------
-# ~zozo/.config/bash/functions.d/archive.bash
 # functions for working with archives in various formats
 # ------------------------------------------------------------------------------
 
 roll()
 {   # create a new archive
 
-    local -r this="${FUNCNAME[0]}"
-    local -r usage="${this} ARCHIVE.EXT FILE [FILE ...]"
-
-    if [[ $# -lt 2 ]]; then
-        scold "Usage: ${usage}"
-        return 64
+    if (( $# < 2 )); then
+        scold "Usage: ${FUNCNAME[0]} ARCHIVE.EXT FILE [FILE ...]"
+        return $EX_USAGE
     fi
 
     local archive="$1"; shift
@@ -25,8 +21,8 @@ roll()
         *.tar.gz)   tar czf "$archive" "$@" ;;
         *.tgz)      tar czf "$archive" "$@" ;;
         *.zip)      zip -9r "$archive" "$@" ;;
-        *)          scold "${this}: unsupported archive format: ${archive##*.}"
-                    return 1
+        *)          scold "${FUNCNAME[0]}: unsupported archive format: ${archive##*.}"
+                    return $EX_USAGE
                     ;;
     esac
 }
@@ -34,6 +30,7 @@ roll()
 tarup()
 {   # tar + gzip an entire directory
 
+    (( $# == 1 )) || return $EX_USAGE
     local dir="${1%/}"
     roll "${dir}.tar.gz" "${dir%/}/"
 }
@@ -41,6 +38,7 @@ tarup()
 zipup()
 {   # zip an entire directory
 
+    (( $# == 1 )) || return $EX_USAGE
     local dir="${1%/}"
     roll "${dir}.zip" "${dir%/}/"
 }

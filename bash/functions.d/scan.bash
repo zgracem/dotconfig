@@ -1,23 +1,27 @@
 [[ $OSTYPE =~ darwin ]] || return
 
-# TODO: turn into shell script
 scan()
 {
+    local usage="${FUNCNAME[0]} ssh | wifi | file NAME | pid PID"
 
-    declare usage="$FUNCNAME ssh | wifi | file NAME"
     case $1 in
-        ssh) # list all SSH-enabled hosts on the domain
-            /usr/bin/dns-sd -B _ssh._tcp
+        ssh)
+            # list all SSH-enabled hosts on the domain
+            dns-sd -B _ssh._tcp
             ;;
-        [Ww]i[Ff]i) # scan for WiFi networks
-            /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s
+        [Ww]i[Ff]i)
+            # scan for WiFi networks
+            airport -s
             ;;
         file)
-            sudo opensnoop -f "$2"
+            sudo opensnoop -v -f "$2"
+            ;;
+        pid)
+            sudo opensnoop -v -p "$2"
             ;;
         *)
-            scold "Usage: %s" "$usage"
-            return 1
+            scold "Usage: ${usage}"
+            return $EX_USAGE
             ;;
     esac
 }

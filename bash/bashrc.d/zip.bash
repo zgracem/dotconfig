@@ -1,4 +1,3 @@
-ZIPOPTS='-9 '           # maximum compression
-ZIPOPTS+='--symlinks'   # store symlinks as symlinks
-
-export ZIPOPTS
+export ZIPOPTS="-9 --symlinks"
+#                │   └─ store symlinks as symlinks
+#                └───── maximum compression

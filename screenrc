@@ -1,6 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/screenrc
-# say hello: printf "zozo\x40inescapable\x2eorg"
+# ~/.config/screenrc
 # -----------------------------------------------------------------------------
 
 shell ${SHELL}
@@ -93,7 +92,7 @@ attrcolor b ".I"
 termcapinfo xterm*|putty*|screen* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 # tell screen how to change xterm window titles
-termcapinfo xterm*|putty*|screen* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+termcapinfo xterm*|putty*|screen* 'hs:ts=\E]2;:fs=\007:ds=\E]0;\007'
 
 # erase background with current bg color
 defbce "off"

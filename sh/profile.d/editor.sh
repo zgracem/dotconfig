@@ -5,13 +5,16 @@ GIT_EDITOR=$EDITOR
 SUDO_EDITOR=$EDITOR
 
 # use GUI app if not logged in remotely
-if [ -z "$SSH_CONNECTION" ]; then
-    if [ -d '/Applications/Sublime Text.app' ]; then
-        VISUAL='/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl --wait'
-    elif [ -x "$HOME/bin/subl" ]; then
+if test -z "$SSH_TTY"; then
+    if test -d '/Applications/Sublime Text.app'; then
+        VISUAL="$HOME/bin/subl-wait"
+
+    elif test -x "$HOME/bin/subl"; then
         VISUAL="$HOME/bin/subl --wait"
-    # elif [ ":$OSTYPE:" = ':cygwin:' ]; then
+
+    # elif test ":$OSTYPE:" = ':cygwin:'; then
     #     VISUAL="$HOME/scripts/subl.sh --wait"
+
     fi
 fi
 

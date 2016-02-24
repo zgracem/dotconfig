@@ -1,37 +1,87 @@
+# -----------------------------------------------------------------------------
 # default flags
+# -----------------------------------------------------------------------------
 
-export flags_ls=
-flags_ls+='-A '             # (almost) all files
-flags_ls+='-p '             # append / to directories
+quietly unalias ls ll
 
-ls()
-{
-    command ls $flags_ls "$@"
+declare -a flags_ls=()
+
+flags_ls+=(-AH)
+#           │└───── follow symbolic links
+#           └────── (almost) all files
+
+if [[ $OSTYPE == cygwin ]]; then
+    flags_ls+=(--append-exe)
+    #            └─ append .exe if cygwin magic was needed
+fi
+
+# colourize output
+if _isGNU ls; then
+    flags_ls+=(--color=auto)
+else
+    flags_ls+=(-G)
+fi
+
+export flags_ls
+
+ls() { command ls "${flags_ls[@]}" "$@"; }
+
+# -----------------------------------------------------------------------------
+# variants
+# -----------------------------------------------------------------------------
+
+ll() { ls -lgoh "$@"; }
+#          │││└── human-readable sizes
+#          ││└─── omit owner
+#          │└──── omit group
+#          └───── long-list output
+
+ls1() { ls -1 "$@"; }
+#           └──── filenames only
+
+lst() { ll -rt "$@"; }
+#           │└─── sort by time
+#           └──── reverse sort (i.e. newest files last)
+
+lsd()
+{   # list all subdirectories in $1/$PWD
+
+    ll -d "${1+$1/}"*/
+    #   └─── list directories, not their contents
+}
+
+lsl()
+{   # list all symbolic links in $1/$PWD
+    find "${1-.}" -maxdepth 1 -type l \
+    | xargs ls -d "${flags_ls}"
 }
 
 # -----------------------------------------------------------------------------
-# colours
-# -----------------------------------------------------------------------------
 
-colour_dir="$HOME/share/dircolors"
+lsf()
+{   # "full" info
 
-if [[ -d $colour_dir ]] && _inPath dircolors; then
-    if [[ -n $solarized ]]; then
-        colour_file="$colour_dir/solarized.$solarized"
+    local a flags_lsf=(-i -l)
+    #                    │  └─ long-list output
+    #                    └──── print inode number
+
+    if [[ $OSTYPE =~ darwin ]]; then
+        flags_lsf+=(-@ -O -G)
+        #            │  │  └── colourize output
+        #            │  └───── print file flags
+        #            └──────── display extended attributes
+
+        /bin/ls "${flags_lsf[@]}" "$@"
+        return
+
+    elif _isGNU ls; then
+        flags_lsf+=(--color=auto)
+        #             └─────── colourize output
     else
-        colour_file="$colour_dir/default"
+        flags_lsf+=(-G)
+        #            └──────── colourize output
     fi
 
-    # sets and exports LS_COLORS
-    eval $(dircolors -b $colour_file)
-fi
+    command ls "${flags_lsf[@]}" "$@"
+}
 
-unset -v colour_dir colour_file
-
-if _isGNU ls; then
-    flags_ls+=' --color=auto'
-else
-    # http://geoff.greer.fm/lscolors/
-    export LSCOLORS="exfxdacabxgagaabadHbHd"
-    export CLICOLOR=1
-fi

@@ -2,18 +2,18 @@
 
 findDrive()
 {   # given a drive label, return its path under /cygdrive
-    declare drive letter cmdexe="$(cygpath -au $COMSPEC)"
-    declare label="$1"
 
+    local label="$1"
+    local cmd_exe=$(cygpath -au "${COMSPEC:-/cygdrive/c/Windows/system32/cmd.exe}")
+
+    local letter drive
     for letter in {d..l}; do
         drive="/cygdrive/$letter"
 
         if [[ -d $drive ]]; then
-            "$cmdexe" /c vol ${letter}: 2>/dev/null \
-            | grep -iq "${label}$" && {
-                echo "$drive"
-                return 0
-            }
+            "$cmd_exe" /c vol ${letter}: 2>/dev/null \
+            | grep -iq "${label}$" \
+                && { echo "$drive"; return 0; }
         fi
     done
 
