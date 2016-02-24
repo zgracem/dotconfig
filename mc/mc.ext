@@ -1,0 +1,153 @@
+# -----------------------------------------------------------------------------
+# archives
+# -----------------------------------------------------------------------------
+
+# zip
+regex/i/\.zip$
+    Include=zip
+
+regex/i/\.(epub|ipa)$
+    Include=zip
+
+type/i/^zip\ archive
+    Include=zip
+
+type/i/^Java\ (Jar\ file|archive)\ data\ \((zip|JAR)\)
+    Include=zip
+
+include/zip
+    Open=%cd %p/uzip://
+
+# tar
+regex/\.t([gp]?z|ar\.(g?[zZ]|bz2|lzma|xz|F)|bz2?|b2|lz|xz)$|\.ipk$|\.gem$|\.qp[rk]$
+    Open=%cd %p/utar://
+
+# rar
+regex/i/\.r(ar|[0-9][0-9])$
+    Open=%cd %p/urar://
+
+# cpio
+regex/\.cpio(\.(Z|[gx]z))?
+    Open=%cd %p/ucpio://
+
+# ISO9660
+shell/i/.iso
+    Open=%cd %p/iso9660://
+
+# 7zip
+shell/i/.7z
+    Open=%cd %p/u7z://
+
+# OSX installer packages
+shell/i/.pkg
+    Open=%cd %p/upkg://
+
+# -----------------------------------------------------------------------------
+# media
+# -----------------------------------------------------------------------------
+
+# # images
+
+# type/^GIF
+#     Include=image
+
+# type/^JPEG
+#     Include=image
+
+# type/^PC\ bitmap
+#     Include=image
+
+# type/^PNG
+#     Include=image
+
+# type/^TIFF
+#     Include=image
+
+# shell/i/.ico
+#     Include=image
+
+# shell/i/.svg
+#     Include=image
+
+# include/image
+#     Open=~/.config/mc/ext.d/action.sh open image
+
+# # audio
+
+# # TODO: separate iTunes section?
+# regex/i/\.(aac|aiff?|[af]lac|m4a|midi?|mp3|ogg|wa?v|wma)$
+#     Open=~/.config/mc/ext.d/action.sh open audio
+
+# # video
+
+# regex/i/\.(avi|mkv|mov|mp4|m4v|wmv|flv|webm)$
+#     Open=~/.config/mc/ext.d/action.sh open video
+
+# -----------------------------------------------------------------------------
+# documents
+# -----------------------------------------------------------------------------
+
+# type/^PDF
+#     Open=~/.config/mc/ext.d/action.sh open pdf
+
+# regex/i/\.(pages|numbers|keynote)$
+#     Open=~/.config/mc/ext.d/action.sh open iwork
+
+# regex/i/\.(ht|x)ml?$
+#     Open=~/.config/mc/ext.d/action.sh open browser
+
+# regex/i/\.(md(own)?|markdown)$
+#     Open=~/.config/mc/ext.d/action.sh open markdown
+#     # View=~/.config/mc/ext.d/action.sh view markdown
+#     # Edit=~/.config/mc/ext.d/action.sh edit markdown
+
+# regex/i/\.(te?xt|taskpaper|srt)$
+#     Include=text
+
+# type/i/text
+#     Include=text
+
+# include/text
+#     Open=~/.config/mc/ext.d/action.sh open text
+
+# Microsoft Office
+
+regex/i/\.(do[ct]|xl[st]|ppt)x$
+    Open=%cd %p/uzip://
+    # View=~/.config/mc/ext.d/action.sh view msoffice-xml
+    # Edit=~/.config/mc/ext.d/action.sh edit msoffice-xml
+
+# regex/i/\.(do(cm?|t)|pptm?|xl(sm?|t))$
+#     Include=msoffice
+
+# include/msoffice
+#     Open=~/.config/mc/ext.d/action.sh open msoffice
+#     # View=~/.config/mc/ext.d/action.sh view msoffice
+#     # Edit=~/.config/mc/ext.d/action.sh edit msoffice
+
+# -----------------------------------------------------------------------------
+# misc.
+# -----------------------------------------------------------------------------
+
+# diff and patch files
+regex/\.(diff|patch)(\.(bz2|gz|Z))?$
+    Open=%cd %p/patchfs://
+
+# mailboxes
+type/^ASCII\ mail\ text
+    Open=%cd %p/mailfs://
+
+# type/i/^MS\ Windows\ shortcut
+#     Open=~/.config/mc/ext.d/action.sh shortcut
+#     Open=%cd %p/winlnk://
+
+# -----------------------------------------------------------------------------
+# fallbacks
+# -----------------------------------------------------------------------------
+
+# default/*
+#     Open=~/.config/mc/ext.d/action.sh open default
+#     View=~/.config/mc/ext.d/action.sh view default
+#     Edit=~/.config/mc/ext.d/action.sh edit default
+
+### EOF ###

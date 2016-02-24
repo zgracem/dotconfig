@@ -1,0 +1,5 @@
+ENTRY "~/.config" URL "~/.config"
+ENTRY "~/txt" URL "~/txt"
+ENTRY "www:vsmm" URL "~/Dropbox/Projects/vsmm"
+ENTRY "Minerva.local" URL "sh://zozo@minerva.local:C/Users/zozo"
+ENTRY "WebFaction:/home/zozo" URL "sh://zozo@web458.webfaction.com:C/home/zozo"

@@ -1,0 +1,35 @@
+# install with `gem install -g $THIS_FILE`
+
+source "https://rubygems.org"
+
+gem "bundler",        "~> 1.9.9"
+
+# ruby dev
+gem "json"
+gem "plist"
+gem "what_methods" # irb
+# gem "yard" # documentation
+
+# webdev
+gem "middleman",      "~> 3.4"
+gem "sass",           "~> 3.4"
+gem "slim",           "~> 3.0"
+gem "htmlentities"
+
+# misc.
+gem "gemoji"
+gem "ronn"
+gem "ttfunk" # fonts
+gem "unicode_utils",  ">= 1.4"
+
+# APIs
+gem "dropbox-sdk",    "1.6.5"
+gem "google-api-client", "~> 0.8"
+gem "instagram",      "1.1.5"
+gem "oauth"
+gem "tumblr_client"
+
+# network stuff
+gem "http",           "0.9.7"
+gem "socksify",       "1.7.0"
+gem "net-ssh",        "~> 3.0"

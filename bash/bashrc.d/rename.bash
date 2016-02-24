@@ -1,0 +1,1 @@
+rename() { command rename --verbose "$@"; }
