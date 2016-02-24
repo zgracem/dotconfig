@@ -1,0 +1,104 @@
+# -----------------------------------------------------------------------------
+# Hiroko:~/.local/Brewfile
+# -----------------------------------------------------------------------------
+
+# tap 'homebrew/bundle' # needs to be installed before this can run, though...
+
+tap 'homebrew/dupes'
+tap 'homebrew/versions'
+
+# command_not_found_handle() assistant
+tap 'homebrew/command-not-found'
+
+# -----------------------------------------------------------------------------
+# essentials
+# -----------------------------------------------------------------------------
+
+# for Homebrew
+brew 'curl'
+brew 'openssl'
+brew 'git', args: ['with-brewed-curl', 'with-brewed-openssl']
+
+# bash 4
+brew 'bash'
+brew 'homebrew/versions/bash-completion2'
+
+# tmux
+brew 'tmux'
+brew 'reattach-to-user-namespace'
+
+# other
+brew 'fpp'
+brew 'vim', args: ['HEAD', 'override-system-vi']
+brew 'homebrew/dupes/less', args: ['with-pcre']
+brew 'homebrew/dupes/ncurses'
+
+# -----------------------------------------------------------------------------
+# GNU utilities
+# -----------------------------------------------------------------------------
+
+brew 'coreutils', args: ['HEAD']
+brew 'moreutils', args: ['HEAD']
+brew 'gawk'
+brew 'gnu-tar'
+
+# find, locate, updatedb, and xargs (do not prepend 'g' to the binaries)
+brew 'findutils', args: ['default-names']
+
+# sed (overwrite built-in)
+brew 'gnu-sed', args: ['default-names']
+
+# grep (overwrite built-in)
+brew 'homebrew/dupes/grep', args: ['with-default-names']
+
+# -----------------------------------------------------------------------------
+# internet stuff
+# -----------------------------------------------------------------------------
+
+brew 'links'
+brew 'wget', args: ['HEAD', 'enable-iri', 'with-pcre']
+brew 'youtube-dl', args: ['HEAD', 'with-rtmpdump']
+brew 'homebrew/dupes/rsync'
+brew 'homebrew/dupes/whois'
+
+# OpenSSH
+
+brew 'ssh-copy-id'
+brew 'homebrew/dupes/openssh'
+
+# -----------------------------------------------------------------------------
+# development
+# -----------------------------------------------------------------------------
+
+# brew 'rbenv'
+# brew 'ruby-build'
+
+brew 'jq'
+
+# -----------------------------------------------------------------------------
+# misc.
+# -----------------------------------------------------------------------------
+
+brew 'pv'
+brew 'rename'
+brew 'source-highlight' # for less
+brew 'tree'
+brew 'watch'
+
+# archives & compression
+brew 'dtrx', args: ['with-cabextract', 'with-lha', 'with-unshield']
+brew 'p7zip'
+brew 'unrar'
+brew 'xz'
+
+# GnuPG
+brew 'gnupg2', args: ['with-readline']
+brew 'gpg-agent'
+brew 'pinentry'
+
+# pdf
+brew 'ghostscript'
+
+# text
+brew 'dos2unix'
+brew 'multimarkdown'

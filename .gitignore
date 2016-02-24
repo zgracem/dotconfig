@@ -7,17 +7,10 @@
 
 # private configuration files
 **/private*
-bash/bashrc.d/1pass.bash
-bash/bashrc.d/config.bash
-bash/bashrc.d/jrnl.bash
-bash/bashrc.d/snmp.bash
 bash/private.bash
-dropbox_uploader
 
 # email
 alpine/
-**/email.conf
-offlineimaprc
 
 # GPG/SSH
 gnupg/*
@@ -25,28 +18,17 @@ gnupg/*
 !gnupg/gpg-agent.conf
 keybase/
 ssh/
+**/ssh_config
 
 # assorted crap
-aspell/
-bash.old/
-local/
 misc/
-
-# other shells
-fish/
-zsh/
-
-# charm -- http://ljcharm.sourceforge.net/
-charmrc
+*.bak
 
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*
 
 # Transmission -- https://transmissionbt.com/
 transmission/
-
-# TTYtter -- http://www.floodgap.com/software/ttytter/
-ttytter*
 
 # t -- https://github.com/sferik/t
 trc

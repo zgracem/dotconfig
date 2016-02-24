@@ -1,0 +1,10 @@
+LANG=en_CA
+
+#include <calendar.birthday>
+#include <calendar.computer>
+#include <calendar.history>
+#include <calendar.music>
+#include </home/uxhj/share/calendar/calendar.catholiclite>
+#include </home/uxhj/share/calendar/calendar.buddhist>
+#include </home/uxhj/share/calendar/calendar.canada>
+#include </home/uxhj/share/calendar/calendar.usholiday>
