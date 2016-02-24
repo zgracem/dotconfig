@@ -1,6 +1,9 @@
-# start keychain
-if _inPath keychain; then
-    export GPG_TTY="$(tty)"
+_inPath keychain || return
 
-    eval $(keychain --dir "${HOME}/.local/keychain" --eval --inherit any --quick --quiet id_rsa)
+export GPG_TTY="$(tty)"
+
+if [[ -z $SSH_AGENT_PID ]]; then
+    eval $(keychain --dir "${HOME}/.keychain" \
+           --eval --ignore-missing --inherit any --quick --quiet \
+           id_rsa)
 fi

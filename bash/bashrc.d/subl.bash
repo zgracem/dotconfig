@@ -1,21 +1,13 @@
 # Sublime Text
 
-subl()
+# s() { subl -a "${@:-$PWD}"; }
+
+s()
 {
-    local app
-
-    if [[ $OSTYPE =~ darwin ]]; then
-        app='/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
-    elif [[ -x $dir_mybin/subl ]]; then
-        app="$dir_mybin/subl"
-    elif [[ $OSTYPE =~ cygwin ]]; then
-        app="$dir_scripts/cygsubl.sh"
-    fi
-
-    if [[ -x $app ]]; then
-        "$app" "$@"
+    if [[ ! -t 0 ]]; then
+        # we're getting stdin from something, discard arguments
+        subl < /dev/stdin 
     else
-        scold "$FUNCNAME: not found"
-        return 64
+        subl -a "${@:-$PWD}"
     fi
 }

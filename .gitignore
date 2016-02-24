@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/.gitignore
+# ~/.config/.gitignore
 # -----------------------------------------------------------------------------
 
 # this file
@@ -32,8 +32,9 @@ bash.old/
 local/
 misc/
 
-# fish -- http://fishshell.com/
+# other shells
 fish/
+zsh/
 
 # charm -- http://ljcharm.sourceforge.net/
 charmrc

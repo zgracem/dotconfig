@@ -1,14 +1,15 @@
 "-----------------------------------------------------------------------------
-" ~zozo/.config/vimrc
+" ~/.config/vimrc
 " vim: ft=vim:tw=0:sw=2:ts=2:sts=2
-" say hello: printf "zozo\x40inescapable\x2eorg"
 "-----------------------------------------------------------------------------
 
 set nocompatible                " use vim settings, rather than vi settings
 
-set runtimepath =$HOME/.vim
+set runtimepath =$HOME/share/vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
 set runtimepath+=$HOME/share/vim/after
+
+set viminfo+=n~/var/lib/vim/.viminfo
 
 silent! call pathogen#infect()
 silent! call pathogen#helptags()
@@ -47,9 +48,9 @@ set backup                      " do make backups
 set backupcopy=yes              " copy/overwrite instead of renaming
 
 if has("unix")
-  set backupdir=$HOME/tmp/.vim,$TMPDIR
+  set backupdir=$HOME/var/lib/vim,$TMPDIR
 elseif has("win32") || has("win64")
-  set backupdir=$HOME/tmp/.vim,$TEMP
+  set backupdir=$HOME/var/lib/vim,$TEMP
 endif
 
 " swap files
@@ -57,9 +58,9 @@ set swapfile                    " make swapfiles
 set updatecount=80              " update swapfile after x characters
 
 if has("unix")
-  set directory=$HOME/tmp/share/vim//,$TMPDIR//
+  set directory=.,$HOME/var/lib/vim//,$TMPDIR//
 elseif has("win32") || has("win64")
-  set directory=$HOME/tmp/share/vim//,$TEMP//
+  set directory=.,$HOME/var/lib/vim//,$TEMP//
 endif
 
 " // = include path in name of swap file
@@ -124,6 +125,7 @@ set tildeop                     " tilde behaves like an operator
 set wrap                        " visually wrap long lines
 set linebreak                   " visually break at word boundaries
 set textwidth=78                " force EoL after < x chars
+
 set nojoinspaces                " two spaces after sentences is an abomination
 set formatoptions+=n            " format numbered lists w/ hanging indent
 set formatoptions+=1            " break before one-letter words where possible
@@ -166,6 +168,16 @@ if v:version >= 703
   let g:vim_json_syntax_conceal = 0
 endif
 
+if $TERM_PROGRAM == "iTerm.app"
+  if expand($TMUX) != ""
+    let &t_SI = "\<Esc>[3 q"
+    let &t_EI = "\<Esc>[0 q"
+  else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
+endif
+
 "-----------------------------------------------------------------------------
 " Colours and syntax highlighting
 "-----------------------------------------------------------------------------
@@ -191,22 +203,26 @@ silent! colorscheme solarized
 "-----------------------------------------------------------------------------
 
 if has("statusline")
-  " window title
-  set title
+  " window title -- ### ZGM disabled 2015-09-10
+  " set title
 
   if has("gui_running")
-    set titlestring=
+    " set titlestring=
   else
-    let &titleold = expand("$USER") . "@" . expand("$HOSTNAME") . ": " . expand("$PWD")
-"   set titlestring=%{$USER}@%{$HOSTNAME}:\
-    set titlestring=
+    let &titleold = expand("$USER") . "@" . expand("$HOSTNAME") " . ": " . expand("$PWD")
+    " set titlestring=
   endif
 
-  set titlestring+=%(%h\ %)     " help flag
-  set titlestring+=%F           " full path to file
-  set titlestring+=%(\ [%M%R]%) " modified/readonly flags
+  " set titlestring+=%(%h\ %)     " help flag
+  " set titlestring+=%F           " full path to file
+  " set titlestring+=%(\ [%M%R]%) " modified/readonly flags
 
-  if expand($TMUX) != ""
+  if $TERM_PROGRAM == "Apple_Terminal"
+    let &t_ts = "]6;"
+    let &t_fs = ""
+    " set title
+    " let &titlestring = "file://" . expand("$HOSTNAME") . UrlEncode("%F")
+  elseif expand($TMUX) != ""
     let &t_ts = "\<Esc>Ptmux;\<Esc>\<Esc>]0;"
     let &t_fs = "\<Esc>\\"
   elseif &term =~ "screen"
@@ -217,7 +233,8 @@ if has("statusline")
   " status line
   set laststatus=2                " always show statusline (overrides ruler)
 
-  set statusline=%<%t\            " tail of the filename, front-truncated
+  " set statusline=%<%t\          " tail of the filename, front-truncated
+  set statusline=%F\              " full path to file
   set statusline+=%([%M%R]%)      " modified & readonly flags
 
   set statusline+=%=              " start of right side
@@ -268,7 +285,7 @@ if has("gui_running")
   if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-    set guifont=Inconsolata:h14,Menlo:h12
+    set guifont=Consolas:h12,Menlo:h12
     endif
   endif
 endif
@@ -288,61 +305,21 @@ if exists("#vimrc")
     autocmd FileType conf,dosini,javascript,sh,vim
       \ setlocal ff=unix fo+=l fo+=r fo-=t fo-=n
     autocmd FileType css,html
-      \ setlocal fo+=l noet ff=unix
+      \ setlocal ff=unix fo+=l noet
     autocmd FileType crontab
       \ setlocal fo+=l fo-=t sw=8 sts=8 ts=8 noet nowrap backupcopy=yes
     autocmd FileType mail
-      \ setlocal fo+=al
+      \ setlocal fo+=la
     autocmd FileType markdown,text
       \ setlocal fo+=ta
-    autocmd FileType tiddlywiki
-      \ setlocal fo-=t fo+=l
 
-    " bash config files
-    autocmd BufNewFile,BufRead bash_*
-      \ setlocal ft=sh
+    " journaling
+    autocmd BufNewFile,BufRead draft_[0-9]*,750words-201*,jrnl*.txt
+      \ setlocal ft=markdown fo-=t fo-=a fo-=c textwidth=0
 
     " poetry
     autocmd BufNewFile,BufRead */p/[1-4]*/*.txt
       \ setlocal ft=markdown fo-=t fo-=a
-
-    " journaling
-    autocmd BufNewFile,BufRead draft_[0-9]*,750words-201*
-      \ setlocal ft=markdown
-    autocmd BufNewFile,BufRead 750words-201*
-      \ setlocal fo+=a
-
-    " TiddlyWiki (i.e. twee/twine) source files
-    autocmd BufNewFile,BufRead *.tw
-      \ setlocal ft=tiddlywiki
-
-    " strip trailing whitespace on save
-    autocmd BufWrite *.bash,*.css,*.html,*.js,*.sh,*.txt
-      \ :StripTrailingWhitespaces
-  augroup END
-endif
-
-"-----------------------------------------------------------------------------
-" Templates
-"-----------------------------------------------------------------------------
-
-if exists("#vimrc")
-  augroup vimrc
-    autocmd BufNewFile *.sh so $HOME/share/vim/templates/template.sh
-    autocmd BufNewFile *.sh exe "3g/$/s// " . expand("%:t:r")
-    autocmd BufNewFile *.sh exe "5g/$/s// " . strftime("%Y-%m-%d")
-    autocmd BufNewFile *.sh exe "9g/$/s//" . expand("%:t")
-    autocmd BufNewFile *.sh exe "normal G"
-
-    autocmd BufNewFile *.css so $HOME/share/vim/templates/template.css
-
-    autocmd BufNewFile *.html so $HOME/share/vim/templates/template.html
-    autocmd BufNewFile *.html exe "normal 8G$"
-
-    autocmd BufNewFile lj_draft_[0-9]* so $HOME/share/vim/templates/lj_template.md
-    autocmd BufNewFile lj_draft_[0-9]* exe "setlocal ft=markdown"
-    autocmd BufNewFile lj_draft_[0-9]* exe "set formatoptions-=a"
-    autocmd BufNewFile lj_draft_[0-9]* exe "normal 1G$"
   augroup END
 endif
 
@@ -352,16 +329,12 @@ endif
 
 if exists("#vimrc")
   augroup vimrc
-    " always open files at the last edited line, if possible
-    " autocmd BufReadPost *
-    "   \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    "   \   exe "normal g`\"" |
-    "   \ endif
 
     " strip trailing whitespace on save
     autocmd FileType html,css,js,sh
       \ autocmd BufWritePre <buffer> :StripTrailingWhitespaces
-    augroup END
+
+  augroup END
 endif
 
 "-----------------------------------------------------------------------------
@@ -454,12 +427,6 @@ nmap <silent> <leader>vr :source $MYVIMRC<CR>
 " ,w gets word count
 nnoremap <leader>w g<C-G>
 
-" ,x executes the current line in vim
-nnoremap <silent> <leader>x "yyy:@y<CR>
-
-" ,z uses current word as LHS of a new substitute command
-nnoremap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
-
 " ,B = "break here instead" (useful for poetry)
 nnoremap <leader>B mzJ`zF<Space>r<CR><Esc>
 
@@ -479,11 +446,6 @@ nmap <silent> <leader>FF :setlocal ff=unix<CR>
 " ,J squeezes multiple blank lines to one (broken)
 " nmap <silent> <leader>J :g/^\s*$/,/\S/-j|s/.*//<CR>
 
-" ,M converts Markdown to HTML
-if !has("gui_running")
-    nmap <silent> <leader>M :%!$HOME/bin/Markdown.pl<CR>:setlocal ft=html<CR>
-endif
-
 " ,O opens up for a new paragraph (useful for email)
 nmap <leader>O i<CR><CR><CR><CR><Esc>2ki
 
@@ -496,9 +458,6 @@ nmap <silent> <leader>qD :call MakeQuotesDumb()<CR>
 " ,S strips trailing whitespace
 nmap <silent> <leader>S :StripTrailingWhitespaces<CR>
 
-" ,T saves and executes the file
-nmap <silent> <leader>T :w\|:!./%<CR>
-
 " ,WP rewraps current paragraph
 nmap <leader>WP mzgqip`z
 
@@ -507,6 +466,9 @@ nmap <silent> <leader>WU mz:UnwrapAll<CR>`z
 
 " ,WW rewraps entire file
 nmap <leader>WW mz1GgqG`z
+
+" ,X saves and executes the file
+nmap <silent> <leader>X :w\|:!./%<CR>
 
 " ,1 creates a Markdown H1
 nnoremap <leader>1 :set fo-=a<CR>yypVr=
@@ -553,13 +515,12 @@ cmap w!! w !sudo tee > /dev/null %
 " Abbreviations
 "-----------------------------------------------------------------------------
 
-abbr --\ "-----------------------------------------------------------------------------<CR>
-abbr #--\ # ----------------------------------------------------------------------------<CR>
+abbr #div\ # ----------------------------------------------------------------------------<CR>
 abbr #box\ # ----------------------------------------------------------------------------<Esc>yyPO#
 abbr "box\ "-----------------------------------------------------------------------------<Esc>yyPO"
 
 " 2012-12-21
-abbr ttdy <C-R>=strftime("%Y-%m-%d")<CR>
+abbr tdy <C-R>=strftime("%Y-%m-%d")<CR>
 
 abbr +/-    <C-K>+-
 abbr ?x     <C-K>*X

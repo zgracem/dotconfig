@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/bash/functions.bash
+# ~/.config/bash/functions.bash
 # -----------------------------------------------------------------------------
 
 quietly()
@@ -58,7 +58,22 @@ _optSet()
 
 _shoptSet()
 {   # exits 0 if all shell options in $@ are set
-    shopt -pq $*
+    shopt -pq "$@"
+}
+
+_inScreen()
+{   # exits 0 if inside a GNU screen session
+    [[ -p $SCREENDIR/$STY ]]
+}
+
+_inTmux()
+{   # exits 0 if inside a tmux session
+    [[ -S ${TMUX%%,*} ]]
+}
+
+_mux()
+{   # exits 0 if inside a multiplexer session
+    _inScreen || _inTmux
 }
 
 # -----------------------------------------------------------------------------

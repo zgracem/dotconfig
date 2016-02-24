@@ -3,7 +3,7 @@ newwin()
     # Usage: newwin [-t|--title TITLE] COMMAND [ARGS]
 
     local title_regex='^-?-t(itle)?$'
-    local title cmd i=0
+    local title cmd arg i=0
     local -a args
 
     if [[ $1 =~ $title_regex ]]; then
@@ -11,19 +11,21 @@ newwin()
         shift 2
     else
         title="${1##*/}"
-        printf -v cmd "%q" "$1"
+        printf -v cmd %q "$1"
         shift
     fi
 
-    if [[ $TMUX ]]; then
+    if _inTmux; then
         until [[ $# -eq 0 ]]; do
-            printf -v args[$i] "%q" "$1"
+            # printf -v args[$i] %q "$1"
+            printf -v arg %q "$1"
+            args[$i]=$arg
             ((i++))
             shift
         done
 
         command tmux new-window -n "$title" "$cmd ${args[*]}"
-    elif [[ $STY ]]; then
+    elif _inScreen; then
         command screen -t "$title" $cmd "$@"
     else
         $cmd "$@"
@@ -34,12 +36,14 @@ splitwin()
 {   # open in a new tmux windowpane, if applicable
     # Usage: splitwin COMMAND [ARGS]
 
-    local cmd i=0
+    local cmd arg i=0
     local -a args
 
-    if [[ $TMUX ]]; then
+    if _inTmux; then
         until [[ $# -eq 0 ]]; do
-            printf -v args[$i] "%q" "$1"
+            # printf -v args[$i] %q "$1"
+            printf -v arg %q "$1"
+            args[$i]=$arg
             ((i++))
             shift
         done
@@ -48,4 +52,12 @@ splitwin()
     else
         $cmd "$@"
     fi
+}
+
+splithelp()
+{   # open help in a new tmux windowpane
+
+    local cmd="$1"
+
+    command tmux split-window -h "$cmd"' --help | less'
 }

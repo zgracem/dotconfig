@@ -2,7 +2,7 @@ numfiles()
 {   # return the number of files in $PWD (or $1)
     # Based on: https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/cf.bash
 
-    local dir="${1-$PWD}" dotglob nullglob
+    local dir="${1-$PWD}"
     local -a files
 
     # check target directory
@@ -19,9 +19,9 @@ numfiles()
 
     # capture glob settings
     _shoptSet dotglob \
-        && dotglob=true
+        && local dotglob=true
     _shoptSet nullglob \
-        && nullglob=true
+        && local nullglob=true
 
     # populate files array
     shopt -s dotglob nullglob

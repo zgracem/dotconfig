@@ -1,23 +1,39 @@
-[[ $OSTYPE =~ darwin ]] || return
-
 lockfile()
 {
     local -a files=("$@")
-    local file
 
-    for file in "${files[@]}"; do
-        sudo chflags uchg "$file"
-        chmod a-w "$file"
-    done
+    case $OSTYPE in
+        darwin*)
+            sudo chflags uchg "${files[@]}"
+            ;;
+        cygwin)
+            "${SYSTEMROOT}/system32/attrib" +R "${files[@]}"
+            ;;
+        *)
+            scold 'not available on this system'
+            return $EX_OSERR
+            ;;
+    esac
+
+    chmod a-w "${files[@]}"
 }
 
 unlockfile()
 {
     local -a files=("$@")
-    local file
 
-    for file in "${files[@]}"; do
-        sudo chflags nouchg "$file"
-        chmod u+w "$file"
-    done
+    case $OSTYPE in
+        darwin*)
+            sudo chflags nouchg "${files[@]}"
+            ;;
+        cygwin)
+            "${SYSTEMROOT}/system32/attrib" +R "${files[@]}"
+            ;;
+        *)
+            scold 'not available on this system'
+            return $EX_OSERR
+            ;;
+    esac
+
+    chmod u+w "${files[@]}"
 }

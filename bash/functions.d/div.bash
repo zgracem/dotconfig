@@ -6,5 +6,5 @@ div()
     local line
     printf -v line '%*s' $COLUMNS
 
-    printf "\n${esc_hi}${line// /$p}${esc_reset}\n\n"
+    printf '\n%b\n\n' "${esc_hi}${line// /$p}${esc_reset}"
 }

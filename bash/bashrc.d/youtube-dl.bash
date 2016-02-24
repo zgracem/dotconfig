@@ -3,7 +3,12 @@
 
 _inPath youtube-dl || return
 
-export ydl_format='%(title)s.%(ext)s'
+if [[ ! -d $HOME/var/cache/youtube-dl ]]; then
+    mkdir -p "$HOME/var/cache/youtube-dl"
+fi
 
-alias ydl='youtube-dl -o "${dir_downloads}/${ydl_format}"'
-alias yydl='youtube-dl -o "${HOME}/Movies/YouTube/${ydl_format}"'
+ydl()
+{
+    local output_fmt="%(title)s.%(ext)s"
+    youtube-dl -o "$dir_downloads/$output_fmt" "$@"
+}

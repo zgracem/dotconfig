@@ -1,3 +1,5 @@
+# (_inPath id3v2 && _inPath mp4info) || return
+
 songinfo()
 {   # prints metadata for song files
     local song="$1"
@@ -10,8 +12,8 @@ songinfo()
             mp4info "$song"
             ;;
         *)
-            scold "$FUNCNAME: $song: no metadata found"
-            return 1
+            scold "${FUNCNAME[0]}: ${song}: no metadata found"
+            return $EX_NOINPUT
             ;;
     esac
 }

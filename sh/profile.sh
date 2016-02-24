@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/sh/profile
+# ~/.config/sh/profile
 # -----------------------------------------------------------------------------
 
 if [ -d "$HOME/.config/sh/profile.d" ]; then
@@ -8,5 +8,6 @@ if [ -d "$HOME/.config/sh/profile.d" ]; then
             # debug_echo "# sourcing $file..."
             . "$file"
         fi
+        unset file
     done
 fi

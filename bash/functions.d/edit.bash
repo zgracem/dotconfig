@@ -3,12 +3,12 @@ _edit()
     # Usage: _edit FILE[:LINE] [FILE[:LINE] ...]
 
     local -a files=("$@")
-    local file line
     local -r lineno_regex=':([[:digit:]]+)$'
 
+    local file
     for file in "${files[@]}"; do
         if [[ $file =~ $lineno_regex ]]; then
-            line="${BASH_REMATCH[1]}"
+            local line="${BASH_REMATCH[1]}"
             file="${file%:*}"
         fi
 
@@ -22,12 +22,14 @@ _edit()
                 newwin --title "$window_title" "$EDITOR" "$file"
             fi
         else
-        # use a GUI editor
+            # use a GUI editor
             if [[ $VISUAL =~ subl && -n $line ]]; then
                 file="${file}:${line}"
             fi
 
-            "${VISUAL% --wait}" "$file"
+            local VISUAL=${VISUAL%%?( -)-wait}
+
+            "$VISUAL" "$file"
         fi
     done
 }

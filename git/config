@@ -1,6 +1,6 @@
 [user]
-	name = Zozo
-	email = zozo@inescapable.org
+	name = ZGM
+	email = cryptostrophe@users.noreply.github.com
 
 [core]
 	autocrlf = input
@@ -39,3 +39,7 @@
 
 [push]
 	default = simple
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

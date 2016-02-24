@@ -1,212 +1,88 @@
-# -----------------------------------------------------------------------------
-# header
-# -----------------------------------------------------------------------------
+zk=${esc_black:-$'\e[0;30m'}
+zr=${esc_red:-$'\e[0;31m'}
+zg=${esc_green:-$'\e[0;32m'}
+zy=${esc_yellow:-$'\e[0;33m'}
+zb=${esc_blue:-$'\e[0;34m'}
+zm=${esc_magenta:-$'\e[0;35m'}
+zc=${esc_cyan:-$'\e[0;36m'}
+zw=${esc_white:-$'\e[0;37m'}
+z0=${esc_reset:-$'\e[0m'}
 
-if [[ ${BASH_VERSINFO[0]} -lt 4 ]]; then
-    return
-fi
-
-# TODO:
-# - comments
-
-# instructions
-
-# configuration
-
-_z_bg="${solarized:-dark}"
-
-# -----------------------------------------------------------------------------
-# colours
-# -----------------------------------------------------------------------------
-
-if [[ -z $_z_rst ]] && _z_rst="$(tput sgr0 2>/dev/null)"; then
-    read _z_{blk,red,grn,yel,blu,mag,cyn,wht} \
-    < <(for i in {0..7}; do tput setaf $i; printf '\t'; done)
-fi
-
-_z_true="$_z_grn"
-_z_false="$_z_red"
-
-_z_alias_name="$_z_blu"
-_z_alias_value="$_z_cyn"
-_z_function_name="$_z_blu"
-_z_function_file="$_z_grn"
-_z_function_line="$_z_yel"
-_z_special_name="$_z_mag"
-_z_file_name="$_z_yel"
-_z_file_path="$_z_grn"
-_z_var_name="$_z_blu"
-_z_var_value="$_z_cyn"
-
-_z_man_cmd="${LESS_TERMCAP_md:-$_z_grn}"
-_z_man_var="${LESS_TERMCAP_us:-$_z_yel}"
-
-case $_z_bg in
-    dark)
-        _z_punct="$_z_wht"
-        ;;
+case $solarized in
     light)
-        _z_punct="$_z_blk"
-        _z_true="$_z_cyn"
+        z_no=${esc_false:-$'\e[1;31m'}
+        z_hi=$zk
         ;;
     *)
-        _z_punct="$_z_rst"
+        z_no=$zr
+        z_hi=$zw
         ;;
 esac
 
-# -----------------------------------------------------------------------------
-# secondary functions
-# -----------------------------------------------------------------------------
+z::print()
+{   # echo to standard output
 
-# helper functions
-
-zhelp::print()
-{   # echo to stdout
     if [[ -t 1 ]]; then
-        printf "${_z_rst}%b${_z_rst}" "$@"
+        printf "${z0}%b${z0}" "$@"
     else
-        # strip colours if we're in a pipe or something
-        printf "%b" "$@" \
-        | sed -E "s|\[[0-9;]*m?||g"
+        # strip colours before printing
+        printf '%b' "$@" \
+        | sed -E 's|\[[0-9;]*m?||g'
     fi
 }
 
-zhelp::scold()
-{   # echo to stderr
-    zhelp::print "$@\n" >&2
-}
-
-zhelp::shoptSet()
-{   # return 0 if all shell options in $@ are set
-    shopt -pq $*
-}
-
-zhelp::isFunction()
-{   # return 0 if $1 is defined as a shell function
-    declare -f "$1" &>/dev/null
-}
-
-# info functions
-
-zhelp::help()
-{   # return a short description of $1 (via `help`)
-
-    declare thing="$1" help_string name desc
-
-    builtin help -d "$thing" &>/dev/null \
-        || return
-
-    while read help_string; do
-        name="${help_string% - *}"
-        desc="${help_string#* - }"
-
-        if [[ -n $name && -n $desc ]]; then
-            zhelp::print "${_z_special_name}${name}"
-            zhelp::print "${thing_type:+ ($thing_type)}${_z_punct}: "
-            zhelp::print "${desc}\n"
-        fi
-    done < <(builtin help -d "$thing" 2>/dev/null)
-}
-
-zhelp::file()
+where()
 {
-    declare name="$1" filename
-
-    if [[ $_all == true ]]; then
-        declare -a filenames=($(type -ap "$name"))
+    if (( $# > 0 )); then
+        local func="$1"
     else
-        declare -a filenames=($(type -p "$name"))
-    fi
-
-    for filename in ${filenames[@]}; do
-        if [[ $_short == true ]]; then
-            zhelp::print "${filename}\n"
-        else
-            zhelp::print "${_z_file_name}${name}"
-            zhelp::print " is "
-            zhelp::print "${_z_file_path}${filename}"
-            zhelp::print "\n"
-        fi
-    done
-}
-
-zhelp::alias()
-{
-    declare name="$1" target
-
-    target="$(builtin alias "$name")" \
-        || return
-
-    target="${target#*=\'}"         # remove beginning
-    target="${target%\'}"           # remove end
-    target="${target//\'\\\'\'/\'}" # unescape single quotes
-    target="${target//\\/\\\\}"     # escape backslashes
-
-    if [[ -n $target ]]; then
-        if [[ $_short == true ]]; then
-            zhelp::print "${target}\n"
-        else
-            zhelp::print "${_z_alias_name}${name} "
-            zhelp::print "is aliased to '"
-            zhelp::print "${_z_alias_value}${target}"
-            zhelp::print "'\n"
-        fi
-    fi
-}
-
-zhelp::where()
-{   # return filename and line number where function $1 was defined
-
-    declare func="$1" location line _extdebug_toggled
-
-    if ! zhelp::isFunction "$func"; then
-        zhelp::scold "${_z_false}${func}${_z_rst}: not a function"
         return 1
     fi
 
-    # enable debugging behaviour if necessary
-    if ! zhelp::shoptSet extdebug; then
-        shopt -s extdebug \
-            && _extdebug_toggled='true'
-    fi
+    # enable advanced debugging behaviour
+    shopt -q extdebug || trap 'shopt -u extdebug; trap - RETURN;' RETURN
+    shopt -s extdebug
 
-    location="$(declare -F "$func")"    # get [name] [line no.] [file path]
-    location="${location#$func }"       # remove function name
-    line="${location% *}"               # isolate line number
-    location="${location#* }"           # remove line number
+    local location line
 
-    zhelp::print "${_z_function_file}${location}"
-    zhelp::print "${_z_punct}:"
-    zhelp::print "${_z_function_line}${line}"
-
-    # disable debugging behaviour if we enabled it
-    if [[ $_extdebug_toggled == true ]]; then
-        shopt -u extdebug
+    if ! declare -f "$func" &>/dev/null; then
+        z::print "${z_no}${func}${z0}: not a function\n" >&2
+        return 1
     else
-        return 0
+        location=$(declare -F "$func")  # prints "[name] [line#] [/path/to/file]"
+        location=${location#$func }     # remove function name
+        line=${location%% *}            # isolate line number
+        location=${location#$line }     # remove line number
+        
+        if [[ -t 1 ]]; then
+            # tilde-ify homedir unless we're piping this somewhere
+            location=${location/#$HOME/$'~'}
+        fi
+    fi
+
+    if [[ $location == '(null)' ]]; then
+        z::print "${z_no}${func}${z0}: could not determine source file\n" >&2
+        return 1
+    elif [[ -n $location && -n $line ]]; then
+        z::print "${zg}${location}${z_hi}:${zy}${line}"
+
+        if [[ ${FUNCNAME[2]} != which ]]; then
+            z::print '\n'
+        fi
     fi
 }
 
-zhelp::function()
+z::whatis()
 {
-    declare func="$1"
+    # disable case-insensitive matching
+    shopt -q nocasematch && trap 'shopt -s nocasematch; trap - RETURN;' RETURN
+    shopt -u nocasematch
 
-    # display source file and line number
-    zhelp::where "$func"
-    zhelp::print "\n"
+    local thing="$1"
 
-    # print source, colourizing function name
-    declare -f "$func" \
-    | sed -E "s/^${func}\b/${_z_function_name}\0${_z_rst}/"
-}
-
-zhelp::whatis()
-{   # return a short description of $1 (via the whatis database)
-
-    declare thing="$1" line _extglob_toggled _found='false'
-    declare regex_fail='nothing appropriate$'
-    declare regex_pass="^${thing}[[:space:](]"
-    declare regex_trouble='[]\[()]'
+    local regex_fail='nothing appropriate$'
+    local regex_pass="^${thing}[[:space:](]"
+    local regex_trouble='[]\[()]'
 
     # escape characters that sed won't like
     if [[ $thing =~ $regex_trouble ]]; then
@@ -214,258 +90,208 @@ zhelp::whatis()
     fi
 
     # check whatis database
-    while read line; do
-        # if not found in whatis database
-        [[ $line =~ $regex_fail ]] \
-            && continue
+    local line; while read line; do
+        if [[ $line =~ $regex_fail ]]; then
+            return 1 # not found at all in whatis database, abort
+        elif [[ ! $line =~ $regex_pass ]]; then
+            continue # skip non-whole-word matches
+        elif [[ $line =~ 'built-in command' ]]; then
+            continue # skip builtins
+        else
+            sed -E \
+                -e "s/^(${thing})[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/${zy}\1${z0}\2: \3/g" \
+                -e "s/[[:space:]]+-[[:space:]]/: /" \
+            <<< "$line"
+        fi
+    done < <(command whatis "$thing" 2>&1)
 
-        # skip non-whole-word matches
-        [[ ! $line =~ $regex_pass ]] \
-            && continue
-
-        # skip builtins
-        [[ $line =~ 'built-in command' ]] \
-            && continue
-
-        _found='true'
-
-        echo "$line" \
-        | sed -E "s/^(${thing,,})[^\(]*(\([[:alnum:]]+\))[[:space:]-]+(.*)/${_z_file_name}\1${_z_rst}\2${_z_punct}:${_z_rst} \3/g"
-
-    done < <(command whatis "$thing")
-
-    [[ $_found == true ]]
+    return 1
 }
 
-zhelp::variable()
-{   # like `type`, but for variables
+z::help()
+{
+    local thing="$1" desc
 
-    declare var="$1" article="a" var_type="variable"
-    declare var_{flags,nature,property,content} string
-
-    # disable case-sensitive matching if necessary
-    if zhelp::shoptSet nocasematch; then
-        shopt -u nocasematch \
-            && declare _nocasematch_toggled='true'
+    if desc=$(builtin help -d "$thing" 2>/dev/null); then
+        z::print "${zm}${thing}${z0}${thing_type:+ ($thing_type)}: ${desc#* - }\n"
+    else
+        return 1
     fi
+}
 
-    if ! string=$(declare -p "$var" 2>/dev/null); then
-        [[ $_nocasematch_toggled == true ]] \
-            && shopt -s nocasematch
+z::wtf()
+{
+    local this=${FUNCNAME[1]:-${FUNCNAME[0]}}
+
+    if (( $# == 1 )); then
+        local thing="$1"
+        local -a thing_types=($(builtin type -at "$thing" | uniq))
+    else
+        z::print "${z_no}${this}${z0}: syntax error\n" >&2
         return 1
     fi
 
-    string="${string/#declare }"
-    var_flags="${string%% *}"
-    var_value="${string#*=}"
+    # disable case-sensitive matching
+    shopt -q nocasematch && trap 'shopt -s nocasematch; trap - RETURN;' RETURN
+    shopt -u nocasematch
 
-    case $var_flags in
-        *a*)    var_type="indexed array"     ;;&
-        *A*)    var_type="associative array" ;;&
-        *i*)    var_content="integer"   ;;&
-        *r*)    var_property+="${var_property:+, }read-only" ;;&
-        *t*)    var_property+="${var_property:+, }traced"    ;;&
-        *x*)    var_property+="${var_property:+, }exported"  ;;&
-        *l*)    var_content="lowercase" ;;&
-        *u*)    var_content="uppercase" ;;&
-        *)      : ;;
-    esac
+    if (( ${#thing_types[@]} > 0 )); then
+        local thing_type def place
+        for thing_type in "${thing_types[@]}"; do
+            case $thing_type in
+                file)
+                    [[ $this == what ]] && z::whatis "$thing"
+                    local -a places=($(builtin type -ap "$thing"))
+                    for place in "${places[@]}"; do
+                        def="${zg}${place}\n"
 
-    var_nature="${var_property:+$var_property }${var_content:+$var_content }${var_type}"
-
-    if [[ $var_value == '""' ]]; then
-        var_nature="null ${var_nature}"
-    elif [[ $var_value == "'()'" ]]; then
-        var_nature="empty ${var_nature}"
-    fi
-
-    if [[ ${var_nature:0:1} =~ [aeiou] ]]; then
-        article+="n"
-    fi
-
-    zhelp::print "${_z_var_name}${var} "
-    zhelp::print "is ${article} ${var_nature}\n"
-
-    # enable case-sensitive matching if we enabled it
-    if [[ $_nocasematch_toggled == true ]]; then
-        shopt -s nocasematch
-    else
-        return 0
-    fi
-}
-
-# -----------------------------------------------------------------------------
-# main functions
-# -----------------------------------------------------------------------------
-
-zhelp::define()
-{
-    declare thing="$1" thing_type="$2"
-
-    if [[ -z $thing_type ]]; then
-        # get the type (alias/keyword/function/builtin/file)
-        thing_type=$(type -t "$thing" 2>/dev/null)
-    fi
-
-    case $thing_type in
-        keyword|builtin)
-            zhelp::print "${_z_special_name}${thing}"
-            zhelp::print " is a shell ${thing_type}\n"
-            ;;
-        alias)
-            zhelp::alias "$thing"
-            ;;
-        function)
-            zhelp::print "${_z_function_name}${thing} "
-            zhelp::print "is a function"
-            zhelp::print " ("
-            zhelp::where "$thing"
-            zhelp::print ")"
-            zhelp::print "\n"
-            ;;
-        file)
-            zhelp::file "$thing"
-            ;;
-        *)
-            return 1
-            ;;
-    esac
-}
-
-zhelp::describe()
-{
-    declare thing="$1" thing_type="$2"
-
-    if [[ -z $thing_type ]]; then
-        # get the type (alias/keyword/function/builtin/file)
-        thing_type=$(type -t "$thing" 2>/dev/null)
-    fi
-
-    case $thing_type in
-        keyword|builtin)
-            zhelp::help "$thing"
-            ;;
-        alias)
-            zhelp::alias "$thing"
-            ;;
-        function)
-            zhelp::function "$thing"
-            ;;
-        file)
-            zhelp::whatis "$thing"
-            ;;
-        *)
-            return 1
-            ;;
-    esac
-}
-
-zhelp::wtf()
-{
-    while [[ $1 =~ ^- ]]; do
-        case $1 in
-            -a|--all)
-                declare _all='true'
-                shift
-                ;;
-            -s|--short)
-                declare _short='true'
-                shift
-                ;;
-            *)
-                break 2
-                ;;
-        esac
-    done
-
-    declare thing="$1" thing_type whatis_string
-
-    if [[ $_all == true ]]; then
-        declare -a thing_types=($(type -at "$thing" | uniq))
-    else
-        declare -a thing_types=($(type -t "$thing"))
-    fi
-
-    if [[ ${#thing_types[@]} -gt 0 ]]; then
-        for thing_type in ${thing_types[@]}; do
-            case ${FUNCNAME[1]} in
-                *which)
-                    zhelp::define "$thing" "$thing_type"
+                        if [[ -t 1 ]]; then
+                            z::print "${zy}${thing}${z0} is ${zg}${place}\n"
+                        else
+                            z::print "${place}"
+                            break
+                        fi
+                    done
                     ;;
-                *what)
-                    zhelp::describe "$thing" "$thing_type"
+                alias)
+                    def="${zy}$(builtin type "$thing")"
+                    def="${def/ /$z0 }"
+                    def="${def/\`/‘$zc}"
+                    def="${def/\'/$z0}’"
+                    
+                    z::print "${def}\n"
+                    ;;
+                keyword|builtin)
+                    if [[ $this == which ]] || ! def=$(help -d "$thing" 2>/dev/null); then
+                        z::print "${zm}${thing}${z0} is a shell ${thing_type}\n"
+                    else
+                        z::print "${zm}${thing}${z0} (${thing_type}): ${def#* - }\n"
+                    fi
+                    ;;
+                function)
+                    if [[ $this == which ]]; then
+                        if [[ -t 1 ]]; then
+                            z::print "${zb}${thing}${z0} is a ${zb}function${z0} ("
+                            where "$thing"
+                            z::print ')\n'
+                        else
+                            where "$thing"
+                        fi
+                    elif [[ -t 1 ]]; then
+                        where "$thing"
+                        declare -f "$thing" \
+                        | sed -E "s/^${thing}\b/${zb}\0${z0}/"
+                    else
+                        where "$thing"
+                        declare -f "$thing"
+                    fi
                     ;;
                 *)
                     return 1
                     ;;
             esac
+            [[ $this == which ]] && break
         done
 
         return 0
-    elif [[ ${FUNCNAME[1]} =~ what ]]; then
+    elif [[ $this == what ]]; then
         # system libraries & other non-command man pages
-        zhelp::whatis "$thing" \
+        z::whatis "$thing" \
             && return 0
 
         # edge-case shell syntax items
-        zhelp::help "$thing" \
-            && return 0
-
-        # variables
-        zhelp::variable "$thing" \
+        z::help "$thing" \
             && return 0
     fi
 
-    zhelp::scold "${_z_false}${thing}${_z_rst}: not found"
+    z::print "${z_no}${thing}${z0}: not a thing\n" >&2
     return 1
 }
 
+quietly unalias which
+
+which() { z::wtf "$@"; }
+what() { z::wtf "$@"; }
+
+# -----------------------------------------------------------------------------
+# variables
 # -----------------------------------------------------------------------------
 
-for alias in which what where; do
-    alias $alias &>/dev/null \
-        && unalias $alias
-done
-
-unset alias
-
-which() { zhelp::wtf "$@"; }
-what()  { zhelp::wtf "$@"; }
-
-where() {
-    zhelp::where "$@" \
-        && zhelp::print "\n"
-}
+(( BASH_VERSINFO[0] < 4 )) && return
 
 whatvar()
 {
-    if [[ $# -eq 0 ]]; then
-        zhelp::scold "Usage: ${_z_man_cmd}${FUNCNAME} ${_z_man_var}variable_name${_z_rst}"
-        return 1
-    fi
+    local this=${FUNCNAME[1]:-${FUNCNAME[0]}}
 
-    declare objectvar="$1" var_type array
-
-    if zhelp::variable "$objectvar"; then
-        var_type="$(zhelp::variable "$objectvar")"
-
-        case $var_type in
-            *null*|*empty*)
-                return 0
-                ;;
-            *variable)
-                zhelp::print "${_z_var_value}${!objectvar//\\e}\n"
-                ;;
-            *array)
-                array="$(declare -p "$objectvar")"
-                array="${array#*\'(}"    # strip leading info
-                array="${array%)\'}"     # strip trailing single-quote
-
-                zhelp::print "${_z_var_value}${array}\n"
-                ;;
-        esac
+    if (( $# == 1 )); then
+        local var="$1"
     else
-        zhelp::scold "${_z_false}${objectvar}${_z_rst} is not set"
+        z::print "${z_no}${this}${z0}: syntax error\n" >&2
         return 1
     fi
+
+    # disable case-sensitive matching
+    shopt -q nocasematch && trap 'shopt -s nocasematch; trap - RETURN;' RETURN
+    shopt -u nocasematch
+
+    local string
+    if ! string=$(declare -p "$var" 2>/dev/null); then
+        z::print "${z_no}${var}${z0}: not set\n" >&2
+        return 1
+    fi
+
+    string="${string#declare }"
+    local flags="${string%% *}"
+    local value="${string#*=}"
+    local var_type='variable' var_cont var_prop
+
+    case $flags in
+        *a*)    var_type='indexed array'
+                ;;&
+        *A*)    var_type='associative array'
+                ;;&
+        *i*)    var_cont='integer'
+                ;;&
+        *r*)    var_prop+="${var_prop:+, }read-only"
+                ;;&
+        *t*)    var_prop+="${var_prop:+, }traced"
+                ;;&
+        *x*)    var_prop+="${var_prop:+, }exported"
+                ;;&
+        *l*)    var_cont='lowercase'
+                ;;&
+        *u*)    var_cont='uppercase'
+                ;;&
+        *)      : ;;
+    esac
+
+    # concatenate with single spaces
+    read nature <<< "$var_prop $var_cont $var_type"
+
+    if [[ $value == '""' ]]; then
+        nature="null ${nature}"
+    elif [[ $value == "'()'" ]]; then
+        nature="empty ${nature}"
+    fi
+
+    if [[ ${nature:0:1} =~ [aeiou] ]]; then
+        local article='an'
+    else
+        local article='a'
+    fi
+
+    z::print "${zc}${var}${z0} is ${article} ${nature}\n"
+
+    case $nature in
+        *null*|*empty*)
+            : ;;
+        *variable)
+            printf '%s\n' "${!var//\\e}"
+            ;;
+        *array)
+            explode "$var"
+            ;;
+    esac
+
+    return 0
 }

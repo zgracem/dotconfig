@@ -1,29 +1,26 @@
-pbmarkdown()
-{   # convert clipboard contents to Markdown
+pbwc()
+{   # get word count of clipboard contents
 
     pbpaste \
-    | ~/bin/Markdown.pl \
-    | pbcopy
+    | wc -w
 }
 
 pbsort()
 {   # sort contents of clipboard
 
     pbpaste \
-    | sort -u \
+    | sort \
+    | uniq \
     | pbcopy
 }
 
 cppwd()
 {   # copy current directory's path to clipboard
 
-    printf "%q" "$PWD" \
-    | pbcopy
+    pbcopy <<< "$PWD"
 }
 
-# -----------------------------------------------------------------------------
-
-_inPath cygpath || return
+[[ $OSTYPE =~ cygwin ]] || return
 
 cpcd()
 {   # copy current directory's Windows path to clipboard

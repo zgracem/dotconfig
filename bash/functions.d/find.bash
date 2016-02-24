@@ -1,12 +1,9 @@
-_zfind()
+z::find()
 {   # general finding function
-    # Usage: _zfind TYPE SCOPE STRING
+    # Usage: z::find f[ile]|d[ir] SCOPE TERM
 
-    local usage="${FUNCNAME[0]} TYPE SCOPE STRING"
-
-    local find_type="$1"; shift
-    local scope="$1"; shift
-    local term="$@"
+    local find_type=$1 scope=$2; shift 2
+    local term=$@
 
     case $find_type in
         f|d)
@@ -16,54 +13,50 @@ _zfind()
             find_type="${find_type:0:1}"
             ;;
         *)
-            scold "Usage: ${usage}"
-            return 1
+            scold "Usage: ${FUNCNAME[0]} f[ile]|d[ir] SCOPE TERM"
+            return $EX_USAGE
             ;;
     esac
 
-    find -H "$scope" -type $find_type -iname '*'"${term}"'*' 2>&- \
-    | sed "s|^${HOME}|~|g" \
-    | grep -i --colour=auto "$term"
+    find -H "$scope" -xtype $find_type -iname '*'"$term"'*' -print 2>&- \
+    | sed "s|^$HOME|~|g" \
+    | command grep -i --colour=auto "$term"
 
 }
 
-ff()
-{   # find a file whose name contains a given string
-    _zfind file "$PWD" "$@"
-}
+z::find::daysold()
+{   # list all files in $PWD changed in the last $1 days
 
-fd()
-{   # find a directory whose name contains a given string
-    _zfind dir "$PWD" "$@"
-}
-
-_zfind_daysold()
-{   # list all files under $PWD changed in the last $1 days
-
-    declare days="$1" find_bin
+    local days="$1" find_bin
 
     if ! _isNumber "$days"; then
         scold "Error: $days: not a number"
-        return 64
+        return $EX_USAGE
     elif ! find_bin=$(getGNU find); then
         scold "Error: GNU find(1) required"
-        return 69
+        return $EX_UNAVAILABLE
     fi
 
-    if [[ $days -gt 0 ]]; then
+    if (( days > 0 )); then
         days="-${days}"
     fi
 
-    "$find_bin" "$PWD" \
+    "$find_bin" -H "$PWD" \
         -maxdepth 1 \
-        -type f \
+        -xtype f \
         -daystart \
         -mtime "$days" \
         -print
 }
 
+# find a file whose name contains a given string
+ff() { z::find file "$PWD" "$@"; }
+
+# find a directory whose name contains a given string
+fd() { z::find dir "$PWD" "$@"; }
+
 # list all files under $PWD changed today
-today() { _zfind_daysold 0; }
+today() { z::find::daysold 0; }
 
 # list all files under $PWD changed this week
-thisweek() { _zfind_daysold -7; }
+thisweek() { z::find::daysold -7; }

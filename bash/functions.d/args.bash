@@ -3,7 +3,6 @@ args()
     # http://mywiki.wooledge.org/WordSplitting
 
     local num_args="$#"
-    local string
 
     printf '%b%d:%b' \
         "$esc_hi" "$num_args" "$esc_reset"

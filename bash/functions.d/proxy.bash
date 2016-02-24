@@ -7,4 +7,7 @@ proxy()
 	#    ││└─── quiet mode
 	#    │└──── compress all data
 	#    └───── go to background immediately
+
+    export SOCKS5_SERVER='127.0.0.1:8080'
+    export ALL_PROXY="socks5h://${SOCKS5_SERVER}"
 }

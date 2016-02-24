@@ -1,12 +1,14 @@
+__z_complete_src "$HOMEBREW_COMPLETION/git-completion.bash"
+
 # alias for 'git difftool'
+_isAlias gd || return
 
-__complete_gd()
+__z_complete_gd()
 {
-    declare cur=${COMP_WORDS[COMP_CWORD]}
-    declare files=( $(git status 2>/dev/null \
-    	| sed -nE 's/^#?\s+modified:\s+(.+)$/\1/p') )
+    local -a wordlist=( $(git status 2>/dev/null \
+        | sed -nE 's/^#?\s+modified:\s+(.+)$/\1/p') )
 
-    COMPREPLY=( $(compgen -W "${files[*]}" -- $cur) )
+    COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
 }
 
-complete -F __complete_gd gd
+complete -F __z_complete_gd gd

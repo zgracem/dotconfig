@@ -1,18 +1,19 @@
-_inPath mdfind || return
+[[ $OSTYPE =~ darwin ]] || return
 
 sp()
 {   # find a file using Spotlight
     local scope="$PWD"
-    local term="$@"
+    local query="$@"
 
-    mdfind -onlyin "$scope" -name "$term" \
-    | grep -i "$term"
+    mdfind -onlyin "$scope" -name "$query" \
+    | grep -i "$query"
 }
 
 spliteral()
-{   # interpret search term as though it had been typed into the Spotlight menu
-    local term="$@"
+{   # interpret search query as though it had been typed into the Spotlight menu
+    local scope="$PWD"
+    local query="$@"
 
-    mdfind -interpret "$term" \
-    | grep -i "$term"
+    mdfind -onlyin "$scope" -interpret "$query" \
+    | grep -i "$query"
 }

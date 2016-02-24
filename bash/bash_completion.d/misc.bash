@@ -1,35 +1,61 @@
 # -----------------------------------------------------------------------------
-# my custom completions
+# simple custom completions
 # -----------------------------------------------------------------------------
 
 # complete actions:
-# -a    alias           #       function
-# -b    builtin         #       helptopic
-# -c    command         #       hostname [from $HOSTFILE]
-# -d    directory       # -j    job [name]
-# -e    export[ed var]  # -k    keyword
-# -f    file [names]    # -v    variable
+#   alias           -a
+#   builtin         -b
+#   command         -c
+#   directory       -d
+#   export[ed var]  -e
+#   file            -f
+#   function                    
+#   helptopic                   
+#   hostname [from $HOSTFILE]   
+#   job [name]      -j
+#   keyword         -k
+#   variable        -v
 
-complete -a                     alias unalias
-complete -bk    -A helptopic    help
-complete -aev   -A function --  export unset
-complete -abcfk -A function \
-                -A helptopic -- type
+complete -a \
+    alias unalias
 
-complete -defv  -A hostname     scp sftp ssh
-complete -abcdf -A function     sudo
+complete -d -ev \
+    -o nospace \
+    cd
 
-complete -A shopt               _shoptSet
-complete -def                   trash
-complete -A function            fe
-complete -v                     explode
+complete -bk -A helptopic \
+    -o nospace \
+    help
 
-# -----------------------------------------------------------------------------
-# misc. custom completions
-# -----------------------------------------------------------------------------
+complete -ev -a -A function -- \
+    export unset
 
-# transmission-remote-cli (https://github.com/fagga/transmission-remote-cli)
-# _source "${dir_mybin}/github/transmission-remote-cli/completion/bash/transmission-remote-cli-bash-completion.sh"
+complete -ev -A function \
+    declare
 
-# t (https://github.com/sferik/t)
-# _source "${dir_mybin}/github/t/etc/t-completion.sh"
+complete -fd -ev -A hostname \
+    scp sftp ssh
+
+complete -fd -abck -A function \
+    sudo
+
+complete -f -abck -A function -A helptopic -- \
+    -o nospace \
+    type
+
+# custom scripts and functions
+
+complete -A shopt \
+    -o nospace \
+    _shoptSet
+
+complete -fd \
+    trash
+
+complete -A function \
+    -o nospace \
+    fe
+
+complete -ev \
+    -o nospace \
+    explode

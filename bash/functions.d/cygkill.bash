@@ -1,11 +1,19 @@
 [[ $OSTYPE =~ cygwin ]] || return
 
-cygkill()
-{   # kill a process by its Cygwin PID
+winkill()
+{   # kill a process by its Windows PID
     /bin/kill --force --signal SIGTERM "$@"
 }
 
 killall()
 {   # kill a process by name
-    cygkill $(pidof $1)
+
+    local pid
+
+    if pid="$(pidof $1)"; then
+        winkill "$pid"
+    else
+        scold 'No matching processes belonging to you were found'
+        return 1
+    fi
 }

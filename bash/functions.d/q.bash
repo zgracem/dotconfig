@@ -4,42 +4,43 @@ q()
     #        q '-n $SSH_TTY'
     #        some_command; q
 
-    declare lastExit=$? expr result qAnswer qColour
+    local lastExit=$?
 
     case $# in
         0)
-            expr="$lastExit -eq 0"
+            local expr="$lastExit -eq 0"
             ;;
         1)
-            expr="$@"
+            local expr="$@"
             ;;
         *)
             scold "Usage: $FUNCNAME [EXPRESSION]\n'EXPRESSION' uses [[ ... ]] syntax"
-            return 64
+            return $EX_USAGE
             ;;
     esac
 
     # test it
+    local result
     result="$(eval "[[ $expr ]] && echo true" 2>&1)"
 
     case $result in
         *error*)
             # syntax error
             scold "$FUNCNAME" "bad expression"
-            return 64
+            return $EX_USAGE
             ;;
         *true*)
             # true
-            qAnswer="true"
-            qColour="${esc_true}"  # green
+            local qColour="${esc_true}"  # green (set in colours.bash)
+            local qAnswer='true'
             ;;
         *)  # false
-            qAnswer="false"
-            qColour="${esc_false}" # red (set in colours.bash)
+            local qColour="${esc_false}" # red
+            local qAnswer='false'
             ;;
     esac
 
-    printf "%b%b%b\n" $qColour $qAnswer $esc_reset
+    printf '%b%b%b\n' $qColour $qAnswer $esc_reset
 
-    return 0
+    return $EX_OK
 }

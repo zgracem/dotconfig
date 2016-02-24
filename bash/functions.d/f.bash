@@ -1,6 +1,6 @@
 f()
 {   # open a Finder/Explorer window for the current/specified directory
-    local here="${1-.}"
+    local here="${@-.}"
 
     case $OSTYPE in
         darwin*)
@@ -11,7 +11,8 @@ f()
             ;;
         *)
             scold 'not available on this system'
-            return 1
+            return $EX_OSERR
             ;;
     esac
 }
+

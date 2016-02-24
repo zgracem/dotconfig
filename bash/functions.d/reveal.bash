@@ -1,25 +1,21 @@
 reveal()
-{   # reveal a file in Explorer/the Finder instead of opening it
-    local item="$1"
-
-    if [[ -z $item ]]; then
-        scold "Usage: $FUNCNAME FILE"
-        return 1
-    elif [[ ! -e $item ]]; then
-        scold "$item: not found"
-        return 1
+{   # reveal $1 in Finder/Explorer
+    if (( $# == 1 )); then
+        local target="$1"        
+    else
+        return $EX_USAGE
     fi
 
     case $OSTYPE in
         darwin*)
-            open -R "$item"
+            open -R "$target"
             ;;
         cygwin)
-            $(cygpath --windir)/explorer /select, $(cygpath -w "$item")
+            cygstart --explore "$(dirname "$target")"
             ;;
         *)
             scold 'not available on this system'
-            return 1
+            return $EX_OSERR
             ;;
     esac
 }

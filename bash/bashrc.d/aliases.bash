@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~zozo/.config/bash/bashrc.d/aliases
+# ~/.config/bash/bashrc.d/aliases
 # -----------------------------------------------------------------------------
 
 alias    ..='cd ..'
@@ -13,12 +13,31 @@ alias e='echo'
 alias svim='sudo vim'
 alias unmount='umount'
 
-alias ttest="${dir_scripts}/dev/test.sh"
+alias hd='hexdump -C'
+
+alias etest='_edit "$dir_scripts/dev/test.sh"'
+alias ttest="$dir_scripts/dev/test.sh"
+
+alias pinback='"$HOME/scripts/pinback.sh" -t "$pinboard_api_key" -d "$HOME/Archive/pinboard" -fvx'
+
+# -----------------------------------------------------------------------------
+
+# files/directories
+alias dirsize='du -sh'              # total size of $PWD
+alias sizes='dirsize | sort -rh'    # sort files & directories in $PWD by size
 
 # check network connection
 alias pingg='ping -c 4 google.com'
-# share $PWD at localhost:7777
-alias webshare='python -m SimpleHTTPServer 7777'
+
+# share $PWD at localhost:17777 (port reserved by IANA)
+alias webshare='python -m SimpleHTTPServer 17777'
+
+# get external IP address
+alias myip='dig +short @resolver1.opendns.com myip.opendns.com'
+
+# start servers
+alias mm='bundle exec middleman'
+alias gulp='./node_modules/.bin/gulp'
 
 # chmod
 alias 400='chmod 400'
@@ -27,28 +46,10 @@ alias 644='chmod 644'
 alias 700='chmod 700'
 alias 755='chmod 755'
 
-# files/directories
-alias disks='df -h'                 # all mounted disks (w/ human units)
-alias dirsize='du -sh'              # total size of $PWD
-alias sizes='du -sh * | sort -rh'   # sort files & directories in $PWD by size
-
 # ssh
-alias m='newwin --title Minerva ssh Minerva'
-alias mr='newwin --title Minerva ssh Minerva.remote'
+alias  a='newwin --title Athena ssh Athena'
+alias aa='newwin --title Athena ssh Athena.remote'
+alias m='newwin  --title Minerva ssh Minerva'
 alias er='newwin --title Erato ssh Erato'
 alias wf='newwin --title WebFaction ssh WebFaction'
-
-# alias foo='~/scripts/foo.sh'
-if [[ -d $dir_scripts ]]; then
-    for script in $dir_scripts/*.sh; do
-        name=${script##*/}
-        name=${name%.sh}
-
-        if ! _isAlias "$name"; then
-            alias "$name"="$script"
-        fi
-
-        unset -v name script
-    done
-fi
-
+alias hiroko='newwin --title Hiroko ssh Hiroko'

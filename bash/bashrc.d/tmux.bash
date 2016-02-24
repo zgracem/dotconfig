@@ -1,4 +1,10 @@
-alias tt='tmux attach 2>&- || tmux -2 new-session'
-#                 │                 │ └─ create new session
-#                 │                 └─── 256-colour mode
-#                 └───────────────────── attach to session if it exists
+_inPath tmux || return
+
+tt()
+{
+    local session=${1:-$(date +%F)}
+
+    tmux new-session -A -s "$session"
+    #                 │  └─ session name
+    #                 └──── attach if session already exists
+}

@@ -2,12 +2,11 @@
 
 apachelogs()
 {
-    declare logType
-
-    if [[ $STY || $TMUX ]]; then
-        for logType in access error; do
-            newwin --title ${logType}_log \
-            	tail -f /var/log/apache2/${logType}_log
+    if _mux; then
+	    local log_type
+        for log_type in access error; do
+            newwin --title ${log_type}_log \
+            	tail -f /var/log/apache2/${log_type}_log
         done
     fi
 }
