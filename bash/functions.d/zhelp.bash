@@ -8,7 +8,7 @@ zc=${esc_cyan:-$'\e[0;36m'}
 zw=${esc_white:-$'\e[0;37m'}
 z0=${esc_reset:-$'\e[0m'}
 
-case $solarized in
+case $Z_SOLARIZED in
     light)
         z_no=${esc_false:-$'\e[1;31m'}
         z_hi=$zk

@@ -40,7 +40,7 @@ Host Koding
 
 Host *
     User zozo
-    SendEnv LANG LC_* TZ GIT_* TERM_PROGRAM solarized
+    SendEnv LANG LC_* TZ GIT_* TERM_PROGRAM Z_SOLARIZED
     HashKnownHosts yes
     Compression yes
     ForwardAgent yes

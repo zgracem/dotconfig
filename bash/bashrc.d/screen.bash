@@ -4,7 +4,7 @@ _inPath screen || return
 export SCREENDIR="$HOME/tmp/.screens"
 
 # Solarized Light colour scheme
-if [[ $solarized == light ]]; then
+if [[ $Z_SOLARIZED == light ]]; then
     export SCREENRC="${dir_config}/screenrc.light"
 else
     export SCREENRC="${dir_config}/screenrc"

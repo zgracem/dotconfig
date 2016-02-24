@@ -27,17 +27,17 @@ solarized()
 {   # toggle Solarized settings
 
     if [[ $1 =~ (light|dark) ]]; then
-        solarized="${BASH_REMATCH[1]}"
+        Z_SOLARIZED="${BASH_REMATCH[1]}"
     else
-        case $solarized in
-            dark)   solarized=light ;;
-            light)  solarized=dark  ;;
-            *)      solarized=dark ;;
+        case $Z_SOLARIZED in
+            dark)   Z_SOLARIZED=light ;;
+            light)  Z_SOLARIZED=dark  ;;
+            *)      Z_SOLARIZED=dark ;;
         esac
     fi
 
-    export solarized
-    declare -p solarized
+    export Z_SOLARIZED
+    declare -p Z_SOLARIZED
 
     rl prompt
 }

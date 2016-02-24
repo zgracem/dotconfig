@@ -20,7 +20,7 @@ IRB.conf[:USE_READLINE] = true
 # prompt
 # -----------------------------------------------------------------------------
 
-case ENV["solarized"]
+case ENV["Z_SOLARIZED"]
   when "dark"
     colour = "37"   # white
   when "light"
