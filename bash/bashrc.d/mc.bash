@@ -18,7 +18,7 @@ fi
 
 export MC_SKIN='zskin'
 
-case $solarized in
+case $Z_SOLARIZED in
     dark)
         MC_SKIN='solarized_dark'
         ;;

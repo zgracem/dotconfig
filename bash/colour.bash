@@ -87,22 +87,22 @@ case $TERM_PROGRAM in
     iTerm.app)
         case $ITERM_PROFILE in
             *light*)
-                solarized=light
+                Z_SOLARIZED=light
                 ;;
             Default*|Hotkey*)
-                solarized=dark
+                Z_SOLARIZED=dark
                 ;;
         esac
         ;;
     Apple_Terminal)
         if [[ -n $TERM_PROGRAM_VERSION ]] && (( ${TERM_PROGRAM_VERSION%%.*} > 240 )); then
             # i.e. if not running in Terminal.app on 10.5.8...
-            : # solarized=dark
+            : # Z_SOLARIZED=dark
         fi
         ;;
 esac
 
-if [[ -n $solarized ]]; then
+if [[ -n $Z_SOLARIZED ]]; then
     base03="${bold};${black}"
     base02=$black
     base01="${bold};${green}"
@@ -117,7 +117,7 @@ if [[ -n $solarized ]]; then
     colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
 
     # re/define semantic colours
-    case $solarized in
+    case $Z_SOLARIZED in
         dark)
             COLORFGBG='12;8'
             colour_hi=$base2
@@ -134,7 +134,7 @@ if [[ -n $solarized ]]; then
     esac
 fi
 
-export solarized COLORFGBG
+export Z_SOLARIZED COLORFGBG
 
 # ------------------------------------------------------------------------------
 # add escape codes
@@ -213,8 +213,8 @@ if [[ -z $LS_COLORS ]]; then
     dircolor_src="$dir_config/dircolors"
     dircolor_cache="$HOME/var/cache/dircolors"
 
-    if [[ -n $solarized ]]; then
-        dircolor_stub="solarized.$solarized"
+    if [[ -n $Z_SOLARIZED ]]; then
+        dircolor_stub="solarized.$Z_SOLARIZED"
     else
         dircolor_stub="default"
     fi
