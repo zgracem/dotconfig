@@ -2,7 +2,7 @@
 
 scan()
 {
-    local usage="${FUNCNAME[0]} ssh | wifi | file NAME | pid PID"
+    local usage="${FUNCNAME[0]} ssh | wifi | file NAME | pid PID | port PORT"
 
     case $1 in
         ssh)
@@ -14,10 +14,13 @@ scan()
             airport -s
             ;;
         file)
-            sudo opensnoop -v -f "$2"
+            sudo opensnoop -v -f "${2}"
             ;;
         pid)
-            sudo opensnoop -v -p "$2"
+            sudo opensnoop -v -p "${2}"
+            ;;
+        port)
+            sudo lsof -i ":${2}"
             ;;
         *)
             scold "Usage: ${usage}"
