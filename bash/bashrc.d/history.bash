@@ -13,8 +13,6 @@ HISTTIMEFORMAT='%F %T '
 
 # history file
 
-HISTFILE="$HOME/.bash_history"
-
 if (( BASH_VERSINFO[0] >= 4 )) && (( BASH_VERSINFO[1] >= 3 )); then
     HISTSIZE=-1                 # unlimited session history
     HISTFILESIZE=-1             # unlimited $HISTFILE size
@@ -22,6 +20,11 @@ else
     HISTSIZE=$((2 ** 10))       # remember 2^10 commands per session
     HISTFILESIZE=$((2 ** 16))   # store 2^16 lines in $HISTFILE
 fi
+
+HISTDIR="$HOME/.local/history"
+mkdir -p "$HISTDIR" 1>/dev/null
+
+HISTFILE="$HISTDIR/bash_history"
 
 # -----------------------------------------------------------------------------
 # commands to ignore

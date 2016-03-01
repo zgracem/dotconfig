@@ -20,9 +20,12 @@ keybase/
 ssh/
 **/ssh_config
 
+# shell history
+**/history/
+
 # assorted crap
-misc/
 *.bak
+misc/
 
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*

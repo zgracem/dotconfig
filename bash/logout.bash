@@ -10,19 +10,11 @@
 # -----------------------------------------------------------------------------
 
 hfmax=$(( 128 * 1024 ))
-HISTDIR="$HOME/Archive/history"
 
-if _isGNU stat; then
-    flags='-c %s'
-else
-    flags='-f %z'
-fi
-
-if hfsize=$(command stat $flags "$HISTFILE" 2>/dev/null) && (( hfsize >= hfmax )); then
-    HISTFILE_OLD="$HISTDIR/${HISTFILE##*/.}_$(date +%y%m%d)"
+if hfsize=$(wc -c "$HISTFILE" | cut -d" " -f1 2>/dev/null) && (( hfsize >= hfmax )); then
+    HISTFILE_OLD="$HISTDIR/${HISTFILE##*/}_$(date +%F)"
     
-    mkdir -p "$HISTDIR" \
-    && /bin/mv "$HISTFILE" "$HISTFILE_OLD" \
+    /bin/mv "$HISTFILE" "$HISTFILE_OLD" \
     && touch "$HISTFILE"
 fi
 
