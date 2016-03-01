@@ -17,3 +17,11 @@ _isFunction cl && cl
 
 # print bash version (~/.config/bash/functions.d/bashver.bash)
 bashver
+
+
+
+echo "*****************************************************"
+echo "***          Check and then run esync.sh          ***"
+echo "***    then remove this notice from init.bash     ***"
+echo "*****************************************************"
+
