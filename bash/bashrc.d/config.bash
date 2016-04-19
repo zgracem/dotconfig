@@ -90,7 +90,7 @@ alias brewfile='_edit $dir_config/brew/Brewfile'
 alias inputrc='_edit  $dir_config/inputrc'
 alias vimrc='_edit    $dir_config/vimrc'
 
-newfunc()
+z::new_function()
 {
     if [[ ${FUNCNAME[1]} == fe && -n $func && -n $file && ! -f $file ]]; then
         cat > "$file" <<EOF
@@ -124,7 +124,7 @@ fe()
             read -e -p "Create it ("${file/#$HOME/$'~'}")? [y/N] " answer
 
             if [[ $answer =~ [yY] ]]; then
-                newfunc
+                z::new_function
                 _edit "$file:3:5"
                 return $EX_OK
             else
