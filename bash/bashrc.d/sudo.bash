@@ -23,6 +23,7 @@ rootme()
     sudo \
         ${STY:+STY=$STY} \
         ${TMUX:+TMUX=$TMUX} \
+        ${Z_SOLARIZED:+Z_SOLARIZED=$Z_SOLARIZED} \
         TMOUT=$tmout \
         -p "%u "$'\xe2\x86\x92'" %U@%H: " \
         -s
