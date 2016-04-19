@@ -26,6 +26,7 @@ ssh/
 # assorted crap
 *.bak
 misc/
+mc/panels.ini
 
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*
