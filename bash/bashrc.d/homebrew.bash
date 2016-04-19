@@ -3,9 +3,13 @@
 
 _inPath brew || return
 
-export HOMEBREW_BREW_FILE=${HOMEBREW_BREW_FILE:=$(getPath brew)}
-export HOMEBREW_PREFIX=${HOMEBREW_PREFIX:=$(brew --prefix)}
+export HOMEBREW_PREFIX="/usr/local"
+export HOMEBREW_BREW_FILE="$HOMEBREW_PREFIX/bin/brew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+
+### ZGM removed 2016-03-31 -- these don't need to be generated every time
+# export HOMEBREW_BREW_FILE=${HOMEBREW_BREW_FILE:=$(getPath brew)}
+# export HOMEBREW_PREFIX=${HOMEBREW_PREFIX:=$(brew --prefix)}
 # export HOMEBREW_CELLAR=${HOMEBREW_CELLAR:=$(brew --cellar)}
 # export HOMEBREW_CACHE=${HOMEBREW_CACHE:=$(brew --cache)}
 # export HOMEBREW_REPOSITORY=${HOMEBREW_REPOSITORY:=$(brew --repository)}
