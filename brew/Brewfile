@@ -31,7 +31,6 @@ brew 'reattach-to-user-namespace'
 brew 'direnv', args: ['force-bottle']
 brew 'fpp'
 brew 'midnight-commander'
-# brew 'sift' ### ZGM 2015-10-27 -- it never works properly
 brew 'vim', args: ['HEAD', 'override-system-vi']
 brew 'homebrew/dupes/less', args: ['with-pcre']
 brew 'homebrew/dupes/ncurses'
@@ -130,7 +129,6 @@ brew 'woff2'
 
 tap  'homebrew/games'
 brew 'homebrew/games/nethack'
-# brew 'homebrew/games/unnethack', args: ['with-curses-graphics']
 
 brew 'cowsay'
 brew 'figlet'
@@ -143,6 +141,7 @@ brew 'jrnl'
 
 brew 'pv'
 brew 'rename'
+brew 'sf-pwgen' # github.com/anders/pwgen
 brew 'source-highlight' # for less
 brew 'tree'
 brew 'watch'
