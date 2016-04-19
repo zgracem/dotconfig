@@ -194,9 +194,12 @@ else
   set background=dark
 endif
 
-let g:solarized_termtrans=1     " use proper solarized bg colour
+if $Z_SOLARIZED == "light" || $Z_SOLARIZED == "dark"
+  let g:solarized_termtrans=1     " use proper solarized bg colour
+  silent! colorscheme solarized
+endif
+
 let g:is_bash=1                 " default shell for syntax highlighting
-silent! colorscheme solarized
 
 "-----------------------------------------------------------------------------
 " Window title and status line
@@ -314,7 +317,7 @@ if exists("#vimrc")
       \ setlocal fo+=ta
 
     " journaling
-    autocmd BufNewFile,BufRead draft_[0-9]*,750words-201*,jrnl*.txt
+    autocmd BufNewFile,BufRead draft_[0-9]*,750words-201*,jrnl*.txt,dayone*.md
       \ setlocal ft=markdown fo-=t fo-=a fo-=c textwidth=0
 
     " poetry
@@ -549,32 +552,34 @@ abbr ?-     <C-V>u2212
 " 15 = base3    2 = green
 " ---------------------------
 
-if &background == "dark"
-  hi LineNr                      ctermbg=8     ctermfg=10
-  hi CursorLine    cterm=none    ctermbg=0
-  hi CursorLineNr                ctermbg=0     ctermfg=14
+if expand($Z_SOLARIZED) != ""
+  if &background == "dark"
+    hi LineNr                      ctermbg=8     ctermfg=10
+    hi CursorLine    cterm=none    ctermbg=0
+    hi CursorLineNr                ctermbg=0     ctermfg=14
 
-  hi StatusLine    cterm=reverse ctermbg=0     ctermfg=12
-  hi StatusLineNC  cterm=reverse ctermbg=0     ctermfg=10
-  hi VertSplit     cterm=none    ctermbg=10    ctermfg=10
+    hi StatusLine    cterm=reverse ctermbg=0     ctermfg=12
+    hi StatusLineNC  cterm=reverse ctermbg=0     ctermfg=10
+    hi VertSplit     cterm=none    ctermbg=10    ctermfg=10
 
-  hi SpecialKey    cterm=none    ctermbg=0     ctermfg=5
-  hi NonText       cterm=none                  ctermfg=13
+    hi SpecialKey    cterm=none    ctermbg=0     ctermfg=5
+    hi NonText       cterm=none                  ctermfg=13
 
-  hi ErrorMsg      cterm=none                  ctermfg=1
+    hi ErrorMsg      cterm=none                  ctermfg=1
 
-  hi IncSearch     cterm=reverse ctermbg=8     ctermfg=9
-  hi Search        cterm=reverse ctermbg=8     ctermfg=3
+    hi IncSearch     cterm=reverse ctermbg=8     ctermfg=9
+    hi Search        cterm=reverse ctermbg=8     ctermfg=3
 
-  hi htmlItalic    cterm=none                  ctermfg=7
-endif
+    hi htmlItalic    cterm=none                  ctermfg=7
+  endif
 
-if &background == "light"
-  hi LineNr                      ctermbg=15
-  hi CursorLine    cterm=none    ctermbg=7
-  hi CursorLineNr                ctermbg=7     ctermfg=0
+  if &background == "light"
+    hi LineNr                      ctermbg=15
+    hi CursorLine    cterm=none    ctermbg=7
+    hi CursorLineNr                ctermbg=7     ctermfg=0
 
-  hi markdownItalic cterm=none   ctermbg=15    ctermfg=0
+    hi markdownItalic cterm=none   ctermbg=15    ctermfg=0
+  endif
 endif
 
 "-----------------------------------------------------------------------------
