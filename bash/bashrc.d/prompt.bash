@@ -347,6 +347,17 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     esc_user=${esc_red}
   fi
 
+  # users in Administrators group get a red prompt too
+  if [[ $OSTYPE == cygwin ]]; then
+    for g in $(id -G); do
+      if [[ $g == 544 ]]; then
+        esc_user=${esc_red}
+        break
+      fi
+    done
+    unset g
+  fi
+
   z::colour::PS1_esc()
   { # create new colour variables w/ prompt escape codes (\[ and \])
 
@@ -436,9 +447,10 @@ z_PS1[oneline]+="${z_PS1_pwd}${z_PS1_git} ${z_PS1_usr}"
 
 z_PS1[basic]+="${z_PS1_exit}"
 
-if [[ -n $z_PS1_ssh ]]; then
-  z_PS1[basic]+="${z_PS1_ssh}:"
-fi
+# -- ZGM removed 2016-03-30 -- not very "basic", is it...
+# if [[ -n $z_PS1_ssh ]]; then
+#   z_PS1[basic]+="${z_PS1_ssh}:"
+# fi
 
 z_PS1[basic]+="${z_PS1_pwd} ${z_PS1_usr}"
 
