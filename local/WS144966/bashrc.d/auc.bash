@@ -2,7 +2,7 @@ auc::url()
 {
     local document="$1"
     local regex='^((U|DA)?([[:digit:]]{4})-[[:digit:]]+$|[[:digit:]]+-D[[:digit:]]+-([[:digit:]]{4}))$'
-    auc_url='http://www.auc.ab.ca/applications/'
+    auc_url='http://www.auc.ab.ca/'
 
     if [[ -z $document ]]; then
         read document < /dev/clipboard
@@ -17,10 +17,14 @@ auc::url()
 
     case $document in
         U*) # utility order
-            auc_url+='orders/utility-orders/Utility%20Orders'
+            auc_url+='applications/orders/utility-orders/Utility%20Orders'
             ;;
-        *)  # decision
-            auc_url+='decisions/Decisions'
+        *-D*)
+            # new-style decision (PPPPP-D##-YYYY)
+            auc_url+='regulatory_documents/ProceedingDocuments'
+            ;;
+        *)  # old-style decision (YYYY-###)
+            auc_url+='applications/decisions/Decisions'
             ;;
     esac
 
