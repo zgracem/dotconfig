@@ -5,7 +5,7 @@ pdfcrack()
 
     case $OSTYPE in
         cygwin)
-            local dir_fonts="$WINDIR/Fonts"
+            local dir_fonts=$(cygpath -au "$WINDIR/Fonts")
             ;;
         darwin*)
             local dir_fonts="/Library/Fonts"
