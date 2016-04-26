@@ -24,6 +24,6 @@ fi
 
 if [[ -f $dir_local/logout.bash ]]; then
     . "$dir_local/logout.bash"
-else
-    return 0
 fi
+
+printf "Be seeing you.\n"
