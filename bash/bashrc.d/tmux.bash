@@ -1,10 +1,6 @@
 _inPath tmux || return
 
 tt()
-{
-    local session=${1:-$(date +%F)}
-
-    tmux new-session -A -s "$session"
-    #                 │  └─ session name
-    #                 └──── attach if session already exists
+{ # attach to an existing tmux session or create a new one
+  tmux attach-session 2>&- || tmux new-session
 }
