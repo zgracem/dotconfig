@@ -19,10 +19,12 @@ alias screensaver='open "/System/Library/Frameworks/ScreenSaver.framework/Versio
 alias mute='osascript -e "set volume output muted true"'
 alias unmute='osascript -e "set volume output muted false"'
 
-### ZGM 2015-11-08 -- doesn't work on El Capitan (thanks to SIP/rootless)
-# if [[ -d /Volumes/BOOTCAMP ]]; then
-#   # load Windows on next boot
-#   alias bootwin='sudo bless --mount "/Volumes/BOOTCAMP" --setBoot -nextonly '
-#   # ...or right now
-#   alias bootcamp='bootwin && restart'
-# fi
+# bless(8) doesn't work on El Capitan thanks to SIP/rootless
+if (( OSX_VERSINFO[1] < 11 )) && [[ -d /Volumes/BOOTCAMP ]]; then
+  # load Windows on next boot
+  alias bootwin='sudo bless --mount "/Volumes/BOOTCAMP" --setBoot -nextonly '
+  # ...or right now
+  alias bootcamp='bootwin && restart'
+fi
+
+unset -v osx_minor_version

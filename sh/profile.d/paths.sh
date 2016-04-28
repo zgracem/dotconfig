@@ -2,17 +2,17 @@
 # paths
 # -----------------------------------------------------------------------------
 
-# TODO: check dirs and write semi-static ~/etc/paths files?
+### ZGM TODO: check dirs and write semi-static ~/etc/paths files?
 
 # only run if we need to
 # [[ -z $SYSPATH && -z $z_reloading ]] || return 0
 
 # get a reliable base path
 # export SYSPATH="$(command -p getconf PATH 2>/dev/null)"
-: ${SYSPATH:=/usr/bin:/bin:/usr/sbin:/sbin}
+# : ${SYSPATH:=/usr/bin:/bin:/usr/sbin:/sbin}
 
 # base paths
-export PATH=$SYSPATH
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 export MANPATH=/usr/share/man:/usr/man
 export INFOPATH=/usr/share/info
 export CDPATH=.:$HOME
@@ -35,17 +35,6 @@ if [[ -d $RBENV_ROOT ]]; then
 else
     unset -v RBENV_ROOT
 fi
-
-# export PYTHONPATH=/usr/local/lib/python2.7/site-packages
-
-### ZGM disabled 2015-10-04 -- not sure how this will interact w/ Homebrew pip
-# export PYTHONUSERBASE="$HOME/.pip"
-
-# if [[ -d $PYTHONUSERBASE ]]; then
-#     PATH=$PYTHONUSERBASE/bin:$PATH
-# else
-#     unset -v PYTHONUSERBASE
-# fi
 
 # -----------------------------------------------------------------------------
 # OS X
@@ -78,7 +67,7 @@ if [[ -x /usr/bin/xcode-select ]]; then
             DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
             ;;
         Erato)
-            ### ZGM removed 2016-02-13 -- broken since El Cap
+            ### ZGM TODO 2016-02-13: fix; broken since El Cap
             : DEVELOPER_DIR="/Library/Developer/CommandLineTools"
             ;;
         Hiroko)
@@ -151,10 +140,5 @@ fixpath()
 PATH=$(    fixpath "$PATH")
 MANPATH=$( fixpath "$MANPATH")
 INFOPATH=$(fixpath "$INFOPATH")
-
-### ZGM -- why would I do this instead of the above?
-# printf -v PATH     "%s" "$(fixpath "$PATH")"
-# printf -v MANPATH  "%s" "$(fixpath "$MANPATH")"
-# printf -v INFOPATH "%s" "$(fixpath "$INFOPATH")"
 
 return 0

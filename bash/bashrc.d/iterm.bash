@@ -1,33 +1,5 @@
 [[ $TERM_PROGRAM == iTerm.app ]] || return
 
-### ZGM disabled 2015-10-02: I don't use iTerm much anymore and
-#   I'm definitely not using old versions of it, so.
-
-# if [[ -z $ITERM_VERSINFO ]]; then
-    # # find the app
-    # ps_re='^/.+/iTerm\.app[[:>:]]'
-    # ps_output=$(command ps -T -o comm= | head -n1)
-
-    # if [[ $ps_output =~ $ps_re ]]; then
-    #     iterm_app=${BASH_REMATCH[0]}
-    # else
-    #     for proc in $(command ps -x -o comm= | grep '/iTerm\.app/' | sort -u); do
-    #         if [[ $proc =~ $ps_re ]]; then
-    #             iterm_app=${BASH_REMATCH[0]}
-    #             break
-    #         fi
-    #     done
-    # fi
-
-    # IFS=. read -a ITERM_VERSINFO < <(/usr/libexec/PlistBuddy \
-    #     -c 'Print :CFBundleShortVersionString' \
-    #     "$iterm_app/Contents/info.plist")
-
-    # unset -v proc ps_re ps_output iterm_app
-# fi
-
-# -----------------------------------------------------------------------------
-
 if ! (( ITERM_VERSINFO[0] >= 2 )) && (( ITERM_VERSINFO[1] >= 9 )); then
     return
 fi

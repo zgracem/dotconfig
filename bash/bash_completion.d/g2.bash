@@ -28,16 +28,3 @@ __z_complete_g2()
 }
 
 complete -o nospace -F __z_complete_g2 g2
-
-### ZGM 2015-10-29
-# __complete_g2()
-# {
-#     declare cur=${COMP_WORDS[COMP_CWORD]} place
-#     declare -a places=()
-
-#     for place in ${!dir_*}; do
-#         places+=("${place#dir_}")
-#     done
-
-#     COMPREPLY=( $(compgen -W "${places[*]}" -- $cur) )
-# }

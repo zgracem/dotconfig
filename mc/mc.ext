@@ -74,7 +74,7 @@ shell/i/.pkg
 
 # # audio
 
-# # TODO: separate iTunes section?
+### ZGM TODO: separate iTunes section?
 # regex/i/\.(aac|aiff?|[af]lac|m4a|midi?|mp3|ogg|wa?v|wma)$
 #     Open=~/.config/mc/ext.d/action.sh open audio
 

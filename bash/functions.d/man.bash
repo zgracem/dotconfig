@@ -66,23 +66,3 @@ man()
         fi
     # fi
 }
-
-macman()
-{   # open the Mac OS X manual page at developer.apple.com
-    declare manPath manPathTrimmed
-    declare baseURL='http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/'
-
-    # do we already know where to look?
-    if manPath=$(command man --path "$@" 2>/dev/null); then
-        manPathTrimmed=$(command grep -Eo 'man[1-8]/[^\.]+\.[^\.]+' <<< "$manPath")
-    else # try anyway
-        if [[ $# -eq 2 ]]; then # if the user specified a section
-            manPathTrimmed="man$1/$2.$1"
-        else                    # hope for the best
-            manPathTrimmed="man1/$1.1"
-        fi
-    fi
-
-    # go!
-    "$BROWSER" "${baseURL}${manPathTrimmed}.html"
-}
