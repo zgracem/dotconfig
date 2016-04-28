@@ -88,10 +88,6 @@ $if Bash
     # expand ! history with a spacebar press
     Space: magic-space
 
-    ### ZGM disabled 2015-10-16 -- doesn't seem to help much
-    # # prevent garbage in terminal
-    # "\e[": skip−csi−sequence
-
     # F10 exits
     "\e[21~": ""
 $endif

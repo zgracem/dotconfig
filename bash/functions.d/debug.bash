@@ -8,31 +8,18 @@ xtrace()
     fi
 }
 
-return # TODO: finish
+return
+### ZGM TODO: finish this
 
 # BASH_XTRACEFD introduced in v4.1
 (( BASH_VERSINFO[0] >= 4 )) && (( BASH_VERSINFO[1] >= 1 )) || return
 
 debug()
 {
-    if [[ :$SHELLOPTS: =~ :xtrace: ]]; then
-        # turn it off immediately
-        set +o xtrace
-
-        # close our fd
-        exec 4>&-
-
-        # remind us where the log is
-        echo "$BASH_XTRACELOG"
-
-        # tidy up
-        PS4=$OLDPS4
-        unset -v BASH_XTRACEFD BASH_XTRACELOG OLDPS4
-
-    else
+    if ! [[ :$SHELLOPTS: =~ :xtrace: ]]; then
         # create log in TMPDIR, capture filename, & output for reference
-        export BASH_XTRACELOG=$(printf "$HOME/var/log/debug.$$.log" | tee /dev/stdout)
-        # export BASH_XTRACELOG=$(mktemp -q -t "debug.$$.log" | tee /dev/stdout)
+        export BASH_XTRACELOG=$(printf "$HOME/var/log/bash_debug.$$.log" | tee /dev/stdout)
+        # export BASH_XTRACELOG=$(mktemp -q -t "bash_debug.$$.log" | tee /dev/stdout)
 
         # save PS4 and change it to something helpful
         export OLDPS4=$PS4
@@ -46,5 +33,18 @@ debug()
 
         # turn on xtrace
         set -o xtrace
+    else
+        # turn it off immediately
+        set +o xtrace
+
+        # close our fd
+        exec 4>&-
+
+        # remind us where the log is
+        echo "$BASH_XTRACELOG"
+
+        # tidy up
+        PS4=$OLDPS4
+        unset -v BASH_XTRACEFD BASH_XTRACELOG OLDPS4
     fi
 }

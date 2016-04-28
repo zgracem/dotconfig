@@ -20,7 +20,7 @@ unset -v PROMPT_DIRTRIM
 
 : ${Z_PROMPT_COLOUR:=true}
 : ${Z_PROMPT_EXIT:=true}
-: ${Z_PROMPT_GIT:=true}
+: ${Z_PROMPT_GIT:=false}
 
 : ${Z_PROMPT_WINTITLE:=true}
 : ${Z_PROMPT_TABTITLE:=true}
@@ -32,11 +32,10 @@ export ${!Z_PROMPT_*}
 # -----------------------------------------------------------------------------
 
 # only change window title if supported by current terminal
+### ZGM TODO: create equivalent for tab title
 if [[ ! $TERM =~ xterm|rxvt|putty|screen|cygwin ]]; then
     Z_PROMPT_WINTITLE=false
 fi
-
-# TODO: equivalent to above for tab title
 
 # only use colours if supported by current terminal
 if (( TERM_COLOURDEPTH < 8 )); then
@@ -334,8 +333,9 @@ if _inPath direnv; then
 fi
 
 z::prompt::cmd_add -p 'history -a' # append to HISTFILE
-### ZGM disabled -- I don't want sessions to share history...
-# z::prompt::cmd_add -p 'history -n' # read from HISTFILE (so tmux windows can share history)
+
+# # if you want tmux sessions to share history:
+# z::prompt::cmd_add -p 'history -n' # read from HISTFILE
 
 # -----------------------------------------------------------------------------
 # colours
@@ -452,7 +452,7 @@ z_PS1[oneline]+="${z_PS1_pwd}${z_PS1_git} ${z_PS1_usr}"
 
 z_PS1[basic]+="${z_PS1_exit}"
 
-# -- ZGM removed 2016-03-30 -- not very "basic", is it...
+### ZGM removed 2016-03-30 -- not very "basic", is it...
 # if [[ -n $z_PS1_ssh ]]; then
 #   z_PS1[basic]+="${z_PS1_ssh}:"
 # fi

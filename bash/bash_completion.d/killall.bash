@@ -1,4 +1,5 @@
-return ### ZGM 2015-10-29 -- I don't think this works very well yet
+### ZGM TODO 2016-04-28: fix this
+return 
 
 _inPath killall || return
 
