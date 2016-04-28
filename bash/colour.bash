@@ -62,6 +62,8 @@ else
     brwhite=$white
 fi
 
+base_ansi=(${colours[*]})
+
 # -----------------------------------------------------------------------------
 # semantic colours
 # -----------------------------------------------------------------------------
@@ -114,7 +116,10 @@ if [[ -n $Z_SOLARIZED ]]; then
     orange="${bold};${red}"
     violet="${bold};${magenta}"
 
-    colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
+    solarized_colours=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
+    colours+=(${solarized_colours[*]})
+    base_ansi+=(${solarized_colours[*]})
+    unset -v solarized_colours
 
     # re/define semantic colours
     case $Z_SOLARIZED in
@@ -150,7 +155,7 @@ z::colour::add_esc()
         local var_name="esc_${index#*_}"
 
         if [[ -n ${!index} && -z ${!var_name} ]] || [[ $z_reloading == true ]]; then
-            eval "$var_name=\"$CSI${!index}m\""
+            eval "$var_name=\"${CSI}${!index}m\""
         fi
     done
 }
@@ -158,7 +163,7 @@ z::colour::add_esc()
 z::colour::add_esc ${colours[*]} ${props[*]}
 
 # export everything
-export ${!colour_*} ${!esc_*}
+export ${!esc_*}
 
 # -----------------------------------------------------------------------------
 # grep
@@ -239,8 +244,9 @@ if [[ -z $LS_COLORS ]]; then
         eval "$(<"$dircolor_cache_file")"
     fi
 
-    unset -v ${!dircolor_}
+    unset -v ${!dircolor_*}
 fi
+
 # -----------------------------------------------------------------------------
 # miscellany
 # -----------------------------------------------------------------------------
@@ -262,3 +268,9 @@ fi
 
 # gcc
 export GCC_COLORS=1
+
+# -----------------------------------------------------------------------------
+# cleanup
+# -----------------------------------------------------------------------------
+
+unset -v ${!colour_*} ${base_ansi[*]} base_ansi ${props[*]} props colours
