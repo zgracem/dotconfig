@@ -1,5 +1,6 @@
 # default title string
-title_default="${USER:-$(id -un)}@${HOSTNAME:-$(uname -n)}"
+### ZGM disabled 2016-04-28 -- not using this, don't need it
+# Z_WINTITLE_DEFAULT="${USER:-$(id -un)}@${HOSTNAME:-$(uname -n)}"
 
 # typical escape codes
 cap_tsl="${OSC}2;"      # to_status_line
@@ -14,7 +15,7 @@ elif _inScreen; then
     cap_fsl="$cap_fsl${ST}"
 fi
 
-export title_{prefix,ante,post}
+# export Z_WINTITLE_{PREFIX,ANTE,POST}
 
 # -----------------------------------------------------------------------------
 
