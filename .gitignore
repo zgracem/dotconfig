@@ -5,10 +5,6 @@
 # this file
 .gitignore
 
-# private configuration files
-**/private*
-bash/private.bash
-
 # email
 alpine/
 
