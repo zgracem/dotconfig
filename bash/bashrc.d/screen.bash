@@ -1,4 +1,4 @@
-_inPath screen || return
+_inPath screen && ! _inPath tmux || return
 
 # set socket directory
 export SCREENDIR="$HOME/tmp/.screens"
