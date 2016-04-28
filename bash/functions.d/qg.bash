@@ -1,7 +1,7 @@
 qg()
 {   # return the first Google result for $1
 
-    if [[ -n $qg_id && -n $google_api_key ]]; then
+    if [[ -n $QG_ID && -n $GOOGLE_API_KEY ]]; then
         local term=$@
         local term_esc
         term_esc=$(urlencode "$term")
@@ -15,8 +15,8 @@ qg()
     local query
 
     query+='https://www.googleapis.com/customsearch/v1'
-    query+="?key=$google_api_key"
-    query+="&cx=$qg_id"
+    query+="?key=$GOOGLE_API_KEY"
+    query+="&cx=$QG_ID"
     query+="&$options"
     query+="&q=$term_esc"
 

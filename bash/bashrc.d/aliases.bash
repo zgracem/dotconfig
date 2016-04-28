@@ -18,7 +18,7 @@ alias hd='hexdump -C'
 alias etest='_edit "$dir_scripts/dev/test.sh"'
 alias ttest="$dir_scripts/dev/test.sh"
 
-alias pinback='"$HOME/scripts/pinback.sh" -t "$pinboard_api_key" -d "$HOME/Archive/pinboard" -fvx'
+alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" -d "$HOME/Archive/pinboard" -fvx'
 
 # -----------------------------------------------------------------------------
 
