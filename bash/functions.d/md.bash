@@ -12,6 +12,7 @@ md()
 {
     local -a files=()
     local f filename
+    local markdown=$markdown
 
     for filename in "$@"; do
         if [[ -r $filename ]]; then
@@ -56,3 +57,5 @@ md()
         fi
     done
 }
+
+unset -v markdown

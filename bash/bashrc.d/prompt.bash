@@ -358,6 +358,11 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     unset g
   fi
 
+  if [[ $HOSTNAME == Hiroko && $TERM_PROGRAM_VERSION == 240.2 ]]; then
+    # we're running in Terminal.app locally
+    esc_user=${esc_magenta}
+  fi
+
   z::colour::PS1_esc()
   { # create new colour variables w/ prompt escape codes (\[ and \])
 
@@ -500,3 +505,9 @@ prompt()
 
 # completion for prompt types
 complete -W "${!z_PS1[*]}" prompt
+
+# -----------------------------------------------------------------------------
+# cleanup
+# -----------------------------------------------------------------------------
+
+unset -v ${!PS1_*}
