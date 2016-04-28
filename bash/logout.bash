@@ -22,8 +22,8 @@ fi
 # machine-specific logout file
 # -----------------------------------------------------------------------------
 
-if [[ -f $dir_local/logout.bash ]]; then
-    . "$dir_local/logout.bash"
+if [[ -f $dir_local/config/logout.bash ]]; then
+    . "$dir_local/config/logout.bash"
 fi
 
 printf "Be seeing you.\n"

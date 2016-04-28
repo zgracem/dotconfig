@@ -30,7 +30,6 @@ hconfsync()
         --exclude=keybase/
         --include=local/Hiroko/
         --exclude='local/*'
-        --exclude='local/*/history'
         --exclude='transmission*/'
         --exclude=jrnl
         --exclude=trc
@@ -76,7 +75,6 @@ wfconfsync()
         --exclude=keybase/
         --include=local/web500/
         --exclude='local/*'
-        --exclude='local/*/history'
         --exclude=misc/
         --exclude=skel/
         --exclude='.git*'
