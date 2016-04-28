@@ -217,8 +217,8 @@ if [[ -d $dir_config/bash/functions.d ]]; then
 fi
 
 # machine specific files in ~/.local
-if [[ -d $dir_local/bashrc.d ]]; then
-    for file in "$dir_local"/bashrc.d/*.bash; do
+if [[ -d $dir_local/config/bashrc.d ]]; then
+    for file in "$dir_local"/config/bashrc.d/*.bash; do
         [[ -f $file ]] && . "$file"
     done
 fi
@@ -237,7 +237,7 @@ fi
 
 # local initialization script (not in subshells/when reloading)
 if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $z_reloading ]]; then
-    [[ -f $dir_local/init.bash ]] && . "$dir_local/init.bash"
+    [[ -f $dir_local/config/init.bash ]] && . "$dir_local/config/init.bash"
 fi
 
 # # enable preexec and precmd hooks

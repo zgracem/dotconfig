@@ -7,36 +7,26 @@ dir_config="$HOME/.config"
 dir_local="$HOME/.local"
 
 dir_dropbox="$HOME/Dropbox"
-dir_proj="$dir_dropbox/Projects"
-
-dir_optbin="$HOME/opt/bin"
-dir_mybin="$HOME/bin"
-dir_mytmp="$HOME/tmp"
-dir_scratch="$dir_mytmp/_scratch"
+dir_scratch="$HOME/tmp/_scratch"
 
 dir_scripts="$HOME/scripts"
 dir_dev="$dir_scripts/dev"
 
-dir_notes="$HOME/txt"
-dir_howto="$dir_notes/howto"
-
-dir_zkit="$HOME/lib/zkit"
+dir_howto="$HOME/txt/howto"
 dir_vsmm="$dir_dropbox/www/vsmm"
+dir_zkit="$HOME/lib/zkit"
 
 # platform-specific
 case $OSTYPE in
     darwin*)
-        dir_apps='/Applications'
-        dir_desktop="$HOME/Desktop"
+        dir_apps="/Applications"
         dir_docs="$HOME/Documents"
         dir_downloads="$HOME/Downloads"
         dir_music="$HOME/Music/iTunes/iTunes Media/Music"
-        dir_prefs="$HOME/Library/Preferences"
-        dir_drive='/Volumes/SILVER'
+        dir_drive="/Volumes/SILVER"
         ;;
 
     cygwin)
-        : ${dir_desktop:="$(cygpath --desktop)"}
         : ${dir_docs:="$(cygpath --mydocs)"}
         dir_downloads="$dir_docs/Downloads"
         dir_dropbox="$dir_docs/Dropbox"
@@ -51,13 +41,6 @@ esac
 
 # machine-specific
 case $HOSTNAME in
-    Athena)
-        dir_attic='/Volumes/Attic'
-        dir_old='/Volumes/Minerva'
-        dir_oldhome="$dir_old/${HOME#/}"
-        dir_oldmusic="$dir_attic/Music/zPod"
-        ;;
-
     Erato)
         dir_docs="$dir_dropbox/Documents"
         ;;

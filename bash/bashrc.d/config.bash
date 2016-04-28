@@ -23,12 +23,12 @@ rl()
         files+=("$dir_config/"{bash,sh}/**/"$1"?(.*))
 
         # check ~/.local
-        files+=("$dir_local/bashrc.d/$1"?(.*))
-        files+=("$dir_local/functions.d/$1"?(.*))
+        files+=("$dir_local/config/bashrc.d/$1"?(.*))
+        files+=("$dir_local/config/functions.d/$1"?(.*))
 
         case $1 in
             init)   # normally not sourced on reload
-                    files+=("$dir_local/init.bash")
+                    files+=("$dir_local/config/init.bash")
                     ;;
 
             prompt) # reload colours first
@@ -39,7 +39,7 @@ rl()
                     files+=("$dir_config/bash/functions.d/"*.bash)
                     ;;
 
-            local)  files+=("$dir_local/bashrc.d/"*.bash)
+            local)  files+=("$dir_local/config/bashrc.d/"*.bash)
                     ;;
 
             inputrc)
@@ -80,7 +80,7 @@ alias ba='_edit       $dir_config/bash/bashrc.d/aliases.bash'
 alias brc='_edit      $dir_config/bash/bashrc.bash'
 alias bcol='_edit     $dir_config/bash/colour.bash'
 alias bf='_edit       $dir_config/bash/functions.bash'
-alias bloc='_edit     $dir_local/bashrc.bash'
+alias bloc='_edit     $dir_local/config/bashrc.bash'
 alias bpath='_edit    $dir_config/sh/profile.d/paths.sh'
 alias bdirs='_edit    $dir_config/bash/dirs.bash'
 alias bpri='_edit     $dir_config/bash/private.bash'
