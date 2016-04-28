@@ -7,13 +7,13 @@ if [[ -z $NUMBER_OF_PROCESSORS ]]; then
 fi
 
 if (( NUMBER_OF_PROCESSORS > 1 )); then
-    export MAKEFLAGS="-j${NUMBER_OF_PROCESSORS}"
+  export MAKEFLAGS="-j${NUMBER_OF_PROCESSORS}"
 fi
 
 if _inPath sysctl && [[ -z $PROCESSOR_ARCHITECTURE ]]; then
-    export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)"
+  export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)"
 fi
 
 if [[ -n $PROCESSOR_ARCHITECTURE && ! $ARCHFLAGS =~ \-arch ]]; then
-    export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
+  export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
 fi

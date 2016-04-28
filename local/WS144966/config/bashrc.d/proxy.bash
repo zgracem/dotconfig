@@ -13,5 +13,5 @@ export HTTPS_PROXY="$http_proxy"
 
 links()
 {
-    command links -socks-proxy "$SOCKS5_SERVER" "$@"
+  command links -socks-proxy "$SOCKS5_SERVER" "$@"
 }
