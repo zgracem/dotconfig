@@ -2,7 +2,8 @@
 # history
 # -----------------------------------------------------------------------------
 
-# set -o history        # enable command history
+### ZGM added 2016-04-28 -- abort if history isn't enabled
+[[ :$SHELLOPTS: =~ :history: ]] || return
 
 shopt -s cmdhist        # combine multiline commands into one in history
 shopt -s histappend     # append to the history file, don't overwrite it
@@ -14,11 +15,11 @@ HISTTIMEFORMAT='%F %T '
 # history file
 
 if (( BASH_VERSINFO[0] >= 4 )) && (( BASH_VERSINFO[1] >= 3 )); then
-    HISTSIZE=-1                 # unlimited session history
-    HISTFILESIZE=-1             # unlimited $HISTFILE size
+  HISTSIZE=-1                 # unlimited session history
+  HISTFILESIZE=-1             # unlimited $HISTFILE size
 else
-    HISTSIZE=$((2 ** 10))       # remember 2^10 commands per session
-    HISTFILESIZE=$((2 ** 16))   # store 2^16 lines in $HISTFILE
+  HISTSIZE=$((2 ** 10))       # remember 2^10 commands per session
+  HISTFILESIZE=$((2 ** 16))   # store 2^16 lines in $HISTFILE
 fi
 
 HISTDIR="$HOME/.local/history"
@@ -65,22 +66,22 @@ HISTIGNORE+=':h *:which *:what *:where *:wtf'
 
 tophist()
 {   # history sorted by frequency of use
-    history \
-    | awk "{print \$4}" \
-    | awk "BEGIN{FS=\"|\"}{print \$1}" \
-    | sort \
-    | uniq -c \
-    | sort -nr \
-    | head -n 20
+  history \
+  | awk "{print \$4}" \
+  | awk "BEGIN{FS=\"|\"}{print \$1}" \
+  | sort \
+  | uniq -c \
+  | sort -nr \
+  | head -n 20
 }
 
 incognito()
 {
-    if _optSet history; then
-        set +o history
-        echo 'incognito mode enabled'
-    else
-        set -o history
-        echo 'incognito mode disabled'
-    fi
+  if _optSet history; then
+    set +o history
+    echo 'incognito mode enabled'
+  else
+    set -o history
+    echo 'incognito mode disabled'
+  fi
 }
