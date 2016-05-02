@@ -26,5 +26,3 @@ if (( OSX_VERSINFO[1] < 11 )) && [[ -d /Volumes/BOOTCAMP ]]; then
   # ...or right now
   alias bootcamp='bootwin && restart'
 fi
-
-unset -v osx_minor_version
