@@ -4,7 +4,7 @@ command_not_found_handle()
 {
     local cmd="$1"; shift
 
-    printf '%s\n' "${esc_false}${cmd}${esc_null}: command not found" >&2
+    printf '%s\n' "${esc_false}${cmd}${esc_reset}: command not found" >&2
 
     return $EX_NOCMD
 }

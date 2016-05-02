@@ -205,11 +205,11 @@ PS1_git_info()
 
   # $status = '*' if there's anything to commit
   if git status --porcelain 2>/dev/null | command grep -m1 -q '^.'; then
-    status="${esc_false}*${esc_null}"
+    status="${esc_false}*${esc_reset}"
   fi
 
   if [[ $branch != master ]] || true; then
-    printf " ${esc_2d}${branch}${esc_null}"
+    printf " ${esc_2d}${branch}${esc_reset}"
   fi
 
   printf "${status}"
@@ -394,7 +394,7 @@ if [[ $Z_PROMPT_EXIT == true ]]; then
 
   if [[ $Z_PROMPT_TYPE != twoline ]]; then
     # `PS1_print_exit` doesn't print colour codes for other types of prompt
-    z_PS1_exit="${PS1_false}${z_PS1_exit}${PS1_null}"
+    z_PS1_exit="${PS1_false}${z_PS1_exit}${PS1_reset}"
   fi
 fi
 
@@ -407,7 +407,7 @@ if [[ -n $SSH_CONNECTION ]]; then
     z_PS1_ssh="\u@\h"
   fi
 
-  z_PS1_ssh="${PS1_2d}${z_PS1_ssh}${PS1_null}"
+  z_PS1_ssh="${PS1_2d}${z_PS1_ssh}${PS1_reset}"
 fi
 
 if [[ $Z_PROMPT_GIT == true ]]; then
@@ -419,7 +419,7 @@ fi
 z_PS1_pwd="${PS1_hi}\$(PS1_compress_pwd)"
 
 # blue $ for me, red # for root
-z_PS1_usr="${PS1_user}\\\$${PS1_null} "
+z_PS1_usr="${PS1_user}\\\$${PS1_reset} "
 
 # -----------------------------------------------------------------------------
 
@@ -435,7 +435,7 @@ if [[ -n $z_PS1_ssh ]]; then
   z_PS1[twoline]+="─ ${z_PS1_ssh} "
 fi
 
-z_PS1[twoline]+="─┤ ${z_PS1_pwd}${z_PS1_git}${PS1_null}\n"
+z_PS1[twoline]+="─┤ ${z_PS1_pwd}${z_PS1_git}${PS1_reset}\n"
 z_PS1[twoline]+="└ ${z_PS1_usr}"
 
 # ----- one-line prompt -----
@@ -470,14 +470,14 @@ z_PS1[off]="${z_PS1_usr}"
 PS1=${z_PS1[${Z_PROMPT_TYPE:-off}]}
 
 # secondary prompt (for multi-line commands) -- bright white right guillemet
-PS2="${PS1_hi}"$'\xC2\xBB'"${PS1_null} "
+PS2="${PS1_hi}"$'\xC2\xBB'"${PS1_reset} "
 
 # `select` prompt -- blue question mark
-PS3="${PS1_blue}?${PS1_null} "
+PS3="${PS1_blue}?${PS1_reset} "
 
 # prefix for xtrace output
 PS4='+ '
-xse="${PS1_null}:" # separator
+xse="${PS1_reset}:" # separator
 
 PS4+="\${BASH_SOURCE[0]+$PS1_2d\${BASH_SOURCE[0]}$xse$PS1_blue\$LINENO$xse}"
 PS4+="\${FUNCNAME:+\${FUNCNAME[0]}()$xse}"

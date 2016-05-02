@@ -12,19 +12,19 @@
 export countTo='2016-05-26 23:54 -0600'
 
 if [[ -x $dir_scripts/countdown.sh && -n $countTo ]]; then
-    c() {
-        local output
+  c() {
+    local output
 
-        printf -v output "%b " "$esc_red\xe2\x99\xa5$esc_null"
-        output+=$("$dir_scripts/countdown.sh" "$@" "$countTo")
+    printf -v output "%b " "$esc_red\xe2\x99\xa5$esc_reset"
+    output+=$("$dir_scripts/countdown.sh" "$@" "$countTo")
 
-        echo "$output"
-    }
-    cs() { c -s; }
-    cl() { c -l; }
-    # alias  c="$dir_scripts/countdown.sh '${countTo}'"
-    # alias cl="$dir_scripts/countdown.sh -l '${countTo}'"
-    # alias cs="$dir_scripts/countdown.sh -s '${countTo}'"
+    echo "$output"
+  }
+  cs() { c -s; }
+  cl() { c -l; }
+  # alias  c="$dir_scripts/countdown.sh '${countTo}'"
+  # alias cl="$dir_scripts/countdown.sh -l '${countTo}'"
+  # alias cs="$dir_scripts/countdown.sh -s '${countTo}'"
 fi
 
 # -----------------------------------------------------------------------------
