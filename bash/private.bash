@@ -5,14 +5,6 @@
 
 ### * ZGM removed `export` 2015-09-29 for tidiness -- add back as needed
 
-# NAME='Simon Crowley' # *
-# EMAIL='simon@simoncrowley.net' # *
-
-# GIT_AUTHOR_NAME='Z. Grace Moreau' # *
-# GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME" # *
-GIT_AUTHOR_EMAIL='cryptostrophe@users.noreply.github.com' # *
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL" # *
-
 # -----------------------------------------------------------------------------
 # countdown
 # -----------------------------------------------------------------------------
@@ -40,7 +32,7 @@ fi
 # -----------------------------------------------------------------------------
 
 # tinypng
-export tinypng_api_token='ammbxouG1p2YXPIRw7_84YywEfiIY0HH'
+export TINYPNG_API_TOKEN='ammbxouG1p2YXPIRw7_84YywEfiIY0HH'
 
 # Homebrew
 export GITHUB_API_TOKEN='3b1670b5c75f887e0607728cdc61b98a8346e6ee'
