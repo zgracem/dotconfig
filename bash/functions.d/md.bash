@@ -1,18 +1,19 @@
-for markdown in multimarkdown Markdown.pl; do
-    if _inPath "$markdown"; then
+for MARKDOWN in multimarkdown Markdown.pl; do
+    if _inPath "$MARKDOWN"; then
+        export MARKDOWN
         break
     else
-        unset -v markdown
+        unset -v MARKDOWN
     fi
 done
 
-[[ -z $markdown ]] && return
+[[ -z $MARKDOWN ]] && return
 
 md()
 {
     local -a files=()
     local f filename
-    local markdown=$markdown
+    local markdown=$MARKDOWN
 
     for filename in "$@"; do
         if [[ -r $filename ]]; then
