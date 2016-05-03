@@ -163,8 +163,15 @@ export dir_config="$HOME/.config"
 
 export INPUTRC="$dir_config/inputrc"
 
+# define important shell functions
+. "$dir_config/bash/functions.bash"
+
 if [[ $TIME_TEST_ACTIVE == true ]]; then
-    TIME_TEST_LOG="$HOME/var/log/timetest_$(date +%y%m%d).$$.log"
+    if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
+        printf -v TIME_TEST_LOG "$HOME/var/log/timetest_%(%y%m%d_%H%M%S)T.log" -1
+    else
+        TIME_TEST_LOG="$HOME/var/log/timetest_$(date +%y%m%d_%H%M%S).log"
+    fi
     
     .()
     {
@@ -189,9 +196,6 @@ shopt -s nullglob
 
 # load direction definitions ($dir_foo)
 . "$dir_config/bash/dirs.bash"
-
-# shell functions
-. "$dir_config/bash/functions.bash"
 
 # define colours (before ./bashrc.d/prompt.bash loads)
 . "$dir_config/bash/colour.bash"
@@ -231,7 +235,9 @@ shopt -u nullglob
 # -----------------------------------------------------------------------------
 
 # set window title
-if [[ $TERM =~ xterm|rxvt|putty|screen|cygwin && $TERM_PROGRAM != Apple_Terminal ]]; then
+if [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] \
+    && [[ $TERM_PROGRAM != Apple_Terminal ]] \
+    && _isFunction setwintitle; then
     setwintitle "$USER@$HOSTNAME"
 fi
 
