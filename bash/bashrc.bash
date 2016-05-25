@@ -143,7 +143,7 @@ DCS=$'\eP'  # Device Control String
 BEL=$'\a'   # 🔔
 
 # just say no to flow control
-(hash stty && stty -ixon) &>/dev/null
+(type -P stty && stty -ixon) &>/dev/null
 
 # Koding.com
 if [[ $STY =~ koding ]]; then
