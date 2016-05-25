@@ -214,6 +214,11 @@ PS1_git_info()
     ahead="${BASH_REMATCH[1]}"
   fi
 
+  # check for presence of untracked files
+  if [[ $status =~ $re_ut ]]; then
+    untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
+  fi
+
   # get number of newlines in status (= number of unstaged files, in theory)
   unstaged=${status//[^$'\x0a']/}
   unstaged=${#unstaged}
@@ -222,15 +227,10 @@ PS1_git_info()
     dirty=true
   fi
 
-  # check for presence of untracked files
-  if [[ $status =~ $re_ut ]]; then
-    untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
-  fi
-
   local output="${esc_reset}"
 
   # name of current branch
-  output="${esc_2d}${branch}${esc_reset}"
+  output+=" ${esc_2d}${branch}${esc_reset}"
 
   # add '•' if there's anything to commit
   if [[ $dirty == true ]]; then
@@ -248,7 +248,7 @@ PS1_git_info()
   fi
 
   output+="${esc_reset}"
-  echo " $output"
+  printf "%b" "$output"
 }
 
 # -----------------------------------------------------------------------------
