@@ -150,7 +150,7 @@ PS1_print_exit()
 
   if (( last_exit != 0 )); then
     # abort if tput doesn't exist
-    hash tput 2>/dev/null || return
+    type -P tput &>/dev/null || return
 
     # if last command terminated from a signal, print that instead
     if (( last_exit > 128 )) && sigspec=$(builtin kill -l $last_exit 2>/dev/null); then

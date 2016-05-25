@@ -255,7 +255,7 @@ if (( TERM_COLOURDEPTH >= 16 )); then
 fi
 
 # print a red "^C" when a command is aborted
-if hash stty &>/dev/null; then
+if type -P stty &>/dev/null; then
   # disable echoing of control characters
   stty -ctlecho &>/dev/null
   bind 'set echo-control-characters off'
