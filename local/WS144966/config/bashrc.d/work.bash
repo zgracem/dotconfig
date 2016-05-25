@@ -1,4 +1,5 @@
-[[ -d //atco ]] || return
+### ZGM removed 2016-05-25 -- this file will only ever run here anyway
+# [[ -d //atco ]] || return
 
 dir_Pdrive="//atco/dept/2100657"
 dir_Qdrive="//atco/comp/2100655"
