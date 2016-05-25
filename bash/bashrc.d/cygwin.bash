@@ -20,7 +20,7 @@ if ! [[ $CYGWIN =~ winsymlinks ]]; then
     CYGWIN="${CYGWIN+$CYGWIN }winsymlinks:nativestrict"
   else
     # no admin privileges; create .lnk files instead
-    CYGWIN="${CYGWIN/winsymlinks:native/winsymlinks:lnk}"
+    CYGWIN="${CYGWIN+$CYGWIN }winsymlinks:lnk"
   fi
 fi
 
@@ -59,4 +59,5 @@ alias emptytrash='command -p rm -rf ~/.Trash/* 1>/dev/null'
 # cleanup
 # -----------------------------------------------------------------------------
 
+export CYGWIN 
 unset -v CYGWIN_ADMIN
