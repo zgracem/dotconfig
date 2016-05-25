@@ -1,4 +1,4 @@
-return
+return # TODO: finish this
 
 # Goal: send 15 (which `killall` does by default on OSX), wait a few seconds,
 # then try 2, and if that doesn't work, try 1; if THAT doesn't work, use 9.
