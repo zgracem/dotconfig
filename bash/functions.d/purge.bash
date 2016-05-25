@@ -8,10 +8,10 @@ purge()
     if [[ $1 == -y ]]; then
         shift
         local term="$1"
-        find -H "$scope" -xtype f -iname '*'"$term"'*' -exec rm -fv {} + 2>&-
+        find -H "$scope" -xtype f -iname '*'"$term"'*' -exec rm -fv {} + 2>/dev/null
     else
         local term="$1"
-        find -H "$scope" -xtype f -iname '*'"$term"'*' -print 2>&- \
+        find -H "$scope" -xtype f -iname '*'"$term"'*' -print 2>/dev/null \
         | command grep -i --colour=auto "$term"
 
         printf ">> %s\n" "No files deleted." "Use \`$FUNCNAME -y $1\` to confirm."

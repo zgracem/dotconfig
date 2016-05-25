@@ -235,8 +235,10 @@ if [[ -d $dir_local/config/bashrc.d ]]; then
   done
 fi
 
-unset -v file
+# disable after temporarily enabling above
 shopt -u nullglob
+
+unset -v file
 
 # -----------------------------------------------------------------------------
 # and finally...
@@ -268,9 +270,3 @@ fi
 
 printf "\r\e[K"
 unset -f .
-
-# -----------------------------------------------------------------------------
-
-: <<TODO
-- ...
-TODO
