@@ -20,7 +20,7 @@ unset -v PROMPT_DIRTRIM
 
 : ${Z_PROMPT_COLOUR:=true}
 : ${Z_PROMPT_EXIT:=true}
-: ${Z_PROMPT_GIT:=false}
+: ${Z_PROMPT_GIT:=true}
 
 : ${Z_PROMPT_WINTITLE:=true}
 : ${Z_PROMPT_TABTITLE:=true}
@@ -190,29 +190,65 @@ PS1_print_exit()
 
 PS1_git_info()
 {
-  local branch branches status
-  local re='\* ([[:graph:]]+)'
+  [[ $Z_PROMPT_GIT == true ]] || return 0
 
-  # get name of branch, or bail out if no branch exists
-  branches=$(git branch --no-color 2>/dev/null) || return
+  local status branch ahead=0 unstaged dirty=false untracked=0
 
-  # parse name of branch
-  if [[ $branches =~ $re ]]; then
+  # get info on current branch, or bail if no branch exists
+  status=$(git status --branch --porcelain 2>/dev/null) || return
+
+  # regular expressions
+  local re_br='^## ([[:graph:]]+)…'
+  local re_ah=' \[ahead ([[:digit:]]+)\]'
+  local re_ut=$'\x0a''(\? | \?|\?\?)'
+
+  # get name of branch
+  if [[ ${status/.../…} =~ $re_br ]]; then
     branch="${BASH_REMATCH[1]}"
   else
-    return
+    return 1
   fi
 
-  # $status = '*' if there's anything to commit
-  if git status --porcelain 2>/dev/null | command grep -m1 -q '^.'; then
-    status="${esc_false}*${esc_reset}"
+  # get number of commits (if any)
+  if [[ $status =~ $re_ah ]]; then
+    ahead="${BASH_REMATCH[1]}"
   fi
 
-  if [[ $branch != master ]] || true; then
-    printf " ${esc_2d}${branch}${esc_reset}"
+  # get number of newlines in status (= number of unstaged files, in theory)
+  unstaged=${status//[^$'\x0a']/}
+  unstaged=${#unstaged}
+
+  if (( unstaged > 0 )); then
+    dirty=true
   fi
 
-  printf "${status}"
+  # check for presence of untracked files
+  if [[ $status =~ $re_ut ]]; then
+    untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
+  fi
+
+  local output="${esc_reset}"
+
+  # name of current branch
+  output="${esc_2d}${branch}${esc_reset}"
+
+  # add '↑n' if we're n commits ahead of origin
+  if (( ahead > 0 )); then
+    output+="${esc_true}↑${ahead}${esc_reset}"
+  fi
+
+  # add '*' if there's anything to commit
+  if [[ $dirty == true ]]; then
+    output+="${esc_false}*${esc_reset}"
+  fi
+
+  # add '+n' if there are n untracked files
+  if (( untracked > 0 )); then
+    output+="${esc_false}+${untracked}${esc_reset}"
+  fi
+
+  output+="${esc_reset}"
+  echo " $output"
 }
 
 # -----------------------------------------------------------------------------
@@ -410,10 +446,13 @@ if [[ -n $SSH_CONNECTION ]]; then
   z_PS1_ssh="${PS1_2d}${z_PS1_ssh}${PS1_reset}"
 fi
 
-if [[ $Z_PROMPT_GIT == true ]]; then
-  # info about current git branch, if any
-  z_PS1_git="\$(PS1_git_info)"
-fi
+# if [[ $Z_PROMPT_GIT == true ]]; then
+#   # info about current git branch, if any
+#   z_PS1_git="\$(PS1_git_info)"
+# fi
+
+# info about current git branch, if any
+z_PS1_git="\$(PS1_git_info)"
 
 # current path, highlighted
 z_PS1_pwd="${PS1_hi}\$(PS1_compress_pwd)"
