@@ -15,7 +15,8 @@ vnc()
     local config_file=$(cygpath -aw "$vnc_dir/vnc.conf")
     if run "$vnc_dir/vncviewer.exe" -config "$config_file"; then
       printf "\eM"  # move cursor up one line
-      printf "\e[K" # clear line
+      printf "\r"   # move cursor to beginning of line
+      printf "\e[K" # clear to end of line
     fi
   else
     scold "$vnc_dir/vncviewer.exe not found"
