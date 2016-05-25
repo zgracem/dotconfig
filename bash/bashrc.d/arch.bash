@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 if [[ -z $NUMBER_OF_PROCESSORS ]]; then
-	export NUMBER_OF_PROCESSORS="$(getconf _NPROCESSORS_ONLN 2>&-)"
+	export NUMBER_OF_PROCESSORS="$(getconf _NPROCESSORS_ONLN 2>/dev/null)"
 fi
 
 if (( NUMBER_OF_PROCESSORS > 1 )); then

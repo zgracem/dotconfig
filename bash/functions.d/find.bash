@@ -18,7 +18,7 @@ z::find()
             ;;
     esac
 
-    find -H "$scope" -xtype $find_type -iname '*'"$term"'*' -print 2>&- \
+    find -H "$scope" -xtype $find_type -iname '*'"$term"'*' -print 2>/dev/null \
     | sed "s|^$HOME|~|g" \
     | command grep -i --colour=auto "$term"
 
