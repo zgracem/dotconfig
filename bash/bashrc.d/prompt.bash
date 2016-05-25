@@ -232,19 +232,19 @@ PS1_git_info()
   # name of current branch
   output="${esc_2d}${branch}${esc_reset}"
 
-  # add '↑n' if we're n commits ahead of origin
-  if (( ahead > 0 )); then
-    output+="${esc_true}↑${ahead}${esc_reset}"
-  fi
-
-  # add '*' if there's anything to commit
+  # add '•' if there's anything to commit
   if [[ $dirty == true ]]; then
-    output+="${esc_false}*${esc_reset}"
+    output+="${esc_false}•${esc_reset}"
   fi
 
-  # add '+n' if there are n untracked files
+  # add '+' if there are untracked files
   if (( untracked > 0 )); then
-    output+="${esc_false}+${untracked}${esc_reset}"
+    output+="${esc_yellow}+${untracked}"
+  fi
+
+  # add '»n' if we're n commits ahead of origin
+  if (( ahead > 0 )); then
+    output+="${esc_true}»${ahead}"
   fi
 
   output+="${esc_reset}"
