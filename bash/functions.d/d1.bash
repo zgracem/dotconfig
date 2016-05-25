@@ -11,7 +11,7 @@ d1()
 {
   # create temp file to hold entry
   local entry
-  printf -v entry "$HOME/var/tmp/dayone.%(%y%m%d.%H%M%S)T.md"
+  printf -v entry "$HOME/var/tmp/dayone.%(%Y%m%d.%H%M%S)T.md"
   # entry=$(mktemp -q -t "dayone.XXXXXX.md")
 
   # invoke editor to create entry -- if it exits successfully and creates
@@ -20,8 +20,10 @@ d1()
     if [[ -s $entry ]]; then
       # pass through any arguments to this function, and delete the entry file
       # if it successfully imports
-      dayone new "$@" < "$entry" \
-        && mv "$entry" ~/.Trash
+      if dayone new "$@" < "$entry"; then
+        /bin/mv "$entry" ~/.Trash >/dev/null \
+          && echo "Deleted   : ${entry/#$HOME/$'~'}"
+      fi
     else
       scold "zero-length file: $entry"
       return 1
