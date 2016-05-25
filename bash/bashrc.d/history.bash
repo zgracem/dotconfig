@@ -14,7 +14,7 @@ HISTTIMEFORMAT='%F %T '
 
 # history file
 
-if (( BASH_VERSINFO[0] >= 4 )) && (( BASH_VERSINFO[1] >= 3 )); then
+if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 43 )); then
   HISTSIZE=-1                 # unlimited session history
   HISTFILESIZE=-1             # unlimited $HISTFILE size
 else
@@ -33,12 +33,12 @@ HISTFILE="$HISTDIR/bash_history"
 
 unset -v HISTCONTROL HISTIGNORE
 
-HISTCONTROL+='ignoredups'   # ignore duplicate commands
+HISTCONTROL='ignoredups'    # ignore duplicate commands
 HISTCONTROL+=':ignorespace' # ignore commands that start w/ ' '
-# HISTCONTROL+=':erasedups'   # erase previous identical lines from history
+# HISTCONTROL+=':erasedups' # erase previous identical lines from history
 
 # no-ops
-HISTIGNORE+='true:false'
+HISTIGNORE='true:false'
 
 # navigation
 HISTIGNORE+=':-?(-):.+(.):?(c)cd:dirs:dirs *'
@@ -53,19 +53,19 @@ HISTIGNORE+=':clear:history*:pwd:mc'
 HISTIGNORE+=':ls*([1dflt]):ll'
 
 # quittin'
-HISTIGNORE+=':bye:exit'
+HISTIGNORE+=':exit:bye'
 
 # my own shortcuts
-HISTIGNORE+=':console*:c:c[sl]:e *:etest:f:fe *:manpdf*:ss:tt:vnc:vsmm'
+HISTIGNORE+=':e *:fe *:manpdf *:c:c[sl]:etest:f:rl:ss:tt:vnc:vsmm'
 HISTIGNORE+=':b@(a|rc|col|f|loc|path|dirs|pri|pro|ps1)'
 
 # zhelp
-HISTIGNORE+=':h *:which *:what *:where *:wtf'
+HISTIGNORE+=':@(h|which|what|where) *:wtf'
 
 # -----------------------------------------------------------------------------
 
 tophist()
-{   # history sorted by frequency of use
+{ # history sorted by frequency of use
   history \
   | awk "{print \$4}" \
   | awk "BEGIN{FS=\"|\"}{print \$1}" \
