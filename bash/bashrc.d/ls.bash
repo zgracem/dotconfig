@@ -4,7 +4,7 @@
 
 quietly unalias ls ll
 
-declare -a flags_ls=()
+export flags_ls=()
 
 flags_ls+=(-AH)
 #           │└───── follow symbolic links
@@ -21,8 +21,6 @@ if _isGNU ls; then
 else
     flags_ls+=(-G)
 fi
-
-export flags_ls
 
 ls() { command ls "${flags_ls[@]}" "$@"; }
 
