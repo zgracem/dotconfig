@@ -8,10 +8,10 @@ flags_chrome+=('--allow-file-access-from-files')
 
 if [[ -n $SOCKS5_SERVER ]]; then
     flags_chrome+=("--proxy-server=\"socks5://${SOCKS5_SERVER}\"")
-    flags_chrome+=('--proxy-bypass-list="localhost;127.0.0.1"')
+    flags_chrome+=('--proxy-bypass-list="<local>;127.0.0.1;*.atco.ca"')
+    flags_chrome+=('--host-resolver-rules="MAP * ~NOTFOUND,EXCLUDE '"${SOCKS5_SERVER%:*}"',EXCLUDE atco.ca,EXCLUDE *.atco.ca"')
     flags_chrome+=('--disable-background-mode')
     flags_chrome+=('--disable-background-networking')
     flags_chrome+=('--dns-prefetch-disable')
-    flags_chrome+=('--host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE 127.0.0.1"')
     # flags_chrome+=('--disable-remote-fonts')
 fi
