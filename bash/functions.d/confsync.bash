@@ -4,13 +4,14 @@ confsync()
 {
     local dir_config="$HOME/Dropbox/.config"
     local dir_scripts="$HOME/Dropbox/scripts"
+    local -a usrflags=("$@")
 
     if [[ ${FUNCNAME[1]} == main ]]; then
         scold "this function cannot be called directly"
         return 1
     elif [[ -n $dest && -n $config_filters && -n $script_filters && -d $dir_config && -d $dir_scripts ]]; then
-        syncdir "$dir_config"  "$dest/${dir_config##*/}"  "${config_filters[@]}"
-        syncdir "$dir_scripts" "$dest/${dir_scripts##*/}" "${script_filters[@]}"
+        syncdir ${usrflags[*]} "$dir_config"  "$dest/${dir_config##*/}"  "${config_filters[@]}"
+        syncdir ${usrflags[*]} "$dir_scripts" "$dest/${dir_scripts##*/}" "${script_filters[@]}"
     else
         scold "something went wrong :("
         return 1
