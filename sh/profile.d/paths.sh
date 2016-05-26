@@ -2,19 +2,14 @@
 # paths
 # -----------------------------------------------------------------------------
 
-### ZGM TODO: check dirs and write semi-static ~/etc/paths files?
-
-# only run if we need to
-# [[ -z $SYSPATH && -z $z_reloading ]] || return 0
-
 # get a reliable base path
 # export SYSPATH="$(command -p getconf PATH 2>/dev/null)"
 # : ${SYSPATH:=/usr/bin:/bin:/usr/sbin:/sbin}
 
 # base paths
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin
-export MANPATH=/usr/share/man:/usr/man
-export INFOPATH=/usr/share/info
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export MANPATH=/usr/share/man:/usr/man:$MANPATH
+export INFOPATH=/usr/share/info:$INFOPATH
 export CDPATH=.:$HOME
 
 # /usr/local
