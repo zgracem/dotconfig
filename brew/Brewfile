@@ -114,6 +114,8 @@ brew 'python'
 brew 'jq'
 brew 'node'
 
+brew 'go'
+
 # https://github.com/zoltan-dulac/css3FontConverter
 brew 'fontforge'
 tap 'bramstein/webfonttools'
