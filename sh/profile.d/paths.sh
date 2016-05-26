@@ -53,6 +53,9 @@ if [[ -x /usr/local/bin/brew ]]; then
     # OpenSSL
     PATH=/usr/local/opt/openssl/bin:$PATH
     MANPATH=/usr/local/opt/openssl/share/man:$MANPATH
+
+    # go-lang
+    PATH=$PATH:/usr/local/opt/go/libexec/bin
 fi
 
 # Xcode
@@ -98,6 +101,9 @@ PATH=$PATH:$HOME/Applications/calibre.app/Contents/MacOS
 # -----------------------------------------------------------------------------
 # cygwin
 # -----------------------------------------------------------------------------
+
+# golang
+PATH=$PATH:/opt/go/bin
 
 # gcc tools
 PATH=$PATH:/opt/gcc-tools/bin
