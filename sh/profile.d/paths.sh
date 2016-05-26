@@ -123,6 +123,12 @@ INFOPATH=$HOME/share/info:$HOME/opt/share/info:$INFOPATH
 
 fixpath()
 {
+    # The input, a colon-separated list, is split by setting IFS to a colon
+    # and using an unquoted $@ in the `for` loop. Each directory is checked to
+    # ensure that it isn't in the PATH-in-progress, and that it exists at all;
+    # if so, it's appended to the P-i-p, with a leading colon if necessary.
+    # Once complete, returns the new PATH.
+
     local d p IFS=:
 
     for d in $@; do
