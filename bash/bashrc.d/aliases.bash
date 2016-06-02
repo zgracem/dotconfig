@@ -45,11 +45,3 @@ alias 600='chmod 600'
 alias 644='chmod 644'
 alias 700='chmod 700'
 alias 755='chmod 755'
-
-# ssh
-alias  a='newwin --title Athena ssh Athena'
-alias aa='newwin --title Athena ssh Athena.remote'
-alias m='newwin  --title Minerva ssh Minerva'
-alias er='newwin --title Erato ssh Erato'
-alias wf='newwin --title WebFaction ssh WebFaction'
-alias hiroko='newwin --title Hiroko ssh Hiroko'
