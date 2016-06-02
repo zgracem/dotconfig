@@ -1,7 +1,5 @@
 # for my directory-bookmarking function
 
-_isFunction g2 || return
-
 __z_complete_g2()
 {
     local -a wordlist=()
@@ -24,7 +22,8 @@ __z_complete_g2()
         wordlist+=("${DIRSTACK[@]}")
     fi
 
+    compopt -o nospace
     COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
 }
 
-complete -o nospace -F __z_complete_g2 g2
+complete -F __z_complete_g2 g2

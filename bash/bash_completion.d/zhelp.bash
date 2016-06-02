@@ -1,11 +1,19 @@
+# functions -- for `where`
 complete -A function \
     -o nospace \
     where
 
-complete -v \
+# variables -- for `whatvar`
+complete -ev -A arrayvar \
     -o nospace \
-    whatvar wv
+    whatvar
 
+# files, aliases, builtins, commands, keywords, functions & helptopics -- for `which` & `what`
 complete -f -abck -A function -A helptopic \
     -o nospace \
-    which what h
+    which what
+
+# aliases, builtins, commands, keywords & helptopics -- for `h`
+complete -abck -A helptopic \
+    -o nospace \
+    h

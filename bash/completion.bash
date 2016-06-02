@@ -6,7 +6,7 @@
 export BASH_COMPLETION_DIR="/usr/local/share/bash-completion/completions"
 
 if [[ ! -d $BASH_COMPLETION_DIR ]]; then
-  unset BASH_COMPLETION_DIR
+  unset -v BASH_COMPLETION_DIR
 fi
 
 # Homebrew
@@ -33,6 +33,10 @@ fi
 # ignore these suffixes when searching for completions
 FIGNORE="DS_Store:~:.swp:Application Scripts"
 
+# do not treat colon specially
+# see question E13: http://tiswww.case.edu/php/chet/bash/FAQ
+COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+
 # -----------------------------------------------------------------------------
 # support functions
 # -----------------------------------------------------------------------------
@@ -52,31 +56,38 @@ __z_complete_files()
   done
 }
 
-__z_complete_src()
-{   # Usage: __z_complete_src FILE...
+### ZGM removed 2016-06-02 -- don't need error tracking anymore
+# __z_complete_src()
+# {   # Usage: __z_complete_src FILE...
 
-  # track errors
-  local x=0
+#   # track errors
+#   local x=0
 
-  local f; for f in "$@"; do
-    if [[ -f $f ]]; then
-      . "$f" || (( x++ ))
-    else
-      (( x++ ))
-    fi
-  done
+#   local f; for f in "$@"; do
+#     if [[ -f $f ]]; then
+#       . "$f" || (( x++ ))
+#     else
+#       (( x++ ))
+#     fi
+#   done
 
-  return $x
-}
+#   return $x
+# }
+
+# -----------------------------------------------------------------------------
+# template function
+# -----------------------------------------------------------------------------
 
 # __z_complete_thing()
 # {
+#   local cmd=$1
 #   local cur=${COMP_WORDS[COMP_CWORD]}
+#   local prev=${COMP_WORDS[COMP_CWORD-1]}
 #   local -a wordlist=()
 #
 #   # other stuff
 #
-#   COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "$cur" ) )
+#   COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "$cur") )
 # }
 #
 # complete -F __z_complete_thing thing
@@ -91,17 +102,11 @@ __z_complete_src()
 #     . /usr/local/share/bash-completion/bash_completion
 # fi
 
-### ZGM removed `man` 2015-11-10 -- was getting _init_completion not found errors
-for c in configure curl find tmux wget; do
-  __z_complete_src "$HOMEBREW_COMPLETION/$c" \
-    || __z_complete_src "$BASH_COMPLETION_DIR/$c"
-done
-
 # custom completions
 if [[ -d $dir_config/bash/bash_completion.d ]]; then
-  for c in "$dir_config"/bash/bash_completion.d/*.bash; do
-    __z_complete_src "$c"
+  for cf in "$dir_config"/bash/bash_completion.d/*.bash; do
+    [[ -f $cf ]] && . "$cf"
   done
 fi
 
-unset c
+unset -v cf

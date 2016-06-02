@@ -1,5 +1,3 @@
-_isFunction howto || return
-
 __z_complete_howto()
 {
     local -a wordlist=( $(__z_complete_files markdown "$dir_howto") )
