@@ -1,46 +1,53 @@
 q()
-{   # exit code tester and wrapper for [[ ... ]]
-    # Usage: q '-d /path/to/dir'
-    #        q '-n $SSH_TTY'
-    #        some_command; q
+{
+  # We have to capture this immediately, because $? will be overwritten.
+  local last_exit=$?
 
-    local lastExit=$?
+  # Preferences!
+  local true_colour=$esc_true
+  local false_colour=$esc_false
 
-    case $# in
-        0)
-            local expr="$lastExit -eq 0"
-            ;;
-        1)
-            local expr="$@"
-            ;;
-        *)
-            scold "Usage: $FUNCNAME [EXPRESSION]\n'EXPRESSION' uses [[ ... ]] syntax"
-            return $EX_USAGE
-            ;;
-    esac
+  # Our functionality is determined by number of arguments:
+  case $# in
+    0)  # No arguments: Pretty-print the last command's exit status.
+        # We already know we want to return true, so we're creating
+        # a tautologically true expression to test later.
+        local expr="$last_exit -eq 0"
+        ;;
+    1)  # One argument: Evaluate like [[ (and pretty-print result).
+        local expr="$@"
+        ;;
+    *)  # 2+ arguments: You're doing it wrong.
+        scold "Usage: $FUNCNAME '-d /path/to/dir'"
+        scold "       $FUNCNAME '-n $SSH_TTY'"
+        scold "       some_command; $FUNCNAME"
+        return $EX_USAGE
+        ;;
+  esac
 
-    # test it
-    local result
-    result="$(eval "[[ $expr ]] && echo true" 2>&1)"
+  # Run the test. Capture standard error to check later.
+  answer=$(eval "[[ $expr ]] && echo true" 2>&1)
+  local colour=
 
-    case $result in
-        *error*)
-            # syntax error
-            scold "$FUNCNAME" "bad expression"
-            return $EX_USAGE
-            ;;
-        *true*)
-            # true
-            local qColour="${esc_true}"  # green (set in colours.bash)
-            local qAnswer='true'
-            ;;
-        *)  # false
-            local qColour="${esc_false}" # red
-            local qAnswer='false'
-            ;;
-    esac
+  case $answer in
+    *error*)  # Syntax error from [[
+              scold "$FUNCNAME: bad expression"
+              return $EX_USAGE
+              ;;
 
-    printf '%b%b%b\n' $qColour $qAnswer $esc_reset
+    true)     colour=$true_colour
+              ;;
 
-    return $EX_OK
+    "")       answer="false"
+              colour=$false_colour
+              if (( last_exit > 1 )); then
+                # This may be interesting information.
+                answer+=" ($last_exit)"
+              fi
+              ;;
+  esac
+
+  printf "%b\n" "${colour}${answer}${esc_reset}"
+
+  return $last_exit
 }
