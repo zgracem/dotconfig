@@ -16,4 +16,4 @@ if [[ -f $diskutil_file && -f $diskutil_helper ]]; then
     . "$diskutil_file"
 fi
 
-unset diskutil_file diskutil_helper
+unset -v ${!diskutil_*}

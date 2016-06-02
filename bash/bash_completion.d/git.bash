@@ -1,4 +1,6 @@
-__z_complete_src "$HOMEBREW_COMPLETION/git-completion.bash"
+if [[ -n $HOMEBREW_COMPLETION ]]; then
+    . "$HOMEBREW_COMPLETION/git-completion.bash"
+fi
 
 # alias for 'git difftool'
 _isAlias gd || return
