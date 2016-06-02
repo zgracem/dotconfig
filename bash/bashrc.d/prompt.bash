@@ -20,7 +20,7 @@ unset -v PROMPT_DIRTRIM
 
 : ${Z_PROMPT_COLOUR:=true}
 : ${Z_PROMPT_EXIT:=true}
-: ${Z_PROMPT_GIT:=true}
+: ${Z_PROMPT_GIT:=false}
 
 : ${Z_PROMPT_WINTITLE:=true}
 : ${Z_PROMPT_TABTITLE:=true}
@@ -192,34 +192,21 @@ PS1_git_info()
 {
   [[ $Z_PROMPT_GIT == true ]] || return 0
 
-  local status branch ahead=0 unstaged dirty=false untracked=0
+  local status= branch= icons=
+  local ahead=0 unstaged=0 untracked=0 dirty=false
 
   # get info on current branch, or bail if no branch exists
   status=$(git status --branch --porcelain 2>/dev/null) || return
 
-  # regular expressions
-  local re_br='^## ([[:graph:]]+)…'
-  local re_ah=' \[ahead ([[:digit:]]+)\]'
-  local re_ut=$'\x0a''(\? | \?|\?\?)'
-
   # get name of branch
+  local re_br='^## ([[:graph:]]+)…'
   if [[ ${status/.../…} =~ $re_br ]]; then
     branch="${BASH_REMATCH[1]}"
   else
     return 1
   fi
 
-  # get number of commits (if any)
-  if [[ $status =~ $re_ah ]]; then
-    ahead="${BASH_REMATCH[1]}"
-  fi
-
-  # check for presence of untracked files
-  if [[ $status =~ $re_ut ]]; then
-    untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
-  fi
-
-  # get number of newlines in status (= number of unstaged files, in theory)
+  # count unstaged files (by counting newlines)
   unstaged=${status//[^$'\x0a']/}
   unstaged=${#unstaged}
 
@@ -227,28 +214,41 @@ PS1_git_info()
     dirty=true
   fi
 
-  local output="${esc_reset}"
-
-  # name of current branch
-  output+=" ${esc_2d}${branch}${esc_reset}"
-
-  # add '•' if there's anything to commit
+  # add '●' if there's anything to commit
   if [[ $dirty == true ]]; then
-    output+="${esc_false}•${esc_reset}"
+    icons+=$esc_false
+    icons+="●"
+  fi
+
+  # count untracked files
+  local re_ut=$'\n''(\? | \?|\?\?)'
+  if [[ $status =~ $re_ut ]]; then
+    untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
   fi
 
   # add '+' if there are untracked files
   if (( untracked > 0 )); then
-    output+="${esc_yellow}+${untracked}"
+    icons+=$esc_reset
+    icons+=$esc_yellow
+    icons+="+"
   fi
 
-  # add '»n' if we're n commits ahead of origin
+  # get commits ahead (if any)
+  local re_ah=' \[ahead ([[:digit:]]+)\]'
+  if [[ $status =~ $re_ah ]]; then
+    ahead="${BASH_REMATCH[1]}"
+  fi
+
+  # add '▸' if we're ahead of origin
   if (( ahead > 0 )); then
-    output+="${esc_true}»${ahead}"
+    icons+=$esc_reset
+    icons+=$esc_true
+    icons+="▸"
   fi
 
-  output+="${esc_reset}"
-  printf "%b" "$output"
+  printf "${esc_reset} %b" \
+    "${esc_2d}${branch}" \
+    "${icons:-}${esc_reset}"
 }
 
 # -----------------------------------------------------------------------------
