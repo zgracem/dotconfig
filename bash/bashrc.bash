@@ -22,8 +22,9 @@ fi
 
 # switch to bash-4.4 if available
 if [[ -x $HOME/opt/bin/bash ]]; then
-  SHELL="$HOME/opt/bin/bash"
+  export SHELL="$HOME/opt/bin/bash"
   if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} < 44 )); then
+    export BASHOPTS SHELLOPTS
     exec -l "$SHELL"
   else
     BASH=$SHELL
@@ -34,12 +35,6 @@ fi
 # if [[ $BASH != $SHELL ]]; then
 #   export SHELL=$BASH
 # fi
-
-.()
-{ # fancy new source function
-  printf "\r\e[K%b" "$1"
-  builtin . "$@"
-}
 
 # -----------------------------------------------------------------------------
 # shell options
@@ -165,6 +160,17 @@ fi
 # other config files
 # -----------------------------------------------------------------------------
 
+# Uncomment the function below to troubleshoot slow shell startups.
+# Each filename will appear as it is sourced. Files whose names linger
+# are your slowpokes.
+# (See related code in bashrc.d/keychain.bash when enabling/disabling.)
+
+# .()
+# {
+#   printf "\r\e[K%s" "$1"
+#   builtin . "$@"
+# }
+
 export dir_config="$HOME/.config"
 
 export INPUTRC="$dir_config/inputrc"
@@ -187,7 +193,7 @@ if [[ $TIME_TEST_ACTIVE == true ]]; then
     local filename=$1
     local elapsed
 
-    # keep both stdout and stderr intact
+    # stdout and stderr intact
     exec 3>&1 4>&2
 
     elapsed=$( { time source "$filename" 1>&3 2>&4; } 2>&1 )

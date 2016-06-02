@@ -58,7 +58,12 @@ _optSet()
 
 _shoptSet()
 {   # exits 0 if all shell options in $@ are set
-    shopt -pq "$@"
+    shopt -pq "$@" 2>/dev/null
+}
+
+_set()
+{   # exits 0 if shell variable/option $1 is set
+    _optSet "$1" || _shoptSet "$1"
 }
 
 _inScreen()

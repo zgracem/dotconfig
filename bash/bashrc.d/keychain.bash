@@ -7,16 +7,18 @@ if [[ -z $SSH_AGENT_PID ]]; then
     mkdir -p ~/var/run 1>/dev/null || return
   fi
 
-  printf "\r\e[K"
+  _isFunction . && printf "\r\e[K"
 
-  if keychain_env=$(keychain --eval --dir ~/var/run --quick --quiet \
-                    --ignore-missing --inherit any id_rsa); then
+  _set noclobber || trap 'set -o noclobber; trap - RETURN;' RETURN
+  set +o noclobber
+
+  if keychain_env=$(keychain --agents ssh --dir ~/var/run --eval \
+                    --ignore-missing --inherit any \
+                    --quick --quiet \
+                    id_rsa); then
     eval "$keychain_env"
-    printf "\eM\e[K"
+    _isFunction . && printf "\eM\e[K"
   fi
+  
+  unset -v keychain_env
 fi
-
-unset -v keychain_env
-
-# TODO: remove later
-[[ -d ~/var/run/.keychain ]] && rm -rfv ~/.keychain
