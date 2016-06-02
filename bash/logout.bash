@@ -30,4 +30,4 @@ if [[ -f $dir_local/config/logout.bash ]]; then
   . "$dir_local/config/logout.bash"
 fi
 
-printf "Be seeing you.\n"
+# printf "Be seeing you.\n"

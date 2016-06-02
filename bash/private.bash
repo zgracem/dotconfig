@@ -9,7 +9,7 @@
 # countdown
 # -----------------------------------------------------------------------------
 
-export countTo='2016-05-26 23:54 -0600'
+# export countTo='2016-05-26 23:54 -0600'
 
 if [[ -x $dir_scripts/countdown.sh && -n $countTo ]]; then
   c() {
