@@ -2,5 +2,5 @@
 # http://brew.sh/
 
 if [[ -n $HOMEBREW_COMPLETION ]]; then
-    . "$HOMEBREW_COMPLETION/brew_bash_completion.sh"
+    . "$HOMEBREW_COMPLETION/brew"
 fi
