@@ -4,7 +4,10 @@ scan()
 {
     local usage="${FUNCNAME[0]} ssh | wifi | file NAME | pid PID | port PORT"
 
-    case $1 in
+    local verb=$1
+    local noun=$2
+
+    case $verb in
         ssh)
             # list all SSH-enabled hosts on the domain
             dns-sd -B _ssh._tcp
@@ -14,13 +17,13 @@ scan()
             airport -s
             ;;
         file)
-            sudo opensnoop -v -f "${2}"
+            sudo opensnoop -v -f "${noun}"
             ;;
         pid)
-            sudo opensnoop -v -p "${2}"
+            sudo opensnoop -v -p "${noun}"
             ;;
         port)
-            sudo lsof -i ":${2}"
+            sudo lsof -i ":${noun}"
             ;;
         *)
             scold "Usage: ${usage}"
