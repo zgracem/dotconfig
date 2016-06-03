@@ -202,6 +202,8 @@ PS1_git_info()
   local re_br='^## ([[:graph:]]+)…'
   if [[ ${status/.../…} =~ $re_br ]]; then
     branch="${BASH_REMATCH[1]}"
+  elif [[ $status =~ ${re_br%…} ]]; then
+    branch="${BASH_REMATCH[1]}"
   else
     return 1
   fi
