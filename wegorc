@@ -1,0 +1,35 @@
+# wego configuration
+# 
+# This config has https://github.com/schachmat/ingo syntax.
+# Empty lines or lines starting with # will be ignored.
+# All other lines must look like "KEY=VALUE" (without the quotes).
+# The VALUE must not be enclosed in quotes as well!
+
+# aat-frontend: Show geo coordinates (default false)
+aat-coords=false
+
+# aat-frontend: Monochrome output (default false)
+aat-monochrome=false
+
+# BACKEND to be used (default forecast.io)
+backend=forecast.io
+
+# NUMBER of days of weather forecast to be displayed (default 3)
+days=3
+
+# forecast backend: the api KEY to use (default )
+forecast-api-key=82e31cc0edd769ec3df214b7015d0e38
+
+# forecast backend: the LANGUAGE to request from forecast.io (default en)
+forecast-lang=en
+
+# FRONTEND to be used
+# Choices are: ascii-art-table (default), emoji, json
+frontend=ascii-art-table
+
+# LOCATION to be queried (default 40.748,-73.985)
+location=53.54372,-113.52903
+
+# UNITSYSTEM to use for output.
+# Choices are: metric, imperial, si (default metric)
+units=metric
