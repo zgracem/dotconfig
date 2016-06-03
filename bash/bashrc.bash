@@ -226,13 +226,17 @@ shopt -s nullglob
 # define colours (before ./bashrc.d/prompt.bash loads)
 . "$dir_config/bash/colour.bash"
 
-# private stuff
-. "$dir_config/bash/private.bash"
-
 # programmable completion
 . "$dir_config/bash/completion.bash"
 
-# supplementary files
+# private stuff
+if [[ -d $dir_config/bash/private.d ]]; then
+  for file in "$dir_config"/bash/private.d/*.bash; do
+    [[ -f $file ]] && . "$file"
+  done
+fi
+
+# supplementary startup files
 if [[ -d $dir_config/bash/bashrc.d ]]; then
   for file in "$dir_config"/bash/bashrc.d/*.bash; do
     [[ -f $file ]] && . "$file"
