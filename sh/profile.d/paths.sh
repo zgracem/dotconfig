@@ -18,9 +18,10 @@ MANPATH=/usr/local/share/man:$MANPATH
 INFOPATH=/usr/local/share/info:$INFOPATH
 
 # -----------------------------------------------------------------------------
-# Ruby & Python
+# development
 # -----------------------------------------------------------------------------
 
+# Ruby (see also bashrc.d/rubygems.bash)
 export RBENV_ROOT="$HOME/.rbenv"
 
 if [[ -d $RBENV_ROOT ]]; then
@@ -31,11 +32,21 @@ else
     unset -v RBENV_ROOT
 fi
 
+# go-lang (see also bashrc.d/golang.bash)
+case $HOSTNAME in
+    Athena)
+        PATH=$PATH:/usr/local/opt/go/libexec/bin
+        ;;
+    *.atco.com)
+        PATH=$PATH:/opt/go/bin
+        ;;
+esac
+
 # -----------------------------------------------------------------------------
 # OS X
 # -----------------------------------------------------------------------------
 
-# Homebrew
+# Homebrew (see also bashrc.d/homebrew.bash)
 if [[ -x /usr/local/bin/brew ]]; then
     # GNU coreutils
     PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
@@ -53,9 +64,6 @@ if [[ -x /usr/local/bin/brew ]]; then
     # OpenSSL
     PATH=/usr/local/opt/openssl/bin:$PATH
     MANPATH=/usr/local/opt/openssl/share/man:$MANPATH
-
-    # go-lang
-    PATH=$PATH:/usr/local/opt/go/libexec/bin
 fi
 
 # Xcode
@@ -102,9 +110,6 @@ PATH=$PATH:$HOME/Applications/calibre.app/Contents/MacOS
 # cygwin
 # -----------------------------------------------------------------------------
 
-# golang
-PATH=$PATH:/opt/go/bin
-
 # gcc tools
 PATH=$PATH:/opt/gcc-tools/bin
 MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man
@@ -119,7 +124,7 @@ fi
 # ~
 # -----------------------------------------------------------------------------
 
-PATH=$HOME/bin:$HOME/opt/bin:$PATH
+PATH=$HOME/bin:$HOME/opt/bin:$HOME/opt/go/bin:$PATH
 MANPATH=$HOME/share/man:$HOME/opt/share/man:$MANPATH
 INFOPATH=$HOME/share/info:$HOME/opt/share/info:$INFOPATH
 

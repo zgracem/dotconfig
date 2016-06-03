@@ -6,11 +6,11 @@ _inPath go || return
 case $OSTYPE in
   cygwin)
     GOROOT="/opt/go"
-    GOPATH="${CYGWIN_HOME}${HOME}/Dropbox/src/go"
+    GOPATH="${CYGWIN_HOME}${HOME}/opt/go"
     ;;
   darwin*)
     GOROOT="/usr/local/opt/go/libexec"
-    GOPATH="${HOME}/Dropbox/src/go"
+    GOPATH="${HOME}/opt/go"
     ;;
   *)
     return
