@@ -23,7 +23,7 @@ alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" -d "$HOME/Archi
 # -----------------------------------------------------------------------------
 
 # files/directories
-alias dirsize='du -sh'              # total size of $PWD
+alias dirsize='du -sh .'            # total size of $PWD
 alias sizes='dirsize | sort -rh'    # sort files & directories in $PWD by size
 
 # check network connection
@@ -37,7 +37,6 @@ alias myip='dig +short @resolver1.opendns.com myip.opendns.com'
 
 # start servers
 alias mm='bundle exec middleman'
-alias gulp='./node_modules/.bin/gulp'
 
 # chmod
 alias 400='chmod 400'
