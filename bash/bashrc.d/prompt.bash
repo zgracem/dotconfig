@@ -409,7 +409,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     for index in "${indexes[@]}"; do
       local var_name="PS1_${index#*_}"
 
-      if [[ -n ${!index} && -z ${!var_name} ]] || [[ $z_reloading == true ]]; then
+      if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == true ]]; then
         eval "$var_name=\"\[${!index}\]\""
       fi
     done

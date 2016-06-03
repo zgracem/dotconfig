@@ -152,7 +152,7 @@ z::colour::add_esc()
   for index in "${indexes[@]}"; do
     local var_name="esc_${index#*_}"
 
-    if [[ -n ${!index} && -z ${!var_name} ]] || [[ $z_reloading == true ]]; then
+    if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == true ]]; then
       eval "$var_name=\"${CSI}${!index}m\""
     fi
   done

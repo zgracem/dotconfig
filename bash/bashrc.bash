@@ -166,16 +166,17 @@ fi
 # other config files
 # -----------------------------------------------------------------------------
 
-# Uncomment the function below to troubleshoot slow shell startups.
-# Each filename will appear as it is sourced. Files whose names linger
-# are your slowpokes.
-# (See related code in bashrc.d/keychain.bash when enabling/disabling.)
+# Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
+# Each filename will appear as it is sourced; slowpokes will visibly linger.
+# (See also related code in bashrc.d/keychain.bash when enabling/disabling.)
 
-# .()
-# {
-#   printf "\r\e[K%s" "$1"
-#   builtin . "$@"
-# }
+if [[ $Z_RELOADING_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
+  .()
+  {
+    printf "\r\e[K%s" "$1"
+    builtin . "$@"
+  }
+fi
 
 export dir_config="$HOME/.config"
 
@@ -264,7 +265,7 @@ if [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] \
 fi
 
 # local initialization script (not in subshells/when reloading)
-if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $z_reloading ]]; then
+if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $Z_RELOADING ]]; then
   [[ -f $dir_local/config/init.bash ]] && . "$dir_local/config/init.bash"
 fi
 
