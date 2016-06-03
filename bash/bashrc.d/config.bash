@@ -146,3 +146,15 @@ fe()
     fi
   fi
 }
+
+if _inPath launchctl; then
+  rlenv()
+  { # reload OS-wide environment variables (GUI apps will require restart)
+    local plist=~/Library/LaunchAgents/org.inescapable.environment.plist
+
+    launchctl unload "$plist" \
+      && launchctl load "$plist"
+
+    [[ $TERM_PROGRAM == Apple_Terminal ]] && killall Terminal
+  }
+fi

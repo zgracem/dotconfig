@@ -8,7 +8,7 @@
 shopt -s promptvars
 
 # clear prompt-related variables so we can start fresh
-unset -v PS{1..4}
+unset -v PS{0..4}
 unset -v PROMPT_COMMAND
 unset -v PROMPT_DIRTRIM
 
@@ -32,9 +32,9 @@ export ${!Z_PROMPT_*}
 # -----------------------------------------------------------------------------
 
 # only change window title if supported by current terminal
-### ZGM TODO: create equivalent for tab title
 if [[ ! $TERM =~ xterm|rxvt|putty|screen|cygwin ]]; then
     Z_PROMPT_WINTITLE=false
+    Z_PROMPT_TABTITLE=false
 fi
 
 # only use colours if supported by current terminal
@@ -58,14 +58,14 @@ fi
 # functions
 # -----------------------------------------------------------------------------
 
-PS1_compress_pwd()
-{ # Usage: PS1_compress_pwd "$PWD"
+z::prompt::compress_pwd()
+{ # Usage: z::prompt::compress_pwd "$PWD"
 
   # Trims leading elements of the current directory like so:
-  #   ~/first/second/third/fourth
-  #   ~/fi…/se…/third/fourth/fifth
-  #   ~/fi…/se…/th…/fourth/fifth/sixth
-  #   ~/fi…/se…/th…/fo…/fifth/sixth/seventh
+  #   ~/first/second/3d/fourth
+  #   ~/fi…/se…/3d/fourth/fifth
+  #   ~/fi…/se…/3d/fourth/fifth/sixth
+  #   ~/fi…/se…/3d/fo…/fifth/sixth/seventh
 
   # Compress if PWD has __ or more elements (not counting `~`).
   local min_depth=5
@@ -142,7 +142,7 @@ PS1_compress_pwd()
   fi
 }
 
-PS1_print_exit()
+z::prompt::print_exit()
 { # print non-zero exit codes on the far right of the screen (zsh envy...)
   local last_exit=$?
   local gutter=1
@@ -188,7 +188,7 @@ PS1_print_exit()
   fi
 }
 
-PS1_git_info()
+z::prompt::git_info()
 {
   [[ $Z_PROMPT_GIT == true ]] || return 0
 
@@ -253,127 +253,66 @@ PS1_git_info()
     "${icons:-}${esc_reset}"
 }
 
-# -----------------------------------------------------------------------------
-# PROMPT_COMMAND
-# -----------------------------------------------------------------------------
-
-z::prompt::cmd_add()
-{ # append (or prepend with -p) to PROMPT_COMMAND, avoiding duplicates
-  if [[ $1 == -p ]]; then
-    local prepend=true
-    shift
-  fi
-
-  local cmd="$@"
-
-  if [[ ! $PROMPT_COMMAND =~ $cmd ]]; then
-    if [[ $prepend == true ]]; then
-      PROMPT_COMMAND="${cmd}${PROMPT_COMMAND:+;}${PROMPT_COMMAND}"
-    else
-      PROMPT_COMMAND+="${PROMPT_COMMAND:+;}${cmd}"
-    fi
-  fi
-
-  return 0
-}
-
-z::prompt::cmd_del()
-{ # remove a command from PROMPT_COMMAND
-  local regex=' ?'"$*"'[ ;]*'
-
-  if [[ $PROMPT_COMMAND =~ $regex ]]; then
-    # capture command + any leading space + trailing semicolon
-    local cmd=${BASH_REMATCH[0]}
-
-    # remove that from existing PROMPT_COMMAND
-    PROMPT_COMMAND=${PROMPT_COMMAND/$cmd/}
-
-    # remove any orphaned trailing semicolon
-    PROMPT_COMMAND=${PROMPT_COMMAND%;}
-  fi
-}
-
-# -----------------------------------------------------------------------------
-
-if [[ $TERM_PROGRAM == iTerm.app ]]; then
-  # notify iTerm of the current directory
-  if _isFunction iterm::state; then
-    PS1_update_iTerm() { iterm::state; }
-  else
-    PS1_update_iTerm()
-    {
-      printf '%b%s%b' "${OSC}50;CurrentDir=${PWD}${BEL}"
-    }
-  fi
-
-  z::prompt::cmd_add PS1_update_iTerm
+# notify iTerm of the current directory
+if _isFunction iterm::state; then
+  z::prompt::update_iTerm() { iterm::state; }
+else
+  z::prompt::update_iTerm()
+  {
+    printf '%b%s%b' "${OSC}50;CurrentDir=${PWD}${BEL}"
+  }
 fi
 
-if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-  # unset Apple's stock function
-  unset -f update_terminal_cwd
+# Notify Terminal.app of the current directory
+z::prompt::update_Terminal()
+{ # Format:   file://hostname/path/to/pwd
+  # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 
-  PS1_update_Terminal()
-  { # Notify Terminal.app of the current directory
-    # Format:   file://hostname/path/to/pwd
-    # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
+  local ante="${OSC}7;" post="${BEL}"
 
-    local ante="${OSC}7;" post="${BEL}"
+  if _inTmux; then
+    # ANSI device control string
+    ante="${DCS}tmux;\e${ante}"
+    post="${post}${ST}"
+  fi
 
-    if _inTmux; then
-      # ANSI device control string
-      ante="${DCS}tmux;\e${ante}"
-      post="${post}${ST}"
-    fi
+  local pwd_url="file://${HOSTNAME}"
 
-    local pwd_url="file://${HOSTNAME}"
+  {
+    # ensure text is processed byte-by-byte
+    local LC_CTYPE=C LC_ALL=
 
-    {
-      # ensure text is processed byte-by-byte
-      local LC_CTYPE=C LC_ALL=
+    local i ch hexch
+    for (( i = 0; i < ${#PWD}; i++ )); do
+      ch=${PWD:i:1}
+      if [[ $ch =~ [/._~A-Za-z0-9-] ]]; then
+        pwd_url+="$ch"
+      else
+        # interpret as number ──┐
+        printf -v hexch "%02X" "'$ch"
 
-      local i ch hexch
-      for (( i = 0; i < ${#PWD}; i++ )); do
-        ch=${PWD:i:1}
-        if [[ $ch =~ [/._~A-Za-z0-9-] ]]; then
-          pwd_url+="$ch"
-        else
-          # interpret as number ──┐
-          printf -v hexch "%02X" "'$ch"
-
-          # printf treats values > 127 as negative
-          # and pads w/ 'FF', so truncate
-          pwd_url+="%${hexch: -2:2}"
-        fi
-      done
-    }
-
-    printf '%b' "$ante" "$pwd_url" "$post"
+        # printf treats values > 127 as negative
+        # and pads w/ 'FF', so truncate
+        pwd_url+="%${hexch: -2:2}"
+      fi
+    done
   }
 
-  z::prompt::cmd_add PS1_update_Terminal
-fi
+  printf '%b' "$ante" "$pwd_url" "$post"
+}
 
-if [[ $Z_PROMPT_WINTITLE == true ]]; then
-  z::prompt::cmd_add 'setwintitle "$USER@$HOSTNAME"'
-fi
+z::prompt::update_titles()
+{
+  local tab_title="${USER}@${HOSTNAME%%.*}"
+  local win_title="${tab_title}: ${PWD/#$HOME/$'~'}"
 
-if [[ $Z_PROMPT_TABTITLE == true ]]; then
   if [[ $TERM_PROGRAM == iTerm.app ]]; then
-    z::prompt::cmd_add 'settabtitle "${ITERM_SESSION_ID%:*}"'
-  else
-    z::prompt::cmd_add 'settabtitle "$USER@$HOSTNAME"'
+    tab_title="${ITERM_SESSION_ID%:*}"
   fi
-fi
 
-if _inPath direnv; then
-  z::prompt::cmd_add -p '_direnv_hook'
-fi
-
-z::prompt::cmd_add -p 'history -a' # append to HISTFILE
-
-# # if you want tmux sessions to share history:
-# z::prompt::cmd_add -p 'history -n' # read from HISTFILE
+  [[ $Z_PROMPT_WINTITLE == true ]] && setwintitle "$win_title"
+  [[ $Z_PROMPT_TABTITLE == true ]] && settabtitle "$tab_title"
+}
 
 # -----------------------------------------------------------------------------
 # colours
@@ -412,7 +351,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
       local var_name="PS1_${index#*_}"
 
       if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == true ]]; then
-        eval "$var_name=\"\[${!index}\]\""
+        printf -v $var_name "\[${!index}\]"
       fi
     done
   }
@@ -428,10 +367,10 @@ fi
 unset -v z_PS1_{git,pwd,ssh,usr}
 
 if [[ $Z_PROMPT_EXIT == true ]]; then
-  z_PS1_exit="\[\$(PS1_print_exit)\]"
+  z_PS1_exit="\[\$(z::prompt::print_exit)\]"
 
   if [[ $Z_PROMPT_TYPE != twoline ]]; then
-    # `PS1_print_exit` doesn't print colour codes for other types of prompt
+    # `z::prompt::print_exit` doesn't print colour codes for other types of prompt
     z_PS1_exit="${PS1_false}${z_PS1_exit}${PS1_reset}"
   fi
 fi
@@ -448,16 +387,11 @@ if [[ -n $SSH_CONNECTION ]]; then
   z_PS1_ssh="${PS1_2d}${z_PS1_ssh}${PS1_reset}"
 fi
 
-# if [[ $Z_PROMPT_GIT == true ]]; then
-#   # info about current git branch, if any
-#   z_PS1_git="\$(PS1_git_info)"
-# fi
-
 # info about current git branch, if any
-z_PS1_git="\$(PS1_git_info)"
+z_PS1_git="\$(z::prompt::git_info)"
 
 # current path, highlighted
-z_PS1_pwd="${PS1_hi}\$(PS1_compress_pwd)"
+z_PS1_pwd="${PS1_hi}\$(z::prompt::compress_pwd)"
 
 # blue $ for me, red # for root
 z_PS1_usr="${PS1_user}\\\$${PS1_reset} "
@@ -523,6 +457,79 @@ xse="${PS1_reset}:" # separator
 PS4+="\${BASH_SOURCE[0]+$PS1_2d\${BASH_SOURCE[0]}$xse$PS1_blue\$LINENO$xse}"
 PS4+="\${FUNCNAME:+\${FUNCNAME[0]}()$xse}"
 PS4+="\${BASH_COMMAND}\n\011"
+
+# -----------------------------------------------------------------------------
+# PROMPT_COMMAND
+# -----------------------------------------------------------------------------
+
+z::prompt::cmd_add()
+{ # append (or prepend with -p) to PROMPT_COMMAND, avoiding duplicates
+  if [[ $1 == -p ]]; then
+    local prepend=true
+    shift
+  fi
+
+  local cmd="$@"
+
+  if [[ ! $PROMPT_COMMAND =~ $cmd ]]; then
+    if [[ $prepend == true ]]; then
+      PROMPT_COMMAND="${cmd}${PROMPT_COMMAND:+;}${PROMPT_COMMAND}"
+    else
+      PROMPT_COMMAND+="${PROMPT_COMMAND:+;}${cmd}"
+    fi
+  fi
+
+  return 0
+}
+
+z::prompt::cmd_del()
+{ # remove a command from PROMPT_COMMAND
+  local regex=' ?'"$*"'[ ;]*'
+
+  if [[ $PROMPT_COMMAND =~ $regex ]]; then
+    # capture command + any leading space + trailing semicolon
+    local cmd=${BASH_REMATCH[0]}
+
+    # remove that from existing PROMPT_COMMAND
+    PROMPT_COMMAND=${PROMPT_COMMAND/$cmd/}
+
+    # remove any orphaned trailing semicolon
+    PROMPT_COMMAND=${PROMPT_COMMAND%;}
+  fi
+}
+
+# -----------------------------------------------------------------------------
+
+if [[ $TERM_PROGRAM == iTerm.app ]]; then
+  z::prompt::cmd_add z::prompt::update_iTerm
+else
+  unset -f z::prompt::update_iTerm
+fi
+
+if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
+  z::prompt::cmd_add z::prompt::update_Terminal
+
+  # unset Apple's stock function
+  unset -f update_terminal_cwd
+else
+  unset -f z::prompt::update_Terminal
+fi
+
+if [[ $Z_PROMPT_WINTITLE == true || $Z_PROMPT_TABTITLE == true ]]; then
+  z::prompt::cmd_add "z::prompt::update_titles"
+  [[ $Z_PROMPT_WINTITLE == true ]] && PS0+="\$(setwintitle \"\u@\h: \w\")"
+  [[ $Z_PROMPT_TABTITLE == true ]] && PS0+="\$(settabtitle \"\u@\h\")"
+fi
+
+z::prompt::cmd_add -p 'history -a'    # append to HISTFILE
+
+# # if you want tmux sessions to share history:
+# z::prompt::cmd_add -p 'history -n'  # read from HISTFILE
+
+# see also bashrc.d/direnv.bash
+if _inPath direnv; then
+  z::prompt::cmd_add -p '_direnv_hook'
+fi
 
 # -----------------------------------------------------------------------------
 # prompt manipulation

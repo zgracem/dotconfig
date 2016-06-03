@@ -7,7 +7,7 @@ alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'
 
-alias bell='tput bel'
+alias bell='tput bel' # 🔔
 alias bye='exit'
 alias e='echo'
 alias svim='sudo vim'
