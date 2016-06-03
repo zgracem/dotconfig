@@ -3,7 +3,7 @@ if type -P gem &>/dev/null; then
     Athena|*webfaction*)
       GEM_HOME=$HOME/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0
       ;;
-    WS144966*)
+    *.atco.com)
       GEM_HOME=$HOME/.gem/ruby
       ;;
     Hiroko)

@@ -45,7 +45,7 @@ case $HOSTNAME in
         dir_docs="$dir_dropbox/Documents"
         ;;
 
-    WS144966*)
+    *.atco.com)
         dir_apps="$dir_winhome/Applications"
         dir_downloads="$HOME/tmp"
         dir_dropbox="$HOME/Dropbox"
