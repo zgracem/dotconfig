@@ -59,6 +59,7 @@ brew 'homebrew/dupes/grep', args: ['with-default-names']
 
 brew 'links'
 brew 'ngrep'
+brew 'socat'
 brew 'transmission'
 brew 'wget', args: ['HEAD', 'enable-iri', 'with-pcre']
 brew 'youtube-dl', args: ['HEAD', 'with-rtmpdump']
