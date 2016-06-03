@@ -49,7 +49,6 @@ __z_complete_man()
 
   # remove suffixes
   reply=( ${reply[@]%$suffixes} )
-  reply=( ${reply[@]%.*} )
   reply=( $( compgen -W '${reply[@]%.*}' -- "${cur//\\\\/}" ) )
 
   if [[ "$prev" != $sections ]]; then
