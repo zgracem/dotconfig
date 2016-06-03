@@ -8,7 +8,7 @@ vsmm()
         Athena)
             [[ -z $SSH_CONNECTION ]] && subl --project "$project_dir/misc/vsmm-osx.sublime-project"
             ;;
-        WS144966*)
+        *.atco.com)
             cygstart "$project_dir/misc/vsmm.sublime-project"
             ;;
         *)

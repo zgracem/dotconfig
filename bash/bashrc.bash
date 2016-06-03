@@ -83,6 +83,12 @@ fi
 : ${HOSTNAME:=$(uname -n)}
 : ${TMPDIR:=$(dirname "$(mktemp -ut tmp.XXX)")}
 
+if [[ $HOSTNAME == Athena.* ]]; then
+  HOSTNAME=$(hostname -s) # trim domain ".local"
+elif [[ $HOSTNAME =~ ^WS[[:digit:]]{6} ]]; then
+  HOSTNAME=$(hostname -f) # add domain
+fi
+
 if [[ -z $HOME ]]; then
   # This happened to me once. Literally one time, ever. Then I wrote this.
   # You do not want to find yourself in a shell without HOME set.
