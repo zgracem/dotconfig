@@ -8,11 +8,11 @@ cap_fsl="${BEL}"        # from_status_line
 
 # ANSI Device Control Strings (http://serverfault.com/a/361639)
 if _inTmux; then
-    cap_tsl="${DCS}tmux;\e$cap_tsl"
-    cap_fsl="$cap_fsl${ST}"
+    cap_tsl="${DCS}tmux;\e${cap_tsl}"
+    cap_fsl="${cap_fsl}${ST}"
 elif _inScreen; then
-    cap_tsl="${DCS}$cap_tsl"
-    cap_fsl="$cap_fsl${ST}"
+    cap_tsl="${DCS}${cap_tsl}"
+    cap_fsl="${cap_fsl}${ST}"
 fi
 
 # export Z_WINTITLE_{PREFIX,ANTE,POST}
@@ -22,13 +22,13 @@ fi
 setwintitle()
 {   # set the xterm-compatible window title
     local title="$@"
-    printf '%b' "$cap_tsl" "$title" "$cap_fsl"
+    printf '%b%s%b' "${cap_tsl}" "${title}" "${cap_fsl}"
 }
 
 settabtitle()
 {   # set the tab title
     local title="$@"
-    printf '%b' "${cap_tsl/2;/1;}" "$title" "$cap_fsl"
+    printf '%b%s%b' "${cap_tsl/2;/1;}" "${title}" "${cap_fsl}"
 }
 
 setbothtitles()

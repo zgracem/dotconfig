@@ -26,7 +26,7 @@ if [[ $OSTYPE =~ cygwin ]]; then
     if [[ ${BASH_ALIASES[$a]} =~ \ ssh\  ]]; then
       c="${BASH_ALIASES[$a]}"
       quietly unalias "$a"
-      eval "alias $a=\"${c,,}\""
+      alias "$a"="${c,,}"
     fi
   done
   unset -v a c

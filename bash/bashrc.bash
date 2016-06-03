@@ -24,7 +24,7 @@ fi
 if [[ -x $HOME/opt/bin/bash ]]; then
   export SHELL="$HOME/opt/bin/bash"
   if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} < 44 )); then
-    export BASHOPTS SHELLOPTS
+    export SHELLOPTS
     exec -l "$SHELL"
   else
     BASH=$SHELL
@@ -79,15 +79,20 @@ fi
 # miscellaneous settings
 # -----------------------------------------------------------------------------
 
-: ${USER:=$(id -un)}
-: ${HOSTNAME:=$(uname -n)}
-: ${TMPDIR:=$(dirname "$(mktemp -ut tmp.XXX)")}
+export USER=${USER:-$(id -un)}
+export HOSTNAME=${HOSTNAME:-$(uname -n)}
+export TMPDIR=${TMPDIR:-$(dirname "$(mktemp -ut tmp.XXX)")}
 
-if [[ $HOSTNAME == Athena.* ]]; then
-  HOSTNAME=$(hostname -s) # trim domain ".local"
-elif [[ $HOSTNAME =~ ^WS[[:digit:]]{6} ]]; then
-  HOSTNAME=$(hostname -f) # add domain
-fi
+case $HOSTNAME in
+  *.local)
+    # trim domain ".local"
+    HOSTNAME=$(hostname -s)
+    ;;
+  @(WS|web)+([[:digit:]])*)
+    # add domain
+    HOSTNAME=$(hostname -f) 
+    ;;
+esac
 
 if [[ -z $HOME ]]; then
   # This happened to me once. Literally one time, ever. Then I wrote this.
@@ -97,12 +102,12 @@ if [[ -z $HOME ]]; then
   printf "HOME not found, searching... " >&2
 
   # First, the simplest: grep the system passwd(5) file and take the homedir
-  # from the sixth (`-f 6`) colon-delimited (`-d :`) field. If grep fails,
+  # from the sixth (`-f6`) colon-delimited (`-d:`) field. If grep fails,
   # it will pass the false exit status through (because `pipefail` is set)
   # and try to query Directory Services; if that fails, Python will try to
   # resolve it.
 
-  HOME=$(grep "^$USER" /etc/passwd | cut -f 6 -d :) \
+  HOME=$(grep "^$USER" /etc/passwd | cut -f6 -d:) \
   || HOME=$(dscl . -read /Users/$USER NFSHomeDirectory 2>/dev/null | cut -d' ' -f2) \
   || HOME=$(python -c 'import os;print os.path.expanduser("~")' 2>/dev/null) \
   || {
@@ -114,7 +119,7 @@ if [[ -z $HOME ]]; then
   printf '%s\n' "$HOME"
 fi
 
-export USER HOSTNAME TMPDIR HOME
+export HOME
 
 export BLOCKSIZE=1024
 
