@@ -1,7 +1,7 @@
 rl()
 {   # note: requires extglob, globstar, nullglob
 
-  export z_reloading=true
+  export Z_RELOADING=true
 
   # nullglob interferes with bash-completion, so turn it on only temporarily
   shopt -q nullglob || trap 'shopt -u nullglob; trap - RETURN;' RETURN
@@ -13,6 +13,9 @@ rl()
   if [[ $1 == -d ]]; then
     local dry_run=true
     printf '[%s]\n' "dry run"
+    shift
+  elif [[ $1 == -v ]]; then
+    export Z_RELOADING_VERBOSE=true
     shift
   fi
 
@@ -72,7 +75,7 @@ rl()
     fi
   done
 
-  unset -v z_reloading
+  unset -v Z_RELOADING Z_RELOADING_VERBOSE
   return $ret
 }
 
