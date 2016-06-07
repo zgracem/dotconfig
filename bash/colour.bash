@@ -83,24 +83,24 @@ colours+=(colour_true colour_false colour_hi colour_2d colour_user)
 # solarized -- http://ethanschoonover.com/solarized
 # -----------------------------------------------------------------------------
 
-case $TERM_PROGRAM in
-  iTerm.app)
-    case $ITERM_PROFILE in
-      *light*)
-        Z_SOLARIZED=light
-        ;;
-      Default*|Hotkey*)
-        Z_SOLARIZED=dark
-        ;;
-    esac
-    ;;
-  Apple_Terminal)
-    if [[ -n $TERM_PROGRAM_VERSION ]] && (( ${TERM_PROGRAM_VERSION%%.*} > 240 )); then
-      # i.e. if not running in Terminal.app on 10.5.8...
-      : # Z_SOLARIZED=dark
-    fi
-    ;;
-esac
+# case $TERM_PROGRAM in
+#   iTerm.app)
+#     case $ITERM_PROFILE in
+#       *light*)
+#         Z_SOLARIZED=light
+#         ;;
+#       Default*|Hotkey*)
+#         Z_SOLARIZED=dark
+#         ;;
+#     esac
+#     ;;
+#   Apple_Terminal)
+#     if [[ -n $TERM_PROGRAM_VERSION ]] && (( ${TERM_PROGRAM_VERSION%%.*} > 240 )); then
+#       # i.e. if not running in Terminal.app on 10.5.8...
+#       : # Z_SOLARIZED=dark
+#     fi
+#     ;;
+# esac
 
 if [[ -n $Z_SOLARIZED ]]; then
   base03="${bold};${black}"
@@ -208,41 +208,41 @@ export ${!LESS_TERM*}
 
 if ! _isGNU ls; then
   # http://geoff.greer.fm/lscolors/
-  export LSCOLORS='exfxdacabxgagaabadHbHd'
+  export LSCOLORS='exFxdacabxgagaabadHbHd'
   export CLICOLOR=1
 fi
+
 # use dircolors(1) to set LS_COLORS
+
 if [[ -z $LS_COLORS ]]; then
-  dircolor_src="$dir_config/dircolors"
-  dircolor_cache="$HOME/var/cache/dircolors"
+  dc_src="$dir_config/dircolors"
+  dc_cache="$HOME/var/cache/dircolors"
 
   if [[ -n $Z_SOLARIZED ]]; then
-    dircolor_stub="solarized.$Z_SOLARIZED"
+    dc_stub="solarized.$Z_SOLARIZED"
   else
-    dircolor_stub="default"
+    dc_stub="500kv.dircolors"
   fi
 
-  dircolor_src_file="$dircolor_src/$dircolor_stub"
-  dircolor_cache_file="$dircolor_cache/$dircolor_stub"
+  dc_src_file="$dc_src/$dc_stub"
+  dc_cache_file="$dc_cache/$dc_stub"
 
-  if [[ ! -f $dircolor_cache_file ]] \
-    && [[ -f $dircolor_src_file ]] \
-    && _inPath dircolors; then
-      # create cache dir if it doesn't exist
-      [[ -d $dircolor_cache ]] \
-      || mkdir -p "$dircolor_cache" 1>/dev/null
+  if [[ ! -f $dc_cache_file ]] \
+  && [[ -f $dc_src_file ]] \
+  && _inPath dircolors; then
+    # create cache dir if it doesn't exist
+    [[ -d $dc_cache ]] || mkdir -p "$dc_cache" 1>/dev/null
 
-      # create cache file
-      dircolors -b "$dircolor_src/$dircolor_stub" \
-      > "$dircolor_cache_file"
+    # create cache file
+    dircolors -b "$dc_src_file" > "$dc_cache_file"
   fi
 
-  if [[ -f $dircolor_cache_file ]]; then
+  if [[ -f $dc_cache_file ]]; then
     # set and export LS_COLORS
-    eval "$(<"$dircolor_cache_file")"
+    eval "$(<"$dc_cache_file")"
   fi
 
-  unset -v ${!dircolor_*}
+  unset -v ${!dc_*}
 fi
 
 # -----------------------------------------------------------------------------

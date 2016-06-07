@@ -1,0 +1,318 @@
+# -----------------------------------------------------------------------------
+# Solarized Dark color theme for the color GNU ls utility.
+# Designed for dircolors (GNU coreutils) 5.97
+# Adapted from https://github.com/seebi/dircolors-solarized
+# -----------------------------------------------------------------------------
+
+# tty : colorize output to terminals, but not pipes
+# all : colorize all output
+# none: colorization off
+COLOR tty
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+TERM ansi
+TERM console
+TERM cygwin
+TERM gnome
+TERM gnome-256color
+TERM konsole
+TERM linux
+TERM linux-c
+TERM putty
+TERM putty-256color
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode256
+TERM rxvt-unicode-256color
+TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-256color-s
+TERM screen-bce
+TERM screen-w
+TERM screen.linux
+TERM screen.xterm-new
+TERM vt100
+TERM xterm
+TERM xterm-new
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+
+# 8-bit output: '1' for on, '0' for off
+EIGHTBIT 1
+
+# -----------------------------------------------------------------------------
+# File types
+# -----------------------------------------------------------------------------
+
+# global default - no color
+NORMAL	00
+
+# normal file - no color
+FILE	00
+
+# directory - blue
+DIR		34
+
+# symbolic link - bright magenta
+LINK	95
+
+# pipe, socket, block device, character device
+FIFO					32;40	# green on black
+SOCK					33;40	# yellow on black
+BLK						36;40	# cyan on black
+CHR						36;40	# cyan on black
+
+SETUID					30;41	# black on red
+SETGID					30;43	# black on yellow
+STICKY					30;44	# black on blue
+STICKY_OTHER_WRITABLE	97;41	# bright white on red
+OTHER_WRITABLE			97;43	# bright white on yellow
+
+# -----------------------------------------------------------------------------
+# File attributes
+# -----------------------------------------------------------------------------
+
+# Orphaned symlinks (inverse magenta)
+ORPHAN	07;95
+# ... and the files that orphaned symlinks point to (blinking bright red)
+MISSING	05;91
+
+# files with execute permission - red
+EXEC	31	# Unix
+*.cmd	31	# Win
+*.exe	31	# Win
+*.com	31	# Win
+*.bat	31	# Win
+*.reg	31	# Win
+*.app	31	# OSX
+
+# =============================================================================
+# Extensions
+# =============================================================================
+# Plain text
+# -----------------------------------------------------------------------------
+
+# Text files - base1
+*.txt		37
+*.md		37
+*.markdown	37
+
+# Source code - base1
+*.h			01;36
+*.c			01;36
+*.C			01;36
+*.cc		01;36
+*.cpp		01;36
+*.cxx		01;36
+*.objc		01;36
+*.sh		01;36
+*.bash		01;36
+*.csh		01;36
+*.zsh		01;36
+*.el		01;36
+*.vim		01;36
+*.java		01;36
+*.pl		01;36
+*.pm		01;36
+*.py		01;36
+*.rb		01;36
+*.hs		01;36
+*.php		01;36
+*.htm		01;36
+*.html		01;36
+*.shtml		01;36
+*.php		01;36
+*.xml		01;36
+*.rdf		01;36
+*.css		01;36
+*.js		01;36
+*.man		01;36
+*.0			01;36
+*.1			01;36
+*.2			01;36
+*.3			01;36
+*.4			01;36
+*.5			01;36
+*.6			01;36
+*.7			01;36
+*.8			01;36
+*.9			01;36
+*.l			01;36
+*.n			01;36
+*.p			01;36
+*.pod		01;36
+*.tex		01;36
+*.bash*		01;36
+*rc			01;36
+
+# -----------------------------------------------------------------------------
+# Multimedia formats
+# -----------------------------------------------------------------------------
+
+# Images - yellow
+*.bmp    33
+*.cgm    33
+*.dl     33
+*.dvi    33
+*.emf    33
+*.eps    33
+*.gif    33
+*.jpeg   33
+*.jpg    33
+*.JPG    33
+*.mng    33
+*.pbm    33
+*.pcx    33
+*.pgm    33
+*.png    33
+*.ppm    33
+*.pps    33
+*.ppsx   33
+*.ps     33
+*.svg    33
+*.svgz   33
+*.tga    33
+*.tif    33
+*.tiff   33
+*.xbm    33
+*.xcf    33
+*.xpm    33
+*.xwd    33
+*.xwd    33
+*.yuv    33
+*.psd    33
+
+# Audio - violet
+*.aac    01;35
+*.aiff   01;35
+*.au     01;35
+*.flac   01;35
+*.m4a    01;35
+*.mid    01;35
+*.midi   01;35
+*.mka    01;35
+*.mp3    01;35
+*.mpa    01;35
+*.ogg    01;35
+*.ra     01;35
+*.wav    01;35
+*.wma    01;35
+
+# Video - cyan
+*.anx    36
+*.asf    36
+*.avi    36
+*.axv    36
+*.flc    36
+*.fli    36
+*.flv    36
+*.gl     36
+*.m2v    36
+*.m4v    36
+*.mkv    36
+*.mov    36
+*.mp4    36
+*.mp4v   36
+*.mpeg   36
+*.mpg    36
+*.nuv    36
+*.ogm    36
+*.ogv    36
+*.ogx    36
+*.qt     36
+*.rm     36
+*.rmvb   36
+*.swf    36
+*.vob    36
+*.webm   36
+*.wmv    36
+
+# -----------------------------------------------------------------------------
+# Miscellaneous
+# -----------------------------------------------------------------------------
+
+# Binary document formats - green
+*.rtf        32
+*.pdf        32
+
+# Office/iWork documents
+*.doc        32
+*.docx       32
+*.dot        32
+*.dotx       32
+*.xls        32
+*.xlsx       32
+*.ppt        32
+*.pptx       32
+*.pages      32
+*.numbers    32
+*.keynote    32
+
+# ebooks - green
+*.epub       32
+*.mobi       32
+*.azw        32
+*.azw3       32
+*.lit        32
+
+# Archives - orange
+*.7z     1;31
+*.apk    1;31
+*.arj    1;31
+*.bin    1;31
+*.bz     1;31
+*.bz2    1;31
+*.cab    1;31 # Win
+*.deb    1;31
+*.dmg    1;31 # OSX
+*.gem    1;31
+*.gz     1;31
+*.iso    1;31
+*.jar    1;31
+*.msi    1;31 # Win
+*.pkg    1;31
+*.rar    1;31
+*.rpm    1;31
+*.tar    1;31
+*.tbz    1;31
+*.tbz2   1;31
+*.tgz    1;31
+*.tx     1;31
+*.war    1;31
+*.xpi    1;31
+*.xz     1;31
+*.z      1;31
+*.Z      1;31
+*.zip    1;31
+
+# -----------------------------------------------------------------------------
+# Unimportant files
+# -----------------------------------------------------------------------------
+
+# Unimportant text files - base01
+*.log    01;32
+*.swp    01;32
+*~      01;32
+*#      01;32
+
+# Unimportant non-text files - base01
+*.bak    01;32
+*.BAK    01;32
+*.old    01;32
+*.OLD    01;32
+*.off    01;32
+*.OFF    01;32
+*.dist   01;32
+*.DIST   01;32
+*.orig   01;32
+*.ORIG   01;32
+*.swp    01;32
+*.swo    01;32
+*,v     01;32
