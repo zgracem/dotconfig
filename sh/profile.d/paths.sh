@@ -73,14 +73,13 @@ if [[ -x /usr/bin/xcode-select ]]; then
             DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
             ;;
         Erato)
-            ### ZGM TODO 2016-02-13: fix; broken since El Cap
-            : DEVELOPER_DIR="/Library/Developer/CommandLineTools"
+            DEVELOPER_DIR="/Library/Developer/CommandLineTools"
             ;;
         Hiroko)
             DEVELOPER_DIR="/Developer"
             ;;
         *)
-            DEVELOPER_DIR=$(xcode-select -print-path)
+            DEVELOPER_DIR=$(xcode-select --print-path)
             ;;
     esac
 
