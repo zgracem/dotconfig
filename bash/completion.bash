@@ -34,7 +34,7 @@ fi
 FIGNORE="DS_Store:~:.swp:Application Scripts"
 
 # do not treat colon specially
-# see question E13: http://tiswww.case.edu/php/chet/bash/FAQ
+#   see question E13: http://tiswww.case.edu/php/chet/bash/FAQ
 COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 
 # -----------------------------------------------------------------------------
@@ -42,8 +42,8 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 # -----------------------------------------------------------------------------
 
 __z_complete_files()
-{   # Usage: __z_complete_files EXTENSION DIRECTORY... 
-  # Returns *.EXTENSION in each DIRECTORY
+{ # Usage: __z_complete_files EXT DIR... 
+  # Returns *.EXT in each DIR
 
   local extension="$1"; shift
 
@@ -55,24 +55,6 @@ __z_complete_files()
     done
   done
 }
-
-### ZGM removed 2016-06-02 -- don't need error tracking anymore
-# __z_complete_src()
-# {   # Usage: __z_complete_src FILE...
-
-#   # track errors
-#   local x=0
-
-#   local f; for f in "$@"; do
-#     if [[ -f $f ]]; then
-#       . "$f" || (( x++ ))
-#     else
-#       (( x++ ))
-#     fi
-#   done
-
-#   return $x
-# }
 
 # -----------------------------------------------------------------------------
 # template function

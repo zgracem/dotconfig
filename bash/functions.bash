@@ -12,17 +12,6 @@ scold()
     printf '%b\n' >&2 "$@"
 }
 
-z_newline()
-{   # print a newline if output is going to a terminal (force with -f)
-    # Usage: z_newline [-f]
-
-    if [[ -t 1 || $1 == -f ]]; then
-        printf '%b' '\n'
-    else
-        return 0
-    fi
-}
-
 # -----------------------------------------------------------------------------
 # true/false functions
 # -----------------------------------------------------------------------------
@@ -79,25 +68,4 @@ _inTmux()
 _mux()
 {   # exits 0 if inside a multiplexer session
     _inScreen || _inTmux
-}
-
-# -----------------------------------------------------------------------------
-# $PATH-related functions
-# -----------------------------------------------------------------------------
-
-getPath()
-{   # returns the full path to $1
-    type -P "$1" 2>/dev/null
-}
-
-getGNU()
-{   # return the path to the GNU version of $1, if available
-
-    local bin="$1"
-
-    if _isGNU "$bin"; then
-        type -P "$bin"
-    else
-        getPath "g${bin}"
-    fi
 }

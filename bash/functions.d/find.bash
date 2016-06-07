@@ -32,7 +32,7 @@ z::find::daysold()
     if ! _isNumber "$days"; then
         scold "Error: $days: not a number"
         return $EX_USAGE
-    elif ! find_bin=$(getGNU find); then
+    elif ! _isGNU find; then
         scold "Error: GNU find(1) required"
         return $EX_UNAVAILABLE
     fi
@@ -41,12 +41,12 @@ z::find::daysold()
         days="-${days}"
     fi
 
-    "$find_bin" -H "$PWD" \
-        -maxdepth 1 \
-        -xtype f \
-        -daystart \
-        -mtime "$days" \
-        -print
+    find -H "$PWD" \
+         -maxdepth 1 \
+         -xtype f \
+         -daystart \
+         -mtime "$days" \
+         -print
 }
 
 # find a file whose name contains a given string

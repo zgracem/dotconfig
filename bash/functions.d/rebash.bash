@@ -11,5 +11,5 @@ rebash()
     ${SSH_TTY:+SSH_TTY="$SSH_TTY"} \
     ${USERPROFILE:+USERPROFILE="$USERPROFILE"} \
     ${Z_SOLARIZED:+Z_SOLARIZED="$Z_SOLARIZED"} \
-    "$SHELL" -l
+    "$SHELL" -l "$@"
 }
