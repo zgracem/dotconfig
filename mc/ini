@@ -139,6 +139,8 @@ show_mini_info=true
 simple_swap=true
 torben_fj_mode=false
 
+panel_scroll_center=false
+
 [HotlistConfig]
 expanded_view_of_groups=0
 
