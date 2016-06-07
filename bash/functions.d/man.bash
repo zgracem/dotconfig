@@ -24,8 +24,14 @@ z::mantitle()
 }
 
 man()
-{   # open man page in a new window with a helpful title
+{ # open man page in a new window with a helpful title
   local OPT OPTIND
+
+  if [[ ! -t 1 ]]; then
+    # stdout is being redirected somewhere, let it go
+    command man "$@"
+    return
+  fi
 
   while getopts ':acCdDeEfHiIkKlLmMpPrRStTuVwWXZ7?' OPT; do
     case $OPT in
@@ -45,23 +51,21 @@ man()
   title=$(z::mantitle "$@") || return
 
   # open the new window
-  ## ZGM disabled 2015-10-04 -- doesn't respect MANPATH
-  if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
+  if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_NO_MAN_URL ]]; then
     # let Terminal.app be clever about this
     open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
     return 0
-  elif [[ $TERM_PROGRAM == iTerm.app ]]; then
-    open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
-    return 0
+  ### ZGM disabled 2016-06-04 -- need to make this work properly in iTerm3
+  # elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_NO_MAN_URL ]]; then
+  #   open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
+  #   return 0
   else
-    ### ZGM disabled 2015-09-04 -- behaviour too inconsistent w/ mc and tmux
-    # setwintitle "$title"
-
     if _inScreen; then
       screen -t "$title" man "$@"
     elif _inTmux; then
       tmux new-window -n "$title" "MANLESS= man $*"
     else
+      setwintitle "$title"
       command man "$@"
     fi
   fi

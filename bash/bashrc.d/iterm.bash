@@ -1,8 +1,12 @@
+return
+
+### ZGM disabled 2016-06-03 -- need to decide if this is worth it
+
 [[ $TERM_PROGRAM == iTerm.app ]] || return
 
-if ! (( ITERM_VERSINFO[0] >= 2 )) && (( ITERM_VERSINFO[1] >= 9 )); then
-    return
-fi
+# if ! (( ITERM_VERSINFO[0] >= 2 )) && (( ITERM_VERSINFO[1] >= 9 )); then
+#     return
+# fi
 
 iterm::esc()
 {
