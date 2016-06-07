@@ -20,7 +20,8 @@ ssh/
 *.bak
 fish/
 misc/
-mc/panels.ini
+mc/*
+powerline/
 
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*
