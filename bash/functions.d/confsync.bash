@@ -48,6 +48,7 @@ hconfsync()
         --include=fixchmod.sh
         --include=hardware.rb
         --include=loginbanner.sh
+        --include=loginbanner2.sh
         --include=manpdf.sh
         --include=matins.sh
         --include=newpassword.sh
@@ -90,6 +91,7 @@ wfconfsync()
         --include=fds.sh
         --include=fixchmod.sh
         --include=loginbanner.sh
+        --include=loginbanner2.sh
         --include=matins.sh
         --include=newpassword.sh
         --include=os.sh
