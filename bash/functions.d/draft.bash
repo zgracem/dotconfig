@@ -2,7 +2,7 @@ draft()
 {   # save a draft
     declare scriptName="${1%.sh}"
     declare script="$dir_scripts/$scriptName.sh"
-    declare draftDir="$dir_dev/drafts"
+    declare draftDir="$dir_dev/done/drafts"
     declare draft lmSeconds lmDate i=2
 
     if [[ ! -f $script ]]; then
