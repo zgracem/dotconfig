@@ -43,37 +43,41 @@ complete -a \
     alias unalias
 
 # directories & variables -- for `cd`
-complete -d -ev \
+complete -d -e -v \
     -o nospace \
     cd
 
 # builtins, keywords & help topics -- for `help`
-complete -bk -A helptopic \
+complete -b -k -A helptopic \
     -o nospace \
     help
 
 # variables, aliases & functions -- for `export` & `unset`
-complete -ev -a -A function -- \
+complete -e -v -a -A function -- \
     export unset
 
 # variables & functions -- for `declare`
-complete -ev -A function \
+complete -e -v -A function \
     declare
 
 # files, directories, variables & hostnames -- for `scp`, `sftp` & `ssh`
-complete -fd -ev -A hostname \
+complete -f -d -e -v -A hostname \
     scp sftp ssh
 
 # files, directories, aliases, builtins, commands, keywords & functions -- for `sudo`
-complete -fd -abck -A function \
+complete -f -d -a -b -c -k -A function \
     sudo
 
 # files, aliases, builtins, commands, keywords, functions & help topics -- for `type`
-complete -f -abck -A function -A helptopic -- \
+complete -f -a -b -c -k -A function -A helptopic -- \
     -o nospace \
     type
 
 # custom scripts and functions
+
+# variables & arrays -- for alias to `declare -p`
+complete -e -v -A function \
+    d
 
 # shell options -- for `shopt` and `_shoptSet`
 complete -A shopt \
@@ -84,7 +88,7 @@ complete -A setopt \
     set _optSet
 
 # files & directories -- for `trash`
-complete -fd \
+complete -f -d \
     -o filenames \
     trash
 

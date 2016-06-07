@@ -31,7 +31,7 @@ if [[ -x $HOME/opt/bin/bash ]]; then
   fi
 fi
 
-### ZGM disabled 2015-11-09 -- redundant with the above?
+### ZGM disabled 2015-11-09 -- redundant with the above? test on 4.4-final
 # if [[ $BASH != $SHELL ]]; then
 #   export SHELL=$BASH
 # fi
@@ -150,12 +150,6 @@ BEL=$'\a'   # 🔔
 
 # just say no to flow control
 (type -P stty && stty -ixon) &>/dev/null
-
-# Koding.com
-if [[ $STY =~ koding ]]; then
-  export TERM='screen-256color'
-  export TERM_PROGRAM='Koding'
-fi
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
 if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then

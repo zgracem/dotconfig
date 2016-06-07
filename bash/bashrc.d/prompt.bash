@@ -216,23 +216,14 @@ z::prompt::git_info()
     dirty=true
   fi
 
-  # add '●' if there's anything to commit
-  if [[ $dirty == true ]]; then
-    icons+=$esc_false
-    icons+="●"
-  fi
-
   # count untracked files
   local re_ut=$'\n''(\? | \?|\?\?)'
   if [[ $status =~ $re_ut ]]; then
     untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
   fi
 
-  # add '+' if there are untracked files
   if (( untracked > 0 )); then
-    icons+=$esc_reset
-    icons+=$esc_yellow
-    icons+="+"
+    dirty=true
   fi
 
   # get commits ahead (if any)
@@ -241,16 +232,37 @@ z::prompt::git_info()
     ahead="${BASH_REMATCH[1]}"
   fi
 
-  # add '▸' if we're ahead of origin
-  if (( ahead > 0 )); then
-    icons+=$esc_reset
-    icons+=$esc_true
-    icons+="▸"
+  # # add '•' if there's anything to commit
+  # if [[ $dirty == true ]]; then
+  #   icons+=$esc_false
+  #   icons+="•"
+  # fi
+
+  # # add '+' if there are untracked files
+  # if (( untracked > 0 )); then
+  #   icons+=$esc_reset
+  #   icons+=$esc_green
+  #   icons+="+"
+  # fi
+
+  # # add '»' if we're ahead of origin
+  # if (( ahead > 0 )); then
+  #   icons+=$esc_reset
+  #   icons+=$esc_yellow
+  #   icons+="»"
+  # fi
+
+  if [[ $dirty == true ]]; then
+    icons+=$esc_false
+    icons+="*"
   fi
 
-  printf "${esc_reset} %b" \
-    "${esc_2d}${branch}" \
-    "${icons:-}${esc_reset}"
+  # printf "${esc_reset} %b" \
+  #   "${esc_2d}${branch}" \
+  #   "${icons:-}${esc_reset}"
+
+  printf "${esc_reset} %b${esc_reset}" \
+    "${esc_2d}${branch}${icons}"
 }
 
 # notify iTerm of the current directory

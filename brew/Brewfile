@@ -75,7 +75,6 @@ brew 'keychain'
 # email
 
 brew 'getmail'
-# brew 'mu'
 brew 'offline-imap'
 
 # -----------------------------------------------------------------------------
@@ -168,8 +167,8 @@ brew 'keybase'
 brew 'ghostscript'
 
 # shells
-# brew 'fish'
-# brew 'zsh'
+brew 'fish'
+brew 'zsh'
 
 # text
 brew 'aspell', args: ['with-lang-en']

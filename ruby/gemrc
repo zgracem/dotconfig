@@ -1,1 +1,1 @@
-gem: --no-document -​-env-shebang
+gem: --no-document -​-env-shebang --bindir $HOME/opt/bin

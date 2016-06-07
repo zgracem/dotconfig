@@ -18,6 +18,7 @@ gem "htmlentities"
 
 # misc.
 gem "gemoji"
+gem "nokogiri"
 gem "ronn"
 gem "ttfunk" # fonts
 gem "unicode_utils",  ">= 1.4"
