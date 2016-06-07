@@ -56,7 +56,7 @@ HISTIGNORE+=':ls*([1dflt]):ll'
 HISTIGNORE+=':exit:bye'
 
 # my own shortcuts
-HISTIGNORE+=':e *:fe *:manpdf *:c:c[sl]:etest:f:rl:ss:tt:vnc:vsmm'
+HISTIGNORE+=':d *:e *:fe *:manpdf *:c:c[sl]:etest:f:rl:ss:tt:vnc:vsmm'
 HISTIGNORE+=':b@(a|rc|col|f|loc|path|dirs|pri|pro|ps1)'
 
 # zhelp
