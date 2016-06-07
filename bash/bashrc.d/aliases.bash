@@ -20,9 +20,9 @@ alias d='declare -p'
 
 alias hd='hexdump -C'
 
-alias etest='_edit "$dir_scripts/dev/test.sh"'
-alias stest='. "$dir_scripts/dev/test.bash"'
-alias ttest="$dir_scripts/dev/test.sh"
+alias etest='_edit "$dir_dropbox/src/test.sh"'
+alias stest='. "$dir_dropbox/src/test.bash"'
+alias ttest="$dir_dropbox/src/test.sh"
 
 alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" -d "$HOME/Archive/pinboard" -fvx'
 
