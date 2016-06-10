@@ -92,10 +92,10 @@ complete -f -d \
     -o filenames \
     trash
 
-# functions -- for `fe`
+# functions -- for `ef`
 complete -A function \
     -o nospace \
-    fe
+    ef
 
 # arrays -- for `explode`
 complete -A arrayvar \

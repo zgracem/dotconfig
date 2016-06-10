@@ -107,8 +107,8 @@ EOF
   fi
 }
 
-fe()
-{ # find and edit a function
+ef()
+{ # find and edit shell functions
   (( $# == 1 )) || return $EX_USAGE
 
   local func=$1
@@ -120,7 +120,8 @@ fe()
     if [[ -f $file ]]; then
       _edit "$file"
       return $EX_OK
-    else
+    elif (( ${#FUNCNAME[@]} == 1 )); then
+      # we're not being called by another function like edsh()
       local answer=n
 
       printf '%s' "$func does not exist. "
@@ -133,6 +134,9 @@ fe()
       else
         return $EX_ABORT
       fi
+    else
+      # we are being called by another function like es(), so we're done
+      return 1
     fi
   else
     local src=$(where "$func")
