@@ -7,7 +7,8 @@ if [[ -z $SSH_AGENT_PID ]]; then
     mkdir -p ~/var/run 1>/dev/null || return
   fi
 
-  _isFunction . && printf "\r\e[K"
+  ### ZGM disabled 2016-06-10 -- deal with it, princess
+  # _isFunction . && printf "\r\e[K"
 
   _set noclobber || trap 'set -o noclobber; trap - RETURN;' RETURN
   set +o noclobber
@@ -15,9 +16,11 @@ if [[ -z $SSH_AGENT_PID ]]; then
   if keychain_env=$(keychain --agents ssh --dir ~/var/run --eval \
                     --ignore-missing --inherit any \
                     --quick --quiet \
-                    id_rsa); then
+                    id_rsa)
+  then
     eval "$keychain_env"
-    _isFunction . && printf "\eM\e[K"
+    ### ZGM disabled 2016-06-10 -- deal with it, princess
+    # _isFunction . && printf "\eM\e[K"
   fi
   
   unset -v keychain_env

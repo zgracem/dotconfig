@@ -11,6 +11,7 @@ dir_scratch="$HOME/tmp/_scratch"
 
 dir_scripts="$HOME/scripts"
 dir_dev="$dir_scripts/dev"
+dir_defunct="$dir_dropbox/src/_defunct"
 
 dir_howto="$HOME/txt/howto"
 dir_vsmm="$dir_dropbox/www/vsmm"

@@ -1,6 +1,6 @@
 if _inPath wget; then
     # download a file
-    dl()      { wget -c "$@"; }
+    dl()      { wget "$@"; }
 
     # get HTTP headers
     headers() { wget --spider -Snv "$@"; }

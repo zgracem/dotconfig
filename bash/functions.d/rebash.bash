@@ -1,7 +1,7 @@
 rebash()
 { # start a fresh environment
 
-  clear_scrollback
+  # clear_scrollback
 
   exec -c env - \
     HOME="$HOME" TERM="$TERM" \

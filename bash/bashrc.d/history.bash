@@ -80,8 +80,10 @@ incognito()
   if _optSet history; then
     set +o history
     echo 'incognito mode enabled'
+    Z_INCOGNITO=true
   else
     set -o history
     echo 'incognito mode disabled'
+    unset -v Z_INCOGNITO
   fi
 }
