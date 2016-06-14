@@ -12,7 +12,7 @@ es()
   done
 
   # no script, try editing a function instead & exit w/ fe's error code
-  fe "$1"
+  ef "$1"
 }
 
 # Has custom completions in ../bash_completion.d

@@ -6,8 +6,7 @@ quietly unalias ls ll
 
 export flags_ls=()
 
-flags_ls+=(-AH)
-#           │└───── follow symbolic links
+flags_ls+=(-A)
 #           └────── (almost) all files
 
 if [[ $OSTYPE == cygwin ]]; then

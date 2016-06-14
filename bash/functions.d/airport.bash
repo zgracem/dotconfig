@@ -11,13 +11,13 @@ airport()
 }
 
 router()
-{   # IP address of router
+{ # IP address of router
   netstat -rn \
   | sed -nE 's/^default +([[:digit:].]+).*$/\1/p'
 }
 
 localip()
-{   # print local IP address
+{ # print local IP address
   ipconfig getifaddr $netcard
 }
 

@@ -1,4 +1,4 @@
- # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # ~/.config/bash/bashrc.bash                                          ~/.bashrc
 # executed by bash(1) for interactive shells
 # -----------------------------------------------------------------------------
@@ -70,7 +70,6 @@ if (( BASH_VERSINFO[0] >= 4 )); then
   fi
 
   if (( BASH_VERSINFO[1] >= 0 )); then
-    shopt -s autocd     # `cd` just by typing directory names
     shopt -s globstar   # '**' matches all directories and their files recursively
   fi
 fi
@@ -169,7 +168,7 @@ fi
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
 # (See also related code in bashrc.d/keychain.bash when enabling/disabling.)
 
-if [[ $Z_RELOADING_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
+if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
   .()
   {
     printf "\r\e[K%s" "$1"

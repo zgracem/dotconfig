@@ -40,7 +40,7 @@ q()
 
     "")       answer="false"
               colour=$false_colour
-              if (( last_exit > 1 )); then
+              if (( $# == 0 && last_exit > 1 )); then
                 # This may be interesting information.
                 answer+=" ($last_exit)"
               fi

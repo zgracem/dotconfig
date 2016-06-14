@@ -228,8 +228,9 @@ if [[ -z $LS_COLORS ]]; then
   dc_cache_file="$dc_cache/$dc_stub"
 
   if [[ ! -f $dc_cache_file ]] \
-  && [[ -f $dc_src_file ]] \
-  && _inPath dircolors; then
+    && [[ -f $dc_src_file ]] \
+    && _inPath dircolors
+  then
     # create cache dir if it doesn't exist
     [[ -d $dc_cache ]] || mkdir -p "$dc_cache" 1>/dev/null
 

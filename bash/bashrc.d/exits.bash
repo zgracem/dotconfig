@@ -22,6 +22,8 @@ EX_CONFIG=78        # configuration error
 
 # my additions
 EX_ABORT=79         # aborted by user
+
+# reserved by bash
 EX_NOCMD=127        # no such command
 
 declare -ix ${!EX_*}

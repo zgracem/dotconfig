@@ -26,3 +26,11 @@ if (( OSX_VERSINFO[1] < 11 )) && [[ -d /Volumes/BOOTCAMP ]]; then
   # ...or right now
   alias bootcamp='bootwin && restart'
 fi
+
+# -----------------------------------------------------------------------------
+# environment variables
+# -----------------------------------------------------------------------------
+
+# if [[ -n $OS_INSTALL || -n $__OSINSTALL_ENVIRONMENT ]]; then
+#   : # booted from recovery partition
+# fi

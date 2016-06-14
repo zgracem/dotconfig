@@ -14,8 +14,10 @@ rl()
     local dry_run=true
     printf '[%s]\n' "dry run"
     shift
-  elif [[ $1 == -v ]]; then
-    export Z_RELOADING_VERBOSE=true
+  fi
+
+  if [[ $1 == -v ]]; then
+    export Z_RL_VERBOSE=true
     shift
   fi
 
@@ -75,7 +77,7 @@ rl()
     fi
   done
 
-  unset -v Z_RELOADING Z_RELOADING_VERBOSE
+  unset -v Z_RELOADING Z_RL_VERBOSE
   return $ret
 }
 

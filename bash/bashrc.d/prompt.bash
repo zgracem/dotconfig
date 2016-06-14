@@ -62,19 +62,19 @@ z::prompt::compress_pwd()
 { # Usage: z::prompt::compress_pwd "$PWD"
 
   # Trims leading elements of the current directory like so:
-  #   ~/first/second/3d/fourth
-  #   ~/fi…/se…/3d/fourth/fifth
-  #   ~/fi…/se…/3d/fourth/fifth/sixth
-  #   ~/fi…/se…/3d/fo…/fifth/sixth/seventh
+  #   ~/first/second/3rd/fourth
+  #   ~/fir…/sec…/3rd/fourth/fifth
+  #   ~/fir…/sec…/3rd/fourth/fifth/sixth
+  #   ~/fir…/sec…/3rd/fou…/fifth/sixth/seventh
 
   # Compress if PWD has __ or more elements (not counting `~`).
-  local min_depth=5
+  local min_depth=4
 
   # Always retain the full names of the last __ elements.
   local keep_dirs=2
 
   # When compressing a directory element, keep the first __ characters.
-  local keep_chars=2
+  local keep_chars=3
 
   # Append __ to each trimmed element to indicate it has been compressed.
   local indicator="…"
@@ -152,16 +152,18 @@ z::prompt::print_exit()
     # abort if tput doesn't exist
     type -P tput &>/dev/null || return
 
-    # if last command terminated from a signal, print that instead
+    # If terminated from a signal (128 >= $? >= 165), get signal name from
+    # builtin `kill -l` (list) and print that instead.
     if (( last_exit > 128 )) && sigspec=$(builtin kill -l $last_exit 2>/dev/null); then
       last_exit=${sigspec#SIG}
-    elif (( last_exit >= 64 && last_exit <= 78 )); then
-      # someone's been reading /usr/include/sysexits.h ;)
 
-      local exits=([64]="USAGE" [65]="DATAERR" [66]="NOINPUT" [67]="NOUSER"
-        [68]="NOHOST" [69]="UNAVAILABLE" [70]="SOFTWARE" [71]="OSERR"
-        [72]="OSFILE" [73]="CANTCREAT" [74]="IOERR" [75]="TEMPFAIL"
-        [76]="PROTOCOL" [77]="NOPERM" [78]="CONFIG")
+    elif (( last_exit >= 64 && last_exit <= 78 )); then
+      # someone's been reading `/usr/include/sysexits.h`... ;)
+
+      local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
+        [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
+        [71]="OSERR"    [72]="OSFILE"   [73]="CANTCREAT"   [74]="IOERR"
+        [75]="TEMPFAIL" [76]="PROTOCOL" [77]="NOPERM"      [78]="CONFIG" )
       last_exit=${exits[$last_exit]}
     fi
 
@@ -539,7 +541,7 @@ z::prompt::cmd_add -p 'history -a'    # append to HISTFILE
 # z::prompt::cmd_add -p 'history -n'  # read from HISTFILE
 
 # see also bashrc.d/direnv.bash
-if _inPath direnv; then
+if _isFunction _direnv_hook; then
   z::prompt::cmd_add -p '_direnv_hook'
 fi
 
