@@ -4,7 +4,7 @@
 _inPath youtube-dl || return
 
 if [[ ! -d $HOME/var/cache/youtube-dl ]]; then
-  mkdir -p "$HOME/var/cache/youtube-dl"
+  mkdir -vp "$HOME/var/cache/youtube-dl"
 fi
 
 ydl()

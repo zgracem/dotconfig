@@ -10,8 +10,8 @@ export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_LOGS="$HOME/var/log/homebrew"
 export HOMEBREW_CACHE="$HOME/var/cache/homebrew"
 
-[[ -d $HOMEBREW_LOGS ]] || mkdir -p "$HOMEBREW_LOGS"
-[[ -d $HOMEBREW_CACHE ]] || mkdir -p "$HOMEBREW_CACHE"
+[[ -d $HOMEBREW_LOGS ]]  || mkdir -vp "$HOMEBREW_LOGS"
+[[ -d $HOMEBREW_CACHE ]] || mkdir -vp "$HOMEBREW_CACHE"
 
 # print developer warnings
 export HOMEBREW_DEVELOPER=true

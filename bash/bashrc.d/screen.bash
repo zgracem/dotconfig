@@ -15,7 +15,7 @@ fi
 ss()
 {   # reattach a session; detach/create it first if necessary
     if [[ -n $SCREENDIR && ! -d $SCREENDIR ]]; then
-        command mkdir -p -m 700 "$SCREENDIR"
+        command mkdir -vp -m 700 "$SCREENDIR"
     else
         chmod 700 "$SCREENDIR"
     fi
