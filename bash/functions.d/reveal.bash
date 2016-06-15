@@ -11,7 +11,8 @@ reveal()
             open -R "$target"
             ;;
         cygwin)
-            cygstart --explore "$(dirname "$target")"
+            "$(cygpath --windir)/explorer" /select, "$(cygpath -w "$item")"
+            # cygstart --explore "$(dirname "$target")"
             ;;
         *)
             scold 'not available on this system'

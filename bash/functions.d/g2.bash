@@ -1,5 +1,3 @@
-unset -f go
-
 g2()
 {
     local name="$1" place
