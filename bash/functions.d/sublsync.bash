@@ -5,9 +5,9 @@ sublsync()
     case $HOSTNAME in
         *.atco.com)
             src="$dir_apps/Sublime Text 3/Data/Packages/User"
-            dst='Minerva:/Users/zozo/Dropbox/Apps/Sublime Text 3'
+            dst="Athena:/Users/zozo/Dropbox/Apps/Sublime Text 3"
             ;;
-        # Minerva|Erato)
+        # Athena|Erato)
         #     src="$HOME/Dropbox/Apps/Sublime Text 3"
         #     dst="$HOME/Dropbox/Apps/Sublime Text 3"
         #     ;;

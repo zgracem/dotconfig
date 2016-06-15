@@ -8,14 +8,12 @@ whichpkg()
         return $EX_USAGE
     fi
 
-    local pkg mgr
-
     if [[ $OSTYPE =~ cygwin ]]; then
-        mgr='Cygwin'
-        pkg=$(cygcheck --find-package "$file") || return
+        local mgr='Cygwin'
+        local pkg=$(cygcheck --find-package "$file") || return
 
     elif [[ $OSTYPE =~ darwin ]] && [[ -d $HOMEBREW_CELLAR ]]; then
-        mgr='Homebrew'
+        local mgr='Homebrew'
 
         local canon
 
@@ -23,7 +21,7 @@ whichpkg()
             local re="^${HOMEBREW_CELLAR}/([^/]+)/([^/]+)/.+\$"
 
             if [[ $canon =~ $re ]]; then
-                pkg="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}"
+                local pkg="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}"
                 file=$canon
             fi
         else

@@ -10,6 +10,7 @@ purge()
         local term="$1"
         find -H "$scope" -xtype f -iname '*'"$term"'*' -exec rm -fv {} + 2>/dev/null
     else
+        printf ">> %s\n" "Searching..."
         local term="$1"
         find -H "$scope" -xtype f -iname '*'"$term"'*' -print 2>/dev/null \
         | command grep -i --colour=auto "$term"

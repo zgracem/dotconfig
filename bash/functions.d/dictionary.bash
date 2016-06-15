@@ -1,18 +1,15 @@
-if _inPath dict; then
-    def()
-    {   # dictionary wrapper
+# dictionary wrappers
 
-        dict -d wn "$@"
-    }
+if _inPath dict; then
+  def() { dict -d wn "$@"; }
 fi
 
 if _inPath sdcv; then
-    webster()
-    {   # wrapper for StarDict + Webster's 1913
-
-        sdcv \
-            --non-interactive \
-            --use-dict "Webster's Revised Unabridged Dictionary (1913)" \
-            "$@"
-    }
+  webster()
+  { # wrapper for StarDict + Webster's 1913
+    sdcv \
+      --non-interactive \
+      --use-dict "Webster's Revised Unabridged Dictionary (1913)" \
+      "$@"
+  }
 fi

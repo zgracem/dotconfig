@@ -23,37 +23,26 @@ mkdir()
     #              └── create parents as required
 }
 
+mv()
+{
+    local -a flags_mv=(-iv)
+    #                   │└─ verbose
+    #                   └── interactive
+
+    if [[ $OSTYPE =~ darwin ]]; then
+        # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+        /bin/mv "${flags_mv[@]}" "$@"
+    else
+        command mv "${flags_mv[@]}" "$@"
+    fi
+}
+    
 rm()
 {
     command rm -iv "$@"
     #           │└─ verbose
     #           └─── interactive
 }
-
-# -----------------------------------------------------------------------------
-# mv
-# -----------------------------------------------------------------------------
-
-export flags_mv=()
-flags_mv+=(-i) # interactive
-flags_mv+=(-v) # verbose
-
-if [[ $OSTYPE =~ darwin ]] && _isGNU mv; then
-    # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
-    mv()
-    {
-        /bin/mv "${flags_mv[@]}" "$@"
-    }
-else
-    mv()
-    {
-        command mv "${flags_mv[@]}" "$@"
-    }
-fi
-    
-# -----------------------------------------------------------------------------
-# stat
-# -----------------------------------------------------------------------------
 
 stat()
 {

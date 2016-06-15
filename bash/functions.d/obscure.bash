@@ -1,4 +1,4 @@
-obscure()
+z::obscure()
 {
     local instring="${@:-$(</dev/stdin)}"
 
@@ -23,8 +23,8 @@ obscure()
     echo "$outstring"
 }
 
-obscure_url() { obscure "$@"; }
-obscure_html() { obscure "$@"; }
+obscure_url() { z::obscure "$@"; }
+obscure_html() { z::obscure "$@"; }
 
 obscure_unicode()
 {

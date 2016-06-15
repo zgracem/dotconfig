@@ -1,4 +1,4 @@
-# (_inPath id3v2 && _inPath mp4info) || return
+(_inPath id3v2 || _inPath mp4info) || return
 
 songinfo()
 {   # prints metadata for song files
