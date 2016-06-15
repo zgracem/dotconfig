@@ -3,14 +3,20 @@
 
 _inPath fpp || return
 
+# don't wait for fpp if VISUAL is something like `subl --wait`
+export FPP_EDITOR=${VISUAL%%?( -)-wait}
+
+# setup temp directory
 export FPP_DIR=~/var/spool/fpp
 
-# TODO: remove later
-[[ -d $FPP_DIR ]] || mkdir -p "$FPP_DIR"
-[[ -d ~/.fpp ]] && rm -rf ~/.fpp &>/dev/null
+if [[ ! -d $FPP_DIR ]]; then
+  mkdir -vp "$FPP_DIR"
+fi
 
-# Don't wait for fpp if VISUAL is something like `subl --wait`
-export FPP_EDITOR=${VISUAL%%?( -)-wait}
+# keep homedir tidy
+if [[ -d ~/.fpp ]]; then
+  rm -rfv ~/.fpp
+fi
 
 # -----------------------------------------------------------------------------
 # tmux integration
