@@ -1,18 +1,19 @@
 h()
 {   # context-sensitive help
 
-    local thing="$1"
-
-    if quietly help "$thing"; then
-        help -m "$thing" \
+    if quietly help "$1"
+    then
+        help -m "$1" \
         | less -F
-    elif quietly command man -w "$thing"; then
-        man "$thing"
-    elif _inPath "$thing" && "$thing" --help 2>/dev/null; then
+    elif quietly command man -w "$1"
+    then
+        man "$1"
+    elif _inPath "$1" && "$1" --help 2>/dev/null \
+                           | less -F
+    then
         return 0
     else
-        scold "${thing}: help not found"
+        scold "${1}: help not found"
         return 1
     fi
 }
-

@@ -29,11 +29,14 @@ brew 'reattach-to-user-namespace'
 
 # other
 brew 'direnv', args: ['force-bottle']
-brew 'fpp'
 brew 'midnight-commander'
 brew 'vim', args: ['HEAD', 'override-system-vi']
 brew 'homebrew/dupes/less', args: ['with-pcre']
 brew 'homebrew/dupes/ncurses'
+
+# ZGM 2016-06-09: HEAD is broken -- the bin doesn't have its exec bit set.
+# Install manually until fixed (or I learn how to modify the formula).
+# brew 'fpp', args: ['HEAD']
 
 # -----------------------------------------------------------------------------
 # GNU utilities
@@ -58,7 +61,6 @@ brew 'homebrew/dupes/grep', args: ['with-default-names']
 # -----------------------------------------------------------------------------
 
 brew 'links'
-brew 'ngrep'
 brew 'socat'
 brew 'transmission'
 brew 'wget', args: ['HEAD', 'enable-iri', 'with-pcre']
@@ -118,7 +120,7 @@ brew 'go'
 
 # https://github.com/zoltan-dulac/css3FontConverter
 brew 'fontforge'
-tap 'bramstein/webfonttools'
+tap  'bramstein/webfonttools'
 brew 'sfnt2woff-zopfli'
 brew 'sfnt2woff'
 brew 'sfntly'
@@ -157,11 +159,11 @@ brew 'unrar'
 brew 'dict'
 brew 'sdcv'
 
-# GnuPG & friends
+# # GnuPG & friends
 # brew 'gnupg2', args: ['with-readline']
 # brew 'gpg-agent'
-brew 'pinentry'
-brew 'keybase'
+# brew 'pinentry'
+# brew 'keybase'
 
 # pdf
 brew 'ghostscript'
