@@ -1,3 +1,18 @@
+# -----------------------------------------------------------------------------
+# aliases
+# -----------------------------------------------------------------------------
+
+alias    ba='_edit $dir_config/bash/bashrc.d/aliases.bash'
+alias   brc='_edit $dir_config/bash/bashrc.bash'
+alias  bcol='_edit $dir_config/bash/colour.bash'
+alias bpath='_edit $dir_config/sh/profile.d/paths.sh'
+alias bdirs='_edit $dir_config/bash/dirs.bash'
+alias  bps1='_edit $dir_config/bash/bashrc.d/prompt.bash'
+
+# -----------------------------------------------------------------------------
+# functions
+# -----------------------------------------------------------------------------
+
 rl()
 {   # note: requires extglob, globstar, nullglob
 
@@ -81,20 +96,6 @@ rl()
   return $ret
 }
 
-alias ba='_edit       $dir_config/bash/bashrc.d/aliases.bash'
-alias brc='_edit      $dir_config/bash/bashrc.bash'
-alias bcol='_edit     $dir_config/bash/colour.bash'
-alias bf='_edit       $dir_config/bash/functions.bash'
-alias bloc='_edit     $dir_local/config/bashrc.bash'
-alias bpath='_edit    $dir_config/sh/profile.d/paths.sh'
-alias bdirs='_edit    $dir_config/bash/dirs.bash'
-alias bpri='_edit     $dir_config/bash/private.bash'
-alias bpro='_edit     $dir_config/bash/profile.bash'
-alias bps1='_edit     $dir_config/bash/bashrc.d/prompt.bash'
-alias brewfile='_edit $dir_config/brew/Brewfile'
-alias inputrc='_edit  $dir_config/inputrc'
-alias vimrc='_edit    $dir_config/vimrc'
-
 z::new_function()
 {
   if [[ ${FUNCNAME[1]} == fe && -n $func && -n $file && ! -f $file ]]; then
@@ -164,3 +165,45 @@ if _inPath launchctl; then
     [[ $TERM_PROGRAM == Apple_Terminal ]] && killall Terminal
   }
 fi
+
+# -----------------------------------------------------------------------------
+# z::config::symlink
+# Symlink files from ~/.config into ~
+# -----------------------------------------------------------------------------
+
+# Usage:
+#   z::config::symlink target [symlink]
+#
+# - TARGET is relative to ~/.config
+# - SYMLINK is relative to ~
+#   - defaults to the basename of TARGET preceded by a dot
+#
+# Example: 
+#   z::config::symlink git/config .gitconfig
+#   z::config::symlink vimrc
+
+z::config::symlink()
+{
+  local target=".config/${1}"
+
+  if [[ -n $2 ]]; then
+    local symlink=$2
+  else
+    local symlink=".${target##*/}"
+  fi
+
+  if [[ ! -e $HOME/$target ]]; then
+    scold "not found: $HOME/$target"
+    return 1
+  fi
+
+  if [[ ! -L $HOME/$symlink ]]; then
+    if [[ -f $HOME/$symlink ]]; then
+      local backup
+      printf -v backup "$symlink~orig_%(%F)T"
+      mv -v "$HOME/$symlink" "$HOME/$backup" || return
+    fi
+
+    ( cd "$HOME"; ln -sv "$target" "$symlink" )
+  fi
+}

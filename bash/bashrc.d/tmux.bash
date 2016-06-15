@@ -12,3 +12,6 @@ tt()
   #                 │  └─ session name
   #                 └──── attach if session already exists
 }
+
+# symlink config file into HOME
+z::config::symlink "tmux/tmux.conf"
