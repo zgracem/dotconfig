@@ -229,16 +229,17 @@ if [[ -d $dir_config/bash/private.d ]]; then
   done
 fi
 
-# supplementary startup files
-if [[ -d $dir_config/bash/bashrc.d ]]; then
-  for file in "$dir_config"/bash/bashrc.d/*.bash; do
+### ZGM moved above bashrc.d block 2016-06-15 -- see if this breaks anything
+# lesser function files
+if [[ -d $dir_config/bash/functions.d ]]; then
+  for file in "$dir_config"/bash/functions.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
 
-# lesser function files
-if [[ -d $dir_config/bash/functions.d ]]; then
-  for file in "$dir_config"/bash/functions.d/*.bash; do
+# supplementary startup files
+if [[ -d $dir_config/bash/bashrc.d ]]; then
+  for file in "$dir_config"/bash/bashrc.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
@@ -262,13 +263,9 @@ unset -v file
 # set window title
 if [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] \
   && [[ $TERM_PROGRAM != Apple_Terminal ]] \
-  && _isFunction setwintitle; then
+  && _isFunction setwintitle
+then
   setwintitle "$USER@$HOSTNAME"
-fi
-
-# local initialization script (not in subshells/when reloading)
-if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $Z_RELOADING ]]; then
-  [[ -f $dir_local/config/init.bash ]] && . "$dir_local/config/init.bash"
 fi
 
 # # enable preexec and precmd hooks
@@ -278,10 +275,22 @@ fi
 #     # precmd() { echo ">> printing the prompt..."; }
 # fi
 
+# final initialization scripts (except in subshells/when reloading)
+if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $Z_RELOADING ]]; then
+  . "$dir_config/bash/init.bash"
+  [[ -f $dir_local/config/init.bash ]] && . "$dir_local/config/init.bash"
+fi
+
+# -----------------------------------------------------------------------------
+# cleanup after debugging
+# -----------------------------------------------------------------------------
+
 if [[ $TIME_TEST_ACTIVE == true ]]; then
   printf "%s\n" "$TIME_TEST_LOG"
   unset -v TIME_TEST_ACTIVE TIME_TEST_LOG
 fi
 
-printf "\r\e[K"
-unset -f .
+if _isFunction .; then
+  printf "\r\e[K"
+  unset -f .
+fi
