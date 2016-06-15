@@ -21,7 +21,6 @@ ssh/
 fish/
 misc/
 mc/*
-powerline/
 
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*

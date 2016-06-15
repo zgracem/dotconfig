@@ -36,9 +36,12 @@
 
 [difftool]
 	prompt = false
+  # Be able to abort all diffs with `:cq` or `:cquit`
+  trustExitCode = true
 
 [push]
 	default = simple
+
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
