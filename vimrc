@@ -3,11 +3,14 @@
 " vim: ft=vim:tw=0:sw=2:ts=2:sts=2
 "-----------------------------------------------------------------------------
 
-set nocompatible                " use vim settings, rather than vi settings
+" use vim settings, rather than vi settings
+set nocompatible
 
-set runtimepath =$HOME/share/vim
+" $VIM        = /usr/share/vim
+" $VIMRUNTIME = /usr/share/vim/vim74
+
+set runtimepath =$HOME/.config/vim,$HOME/share/vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
-set runtimepath+=$HOME/share/vim/after
 
 set viminfo+=n~/var/lib/vim/.viminfo
 
@@ -27,11 +30,6 @@ endif
 
 set history=640                 " lots of history
 set termencoding=utf-8          " Unicode terminal
-
-" use strong encryption for :X
-if exists("+cryptmethod")
-  set cryptmethod=blowfish
-endif
 
 " spellcheck dictionaries
 if has("spell")
@@ -57,13 +55,13 @@ endif
 set swapfile                    " make swapfiles
 set updatecount=80              " update swapfile after x characters
 
+" swap files will be created in the first possible directory of:
+" (double slash = include %-separated path in name of swap file)
 if has("unix")
   set directory=.,$HOME/var/lib/vim//,$TMPDIR//
 elseif has("win32") || has("win64")
   set directory=.,$HOME/var/lib/vim//,$TEMP//
 endif
-
-" // = include path in name of swap file
 
 "-----------------------------------------------------------------------------
 " Behaviour
@@ -71,11 +69,11 @@ endif
 
 let mapleader=","               " use `,` as leader
 set autoread                    " reload files changed outside vim
-set confirm                     " ask instead of aborting
+set confirm                     " ask on unsaved changes instead of aborting
 set hidden                      " don't unload abandoned buffers
 set noerrorbells                " shut up
-set shortmess+=I                " don't display startup message
 set visualbell t_vb=            " really, shut up
+set shortmess+=I                " don't display startup message either
 
 " autocompletion
 if has("wildmenu")
@@ -88,9 +86,9 @@ endif
 
 " mousing
 if has("mouse")
-  " set mouse=a                 " to enable mouse in all modes
   set mouse=""                  " disable mouse
-  set ttymouse=xterm2           " xterm-style mouse + enable dragging
+  " set mouse=a                 " to enable mouse in all modes
+  " set ttymouse=xterm2           " xterm-style mouse + enable dragging
   if has("gui_running")
     set mousehide               " hide pointer when typing
     set mousemodel=popup_setpos " right-click moves cursor + opens menu
@@ -107,7 +105,7 @@ set hlsearch                    " highlight last pattern
 silent! set cpoptions+=;        " skip current char when ;-repeating a t-search
 set gdefault                    " apply substitutions globally on lines
 
-" use normal regexes
+" use normal regexes when searching
 nnoremap / /\v
 vnoremap / /\v
 
@@ -119,12 +117,11 @@ set backspace=indent,eol,start  " backspace over everything in insert mode
 set undolevels=640              " lots of undo
 set fileformats=unix            " LF line endings
 set encoding=utf-8              " Unicode files
-set tildeop                     " tilde behaves like an operator
 
 " wrapping
 set wrap                        " visually wrap long lines
 set linebreak                   " visually break at word boundaries
-set textwidth=78                " force EoL after < x chars
+set textwidth=79                " force EoL after < x chars
 
 set nojoinspaces                " two spaces after sentences is an abomination
 set formatoptions+=n            " format numbered lists w/ hanging indent
@@ -139,13 +136,15 @@ set smarttab                    " backspace over blanks at BoL
 
 " tabs
 set tabstop=4                   " shouldn't matter
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=0                " 0 = use 'tabstop' instead
+set softtabstop=-1              " negative = use 'shiftwidth' instead
 set shiftround                  " always indent to a multiple of 4
 
 "-----------------------------------------------------------------------------
 " Appearance
 "-----------------------------------------------------------------------------
+
+colorscheme zozo-colours
 
 set cursorline                  " highlight current line
 set lazyredraw                  " don't redraw screen while executing macros
@@ -158,7 +157,7 @@ set showcmd                     " display partial commands
 set splitright                  " open new vertical panes to the right
 set ttyfast                     " faster redraw
 set winminheight=0              " windows can be 0 lines high
-set cmdheight=2                 " fewer "Press ENTER to continue" messages
+set cmdheight=2                 " fewer 'Press ENTER to continue' messages
 
 set listchars=eol:¶,tab:→\ ,trail:·,extends:»,precedes:«,nbsp:¬
 
@@ -188,18 +187,7 @@ set t_ut=                       " disable BCE
 syntax on                       " syntax highlighting
 filetype plugin indent on       " filetype detection + plugins + indent prefs
 
-if $Z_SOLARIZED == "light" && ! has("gui_running")
-  set background=light
-else
-  set background=dark
-endif
-
-if $Z_SOLARIZED == "light" || $Z_SOLARIZED == "dark"
-  let g:solarized_termtrans=1     " use proper solarized bg colour
-  silent! colorscheme solarized
-endif
-
-let g:is_bash=1                 " default shell for syntax highlighting
+set background=dark
 
 "-----------------------------------------------------------------------------
 " Window title and status line
@@ -268,7 +256,7 @@ if has("gui_running")
   set columns=167
   set lines=52
 
-  set guioptions+=a             " use "* in visual mode (system clipboard)
+  set guioptions+=a             " use system clipboard in visual mode
   set guioptions+=c             " use console dialogs for simple choices
   set guioptions-=m             " no menu
   set guioptions-=r             " no right-hand scrollbar
@@ -281,14 +269,14 @@ if has("gui_running")
 
   " Windows fonts
   if has('win32') || has('win64')
-    set guifont=Consolas:h10,Courier\ New:h10
+    set guifont=Source\ Code\ Pro\ Medium:h9,Consolas:h10,Courier\ New:h10
   endif
 
   " OS X fonts
   if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-    set guifont=Consolas:h12,Menlo:h12
+    set guifont=Source\ Code\ Pro\ Medium:h9,Consolas:h12,Menlo:h12
     endif
   endif
 endif
@@ -304,215 +292,15 @@ if exists("#vimrc")
     " ↑ why doesn't this work on Win32 gvim? :(
     autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
-    " formatoptions etc.
-    autocmd FileType conf,dosini,javascript,sh,vim
-      \ setlocal ff=unix fo+=l fo+=r fo-=t fo-=n
-    autocmd FileType css,html
-      \ setlocal ff=unix fo+=l noet
-    autocmd FileType crontab
-      \ setlocal fo+=l fo-=t sw=8 sts=8 ts=8 noet nowrap backupcopy=yes
-    autocmd FileType mail
-      \ setlocal fo+=la
-    autocmd FileType markdown,text
-      \ setlocal fo+=ta
+    " treat *.md as Markdown, not Modula-2
+    autocmd BufNewFile,BufReadPost *.md 
+      \ setlocal ft=markdown
 
     " journaling
-    autocmd BufNewFile,BufRead draft_[0-9]*,750words-201*,jrnl*.txt,dayone*.md
+    autocmd BufNewFile,BufRead dayone*.md
       \ setlocal ft=markdown fo-=t fo-=a fo-=c textwidth=0
-
-    " poetry
-    autocmd BufNewFile,BufRead */p/[1-4]*/*.txt
-      \ setlocal ft=markdown fo-=t fo-=a
   augroup END
 endif
-
-"-----------------------------------------------------------------------------
-" Autocmd's and functions
-"-----------------------------------------------------------------------------
-
-if exists("#vimrc")
-  augroup vimrc
-
-    " strip trailing whitespace on save
-    autocmd FileType html,css,js,sh
-      \ autocmd BufWritePre <buffer> :StripTrailingWhitespaces
-
-  augroup END
-endif
-
-"-----------------------------------------------------------------------------
-" man pages
-"-----------------------------------------------------------------------------
-
-if exists("#vimrc")
-  augroup man
-    " Ensure man-db won't recursively invoke vim when ^['ing manpage references
-    " http://www.pixelbeat.org/settings/.vimrc
-    autocmd FileType man let $MANPAGER=""
-    autocmd FileType man set notitle
-  augroup END
-endif
-
-"-----------------------------------------------------------------------------
-" Remapping
-"-----------------------------------------------------------------------------
-
-" page down with the space bar (thanks, 15 years of muscle memory)
-map <Space> <PageDown>
-
-" because I am a masochist
-map  <up>    <nop>
-map  <down>  <nop>
-map  <left>  <nop>
-map  <right> <nop>
-imap <up>    <nop>
-imap <down>  <nop>
-imap <left>  <nop>
-imap <right> <nop>
-
-" keep the cursor in place when joining lines
-nnoremap <silent> J mzJ`z
-
-" move by screen rows instead of file lines
-nnoremap j gj
-nnoremap k gk
-nnoremap ^ g^
-nnoremap 0 g0
-nnoremap $ g$
-
-nnoremap gj j
-nnoremap gk k
-nnoremap g^ ^
-nnoremap g0 0
-nnoremap g$ $
-
-" use <Tab> to hop between brackets
-nnoremap <tab> %
-vnoremap <tab> %
-
-" swap 0 and ^
-nnoremap 0 ^
-nnoremap ^ 0
-
-" swap p and P
-nnoremap p P
-nnoremap P p
-
-" I never use Ex mode, but I sure do start a lot of macros by accident
-nnoremap q <nop>
-nnoremap Q q
-
-"-----------------------------------------------------------------------------
-" Key bindings
-"-----------------------------------------------------------------------------
-
-" ,fa toggles autoformatting
-nmap <silent> <leader>fa :call FOtoggleA()<CR>
-
-" ,h hides highlighting
-nmap <silent> <leader>h :nohlsearch<CR>
-
-" ,md changes filetype to Markdown
-nmap <silent> <leader>md :set filetype=markdown<CR>
-
-" ,s makes tabs and trailing spaces visible
-nmap <silent> <leader>s :set nolist!<CR>
-
-" ,ve edits .vimrc
-nmap <silent> <leader>ve :vs $MYVIMRC<CR>
-
-" ,vE edits .vimrc only
-nmap <silent> <leader>vE :vs $MYVIMRC<CR>:only<CR>
-
-" ,vr reloads .vimrc
-nmap <silent> <leader>vr :source $MYVIMRC<CR>
-
-" ,w gets word count
-nnoremap <leader>w g<C-G>
-
-" ,B = "break here instead" (useful for poetry)
-nnoremap <leader>B mzJ`zF<Space>r<CR><Esc>
-
-" ,E unwraps, yanks entire file, rewraps
-if has("gui_running") || system("uname") == "Darwin\n"
-    nmap <silent> <leader>E :UnwrapAll<CR>:normal gg"*yGgqG<CR>
-  else
-    nmap <silent> <leader>E :UnwrapAll<CR>:
-endif
-
-" ,FE changes to UTF-8 encoding
-nmap <silent> <leader>FE :setlocal fenc=utf-8<CR>
-
-" ,FF changes to LF line endings
-nmap <silent> <leader>FF :setlocal ff=unix<CR>
-
-" ,J squeezes multiple blank lines to one (broken)
-" nmap <silent> <leader>J :g/^\s*$/,/\S/-j|s/.*//<CR>
-
-" ,O opens up for a new paragraph (useful for email)
-nmap <leader>O i<CR><CR><CR><CR><Esc>2ki
-
-" ,P inserts a paragraph break
-nmap <silent> <leader>P i<CR><CR><Esc>2k
-
-" ,qD makes smart quotes (and other punctuation) dumb
-nmap <silent> <leader>qD :call MakeQuotesDumb()<CR>
-
-" ,S strips trailing whitespace
-nmap <silent> <leader>S :StripTrailingWhitespaces<CR>
-
-" ,WP rewraps current paragraph
-nmap <leader>WP mzgqip`z
-
-" ,WU unwraps entire file
-nmap <silent> <leader>WU mz:UnwrapAll<CR>`z
-
-" ,WW rewraps entire file
-nmap <leader>WW mz1GgqG`z
-
-" ,X saves and executes the file
-nmap <silent> <leader>X :w\|:!./%<CR>
-
-" ,1 creates a Markdown H1
-nnoremap <leader>1 :set fo-=a<CR>yypVr=
-
-" ,2 creates a Markdown H2
-nnoremap <leader>2 :set fo-=a<CR>yypVr-
-
-" <F2> allows for pasting without an autoindent clusterfuck
-set pastetoggle=<F2>
-
-" <F5> quicksaves
-map <silent> <F5> <C-O>:w!<CR>
-
-" <F6> inserts the current date
-map  <silent> <F6> "=strftime("%Y-%m-%d")<CR>P
-imap <silent> <F6> <C-R>=strftime("%Y-%m-%d")<CR>
-
-" <F9> toggles spellchecking
-if has("spell")
-  map  <silent> <F9> :set spell!<CR>
-  imap <silent> <F9> <C-O>:set spell!<CR>
-endif
-
-" Ctrl+[hjkl] moves b/w tabs and windows
-map <silent> <C-j> :wincmd j<CR>
-map <silent> <C-k> :wincmd k<CR>
-map <silent> <C-l> :wincmd l<CR>
-map <silent> <C-h> :wincmd h<CR>
-
-" Ctrl+[arrow] moves windows
-map <silent> <C-Down>  :wincmd J<CR>
-map <silent> <C-Up>    :wincmd K<CR>
-map <silent> <C-Right> :wincmd L<CR>
-map <silent> <C-Left>  :wincmd H<CR>
-
-" text bubbling (w/ tpope's vim-unimpaired)
-nmap <C-S-k> [e
-nmap <C-S-j> ]e
-
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
 
 "-----------------------------------------------------------------------------
 " Abbreviations
@@ -522,7 +310,6 @@ abbr #div\ # -------------------------------------------------------------------
 abbr #box\ # ----------------------------------------------------------------------------<Esc>yyPO#
 abbr "box\ "-----------------------------------------------------------------------------<Esc>yyPO"
 
-" 2012-12-21
 abbr tdy <C-R>=strftime("%Y-%m-%d")<CR>
 
 abbr +/-    <C-K>+-
@@ -541,60 +328,19 @@ abbr <<-    <C-V>u2190
 abbr ->>    <C-V>u2192
 abbr ?-     <C-V>u2212
 
-" -------- Solarized --------
-"  8 = base03   3 = yellow
-"  0 = base02   9 = orange
-" 10 = base01   1 = red
-" 11 = base00   5 = magenta
-" 12 = base0   13 = violet
-" 14 = base1    4 = blue
-"  7 = base2    6 = cyan
-" 15 = base3    2 = green
-" ---------------------------
+"-----------------------------------------------------------------------------
+" diff mode
+"-----------------------------------------------------------------------------
 
-if expand($Z_SOLARIZED) != ""
-  if &background == "dark"
-    hi LineNr                      ctermbg=8     ctermfg=10
-    hi CursorLine    cterm=none    ctermbg=0
-    hi CursorLineNr                ctermbg=0     ctermfg=14
+if &diff
+  set shell=/bin/bash " prevents weird job-stop behaviour on bash-4.4
+  set diffopt=filler,context:3,iwhite
 
-    hi StatusLine    cterm=reverse ctermbg=0     ctermfg=12
-    hi StatusLineNC  cterm=reverse ctermbg=0     ctermfg=10
-    hi VertSplit     cterm=none    ctermbg=10    ctermfg=10
-
-    hi SpecialKey    cterm=none    ctermbg=0     ctermfg=5
-    hi NonText       cterm=none                  ctermfg=13
-
-    hi ErrorMsg      cterm=none                  ctermfg=1
-
-    hi IncSearch     cterm=reverse ctermbg=8     ctermfg=9
-    hi Search        cterm=reverse ctermbg=8     ctermfg=3
-
-    hi htmlItalic    cterm=none                  ctermfg=7
-  endif
-
-  if &background == "light"
-    hi LineNr                      ctermbg=15
-    hi CursorLine    cterm=none    ctermbg=7
-    hi CursorLineNr                ctermbg=7     ctermfg=0
-
-    hi markdownItalic cterm=none   ctermbg=15    ctermfg=0
-  endif
+  " disable localizations
+  let g:diff_translations = 0
 endif
 
-"-----------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 
-hi CursorLine    gui=none      guibg=#073642
-hi CursorLineNr  gui=none      guibg=#073642 guifg=#93a1a1
-hi LineNr        gui=none      guibg=#002b36 guifg=#586e75
-
-hi SpecialKey    gui=none      guibg=#002b36 guifg=#d33682
-hi NonText                     guibg=#002b36 guifg=#6c71c4
-
-hi ErrorMsg      gui=none
-
-"-----------------------------------------------------------------------------
-
-hi! link StatusLineErr StatusLine
-hi StatusLineErr cterm=none    ctermbg=1     ctermfg=8
-hi StatusLineErr gui=none      guibg=#dc322f guifg=#002b36
+" " source :Man() function (no vertical option...)
+" source $VIMRUNTIME/ftplugin/man.vim
