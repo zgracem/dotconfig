@@ -1,7 +1,18 @@
 # OpenSSL
 
-export CURL_CA_BUNDLE="/usr/local/etc/openssl/certs/ca-bundle.crt"
+declare -a certificates=(
+  "/etc/ssl/certs/ca-bundle.crt"
+  "/usr/local/etc/openssl/cert.pem"
+  "/usr/local/etc/openssl/certs/ca-bundle.crt"
+)
 
-if [[ ! -f $CURL_CA_BUNDLE ]]; then
+for certificate in "${certificates[@]}"; do
+  if [[ -r $certificate ]]; then
+    export CURL_CA_BUNDLE=$certificate
+    break
+  else
     unset -v CURL_CA_BUNDLE
-fi
+  fi
+done
+
+unset -v certificate certificates
