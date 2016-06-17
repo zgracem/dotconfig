@@ -28,7 +28,9 @@ fi
 # properties
 reset='0'
 bold='1'; ul='4';
+props=(bold ul)
 # bold='1'; ital='3'; ul='4'; blink='5'; inv='7'
+# props=(bold ital ul blink inv)
 
 # basic ANSI colours
 black='30'   # 8
@@ -264,14 +266,21 @@ if type -P stty &>/dev/null; then
   trap 'printf "${esc_false}^C${esc_reset}"' INT
 fi
 
-# gcc
-export GCC_COLORS=1
+# gcc diagnostics
+export GCC_COLORS=""
+GCC_COLORS+="error=${brred}:"
+GCC_COLORS+="warning=${brmagenta}:"
+GCC_COLORS+="note=${brcyan}:"
+GCC_COLORS+="caret=${brgreen}:"
+GCC_COLORS+="locus=${bryellow}:"
+GCC_COLORS+="quote=${brblue}"
 
 # 500 kV library for cool colour printing
+export HV_BG="reset"
 . "${dir_bashlib}/500kv.bash"
 
 # -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
 
-unset -v ${!colour_*} ${base_ansi[*]} base_ansi colours
+unset -v ${!colour_*} ${base_ansi[*]} base_ansi ${props[*]} props colours 
