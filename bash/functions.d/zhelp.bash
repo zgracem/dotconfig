@@ -1,3 +1,6 @@
+return
+### ZGM disabled 2016-06-17 -- replaced w/ 500kv_wtf.bash
+
 zk=${esc_black:-$'\e[0;30m'}
 zr=${esc_red:-$'\e[0;31m'}
 zg=${esc_green:-$'\e[0;32m'}
