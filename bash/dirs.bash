@@ -24,7 +24,6 @@ case $OSTYPE in
         dir_docs="$HOME/Documents"
         dir_downloads="$HOME/Downloads"
         dir_music="$HOME/Music/iTunes/iTunes Media/Music"
-        dir_drive="/Volumes/SILVER"
         ;;
 
     cygwin)
