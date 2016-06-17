@@ -1,20 +1,20 @@
-vars()
-{   # display all variable values and attributes
-
-    declare -p \
-    | colourstrip \
-    | sed -nE 's/^declare (.*)$/\1/p' \
-    | sort -k2
-}
-
 allvars()
 {
-    vars \
-    | command less
+    local LESS= # suppress preferences in environment
+
+    declare -p \
+    | less -FQX
 }
 
 vgrep()
 {
-    vars \
-    | grep -i "$@"
+    # vars \
+    # | grep -i "$@"
+    local LESS= # suppress preferences in environment
+
+    declare -p \
+    | grep -i "$@" \
+    | less -EQX
+
+    # TODO: use LESSOPEN?
 }
