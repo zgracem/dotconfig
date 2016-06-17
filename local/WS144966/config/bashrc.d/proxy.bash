@@ -3,7 +3,7 @@
 export SOCKS5_SERVER="127.0.0.1:8080"
 
 if [[ -z $ALL_PROXY ]]; then
-  if command curl -sSf --connect-timeout 5 --socks5-hostname $SOCKS5_SERVER inescapable.org &>/dev/null; then
+  if command curl -sSf --connect-timeout 3 --socks5-hostname $SOCKS5_SERVER inescapable.org &>/dev/null; then
     export ALL_PROXY="socks5h://${SOCKS5_SERVER}"
     export GIT_PROXY_COMMAND="${dir_scripts}/util/git-proxy.sh"
     . "${dir_config}/bash/bashrc.d/chrome.bash"

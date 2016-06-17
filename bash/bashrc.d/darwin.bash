@@ -1,8 +1,12 @@
+# -----------------------------------------------------------------------------
+# ~/.config/bash/bashrc.d/darwin.bash
+# -----------------------------------------------------------------------------
+
 if [[ $OSTYPE =~ darwin ]]; then
-    HARDWARE=$(sysctl -n hw.model)
-    OSX_VERSINFO=($(sw_vers -productVersion | tr '.' ' '; sw_vers -buildVersion))
+  HARDWARE=$(sysctl -n hw.model)
+  OSX_VERSINFO=($(sw_vers -productVersion | tr '.' ' '; sw_vers -buildVersion))
 else
-    return
+  return
 fi
 
 # -----------------------------------------------------------------------------

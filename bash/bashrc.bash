@@ -156,13 +156,13 @@ if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then
   TERMCAP=${TERMCAP/Co#8/Co#256}
 fi
 
-### ZGM disabled 2016-06-16
-### -- don't have this, don't need this; and anyway, per terminfo(5),
-###    if TERMINFO is set, ncurses won't look anywhere else for files.
 # # custom terminfo
 # if [[ -d $HOME/.terminfo ]]; then
 #   export TERMINFO="$HOME/.terminfo"
 # fi
+### ZGM disabled 2016-06-16
+### -- don't have this, don't need this; and anyway, per terminfo(5),
+###    if TERMINFO is set, ncurses won't look anywhere else for files.
 
 # -----------------------------------------------------------------------------
 # other config files
@@ -180,7 +180,7 @@ fi
 if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
   .()
   {
-    printf "\r\e[K%s" "$1"
+    printf "\r${CSI}K%s" "$1"
     builtin . "$@"
   }
 fi
@@ -219,9 +219,6 @@ if [[ $TIME_TEST_ACTIVE == true ]]; then
   }
 fi
 
-# temporarily enable
-shopt -s nullglob
-
 # load direction definitions ($dir_foo)
 . "$dir_config/bash/dirs.bash"
 
@@ -230,6 +227,9 @@ shopt -s nullglob
 
 # programmable completion
 . "$dir_config/bash/completion.bash"
+
+# temporarily enable
+shopt -s nullglob
 
 # private stuff
 if [[ -d $dir_config/bash/private.d ]]; then
@@ -300,6 +300,6 @@ if [[ $TIME_TEST_ACTIVE == true ]]; then
 fi
 
 if _isFunction .; then
-  printf "\r\e[K"
+  printf "\r${CSI}K"
   unset -f .
 fi
