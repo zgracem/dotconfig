@@ -1,6 +1,7 @@
 setup()
 {
-    : ${dir_drive:=$(findDrive "$myDrive")}
+    # set `dir_drive` if it isn't already
+    dir_drive=${dir_drive:-$(find_drive "$myDrive")} || return
 
     local log_dir="/var/log"
     local installer_dir="${dir_drive}/bin/cygwin"
