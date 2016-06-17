@@ -157,10 +157,15 @@ ef()
 if _inPath launchctl; then
   rlenv()
   { # reload OS-wide environment variables (GUI apps will require restart)
-    local plist=~/Library/LaunchAgents/org.inescapable.environment.plist
+    local plist="$HOME/Library/LaunchAgents/org.inescapable.environment.plist"
 
-    launchctl unload "$plist" \
-      && launchctl load "$plist"
+    if [[ ! -e $plist ]]; then
+      ln -sv "$HOME/Dropbox/.config/misc/${plist##*/}" || return
+    else
+      launchctl unload "$plist" || return
+    fi
+
+    launchctl load "$plist"
 
     [[ $TERM_PROGRAM == Apple_Terminal ]] && killall Terminal
   }
