@@ -32,6 +32,9 @@ fi
 # file extensions considered "executable" by cmd.com (minimal set)
 : ${PATHEXT:=".COM;.EXE;.BAT"}
 
+# disable logging by Windows' Component Servicing Infrastructure
+export windows_tracing_flags=0
+
 # -----------------------------------------------------------------------------
 # printer
 # -----------------------------------------------------------------------------
