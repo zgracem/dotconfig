@@ -98,7 +98,7 @@ rl()
 
 z::new_function()
 {
-  if [[ ${FUNCNAME[1]} == fe && -n $func && -n $file && ! -f $file ]]; then
+  if [[ ${FUNCNAME[1]} == ef && -n $func && -n $file && ! -f $file ]]; then
     cat > "$file" <<EOF
 ${func}()
 {
@@ -184,8 +184,8 @@ fi
 #   - defaults to the basename of TARGET preceded by a dot
 #
 # Example: 
-#   z::config::symlink git/config .gitconfig
-#   z::config::symlink vimrc
+#   z::config::symlink "git/config" ".gitconfig"
+#   z::config::symlink "vimrc"
 
 z::config::symlink()
 {
@@ -194,6 +194,7 @@ z::config::symlink()
   if [[ -n $2 ]]; then
     local symlink=$2
   else
+    # default to ~/.whatever
     local symlink=".${target##*/}"
   fi
 
@@ -205,10 +206,13 @@ z::config::symlink()
   if [[ ! -L $HOME/$symlink ]]; then
     if [[ -f $HOME/$symlink ]]; then
       local backup
-      printf -v backup "$symlink~orig_%(%F)T"
+      printf -v backup "$symlink~original_%(%Y%m%d)T"
       mv -v "$HOME/$symlink" "$HOME/$backup" || return
     fi
 
     ( cd "$HOME"; ln -sv "$target" "$symlink" )
+  else
+    # symlink already exists
+    return 0
   fi
 }
