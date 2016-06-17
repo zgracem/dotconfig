@@ -13,9 +13,9 @@ dir_scripts="$HOME/scripts"
 dir_dev="$dir_scripts/dev"
 dir_defunct="$dir_dropbox/src/_defunct"
 
+dir_bashlib="$dir_dropbox/lib"
 dir_howto="$HOME/txt/howto"
 dir_vsmm="$dir_dropbox/www/vsmm"
-dir_zkit="$HOME/lib/zkit"
 
 # platform-specific
 case $OSTYPE in

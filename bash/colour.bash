@@ -49,8 +49,6 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   brmagenta="${bold};${magenta}"
   brcyan="${bold};${cyan}"
   brwhite="${bold};${white}"
-
-  colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 else
   brblack=$black
   brred=$red
@@ -62,6 +60,7 @@ else
   brwhite=$white
 fi
 
+colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 base_ansi=(${colours[*]})
 
 # -----------------------------------------------------------------------------
@@ -84,14 +83,10 @@ colours+=(colour_true colour_false colour_hi colour_2d colour_user)
 # -----------------------------------------------------------------------------
 
 # case $TERM_PROGRAM in
-#   iTerm.app)
+#   iTerm*)
 #     case $ITERM_PROFILE in
-#       *light*)
-#         Z_SOLARIZED=light
-#         ;;
-#       Default*|Hotkey*)
-#         Z_SOLARIZED=dark
-#         ;;
+#       *light*) Z_SOLARIZED=light ;;
+#       Default*|Hotkey*) Z_SOLARIZED=dark ;;
 #     esac
 #     ;;
 #   Apple_Terminal)
@@ -103,16 +98,16 @@ colours+=(colour_true colour_false colour_hi colour_2d colour_user)
 # esac
 
 if [[ -n $Z_SOLARIZED ]]; then
-  base03="${bold};${black}"
+  base03=$brblack
   base02=$black
-  base01="${bold};${green}"
-  base00="${bold};${yellow}"
-   base0="${bold};${blue}"
-   base1="${bold};${cyan}"
+  base01=$brgreen
+  base00=$bryellow
+   base0=$brblue
+   base1=$brcyan
    base2=$white
-   base3="${bold};${white}"
-  orange="${bold};${red}"
-  violet="${bold};${magenta}"
+   base3=$brwhite
+  orange=$brred
+  violet=$brmagenta
 
   solarized_colours=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
   colours+=(${solarized_colours[*]})
@@ -144,7 +139,7 @@ export Z_SOLARIZED COLORFGBG
 # ------------------------------------------------------------------------------
 
 z::colour::add_esc()
-{   # $green -> $esc_green, $colour_true -> $esc_true
+{ # $green -> $esc_green, $colour_true -> $esc_true
 
   local -a indexes=("$@")
   local index
@@ -217,10 +212,11 @@ fi
 if [[ -z $LS_COLORS ]]; then
   dc_src="$dir_config/dircolors"
   dc_cache="$HOME/var/cache/dircolors"
+  dc_stub="default"
 
   if [[ -n $Z_SOLARIZED ]]; then
     dc_stub="solarized.$Z_SOLARIZED"
-  else
+  elif [[ -n $HV_LOADED ]]; then
     dc_stub="500kv.dircolors"
   fi
 
@@ -267,6 +263,9 @@ fi
 
 # gcc
 export GCC_COLORS=1
+
+# 500 kV library for cool colour printing
+. "${dir_bashlib}/500kv.bash"
 
 # -----------------------------------------------------------------------------
 # cleanup
