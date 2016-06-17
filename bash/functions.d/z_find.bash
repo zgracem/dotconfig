@@ -28,8 +28,9 @@ z::find::daysold()
 {   # list all files in $PWD changed in the last $1 days
 
     local days="$1" find_bin
+    local number_re='^-?[[:digit:]]+$'
 
-    if ! _isNumber "$days"; then
+    if ! [[ $days =~ $number_re ]]; then
         scold "Error: $days: not a number"
         return $EX_USAGE
     elif ! _isGNU find; then

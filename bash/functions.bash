@@ -31,11 +31,6 @@ _isFunction()
     quietly declare -f "$1"
 }
 
-_isAlias()
-{   # exits 0 if $1 is defined as an alias
-    quietly alias "$1"
-}
-
 _optSet()
 {   # exits 0 if all shell variables in $@ are set
 
