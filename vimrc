@@ -86,9 +86,9 @@ endif
 
 " mousing
 if has("mouse")
-  set mouse=""                  " disable mouse
-  " set mouse=a                 " to enable mouse in all modes
-  " set ttymouse=xterm2           " xterm-style mouse + enable dragging
+  " set mouse=""                  " disable mouse
+  set mouse=a                 " to enable mouse in all modes
+  set ttymouse=xterm2           " xterm-style mouse + enable dragging
   if has("gui_running")
     set mousehide               " hide pointer when typing
     set mousemodel=popup_setpos " right-click moves cursor + opens menu
