@@ -1,35 +1,31 @@
 hidefile()
 {
-    local -a files=("$@")
-
-    case $OSTYPE in
-        darwin*)
-            chflags hidden "${files[@]}"
-            ;;
-        cygwin)
-            "${SYSTEMROOT}/system32/attrib" +H "${files[@]}"
-            ;;
-        *)
-            scold 'not available on this system'
-            return $EX_OSERR
-            ;;
-    esac
+  case $OSTYPE in
+    darwin*)
+      chflags hidden "$@"
+      ;;
+    cygwin)
+      "${SYSTEMROOT}/system32/attrib" +H "$@"
+      ;;
+    *)
+      scold "not available on this system"
+      return $EX_OSERR
+      ;;
+  esac
 }
 
 unhidefile()
 {
-    local -a files=("$@")
-
-    case $OSTYPE in
-        darwin*)
-            chflags nohidden "${files[@]}"
-            ;;
-        cygwin)
-            "${SYSTEMROOT}/system32/attrib" -H "${files[@]}"
-            ;;
-        *)
-            scold 'not available on this system'
-            return $EX_OSERR
-            ;;
-    esac
+  case $OSTYPE in
+    darwin*)
+      chflags nohidden "$@"
+      ;;
+    cygwin)
+      "${SYSTEMROOT}/system32/attrib" -H "$@"
+      ;;
+    *)
+      scold "not available on this system"
+      return $EX_OSERR
+      ;;
+  esac
 }
