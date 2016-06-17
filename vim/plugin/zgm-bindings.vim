@@ -1,5 +1,5 @@
 "-----------------------------------------------------------------------------
-" Zozo's custom vim keybindings
+" custom vim keybindings
 "-----------------------------------------------------------------------------
 
 " page down with the space bar (thanks, 15 years of muscle memory)

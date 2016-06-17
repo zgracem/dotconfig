@@ -144,7 +144,7 @@ set shiftround                  " always indent to a multiple of 4
 " Appearance
 "-----------------------------------------------------------------------------
 
-colorscheme zozo-colours
+colorscheme zgm-colours
 
 set cursorline                  " highlight current line
 set lazyredraw                  " don't redraw screen while executing macros
