@@ -36,10 +36,10 @@ maxWidth()
 
   if (( old_width > new_width )); then
     # calculate aspect ratio
-    local ratio=$(calc "scale=3;$old_width/$old_height")
+    local ratio=$(bc -q 2>/dev/null <<< "scale=3;$old_width/$old_height")
 
     # calculate new height
-    local new_height=$(calc "scale=0;$new_width/$ratio")
+    local new_height=$(bc -q 2>/dev/null <<< "scale=0;$new_width/$ratio")
 
     # resize image
     quietly /usr/bin/sips -z $new_height $new_width "$img_file"

@@ -3,7 +3,7 @@ if [[ -n $HOMEBREW_COMPLETION ]]; then
 fi
 
 # alias for 'git difftool'
-_isAlias gd || return
+alias gd &>/dev/null || return
 
 __z_complete_gd()
 {
