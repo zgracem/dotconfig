@@ -59,8 +59,8 @@ HISTIGNORE+=':exit:bye'
 HISTIGNORE+=':d *:e *:fe *:manpdf *:c:c[sl]:etest:f:rl:ss:tt:vnc:vsmm'
 HISTIGNORE+=':b@(a|rc|col|f|loc|path|dirs|pri|pro|ps1)'
 
-# zhelp
-HISTIGNORE+=':@(h|which|what|where) *:wtf'
+# my help commands
+HISTIGNORE+=':@(h|wtf) *'
 
 # -----------------------------------------------------------------------------
 
