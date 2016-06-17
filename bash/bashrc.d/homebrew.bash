@@ -16,8 +16,8 @@ export HOMEBREW_CACHE="$HOME/var/cache/homebrew"
 # print developer warnings
 export HOMEBREW_DEVELOPER=true
 
-# when logged in remotely...
-if [[ -n $SSH_CONNECTION ]]; then
+# if we're not in a GUI session on OSX...
+if [[ -z $SECURITYSESSIONID ]]; then
   # don't print beer emoji
   export HOMEBREW_NO_EMOJI=true
 
