@@ -120,12 +120,13 @@ fi
 
 export HOME
 
+# filesystem blocks of 1KB, like the good lord intended
 export BLOCKSIZE=1024
 
 # abort runaway function nesting
 FUNCNEST=128
 
-# require ^D × 3 to exit
+# require ^D × (n+1) to exit
 IGNOREEOF=2
 
 # end ssh sessions after 8 hours of inactivity
@@ -155,14 +156,22 @@ if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then
   TERMCAP=${TERMCAP/Co#8/Co#256}
 fi
 
-# custom terminfo
-if [[ -d $HOME/.terminfo ]]; then
-  export TERMINFO="$HOME/.terminfo"
-fi
+### ZGM disabled 2016-06-16
+### -- don't have this, don't need this; and anyway, per terminfo(5),
+###    if TERMINFO is set, ncurses won't look anywhere else for files.
+# # custom terminfo
+# if [[ -d $HOME/.terminfo ]]; then
+#   export TERMINFO="$HOME/.terminfo"
+# fi
 
 # -----------------------------------------------------------------------------
 # other config files
 # -----------------------------------------------------------------------------
+
+# Our remaining files do *not* conform to POSIX, so we shouldn't even try.
+if [[ -n $POSIXLY_CORRECT ]]; then
+  return
+fi
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
