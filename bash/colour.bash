@@ -42,14 +42,25 @@ colours+=(black red green yellow blue magenta cyan white)
 
 # bright colours
 if (( TERM_COLOURDEPTH >= 16 )); then
-  brblack="${bold};${black}"
-  brred="${bold};${red}"
-  brgreen="${bold};${green}"
-  bryellow="${bold};${yellow}"
-  brblue="${bold};${blue}"
-  brmagenta="${bold};${magenta}"
-  brcyan="${bold};${cyan}"
-  brwhite="${bold};${white}"
+  # Use aixterm codes to get actual *bright* colours instead of setting the
+  # emulator to display bold text as unbold-but-bright. (Inspired by Prompt,
+  # which doesn't offer that option.)
+  brblack="${black/#3/9}"
+  brred="${red/#3/9}"
+  brgreen="${green/#3/9}"
+  bryellow="${yellow/#3/9}"
+  brblue="${blue/#3/9}"
+  brmagenta="${magenta/#3/9}"
+  brcyan="${cyan/#3/9}"
+  brwhite="${white/#3/9}"
+  # brblack="$bold;$black"
+  # brred="$bold;$red"
+  # brgreen="$bold;$green"
+  # bryellow="$bold;$yellow"
+  # brblue="$bold;$blue"
+  # brmagenta="$bold;$magenta"
+  # brcyan="$bold;$cyan"
+  # brwhite="$bold;$white"
 else
   brblack=$black
   brred=$red
