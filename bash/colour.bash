@@ -21,19 +21,15 @@ fi
 # basic colours
 # -----------------------------------------------------------------------------
 
-# reset
-# unset -v ${colours[*]} colours ${!esc_*}
-### ZGM disabled 2016-05-02 -- probably unnecessary
-
 # properties
-reset='0'
-bold='1'; ul='4';
+reset='0'; bold='1'; ul='4';
 props=(bold ul)
 # bold='1'; ital='3'; ul='4'; blink='5'; inv='7'
 # props=(bold ital ul blink inv)
+colours=(reset)
 
 # basic ANSI colours
-black='30'   # 8
+black='30'   # 8 -- TODO: wtf are these?
 red='31'     # 9
 green='32'   # 10
 yellow='33'  # 11
@@ -42,9 +38,9 @@ magenta='35' # 13
 cyan='36'    # 14
 white='37'   # 15
 
-colours=(reset black red green yellow blue magenta cyan white)
+colours+=(black red green yellow blue magenta cyan white)
 
-# bright ANSI colours
+# bright colours
 if (( TERM_COLOURDEPTH >= 16 )); then
   brblack="${bold};${black}"
   brred="${bold};${red}"
@@ -66,7 +62,6 @@ else
 fi
 
 colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
-base_ansi=(${colours[*]})
 
 # -----------------------------------------------------------------------------
 # semantic colours
@@ -84,7 +79,7 @@ colour_2d=$brblack  # secondary colour
 colours+=(colour_true colour_false colour_hi colour_2d colour_user)
 
 # -----------------------------------------------------------------------------
-# solarized -- http://ethanschoonover.com/solarized
+# Solarized -- http://ethanschoonover.com/solarized
 # -----------------------------------------------------------------------------
 
 # case $TERM_PROGRAM in
@@ -114,10 +109,7 @@ if [[ -n $Z_SOLARIZED ]]; then
   orange=$brred
   violet=$brmagenta
 
-  solarized_colours=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
-  colours+=(${solarized_colours[*]})
-  base_ansi+=(${solarized_colours[*]})
-  unset -v solarized_colours
+  colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
 
   # re/define semantic colours
   case $Z_SOLARIZED in
@@ -135,9 +127,9 @@ if [[ -n $Z_SOLARIZED ]]; then
       colour_false=$orange
       ;;
   esac
-fi
 
-export Z_SOLARIZED COLORFGBG
+  export Z_SOLARIZED COLORFGBG
+fi
 
 # ------------------------------------------------------------------------------
 # add escape codes
@@ -152,7 +144,7 @@ z::colour::add_esc()
   for index in "${indexes[@]}"; do
     local var_name="esc_${index#*_}"
 
-    if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == true ]]; then
+    if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == "true" ]]; then
       eval "$var_name=\"${CSI}${!index}m\""
     fi
   done
@@ -160,8 +152,9 @@ z::colour::add_esc()
 
 z::colour::add_esc ${colours[*]}
 
-# export everything
-export ${!esc_*}
+# # export everything
+# export ${!esc_*}
+### ZGM disabled 2016-06-17 -- what on earth uses this?
 
 # -----------------------------------------------------------------------------
 # grep
@@ -207,7 +200,7 @@ export ${!LESS_TERM*}
 # -----------------------------------------------------------------------------
 
 if ! _isGNU ls; then
-  # http://geoff.greer.fm/lscolors/
+  # Generated at http://geoff.greer.fm/lscolors/
   export LSCOLORS='exFxdacabxgagaabadHbHd'
   export CLICOLOR=1
 fi
@@ -283,4 +276,4 @@ export HV_BG="reset"
 # cleanup
 # -----------------------------------------------------------------------------
 
-unset -v ${!colour_*} ${base_ansi[*]} base_ansi ${props[*]} props colours 
+unset -v ${!colour_*} ${props[*]} props colours 
