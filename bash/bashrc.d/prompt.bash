@@ -572,4 +572,5 @@ complete -W "${!z_PS1[*]}" prompt
 # cleanup
 # -----------------------------------------------------------------------------
 
+unset -f z::colour::PS1_esc z::prompt::cmd_{add,del}
 unset -v ${!PS1_*}

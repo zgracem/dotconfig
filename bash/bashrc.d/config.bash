@@ -96,20 +96,6 @@ rl()
   return $ret
 }
 
-z::new_function()
-{
-  if [[ ${FUNCNAME[1]} == ef && -n $func && -n $file && ! -f $file ]]; then
-    cat > "$file" <<EOF
-${func}()
-{
-  #function
-}
-EOF
-  else
-    return $EX_SOFTWARE
-  fi
-}
-
 ef()
 { # find and edit shell functions
   (( $# == 1 )) || return $EX_USAGE
@@ -131,7 +117,7 @@ ef()
       read -e -p "Create it ("${file/#$HOME/$'~'}")? [y/N] " answer
 
       if [[ $answer =~ [yY] ]]; then
-        z::new_function
+        printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
         _edit "$file:3:5"
         return $EX_OK
       else
