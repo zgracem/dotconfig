@@ -19,13 +19,15 @@ find_drive()
         return 0
       fi
     done < <(/cygdrive/c/Windows/System32/Wbem/wmic logicaldisk get caption,volumename)
+
   elif [[ $OSTYPE =~ darwin && -d /Volumes/$label ]]; then
     echo "/Volumes/$label"
     return 0
+  
+  else
+    scold "volume not found: ${label}"
+    return 1
   fi
-
-  scold "volume not found: ${label}"
-  return 1
 }
 
 # `drive` changes PWD to the volume named $myDrive, if present, and sets the
