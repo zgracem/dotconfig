@@ -18,9 +18,9 @@ numfiles()
     fi
 
     # capture glob settings
-    _shoptSet dotglob \
+    shopt -q dotglob \
         && local dotglob=true
-    _shoptSet nullglob \
+    shopt -q nullglob \
         && local nullglob=true
 
     # populate files array

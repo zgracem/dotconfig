@@ -32,22 +32,8 @@ _isFunction()
 }
 
 _optSet()
-{   # exits 0 if all shell variables in $@ are set
-
-    local opt
-    for opt in "$@"; do
-        [[ :$SHELLOPTS: =~ :$opt: ]] || return 1
-    done
-}
-
-_shoptSet()
-{   # exits 0 if all shell options in $@ are set
-    shopt -pq "$@" 2>/dev/null
-}
-
-_set()
 {   # exits 0 if shell variable/option $1 is set
-    _optSet "$1" || _shoptSet "$1"
+    [[ :$SHELLOPTS: =~ :$1: ]] || shopt -pq "$1" 2>/dev/null
 }
 
 _inScreen()

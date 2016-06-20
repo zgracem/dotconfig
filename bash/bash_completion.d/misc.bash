@@ -79,13 +79,12 @@ complete -f -a -b -c -k -A function -A helptopic -- \
 complete -e -v -A function \
     d
 
-# shell options -- for `shopt` and `_shoptSet`
+# shell options -- for `set` & `shopt`
 complete -A shopt \
-    shopt _shoptSet
+    shopt
 
-# shell options -- for `set` and `_optSet`
 complete -A setopt \
-    set _optSet
+    set
 
 # files & directories -- for `trash`
 complete -f -d \

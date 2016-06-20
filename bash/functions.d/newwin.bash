@@ -53,11 +53,3 @@ splitwin()
         $cmd "$@"
     fi
 }
-
-splithelp()
-{   # open help in a new tmux windowpane
-
-    local cmd="$1"
-
-    command tmux split-window -h "$cmd"' --help | less'
-}

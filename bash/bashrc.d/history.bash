@@ -77,7 +77,7 @@ tophist()
 
 incognito()
 {
-  if _optSet history; then
+  if [[ :$SHELLOPTS: =~ :history: ]]; then
     set +o history
     echo 'incognito mode enabled'
     Z_INCOGNITO=true
