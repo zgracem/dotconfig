@@ -1,6 +1,7 @@
-if [[ -n $HOMEBREW_COMPLETION ]]; then
-    . "$HOMEBREW_COMPLETION/git-completion.bash"
-fi
+### ZGM disabled 2016-06-20 -- I don't use git enough
+# if [[ -n $HOMEBREW_COMPLETION ]]; then
+#     . "$HOMEBREW_COMPLETION/git-completion.bash"
+# fi
 
 # alias for 'git difftool'
 alias gd &>/dev/null || return

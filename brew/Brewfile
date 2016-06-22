@@ -2,7 +2,7 @@
 # ~/.config/brew/Brewfile
 # -----------------------------------------------------------------------------
 
-tap 'homebrew/bundle' # needs to be installed before this can run, though...
+# tap 'homebrew/bundle' # needs to be installed before this can run, though...
 
 tap 'homebrew/dupes'
 tap 'homebrew/versions'
@@ -15,7 +15,7 @@ tap 'homebrew/command-not-found'
 # -----------------------------------------------------------------------------
 
 # for Homebrew
-brew 'curl'
+brew 'curl', args: ['with-nghttp2']
 brew 'openssl'
 brew 'git', args: ['with-brewed-curl', 'with-brewed-openssl']
 
