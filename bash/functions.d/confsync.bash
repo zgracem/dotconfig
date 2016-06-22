@@ -63,7 +63,7 @@ hconfsync()
 
     confsync \
         && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-            --exclude=.DS_Store --max-delete=0
+            --exclude=.DS_Store --max-delete=1
 }
 
 wfconfsync()

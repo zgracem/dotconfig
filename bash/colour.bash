@@ -22,11 +22,9 @@ fi
 # -----------------------------------------------------------------------------
 
 # properties
-reset='0'; bold='1'; ul='4';
-props=(bold ul)
-# bold='1'; ital='3'; ul='4'; blink='5'; inv='7'
-# props=(bold ital ul blink inv)
+reset='0'; bold='1'; ul='4'; blink='5'; inv='7'
 colours=(reset)
+props=(bold ul blink inv)
 
 # basic ANSI colours
 black='30'   # 8 -- TODO: wtf are these?
@@ -287,4 +285,5 @@ export HV_BG="reset"
 # cleanup
 # -----------------------------------------------------------------------------
 
-unset -v ${!colour_*} ${props[*]} props colours 
+unset -f z::colour::add_esc
+unset -v ${!colour_*} ${colours[*]} colours  ${props[*]} props 

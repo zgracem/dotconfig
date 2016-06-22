@@ -7,7 +7,7 @@ if [[ -z $SSH_AGENT_PID ]]; then
     mkdir -vp ~/var/run || return
   fi
 
-  _set noclobber || trap 'set -o noclobber; trap - RETURN;' RETURN
+  [[ :$SHELLOPTS: =~ :noclobber: ]] || trap 'set -o noclobber; trap - RETURN;' RETURN
   set +o noclobber
 
   if keychain_env=$(keychain --agents ssh --dir ~/var/run --eval \
