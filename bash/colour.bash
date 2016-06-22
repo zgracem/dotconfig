@@ -10,9 +10,6 @@ fi
 # skip this file if the terminal can't support at least eight colours
 if (( TERM_COLOURDEPTH >= 8 )); then
   export TERM_COLOURDEPTH
-elif [[ $TERM == vt100 ]]; then
-  # `tput colors` lied and returned -1
-  export TERM_COLOURDEPTH=8
 else
   return
 fi

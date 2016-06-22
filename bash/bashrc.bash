@@ -151,18 +151,42 @@ BEL=$'\a'   # 🔔
 # just say no to flow control
 (type -P stty && stty -ixon) &>/dev/null
 
+# Darwin's full-screen system console
+if [[ $TERM == "vt100" && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
+  TERM=xnuppc
+  export HV_DISABLE_PP=1
+fi
+
+# Old versions of Terminal.app
+if [[ $TERM_PROGRAM == "Apple_Terminal" && $TERM != nsterm* ]]; then
+  ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
+  case 1 in
+    $(( ver >= 361 ))*) # OSX 10.11
+      TERM=nsterm-build361 ;;
+    $(( ver >= 343 ))*) # OSX 10.10
+      TERM=nsterm-build343 ;;
+    $(( ver >= 326 ))*) # OSX 10.9
+      TERM=nsterm-build326 ;;
+    $(( ver >= 303 ))*) # OSX 10.7 & 10.8
+      TERM=nsterm-256color ;;
+    $(( ver >= 240 ))*) # OSX 10.5
+      TERM=nsterm-16color ;;
+    *)
+      # This is probably god-awfully old; just leave it alone.
+      : ;;
+  esac
+elif [[ $TERM_PROGRAM == "iTerm.app" && $TERM != "iTerm.app" ]]; then
+  TERM="iTerm.app"
+fi
+
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
 if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then
   TERMCAP=${TERMCAP/Co#8/Co#256}
 fi
 
-# # custom terminfo
-# if [[ -d $HOME/.terminfo ]]; then
-#   export TERMINFO="$HOME/.terminfo"
-# fi
-### ZGM disabled 2016-06-16
-### -- don't have this, don't need this; and anyway, per terminfo(5),
-###    if TERMINFO is set, ncurses won't look anywhere else for files.
+# custom terminfo
+export TERMINFO_DIRS="$HOME/share/terminfo:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
+export TERMINFO=${TERMINFO_DIRS%%:*}
 
 # -----------------------------------------------------------------------------
 # other config files
@@ -175,12 +199,13 @@ fi
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
-# (See also related code in bashrc.d/keychain.bash when enabling/disabling.)
-
 if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
   .()
   {
-    printf "\r${CSI}K%s" "$1"
+    tput cr   # move cursor to beginning of line
+    tput el   # clear to end of line
+    # printf "\r${CSI}K%s" "$@"
+    printf "%s" "$@"
     builtin . "$@"
   }
 fi
@@ -238,7 +263,6 @@ if [[ -d $dir_config/bash/private.d ]]; then
   done
 fi
 
-### ZGM moved above bashrc.d block 2016-06-15 -- see if this breaks anything
 # lesser function files
 if [[ -d $dir_config/bash/functions.d ]]; then
   for file in "$dir_config"/bash/functions.d/*.bash; do
@@ -269,11 +293,8 @@ unset -v file
 # and finally...
 # -----------------------------------------------------------------------------
 
-# set window title
-if [[ $TERM =~ xterm|rxvt|putty|screen|cygwin ]] \
-  && [[ $TERM_PROGRAM != Apple_Terminal ]] \
-  && _isFunction setwintitle
-then
+# set window title (environment variable set in bashrc.d/prompt.bash)
+if [[ -n $Z_PROMPT_WINTITLE ]]; then
   setwintitle "$USER@$HOSTNAME"
 fi
 
@@ -300,6 +321,8 @@ if [[ $TIME_TEST_ACTIVE == true ]]; then
 fi
 
 if _isFunction .; then
-  printf "\r${CSI}K"
+  tput cr   # move cursor to beginning of line
+  tput el   # clear to end of line
+  # printf "\r${CSI}K"
   unset -f .
 fi

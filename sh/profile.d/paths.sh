@@ -64,6 +64,10 @@ if [[ -x /usr/local/bin/brew ]]; then
     # OpenSSL
     PATH=/usr/local/opt/openssl/bin:$PATH
     MANPATH=/usr/local/opt/openssl/share/man:$MANPATH
+
+    # ncurses
+    PATH=/usr/local/opt/ncurses/bin:$PATH
+    MANPATH=/usr/local/opt/ncurses/share/man:$MANPATH
 fi
 
 # Xcode
