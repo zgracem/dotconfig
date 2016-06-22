@@ -23,7 +23,7 @@ unset -v PROMPT_DIRTRIM
 : ${Z_PROMPT_GIT:=false}
 
 : ${Z_PROMPT_WINTITLE:=true}
-: ${Z_PROMPT_TABTITLE:=true}
+: ${Z_PROMPT_TABTITLE:=false}
 
 export ${!Z_PROMPT_*}
 
@@ -32,7 +32,7 @@ export ${!Z_PROMPT_*}
 # -----------------------------------------------------------------------------
 
 # only change window title if supported by current terminal
-if [[ ! $TERM =~ xterm|rxvt|putty|screen|cygwin ]]; then
+if [[ ! $TERM =~ xterm|putty|screen|tmux|cygwin|iTerm ]]; then
     Z_PROMPT_WINTITLE=false
     Z_PROMPT_TABTITLE=false
 fi
