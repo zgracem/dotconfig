@@ -16,42 +16,40 @@ unset -v PROMPT_DIRTRIM
 # configuration
 # -----------------------------------------------------------------------------
 
-: ${Z_PROMPT_TYPE:=oneline}
-
 : ${Z_PROMPT_COLOUR:=true}
 : ${Z_PROMPT_EXIT:=true}
 : ${Z_PROMPT_GIT:=false}
 
-: ${Z_PROMPT_WINTITLE:=true}
-: ${Z_PROMPT_TABTITLE:=false}
+: ${Z_SET_WINTITLE:=true}
+: ${Z_SET_TABTITLE:=false}
 
-export ${!Z_PROMPT_*}
+export ${!Z_PROMPT_*} ${!Z_SET_*}
 
 # -----------------------------------------------------------------------------
-# sanity checks for prompt features
+# sanity checks for features
 # -----------------------------------------------------------------------------
 
 # only change window title if supported by current terminal
-if [[ ! $TERM =~ xterm|putty|screen|tmux|cygwin|iTerm ]]; then
-    Z_PROMPT_WINTITLE=false
-    Z_PROMPT_TABTITLE=false
+if [[ ! $TERM =~ xterm|screen|tmux|cygwin|putty|iTerm.app ]]; then
+  Z_SET_WINTITLE=false
+  Z_SET_TABTITLE=false
 fi
 
 # only use colours if supported by current terminal
 if (( TERM_COLOURDEPTH < 8 )); then
-    Z_PROMPT_COLOUR=false
+  Z_PROMPT_COLOUR=false
 fi
 
-# Prompt (iOS SSH client)
+# Prompt <panic.com/prompt> doesn't have a status line
 if [[ $TERM_PROGRAM =~ ^Prompt ]]; then
-    Z_PROMPT_WINTITLE=false
-    : ${Z_PROMPT_TYPE:=basic}
+  Z_SET_WINTITLE=false
+  Z_SET_TABTITLE=false
 fi
 
 # Terminal.app has its own functions for this
 if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-    Z_PROMPT_WINTITLE=false
-    Z_PROMPT_TABTITLE=false
+  Z_SET_WINTITLE=false
+  Z_SET_TABTITLE=false
 fi
 
 # -----------------------------------------------------------------------------
@@ -158,8 +156,8 @@ z::prompt::print_exit()
       last_exit=${sigspec#SIG}
 
     elif (( last_exit >= 64 && last_exit <= 78 )); then
-      # someone's been reading `/usr/include/sysexits.h`... ;)
 
+      # Someone's been reading `/usr/include/sysexits.h`... ;)
       local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
         [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
         [71]="OSERR"    [72]="OSFILE"   [73]="CANTCREAT"   [74]="IOERR"
@@ -174,16 +172,7 @@ z::prompt::print_exit()
     tput sc
 
     # print exit code
-    case $Z_PROMPT_TYPE in
-      oneline)
-        printf "%*s" $padding "$last_exit"
-        ;;
-      twoline|*)
-        padding=$(( padding + ${#esc_false} + ${#esc_reset} ))
-
-        printf "%*b" $padding "${esc_false}${last_exit}${esc_reset}"
-        ;;
-    esac
+    printf "%*s" $padding "$last_exit"
 
     # restore cursor position
     tput rc
@@ -260,11 +249,11 @@ z::prompt::git_info()
   fi
 
   # printf "${esc_reset} %b" \
-  #   "${esc_2d}${branch}" \
+  #   "${esc_dim}${branch}" \
   #   "${icons:-}${esc_reset}"
 
   printf "${esc_reset} %b${esc_reset}" \
-    "${esc_2d}${branch}${icons}"
+    "${esc_dim}${branch}${icons}"
 }
 
 # notify iTerm of the current directory
@@ -320,12 +309,8 @@ z::prompt::update_titles()
   local tab_title="${USER}@${HOSTNAME%%.*}"
   local win_title="${tab_title}: ${PWD/#$HOME/$'~'}"
 
-  if [[ $TERM_PROGRAM == iTerm.app ]]; then
-    tab_title="${ITERM_SESSION_ID%:*}"
-  fi
-
-  [[ $Z_PROMPT_WINTITLE == true ]] && setwintitle "$win_title"
-  [[ $Z_PROMPT_TABTITLE == true ]] && settabtitle "$tab_title"
+  [[ $Z_SET_WINTITLE == true ]] && setwintitle "$win_title"
+  [[ $Z_SET_TABTITLE == true ]] && settabtitle "$tab_title"
 }
 
 # -----------------------------------------------------------------------------
@@ -349,11 +334,6 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     unset g
   fi
 
-  if [[ $HOSTNAME == Hiroko && $TERM_PROGRAM_VERSION == 240.2 ]]; then
-    # we're running in Terminal.app locally
-    esc_user=${esc_magenta}
-  fi
-
   z::colour::PS1_esc()
   { # create new colour variables w/ prompt escape codes (\[ and \])
 
@@ -362,10 +342,10 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
 
     # $esc_green -> $PS1_green, $esc_true -> $PS1_true
     for index in "${indexes[@]}"; do
-      local var_name="PS1_${index#*_}"
+      local name="PS1_${index#*_}"
 
-      if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == true ]]; then
-        printf -v $var_name "\[${!index}\]"
+      if [[ -n ${!index} && -z ${!name} ]] || [[ $Z_RELOADING == true ]]; then
+        printf -v $name "\[${!index}\]"
       fi
     done
   }
@@ -374,103 +354,45 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# PS1 setup
+# PS1
 # -----------------------------------------------------------------------------
 
-# parts
-unset -v z_PS1_{git,pwd,ssh,usr}
+PS1=""
 
+# Print exit status of last command
 if [[ $Z_PROMPT_EXIT == true ]]; then
-  z_PS1_exit="\[\$(z::prompt::print_exit)\]"
-
-  if [[ $Z_PROMPT_TYPE != twoline ]]; then
-    # `z::prompt::print_exit` doesn't print colour codes for other types of prompt
-    z_PS1_exit="${PS1_false}${z_PS1_exit}${PS1_reset}"
-  fi
+  PS1+="${PS1_false}\[\$(z::prompt::print_exit)\]${PS1_reset}"
 fi
 
 if [[ -n $SSH_CONNECTION ]]; then
   # hostname
-  z_PS1_ssh="\h"
-
-  if [[ $Z_PROMPT_TYPE == twoline ]]; then
-    # username and hostname
-    z_PS1_ssh="\u@\h"
-  fi
-
-  z_PS1_ssh="${PS1_2d}${z_PS1_ssh}${PS1_reset}"
+  PS1+="${PS1_dim}\h${PS1_reset}:"
 fi
-
-# info about current git branch, if any
-z_PS1_git="\$(z::prompt::git_info)"
 
 # current path, highlighted
-z_PS1_pwd="${PS1_hi}\$(z::prompt::compress_pwd)"
+PS1+="${PS1_hi}\$(z::prompt::compress_pwd)"
+
+# info about current git branch, if any (function supplies colours)
+PS1+="\$(z::prompt::git_info)"
 
 # blue $ for me, red # for root
-z_PS1_usr="${PS1_user}\\\$${PS1_reset} "
+PS1+=" ${PS1_user}\\\$${PS1_reset} "
 
 # -----------------------------------------------------------------------------
-
-# different kinds of prompt
-declare -A z_PS1=()
-
-# ----- two-line prompt -----
-
-z_PS1[twoline]+="${z_PS1_exit}"
-z_PS1[twoline]+="┌"
-
-if [[ -n $z_PS1_ssh ]]; then
-  z_PS1[twoline]+="─ ${z_PS1_ssh} "
-fi
-
-z_PS1[twoline]+="─┤ ${z_PS1_pwd}${z_PS1_git}${PS1_reset}\n"
-z_PS1[twoline]+="└ ${z_PS1_usr}"
-
-# ----- one-line prompt -----
-
-z_PS1[oneline]+="${z_PS1_exit}"
-
-if [[ -n $z_PS1_ssh ]]; then
-  z_PS1[oneline]+="${z_PS1_ssh}:"
-fi
-
-z_PS1[oneline]+="${z_PS1_pwd}${z_PS1_git} ${z_PS1_usr}"
-
-# ----- basic prompt -----
-
-z_PS1[basic]+="${z_PS1_exit}"
-
-### ZGM removed 2016-03-30 -- not very "basic", is it...
-# if [[ -n $z_PS1_ssh ]]; then
-#   z_PS1[basic]+="${z_PS1_ssh}:"
-# fi
-
-z_PS1[basic]+="${z_PS1_pwd} ${z_PS1_usr}"
-
-# ----- "no" prompt -----
-
-z_PS1[off]="${z_PS1_usr}"
-
-# -----------------------------------------------------------------------------
-# PS1-4
+# PS0,2-4
 # -----------------------------------------------------------------------------
 
-PS1=${z_PS1[${Z_PROMPT_TYPE:-off}]}
+[[ $Z_SET_WINTITLE == true ]] && PS0+="\$(setwintitle \"\u@\h: \w\")"
+# [[ $Z_SET_TABTITLE == true ]] && PS0+="\$(settabtitle \"\u@\h\")"
 
-# secondary prompt (for multi-line commands) -- bright white right guillemet
-PS2="${PS1_hi}"$'\xC2\xBB'"${PS1_reset} "
+# Secondary prompt for multi-line commands = right-facing guillemet (»)
+PS2="${PS1_user}"$'\xC2\xBB'"${PS1_reset} "
 
-# `select` prompt -- blue question mark
+# Prompt for the `select` builtin = question mark
 PS3="${PS1_blue}?${PS1_reset} "
 
-# prefix for xtrace output
-PS4='+ '
-xse="${PS1_reset}:" # separator
-
-PS4+="\${BASH_SOURCE[0]+$PS1_2d\${BASH_SOURCE[0]}$xse$PS1_blue\$LINENO$xse}"
-PS4+="\${FUNCNAME:+\${FUNCNAME[0]}()$xse}"
-PS4+="\${BASH_COMMAND}\n\011"
+# Prefix for `set -o xtrace` output
+PS4="+ $PS1_dim\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COMMAND\n  $PS1_reset"
 
 # -----------------------------------------------------------------------------
 # PROMPT_COMMAND
@@ -522,55 +444,28 @@ fi
 
 if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
   z::prompt::cmd_add z::prompt::update_Terminal
-
-  # unset Apple's stock function
-  unset -f update_terminal_cwd
 else
   unset -f z::prompt::update_Terminal
 fi
 
-if [[ $Z_PROMPT_WINTITLE == true || $Z_PROMPT_TABTITLE == true ]]; then
+if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
   z::prompt::cmd_add "z::prompt::update_titles"
-  [[ $Z_PROMPT_WINTITLE == true ]] && PS0+="\$(setwintitle \"\u@\h: \w\")"
-  [[ $Z_PROMPT_TABTITLE == true ]] && PS0+="\$(settabtitle \"\u@\h\")"
 fi
 
-z::prompt::cmd_add -p 'history -a'    # append to HISTFILE
+# append to HISTFILE
+z::prompt::cmd_add -p "history -a"    
 
-# # if you want tmux sessions to share history:
-# z::prompt::cmd_add -p 'history -n'  # read from HISTFILE
+# # read from HISTFILE -- enable if you want tmux sessions to share history
+# z::prompt::cmd_add -p "history -n"  
 
-# see also bashrc.d/direnv.bash
+# see bashrc.d/direnv.bash
 if _isFunction _direnv_hook; then
-  z::prompt::cmd_add -p '_direnv_hook'
+  z::prompt::cmd_add -p "_direnv_hook"
 fi
-
-# -----------------------------------------------------------------------------
-# prompt manipulation
-# -----------------------------------------------------------------------------
-
-prompt()
-{
-  local types="${!z_PS1[*]}"
-
-  case " $types " in
-    *" $1 "*)
-      export Z_PROMPT_TYPE=$1
-      rl prompt >/dev/null
-      ;;
-    *)
-      echo "Usage: ${FUNCNAME[0]} ${types// /|}"
-      return
-      ;;
-  esac
-}
-
-# completion for prompt types
-complete -W "${!z_PS1[*]}" prompt
 
 # -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
 
 unset -f z::colour::PS1_esc z::prompt::cmd_{add,del}
-unset -v ${!PS1_*}
+unset -v ${!PS1_*} ${!z_PS1*}
