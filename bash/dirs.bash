@@ -12,6 +12,7 @@ dir_scratch="$HOME/tmp/_scratch"
 dir_scripts="$HOME/scripts"
 dir_dev="$dir_scripts/dev"
 dir_defunct="$dir_dropbox/src/_defunct"
+dir_cache="$HOME/var/cache"
 
 dir_bashlib="$HOME/lib"
 dir_howto="$HOME/txt/howto"
@@ -21,12 +22,14 @@ dir_vsmm="$dir_dropbox/www/vsmm"
 case $OSTYPE in
     darwin*)
         dir_apps="/Applications"
+        dir_desktop="$HOME/Desktop"
         dir_docs="$HOME/Documents"
         dir_downloads="$HOME/Downloads"
         dir_music="$HOME/Music/iTunes/iTunes Media/Music"
         ;;
 
     cygwin)
+        : ${dir_desktop:="$(cygpath --desktop)"}
         : ${dir_docs:="$(cygpath --mydocs)"}
         dir_downloads="$dir_docs/Downloads"
         dir_dropbox="$dir_docs/Dropbox"
