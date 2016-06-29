@@ -8,7 +8,7 @@ export HOMEBREW_BREW_FILE="$HOMEBREW_PREFIX/bin/brew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 
 export HOMEBREW_LOGS="$HOME/var/log/homebrew"
-export HOMEBREW_CACHE="$HOME/var/cache/homebrew"
+export HOMEBREW_CACHE="$dir_cache/homebrew"
 
 [[ -d $HOMEBREW_LOGS ]]  || mkdir -vp "$HOMEBREW_LOGS"
 [[ -d $HOMEBREW_CACHE ]] || mkdir -vp "$HOMEBREW_CACHE"
