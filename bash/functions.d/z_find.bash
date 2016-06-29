@@ -1,6 +1,6 @@
-z::find()
+_z_find()
 {   # general finding function
-    # Usage: z::find f[ile]|d[ir] SCOPE TERM
+    # Usage: _z_find f[ile]|d[ir] SCOPE TERM
 
     local find_type=$1 scope=$2; shift 2
     local term=$@
@@ -24,7 +24,7 @@ z::find()
 
 }
 
-z::find::daysold()
+_z_find_daysold()
 {   # list all files in $PWD changed in the last $1 days
 
     local days="$1" find_bin
@@ -51,13 +51,13 @@ z::find::daysold()
 }
 
 # find a file whose name contains a given string
-ff() { z::find file "$PWD" "$@"; }
+ff() { _z_find file "$PWD" "$@"; }
 
 # find a directory whose name contains a given string
-fd() { z::find dir "$PWD" "$@"; }
+fd() { _z_find dir "$PWD" "$@"; }
 
 # list all files under $PWD changed today
-today() { z::find::daysold 0; }
+today() { _z_find_daysold 0; }
 
 # list all files under $PWD changed this week
-thisweek() { z::find::daysold -7; }
+thisweek() { _z_find_daysold -7; }

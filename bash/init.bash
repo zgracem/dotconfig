@@ -6,19 +6,19 @@
 # add config file symlinks if necessary (see bashrc.d/config.bash)
 
 if [[ ! -e ~/.npmrc ]] && _inPath npm; then
-  z::config::symlink npmrc
+  _z_config_symlink npmrc
 fi
 
 if [[ ! -e ~/.irbrc ]] && _inPath irb; then
-  z::config::symlink ruby/irbrc
+  _z_config_symlink ruby/irbrc
 fi
 
 if [[ ! -e ~/.vimrc ]] && _inPath vim; then
-  z::config::symlink vimrc
+  _z_config_symlink vimrc
 fi
 
 if [[ ! -e ~/.wgetrc ]] && _inPath wget; then
-  z::config::symlink wgetrc
+  _z_config_symlink wgetrc
 fi
 
 # -----------------------------------------------------------------------------

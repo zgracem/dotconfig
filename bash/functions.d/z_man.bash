@@ -30,7 +30,7 @@ man()
   # get a nice title like "printf(1)" or "cron(8)"
   # or fail if man page doesn't exist
   local title
-  title=$(z::mantitle "$@") || return
+  title=$(_z_mantitle "$@") || return
 
   # open the new window
   if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_NO_MAN_URL ]]; then
@@ -54,7 +54,7 @@ man()
   fi
 }
 
-z::mantitle()
+_z_mantitle()
 {
   local manfile title section
 

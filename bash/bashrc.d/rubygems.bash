@@ -20,9 +20,9 @@ if type -P gem &>/dev/null; then
 
   unset -v GEM_HOME
 
-  if declare -f z::config::symlink >/dev/null; then
+  if declare -f _z_config_symlink >/dev/null; then
     # symlink config file into HOME
-    z::config::symlink "ruby/gemrc"
+    _z_config_symlink "ruby/gemrc"
   fi
 fi
 
