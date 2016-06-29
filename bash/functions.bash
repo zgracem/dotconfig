@@ -18,17 +18,17 @@ scold()
 
 _inPath()
 {   # exits 0 if $1 is installed in $PATH
-    quietly type -P "$1"
+    type -P "$1" >/dev/null
 }
 
 _isGNU()
 {   # exits 0 if $1 uses GNU switches
-    quietly command "$1" --version
+    command "$1" --version >/dev/null 2>&1
 }
 
 _isFunction()
 {   # exits 0 if $1 is defined as a function
-    quietly declare -f "$1"
+    declare -f "$1" >/dev/null
 }
 
 _optSet()
@@ -44,6 +44,10 @@ _inScreen()
 _inTmux()
 {   # exits 0 if inside a tmux session
     [[ -S ${TMUX%%,*} ]]
+
+    # When a new session is created, tmux sets the environment variable TMUX to
+    # "<socket>,<pid>,<session>". So we strip everything after (and including)
+    # the first comma and test whether the resulting path is indeed a socket.
 }
 
 _mux()

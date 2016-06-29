@@ -45,10 +45,6 @@ wheretf()
 
 } # /wheretf()
 
-unalias where 2>/dev/null
-unset -f where
-where() { wheretf "$@"; }
-
 # -----------------------------------------------------------------------------
 # wtf: Explains what a thing is.
 # -----------------------------------------------------------------------------
@@ -70,7 +66,7 @@ wtf()
   # Accept only one subject term.
   (( $# == 1 )) || return 64
 
-  # Suppress output from `hv_chevron` if not connected to a terminal.
+  # Suppress fancy output from `hv_chevron` if not connected to a terminal.
   if [[ ! -t 1 ]]; then
     local HV_DISABLE_PP="true"
   fi
@@ -199,7 +195,8 @@ wtf()
 
       function)
         output="$1 is a function"
-        hv_chevron brightblue,brightblack "$1"
+        hv_chevron    brightblue,brightblack "$1"
+        hv_chevron -t black,blue "function"
 
         if desc=$(wheretf $1); then
           output+=" ($desc)"
@@ -224,6 +221,10 @@ wtf()
   return 0
 } # /wtf()
 
-unalias what 2>/dev/null
-unset -f what
+unalias where what which 2>/dev/null
+unset -f where what which
+
+where() { wheretf "$@"; }
 what() { wtf "$@"; }
+which() { builtin type "$@"; }
+

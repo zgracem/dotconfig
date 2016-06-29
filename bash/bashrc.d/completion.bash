@@ -78,17 +78,11 @@ __z_complete_files()
 # load external completions
 # -----------------------------------------------------------------------------
 
-### ZGM disabled 2015-10-29 -- performance reasons, let's see if we miss it
-# # bash-completion
-# if [[ -e /usr/local/share/bash-completion/bash_completion ]]; then
-#     . /usr/local/share/bash-completion/bash_completion
-# fi
-
 # custom completions
 if [[ -d $dir_config/bash/bash_completion.d ]]; then
-  for cf in "$dir_config"/bash/bash_completion.d/*.bash; do
-    [[ -f $cf ]] && . "$cf"
+  for file in "$dir_config"/bash/bash_completion.d/*.bash; do
+    [[ -f $file ]] && . "$file"
   done
 fi
 
-unset -v cf
+unset -v file

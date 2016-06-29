@@ -21,17 +21,20 @@ elif shopt -q restricted_shell; then
 fi
 
 # switch to bash-4.4 if available
-if [[ -x $HOME/opt/bin/bash ]]; then
+latest_bash=44
+this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
+
+if (( this_bash < latest_bash )) && [[ -x $HOME/opt/bin/bash ]]; then
   export SHELL="$HOME/opt/bin/bash"
-  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} < 44 )); then
-    export SHELLOPTS
+  export SHELLOPTS
+  if shopt -pq login_shell; then
     exec -l "$SHELL"
   else
-    BASH=$SHELL
+    exec "$SHELL"
   fi
 fi
 
-### ZGM disabled 2015-11-09 -- redundant with the above? test on 4.4-final
+# # redundant with the above? test on 4.4-final
 # if [[ $BASH != $SHELL ]]; then
 #   export SHELL=$BASH
 # fi
@@ -151,51 +154,54 @@ BEL=$'\a'   # 🔔
 # just say no to flow control
 (type -P stty && stty -ixon) &>/dev/null
 
-# Darwin's full-screen system console
-if [[ $TERM == "vt100" && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
-  TERM=xnuppc
-  export HV_DISABLE_PP=1
-fi
+# custom terminfo files
+TERMINFO="$HOME/share/terminfo"
 
-# Old versions of Terminal.app
-if [[ $TERM_PROGRAM == "Apple_Terminal" && $TERM != nsterm* ]]; then
-  ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
-  case 1 in
-    $(( ver >= 361 ))*) # OSX 10.11
-      TERM=nsterm-build361 ;;
-    $(( ver >= 343 ))*) # OSX 10.10
-      TERM=nsterm-build343 ;;
-    $(( ver >= 326 ))*) # OSX 10.9
-      TERM=nsterm-build326 ;;
-    $(( ver >= 303 ))*) # OSX 10.7 & 10.8
-      TERM=nsterm-256color ;;
-    $(( ver >= 240 ))*) # OSX 10.5
-      TERM=nsterm-16color ;;
-    *)
-      # This is probably god-awfully old; just leave it alone.
-      : ;;
-  esac
-elif [[ $TERM_PROGRAM == "iTerm.app" && $TERM != "iTerm.app" ]]; then
-  TERM="iTerm.app"
-fi
+if [[ -d $TERMINFO ]]; then
+  export TERMINFO
+  export TERMINFO_DIRS="$TERMINFO:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
 
-# fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
-if [[ $TERM =~ screen-256color && -n $TERMCAP ]]; then
-  TERMCAP=${TERMCAP/Co#8/Co#256}
-fi
+  # Darwin's full-screen system console
+  if [[ $TERM == "vt100" && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
+    TERM=xnuppc
+    export HV_DISABLE_PP=1
+  fi
 
-# custom terminfo
-export TERMINFO_DIRS="$HOME/share/terminfo:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
-export TERMINFO=${TERMINFO_DIRS%%:*}
+  # Old versions of Terminal.app
+  if [[ $TERM_PROGRAM == "Apple_Terminal" && $TERM != nsterm* ]]; then
+    ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
+    case 1 in
+      $(( ver >= 361 ))*) # OSX 10.11
+        TERM=nsterm-build361 ;;
+      $(( ver >= 343 ))*) # OSX 10.10
+        TERM=nsterm-build343 ;;
+      $(( ver >= 326 ))*) # OSX 10.9
+        TERM=nsterm-build326 ;;
+      $(( ver >= 303 ))*) # OSX 10.7 & 10.8
+        TERM=nsterm-256color ;;
+      $(( ver >= 240 ))*) # OSX 10.5
+        TERM=nsterm-16color ;;
+      *)
+        # This is probably god-awfully old; just leave it alone.
+        : ;;
+    esac
+  
+  # iTerm.app
+  elif [[ $TERM_PROGRAM == "iTerm.app" && $TERM != "iTerm.app" ]]; then
+    TERM="iTerm.app"
+  fi
+else
+  unset -v TERMINFO
+fi
 
 # -----------------------------------------------------------------------------
 # other config files
 # -----------------------------------------------------------------------------
 
-# Our remaining files do *not* conform to POSIX, so we shouldn't even try.
-if [[ -n $POSIXLY_CORRECT ]]; then
-  return
-fi
+# # Our remaining files do *not* conform to POSIX, so we shouldn't even try.
+# if [[ -n $POSIXLY_CORRECT ]]; then
+#   return
+# fi
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
@@ -250,9 +256,6 @@ fi
 # define colours (before ./bashrc.d/prompt.bash loads)
 . "$dir_config/bash/colour.bash"
 
-# programmable completion
-. "$dir_config/bash/completion.bash"
-
 # temporarily enable
 shopt -s nullglob
 
@@ -294,19 +297,12 @@ unset -v file
 # -----------------------------------------------------------------------------
 
 # set window title (environment variable set in bashrc.d/prompt.bash)
-if [[ -n $Z_PROMPT_WINTITLE ]]; then
+if [[ -n $Z_SET_WINTITLE ]]; then
   setwintitle "$USER@$HOSTNAME"
 fi
 
-# # enable preexec and precmd hooks
-# if [[ -r $HOME/Dropbox/src/z-preexec.bash ]]; then
-#     . "$HOME/Dropbox/src/z-preexec.bash"
-#     # preexec() { echo ">> “$@”"; }
-#     # precmd() { echo ">> printing the prompt..."; }
-# fi
-
-# final initialization scripts (except in subshells/when reloading)
-if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $Z_RELOADING ]]; then
+# final initialization scripts (except in subshells/when reloading/as root)
+if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $Z_RELOADING ]] && (( EUID != 0 )); then
   . "$dir_config/bash/init.bash"
   [[ -f $dir_local/config/init.bash ]] && . "$dir_local/config/init.bash"
 fi

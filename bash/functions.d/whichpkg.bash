@@ -8,6 +8,20 @@ whichpkg()
         return $EX_USAGE
     fi
 
+    if [[ ! $file =~ / ]]; then
+        # If we're not passing a full path, search the current directory, then
+        # check PATH for an executable.
+        if [[ -f $PWD/$file ]]; then
+            file="$PWD/$file"
+        elif file=$(type -P "$file"); then
+            # Do nothing, we're fine
+            :
+        else
+            scold "not found: $1"
+            return $EX_NOINPUT
+        fi
+    fi
+
     if [[ $OSTYPE =~ cygwin ]]; then
         local mgr='Cygwin'
         local pkg=$(cygcheck --find-package "$file") || return
