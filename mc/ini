@@ -118,6 +118,8 @@ xterm-256color=
 
 putty-256color=
 
+tmux-256color=
+
 [Panels]
 auto_save_setup_panels=true
 fast_reload=false

@@ -41,15 +41,15 @@ iterm::state()
 
 iterm::prompt_prefix()
 {
-    printf "${OSC}133;D;\$?${BEL}"
+    printf "${OSC}1337;D;\$?${BEL}"
     iterm::state
-    printf "${OSC}133;A${BEL}"
+    printf "${OSC}1337;A${BEL}"
 
 }
 
 iterm::prompt_suffix()
 {
-    printf "${OSC}133;B${BEL}"
+    printf "${OSC}1337;B${BEL}"
 }
 
 iterm::version()

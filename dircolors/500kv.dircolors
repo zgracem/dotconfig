@@ -1,7 +1,6 @@
 # -----------------------------------------------------------------------------
-# Solarized Dark color theme for the color GNU ls utility.
+# 500 kV colour theme for the colour GNU ls utility.
 # Designed for dircolors (GNU coreutils) 5.97
-# Adapted from https://github.com/seebi/dircolors-solarized
 # -----------------------------------------------------------------------------
 
 # tty : colorize output to terminals, but not pipes
@@ -43,6 +42,9 @@ TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
+TERM iTerm.app
+TERM nsterm
+TERM tmux-256color
 
 # 8-bit output: '1' for on, '0' for off
 EIGHTBIT 1

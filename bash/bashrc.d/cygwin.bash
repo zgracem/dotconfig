@@ -2,7 +2,7 @@
 
 # if we have Windows admin privileges, we will be a member of group 544 or 0
 for group in "${GROUPS[@]}"; do
-  if [[ $group =~ ^(0|544)$ ]]; then
+  if [[ $group == @(0|544) ]]; then
     CYGWIN_ADMIN=true
     break
   fi
@@ -51,8 +51,6 @@ unset -v printer_key
 # -----------------------------------------------------------------------------
 # aliases
 # -----------------------------------------------------------------------------
-
-alias eject="$SYSTEMROOT/system32/rundll32 shell32.dll,Control_RunDLL hotplug.dll"
 
 # be like OS X
 open() { cygstart "$@"; }

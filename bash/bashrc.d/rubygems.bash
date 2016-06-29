@@ -1,6 +1,6 @@
 if type -P gem &>/dev/null; then
   case $HOSTNAME in
-    Athena|*webfaction*)
+    Athena|*.webfaction.com)
       GEM_HOME=$HOME/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0
       ;;
     *.atco.com)

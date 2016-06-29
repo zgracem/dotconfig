@@ -7,8 +7,8 @@ if _inPath mandb; then
     export GROFF_NO_SGR=1
 
     # use less's default prompt in man pages
-    export MANLESS=''
+    export MANLESS=""
 fi
 
 # used by Midnight Commander
-export VIEWER='vim -R'
+export VIEWER="vim -R"

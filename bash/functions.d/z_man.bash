@@ -2,26 +2,8 @@
 # man pages for all
 # ------------------------------------------------------------------------------
 
-z::mantitle()
-{
-  local manfile title section
-
-  manfile=$(command man -w "$@") || return
-
-  title=${manfile##*/} # strip path
-  title=${title%.gz}   # strip extension (if any)
-
-  section=${title##*.} # isolate section
-  title=${title%.*}    # remove section
-
-  if [[ $section =~ (.+)(ssl|tcl)$ ]]; then
-    section=${BASH_REMATCH[1]}
-  elif [[ $section == 3o ]]; then
-    section=3
-  fi
-
-  printf '%s(%s)' "$title" "$section"
-}
+# This function will use Terminal.app's x-man-page:// handling if available.
+# Set Z_NO_MAN_URL to inhibit this behaviour.
 
 man()
 { # open man page in a new window with a helpful title
@@ -55,10 +37,11 @@ man()
     # let Terminal.app be clever about this
     open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
     return 0
-  ### ZGM disabled 2016-06-04 -- need to make this work properly in iTerm3
-  # elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_NO_MAN_URL ]]; then
-  #   open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
-  #   return 0
+  ## ZGM revised 2016-06-17 -- better than nothing for now
+  elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_NO_MAN_URL ]]; then
+    open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
+    # open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
+    return 0
   else
     if _inScreen; then
       screen -t "$title" man "$@"
@@ -69,4 +52,25 @@ man()
       command man "$@"
     fi
   fi
+}
+
+z::mantitle()
+{
+  local manfile title section
+
+  manfile=$(command man -w "$@") || return
+
+  title=${manfile##*/} # strip path
+  title=${title%.gz}   # strip extension (if any)
+
+  section=${title##*.} # isolate section
+  title=${title%.*}    # remove section
+
+  if [[ $section =~ (.+)(ssl|tcl)$ ]]; then
+    section=${BASH_REMATCH[1]}
+  elif [[ $section == 3o ]]; then
+    section=3
+  fi
+
+  printf '%s(%s)' "$title" "$section"
 }
