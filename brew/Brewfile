@@ -20,7 +20,7 @@ brew 'openssl'
 brew 'git', args: ['with-brewed-curl', 'with-brewed-openssl']
 
 # bash 4
-brew 'bash'
+brew 'bash', args: ['devel']
 brew 'homebrew/versions/bash-completion2'
 
 # tmux
