@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 # get the terminal colour depth (based on $TERM, not perfect but it'll do)
-if [[ -z $TERM_COLOURDEPTH ]]; then
+if [[ -z $TERM_COLOURDEPTH || -n $Z_RELOADING ]]; then
   TERM_COLOURDEPTH="$(tput colors 2>/dev/null)" || return
 fi
 
@@ -24,14 +24,14 @@ colours=(reset)
 props=(bold ul blink inv)
 
 # basic ANSI colours
-black='30'   # 8 -- TODO: wtf are these?
-red='31'     # 9
-green='32'   # 10
-yellow='33'  # 11
-blue='34'    # 12
-magenta='35' # 13
-cyan='36'    # 14
-white='37'   # 15
+black='30'
+red='31'
+green='32'
+yellow='33'
+blue='34'
+magenta='35'
+cyan='36'
+white='37'
 
 colours+=(black red green yellow blue magenta cyan white)
 
@@ -77,12 +77,12 @@ colour_true=$green
 colour_false=$red
 
 colour_hi=$brwhite  # highlight colour
-colour_2d=$brblack  # secondary colour
+colour_dim=$brblack  # secondary colour
 
 # used in PS1 -- see bashrc.d/prompt.bash
 : ${colour_user:=$blue}
 
-colours+=(colour_true colour_false colour_hi colour_2d colour_user)
+colours+=(colour_true colour_false colour_hi colour_dim colour_user)
 
 # -----------------------------------------------------------------------------
 # Solarized -- http://ethanschoonover.com/solarized
@@ -122,12 +122,12 @@ if [[ -n $Z_SOLARIZED ]]; then
     dark)
       COLORFGBG='12;8'
       colour_hi=$base2
-      colour_2d=$base01
+      colour_dim=$base01
       ;;
     light)
       COLORFGBG='11;15'
       colour_hi=$base02
-      colour_2d=$base1
+      colour_dim=$base1
 
       colour_true=$cyan
       colour_false=$orange
@@ -151,7 +151,8 @@ z::colour::add_esc()
     local var_name="esc_${index#*_}"
 
     if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == "true" ]]; then
-      eval "$var_name=\"${CSI}${!index}m\""
+      # eval "$var_name=\"${CSI}${!index}m\""
+      printf -v "$var_name" "${CSI}${!index}m"
     fi
   done
 }
@@ -170,11 +171,11 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   export GREP_COLORS=''
 
   GREP_COLORS+="sl=${reset}:"         # whole selected lines
-  GREP_COLORS+="cx=${colour_2d}:"     # whole context lines
+  GREP_COLORS+="cx=${colour_dim}:"    # whole context lines
   GREP_COLORS+="mt=${brred}:"         # any matching text
   GREP_COLORS+="ms=${ul};${brred}:"   # matching text in a selected line
   GREP_COLORS+="mc=${brred}:"         # matching text in a context line
-  GREP_COLORS+="fn=${colour_2d}:"     # filenames
+  GREP_COLORS+="fn=${colour_dim}:"    # filenames
   GREP_COLORS+="ln=${blue}:"          # line numbers
   GREP_COLORS+="bn=${cyan}:"          # byte offsets
   GREP_COLORS+="se=${reset}"          # separators
@@ -182,24 +183,6 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   # deprecated
   export GREP_COLOR="${ul};${brred}"
 fi
-
-# -----------------------------------------------------------------------------
-# less -- colourize man pages
-# -----------------------------------------------------------------------------
-
-LESS_TERMCAP_mb="${esc_magenta}"        # begin blinking mode
-LESS_TERMCAP_md="${esc_green}"          # begin bold mode [headers]
-LESS_TERMCAP_me="${esc_reset}"          # end blink/bold mode
-
-LESS_TERMCAP_us="${esc_yellow}"         # begin underline [variables]
-LESS_TERMCAP_ue="${esc_reset}"          # end underline
-
-LESS_TERMCAP_so="${esc_orange}"         # begin standout [info box]
-LESS_TERMCAP_se="${esc_reset}"          # end standout
-
-LESS_TERMEND="${esc_reset}"             # reset colours
-
-export ${!LESS_TERM*}
 
 # -----------------------------------------------------------------------------
 # ls
@@ -211,54 +194,19 @@ if ! _isGNU ls; then
   export CLICOLOR=1
 fi
 
-# use dircolors(1) to set LS_COLORS
-
-if [[ -z $LS_COLORS ]]; then
-  dc_src="$dir_config/dircolors"
-  dc_cache="$HOME/var/cache/dircolors"
-  dc_stub="default"
-
-  if [[ -n $Z_SOLARIZED ]]; then
-    dc_stub="solarized.$Z_SOLARIZED"
-  elif [[ -n $HV_LOADED ]]; then
-    dc_stub="500kv.dircolors"
-  fi
-
-  dc_src_file="$dc_src/$dc_stub"
-  dc_cache_file="$dc_cache/$dc_stub"
-
-  if [[ ! -f $dc_cache_file ]] \
-    && [[ -f $dc_src_file ]] \
-    && _inPath dircolors
-  then
-    # create cache dir if it doesn't exist
-    [[ -d $dc_cache ]] || mkdir -p "$dc_cache" 1>/dev/null
-
-    # create cache file
-    dircolors -b "$dc_src_file" > "$dc_cache_file"
-  fi
-
-  if [[ -f $dc_cache_file ]]; then
-    # set and export LS_COLORS
-    eval "$(<"$dc_cache_file")"
-  fi
-
-  unset -v ${!dc_*}
-fi
-
 # -----------------------------------------------------------------------------
 # miscellany
 # -----------------------------------------------------------------------------
 
 # colourize history output
 if (( TERM_COLOURDEPTH >= 16 )); then
-  HISTTIMEFORMAT="${esc_2d}${HISTTIMEFORMAT}${esc_reset}"
+  HISTTIMEFORMAT="${esc_dim}${HISTTIMEFORMAT}${esc_reset}"
 fi
 
 # print a red "^C" when a command is aborted
-if type -P stty &>/dev/null; then
+if type -P stty >/dev/null; then
   # disable echoing of control characters
-  stty -ctlecho &>/dev/null
+  stty -ctlecho >/dev/null
   bind 'set echo-control-characters off'
 
   # print a red "^C" on SIGINT
@@ -283,4 +231,4 @@ export HV_BG="reset"
 # -----------------------------------------------------------------------------
 
 unset -f z::colour::add_esc
-unset -v ${!colour_*} ${colours[*]} colours  ${props[*]} props 
+unset -v ${!colour_*} ${colours[*]} colours ${props[*]} props
