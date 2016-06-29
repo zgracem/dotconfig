@@ -141,7 +141,7 @@ fi
 # add escape codes
 # ------------------------------------------------------------------------------
 
-z::colour::add_esc()
+_z_colour_add_esc()
 { # $green -> $esc_green, $colour_true -> $esc_true
 
   local -a indexes=("$@")
@@ -157,7 +157,7 @@ z::colour::add_esc()
   done
 }
 
-z::colour::add_esc ${colours[*]}
+_z_colour_add_esc ${colours[*]}
 
 # # export everything
 # export ${!esc_*}
@@ -230,5 +230,5 @@ export HV_BG="reset"
 # cleanup
 # -----------------------------------------------------------------------------
 
-unset -f z::colour::add_esc
+unset -f _z_colour_add_esc
 unset -v ${!colour_*} ${colours[*]} colours ${props[*]} props

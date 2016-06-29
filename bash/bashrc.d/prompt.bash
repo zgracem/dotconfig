@@ -56,8 +56,8 @@ fi
 # functions
 # -----------------------------------------------------------------------------
 
-z::prompt::compress_pwd()
-{ # Usage: z::prompt::compress_pwd "$PWD"
+_z_prompt_compress_pwd()
+{ # Usage: _z_prompt_compress_pwd "$PWD"
 
   # Trims leading elements of the current directory like so:
   #   ~/first/second/3rd/fourth
@@ -140,7 +140,7 @@ z::prompt::compress_pwd()
   fi
 }
 
-z::prompt::print_exit()
+_z_prompt_print_exit()
 { # print non-zero exit codes on the far right of the screen (zsh envy...)
   local last_exit=$?
   local gutter=1
@@ -179,7 +179,7 @@ z::prompt::print_exit()
   fi
 }
 
-z::prompt::git_info()
+_z_prompt_git_info()
 {
   [[ $Z_PROMPT_GIT == true ]] || return 0
 
@@ -257,17 +257,17 @@ z::prompt::git_info()
 }
 
 # notify iTerm of the current directory
-if _isFunction iterm::state; then
-  z::prompt::update_iTerm() { iterm::state; }
+if _isFunction iterm_state; then
+  _z_prompt_update_iTerm() { iterm_state; }
 else
-  z::prompt::update_iTerm()
+  _z_prompt_update_iTerm()
   {
     printf '%b%s%b' "${OSC}50;CurrentDir=${PWD}${BEL}"
   }
 fi
 
 # Notify Terminal.app of the current directory
-z::prompt::update_Terminal()
+_z_prompt_update_Terminal()
 { # Format:   file://hostname/path/to/pwd
   # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 
@@ -304,7 +304,7 @@ z::prompt::update_Terminal()
   printf '%b' "$ante" "$pwd_url" "$post"
 }
 
-z::prompt::update_titles()
+_z_prompt_update_titles()
 {
   local tab_title="${USER}@${HOSTNAME%%.*}"
   local win_title="${tab_title}: ${PWD/#$HOME/$'~'}"
@@ -334,7 +334,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     unset g
   fi
 
-  z::colour::PS1_esc()
+  z_colour_PS1_esc()
   { # create new colour variables w/ prompt escape codes (\[ and \])
 
     local -a indexes=("$@")
@@ -350,7 +350,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     done
   }
 
-  z::colour::PS1_esc ${!esc_*}
+  z_colour_PS1_esc ${!esc_*}
 fi
 
 # -----------------------------------------------------------------------------
@@ -361,7 +361,7 @@ PS1=""
 
 # Print exit status of last command
 if [[ $Z_PROMPT_EXIT == true ]]; then
-  PS1+="${PS1_false}\[\$(z::prompt::print_exit)\]${PS1_reset}"
+  PS1+="${PS1_false}\[\$(_z_prompt_print_exit)\]${PS1_reset}"
 fi
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -370,10 +370,10 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 # current path, highlighted
-PS1+="${PS1_hi}\$(z::prompt::compress_pwd)"
+PS1+="${PS1_hi}\$(_z_prompt_compress_pwd)"
 
 # info about current git branch, if any (function supplies colours)
-PS1+="\$(z::prompt::git_info)"
+PS1+="\$(_z_prompt_git_info)"
 
 # blue $ for me, red # for root
 PS1+=" ${PS1_user}\\\$${PS1_reset} "
@@ -398,7 +398,7 @@ PS4="+ $PS1_dim\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COM
 # PROMPT_COMMAND
 # -----------------------------------------------------------------------------
 
-z::prompt::cmd_add()
+_z_prompt_cmd_add()
 { # append (or prepend with -p) to PROMPT_COMMAND, avoiding duplicates
   if [[ $1 == -p ]]; then
     local prepend=true
@@ -418,7 +418,7 @@ z::prompt::cmd_add()
   return 0
 }
 
-z::prompt::cmd_del()
+_z_prompt_cmd_del()
 { # remove a command from PROMPT_COMMAND
   local regex=' ?'"$*"'[ ;]*'
 
@@ -437,35 +437,35 @@ z::prompt::cmd_del()
 # -----------------------------------------------------------------------------
 
 if [[ $TERM_PROGRAM == iTerm.app ]]; then
-  z::prompt::cmd_add z::prompt::update_iTerm
+  _z_prompt_cmd_add _z_prompt_update_iTerm
 else
-  unset -f z::prompt::update_iTerm
+  unset -f _z_prompt_update_iTerm
 fi
 
 if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-  z::prompt::cmd_add z::prompt::update_Terminal
+  _z_prompt_cmd_add _z_prompt_update_Terminal
 else
-  unset -f z::prompt::update_Terminal
+  unset -f _z_prompt_update_Terminal
 fi
 
 if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
-  z::prompt::cmd_add "z::prompt::update_titles"
+  _z_prompt_cmd_add "_z_prompt_update_titles"
 fi
 
 # append to HISTFILE
-z::prompt::cmd_add -p "history -a"    
+_z_prompt_cmd_add -p "history -a"    
 
 # # read from HISTFILE -- enable if you want tmux sessions to share history
-# z::prompt::cmd_add -p "history -n"  
+# _z_prompt_cmd_add -p "history -n"  
 
 # see bashrc.d/direnv.bash
 if _isFunction _direnv_hook; then
-  z::prompt::cmd_add -p "_direnv_hook"
+  _z_prompt_cmd_add -p "_direnv_hook"
 fi
 
 # -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
 
-unset -f z::colour::PS1_esc z::prompt::cmd_{add,del}
+unset -f z_colour_PS1_esc _z_prompt_cmd_{add,del}
 unset -v ${!PS1_*} ${!z_PS1*}

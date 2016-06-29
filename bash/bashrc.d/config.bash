@@ -158,22 +158,22 @@ if _inPath launchctl; then
 fi
 
 # -----------------------------------------------------------------------------
-# z::config::symlink
+# _z_config_symlink
 # Symlink files from ~/.config into ~
 # -----------------------------------------------------------------------------
 
 # Usage:
-#   z::config::symlink target [symlink]
+#   _z_config_symlink target [symlink]
 #
 # - TARGET is relative to ~/.config
 # - SYMLINK is relative to ~
 #   - defaults to the basename of TARGET preceded by a dot
 #
 # Example: 
-#   z::config::symlink "git/config" ".gitconfig"
-#   z::config::symlink "vimrc"
+#   _z_config_symlink "git/config" ".gitconfig"
+#   _z_config_symlink "vimrc"
 
-z::config::symlink()
+_z_config_symlink()
 {
   local target=".config/${1}"
 

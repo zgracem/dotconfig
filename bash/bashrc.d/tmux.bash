@@ -14,4 +14,4 @@ tt()
 }
 
 # symlink config file into HOME
-z::config::symlink "tmux/tmux.conf"
+_z_config_symlink "tmux/tmux.conf"

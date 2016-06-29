@@ -5,4 +5,4 @@ if [[ $OSTYPE =~ cygwin && -x "${dir_apps}/Git/cmd/git" ]]; then
 fi
 
 # symlink config file into HOME
-z::config::symlink "git/config" ".gitconfig"
+_z_config_symlink "git/config" ".gitconfig"
