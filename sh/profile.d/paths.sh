@@ -92,9 +92,9 @@ if [[ -x /usr/bin/xcode-select ]]; then
     darwin_ver=$(uname -r)
 
     if (( ${darwin_ver%%.*} >= 15 )); then
-        # PATH=$PATH:$DEVELOPER_DIR/usr/bin
-        # PATH=$PATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/bin
-        # PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
+        PATH=$PATH:$DEVELOPER_DIR/usr/bin
+        PATH=$PATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/bin
+        PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
         MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
         MANPATH=$MANPATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man
         MANPATH=$MANPATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/share/man
@@ -108,6 +108,10 @@ fi
 
 # calibre
 PATH=$PATH:$HOME/Applications/calibre.app/Contents/MacOS
+
+# X11
+PATH=$PATH:/opt/X11/bin
+MANPATH=$MANPATH:/opt/X11/share/man
 
 # -----------------------------------------------------------------------------
 # cygwin

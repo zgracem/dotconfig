@@ -198,10 +198,12 @@ fi
 # other config files
 # -----------------------------------------------------------------------------
 
-# # Our remaining files do *not* conform to POSIX, so we shouldn't even try.
-# if [[ -n $POSIXLY_CORRECT ]]; then
-#   return
-# fi
+# For reasons I have yet (2016-06-29) to learn, xterm(1) sessions start with
+# POSIXLY_CORRECT set to "y", which messes up a lot of my config files. This
+# should detect when that's happening and disable it.
+if [[ $POSIXLY_CORRECT == "y" && -n $XTERM_VERSION ]]; then
+  unset -v POSIXLY_CORRECT
+fi
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.

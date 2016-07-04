@@ -1,0 +1,78 @@
+!#include ".Xresources.d/xterm"
+
+! -----------------------------------------------------------------------------
+! xterm
+! -----------------------------------------------------------------------------
+
+XTerm*VT100.geometry: 132x40
+
+XTerm*termName: xterm-256color
+!XTerm*toolBar: false
+
+! Interpret all incoming data as UTF-8 encoded.
+XTerm*locale: true
+XTerm*utf8: 1
+
+! Keep more history.
+XTerm*saveLines: 32767
+
+! Scroll to bottom on keypress.
+XTerm*scrollKey: true
+
+! Visual bell instead of audible
+XTerm*visualbell: true
+
+!XTerm*faceName: Consolas
+!XTerm*faceSize: 10
+!XTerm*renderFont: true
+
+! Selectively disable window operations.
+!allowWindowOps: false
+!disallowedWindowOps: GetIconTitle,GetWinTitle,SetXprop,SetSelection,SetWinLines,SetWinPosition,SetWinSizeChars,SetWinSizePixels
+
+! Do not display "bright" ANSI colours as bold.
+boldColors: false
+allowBoldFonts: false
+
+! -----------------------------------------------------------------------------
+! colour setup
+! -----------------------------------------------------------------------------
+
+*customization: -color
+
+XTerm*background: rgb:28/28/28
+XTerm*foreground: rgb:7f/8c/8d
+XTerm*highlightColor:     rgb:4a/4f/50
+XTerm*highlightTextColor: rgb:ec/f0/f1
+
+! black
+XTerm*color0:  rgb:38/38/38
+XTerm*color8:  rgb:4a/4f/50
+
+! red
+XTerm*color1:  rgb:ab/46/42
+XTerm*color9:  rgb:dc/32/2f
+
+! green
+XTerm*color2:  rgb:42/93/64
+XTerm*color10: rgb:2e/cc/71
+
+! yellow
+XTerm*color3:  rgb:a7/82/0e
+XTerm*color11: rgb:f1/c4/0f
+
+! blue
+XTerm*color4:  rgb:53/8c/b8
+XTerm*color12: rgb:4b/b2/fa
+
+! magenta
+XTerm*color5:  rgb:95/41/6a
+XTerm*color13: rgb:d3/36/82
+
+! cyan
+XTerm*color6:  rgb:24/8c/92
+XTerm*color14: rgb:15/e1/ed
+
+! white
+XTerm*color7:  rgb:95/a5/a6
+XTerm*color15: rgb:ec/f0/f1
