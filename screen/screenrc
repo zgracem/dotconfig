@@ -76,9 +76,6 @@ bind - resize -1
 
 bind ^r source $SCREENRC
 
-bind M screen alpine $flags_alpine
-bind t screen -t twitter $HOME/bin/ttytter.pl -dostream
-
 # -----------------
 # Terminal settings
 # -----------------

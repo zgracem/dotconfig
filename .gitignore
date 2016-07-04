@@ -8,11 +8,7 @@
 # email
 alpine/
 
-# GPG/SSH
-gnupg/*
-!gnupg/gpg.conf
-!gnupg/gpg-agent.conf
-keybase/
+# SSH
 ssh/
 **/ssh_config
 
@@ -20,7 +16,7 @@ ssh/
 *.bak
 fish/
 misc/
-mc/*
+mc/
 
 # jrnl -- http://maebert.github.io/jrnl/
 jrnl*
