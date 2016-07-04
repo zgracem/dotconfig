@@ -1,37 +1,45 @@
 setup()
 {
-    # set `dir_drive` if it isn't already
-    dir_drive=${dir_drive:-$(find_drive "$myDrive")} || return
+  # Set path to USB drive if it isn't set already.
+  dir_drive=${dir_drive:-$(find_drive "$myDrive")} || return
+  local installer_dir="$dir_drive/bin/cygwin"
 
-    local log_dir="/var/log"
-    local installer_dir="${dir_drive}/bin/cygwin"
-    local cyg_bin="${installer_dir}/cygwin.exe"
+  # Where to save downloaded packages (Windows-style path).
+  local pkg_dir
+  pkg_dir=$(cygpath -aw "$installer_dir/pkg")
 
-    local pkg_dir
-    pkg_dir=$(cygpath -aw "${installer_dir}/pkg")
+  # Windows-style path to cygwin's root installation directory.
+  local cyg_root
+  cyg_root=$(cygpath -aw /)
 
-    local cyg_root
-    cyg_root=$(cygpath -aw /)
+  local -a flags=()
 
-    local -a flags=()
+  # Root installation directory (--root)
+  flags+=(-R "${cyg_root//\\/\\\\}")
 
-    # root installation directory
-    flags+=("--root \"${cyg_root//\\/\\\\}\"")
-    
-    # where to save downloaded packages
-    flags+=("--local-package-dir \"${pkg_dir}\"")
+  # Directory to save downloaded packages in (--local-package-dir)
+  flags+=(-l "${pkg_dir}")
 
-    flags+=("--upgrade-also")       # also upgrade installed packages
-    flags+=("--arch x86")           # architecture to install (x86_64 or x86)
-    flags+=("--no-admin")           # don't require Administrator privileges
-    flags+=("--no-shortcuts")       # don't create desktop/Start menu shortcuts
-    flags+=("--no-verify")          # don't verify setup.ini
+  # More options:
+  flags+=(-gnXBM -a x86)
+  #        │││││  └── Architecture to install: x86_64 or x86 (--arch)
+  #        ││││└───── Semi-attended mode (--package-manager)
+  #        │││└────── Don't require admin privileges (--no-admin)
+  #        ││└─────── Don't verify setup.ini signatures (--no-verify)
+  #        │└──────── Don't make desktop/Start menu shortcuts (--no-shortcuts)
+  #        └───────── Also upgrade installed packages (--upgrade-also)
 
-    if [[ -x $cyg_bin ]]; then
-        PWD="$log_dir" run "$cyg_bin" "${flags[@]}"
-        # otherwise setup.log will write to actual PWD for some annoying reason
-    else
-        scold "can't find ${cyg_bin}"
-        return 69
-    fi
+  local cyg_bin="${installer_dir}/cygwin.exe"
+  local log_dir="/var/log"
+
+  if [[ -x $cyg_bin ]]; then
+      (cd "$log_dir" && run "$cyg_bin" "${flags[@]}")
+      # Otherwise setup.log will write to actual PWD for some annoying reason.
+  else
+    scold "can't find ${cyg_bin}"
+    return 69
+  fi
 }
+
+# To duplicate installation on another computer:
+#   setup.exe ... --local-install --quiet-mode --local-package-dir "$pkg_dir"
