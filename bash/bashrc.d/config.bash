@@ -87,7 +87,7 @@ rl()
 
   local f; for f in "${files[@]}"; do
     if [[ -f $f ]]; then
-      # printf "Reloading %s...\n" "${f/#$HOME/$'~'}"
+      [[ -n $Z_RL_VERBOSE ]] && printf "Reloading %s...\n" "${f/#$HOME/$'~'}"
       [[ -z $dry_run ]] && . "$f" && ret=0
     fi
   done

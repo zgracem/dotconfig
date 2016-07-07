@@ -26,21 +26,16 @@ hconfsync()
         --exclude=.DS_Store
         --exclude=.git/
         --exclude=alpine/ 
-        --exclude=direnv/
         --exclude=fish/ 
-        --exclude=keybase/
         --include=local/Hiroko/
         --exclude='local/*'
         --exclude='transmission*/'
-        --exclude=jrnl
-        --exclude=trc
         --exclude=youtube-dl.conf
     )
 
     local -a script_filters=(
         --include=brew-check.sh
         --include=brew-relink.sh
-        --include=brew-tidy.sh
         --include=brew-vars.sh
         --include=btadd.sh
         --include=countdown.sh
@@ -48,16 +43,14 @@ hconfsync()
         --include=fixchmod.sh
         --include=hardware.rb
         --include=loginbanner.sh
-        --include=loginbanner2.sh
         --include=manpdf.sh
         --include=matins.sh
-        --include=newpassword.sh
         --include=os.sh
         --include=pinback.sh
         --include=tc.sh
         --include=tinypng.sh
-        --include=trash.sh
         --include=weather.sh
+        --include=util/
         --exclude='*'
     )
 
@@ -75,16 +68,11 @@ wfconfsync()
         --exclude=alpine/
         --exclude=brew/
         --exclude=fish/
-        --exclude=gnupg/
-        --exclude=keybase/
         --include=local/web500/
         --exclude='local/*'
         --exclude=misc/
-        --exclude=skel/
         --exclude='.git*'
         --exclude='transmission*/'
-        --exclude=jrnl
-        --exclude=trc
         --exclude=youtube-dl.conf
     )
 
@@ -93,14 +81,12 @@ wfconfsync()
         --include=fds.sh
         --include=fixchmod.sh
         --include=loginbanner.sh
-        --include=loginbanner2.sh
         --include=matins.sh
-        --include=newpassword.sh
         --include=os.sh
         --include=tc.sh
         --include=tinypng.sh
-        --include=trash.sh
         --include=weather.sh
+        --include=util/
         --exclude='*'
     )
 

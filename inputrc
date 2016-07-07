@@ -16,6 +16,10 @@ set convert-meta off
 # readline uses a visible bell if available
 set bell-style visible
 
+# I don't use any terminal emulators w/ Meta-key support
+# http://invisible-island.net/ncurses/ncurses.faq.html#bash_meta_mode
+set enable-meta-key off
+
 # -----------------------------------------------------------------------------
 # display
 # -----------------------------------------------------------------------------
@@ -39,8 +43,9 @@ set print-completions-horizontally on
 # ask to view possible completions if >= x
 set completion-query-items 64
 
-# display completions in colour (based on LS_COLORS)
-set colored-stats on
+### ZGM disabled 2016-07-06 -- ugly and unreliable
+# # display completions in colour (based on LS_COLORS)
+# set colored-stats on
 
 # complete things that have been typed in the wrong case
 set completion-ignore-case on

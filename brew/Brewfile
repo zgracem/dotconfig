@@ -2,7 +2,8 @@
 # ~/.config/brew/Brewfile
 # -----------------------------------------------------------------------------
 
-# tap 'homebrew/bundle' # needs to be installed before this can run, though...
+# tap 'homebrew/bundle' 
+# -- needs to be installed before this can run, though...
 
 tap 'homebrew/dupes'
 tap 'homebrew/versions'
@@ -29,14 +30,11 @@ brew 'reattach-to-user-namespace'
 
 # other
 brew 'direnv', args: ['force-bottle']
+brew 'fpp', args: ['HEAD']
 brew 'midnight-commander'
 brew 'vim', args: ['HEAD', 'override-system-vi']
 brew 'homebrew/dupes/less', args: ['with-pcre']
 brew 'homebrew/dupes/ncurses'
-
-# ZGM 2016-06-09: HEAD is broken -- the bin doesn't have its exec bit set.
-# Install manually until fixed (or I learn how to modify the formula).
-# brew 'fpp', args: ['HEAD']
 
 # -----------------------------------------------------------------------------
 # GNU utilities
@@ -141,8 +139,6 @@ brew 'figlet'
 # misc.
 # -----------------------------------------------------------------------------
 
-brew 'jrnl'
-
 brew 'pv'
 brew 'rename'
 brew 'sf-pwgen' # github.com/anders/pwgen
@@ -158,12 +154,6 @@ brew 'unrar'
 # dictionaries
 brew 'dict'
 brew 'sdcv'
-
-# # GnuPG & friends
-# brew 'gnupg2', args: ['with-readline']
-# brew 'gpg-agent'
-# brew 'pinentry'
-# brew 'keybase'
 
 # pdf
 brew 'ghostscript'

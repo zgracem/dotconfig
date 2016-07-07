@@ -8,7 +8,7 @@ fi
 
 if [ -z "$LANG" ]; then
     # grep available locales to find 'en_CA.UTF-8' or 'en_CA.utf8'
-    export LANG="$(locale -a 2>/dev/null | command grep -Ei "$LANGUAGE\.utf-?8")"
+    export LANG="$(locale -a 2>/dev/null | /usr/bin/grep -Ei "$LANGUAGE\.utf-?8")"
 fi
 
 if [ -z "$LC_ALL" ]; then
