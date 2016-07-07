@@ -29,8 +29,8 @@ if [[ -x $dir_scripts/loginbanner.sh ]]; then
 fi
 
 # this day in history...
-if [[ -x $dir_scripts/matins.sh ]]; then
-    "${dir_scripts}/matins.sh"
+if [[ -x $dir_scripts/util/matins.sh ]]; then
+    "${dir_scripts}/util/matins.sh"
 fi
 
 # countdown (date & function set in private.d/countdown.bash)

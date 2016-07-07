@@ -55,7 +55,10 @@ IRB.conf[:PROMPT_MODE]  = :ZGM
 # proxy
 # -----------------------------------------------------------------------------
 
-if ENV["HOSTNAME"].to_s =~ /\.atco\.com/
+require "socket"
+hostname = Socket.gethostname
+
+if hostname.to_s.downcase =~ /ws144966/
   require "socksify"
   TCPSocket.socks_server = "127.0.0.1"
   TCPSocket.socks_port   = 8080

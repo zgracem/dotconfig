@@ -29,15 +29,15 @@ export ${!Z_PROMPT_*} ${!Z_SET_*}
 # sanity checks for features
 # -----------------------------------------------------------------------------
 
+# only use colours if supported by current terminal
+if (( TERM_COLOURDEPTH < 8 )); then
+  Z_PROMPT_COLOUR=false
+fi
+
 # only change window title if supported by current terminal
 if [[ ! $TERM =~ xterm|screen|tmux|cygwin|putty|iTerm.app ]]; then
   Z_SET_WINTITLE=false
   Z_SET_TABTITLE=false
-fi
-
-# only use colours if supported by current terminal
-if (( TERM_COLOURDEPTH < 8 )); then
-  Z_PROMPT_COLOUR=false
 fi
 
 # Prompt <panic.com/prompt> doesn't have a status line

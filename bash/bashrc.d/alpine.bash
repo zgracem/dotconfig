@@ -3,6 +3,9 @@
 
 _inPath alpine || return
 
+# Create a write-protected ~/.pinerc so alpine has to use our custom path.
+printf "" >| ~/.pinerc && 400 ~/.pinerc
+
 export flags_alpine=()
 
 # go directly to index, bypassing main menu

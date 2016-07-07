@@ -4,7 +4,7 @@
 
 # get the terminal colour depth (based on $TERM, not perfect but it'll do)
 if [[ -z $TERM_COLOURDEPTH || -n $Z_RELOADING ]]; then
-  TERM_COLOURDEPTH="$(tput colors 2>/dev/null)" || return
+  TERM_COLOURDEPTH="$(tput colors)" || return
 fi
 
 # skip this file if the terminal can't support at least eight colours
@@ -120,12 +120,10 @@ if [[ -n $Z_SOLARIZED ]]; then
   # re/define semantic colours
   case $Z_SOLARIZED in
     dark)
-      COLORFGBG='12;8'
       colour_hi=$base2
       colour_dim=$base01
       ;;
     light)
-      COLORFGBG='11;15'
       colour_hi=$base02
       colour_dim=$base1
 
@@ -134,7 +132,7 @@ if [[ -n $Z_SOLARIZED ]]; then
       ;;
   esac
 
-  export Z_SOLARIZED COLORFGBG
+  export Z_SOLARIZED
 fi
 
 # ------------------------------------------------------------------------------

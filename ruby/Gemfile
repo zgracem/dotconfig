@@ -2,12 +2,12 @@
 
 source "https://rubygems.org"
 
-gem "bundler",        "~> 1.9.9"
+gem "bundler"
 
 # ruby dev
 gem "json"
 gem "plist"
-gem "what_methods" # irb
+gem "what_methods" # for use in irb
 # gem "yard" # documentation
 
 # webdev
