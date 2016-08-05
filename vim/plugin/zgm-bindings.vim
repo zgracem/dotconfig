@@ -123,6 +123,11 @@ if has("spell")
   imap <silent> <F9> <C-O>:set spell!<CR>
 endif
 
+" <F10> displays the current syntax highlighting context(s)
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 " Ctrl+[hjkl] moves b/w tabs and windows
 map <silent> <C-j> :wincmd j<CR>
 map <silent> <C-k> :wincmd k<CR>

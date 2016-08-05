@@ -32,13 +32,14 @@ case $OSTYPE in
         : ${dir_desktop:="$(cygpath --desktop)"}
         : ${dir_docs:="$(cygpath --mydocs)"}
         dir_downloads="$dir_docs/Downloads"
-        dir_dropbox="$dir_docs/Dropbox"
 
         if [[ -n $USERPROFILE ]]; then
             : ${dir_winhome:="$(cygpath -au "$USERPROFILE")"}
         else
             dir_winhome="/cygdrive/c/Users/$USER"
         fi
+        
+        dir_dropbox="$dir_winhome/Dropbox"
         ;;
 esac
 

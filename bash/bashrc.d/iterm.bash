@@ -10,7 +10,7 @@
 
 iterm::esc()
 {
-    printf "${OSC}1337;%s${BEL}" "$@"
+    printf "${OSC}1337;%b${BEL}" "$@"
 }
 
 iterm::setvar()

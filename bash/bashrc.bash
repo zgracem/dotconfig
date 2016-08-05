@@ -1,37 +1,47 @@
 # -----------------------------------------------------------------------------
 # ~/.config/bash/bashrc.bash                                          ~/.bashrc
-# executed by bash(1) for interactive shells
+# Executed by bash(1) for interactive shells
 # -----------------------------------------------------------------------------
 
-# source .profile
+# Source ~/.profile
 if [[ -r $HOME/.config/sh/profile.sh ]] ; then
   . "$HOME/.config/sh/profile.sh"
 fi
 
-# abort if...
+# Abort if...
 if ! test "$BASH_VERSINFO" || (( BASH_VERSINFO[0] < 3 )); then
-  # bash is too old
+  # ...bash is too old
   return
 elif ! [[ -n $PS1 && $- =~ i ]]; then
-  # this isn't an interactive shell
+  # ...this isn't an interactive shell
   return
 elif shopt -q restricted_shell; then
-  # this is a restricted shell
+  # ...this is a restricted shell
   return
 fi
 
-# switch to bash-4.4 if available
+# Switch to bash-4.4 if available
 latest_bash=44
 this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 
 if (( this_bash < latest_bash )) && [[ -x $HOME/opt/bin/bash ]]; then
   export SHELL="$HOME/opt/bin/bash"
+
+  # Temporarily export shell options so the new shell inherits them.
   export SHELLOPTS
+
+  # Prevent shell from exiting if `exec` fails.
+  shopt -s execfail
+
   if shopt -pq login_shell; then
     exec -l "$SHELL"
   else
     exec "$SHELL"
   fi
+  shopt -u execfail
+else
+  # We don't actually want to *keep* them exported, though.
+  declare +x SHELLOPTS
 fi
 
 # # redundant with the above? test on 4.4-final
@@ -40,7 +50,7 @@ fi
 # fi
 
 # -----------------------------------------------------------------------------
-# shell options
+# Shell options
 # -----------------------------------------------------------------------------
 
 set -o noclobber        # >file won't overwrite existing file (override with >|file)
@@ -57,7 +67,7 @@ shopt -s checkwinsize   # update LINES & COLUMNS after each command if necessary
 shopt -s gnu_errfmt     # print shell error messages in standard GNU format
 shopt -u sourcepath     # [don't] use PATH to find files to source
 
-# bash 4+ options
+# bash-4.0+ options
 # -- http://wiki.bash-hackers.org/scripting/bashchanges#shell_options
 
 if (( BASH_VERSINFO[0] >= 4 )); then
@@ -78,7 +88,7 @@ if (( BASH_VERSINFO[0] >= 4 )); then
 fi
 
 # -----------------------------------------------------------------------------
-# miscellaneous settings
+# Miscellaneous settings
 # -----------------------------------------------------------------------------
 
 export USER=${USER:-$(id -un)}
@@ -123,43 +133,45 @@ fi
 
 export HOME
 
-# filesystem blocks of 1KB, like the good lord intended
+# Filesystem blocks of 1 KB, like the good Lord intended
 export BLOCKSIZE=1024
 
-# abort runaway function nesting
+# Abort runaway function nesting in bash-4.2+
 FUNCNEST=128
 
-# require ^D × (n+1) to exit
+# Require ^D × (n+1) to exit
 IGNOREEOF=2
 
-# end ssh sessions after 8 hours of inactivity
+# End ssh sessions after 8 hours of inactivity
 if [[ -n $SSH_CONNECTION && -z $STY && -z $TMUX ]]; then
   TMOUT=$(( 8 * 60 * 60 ))
 fi
 
-# default 'rwXr-Xr-X' permissions for new files
+# Default 'rwXr-Xr-X' permissions for new files
 umask 0022
 
 # -----------------------------------------------------------------------------
-# terminals
+# Terminals
 # -----------------------------------------------------------------------------
 
-# control sequences
+# Control sequences
 CSI=$'\e['  # Control Sequence Introducer
 OSC=$'\e]'  # Operating System Command
 DCS=$'\eP'  # Device Control String
  ST=$'\e\\' # String Terminator
 BEL=$'\a'   # 🔔
 
-# just say no to flow control
+# Just say no to flow control
 (type -P stty && stty -ixon) &>/dev/null
 
-# custom terminfo files
+# Custom terminfo files
 TERMINFO="$HOME/share/terminfo"
 
 if [[ -d $TERMINFO ]]; then
   export TERMINFO
   export TERMINFO_DIRS="$TERMINFO:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
+
+  TERMINFO_DIRS=$(fixpath "$TERMINFO_DIRS")
 
   # Darwin's full-screen system console
   if [[ $TERM == "vt100" && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
@@ -195,8 +207,10 @@ else
 fi
 
 # -----------------------------------------------------------------------------
-# other config files
+# Other config files
 # -----------------------------------------------------------------------------
+
+export dir_config="$HOME/.config"
 
 # For reasons I have yet (2016-06-29) to learn, xterm(1) sessions start with
 # POSIXLY_CORRECT set to "y", which messes up a lot of my config files. This
@@ -218,109 +232,78 @@ if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
   }
 fi
 
-export dir_config="$HOME/.config"
-
 export INPUTRC="$dir_config/inputrc"
 
-# define important shell functions
+# Define important shell functions
 . "$dir_config/bash/functions.bash"
 
-if [[ $TIME_TEST_ACTIVE == true ]]; then
-  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
-    printf -v TIME_TEST_LOG "$HOME/var/log/timetest_%(%y%m%d_%H%M%S)T.log" -1
-  else
-    TIME_TEST_LOG="$HOME/var/log/timetest_$(date +%y%m%d_%H%M%S).log"
-  fi
-  
-  unset -f .
-
-  .()
-  {
-    local TIMEFORMAT='%R' # seconds only
-    local filename=$1
-    local elapsed
-
-    # stdout and stderr intact
-    exec 3>&1 4>&2
-
-    elapsed=$( { time source "$filename" 1>&3 2>&4; } 2>&1 )
-
-    # restore fd's
-    exec 3>&- 4>&-
-
-    printf "%s\t%s\n" "$elapsed" "$filename" >> "$TIME_TEST_LOG"
-  }
-fi
-
-# load direction definitions ($dir_foo)
+# Load direction definitions ($dir_foo)
 . "$dir_config/bash/dirs.bash"
 
-# define colours (before ./bashrc.d/prompt.bash loads)
+# Define colours (before ./bashrc.d/prompt.bash loads)
 . "$dir_config/bash/colour.bash"
 
-# temporarily enable
+# Temporarily enable
 shopt -s nullglob
 
-# private stuff
+# Private stuff
 if [[ -d $dir_config/bash/private.d ]]; then
   for file in "$dir_config"/bash/private.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
 
-# lesser function files
+# Lesser function files
 if [[ -d $dir_config/bash/functions.d ]]; then
   for file in "$dir_config"/bash/functions.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
 
-# supplementary startup files
+# Supplementary startup files
 if [[ -d $dir_config/bash/bashrc.d ]]; then
   for file in "$dir_config"/bash/bashrc.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
 
-# machine specific files in ~/.local
+# Machine specific files in ~/.local
 if [[ -d $dir_local/config/bashrc.d ]]; then
   for file in "$dir_local"/config/bashrc.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
 
-# disable after temporarily enabling above
+# Disable after temporarily enabling above
 shopt -u nullglob
 
 unset -v file
 
 # -----------------------------------------------------------------------------
-# and finally...
+# And finally...
 # -----------------------------------------------------------------------------
 
-# set window title (environment variable set in bashrc.d/prompt.bash)
+# Set window title (environment variable set in bashrc.d/prompt.bash)
 if [[ -n $Z_SET_WINTITLE ]]; then
   setwintitle "$USER@$HOSTNAME"
 fi
 
-# final initialization scripts (except in subshells/when reloading/as root)
-if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) && [[ -z $Z_RELOADING ]] && (( EUID != 0 )); then
+# Final initialization scripts, except in subshells/when reloading/as root
+if (( SHLVL <= 1 )) \
+  && (( BASH_SUBSHELL < 1 )) \
+  && [[ -z $Z_NO_INIT ]] && [[ -z $Z_RELOADING ]] \
+  && (( EUID != 0 ))
+then
   . "$dir_config/bash/init.bash"
-  [[ -f $dir_local/config/init.bash ]] && . "$dir_local/config/init.bash"
+
+  if [[ -f $dir_local/config/init.bash ]]; then
+    . "$dir_local/config/init.bash"
+  fi
 fi
 
-# -----------------------------------------------------------------------------
-# cleanup after debugging
-# -----------------------------------------------------------------------------
-
-if [[ $TIME_TEST_ACTIVE == true ]]; then
-  printf "%s\n" "$TIME_TEST_LOG"
-  unset -v TIME_TEST_ACTIVE TIME_TEST_LOG
-fi
-
+# Cleanup after debugging
 if _isFunction .; then
   tput cr   # move cursor to beginning of line
   tput el   # clear to end of line
-  # printf "\r${CSI}K"
   unset -f .
 fi

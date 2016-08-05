@@ -36,7 +36,7 @@ return
 ### ZGM TODO: finish this
 
 # BASH_XTRACEFD introduced in v4.1
-(( BASH_VERSINFO[0] >= 4 )) && (( BASH_VERSINFO[1] >= 1 )) || return
+(( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 41 )) || return
 
 debug()
 {

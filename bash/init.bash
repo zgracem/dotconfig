@@ -18,7 +18,7 @@ if [[ ! -e ~/.vimrc ]] && _inPath vim; then
 fi
 
 if [[ ! -e ~/.wgetrc ]] && _inPath wget; then
-  _z_config_symlink wgetrc
+  _z_config_symlink wget/wgetrc
 fi
 
 # -----------------------------------------------------------------------------
