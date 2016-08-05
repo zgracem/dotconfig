@@ -1,19 +1,19 @@
 # -----------------------------------------------------------------------------
 # ~/.config/bash/bashrc.d/prompt.bash
 # -----------------------------------------------------------------------------
-# setup
+# Setup
 # -----------------------------------------------------------------------------
 
-# prompt strings undergo parameter expansion and command substitution
+# Prompt strings undergo parameter expansion and command substitution
 shopt -s promptvars
 
-# clear prompt-related variables so we can start fresh
+# Clear prompt-related variables so we can start fresh
 unset -v PS{0..4}
 unset -v PROMPT_COMMAND
 unset -v PROMPT_DIRTRIM
 
 # -----------------------------------------------------------------------------
-# configuration
+# Configuration
 # -----------------------------------------------------------------------------
 
 : ${Z_PROMPT_COLOUR:=true}
@@ -26,15 +26,15 @@ unset -v PROMPT_DIRTRIM
 export ${!Z_PROMPT_*} ${!Z_SET_*}
 
 # -----------------------------------------------------------------------------
-# sanity checks for features
+# Sanity checks for features
 # -----------------------------------------------------------------------------
 
-# only use colours if supported by current terminal
+# Only use colours if supported by current terminal
 if (( TERM_COLOURDEPTH < 8 )); then
   Z_PROMPT_COLOUR=false
 fi
 
-# only change window title if supported by current terminal
+# Only change window title if supported by current terminal
 if [[ ! $TERM =~ xterm|screen|tmux|cygwin|putty|iTerm.app ]]; then
   Z_SET_WINTITLE=false
   Z_SET_TABTITLE=false
@@ -53,7 +53,7 @@ if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# functions
+# Functions
 # -----------------------------------------------------------------------------
 
 _z_prompt_compress_pwd()
@@ -68,6 +68,9 @@ _z_prompt_compress_pwd()
   # Compress if PWD has __ or more elements (not counting `~`).
   local min_depth=4
 
+  # Compress if PWD is __ or more characters long. (Overrides $min_depth.)
+  local max_length=50
+
   # Always retain the full names of the last __ elements.
   local keep_dirs=2
 
@@ -76,12 +79,6 @@ _z_prompt_compress_pwd()
 
   # Append __ to each trimmed element to indicate it has been compressed.
   local indicator="…"
-
-  if [[ $Z_PROMPT_TYPE == basic ]]; then
-    min_depth=1 # activate on any multi-part path
-    keep_dirs=1 # only keep the last element
-    keep_chars=1
-  fi
 
   # ---------------------------------------------------------------------------
 
@@ -101,13 +98,14 @@ _z_prompt_compress_pwd()
   local -a input_parts
   IFS=/ read -a input_parts <<< "${input}"
 
-  # Are there enough elements to warrant compression?
-  if (( ${#input_parts[@]} >= ${min_depth} )); then
+  # If PWD is under HOME, input_parts[0] will contain the leading tilde;
+  # otherwise, it will be empty, and should be removed from the array.
+  if [[ ${input_parts[0]} == "" ]]; then
+    unset input_parts[0]
+  fi
 
-    # If PWD is under HOME, input_parts[0] will contain the leading tilde;
-    # otherwise, it will be empty, and this command will print nothing.
-    printf "%s" "${input_parts[0]}"
-
+  # Are there enough elements/characters to warrant compression?
+  if (( ${#input_parts[@]} > ${min_depth} )) || (( ${#input} > ${max_length} )); then
     # Collect the trailing elements that will not be compressed.
     local -a trailing_parts=()
     local n; for (( n = ${keep_dirs}; n > 0; n-- )); do
@@ -122,8 +120,11 @@ _z_prompt_compress_pwd()
     local i; for (( i = 1; i < ${stop_index}; i++ )); do
       local part="${input_parts[$i]}"
 
-      # No need to compress elements that are already short.
-      if (( ${#part} > ${keep_chars} )); then
+      # No need to compress elements that are already short. Note: If the
+      # indicator would replace only trimmed character(s), for a zero net
+      # decrease in length (i.e., "user" -> "use…"), the element will not be
+      # trimmed.
+      if (( ${#part} > (${keep_chars} + ${#indicator}) )); then
           part="${part:0:$keep_chars}${indicator}"
       fi
 
@@ -141,7 +142,7 @@ _z_prompt_compress_pwd()
 }
 
 _z_prompt_print_exit()
-{ # print non-zero exit codes on the far right of the screen (zsh envy...)
+{ # Print non-zero exit codes on the far right of the screen (zsh envy...)
   local last_exit=$?
   local gutter=1
   local sigspec
@@ -256,7 +257,7 @@ _z_prompt_git_info()
     "${esc_dim}${branch}${icons}"
 }
 
-# notify iTerm of the current directory
+# Notify iTerm of the current directory
 if _isFunction iterm_state; then
   _z_prompt_update_iTerm() { iterm_state; }
 else
@@ -323,16 +324,16 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     esc_user=${esc_red}
   fi
 
-  # users in Administrators group get a red prompt too
-  if [[ $OSTYPE == cygwin ]]; then
-    for g in $(id -G); do
-      if [[ $g == 544 ]]; then
-        esc_user=${esc_red}
-        break
-      fi
-    done
-    unset g
-  fi
+  ### ZGM disabled 2016-07-09 -- ugly and distracting.
+  # # Users in Administrators group get a red prompt too.
+  # if [[ $OSTYPE == cygwin && -z $CYGWIN_ADMIN ]]; then
+  #   # Sets CYGWIN_ADMIN to "true" or "false."
+  #   . "$dir_config/bash/bashrc.d/cygwin.bash"
+  # fi
+
+  # if [[ $CYGWIN_ADMIN == true ]]; then
+  #   esc_user=${esc_red}
+  # fi
 
   z_colour_PS1_esc()
   { # create new colour variables w/ prompt escape codes (\[ and \])

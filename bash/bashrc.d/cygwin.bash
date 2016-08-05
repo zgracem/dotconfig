@@ -1,6 +1,8 @@
 [[ $OSTYPE =~ cygwin ]] || return
 
-# if we have Windows admin privileges, we will be a member of group 544 or 0
+# If we have Windows admin privileges, we will be a member of group 544 or 0
+export CYGWIN_ADMIN=false
+
 for group in "${GROUPS[@]}"; do
   if [[ $group == @(0|544) ]]; then
     CYGWIN_ADMIN=true

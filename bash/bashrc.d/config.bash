@@ -192,7 +192,11 @@ _z_config_symlink()
   if [[ ! -L $HOME/$symlink ]]; then
     if [[ -f $HOME/$symlink ]]; then
       local backup
-      printf -v backup "$symlink~original_%(%Y%m%d)T"
+      if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
+        printf -v backup "$symlink~original_%(%Y%m%d)T"
+      else
+        backup="$symlink~original_$(date +%Y%m%d)"
+      fi
       mv -v "$HOME/$symlink" "$HOME/$backup" || return
     fi
 

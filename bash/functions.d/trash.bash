@@ -18,6 +18,9 @@ if [[ $OSTYPE =~ darwin ]]; then
             move fileItself to trash
           end tell
 				EOF
+        # The above line MUST STAY tab-indented!
+        # Also, we can't do a normal `&&` because of the heredoc.
+        (( $? == 0 )) && echo "${filename/#$HOME/$'~'} → ~/.Trash"
       else
         scold "not found: $f"
         return 1
@@ -25,7 +28,7 @@ if [[ $OSTYPE =~ darwin ]]; then
     done
   }
 
-else
+elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
   trash()
   {
     local t

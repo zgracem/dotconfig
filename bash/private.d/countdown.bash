@@ -2,7 +2,7 @@
 # ~/.config/bash/private.d/countdown.bash
 # -----------------------------------------------------------------------------
 
-export liz="2016-07-21 16:51"
+# export liz="2016-07-21 16:51"
 
 if [[ -x $dir_scripts/countdown.sh && -n $liz ]]; then
   liz() {

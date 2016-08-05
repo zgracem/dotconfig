@@ -40,7 +40,7 @@ hi SpecialKey     ctermbg=0     ctermfg=13
 hi NonText        ctermbg=none  ctermfg=13
 
 " matching brackets
-hi MatchParen     ctermbg=6     ctermfg=0
+hi MatchParen     ctermbg=none  ctermfg=14
 
 " search-as-you-type highlighting
 hi IncSearch      ctermbg=3     ctermfg=15
@@ -54,6 +54,12 @@ hi ModeMsg        ctermbg=none  ctermfg=4   cterm=none
 " more-prompt; hit-enter prompt and yes/no questions
 hi MoreMsg        ctermbg=none  ctermfg=14  cterm=none
 hi! link Question MoreMsg
+
+"-----------------------------------------------------------------------------
+" Markdown
+"-----------------------------------------------------------------------------
+
+hi markdownItalic ctermbg=none  ctermfg=15
 
 "-----------------------------------------------------------------------------
 " diff mode

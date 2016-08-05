@@ -99,8 +99,8 @@ if [[ -x /usr/bin/xcode-select ]]; then
         MANPATH=$MANPATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man
         MANPATH=$MANPATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/share/man
     else
-        PATH=$DEVELOPER_DIR/usr/share/man:$PATH
-        MANPATH=$DEVELOPER_DIR/usr/bin:$MANPATH
+        PATH=$DEVELOPER_DIR/usr/bin:$PATH
+        MANPATH=$DEVELOPER_DIR/usr/share/man:$MANPATH
     fi
 
     unset -v darwin_ver
