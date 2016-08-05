@@ -3,11 +3,11 @@
 
 find_drive()
 {
-  if [[ -d $dir_drive ]]; then
-    # We don't need to run this at all.
-    return 0
-  else
+  if [[ -n $1 ]]; then
     local label=$1
+  else
+    scold "Usage: $FUNCNAME LABEL"
+    return $EX_USAGE
   fi
 
   if [[ $OSTYPE =~ cygwin ]]; then
