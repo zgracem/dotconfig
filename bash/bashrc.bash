@@ -182,15 +182,15 @@ if [[ -d $TERMINFO ]]; then
   if [[ $TERM_PROGRAM == "Apple_Terminal" && $TERM != nsterm* ]]; then
     ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
     case 1 in
-      $(( ver >= 361 ))*) # OSX 10.11
+      $(( ver >= 361 ))*) # OS X 10.11
         TERM=nsterm-build361 ;;
-      $(( ver >= 343 ))*) # OSX 10.10
+      $(( ver >= 343 ))*) # OS X 10.10
         TERM=nsterm-build343 ;;
-      $(( ver >= 326 ))*) # OSX 10.9
+      $(( ver >= 326 ))*) # OS X 10.9
         TERM=nsterm-build326 ;;
-      $(( ver >= 303 ))*) # OSX 10.7 & 10.8
+      $(( ver >= 303 ))*) # OS X 10.7 & 10.8
         TERM=nsterm-256color ;;
-      $(( ver >= 240 ))*) # OSX 10.5
+      $(( ver >= 240 ))*) # OS X 10.5
         TERM=nsterm-16color ;;
       *)
         # This is probably god-awfully old; just leave it alone.

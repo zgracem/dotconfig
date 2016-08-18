@@ -16,7 +16,7 @@ export HOMEBREW_CACHE="$dir_cache/homebrew"
 # print developer warnings
 export HOMEBREW_DEVELOPER=true
 
-# if we're not in a GUI session on OSX...
+# if we're not in a GUI session on macOS...
 if [[ -z $SECURITYSESSIONID ]]; then
   # don't print beer emoji
   export HOMEBREW_NO_EMOJI=true

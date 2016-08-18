@@ -272,7 +272,7 @@ if has("gui_running")
     set guifont=Source\ Code\ Pro\ Medium:h9,Consolas:h10,Courier\ New:h10
   endif
 
-  " OS X fonts
+  " macOS fonts
   if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
