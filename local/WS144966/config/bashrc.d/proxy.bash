@@ -18,7 +18,7 @@ if [[ -z $ALL_PROXY ]]; then
   fi
 fi
 
-export http_proxy="http://uxhj:violet0615_Delta@proxy:8080/"
+export http_proxy="http://uxhj:violet0815_Delta@proxy:8080/"
 export https_proxy="$http_proxy"
 export HTTP_PROXY="$http_proxy"
 export HTTPS_PROXY="$http_proxy"

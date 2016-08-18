@@ -1,8 +1,10 @@
-require 'rubygems'
-require 'irb/completion'  # double-Tab completion for methods
-require 'pp'              # pretty print
+require "rubygems"
+require "irb/completion"  # double-Tab completion for methods
+require "pp"              # pretty print
 
-require 'what_methods'    # object.what?(result) => method(s) that will produce result
+require "what_methods"    # object.what?(result) => method(s) that will produce result
+
+require "proxy"
 
 # -----------------------------------------------------------------------------
 # settings
@@ -12,7 +14,7 @@ IRB.conf[:AUTO_INDENT]  = true
 
 IRB.conf[:USE_READLINE] = true
 
-# IRB.conf[:HISTORY_FILE] = File::expand_path("~/.irb_history")
+# IRB.conf[:HISTORY_FILE] = File::expand_path("~/.local/history/irb_history")
 # IRB.conf[:SAVE_HISTORY] = 1024
 # IRB.conf[:EVAL_HISTORY] = 256
 
@@ -50,19 +52,6 @@ IRB.conf[:PROMPT][:ZGM] = {
 }
 
 IRB.conf[:PROMPT_MODE]  = :ZGM
-
-# -----------------------------------------------------------------------------
-# proxy
-# -----------------------------------------------------------------------------
-
-require "socket"
-hostname = Socket.gethostname
-
-if hostname.to_s.downcase =~ /ws144966/
-  require "socksify"
-  TCPSocket.socks_server = "127.0.0.1"
-  TCPSocket.socks_port   = 8080
-end
 
 # -----------------------------------------------------------------------------
 # helper methods

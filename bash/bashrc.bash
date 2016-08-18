@@ -79,7 +79,6 @@ if (( BASH_VERSINFO[0] >= 4 )); then
     # checkjobs is available but buggy in 4.0
     # -- https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
     shopt -s checkjobs  # warn when exiting shell with stopped/running jobs
-    
   fi
 
   if (( BASH_VERSINFO[1] >= 0 )); then

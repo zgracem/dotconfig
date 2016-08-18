@@ -15,7 +15,8 @@ alias lockscreen='"/System/Library/CoreServices/Menu Extras/User.menu/Contents/R
 alias gotosleep="pmset sleepnow"
 alias PlistBuddy="/usr/libexec/PlistBuddy"
 alias restart="sudo shutdown -r now"
-alias screensaver='open "/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"'
+# /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
+alias screensaver='open -a ScreenSaverEngine'
 
 if [[ -d /Volumes/BOOTCAMP ]]; then
   # bless(8) doesn't work if System Integrity Protection is enabled on El Cap+
