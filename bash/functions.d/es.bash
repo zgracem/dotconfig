@@ -1,18 +1,46 @@
 es()
 { # edit a script
 
-  local dir
-  for dir in "$dir_scripts"/{,dev,util,work}; do
-    local script="$dir/${1%.sh}.sh"
+  local search="$1"
 
-    if [[ -f $script ]]; then
-      _edit "$script"
-      return 0
-    fi
+  local -a script_dirs=( "$dir_scripts"{,/dev,/util,/work} )
+  local -a script_exts=(sh rb)
+  local -a scripts=()
+
+  local dir ext scr
+  for dir in "${script_dirs[@]}"; do
+    for ext in "${script_exts[@]}"; do
+      scr="$dir/$1.$ext"
+      [[ -f $scr ]] && scripts+=("$scr")
+    done
   done
 
-  # no script, try editing a function instead & exit w/ fe's error code
-  ef "$1"
+  case ${#scripts[@]} in
+    0)  # No script; try editing a function instead & exit w/ ef()'s error code
+        ef "$1" || {
+          scold "not found: $1"
+          return 1
+        }
+        ;;
+    1)  _edit "${scripts[0]}"
+        return 0
+        ;;
+    *)
+        local PS3="q) cancel"$'\n'"#? "
+
+        select scr in "${scripts[@]}"; do
+          if [[ $REPLY == "q" ]]; then
+            return
+          elif [[ -f $scr ]]; then
+            _edit "$scr"
+            return
+          else
+            scold "invalid option: $REPLY"
+            PS3="${PS3##*$'\n'}"
+          fi
+        done
+        ;;
+  esac
 }
 
 # Has custom completions in ../bash_completion.d
