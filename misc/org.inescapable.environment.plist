@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>org.inescapable.environment</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>bash</string>
+    <string>-c</string>
+    <string>
+    while read -r subcmd || [[ -n $subcmd ]]; do [[ ${subcmd:0:1} != "#" ]] && eval "/bin/launchctl $subcmd"; done &lt; $HOME/.config/misc/launchd.conf
+    </string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+</dict>
+</plist>
