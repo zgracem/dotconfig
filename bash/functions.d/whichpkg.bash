@@ -31,7 +31,7 @@ whichpkg()
 
         local canon
 
-        if canon=$(readlink -e "$file"); then
+        if canon=$(mdutil -t "$file"); then
             local re="^${HOMEBREW_CELLAR}/([^/]+)/([^/]+)/.+\$"
 
             if [[ $canon =~ $re ]]; then
