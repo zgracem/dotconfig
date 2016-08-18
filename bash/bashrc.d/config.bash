@@ -110,7 +110,7 @@ ef()
       _edit "$file"
       return $EX_OK
     elif (( ${#FUNCNAME[@]} == 1 )); then
-      # we're not being called by another function like edsh()
+      # we're not being called by another function like es()
       local answer=n
 
       printf '%s' "$func does not exist. "
