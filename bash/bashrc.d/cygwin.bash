@@ -54,7 +54,7 @@ unset -v printer_key
 # aliases
 # -----------------------------------------------------------------------------
 
-# be like OS X
+# be like macOS
 open() { cygstart "$@"; }
 alias emptytrash='command -p rm -rf ~/.Trash/* 1>/dev/null'
 
