@@ -15,7 +15,9 @@ ssh/
 # assorted crap
 fish/
 mc/
+ruby/Gemfile.lock
 *.bak
+**/private.*
 
 # Transmission -- https://transmissionbt.com/
 transmission/
