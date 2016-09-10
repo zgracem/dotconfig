@@ -27,11 +27,6 @@ man()
     esac
   done
 
-  # get a nice title like "printf(1)" or "cron(8)"
-  # or fail if man page doesn't exist
-  local title
-  title=$(_z_mantitle "$@") || return
-
   # open the new window
   if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_NO_MAN_URL ]]; then
     # let Terminal.app be clever about this
@@ -43,6 +38,11 @@ man()
     # open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
     return 0
   else
+    # get a nice title like "printf(1)" or "cron(8)"
+    # or fail if man page doesn't exist
+    local title
+    title=$(_z_mantitle "$@") || return
+
     if _inScreen; then
       screen -t "$title" man "$@"
     elif _inTmux; then
