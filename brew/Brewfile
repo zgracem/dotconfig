@@ -2,80 +2,86 @@
 # ~/.config/brew/Brewfile
 # -----------------------------------------------------------------------------
 
-# tap 'homebrew/bundle' 
-# -- needs to be installed before this can run, though...
+# Instructions:
+#   1. Install Homebrew
+#   2. `brew tap homebrew/bundle`
+#   3. `brew bundle --file $THIS_FILE`
 
-tap 'homebrew/dupes'
-tap 'homebrew/versions'
+tap "homebrew/dupes"
+tap "homebrew/versions"
 
 # command_not_found_handle() assistant
-tap 'homebrew/command-not-found'
+tap "homebrew/command-not-found"
 
 # -----------------------------------------------------------------------------
 # essentials
 # -----------------------------------------------------------------------------
 
 # for Homebrew
-brew 'curl', args: ['with-nghttp2']
-brew 'openssl'
-brew 'git', args: ['with-brewed-curl', 'with-brewed-openssl']
+brew "curl", args: ["with-nghttp2"]
+brew "openssl"
+brew "git", args: ["with-brewed-curl", "with-brewed-openssl"]
 
 # bash 4
-brew 'bash', args: ['devel']
-brew 'homebrew/versions/bash-completion2'
+brew "bash", args: ["devel"]
+brew "homebrew/versions/bash-completion2"
 
 # tmux
-brew 'tmux'
-brew 'reattach-to-user-namespace'
+brew "tmux"
+brew "reattach-to-user-namespace"
 
 # other
-brew 'direnv', args: ['force-bottle']
-brew 'fpp', args: ['HEAD']
-brew 'midnight-commander'
-brew 'vim', args: ['HEAD', 'override-system-vi']
-brew 'homebrew/dupes/less', args: ['with-pcre']
-brew 'homebrew/dupes/ncurses'
+brew "direnv", args: ["force-bottle"]
+brew "fpp", args: ["HEAD"]
+brew "midnight-commander"
+brew "vim", args: ["HEAD", "override-system-vi"]
+brew "homebrew/dupes/less", args: ["with-pcre"]
+brew "homebrew/dupes/ncurses"
 
 # -----------------------------------------------------------------------------
 # GNU utilities
 # -----------------------------------------------------------------------------
 
-brew 'coreutils', args: ['HEAD']
-brew 'moreutils', args: ['HEAD']
-brew 'gawk'
-brew 'gnu-tar'
+brew "coreutils", args: ["HEAD"]
+brew "moreutils", args: ["HEAD"]
+brew "gawk"
+brew "gnu-tar"
 
-# find, locate, updatedb, and xargs (do not prepend 'g' to the binaries)
-brew 'findutils', args: ['default-names']
+# find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
+brew "findutils", args: ["default-names"]
 
 # sed (overwrite built-in)
-brew 'gnu-sed', args: ['default-names']
+brew "gnu-sed", args: ["default-names"]
 
 # grep (overwrite built-in)
-brew 'homebrew/dupes/grep', args: ['with-default-names']
+brew "homebrew/dupes/grep", args: ["with-default-names"]
+
+# groff
+brew "groff"
 
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
-brew 'links'
-brew 'socat'
-brew 'transmission'
-brew 'wget', args: ['HEAD', 'enable-iri', 'with-pcre']
-brew 'youtube-dl', args: ['HEAD', 'with-rtmpdump']
-brew 'homebrew/dupes/rsync'
-brew 'homebrew/dupes/whois'
+brew "links"
+brew "socat"
+brew "transmission"
+brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
+brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
+
+brew "homebrew/dupes/rsync"
+brew "homebrew/dupes/whois"
 
 # OpenSSH
 
-brew 'ssh-copy-id'
-brew 'homebrew/dupes/openssh'
-brew 'keychain'
+brew "homebrew/dupes/openssh"
+brew "ssh-copy-id"
+brew "keychain"
 
 # email
 
-brew 'getmail'
-brew 'offline-imap'
+brew "getmail"
+brew "offline-imap"
 
 # -----------------------------------------------------------------------------
 # media
@@ -83,89 +89,154 @@ brew 'offline-imap'
 
 # audio/video
 
-brew 'atomicparsley'
-brew 'ffmpeg', args: ['with-openssl', 'with-rtmpdump']
-brew 'id3v2'
-brew 'lame'
-brew 'mp4v2'
-brew 'mplayer'
+brew "atomicparsley"
+brew "ffmpeg", args: ["with-openssl", "with-rtmpdump"]
+brew "id3v2"
+brew "lame"
+brew "mkvtoolnix"
+brew "mp4v2"
+brew "mplayer"
 
 # images
 
-brew 'exif'
-brew 'exiftool'
-brew 'imagemagick', args: ['with-ghostscript']
-brew 'pngcrush'
-brew 'qrencode'
-brew 'webkit2png'
+brew "exif"
+brew "exiftool"
+brew "imagemagick", args: ["with-ghostscript"]
+brew "pngcrush"
+brew "qrencode"
+brew "webkit2png"
 
 # imagesnap requires full Xcode to compile
-brew 'imagesnap' if system '[[ -x /Applications/Xcode.app ]]'
+brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
 
 # -----------------------------------------------------------------------------
 # development
 # -----------------------------------------------------------------------------
 
-brew 'rbenv'
-brew 'ruby-build'
+brew "rbenv"
+brew "ruby-build"
 
-brew 'python'
+brew "python"
 
-brew 'jq'
-brew 'node'
+brew "jq"
+brew "node"
 
-brew 'go'
+brew "go"
 
 # https://github.com/zoltan-dulac/css3FontConverter
-brew 'fontforge'
-tap  'bramstein/webfonttools'
-brew 'sfnt2woff-zopfli'
-brew 'sfnt2woff'
-brew 'sfntly'
-brew 'ttf2eot'
-brew 'woff2'
+brew "fontforge"
+
+tap  "bramstein/webfonttools"
+brew "sfnt2woff-zopfli"
+brew "sfnt2woff"
+brew "sfntly"
+brew "ttf2eot"
+brew "woff2"
 
 # -----------------------------------------------------------------------------
 # fun & games
 # -----------------------------------------------------------------------------
 
-tap  'homebrew/games'
-brew 'homebrew/games/nethack'
+tap  "homebrew/games"
+brew "homebrew/games/nethack"
 
-brew 'cowsay'
-brew 'figlet'
+brew "cowsay"
+brew "figlet"
 
 # -----------------------------------------------------------------------------
 # misc.
 # -----------------------------------------------------------------------------
 
-brew 'pv'
-brew 'rename'
-brew 'sf-pwgen' # github.com/anders/pwgen
-brew 'source-highlight' # for less
-brew 'tree'
-brew 'watch'
+brew "pv"
+brew "rename"
+brew "sf-pwgen" # github.com/anders/pwgen
+brew "source-highlight" # for less
+brew "homebrew/dupes/srm"
+brew "tree"
+brew "watch"
 
 # archives & compression
-brew 'dtrx', args: ['with-cabextract', 'with-lha', 'with-unshield']
-brew 'p7zip'
-brew 'unrar'
+brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
+brew "p7zip"
+brew "unrar"
 
 # dictionaries
-brew 'dict'
-brew 'sdcv'
+brew "dict"
+brew "sdcv"
 
 # pdf
-brew 'ghostscript'
+brew "ghostscript"
 
 # shells
-brew 'fish'
-brew 'zsh'
+brew "fish"
+brew "zsh"
 
 # text
-brew 'aspell', args: ['with-lang-en']
-brew 'dos2unix'
-brew 'multimarkdown'
-brew 'pandoc'
-brew 'recode'
-brew 'txt2man'
+brew "aspell", args: ["with-lang-en"]
+brew "dos2unix"
+brew "multimarkdown"
+brew "pandoc"
+brew "recode"
+brew "txt2man"
+
+# -----------------------------------------------------------------------------
+# casks
+# -----------------------------------------------------------------------------
+
+# essentials
+
+cask "1password"
+cask "alfred"
+cask "dropbox"
+cask "google-chrome"
+cask "iterm2"
+cask "slack"
+# cask "sublime-text"
+cask "the-unarchiver"
+cask "transmission"
+cask "transmit"
+
+# utilities
+
+cask "dayone-cli"
+cask "file-juicer"
+cask "flux"
+cask "go2shell"
+cask "grandperspective"
+cask "istat-menus"
+cask "magicprefs"
+cask "senuti"
+cask "superduper"
+
+# audio/video
+
+cask "fission"
+cask "kid3"
+cask "metaz"
+cask "vlc"
+cask "xact"
+
+# etc.
+
+cask "black-screen"
+cask "mactracker"
+cask "onyx"
+cask "real-vnc"
+cask "skype"
+cask "steam"
+cask "xquartz"
+
+# -----------------------------------------------------------------------------
+# Mac App Store
+# -----------------------------------------------------------------------------
+
+brew "mas"
+
+mas "Xcode", id: 497799835
+mas "The Archive Browser", id: 510232205
+mas "Persistent Color Picker", id: 442921390
+mas "Day One", id: 1055511498
+mas "Tweetbot", id: 557168941
+mas "Server", id: 883878097
+mas "Sip", id: 507257563
+mas "Divvy", id: 413857545
