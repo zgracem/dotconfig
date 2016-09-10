@@ -16,10 +16,21 @@ unset -v PROMPT_DIRTRIM
 # Configuration
 # -----------------------------------------------------------------------------
 
+# These can be set manually to override the default behaviour.
+
+# If false, skip all the colour setup so the prompt prints plain
 : ${Z_PROMPT_COLOUR:=true}
+
+# If true, print the exit status of the last command aligned right in red
 : ${Z_PROMPT_EXIT:=true}
+
+# If true, make several slow calls to `git` every time the prompt refreshes,
+# in exchange for info about the current git situation
 : ${Z_PROMPT_GIT:=false}
 
+: ${Z_PROMPT_JOBS:=true}
+
+# If true, set window/tab title to "host@username: pwd"
 : ${Z_SET_WINTITLE:=true}
 : ${Z_SET_TABTITLE:=false}
 
@@ -35,12 +46,12 @@ if (( TERM_COLOURDEPTH < 8 )); then
 fi
 
 # Only change window title if supported by current terminal
-if [[ ! $TERM =~ xterm|screen|tmux|cygwin|putty|iTerm.app ]]; then
+if [[ ! $TERM =~ xterm|screen|tmux|putty|iTerm ]]; then
   Z_SET_WINTITLE=false
   Z_SET_TABTITLE=false
 fi
 
-# Prompt <panic.com/prompt> doesn't have a status line
+# Prompt (panic.com/prompt) doesn't have a status line
 if [[ $TERM_PROGRAM =~ ^Prompt ]]; then
   Z_SET_WINTITLE=false
   Z_SET_TABTITLE=false
@@ -65,19 +76,19 @@ _z_prompt_compress_pwd()
   #   ~/fir…/sec…/3rd/fourth/fifth/sixth
   #   ~/fir…/sec…/3rd/fou…/fifth/sixth/seventh
 
-  # Compress if PWD has __ or more elements (not counting `~`).
+  # Compress if PWD has >= `$min_depth` elements (not counting `~`, if any).
   local min_depth=4
 
-  # Compress if PWD is __ or more characters long. (Overrides $min_depth.)
-  local max_length=50
+  # Compress if PWD is >= `$max_pwd_length` chars long (overrides `min_depth`).
+  local max_pwd_length=50
 
-  # Always retain the full names of the last __ elements.
-  local keep_dirs=2
+  # Always retain the full names of the last `$keep_dirs` elements.
+  local keep_dirs=1
 
-  # When compressing a directory element, keep the first __ characters.
+  # When compressing a directory name, keep the first `$keep_chars` characters.
   local keep_chars=3
 
-  # Append __ to each trimmed element to indicate it has been compressed.
+  # Append `$indicator` to each compressed element.
   local indicator="…"
 
   # ---------------------------------------------------------------------------
@@ -88,29 +99,36 @@ _z_prompt_compress_pwd()
   # Tilde-ify home directory if present.
   input="${input/#$HOME/$'~'}"
 
-  # Because a leading tilde is so short, it doesn't count for the purposes of
-  # determining minimum depth.
-  if [[ ${input:0:1} == "~" ]]; then
-    (( min_depth++ ))
-  fi
-
   # Use the slash as a separator to split PWD into an array of its elements.
   local -a input_parts
   IFS=/ read -a input_parts <<< "${input}"
+  # declare -p input_parts ##debug
 
   # If PWD is under HOME, input_parts[0] will contain the leading tilde;
-  # otherwise, it will be empty, and should be removed from the array.
-  if [[ ${input_parts[0]} == "" ]]; then
-    unset input_parts[0]
-  fi
+  # otherwise, it will be empty.
+  case ${input_parts[0]} in
+    "~")  # Because a leading tilde is so short, it doesn't count when
+          # determining minimum depth.
+          (( min_depth++ ))
+          ;;
+    "")   # PWD starts at root; remove the empty element from the array.
+          unset input_parts[0]
+          ;;
+  esac
 
   # Are there enough elements/characters to warrant compression?
-  if (( ${#input_parts[@]} > ${min_depth} )) || (( ${#input} > ${max_length} )); then
+  if (( ${#input_parts[@]} < ${min_depth} )) \
+      && (( ${#input} < ${max_pwd_length} )); then
+    # PWD is too short; just return what we were given.
+    printf "%s" "$input"
+    return
+  else
     # Collect the trailing elements that will not be compressed.
     local -a trailing_parts=()
     local n; for (( n = ${keep_dirs}; n > 0; n-- )); do
       trailing_parts+=("${input_parts[-$n]}")
     done
+    # declare -p trailing_parts ##debug
 
     # The stopping point required to preserve uncompressed trailing elements.
     local stop_index=$(( ${#input_parts[@]} - ${#trailing_parts[@]} ))
@@ -120,10 +138,9 @@ _z_prompt_compress_pwd()
     local i; for (( i = 1; i < ${stop_index}; i++ )); do
       local part="${input_parts[$i]}"
 
-      # No need to compress elements that are already short. Note: If the
-      # indicator would replace only trimmed character(s), for a zero net
-      # decrease in length (i.e., "user" -> "use…"), the element will not be
-      # trimmed.
+      # No need to compress elements that are already <= $keep_chars long.
+      # Nor should we "compress" unless there would actually be a net decrease
+      # in length; i.e. don't turn "user" (4 chars) into "use…" (4 chars).
       if (( ${#part} > (${keep_chars} + ${#indicator}) )); then
           part="${part:0:$keep_chars}${indicator}"
       fi
@@ -131,13 +148,14 @@ _z_prompt_compress_pwd()
       # Add the result to the array of compressed elements.
       output_parts+=("${part}")
     done
+    # declare -p output_parts ##debug
 
     # Print all of the compressed elements, then all of the uncompressed
     # trailing elements, each preceded by a slash.
+    if [[ ${input_parts[0]} == "~" ]]; then
+      printf "%s" "~"
+    fi
     printf "/%s" "${output_parts[@]}" "${trailing_parts[@]}"
-  else
-    # PWD is too short to warrant compression; just return what we were given.
-    printf "%s" "$input"
   fi
 }
 
@@ -182,7 +200,7 @@ _z_prompt_print_exit()
 
 _z_prompt_git_info()
 {
-  [[ $Z_PROMPT_GIT == true ]] || return 0
+  [[ $Z_PROMPT_GIT != true ]] && return
 
   local status= branch= icons=
   local ahead=0 unstaged=0 untracked=0 dirty=false
@@ -253,8 +271,18 @@ _z_prompt_git_info()
   #   "${esc_dim}${branch}" \
   #   "${icons:-}${esc_reset}"
 
-  printf "${esc_reset} %b${esc_reset}" \
+  printf " %b${esc_reset}" \
     "${esc_dim}${branch}${icons}"
+}
+
+_z_prompt_jobs()
+{
+  [[ $Z_PROMPT_JOBS != true ]] && return
+
+  local job_count="$(jobs|wc -l)"
+  if (( job_count > 0 )); then
+    printf " %b" "${job_count}"
+  fi
 }
 
 # Notify iTerm of the current directory
@@ -321,7 +349,7 @@ _z_prompt_update_titles()
 if [[ $Z_PROMPT_COLOUR == true ]]; then
   # root gets red prompt
   if (( EUID == 0 )); then
-    esc_user=${esc_red}
+    esc_user=${esc_brred}
   fi
 
   ### ZGM disabled 2016-07-09 -- ugly and distracting.
@@ -371,13 +399,22 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 # current path, highlighted
-PS1+="${PS1_hi}\$(_z_prompt_compress_pwd)"
+PS1+="${PS1_hi}\$(_z_prompt_compress_pwd)${PS1_reset}"
 
 # info about current git branch, if any (function supplies colours)
 PS1+="\$(_z_prompt_git_info)"
 
-# blue $ for me, red # for root
-PS1+=" ${PS1_user}\\\$${PS1_reset} "
+# number of background jobs, if any
+PS1+="${PS1_yellow}\$(_z_prompt_jobs)${PS1_reset}"
+
+# $ for me, # for root, ? if we're in incognito mode
+if [[ -n $Z_INCOGNITO ]]; then
+  PS1+=" ${PS1_brblack}?"
+else
+  PS1+=" ${PS1_user}\\\$"
+fi
+
+PS1+="${PS1_reset} "
 
 # -----------------------------------------------------------------------------
 # PS0,2-4
