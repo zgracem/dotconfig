@@ -19,8 +19,4 @@ _isRunning Dropbox \
 _isRunning pageant \
     || run "$(find_drive RED)/apps/WinSCP/pageant.exe" "$(cygpath -aw ~/.ssh/key.ppk)"
 
-# # ColorCop
-# _isRunning ColorCop \
-#     || cygstart /cygdrive/f/apps/ColorCop/ColorCop.exe
-
 # unset -f _isRunning

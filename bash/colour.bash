@@ -19,19 +19,19 @@ fi
 # -----------------------------------------------------------------------------
 
 # properties
-reset='0'; bold='1'; ul='4'; blink='5'; inv='7'
-props=(bold ul blink inv)
+reset=0; bold=1; italic=3; ul=4; blink=5; inv=7
+props=(bold italic ul blink inv)
 colours=()
 
 # basic ANSI colours
-black='30'
-red='31'
-green='32'
-yellow='33'
-blue='34'
-magenta='35'
-cyan='36'
-white='37'
+black=30
+red=31
+green=32
+yellow=33
+blue=34
+magenta=35
+cyan=36
+white=37
 
 colours+=(black red green yellow blue magenta cyan white)
 
@@ -68,11 +68,11 @@ colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 colour_true=$green
 colour_false=$red
 
-colour_hi=$brwhite  # highlight colour
+colour_hi=$brwhite   # highlight colour
 colour_dim=$brblack  # secondary colour
 
 # used in PS1 -- see bashrc.d/prompt.bash
-: ${colour_user:=$blue}
+: ${colour_user:=$magenta}
 
 colours+=(colour_true colour_false colour_hi colour_dim colour_user)
 colours+=(reset)
@@ -148,7 +148,7 @@ _z_colour_add_esc()
   done
 }
 
-_z_colour_add_esc ${colours[*]}
+_z_colour_add_esc ${colours[*]} ${props[*]}
 
 # # export everything
 # export ${!esc_*}
@@ -161,15 +161,15 @@ _z_colour_add_esc ${colours[*]}
 if (( TERM_COLOURDEPTH >= 16 )); then
   export GREP_COLORS=''
 
-  GREP_COLORS+="sl=${reset}:"         # whole selected lines
-  GREP_COLORS+="cx=${colour_dim}:"    # whole context lines
-  GREP_COLORS+="mt=${brred}:"         # any matching text
-  GREP_COLORS+="ms=${ul};${brred}:"   # matching text in a selected line
-  GREP_COLORS+="mc=${brred}:"         # matching text in a context line
-  GREP_COLORS+="fn=${colour_dim}:"    # filenames
-  GREP_COLORS+="ln=${blue}:"          # line numbers
-  GREP_COLORS+="bn=${cyan}:"          # byte offsets
-  GREP_COLORS+="se=${reset}"          # separators
+  GREP_COLORS+="sl=${reset}:"       # whole selected lines
+  GREP_COLORS+="cx=${colour_dim}:"  # whole context lines
+  GREP_COLORS+="mt=${brred}:"       # any matching text
+  GREP_COLORS+="ms=${ul};${brred}:" # matching text in a selected line
+  GREP_COLORS+="mc=${brred}:"       # matching text in a context line
+  GREP_COLORS+="fn=${colour_dim}:"  # filenames
+  GREP_COLORS+="ln=${blue}:"        # line numbers
+  GREP_COLORS+="bn=${cyan}:"        # byte offsets
+  GREP_COLORS+="se=${reset}"        # separators
 
   # deprecated
   export GREP_COLOR="${ul};${brred}"

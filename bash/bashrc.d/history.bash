@@ -56,7 +56,7 @@ HISTIGNORE+=':ls*([1dflt]):ll'
 HISTIGNORE+=':exit:bye'
 
 # my own shortcuts
-HISTIGNORE+=':d *:e *:fe *:manpdf *:c:c[sl]:etest:f:mmin:rl:ss:tt:vnc:vsmm'
+HISTIGNORE+=':d *:e *:fe *:manpdf *:c:c[sl]:etest:f:i:mmin:rl:ss:tt:vnc:vsmm'
 HISTIGNORE+=':b@(a|rc|col|f|loc|path|dirs|pri|pro|ps1)'
 
 # my help commands
@@ -86,4 +86,5 @@ incognito()
     echo 'incognito mode disabled'
     unset -v Z_INCOGNITO
   fi
+  rl prompt
 }

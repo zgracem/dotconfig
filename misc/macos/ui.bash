@@ -6,7 +6,6 @@
 for domain in ~/Library/Preferences/ByHost/com.apple.SystemUIServer.*; do
     defaults write "${domain}" dontAutoLoad -array \
         "/System/Library/CoreServices/Menu Extras/Eject.menu" \
-        "/System/Library/CoreServices/Menu Extras/TextInput.menu" \
         "/System/Library/CoreServices/Menu Extras/User.menu"
 done
 

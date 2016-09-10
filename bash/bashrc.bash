@@ -11,8 +11,9 @@ fi
 # Abort if...
 if ! test "$BASH_VERSINFO" || (( BASH_VERSINFO[0] < 3 )); then
   # ...bash is too old
+  echo >&2 "this version of bash is too old!"
   return
-elif ! [[ -n $PS1 && $- =~ i ]]; then
+elif ! [[ $- =~ i ]]; then
   # ...this isn't an interactive shell
   return
 elif shopt -q restricted_shell; then
@@ -38,13 +39,14 @@ if (( this_bash < latest_bash )) && [[ -x $HOME/opt/bin/bash ]]; then
   else
     exec "$SHELL"
   fi
-  shopt -u execfail
-else
-  # We don't actually want to *keep* them exported, though.
-  declare +x SHELLOPTS
+
 fi
 
-# # redundant with the above? test on 4.4-final
+# We don't actually want to *keep* those settings, though.
+shopt -u execfail
+declare +x SHELLOPTS
+
+# # Redundant with the above? test on 4.4-final
 # if [[ $BASH != $SHELL ]]; then
 #   export SHELL=$BASH
 # fi
@@ -53,36 +55,37 @@ fi
 # Shell options
 # -----------------------------------------------------------------------------
 
-set -o noclobber        # >file won't overwrite existing file (override with >|file)
-set -o notify           # notify of job termination immediately (not on next prompt)
+set -o noclobber        # >file won't overwrite (use >|file for that)
+set -o notify           # done jobs notify immediately, not on next prompt
 set -o pipefail         # pipelines return rightmost non-zero status, if any
 set -o vi               # vi mode
 
 shopt -s extglob        # enable extended pattern matching
-shopt -s nocaseglob     # case-insensitive globbing (used in pathname expansion)
-shopt -s nocasematch    # case-insensitive pattern matching in `case` and `[[`
+shopt -s nocaseglob     # case-insensitive globbing in pathn?m* expansion
+shopt -s nocasematch    # case-insensitive patterns in `case` and `[[`
 shopt -u nullglob       # interferes with bash-completion
 
-shopt -s checkwinsize   # update LINES & COLUMNS after each command if necessary
+shopt -s checkwinsize   # update LINES & COLUMNS after each command
 shopt -s gnu_errfmt     # print shell error messages in standard GNU format
-shopt -u sourcepath     # [don't] use PATH to find files to source
+shopt -u sourcepath     # [don't] use PATH to find files to `.`
 
 # bash-4.0+ options
-# -- http://wiki.bash-hackers.org/scripting/bashchanges#shell_options
+# >> http://wiki.bash-hackers.org/scripting/bashchanges#shell_options
 
 if (( BASH_VERSINFO[0] >= 4 )); then
   if (( BASH_VERSINFO[1] >= 2 )); then
     shopt -s lastpipe   # execute a pipeline's last cmd in the current shell context
+    FUNCNEST=128        # abort runaway function nesting
   fi
 
   if (( BASH_VERSINFO[1] >= 1 )); then
-    # checkjobs is available but buggy in 4.0
-    # -- https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
     shopt -s checkjobs  # warn when exiting shell with stopped/running jobs
+    # `checkjobs` is available in 4.0, but buggy --
+    # >> https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
   fi
 
   if (( BASH_VERSINFO[1] >= 0 )); then
-    shopt -s globstar   # '**' matches all directories and their files recursively
+    shopt -s globstar   # `**` matches directories and their files recursively
   fi
 fi
 
@@ -94,22 +97,22 @@ export USER=${USER:-$(id -un)}
 export HOSTNAME=${HOSTNAME:-$(uname -n)}
 export TMPDIR=${TMPDIR:-$(dirname "$(mktemp -ut tmp.XXX)")}
 
+# TODO: identify if $TMPDIR is mounted `noexec` (or with otherwise restricted
+# privileges), in case we don't have root and the system /tmp is locked down
+
 case $HOSTNAME in
   *.local)
-    # trim domain ".local"
-    HOSTNAME=$(hostname -s)
+    HOSTNAME=$(hostname -s) # trim domain ".local"
     ;;
   @(WS|web)+([[:digit:]])*)
-    # add domain
-    HOSTNAME=$(hostname -f) 
+    HOSTNAME=$(hostname -f) # add domain
     ;;
 esac
 
 if [[ -z $HOME ]]; then
-  # This happened to me once. Literally one time, ever. Then I wrote this.
-  # You do not want to find yourself in a shell without HOME set.
-  # *Everything* breaks. And since, if HOME is suddenly empty or unset,
-  # that's probably not even the biggest problem, notify the user immediately.
+  # This happened to me once. Ever. Then I wrote this. *Everything* breaks if
+  # HOME is suddenly empty or unset, and if that's the case, it's probably not
+  # even the biggest problem, so notify the user immediately.
   printf "HOME not found, searching... " >&2
 
   # First, the simplest: grep the system passwd(5) file and take the homedir
@@ -117,7 +120,6 @@ if [[ -z $HOME ]]; then
   # it will pass the false exit status through (because `pipefail` is set)
   # and try to query Directory Services; if that fails, Python will try to
   # resolve it.
-
   HOME=$(grep "^$USER" /etc/passwd | cut -f6 -d:) \
   || HOME=$(dscl . -read /Users/$USER NFSHomeDirectory 2>/dev/null | cut -d' ' -f2) \
   || HOME=$(python -c 'import os;print os.path.expanduser("~")' 2>/dev/null) \
@@ -132,17 +134,18 @@ fi
 
 export HOME
 
-# Filesystem blocks of 1 KB, like the good Lord intended
-export BLOCKSIZE=1024
+# -----------------------------------------------------------------------------
+# Other business
+# -----------------------------------------------------------------------------
 
-# Abort runaway function nesting in bash-4.2+
-FUNCNEST=128
+# Filesystem blocks of 1 KB, like the good lord intended
+export BLOCKSIZE=1024
 
 # Require ^D × (n+1) to exit
 IGNOREEOF=2
 
-# End ssh sessions after 8 hours of inactivity
-if [[ -n $SSH_CONNECTION && -z $STY && -z $TMUX ]]; then
+# Kill ssh sessions after 8 hours' inactivity, unless tmux/screen is active
+if [[ -n $SSH_CONNECTION && -z $TMUX && -z $STY ]]; then
   TMOUT=$(( 8 * 60 * 60 ))
 fi
 
@@ -153,12 +156,12 @@ umask 0022
 # Terminals
 # -----------------------------------------------------------------------------
 
-# Control sequences
-CSI=$'\e['  # Control Sequence Introducer
-OSC=$'\e]'  # Operating System Command
-DCS=$'\eP'  # Device Control String
- ST=$'\e\\' # String Terminator
+# Control sequences:
 BEL=$'\a'   # 🔔
+CSI=$'\e['  # Control Sequence Introducer
+DCS=$'\eP'  # Device Control String
+OSC=$'\e]'  # Operating System Command
+ ST=$'\e\\' # String Terminator
 
 # Just say no to flow control
 (type -P stty && stty -ixon) &>/dev/null
@@ -182,6 +185,8 @@ if [[ -d $TERMINFO ]]; then
   if [[ $TERM_PROGRAM == "Apple_Terminal" && $TERM != nsterm* ]]; then
     ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
     case 1 in
+      # $(( ver >= 377 ))*) # OS X 10.12
+      #   TERM=nsterm-build377 ;;
       $(( ver >= 361 ))*) # OS X 10.11
         TERM=nsterm-build361 ;;
       $(( ver >= 343 ))*) # OS X 10.10
