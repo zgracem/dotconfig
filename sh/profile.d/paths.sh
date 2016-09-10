@@ -91,13 +91,15 @@ if [[ -x /usr/bin/xcode-select ]]; then
 
     darwin_ver=$(uname -r)
 
+    # ZGM removed SDK directories 2016-08-29 -- nothing important in there, and
+    # causes `brew doctor` to complain.
     if (( ${darwin_ver%%.*} >= 15 )); then
         PATH=$PATH:$DEVELOPER_DIR/usr/bin
-        PATH=$PATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/bin
-        PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
         MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
-        MANPATH=$MANPATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man
+        PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
         MANPATH=$MANPATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/share/man
+        # PATH=$PATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/bin
+        # MANPATH=$MANPATH:$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man
     else
         PATH=$DEVELOPER_DIR/usr/bin:$PATH
         MANPATH=$DEVELOPER_DIR/usr/share/man:$MANPATH
@@ -122,10 +124,11 @@ PATH=$PATH:/opt/gcc-tools/bin
 MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man
 INFOPATH=$INFOPATH:/opt/gcc-tools/epoch2/share/info
 
-# add Windows' %PATH% if available (cygwin)
-if [[ -n $ORIGINAL_PATH ]]; then
-    PATH=$PATH:$ORIGINAL_PATH
-fi
+### ZGM disabled 2016-09-09 -- I don't think this is necessary
+# # add Windows' %PATH% if available (cygwin)
+# if [[ -n $ORIGINAL_PATH ]]; then
+#     PATH=$PATH:$ORIGINAL_PATH
+# fi
 
 # -----------------------------------------------------------------------------
 # ~
