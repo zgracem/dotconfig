@@ -29,7 +29,7 @@ if (( this_bash < latest_bash )) && [[ -x $HOME/opt/bin/bash ]]; then
   export SHELL="$HOME/opt/bin/bash"
 
   # Temporarily export shell options so the new shell inherits them.
-  export SHELLOPTS
+  export SHELLOPTS 2>/dev/null
 
   # Prevent shell from exiting if `exec` fails.
   shopt -s execfail
@@ -44,7 +44,7 @@ fi
 
 # We don't actually want to *keep* those settings, though.
 shopt -u execfail
-declare +x SHELLOPTS
+declare +x SHELLOPTS 2>/dev/null
 
 # # Redundant with the above? test on 4.4-final
 # if [[ $BASH != $SHELL ]]; then
@@ -230,9 +230,11 @@ if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
   {
     tput cr   # move cursor to beginning of line
     tput el   # clear to end of line
-    # printf "\r${CSI}K%s" "$@"
-    printf "%s" "$@"
-    builtin . "$@"
+
+    local f; for f in "$@"; do
+      printf "%s" "${f/#$HOME/$'~'}"
+      builtin . "$f"
+    done
   }
 fi
 

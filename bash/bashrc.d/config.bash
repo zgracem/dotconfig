@@ -13,28 +13,48 @@ alias  bps1='_edit $dir_config/bash/bashrc.d/prompt.bash'
 # functions
 # -----------------------------------------------------------------------------
 
+_z_rl_say()
+{
+  (( verbosity > 0 )) || return
+  local msg_fmt="Reloading %s...\n"
+  local filename="${1/#$HOME/$'~'}"
+  printf "$msg_fmt" "$filename"
+}
+
 rl()
-{   # note: requires extglob, globstar, nullglob
+{ # note: requires extglob, globstar, nullglob
 
   export Z_RELOADING=true
 
-  # nullglob interferes with bash-completion, so turn it on only temporarily
+  # nullglob interferes with bash-completion, so turn it on only temporarily,
+  # and set a trap to make sure it turns off again no matter what
   shopt -q nullglob || trap 'shopt -u nullglob; trap - RETURN;' RETURN
   shopt -s nullglob
 
   local -a files=()
-  local ret=1
+  local verbosity=${verbosity:+0}
 
-  if [[ $1 == -d ]]; then
-    local dry_run=true
-    printf '[%s]\n' "dry run"
-    shift
-  fi
+  local OPT OPTIND
 
-  if [[ $1 == -v ]]; then
-    export Z_RL_VERBOSE=true
-    shift
-  fi
+  while [[ ${1:0:1} == "-" ]]; do
+    if [[ $1 == -d ]]; then
+      local dry_run=true
+      (( verbosity < 1 && verbosity++ ))
+      verbose "> dry run"
+      shift
+    elif [[ $1 == -+(v) ]]; then
+      local v=${1//[^v]/}
+      verbosity=${#v}
+      verbose 2 ">> verbosity level: ${verbosity}"
+      shift
+    else
+      # meaningless switch, discard
+      shift
+    fi
+  done
+
+  # Used in .bashrc
+  (( verbosity > 0 )) && export Z_RL_VERBOSE=true
 
   if (( $# == 0 )); then
     files+=("$dir_config/bash/profile.bash")
@@ -55,40 +75,66 @@ rl()
           files=("$dir_config/bash/colour.bash" "${files[@]}")
           ;;
 
+      colour) # also reload prompt
+          files+=("$dir_config/bash/bashrc.d/prompt.bash")
+          ;;
+
       functions)
           files+=("$dir_config/bash/functions.d/"*.bash)
           ;;
 
-      local)  files+=("$dir_local/config/bashrc.d/"*.bash)
+      local) 
+          files+=("$dir_local/config/bashrc.d/"*.bash)
           ;;
 
       inputrc)
-          printf "%s\n" "~/.inputrc"
-          [[ -z $dry_run ]] && bind -x 're-read-init-file'
+          local inputrc="${INPUTRC:-~/.inputrc}"
+          _z_rl_say "$inputrc"
+          [[ -z $dry_run ]] && bind -f "$inputrc"
           return
           ;;
 
-      tmux)   _inTmux || return
-          printf "%s\n" "~/.tmux.conf"
+      tmux) _inTmux || return
+          _z_rl_say "~/.tmux.conf"
           [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
           return
           ;;
     esac
 
-    if (( ${#files[@]} == 0 )); then
+    if (( ${#files[@]} > 0 )); then
+      verbose 2 ">> $(declare -p files)"
+    else
+      verbose 2 ">> no files found for <$1>, searching functions..."
       # still nothing... maybe it's the name of a function?
       local func; if func=$(where "$1" 2>/dev/null); then
-        files+=(${func%:*})
+        func=${func%:*}       # remove trailing colon and line no.
+        func=${func/#~/$HOME} # tilde-expand filename
+        files+=("$func")
       fi
     fi
   fi
 
+  # We don't need nullglob anymore, so turn it off and unset the RETURN trap
+  # before using `.` on any files.
   shopt -u nullglob; trap - RETURN
 
   local f; for f in "${files[@]}"; do
     if [[ -f $f ]]; then
-      [[ -n $Z_RL_VERBOSE ]] && printf "Reloading %s...\n" "${f/#$HOME/$'~'}"
-      [[ -z $dry_run ]] && . "$f" && ret=0
+      _z_rl_say "$f"
+      if [[ -z $dry_run ]]; then
+        if (( verbosity >= 3 )); then
+          verbose 3 ">>> begin xtrace";
+          set -o xtrace
+          . "$f"
+          set +o xtrace;
+          verbose 3 ">>> end xtrace"
+        else
+          . "$f"
+        fi
+      fi
+    else
+      verbose 2 ">> bad file: <$f>"
+      verbose ">> no functions found for <$1>"
     fi
   done
 
