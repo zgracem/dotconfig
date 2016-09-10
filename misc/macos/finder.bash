@@ -31,6 +31,9 @@ defaults write com.apple.Finder NewWindowTarget -string "PfHm" \
 # # Show all filename extensions
 # defaults write -g AppleShowAllExtensions -bool true
 
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
 # Path bar shows relative to $HOME
 defaults write com.apple.Finder PathBarRootAtHome -bool TRUE
 
@@ -63,8 +66,7 @@ defaults write com.apple.Finder QLEnableXRayFolders -boolean true
 
 # -----------------------------------------------------------------------------
 
-# Prefer list view
-# (codes for the other view modes: `icnv`, `clmv`, `Flwv`)
+# Prefer list view (other view modes: `icnv`, `clmv`, `Flwv`)
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 declare grid_spacing=93
@@ -98,3 +100,5 @@ settings+=(":StandardViewSettings:IconViewSettings:iconSize $icon_size")
 for setting in "${settings[@]}"; do
   /usr/libexec/PlistBuddy -c "Set $setting" ~/Library/Preferences/com.apple.finder.plist
 done
+
+unset -v setting settings

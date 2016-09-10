@@ -9,20 +9,25 @@ alias .....='cd ../../../..'
 
 alias bell='tput bel' # 🔔
 alias bye='exit'
+alias d='declare -p'
 alias e='echo'
+alias ee='_edit'
+alias i='newwin irb'
 alias svim='sudo vim'
 alias unmount='umount'
+
+alias builtins='compgen -b | column'
+alias functions='compgen -A function | column'
 
 alias c='pbcopy'
 alias p='pbpaste'
 
-alias d='declare -p'
-
 alias hd='hexdump -C'
 
-alias etest='_edit "$dir_dropbox/src/test.sh"'
-alias stest='. "$dir_dropbox/src/test.bash"'
-alias ttest="$dir_dropbox/src/test.sh"
+alias  etest='_edit "$dir_dropbox/src/test.sh"'
+alias  ttest="$dir_dropbox/src/test.sh"
+export rtest="$dir_dropbox/src/test.rb"
+alias  rtest="$rtest"
 
 alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" -d "$HOME/Archive/pinboard" -fvx'
 
@@ -31,9 +36,6 @@ alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" -d "$HOME/Archi
 # files/directories
 alias dirsize='du -sh .'            # total size of $PWD
 alias sizes='dirsize | sort -rh'    # sort files & directories in $PWD by size
-
-# check network connection
-alias pingg='ping -c 4 google.com'
 
 # share $PWD at localhost:17777 (port reserved by IANA)
 alias webshare='python -m SimpleHTTPServer 17777'

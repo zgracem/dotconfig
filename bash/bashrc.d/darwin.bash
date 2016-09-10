@@ -5,7 +5,12 @@
 [[ $OSTYPE =~ darwin ]] || return
 
 HARDWARE=$(sysctl -n hw.model)
-MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '; sw_vers -buildVersion))
+
+DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
+MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+if [[ -z ${MACOS_VERSINFO[2]} ]]; then
+  MACOS_VERSINFO[2]=0
+fi
 
 # -----------------------------------------------------------------------------
 # system commands
