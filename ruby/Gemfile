@@ -2,35 +2,97 @@
 
 source "https://rubygems.org"
 
+# <github.com/bundler/bundler>
 gem "bundler"
 
-# ruby dev
-gem "json"
-gem "plist"
-gem "what_methods" # for use in irb
-# gem "yard" # documentation
+# Show a method's code w/ syntax highlighting <github.com/janlelis/code>
+gem "code"
 
+# MRI core documentation & source <github.com/janlelis/core_docs>
+gem "core_docs"
+
+# <github.com/github/gemoji>
+gem "gemoji"
+
+# <github.com/janlelis/irbtools>
+gem "irbtools"
+
+# <github.com/flori/json>
+gem "json"
+
+# <github.com/markburns/numbers_in_words>
+gem "numbers_in_words"
+
+# <github.com/bleything/plist>
+gem "plist"
+
+# power tools for the File class <github.com/djberg96/ptools>
+gem "ptools"
+
+# builds manual pages <github.com/rtomayko/ronn>
+gem "ronn"
+
+# <github.com/genki/ruby-terminfo>
+gem "ruby-terminfo"
+
+# TrueType font parser <github.com/prawnpdf/ttfunk>
+gem "ttfunk"
+
+# <github.com/lang/unicode_utils>
+gem "unicode_utils"
+
+# <rubygems.org/gems/what_methods>
+gem "what_methods"
+
+# Yay! A Ruby Documentation Tool <github.com/lsegal/yard>
+gem "yard"
+
+# -----------------------------------------------------------------------------
 # webdev
-gem "middleman",      "~> 3.4"
-gem "sass",           "~> 3.4"
-gem "slim",           "~> 3.0"
+# -----------------------------------------------------------------------------
+
+# <github.com/threedaymonk/htmlentities>
 gem "htmlentities"
 
-# misc.
-gem "gemoji"
-gem "nokogiri"
-gem "ronn"
-gem "ttfunk" # fonts
-gem "unicode_utils",  ">= 1.4"
+# <github.com/middleman/middleman>
+gem "middleman", "~> 3.4"
 
+# <github.com/sass/sass>
+gem "sass"
+
+# <github.com/slim-template/slim>
+gem "slim"
+
+# -----------------------------------------------------------------------------
 # APIs
-gem "dropbox-sdk",    "1.6.5"
-gem "google-api-client", "~> 0.8"
-gem "instagram",      "1.1.5"
+# -----------------------------------------------------------------------------
+
+# <github.com/dropbox/dropbox-sdk-ruby>
+gem "dropbox-sdk"
+
+# <github.com/google/google-api-ruby-client>
+gem "google-api-client"
+
+# <github.com/facebookarchive/instagram-ruby-gem>
+gem "instagram"
+
+# <github.com/oauth-xx/oauth-ruby>
 gem "oauth"
+
+# <github.com/tumblr/tumblr_client>
 gem "tumblr_client"
 
+# -----------------------------------------------------------------------------
 # network stuff
-gem "http",           "0.9.7"
-gem "socksify",       "1.7.0"
-gem "net-ssh",        "~> 3.0"
+# -----------------------------------------------------------------------------
+
+gem "http"
+gem "net-scp"
+gem "net-ssh"
+
+# <github.com/sparklemotion/nokogiri>
+gem "nokogiri"
+
+# <github.com/astro/socksify-ruby>
+gem "socksify"
+

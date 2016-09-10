@@ -1,62 +1,77 @@
-require "rubygems"
-require "irb/completion"  # double-Tab completion for methods
-require "pp"              # pretty print
+require "English"
+require "irb/completion"
+require "open-uri"
+require "pp"
+require "what_methods"  # object.what?(result)
+                        # => method(s) that will produce result
+require "zgm/colour"
+require "zgm/proxy"
+require "zgm/red_warnings"
+require "zgm/term"
 
-require "what_methods"    # object.what?(result) => method(s) that will produce result
-
-require "proxy"
+include IRB
 
 # -----------------------------------------------------------------------------
 # settings
 # -----------------------------------------------------------------------------
 
+# http://irb.tools/
+
+# `configure.rb` loads `implementation.rb`, which sets up the Irbtools module 
+# with a default welcome message. 
+require "irbtools/configure"
+
+# This overrides that default:
+Irbtools.welcome_message =
+  "Welcome to " +
+  "#{Colour.brightyellow}" + IRB.version.split("(").first.upcase + 
+  "#{Colour.reset}. You are using " +
+  "#{Colour.brightmagenta}" + RUBY_DESCRIPTION.split(" (").first +
+  "#{Colour.reset}."
+
+# Now we load the rest of it:
+require "irbtools"
+
+# General IRB settings
+
 IRB.conf[:AUTO_INDENT]  = true
 
 IRB.conf[:USE_READLINE] = true
 
-# IRB.conf[:HISTORY_FILE] = File::expand_path("~/.local/history/irb_history")
-# IRB.conf[:SAVE_HISTORY] = 1024
-# IRB.conf[:EVAL_HISTORY] = 256
+IRB.conf[:HISTORY_FILE] = File::expand_path("~/.local/history/irb_history")
+IRB.conf[:SAVE_HISTORY] = 4096
+IRB.conf[:EVAL_HISTORY] = 1024
 
 # -----------------------------------------------------------------------------
 # prompt
 # -----------------------------------------------------------------------------
 
-case ENV["Z_SOLARIZED"]
-  when "dark"
-    colour = "37"   # white
-  when "light"
-    colour = "30"   # black
-  else
-    colour = "1;37" # brwhite
-end
-
-on  = "\001\e[" + colour + "m\002"
-off = "\001\e[0m\002"
+off = "#{Colour.reset}"
+dim = "#{Colour.brightblack}"
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{on}>>#{off} ",
-
-  # prompt when continuing a string
-  PROMPT_S: "#{on}>%l#{off} ",
-
-  # prompt when continuing a statement
-  PROMPT_C: "#{on}>*#{off} ",
+  PROMPT_I: "#{Colour.brightblue}>>#{off} ",
 
   # prompt when indenting code
-  PROMPT_N: "#{on}>>>>#{off} ",
+  PROMPT_N: "#{dim}>" + "#{Colour.blue}>  " + off,
+
+  # prompt for continuing strings
+  PROMPT_S: "#{dim}%l" + "#{Colour.cyan}>" + off,
+
+  # prompt for continuing statement
+  PROMPT_C: "#{dim}*" + "#{Colour.yellow}>" + off,
 
   # prefix to statement output
-  RETURN:   "\001\e[34m\002=>#{off} %s\n"
+  RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
 }
 
-IRB.conf[:PROMPT_MODE]  = :ZGM
+IRB.conf[:PROMPT_MODE] = :ZGM
 
 # -----------------------------------------------------------------------------
 # helper methods
 # -----------------------------------------------------------------------------
 
 def echo
-  conf.echo = !(conf.echo)
+  IRB.conf[:echo] = !IRB.conf[:echo]
 end
