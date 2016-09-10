@@ -1,13 +1,13 @@
-_inPath screen && ! _inPath tmux || return
+_inPath screen || return
 
 # set socket directory
 export SCREENDIR="$HOME/tmp/.screens"
 
 # Solarized Light colour scheme
 if [[ $Z_SOLARIZED == light ]]; then
-  export SCREENRC="${dir_config}/screenrc.light"
+  export SCREENRC="${dir_config}/screen/screenrc.light"
 else
-  export SCREENRC="${dir_config}/screenrc"
+  export SCREENRC="${dir_config}/screen/screenrc"
 fi
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
