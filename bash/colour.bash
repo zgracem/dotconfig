@@ -40,14 +40,14 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   # Use aixterm codes to get actual *bright* colours instead of setting the
   # emulator to display bold text as unbold-but-bright. (Inspired by Prompt,
   # which doesn't offer that option.)
-  brblack="${black/#3/9}"     # brblack="$bold;$black"
-  brred="${red/#3/9}"         # brred="$bold;$red"
-  brgreen="${green/#3/9}"     # brgreen="$bold;$green"
-  bryellow="${yellow/#3/9}"   # bryellow="$bold;$yellow"
-  brblue="${blue/#3/9}"       # brblue="$bold;$blue"
-  brmagenta="${magenta/#3/9}" # brmagenta="$bold;$magenta"
-  brcyan="${cyan/#3/9}"       # brcyan="$bold;$cyan"
-  brwhite="${white/#3/9}"     # brwhite="$bold;$white"
+  brblack=90
+  brred=91
+  brgreen=92
+  bryellow=93
+  brblue=94
+  brmagenta=95
+  brcyan=96
+  brwhite=97
 else
   brblack=$black
   brred=$red
