@@ -10,10 +10,10 @@ vnc()
   if [[ -x $vnc_dir/vncviewer.exe ]]; then
     local config_file=$(cygpath -aw "$vnc_dir/vnc.conf")
     if run "$vnc_dir/vncviewer.exe" -config "$config_file"; then
-      printf "%b" "\e[6t" # lower window
-      tput cuu1 # move cursor up one line (printf "\eM")
-      tput cr   # move cursor to beginning of line (printf "\r")
-      tput el   # clear to end of line (printf "${CSI}K")
+      printf "%b" "${CSI}6t" # lower window
+      tput cuu1 # move cursor up one line
+      tput cr   # move cursor to beginning of line
+      tput el   # clear to end of line
     fi
   else
     scold "$vnc_dir/vncviewer.exe not found"

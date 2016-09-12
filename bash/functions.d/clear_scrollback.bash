@@ -13,10 +13,11 @@ clear_scrollback()
   # clear scrollback in terminal
   case $TERM_PROGRAM in
     PuTTY|Apple_Terminal)
-      printf "%b" "${CSI}3J"
+      printf "%b" "${DCS_ante}${CSI}3J${DCS_post}"
       ;;
     iTerm*)
       printf "%b" "${OSC}50;ClearScrollback${BEL}"
       ;;
   esac
 }
+# [warn] kq_init: detected broken kqueue; not using.: Undefined error: 0

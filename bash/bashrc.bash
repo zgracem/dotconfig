@@ -39,7 +39,6 @@ if (( this_bash < latest_bash )) && [[ -x $HOME/opt/bin/bash ]]; then
   else
     exec "$SHELL"
   fi
-
 fi
 
 # We don't actually want to *keep* those settings, though.
@@ -153,64 +152,6 @@ fi
 umask 0022
 
 # -----------------------------------------------------------------------------
-# Terminals
-# -----------------------------------------------------------------------------
-
-# Control sequences:
-BEL=$'\a'   # 🔔
-CSI=$'\e['  # Control Sequence Introducer
-DCS=$'\eP'  # Device Control String
-OSC=$'\e]'  # Operating System Command
- ST=$'\e\\' # String Terminator
-
-# Just say no to flow control
-(type -P stty && stty -ixon) &>/dev/null
-
-# Custom terminfo files
-TERMINFO="$HOME/share/terminfo"
-
-if [[ -d $TERMINFO ]]; then
-  export TERMINFO
-  export TERMINFO_DIRS="$TERMINFO:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
-
-  TERMINFO_DIRS=$(fixpath "$TERMINFO_DIRS")
-
-  # Darwin's full-screen system console
-  if [[ $TERM == "vt100" && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
-    TERM=xnuppc
-    export HV_DISABLE_PP=1
-  fi
-
-  # Old versions of Terminal.app
-  if [[ $TERM_PROGRAM == "Apple_Terminal" && $TERM != nsterm* ]]; then
-    ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
-    case 1 in
-      # $(( ver >= 377 ))*) # OS X 10.12
-      #   TERM=nsterm-build377 ;;
-      $(( ver >= 361 ))*) # OS X 10.11
-        TERM=nsterm-build361 ;;
-      $(( ver >= 343 ))*) # OS X 10.10
-        TERM=nsterm-build343 ;;
-      $(( ver >= 326 ))*) # OS X 10.9
-        TERM=nsterm-build326 ;;
-      $(( ver >= 303 ))*) # OS X 10.7 & 10.8
-        TERM=nsterm-256color ;;
-      $(( ver >= 240 ))*) # OS X 10.5
-        TERM=nsterm-16color ;;
-      *)
-        # This is probably god-awfully old; just leave it alone.
-        : ;;
-    esac
-  
-  # iTerm.app
-  elif [[ $TERM_PROGRAM == "iTerm.app" && $TERM != "iTerm.app" ]]; then
-    TERM="iTerm.app"
-  fi
-else
-  unset -v TERMINFO
-fi
-
-# -----------------------------------------------------------------------------
 # Other config files
 # -----------------------------------------------------------------------------
 
@@ -228,8 +169,8 @@ fi
 if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
   .()
   {
-    tput cr   # move cursor to beginning of line
-    tput el   # clear to end of line
+    printf $'\r'    # (tput cr) move cursor to beginning of line
+    printf $'\e[K'  # (tput el) clear to end of line
 
     local f; for f in "$@"; do
       printf "%s" "${f/#$HOME/$'~'}"
@@ -242,6 +183,9 @@ export INPUTRC="$dir_config/inputrc"
 
 # Define important shell functions
 . "$dir_config/bash/functions.bash"
+
+# Terminal-related setup
+. "$dir_config/bash/term.bash"
 
 # Load direction definitions ($dir_foo)
 . "$dir_config/bash/dirs.bash"
