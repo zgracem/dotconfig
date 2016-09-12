@@ -21,6 +21,8 @@ elif shopt -q restricted_shell; then
   return
 fi
 
+export Z_IN_BASHRC=true
+
 # Switch to bash-4.4 if available
 latest_bash=44
 this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
@@ -251,9 +253,11 @@ then
   fi
 fi
 
-# Cleanup after debugging
+# Cleanup from debugging
 if _isFunction .; then
   tput cr   # move cursor to beginning of line
   tput el   # clear to end of line
   unset -f .
 fi
+
+unset -v Z_IN_BASHRC
