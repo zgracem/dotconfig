@@ -24,10 +24,15 @@ unset -v PROMPT_DIRTRIM
 # If true, print the exit status of the last command aligned right in red
 : ${Z_PROMPT_EXIT:=true}
 
-# If true, make several slow calls to `git` every time the prompt refreshes,
-# in exchange for info about the current git situation
+# If true, make a slow call to `git` every time the prompt refreshes,
+# in exchange for info about the current git situation ("gituation")
 : ${Z_PROMPT_GIT:=false}
 
+# If false, display the hostname in the prompt only when connected via SSH.
+# If true, always display the hostname in the prompt, even in local sessions.
+: ${Z_PROMPT_HOST:=true}
+
+# If true, the prompt will display an indication of any active jobs
 : ${Z_PROMPT_JOBS:=true}
 
 # If true, set window/tab title to "host@username: pwd"
@@ -383,7 +388,7 @@ if [[ $Z_PROMPT_EXIT == true ]]; then
   PS1+="${PS1_false}\[\$(_z_prompt_print_exit)\]${PS1_reset}"
 fi
 
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
   # hostname
   PS1+="${PS1_dim}\h${PS1_reset}:"
 fi
