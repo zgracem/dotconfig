@@ -4,7 +4,7 @@
 
 # get the terminal colour depth (based on $TERM, not perfect but it'll do)
 if [[ -z $TERM_COLOURDEPTH || -n $Z_RELOADING ]]; then
-  TERM_COLOURDEPTH="$(tput colors)" || return
+  TERM_COLOURDEPTH="$(tput -T ${PTERM:-$TERM} colors)" || return
 fi
 
 # skip this file if the terminal can't support at least eight colours
@@ -80,21 +80,6 @@ colours+=(reset)
 # -----------------------------------------------------------------------------
 # Solarized -- http://ethanschoonover.com/solarized
 # -----------------------------------------------------------------------------
-
-# case $TERM_PROGRAM in
-#   iTerm*)
-#     case $ITERM_PROFILE in
-#       *light*) Z_SOLARIZED=light ;;
-#       Default*|Hotkey*) Z_SOLARIZED=dark ;;
-#     esac
-#     ;;
-#   Apple_Terminal)
-#     if [[ -n $TERM_PROGRAM_VERSION ]] && (( ${TERM_PROGRAM_VERSION%%.*} > 240 )); then
-#       # i.e. if not running in Terminal.app on 10.5.8...
-#       : # Z_SOLARIZED=dark
-#     fi
-#     ;;
-# esac
 
 if [[ -n $Z_SOLARIZED ]]; then
   base03=$brblack
