@@ -202,7 +202,7 @@ _z_prompt_git_info()
 {
   [[ $Z_PROMPT_GIT != true ]] && return
 
-  local status= branch= icons=
+  local status="" branch="" icons=$esc_reset
   local ahead=0 unstaged=0 untracked=0 dirty=false
 
   # get info on current branch, or bail if no branch exists
@@ -222,17 +222,13 @@ _z_prompt_git_info()
   unstaged=${status//[^$'\x0a']/}
   unstaged=${#unstaged}
 
-  if (( unstaged > 0 )); then
-    dirty=true
-  fi
-
   # count untracked files
   local re_ut=$'\n''(\? | \?|\?\?)'
   if [[ $status =~ $re_ut ]]; then
     untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
   fi
 
-  if (( untracked > 0 )); then
+  if (( unstaged > 0 )) || (( untracked > 0 )); then
     dirty=true
   fi
 
@@ -242,37 +238,37 @@ _z_prompt_git_info()
     ahead="${BASH_REMATCH[1]}"
   fi
 
-  # # add '•' if there's anything to commit
-  # if [[ $dirty == true ]]; then
-  #   icons+=$esc_false
-  #   icons+="•"
-  # fi
-
-  # # add '+' if there are untracked files
-  # if (( untracked > 0 )); then
-  #   icons+=$esc_reset
-  #   icons+=$esc_green
-  #   icons+="+"
-  # fi
-
-  # # add '»' if we're ahead of origin
-  # if (( ahead > 0 )); then
-  #   icons+=$esc_reset
-  #   icons+=$esc_yellow
-  #   icons+="»"
-  # fi
-
+  # add '*' if there's anything to commit
   if [[ $dirty == true ]]; then
     icons+=$esc_false
     icons+="*"
   fi
 
-  # printf "${esc_reset} %b" \
-  #   "${esc_dim}${branch}" \
-  #   "${icons:-}${esc_reset}"
+  # add '+' if there are untracked files
+  if (( untracked > 0 )); then
+    icons+=$esc_reset
+    icons+=$esc_green
+    icons+="+"
+  fi
 
-  printf " %b${esc_reset}" \
-    "${esc_dim}${branch}${icons}"
+  # add '»' if we're ahead of origin
+  if (( ahead > 0 )); then
+    icons+=$esc_reset
+    icons+=$esc_yellow
+    icons+="»"
+  fi
+
+  printf "${esc_reset}%b" \
+    " ${esc_dim}${branch}" \
+    "${icons:-}${esc_reset}"
+
+  # if [[ $dirty == true ]]; then
+  #   icons+=$esc_false
+  #   icons+="*"
+  # fi
+
+  # printf " %b${esc_reset}" \
+  #   "${esc_dim}${branch}${icons}"
 }
 
 _z_prompt_jobs()
