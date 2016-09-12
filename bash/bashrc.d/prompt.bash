@@ -296,13 +296,7 @@ _z_prompt_update_Terminal()
 { # Format:   file://hostname/path/to/pwd
   # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 
-  local ante="${OSC}7;" post="${BEL}"
-
-  if _inTmux; then
-    # ANSI device control string
-    ante="${DCS}tmux;\e${ante}"
-    post="${post}${ST}"
-  fi
+  local ante="${DCS_ante}${OSC}7;" post="${BEL}${DCS_post}"
 
   local pwd_url="file://${HOSTNAME}"
 
