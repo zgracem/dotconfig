@@ -47,43 +47,44 @@ else
     export HV_DISABLE_PP=1
   fi
 
-  # Old versions of Terminal.app
-  if [[ $TERM_PROGRAM == "Apple_Terminal" && $OLDTERM != nsterm* ]] \
-        && ! _inTmux && ! _inScreen; then
-    ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
-    case 1 in
-      $(( ver >= 377 ))*)
-        # macOS 10.12
-        TERM=nsterm-build377
-        ;;
-      $(( ver >= 361 ))*)
-        # OS X 10.11
-        TERM=nsterm-build361
-        ;;
-      $(( ver >= 343 ))*)
-        # OS X 10.10
-        TERM=nsterm-build343
-        ;;
-      $(( ver >= 326 ))*)
-        # OS X 10.9
-        TERM=nsterm-build326
-        ;;
-      $(( ver >= 303 ))*)
-        # OS X 10.7 & 10.8
-        TERM=nsterm-256color
-        ;;
-      $(( ver >= 240 ))*)
-        # OS X 10.5
-        TERM=nsterm-16color
-        ;;
-      *)
-        # This is probably god-awfully old; just leave it alone.
-        : ;;
-    esac
-  
-  # iTerm.app
-  elif [[ $TERM_PROGRAM == "iTerm.app" && $OLDTERM != "iTerm.app" ]]; then
-    TERM="iTerm.app"
+  if ! _inTmux && ! _inScreen; then
+    # Old versions of Terminal.app
+    if [[ $TERM_PROGRAM == "Apple_Terminal" && $OLDTERM != nsterm* ]]; then
+      ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
+      case 1 in
+        $(( ver >= 377 ))*)
+          # macOS 10.12
+          TERM=nsterm-build377
+          ;;
+        $(( ver >= 361 ))*)
+          # OS X 10.11
+          TERM=nsterm-build361
+          ;;
+        $(( ver >= 343 ))*)
+          # OS X 10.10
+          TERM=nsterm-build343
+          ;;
+        $(( ver >= 326 ))*)
+          # OS X 10.9
+          TERM=nsterm-build326
+          ;;
+        $(( ver >= 303 ))*)
+          # OS X 10.7 & 10.8
+          TERM=nsterm-256color
+          ;;
+        $(( ver >= 240 ))*)
+          # OS X 10.5
+          TERM=nsterm-16color
+          ;;
+        *)
+          # This is probably god-awfully old; just leave it alone.
+          : ;;
+      esac
+    
+    # iTerm.app
+    elif [[ $TERM_PROGRAM == "iTerm.app" && $OLDTERM != "iTerm.app" ]]; then
+      TERM="iTerm.app"
+    fi
   fi
 
   # Verify the new TERM setting before we proceed.
@@ -98,6 +99,32 @@ fi
 # Run this here to make sure `stty` has the best possible value for TERM, and
 # in a subshell to catch the output of both commands.
 (type -P stty && stty -ixon) &>/dev/null
+
+# Set the parent TERM so we can check capabilities of the actual emulator.
+# Mark the variable readonly and export so it propagates to subshells.
+if [[ -z $PTERM ]]; then
+  if _inTmux || _inScreen; then
+    # Try to guess the parent terminal from the value of TERM_PROGRAM, if any.
+    case $TERM_PROGRAM in
+      Apple_Terminal)
+        PTERM=nsterm
+        ;;
+      iTerm.app)
+        PTERM=iTerm.app
+        ;;
+      PuTTY)
+        PTERM=putty-256color
+        ;;
+      *)
+        : # Oh well, we tried.
+        ;;
+    esac
+  else
+    PTERM=$TERM
+  fi
+
+  declare -rx PTERM=${PTERM:-$TERM}
+fi
 
 # -----------------------------------------------------------------------------
 # Functions
