@@ -20,10 +20,16 @@ done 2>/dev/null &
 
 # Set helpful variables
 HARDWARE=$(sysctl -n hw.model)
-MACOS_VERSINFO=($(sw_vers -productVersion | tr "." " "; sw_vers -buildVersion))
+DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
+MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+
+if [[ -z ${MACOS_VERSINFO[2]} ]]; then
+  MACOS_VERSINFO[2]=0
+fi
+
 MACOS_VERSION=${MACOS_VERSINFO[1]}
 
-export HARDWARE MACOS_VERSINFO MACOS_VERSION
+export HARDWARE DARWIN_VERSINFO MACOS_VERSINFO MACOS_VERSION
 
 # -----------------------------------------------------------------------------
 # Load preferences
@@ -34,7 +40,7 @@ source_dir=$(mdutil -t "${BASH_SOURCE[0]%/*}/macos")
 shopt -s extglob nullglob
 
 for pref in "${source_dir}"/*.bash; do
-  [[ -f $pref ]] && echo "${pref}"
+  [[ -f $pref ]] && . "${pref}"
 done
 
 # -----------------------------------------------------------------------------

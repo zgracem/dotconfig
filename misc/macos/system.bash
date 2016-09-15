@@ -22,10 +22,10 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # # Disable Notification Center and remove the menu bar icon
 # launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
-# Enable access for assistive devices (pre-Mavericks)
-# post-Mavericks, use <https://github.com/jacobsalmela/tccutil>
+# Enable access for assistive devices pre-Mavericks.
+# Post-Mavericks, use <github.com/jacobsalmela/tccutil>.
 if (( MACOS_VERSION < 9 )); then
-    sudo touch /private/var/db/.AccessibilityAPIEnabled
+  sudo touch "/private/var/db/.AccessibilityAPIEnabled"
 fi
 
 # Disable disk image verification
@@ -56,4 +56,3 @@ sudo defaults write /Library/Preferences/com.apple.RemoteManagement VNCAlwaysSta
 ### ZGM disabled 2016-08-18 -- redundant w/ Server?
 # # Web Sharing -- enable Apache
 # sudo defaults write /System/Library/LaunchDaemons/org.apache.httpd Disabled -bool false
-

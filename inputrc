@@ -43,10 +43,6 @@ set print-completions-horizontally on
 # ask to view possible completions if >= x
 set completion-query-items 64
 
-### ZGM disabled 2016-07-06 -- ugly and unreliable
-# # display completions in colour (based on LS_COLORS)
-# set colored-stats on
-
 # complete things that have been typed in the wrong case
 set completion-ignore-case on
 
@@ -69,6 +65,9 @@ set match-hidden-files on
 
 # don't re-complete already-completed text after the cursor.
 set skip-completed-text on
+
+# don't expand "~" to $HOME when completing
+set expand-tilde off
 
 # -----------------------------------------------------------------------------
 # history
@@ -95,23 +94,23 @@ set history-preserve-point on
 
 # vi mode
 $if mode=vi
-    set keymap vi-command
-    Control-t: transpose-chars
+  set keymap vi-command
+  "\C-t": transpose-chars
 
-    set keymap vi-insert
-    Control-a: beginning-of-line
-    Control-e: end-of-line
-    Control-l: clear-screen
-    Control-w: backward-kill-word
-    "\C-x\C-r": re-read-init-file
-    "\C-x\C-e": edit-and-execute-command
+  set keymap vi-insert
+  "\C-a":     beginning-of-line
+  "\C-e":     end-of-line
+  "\C-l":     clear-screen
+  "\C-w":     backward-kill-word
+  "\C-x\C-r": re-read-init-file
+  "\C-x\C-e": edit-and-execute-command
 
-    # auto-complete from the history
-    "\C-p": history-search-backward
-    "\C-n": history-search-forward
+  # auto-complete from the history
+  "\C-p": history-search-backward
+  "\C-n": history-search-forward
 $endif
 
 $if Bash
-    # expand ! history with a spacebar press
-    Space: magic-space
+  # expand ! history with a spacebar press
+  Space: magic-space
 $endif
