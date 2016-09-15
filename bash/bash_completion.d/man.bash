@@ -60,4 +60,4 @@ __z_complete_man()
   COMPREPLY=( "${reply[@]}" )
 }
 
-complete -F __z_complete_man man apropos whatis manpdf
+complete -F __z_complete_man man

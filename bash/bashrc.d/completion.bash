@@ -9,11 +9,6 @@ if [[ ! -d $BASH_COMPLETION_DIR ]]; then
   unset -v BASH_COMPLETION_DIR
 fi
 
-# Homebrew
-if [[ -n $HOMEBREW_PREFIX ]]; then
-  export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
-fi
-
 # -----------------------------------------------------------------------------
 # completion options
 # -----------------------------------------------------------------------------
@@ -41,6 +36,22 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 # support functions
 # -----------------------------------------------------------------------------
 
+# template:
+
+# __z_complete_THING()
+# {
+#   local cmd=$1
+#   local cur=${COMP_WORDS[COMP_CWORD]}
+#   local prev=${COMP_WORDS[COMP_CWORD-1]}
+#   local -a wordlist=()
+#
+#   # other stuff
+#
+#   COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "$cur") )
+# }
+#
+# complete -F __z_complete_THING THING
+
 __z_complete_files()
 { # Usage: __z_complete_files EXT DIR... 
   # Returns *.EXT in each DIR
@@ -56,33 +67,28 @@ __z_complete_files()
   done
 }
 
-# -----------------------------------------------------------------------------
-# template function
-# -----------------------------------------------------------------------------
-
-# __z_complete_thing()
-# {
-#   local cmd=$1
-#   local cur=${COMP_WORDS[COMP_CWORD]}
-#   local prev=${COMP_WORDS[COMP_CWORD-1]}
-#   local -a wordlist=()
-#
-#   # other stuff
-#
-#   COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "$cur") )
-# }
-#
-# complete -F __z_complete_thing thing
+__z_complete_autoload()
+{ # Set this function as the default completion handler to autoload compspecs.
+  # Based on: https://sanctum.geek.nz/cgit/dotfiles.git/tree/bash/bashrc.d/completion.bash
+  [[ -n $1 ]] || return
+  local compspec="$dir_config/bash/bash_completion.d/$1.bash"
+  [[ -f $compspec ]] || return
+  . "$compspec" &>/dev/null && return 124
+}
 
 # -----------------------------------------------------------------------------
 # load external completions
 # -----------------------------------------------------------------------------
 
-# custom completions
-if [[ -d $dir_config/bash/bash_completion.d ]]; then
-  for file in "$dir_config"/bash/bash_completion.d/*.bash; do
+. "$dir_config/bash/bash_completion.d/_misc.bash"
+
+if (( BASH_VERSINFO[0] >= 4 )); then
+  # Load completions dynamically
+  complete -D -F __z_complete_autoload -o bashdefault -o default
+else
+  # Load them manually
+  for file in "$dir_config"/bash/bash_completion.d/[^_]*.bash; do
     [[ -f $file ]] && . "$file"
   done
+  unset -v file
 fi
-
-unset -v file
