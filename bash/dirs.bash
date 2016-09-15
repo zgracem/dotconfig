@@ -11,10 +11,10 @@ dir_scratch="$HOME/tmp/_scratch"
 
 dir_scripts="$HOME/scripts"
 dir_dev="$dir_scripts/dev"
-dir_defunct="$dir_dropbox/src/_defunct"
+dir_defunct="$HOME/src/_defunct"
 dir_cache="$HOME/var/cache"
 
-dir_bashlib="$HOME/lib"
+dir_bashlib="$HOME/lib/bash"
 dir_howto="$HOME/txt/howto"
 dir_vsmm="$dir_dropbox/www/vsmm"
 
@@ -45,7 +45,7 @@ esac
 
 # machine-specific
 case $HOSTNAME in
-    Erato)
+    Erato*)
         dir_docs="$dir_dropbox/Documents"
         ;;
 
@@ -55,25 +55,13 @@ case $HOSTNAME in
         dir_dropbox="$HOME/Dropbox"
         ;;
 
-    WTL2)
+    WTL2*)
         dir_music="$dir_docs/My Music/iTunes/iTunes Media/Music"
         ;;
 
-    Pallas)
+    Pallas*)
         dir_downloads="$dir_winhome/Downloads"
         ;;
 esac
 
 export ${!dir_*}
-
-# # bash-completion v1
-# if [[ -z $BASH_COMPLETION_DIR ]]; then
-#     for BASH_COMPLETION_DIR in /{usr/local/,}etc/bash_completion.d; do
-#         if [[ -d $BASH_COMPLETION_DIR ]]; then
-#             export BASH_COMPLETION_DIR
-#             break
-#         else
-#             unset BASH_COMPLETION_DIR
-#         fi
-#     done
-# fi

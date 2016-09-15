@@ -1,11 +1,14 @@
 dev()
 {
+  local os=${OSTYPE%%+([^[:alpha:]])}
+
   case $1 in
     ruby)
-      subl --project ~/Dropbox/etc/rubydev.sublime-project
+      subl --project "$HOME/Dropbox/etc/rubydev.${os}.sublime-project"
       ;;
     weather)
       local lib=~/Dropbox/src/gems/weather_ca
+      cd "$lib"
       _dev_subl "$lib"
       ;;
     micro)
@@ -20,12 +23,19 @@ dev()
                 "$proj_dir/source/css/gonehome.sass"
       _dev_middleman "$proj_dir"
       ;;
-    scheme|schemes)
-      local proj_dir=~/Dropbox/etc/schemes
+    cp437)
+      local proj_dir=~/Dropbox/www/cp437
       _dev_subl "$proj_dir"
+      _dev_middleman "$proj_dir"
       ;;
     *)
-      scold "I don't know $1"
+      local opts=($(declare -f $FUNCNAME \
+                    | sed -nE 's/.*[[:space:]]([[:alnum:]]+)\)$/\1/p'))
+
+      scold "Sorry, I don't know “$1”"
+      scold "Try one of:"
+      scold "  ${opts[*]}"
+      
       return $EX_DATAERR
       ;;
   esac
@@ -33,7 +43,7 @@ dev()
 
 _dev_middleman()
 {
-  [[ $HOSTNAME =~ ^Athena ]] || return $EX_NOHOST
+  [[ $HOSTNAME == Athena* ]] || return $EX_NOHOST
 
   local proj_dir="$1"; shift
   

@@ -17,11 +17,11 @@ elif ! [[ $- =~ i ]]; then
   # ...this isn't an interactive shell
   return
 elif shopt -q restricted_shell; then
-  # ...this is a restricted shell
+  echo >&2 "restricted shell -- aborting .bashrc"
   return
+else
+  export Z_IN_BASHRC=true
 fi
-
-export Z_IN_BASHRC=true
 
 # Switch to bash-4.4 if available
 latest_bash=44
@@ -46,11 +46,6 @@ fi
 # We don't actually want to *keep* those settings, though.
 shopt -u execfail
 declare +x SHELLOPTS 2>/dev/null
-
-# # Redundant with the above? test on 4.4-final
-# if [[ $BASH != $SHELL ]]; then
-#   export SHELL=$BASH
-# fi
 
 # -----------------------------------------------------------------------------
 # Shell options
@@ -102,9 +97,9 @@ export TMPDIR=${TMPDIR:-$(dirname "$(mktemp -ut tmp.XXX)")}
 # privileges), in case we don't have root and the system /tmp is locked down
 
 case $HOSTNAME in
-  *.local)
-    HOSTNAME=$(hostname -s) # trim domain ".local"
-    ;;
+  # *.local)
+  #   HOSTNAME=$(hostname -s) # trim domain ".local"
+  #   ;;
   @(WS|web)+([[:digit:]])*)
     HOSTNAME=$(hostname -f) # add domain
     ;;
@@ -132,8 +127,6 @@ if [[ -z $HOME ]]; then
 
   printf '%s\n' "$HOME"
 fi
-
-export HOME
 
 # -----------------------------------------------------------------------------
 # Other business
@@ -168,7 +161,7 @@ fi
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
-if [[ $Z_RL_VERBOSE == true && $TIME_TEST_ACTIVE != true ]]; then
+if [[ -n $Z_RL_VERBOSE && $TIME_TEST_ACTIVE != true ]]; then
   .()
   {
     printf $'\r'    # (tput cr) move cursor to beginning of line
@@ -237,7 +230,7 @@ unset -v file
 
 # Set window title (environment variable set in bashrc.d/prompt.bash)
 if [[ -n $Z_SET_WINTITLE ]]; then
-  setwintitle "$USER@$HOSTNAME"
+  setwintitle "${USER}@${HOSTNAME%%.*}"
 fi
 
 # Final initialization scripts, except in subshells/when reloading/as root
