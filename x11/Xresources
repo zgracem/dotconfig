@@ -40,39 +40,40 @@ allowBoldFonts: false
 
 *customization: -color
 
-XTerm*background: rgb:28/28/28
-XTerm*foreground: rgb:7f/8c/8d
-XTerm*highlightColor:     rgb:4a/4f/50
-XTerm*highlightTextColor: rgb:ec/f0/f1
+XTerm*background:         rgb:28/28/28
+XTerm*foreground:         rgb:4a/4f/50
+XTerm*highlightColor:     rgb:7a/87/88
+XTerm*highlightTextColor: rgb:df/e4/e5
+XTerm*cursorColor:        rgb:7a/87/88
 
 ! black
-XTerm*color0:  rgb:38/38/38
-XTerm*color8:  rgb:4a/4f/50
+*color0: rgb:38/38/38
+*color8: rgb:4a/4f/50
 
 ! red
-XTerm*color1:  rgb:ab/46/42
-XTerm*color9:  rgb:dc/32/2f
+*color1: rgb:98/33/31
+*color9: rgb:e5/2e/2b
 
 ! green
-XTerm*color2:  rgb:42/93/64
-XTerm*color10: rgb:2e/cc/71
+*color2: rgb:42/93/64
+*color10: rgb:1b/df/6e
 
 ! yellow
-XTerm*color3:  rgb:a7/82/0e
-XTerm*color11: rgb:f1/c4/0f
+*color3: rgb:a7/82/0e
+*color11: rgb:f1/c4/0f
 
 ! blue
-XTerm*color4:  rgb:53/8c/b8
-XTerm*color12: rgb:4b/b2/fa
+*color4: rgb:42/71/a0
+*color12: rgb:22/95/ff
 
 ! magenta
-XTerm*color5:  rgb:95/41/6a
-XTerm*color13: rgb:d3/36/82
+*color5: rgb:9e/3d/74
+*color13: rgb:e9/3f/91
 
 ! cyan
-XTerm*color6:  rgb:24/8c/92
-XTerm*color14: rgb:15/e1/ed
+*color6: rgb:24/8c/92
+*color14: rgb:15/e1/ed
 
 ! white
-XTerm*color7:  rgb:95/a5/a6
-XTerm*color15: rgb:ec/f0/f1
+*color7: rgb:a8/b5/b6
+*color15: rgb:df/e4/e5

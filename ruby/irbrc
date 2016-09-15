@@ -23,10 +23,10 @@ require "irbtools/configure"
 
 # This overrides that default:
 Irbtools.welcome_message =
-  "Welcome to " +
-  "#{Colour.brightyellow}" + IRB.version.split("(").first.upcase + 
-  "#{Colour.reset}. You are using " +
-  "#{Colour.brightmagenta}" + RUBY_DESCRIPTION.split(" (").first +
+  "Welcome to " <<
+  "#{Colour.cyan}" << IRB.version.split("(").first.upcase << 
+  "#{Colour.reset}. You are using " <<
+  "#{Colour.magenta}" << RUBY_DESCRIPTION.split(" (").first <<
   "#{Colour.reset}."
 
 # Now we load the rest of it:
@@ -51,16 +51,16 @@ dim = "#{Colour.brightblack}"
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.brightblue}>>#{off} ",
+  PROMPT_I: "#{Colour.blue}>>#{off} ",
 
   # prompt when indenting code
   PROMPT_N: "#{dim}>" + "#{Colour.blue}>  " + off,
 
   # prompt for continuing strings
-  PROMPT_S: "#{dim}%l" + "#{Colour.cyan}>" + off,
+  PROMPT_S: "#{dim}%l" + "#{Colour.cyan}> " + off,
 
   # prompt for continuing statement
-  PROMPT_C: "#{dim}*" + "#{Colour.yellow}>" + off,
+  PROMPT_C: "#{dim}*" + "#{Colour.yellow}> " + off,
 
   # prefix to statement output
   RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
