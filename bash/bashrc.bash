@@ -70,18 +70,22 @@ shopt -u sourcepath     # [don't] use PATH to find files to `.`
 
 if (( BASH_VERSINFO[0] >= 4 )); then
   if (( BASH_VERSINFO[1] >= 2 )); then
-    shopt -s lastpipe   # execute a pipeline's last cmd in the current shell context
-    FUNCNEST=128        # abort runaway function nesting
+    # Execute a pipeline's last cmd in the current shell context
+    shopt -s lastpipe
+    # Abort runaway function nesting
+    FUNCNEST=128
   fi
 
   if (( BASH_VERSINFO[1] >= 1 )); then
-    shopt -s checkjobs  # warn when exiting shell with stopped/running jobs
-    # `checkjobs` is available in 4.0, but buggy --
+    # Warn when exiting shell with stopped/running jobs
+    shopt -s checkjobs 
+    # `checkjobs` is available in 4.0, but buggy:
     # >> https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
   fi
 
   if (( BASH_VERSINFO[1] >= 0 )); then
-    shopt -s globstar   # `**` matches directories and their files recursively
+    # `**` matches directories and their files recursively
+    shopt -s globstar
   fi
 fi
 
