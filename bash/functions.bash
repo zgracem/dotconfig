@@ -1,6 +1,8 @@
 # -----------------------------------------------------------------------------
 # ~/.config/bash/functions.bash
 # -----------------------------------------------------------------------------
+# I/O functions
+# -----------------------------------------------------------------------------
 
 quietly()
 { # execute a command silently
@@ -76,4 +78,15 @@ _inTmux()
 _mux()
 { # exits 0 if inside a multiplexer session
   _inScreen || _inTmux
+}
+
+# -----------------------------------------------------------------------------
+# other functions
+# -----------------------------------------------------------------------------
+
+# Destructive version of fixpath(), defined in ~/.config/sh/profile.d/paths.sh.
+function fixpath! {
+    local var="$1"
+    local p; p=$(fixpath "${!var}")
+    printf -v "$var" "$p"
 }
