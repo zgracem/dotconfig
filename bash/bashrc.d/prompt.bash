@@ -30,7 +30,7 @@ unset -v PROMPT_DIRTRIM
 
 # If false, display the hostname in the prompt only when connected via SSH.
 # If true, always display the hostname in the prompt, even in local sessions.
-: ${Z_PROMPT_HOST:=true}
+: ${Z_PROMPT_HOST:=false}
 
 # If true, the prompt will display an indication of any active jobs
 : ${Z_PROMPT_JOBS:=true}
@@ -298,11 +298,15 @@ fi
 
 # Notify Terminal.app of the current directory
 _z_prompt_update_Terminal()
-{ # Format:   file://hostname/path/to/pwd
-  # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
+{ # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 
-  local ante="${DCS_ante}${OSC}7;" post="${BEL}${DCS_post}"
+  local ante="${OSC}7;" post="${BEL}"
 
+  if [[ $HOSTNAME != *.* ]]; then
+    local HOSTNAME="$(uname -n)"
+  fi
+
+  # Format: file://hostname/path/to/pwd
   local pwd_url="file://${HOSTNAME}"
 
   {
@@ -325,7 +329,7 @@ _z_prompt_update_Terminal()
     done
   }
 
-  printf '%b' "$ante" "$pwd_url" "$post"
+  printf '%b' "$DCS_ante" "$ante" "$pwd_url" "$post" "$DCS_post"
 }
 
 _z_prompt_update_titles()
@@ -415,7 +419,9 @@ PS1+="${PS1_reset} "
 # PS0,2-4
 # -----------------------------------------------------------------------------
 
-[[ $Z_SET_WINTITLE == true ]] && PS0+="\$(setwintitle \"\u@\h: \w\")"
+unset -f PS0
+
+# [[ $Z_SET_WINTITLE == true ]] && PS0+="\$(setwintitle \"\u@\h: \w\")"
 # [[ $Z_SET_TABTITLE == true ]] && PS0+="\$(settabtitle \"\u@\h\")"
 
 # Secondary prompt for multi-line commands = right-facing guillemet (»)
@@ -425,7 +431,7 @@ PS2="${PS1_user}"$'\xC2\xBB'"${PS1_reset} "
 PS3="${PS1_blue}?${PS1_reset} "
 
 # Prefix for `set -o xtrace` output
-PS4="+ $PS1_dim\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COMMAND\n  $PS1_reset"
+PS4="+ ${PS1_dim}\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COMMAND\n  $PS1_reset"
 
 # -----------------------------------------------------------------------------
 # PROMPT_COMMAND
@@ -482,7 +488,7 @@ else
 fi
 
 if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
-  _z_prompt_cmd_add "_z_prompt_update_titles"
+  _z_prompt_cmd_add _z_prompt_update_titles
 fi
 
 # append to HISTFILE

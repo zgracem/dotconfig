@@ -44,7 +44,7 @@ alias webshare='python -m SimpleHTTPServer 17777'
 alias myip='dig +short @resolver1.opendns.com myip.opendns.com'
 
 # start servers
-if [[ $HOSTNAME =~ Athena ]]; then
+if [[ $HOSTNAME == Athena* ]]; then
   alias mm='bundle exec middleman'
 fi
 

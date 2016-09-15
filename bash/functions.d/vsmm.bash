@@ -7,7 +7,7 @@ vsmm()
   fi
 
   case $HOSTNAME in
-    Athena)
+    Athena*)
       [[ -z $SSH_CONNECTION ]] && subl --project "$project_dir/misc/vsmm-osx.sublime-project"
       ;;
     *.atco.com)
