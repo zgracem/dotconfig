@@ -1,14 +1,18 @@
 # Complete SSH hostnames from ~/.ssh/config, ignoring wildcards
-# Based on: https://github.com/pahen/dotfiles/blob/master/.completions
+# Based on: https://sanctum.geek.nz/cgit/dotfiles.git/tree/bash/bash_completion.d/_ssh_config_hosts.bash
 
-if [[ -r $HOME/.ssh/config ]]; then
-    declare -a hosts=( $(sed -nE 's/Host (.*[^?*])$/\1/p' "$HOME/.ssh/config") )
+__z_complete_ssh_hosts()
+{
+  COMPREPLY=()
 
-    # also add files, dirs, vars, and hostnames from $HOSTFILE
-    complete -fdev -A hostname \
-             -o default -o nospace \
-             -W "${hosts[*]}" \
-             scp sftp ssh
+  local -a hosts
+  hosts=( $(sed -nE 's/Host (.*[^?*])$/\1/p' "$HOME/.ssh/config") ) || return
 
-    unset -v hosts
-fi
+  local host
+  for host in "${hosts[@]}"; do
+    [[ $host == "${COMP_WORDS[COMP_CWORD]}"* ]] || continue
+    COMPREPLY+=("$host")
+  done
+}
+
+complete -o default -o nospace -F __z_complete_ssh_hosts ssh

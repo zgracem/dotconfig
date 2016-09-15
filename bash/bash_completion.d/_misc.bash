@@ -60,10 +60,6 @@ complete -e -v -a -A function -- \
 complete -e -v -A function \
     declare
 
-# files, directories, variables & hostnames -- for `scp`, `sftp` & `ssh`
-complete -f -d -e -v -A hostname \
-    scp sftp ssh
-
 # files, directories, aliases, builtins, commands, keywords & functions -- for `sudo`
 complete -f -d -a -b -c -k -A function \
     sudo
@@ -95,8 +91,3 @@ complete -f -d \
 complete -A function \
     -o nospace \
     ef
-
-# arrays -- for `explode`
-complete -A arrayvar \
-    -o nospace \
-    explode
