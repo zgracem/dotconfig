@@ -37,19 +37,19 @@ if [[ ! -d $TERMINFO ]]; then
 else
   export TERMINFO
   export TERMINFO_DIRS="$TERMINFO:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
-  TERMINFO_DIRS=$(fixpath "$TERMINFO_DIRS")
+  fixpath! TERMINFO_DIRS
 
   OLDTERM=$TERM
 
   # Darwin's full-screen system console
-  if [[ $OLDTERM == "vt100" && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
+  if [[ $OLDTERM == vt100 && $OSTYPE =~ darwin && $(tty) == /dev/console ]]; then
     TERM=xnuppc
     export HV_DISABLE_PP=1
   fi
 
   if ! _inTmux && ! _inScreen; then
     # Old versions of Terminal.app
-    if [[ $TERM_PROGRAM == "Apple_Terminal" && $OLDTERM != nsterm* ]]; then
+    if [[ $TERM_PROGRAM == Apple_Terminal && $OLDTERM != nsterm* ]]; then
       ver=${TERM_PROGRAM_VERSION%%.*} # Major version (integer) only
       case 1 in
         $(( ver >= 377 ))*)
@@ -96,9 +96,8 @@ else
 fi
 
 # Just say no to flow control.
-# Run this here to make sure `stty` has the best possible value for TERM, and
-# in a subshell to catch the output of both commands.
-(type -P stty && stty -ixon) &>/dev/null
+# Run this here to make sure `stty` has the best possible value for TERM.
+{ type -P stty && stty -ixon; } &>/dev/null
 
 # Set the parent TERM so we can check capabilities of the actual emulator.
 # Mark the variable readonly and export so it propagates to subshells.
@@ -120,6 +119,7 @@ if [[ -z $PTERM ]]; then
         ;;
     esac
   else
+    # Set it to the multiplexer's and hope for the best
     PTERM=$TERM
   fi
 
@@ -130,6 +130,13 @@ fi
 # Functions
 # -----------------------------------------------------------------------------
 
+rollback()
+{
+  tput cuu1 # move cursor up one line (printf "\eM")
+  tput cr   # move cursor to beginning of line (printf "\r")
+  tput el   # clear to end of line (printf "${CSI}K")
+}
+
 dtterm()
 {
   local Ps="$1"
@@ -137,21 +144,15 @@ dtterm()
 }
 
 mmin()
-{  # minimize (iconify) window
-  
+{ # minimize (iconify) window
   dtterm "2t"
-  tput cuu1 # move cursor up one line (printf "\eM")
-  tput cr   # move cursor to beginning of line (printf "\r")
-  tput el   # clear to end of line (printf "${CSI}K")
+  rollback
 }
 
 mmax()
-{  # maximize (de-iconify) window
-  
+{ # maximize (de-iconify) window
   dtterm "1t"
-  tput cuu1 # move cursor up one line (printf "\eM")
-  tput cr   # move cursor to beginning of line (printf "\r")
-  tput el   # clear to end of line (printf "${CSI}K")
+  rollback
 }
 
 setwintitle()
