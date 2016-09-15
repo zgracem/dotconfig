@@ -19,47 +19,42 @@ fi
 # -----------------------------------------------------------------------------
 
 # properties
-reset=0; bold=1; faint=2; italic=3; ul=4; blink=5; inv=7
-props=(bold faint italic ul blink inv)
-colours=()
+props=([0]=reset [1]=bold [2]=faint [4]=ul [5]=blink [7]=inv)
 
-# basic ANSI colours
-black=30
-red=31
-green=32
-yellow=33
-blue=34
-magenta=35
-cyan=36
-white=37
-
-colours+=(black red green yellow blue magenta cyan white)
-
-# bright colours
-if (( TERM_COLOURDEPTH >= 16 )); then
-  # Use aixterm codes to get actual *bright* colours instead of setting the
-  # emulator to display bold text as unbold-but-bright. (Inspired by Prompt,
-  # which doesn't offer that option.)
-  brblack=90
-  brred=91
-  brgreen=92
-  bryellow=93
-  brblue=94
-  brmagenta=95
-  brcyan=96
-  brwhite=97
-else
-  brblack=$black
-  brred=$red
-  brgreen=$green
-  bryellow=$yellow
-  brblue=$blue
-  brmagenta=$magenta
-  brcyan=$cyan
-  brwhite=$white
+# PuTTY renders italics as inverted text for some reason.
+if [[ $TERM_PROGRAM != "PuTTY" && $TERM != putty* && $PTERM != putty* ]]; then
+  props+=([3]=italic)
 fi
 
-colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
+for p in "${!props[@]}"; do
+  printf -v "${props[p]}" "$p"
+done
+
+# basic ANSI colours
+colours=(
+  [0]=black   [1]=red   [2]=green   [3]=yellow    [4]=blue
+  [5]=magenta [6]=cyan  [7]=white   [9]=default
+)
+
+for c in "${!colours[@]}"; do
+  printf -v "${colours[c]}" $(( 30 + c ))
+
+  [[ $v == brdefault ]] && continue # There's no "bright default" colour.
+  
+  # Use aixterm codes to get actual *bright* colours where supported, instead
+  # of relying on the emulator to display bold text as bright-but-unbold.
+  # (Inspired by Prompt, which doesn't offer that option.)
+
+  if (( TERM_COLOURDEPTH >= 16 )); then
+    printf -v "br${colours[c]}" $(( 90 + c ))
+  else
+    printf -v "br${colours[c]}" "${!colours[c]}"
+  fi
+
+  colours+=("br${colours[c]}")
+done
+
+unset -v p c
 
 # -----------------------------------------------------------------------------
 # semantic colours
@@ -76,7 +71,7 @@ colour_dim=$brblack  # secondary colour
 
 case $TERM_PROGRAM in
   Apple_Terminal)
-    if (( TERM_PROGRAM_VERSION >= 377 )); then
+    if (( ${TERM_PROGRAM_VERSION%%.*} >= 377 )); then
       colour_dim=$faint
     fi
     ;;
@@ -129,26 +124,22 @@ fi
 # ------------------------------------------------------------------------------
 
 _z_colour_add_esc()
-{ # $green -> $esc_green, $colour_true -> $esc_true
+{
 
   local -a indexes=("$@")
-  local index
+  local index var
 
   for index in "${indexes[@]}"; do
-    local var_name="esc_${index#*_}"
+    var="esc_${index#*_}"
+    # $green -> $esc_green, $colour_true -> $esc_true
 
-    if [[ -n ${!index} && -z ${!var_name} ]] || [[ $Z_RELOADING == "true" ]]; then
-      # eval "$var_name=\"${CSI}${!index}m\""
-      printf -v "$var_name" "${CSI}${!index}m"
+    if [[ -n ${!index} && -z ${!var} ]] || [[ -n $Z_RELOADING ]]; then
+      printf -v "$var" "${CSI}${!index}m"
     fi
   done
 }
 
 _z_colour_add_esc ${colours[*]} ${props[*]}
-
-# # export everything
-# export ${!esc_*}
-### ZGM disabled 2016-06-17 -- what on earth uses this?
 
 # -----------------------------------------------------------------------------
 # grep
@@ -159,9 +150,9 @@ if (( TERM_COLOURDEPTH >= 16 )); then
 
   GREP_COLORS+="sl=${reset}:"       # whole selected lines
   GREP_COLORS+="cx=${colour_dim}:"  # whole context lines
-  GREP_COLORS+="mt=${brred}:"       # any matching text
+  GREP_COLORS+="mt=${red}:"         # any matching text
   GREP_COLORS+="ms=${ul};${brred}:" # matching text in a selected line
-  GREP_COLORS+="mc=${brred}:"       # matching text in a context line
+  GREP_COLORS+="mc=${red}:"         # matching text in a context line
   GREP_COLORS+="fn=${colour_dim}:"  # filenames
   GREP_COLORS+="ln=${blue}:"        # line numbers
   GREP_COLORS+="bn=${cyan}:"        # byte offsets
@@ -203,10 +194,10 @@ fi
 # gcc diagnostics
 export GCC_COLORS=""
 GCC_COLORS+="error=${brred}:"
-GCC_COLORS+="warning=${brmagenta}:"
+GCC_COLORS+="warning=${bryellow}:"
 GCC_COLORS+="note=${brcyan}:"
 GCC_COLORS+="caret=${brgreen}:"
-GCC_COLORS+="locus=${bryellow}:"
+GCC_COLORS+="locus=${brmagenta}:"
 GCC_COLORS+="quote=${brblue}"
 
 # 500 kV library for cool colour printing
