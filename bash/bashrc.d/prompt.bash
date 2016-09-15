@@ -431,7 +431,12 @@ PS2="${PS1_user}"$'\xC2\xBB'"${PS1_reset} "
 PS3="${PS1_blue}?${PS1_reset} "
 
 # Prefix for `set -o xtrace` output
-PS4="+ ${PS1_dim}\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COMMAND\n  $PS1_reset"
+# PS4="+ ${PS1_dim}\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COMMAND\n  $PS1_reset"
+PS4="+ "
+PS4+="\${BASH_SOURCE+$PS1_dim\${BASH_SOURCE/#\$HOME/'~'}$PS1_reset}"
+PS4+="\${BASH_SOURCE+:$PS1_blue\$LINENO$PS1_reset:}"
+PS4+="$PS1_italic\$BASH_COMMAND$PS1_reset"
+PS4+=$'\n\t'
 
 # -----------------------------------------------------------------------------
 # PROMPT_COMMAND
