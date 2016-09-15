@@ -95,9 +95,18 @@ else
   unset -v OLDTERM
 fi
 
-# Just say no to flow control.
+# Change terminal line settings.
 # Run this here to make sure `stty` has the best possible value for TERM.
-{ type -P stty && stty -ixon; } &>/dev/null
+if _inPath stty; then
+  # Just say no to flow control.
+  stty -ixon &>/dev/null
+
+  # Set terminal to use hard tabs, 4 chars wide
+  if _inPath tabs; then
+    stty tab0
+    tabs -4
+  fi
+fi
 
 # Set the parent TERM so we can check capabilities of the actual emulator.
 # Mark the variable readonly and export so it propagates to subshells.
