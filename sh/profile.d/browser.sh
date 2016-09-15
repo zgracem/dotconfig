@@ -1,15 +1,19 @@
-# set default
+unset -v BROWSER
+
+# Set default browser to links, if available
 if type -P links 1>/dev/null; then
-    BROWSER=links
+  BROWSER=links
 fi
 
-# use GUI app if not logged in remotely
+# Use GUI app if not logged in remotely
 if test -z "$SSH_CONNECTION"; then
-    if test -x /usr/bin/open; then
-        BROWSER=/usr/bin/open
-    elif test "$OSTYPE" = 'cygwin'; then
-        BROWSER="$HOME/scripts/chrome.sh"
-    fi
+  if test -x /usr/bin/open; then
+    # open(1) will send URLs to the default GUI browser
+    BROWSER=/usr/bin/open
+  elif test "$OSTYPE" = 'cygwin'; then
+    # Wrapper script for Google Chrome w/ custom command-line switches
+    BROWSER="$HOME/bin/chrome"
+  fi
 fi
 
 export BROWSER

@@ -1,21 +1,23 @@
-# set defaults
+unset -v EDITOR VISUAL GIT_EDITOR SUDO_EDITOR
+
+# Set all default editors to vim
 EDITOR=vim
 VISUAL=$EDITOR
 GIT_EDITOR=$EDITOR
 SUDO_EDITOR=$EDITOR
 
-# use GUI app if not logged in remotely
-if test -z "$SSH_TTY"; then
-    if test -d '/Applications/Sublime Text.app'; then
-        VISUAL="$HOME/bin/subl-wait"
-
-    elif test -x "$HOME/bin/subl"; then
-        VISUAL="$HOME/bin/subl --wait"
-
-    # elif test ":$OSTYPE:" = ':cygwin:'; then
-    #     VISUAL="$HOME/scripts/subl.sh --wait"
-
-    fi
+# Use GUI app if not logged in remotely.
+if [ -z "$SSH_CONNECTION" ]; then
+  if [ -x "$HOME/bin/subl-wait" ]; then
+    VISUAL="$HOME/bin/subl-wait"
+  elif [ -x "$HOME/bin/subl" ]; then
+    # The above solution is preferred because some things that use $VISUAL
+    # check to see whether it exists. Since there is no file "subl --wait" in
+    # ~/bin, those things will fail. :(
+    VISUAL="$HOME/bin/subl --wait"
+  fi
 fi
+
+GIT_EDITOR=$VISUAL
 
 export EDITOR VISUAL GIT_EDITOR SUDO_EDITOR
