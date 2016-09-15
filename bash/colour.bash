@@ -19,8 +19,8 @@ fi
 # -----------------------------------------------------------------------------
 
 # properties
-reset=0; bold=1; italic=3; ul=4; blink=5; inv=7
-props=(bold italic ul blink inv)
+reset=0; bold=1; faint=2; italic=3; ul=4; blink=5; inv=7
+props=(bold faint italic ul blink inv)
 colours=()
 
 # basic ANSI colours
@@ -65,14 +65,25 @@ colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 # semantic colours
 # -----------------------------------------------------------------------------
 
-colour_true=$green
+# used in PS1 -- see bashrc.d/prompt.bash
+: ${colour_user:=$blue}
+
+colour_true=$brgreen
 colour_false=$red
 
 colour_hi=$brwhite   # highlight colour
 colour_dim=$brblack  # secondary colour
 
-# used in PS1 -- see bashrc.d/prompt.bash
-: ${colour_user:=$magenta}
+case $TERM_PROGRAM in
+  Apple_Terminal)
+    if (( TERM_PROGRAM_VERSION >= 377 )); then
+      colour_dim=$faint
+    fi
+    ;;
+  iTerm.app)
+    colour_dim=$faint
+    ;;
+esac
 
 colours+=(colour_true colour_false colour_hi colour_dim colour_user)
 colours+=(reset)
