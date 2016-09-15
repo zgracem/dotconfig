@@ -42,8 +42,8 @@ verbose()
 # -----------------------------------------------------------------------------
 
 _inPath()
-{ # exits 0 if $1 is installed in $PATH
-  type -P "$1" >/dev/null
+{ # exits 0 if all arguments are installed in $PATH
+  type -P "$@" >/dev/null
 }
 
 _isGNU()
@@ -86,7 +86,7 @@ _mux()
 
 # Destructive version of fixpath(), defined in ~/.config/sh/profile.d/paths.sh.
 function fixpath! {
-    local var="$1"
-    local p; p=$(fixpath "${!var}")
-    printf -v "$var" "$p"
+  local var="$1"
+  local p; p=$(fixpath "${!var}")
+  printf -v "$var" "$p"
 }
