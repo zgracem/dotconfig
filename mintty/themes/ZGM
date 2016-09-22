@@ -1,7 +1,7 @@
 BackgroundColour=40,40,40
-ForegroundColour=122,135,136
-BoldColour=223,228,229
-CursorColour=122,135,136
+ForegroundColour=124,138,139
+BoldColour=228,232,233
+CursorColour=124,138,139
 Black=56,56,56
 BoldBlack=74,79,80
 Red=152,51,49
@@ -17,4 +17,4 @@ BoldMagenta=233,63,145
 Cyan=36,140,146
 BoldCyan=21,225,237
 White=168,181,182
-BoldWhite=223,228,229
+BoldWhite=228,232,233

@@ -41,10 +41,10 @@ allowBoldFonts: false
 *customization: -color
 
 XTerm*background:         rgb:28/28/28
-XTerm*foreground:         rgb:4a/4f/50
-XTerm*highlightColor:     rgb:7a/87/88
-XTerm*highlightTextColor: rgb:df/e4/e5
-XTerm*cursorColor:        rgb:7a/87/88
+XTerm*foreground:         rgb:7c/8a/8b
+XTerm*highlightColor:     rgb:4a/4f/50
+XTerm*highlightTextColor: rgb:e4/e8/e9
+XTerm*cursorColor:        rgb:7c/8a/8b
 
 ! black
 *color0: rgb:38/38/38
@@ -76,4 +76,4 @@ XTerm*cursorColor:        rgb:7a/87/88
 
 ! white
 *color7: rgb:a8/b5/b6
-*color15: rgb:df/e4/e5
+*color15: rgb:e4/e8/e9
