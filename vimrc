@@ -169,11 +169,11 @@ endif
 
 if $TERM_PROGRAM == "iTerm.app"
   if expand($TMUX) != ""
-    let &t_SI = "\<Esc>[3 q"
-    let &t_EI = "\<Esc>[0 q"
+    let &t_SI = "\e[3 q"
+    let &t_EI = "\e[0 q"
   else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_SI = "\e]50;CursorShape=1\x07"
+    let &t_EI = "\e]50;CursorShape=0\x07"
   endif
 endif
 
@@ -194,31 +194,31 @@ set background=dark
 "-----------------------------------------------------------------------------
 
 if has("statusline")
-  " window title -- ### ZGM disabled 2015-09-10
-  " set title
+  " window title -- ### ZGM disabled 2015-09-10/re-enabled 2016-09-21
+  set title
 
   if has("gui_running")
-    " set titlestring=
+    set titlestring=
   else
-    let &titleold = expand("$USER") . "@" . expand("$HOSTNAME") " . ": " . expand("$PWD")
-    " set titlestring=
+    "let s:hostname = system("echo ${HOSTNAME%%.*}")
+    let &titleold = expand("$USER") . "@" . system('printf "${HOSTNAME%%.*}"') . ": " . system('printf "${PWD/#$HOME/$''~''}"')
+    set titlestring=
   endif
 
-  " set titlestring+=%(%h\ %)     " help flag
-  " set titlestring+=%F           " full path to file
-  " set titlestring+=%(\ [%M%R]%) " modified/readonly flags
+  set titlestring+=%(%h\ %)     " help flag
+  set titlestring+=%F           " full path to file
+  set titlestring+=%(\ [%M%R]%) " modified/readonly flags
 
   if $TERM_PROGRAM == "Apple_Terminal"
-    let &t_ts = "]6;"
-    let &t_fs = ""
-    " set title
-    " let &titlestring = "file://" . expand("$HOSTNAME") . UrlEncode("%F")
+    let &t_ts = "\e]6;"
+    let &t_fs = "\x07"
+    set titlestring="file://" . expand("$HOSTNAME") . UrlEncode("%F")
   elseif expand($TMUX) != ""
-    let &t_ts = "\<Esc>Ptmux;\<Esc>\<Esc>]0;"
-    let &t_fs = "\<Esc>\\"
+    let &t_ts = "\ePtmux;\e\e]0;"
+    let &t_fs = "\x07\e\\"
   elseif &term =~ "screen"
-    let &t_ts = "\<Esc>P\<Esc>]0;"
-    let &t_fs = "\<Esc>\\"
+    let &t_ts = "\eP\e]0;"
+    let &t_fs = "\x07\e\\"
   endif
 
   " status line
