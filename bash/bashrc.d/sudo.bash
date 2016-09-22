@@ -21,9 +21,6 @@ rootme()
     fi
 
     sudo \
-        ${STY:+STY=$STY} \
-        ${TMUX:+TMUX=$TMUX} \
-        ${TERMINFO:+TERMINFO=$TERMINFO} \
         ${Z_SOLARIZED:+Z_SOLARIZED=$Z_SOLARIZED} \
         TMOUT=$tmout \
         -s
