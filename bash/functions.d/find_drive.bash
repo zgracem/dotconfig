@@ -23,11 +23,10 @@ find_drive()
   elif [[ $OSTYPE =~ darwin && -d /Volumes/$label ]]; then
     echo "/Volumes/$label"
     return 0
-  
-  else
-    scold "volume not found: ${label}"
-    return 1
   fi
+  
+  scold "volume not found: ${label}"
+  return 1
 }
 
 # `drive` changes PWD to the volume named $myDrive, if present, and sets the
