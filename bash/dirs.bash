@@ -2,21 +2,14 @@
 # ~/.config/bash/dirs.bash
 # -----------------------------------------------------------------------------
 
-# universal
 dir_config="$HOME/.config"
 dir_local="$HOME/.local"
 
-dir_dropbox="$HOME/Dropbox"
-dir_scratch="$HOME/tmp/_scratch"
-
-dir_scripts="$HOME/scripts"
-dir_dev="$dir_scripts/dev"
-dir_defunct="$HOME/src/_defunct"
-dir_cache="$HOME/var/cache"
-
 dir_bashlib="$HOME/lib/bash"
+dir_cache="$HOME/var/cache"
+dir_dropbox="$HOME/Dropbox"
 dir_howto="$HOME/txt/howto"
-dir_vsmm="$dir_dropbox/www/vsmm"
+dir_scripts="$HOME/scripts"
 
 # platform-specific
 case $OSTYPE in
