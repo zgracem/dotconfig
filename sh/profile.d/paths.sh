@@ -6,7 +6,6 @@
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 export MANPATH=/usr/share/man:/usr/man:$MANPATH
 export INFOPATH=/usr/share/info:$INFOPATH
-export CDPATH=.:$HOME
 
 # /usr/local
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
