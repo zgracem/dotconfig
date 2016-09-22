@@ -37,21 +37,23 @@ colours=(
 )
 
 for c in "${!colours[@]}"; do
-  printf -v "${colours[c]}" $(( 30 + c ))
+  printf -v "${colours[c]}"   $(( 30 + c ))
+  printf -v "bg${colours[c]}" $(( 40 + c ))
 
   [[ $v == brdefault ]] && continue # There's no "bright default" colour.
-  
+
   # Use aixterm codes to get actual *bright* colours where supported, instead
   # of relying on the emulator to display bold text as bright-but-unbold.
   # (Inspired by Prompt, which doesn't offer that option.)
-
   if (( TERM_COLOURDEPTH >= 16 )); then
-    printf -v "br${colours[c]}" $(( 90 + c ))
+    printf -v "br${colours[c]}"   $((  90 + c ))
+    printf -v "bgbr${colours[c]}" $(( 100 + c ))
   else
-    printf -v "br${colours[c]}" "${!colours[c]}"
+    printf -v "br${colours[c]}"   ${!colours[c]}
+    printf -v "bgbr${colours[c]}" $(( ${!colours[c]} + 10 ))
   fi
 
-  colours+=("br${colours[c]}")
+  colours+=("br${colours[c]}" "bg${colours[c]}" "bgbr${colours[c]}" )
 done
 
 unset -v p c
@@ -146,17 +148,28 @@ _z_colour_add_esc ${colours[*]} ${props[*]}
 # -----------------------------------------------------------------------------
 
 if (( TERM_COLOURDEPTH >= 16 )); then
-  export GREP_COLORS=''
+  export GREP_COLORS=""
 
-  GREP_COLORS+="sl=${reset}:"       # whole selected lines
-  GREP_COLORS+="cx=${colour_dim}:"  # whole context lines
-  GREP_COLORS+="mt=${red}:"         # any matching text
-  GREP_COLORS+="ms=${ul};${brred}:" # matching text in a selected line
-  GREP_COLORS+="mc=${red}:"         # matching text in a context line
-  GREP_COLORS+="fn=${colour_dim}:"  # filenames
-  GREP_COLORS+="ln=${blue}:"        # line numbers
-  GREP_COLORS+="bn=${cyan}:"        # byte offsets
-  GREP_COLORS+="se=${reset}"        # separators
+  # Whole selected (matching) lines; or non-matching lines if -v is specified
+  GREP_COLORS+="sl=${reset}:"
+  # Whole context (non-matching) lines; or matching lines if -v is specified
+  GREP_COLORS+="cx=${colour_dim}:"
+  # # Reverses `sl` and `cx` if -v is specified (omit to set it to false)
+  # GREP_COLORS+="rv:"
+  # Matching text in any matching line, regardless of -v
+  GREP_COLORS+="mt=${yellow}:"
+  # Matching text in a selected line (if -v is omitted)
+  GREP_COLORS+="ms=${bryellow}:"
+  # Matching text in a context line (if -v is specified)
+  GREP_COLORS+="mc=${yellow}:"
+  # Filename in line prefix
+  GREP_COLORS+="fn=${blue}:"
+  # Line number in line prefix
+  GREP_COLORS+="ln=${cyan}:"
+  # Byte offset in line prefix
+  GREP_COLORS+="bn=${green}:"
+  # Separators between fields in selected/context lines, etc.
+  GREP_COLORS+="se=${colour_dim}"
 
   # deprecated
   export GREP_COLOR="${ul};${brred}"
@@ -194,11 +207,11 @@ fi
 # gcc diagnostics
 export GCC_COLORS=""
 GCC_COLORS+="error=${brred}:"
-GCC_COLORS+="warning=${bryellow}:"
-GCC_COLORS+="note=${brcyan}:"
-GCC_COLORS+="caret=${brgreen}:"
-GCC_COLORS+="locus=${brmagenta}:"
-GCC_COLORS+="quote=${brblue}"
+GCC_COLORS+="warning=${yellow}:"
+GCC_COLORS+="note=${blue}:"
+GCC_COLORS+="caret=${brmagenta}:"
+GCC_COLORS+="locus=${colour_dim}:"
+GCC_COLORS+="quote=${green}"
 
 # 500 kV library for cool colour printing
 export HV_BG="reset"

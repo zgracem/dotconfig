@@ -15,7 +15,7 @@
 hi CursorLine     ctermbg=0                 cterm=none
 
 " line numbers in left-side gutter
-hi LineNr         ctermbg=0     ctermfg=7
+hi LineNr         ctermbg=none  ctermfg=8
 hi CursorLineNr   ctermbg=0     ctermfg=15
 
 " status line of current window
@@ -37,13 +37,13 @@ hi StatusLineErr  ctermbg=none  ctermfg=1   cterm=reverse
 hi SpecialKey     ctermbg=0     ctermfg=13
 
 " characters that don't really exist in the text
-hi NonText        ctermbg=none  ctermfg=13
+hi NonText        ctermbg=none  ctermfg=5
 
 " matching brackets
 hi MatchParen     ctermbg=none  ctermfg=14
 
 " search-as-you-type highlighting
-hi IncSearch      ctermbg=3     ctermfg=15
+hi IncSearch      ctermbg=3     ctermfg=15  cterm=none
 
 " last search pattern & other standout text
 hi Search         ctermbg=11    ctermfg=0
@@ -52,8 +52,11 @@ hi Search         ctermbg=11    ctermfg=0
 hi ModeMsg        ctermbg=none  ctermfg=4   cterm=none
 
 " more-prompt; hit-enter prompt and yes/no questions
-hi MoreMsg        ctermbg=none  ctermfg=14  cterm=none
+hi MoreMsg        ctermbg=none  ctermfg=6  cterm=none
 hi! link Question MoreMsg
+
+" folded text
+hi Folded         ctermbg=none  ctermfg=8
 
 "-----------------------------------------------------------------------------
 " Markdown
@@ -66,16 +69,16 @@ hi markdownItalic ctermbg=none  ctermfg=15
 "-----------------------------------------------------------------------------
 
 " Added line
-hi DiffAdd        ctermbg=0     ctermfg=2   cterm=none
+hi DiffAdd        ctermbg=0     ctermfg=10  cterm=none
 
 " Deleted line
-hi DiffDelete     ctermbg=0     ctermfg=1   cterm=none
+hi DiffDelete     ctermbg=none  ctermfg=1   cterm=none
 
 " Changed line
-hi DiffChange     ctermbg=0     ctermfg=7
+hi DiffChange     ctermbg=0     ctermfg=none
 
 " Changed text within a changed line
-hi DiffText       ctermbg=0     ctermfg=13  cterm=reverse
+hi DiffText       ctermbg=8     ctermfg=7   cterm=bold
 
 "-----------------------------------------------------------------------------
 " spellcheck
