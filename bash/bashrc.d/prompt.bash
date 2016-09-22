@@ -57,7 +57,7 @@ if [[ ! $PTERM =~ xterm|putty|nsterm|iTerm ]]; then
 fi
 
 # Prompt (panic.com/prompt) doesn't have a status line
-if [[ $TERM_PROGRAM =~ ^Prompt ]]; then
+if [[ $TERM_PROGRAM == Prompt* ]]; then
   Z_SET_WINTITLE=false
   Z_SET_TABTITLE=false
 fi
@@ -105,43 +105,41 @@ _z_prompt_compress_pwd()
   input="${input/#$HOME/$'~'}"
 
   # Use the slash as a separator to split PWD into an array of its elements.
-  local -a input_parts
-  IFS=/ read -a input_parts <<< "${input}"
-  # declare -p input_parts ##debug
+  local -a in_parts
+  IFS=/ read -a in_parts <<< "${input}"
 
-  # If PWD is under HOME, input_parts[0] will contain the leading tilde;
+  # If PWD is under HOME, in_parts[0] will contain the leading tilde;
   # otherwise, it will be empty.
-  case ${input_parts[0]} in
+  case ${in_parts[0]} in
     "~")  # Because a leading tilde is so short, it doesn't count when
           # determining minimum depth.
           (( min_depth++ ))
           ;;
     "")   # PWD starts at root; remove the empty element from the array.
-          unset input_parts[0]
+          unset in_parts[0]
           ;;
   esac
 
   # Are there enough elements/characters to warrant compression?
-  if (( ${#input_parts[@]} < ${min_depth} )) \
+  if (( ${#in_parts[@]} < ${min_depth} )) \
       && (( ${#input} < ${max_pwd_length} )); then
-    # PWD is too short; just return what we were given.
+    # PWD is already short; just return what we were given.
     printf "%s" "$input"
     return
   else
     # Collect the trailing elements that will not be compressed.
-    local -a trailing_parts=()
+    local -a end_parts=()
     local n; for (( n = ${keep_dirs}; n > 0; n-- )); do
-      trailing_parts+=("${input_parts[-$n]}")
+      end_parts+=("${in_parts[-$n]}")
     done
-    # declare -p trailing_parts ##debug
 
     # The stopping point required to preserve uncompressed trailing elements.
-    local stop_index=$(( ${#input_parts[@]} - ${#trailing_parts[@]} ))
+    local stop_index=$(( ${#in_parts[@]} - ${#end_parts[@]} ))
 
     # Iterate through the remaining elements, stopping where required.
-    local -a output_parts=()
+    local -a out_parts=()
     local i; for (( i = 1; i < ${stop_index}; i++ )); do
-      local part="${input_parts[$i]}"
+      local part="${in_parts[$i]}"
 
       # No need to compress elements that are already <= $keep_chars long.
       # Nor should we "compress" unless there would actually be a net decrease
@@ -151,16 +149,15 @@ _z_prompt_compress_pwd()
       fi
 
       # Add the result to the array of compressed elements.
-      output_parts+=("${part}")
+      out_parts+=("${part}")
     done
-    # declare -p output_parts ##debug
 
     # Print all of the compressed elements, then all of the uncompressed
     # trailing elements, each preceded by a slash.
-    if [[ ${input_parts[0]} == "~" ]]; then
+    if [[ ${in_parts[0]} == "~" ]]; then
       printf "%s" "~"
     fi
-    printf "/%s" "${output_parts[@]}" "${trailing_parts[@]}"
+    printf "/%s" "${out_parts[@]}" "${end_parts[@]}"
   fi
 }
 
@@ -170,37 +167,34 @@ _z_prompt_print_exit()
   local gutter=1
   local sigspec
 
-  if (( last_exit != 0 )); then
-    # abort if tput doesn't exist
-    type -P tput &>/dev/null || return
+  (( last_exit != 0 )) || return 0
+  [[ $Z_PROMPT_EXIT == "true" ]] || return $last_exit
 
-    # If terminated from a signal (128 >= $? >= 165), get signal name from
-    # builtin `kill -l` (list) and print that instead.
-    if (( last_exit > 128 )) && sigspec=$(builtin kill -l $last_exit 2>/dev/null); then
-      last_exit=${sigspec#SIG}
-
-    elif (( last_exit >= 64 && last_exit <= 78 )); then
-
-      # Someone's been reading `/usr/include/sysexits.h`... ;)
-      local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
-        [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
-        [71]="OSERR"    [72]="OSFILE"   [73]="CANTCREAT"   [74]="IOERR"
-        [75]="TEMPFAIL" [76]="PROTOCOL" [77]="NOPERM"      [78]="CONFIG" )
-      last_exit=${exits[$last_exit]}
-    fi
-
-    local screen_width=${COLUMNS:-$(tput cols)}
-    local padding=$(( screen_width - gutter ))
-
-    # save cursor position
-    tput sc
-
-    # print exit code
-    printf "%*s" $padding "$last_exit"
-
-    # restore cursor position
-    tput rc
+  # If terminated from a signal (128 >= $? >= 165), get signal name from `kill`
+  # (`-l` = list) and print that instead.
+  if (( last_exit > 128 )) && sigspec=$(builtin kill -l $last_exit 2>/dev/null); then
+    last_exit=${sigspec#SIG}
+  elif (( last_exit >= 64 && last_exit <= 78 )); then
+    # Someone's been reading `/usr/include/sysexits.h`... ;)
+    local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
+      [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
+      [71]="OSERR"    [72]="OSFILE"   [73]="CANTCREAT"   [74]="IOERR"
+      [75]="TEMPFAIL" [76]="PROTOCOL" [77]="NOPERM"      [78]="CONFIG" )
+    last_exit=${exits[$last_exit]}
   fi
+
+  local screen_width=${COLUMNS:-$(tput cols)}
+  local padding=$(( screen_width - gutter ))
+
+  # # save cursor position
+  # tput sc
+
+  # print exit code
+  printf "%*s" $padding "$last_exit"
+
+  # restore cursor position
+  tput cr
+  # tput rc
 }
 
 _z_prompt_git_info()
@@ -319,8 +313,8 @@ _z_prompt_update_Terminal()
       if [[ $ch =~ [/._~A-Za-z0-9-] ]]; then
         pwd_url+="$ch"
       else
-        # interpret as number ──┐
         printf -v hexch "%02X" "'$ch"
+        # interpret as number ──┘
 
         # printf treats values > 127 as negative
         # and pads w/ 'FF', so truncate
@@ -361,9 +355,11 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
   # if [[ $CYGWIN_ADMIN == true ]]; then
   #   esc_user=${esc_red}
   # fi
+  ###
 
+  # Create new colour variables w/ prompt escape codes (\[ and \])
   z_colour_PS1_esc()
-  { # create new colour variables w/ prompt escape codes (\[ and \])
+  {
 
     local -a indexes=("$@")
     local index
@@ -387,17 +383,21 @@ fi
 
 PS1=""
 
-# Print exit status of last command
-if [[ $Z_PROMPT_EXIT == true ]]; then
+# Print exit status of last command. This has to come first for two reasons:
+# 1) So the last exit status doesn't get overwritten by anything else in the
+# prompt; and 2) so the tput calls in `_z_prompt_print_exit` get made before
+# anything else is printed.
+if [[ $Z_PROMPT_EXIT == true ]] && _inPath tput; then
   PS1+="${PS1_false}\[\$(_z_prompt_print_exit)\]${PS1_reset}"
 fi
 
+# Print the hostname if we're remotely connected. (Otherwise we probably know
+# which machine we're sitting in front of.)
 if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
-  # hostname
   PS1+="${PS1_dim}\h${PS1_reset}:"
 fi
 
-# current path, highlighted
+# Print the current path, highlighted and truncated if necessary.
 PS1+="${PS1_hi}\$(_z_prompt_compress_pwd)${PS1_reset}"
 
 # info about current git branch, if any (function supplies colours)
