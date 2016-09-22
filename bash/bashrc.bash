@@ -23,30 +23,6 @@ else
   export Z_IN_BASHRC=true
 fi
 
-# Switch to bash-4.4 if available
-latest_bash=44
-this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
-
-if (( this_bash < latest_bash )) && [[ -x $HOME/opt/bin/bash ]]; then
-  export SHELL="$HOME/opt/bin/bash"
-
-  # Temporarily export shell options so the new shell inherits them.
-  export SHELLOPTS 2>/dev/null
-
-  # Prevent shell from exiting if `exec` fails.
-  shopt -s execfail
-
-  if shopt -pq login_shell; then
-    exec -l "$SHELL"
-  else
-    exec "$SHELL"
-  fi
-fi
-
-# We don't actually want to *keep* those settings, though.
-shopt -u execfail
-declare +x SHELLOPTS 2>/dev/null
-
 # -----------------------------------------------------------------------------
 # Shell options
 # -----------------------------------------------------------------------------
@@ -90,24 +66,54 @@ if (( BASH_VERSINFO[0] >= 4 )); then
 fi
 
 # -----------------------------------------------------------------------------
-# Miscellaneous settings
+# Switch to bash-4.4 if available
 # -----------------------------------------------------------------------------
 
-export USER=${USER:-$(id -un)}
+latest_bash=44
+this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
+
+if (( this_bash < latest_bash )); then
+  unset -v newer_bash
+  case $HOSTNAME in
+    WS*)
+      # If I launch Cygwin with anything besides /bin/bash, the session crashes
+      # immediately. I don't know why. -- ZGM 2016-09-16
+      newer_bash=/usr/local/bin/bash
+      ;;
+    web*)
+      # I'm obviously not allowed to change anything on my shared host.
+      newer_bash="$HOME/opt/bin/bash"
+      ;;
+  esac
+
+  if [[ -x $newer_bash && $newer_bash != $SHELL ]]; then
+    export SHELL="$newer_bash"
+
+    # Temporarily export shell options so the new shell inherits them.
+    export SHELLOPTS 2>/dev/null
+
+    # Prevent shell from exiting if `exec` fails.
+    shopt -s execfail
+
+    if shopt -pq login_shell; then
+      exec -l "$SHELL"
+    else
+      exec "$SHELL"
+    fi
+  fi  
+fi
+
+# We don't actually want to *keep* those settings, though.
+shopt -u execfail
+declare +x SHELLOPTS 2>/dev/null
+
+# -----------------------------------------------------------------------------
+# Essential environment variables
+# -----------------------------------------------------------------------------
+
+export USER=${USER:-${LOGNAME:-$(id -un)}}
 export HOSTNAME=${HOSTNAME:-$(uname -n)}
-export TMPDIR=${TMPDIR:-$(dirname "$(mktemp -ut tmp.XXX)")}
-
-# TODO: identify if $TMPDIR is mounted `noexec` (or with otherwise restricted
-# privileges), in case we don't have root and the system /tmp is locked down
-
-case $HOSTNAME in
-  # *.local)
-  #   HOSTNAME=$(hostname -s) # trim domain ".local"
-  #   ;;
-  @(WS|web)+([[:digit:]])*)
-    HOSTNAME=$(hostname -f) # add domain
-    ;;
-esac
+export TMPDIR=${TMPDIR:-$(dirname "$(mktemp -u)")}
 
 if [[ -z $HOME ]]; then
   # This happened to me once. Ever. Then I wrote this. *Everything* breaks if
@@ -130,6 +136,18 @@ if [[ -z $HOME ]]; then
   }
 
   printf '%s\n' "$HOME"
+fi
+
+case $HOSTNAME in
+  @(WS|web)+([[:digit:]])*)
+    HOSTNAME=$(hostname -f) # add domain
+    ;;
+esac
+
+# If the current user's group doesn't own TMPDIR, check to see if it's mounted
+# "noexec" (as it would be on a shared host) and change to a path we control.
+if [[ ! -G $TMPDIR ]] && mount|grep -q " on $TMPDIR.*noexec,"; then
+  TMPDIR="$HOME/var/tmp"
 fi
 
 # -----------------------------------------------------------------------------
@@ -238,9 +256,8 @@ if [[ -n $Z_SET_WINTITLE ]]; then
 fi
 
 # Final initialization scripts, except in subshells/when reloading/as root
-if (( SHLVL <= 1 )) \
-  && (( BASH_SUBSHELL < 1 )) \
-  && [[ -z $Z_NO_INIT ]] && [[ -z $Z_RELOADING ]] \
+if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) \
+  && [[ -z $Z_RELOADING ]] && [[ -z $Z_NO_INIT ]] \
   && (( EUID != 0 ))
 then
   . "$dir_config/bash/init.bash"
@@ -250,7 +267,10 @@ then
   fi
 fi
 
-# Cleanup from debugging
+# Clean up
+
+unset -v latest_bash this_bash
+
 if _isFunction .; then
   tput cr   # move cursor to beginning of line
   tput el   # clear to end of line
