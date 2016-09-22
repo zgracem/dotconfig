@@ -134,7 +134,6 @@ rl()
       fi
     else
       verbose 2 ">> bad file: <$f>"
-      verbose ">> no functions found for <$1>"
     fi
   done
 
