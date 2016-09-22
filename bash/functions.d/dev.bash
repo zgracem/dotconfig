@@ -32,8 +32,7 @@ dev()
       local opts=($(declare -f $FUNCNAME \
                     | sed -nE 's/.*[[:space:]]([[:alnum:]]+)\)$/\1/p'))
 
-      scold "Sorry, I don't know “$1”"
-      scold "Try one of:"
+      scold "Sorry, I don't know “$1”. Try:"
       scold "  ${opts[*]}"
       
       return $EX_DATAERR

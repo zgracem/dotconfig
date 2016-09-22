@@ -11,7 +11,6 @@ alias bell='tput bel' # 🔔
 alias bye='exit'
 alias d='declare -p'
 alias e='echo'
-alias ee='_edit'
 alias i='newwin irb'
 alias svim='sudo vim'
 alias unmount='umount'
