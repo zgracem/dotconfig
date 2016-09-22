@@ -13,9 +13,6 @@ export HOMEBREW_CACHE="$dir_cache/homebrew"
 [[ -d $HOMEBREW_LOGS ]]  || mkdir -vp "$HOMEBREW_LOGS"
 [[ -d $HOMEBREW_CACHE ]] || mkdir -vp "$HOMEBREW_CACHE"
 
-# print developer warnings
-export HOMEBREW_DEVELOPER=true
-
 # if we're not in a GUI session on macOS...
 if [[ -z $SECURITYSESSIONID ]]; then
   # don't print beer emoji
