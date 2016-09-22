@@ -1,4 +1,4 @@
-### ZGM TODO: add ~/lib/zkit syncing
+### ZGM TODO: add ~/lib/ruby syncing
 
 confsync()
 {

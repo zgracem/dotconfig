@@ -12,8 +12,6 @@ pbsort()
     (pbpaste;echo) \
     | sort -u \
     | pbcopy
-
-    ### ZGM removed `uniq` call 2016-06-04 -- necessary?
 }
 
 cppwd()

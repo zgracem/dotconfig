@@ -194,7 +194,7 @@ set background=dark
 "-----------------------------------------------------------------------------
 
 if has("statusline")
-  " window title -- ### ZGM disabled 2015-09-10/re-enabled 2016-09-21
+  " window title
   set title
 
   if has("gui_running")

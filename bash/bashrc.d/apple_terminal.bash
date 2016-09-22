@@ -9,16 +9,14 @@ if [[ -n $TERM_SESSION_ID ]]; then
   # Unset all functions set in /etc/bashrc_Apple_Terminal. (Requires GNU sed.)
   for func in $(sed -nE 's/.*\<(\w+)\(.*/\1/p' /etc/bashrc_Apple_Terminal); do
     unset -f "$func"
+    unset -v func
   done
 
-  ### ZGM disabled 2016-06-17 -- Possibly faster than the above, though.
-  # unset -f update_terminal_cwd shell_session_{save_user_state,history_allowed,history_enable,history_check,save_history,save,delete_expired,update}
-  
-  while [[ ! -e ~/.bash_sessions_disable ]]
-  do
-    command cp ~/etc/skel/.bash_sessions_disable "$HOME"
-    command touch ~/.bash_sessions_disable || break
-  done &>/dev/null
+  if [[ ! -f ~/.bash_sessions_disable ]]; then
+    command touch ~/.bash_sessions_disable &>/dev/null
+  fi
 else
   return 0
 fi
+
+unset -f terminal_app_functions

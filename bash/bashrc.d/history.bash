@@ -2,7 +2,7 @@
 # history
 # -----------------------------------------------------------------------------
 
-### ZGM added 2016-04-28 -- abort if history isn't enabled
+# Abort if history isn't enabled
 [[ :$SHELLOPTS: =~ :history: ]] || return
 
 shopt -s cmdhist        # combine multiline commands into one in history
