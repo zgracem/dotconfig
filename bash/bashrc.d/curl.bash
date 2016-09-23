@@ -11,10 +11,10 @@ curl()
   local homebrew_curl=/usr/local/opt/curl/bin/curl
 
   if [[ -x $homebrew_curl ]]; then
-    local bin=$homebrew_curl
+    local curl=$homebrew_curl
   else
-    local bin="command curl"
+    local curl="command curl"
   fi
 
-  $bin -K "${CURLRC}" "$@"
+  $curl -K "${CURLRC}" "$@"
 }
