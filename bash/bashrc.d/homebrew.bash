@@ -10,11 +10,14 @@ export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_LOGS="$HOME/var/log/homebrew"
 export HOMEBREW_CACHE="$dir_cache/homebrew"
 
-# also ring the bell when printing beer emoji
-export HOMEBREW_INSTALL_BADGE=${BEL}$'\xf0\x9f\x8d\xba'
-
 [[ -d $HOMEBREW_LOGS ]]  || mkdir -vp "$HOMEBREW_LOGS"
 [[ -d $HOMEBREW_CACHE ]] || mkdir -vp "$HOMEBREW_CACHE"
+
+# don't automatically `brew update`
+export HOMEBREW_NO_AUTO_UPDATE=true
+
+# also ring the bell when printing beer emoji
+export HOMEBREW_INSTALL_BADGE=${BEL}$'\xf0\x9f\x8d\xba'
 
 # if we're not in a GUI session on macOS...
 if [[ -z $SECURITYSESSIONID ]]; then
