@@ -174,13 +174,6 @@ umask 0022
 
 export dir_config="$HOME/.config"
 
-# For reasons I have yet (2016-06-29) to learn, xterm(1) sessions start with
-# POSIXLY_CORRECT set to "y", which messes up a lot of my config files. This
-# should detect when that's happening and disable it.
-if [[ $POSIXLY_CORRECT == "y" && -n $XTERM_VERSION ]]; then
-  unset -v POSIXLY_CORRECT
-fi
-
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
 if [[ -n $Z_RL_VERBOSE && $TIME_TEST_ACTIVE != true ]]; then

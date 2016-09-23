@@ -19,12 +19,16 @@ INFOPATH=/usr/local/share/info:$INFOPATH
 # Ruby (see also bashrc.d/rubygems.bash)
 export RBENV_ROOT="$HOME/.rbenv"
 
-if [[ -d $RBENV_ROOT ]]; then
+if [ -d $RBENV_ROOT ]; then
   export RBENV_ROOT
   PATH=$RBENV_ROOT/bin:$PATH
   eval "$(rbenv init -)"
 else
   unset -v RBENV_ROOT
+fi
+
+if [ -z "$HOSTNAME" ]; then
+  HOSTNAME=`hostname`
 fi
 
 # go-lang (see also bashrc.d/golang.bash)
@@ -42,7 +46,7 @@ esac
 # -----------------------------------------------------------------------------
 
 # Homebrew (see also bashrc.d/homebrew.bash)
-if [[ -x /usr/local/bin/brew ]]; then
+if [ -x /usr/local/bin/brew ]; then
   # GNU coreutils
   PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
@@ -66,7 +70,7 @@ if [[ -x /usr/local/bin/brew ]]; then
 fi
 
 # Xcode
-if [[ -x /usr/bin/xcode-select ]]; then
+if [ -x /usr/bin/xcode-select ]; then
   case $HOSTNAME in
     Athena*|Minerva*)
       DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
@@ -86,7 +90,7 @@ if [[ -x /usr/bin/xcode-select ]]; then
 
   darwin_ver=$(uname -r)
 
-  if (( ${darwin_ver%%.*} >= 15 )); then
+  if [ ${darwin_ver%%.*} -ge 15 ]; then
     PATH=$PATH:$DEVELOPER_DIR/usr/bin
     MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
     PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
@@ -110,7 +114,7 @@ MANPATH=$MANPATH:/opt/X11/share/man
 # cygwin
 # -----------------------------------------------------------------------------
 
-if [[ $OSTYPE == cygwin ]]; then
+if [ -e /bin/cygwin1.dll ]; then
   # gcc tools
   PATH=$PATH:/opt/gcc-tools/bin
   MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man
@@ -139,7 +143,7 @@ fixpath()
   local d p IFS=:
 
   for d in $@; do
-    [[ ! :$p: =~ :$d: ]] && [[ -d $d ]] && p+="${p:+:}$d"
+    [ ! ":$p:" == *:"$d":* ] && [ -d "$d" ] && p="${p:+$p:}$d"
   done
 
   printf "$p"
@@ -148,7 +152,5 @@ fixpath()
 PATH=$(    fixpath "$PATH")
 MANPATH=$( fixpath "$MANPATH")
 INFOPATH=$(fixpath "$INFOPATH")
-
-# unset -f fixpath
 
 return 0
