@@ -72,8 +72,8 @@ fi
 # Functions
 # -----------------------------------------------------------------------------
 
-_z_prompt_compress_pwd()
-{ # Usage: _z_prompt_compress_pwd "$PWD"
+_z_PS1_compress_pwd()
+{ # Usage: _z_PS1_compress_pwd "$PWD"
 
   # Trims leading elements of the current directory like so:
   #   ~/first/second/3rd/fourth
@@ -161,14 +161,15 @@ _z_prompt_compress_pwd()
   fi
 }
 
-_z_prompt_print_exit()
+_z_PS1_print_exit()
 { # Print non-zero exit codes on the far right of the screen (zsh envy...)
   local last_exit=$?
   local gutter=1
   local sigspec
 
+  [[ $Z_PROMPT_EXIT == true ]] || return $last_exit
+  [[ $1 =~ ^[[:digit:]]+$ ]] && last_exit=$1
   (( last_exit != 0 )) || return 0
-  [[ $Z_PROMPT_EXIT == "true" ]] || return $last_exit
 
   # If terminated from a signal (128 >= $? >= 165), get signal name from `kill`
   # (`-l` = list) and print that instead.
@@ -186,18 +187,11 @@ _z_prompt_print_exit()
   local screen_width=${COLUMNS:-$(tput cols)}
   local padding=$(( screen_width - gutter ))
 
-  # # save cursor position
-  # tput sc
-
-  # print exit code
-  printf "%*s" $padding "$last_exit"
-
-  # restore cursor position
-  tput cr
-  # tput rc
+  # print exit code & return to beginning of line
+  printf "%*s\r" $padding "$last_exit"
 }
 
-_z_prompt_git_info()
+_z_PS1_git_info()
 {
   [[ $Z_PROMPT_GIT != true ]] && return
 
@@ -260,41 +254,32 @@ _z_prompt_git_info()
   printf "${esc_reset}%b" \
     " ${esc_dim}${branch}" \
     "${icons:-}${esc_reset}"
-
-  # if [[ $dirty == true ]]; then
-  #   icons+=$esc_false
-  #   icons+="*"
-  # fi
-
-  # printf " %b${esc_reset}" \
-  #   "${esc_dim}${branch}${icons}"
 }
 
-_z_prompt_jobs()
+_z_PS1_jobs()
 {
   [[ $Z_PROMPT_JOBS != true ]] && return
 
   local job_count="$(jobs|wc -l)"
   if (( job_count > 0 )); then
-    printf " %b" "${job_count}"
+    printf ' %d' "${job_count}"
   fi
 }
 
 # Notify iTerm of the current directory
-if _isFunction iterm_state; then
-  _z_prompt_update_iTerm() { iterm_state; }
-else
-  _z_prompt_update_iTerm()
-  {
-    printf '%b%s%b' "${OSC}50;CurrentDir=${PWD}${BEL}"
-  }
-fi
+_z_PS1_update_iTerm()
+{ # Notify iTerm of the current directory
+  printf "\["
+  iterm::state
+  printf "\]"
+}
 
 # Notify Terminal.app of the current directory
-_z_prompt_update_Terminal()
-{ # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
+_z_PS1_update_Terminal()
+{ # Notify Terminal.app of the current directory
+  # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 
-  local ante="${OSC}7;" post="${BEL}"
+  local ante="${DCS_ante}${OSC}7;" post="${BEL}${DCS_post}"
 
   if [[ $HOSTNAME != *.* ]]; then
     local HOSTNAME="$(uname -n)"
@@ -323,10 +308,10 @@ _z_prompt_update_Terminal()
     done
   }
 
-  printf '%b' "$DCS_ante" "$ante" "$pwd_url" "$post" "$DCS_post"
+  printf '\[%b\]' "$ante" "$pwd_url" "$post"
 }
 
-_z_prompt_update_titles()
+_z_PS1_update_titles()
 {
   local tab_title="${USER}@${HOSTNAME%%.*}"
   local win_title="${tab_title}: ${PWD/#$HOME/$'~'}"
@@ -345,22 +330,9 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
     esc_user=${esc_brred}
   fi
 
-  ### ZGM disabled 2016-07-09 -- ugly and distracting.
-  # # Users in Administrators group get a red prompt too.
-  # if [[ $OSTYPE == cygwin && -z $CYGWIN_ADMIN ]]; then
-  #   # Sets CYGWIN_ADMIN to "true" or "false."
-  #   . "$dir_config/bash/bashrc.d/cygwin.bash"
-  # fi
-
-  # if [[ $CYGWIN_ADMIN == true ]]; then
-  #   esc_user=${esc_red}
-  # fi
-  ###
-
   # Create new colour variables w/ prompt escape codes (\[ and \])
-  z_colour_PS1_esc()
+  _z_PS1_esc_colours()
   {
-
     local -a indexes=("$@")
     local index
 
@@ -373,8 +345,8 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
       fi
     done
   }
-
-  z_colour_PS1_esc ${!esc_*}
+  _z_PS1_esc_colours ${!esc_*}
+  unset -f _z_PS1_esc_colours
 fi
 
 # -----------------------------------------------------------------------------
@@ -385,10 +357,10 @@ PS1=""
 
 # Print exit status of last command. This has to come first for two reasons:
 # 1) So the last exit status doesn't get overwritten by anything else in the
-# prompt; and 2) so the tput calls in `_z_prompt_print_exit` get made before
+# prompt; and 2) so the tput calls in `_z_PS1_print_exit` get made before
 # anything else is printed.
-if [[ $Z_PROMPT_EXIT == true ]] && _inPath tput; then
-  PS1+="${PS1_false}\[\$(_z_prompt_print_exit)\]${PS1_reset}"
+if [[ $Z_PROMPT_EXIT == true ]]; then
+  PS1+="${PS1_false}\[\$(_z_PS1_print_exit)\]${PS1_reset}"
 fi
 
 # Print the hostname if we're remotely connected. (Otherwise we probably know
@@ -398,13 +370,13 @@ if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
 fi
 
 # Print the current path, highlighted and truncated if necessary.
-PS1+="${PS1_hi}\$(_z_prompt_compress_pwd)${PS1_reset}"
+PS1+="${PS1_hi}\$(_z_PS1_compress_pwd)${PS1_reset}"
 
 # info about current git branch, if any (function supplies colours)
-PS1+="\$(_z_prompt_git_info)"
+PS1+="\$(_z_PS1_git_info)"
 
 # number of background jobs, if any
-PS1+="${PS1_yellow}\$(_z_prompt_jobs)${PS1_reset}"
+PS1+="${PS1_yellow}\$(_z_PS1_jobs)${PS1_reset}"
 
 # $ for me, # for root, ? if we're in incognito mode
 if [[ -n $Z_INCOGNITO ]]; then
@@ -419,11 +391,6 @@ PS1+="${PS1_reset} "
 # PS0,2-4
 # -----------------------------------------------------------------------------
 
-unset -f PS0
-
-# [[ $Z_SET_WINTITLE == true ]] && PS0+="\$(setwintitle \"\u@\h: \w\")"
-# [[ $Z_SET_TABTITLE == true ]] && PS0+="\$(settabtitle \"\u@\h\")"
-
 # Secondary prompt for multi-line commands = right-facing guillemet (»)
 PS2="${PS1_user}"$'\xC2\xBB'"${PS1_reset} "
 
@@ -431,7 +398,6 @@ PS2="${PS1_user}"$'\xC2\xBB'"${PS1_reset} "
 PS3="${PS1_blue}?${PS1_reset} "
 
 # Prefix for `set -o xtrace` output
-# PS4="+ ${PS1_dim}\${BASH_SOURCE+\${BASH_SOURCE/#\$HOME/'~'}:\$LINENO # }\$BASH_COMMAND\n  $PS1_reset"
 PS4="+ "
 PS4+="\${BASH_SOURCE+$PS1_dim\${BASH_SOURCE/#\$HOME/'~'}$PS1_reset}"
 PS4+="\${BASH_SOURCE+:$PS1_blue\$LINENO$PS1_reset:}"
@@ -444,6 +410,8 @@ PS4+=$'\n\t'
 
 _z_prompt_cmd_add()
 { # append (or prepend with -p) to PROMPT_COMMAND, avoiding duplicates
+  local regex=' ?'"$*"'[ ;]*'
+
   if [[ $1 == -p ]]; then
     local prepend=true
     shift
@@ -451,7 +419,7 @@ _z_prompt_cmd_add()
 
   local cmd="$@"
 
-  if [[ ! $PROMPT_COMMAND =~ $cmd ]]; then
+  if [[ ! $PROMPT_COMMAND =~ $regex ]]; then
     if [[ $prepend == true ]]; then
       PROMPT_COMMAND="${cmd}${PROMPT_COMMAND:+;}${PROMPT_COMMAND}"
     else
@@ -481,19 +449,19 @@ _z_prompt_cmd_del()
 # -----------------------------------------------------------------------------
 
 if [[ $TERM_PROGRAM == iTerm.app ]]; then
-  _z_prompt_cmd_add _z_prompt_update_iTerm
+  _z_prompt_cmd_add _z_PS1_update_iTerm
 else
-  unset -f _z_prompt_update_iTerm
+  unset -f _z_PS1_update_iTerm
 fi
 
 if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-  _z_prompt_cmd_add _z_prompt_update_Terminal
+  _z_prompt_cmd_add _z_PS1_update_Terminal
 else
-  unset -f _z_prompt_update_Terminal
+  unset -f _z_PS1_update_Terminal
 fi
 
 if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
-  _z_prompt_cmd_add _z_prompt_update_titles
+  _z_prompt_cmd_add _z_PS1_update_titles
 fi
 
 # append to HISTFILE
@@ -502,14 +470,14 @@ _z_prompt_cmd_add -p "history -a"
 # # read from HISTFILE -- enable if you want tmux sessions to share history
 # _z_prompt_cmd_add -p "history -n"  
 
-# see bashrc.d/direnv.bash
-if _isFunction _direnv_hook; then
-  _z_prompt_cmd_add -p "_direnv_hook"
-fi
+# # see bashrc.d/direnv.bash
+# if _isFunction _direnv_hook; then
+#   _z_prompt_cmd_add -p "_direnv_hook"
+# fi
 
 # -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
 
-unset -f z_colour_PS1_esc _z_prompt_cmd_{add,del}
-unset -v ${!PS1_*} ${!z_PS1*}
+unset -f _z_prompt_cmd_{add,del}
+unset -v ${!PS1_*}
