@@ -118,6 +118,11 @@ set undolevels=640              " lots of undo
 set fileformats=unix            " LF line endings
 set encoding=utf-8              " Unicode files
 
+if v:version >= 800
+  set fixendofline              " make sure last line in file has <EOL>
+  set breakindent               " wrapped line repeats indent
+endif
+
 " wrapping
 set wrap                        " visually wrap long lines
 set linebreak                   " visually break at word boundaries
@@ -160,6 +165,7 @@ set winminheight=0              " windows can be 0 lines high
 set cmdheight=2                 " fewer 'Press ENTER to continue' messages
 
 set listchars=eol:¶,tab:→\ ,trail:·,extends:»,precedes:«,nbsp:¬
+let &showbreak = '» '
 
 " disable concealing
 if v:version >= 703
@@ -172,8 +178,8 @@ if $TERM_PROGRAM == "iTerm.app"
     let &t_SI = "\e[3 q"
     let &t_EI = "\e[0 q"
   else
-    let &t_SI = "\e]50;CursorShape=1\x07"
-    let &t_EI = "\e]50;CursorShape=0\x07"
+    let &t_SI = "\e]1337;CursorShape=1\x07"
+    let &t_EI = "\e]1337;CursorShape=0\x07"
   endif
 endif
 
@@ -269,14 +275,17 @@ if has("gui_running")
 
   " Windows fonts
   if has('win32') || has('win64')
-    set guifont=Source\ Code\ Pro\ Medium:h9,Consolas:h10,Courier\ New:h10
+    set guifont=Source\ Code\ Pro\ Medium:h9,Powerline\ Consolas:h10,Courier\ New:h10
+    if v:version >= 800
+      set renderoptions=type:directx
+    endif
   endif
 
   " macOS fonts
   if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-    set guifont=Source\ Code\ Pro\ Medium:h9,Consolas:h12,Menlo:h12
+    set guifont=Source\ Code\ Pro\ Medium:h9,Powerline\ Consolas:h12,Menlo:h12
     endif
   endif
 endif
