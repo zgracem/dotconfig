@@ -10,13 +10,19 @@ export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_LOGS="$HOME/var/log/homebrew"
 export HOMEBREW_CACHE="$dir_cache/homebrew"
 
+# also ring the bell when printing beer emoji
+export HOMEBREW_INSTALL_BADGE=${BEL}$'\xf0\x9f\x8d\xba'
+
 [[ -d $HOMEBREW_LOGS ]]  || mkdir -vp "$HOMEBREW_LOGS"
 [[ -d $HOMEBREW_CACHE ]] || mkdir -vp "$HOMEBREW_CACHE"
 
 # if we're not in a GUI session on macOS...
 if [[ -z $SECURITYSESSIONID ]]; then
-  # don't print beer emoji
-  export HOMEBREW_NO_EMOJI=true
+  # # don't print beer emoji
+  # export HOMEBREW_NO_EMOJI=true
+
+  # only ring bell
+  export HOMEBREW_INSTALL_BADGE=${BEL}
 
   # make `brew home` et al. print the URL instead of launching a browser
   export HOMEBREW_BROWSER=/bin/echo
