@@ -5,10 +5,12 @@
 [[ $OSTYPE =~ darwin ]] || return
 
 HARDWARE=$(sysctl -n hw.model)
-
 DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
 MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+MACOS_VERSION=${MACOS_VERSINFO[1]}
+
 if [[ -z ${MACOS_VERSINFO[2]} ]]; then
+  # initial releases return e.g. "10.12" instead of "10.12.0"
   MACOS_VERSINFO[2]=0
 fi
 
@@ -25,7 +27,7 @@ alias screensaver='open -a ScreenSaverEngine'
 
 if [[ -d /Volumes/BOOTCAMP ]]; then
   # bless(8) doesn't work if System Integrity Protection is enabled on El Cap+
-  if (( MACOS_VERSINFO[1] < 11 )) || [[ $(csrutil status 2>&1) == *disabled. ]]; then
+  if (( MACOS_VERSION < 11 )) || [[ $(csrutil status 2>&1) == *disabled. ]]; then
     # load Windows on next boot
     alias bootwin="sudo bless --mount /Volumes/BOOTCAMP --setBoot -nextonly "
     # ...or right now
