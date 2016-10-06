@@ -4,7 +4,7 @@ export COPYFILE_DISABLE=true
 # avoid flattening contents of tar files
 export COMP_TAR_INTERNAL_PATHS=1
 
-if [ -e /bin/cygwin1.dll ] && [ -x /usr/bin/bsdtar ]; then
+if [ "$OSTYPE" = "cygwin" ] && [ -x /usr/bin/bsdtar ]; then
   tar () { 
     /usr/bin/bsdtar "$@"; 
   }
