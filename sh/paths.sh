@@ -140,10 +140,10 @@ fixpath()
   # ensure that it isn't already in the PATH-in-progress, and that it exists
   # at all; if both, it's appended to the P-in-p, w/ a leading colon if
   # necessary. Once complete, it prints the new PATH and returns 0.
-  local d p IFS=:
+  local d="" p="" IFS=:
 
   for d in $@; do
-    [ ! ":$p:" == *:"$d":* ] && [ -d "$d" ] && p="${p:+$p:}$d"
+    [ ":$p:" != *":$d:"* ] && [ -d "$d" ] && p="${p:+$p:}$d"
   done
 
   printf "$p"
