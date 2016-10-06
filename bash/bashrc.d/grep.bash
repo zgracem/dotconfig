@@ -22,9 +22,8 @@ grep()
 g()
 {   # search files in the current directory
 
-    local opts='in'
-    #           │└─ output line numbers
-    #           └── case-insensitive matching
+    local opts='n'
+    #           └─ output line numbers
 
     grep -$opts "$@" *
 }
