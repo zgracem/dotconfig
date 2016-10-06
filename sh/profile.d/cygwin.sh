@@ -1,4 +1,4 @@
-[ -e /bin/cygwin1.dll ] || return
+[ "$OSTYPE" = "cygwin" ] || return
 
 # If we have Windows admin privileges, we will be a member of group 544 or 0
 CYGWIN_ADMIN=false
