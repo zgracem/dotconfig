@@ -3,8 +3,8 @@
 
 _inPath youtube-dl || return
 
-if [[ ! -d $dir_cache/youtube-dl ]]; then
-  mkdir -vp "$dir_cache/youtube-dl"
+if [[ ! -d $XDG_CACHE_HOME/youtube-dl ]]; then
+  mkdir -vp "$XDG_CACHE_HOME/youtube-dl"
 fi
 
 ydl()
