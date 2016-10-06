@@ -244,7 +244,7 @@ unset -v file
 # -----------------------------------------------------------------------------
 
 # Set window title (environment variable set in bashrc.d/prompt.bash)
-if [[ -n $Z_SET_WINTITLE ]]; then
+if [[ -n $Z_SET_WINTITLE || $TERM_PROGRAM == Coda ]]; then
   setwintitle "${USER}@${HOSTNAME%%.*}"
 fi
 

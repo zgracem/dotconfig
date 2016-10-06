@@ -62,6 +62,12 @@ if [[ $TERM_PROGRAM == Prompt* ]]; then
   Z_SET_TABTITLE=false
 fi
 
+# Coda (panic.com/coda-ios) has a very narrow status line
+if [[ $TERM_PROGRAM == Coda ]]; then
+  Z_SET_WINTITLE=false
+  Z_SET_TABTITLE=false
+fi
+
 # Terminal.app has its own functions for this
 if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
   Z_SET_WINTITLE=false
@@ -269,9 +275,7 @@ _z_PS1_jobs()
 # Notify iTerm of the current directory
 _z_PS1_update_iTerm()
 { # Notify iTerm of the current directory
-  printf "\["
   iterm::state
-  printf "\]"
 }
 
 # Notify Terminal.app of the current directory
@@ -308,7 +312,7 @@ _z_PS1_update_Terminal()
     done
   }
 
-  printf '\[%b\]' "$ante" "$pwd_url" "$post"
+  printf '%b' "$ante" "$pwd_url" "$post"
 }
 
 _z_PS1_update_titles()
@@ -465,10 +469,10 @@ if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
 fi
 
 # append to HISTFILE
-_z_prompt_cmd_add -p "history -a"    
+_z_prompt_cmd_add -p "history -a"
 
 # # read from HISTFILE -- enable if you want tmux sessions to share history
-# _z_prompt_cmd_add -p "history -n"  
+# _z_prompt_cmd_add -p "history -n"
 
 # # see bashrc.d/direnv.bash
 # if _isFunction _direnv_hook; then
