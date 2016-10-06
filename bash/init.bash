@@ -14,7 +14,7 @@ if [[ ! -e ~/.irbrc ]] && _inPath irb; then
 fi
 
 if [[ ! -e ~/.vimrc ]] && _inPath vim; then
-  _z_config_symlink vimrc
+  _z_config_symlink vim/vimrc
 fi
 
 if [[ ! -e ~/.wgetrc ]] && _inPath wget; then
