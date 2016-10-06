@@ -114,11 +114,20 @@ MANPATH=$MANPATH:/opt/X11/share/man
 # cygwin
 # -----------------------------------------------------------------------------
 
-if [ -e /bin/cygwin1.dll ]; then
+if [ $OSTYPE == "cygwin" ]; then
   # gcc tools
   PATH=$PATH:/opt/gcc-tools/bin
   MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man
   INFOPATH=$INFOPATH:/opt/gcc-tools/epoch2/share/info
+fi
+
+# -----------------------------------------------------------------------------
+# Linuxbrew
+# -----------------------------------------------------------------------------
+
+if [ -x $HOME/.linuxbrew/bin/brew ]; then
+  PATH=$HOME/.linuxbrew/bin:$PATH
+  MANPATH=$HOME/.linuxbrew/share/man:$MANPATH
 fi
 
 # -----------------------------------------------------------------------------

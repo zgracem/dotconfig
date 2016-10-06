@@ -82,7 +82,7 @@ if (( this_bash < latest_bash )); then
       ;;
     web*)
       # I'm obviously not allowed to change anything on my shared host.
-      newer_bash="$HOME/opt/bin/bash"
+      newer_bash="$HOME/.linuxbrew/bin/bash"
       ;;
   esac
 

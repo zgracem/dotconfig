@@ -56,7 +56,7 @@ hconfsync()
 
     confsync \
         && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-            --exclude=.DS_Store --max-delete=1
+            --exclude=.DS_Store
 }
 
 wfconfsync()
@@ -66,10 +66,10 @@ wfconfsync()
     local -a config_filters=(
         --exclude=.DS_Store
         --exclude=alpine/
-        --exclude=brew/
         --exclude=fish/
         --include=local/web500/
         --exclude='local/*'
+        --exclude=macos/
         --exclude=misc/
         --exclude='.git*'
         --exclude='transmission*/'
@@ -92,5 +92,5 @@ wfconfsync()
 
     confsync \
         && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-            --exclude=.DS_Store --max-delete=1
+            --exclude=.DS_Store
 }

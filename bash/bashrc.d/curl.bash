@@ -8,7 +8,7 @@ export CURLRC="${dir_config}/curlrc"
 
 curl()
 {
-  local homebrew_curl=/usr/local/opt/curl/bin/curl
+  local homebrew_curl="$HOMEBREW_PREFIX/opt/curl/bin/curl"
 
   if [[ -x $homebrew_curl ]]; then
     local curl=$homebrew_curl
