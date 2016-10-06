@@ -1,9 +1,15 @@
 # Homebrew
 # http://brew.sh/
 
-[ -x /usr/local/bin/brew ] || return
+if [ -x /usr/local/bin/brew ]; then
+  export HOMEBREW_PREFIX="/usr/local"
+elif [ -x $HOME/.linuxbrew/bin/brew ]; then
+  export HOMEBREW_PREFIX="$HOME/.linuxbrew"
+  export HOMEBREW_TEMP="$HOME/var/tmp"
+else
+  return
+fi
 
-export HOMEBREW_PREFIX="/usr/local"
 export HOMEBREW_BREW_FILE="$HOMEBREW_PREFIX/bin/brew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 
