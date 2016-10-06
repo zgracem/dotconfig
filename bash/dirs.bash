@@ -6,7 +6,7 @@ dir_config="$HOME/.config"
 dir_local="$HOME/.local"
 
 dir_bashlib="$HOME/lib/bash"
-dir_cache="$HOME/var/cache"
+dir_cache="${XDG_CACHE_HOME:-$HOME/var/cache}"
 dir_dropbox="$HOME/Dropbox"
 dir_howto="$HOME/txt/howto"
 dir_scripts="$HOME/scripts"

@@ -4,7 +4,7 @@
 
 if [[ -z $LS_COLORS || -n $Z_RELOADING ]]; then
   dc_src_dir="$dir_config/dircolors"
-  dc_cache_dir="$dir_cache/dircolors"
+  dc_cache_dir="$XDG_CACHE_HOME/dircolors"
 
   if [[ -n $HV_LOADED ]]; then
     dc_stub="500kv.dircolors"

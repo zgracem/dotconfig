@@ -172,7 +172,7 @@ umask 0022
 # Other config files
 # -----------------------------------------------------------------------------
 
-export dir_config="$HOME/.config"
+export dir_config="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
