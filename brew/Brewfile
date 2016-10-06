@@ -5,13 +5,10 @@
 # Instructions:
 #   1. Install Homebrew
 #   2. `brew tap homebrew/bundle`
-#   3. `brew bundle --file $THIS_FILE`
+#   3. `brew bundle --file=$THIS_FILE`
 
 tap "homebrew/dupes"
 tap "homebrew/versions"
-
-# command_not_found_handle() assistant
-tap "homebrew/command-not-found"
 
 # -----------------------------------------------------------------------------
 # essentials
@@ -127,11 +124,11 @@ brew "go"
 brew "fontforge"
 
 tap  "bramstein/webfonttools"
-brew "sfnt2woff-zopfli"
-brew "sfnt2woff"
-brew "sfntly"
-brew "ttf2eot"
-brew "woff2"
+brew "bramstein/webfonttools/sfnt2woff-zopfli"
+brew "bramstein/webfonttools/sfnt2woff"
+brew "bramstein/webfonttools/sfntly"
+brew "bramstein/webfonttools/ttf2eot"
+brew "bramstein/webfonttools/woff2"
 
 # -----------------------------------------------------------------------------
 # fun & games
