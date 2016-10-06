@@ -152,7 +152,7 @@ fixpath()
   local d="" p="" IFS=:
 
   for d in $@; do
-    [ ":$p:" != *":$d:"* ] && [ -d "$d" ] && p="${p:+$p:}$d"
+    [ "${p#*$d}" == "$p" ] && [ -d "$d" ] && p="${p:+$p:}$d"
   done
 
   printf "$p"
