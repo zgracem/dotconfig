@@ -23,17 +23,15 @@ while true; do
 done 2>/dev/null &
 
 # Set helpful variables
-HARDWARE=$(sysctl -n hw.model)
-DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
-MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+export HARDWARE=$(sysctl -n hw.model)
+export DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
+export MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+export MACOS_VERSION=${MACOS_VERSINFO[1]}
 
 if [[ -z ${MACOS_VERSINFO[2]} ]]; then
+  # initial releases return e.g. "10.12" instead of "10.12.0"
   MACOS_VERSINFO[2]=0
 fi
-
-MACOS_VERSION=${MACOS_VERSINFO[1]}
-
-export HARDWARE DARWIN_VERSINFO MACOS_VERSINFO MACOS_VERSION
 
 # -----------------------------------------------------------------------------
 # Load preferences

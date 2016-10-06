@@ -1,6 +1,6 @@
 _inPath tmux || return
 
-if (( MACOS_VERSINFO[0] >= 12 )); then
+if (( MACOS_VERSION >= 12 )); then
   # kqueue is broken on macOS, but tmux 2.2 doesn't turn it off like it should.
   # >> github.com/tmux/tmux/issues/475
   export EVENT_NOKQUEUE=1
