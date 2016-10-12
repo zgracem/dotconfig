@@ -11,7 +11,7 @@ reveal()
       open -R "$target"
       ;;
     cygwin)
-      "$(cygpath --windir)/explorer" /select, "$(cygpath -w "$item")"
+      "$(cygpath --windir)/explorer" /select, "$(cygpath -w "$target")"
       # cygstart --explore "$(dirname "$target")"
       ;;
     *)
