@@ -16,15 +16,10 @@ INFOPATH=/usr/local/share/info:$INFOPATH
 # development
 # -----------------------------------------------------------------------------
 
-# Ruby (see also bashrc.d/rubygems.bash)
-export RBENV_ROOT="$HOME/.rbenv"
-
-if [ -d $RBENV_ROOT ]; then
-  export RBENV_ROOT
-  PATH=$RBENV_ROOT/bin:$PATH
+# rbenv
+if [ -d "$HOME/.rbenv" ] && command -v rbenv >/dev/null; then
   eval "$(rbenv init -)"
-else
-  unset -v RBENV_ROOT
+  MANPATH="$(rbenv prefix)/share/man:$MANPATH"
 fi
 
 if [ -z "$HOSTNAME" ]; then
