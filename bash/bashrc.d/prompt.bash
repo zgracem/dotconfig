@@ -480,6 +480,55 @@ _z_prompt_cmd_add -p "history -a"
 # fi
 
 # -----------------------------------------------------------------------------
+# control function
+# -----------------------------------------------------------------------------
+
+prompt()
+{
+  local var="Z_PROMPT_${1^^}"
+
+  if [[ -n ${!var} ]]; then
+    if [[ ${!var} == true ]]; then
+      printf -v $var "false"
+    else
+      printf -v $var "true"
+    fi
+    
+    if [[ ${1,,} == host ]]; then
+      rl prompt
+    fi
+
+    echo "$var=${!var}"
+  elif [[ -n $1 ]]; then
+    case ${1,,} in
+      reset)
+        unset -v ${!Z_PROMPT_*}
+        ;;&
+      reset|on)
+        rl prompt
+        ;;
+      off)
+        unset PS0
+        PS1="\$ "
+        PS2="> "
+        PS3="? "
+        PS4="+ "
+        ;;
+      help|*)
+        local -a opts=( on off reset ${!Z_PROMPT_*} )
+        opts="${opts[@]##*_}"
+        opts="${opts,,}"
+        echo "Usage: $FUNCNAME [${opts// /|}]"
+        ;;
+    esac
+  elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
+    local p v; for p in PS{0..4}; do v=${!p}
+      echo "$p=${v@Q}"
+    done
+  fi
+}
+
+# -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
 
