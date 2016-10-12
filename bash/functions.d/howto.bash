@@ -13,7 +13,7 @@ howto()
 
     if [[ $do_edit == true ]]; then
         _edit "$file"
-        return $EX_OK
+        return 0
     elif [[ -f $file ]]; then
         less -F "$file"
     else
@@ -24,9 +24,9 @@ howto()
 
         if [[ $answer =~ [yY] ]]; then
             _edit "$file"
-            return $EX_OK
+            return 0
         else
-            return $EX_ABORT
+            return 1
         fi
     fi
 }

@@ -20,17 +20,12 @@ EX_PROTOCOL=76      # impossible response from remote system
 EX_NOPERM=77        # insufficient permission (not file-related)
 EX_CONFIG=78        # configuration error
 
-# my additions
-EX_ABORT=79         # aborted by user
-
-# reserved by bash
-EX_NOCMD=127        # no such command
-
-declare -ix ${!EX_*}
-
 # -----------------------------------------------------------------------------
+
+# declare -ix ${!EX_*}
+unset -v ${!EX_*}
 
 errexits()
 {
-    head -n-9 "${BASH_SOURCE[0]}"
+  head -n-8 "${BASH_SOURCE[0]}"
 }

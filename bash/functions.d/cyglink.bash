@@ -8,7 +8,7 @@ cyglink()
 
   if (( $# == 0 )); then
     scold "Usage: $FUNCNAME target link"
-    return $EX_USAGE
+    return 1
   else
     local target="$1"
     local link="$2"

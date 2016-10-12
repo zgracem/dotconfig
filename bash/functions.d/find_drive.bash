@@ -7,7 +7,7 @@ find_drive()
     local label=$1
   else
     scold "Usage: $FUNCNAME LABEL"
-    return $EX_USAGE
+    return 1
   fi
 
   if [[ $OSTYPE =~ cygwin ]]; then

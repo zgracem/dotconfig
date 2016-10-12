@@ -9,7 +9,7 @@ hidefile()
       ;;
     *)
       scold "not available on this system"
-      return $EX_OSERR
+      return 1
       ;;
   esac
 }
@@ -25,7 +25,7 @@ unhidefile()
       ;;
     *)
       scold "not available on this system"
-      return $EX_OSERR
+      return 1
       ;;
   esac
 }

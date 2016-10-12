@@ -9,6 +9,6 @@
 
 command_not_found_handle()
 {
-    printf >&2 '%s\n' "${esc_false}${1}${esc_reset}: command not found"
-    return $EX_NOCMD
+  printf >&2 '%s\n' "${esc_false}${1}${esc_reset}: command not found"
+  return 127
 }

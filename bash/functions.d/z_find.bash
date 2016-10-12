@@ -14,7 +14,7 @@ _z_find()
             ;;
         *)
             scold "Usage: ${FUNCNAME[0]} f[ile]|d[ir] SCOPE TERM"
-            return $EX_USAGE
+            return 1
             ;;
     esac
 
@@ -32,10 +32,10 @@ _z_find_daysold()
 
     if ! [[ $days =~ $number_re ]]; then
         scold "Error: $days: not a number"
-        return $EX_USAGE
+        return 1
     elif ! _isGNU find; then
         scold "Error: GNU find(1) required"
-        return $EX_UNAVAILABLE
+        return 1
     fi
 
     if (( days > 0 )); then

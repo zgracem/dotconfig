@@ -143,7 +143,7 @@ rl()
 
 ef()
 { # find and edit shell functions
-  (( $# == 1 )) || return $EX_USAGE
+  (( $# == 1 )) || return 1
 
   local func=$1
   local dir="$dir_config/bash"
@@ -153,7 +153,7 @@ ef()
 
     if [[ -f $file ]]; then
       _edit "$file"
-      return $EX_OK
+      return 0
     elif (( ${#FUNCNAME[@]} == 1 )); then
       # we're not being called by another function like es()
       local answer=n
@@ -164,9 +164,9 @@ ef()
       if [[ $answer =~ [yY] ]]; then
         printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
         _edit "$file:3:5"
-        return $EX_OK
+        return 0
       else
-        return $EX_ABORT
+        return 1
       fi
     else
       # we are being called by another function like es(), so we're done

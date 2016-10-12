@@ -9,7 +9,7 @@ lockfile()
       ;;
     *)
       scold 'not available on this system'
-      return $EX_OSERR
+      return 1
       ;;
   esac
 
@@ -27,7 +27,7 @@ unlockfile()
       ;;
     *)
       scold 'not available on this system'
-      return $EX_OSERR
+      return 1
       ;;
   esac
 

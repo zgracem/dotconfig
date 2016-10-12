@@ -13,7 +13,7 @@ songinfo()
       ;;
     *)
       scold "${FUNCNAME[0]}: ${song}: no metadata found"
-      return $EX_NOINPUT
+      return 1
       ;;
   esac
 }
