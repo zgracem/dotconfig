@@ -66,6 +66,11 @@ defaults write com.apple.Finder QLEnableXRayFolders -boolean true
 
 # -----------------------------------------------------------------------------
 
+# Keep folders on top when sorting by name
+if (( MACOS_VERSION >= 12 )); then
+  defaults write com.apple.Finder _FXSortFoldersFirst -bool true
+fi
+
 # Prefer list view (other view modes: `icnv`, `clmv`, `Flwv`)
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
