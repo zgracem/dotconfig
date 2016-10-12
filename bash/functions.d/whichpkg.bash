@@ -5,7 +5,7 @@ whichpkg()
         local file="$1"
     else
         scold "Usage: $FUNCNAME file"
-        return $EX_USAGE
+        return 1
     fi
 
     if [[ ! $file =~ / ]]; then
@@ -18,7 +18,7 @@ whichpkg()
             :
         else
             scold "not found: $1"
-            return $EX_NOINPUT
+            return 1
         fi
     fi
 
@@ -45,7 +45,7 @@ whichpkg()
 
     else
         scold 'no compatible package manager found'
-        return $EX_OSERR
+        return 1
     fi
 
     if [[ -n $pkg ]]; then

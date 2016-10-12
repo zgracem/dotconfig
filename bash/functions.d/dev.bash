@@ -35,14 +35,14 @@ dev()
       scold "Sorry, I don't know “$1”. Try:"
       scold "  ${opts[*]}"
       
-      return $EX_DATAERR
+      return 1
       ;;
   esac
 }
 
 _dev_middleman()
 {
-  [[ $HOSTNAME == Athena* ]] || return $EX_NOHOST
+  [[ $HOSTNAME == Athena* ]] || return 1
 
   local proj_dir="$1"; shift
   

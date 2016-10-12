@@ -7,7 +7,7 @@ roll()
 
     if (( $# < 2 )); then
         scold "Usage: ${FUNCNAME[0]} ARCHIVE.EXT FILE [FILE ...]"
-        return $EX_USAGE
+        return 1
     fi
 
     local archive="$1"; shift
@@ -22,7 +22,7 @@ roll()
         *.tgz)      tar czf "$archive" "$@" ;;
         *.zip)      zip -9r "$archive" "$@" ;;
         *)          scold "${FUNCNAME[0]}: unsupported archive format: ${archive##*.}"
-                    return $EX_USAGE
+                    return 1
                     ;;
     esac
 }
@@ -30,7 +30,7 @@ roll()
 tarup()
 {   # tar + gzip an entire directory
 
-    (( $# == 1 )) || return $EX_USAGE
+    (( $# == 1 )) || return 1
     local dir="${1%/}"
     roll "${dir}.tar.gz" "${dir%/}/"
 }
@@ -38,7 +38,7 @@ tarup()
 zipup()
 {   # zip an entire directory
 
-    (( $# == 1 )) || return $EX_USAGE
+    (( $# == 1 )) || return 1
     local dir="${1%/}"
     roll "${dir}.zip" "${dir%/}/"
 }

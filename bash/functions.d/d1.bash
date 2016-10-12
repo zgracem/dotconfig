@@ -44,10 +44,10 @@ d1import()
       dayone -d="$entry_date" new < "$entry_file"
     else
       scold "$FUNCNAME: failed to get date from $entry_file"
-      return $EX_SOFTWARE
+      return 1
     fi
   else
     scold "$FUNCNAME: failed to read $entry_file"
-    return $EX_NOINPUT
+    return 1
   fi
 }
