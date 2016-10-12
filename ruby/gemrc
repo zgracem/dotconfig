@@ -1,1 +1,1 @@
-gem: -​-env-shebang
+gem: -​-env-shebang --no-document
