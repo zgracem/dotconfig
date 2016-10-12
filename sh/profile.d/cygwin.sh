@@ -1,11 +1,9 @@
 [ "$OSTYPE" = "cygwin" ] || return
 
 # If we have Windows admin privileges, we will be a member of group 544 or 0
-CYGWIN_ADMIN=false
-
 for group in `id -G`; do
   if [ "$group" -eq 0 ] || [ "$group" -eq 544 ]; then
-    CYGWIN_ADMIN=true
+    export CYGWIN_ADMIN=true
     break
   fi
 done
@@ -56,4 +54,4 @@ unset -v printer_key
 # cleanup
 # -----------------------------------------------------------------------------
 
-export CYGWIN CYGWIN_ADMIN
+export CYGWIN

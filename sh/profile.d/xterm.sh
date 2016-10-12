@@ -1,4 +1,4 @@
-if [ "$XTERM_VERSION" != "x" ]; then
+if [ -n "$XTERM_VERSION" ]; then
   export XTERM_PROFILE="yes"
 
   # For reasons I have yet (2016-06-29) to learn, xterm(1) sessions start with

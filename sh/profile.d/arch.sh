@@ -14,6 +14,6 @@ if command -v sysctl 1>/dev/null && [ -z "$PROCESSOR_ARCHITECTURE" ]; then
   export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)"
 fi
 
-if [ -n "$PROCESSOR_ARCHITECTURE" ] && [ ! "$ARCHFLAGS" == *-arch* ]; then
+if [ -n "$PROCESSOR_ARCHITECTURE" ] && [ "${ARCHFLAGS#*-arch}" == "$ARCHFLAGS" ]; then
   export ARCHFLAGS="${ARCHFLAGS:+$ARCHFLAGS }-arch ${PROCESSOR_ARCHITECTURE}"
 fi

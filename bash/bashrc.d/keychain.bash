@@ -1,6 +1,7 @@
 _inPath keychain || return
 
-export GPG_TTY="$(tty)"
+### ZGM disabled 2016-10-12 -- I don't use GnuPG right now
+# export GPG_TTY="$(tty)"
 
 if [[ -z $SSH_AGENT_PID ]]; then
   if [[ ! -d ~/var/run ]]; then
