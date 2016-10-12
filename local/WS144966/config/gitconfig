@@ -1,0 +1,53 @@
+[http]
+	sslCAinfo = /usr/local/etc/openssl/cert.pem
+
+# ---- Keep everything below this line in sync with `~/.config/git/config` ----
+
+[user]
+	name = ZGM
+	email = cryptostrophe@users.noreply.github.com
+
+[core]
+	autocrlf = input
+	safecrlf = true
+	excludesfile = ~/.config/git/globalignore
+	filemode = false
+
+[alias]
+	# http://gitimmersion.com/lab_11.html
+	co = checkout
+	cm = commit
+	st = status
+	br = branch
+	df = diff
+	dt = difftool
+	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	unstage = reset HEAD
+
+[hub]
+	protocol = https
+
+[color]
+	ui = true
+	branch = true
+	diff = true
+	interactive = true
+	status = true
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
+  # Be able to abort all diffs with `:cq` or `:cquit`
+  trustExitCode = true
+
+[push]
+	default = simple
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
