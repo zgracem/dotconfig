@@ -1,26 +1,24 @@
 # Homebrew
 # http://brew.sh/
 
-if [ -x /usr/local/bin/brew ]; then
-  export HOMEBREW_PREFIX="/usr/local"
-elif [ -x $HOME/.linuxbrew/bin/brew ]; then
-  export HOMEBREW_PREFIX="$HOME/.linuxbrew"
+HOMEBREW_BREW_FILE=$(type -P brew) || return
+
+export HOMEBREW_PREFIX="${HOMEBREW_BREW_FILE%/bin/brew}"
+
+if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$HOME/var/tmp"
-else
-  return
 fi
 
-export HOMEBREW_BREW_FILE="$HOMEBREW_PREFIX/bin/brew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
-
 export HOMEBREW_LOGS="$HOME/var/log/homebrew"
 export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 
 [ -d "$HOMEBREW_LOGS" ]  || mkdir -vp "$HOMEBREW_LOGS"
 [ -d "$HOMEBREW_CACHE" ] || mkdir -vp "$HOMEBREW_CACHE"
 
-# don't automatically `brew update`
-export HOMEBREW_NO_AUTO_UPDATE=true
+# only automatically `brew update` every 24 hours
+unset -v HOMEBREW_NO_AUTO_UPDATE
+export HOMEBREW_AUTO_UPDATE_SECS=$(( 24 * 60 * 60 ))
 
 # if we're not in a GUI session on macOS...
 if [ -z "$SECURITYSESSIONID" ]; then

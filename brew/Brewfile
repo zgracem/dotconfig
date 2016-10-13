@@ -15,8 +15,8 @@ tap "homebrew/versions"
 # -----------------------------------------------------------------------------
 
 # for Homebrew
-brew "curl", args: ["with-nghttp2"]
 brew "openssl"
+brew "curl", args: ["with-nghttp2"]
 brew "git", args: ["with-brewed-curl", "with-brewed-openssl"]
 
 # bash 4
@@ -28,9 +28,7 @@ brew "tmux"
 brew "reattach-to-user-namespace"
 
 # other
-brew "direnv", args: ["force-bottle"]
 brew "fpp", args: ["HEAD"]
-brew "midnight-commander"
 brew "vim", args: ["HEAD", "override-system-vi"]
 brew "homebrew/dupes/less", args: ["with-pcre"]
 brew "homebrew/dupes/ncurses"
@@ -144,6 +142,8 @@ brew "figlet"
 # misc.
 # -----------------------------------------------------------------------------
 
+brew "direnv", args: ["force-bottle"]
+brew "midnight-commander"
 brew "pv"
 brew "rename"
 brew "sf-pwgen" # github.com/anders/pwgen
