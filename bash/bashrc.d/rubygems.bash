@@ -1,19 +1,19 @@
-if type -P gem &>/dev/null; then
+if command -v gem >/dev/null; then
   case $HOSTNAME in
     Athena*)
-      : # Athena should be smart enough not to need this.
+      true # Athena should be smart enough not to need this.
       ;;
     *.webfaction.com)
-      GEM_HOME=$HOME/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0
+      GEM_HOME="$HOME/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0"
       ;;
     *.atco.com)
-      GEM_HOME=$HOME/.gem/ruby
+      GEM_HOME="$HOME/.gem/ruby"
       ;;
     Hiroko*)
       GEM_HOME=/usr/local/lib/ruby/gems/2.2.0
       ;;
     *)
-      GEM_HOME=$(gem env home 2>/dev/null) || return
+      GEM_HOME="$(gem env home 2>/dev/null)" || return
       ;;
   esac
 
