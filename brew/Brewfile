@@ -28,6 +28,7 @@ brew "tmux"
 brew "reattach-to-user-namespace"
 
 # other
+brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
 brew "fpp", args: ["HEAD"]
 brew "vim", args: ["HEAD", "override-system-vi"]
 brew "homebrew/dupes/less", args: ["with-pcre"]
@@ -142,7 +143,6 @@ brew "figlet"
 # misc.
 # -----------------------------------------------------------------------------
 
-brew "direnv", args: ["force-bottle"]
 brew "midnight-commander"
 brew "pv"
 brew "rename"
@@ -151,11 +151,6 @@ brew "source-highlight" # for less
 brew "homebrew/dupes/srm"
 brew "tree"
 brew "watch"
-
-# archives & compression
-brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
-brew "p7zip"
-brew "unrar"
 
 # dictionaries
 brew "dict"

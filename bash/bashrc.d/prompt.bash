@@ -474,11 +474,6 @@ _z_prompt_cmd_add -p "history -a"
 # # read from HISTFILE -- enable if you want tmux sessions to share history
 # _z_prompt_cmd_add -p "history -n"
 
-# # see bashrc.d/direnv.bash
-# if _isFunction _direnv_hook; then
-#   _z_prompt_cmd_add -p "_direnv_hook"
-# fi
-
 # -----------------------------------------------------------------------------
 # control function
 # -----------------------------------------------------------------------------
