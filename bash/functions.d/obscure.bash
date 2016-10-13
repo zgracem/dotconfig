@@ -1,33 +1,36 @@
 _z_obscure()
 {
-    local instring="${@:-$(</dev/stdin)}"
+  local instring="${@:-$(</dev/stdin)}"
+  local outstring=""
 
-    local i
-    local inchar outchar url outstring
+  local i; for (( i = 0; i < ${#instring}; i++ )); do
+    local inchar="${instring:$i:1}"
+    local outchar="$inchar"
 
-    for (( i = 0; i < ${#instring}; i++ )); do
-        inchar="${instring:$i:1}"
+    case ${FUNCNAME[1]} in
+      obscure_url)
+        printf -v outchar '%%%02x' "'$inchar"
+        ;;
+      obscure_html)
+        printf -v outchar "&#x%02x;" "'$inchar"
+        ;;
+      *)
+        echo >&2 "This function cannot be called directly."
+        return 1
+        ;;
+    esac
 
-        case ${FUNCNAME[1]} in
-            obscure_url)
-                printf -v outchar '%%%02x' "'${instring:$i:1}"
-                ;;
-            obscure_html)
-                printf -v outchar "&#x%02x;" "'${instring:$i:1}"
-                ;;
-        esac
+    outstring+="$outchar"
+  done
 
-        outstring+="$outchar"
-    done
-
-    echo "$outstring"
+  echo "$outstring"
 }
 
-obscure_url() { _z_obscure "$@"; }
-obscure_html() { _z_obscure "$@"; }
+obscure_url()   { _z_obscure "$@"; }
+obscure_html()  { _z_obscure "$@"; }
 
 obscure_unicode()
 {
-    <<< "${@:-$(</dev/stdin)}" \
-    sed "y/ABCDEHIJKLMNOPSTXYZacdeijlmopsvxy/ΑΒСⅮΕΗΙЈΚⅬΜΝΟΡЅΤΧΥΖасⅾеіјⅼⅿοрѕⅴху/"
+  <<< "${@:-$(</dev/stdin)}" \
+  sed "y/ABCDEHIJKLMNOPSTXYZacdeijlmopsvxy/ΑΒСⅮΕΗΙЈΚⅬΜΝΟΡЅΤΧΥΖасⅾеіјⅼⅿοрѕⅴху/"
 }
