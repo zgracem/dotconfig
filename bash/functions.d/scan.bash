@@ -14,7 +14,7 @@ scan()
       ;;
     [Ww]i[Ff]i)
       # scan for WiFi networks
-      airport -s
+      "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport" -s
       ;;
     file)
       sudo opensnoop -v -f "${noun}"
