@@ -65,6 +65,14 @@ if (( BASH_VERSINFO[0] >= 4 )); then
   fi
 fi
 
+# Require ^D × (n+1) to exit
+IGNOREEOF=2
+
+# Kill ssh sessions after 8 hours' inactivity, unless tmux/screen is active
+if [[ -n $SSH_CONNECTION && -z $TMUX && -z $STY ]]; then
+  TMOUT=$(( 8 * 60 * 60 ))
+fi
+
 # -----------------------------------------------------------------------------
 # Switch to bash-4.4 if available
 # -----------------------------------------------------------------------------
@@ -111,10 +119,6 @@ declare +x SHELLOPTS 2>/dev/null
 # Essential environment variables
 # -----------------------------------------------------------------------------
 
-export USER=${USER:-${LOGNAME:-$(id -un)}}
-export HOSTNAME=${HOSTNAME:-$(uname -n)}
-export TMPDIR=${TMPDIR:-$(dirname "$(mktemp -u)")}
-
 if [[ -z $HOME ]]; then
   # This happened to me once. Ever. Then I wrote this. *Everything* breaks if
   # HOME is suddenly empty or unset, and if that's the case, it's probably not
@@ -137,36 +141,6 @@ if [[ -z $HOME ]]; then
 
   printf '%s\n' "$HOME"
 fi
-
-case $HOSTNAME in
-  @(WS|web)+([[:digit:]])*)
-    HOSTNAME=$(hostname -f) # add domain
-    ;;
-esac
-
-# If the current user's group doesn't own TMPDIR, check to see if it's mounted
-# "noexec" (as it would be on a shared host) and change to a path we control.
-if [[ ! -G $TMPDIR ]] && mount|grep -q " on $TMPDIR.*noexec,"; then
-  TMPDIR="$HOME/var/tmp"
-fi
-
-# -----------------------------------------------------------------------------
-# Other business
-# -----------------------------------------------------------------------------
-
-# Filesystem blocks of 1 KB, like the good lord intended
-export BLOCKSIZE=1024
-
-# Require ^D × (n+1) to exit
-IGNOREEOF=2
-
-# Kill ssh sessions after 8 hours' inactivity, unless tmux/screen is active
-if [[ -n $SSH_CONNECTION && -z $TMUX && -z $STY ]]; then
-  TMOUT=$(( 8 * 60 * 60 ))
-fi
-
-# Default 'rwXr-Xr-X' permissions for new files
-umask 0022
 
 # -----------------------------------------------------------------------------
 # Other config files

@@ -140,14 +140,26 @@ INFOPATH=$HOME/share/info:$HOME/opt/share/info:$INFOPATH
 fixpath()
 {
   # The input, a colon-separated list, is split by setting IFS to a colon
-  # and using an unquoted $@ in the `for` loop. Each directory is checked to
+  # and using an unquoted $* in the `for` loop. Each directory is checked to
   # ensure that it isn't already in the PATH-in-progress, and that it exists
   # at all; if both, it's appended to the P-in-p, w/ a leading colon if
   # necessary. Once complete, it prints the new PATH and returns 0.
   local d="" p="" IFS=:
 
-  for d in $@; do
-    [ "${p#*$d}" == "$p" ] && [ -d "$d" ] && p="${p:+$p:}$d"
+  if [[ -n $ZSH_NAME ]]; then
+    setopt sh_word_split
+  fi
+
+  for d in $*; do
+    case ":$p:" in
+      *:$d:*) 
+          false
+          ;;
+      *)  if [ -d "$d" ]; then
+            p="${p:+$p:}$d"
+          fi
+          ;;
+    esac
   done
 
   printf "$p"

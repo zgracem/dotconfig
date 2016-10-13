@@ -15,7 +15,7 @@ unset -v group
 # ------------------------------------------------------------------------------
 
 # create Windows-native symlinks (if we have admin privileges)
-if [ "$CYGWIN" != *winsymlinks* ]; then
+if [ "${CYGWIN#*winsymlinks}" = "$CYGWIN" ]; then
   if [ "$CYGWIN_ADMIN" = true ]; then
     CYGWIN="${CYGWIN+$CYGWIN }winsymlinks:nativestrict"
   else
@@ -25,7 +25,7 @@ if [ "$CYGWIN" != *winsymlinks* ]; then
 fi
 
 # don't warn on using MS-DOS-style paths instead of POSIX-style
-if [ "$CYGWIN" != *dosfilewarning* ]; then
+if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
   CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
 
