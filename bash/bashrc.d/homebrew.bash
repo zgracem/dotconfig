@@ -1,5 +1,8 @@
 _inPath brew || return
 
+# howto disable developer mode:
+#   git -C "$(brew --repo)" config --unset homebrew.devcmdrun
+
 # Pumpkin Spice Homebrew
 # -- https://twitter.com/MacHomebrew/status/783028298351730688
 
