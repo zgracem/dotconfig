@@ -1,37 +1,30 @@
 urlencode()
-{   # pure bash URL-encoding
-    # Based on: http://stackoverflow.com/a/10660730
+{ # pure bash URL-encoding
+  # Based on: http://stackoverflow.com/a/10660730
 
-    local instring="${@:-$(</dev/stdin)}"
+  local instring="${@:-$(</dev/stdin)}"
+  local outstring=""
 
-    local outstring
-    local inchar outchar
-    local i
+  local i; for (( i = 0; i < ${#instring}; i++ )); do
+    local inchar="${instring:$i:1}"
+    local outchar="$inchar"
 
-    for (( i = 0; i < ${#instring}; i++ )); do
-        inchar="${instring:$i:1}"
+    if [[ $inchar != [-_.~a-zA-Z0-9] ]]; then
+      printf -v outchar '%%%02x' "'$inchar"
+    fi
 
-        case $inchar in
-            [-_.~a-zA-Z0-9])
-                outchar="$inchar"
-                ;;
-            *)
-                printf -v outchar '%%%02x' "'$inchar"
-                ;;
-        esac
+    outstring+="$outchar"
+  done
 
-        outstring+="$outchar"
-    done
-
-    echo "$outstring"
+  echo "$outstring"
 }
 
 urldecode()
-{   # corresponding decode function
-    # http://stackoverflow.com/a/10660730
+{ # corresponding decode function
+  # http://stackoverflow.com/a/10660730
 
-    local instring="${@:-$(</dev/stdin)}"
-    local outstring="${instring//%/\\x}"
+  local instring="${@:-$(</dev/stdin)}"
+  local outstring="${instring//%/\\x}"
 
-    echo -e "$outstring"
+  printf "%b\n" "$outstring"
 }
