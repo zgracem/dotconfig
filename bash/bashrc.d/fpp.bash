@@ -8,15 +8,10 @@ export FPP_EDITOR=${VISUAL%%?( -)-wait}
 
 # setup temp directory
 export FPP_DIR=~/var/spool/fpp
-
-if [[ ! -d $FPP_DIR ]]; then
-  mkdir -vp "$FPP_DIR"
-fi
+[[ -d $FPP_DIR ]] || mkdir -vp "$FPP_DIR"
 
 # keep homedir tidy
-if [[ -d ~/.fpp ]]; then
-  rm -rfv ~/.fpp
-fi
+[[ -d ~/.fpp ]] && rm -rfv ~/.fpp
 
 # -----------------------------------------------------------------------------
 # tmux integration

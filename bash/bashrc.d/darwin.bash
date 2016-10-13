@@ -4,7 +4,6 @@
 
 [[ $OSTYPE =~ darwin ]] || return
 
-HARDWARE=$(sysctl -n hw.model)
 DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
 MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
 MACOS_VERSION=${MACOS_VERSINFO[1]}

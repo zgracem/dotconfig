@@ -3,9 +3,8 @@
 
 _inPath youtube-dl || return
 
-if [[ ! -d $XDG_CACHE_HOME/youtube-dl ]]; then
-  mkdir -vp "$XDG_CACHE_HOME/youtube-dl"
-fi
+# see also `--cache-dir` and `--cookies` settings in youtube-dl.conf
+[[ -d $XDG_CACHE_HOME/youtube-dl ]] || mkdir -vp "$XDG_CACHE_HOME/youtube-dl"
 
 ydl()
 {

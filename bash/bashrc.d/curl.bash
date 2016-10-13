@@ -3,11 +3,12 @@
 
 _inPath curl || return
 
-# use alternate .curlrc
-export CURLRC="${dir_config}/curlrc"
-
 curl()
 {
+  # use alternate .curlrc
+  local CURLRC="$dir_config/curlrc"
+
+  # prefer Homebrew's curl if present
   local homebrew_curl="$HOMEBREW_PREFIX/opt/curl/bin/curl"
 
   if [[ -x $homebrew_curl ]]; then
@@ -16,5 +17,5 @@ curl()
     local curl="command curl"
   fi
 
-  $curl -K "${CURLRC}" "$@"
+  $curl -K "$CURLRC" "$@"
 }
