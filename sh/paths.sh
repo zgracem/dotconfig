@@ -81,7 +81,7 @@ if [ -x /usr/bin/xcode-select ]; then
       ;;
   esac
 
-  export DEVELOPER_DIR
+  # export DEVELOPER_DIR
 
   darwin_ver=$(uname -r)
 
