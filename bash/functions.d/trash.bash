@@ -1,12 +1,4 @@
-dir_trash="$HOME/.Trash"
-
-if [[ ! -d $dir_trash ]]; then
-  mkdir -p "$dir_trash" &>/dev/null
-fi
-
 if [[ $OSTYPE =~ darwin ]]; then
-  unset -v dir_trash
-
   trash()
   {
     local f; for f in "$@"; do
@@ -31,6 +23,12 @@ if [[ $OSTYPE =~ darwin ]]; then
 elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
   trash()
   {
+    local dir_trash="$HOME/.Trash"
+
+    if [[ ! -d $dir_trash ]]; then
+      mkdir -p "$dir_trash" &>/dev/null
+    fi
+
     local t
     local f; for f in "$@"; do
       filebase=${f##*/}

@@ -1,29 +1,29 @@
 fwd()
 {
   # moves a file, leaving behind a symlink to the new location
-  local old=$1
-  local new=$2
+  local src=$1
+  local dst=$2
 
-  local old_full
-  old_full=$(readlink -e "$old") || return 4
+  local src_full
+  src_full=$(readlink -e "$src") || return 204
 
-  if [[ -d $new ]]; then
-    new="$new/$(basename "$old")"
+  if [[ -d $dst ]]; then
+    dst="$dst/$(basename "$src")"
   fi
 
-  if mv -v "$old" "$new"; then
-    local new_full
-    new_full=$(readlink -e "$new") || return 5
+  if mv -v "$src" "$dst"; then
+    local dst_full
+    dst_full=$(readlink -e "$dst") || return 205
 
-    if ln -sv "$new_full" "$old_full"
+    if ln -sv "$dst_full" "$src_full"
     then
       return 0      
     else
-      scold "$FUNCNAME: failed: $old_full <- $new_full"
-      if [[ -e $new ]]; then
-        mv -fv "$new" "$1" || return 6
+      scold "$FUNCNAME: failed: $src_full <- $dst_full"
+      if [[ -e $dst ]]; then
+        mv -fv "$dst" "$1" || return 206
       fi
-      return 7
+      return 207
     fi
   fi
 }

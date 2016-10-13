@@ -1,5 +1,5 @@
 lspath()
-{   # list path entries of $PATH or environment variable $1
-    local var="${1-PATH}"
-    tr ":" "\n" <<< "${!var}"
+{ # list PATH dirs, or env. var. $1 -- any colon-separated list -- vertically
+  local var="${1-PATH}"
+  tr ":" "\n" <<< "${!var}"
 }

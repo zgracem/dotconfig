@@ -1,5 +1,5 @@
 map()
-{   # applies a function to each item in a list
+{ # applies a function to each item in a list
   # Usage: map COMMAND: ITEM [ITEM ...]
   # Based on: http://redd.it/aks3u
 

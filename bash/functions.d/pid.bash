@@ -1,30 +1,31 @@
 if [[ -z $flags_pid ]]; then
-    case $OSTYPE in
-        cygwin)  flags_pid='-asW' ;;
-        *)       flags_pid='-cx -o pid,command' ;;
-    esac
+  case $OSTYPE in
+    cygwin)  flags_pid='-asW' ;;
+    *)       flags_pid='-cx -o pid,command' ;;
+  esac
 fi
 
 pidof()
-{   # return the PID of process $1 or exit false
-    local proc="$1"
+{ # return the PID of process $1 or exit false
+  local proc="$1"
+  local pid
 
-    local pid=$(command ps $flags_pid \
+  pid=$(command ps $flags_pid \
         | sed -nE "s/[[:space:]]*([[:digit:]]+) .*\<$proc[^\\]*(\.exe)?$/\1/ip")
 
-    if [[ -n $pid ]]; then
-        echo "$pid"
-    fi
+  if [[ -n $pid ]]; then
+    echo "$pid"
+  fi
 }
 
 pidis()
-{   # return the process with PID $1 or exit false
-    local pid="$1"
+{ # return the process with PID $1 or exit false
+  local pid="$1"
+  local proc
 
-    local proc=$(command ps ${flags_pid/pid,/} -p $pid \
-        | tail -n+2)
+  proc=$(command ps ${flags_pid/pid,/} -p $pid | tail -n+2)
 
-    if [[ -n $proc ]]; then
-        echo "$proc"
-    fi
+  if [[ -n $proc ]]; then
+    echo "$proc"
+  fi
 }

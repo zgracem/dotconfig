@@ -1,10 +1,6 @@
 reveal()
 { # reveal $1 in Finder/Explorer
-  if (( $# == 1 )); then
-    local target="$1"        
-  else
-    return 1
-  fi
+  local target="${1?}"
 
   case $OSTYPE in
     darwin*)
@@ -12,7 +8,6 @@ reveal()
       ;;
     cygwin)
       "$(cygpath --windir)/explorer" /select, "$(cygpath -w "$target")"
-      # cygstart --explore "$(dirname "$target")"
       ;;
     *)
       scold 'not available on this system'

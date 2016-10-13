@@ -1,5 +1,5 @@
 lipsum()
-{   # return a paragraph of lorem ipsum text
+{ # return a paragraph of lorem ipsum text
   local regex_help='-?-h(elp)?'
 
   if [[ $1 =~ $regex_help ]]; then
