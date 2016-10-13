@@ -8,9 +8,9 @@ args()
     local arg
     for arg in "$@"; do
         printf ' %b%b%b' \
-            "$esc_brmagenta<$esc_reset" \
-            "$esc_italic$arg$esc_reset" \
-            "$esc_brmagenta>$esc_reset"
+            "${esc_brmagenta}<${esc_reset}" \
+            "${esc_italic}${arg}${esc_reset}" \
+            "${esc_brmagenta}>${esc_reset}"
     done
     printf '\n'
 }

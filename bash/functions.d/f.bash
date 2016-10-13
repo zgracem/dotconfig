@@ -1,5 +1,5 @@
 f()
-{   # open a Finder/Explorer window for the current/specified directory
+{ # open a Finder/Explorer window for the current/specified directory
   local here="${@-.}"
 
   case $OSTYPE in
