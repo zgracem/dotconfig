@@ -1,8 +1,6 @@
-alias gd='git difftool'
-
-if [[ $OSTYPE =~ cygwin && -x "${dir_apps}/Git/cmd/git" ]]; then
-  alias wingit="${dir_apps}/Git/cmd/git"
-fi
-
 # symlink config file into HOME
-_z_config_symlink "git/config" ".gitconfig"
+if [[ -f ~/.local/config/gitconfig ]]; then
+  _z_config_symlink ".local/config/gitconfig"
+else
+  _z_config_symlink "git/config" ".gitconfig"
+fi

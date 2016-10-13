@@ -220,18 +220,22 @@ fi
 
 _z_config_symlink()
 {
-  local target=".config/${1}"
+  local target
+
+  if [[ -e $HOME/.config/$1 ]]; then
+    target=".config/$1"
+  elif [[ -e $HOME/$1 ]]; then
+    target="$1"
+  else
+    scold "not found: $target"
+    return 1
+  fi
 
   if [[ -n $2 ]]; then
     local symlink=$2
   else
     # default to ~/.whatever
     local symlink=".${target##*/}"
-  fi
-
-  if [[ ! -e $HOME/$target ]]; then
-    scold "not found: $HOME/$target"
-    return 1
   fi
 
   if [[ ! -L $HOME/$symlink ]]; then
