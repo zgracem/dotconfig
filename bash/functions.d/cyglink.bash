@@ -1,4 +1,4 @@
-[[ $OSTYPE =~ cygwin ]] && _inPath cmd || return
+[[ $OSTYPE =~ cygwin ]] && [[ -x $COMSPEC ]] || return
 
 cyglink()
 {
@@ -19,5 +19,5 @@ cyglink()
     return 1
   fi
 
-  cmd /C mklink /J "$(cygpath -aw "$link")" "$(cygpath -aw "$target")"
+  "$COMSPEC" /C mklink /J "$(cygpath -aw "$link")" "$(cygpath -aw "$target")"
 }
