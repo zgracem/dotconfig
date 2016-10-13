@@ -62,7 +62,7 @@ lsf()
     #                    │  └─ long-list output
     #                    └──── print inode number
 
-    if [[ $OSTYPE =~ darwin ]]; then
+    if [[ $OSTYPE == darwin* ]]; then
         flags_lsf+=(-@ -O -G)
         #            │  │  └── colourize output
         #            │  └───── print file flags

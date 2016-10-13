@@ -109,7 +109,7 @@ MANPATH=$MANPATH:/opt/X11/share/man
 # cygwin
 # -----------------------------------------------------------------------------
 
-if [ $OSTYPE == "cygwin" ]; then
+if [ $OSTYPE = "cygwin" ]; then
   # gcc tools
   PATH=$PATH:/opt/gcc-tools/bin
   MANPATH=$MANPATH:/opt/gcc-tools/epoch2/share/man

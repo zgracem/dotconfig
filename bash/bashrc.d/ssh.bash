@@ -12,7 +12,7 @@ wf()
   local title="WebFaction"
   local host="$title"
 
-  [[ $OSTYPE =~ cygwin ]] && host=${host,,}
+  [[ $OSTYPE == cygwin ]] && host=${host,,}
 
   if [[ -n $Z_SOLARIZED ]]; then
     newwin --title "$title" \
@@ -27,7 +27,7 @@ wf()
 }
 
 # Because cygwin ssh can't handle non-lowercase hostnames(?)
-if [[ $OSTYPE =~ cygwin ]]; then
+if [[ $OSTYPE == cygwin ]]; then
   alias  a='newwin --title Athena ssh athena'
   alias aa='newwin --title Athena ssh athena.remote'
   alias m='newwin  --title Minerva ssh minerva'

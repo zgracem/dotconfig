@@ -1,4 +1,4 @@
-if [[ $OSTYPE =~ darwin ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   trash()
   {
     local f; for f in "$@"; do

@@ -2,7 +2,7 @@
 # ~/.config/bash/bashrc.d/darwin.bash
 # -----------------------------------------------------------------------------
 
-[[ $OSTYPE =~ darwin ]] || return
+[[ $OSTYPE == darwin* ]] || return
 
 DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
 MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
