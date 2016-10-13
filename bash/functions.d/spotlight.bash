@@ -1,4 +1,4 @@
-[[ $OSTYPE =~ darwin ]] || return
+[[ $OSTYPE == darwin* ]] || return
 
 sp()
 {   # find a file using Spotlight

@@ -22,11 +22,12 @@ whichpkg()
     fi
   fi
 
-  if [[ $OSTYPE =~ cygwin ]]; then
+  if [[ $OSTYPE == cygwin ]]; then
     local mgr='Cygwin'
     local pkg=$(cygcheck --find-package "$file") || return
 
-  elif [[ $OSTYPE =~ darwin ]] && [[ -d $HOMEBREW_CELLAR ]]; then
+  ### ZGM TODO: fix to work w/ Linuxbrew and w/out HOMEBREW_CELLAR
+  elif [[ $OSTYPE == darwin* ]] && [[ -d $HOMEBREW_CELLAR ]]; then
     local mgr='Homebrew'
 
     local canon

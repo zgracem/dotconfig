@@ -1,4 +1,4 @@
-[[ $OSTYPE =~ darwin ]] || return
+[[ $OSTYPE == darwin* ]] || return
 
 localip()
 { # print local IP address

@@ -1,4 +1,4 @@
-[[ $OSTYPE =~ cygwin ]] || return
+[[ $OSTYPE == cygwin ]] || return
 
 vnc()
 {

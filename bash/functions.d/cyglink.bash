@@ -1,4 +1,4 @@
-[[ $OSTYPE =~ cygwin ]] && [[ -x $COMSPEC ]] || return
+[[ $OSTYPE == cygwin ]] && [[ -x $COMSPEC ]] || return
 
 cyglink()
 {

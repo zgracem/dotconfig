@@ -55,7 +55,7 @@ ps()
   local flags_ps='-a'
   #                └─── show processes from all users
 
-  if [[ $OSTYPE =~ cygwin ]]; then
+  if [[ $OSTYPE == cygwin ]]; then
     flags_ps+='W'
     #          └───── also show Windows processes
   fi

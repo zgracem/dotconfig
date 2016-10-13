@@ -10,7 +10,7 @@ find_drive()
     return 1
   fi
 
-  if [[ $OSTYPE =~ cygwin ]]; then
+  if [[ $OSTYPE == cygwin ]]; then
     local caption volname discard
     while read -r caption volname discard; do
       if [[ $volname == $label ]]; then
@@ -20,7 +20,7 @@ find_drive()
       fi
     done < <(/cygdrive/c/Windows/System32/Wbem/wmic logicaldisk get caption,volumename)
 
-  elif [[ $OSTYPE =~ darwin && -d /Volumes/$label ]]; then
+  elif [[ $OSTYPE == darwin* && -d /Volumes/$label ]]; then
     echo "/Volumes/$label"
     return 0
   fi

@@ -1,4 +1,4 @@
-[[ $OSTYPE =~ cygwin ]] || return
+[[ $OSTYPE == cygwin ]] || return
 
 cygkill()
 { # kill a process by its Windows PID
