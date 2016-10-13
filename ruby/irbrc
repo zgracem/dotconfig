@@ -12,10 +12,8 @@ require "zgm/term"
 include IRB
 
 # -----------------------------------------------------------------------------
-# settings
-# -----------------------------------------------------------------------------
-
 # http://irb.tools/
+# -----------------------------------------------------------------------------
 
 # `configure.rb` loads `implementation.rb`, which sets up the Irbtools module 
 # with a default welcome message. 
@@ -31,6 +29,10 @@ Irbtools.welcome_message =
 
 # Now we load the rest of it:
 require "irbtools"
+
+# -----------------------------------------------------------------------------
+# settings
+# -----------------------------------------------------------------------------
 
 # General IRB settings
 
