@@ -88,10 +88,10 @@ _z_PS1_compress_pwd()
   #   ~/fir…/sec…/3rd/fou…/fifth/sixth/seventh
 
   # Compress if PWD has >= `$min_depth` elements (not counting `~`, if any).
-  local min_depth=4
+  local min_depth=5
 
   # Compress if PWD is >= `$max_pwd_length` chars long (overrides `min_depth`).
-  local max_pwd_length=50
+  local max_pwd_length=54
 
   # Always retain the full names of the last `$keep_dirs` elements.
   local keep_dirs=1
@@ -201,7 +201,7 @@ _z_PS1_git_info()
 {
   [[ $Z_PROMPT_GIT != true ]] && return
 
-  local status="" branch="" icons=$esc_reset
+  local status="" branch="" icons=""
   local ahead=0 unstaged=0 untracked=0 dirty=false
 
   # get info on current branch, or bail if no branch exists
@@ -239,6 +239,7 @@ _z_PS1_git_info()
 
   # add '*' if there's anything to commit
   if [[ $dirty == true ]]; then
+    icons+=$esc_reset
     icons+=$esc_false
     icons+="*"
   fi
@@ -266,7 +267,20 @@ _z_PS1_jobs()
 {
   [[ $Z_PROMPT_JOBS != true ]] && return
 
-  local job_count="$(jobs|wc -l)"
+  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
+    # Use bash-4.4's prompt-expanding parameter transformation
+    local jobs='\j'
+    local job_count="${j@P}"
+  else
+    # Get output from `jobs` builtin
+    local jobs="$(jobs)"
+    [[ -n $jobs ]] || return
+
+    # count newlines
+    jobs="${jobs//[^$'\n']/}"
+    local job_count="${#jobs}"
+  fi
+
   if (( job_count > 0 )); then
     printf ' %d' "${job_count}"
   fi
@@ -274,16 +288,16 @@ _z_PS1_jobs()
 
 # Notify iTerm of the current directory
 _z_PS1_update_iTerm()
-{ # Notify iTerm of the current directory
+{
   iterm::state
 }
 
 # Notify Terminal.app of the current directory
+# Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 _z_PS1_update_Terminal()
-{ # Notify Terminal.app of the current directory
-  # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
-
-  local ante="${DCS_ante}${OSC}7;" post="${BEL}${DCS_post}"
+{
+  local ante="${DCS_ante}${OSC}7;" 
+  local post="${BEL}${DCS_post}"
 
   if [[ $HOSTNAME != *.* ]]; then
     local HOSTNAME="$(uname -n)"
