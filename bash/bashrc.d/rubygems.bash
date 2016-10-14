@@ -3,10 +3,10 @@ if command -v gem >/dev/null; then
     Athena*)
       true # Athena should be smart enough not to need this.
       ;;
-    *.webfaction.com)
+    web*)
       GEM_HOME="$HOME/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0"
       ;;
-    *.atco.com)
+    WS*)
       GEM_HOME="$HOME/.gem/ruby"
       ;;
     Hiroko*)

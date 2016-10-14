@@ -181,25 +181,19 @@ export INPUTRC="$dir_config/inputrc"
 shopt -s nullglob
 
 # Private stuff
-if [[ -d $dir_config/bash/private.d ]]; then
-  for file in "$dir_config"/bash/private.d/*.bash; do
-    [[ -f $file ]] && . "$file"
-  done
-fi
+for file in "$dir_config"/bash/private.d/*.bash; do
+  [[ -f $file ]] && . "$file"
+done
 
 # Lesser function files
-if [[ -d $dir_config/bash/functions.d ]]; then
-  for file in "$dir_config"/bash/functions.d/*.bash; do
-    [[ -f $file ]] && . "$file"
-  done
-fi
+for file in "$dir_config"/bash/functions.d/*.bash; do
+  [[ -f $file ]] && . "$file"
+done
 
 # Supplementary startup files
-if [[ -d $dir_config/bash/bashrc.d ]]; then
-  for file in "$dir_config"/bash/bashrc.d/*.bash; do
-    [[ -f $file ]] && . "$file"
-  done
-fi
+for file in "$dir_config"/bash/bashrc.d/*.bash; do
+  [[ -f $file ]] && . "$file"
+done
 
 # Machine specific files in ~/.local
 if [[ -d $dir_local/config/bashrc.d ]]; then
@@ -211,20 +205,15 @@ fi
 # Disable after temporarily enabling above
 shopt -u nullglob
 
-unset -v file
-
 # -----------------------------------------------------------------------------
 # And finally...
 # -----------------------------------------------------------------------------
 
-# Set window title (environment variable set in bashrc.d/prompt.bash)
-if [[ -n $Z_SET_WINTITLE || $TERM_PROGRAM == Coda ]]; then
-  setwintitle "${USER}@${HOSTNAME%%.*}"
-fi
-
 # Final initialization scripts, except in subshells/when reloading/as root
-if (( SHLVL <= 1 )) && (( BASH_SUBSHELL < 1 )) \
-  && [[ -z $Z_RELOADING ]] && [[ -z $Z_NO_INIT ]] \
+if   (( SHLVL <= 1 )) \
+  && (( BASH_SUBSHELL < 1 )) \
+  && [[ -z $Z_RELOADING ]] \
+  && [[ -z $Z_NO_INIT ]] \
   && (( EUID != 0 ))
 then
   . "$dir_config/bash/init.bash"
@@ -235,13 +224,11 @@ then
 fi
 
 # Clean up
-
-unset -v latest_bash this_bash
-
 if _isFunction .; then
   tput cr   # move cursor to beginning of line
   tput el   # clear to end of line
   unset -f .
 fi
 
+unset -v file latest_bash this_bash newer_bash
 unset -v Z_IN_BASHRC
