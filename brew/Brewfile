@@ -162,6 +162,7 @@ brew "ghostscript"
 # shells
 brew "fish"
 brew "zsh"
+brew "zsh-syntax-highlighting"
 
 # text
 brew "aspell", args: ["with-lang-en"]

@@ -11,9 +11,8 @@ quietly()
 
 scold()
 { # echo to standard error
-  printf '%b\n' >&2 "$@"
+  printf "%b\n" "$*" >&2
 }
-
 
 verbose()
 { # prints a message, conditional on the value of $verbosity
@@ -63,7 +62,7 @@ _optSet()
 
 _inScreen()
 { # exits 0 if inside a GNU screen session
-  [[ -p $SCREENDIR/$STY ]]
+  [[ -n $STY && -p $SCREENDIR/$STY ]]
 }
 
 _inTmux()
