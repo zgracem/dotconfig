@@ -196,7 +196,7 @@ if _inPath launchctl; then
       launchctl unload "$plist" || return
     fi
 
-    launchctl load "$plist"
+    launchctl load "$plist" || return
 
     [[ $TERM_PROGRAM == Apple_Terminal ]] && killall Terminal
   }
