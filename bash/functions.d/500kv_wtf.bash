@@ -7,10 +7,10 @@ if [[ -z $HV_LOADED ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# wheretf: Finds the source of a shell function.
+# whencetf: Finds the source of a shell function.
 # -----------------------------------------------------------------------------
 
-wheretf()
+whencetf()
 {
   # We need to enable advanced debugging behaviour to get function information
   # with only builtins, but it's not for everyday use, so automatically
@@ -43,7 +43,46 @@ wheretf()
   # Tilde-ify path for display.
   echo "${source_file/#$HOME/$'~'}:${line_number}"
 
-} # /wheretf()
+} # /whencetf()
+
+# -----------------------------------------------------------------------------
+# wtfis: Return a short description of a command.
+# -----------------------------------------------------------------------------
+
+wtfis()
+{
+  local desc
+  local -a results
+
+  if type -P mandb >/dev/null; then
+    # Versions of `whatis` distributed with `mandb` support the `-w` switch,
+    # which expands globbing characters in the search term, but -- more useful
+    # for our purposes -- also returns only exact matches.
+    IFS=$'\n' read -ra results -d $'\004' \
+    < <(whatis -w "$1" 2>/dev/null)
+  else
+    # Use `sed` to parse the results from non-mandb `whatis`.
+    IFS=$'\n' read -ra results -d $'\004' \
+    < <(whatis "$1" 2>/dev/null | sed -nE "/^$1[[:space:](].*/p")
+  fi
+
+  (( ${#results[@]} > 0 )) || return
+
+  # Keep only the first result.
+  local result=${results[0]}
+
+  # Trim garbage from badly-formed description strings
+  local regexp='^(.+) co Copyright \[co\]'
+  if [[ $result =~ $regexp ]]; then
+    result=${BASH_REMATCH[1]}
+  fi
+
+  # Keep only the description by removing everything before the separator.
+  desc="${result#* - }"
+
+  printf "$desc"
+  [[ -t 1 ]] && printf "\n"
+}
 
 # -----------------------------------------------------------------------------
 # wtf: Explains what a thing is.
@@ -54,14 +93,22 @@ wtf()
   # This function uses extended globbing patterns like `@(foo|bar)`, and so
   # requires the shell option `extglob` to be enabled.
   shopt -q extglob || shopt -s extglob
-
+  
   # By default, `wtf` displays only the first result.
+  local one_and_done="true"
+
   # Use `wtf -a` to display all results.
-  if [[ $1 == -a ]]; then
-    shift
-  else
-    local one_and_done="true"
-  fi
+  # Use `wtf -l` to display additional information.
+  local OPT OPTIND OPTARG
+  while getopts ':al' OPT; do
+    case $OPT in
+      a)  unset -v one_and_done ;;
+      l)  local extra_output="true" ;;
+    '?')  hv_err "-$OPTARG" "invalid option"
+          return 1 ;;
+    esac
+  done
+  shift $((OPTIND - 1))
 
   # Accept only one subject term.
   (( $# == 1 )) || return 64
@@ -91,12 +138,11 @@ wtf()
         # Are we querying a file directly? If so, it will have a slash in the
         # path; `type` will also return "/path/to/foo is /path/to/foo".
         if [[ $1 =~ / ]]; then
-
           # `file -b` returns "brief" output (no leading filename), while `-p`
           # avoids updating the file's access time if possible.
           local magic; if magic=$(file -bp "$1" 2>&1); then
-            # tilde-ify path for display
-            output="${1/#$HOME/$'~'}: $magic"
+            # Truncate output and tilde-ify path for display
+            output="${1/#$HOME/$'~'}: ${magic%%:*}"
 
             hv_chevron     brightgreen,brightblack "${1/#$HOME/$'~'}"
             hv_chevron -tn black,green "$magic"
@@ -109,6 +155,10 @@ wtf()
           continue # redundant, since we only end up here if ${#types[@]} = 1
         fi
 
+        if [[ -n $extra_output ]]; then
+          local desc=$(wtfis "$1")
+        fi
+
         # Get a list of places $1 can be found.
         local -a places
         places=( $(type -ap "$1") )
@@ -117,7 +167,15 @@ wtf()
           output+="${output:+\\n}${1} is ${place/#$HOME/$'~'}"
 
           hv_chevron     brightyellow,brightblack "$1"
-          hv_chevron -tn black,yellow "${place/#$HOME/$'~'}"
+          hv_chevron -t  black,yellow "${place/#$HOME/$'~'}"
+          
+          if [[ -n $desc ]]; then
+            hv_chevron -tn black,brightyellow "${desc}"
+            # Don't display a description for any additional items.
+            unset -v extra_output desc
+          else
+            printf "\n"
+          fi
 
           if [[ -n $one_and_done ]]; then
             break
@@ -126,11 +184,12 @@ wtf()
         ;;
 
       alias)
-        output="$1 is aliased to ‘${BASH_ALIASES[$1]}’"
+        local def=${BASH_ALIASES[$1]}
+        output="$1 is aliased to ‘${def}’"
 
         hv_chevron     brightcyan,brightblack "$1"
         hv_chevron -t  black,cyan "$type"
-        hv_chevron -tn black,brightcyan "${BASH_ALIASES[$1]}"
+        hv_chevron -tn black,brightcyan "${def}"
         ;;
 
       builtin|keyword)
@@ -186,11 +245,17 @@ wtf()
           esac
         fi
 
-        output="$name ($type): $desc"
+        output="$name ($type)"
 
         hv_chevron     brightmagenta,brightblack "$name"
         hv_chevron -t  black,magenta "$type"
-        hv_chevron -tn black,brightmagenta "$desc"
+
+        if [[ -n $extra_output ]]; then
+          output+=": $desc"
+          hv_chevron -tn black,brightmagenta "$desc"
+        else
+          [[ -z $HV_DISABLE_PP ]] && printf "\n"
+        fi
         ;;
 
       function)
@@ -198,19 +263,27 @@ wtf()
         hv_chevron    brightblue,brightblack "$1"
         hv_chevron -t black,blue "function"
 
-        if desc=$(wheretf $1); then
+        if desc=$(whencetf "$1"); then
           output+=" ($desc)"
           hv_chevron -tn black,brightblue "$desc"
         else
-          echo # newline
+          [[ -z $HV_DISABLE_PP ]] && printf "\n"
+        fi
+
+        if [[ -n $extra_output ]]; then
+          # Also output function source.
+          if type -P pygmentize >/dev/null; then
+            declare -f "$1" | pygmentize -l bash
+          else
+            declare -f "$1"
+          fi
         fi
         ;;
     esac
 
     if [[ -n $HV_DISABLE_PP ]]; then
       # Print plain-text output if `hv_chevron` has been suppressed.
-      printf "%b" "$output"
-      echo # newline
+      printf "%s\n" "$output"
     fi
 
     if [[ -n $one_and_done ]]; then
@@ -221,10 +294,5 @@ wtf()
   return 0
 } # /wtf()
 
-unalias where what which 2>/dev/null
-unset -f where what which
-
-where() { wheretf "$@"; }
-what() { wtf "$@"; }
-which() { builtin type "$@"; }
-
+unalias which 2>/dev/null
+which() { builtin type -p "$@"; }

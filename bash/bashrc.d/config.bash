@@ -173,7 +173,7 @@ ef()
       return 1
     fi
   else
-    local src=$(where "$func")
+    local src=$(whencetf "$func")
     local src_file=${src%:*}
     local src_line=${src#*:}
 
