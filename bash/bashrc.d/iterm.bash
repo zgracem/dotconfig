@@ -9,25 +9,26 @@ iterm::esc()
   printf "${OSC}1337;%b${BEL}" "$@"
 }
 
-iterm::set_user_var()
-{ # Usage: iterm::set_user_var <name> <value>
-
-  local name="$1"
-  local value="$2"
-
-  value=$(base64 -w 0 <<< "$value") || return
-
-  iterm::esc "SetUserVar=$name=$value"
-}
-
-iterm::set_badge()
-{ # Usage: iterm::set_badge "string"
-
-  local badge
-  badge=$(base64 -w 0 <<< "$@") || return
-
-  iterm::esc "SetBadgeFormat=$badge"
-}
+### ZGM disabled 2016-10-18 -- I don't need/use these
+# iterm::set_user_var()
+# { # Usage: iterm::set_user_var <name> <value>
+#
+#   local name="$1"
+#   local value="$2"
+#
+#   value=$(base64 -w 0 <<< "$value") || return
+#
+#   iterm::esc "SetUserVar=$name=$value"
+# }
+#
+# iterm::set_badge()
+# { # Usage: iterm::set_badge "string"
+#
+#   local badge
+#   badge=$(base64 -w 0 <<< "$@") || return
+#
+#   iterm::esc "SetBadgeFormat=$badge"
+# }
 
 iterm::state()
 {
@@ -36,8 +37,8 @@ iterm::state()
 }
 
 iterm::PS1_ante()
-{ # Usage: place the output from this at the beginning of PS1 (not as a command
-  #        substitution!)
+{ # Usage: place the output from this at the beginning of PS1
+  #        (not as a command substitution!)
   printf '\['
   iterm::esc "D;\$?"
   iterm::state
