@@ -7,87 +7,68 @@
 # -----------------------------------------------------------------------------
 
 # GENERAL:
-# - directory       -d    # - binding [readline]
-# - file            -f    # - hostname [from $HOSTFILE]
-
-# COMMANDS:               # SYSTEM/SHELL:
-# - alias           -a    # - group
-# - builtin         -b    # - service         -s
-#   - disabled            # - setopt
-#   - enabled             # - shopt
-# - command         -c    # - signal
-# - function              # - user            -u
-# - helptopic             
-# - keyword         -k  
-
-# JOB CONTROL:            # VARIABLES:
-# - job             -j    # - arrayvar
-#   - running             # - export[ed var]  -e
-#   - stopped             # - variable        -v
-
+# - directory   (-d)    # - [readline] binding
+# - file        (-f)    # - hostname [from $HOSTFILE]
+                                                                            
+# COMMANDS:             # SYSTEM/SHELL:
+# - alias       (-a)    # - group
+# - builtin     (-b)    # - service (-s)
+#   - disabled          # - setopt
+#   - enabled           # - shopt
+# - command     (-c)    # - signal
+# - function            # - user    (-u)
+# - helptopic         
+# - keyword     (-k)  
+                                                                            
+# JOB CONTROL:          # VARIABLES:
+# - job         (-j)    # - arrayvar
+#   - running           # - export[ed var]  (-e)
+#   - stopped           # - variable        (-v)
+                                                                                
 # OPTIONS (-o):
-# - if compspec generates no matches, fall back to:
-#   - bashdefault   default bash completions
-#   - default       default readline filename completion
-#   - dirnames      directory name completion
-# - filenames       process completions as filenames
-# - plusdirs        add directories to list of completions
-# - noquote         don't quote filenames
-# - nosort          don't sort completions alphabetically
-# - nospace         don't add trailing space
+# - If compspec generates no matches, fall back to:
+#   - bashdefault   Default bash completions
+#   - default       Default readline filename completion
+#   - dirnames      Directory name completion
+# - filenames       Process completions as filenames
+# - plusdirs        Add directories to list of completions
+# - noquote         Don't quote filenames
+# - nosort          Don't sort completions alphabetically
+# - nospace         Don't add trailing space
 
 # -----------------------------------------------------------------------------
 
 # aliases -- for `alias` & `unalias`
-complete -a \
-    alias unalias
+complete -a -- alias unalias
 
 # directories & variables -- for `cd`
-complete -d -e -v \
-    -o nospace \
-    cd
+complete -o nospace -dev -- cd
 
 # builtins, keywords & help topics -- for `help`
-complete -b -k -A helptopic \
-    -o nospace \
-    help
+complete -o nospace -bk -A helptopic -- help
 
-# variables, aliases & functions -- for `export` & `unset`
-complete -e -v -a -A function -- \
-    export unset
-
-# variables & functions -- for `declare`
-complete -e -v -A function \
-    declare
+# variables & functions -- for `declare`, `export` & `unset`
+complete -ev -A function -- declare export unset
 
 # files, directories, aliases, builtins, commands, keywords & functions -- for `sudo`
-complete -f -d -a -b -c -k -A function \
-    sudo
+complete -fdabck -A function -- sudo
 
 # files, aliases, builtins, commands, keywords, functions & help topics -- for `type`
-complete -f -a -b -c -k -A function -A helptopic -- \
-    -o nospace \
-    type
+complete -o nospace -fabck -A function -A helptopic -- type
 
+# -----------------------------------------------------------------------------
 # custom scripts and functions
+# -----------------------------------------------------------------------------
 
-# variables & arrays -- for alias to `declare -p`
-complete -e -v -A function \
-    d
+# variables & functions -- for alias to `declare -p`
+complete -ev -A function -- d
 
 # shell options -- for `set` & `shopt`
-complete -A shopt \
-    shopt
-
-complete -A setopt \
-    set
+complete -A shopt -- shopt
+complete -A setopt -- set
 
 # files & directories -- for `trash`
-complete -f -d \
-    -o filenames \
-    trash
+complete -o filenames -o plusdirs -fd -- trash
 
 # functions -- for `ef`
-complete -A function \
-    -o nospace \
-    ef
+complete -o nospace -A function -- ef

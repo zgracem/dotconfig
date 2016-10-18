@@ -15,4 +15,4 @@ __z_complete_ssh_hosts()
   done
 }
 
-complete -o default -o nospace -F __z_complete_ssh_hosts ssh
+complete -o default -o nospace -F __z_complete_ssh_hosts -- ssh
