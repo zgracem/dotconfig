@@ -331,8 +331,10 @@ _z_PS1_update_Terminal()
 
 _z_PS1_update_titles()
 {
-  local tab_title="${USER}@${HOSTNAME%%.*}"
-  local win_title="${tab_title}: ${PWD/#$HOME/$'~'}"
+  # Window title, e.g. "zozo@Athena.local: /usr/bin"
+  local win_title="${USER}@${HOSTNAME}: ${PWD/#$HOME/$'~'}"
+  # Tab title, e.g. "Athena: bin"
+  local tab_title="${HOSTNAME%%.*}: ${PWD##*/}"
 
   [[ $Z_SET_WINTITLE == true ]] && setwintitle "$win_title"
   [[ $Z_SET_TABTITLE == true ]] && settabtitle "$tab_title"
