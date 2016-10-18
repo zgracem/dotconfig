@@ -10,4 +10,4 @@ __z_complete_es()
   COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
 }
 
-complete -F __z_complete_es es
+complete -F __z_complete_es -- es

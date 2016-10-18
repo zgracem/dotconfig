@@ -26,4 +26,4 @@ __z_complete_g2()
     COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
 }
 
-complete -F __z_complete_g2 g2
+complete -F __z_complete_g2 -- g2

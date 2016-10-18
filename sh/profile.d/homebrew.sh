@@ -10,6 +10,7 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
 fi
 
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
 export HOMEBREW_LOGS="$HOME/var/log/homebrew"
 export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 

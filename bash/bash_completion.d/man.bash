@@ -2,7 +2,6 @@ __z_complete_man()
 {
   local cur=${COMP_WORDS[COMP_CWORD]}
   local prev=${COMP_WORDS[COMP_CWORD-1]}
-  local -a wordlist=()
 
   local suffixes=".@([glx]z|bz2|lzma|Z)"
   local sections="@([0-9lnp]|[0-9][px]|3?(gl|pm))"
@@ -60,4 +59,4 @@ __z_complete_man()
   COMPREPLY=( "${reply[@]}" )
 }
 
-complete -F __z_complete_man man
+complete -F __z_complete_man -- man
