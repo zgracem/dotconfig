@@ -1,5 +1,3 @@
-### ZGM TODO: add ~/lib/ruby syncing
-
 confsync()
 {
     local dir_config="$HOME/Dropbox/.config"
@@ -23,13 +21,14 @@ hconfsync()
     local dest="Hiroko:/Users/zozo"
 
     local -a config_filters=(
-        --exclude=.DS_Store
         --exclude=.git/
         --exclude=alpine/ 
         --exclude=fish/ 
         --include=local/Hiroko/
         --exclude='local/*'
-        --exclude='transmission*/'
+        --exclude=mintty/
+        --exclude='transmission/'
+        --exclude=x11/
         --exclude=youtube-dl.conf
     )
 
@@ -37,7 +36,6 @@ hconfsync()
         --include=brew-check.sh
         --include=brew-relink.sh
         --include=brew-vars.sh
-        --include=btadd.sh
         --include=countdown.sh
         --include=fds.sh
         --include=fixchmod.sh
@@ -49,14 +47,13 @@ hconfsync()
         --include=pinback.sh
         --include=tc.sh
         --include=tinypng.sh
-        --include=weather.sh
         --include=util/
         --exclude='*'
     )
 
     confsync \
         && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-            --exclude=.DS_Store
+        && syncdir "$dir_dropbox/etc"  "$dest/etc"
 }
 
 wfconfsync()
@@ -64,15 +61,16 @@ wfconfsync()
     local dest="WebFaction:/home/zozo"
 
     local -a config_filters=(
+        --exclude='.git*'
         --exclude=.DS_Store
         --exclude=alpine/
         --exclude=fish/
         --include=local/web500/
         --exclude='local/*'
-        --exclude=macos/
+        --exclude='macos*'
+        --exclude=mintty/
         --exclude=misc/
-        --exclude='.git*'
-        --exclude='transmission*/'
+        --exclude=transmission/
         --exclude=youtube-dl.conf
     )
 
@@ -85,12 +83,11 @@ wfconfsync()
         --include=os.sh
         --include=tc.sh
         --include=tinypng.sh
-        --include=weather.sh
         --include=util/
         --exclude='*'
     )
 
     confsync \
         && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-            --exclude=.DS_Store
+        && syncdir "$dir_dropbox/etc"  "$dest/etc"
 }

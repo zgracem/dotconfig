@@ -9,7 +9,7 @@ syncdir()
         return 1
     fi
 
-    local -a flags=()
+    local -a flags=(--exclude=.DS_Store)
     local -a usrflags=("$@")
 
     # recurse, and preserve symlinks, times, permissions [-a]
