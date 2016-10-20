@@ -19,7 +19,7 @@ if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 43 )); then
   HISTFILESIZE=-1             # unlimited $HISTFILE size
 else
   HISTSIZE=$((2 ** 10))       # remember 2^10 commands per session
-  HISTFILESIZE=$((2 ** 16))   # store 2^16 lines in $HISTFILE
+  HISTFILESIZE=$((2 ** 15))   # store 2^15 lines in $HISTFILE
 fi
 
 HISTDIR="$HOME/.local/history"
