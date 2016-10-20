@@ -4,36 +4,13 @@
 _inPath alpine || return
 
 # Create a write-protected ~/.pinerc so alpine has to use our custom path.
-(printf "" >| ~/.pinerc && 400 ~/.pinerc) 2>/dev/null
-
-export flags_alpine=()
-
-# go directly to index, bypassing main menu
-flags_alpine+=("-i")
-
-# use alternate .pinerc
-flags_alpine+=("-p ${dir_config}/alpine/pinerc")
-
-# use passfile
-flags_alpine+=("-passfile ${dir_config}/alpine/alpine-passfile")
+(printf "" >| ~/.pinerc && chmod 400 ~/.pinerc) 2>/dev/null
 
 alpine()
 {
-    if [[ ${FUNCNAME[1]} == okalpine ]]; then
-        local extra_flags='--title alpine(ok)'
-    fi
+  local flags_alpine=(-i -p "$dir_config/alpine/pinerc")
+  #                    │  └─ use alternate .pinerc
+  #                    └──── go directly to index, bypassing main menu
 
-    if _mux; then
-        newwin ${extra_flags} alpine ${flags_alpine[*]} "$@"
-    else
-        command alpine ${flags_alpine[*]} "$@"
-    fi
-}
-
-okalpine()
-{
-    local flags_alpine=("${flags_alpine[@]/alpine-passfile/alpine-passfile.ok}")
-    flags_alpine+=("-x ${dir_config}/alpine/pinerc.ok")
-
-    alpine "$@"
+  newwin alpine ${flags_alpine[*]} "$@"
 }
