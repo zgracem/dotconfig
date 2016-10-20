@@ -6,9 +6,9 @@ _inPath fpp || return
 # don't wait for fpp if VISUAL is something like `subl --wait`
 export FPP_EDITOR=${VISUAL%%?( -)-wait}
 
-# setup temp directory
+# setup (and create) temp directory
 export FPP_DIR=~/var/spool/fpp
-[[ -d $FPP_DIR ]] || mkdir -vp "$FPP_DIR"
+[[ -d $FPP_DIR ]] || mkdir -pv "$FPP_DIR"
 
 # keep homedir tidy
 [[ -d ~/.fpp ]] && rm -rfv ~/.fpp

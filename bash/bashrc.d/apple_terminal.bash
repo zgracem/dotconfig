@@ -12,11 +12,11 @@ if [[ -n $TERM_SESSION_ID ]]; then
     unset -v func
   done
 
-  if [[ ! -f ~/.bash_sessions_disable ]]; then
-    command touch ~/.bash_sessions_disable &>/dev/null
-  fi
+  # The presence of this file will also inhibit session-saving.
+  [[ -f ~/.bash_sessions_disable ]] || touch ~/.bash_sessions_disable
+
+  # Keep homedir tidy.
+  [[ -d ~/.bash_sessions ]] && rm -rfv ~/.bash_sessions
 else
   return 0
 fi
-
-unset -f terminal_app_functions

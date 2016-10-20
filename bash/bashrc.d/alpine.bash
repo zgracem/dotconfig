@@ -6,6 +6,9 @@ _inPath alpine || return
 # Create a write-protected ~/.pinerc so alpine has to use our custom path.
 (printf "" >| ~/.pinerc && chmod 400 ~/.pinerc) 2>/dev/null
 
+# Keep homedir tidy.
+rm -fv ~/.pine-debug{1..4} ~/.pine-crash
+
 alpine()
 {
   local flags_alpine=(-i -p "$dir_config/alpine/pinerc")
