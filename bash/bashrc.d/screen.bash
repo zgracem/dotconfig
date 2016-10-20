@@ -3,6 +3,9 @@ _inPath screen || return
 # set socket directory
 export SCREENDIR="$HOME/tmp/.screens"
 
+# keep homedir tidy
+[[ -d $HOME/.screen ]] && rm -rfv "$HOME/.screen"
+
 # Solarized Light colour scheme
 if [[ $Z_SOLARIZED == light ]]; then
   export SCREENRC="${dir_config}/screen/screenrc.light"
@@ -20,7 +23,7 @@ fi
 ss()
 { # reattach a session; detach/create it first if necessary
   if [[ -n $SCREENDIR && ! -d $SCREENDIR ]]; then
-    command mkdir -vp -m 700 "$SCREENDIR"
+    command mkdir -pv -m 700 "$SCREENDIR"
   else
     chmod 700 "$SCREENDIR"
   fi

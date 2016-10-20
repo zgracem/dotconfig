@@ -23,8 +23,7 @@ else
 fi
 
 HISTDIR="$HOME/.local/history"
-mkdir -p "$HISTDIR" 1>/dev/null
-
+mkdir -pv "$HISTDIR"
 HISTFILE="$HISTDIR/bash_history"
 
 # -----------------------------------------------------------------------------
