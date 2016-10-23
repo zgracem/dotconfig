@@ -135,6 +135,7 @@ brew "figlet"
 # misc.
 # -----------------------------------------------------------------------------
 
+brew "binutils"
 brew "groff"
 brew "midnight-commander"
 brew "pv"
@@ -212,6 +213,7 @@ cask "real-vnc"
 cask "skype"
 cask "steam"
 cask "xquartz"
+cask "xscreensaver"
 
 # -----------------------------------------------------------------------------
 # Mac App Store
