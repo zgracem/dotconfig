@@ -31,6 +31,7 @@ brew "reattach-to-user-namespace"
 brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
 brew "fpp", args: ["HEAD"]
 brew "vim", args: ["HEAD", "override-system-vi"]
+brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
 brew "homebrew/dupes/less", args: ["with-pcre"]
 brew "homebrew/dupes/ncurses"
 
@@ -52,32 +53,23 @@ brew "gnu-sed", args: ["default-names"]
 # grep (overwrite built-in)
 brew "homebrew/dupes/grep", args: ["with-default-names"]
 
-# groff
-brew "groff"
-
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
+brew "getmail"
 brew "links"
 brew "socat"
 brew "transmission"
-brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
 brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
 
 brew "homebrew/dupes/rsync"
 brew "homebrew/dupes/whois"
 
 # OpenSSH
-
 brew "homebrew/dupes/openssh"
 brew "ssh-copy-id"
 brew "keychain"
-
-# email
-
-brew "getmail"
-brew "offline-imap"
 
 # -----------------------------------------------------------------------------
 # media
@@ -102,7 +94,7 @@ brew "pngcrush"
 brew "qrencode"
 brew "webkit2png"
 
-# imagesnap requires full Xcode to compile
+# imagesnap requires full Xcode to compile (not just CLT)
 brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
 
 # -----------------------------------------------------------------------------
@@ -143,6 +135,7 @@ brew "figlet"
 # misc.
 # -----------------------------------------------------------------------------
 
+brew "groff"
 brew "midnight-commander"
 brew "pv"
 brew "rename"
@@ -204,6 +197,7 @@ cask "superduper"
 # audio/video
 
 cask "fission"
+cask "handbrake"
 cask "kid3"
 cask "metaz"
 cask "vlc"

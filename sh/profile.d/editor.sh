@@ -3,8 +3,6 @@ unset -v EDITOR VISUAL GIT_EDITOR SUDO_EDITOR
 # Set all default editors to vim
 EDITOR=vim
 VISUAL=$EDITOR
-GIT_EDITOR=$EDITOR
-SUDO_EDITOR=$EDITOR
 
 # Use GUI app if not logged in remotely.
 if [ -z "$SSH_CONNECTION" ]; then
@@ -18,6 +16,4 @@ if [ -z "$SSH_CONNECTION" ]; then
   fi
 fi
 
-GIT_EDITOR=$VISUAL
-
-export EDITOR VISUAL GIT_EDITOR SUDO_EDITOR
+export EDITOR VISUAL

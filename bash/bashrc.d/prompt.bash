@@ -260,7 +260,7 @@ _z_PS1_git_info()
 
   printf "${esc_reset}%b" \
     " ${esc_dim}${branch}" \
-    "${icons:-}${esc_reset}"
+    "${icons-}${esc_reset}"
 }
 
 _z_PS1_jobs()
