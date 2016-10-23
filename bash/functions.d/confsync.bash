@@ -21,7 +21,7 @@ hconfsync()
     local dest="Hiroko:/Users/zozo"
 
     local -a config_filters=(
-        --exclude=.git/
+        --exclude='.git*'
         --exclude=alpine/ 
         --exclude=fish/ 
         --include=local/Hiroko/
@@ -52,8 +52,8 @@ hconfsync()
     )
 
     confsync \
-        && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-        && syncdir "$dir_dropbox/etc"  "$dest/etc"
+        && syncdir "$dir_dropbox/lib" "$dest/lib" --max-delete=1 \
+        && syncdir "$dir_dropbox/etc" "$dest/etc" --max-delete=1
 }
 
 wfconfsync()
@@ -62,7 +62,6 @@ wfconfsync()
 
     local -a config_filters=(
         --exclude='.git*'
-        --exclude=.DS_Store
         --exclude=alpine/
         --exclude=fish/
         --include=local/web500/
@@ -88,6 +87,8 @@ wfconfsync()
     )
 
     confsync \
-        && syncdir "$dir_dropbox/lib"  "$dest/lib" \
-        && syncdir "$dir_dropbox/etc"  "$dest/etc"
+        && syncdir "$dir_dropbox/lib" "$dest/lib" \
+                    --max-delete=1 \
+        && syncdir "$dir_dropbox/etc" "$dest/etc" \
+                    --max-delete=0 --exclude='*.sublime-*'
 }

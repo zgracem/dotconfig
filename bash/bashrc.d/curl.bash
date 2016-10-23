@@ -6,16 +6,10 @@ _inPath curl || return
 curl()
 {
   # use alternate .curlrc
-  local CURLRC="$dir_config/curlrc"
+  local curlrc="$dir_config/curlrc"
 
   # prefer Homebrew's curl if present
-  local homebrew_curl="$HOMEBREW_PREFIX/opt/curl/bin/curl"
+  local PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
 
-  if [[ -x $homebrew_curl ]]; then
-    local curl=$homebrew_curl
-  else
-    local curl="command curl"
-  fi
-
-  $curl -K "$CURLRC" "$@"
+  command curl -K "$curlrc" "$@"
 }

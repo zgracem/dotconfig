@@ -56,12 +56,14 @@ mmax()
 
 setwintitle()
 { # set the xterm-compatible window title
-  printf '%b%s%b' "$CAP_ts" "$*" "$CAP_fs"
+  local title="$*"
+  printf '%b%s%b' "$CAP_ts" "$title" "$CAP_fs"
 }
 
 settabtitle()
 { # set the tab title
-  printf '%b%s%b' "${CAP_ts/2;/1;}" "$*" "$CAP_fs"
+  local title="$*"
+  printf '%b%s%b' "${CAP_ts/2;/1;}" "$title" "$CAP_fs"
 }
 
 setbothtitles()
