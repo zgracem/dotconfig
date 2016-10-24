@@ -60,7 +60,7 @@ ex()
         *.Z)      
           uncompress "$archive" ;;
         Payload)  
-          gunzip -dc "$archive" | cpio -i ;;
+          cpio -imv -F "$archive" ;;
         *)
           scold "${FUNCNAME[0]}: ${archive}: not a recognized archive"
           return 1 ;;
@@ -87,6 +87,8 @@ exls()
         jar tf "$archive" ;;
       *.pkg)      
         pkgutil --payload-files "$archive" ;;
+      Payload)
+        cpio -itv -F "$archive" ;;
       *)
         scold "${FUNCNAME[0]}: ${archive}: not a recognized archive"
         return 1 ;;
