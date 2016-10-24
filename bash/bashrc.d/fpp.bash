@@ -11,7 +11,7 @@ export FPP_DIR=~/var/spool/fpp
 [[ -d $FPP_DIR ]] || mkdir -pv "$FPP_DIR"
 
 # keep homedir tidy
-[[ -d ~/.fpp ]] && rm -rfv ~/.fpp
+z_tidy ~/.fpp
 
 # -----------------------------------------------------------------------------
 # tmux integration

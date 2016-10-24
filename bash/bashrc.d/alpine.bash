@@ -7,7 +7,7 @@ _inPath alpine || return
 (printf "" >| ~/.pinerc && chmod 400 ~/.pinerc) 2>/dev/null
 
 # Keep homedir tidy.
-rm -fv ~/.pine-debug{1..4} ~/.pine-crash
+z_tidy ~/.pine-debug{1..4} ~/.pine-crash
 
 alpine()
 {
@@ -15,5 +15,5 @@ alpine()
   #                    │  └─ use alternate .pinerc
   #                    └──── go directly to index, bypassing main menu
 
-  newwin alpine ${flags_alpine[*]} "$@"
+  newwin command alpine ${flags_alpine[*]} "$@"
 }

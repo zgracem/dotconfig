@@ -9,5 +9,4 @@ export SDCV_HISTSIZE=0
 export SDCV_PAGER=$PAGER
 
 # keep homedir tidy
-[ -d "$HOME/.stardict" ] && rm -rfv "$HOME/.stardict"
-[ -f "$HOME/.sdcv_history" ] && rm -fv "$HOME/.sdcv_history"
+z_tidy ~/.stardict ~/.sdcv_history
