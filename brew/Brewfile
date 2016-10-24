@@ -142,6 +142,7 @@ brew "pv"
 brew "rename"
 brew "sf-pwgen" # github.com/anders/pwgen
 brew "source-highlight" # for less
+brew "stow"
 brew "homebrew/dupes/srm"
 brew "tree"
 brew "watch"

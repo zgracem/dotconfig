@@ -1,0 +1,12 @@
+# If you put Perl regular expressions, one per line, in a .stow-local-ignore file
+# within any top level package directory, in which case any file or directory
+# within that package matching any of these regular expressions will be ignored.
+# In the absence of this package-specific ignore list, Stow will instead use the
+# contents of ~/.stow-global-ignore, if it exists.
+
+\.DS_Store
+\.git.*
+^/README.*
+^/LICEN[SC]E.*
+^/COPYING
+^/NEWS.*
