@@ -4,7 +4,7 @@ _inPath screen || return
 export SCREENDIR="$HOME/tmp/.screens"
 
 # keep homedir tidy
-[[ -d $HOME/.screen ]] && rm -rfv "$HOME/.screen"
+z_tidy ~/.screen
 
 # Solarized Light colour scheme
 if [[ $Z_SOLARIZED == light ]]; then

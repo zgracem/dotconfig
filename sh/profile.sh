@@ -35,9 +35,34 @@ esac
 
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
 # "noexec" (as it would be on a shared host) and change to a path we control.
-if [[ ! -G $TMPDIR ]] && mount|grep -q " on $TMPDIR.*noexec,"; then
+if [ ! -G $TMPDIR ] && mount|grep -q " on $TMPDIR.*noexec,"; then
   TMPDIR="$HOME/var/tmp"
 fi
+
+# -----------------------------------------------------------------------------
+# Keep homedir tidy.
+# -----------------------------------------------------------------------------
+
+z_tidy()
+{ # Usage: tidy ~/.bash_sessions
+  local rm_opts="-f"
+
+  if [[ $- == *i* ]]; then
+    # interactive shell, be verbose
+    rm_opts+="v"
+  fi
+
+  local targets=("$@")
+  local target; for target in "${targets[@]}"; do
+    if [ ! -e $target ]; then
+      continue
+    elif [ -d $target ]; then
+      rm_opts+="r"
+    fi
+
+    command rm $rm_opts "$target" || return
+  done
+}
 
 # -----------------------------------------------------------------------------
 # Supplementary startup files

@@ -16,7 +16,7 @@ if [[ -n $TERM_SESSION_ID ]]; then
   [[ -f ~/.bash_sessions_disable ]] || touch ~/.bash_sessions_disable
 
   # Keep homedir tidy.
-  [[ -d ~/.bash_sessions ]] && rm -rfv ~/.bash_sessions
+  z_tidy ~/.bash_sessions
 else
   return 0
 fi
