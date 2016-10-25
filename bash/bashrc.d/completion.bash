@@ -3,11 +3,9 @@
 # -----------------------------------------------------------------------------
 
 # bash-completion v2
-export BASH_COMPLETION_DIR="/usr/local/share/bash-completion/completions"
-
-if [[ ! -d $BASH_COMPLETION_DIR ]]; then
-  unset -v BASH_COMPLETION_DIR
-fi
+BASH_COMPLETION="/usr/local/share/bash-completion/bash_completion"
+[[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
+unset -v BASH_COMPLETION
 
 # -----------------------------------------------------------------------------
 # completion options
