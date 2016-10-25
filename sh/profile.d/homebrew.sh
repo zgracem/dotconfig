@@ -1,5 +1,5 @@
 # Homebrew
-# http://brew.sh/
+# >> http://brew.sh/
 
 HOMEBREW_BREW_FILE=$(command -v brew) || return
 

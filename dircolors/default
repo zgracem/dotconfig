@@ -178,7 +178,7 @@ EXEC 01;31
 .yuv 0;36
 .cgm 0;36
 .emf 0;36
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+# >> http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 .axv 0;36
 .anx 0;36
 .ogv 0;36
@@ -195,7 +195,7 @@ EXEC 01;31
 .ogg 0;32
 .ra 0;32
 .wav 0;32
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+# >> http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 .axa 0;32
 .oga 0;32
 .spx 0;32

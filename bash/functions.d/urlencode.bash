@@ -1,6 +1,6 @@
 urlencode()
 { # pure bash URL-encoding
-  # Based on: http://stackoverflow.com/a/10660730
+  # >> http://stackoverflow.com/a/10660730
 
   local instring="${@:-$(</dev/stdin)}"
   local outstring=""
@@ -21,7 +21,7 @@ urlencode()
 
 urldecode()
 { # corresponding decode function
-  # http://stackoverflow.com/a/10660730
+  # >> http://stackoverflow.com/a/10660730
 
   local instring="${@:-$(</dev/stdin)}"
   local outstring="${instring//%/\\x}"

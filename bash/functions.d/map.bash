@@ -1,7 +1,7 @@
 map()
 { # applies a function to each item in a list
   # Usage: map COMMAND: ITEM [ITEM ...]
-  # Based on: http://redd.it/aks3u
+  # >> http://redd.it/aks3u
 
   if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
     scold "${FUNCNAME[0]}: invalid syntax"

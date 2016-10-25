@@ -1,5 +1,5 @@
 # alpine
-# http://patches.freeiz.com/alpine
+# >> http://patches.freeiz.com/alpine
 
 _inPath alpine || return
 

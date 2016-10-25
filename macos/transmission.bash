@@ -28,7 +28,7 @@ defaults write -app Transmission RatioLimit -float 0.01
 defaults write -app Transmission BindPort -int 59192
 
 # IP block list.
-# Source: https://giuliomac.wordpress.com/2014/02/19/best-blocklist-for-transmission/
+# >> https://giuliomac.wordpress.com/2014/02/19/best-blocklist-for-transmission/
 defaults write -app Transmission BlocklistNew -bool true
 defaults write -app Transmission BlocklistURL -string "http://john.bitsurge.net/public/biglist.p2p.gz"
 defaults write -app Transmission BlocklistAutoUpdate -bool true

@@ -13,7 +13,7 @@ endif
 
 "-----------------------------------------------------------------------------
 " show syntax highlighting groups for word under cursor
-" http://vimcasts.org/episodes/creating-colorschemes-for-vim/
+" >> http://vimcasts.org/episodes/creating-colorschemes-for-vim/
 "-----------------------------------------------------------------------------
 
 function! <SID>SynStack()
@@ -63,7 +63,7 @@ endfunction
 
 "-----------------------------------------------------------------------------
 " strip trailing whitespace
-" http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
+" >> http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
 "-----------------------------------------------------------------------------
 
 function! <SID>StripTrailingWhitespaces()

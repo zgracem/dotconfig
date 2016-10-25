@@ -1,5 +1,5 @@
 # StarDict
-# http://sdcv.sourceforge.net/
+# >> http://sdcv.sourceforge.net/
 # Used for Webster's access; see bash/functions.d/dictionary.bash
 
 command -v sdcv >/dev/null || return

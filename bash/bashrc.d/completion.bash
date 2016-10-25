@@ -27,7 +27,7 @@ fi
 FIGNORE="DS_Store:~:.swp:Application Scripts"
 
 # do not treat colon specially
-#   see question E13: http://tiswww.case.edu/php/chet/bash/FAQ
+# >> http://tiswww.case.edu/php/chet/bash/FAQ [question E13]
 COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 
 # -----------------------------------------------------------------------------

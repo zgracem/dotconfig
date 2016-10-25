@@ -1,6 +1,6 @@
 args()
 {   # count and display arguments
-    # http://mywiki.wooledge.org/WordSplitting
+    # >> http://mywiki.wooledge.org/WordSplitting
 
     printf '%b%d%b:' \
         "$esc_hi" "$#" "$esc_reset"

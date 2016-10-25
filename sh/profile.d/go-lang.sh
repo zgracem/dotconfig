@@ -1,5 +1,5 @@
 # go-lang
-# https://golang.org/doc/
+# >> https://golang.org/doc/
 
 command -v go >/dev/null || return
 

@@ -30,7 +30,7 @@ mv()
   #                   └── interactive
 
   if [[ $OSTYPE == darwin* ]]; then
-    # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+    # >> http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
     /bin/mv "${flags_mv[@]}" "$@"
   else
     command mv "${flags_mv[@]}" "$@"

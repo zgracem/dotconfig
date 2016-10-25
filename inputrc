@@ -17,7 +17,7 @@ set convert-meta off
 set bell-style visible
 
 # I don't use any terminal emulators w/ Meta-key support
-# http://invisible-island.net/ncurses/ncurses.faq.html#bash_meta_mode
+# >> http://invisible-island.net/ncurses/ncurses.faq.html#bash_meta_mode
 set enable-meta-key off
 
 # -----------------------------------------------------------------------------
