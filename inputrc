@@ -43,6 +43,10 @@ set print-completions-horizontally on
 # ask to view possible completions if >= x
 set completion-query-items 64
 
+### ZGM disabled 2016-10-24 -- doesn't work as advertised
+# # display completions in colour (based on LS_COLORS)
+# set colored-stats on
+
 # complete things that have been typed in the wrong case
 set completion-ignore-case on
 

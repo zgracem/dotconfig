@@ -211,7 +211,7 @@ GCC_COLORS+="warning=${yellow}:"
 GCC_COLORS+="note=${blue}:"
 GCC_COLORS+="caret=${brmagenta}:"
 GCC_COLORS+="locus=${colour_dim}:"
-GCC_COLORS+="quote=${green}"
+GCC_COLORS+="quote=${cyan}"
 
 # 500 kV library for cool colour printing
 export HV_BG="reset"
