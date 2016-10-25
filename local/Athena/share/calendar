@@ -1,11 +1,9 @@
 LANG=en_CA
 
-#include <calendar.birthday>
-#include <calendar.computer>
-#include <calendar.history>
-/* #include <calendar.music> */
+#include </Users/zozo/opt/share/calendar/calendar.birthday>
+#include </Users/zozo/opt/share/calendar/calendar.computer>
+#include </Users/zozo/opt/share/calendar/calendar.history>
 #include </Users/zozo/share/calendar/calendar.catholiclite>
 #include </Users/zozo/share/calendar/calendar.buddhist>
 #include </Users/zozo/share/calendar/calendar.canada>
-/* #include </Users/zozo/share/calendar/calendar.canada-fr> */
 #include </Users/zozo/share/calendar/calendar.usholiday>

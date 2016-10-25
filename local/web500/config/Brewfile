@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# Hiroko:~/.local/Brewfile
+# web500:~/.local/Brewfile
 # -----------------------------------------------------------------------------
 
 # Instructions:
@@ -15,6 +15,7 @@ tap "homebrew/versions"
 # -----------------------------------------------------------------------------
 
 # for Homebrew
+brew "gcc"
 brew "openssl"
 brew "curl", args: ["with-nghttp2"]
 brew "git", args: ["with-brewed-curl", "with-brewed-openssl"]
@@ -25,7 +26,6 @@ brew "homebrew/versions/bash-completion2"
 
 # tmux
 brew "tmux"
-brew "reattach-to-user-namespace"
 
 # other
 brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
@@ -35,32 +35,8 @@ brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
 brew "homebrew/dupes/less", args: ["with-pcre"]
 brew "homebrew/dupes/ncurses"
 
-# -----------------------------------------------------------------------------
-# GNU utilities
-# -----------------------------------------------------------------------------
-
-brew "coreutils", args: ["HEAD"]
-brew "moreutils", args: ["HEAD"]
-brew "gawk"
-brew "gnu-tar"
-
-# find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
-brew "findutils", args: ["default-names"]
-
-# sed (overwrite built-in)
-brew "gnu-sed", args: ["default-names"]
-
-# grep (overwrite built-in)
-brew "homebrew/dupes/grep", args: ["with-default-names"]
-
-# -----------------------------------------------------------------------------
-# internet stuff
-# -----------------------------------------------------------------------------
-
-brew "links"
-brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
-brew "homebrew/dupes/rsync"
-brew "homebrew/dupes/whois"
+# images
+brew "pngcrush"
 
 # OpenSSH
 brew "homebrew/dupes/openssh"
@@ -71,8 +47,8 @@ brew "keychain"
 # development
 # -----------------------------------------------------------------------------
 
-# brew 'rbenv'
-# brew 'ruby-build'
+brew "rbenv"
+brew "ruby-build"
 
 brew "python"
 brew "jq"
@@ -82,17 +58,5 @@ brew "jq"
 # -----------------------------------------------------------------------------
 
 brew "binutils"
-brew "pv"
-brew "rename"
-brew "source-highlight" # for less
-brew "homebrew/dupes/srm"
+brew "groff"
 brew "stow"
-brew "tree"
-brew "watch"
-
-# pdf
-brew "ghostscript"
-
-# text
-brew "dos2unix"
-brew "multimarkdown"
