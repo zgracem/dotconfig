@@ -4,7 +4,7 @@
 # ---- Keep everything below this line in sync with `~/.config/git/config` ----
 
 [user]
-	name = ZGM
+	name  = ZGM
 	email = cryptostrophe@users.noreply.github.com
 
 [core]
@@ -14,17 +14,7 @@
 	filemode = false
 
 [alias]
-	# http://gitimmersion.com/lab_11.html
-	co = checkout
-	cm = commit
-	st = status
-	br = branch
-	df = diff
-	dt = difftool
 	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
-	unstage = reset HEAD
 
 [hub]
 	protocol = https
