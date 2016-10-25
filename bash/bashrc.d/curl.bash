@@ -1,5 +1,5 @@
 # curl
-# http://curl.haxx.se/
+# >> http://curl.haxx.se/
 
 _inPath curl || return
 

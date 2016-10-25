@@ -1,5 +1,5 @@
 # youtube-dl
-# http://rg3.github.io/youtube-dl/
+# >> http://rg3.github.io/youtube-dl/
 
 _inPath youtube-dl || return
 

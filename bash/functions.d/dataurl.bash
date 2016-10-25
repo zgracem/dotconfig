@@ -1,6 +1,6 @@
 dataurl()
 {   # create a data URL from an image
-    # https://github.com/mathiasbynens/dotfiles/blob/master/.functions
+    # >> https://github.com/mathiasbynens/dotfiles/blob/master/.functions
 
     if (( $# != 1 )); then
         scold "Usage: ${FUNCNAME[0]} IMAGE"

@@ -1,6 +1,6 @@
 numfiles()
 {   # return the number of files in $PWD (or $1)
-    # Based on: https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/cf.bash
+    # >> https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/cf.bash
 
     local dir="${1-$PWD}"
     local -a files

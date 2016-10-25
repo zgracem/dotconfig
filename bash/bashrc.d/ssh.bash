@@ -8,7 +8,7 @@ alias hiroko='newwin --title Hiroko ssh Hiroko'
 
 wf()
 { # Because WebFaction's sshd doesn't AcceptEnv
-  # Based on: http://superuser.com/a/163228
+  # >> http://superuser.com/a/163228
   local title="WebFaction"
   local host="$title"
 

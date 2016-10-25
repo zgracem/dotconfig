@@ -17,7 +17,8 @@ set viminfo+=n~/var/lib/vim/.viminfo
 silent! call pathogen#infect()
 silent! call pathogen#helptags()
 
-" clear all vimrc-related autocmds [http://ruderich.org/simon/config/vimrc]
+" clear all vimrc-related autocmds 
+" >> http://ruderich.org/simon/config/vimrc
 if has("autocmd")
   augroup vimrc
     autocmd!

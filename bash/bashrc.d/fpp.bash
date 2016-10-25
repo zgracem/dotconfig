@@ -1,5 +1,5 @@
 # fpp
-# https://github.com/facebook/PathPicker
+# >> https://github.com/facebook/PathPicker
 
 _inPath fpp || return
 
@@ -15,7 +15,7 @@ z_tidy ~/.fpp
 
 # -----------------------------------------------------------------------------
 # tmux integration
-# Based on: https://github.com/tmux-plugins/tmux-fpp
+# >> https://github.com/tmux-plugins/tmux-fpp
 # -----------------------------------------------------------------------------
 
 _inTmux || return

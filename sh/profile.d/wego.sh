@@ -1,5 +1,5 @@
 # wego
-# https://github.com/schachmat/wego
+# >> https://github.com/schachmat/wego
 
 command -v wego >/dev/null || return
 

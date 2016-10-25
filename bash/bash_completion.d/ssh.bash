@@ -1,5 +1,5 @@
 # Complete SSH hostnames from ~/.ssh/config, ignoring wildcards
-# Based on: https://sanctum.geek.nz/cgit/dotfiles.git/tree/bash/bash_completion.d/_ssh_config_hosts.bash
+# >> https://sanctum.geek.nz/cgit/dotfiles.git/tree/bash/bash_completion.d/_ssh_config_hosts.bash
 
 __z_complete_ssh_hosts()
 {

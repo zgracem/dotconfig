@@ -1,6 +1,6 @@
 console()
 {   # scan system messages from Terminal
-    # http://brettterpstra.com/a-simple-but-handy-bash-function-console/
+    # >> http://brettterpstra.com/a-simple-but-handy-bash-function-console/
 
     # Usage: console [-w]
 
