@@ -40,6 +40,7 @@ hconfsync()
         --include=fds.sh
         --include=fixchmod.sh
         --include=hardware.rb
+        --include=install/
         --include=loginbanner.sh
         --include=manpdf.sh
         --include=matins.sh
