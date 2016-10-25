@@ -71,6 +71,27 @@ ps()
 }
 
 # -----------------------------------------------------------------------------
+# verbosity
+# -----------------------------------------------------------------------------
+
+if _inPath dtrx; then
+  dtrx() { command dtrx --verbose "$@"; }
+fi
+
+if _inPath rename; then
+  rename() { command rename --verbose "$@"; }
+fi
+
+if _inPath stow; then
+  stow() { command stow --verbose "$@"; }
+fi
+
+if [[ $OSTYPE == darwin* ]]; then
+  killall() { command killall -v "$@"; }
+  #                            └─ verbose
+fi
+
+# -----------------------------------------------------------------------------
 # etc.
 # -----------------------------------------------------------------------------
 
@@ -78,11 +99,6 @@ file()
 {
   command file -p "$@"
   #             └─ don't touch last-accessed time
-}
-
-rename()
-{
-  command rename --verbose "$@"
 }
 
 scp()
@@ -109,7 +125,3 @@ elif _inPath gstrings; then
   strings() { gstrings -a "$@" ; }
 fi
 
-if [[ $OSTYPE == darwin* ]]; then
-  killall() { command killall -v "$@"; }
-  #                            └─ verbose
-fi
