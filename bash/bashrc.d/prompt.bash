@@ -37,7 +37,7 @@ unset -v PROMPT_DIRTRIM
 
 # If true, set window/tab title to "host@username: pwd"
 : ${Z_SET_WINTITLE:=true}
-: ${Z_SET_TABTITLE:=false}
+: ${Z_SET_TABTITLE:=true}
 
 export ${!Z_PROMPT_*} ${!Z_SET_*}
 
@@ -53,6 +53,11 @@ fi
 # Only change window title if supported by current terminal
 if [[ ! $PTERM =~ xterm|putty|nsterm|iTerm ]]; then
   Z_SET_WINTITLE=false
+  Z_SET_TABTITLE=false
+fi
+
+# PuTTY doesn't have meaningful "tab titles"
+if [[ $TERM_PROGRAM == PuTTY ]]; then
   Z_SET_TABTITLE=false
 fi
 
@@ -313,7 +318,7 @@ _z_PS1_update_Terminal()
     local i ch hexch
     for (( i = 0; i < ${#PWD}; i++ )); do
       ch=${PWD:i:1}
-      if [[ $ch =~ [/._~A-Za-z0-9-] ]]; then
+      if [[ $ch =~ [[:alnum:]/._~-] ]]; then
         pwd_url+="$ch"
       else
         printf -v hexch "%02X" "'$ch"
@@ -333,8 +338,9 @@ _z_PS1_update_titles()
 {
   # Window title, e.g. "zozo@Athena.local: /usr/bin"
   local win_title="${USER}@${HOSTNAME}: ${PWD/#$HOME/$'~'}"
+
   # Tab title, e.g. "Athena: bin"
-  local tab_title="${HOSTNAME%%.*}: ${PWD##*/}"
+  local tab_title="${SSH_CONNECTION+${HOSTNAME%%.*}: }${PWD##*/}"
 
   [[ $Z_SET_WINTITLE == true ]] && setwintitle "$win_title"
   [[ $Z_SET_TABTITLE == true ]] && settabtitle "$tab_title"
