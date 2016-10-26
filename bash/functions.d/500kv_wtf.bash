@@ -43,7 +43,7 @@ whencetf()
   # Tilde-ify path for display.
   echo "${source_file/#$HOME/$'~'}:${line_number}"
 
-} # /whencetf()
+}
 
 # -----------------------------------------------------------------------------
 # wtfis: Return a short description of a command.
@@ -99,11 +99,13 @@ wtf()
 
   # Use `wtf -a` to display all results.
   # Use `wtf -l` to display additional information.
+  # Use `wtf -x` to suppress fancy output.
   local OPT OPTIND OPTARG
-  while getopts ':al' OPT; do
+  while getopts ':alx' OPT; do
     case $OPT in
       a)  unset -v one_and_done ;;
       l)  local extra_output="true" ;;
+      x)  local HV_DISABLE_PP="true" ;; 
     '?')  hv_err "-$OPTARG" "invalid option"
           return 1 ;;
     esac
@@ -135,12 +137,16 @@ wtf()
     local desc=""
     case $type in
       file)
+        if [[ -n $extra_output ]]; then
+          local desc=$(wtfis "$1")
+        fi
+
         # Are we querying a file directly? If so, it will have a slash in the
         # path; `type` will also return "/path/to/foo is /path/to/foo".
         if [[ $1 =~ / ]]; then
           # `file -b` returns "brief" output (no leading filename), while `-p`
           # avoids updating the file's access time if possible.
-          local magic; if magic=$(file -bp "$1" 2>&1); then
+          local magic; if magic=$(command file -bp "$1" 2>&1); then
             # Truncate output and tilde-ify path for display
             output="${1/#$HOME/$'~'}: ${magic%%:*}"
 
@@ -151,36 +157,30 @@ wtf()
             hv_err "error" "$magic"
             return # w/ the status `hv_err` passed through from `file`
           fi
+        else
+          # Get a list of places $1 can be found.
+          local -a places
+          places=( $(type -ap "$1") )
 
-          continue # redundant, since we only end up here if ${#types[@]} = 1
+          local place; for place in "${places[@]}"; do
+            output+="${output+\\n}${1} is ${place/#$HOME/$'~'}"
+
+            hv_chevron     brightyellow,brightblack "$1"
+            hv_chevron -t  black,yellow "${place/#$HOME/$'~'}"
+            
+            if [[ -n $desc ]]; then
+              hv_chevron -tn black,brightyellow "${desc}"
+              # Don't display a description for any additional items.
+              unset -v extra_output desc
+            elif [[ -z $HV_DISABLE_PP ]]; then
+              printf "\n"
+            fi
+
+            if [[ -n $one_and_done ]]; then
+              break
+            fi
+          done
         fi
-
-        if [[ -n $extra_output ]]; then
-          local desc=$(wtfis "$1")
-        fi
-
-        # Get a list of places $1 can be found.
-        local -a places
-        places=( $(type -ap "$1") )
-
-        local place; for place in "${places[@]}"; do
-          output+="${output:+\\n}${1} is ${place/#$HOME/$'~'}"
-
-          hv_chevron     brightyellow,brightblack "$1"
-          hv_chevron -t  black,yellow "${place/#$HOME/$'~'}"
-          
-          if [[ -n $desc ]]; then
-            hv_chevron -tn black,brightyellow "${desc}"
-            # Don't display a description for any additional items.
-            unset -v extra_output desc
-          else
-            printf "\n"
-          fi
-
-          if [[ -n $one_and_done ]]; then
-            break
-          fi
-        done
         ;;
 
       alias)
@@ -283,7 +283,7 @@ wtf()
 
     if [[ -n $HV_DISABLE_PP ]]; then
       # Print plain-text output if `hv_chevron` has been suppressed.
-      printf "%s\n" "$output"
+      printf "%b\n" "$output"
     fi
 
     if [[ -n $one_and_done ]]; then
