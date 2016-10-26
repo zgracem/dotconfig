@@ -7,7 +7,7 @@ dev()
       subl --project "$HOME/Dropbox/etc/rubydev.${os}.sublime-project"
       ;;
     weather)
-      local lib=~/Dropbox/src/gems/weather_ca
+      local lib=~/Dropbox/src/ruby/gems/weather_ca
       cd "$lib"
       _dev_subl "$lib"
       ;;
