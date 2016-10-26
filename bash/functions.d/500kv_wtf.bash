@@ -113,12 +113,12 @@ _wtf_file()
   fi
 
   if [[ $magic == broken* ]]; then
-    hv_chevron     brred,brblack "$desc"
-    hv_chevron -t  black,red "$target"
-    hv_chevron -tn brred,brblack "$magic"
+    hv_arrow     -f brred -b brblack "$desc"
+    hv_arrow -t  -f black -b red "$target"
+    hv_arrow -tn -f brred -b brblack "$magic"
   else
-    hv_chevron     brgreen,brblack "$desc"
-    hv_chevron -tn black,green "$magic"
+    hv_arrow     -f brgreen -b brblack "$desc"
+    hv_arrow -tn -f black -b green "$magic"
   fi
 }
 
@@ -192,15 +192,15 @@ wtf()
           local place; for place in "${places[@]}"; do
             output+="${output+\\n}${1} is ${place/#$HOME/$'~'}"
 
-            hv_chevron     bryellow,brblack "$1"
-            hv_chevron -t  black,yellow "${place/#$HOME/$'~'}"
+            hv_arrow    -f bryellow -b brblack "$1"
+            hv_arrow -t -f black -b yellow "${place/#$HOME/$'~'}"
             
             if [[ -n $extra_output ]]; then
               desc=$(wtfis "$1")
             fi
 
             if [[ -n $desc ]]; then
-              hv_chevron -tn black,bryellow "${desc}"
+              hv_arrow -tn -f black -b bryellow "${desc}"
               # Don't display a description for any additional items.
               unset -v extra_output desc
             elif [[ -z $HV_DISABLE_PP ]]; then
@@ -218,9 +218,9 @@ wtf()
         local def=${BASH_ALIASES[$1]}
         output="$1 is aliased to ‘${def}’"
 
-        hv_chevron     brcyan,brblack "$1"
-        hv_chevron -t  black,cyan "$type"
-        hv_chevron -tn black,brcyan "${def}"
+        hv_arrow     -f brcyan -b brblack "$1"
+        hv_arrow -t  -f black -b cyan "$type"
+        hv_arrow -tn -f black -b brcyan "${def}"
         ;;
 
       builtin|keyword)
@@ -278,12 +278,12 @@ wtf()
 
         output="$name ($type)"
 
-        hv_chevron     brmagenta,brblack "$name"
-        hv_chevron -t  black,magenta "$type"
+        hv_arrow     -f brmagenta -b brblack "$name"
+        hv_arrow -t  -f black -b magenta "$type"
 
         if [[ -n $extra_output ]]; then
           output+=": $desc"
-          hv_chevron -tn black,brmagenta "$desc"
+          hv_arrow -tn -f black -b brmagenta "$desc"
         else
           [[ -z $HV_DISABLE_PP ]] && printf "\n"
         fi
@@ -291,12 +291,12 @@ wtf()
 
       function)
         output="$1 is a function"
-        hv_chevron    brblue,brblack "$1"
-        hv_chevron -t black,blue "function"
+        hv_arrow    -f brblue -b brblack "$1"
+        hv_arrow -t -f black -b blue "function"
 
         if desc=$(whencetf "$1"); then
           output+=" ($desc)"
-          hv_chevron -tn black,brblue "$desc"
+          hv_arrow -tn -f black -b brblue "$desc"
         else
           [[ -z $HV_DISABLE_PP ]] && printf "\n"
         fi
