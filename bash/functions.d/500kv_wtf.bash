@@ -42,7 +42,6 @@ whencetf()
 
   # Tilde-ify path for display.
   echo "${source_file/#$HOME/$'~'}:${line_number}"
-
 }
 
 # -----------------------------------------------------------------------------
@@ -82,6 +81,45 @@ wtfis()
 
   printf "$desc"
   [[ -t 1 ]] && printf "\n"
+}
+
+# -----------------------------------------------------------------------------
+# _wtf_file: Describes a file.
+# -----------------------------------------------------------------------------
+
+_wtf_file()
+{
+  # Tilde-ify path for display
+  local desc="${1/#$HOME/$'~'}"
+  output="$desc"
+
+  # `file -b` returns "brief" output (no leading filename), `-p` avoids 
+  # updating the file's access time if possible, and `h` doesn't follow
+  # symlinks (we'll do that later if needed).
+  local magic=$(command file -bhp "$1")
+
+  if [[ $magic =~ (broken )?symbolic\ link\ to\ (.+) ]]; then
+    local target="${BASH_REMATCH[2]}"
+    output+=" -> $target"
+    if [[ ${BASH_REMATCH[1]} == broken* ]]; then
+      magic="broken link"
+    else
+      magic=$(command file -bhL "$1")
+    fi
+    output+=" ($magic)"
+  else # not a symlink
+    # Truncate output for display
+    output+=": ${magic%%:*}"
+  fi
+
+  if [[ $magic == broken* ]]; then
+    hv_chevron     brred,brblack "$desc"
+    hv_chevron -t  black,red "$target"
+    hv_chevron -tn brred,brblack "$magic"
+  else
+    hv_chevron     brgreen,brblack "$desc"
+    hv_chevron -tn black,green "$magic"
+  fi
 }
 
 # -----------------------------------------------------------------------------
@@ -128,35 +166,24 @@ wtf()
   types=( $(type -at "$1" | uniq) )
 
   if (( ${#types[@]} == 0 )); then
-    hv_err "$1" "not a thing"
-    return 1
+    if [[ -e $1 || -L $1 ]]; then
+      types=(file)
+    else
+      hv_err "$1" "not a thing"
+      return 1
+    fi
   fi
 
   for type in "${types[@]}"; do
     local output=""
     local desc=""
+
     case $type in
       file)
-        if [[ -n $extra_output ]]; then
-          local desc=$(wtfis "$1")
-        fi
-
         # Are we querying a file directly? If so, it will have a slash in the
-        # path; `type` will also return "/path/to/foo is /path/to/foo".
+        # path (`type` will also return "/path/to/foo is /path/to/foo").
         if [[ $1 =~ / ]]; then
-          # `file -b` returns "brief" output (no leading filename), while `-p`
-          # avoids updating the file's access time if possible.
-          local magic; if magic=$(command file -bp "$1" 2>&1); then
-            # Truncate output and tilde-ify path for display
-            output="${1/#$HOME/$'~'}: ${magic%%:*}"
-
-            hv_chevron     brightgreen,brightblack "${1/#$HOME/$'~'}"
-            hv_chevron -tn black,green "$magic"
-
-          else
-            hv_err "error" "$magic"
-            return # w/ the status `hv_err` passed through from `file`
-          fi
+          _wtf_file "$1"
         else
           # Get a list of places $1 can be found.
           local -a places
@@ -165,11 +192,15 @@ wtf()
           local place; for place in "${places[@]}"; do
             output+="${output+\\n}${1} is ${place/#$HOME/$'~'}"
 
-            hv_chevron     brightyellow,brightblack "$1"
+            hv_chevron     bryellow,brblack "$1"
             hv_chevron -t  black,yellow "${place/#$HOME/$'~'}"
             
+            if [[ -n $extra_output ]]; then
+              desc=$(wtfis "$1")
+            fi
+
             if [[ -n $desc ]]; then
-              hv_chevron -tn black,brightyellow "${desc}"
+              hv_chevron -tn black,bryellow "${desc}"
               # Don't display a description for any additional items.
               unset -v extra_output desc
             elif [[ -z $HV_DISABLE_PP ]]; then
@@ -187,9 +218,9 @@ wtf()
         local def=${BASH_ALIASES[$1]}
         output="$1 is aliased to ‘${def}’"
 
-        hv_chevron     brightcyan,brightblack "$1"
+        hv_chevron     brcyan,brblack "$1"
         hv_chevron -t  black,cyan "$type"
-        hv_chevron -tn black,brightcyan "${def}"
+        hv_chevron -tn black,brcyan "${def}"
         ;;
 
       builtin|keyword)
@@ -247,12 +278,12 @@ wtf()
 
         output="$name ($type)"
 
-        hv_chevron     brightmagenta,brightblack "$name"
+        hv_chevron     brmagenta,brblack "$name"
         hv_chevron -t  black,magenta "$type"
 
         if [[ -n $extra_output ]]; then
           output+=": $desc"
-          hv_chevron -tn black,brightmagenta "$desc"
+          hv_chevron -tn black,brmagenta "$desc"
         else
           [[ -z $HV_DISABLE_PP ]] && printf "\n"
         fi
@@ -260,12 +291,12 @@ wtf()
 
       function)
         output="$1 is a function"
-        hv_chevron    brightblue,brightblack "$1"
+        hv_chevron    brblue,brblack "$1"
         hv_chevron -t black,blue "function"
 
         if desc=$(whencetf "$1"); then
           output+=" ($desc)"
-          hv_chevron -tn black,brightblue "$desc"
+          hv_chevron -tn black,brblue "$desc"
         else
           [[ -z $HV_DISABLE_PP ]] && printf "\n"
         fi
@@ -293,6 +324,8 @@ wtf()
 
   return 0
 } # /wtf()
+
+wtff() { wtf -a "$@"; }
 
 unalias which 2>/dev/null
 which() { builtin type -p "$@"; }
