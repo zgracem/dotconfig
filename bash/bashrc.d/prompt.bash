@@ -360,11 +360,22 @@ _z_PS1_update_Terminal()
 
 _z_PS1_update_titles()
 {
-  # Window title, e.g. "zozo@Athena.local: /usr/bin"
+  # Window title, e.g. "zozo@Athena.local: ~/share/man/man1"
   local win_title="${USER}@${HOSTNAME}: ${PWD/#$HOME/$'~'}"
 
-  # Tab title, e.g. "Athena: bin"
-  local tab_title="${SSH_CONNECTION+${HOSTNAME%%.*}: }${PWD##*/}"
+  # Tab title, e.g. "Athena: ~/.../man1"
+  local tab_title="${SSH_CONNECTION+${HOSTNAME%%.*}: }"
+  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
+    local PROMPT_DIRTRIM=1
+    local pwd
+    pwd="\w"
+    pwd=${pwd@P}
+    pwd=${pwd//.../…}
+  else
+    pwd=${PWD##*/}
+  fi
+
+  local tab_title="${SSH_CONNECTION+${HOSTNAME%%.*}: }${pwd}"
 
   [[ $Z_SET_WINTITLE == true ]] && setwintitle "$win_title"
   [[ $Z_SET_TABTITLE == true ]] && settabtitle "$tab_title"
