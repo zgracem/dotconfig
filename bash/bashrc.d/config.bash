@@ -4,9 +4,7 @@
 
 alias    ba='_edit $dir_config/bash/bashrc.d/aliases.bash'
 alias   brc='_edit $dir_config/bash/bashrc.bash'
-alias  bcol='_edit $dir_config/bash/colour.bash'
-alias bpath='_edit $dir_config/sh/profile.d/paths.sh'
-alias bdirs='_edit $dir_config/bash/dirs.bash'
+alias bpath='_edit $dir_config/sh/paths.sh'
 alias  bps1='_edit $dir_config/bash/bashrc.d/prompt.bash'
 
 # -----------------------------------------------------------------------------
