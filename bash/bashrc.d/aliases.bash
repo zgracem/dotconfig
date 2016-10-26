@@ -14,6 +14,7 @@ alias e='printf "%s\n"'
 alias i='newwin irb'
 alias svim='sudo vim'
 alias unmount='umount'
+alias vd='newwin vimdiff'
 
 alias builtins='compgen -b | column'
 alias functions='compgen -A function | column'
