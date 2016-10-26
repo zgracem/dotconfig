@@ -34,10 +34,6 @@ alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" \
 
 # -----------------------------------------------------------------------------
 
-# files/directories
-alias dirsize='du -sh .'            # total size of $PWD
-alias sizes='dirsize | sort -rh'    # sort files & directories in $PWD by size
-
 # share $PWD at localhost:17777 (port reserved by IANA)
 alias webshare='python -m SimpleHTTPServer 17777'
 
