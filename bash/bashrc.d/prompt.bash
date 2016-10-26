@@ -92,11 +92,12 @@ _z_PS1_compress_pwd()
   #   ~/fir…/sec…/3rd/fourth/fifth/sixth
   #   ~/fir…/sec…/3rd/fou…/fifth/sixth/seventh
 
-  # Compress if PWD has >= `$min_depth` elements (not counting `~`, if any).
+  # Compress if PWD has >= `$min_depth` elements, not counting a leading `~`.
   local min_depth=5
 
-  # Compress if PWD is >= `$max_pwd_length` chars long (overrides `min_depth`).
-  local max_pwd_length=54
+  # Compress if PWD is >= `$max_length` chars long, overriding `$min_depth`.
+  # For shallowly-nested directories with long names.
+  local max_length=54
 
   # Always retain the full names of the last `$keep_dirs` elements.
   local keep_dirs=1
@@ -106,6 +107,26 @@ _z_PS1_compress_pwd()
 
   # Append `$indicator` to each compressed element.
   local indicator="…"
+
+  # -----------------------------------------------------------------------------
+  
+  local OPT OPTIND OPTARG
+  while getopts ':d:l:k:c:i:' OPT; do
+    case $OPT in
+      d)  min_depth="$OPTARG" ;;
+      l)  max_length="$OPTARG" ;;
+      k)  keep_dirs="$OPTARG" ;; 
+      c)  keep_chars="$OPTARG" ;; 
+      i)  indicator="$OPTARG" ;; 
+    '?')  hv_err "-$OPTARG" "invalid option"
+          return 1 ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  # Sanity check
+  # (( min_depth <= keep_dirs )) && min_depth=$keep_dirs
+  # (( keep_dirs > min_depth )) && min_depth=$keep_dirs
 
   # ---------------------------------------------------------------------------
 
@@ -133,7 +154,8 @@ _z_PS1_compress_pwd()
 
   # Are there enough elements/characters to warrant compression?
   if (( ${#in_parts[@]} < ${min_depth} )) \
-      && (( ${#input} < ${max_pwd_length} )); then
+    && (( ${#input} < ${max_length} ))
+  then
     # PWD is already short; just return what we were given.
     printf "%s" "$input"
     return
@@ -147,15 +169,17 @@ _z_PS1_compress_pwd()
     # The stopping point required to preserve uncompressed trailing elements.
     local stop_index=$(( ${#in_parts[@]} - ${#end_parts[@]} ))
 
+    if [[ -z ${in_parts[0]} ]]; then
+      (( stop_index++ ))
+    fi
+
     # Iterate through the remaining elements, stopping where required.
     local -a out_parts=()
     local i; for (( i = 1; i < ${stop_index}; i++ )); do
       local part="${in_parts[$i]}"
 
       # No need to compress elements that are already <= $keep_chars long.
-      # Nor should we "compress" unless there would actually be a net decrease
-      # in length; i.e. don't turn "user" (4 chars) into "use…" (4 chars).
-      if (( ${#part} > (${keep_chars} + ${#indicator}) )); then
+      if (( ${#part} > (${keep_chars}) )); then
           part="${part:0:$keep_chars}${indicator}"
       fi
 
