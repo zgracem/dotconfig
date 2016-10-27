@@ -5,7 +5,7 @@
 [core]
 	autocrlf = input
 	safecrlf = true
-	excludesfile = ~/.config/git/globalignore
+	excludesfile = ~/.config/git/ignore
 	filemode = false
 
 [alias]
