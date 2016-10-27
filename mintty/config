@@ -2,7 +2,6 @@
 # Looks
 # -----------------------------------------------------------------------------
 
-UseSystemColours=no
 ThemeFile=ZGM
 Transparency=off
 OpaqueWhenFocused=no
@@ -51,7 +50,7 @@ MiddleClickAction=paste
 RightClickAction=menu
 ClicksTargetApp=yes
 ClickTargetMod=shift
-HideMouse=on
+HideMouse=yes
 
 # -----------------------------------------------------------------------------
 # WindowShortcuts
@@ -60,7 +59,7 @@ HideMouse=on
 Columns=132
 Rows=40
 RowSpacing=0
-Colspacing=0
+ColSpacing=0
 Padding=3
 ScrollbackLines=10000
 Scrollbar=none

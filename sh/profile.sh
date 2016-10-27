@@ -14,6 +14,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/share"
 export XDG_CACHE_HOME="$HOME/var/cache"
 
+# Location of zsh config files
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Set up PATH, MANPATH, etc.
@@ -59,7 +60,7 @@ esac
 # -----------------------------------------------------------------------------
 
 z_tidy()
-{ # Usage: tidy ~/.bash_sessions
+{ # Usage: z_tidy ~/.bash_sessions
   local rm_opts="-f"
 
   if [[ $- == *i* ]]; then

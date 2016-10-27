@@ -7,7 +7,7 @@ f()
       open -a Finder "$here"
       ;;
     windows)
-      "$(cygpath --windir)/explorer" "$(cygpath -w "$target")"
+      "$(cygpath --windir)/explorer" "$(cygpath -w "$here")"
       ;;
     *)
       scold 'not available on this system'

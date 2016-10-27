@@ -14,8 +14,8 @@ find_drive()
     local root="/"
     [[ $OSTYPE == cygwin ]] && root="/cygdrive${root}"
 
-    local caption volname discard
-    while read -r caption volname discard; do
+    local caption volname _discard
+    while read -r caption volname _discard; do
       if [[ $volname == $label ]]; then
         caption="${caption,,}"
         echo "${root}${caption:0:1}"
@@ -26,6 +26,10 @@ find_drive()
   elif [[ $PLATFORM == mac && -d /Volumes/$label ]]; then
     echo "/Volumes/$label"
     return 0
+
+  else
+    scold "not available on this system"
+    return 1
   fi
   
   scold "volume not found: $label"
