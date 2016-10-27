@@ -1,4 +1,4 @@
-[[ $OSTYPE == cygwin ]] && [[ -x $COMSPEC ]] || return
+[[ $PLATFORM == windows ]] || return
 
 cyglink()
 {
@@ -19,5 +19,5 @@ cyglink()
     return 1
   fi
 
-  "$COMSPEC" /C mklink /J "$(cygpath -aw "$link")" "$(cygpath -aw "$target")"
+  cmd /C mklink /J "$(cygpath -aw "$link")" "$(cygpath -aw "$target")"
 }

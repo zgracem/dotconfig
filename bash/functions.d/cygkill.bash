@@ -1,4 +1,4 @@
-[[ $OSTYPE == cygwin ]] || return
+[[ $PLATFORM == windows ]] || return
 
 cygkill()
 { # kill a process by its Windows PID

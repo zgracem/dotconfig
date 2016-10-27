@@ -1,4 +1,4 @@
-if [[ $OSTYPE == darwin* ]]; then
+if [[ $PLATFORM == mac ]]; then
   trash()
   {
     local f; for f in "$@"; do

@@ -29,7 +29,7 @@ mv()
   #                   │└─ verbose
   #                   └── interactive
 
-  if [[ $OSTYPE == darwin* ]]; then
+  if [[ $PLATFORM == mac ]]; then
     # >> http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
     /bin/mv "${flags_mv[@]}" "$@"
   else
@@ -53,7 +53,7 @@ ps()
   local flags_ps='-a'
   #                └─── show processes from all users
 
-  if [[ $OSTYPE == cygwin ]]; then
+  if [[ $PLATFORM == windows ]]; then
     flags_ps+='W'
     #          └─────── also show Windows processes
   fi
@@ -86,7 +86,7 @@ if _inPath stow; then
   stow() { command stow --verbose "$@"; }
 fi
 
-if [[ $OSTYPE == darwin* ]]; then
+if [[ $PLATFORM == mac ]]; then
   killall() { command killall -v "$@"; }
   #                            └─ verbose
 fi

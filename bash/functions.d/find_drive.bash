@@ -10,22 +10,25 @@ find_drive()
     return 1
   fi
 
-  if [[ $OSTYPE == cygwin ]]; then
+  if [[ $PLATFORM == windows ]]; then
+    local root="/"
+    [[ $OSTYPE == cygwin ]] && root="/cygdrive${root}"
+
     local caption volname discard
     while read -r caption volname discard; do
       if [[ $volname == $label ]]; then
         caption="${caption,,}"
-        echo "/cygdrive/${caption:0:1}"
+        echo "${root}${caption:0:1}"
         return 0
       fi
-    done < <(/cygdrive/c/Windows/System32/Wbem/wmic logicaldisk get caption,volumename)
+    done < <("${root}c/Windows/System32/Wbem/wmic" logicaldisk get caption,volumename)
 
-  elif [[ $OSTYPE == darwin* && -d /Volumes/$label ]]; then
+  elif [[ $PLATFORM == mac && -d /Volumes/$label ]]; then
     echo "/Volumes/$label"
     return 0
   fi
   
-  scold "volume not found: ${label}"
+  scold "volume not found: $label"
   return 1
 }
 

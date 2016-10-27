@@ -3,11 +3,11 @@ pdfcrack()
     # Requires: GhostScript (http://www.ghostscript.com/)
     _inPath gs || return
 
-    case $OSTYPE in
-        cygwin)
+    case $PLATFORM in
+        windows)
             local dir_fonts=$(cygpath -au "$WINDIR/Fonts")
             ;;
-        darwin*)
+        mac)
             local dir_fonts="/Library/Fonts"
             local threads="-dNumRenderingThreads=$(sysctl -n hw.availcpu)"
             ;;

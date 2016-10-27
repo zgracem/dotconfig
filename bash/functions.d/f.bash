@@ -2,12 +2,12 @@ f()
 { # open a Finder/Explorer window for the current/specified directory
   local here="${@-.}"
 
-  case $OSTYPE in
-    darwin*)
+  case $PLATFORM in
+    mac)
       open -a Finder "$here"
       ;;
-    cygwin)
-      cygstart --explore "$here"
+    windows)
+      "$(cygpath --windir)/explorer" "$(cygpath -w "$target")"
       ;;
     *)
       scold 'not available on this system'

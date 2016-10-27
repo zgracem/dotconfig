@@ -12,7 +12,7 @@ cppwd()
   pbcopy <<< "$PWD"
 }
 
-[[ $OSTYPE == cygwin ]] || return
+[[ $PLATFORM == windows ]] || return
 
 cpcd()
 { # copy current directory's Windows path to clipboard

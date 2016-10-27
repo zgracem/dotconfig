@@ -1,14 +1,14 @@
 [ "$OSTYPE" = "cygwin" ] || return
 
 # If we have Windows admin privileges, we will be a member of group 544 or 0
-for group in `id -G`; do
-  if [ "$group" -eq 0 ] || [ "$group" -eq 544 ]; then
+for g in `id -G`; do
+  if [ "$g" -eq 0 ] || [ "$g" -eq 544 ]; then
     export CYGWIN_ADMIN=true
     break
   fi
 done
 
-unset -v group
+unset -v g
 
 # -----------------------------------------------------------------------------
 # shell variables
@@ -28,30 +28,5 @@ fi
 if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
   CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
-
-# file extensions considered "executable" by cmd.com (minimal set)
-if [ -z "$PATHEXT" ]; then
-  PATHEXT=".COM;.EXE;.BAT"
-fi
-
-# disable logging by Windows' Component Servicing Infrastructure
-export windows_tracing_flags=0
-
-# -----------------------------------------------------------------------------
-# printer
-# -----------------------------------------------------------------------------
-
-printer_key='/proc/registry/HKEY_CURRENT_USER/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device'
-
-if [ -z "$PRINTER" ] && [ -e "$printer_key" ]; then
-  read -r PRINTER < "$printer_key"
-  export PRINTER="${PRINTER%%,*}"
-fi
-
-unset -v printer_key
-
-# -----------------------------------------------------------------------------
-# cleanup
-# -----------------------------------------------------------------------------
 
 export CYGWIN

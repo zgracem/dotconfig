@@ -10,7 +10,7 @@ else
   OLDTERM="$TERM"
 
   # Darwin's full-screen system console
-  if [ $OLDTERM = "vt100" ] && [ "${OSTYPE#darwin}" != "$OSTYPE" ] && [ `tty` = "/dev/console" ]; then
+  if [ $OLDTERM = "vt100" ] && [ "$PLATFORM" = "mac" ] && [ `tty` = "/dev/console" ]; then
     TERM=xnuppc
     export HV_DISABLE_PP=1
   fi

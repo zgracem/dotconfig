@@ -1,4 +1,4 @@
-[[ $OSTYPE == darwin* ]] || return
+[[ $PLATFORM == mac ]] || return
 
 plist2bin()  { plutil -convert binary1 -o - "$@"; }
 

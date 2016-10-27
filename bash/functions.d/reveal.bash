@@ -2,11 +2,11 @@ reveal()
 { # reveal $1 in Finder/Explorer
   local target="${1?}"
 
-  case $OSTYPE in
-    darwin*)
+  case $PLATFORM in
+    mac)
       open -R "$target"
       ;;
-    cygwin)
+    windows)
       "$(cygpath --windir)/explorer" /select, "$(cygpath -w "$target")"
       ;;
     *)
