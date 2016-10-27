@@ -1,4 +1,4 @@
-[[ $OSTYPE == darwin* ]] || return
+[[ $PLATFORM == mac ]] || return
 
 localip()
 { # print local IP address

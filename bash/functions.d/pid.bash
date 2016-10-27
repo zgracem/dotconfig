@@ -1,7 +1,7 @@
 if [[ -z $flags_pid ]]; then
-  case $OSTYPE in
-    cygwin)  flags_pid='-asW' ;;
-    *)       flags_pid='-cx -o pid,command' ;;
+  case $PLATFORM in
+    windows)  flags_pid='-asW' ;;
+    *)        flags_pid='-cx -o pid,command' ;;
   esac
 fi
 

@@ -7,7 +7,7 @@ quietly unalias ls ll
 export flags_ls=(-A)
 #                 └────── list (almost) all files
 
-if [[ $OSTYPE == cygwin ]]; then
+if [[ $PLATFORM == windows ]]; then
   flags_ls+=(--append-exe)
   #            └─ append .exe if cygwin magic was needed
 fi
@@ -56,7 +56,7 @@ lsf()
   #                    │  └─ long-list output
   #                    └──── print inode number
 
-  if [[ $OSTYPE == darwin* ]]; then
+  if [[ $PLATFORM == mac ]]; then
     flags_lsf+=(-@ -O -G)
     #            │  │  └──── colourize output
     #            │  └─────── print file flags

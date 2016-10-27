@@ -15,7 +15,7 @@ shopt -s dotglob                 # include .dotfiles in filename expansion
 shopt -s hostcomplete            # do hostname completion on strings containing '@'
 shopt -s no_empty_cmd_completion # ignore completion attempts on empty lines
 
-if [[ $OSTYPE == cygwin ]]; then
+if [[ $PLATFORM == windows ]]; then
   # use the short name of programs when Tab-completing
   shopt -s completion_strip_exe 2>/dev/null
 

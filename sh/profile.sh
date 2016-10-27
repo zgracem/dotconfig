@@ -29,7 +29,10 @@ fi
 # Add domain to names of shared hosts
 case $HOSTNAME in
   WS[[:digit:]]*|web[[:digit:]]*)
-    HOSTNAME=$(hostname -f)
+    if FULL_HOSTNAME=$(hostname -f 2>/dev/null); then
+      HOSTNAME=$FULL_HOSTNAME
+    fi
+    unset -v FULL_HOSTNAME
     ;;
 esac
 
@@ -38,6 +41,18 @@ esac
 if [ ! -G $TMPDIR ] && mount|grep -q " on $TMPDIR.*noexec,"; then
   TMPDIR="$HOME/var/tmp"
 fi
+
+# Determine platform.
+export PLATFORM="unknown"
+
+case $(uname -s) in
+  *_NT-*)
+    PLATFORM="windows" ;;
+  Darwin)
+    PLATFORM="mac" ;;
+  Linux)
+    PLATFORM="linux" ;;
+esac
 
 # -----------------------------------------------------------------------------
 # Keep homedir tidy.

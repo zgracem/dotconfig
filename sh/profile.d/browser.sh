@@ -10,7 +10,7 @@ if [ -z "$SSH_CONNECTION" ]; then
   if [ -x /usr/bin/open ]; then
     # open(1) will send URLs to the default GUI browser
     BROWSER=/usr/bin/open
-  elif [ "$OSTYPE" = "cygwin" ]; then
+  elif [ "$PLATFORM" = "windows" ] ; then
     # Wrapper script for Google Chrome w/ custom command-line switches
     BROWSER="$HOME/bin/chrome"
   fi
