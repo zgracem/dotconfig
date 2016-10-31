@@ -1,0 +1,28 @@
+# Overrides /etc/X11/system.XWinrc
+
+menu apps {
+    xterm            EXEC "/usr/bin/xterm"
+}
+
+menu root {
+    "Applications"   MENU apps
+    SEPARATOR
+
+    "FAQ"            EXEC "cygstart http://x.cygwin.com/docs/faq/cygwin-x-faq.html"
+    "User's Guide"   EXEC "cygstart http://x.cygwin.com/docs/ug/cygwin-x-ug.html"
+    SEPARATOR
+
+    "View logfile"   EXEC "xterm -title $XWINLOGFILE -e less +F $XWINLOGFILE"
+    SEPARATOR
+
+    "Reload .XWinrc" RELOAD
+    SEPARATOR
+}
+
+ROOTMENU root
+
+# disables the exit confirmation dialog if no clients are connected
+SILENTEXIT
+
+# # disables the exit confirmation dialog always
+# FORCEEXIT

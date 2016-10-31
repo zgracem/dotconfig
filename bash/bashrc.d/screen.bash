@@ -6,11 +6,11 @@ export SCREENDIR="$HOME/tmp/.screens"
 # keep homedir tidy
 z_tidy ~/.screen
 
+export SCREENRC="$dir_config/screen/screenrc"
+
 # Solarized Light colour scheme
 if [[ $Z_SOLARIZED == light ]]; then
-  export SCREENRC="${dir_config}/screen/screenrc.light"
-else
-  export SCREENRC="${dir_config}/screen/screenrc"
+  SCREENRC="$dir_config/screen/screenrc.light"
 fi
 
 # fix screen's stupid broken $TERMCAP -- http://robmeerman.co.uk/unix/256colours
