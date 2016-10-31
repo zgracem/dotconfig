@@ -5,20 +5,12 @@
 
 # add config file symlinks if necessary (see bashrc.d/config.bash)
 
-if [[ ! -e ~/.npmrc ]] && _inPath npm; then
-  _z_config_symlink npmrc
-fi
-
 if [[ ! -e ~/.irbrc ]] && _inPath irb; then
   _z_config_symlink ruby/irbrc
 fi
 
 if [[ ! -e ~/.vimrc ]] && _inPath vim; then
   _z_config_symlink vim/vimrc
-fi
-
-if [[ ! -e ~/.wgetrc ]] && _inPath wget; then
-  _z_config_symlink wget/wgetrc
 fi
 
 # -----------------------------------------------------------------------------

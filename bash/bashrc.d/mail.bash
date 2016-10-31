@@ -5,7 +5,8 @@
 MAIL="/var/mail/$USER"
 
 if [[ -r $MAIL ]]; then
-  MBOX="$HOME/.mail/mbox"
+  export MBOX=~/.mail/mbox
+  export DEAD=~/.mail/dead.letter
 
   # Create personal mail directory if it doesn't exist.
   [[ -d ${MBOX%/*} ]] || mkdir -pv "${MBOX%/*}"

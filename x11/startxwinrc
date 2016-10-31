@@ -1,0 +1,34 @@
+#!/bin/sh
+# -----------------------------------------------------------------------------
+# This file overrides /etc/X11/xinit/startxwinrc
+# -----------------------------------------------------------------------------
+
+xwin_error_log="${HOME}/var/log/xwin/Xwin.error.${$}${RANDOM}"
+
+if ( umask 077 && cp /dev/null "${xwin_error_log}" 2>/dev/null ); then
+  chmod 600 "${xwin_error_log}"
+  exec >| "${xwin_error_log}" 2>&1
+else
+  xwin_error_log=$(mktemp -q /tmp/xwin-error-${USER}.XXXXXX)
+  if [ $? -eq 0 ]; then
+    exec >| "$xwin_error_log" 2>&1
+  fi
+fi
+
+# -----------------------------------------------------------------------------
+# set up environment
+# -----------------------------------------------------------------------------
+
+xrdb -merge "$HOME/.Xresources"
+
+export ENV="$HOME/.bashrc"
+unset TERM_COLOURDEPTH TERM_PROGRAM
+
+xterm
+
+# keep XWin open until we explicitly close it
+# exec sleep infinity
+
+# -----------------------------------------------------------------------------
+
+# startxwin -- -nolock -logfile "${HOME}/var/log/xwin/Xwin.${$}${RANDOM}"
