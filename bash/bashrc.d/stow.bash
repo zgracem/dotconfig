@@ -4,3 +4,5 @@ _inPath stow || return
 
 _z_config_symlink stow/stowrc
 _z_config_symlink stow/stow-global-ignore
+
+unstow() { command stow --delete "$@"; }
