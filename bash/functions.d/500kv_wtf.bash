@@ -303,8 +303,8 @@ wtf()
 
         if [[ -n $extra_output ]]; then
           # Also output function source.
-          if type -P pygmentize >/dev/null; then
-            declare -f "$1" | pygmentize -l bash
+          if type -P source-highlight >/dev/null; then
+            declare -f "$1" | source-highlight -s bash -f esc
           else
             declare -f "$1"
           fi
