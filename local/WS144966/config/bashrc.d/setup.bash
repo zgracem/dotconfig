@@ -2,7 +2,10 @@ setup()
 {
   # Set path to USB drive if it isn't set already.
   dir_drive=${dir_drive:-$(find_drive "$myDrive")} || return
+
   local installer_dir="$dir_drive/bin/cygwin"
+  local cyg_bin="${installer_dir}/cygwin.exe"
+  local log_dir="/var/log"
 
   # Where to save downloaded packages (Windows-style path).
   local pkg_dir
@@ -10,7 +13,7 @@ setup()
 
   # Windows-style path to cygwin's root installation directory.
   local cyg_root
-  cyg_root=$(cygpath -aw /)
+  cyg_root=$(cygpath -aw "/")
 
   local -a flags=()
 
@@ -29,15 +32,15 @@ setup()
   #        │└──────── Don't make desktop/Start menu shortcuts (--no-shortcuts)
   #        └───────── Also upgrade installed packages (--upgrade-also)
 
-  local cyg_bin="${installer_dir}/cygwin.exe"
-  local log_dir="/var/log"
-
-  if [[ -x $cyg_bin ]]; then
-      (cd "$log_dir" && run "$cyg_bin" "${flags[@]}")
-      # Otherwise setup.log will write to actual PWD for some annoying reason.
-  else
+  if [[ ! -x $cyg_bin ]]; then
     scold "can't find ${cyg_bin}"
-    return 69
+    return 1
+  elif ! mkdir -p "$log_dir"
+    scold "can't create $log_dir"
+    return 1
+  else
+    # Otherwise setup.log will write to actual PWD for some annoying reason.
+    (cd "$log_dir" && run "$cyg_bin" "${flags[@]}" "$@")
   fi
 }
 
