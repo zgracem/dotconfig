@@ -3,7 +3,7 @@
 __z_complete_es()
 {
   # must be kept in sync w/ same declaration in es()
-  local -a script_dirs=( "$dir_scripts"{,/dev,/util,/work} )
+  local -a script_dirs=( "$dir_scripts" "$dir_scripts"/*/ )
 
   local -a wordlist=( $(__z_complete_files sh "${script_dirs[@]}") )
 

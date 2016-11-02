@@ -7,13 +7,11 @@
 _isRunning() { command ps -sW | command grep -iq "${1}\.exe\$"; }
 
 # Google Chrome
-_isRunning chrome \
-    || "${dir_scripts}/chrome.sh"
+_isRunning chrome || "$dir_scripts/cygwin/chrome.sh"
 
 # Dropbox
 _isRunning Dropbox \
-    || run "$(cygpath -au "${APPDATA}\Dropbox\bin\Dropbox.exe")" "/home"
-    # || run "${dir_apps}/DropboxPortableAHK/DropboxPortableAHK.exe"
+    || run "$(cygpath -au "$APPDATA\Dropbox\bin\Dropbox.exe")" "/home"
 
 # Pageant
 _isRunning pageant \

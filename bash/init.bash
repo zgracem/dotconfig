@@ -16,13 +16,13 @@ fi
 # -----------------------------------------------------------------------------
 
 # cute login banner
-if [[ -x $dir_scripts/loginbanner.sh ]]; then
-    "${dir_scripts}/loginbanner.sh"
+if [[ -x $dir_scripts/login/loginbanner.sh ]]; then
+    "${dir_scripts}/login/loginbanner.sh"
 fi
 
 # this day in history...
-if [[ -x $dir_scripts/util/matins.sh ]]; then
-    "${dir_scripts}/util/matins.sh"
+if [[ -x $dir_scripts/login/matins.sh ]]; then
+    "${dir_scripts}/login/matins.sh"
 fi
 
 # countdown (date & function set in private.d/countdown.bash)
