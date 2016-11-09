@@ -1,0 +1,160 @@
+# -----------------------------------------------------------------------------
+# Athena:~/.local/config/Brewfile
+# -----------------------------------------------------------------------------
+
+# Instructions:
+#   1. Install Homebrew
+#   2. `brew tap homebrew/bundle`
+#   3. `brew bundle --file=~/.config/brew/Brewfile`
+#   4. `brew bundle --file=$THIS_FILE`
+
+# -----------------------------------------------------------------------------
+# internet stuff
+# -----------------------------------------------------------------------------
+
+brew "getmail"
+brew "transmission"
+brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
+
+# -----------------------------------------------------------------------------
+# media
+# -----------------------------------------------------------------------------
+
+# audio/video
+
+brew "atomicparsley"
+brew "ffmpeg", args: ["with-openssl", "with-rtmpdump"]
+brew "id3v2"
+brew "lame"
+brew "mkvtoolnix"
+brew "mp4v2"
+brew "mplayer"
+
+# images
+
+brew "exif"
+brew "exiftool"
+brew "imagemagick", args: ["with-ghostscript"]
+brew "qrencode"
+brew "webkit2png"
+
+# imagesnap requires full Xcode to compile (not just CLT)
+brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
+
+# -----------------------------------------------------------------------------
+# development
+# -----------------------------------------------------------------------------
+
+brew "node"
+
+brew "go"
+
+# >> https://github.com/zoltan-dulac/css3FontConverter
+brew "fontforge"
+
+tap  "bramstein/webfonttools"
+brew "bramstein/webfonttools/sfnt2woff-zopfli"
+brew "bramstein/webfonttools/sfnt2woff"
+brew "bramstein/webfonttools/sfntly"
+brew "bramstein/webfonttools/ttf2eot"
+brew "bramstein/webfonttools/woff2"
+
+# -----------------------------------------------------------------------------
+# fun & games
+# -----------------------------------------------------------------------------
+
+tap  "homebrew/games"
+brew "homebrew/games/nethack"
+
+brew "cowsay"
+brew "figlet"
+
+# -----------------------------------------------------------------------------
+# misc.
+# -----------------------------------------------------------------------------
+
+brew "midnight-commander"
+brew "pv"
+brew "sf-pwgen" # github.com/anders/pwgen
+
+# dictionaries
+brew "dict"
+brew "sdcv"
+
+# pdf
+brew "ghostscript"
+
+# shells
+brew "fish"
+brew "zsh"
+brew "zsh-syntax-highlighting"
+
+# text
+brew "aspell", args: ["with-lang-en"]
+brew "pandoc"
+brew "recode"
+brew "txt2man"
+
+# -----------------------------------------------------------------------------
+# casks
+# -----------------------------------------------------------------------------
+
+# essentials
+
+cask "1password"
+cask "alfred"
+cask "dropbox"
+cask "google-chrome"
+cask "iterm2"
+cask "slack"
+# cask "sublime-text"
+cask "the-unarchiver"
+cask "transmission"
+cask "transmit"
+
+# utilities
+
+cask "dayone-cli"
+cask "file-juicer"
+cask "flux"
+cask "go2shell"
+cask "grandperspective"
+cask "istat-menus"
+cask "magicprefs"
+cask "senuti"
+cask "superduper"
+
+# audio/video
+
+cask "fission"
+cask "handbrake"
+cask "kid3"
+cask "metaz"
+cask "vlc"
+cask "xact"
+
+# etc.
+
+cask "black-screen"
+cask "mactracker"
+cask "onyx"
+cask "real-vnc"
+cask "skype"
+cask "steam"
+cask "xquartz"
+cask "xscreensaver"
+
+# -----------------------------------------------------------------------------
+# Mac App Store
+# -----------------------------------------------------------------------------
+
+brew "mas"
+
+mas "Day One", id: 1055511498
+mas "Divvy", id: 413857545
+mas "Persistent Color Picker", id: 442921390
+mas "Server", id: 883878097
+mas "Sip", id: 507257563
+mas "The Archive Browser", id: 510232205
+mas "Tweetbot", id: 557168941
+mas "Xcode", id: 497799835
