@@ -6,6 +6,7 @@
 #   1. Install Homebrew
 #   2. `brew tap homebrew/bundle`
 #   3. `brew bundle --file=$THIS_FILE`
+#   4. `brew bundle --file=~/.local/config/Brewfile` [optional]
 
 tap "homebrew/dupes"
 tap "homebrew/versions"
@@ -13,6 +14,9 @@ tap "homebrew/versions"
 # -----------------------------------------------------------------------------
 # essentials
 # -----------------------------------------------------------------------------
+
+# for Linuxbrew
+brew "gcc" if OS.linux?
 
 # for Homebrew
 brew "openssl"
@@ -25,7 +29,7 @@ brew "homebrew/versions/bash-completion2"
 
 # tmux
 brew "tmux"
-brew "reattach-to-user-namespace"
+brew "reattach-to-user-namespace" if OS.mac?
 
 # other
 brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
@@ -39,194 +43,71 @@ brew "homebrew/dupes/ncurses"
 # GNU utilities
 # -----------------------------------------------------------------------------
 
-brew "coreutils", args: ["HEAD"]
-brew "moreutils", args: ["HEAD"]
-brew "gawk"
-brew "gnu-tar"
+if OS.mac?
+  brew "coreutils", args: ["HEAD"]
+  brew "moreutils", args: ["HEAD"]
+  brew "gawk"
+  brew "gnu-tar"
 
-# find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
-brew "findutils", args: ["default-names"]
+  # find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
+  brew "findutils", args: ["default-names"]
 
-# sed (overwrite built-in)
-brew "gnu-sed", args: ["default-names"]
+  # sed (overwrite built-in)
+  brew "gnu-sed", args: ["default-names"]
 
-# grep (overwrite built-in)
-brew "homebrew/dupes/grep", args: ["with-default-names"]
+  # grep (overwrite built-in)
+  brew "homebrew/dupes/grep", args: ["with-default-names"]
+end
 
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
-brew "getmail"
 brew "links"
-brew "socat"
-brew "transmission"
-brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
 
-brew "homebrew/dupes/rsync"
-brew "homebrew/dupes/whois"
+if OS.mac?
+  brew "homebrew/dupes/rsync"
+  brew "homebrew/dupes/whois"
+end
+
+# -----------------------------------------------------------------------------
+# development
+# -----------------------------------------------------------------------------
+
+if MacOS.version >= "10.6"
+  brew "rbenv"
+  brew "ruby-build"
+end
+
+brew "python"
+brew "jq"
+
+# -----------------------------------------------------------------------------
+# other stuff
+# -----------------------------------------------------------------------------
+
+if OS.mac?
+  brew "rename"
+  brew "tree"
+  brew "watch"
+end
+
+# images
+brew "pngcrush"
 
 # OpenSSH
 brew "homebrew/dupes/openssh"
 brew "ssh-copy-id"
 brew "keychain"
 
-# -----------------------------------------------------------------------------
-# media
-# -----------------------------------------------------------------------------
-
-# audio/video
-
-brew "atomicparsley"
-brew "ffmpeg", args: ["with-openssl", "with-rtmpdump"]
-brew "id3v2"
-brew "lame"
-brew "mkvtoolnix"
-brew "mp4v2"
-brew "mplayer"
-
-# images
-
-brew "exif"
-brew "exiftool"
-brew "imagemagick", args: ["with-ghostscript"]
-brew "pngcrush"
-brew "qrencode"
-brew "webkit2png"
-
-# imagesnap requires full Xcode to compile (not just CLT)
-brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
-
-# -----------------------------------------------------------------------------
-# development
-# -----------------------------------------------------------------------------
-
-brew "rbenv"
-brew "ruby-build"
-
-brew "python"
-
-brew "jq"
-brew "node"
-
-brew "go"
-
-# >> https://github.com/zoltan-dulac/css3FontConverter
-brew "fontforge"
-
-tap  "bramstein/webfonttools"
-brew "bramstein/webfonttools/sfnt2woff-zopfli"
-brew "bramstein/webfonttools/sfnt2woff"
-brew "bramstein/webfonttools/sfntly"
-brew "bramstein/webfonttools/ttf2eot"
-brew "bramstein/webfonttools/woff2"
-
-# -----------------------------------------------------------------------------
-# fun & games
-# -----------------------------------------------------------------------------
-
-tap  "homebrew/games"
-brew "homebrew/games/nethack"
-
-brew "cowsay"
-brew "figlet"
-
-# -----------------------------------------------------------------------------
-# misc.
-# -----------------------------------------------------------------------------
-
-brew "binutils"
-brew "groff"
-brew "midnight-commander"
-brew "pv"
-brew "rename"
-brew "sf-pwgen" # github.com/anders/pwgen
-brew "source-highlight" # for less
-brew "stow"
-brew "homebrew/dupes/srm"
-brew "tree"
-brew "watch"
-
-# dictionaries
-brew "dict"
-brew "sdcv"
-
-# pdf
-brew "ghostscript"
-
-# shells
-brew "fish"
-brew "zsh"
-brew "zsh-syntax-highlighting"
-
 # text
-brew "aspell", args: ["with-lang-en"]
 brew "dos2unix"
 brew "multimarkdown"
-brew "pandoc"
-brew "recode"
-brew "txt2man"
 
-# -----------------------------------------------------------------------------
-# casks
-# -----------------------------------------------------------------------------
-
-# essentials
-
-cask "1password"
-cask "alfred"
-cask "dropbox"
-cask "google-chrome"
-cask "iterm2"
-cask "slack"
-# cask "sublime-text"
-cask "the-unarchiver"
-cask "transmission"
-cask "transmit"
-
-# utilities
-
-cask "dayone-cli"
-cask "file-juicer"
-cask "flux"
-cask "go2shell"
-cask "grandperspective"
-cask "istat-menus"
-cask "magicprefs"
-cask "senuti"
-cask "superduper"
-
-# audio/video
-
-cask "fission"
-cask "handbrake"
-cask "kid3"
-cask "metaz"
-cask "vlc"
-cask "xact"
-
-# etc.
-
-cask "black-screen"
-cask "mactracker"
-cask "onyx"
-cask "real-vnc"
-cask "skype"
-cask "steam"
-cask "xquartz"
-cask "xscreensaver"
-
-# -----------------------------------------------------------------------------
-# Mac App Store
-# -----------------------------------------------------------------------------
-
-brew "mas"
-
-mas "Xcode", id: 497799835
-mas "The Archive Browser", id: 510232205
-mas "Persistent Color Picker", id: 442921390
-mas "Day One", id: 1055511498
-mas "Tweetbot", id: 557168941
-mas "Server", id: 883878097
-mas "Sip", id: 507257563
-mas "Divvy", id: 413857545
+# misc.
+brew "binutils"
+brew "ghostscript"
+brew "groff"
+brew "source-highlight" # for less
+brew "homebrew/dupes/srm"
+brew "stow"
