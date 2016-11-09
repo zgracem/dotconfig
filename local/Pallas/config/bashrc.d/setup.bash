@@ -32,7 +32,7 @@ setup()
   if [[ ! -x $cyg_bin ]]; then
     scold "can't find ${cyg_bin}"
     return 1
-  elif ! mkdir -p "$log_dir"
+  elif ! mkdir -p "$log_dir"; then
     scold "can't create $log_dir"
     return 1
   else
