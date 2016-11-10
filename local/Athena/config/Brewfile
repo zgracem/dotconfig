@@ -12,6 +12,7 @@
 # internet stuff
 # -----------------------------------------------------------------------------
 
+brew "dnsmasq"
 brew "getmail"
 brew "transmission"
 brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
@@ -74,7 +75,6 @@ brew "figlet"
 # -----------------------------------------------------------------------------
 
 brew "midnight-commander"
-brew "pv"
 brew "sf-pwgen" # github.com/anders/pwgen
 
 # dictionaries
