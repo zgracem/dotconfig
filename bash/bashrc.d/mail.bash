@@ -19,7 +19,7 @@ else
 fi
 
 # mailcaps
-export MAILCAPS="$HOME/share/mailcap"
+export MAILCAPS="$XDG_DATA_HOME/mailcap"
 
 if [[ ! -d $MAILCAPS ]]; then
   unset -v MAILCAPS

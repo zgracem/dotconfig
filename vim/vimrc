@@ -9,7 +9,7 @@ set nocompatible
 " $VIM        = /usr/share/vim
 " $VIMRUNTIME = /usr/share/vim/vim74
 
-set runtimepath =$HOME/.config/vim,$HOME/share/vim
+set runtimepath =$HOME/.config/vim,$XDG_DATA_HOME/vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
 
 set viminfo+=n~/var/lib/vim/.viminfo
@@ -35,7 +35,7 @@ set termencoding=utf-8          " Unicode terminal
 " spellcheck dictionaries
 if has("spell")
   set spelllang=en_ca           " Canadian English
-  set spellfile=$HOME/share/vim/spell/en.utf-8.add
+  set spellfile=$XDG_DATA_HOME/vim/spell/en.utf-8.add
 endif
 
 " paths

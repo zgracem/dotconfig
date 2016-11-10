@@ -1,5 +1,5 @@
 # See ~/etc/terminfo for custom .ti files + a script to compile & install them.
-export TERMINFO="$HOME/share/terminfo"
+export TERMINFO="$XDG_DATA_HOME/terminfo"
 
 if [ ! -d "$TERMINFO" ]; then
   unset -v TERMINFO
