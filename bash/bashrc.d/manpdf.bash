@@ -1,5 +1,9 @@
 # For my manpdf script.
-export MANPDF_DIR="$HOME/share/man/pdf"
+export MANPDF_DIR="$HOME/Dropbox/share/doc/pdf"
+
+if [[ ! -d $MANPDF_DIR ]]; then
+  MANPDF_DIR="$XDG_DATA_HOME/doc/pdf"
+fi
 
 manpdf()
 {

@@ -80,8 +80,8 @@ fi
 # -----------------------------------------------------------------------------
 
 PATH=$HOME/bin:$HOME/opt/bin:$HOME/opt/go/bin:$PATH
-MANPATH=$HOME/share/man:$HOME/opt/share/man:$HOME/opt/man:$MANPATH
-INFOPATH=$HOME/share/info:$HOME/opt/share/info:$INFOPATH
+MANPATH=$HOME/opt/share/man:$HOME/opt/man:$MANPATH
+INFOPATH=$HOME/opt/share/info:$INFOPATH
 
 # -----------------------------------------------------------------------------
 # remove nonexistent directories

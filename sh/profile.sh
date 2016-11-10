@@ -11,7 +11,7 @@ export BLOCKSIZE=1024
 
 # XDG Basedir Spec
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/share"
+export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/var/cache"
 
 # Location of zsh config files

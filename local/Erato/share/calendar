@@ -4,7 +4,7 @@ LANG=en_CA
 #include <calendar.computer>
 #include <calendar.history>
 #include <calendar.music>
-#include </Users/zozo/share/calendar/calendar.catholiclite>
-#include </Users/zozo/share/calendar/calendar.buddhist>
-#include </Users/zozo/share/calendar/calendar.canada>
-#include </Users/zozo/share/calendar/calendar.usholiday>
+#include </Users/zozo/Dropbox/share/calendar/calendar.catholiclite>
+#include </Users/zozo/Dropbox/share/calendar/calendar.buddhist>
+#include </Users/zozo/Dropbox/share/calendar/calendar.canada>
+#include </Users/zozo/Dropbox/share/calendar/calendar.usholiday>

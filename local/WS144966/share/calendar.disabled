@@ -4,7 +4,7 @@ LANG=en_CA
 #include </home/uxhj/opt/share/calendar/calendar.computer>
 #include </home/uxhj/opt/share/calendar/calendar.history>
 #include </home/uxhj/opt/share/calendar/calendar.music>
-#include </home/uxhj/share/calendar/calendar.catholiclite>
-#include </home/uxhj/share/calendar/calendar.buddhist>
-#include </home/uxhj/share/calendar/calendar.canada>
-#include </home/uxhj/share/calendar/calendar.usholiday>
+#include </home/uxhj/Dropbox/share/calendar/calendar.catholiclite>
+#include </home/uxhj/Dropbox/share/calendar/calendar.buddhist>
+#include </home/uxhj/Dropbox/share/calendar/calendar.canada>
+#include </home/uxhj/Dropbox/share/calendar/calendar.usholiday>
