@@ -35,6 +35,9 @@ gem "ronn"
 # <github.com/genki/ruby-terminfo>
 gem "ruby-terminfo"
 
+# calculate sun/moon position & phase <github.com/agileronin/suncalc-ruby>
+gem "suncalc"
+
 # TrueType font parser <github.com/prawnpdf/ttfunk>
 gem "ttfunk"
 
