@@ -1,1 +1,6 @@
-gem: -​-env-shebang --no-document
+---
+gem: --bindir ~/opt/bin
+install: --no-document -​-env-shebang
+update: --no-document -​-env-shebang -​-minimal-deps
+uninstall: -​-executables
+query: --details
