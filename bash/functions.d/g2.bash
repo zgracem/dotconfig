@@ -3,6 +3,7 @@ declare -A mydirs
 mydirs[defunct]="$HOME/src/_defunct"
 mydirs[dev]="$dir_scripts/dev"
 mydirs[stow]="$HOME/opt/stow"
+mydirs[inbox]="$dir_dropbox/inbox"
 mydirs[scratch]="$HOME/tmp/_scratch"
 mydirs[vsmm]="$dir_dropbox/www/vsmm"
 
