@@ -84,10 +84,9 @@ z_tidy()
 # Supplementary startup files
 # -----------------------------------------------------------------------------
 
-if [ -d "$XDG_CONFIG_HOME/sh/profile.d" ]; then
-  for file in "$XDG_CONFIG_HOME/sh/profile.d/"*.sh; do
-    [ -r "$file" ] && . "$file"
-  done
-fi
+for file in "$XDG_CONFIG_HOME/sh/profile.d/"*.sh \
+            "$XDG_CONFIG_HOME/sh/private.d/"*.sh; do
+  [ -r "$file" ] && . "$file"
+done
 
 unset -v file
