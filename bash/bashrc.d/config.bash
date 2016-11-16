@@ -236,20 +236,18 @@ _z_config_symlink()
     local symlink=".${target##*/}"
   fi
 
-  if [[ ! -L $HOME/$symlink ]]; then
-    if [[ -f $HOME/$symlink ]]; then
-      local backup
-      if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
-        printf -v backup "$symlink~original_%(%Y%m%d)T"
-      else
-        backup="$symlink~original_$(date +%Y%m%d)"
-      fi
-      mv -v "$HOME/$symlink" "$HOME/$backup" || return
-    fi
-
-    ( cd "$HOME"; ln -sv "$target" "$symlink" )
-  else
-    # symlink already exists
+  if [[ -L $HOME/$symlink ]]; then
+    # link already exists
     return 0
+  elif [[ -f $HOME/$symlink ]]; then
+    local backup
+    if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
+      printf -v backup "$symlink~original_%(%Y%m%d)T"
+    else
+      backup="$symlink~original_$(date +%Y%m%d)"
+    fi
+    mv -v "$HOME/$symlink" "$HOME/$backup" || return
   fi
+
+  ( cd "$HOME"; ln -sv "$target" "$symlink" )
 }
