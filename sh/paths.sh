@@ -27,9 +27,6 @@ if [ -d "$HOME/.rbenv" ]; then
   fi
 fi
 
-# go-lang (cygwin location)
-PATH=$PATH:/opt/go/bin
-
 # -----------------------------------------------------------------------------
 # macOS
 # -----------------------------------------------------------------------------
@@ -79,7 +76,7 @@ fi
 # ~
 # -----------------------------------------------------------------------------
 
-PATH=$HOME/bin:$HOME/opt/bin:$HOME/opt/go/bin:$PATH
+PATH=$HOME/bin:$HOME/opt/bin:$PATH
 MANPATH=$HOME/opt/share/man:$HOME/opt/man:$MANPATH
 INFOPATH=$HOME/opt/share/info:$INFOPATH
 
