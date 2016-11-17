@@ -9,7 +9,7 @@ set nocompatible
 " $VIM        = /usr/share/vim
 " $VIMRUNTIME = /usr/share/vim/vim74
 
-set runtimepath =$HOME/.config/vim,$XDG_DATA_HOME/vim
+set runtimepath =$XDG_DATA_HOME/vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
 
 set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
