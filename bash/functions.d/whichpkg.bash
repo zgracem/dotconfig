@@ -8,44 +8,45 @@ whichpkg()
     return 1
   fi
 
-  if [[ ! $file =~ / ]]; then
-    # If we're not passing a full path, search the current directory, then
-    # check PATH for an executable.
+  if [[ $file != */* ]]; then
+    # Search the current directory
     if [[ -f $PWD/$file ]]; then
       file="$PWD/$file"
+    # Search for an executable in PATH
     elif file=$(type -P "$file"); then
-      # Do nothing, we're fine
-      :
+      : # Do nothing, we're fine
     else
       scold "not found: $1"
       return 1
     fi
   fi
 
-  if [[ $OSTYPE == cygwin ]]; then
-    local mgr='Cygwin'
-    local pkg=$(cygcheck --find-package "$file") || return
-
-  ### ZGM TODO: fix to work w/ Linuxbrew and w/out HOMEBREW_CELLAR
-  elif [[ $OSTYPE == darwin* ]] && [[ -d $HOMEBREW_CELLAR ]]; then
-    local mgr='Homebrew'
-
-    local canon
-
-    if canon=$(mdutil -t "$file"); then
-      local re="^${HOMEBREW_CELLAR}/([^/]+)/([^/]+)/.+\$"
-
-      if [[ $canon =~ $re ]]; then
-        local pkg="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}"
-        file=$canon
-      fi
-    else
+  # canonicalize 
+  local canon
+  if [[ $OSTYPE == darwin* ]]; then
+    canon=$(mdutil -t "$file")
+    if [[ $canon != /* ]]; then
       scold "$file: could not canonicalize"
       return 1
     fi
+  elif ! canon=$(readlink -e "$file"); then
+    scold "$file: could not canonicalize"
+    return 1
+  fi
 
+  if [[ $OSTYPE == cygwin ]]; then
+    local mgr="Cygwin"
+    local pkg=$(cygcheck --find-package "$canon")
+  elif [[ -d $HOMEBREW_PREFIX ]]; then
+    local mgr="Homebrew"
+    [[ $OSTYPE == linux* ]] && mgr="Linuxbrew"
+
+    local regex="^$HOMEBREW_PREFIX/Cellar/([^/]+)/([^/]+)/.+\$"
+    if [[ $canon =~ $regex ]]; then
+      local pkg="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}"
+    fi 
   else
-    scold 'no compatible package manager found'
+    scold "no compatible package manager found"
     return 1
   fi
 
