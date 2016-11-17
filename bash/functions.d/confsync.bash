@@ -3,7 +3,7 @@ hconfsync()
   local dest="Hiroko:/Users/zozo"
 
   syncdir "$dir_dropbox/.config" "$dest/.config"
-  syncdir "$dir_dropbox/etc"     "$dest/etc" --max-delete=1
+  syncdir "$dir_dropbox/etc"     "$dest/etc" --max-delete=1 --exclude='*.sublime-*'
   syncdir "$dir_dropbox/lib"     "$dest/lib" --max-delete=1
   syncdir "$dir_dropbox/scripts" "$dest/scripts"
 }
@@ -12,10 +12,11 @@ wfconfsync()
 {
   local dest="WebFaction:/home/zozo"
 
-  syncdir "$dir_dropbox/.config" "$dest/.config"
-  syncdir "$dir_dropbox/etc"     "$dest/etc" --max-delete=0 --exclude='*.sublime-*'
-  syncdir "$dir_dropbox/lib"     "$dest/lib" --max-delete=0
-  syncdir "$dir_dropbox/scripts" "$dest/scripts"
+  syncdir "$dir_dropbox/.config"    "$dest/.config"
+  syncdir "$dir_dropbox/etc"        "$dest/etc" --max-delete=0 --exclude='*.sublime-*'
+  syncdir "$dir_dropbox/lib"        "$dest/lib" --max-delete=0
+  syncdir "$dir_dropbox/share/vim"  "$dest/.local/share/vim"
+  syncdir "$dir_dropbox/scripts"    "$dest/scripts"
 }
 
 # confsync()
