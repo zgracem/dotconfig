@@ -8,9 +8,10 @@ export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
 
 if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
+  # HOME-based paths for Linuxbrew
   export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
   export HOMEBREW_LOGS="$HOME/var/log/homebrew"
-  export HOMEBREW_TEMP="$HOME/var/tmp"
+  export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
   [ -d "$HOMEBREW_CACHE" ] || mkdir -pv "$HOMEBREW_CACHE"
   [ -d "$HOMEBREW_LOGS" ]  || mkdir -pv "$HOMEBREW_LOGS"
   [ -d "$HOMEBREW_TEMP" ]  || mkdir -pv "$HOMEBREW_TEMP"

@@ -12,7 +12,7 @@ set nocompatible
 set runtimepath =$HOME/.config/vim,$XDG_DATA_HOME/vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
 
-set viminfo+=n~/var/lib/vim/.viminfo
+set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
 
 silent! call pathogen#infect()
 silent! call pathogen#helptags()
@@ -63,6 +63,9 @@ if has("unix")
 elseif has("win32") || has("win64")
   set directory=.,$HOME/var/lib/vim//,$TEMP//
 endif
+
+" location of .netrwhist file
+let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
 "-----------------------------------------------------------------------------
 " Behaviour

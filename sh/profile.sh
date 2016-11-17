@@ -13,6 +13,8 @@ export BLOCKSIZE=1024
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/var/cache"
+#export XDG_DATA_DIRS=$XDG_DATA_HOME/:$HOME/opt/share/:/usr/local/share/:/usr/share/
+export XDG_RUNTIME_DIR="$HOME/var/run"
 
 # Location of zsh config files
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
@@ -40,7 +42,8 @@ esac
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
 # "noexec" (as it would be on a shared host) and change to a path we control.
 if [ ! -G $TMPDIR ] && mount|grep -q " on $TMPDIR.*noexec,"; then
-  TMPDIR="$HOME/var/tmp"
+  TMPDIR="$XDG_RUNTIME_DIR"
+  [ -d "$TMPDIR" ] || mkdir -p "$TMPDIR"
 fi
 
 # Determine platform.

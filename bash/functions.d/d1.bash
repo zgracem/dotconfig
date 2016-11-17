@@ -11,7 +11,7 @@ d1()
 {
   # create temp file to hold entry
   local entry
-  printf -v entry "$HOME/var/tmp/dayone.%(%Y%m%d.%H%M%S)T.md"
+  printf -v entry "$XDG_RUNTIME_DIR/dayone.%(%Y%m%d.%H%M%S)T.md"
   # entry=$(mktemp -q -t "dayone.XXXXXX.md")
 
   # invoke editor to create entry -- if it exits successfully and creates

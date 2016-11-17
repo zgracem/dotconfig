@@ -4,16 +4,19 @@ _inPath keychain || return
 # export GPG_TTY="$(tty)"
 
 if [[ -z $SSH_AGENT_PID ]]; then
-  keychain_dir="$HOME/var/run"
+  keychain_dir="$XDG_RUNTIME_DIR"
   [[ -d $keychain_dir ]] || mkdir -pv "$keychain_dir"
 
   [[ :$SHELLOPTS: =~ :noclobber: ]] || trap 'set -o noclobber; trap - RETURN;' RETURN
   set +o noclobber
 
-  if keychain_env=$(keychain --agents ssh --dir "$keychain_dir" \
-                    --ignore-missing --inherit any \
-                    --quick --quiet --eval \
-                    id_rsa)
+  if keychain_env=$(keychain --agents ssh \
+                             --dir "$keychain_dir" \
+                             --ignore-missing \
+                             --inherit any \
+                             --quick --quiet \
+                             --eval \
+                             id_rsa)
   then
     eval "$keychain_env"
   fi
