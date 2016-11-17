@@ -36,12 +36,10 @@ if [ -x /usr/local/bin/brew ]; then
   # GNU coreutils (w/out `g` prefix)
   PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
-  INFOPATH=/usr/local/opt/coreutils/share/info:$INFOPATH
 
   # GNU sed (installed --with-default-names)
   PATH=/usr/local/opt/gnu-sed/bin:$PATH
   MANPATH=/usr/local/opt/gnu-sed/share/man:$MANPATH
-  INFOPATH=/usr/local/opt/gnu-sed/share/info:$INFOPATH
 
   # GNU tar (w/out `g` prefix)
   PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
