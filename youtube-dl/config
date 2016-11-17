@@ -21,7 +21,7 @@
 # do not use the Last-modified header to set the file modification time
 # --no-mtime
 
-# location in the filesystem where youtube-dl can store some downloaded information permanently
+# location where youtube-dl can store some downloaded information permanently
 --cache-dir "/Users/zozo/var/cache/youtube-dl"
 # --cache-dir "/Users/zozo/Library/Caches/io.github.rg3.youtube-dl"
 
@@ -50,7 +50,7 @@
 --prefer-insecure
 
 # disguise as Chrome on Windows 7
---user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36"
+--user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
 
 # -----------------------------------------------------------------------------
 # video format options
