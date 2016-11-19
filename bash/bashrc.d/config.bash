@@ -65,12 +65,16 @@ rl()
     files+=("$dir_local/config/functions.d/$1"?(.*))
 
     case $1 in
+      colour|dirs|functions|terminal)
+          files+=("$dir_config/bash/_$1.bash")
+          ;;&
+
       init)   # normally not sourced on reload
           files+=("$dir_local/config/init.bash")
           ;;
 
       prompt) # reload colours first
-          files=("$dir_config/bash/colour.bash" "${files[@]}")
+          files=("$dir_config/bash/_colour.bash" "${files[@]}")
           ;;
 
       colour) # also reload prompt

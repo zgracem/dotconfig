@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~/.config/bash/colour.bash
+# ~/.config/bash/_colour.bash
 # -----------------------------------------------------------------------------
 
 # get the terminal colour depth (based on $TERM, not perfect but it'll do)
