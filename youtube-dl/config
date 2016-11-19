@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~/.config/youtube-dl.conf
+# ~/.config/youtube-dl/config
 # >> http://rg3.github.io/youtube-dl/
 # -----------------------------------------------------------------------------
 # general options
@@ -20,14 +20,6 @@
 
 # do not use the Last-modified header to set the file modification time
 # --no-mtime
-
-# location where youtube-dl can store some downloaded information permanently
---cache-dir "/Users/zozo/var/cache/youtube-dl"
-# --cache-dir "/Users/zozo/Library/Caches/io.github.rg3.youtube-dl"
-
-# file to read cookies from and dump cookie jar in
---cookies "/Users/zozo/var/cache/youtube-dl/cookies.txt"
-# --cookies "/Users/zozo/Library/Caches/io.github.rg3.youtube-dl/cookies.txt"
 
 # -----------------------------------------------------------------------------
 # verbosity/simulation options
