@@ -1,7 +1,7 @@
 _inPath screen || return
 
 # set socket directory
-export SCREENDIR="$HOME/tmp/.screens"
+export SCREENDIR="$XDG_RUNTIME_DIR"
 
 # keep homedir tidy
 z_tidy ~/.screen
