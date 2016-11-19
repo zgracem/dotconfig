@@ -166,16 +166,16 @@ fi
 export INPUTRC="$dir_config/inputrc"
 
 # Define important shell functions
-. "$dir_config/bash/functions.bash"
+. "$dir_config/bash/_functions.bash"
 
 # Terminal-related setup
-. "$dir_config/bash/term.bash"
+. "$dir_config/bash/_terminal.bash"
 
 # Load direction definitions ($dir_foo)
-. "$dir_config/bash/dirs.bash"
+. "$dir_config/bash/_dirs.bash"
 
 # Define colours (before ./bashrc.d/prompt.bash loads)
-. "$dir_config/bash/colour.bash"
+. "$dir_config/bash/_colour.bash"
 
 # Temporarily enable
 shopt -s nullglob
