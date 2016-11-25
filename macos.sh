@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
-# zozo's macOS configuration script
+# macOS configuration script
 # Adapted from https://mths.be/macos
 #          and https://github.com/herrbischoff/awesome-osx-command-line
 # -----------------------------------------------------------------------------

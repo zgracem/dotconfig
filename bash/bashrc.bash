@@ -35,7 +35,7 @@ set -o vi               # vi mode
 shopt -s extglob        # enable extended pattern matching
 shopt -s nocaseglob     # case-insensitive globbing in pathn?m* expansion
 shopt -s nocasematch    # case-insensitive patterns in `case` and `[[`
-shopt -u nullglob       # interferes with bash-completion
+shopt -u nullglob       # (interferes with bash-completion)
 
 shopt -s checkwinsize   # update LINES & COLUMNS after each command
 shopt -s gnu_errfmt     # print shell error messages in standard GNU format
@@ -92,13 +92,18 @@ if (( this_bash < latest_bash )); then
       # I'm obviously not allowed to change anything on my shared host.
       newer_bash="$HOME/.linuxbrew/bin/bash"
       ;;
+    *)
+      # If present, probably newer than the default.
+      newer_bash="$HOME/opt/bin/bash"
+      ;;
   esac
 
   if [[ -x $newer_bash && $newer_bash != $SHELL ]]; then
     export SHELL="$newer_bash"
 
-    # Temporarily export shell options so the new shell inherits them.
-    export SHELLOPTS 2>/dev/null
+    ### ZGM 2016-11-22 -- Why?
+    # # Temporarily export shell options so the new shell inherits them.
+    # export SHELLOPTS 2>/dev/null
 
     # Prevent shell from exiting if `exec` fails.
     shopt -s execfail
@@ -108,12 +113,14 @@ if (( this_bash < latest_bash )); then
     else
       exec "$SHELL"
     fi
+  else
+    unset -v newer_bash
   fi  
 fi
 
 # We don't actually want to *keep* those settings, though.
 shopt -u execfail
-declare +x SHELLOPTS 2>/dev/null
+# declare +x SHELLOPTS 2>/dev/null
 
 # -----------------------------------------------------------------------------
 # Essential environment variables
