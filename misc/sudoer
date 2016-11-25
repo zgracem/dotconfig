@@ -1,0 +1,7 @@
+# /etc/sudoers.d/sudoer_$USER
+
+# pass important multiplexer-related variables
+Defaults    env_keep += "STY TMUX"
+
+# pass location of custom terminfo files
+Defaults    env_keep += "TERMINFO TERMINFO_DIRS"
