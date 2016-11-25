@@ -1,13 +1,5 @@
 _inPath screen || return
 
-# set socket directory
-export SCREENDIR="$XDG_RUNTIME_DIR"
-
-# keep homedir tidy
-z_tidy ~/.screen
-
-export SCREENRC="$dir_config/screen/screenrc"
-
 # Solarized Light colour scheme
 if [[ $Z_SOLARIZED == light ]]; then
   SCREENRC="$dir_config/screen/screenrc.light"
