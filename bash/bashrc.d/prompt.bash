@@ -56,28 +56,23 @@ if [[ ! $PTERM =~ xterm|putty|nsterm|iTerm ]]; then
   Z_SET_TABTITLE=false
 fi
 
-# PuTTY doesn't have meaningful "tab titles"
-if [[ $TERM_PROGRAM == PuTTY ]]; then
-  Z_SET_TABTITLE=false
-fi
-
-# Prompt (panic.com/prompt) doesn't have a status line
-if [[ $TERM_PROGRAM == Prompt* ]]; then
-  Z_SET_WINTITLE=false
-  Z_SET_TABTITLE=false
-fi
-
-# Coda (panic.com/coda-ios) has a very narrow status line
-if [[ $TERM_PROGRAM == Coda ]]; then
-  Z_SET_WINTITLE=false
-  Z_SET_TABTITLE=false
-fi
-
-# Terminal.app has its own functions for this
-if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-  Z_SET_WINTITLE=false
-  Z_SET_TABTITLE=false
-fi
+case $TERM_PROGRAM in
+  PuTTY) # doesn't have meaningful "tab titles"
+    Z_SET_TABTITLE=false
+    ;;
+  Prompt*) # doesn't have a status line (panic.com/prompt)
+    Z_SET_WINTITLE=false
+    Z_SET_TABTITLE=false
+    ;;
+  Coda) # has a very narrow status line (panic.com/coda-ios) 
+    Z_SET_WINTITLE=false
+    Z_SET_TABTITLE=false
+    ;;
+  Apple_Terminal) # has its own functions for this
+    Z_SET_WINTITLE=false
+    Z_SET_TABTITLE=false
+    ;;
+esac
 
 # -----------------------------------------------------------------------------
 # Functions
