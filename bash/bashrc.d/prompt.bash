@@ -74,6 +74,12 @@ case $TERM_PROGRAM in
     ;;
 esac
 
+# Display "user@hostname" if "user" isn't typical
+#   (set in ~/.config/sh/private.d/default_user.sh)
+if [[ $USER != $DEFAULT_USER ]]; then
+  Z_PROMPT_HOST=true
+fi
+
 # -----------------------------------------------------------------------------
 # Functions
 # -----------------------------------------------------------------------------
@@ -243,7 +249,7 @@ _z_PS1_git_info()
   else
     return 1
   fi
-
+  
   # count unstaged files (by counting newlines)
   unstaged=${status//[^$'\x0a']/}
   unstaged=${#unstaged}
@@ -425,7 +431,18 @@ fi
 # Print the hostname if we're remotely connected. (Otherwise we probably know
 # which machine we're sitting in front of.)
 if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
-  PS1+="${PS1_dim}\h${PS1_reset}:"
+  case $USER in
+    $DEFAULT_USER)
+      PS1+="${PS1_dim}"
+      ;;
+    root)
+      PS1+="${PS1_red}\u${PS1_reset}${PS1_dim}@"
+      ;;
+    *)
+      PS1+="${PS1_dim}\u@"
+      ;;
+  esac
+  PS1+="\h${PS1_reset}:"
 fi
 
 # Print the current path, highlighted and truncated if necessary.
@@ -583,4 +600,4 @@ prompt()
 # -----------------------------------------------------------------------------
 
 unset -f _z_prompt_cmd_{add,del}
-unset -v ${!PS1_*}
+# unset -v ${!PS1_*}
