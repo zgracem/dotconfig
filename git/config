@@ -1,6 +1,5 @@
-[user]
-	name  = ZGM
-	email = cryptostrophe@users.noreply.github.com
+[include]
+	path = ~/.config/git/config.private
 
 [core]
 	autocrlf = input

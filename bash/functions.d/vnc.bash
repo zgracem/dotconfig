@@ -2,9 +2,6 @@
 
 vnc()
 {
-  # # set `dir_drive` if it's not already
-  # dir_drive=${dir_drive:-$(find_drive "$myDrive")} || return
-
   local vnc_dir="$dir_apps/RealVNC"
   local vnc_exe="$vnc_dir/vncviewer.exe"
   local vnc_conf="$dir_config/vnc/vnc.conf"

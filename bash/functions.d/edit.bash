@@ -1,5 +1,5 @@
 _edit()
-{   # open file(s) in the appropriate editor
+{ # open file(s) in the appropriate editor
   # Usage: _edit FILE[:LINE] [FILE[:LINE] ...]
 
   local -a files=("$@")

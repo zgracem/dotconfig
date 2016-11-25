@@ -1,3 +1,5 @@
+# Sourced from ~/scripts/util/confsync.sh
+
 syncdir()
 {
     if (( $# >= 2 )); then
