@@ -15,13 +15,14 @@ roll()
   case $archive in
     *.tar.bz2)  tar cjf "$archive" "$@" ;;
     *.tar.gz)   tar czf "$archive" "$@" ;;
-    *.7z)       7z -mx=9 "$archive" "$@" ;;
+    *.tar.xz)   tar cf - "$@" | xz -6e > "$archive" ;;
+    *.7z)       7z a -mx=9 "$archive" "$@" ;;
     *.jar)      jar cf "$archive" "$@" ;;
     *.rar)      rar -m5 -r "$archive" "$@" ;;
     *.tar)      tar cf "$archive" "$@" ;;
     *.tgz)      tar czf "$archive" "$@" ;;
     *.zip)      zip -9r "$archive" "$@" ;;
-    *)          scold "$FUNCNAME: unsupported archive format: ${archive##*.}"
+    *)          scold "$FUNCNAME: unsupported archive format: .${archive#*.}"
                 return 1 ;;
   esac
 }
