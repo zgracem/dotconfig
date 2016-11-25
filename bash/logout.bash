@@ -20,6 +20,6 @@ fi
 # run machine-specific logout file
 if [[ -f $dir_local/config/logout.bash ]]; then
   . "$dir_local/config/logout.bash"
-else
-  return 0
 fi
+
+return 0
