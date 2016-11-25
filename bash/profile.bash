@@ -4,11 +4,11 @@
 # -----------------------------------------------------------------------------
 
 if test "$BASH_VERSINFO"; then
-    # bash > 2.0, so source .bashrc
-    if [[ -r $HOME/.bashrc ]]; then
-        . "$HOME/.bashrc"
-    fi
+  # bash > 2.0, so source .bashrc
+  if [[ -r $HOME/.bashrc ]]; then
+    . "$HOME/.bashrc"
+  fi
 else
-    # bash < v2.0, abort
-    return
+  # bash < v2.0, abort
+  return
 fi

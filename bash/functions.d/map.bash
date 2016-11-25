@@ -19,8 +19,7 @@ map()
   cmd+="${1%:} "
   shift
 
-  local i
-  for i in "$@"; do
+  local i; for i in "$@"; do
     eval "${cmd//\\/\\\\} \"${i//\\/\\\\}\""
   done
 }
