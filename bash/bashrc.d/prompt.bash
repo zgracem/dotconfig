@@ -228,8 +228,11 @@ _z_PS1_git_info()
   local status="" branch="" icons=""
   local ahead=0 unstaged=0 untracked=0 dirty=false
 
-  # get info on current branch, or bail if no branch exists
-  status=$(git status --branch --porcelain 2>/dev/null) || return
+  # bail immediately if we're not in a git repo
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+
+  # get info on current branch
+  status=$(git status --branch --porcelain 2>/dev/null)
 
   # get name of branch
   local re_br='^## ([[:graph:]]+)…'
