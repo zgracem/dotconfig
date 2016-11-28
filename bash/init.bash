@@ -2,16 +2,41 @@
 # final initialization script
 # sourced at the end of ~/.bashrc
 # -----------------------------------------------------------------------------
-# Keep homedir tidy 
-# -----------------------------------------------------------------------------
 
 # Add config file symlinks if necessary (see bashrc.d/config.bash)
+
 if [[ ! -e ~/.irbrc ]] && _inPath irb; then
   _z_config_symlink ruby/irbrc
 fi
+
 if [[ ! -e ~/.vimrc ]] && _inPath vim; then
   _z_config_symlink vim/vimrc
 fi
+
+# -----------------------------------------------------------------------------
+# Keep homedir tidy.
+# -----------------------------------------------------------------------------
+
+z_tidy()
+{ # Usage: z_tidy ~/.bash_sessions
+  local rm_opts="-f"
+
+  if [[ $- == *i* ]]; then
+    # interactive shell, be verbose
+    rm_opts+="v"
+  fi
+
+  local targets=("$@")
+  local target; for target in "${targets[@]}"; do
+    if [ ! -e $target ]; then
+      continue
+    elif [ -d $target ]; then
+      rm_opts+="r"
+    fi
+
+    command rm $rm_opts "$target" || return
+  done
+}
 
 # Remove unwanted dotfiles
 trash_files=(
