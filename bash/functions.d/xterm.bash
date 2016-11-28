@@ -1,4 +1,5 @@
-[[ $OSTYPE == cygwin ]] || return
+return ### ZGM disabled 2016-11-28 -- I don't use this
+# [[ $OSTYPE == cygwin ]] || return
 
 startxwin()
 {
