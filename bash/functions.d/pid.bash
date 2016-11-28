@@ -1,31 +1,45 @@
-if [[ -z $flags_pid ]]; then
+_pid()
+{
+  local flags
   case $PLATFORM in
-    windows)  flags_pid='-asW' ;;
-    *)        flags_pid='-cx -o pid,command' ;;
+    windows)  flags="-sW" ;;
+    #                 │└────── also show Windows processes
+    #                 └─────── summary format
+
+    *)        flags="-cx -o pid,command" ;;
+    #                 ││  └─── output this info only
+    #                 │└────── include processes w/ no controlling terminal
+    #                 └─────── show only the executable name, not the full cmd
   esac
-fi
+
+  [[ ${FUNCNAME[1]} == pidis ]] && flags=${flags/pid,/}
+
+  command ps $flags "$@"
+}
 
 pidof()
-{ # return the PID of process $1 or exit false
+{ # returns the PID(s) of process(es) named $1, or false if nothing found
   local proc="$1"
   local pid
+  pid=$(_pid | sed -nE "s/[[:space:]]*([[:digit:]]+) .*\<${proc}(\.exe)?$/\1/ip")
 
-  pid=$(command ps $flags_pid \
-        | sed -nE "s/[[:space:]]*([[:digit:]]+) .*\<$proc[^\\]*(\.exe)?$/\1/ip")
-
-  if [[ -n $pid ]]; then
-    echo "$pid"
-  fi
+  [[ -n $pid ]] && echo "$pid"
 }
 
 pidis()
-{ # return the process with PID $1 or exit false
+{ # returns the name of the process with PID $1, or false if nothing found
   local pid="$1"
+  [[ $pid =~ ^[[:digit:]]+$ ]] || return 1
+
   local proc
+  proc=$(_pid -p $pid | tail -n+2)
 
-  proc=$(command ps ${flags_pid/pid,/} -p $pid | tail -n+2)
-
-  if [[ -n $proc ]]; then
+  if [[ -z $proc ]]; then
+    return 1
+  elif [[ $PLATFORM == windows ]]; then
+    # Assumes output format of PID,TTY,STIME,COMMAND
+    tr -s " " <<< "$proc" | cut -d" " -f5-
+  else
     echo "$proc"
   fi
 }
