@@ -203,8 +203,8 @@ for file in "$dir_config"/bash/bashrc.d/*.bash; do
 done
 
 # Machine specific files in ~/.local
-if [[ -d $dir_local/config/bashrc.d ]]; then
-  for file in "$dir_local"/config/bashrc.d/*.bash; do
+if [[ -d ~/.local/config/bashrc.d ]]; then
+  for file in ~/.local/config/bashrc.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
@@ -225,8 +225,8 @@ if   (( SHLVL <= 1 )) \
 then
   . "$dir_config/bash/init.bash"
 
-  if [[ -f $dir_local/config/init.bash ]]; then
-    . "$dir_local/config/init.bash"
+  if [[ -f ~/.local/config/init.bash ]]; then
+    . ~/.local/config/init.bash
   fi
 fi
 

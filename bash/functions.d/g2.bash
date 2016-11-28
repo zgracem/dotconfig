@@ -1,43 +1,75 @@
-declare -A mydirs
-
-mydirs[defunct]="$HOME/src/_defunct"
-mydirs[dev]="$dir_scripts/dev"
-mydirs[stow]="$HOME/opt/stow"
-mydirs[inbox]="$dir_dropbox/inbox"
-mydirs[scratch]="$HOME/tmp/_scratch"
-mydirs[vsmm]="$dir_dropbox/www/vsmm"
+declare -A mydirs=(
+  [bashlib]="$HOME/lib/bash"
+  [defunct]="$HOME/src/_defunct"
+  [dev]="$dir_scripts/dev"
+  [stow]="$HOME/opt/stow"
+  [inbox]="$dir_dropbox/inbox"
+  [local]="$HOME/.local"
+  [scratch]="$HOME/tmp/_scratch"
+  [vsmm]="$dir_dropbox/www/vsmm"
+)
 
 g2()
 {
-
-  local name="$1" place
+  local name="$1"
+  local place
 
   if [[ $name == */* ]]; then
     local child="${name#*/}"
     name="${name%%/*}"
   fi
 
-  # remove illegal characters or ${!checkvar} expansion below will fail
-  local checkvar="dir_${name//[^[:alnum:]_]}"
+  case $name in
+    desktop)
+      case $PLATFORM in
+        windows)  place=$(cygpath --desktop) ;;
+        mac)      place=~/Desktop ;;
+      esac
+      ;;
 
-  # first, see if we're trying to call a variable directly
-  if [[ -n ${!checkvar} ]]; then
-    place="${!checkvar}${child:+/$child}"
-  elif [[ -v mydirs[$name] ]]; then
-    place="${mydirs[$name]}"
-  # maybe it's a directory in $HOME?
-  elif [[ -d $HOME/$name${child:+/$child} ]]; then
-    place="$HOME/$name${child:+/$child}"
-  elif [[ -n $DIRSTACK ]]; then
-    local re="$name"'$'
-    local d; for d in "${DIRSTACK[@]}"; do
-      if [[ $d =~ $re ]]; then
-        place="${d/#~/$HOME}${child:+/$child}"
+    docs)
+      if [[ $HOSTNAME == Erato* ]]; then
+        place=~/Dropbox/Documents
+      elif [[ $PLATFORM == windows ]]; then
+        place=$(cygpath --mydocs)
+      else
+        place=~/Documents
       fi
-    done
+      ;;
+
+    music)
+      if [[ $PLATFORM == mac ]]; then
+        place="$HOME/Music/iTunes/iTunes Media/Music"
+      fi
+      ;;
+
+    drive)
+      place=$(find_drive "$myDrive" 2>/dev/null)
+      ;;
+  esac
+
+  if [[ -z $place ]]; then
+    # remove illegal characters or ${!checkvar} expansion below will fail
+    local checkvar="dir_${name//[^[:alnum:]_]}"
+
+    if [[ -n ${!checkvar} ]]; then
+      place="${!checkvar}"
+    elif [[ -v mydirs[$name] ]]; then
+      place="${mydirs[$name]}"
+    elif [[ -d $HOME/$name${child:+/$child} ]]; then
+      place="$HOME/$name"
+    elif [[ -n $DIRSTACK ]]; then
+      local d; for d in "${DIRSTACK[@]}"; do
+        if [[ ${d##*/} == $name ]]; then
+          place="${d/#~/$HOME}"
+          break
+        fi
+      done
+    fi
   fi
 
-  # any luck?
+  place="${place}${child:+/$child}"
+
   if [[ -d $place ]]; then
     cd "$place"
     return 0

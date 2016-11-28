@@ -1,5 +1,9 @@
+# See also ~/.config/bash/bash_completion.d/howto.bash
+
 howto()
 {
+    local dir_howto="$HOME/txt/howto"
+
     if (( $# == 0 )); then
         cd "$dir_howto"
         return

@@ -61,8 +61,8 @@ rl()
     files+=("$dir_config/"{bash,sh}/**/"$1"?(.*))
 
     # check ~/.local
-    files+=("$dir_local/config/bashrc.d/$1"?(.*))
-    files+=("$dir_local/config/functions.d/$1"?(.*))
+    files+=("$HOME/.local/config/bashrc.d/$1"?(.*))
+    files+=("$HOME/.local/config/functions.d/$1"?(.*))
 
     case $1 in
       colour|dirs|functions|terminal)
@@ -70,7 +70,7 @@ rl()
           ;;&
 
       init)   # normally not sourced on reload
-          files+=("$dir_local/config/init.bash")
+          files+=("$HOME/.local/config/init.bash")
           ;;
 
       prompt) # reload colours first
@@ -86,7 +86,7 @@ rl()
           ;;
 
       local) 
-          files+=("$dir_local/config/bashrc.d/"*.bash)
+          files+=("$HOME/.local/config/bashrc.d/"*.bash)
           ;;
 
       inputrc)

@@ -18,8 +18,8 @@ if (( history_size_bytes >= history_max_bytes )); then
 fi
 
 # run machine-specific logout file
-if [[ -f $dir_local/config/logout.bash ]]; then
-  . "$dir_local/config/logout.bash"
+if [[ -f ~/.local/config/logout.bash ]]; then
+  . ~/.local/config/logout.bash
 fi
 
 return 0
