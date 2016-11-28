@@ -6,9 +6,6 @@
 # Default 'rwXr-Xr-X' permissions for new files
 umask 0022
 
-# Filesystem blocks of 1 KB, like the good lord intended
-export BLOCKSIZE=1024
-
 # XDG Basedir Spec
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -84,8 +81,8 @@ z_tidy()
 # Supplementary startup files
 # -----------------------------------------------------------------------------
 
-for file in "$XDG_CONFIG_HOME/sh/profile.d/"*.sh \
-            "$XDG_CONFIG_HOME/sh/private.d/"*.sh; do
+for file in "$XDG_CONFIG_HOME/env.d/"*.sh \
+            "$XDG_CONFIG_HOME/sh/profile.d/"*.sh; do
   [ -r "$file" ] && . "$file"
 done
 
