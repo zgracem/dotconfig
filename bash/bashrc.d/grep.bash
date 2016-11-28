@@ -2,7 +2,7 @@
 # flags
 # -----------------------------------------------------------------------------
 
-quietly unalias grep
+unalias grep 2>/dev/null
 
 grep()
 {

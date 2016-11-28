@@ -2,7 +2,7 @@
 
 _inPath mc || return
 
-quietly unalias mc
+unalias mc 2>/dev/null
 
 mc()
 {

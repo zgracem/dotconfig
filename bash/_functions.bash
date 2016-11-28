@@ -4,11 +4,6 @@
 # I/O functions
 # -----------------------------------------------------------------------------
 
-quietly()
-{ # execute a command silently
-  "$@" >/dev/null 2>&1
-}
-
 scold()
 { # echo to standard error
   printf "%b\n" "$*" >&2
