@@ -1,6 +1,8 @@
-# set defaults
 export PAGER=less
 export MANPAGER=$PAGER
+
+# used by Midnight Commander
+export VIEWER="vim -R"
 
 if command -v mandb >/dev/null; then
   # don't let man-db use grotty to output SGR codes (preserves colour)
@@ -9,6 +11,3 @@ if command -v mandb >/dev/null; then
   # use less's default prompt in man pages
   export MANLESS=""
 fi
-
-# used by Midnight Commander
-export VIEWER="vim -R"

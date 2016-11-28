@@ -4,7 +4,7 @@ export DEAD=~/.mail/dead.letter
 
 MAILCAPS="$XDG_DATA_HOME/mailcap"
 
-if [[ -d $MAILCAPS ]]; then
+if [ -d $MAILCAPS ]; then
   export MAILCAPS
 else
   unset -v MAILCAPS
