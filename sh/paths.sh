@@ -45,6 +45,10 @@ if [ -x /usr/local/bin/brew ]; then
   PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/gnu-tar/share/man:$MANPATH
 
+  # GNU i18n/l10n utilities
+  PATH=/usr/local/opt/gettext/bin:$PATH
+  MANPATH=/usr/local/opt/gettext/share/man:$MANPATH
+
   # OpenSSL
   MANPATH=/usr/local/opt/openssl/share/man:$MANPATH
 
