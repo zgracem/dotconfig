@@ -1,9 +1,7 @@
 if command -v gem >/dev/null; then
-  export GEMRC="$HOME/.config/ruby/gemrc"
+  export GEMRC="${XDG_CONFIG_HOME:-$HOME/.config}/ruby/gemrc"
+  export GEM_SPEC_CACHE="${XDG_CACHE_HOME:-$HOME/var/cache}/gem/specs"
 fi
-
-# keep homedir tidy
-z_tidy ~/.gemrc 2>/dev/null
 
 if command -v bundle >/dev/null; then
   # Bundler should install binstubs to ~/opt/bin, not ~/bin

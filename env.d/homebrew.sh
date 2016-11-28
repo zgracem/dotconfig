@@ -11,9 +11,6 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
   export HOMEBREW_LOGS="$HOME/var/log/homebrew"
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
-  [ -d "$HOMEBREW_CACHE" ] || mkdir -pv "$HOMEBREW_CACHE"
-  [ -d "$HOMEBREW_LOGS" ]  || mkdir -pv "$HOMEBREW_LOGS"
-  [ -d "$HOMEBREW_TEMP" ]  || mkdir -pv "$HOMEBREW_TEMP"
 fi
 
 # Only automatically `brew update` every 24 hours
