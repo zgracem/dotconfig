@@ -29,6 +29,8 @@ elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
       mkdir -p "$dir_trash" &>/dev/null
     fi
 
+    local fmt="%s/%s %(%H.%M.%S)T"
+
     local t
     local f; for f in "$@"; do
       filebase=${f##*/}
@@ -39,10 +41,10 @@ elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
       if [[ -e $t ]]; then
         t_base=${filebase%.*}
         t_ext=${f##*$t_base}
-        printf -v t "%s/%s %(%H.%M.%S)T%s" "$dir_trash" "$t_base" -1 "$t_ext"
+        printf -v t "${fmt}%s" "$dir_trash" "$t_base" -1 "$t_ext"
 
         if [[ -e $t ]]; then
-          printf -v t "%s/%s %(%H.%M.%S)T_%d%s" "$dir_trash" "$filebase" -1 "$RANDOM" "$fileext"
+          printf -v t "${fmt}_%d%s" "$dir_trash" "$filebase" -1 "$RANDOM" "$fileext"
         fi
       fi
       command mv -fv -- "$f" "$t"

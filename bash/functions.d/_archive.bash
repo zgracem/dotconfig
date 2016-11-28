@@ -31,14 +31,14 @@ tarup()
 { # tar + gzip an entire directory
   (( $# == 1 )) || return 1
   local dir="${1%/}"
-  roll "${dir}.tar.gz" "${dir%/}/"
+  roll "$dir.tar.gz" "$dir/"
 }
 
 zipup()
 { # zip an entire directory
   (( $# == 1 )) || return 1
   local dir="${1%/}"
-  roll "${dir}.zip" "${dir%/}/"
+  roll "$dir.zip" "$dir/"
 }
 
 ex()
