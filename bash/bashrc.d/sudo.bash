@@ -17,7 +17,7 @@ rootme()
     if _inScreen; then
         printf '%b' "\eksudo${ST}"
     elif _inTmux; then
-        quietly tmux rename-window sudo
+        tmux rename-window sudo 2>/dev/null
     fi
 
     sudo \
@@ -30,6 +30,6 @@ rootme()
     if _inScreen; then
         printf '%b' "\ekbash${ST}"
     elif _inTmux; then
-        quietly tmux set-window-option automatic-rename on
+        tmux set-window-option automatic-rename on 2>/dev/null
     fi
 }

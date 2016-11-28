@@ -2,7 +2,7 @@
 # default flags
 # -----------------------------------------------------------------------------
 
-quietly unalias ls ll
+unalias ls ll 2>/dev/null
 
 export flags_ls=(-A)
 #                 └────── list (almost) all files
