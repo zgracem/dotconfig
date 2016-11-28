@@ -13,7 +13,7 @@ alias  bps1='_edit $dir_config/bash/bashrc.d/prompt.bash'
 
 _z_rl_say()
 {
-  (( verbosity > 0 )) || return
+  (( VERBOSITY > 0 )) || return
   local msg_fmt="Reloading %s...\n"
   local filename="${1/#$HOME/$'~'}"
   printf "$msg_fmt" "$filename"
@@ -30,20 +30,20 @@ rl()
   shopt -s nullglob
 
   local -a files=()
-  local verbosity=${verbosity:+0}
+  local VERBOSITY=${VERBOSITY:+0}
 
   local OPT OPTIND
 
   while [[ ${1:0:1} == "-" ]]; do
     if [[ $1 == -d ]]; then
       local dry_run=true
-      (( verbosity < 1 && verbosity++ ))
+      (( VERBOSITY < 1 && VERBOSITY++ ))
       verbose "> dry run"
       shift
     elif [[ $1 == -+(v) ]]; then
       local v=${1//[^v]/}
-      verbosity=${#v}
-      verbose 2 ">> verbosity level: ${verbosity}"
+      VERBOSITY=${#v}
+      verbose 2 ">> verbosity level: ${VERBOSITY}"
       shift
     else
       # meaningless switch, discard
@@ -52,7 +52,7 @@ rl()
   done
 
   # Used in .bashrc
-  (( verbosity > 0 )) && export Z_RL_VERBOSE=true
+  (( VERBOSITY > 0 )) && export Z_RL_VERBOSE=true
 
   if (( $# == 0 )); then
     files+=("$dir_config/bash/profile.bash")
@@ -124,7 +124,7 @@ rl()
     if [[ -f $f ]]; then
       _z_rl_say "$f"
       if [[ -z $dry_run ]]; then
-        if (( verbosity >= 3 )); then
+        if (( VERBOSITY >= 3 )); then
           verbose 3 ">>> begin xtrace";
           set -o xtrace
           . "$f"
