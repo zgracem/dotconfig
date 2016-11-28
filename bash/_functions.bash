@@ -42,17 +42,12 @@ _inPath()
 
 _isGNU()
 { # exits 0 if $1 uses GNU switches
-  command "$1" --version >/dev/null 2>&1
+  command "$1" --version &>/dev/null
 }
 
 _isFunction()
 { # exits 0 if $1 is defined as a function
   declare -f "$1" >/dev/null
-}
-
-_optSet()
-{ # exits 0 if shell variable/option $1 is set
-  [[ :$SHELLOPTS: =~ :$1: ]] || shopt -pq "$1" 2>/dev/null
 }
 
 _inScreen()
@@ -67,20 +62,4 @@ _inTmux()
   # When a new session is created, tmux sets the environment variable TMUX to
   # "<socket>,<pid>,<session>". So we strip everything after (and including)
   # the first comma and test whether the resulting path is indeed a socket.
-}
-
-_mux()
-{ # exits 0 if inside a multiplexer session
-  _inScreen || _inTmux
-}
-
-# -----------------------------------------------------------------------------
-# other functions
-# -----------------------------------------------------------------------------
-
-# Destructive version of fixpath(), defined in ~/.config/sh/profile.d/paths.sh.
-function fixpath! {
-  local var="$1"
-  local p; p=$(fixpath "${!var}")
-  printf -v "$var" "$p"
 }

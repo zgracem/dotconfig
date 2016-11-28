@@ -31,7 +31,7 @@ mc()
   # use colourscheme-based skin
   flags_mc+=(--skin=$MC_SKIN)
 
-  if _mux; then
+  if _inScreen || _inTmux; then
     newwin  --title mc \
             EDITOR="$MC_EDITOR" \
             PWD="$PWD" \
