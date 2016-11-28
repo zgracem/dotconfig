@@ -13,7 +13,7 @@ if ! test "$BASH_VERSINFO" || (( BASH_VERSINFO[0] < 3 )); then
   # ...bash is too old
   echo >&2 "this version of bash is too old!"
   return
-elif ! [[ $- =~ i ]]; then
+elif ! [[ $- == *i* ]]; then
   # ...this isn't an interactive shell
   return
 elif shopt -q restricted_shell; then

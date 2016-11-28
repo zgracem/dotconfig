@@ -11,7 +11,7 @@ map()
 
   local cmd
 
-  until [[ $1 =~ :$ ]]; do
+  until [[ $1 == *: ]]; do
     cmd+="$1 "
     shift
   done

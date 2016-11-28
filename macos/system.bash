@@ -33,7 +33,7 @@ defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
-if [[ $HARDWARE =~ MacBook ]]; then
+if [[ $HARDWARE == MacBook* ]]; then
   # Disable the sudden motion sensor as it’s not useful for SSDs
   sudo pmset -a sms 0
 else

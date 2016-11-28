@@ -1,6 +1,6 @@
 xtrace()
 {
-  if [[ :$SHELLOPTS: =~ :xtrace: ]]; then
+  if [[ :$SHELLOPTS: == *:xtrace:* ]]; then
     # turn it off
     set +o xtrace
   else

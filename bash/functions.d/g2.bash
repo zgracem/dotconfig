@@ -12,7 +12,7 @@ g2()
 
   local name="$1" place
 
-  if [[ $name =~ / ]]; then
+  if [[ $name == */* ]]; then
     local child="${name#*/}"
     name="${name%%/*}"
   fi

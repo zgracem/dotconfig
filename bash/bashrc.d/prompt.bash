@@ -51,7 +51,7 @@ if (( TERM_COLOURDEPTH < 8 )); then
 fi
 
 # Only change window title if supported by current terminal
-if [[ ! $PTERM =~ xterm|putty|nsterm|iTerm ]]; then
+if [[ ! $PTERM =~ ^(xterm|putty|nsterm|iTerm) ]]; then
   Z_SET_WINTITLE=false
   Z_SET_TABTITLE=false
 fi
