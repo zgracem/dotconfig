@@ -2,7 +2,7 @@
 # Power management
 # -----------------------------------------------------------------------------
 
-if [[ $HARDWARE =~ MacBook ]]; then
+if [[ $HARDWARE == MacBook* ]]; then
   # Wait 24 hours to go into standby mode (speeds waking from sleep)
   sudo pmset -a standbydelay 86400
 

@@ -15,14 +15,14 @@ _edit()
     if [[ -n $SSH_CONNECTION ]]; then
       local window_title="${EDITOR##*/}"
 
-      if [[ $EDITOR =~ vim && -n $line ]]; then
+      if [[ $EDITOR == *vim && -n $line ]]; then
         newwin --title "$window_title" "$EDITOR" +$line "$file"
       else
         newwin --title "$window_title" "$EDITOR" "$file"
       fi
     else
       # use a GUI editor
-      if [[ $VISUAL =~ subl && -n $line ]]; then
+      if [[ $VISUAL == *subl* && -n $line ]]; then
         file="${file}:${line}"
       fi
 

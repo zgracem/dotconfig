@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 # Abort if history isn't enabled
-[[ :$SHELLOPTS: =~ :history: ]] || return
+[[ :$SHELLOPTS: == *:history:* ]] || return
 
 shopt -s cmdhist        # combine multiline commands into one in history
 shopt -s histappend     # append to the history file, don't overwrite it
@@ -76,7 +76,7 @@ tophist()
 
 incognito()
 {
-  if [[ :$SHELLOPTS: =~ :history: ]]; then
+  if [[ :$SHELLOPTS: == *:history:* ]]; then
     set +o history
     echo 'incognito mode enabled'
     Z_INCOGNITO=true

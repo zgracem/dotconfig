@@ -7,7 +7,7 @@ if [[ -z $SSH_AGENT_PID ]]; then
   keychain_dir="$XDG_RUNTIME_DIR"
   [[ -d $keychain_dir ]] || mkdir -pv "$keychain_dir"
 
-  [[ :$SHELLOPTS: =~ :noclobber: ]] || trap 'set -o noclobber; trap - RETURN;' RETURN
+  [[ :$SHELLOPTS: == *:noclobber:* ]] || trap 'set -o noclobber; trap - RETURN;' RETURN
   set +o noclobber
 
   if keychain_env=$(keychain --agents ssh \
