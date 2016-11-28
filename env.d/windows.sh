@@ -42,9 +42,9 @@ if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
   CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
 
-if [[ $OSTYPE == cygwin ]]; then
+if [[ $OSTYPE = cygwin ]]; then
   export CYGWIN
-elif [[ $OSTYPE == msys ]]; then
+elif [[ $OSTYPE = msys ]]; then
   export MSYS=$CYGWIN
   unset -v CYGWIN
 fi
