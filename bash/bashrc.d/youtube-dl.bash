@@ -3,6 +3,9 @@
 
 _inPath youtube-dl || return
 
+# see also `--cache-dir` and `--cookies` settings in youtube-dl.conf
+[[ -d $XDG_CACHE_HOME/youtube-dl ]] || mkdir -pv "$XDG_CACHE_HOME/youtube-dl"
+
 ydl()
 {
   local output_fmt="%(title)s.%(ext)s"
