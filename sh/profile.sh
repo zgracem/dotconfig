@@ -13,16 +13,13 @@ export BLOCKSIZE=1024
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/var/cache"
-#export XDG_DATA_DIRS=$XDG_DATA_HOME/:$HOME/opt/share/:/usr/local/share/:/usr/share/
 export XDG_RUNTIME_DIR="$HOME/var/run"
 
 # Location of zsh config files
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Set up PATH, MANPATH, etc.
-if [ -r "$XDG_CONFIG_HOME/sh/paths.sh" ]; then
-  . "$XDG_CONFIG_HOME/sh/paths.sh"
-fi
+. "$XDG_CONFIG_HOME/sh/paths.sh"
 
 # Fix missing environment variables
 [ -z "$USER" ] && export USER=$(whoami)

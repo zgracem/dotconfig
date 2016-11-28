@@ -4,8 +4,8 @@
 
 unalias ls ll 2>/dev/null
 
-export flags_ls=(-A)
-#                 └────── list (almost) all files
+flags_ls=(-A)
+#          └───── list (almost) all files
 
 if [[ $PLATFORM == windows ]]; then
   flags_ls+=(--append-exe)
@@ -18,6 +18,8 @@ if _isGNU ls; then
 else
   flags_ls+=(-G)
 fi
+
+export flags_ls
 
 ls() { command ls "${flags_ls[@]}" "$@"; }
 
@@ -44,7 +46,7 @@ lsd() { ll -d "${1+$1/}"*/; }
 lsl()
 { # list all symbolic links in $1/$PWD
   find "${1-.}" -maxdepth 1 -type l \
-  | xargs ls -d "${flags_ls}"
+  | xargs ls -d "${flags_ls[@]}"
 }
 
 # -----------------------------------------------------------------------------
@@ -65,7 +67,7 @@ lsf()
     return
   elif _isGNU ls; then
     flags_lsf+=(--color=auto)
-  else #           ├──────── colourize output
+  else #         ├────────── colourize output
     flags_lsf+=(-G)
   fi
 

@@ -124,4 +124,3 @@ if _inPath strings; then
 elif _inPath gstrings; then
   strings() { gstrings -a "$@" ; }
 fi
-
