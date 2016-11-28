@@ -10,7 +10,7 @@ scold()
 }
 
 verbose()
-{ # prints a message, conditional on the value of $verbosity
+{ # prints a message, conditional on the value of $VERBOSITY
   #
   # Usage: verbose [level] "message"
   #
@@ -26,7 +26,7 @@ verbose()
     shift
   fi
 
-  if (( verbosity >= level )); then
+  if (( VERBOSITY >= level )); then
     printf "%b\n" "$@"
   fi
 }
