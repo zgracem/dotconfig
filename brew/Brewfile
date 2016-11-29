@@ -98,7 +98,6 @@ brew "pngcrush"
 # OpenSSH
 brew "homebrew/dupes/openssh"
 brew "ssh-copy-id"
-brew "keychain"
 
 # text
 brew "dos2unix"
