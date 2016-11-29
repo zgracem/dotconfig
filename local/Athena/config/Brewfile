@@ -48,8 +48,6 @@ brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
 
 brew "node"
 
-brew "go"
-
 # >> https://github.com/zoltan-dulac/css3FontConverter
 brew "fontforge"
 
@@ -74,6 +72,8 @@ brew "figlet"
 # misc.
 # -----------------------------------------------------------------------------
 
+brew "agedu"
+brew "keychain"
 brew "midnight-commander"
 brew "sf-pwgen" # github.com/anders/pwgen
 
