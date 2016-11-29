@@ -1,7 +1,13 @@
 # Homebrew
 # >> http://brew.sh/
 
-HOMEBREW_BREW_FILE=$(command -v brew) || return
+HOMEBREW_BREW_FILE="$(command -v brew)"
+if [ -n "$HOMEBREW_BREW_FILE" ]; then
+  export HOMEBREW_BREW_FILE
+else
+  unset -v HOMEBREW_BREW_FILE
+  return
+fi
 
 export HOMEBREW_PREFIX="${HOMEBREW_BREW_FILE%/bin/brew}"
 export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
@@ -14,10 +20,9 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
 fi
 
 # Only automatically `brew update` every 24 hours
-unset -v HOMEBREW_NO_AUTO_UPDATE
 export HOMEBREW_AUTO_UPDATE_SECS=$(( 24 * 60 * 60 ))
 
-# If we're not in a GUI session on macOS...
+# If we're not in a GUI session on macOS:
 if [ -z "$Apple_PubSub_Socket_Render" ]; then
   # don't print beer emoji
   export HOMEBREW_NO_EMOJI=true

@@ -11,7 +11,7 @@ if [ "$NUMBER_OF_PROCESSORS" -gt 1 ]; then
   export BUNDLE_JOBS="$NUMBER_OF_PROCESSORS"
 fi
 
-if command -v sysctl 1>/dev/null && [ -z "$PROCESSOR_ARCHITECTURE" ]; then
+if command -v sysctl >/dev/null && [ -z "$PROCESSOR_ARCHITECTURE" ]; then
   export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)"
 fi
 
