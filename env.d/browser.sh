@@ -7,11 +7,10 @@ fi
 
 # Use GUI app if not logged in remotely
 if [ -z "$SSH_CONNECTION" ]; then
-  if [ -x /usr/bin/open ]; then
-    # open(1) will send URLs to the default GUI browser
-    BROWSER=/usr/bin/open
+  if command -v open >/dev/null; then
+    BROWSER=open
   elif [ "$PLATFORM" = "windows" ] ; then
-    # Wrapper script for Google Chrome w/ custom command-line switches
+    # Wrapper script for Google Chrome
     BROWSER="$HOME/bin/chrome"
   fi
 fi

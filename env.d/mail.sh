@@ -1,10 +1,15 @@
-export MAIL="/var/mail/$USER"
 export MBOX=~/.mail/mbox
 export DEAD=~/.mail/dead.letter
 
-MAILCAPS="$XDG_DATA_HOME/mailcap"
+MAIL="/var/mail/$USER"
+if [ -r "$MAIL" ]; then
+  export MAIL
+else
+  unset -v MAIL
+fi
 
-if [ -d $MAILCAPS ]; then
+MAILCAPS="$XDG_DATA_HOME/mailcap"
+if [ -d "$MAILCAPS" ]; then
   export MAILCAPS
 else
   unset -v MAILCAPS

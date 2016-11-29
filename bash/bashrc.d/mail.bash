@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# mail
+# email
 # -----------------------------------------------------------------------------
 
 if [[ -r $MAIL ]]; then
@@ -7,5 +7,5 @@ if [[ -r $MAIL ]]; then
   MAILCHECK=300           # check mail every 5 minutes
   MAILPATH="$MAIL"'?New mail in $_':"$MBOX"'?New mail in $_'
 else
-  unset -v MAIL MAILCHECK MAILPATH
+  unset -v MAIL MAILCHECK MAILPATH MBOX
 fi

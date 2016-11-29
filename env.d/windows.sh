@@ -42,10 +42,10 @@ if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
   CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
 
-if [[ $OSTYPE = cygwin ]]; then
+if [ "$OSTYPE" = "cygwin" ]; then
   export CYGWIN
-elif [[ $OSTYPE = msys ]]; then
-  export MSYS=$CYGWIN
+elif [ "$OSTYPE" = "msys" ]; then
+  export MSYS="$CYGWIN"
   unset -v CYGWIN
 fi
 
@@ -53,11 +53,11 @@ fi
 # Default printer
 # -----------------------------------------------------------------------------
 
-printer_key='/proc/registry/HKEY_CURRENT_USER/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device'
+key="/proc/registry/HKEY_CURRENT_USER/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device"
 
-if [ -z "$PRINTER" ] && [ -e "$printer_key" ]; then
-  read -r PRINTER < "$printer_key"
+if [ -z "$PRINTER" ] && [ -e "$key" ]; then
+  read -r PRINTER < "$key"
   export PRINTER="${PRINTER%%,*}"
 fi
 
-unset -v printer_key
+unset -v key
