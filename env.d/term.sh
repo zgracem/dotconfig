@@ -1,6 +1,9 @@
 # See ~/etc/terminfo for custom .ti files + a script to compile & install them.
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 
+# TERMCAP will override TERMINFO if set (e.g. by GNU screen)
+unset -v TERMCAP
+
 if [ ! -d "$TERMINFO" ]; then
   unset -v TERMINFO
 else
