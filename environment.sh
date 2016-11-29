@@ -12,6 +12,11 @@ export XDG_RUNTIME_DIR="$HOME/var/run"
 # Location of zsh config files
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+# Make environment available to non-interactive bash shells
+if [ -z "$BASH_ENV" ]; then
+  export BASH_ENV="${ENV-$XDG_CONFIG_HOME/.config/environment.sh}"
+fi
+
 # Set up PATH, MANPATH, etc.
 . "$XDG_CONFIG_HOME/sh/paths.sh"
 
