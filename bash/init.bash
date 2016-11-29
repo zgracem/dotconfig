@@ -67,7 +67,7 @@ dirs=(
 )
 
 for dir in "${dirs[@]}"; do
-  [[ -d $dir ]] || mkdir -pv "$dir"
+  [[ -n $dir ]] && mkdir -pv "$dir"
 done
 
 unset -v trash_files dir dirs
