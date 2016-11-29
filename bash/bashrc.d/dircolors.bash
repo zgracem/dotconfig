@@ -2,37 +2,34 @@
 # use dircolors(1) to set LS_COLORS
 # -----------------------------------------------------------------------------
 
+_inPath dircolors || return
+
 if [[ -z $LS_COLORS || -n $Z_RELOADING ]]; then
-  dc_src_dir="$dir_config/dircolors"
-  dc_cache_dir="$XDG_CACHE_HOME/dircolors"
+  dc_stub="default"
 
   if [[ -n $HV_LOADED ]]; then
     dc_stub="500kv.dircolors"
   elif [[ -n $Z_SOLARIZED ]]; then
     dc_stub="solarized.$Z_SOLARIZED"
-  else
-    dc_stub="default"
   fi
 
-  dc_src_file="$dc_src_dir/$dc_stub"
-  dc_cache_file="$dc_cache_dir/$dc_stub"
+  dc_src="$XDG_CONFIG_HOME/dircolors/$dc_stub"
+  dc_cache="$XDG_CACHE_HOME/dircolors/$dc_stub"
 
-  if [[ ! -f $dc_cache_file || $dc_src_file -nt $dc_cache_file || ${FUNCNAME[1]} == "rl" ]] \
-      && [[ -f $dc_src_file ]] && _inPath dircolors
+  if [[ -n $Z_RELOADING || ! -f $dc_cache || $dc_src -nt $dc_cache ]] \
+    && [[ -f $dc_src ]]
   then
-    verbose 2 ">> dircolors is recreating $dc_cache_file from $dc_src_file"
+    verbose 2 ">> dircolors is recreating $dc_cache from $dc_src"
 
     # create cache dir if it doesn't exist
-    [[ -d $dc_cache_dir ]] || mkdir -p "$dc_cache_dir" 1>/dev/null
+    mkdir -p "${dc_cache%/*}" >/dev/null
 
     # create cache file
-    dircolors -b "$dc_src_file" >| "$dc_cache_file"
+    dircolors -b "$dc_src" >| "$dc_cache"
   fi
 
-  if [[ -f $dc_cache_file ]]; then
-    # set and export LS_COLORS
-    eval "$(<"$dc_cache_file")"
-  fi
+  # set and export LS_COLORS
+  [[ -f $dc_cache ]] && eval "$(<"$dc_cache")"
 
-  unset -v ${!dc_*}
+  unset -v dc_cache dc_src dc_stub
 fi

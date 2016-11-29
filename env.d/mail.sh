@@ -1,7 +1,7 @@
 export MBOX=~/.mail/mbox
 export DEAD=~/.mail/dead.letter
 
-MAIL="/var/mail/$USER"
+[ -z "$MAIL" ] && MAIL="/var/mail/$USER"
 if [ -r "$MAIL" ]; then
   export MAIL
 else
