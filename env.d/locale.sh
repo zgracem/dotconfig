@@ -3,13 +3,23 @@
 # -----------------------------------------------------------------------------
 
 if [ -z "$LANGUAGE" ]; then
-  export LANGUAGE=en_CA # 'en_CA:en_US:en'
+  export LANGUAGE='en_CA:en_US:en'
 fi
 
 if [ -z "$LANG" ]; then
   # Some systems have 'en_CA.UTF-8', some have 'en_CA.utf8' -- search locales
-  # to find whichever is available.
-  export LANG="$(locale -a 2>/dev/null | /usr/bin/grep -Ei "$LANGUAGE\.utf-?8")"
+  # to find whichever is available, and cache the result.
+  lang_file="$XDG_DATA_HOME/locale/LANG"
+  mkdir -pv "${lang_file%/*}"
+
+  if [ ! -f "$lang_file" ]; then
+    locale -a 2>/dev/null \
+    | command grep -Ei "${LANGUAGE%%:*}\.utf-?8" \
+    > "$lang_file"    
+  fi
+
+  read -r LANG < "$lang_file"
+  unset -v lang_file
 fi
 
 if [ -z "$LC_ALL" ]; then
