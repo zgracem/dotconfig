@@ -2,10 +2,10 @@
 # aliases
 # -----------------------------------------------------------------------------
 
-alias    ba='_edit $dir_config/bash/bashrc.d/aliases.bash'
-alias   brc='_edit $dir_config/bash/bashrc.bash'
-alias bpath='_edit $dir_config/sh/paths.sh'
-alias  bps1='_edit $dir_config/bash/bashrc.d/prompt.bash'
+alias    ba='_edit $XDG_CONFIG_HOME/bash/bashrc.d/aliases.bash'
+alias   brc='_edit $XDG_CONFIG_HOME/bash/bashrc.bash'
+alias bpath='_edit $XDG_CONFIG_HOME/sh/paths.sh'
+alias  bps1='_edit $XDG_CONFIG_HOME/bash/bashrc.d/prompt.bash'
 
 # -----------------------------------------------------------------------------
 # functions
@@ -31,11 +31,12 @@ rl()
 
   local -a files=()
   local VERBOSITY=${VERBOSITY:+0}
+  local conf=$XDG_CONFIG_HOME
 
   local OPT OPTIND
 
   while [[ ${1:0:1} == "-" ]]; do
-    if [[ $1 == -d ]]; then
+    if [[ $1 == -n ]]; then
       local dry_run=true
       (( VERBOSITY < 1 && VERBOSITY++ ))
       verbose "> dry run"
@@ -55,10 +56,10 @@ rl()
   (( VERBOSITY > 0 )) && export Z_RL_VERBOSE=true
 
   if (( $# == 0 )); then
-    files+=("$dir_config/bash/profile.bash")
+    files+=("$conf/bash/profile.bash")
   else
     # search under ~/.config/bash and ~/.config/sh
-    files+=("$dir_config/"{bash,sh}/**/"$1"?(.*))
+    files+=("$conf/"{bash,sh}/**/"$1"?(.*))
 
     # check ~/.local
     files+=("$HOME/.local/config/bashrc.d/$1"?(.*))
@@ -66,7 +67,7 @@ rl()
 
     case $1 in
       functions|terminal|dirs|colour|prompt)
-          files+=("$dir_config/bash/_$1.bash")
+          files+=("$conf/bash/_$1.bash")
           ;;&
 
       init)   # normally not sourced on reload
@@ -74,15 +75,15 @@ rl()
           ;;
 
       prompt) # reload colours first
-          files=("$dir_config/bash/_colour.bash" "${files[@]}")
+          files=("$conf/bash/_colour.bash" "${files[@]}")
           ;;
 
       colour) # also reload prompt
-          files+=("$dir_config/bash/bashrc.d/prompt.bash")
+          files+=("$conf/bash/bashrc.d/prompt.bash")
           ;;
 
       functions)
-          files+=("$dir_config/bash/functions.d/"*.bash)
+          files+=("$conf/bash/functions.d/"*.bash)
           ;;
 
       local) 
@@ -148,7 +149,7 @@ ef()
   (( $# == 1 )) || return 1
 
   local func=$1
-  local dir="$dir_config/bash"
+  local dir="$XDG_CONFIG_HOME/bash"
 
   if ! _isFunction "$func"; then
     local file="$dir/functions.d/$func.bash"

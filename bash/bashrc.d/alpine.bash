@@ -10,7 +10,7 @@ _inPath alpine || return
 
 alpine()
 {
-  local flags_alpine=(-i -p "$dir_config/alpine/pinerc")
+  local flags_alpine=(-i -p "$XDG_CONFIG_HOME/alpine/pinerc")
   #                    │  └─ use alternate .pinerc
   #                    └──── go directly to index, bypassing main menu
 
