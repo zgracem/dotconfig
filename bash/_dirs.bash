@@ -2,8 +2,6 @@
 # ~/.config/bash/_dirs.bash
 # -----------------------------------------------------------------------------
 
-dir_config="${XDG_CONFIG_HOME:-$HOME/.config}"
-
 dir_dropbox="$HOME/Dropbox"
 dir_scripts="$HOME/scripts"
 

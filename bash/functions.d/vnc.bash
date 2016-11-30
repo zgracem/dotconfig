@@ -2,9 +2,9 @@
 
 vnc()
 {
+  local vnc_conf="$XDG_CONFIG_HOME/vnc/vnc.conf"
   local vnc_dir="$dir_apps/RealVNC"
   local vnc_exe="$vnc_dir/vncviewer.exe"
-  local vnc_conf="$dir_config/vnc/vnc.conf"
   local vnc_host="10.0.1.10:1"
 
   if [[ -x $vnc_exe ]]; then

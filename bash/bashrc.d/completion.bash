@@ -5,6 +5,7 @@
 # bash-completion v2
 BASH_COMPLETION="/usr/local/share/bash-completion/bash_completion"
 [[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
+
 unset -v BASH_COMPLETION
 
 # -----------------------------------------------------------------------------
@@ -69,7 +70,7 @@ __z_complete_autoload()
 { # Set this function as the default completion handler to autoload compspecs.
   # Based on: https://sanctum.geek.nz/cgit/dotfiles.git/tree/bash/bashrc.d/completion.bash
   [[ -n $1 ]] || return
-  local compspec="$dir_config/bash/bash_completion.d/$1.bash"
+  local compspec="$XDG_CONFIG_HOME/bash/bash_completion.d/$1.bash"
   [[ -f $compspec ]] || return
   . "$compspec" &>/dev/null && return 124
 }
@@ -78,14 +79,14 @@ __z_complete_autoload()
 # load external completions
 # -----------------------------------------------------------------------------
 
-. "$dir_config/bash/bash_completion.d/_misc.bash"
+. "$XDG_CONFIG_HOME/bash/bash_completion.d/_misc.bash"
 
 if (( BASH_VERSINFO[0] >= 4 )); then
   # Load completions dynamically
   complete -D -F __z_complete_autoload -o bashdefault -o default
 else
   # Load them manually
-  for file in "$dir_config"/bash/bash_completion.d/[^_]*.bash; do
+  for file in "$XDG_CONFIG_HOME"/bash/bash_completion.d/[^_]*.bash; do
     [[ -f $file ]] && . "$file"
   done
   unset -v file

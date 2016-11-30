@@ -153,8 +153,6 @@ fi
 # Other config files
 # -----------------------------------------------------------------------------
 
-export dir_config="${XDG_CONFIG_HOME:-$HOME/.config}"
-
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
 if [[ -n $Z_RL_VERBOSE && $TIME_TEST_ACTIVE != true ]]; then
@@ -170,38 +168,38 @@ if [[ -n $Z_RL_VERBOSE && $TIME_TEST_ACTIVE != true ]]; then
   }
 fi
 
-export INPUTRC="$dir_config/inputrc"
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 
 # Define important shell functions
-. "$dir_config/bash/_functions.bash"
+. "$XDG_CONFIG_HOME/bash/_functions.bash"
 
 # Terminal-related setup
-. "$dir_config/bash/_terminal.bash"
+. "$XDG_CONFIG_HOME/bash/_terminal.bash"
 
 # Load direction definitions ($dir_foo)
-. "$dir_config/bash/_dirs.bash"
+. "$XDG_CONFIG_HOME/bash/_dirs.bash"
 
 # Define colours (before _prompt.bash loads)
-. "$dir_config/bash/_colour.bash"
+. "$XDG_CONFIG_HOME/bash/_colour.bash"
 
 # Set fancy prompt
-. "$dir_config/bash/_prompt.bash"
+. "$XDG_CONFIG_HOME/bash/_prompt.bash"
 
 # Temporarily enable
 shopt -s nullglob
 
 # Private stuff
-for file in "$dir_config"/bash/private.d/*.bash; do
+for file in "$XDG_CONFIG_HOME"/bash/private.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 
 # Lesser function files
-for file in "$dir_config"/bash/functions.d/*.bash; do
+for file in "$XDG_CONFIG_HOME"/bash/functions.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 
 # Supplementary startup files
-for file in "$dir_config"/bash/bashrc.d/*.bash; do
+for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 
@@ -226,7 +224,7 @@ if   (( SHLVL <= 1 )) \
   && [[ -z $Z_NO_INIT ]] \
   && (( EUID != 0 ))
 then
-  . "$dir_config/bash/init.bash"
+  . "$XDG_CONFIG_HOME/bash/init.bash"
 
   if [[ -f ~/.local/config/init.bash ]]; then
     . ~/.local/config/init.bash
