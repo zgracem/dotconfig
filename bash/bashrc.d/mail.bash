@@ -3,8 +3,11 @@
 # -----------------------------------------------------------------------------
 
 if [[ -r $MAIL ]]; then
-  shopt -s mailwarn       # alert on new mail
-  MAILCHECK=300           # check mail every 5 minutes
+  # alert on new mail
+  shopt -s mailwarn
+  # check mail every __ seconds
+  MAILCHECK=60
+  # custom notifications
   MAILPATH="$MAIL"'?New mail in $_':"$MBOX"'?New mail in $_'
 else
   unset -v MAIL MAILCHECK MAILPATH MBOX
