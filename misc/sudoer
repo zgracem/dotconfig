@@ -1,5 +1,7 @@
 # /etc/sudoers.d/sudoer_$USER
 
+Defaults    editor    =  "/usr/local/bin/vim"
+
 # pass important multiplexer-related variables
 Defaults    env_keep += "STY TMUX"
 
