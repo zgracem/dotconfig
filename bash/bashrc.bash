@@ -181,8 +181,11 @@ export INPUTRC="$dir_config/inputrc"
 # Load direction definitions ($dir_foo)
 . "$dir_config/bash/_dirs.bash"
 
-# Define colours (before ./bashrc.d/prompt.bash loads)
+# Define colours (before _prompt.bash loads)
 . "$dir_config/bash/_colour.bash"
+
+# Set fancy prompt
+. "$dir_config/bash/_prompt.bash"
 
 # Temporarily enable
 shopt -s nullglob
