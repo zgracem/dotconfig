@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# ~/.config/bash/profile.bash                                   ~/.bash_profile
-# executed by bash(1) for login shells
+# ~/.bash_profile
+# Executed by bash(1) for login shells
 # -----------------------------------------------------------------------------
 
 if test "$BASH_VERSINFO"; then
