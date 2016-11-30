@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# ~/.config/bash/bashrc.bash                                          ~/.bashrc
-# Executed by bash(1) for interactive shells
+# ~/.bashrc
+# Executed by bash(1) on interactive shell startup
 # -----------------------------------------------------------------------------
 
 # Source ~/.profile
