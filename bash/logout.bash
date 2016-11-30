@@ -1,20 +1,22 @@
 # -----------------------------------------------------------------------------
-# ~/.config/bash/logout
-# executed on logout
+# ~/.bash_logout
+# Executed by bash(1) on logout
 # -----------------------------------------------------------------------------
 
-# archive ~/.bash_history if it's larger than 256 KB
-history_max_bytes=$(( 256 * 1024 ))
-history_size_bytes=$(wc -c "$HISTFILE" | cut -d" " -f1 2>/dev/null)
+# archive bash history if it's larger than 256 KB
+if [[ -f $HISTFILE ]]; then
+  history_max_bytes=$(( 256 * 1024 ))
+  history_size_bytes=$(wc -c "$HISTFILE" | cut -d" " -f1)
 
-if (( history_size_bytes >= history_max_bytes )); then
-  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
-    printf -v HISTFILE_OLD "$HISTDIR/${HISTFILE##*/}_%(%F)T" -1
-  else
-    HISTFILE_OLD="$HISTDIR/${HISTFILE##*/}_$(date +%F)"
+  if (( history_size_bytes >= history_max_bytes )); then
+    if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
+      printf -v HISTFILE_OLD "$HISTDIR/${HISTFILE##*/}_%(%F)T" -1
+    else
+      HISTFILE_OLD="$HISTDIR/${HISTFILE##*/}_$(date +%F)"
+    fi
+    
+    /bin/mv "$HISTFILE" "$HISTFILE_OLD" && touch "$HISTFILE"
   fi
-  
-  /bin/mv "$HISTFILE" "$HISTFILE_OLD" && touch "$HISTFILE"
 fi
 
 # run machine-specific logout file
