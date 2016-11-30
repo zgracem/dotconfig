@@ -65,7 +65,7 @@ rl()
     files+=("$HOME/.local/config/functions.d/$1"?(.*))
 
     case $1 in
-      colour|dirs|functions|terminal)
+      functions|terminal|dirs|colour|prompt)
           files+=("$dir_config/bash/_$1.bash")
           ;;&
 
