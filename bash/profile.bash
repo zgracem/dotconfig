@@ -5,7 +5,7 @@
 
 if test "$BASH_VERSINFO"; then
   # bash >2.0, so source .bashrc
-  [[ -r $HOME/.bashrc ]] && "$HOME/.bashrc"
+  [[ -r $HOME/.bashrc ]] && . "$HOME/.bashrc"
 else
   # bash <2.0, abort
   return
