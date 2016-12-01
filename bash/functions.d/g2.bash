@@ -44,7 +44,10 @@ g2()
       ;;
 
     drive)
-      place=$(find_drive "$myDrive" 2>/dev/null)
+      if place=$(find_drive "$myDrive" 2>/dev/null); then
+        # also set environment variable
+        export dir_drive=$place
+      fi
       ;;
   esac
 
