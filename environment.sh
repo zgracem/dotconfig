@@ -50,7 +50,7 @@ case $(uname -s) in
 esac
 export PLATFORM
 
-for env_file in "$XDG_CONFIG_HOME/env.d/"*.sh; do
+for env_file in "$XDG_CONFIG_HOME/environment.d/"*.sh; do
   [ -r "$env_file" ] && . "$env_file"
 done
 

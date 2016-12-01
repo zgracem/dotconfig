@@ -58,12 +58,11 @@ rl()
   if (( $# == 0 )); then
     files+=("$conf/bash/profile.bash")
   else
-    # search under ~/.config/bash and ~/.config/sh
-    files+=("$conf/"{bash,sh}/**/"$1"?(.*))
+    # search under ~/.config/environment.d, ~/.config/bash, and ~/.config/sh
+    files+=("$conf/"{environment.d,bash,sh}/**/"$1"?(.*))
 
     # check ~/.local
     files+=("$HOME/.local/config/bashrc.d/$1"?(.*))
-    files+=("$HOME/.local/config/functions.d/$1"?(.*))
 
     case $1 in
       functions|terminal|dirs|colour|prompt)
@@ -79,37 +78,42 @@ rl()
           ;;
 
       colour) # also reload prompt
-          files+=("$conf/bash/bashrc.d/prompt.bash")
+          files+=("$conf/bash/_prompt.bash")
           ;;
 
       functions)
-          files+=("$conf/bash/functions.d/"*.bash)
+          files+=("$conf/bash/functions.d/"*)
+          ;;
+
+      env|environment)
+          files+=("$conf/environment.d/"*)
           ;;
 
       local) 
-          files+=("$HOME/.local/config/bashrc.d/"*.bash)
+          files+=("$HOME/.local/config/bashrc.d/"*)
           ;;
 
-      keychain)
+      keychain) _inPath keychain || return
           verbose "> deleting ssh-agent keys..."
-          keychain --quiet --clear
+          [[ -z $dry_run ]] && keychain --quiet --clear
           verbose "> killing all currently running agent processes..."
-          keychain --quiet --stop all
+          [[ -z $dry_run ]] && keychain --quiet --stop all
           verbose "> unsetting environment variables..."
-          unset -v SSH_AGENT_PID SSH_AUTH_SOCK
+          [[ -z $dry_run ]] && unset -v SSH_AGENT_PID SSH_AUTH_SOCK
           ;;
 
       inputrc)
-          local inputrc="${INPUTRC:-~/.inputrc}"
+          local inputrc="${INPUTRC:-$HOME/.inputrc}"
           _z_rl_say "$inputrc"
           [[ -z $dry_run ]] && bind -f "$inputrc"
           return
           ;;
 
-      tmux) _inTmux || return
-          _z_rl_say "~/.tmux.conf"
-          [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
-          return
+      tmux)
+          if _inTmux; then
+            _z_rl_say "~/.tmux.conf"
+            [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
+          fi
           ;;
     esac
 
@@ -127,7 +131,7 @@ rl()
   fi
 
   # We don't need nullglob anymore, so turn it off and unset the RETURN trap
-  # before using `.` on any files.
+  # before using `.` to source any files.
   shopt -u nullglob; trap - RETURN
 
   local f; for f in "${files[@]}"; do
@@ -135,10 +139,10 @@ rl()
       _z_rl_say "$f"
       if [[ -z $dry_run ]]; then
         if (( VERBOSITY >= 3 )); then
-          verbose 3 ">>> begin xtrace";
+          verbose 3 ">>> begin xtrace"
           set -o xtrace
           . "$f"
-          set +o xtrace;
+          { set +o xtrace; } 2>/dev/null
           verbose 3 ">>> end xtrace"
         else
           . "$f"

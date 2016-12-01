@@ -8,7 +8,7 @@ export ENV=~/.config/environment.sh
 . "$ENV"
 
 # Source supplementary startup files
-for file in ~/.config/sh/profile.d/*.sh; do
+for file in ~/.config/sh/profile.d/*; do
   [ -r "$file" ] && . "$file"
 done
 
