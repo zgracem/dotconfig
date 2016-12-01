@@ -49,6 +49,7 @@ trash_files=(
   ~/.screen
   ~/.stardict ~/.sdcv_history
   ~/.wgetrc
+  "$XDG_RUNTIME_DIR/.keychain"
 )
 
 z_tidy "${trash_files[@]}"
