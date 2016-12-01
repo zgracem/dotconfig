@@ -90,6 +90,15 @@ rl()
           files+=("$HOME/.local/config/bashrc.d/"*.bash)
           ;;
 
+      keychain)
+          verbose "> deleting ssh-agent keys..."
+          keychain --quiet --clear
+          verbose "> killing all currently running agent processes..."
+          keychain --quiet --stop all
+          verbose "> unsetting environment variables..."
+          unset -v SSH_AGENT_PID SSH_AUTH_SOCK
+          ;;
+
       inputrc)
           local inputrc="${INPUTRC:-~/.inputrc}"
           _z_rl_say "$inputrc"
@@ -109,7 +118,7 @@ rl()
     else
       verbose 2 ">> no files found for <$1>, searching functions..."
       # still nothing... maybe it's the name of a function?
-      local func; if func=$(where "$1" 2>/dev/null); then
+      local func; if func=$(_wtf_func "$1" 2>/dev/null); then
         func=${func%:*}       # remove trailing colon and line no.
         func=${func/#~/$HOME} # tilde-expand filename
         files+=("$func")
