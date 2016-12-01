@@ -15,6 +15,7 @@ alias i='newwin irb'
 alias svim='sudo vim'
 alias unmount='umount'
 alias vd='newwin vimdiff'
+alias which='type -p'
 
 alias builtins='compgen -b | column'
 alias functions='compgen -A function | column'
