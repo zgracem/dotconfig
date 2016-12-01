@@ -25,7 +25,7 @@ alias p='pbpaste'
 
 alias hd='hexdump -C'
 
-alias  etest='_edit "$dir_dropbox/src/test.sh"'
+alias  etest='_z_edit "$dir_dropbox/src/test.sh"'
 alias  ttest="$dir_dropbox/src/test.sh"
 export rtest="$dir_dropbox/src/test.rb"
 alias  rtest="$rtest"

@@ -7,10 +7,10 @@ if [[ -z $HV_LOADED ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# whencetf: Finds the source of a shell function.
+# _wtf_func: Finds the source of a shell function.
 # -----------------------------------------------------------------------------
 
-whencetf()
+_wtf_func()
 {
   # We need to enable advanced debugging behaviour to get function information
   # with only builtins, but it's not for everyday use, so automatically
@@ -45,10 +45,10 @@ whencetf()
 }
 
 # -----------------------------------------------------------------------------
-# wtfis: Return a short description of a command.
+# _wtf_is: Return a short description of a command.
 # -----------------------------------------------------------------------------
 
-wtfis()
+_wtf_is()
 {
   local desc
   local -a results
@@ -196,7 +196,7 @@ wtf()
             hv_arrow -t -f black -b yellow "${place/#$HOME/$'~'}"
             
             if [[ -n $extra_output ]]; then
-              desc=$(wtfis "$1")
+              desc=$(_wtf_is "$1")
             fi
 
             if [[ -n $desc ]]; then
@@ -294,7 +294,7 @@ wtf()
         hv_arrow    -f brblue -b brblack "$1"
         hv_arrow -t -f black -b blue "function"
 
-        if desc=$(whencetf "$1"); then
+        if desc=$(_wtf_func "$1"); then
           output+=" ($desc)"
           hv_arrow -tn -f black -b brblue "$desc"
         else

@@ -1,3 +1,4 @@
+# Launcher for 1PasswordAnywhere
 1pa()
 {
   local opa_file="$dir_dropbox/Apps/1PasswordSync/1Password.agilekeychain/1Password.html"
