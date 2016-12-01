@@ -1,12 +1,5 @@
 _inPath dayone || return
 
-dayone()
-{
-  # because the CLI tool can't find v2's journal file by default
-  local journal="$HOME/Library/Group Containers/5U8NS4GX82.dayoneapp2/Data/Auto Import/Default Journal.dayone"
-  command dayone -j="$journal" "$@"
-}
-
 d1()
 {
   # create temp file to hold entry
@@ -30,24 +23,6 @@ d1()
     fi
   else
     scold "editor error"
-    return 1
-  fi
-}
-
-d1import()
-{
-  local entry_file="$1"
-  local entry_date
-
-  if [[ -r $entry_file ]]; then
-    if entry_date=$(stat --printf=%y "$entry_file"); then
-      dayone -d="$entry_date" new < "$entry_file"
-    else
-      scold "$FUNCNAME: failed to get date from $entry_file"
-      return 1
-    fi
-  else
-    scold "$FUNCNAME: failed to read $entry_file"
     return 1
   fi
 }

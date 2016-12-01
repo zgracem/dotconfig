@@ -1,5 +1,14 @@
-_z_obscure()
+obscure()
 {
+  local usage="$FUNCNAME --url|--html|--unicode \"text\""
+  local mode="$1"; shift
+
+  if [[ $mode == --unicode ]]; then
+    <<< "${@:-$(</dev/stdin)}" \
+    sed "y/ABCDEHIJKLMNOPSTXYZacdeijlmopsvxy/ΑΒСⅮΕΗΙЈΚⅬΜΝΟΡЅΤΧΥΖасⅾеіјⅼⅿοрѕⅴху/"
+    return
+  fi
+
   local instring="${@:-$(</dev/stdin)}"
   local outstring=""
 
@@ -7,15 +16,15 @@ _z_obscure()
     local inchar="${instring:$i:1}"
     local outchar="$inchar"
 
-    case ${FUNCNAME[1]} in
-      obscure_url)
+    case $mode in
+      --url)
         printf -v outchar '%%%02x' "'$inchar"
         ;;
-      obscure_html)
+      --html)
         printf -v outchar "&#x%02x;" "'$inchar"
         ;;
       *)
-        echo >&2 "This function cannot be called directly."
+        printf >&2 "Usage: %s\n" "$usage"
         return 1
         ;;
     esac
@@ -24,13 +33,4 @@ _z_obscure()
   done
 
   echo "$outstring"
-}
-
-obscure_url()   { _z_obscure "$@"; }
-obscure_html()  { _z_obscure "$@"; }
-
-obscure_unicode()
-{
-  <<< "${@:-$(</dev/stdin)}" \
-  sed "y/ABCDEHIJKLMNOPSTXYZacdeijlmopsvxy/ΑΒСⅮΕΗΙЈΚⅬΜΝΟΡЅΤΧΥΖасⅾеіјⅼⅿοрѕⅴху/"
 }

@@ -9,24 +9,24 @@ dev()
     weather)
       local lib=~/Dropbox/src/ruby/gems/weather_ca
       cd "$lib"
-      _dev_subl "$lib"
+      _z_dev_subl "$lib"
       ;;
     micro)
       local proj_dir=~/Dropbox/www/microprocessor
-      _dev_subl "$proj_dir"
-      _dev_middleman "$proj_dir"
+      _z_dev_subl "$proj_dir"
+      _z_dev_middleman "$proj_dir"
       ;;
     gonehome)
       local proj_dir=~/Dropbox/www/cp437
-      _dev_subl "$proj_dir" \
+      _z_dev_subl "$proj_dir" \
                 "$proj_dir/source/gonehome.html.md" \
                 "$proj_dir/source/css/gonehome.sass"
-      _dev_middleman "$proj_dir"
+      _z_dev_middleman "$proj_dir"
       ;;
     cp437)
       local proj_dir=~/Dropbox/www/cp437
-      _dev_subl "$proj_dir"
-      _dev_middleman "$proj_dir"
+      _z_dev_subl "$proj_dir"
+      _z_dev_middleman "$proj_dir"
       ;;
     *)
       local opts=($(declare -f $FUNCNAME \
@@ -40,7 +40,7 @@ dev()
   esac
 }
 
-_dev_middleman()
+_z_dev_middleman()
 {
   [[ $HOSTNAME == Athena* ]] || return 1
 
@@ -55,7 +55,7 @@ _dev_middleman()
   fi
 }
 
-_dev_subl()
+_z_dev_subl()
 {
   if [[ -n $SSH_CONNECTION ]]; then
     return

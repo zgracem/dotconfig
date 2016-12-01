@@ -1,6 +1,6 @@
-_edit()
+_z_edit()
 { # open file(s) in the appropriate editor
-  # Usage: _edit FILE[:LINE] [FILE[:LINE] ...]
+  # Usage: _z_edit FILE[:LINE] [FILE[:LINE] ...]
 
   local -a files=("$@")
   local -r lineno_regex=':([[:digit:]]+)$'

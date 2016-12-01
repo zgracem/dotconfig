@@ -22,7 +22,7 @@ es()
           return 1
         }
         ;;
-    1)  _edit "${scripts[0]}"
+    1)  _z_edit "${scripts[0]}"
         return 0
         ;;
     *)
@@ -32,7 +32,7 @@ es()
           if [[ $REPLY == "q" ]]; then
             return
           elif [[ -f $scr ]]; then
-            _edit "$scr"
+            _z_edit "$scr"
             return
           else
             scold "invalid option: $REPLY"

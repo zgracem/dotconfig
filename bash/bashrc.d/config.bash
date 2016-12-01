@@ -2,10 +2,10 @@
 # aliases
 # -----------------------------------------------------------------------------
 
-alias    ba='_edit $XDG_CONFIG_HOME/bash/bashrc.d/aliases.bash'
-alias   brc='_edit $XDG_CONFIG_HOME/bash/bashrc.bash'
-alias bpath='_edit $XDG_CONFIG_HOME/sh/paths.sh'
-alias  bps1='_edit $XDG_CONFIG_HOME/bash/bashrc.d/prompt.bash'
+alias    ba='_z_edit $XDG_CONFIG_HOME/bash/bashrc.d/aliases.bash'
+alias   brc='_z_edit $XDG_CONFIG_HOME/bash/bashrc.bash'
+alias bpath='_z_edit $XDG_CONFIG_HOME/sh/paths.sh'
+alias  bps1='_z_edit $XDG_CONFIG_HOME/bash/bashrc.d/prompt.bash'
 
 # -----------------------------------------------------------------------------
 # functions
@@ -155,7 +155,7 @@ ef()
     local file="$dir/functions.d/$func.bash"
 
     if [[ -f $file ]]; then
-      _edit "$file"
+      _z_edit "$file"
       return 0
     elif (( ${#FUNCNAME[@]} == 1 )); then
       # we're not being called by another function like es()
@@ -166,7 +166,7 @@ ef()
 
       if [[ $answer =~ [yY] ]]; then
         printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
-        _edit "$file:3:5"
+        _z_edit "$file:3:5"
         return 0
       else
         return 1
@@ -176,14 +176,14 @@ ef()
       return 1
     fi
   else
-    local src=$(whencetf "$func")
+    local src=$(_wtf_func "$func")
     local src_file=${src%:*}
     local src_line=${src#*:}
 
     src_file=${src_file/#~/$HOME}
 
     if [[ -f $src_file ]]; then
-      _edit "${src_file}:${src_line}"
+      _z_edit "${src_file}:${src_line}"
     fi
   fi
 }

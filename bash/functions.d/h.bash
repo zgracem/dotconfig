@@ -1,5 +1,6 @@
+# context-sensitive help
 h()
-{ # context-sensitive help
+{
   if help "$1" &>/dev/null; then
     help -m "$1" | less -F
   elif command man -w "$1" &>/dev/null; then

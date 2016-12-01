@@ -16,7 +16,7 @@ howto()
     local file="${dir_howto}/${subject}.markdown"
 
     if [[ $do_edit == true ]]; then
-        _edit "$file"
+        _z_edit "$file"
         return 0
     elif [[ -f $file ]]; then
         less -F "$file"
@@ -27,7 +27,7 @@ howto()
         read -e -p 'Create it? [y/N] ' answer
 
         if [[ $answer =~ [yY] ]]; then
-            _edit "$file"
+            _z_edit "$file"
             return 0
         else
             return 1
