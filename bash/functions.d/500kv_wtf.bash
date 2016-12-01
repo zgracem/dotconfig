@@ -324,8 +324,3 @@ wtf()
 
   return 0
 } # /wtf()
-
-wtff() { wtf -a "$@"; }
-
-unalias which 2>/dev/null
-which() { builtin type -p "$@"; }
