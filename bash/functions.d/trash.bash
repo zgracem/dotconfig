@@ -1,6 +1,6 @@
-if [[ $PLATFORM == mac ]]; then
-  trash()
-  {
+trash()
+{
+  if [[ $PLATFORM == mac ]]; then
     local f; for f in "$@"; do
       local filename
       if filename=$(readlink -e "$f"); then
@@ -18,11 +18,7 @@ if [[ $PLATFORM == mac ]]; then
         return 1
       fi
     done
-  }
-
-elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
-  trash()
-  {
+	elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
     local dir_trash="$HOME/.Trash"
 
     if [[ ! -d $dir_trash ]]; then
@@ -49,5 +45,8 @@ elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
       fi
       command mv -fv -- "$f" "$t"
     done
-  }
-fi
+  else
+  	scold "bash ${BASH_VERSINFO[0]}.${BASH_VERSINFO[1]}: not supported"
+  	return 1
+  fi
+}
