@@ -1,6 +1,0 @@
-#!/bin/sh
-
-xrdb -merge "$HOME/.Xresources"
-
-export ENV="$HOME/.bashrc"
-unset TERM_COLOURDEPTH TERM_PROGRAM
