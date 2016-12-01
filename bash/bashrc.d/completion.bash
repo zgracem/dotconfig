@@ -8,6 +8,10 @@ BASH_COMPLETION="/usr/local/share/bash-completion/bash_completion"
 
 BASH_COMPLETION_DIR="$XDG_CONFIG_HOME/bash/bash_completion.d"
 
+if [[ -n $HOMEBREW_PREFIX ]]; then
+  export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
+fi
+
 # -----------------------------------------------------------------------------
 # completion options
 # -----------------------------------------------------------------------------
@@ -93,4 +97,4 @@ else
   unset -v file
 fi
 
-unset -v BASH_COMPLETION BASH_COMPLETION_DIR
+unset -v BASH_COMPLETION BASH_COMPLETION_DIR HOMEBREW_COMPLETION

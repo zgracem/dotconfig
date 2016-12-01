@@ -10,7 +10,6 @@ else
 fi
 
 export HOMEBREW_PREFIX="${HOMEBREW_BREW_FILE%/bin/brew}"
-export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
 
 if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   # HOME-based paths for Linuxbrew
