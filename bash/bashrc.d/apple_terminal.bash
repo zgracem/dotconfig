@@ -2,7 +2,7 @@
 
 # Setting `shopt -s histappend` and `HISTTIMEFORMAT` in bashrc.d/history.bash
 # implicitly disables Apple Terminal's session-saving in El Capitan or later,
-# and setting `SHELL_SESSION_HISTORY` to `0` in env.d/apple_terminal.sh 
+# and setting `SHELL_SESSION_HISTORY` to `0` in environment.d/apple_terminal.sh 
 # makes it explicit.
 if [[ -n $TERM_SESSION_ID ]]; then
   # Unset all functions set in /etc/bashrc_Apple_Terminal. (Requires GNU sed.)

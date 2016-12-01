@@ -189,23 +189,23 @@ export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 shopt -s nullglob
 
 # Private stuff
-for file in "$XDG_CONFIG_HOME"/bash/private.d/*.bash; do
+for file in "$XDG_CONFIG_HOME"/bash/private.d/*; do
   [[ -f $file ]] && . "$file"
 done
 
 # Lesser function files
-for file in "$XDG_CONFIG_HOME"/bash/functions.d/*.bash; do
+for file in "$XDG_CONFIG_HOME"/bash/functions.d/*; do
   [[ -f $file ]] && . "$file"
 done
 
 # Supplementary startup files
-for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*.bash; do
+for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*; do
   [[ -f $file ]] && . "$file"
 done
 
 # Machine specific files in ~/.local
 if [[ -d ~/.local/config/bashrc.d ]]; then
-  for file in ~/.local/config/bashrc.d/*.bash; do
+  for file in ~/.local/config/bashrc.d/*; do
     [[ -f $file ]] && . "$file"
   done
 fi
