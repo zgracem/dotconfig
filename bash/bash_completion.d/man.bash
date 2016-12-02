@@ -3,19 +3,14 @@ __z_complete_man()
   local cur=${COMP_WORDS[COMP_CWORD]}
   local prev=${COMP_WORDS[COMP_CWORD-1]}
 
-  local suffixes=".@([glx]z|bz2|lzma|Z)"
-  local sections="@([0-9lnp]|[0-9][px]|3?(gl|pm))"
-  local extensions="@([0-9lnp]|[0-9][px]|man|3?(gl|pm))?(${suffixes})"
-
   shopt -q nullglob || trap 'shopt -u nullglob; trap - RETURN;' RETURN
   shopt -s nullglob
 
   if [[ $cur == -* ]]; then
     # TODO: add option handling
-    return
+    return 0
   elif [[ "$cur" == @(*/|[.~])* ]]; then
     # looks like a path; do file-based completion
-    compopt -o filenames 2>/dev/null #debug
     return 0
   fi
 
@@ -27,6 +22,7 @@ __z_complete_man()
     local manpath=$MANPATH:
   fi
 
+  local sections="@([0-9lnp]|[0-9][px]|3?(gl|pm))"
   local section
   if [[ "$prev" == $sections ]]; then
     section=$prev
@@ -47,16 +43,18 @@ __z_complete_man()
   reply=( ${reply[@]##*/?(:)} )
 
   # remove suffixes
+  local suffixes=".@([glx]z|bz2|lzma|Z)"
   reply=( ${reply[@]%$suffixes} )
   reply=( $( compgen -W '${reply[@]%.*}' -- "${cur//\\\\/}" ) )
 
   if [[ "$prev" != $sections ]]; then
     # file-based completion
     compopt -o filenames 2>/dev/null #debug
+    local extensions="@([0-9lnp]|[0-9][px]|man|3?(gl|pm))?(${suffixes})"
     reply+=( ./*.${extensions} )
   fi
 
   COMPREPLY=( "${reply[@]}" )
 }
 
-complete -F __z_complete_man -- man
+complete -o default -F __z_complete_man -- man
