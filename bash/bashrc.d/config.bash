@@ -5,7 +5,7 @@
 alias    ba='_z_edit $XDG_CONFIG_HOME/bash/bashrc.d/aliases.bash'
 alias   brc='_z_edit $XDG_CONFIG_HOME/bash/bashrc.bash'
 alias bpath='_z_edit $XDG_CONFIG_HOME/sh/paths.sh'
-alias  bps1='_z_edit $XDG_CONFIG_HOME/bash/bashrc.d/prompt.bash'
+alias  bps1='_z_edit $XDG_CONFIG_HOME/bash/_prompt.bash'
 
 # -----------------------------------------------------------------------------
 # functions

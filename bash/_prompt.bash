@@ -300,19 +300,22 @@ _z_PS1_jobs()
 {
   [[ $Z_PROMPT_JOBS != true ]] && return
 
-  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
-    # Use bash-4.4's prompt-expanding parameter transformation
-    local jobs='\j'
-    local job_count="${j@P}"
-  else
-    # Get output from `jobs` builtin
-    local jobs="$(jobs)"
-    [[ -n $jobs ]] || return
-
-    # count newlines
-    jobs="${jobs//[^$'\n']/}"
-    local job_count="${#jobs}"
+  local job_count="$(jobs|wc -l)"
+  if (( job_count > 0 )); then
+    printf ' %d' "${job_count}"
   fi
+}
+
+_z_PS1_jobs()
+{
+  [[ $Z_PROMPT_JOBS != true ]] && return
+
+  local jobs="$(jobs)"
+  [[ -n $jobs ]] || return
+
+  # count newlines
+  jobs="${jobs//[^$'\n']/}"
+  local job_count=$(( ${#jobs} + 1 )) # no trailing newline at EOT
 
   if (( job_count > 0 )); then
     printf ' %d' "${job_count}"
@@ -364,7 +367,7 @@ _z_PS1_update_Terminal()
 
 _z_PS1_update_titles()
 {
-  # Window title, e.g. "zozo@Athena.local: ~/share/man/man1"
+  # Window title, e.g. "user@Hostname.local: ~/share/man/man1"
   local win_title="${USER}@${HOSTNAME}: ${PWD/#$HOME/$'~'}"
 
   # Tab title, e.g. "Athena: ~/.../man1"
@@ -464,7 +467,7 @@ fi
 PS1+="${PS1_reset} "
 
 # -----------------------------------------------------------------------------
-# PS0,2-4
+# PS2-4
 # -----------------------------------------------------------------------------
 
 # Secondary prompt for multi-line commands = right-facing guillemet (»)
@@ -475,10 +478,10 @@ PS3="${PS1_blue}?${PS1_reset} "
 
 # Prefix for `set -o xtrace` output
 PS4="+ "
-PS4+="\${BASH_SOURCE+$PS1_dim\${BASH_SOURCE/#\$HOME/'~'}$PS1_reset}"
+PS4+="\${BASH_SOURCE:+$PS1_dim\${BASH_SOURCE/#\$HOME/'~'}$PS1_reset}"
 PS4+="\${BASH_SOURCE+:$PS1_blue\$LINENO$PS1_reset:}"
 PS4+="$PS1_italic\$BASH_COMMAND$PS1_reset"
-PS4+=$'\n\t'
+PS4+=$'\n    '
 
 # -----------------------------------------------------------------------------
 # PROMPT_COMMAND
@@ -486,7 +489,7 @@ PS4+=$'\n\t'
 
 _z_prompt_cmd_add()
 { # append (or prepend with -p) to PROMPT_COMMAND, avoiding duplicates
-  local regex=' ?'"$*"'[ ;]*'
+  local regex=" ?${*}[ ;]*"
 
   if [[ $1 == -p ]]; then
     local prepend=true
@@ -508,7 +511,7 @@ _z_prompt_cmd_add()
 
 _z_prompt_cmd_del()
 { # remove a command from PROMPT_COMMAND
-  local regex=' ?'"$*"'[ ;]*'
+  local regex=" ?${*}[ ;]*"
 
   if [[ $PROMPT_COMMAND =~ $regex ]]; then
     # capture command + any leading space + trailing semicolon
