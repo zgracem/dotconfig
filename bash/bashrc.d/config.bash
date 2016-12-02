@@ -103,7 +103,7 @@ rl()
           ;;
 
       inputrc)
-          local inputrc="${INPUTRC:-$HOME/.inputrc}"
+          local inputrc="${INPUTRC:-$HOME/.config/inputrc}"
           _z_rl_say "$inputrc"
           [[ -z $dry_run ]] && bind -f "$inputrc"
           return
