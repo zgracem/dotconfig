@@ -62,7 +62,7 @@ unset -v p c
 # semantic colours
 # -----------------------------------------------------------------------------
 
-# used in PS1 -- see bashrc.d/prompt.bash
+# used in PS1 -- see _prompt.bash
 : ${colour_user:=$blue}
 
 colour_true=$brgreen
