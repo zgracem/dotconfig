@@ -11,7 +11,10 @@ manpdf()
   pdf=$(command manpdf "$@") || return
 
   # Because `manpdf -h` produces a non-filename but exits 0
-  [[ ${pdf:0:1} == "/" ]] || return
+  if [[ ${pdf:0:1} != "/" ]]; then
+    echo "$pdf"
+    return 0
+  fi
 
   if [[ -n $SSH_CONNECTION ]]; then
     echo "$pdf"
