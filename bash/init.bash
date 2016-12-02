@@ -17,8 +17,8 @@ fi
 # Keep homedir tidy.
 # -----------------------------------------------------------------------------
 
-z_tidy()
-{ # Usage: z_tidy ~/.bash_sessions
+_z_tidy()
+{ # Usage: _z_tidy ~/.bash_sessions
   local rm_opts="-f"
 
   if [[ $- == *i* ]]; then
@@ -52,7 +52,8 @@ trash_files=(
   "$XDG_RUNTIME_DIR/.keychain"
 )
 
-z_tidy "${trash_files[@]}"
+_z_tidy "${trash_files[@]}"
+unset -f _z_tidy
 
 # Create important directories
 dirs=(
