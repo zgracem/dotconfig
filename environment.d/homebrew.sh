@@ -29,9 +29,15 @@ if [ -z "$Apple_PubSub_Socket_Render" ]; then
   # make `brew home` et al. print the URL instead of launching a browser
   export HOMEBREW_BROWSER=/bin/echo
 else
-  # Pumpkin Spice Homebrew!
-  # >> https://twitter.com/MacHomebrew/status/783028298351730688
-  if [ "$(date +%B)" = "October" ]; then
-    export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x83' # 🎃
-  fi
+  case "$(date +%B)" in
+    "October")
+      # Pumpkin Spice Homebrew!
+      # >> https://twitter.com/MacHomebrew/status/783028298351730688
+      export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x83' # 🎃
+      ;;
+    "December")       
+      # Santa brought me a bunch of software upgrades 
+      export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x85' # 🎅
+      ;;
+  esac
 fi
