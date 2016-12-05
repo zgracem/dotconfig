@@ -144,6 +144,14 @@ cask "steam"
 cask "xquartz"
 cask "xscreensaver"
 
+# QuickLook
+
+cask "suspicious-package"
+cask "quicklook-json"
+cask "qlmarkdown"
+cask "qlstephen"
+cask "qlcolorcode"
+
 # -----------------------------------------------------------------------------
 # Mac App Store
 # -----------------------------------------------------------------------------
