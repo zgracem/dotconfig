@@ -21,16 +21,6 @@ set bell-style visible
 set enable-meta-key off
 
 # -----------------------------------------------------------------------------
-# display
-# -----------------------------------------------------------------------------
-
-# # show vi insert/command mode at left of prompt
-# # TODO: get this looking nice
-# set show-mode-in-prompt on
-# set vi-ins-mode-string "+"
-# set vi-cmd-mode-string ":"
-
-# -----------------------------------------------------------------------------
 # completion
 # -----------------------------------------------------------------------------
 

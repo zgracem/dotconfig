@@ -14,7 +14,7 @@ if [[ -z $SSH_AGENT_PID ]]; then
                              --inherit any \
                              --quick --quiet \
                              --eval \
-                             id_rsa)
+                             id_ed25519 id_rsa)
   then
     eval "$keychain_env"
     verbose 2 ">> export SSH_AUTH_SOCK=$SSH_AUTH_SOCK"

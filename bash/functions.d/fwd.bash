@@ -4,6 +4,11 @@ fwd()
   local src=$1
   local dst=$2
 
+  if (( $# != 2 )); then
+    scold "Usage: $FUNCNAME <source> <destination>"
+    return 64
+  fi
+
   local src_full
   src_full=$(readlink -e "$src") || return 204
 
