@@ -17,44 +17,6 @@ fi
 # Keep homedir tidy.
 # -----------------------------------------------------------------------------
 
-_z_tidy()
-{ # Usage: _z_tidy ~/.bash_sessions
-  local rm_opts="-f"
-
-  if [[ $- == *i* ]]; then
-    # interactive shell, be verbose
-    rm_opts+="v"
-  fi
-
-  local targets=("$@")
-  local target; for target in "${targets[@]}"; do
-    if [ ! -e $target ]; then
-      continue
-    elif [ -d $target ]; then
-      rm_opts+="r"
-    fi
-
-    command rm $rm_opts "$target" || return
-  done
-}
-
-# Remove unwanted dotfiles
-trash_files=(
-  ~/.bash_sessions
-  ~/.fpp
-  ~/.gemrc
-  ~/.lesshst
-  ~/.npmrc
-  ~/.pine-debug{1..4} ~/.pine-crash
-  ~/.screen
-  ~/.stardict ~/.sdcv_history
-  ~/.wgetrc
-  "$XDG_RUNTIME_DIR/.keychain"
-)
-
-_z_tidy "${trash_files[@]}"
-unset -f _z_tidy
-
 # Create important directories
 dirs=(
   "$XDG_CACHE_HOME"
