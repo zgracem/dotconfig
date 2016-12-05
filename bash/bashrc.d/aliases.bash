@@ -47,8 +47,8 @@ if [[ $HOSTNAME == Athena* ]]; then
 fi
 
 # chmod
-alias 400='chmod 400'
-alias 600='chmod 600'
-alias 644='chmod 644'
-alias 700='chmod 700'
-alias 755='chmod 755'
+alias 400='chmod -v 400'
+alias 600='chmod -v 600'
+alias 644='chmod -v 644'
+alias 700='chmod -v 700'
+alias 755='chmod -v 755'
