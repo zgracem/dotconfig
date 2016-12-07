@@ -3,14 +3,13 @@
 
 # ---- Keep everything below this line in sync with `~/.config/git/config` ----
 
-[user]
-	name  = ZGM
-	email = cryptostrophe@users.noreply.github.com
+[include]
+	path = ~/.config/git/config.private
 
 [core]
 	autocrlf = input
 	safecrlf = true
-	excludesfile = ~/.config/git/globalignore
+	excludesfile = ~/.config/git/ignore
 	filemode = false
 
 [alias]
