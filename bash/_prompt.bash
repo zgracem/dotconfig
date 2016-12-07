@@ -455,11 +455,14 @@ PS1+="\$(_z_PS1_git_info)"
 # number of background jobs, if any
 PS1+="${PS1_yellow}\$(_z_PS1_jobs)${PS1_reset}"
 
-# $ for me, # for root, ? if we're in incognito mode
+# § for me, # for root, ? if we're in incognito mode
 if [[ -n $Z_INCOGNITO ]]; then
   PS1+=" ${PS1_brblack}?"
+elif (( EUID == 0 )); then
+  PS1+=" ${PS1_user}#"
 else
-  PS1+=" ${PS1_user}\\\$"
+  # PS1+=" ${PS1_user}\\\$"
+  PS1+=" ${PS1_user}§"
 fi
 
 PS1+="${PS1_reset} "
