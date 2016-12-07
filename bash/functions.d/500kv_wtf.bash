@@ -136,12 +136,14 @@ wtf()
   local extra_output="true"
 
   # Use `wtf -a` to display all results.
+  # Use `wtf -f` to skip shell function lookup.
   # Use `wtf -s` to display less information.
   # Use `wtf -x` to suppress fancy output.
   local OPT OPTIND OPTARG
   while getopts ':afsx' OPT; do
     case $OPT in
       a)  unset -v one_and_done ;;
+      f)  local skip_func="true" ;;
       s)  unset -v extra_output ;;
       x)  local HV_DISABLE_PP="true" ;; 
     '?')  hv_err "-$OPTARG" "invalid option"
@@ -293,6 +295,7 @@ wtf()
         ;;
 
       function)
+        [[ -n $skip_func ]] && continue
         output="$1 is a function"
         hv_arrow    -f brblue -b brblack "$1"
         hv_arrow -t -f black -b blue "function"
