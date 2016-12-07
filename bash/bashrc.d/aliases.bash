@@ -15,7 +15,7 @@ alias i='newwin irb'
 alias svim='sudo XDG_DATA_HOME="$XDG_DATA_HOME" vim'
 alias unmount='umount'
 alias vd='newwin vimdiff'
-alias which='type -p'
+alias which='builtin type'
 
 alias builtins='compgen -b | column'
 alias functions='compgen -A function | column'
