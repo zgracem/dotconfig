@@ -11,11 +11,9 @@ fi
 # -----------------------------------------------------------------------------
 
 _wtf_func()
-{
-  # We need to enable advanced debugging behaviour to get function information
-  # with only builtins, but it's not for everyday use, so automatically
-  # disable it when this function is done.
-  shopt -q extdebug || trap 'shopt -u extdebug; trap - RETURN;' RETURN
+( # ← We need to enable advanced debugging behaviour to get function info
+  #   using only builtins, but it's not for everyday use, so this function is
+  #   executed in a (subshell) instead of as a { group }.
   shopt -s extdebug
 
   # Require at least one argument. (We will silently ignore $2 and beyond.)
@@ -37,12 +35,11 @@ _wtf_func()
   # If the function was declared at the command line, source_file will be
   # "main" (and "the [line number] is not guaranteed to be meaningful").
   # Otherwise, it will be the path to the file where the function was defined.
-
-  # -- TODO: Document and handle more edge cases.
+  ### ZGM TODO: Document and handle more edge cases.
 
   # Tilde-ify path for display.
-  echo "${source_file/#$HOME/$'~'}:${line_number}"
-}
+  printf "%s:%d\n" "${source_file/#$HOME/$'~'}" "${line_number}"
+)
 
 # -----------------------------------------------------------------------------
 # _wtf_is: Return a short description of a command.
@@ -135,14 +132,17 @@ wtf()
   # By default, `wtf` displays only the first result.
   local one_and_done="true"
 
+  # By default, `wtf` displays extra information.
+  local extra_output="true"
+
   # Use `wtf -a` to display all results.
-  # Use `wtf -l` to display additional information.
+  # Use `wtf -s` to display less information.
   # Use `wtf -x` to suppress fancy output.
   local OPT OPTIND OPTARG
-  while getopts ':alx' OPT; do
+  while getopts ':afsx' OPT; do
     case $OPT in
       a)  unset -v one_and_done ;;
-      l)  local extra_output="true" ;;
+      s)  unset -v extra_output ;;
       x)  local HV_DISABLE_PP="true" ;; 
     '?')  hv_err "-$OPTARG" "invalid option"
           return 1 ;;
@@ -190,10 +190,11 @@ wtf()
           places=( $(type -ap "$1") )
 
           local place; for place in "${places[@]}"; do
-            output+="${output+\\n}${1} is ${place/#$HOME/$'~'}"
+            place=${place/#$HOME/$'~'}
+            output+="${output:+\\n}${1} is ${place}"
 
             hv_arrow    -f bryellow -b brblack "$1"
-            hv_arrow -t -f black -b yellow "${place/#$HOME/$'~'}"
+            hv_arrow -t -f black -b yellow "${place}"
             
             if [[ -n $extra_output ]]; then
               desc=$(_wtf_is "$1")
@@ -237,7 +238,7 @@ wtf()
           # keywords with no `help -d` entry as of bash-4.4, but which have
           # a "parent" keyword (`for`, `case`, `if`, `while`, etc.)
 
-          name="…$1"
+          name="… $1"
 
           case $1 in
             "!")
@@ -253,25 +254,27 @@ wtf()
               desc=$(help -d "[["); desc=${desc#* - }
               ;;
             "in")
-              name+="…"
+              name="… $1 …"
               desc="Define a list of items within a compound command."
               ;;
             "do")
-              name+="…"
+              name="… $1 …"
               desc="Define a list of commands to be executed."
               ;;
             "done")
-              desc="End a 'for', 'select', 'while', or 'until' statement."
+              name="… $1"
+              desc="End a ‘for’, ‘select’, ‘while’, or ‘until’ statement."
               ;;
             "esac")
-              desc="End a 'case' statement."
+              name="… $1"
+              desc="End a ‘case’ statement."
               ;;
             "then"|"elif"|"else")
-              name+="…"
+              name="… $1 …"
               desc="Execute commands conditionally."
               ;;
             "fi")
-              desc="End an 'if' statement."
+              desc="End an ‘if’ statement."
               ;;
           esac
         fi
