@@ -93,7 +93,6 @@ brew "zsh-syntax-highlighting"
 brew "aspell", args: ["with-lang-en"]
 brew "pandoc"
 brew "recode"
-brew "txt2man"
 
 # -----------------------------------------------------------------------------
 # casks
