@@ -1,8 +1,7 @@
-[[ $PLATFORM == windows ]] || return
+[[ $OSTYPE == cygwin ]] || return
 
 killall()
 { # kill a process by name
-
   local pid; if pid="$(pidof "$1")"; then
     cygkill "$pid"
   else
