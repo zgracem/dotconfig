@@ -25,15 +25,15 @@ mkdir()
 
 mv()
 {
-  local -a flags_mv=(-iv)
-  #                   │└─ verbose
-  #                   └── interactive
+  set -- -iv "$@"
+  #       │└─ verbose
+  #       └── interactive
 
   if [[ $PLATFORM == mac ]]; then
     # >> http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
-    /bin/mv "${flags_mv[@]}" "$@"
+    /bin/mv "$@"
   else
-    command mv "${flags_mv[@]}" "$@"
+    command mv "$@"
   fi
 }
   
@@ -50,24 +50,24 @@ rm()
 
 ps()
 {
-  local flags_ps='-a'
-  #                └─── show processes from all users
+  set -- -a "$@"
+  #       └─── show processes from all users
 
   if [[ $PLATFORM == windows ]]; then
-    flags_ps+='W'
-    #          └─────── also show Windows processes
+    set -- -W "$@"
+    #       └─ also show Windows processes
   fi
 
   if _isGNU ps; then
-    flags_ps+='s'
-    #          └─────── summary format
+    set -- -s "$@"
+    #       └─ summary format
   else
-    flags_ps+='xo pid,ppid,user,start,command'
-    #          │└────── output this info (to match GNU ps)
-    #          └─────── include processes w/ no controlling terminal
+    set -- xo pid,ppid,user,start,command "$@"
+    #      │└─ output this info (to match GNU ps)
+    #      └── include processes w/ no controlling terminal
   fi
 
-  command ps $flags_ps "$@"
+  command ps "$@"
 }
 
 # -----------------------------------------------------------------------------
@@ -98,23 +98,27 @@ fi
 file()
 {
   command file -p "$@"
-  #             └─ don't touch last-accessed time
+  #             └── don't touch last-accessed time
 }
 
 scp()
 {
   command scp -rp "$@"
-  #            │└─ preserve times/modes
-  #            └── recursive
+  #            │└── preserve times/modes
+  #            └─── recursive
 }
 
 top()
 {
-  command top -F -R -u -user "$USER" "$@"
-  #            │  │  │  └─────────────── only processes owned by current user
-  #            │  │  └────────────────── sort by CPU usage and execution time
-  #            │  └───────────────────── don't traverse/report memory object map for each process
-  #            └──────────────────────── ignore frameworks
+  set -- -F -R -u "$@"
+  #       │  │  └── sort by CPU usage and execution time
+  #       │  └───── don't traverse/report memory object map for each process
+  #       └──────── ignore frameworks
+
+  set -- -user "$USER" "$@"
+  #       └──────── only processes owned by current user
+
+  command top "$@"
 }
 
 # `-a` scans the whole file instead of using insecure libbfd

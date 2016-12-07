@@ -4,19 +4,17 @@ _inPath agedu || return
 
 agedu()
 {
-  local -a opts=()
-
   # Directory to scan
-  opts+=(--scan "$HOME")
+  set -- --scan "$HOME" "$@"
 
   # Location of database file
-  opts+=(--file "$XDG_RUNTIME_DIR/agedu.dat")
+  set -- --file "$XDG_RUNTIME_DIR/agedu.dat" "$@"
 
   # Web server preferences
-  opts+=(--web --address 10.0.1.10:60053 --auth none)
+  set -- --web --address 10.0.1.10:60053 --auth none "$@"
 
   # Remove database file after web server stops
-  opts+=(--remove)
+  set -- --remove "$@"
 
-  command agedu "${opts[@]}"
+  command agedu "$@"
 }

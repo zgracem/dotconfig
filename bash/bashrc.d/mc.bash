@@ -25,23 +25,22 @@ mc()
     light)  MC_SKIN="solarized_light" ;;
   esac
 
-  local -a flags_mc=()
   # force xterm mode (for mouse support under tmux)
-  flags_mc+=(--xterm)
+  set -- --xterm "$@"
   # use colourscheme-based skin
-  flags_mc+=(--skin=$MC_SKIN)
+  set -- --skin=$MC_SKIN "$@"
 
   if _inScreen || _inTmux; then
     newwin  --title mc \
             EDITOR="$MC_EDITOR" \
             PWD="$PWD" \
-            command mc ${flags_mc[*]} "$@"
+            command mc "$@"
   else
     # based on /usr/libexec/mc/mc-wrapper.sh
     local MC_PWD_FILE="$XDG_RUNTIME_DIR/mc_pwd_$USER.$$"
-    flags_mc+=(--printwd="$MC_PWD_FILE")
+    set -- --printwd="$MC_PWD_FILE" "$@"
 
-    command mc ${flags_mc[*]} "$@"
+    command mc "$@"
 
     if [[ -r $MC_PWD_FILE ]]; then
       local MC_PWD=$(<"$MC_PWD_FILE")
