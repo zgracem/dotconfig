@@ -431,15 +431,13 @@ if [[ $Z_PROMPT_EXIT == true ]]; then
   PS1+="${PS1_false}\[\$(_z_PS1_print_exit)\]${PS1_reset}"
 fi
 
-# Print the hostname if we're remotely connected. (Otherwise we probably know
-# which machine we're sitting in front of.)
+# Print the hostname if we're remotely connected (otherwise we probably know
+# which machine we're sitting in front of), and the username if it's not the
+# one we usually log in with.
 if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
   case $USER in
     $DEFAULT_USER)
       PS1+="${PS1_dim}"
-      ;;
-    root)
-      PS1+="${PS1_red}\u${PS1_reset}${PS1_dim}@"
       ;;
     *)
       PS1+="${PS1_dim}\u@"
@@ -579,7 +577,7 @@ prompt()
         ;;
       off)
         unset PS0
-        PS1="\$ "
+        PS1="\\\$ "
         PS2="> "
         PS3="? "
         PS4="+ "
@@ -591,9 +589,9 @@ prompt()
         echo "Usage: $FUNCNAME [${opts// /|}]"
         ;;
     esac
-  elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
+  else
     local p v; for p in PS{0..4}; do v=${!p}
-      echo "$p=${v@Q}"
+      printf "%s=%q\n" "$p" "$v"
     done
   fi
 }
