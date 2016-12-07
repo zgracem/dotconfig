@@ -6,7 +6,7 @@
 #   1. Install Homebrew
 #   2. `brew tap homebrew/bundle`
 #   3. `brew bundle --file=$THIS_FILE`
-#   4. `brew bundle --file=~/.local/config/Brewfile` [optional]
+#   4. `brew bundle --file=~/.local/config/brew/Brewfile` [optional]
 
 tap "homebrew/dupes"
 tap "homebrew/versions"

@@ -4,10 +4,14 @@ if [[ -z $SSH_AGENT_PID ]]; then
   keychain_dir="$XDG_RUNTIME_DIR/keychain"
   [[ -d $keychain_dir ]] || mkdir -pv "$keychain_dir"
 
+  # We need to ensure noclobber is off so keychain can overwrite the files
+  # holding its environment info. If it was enabled, set a self-clearing trap
+  # to turn it back on when this file RETURNs from being sourced.
   [[ :$SHELLOPTS: == *:noclobber:* ]] || trap 'set -o noclobber; trap - RETURN;' RETURN
   set +o noclobber
 
   verbose "> ${Z_RELOADING+re-}initializing ssh-agent..."
+
   if keychain_env=$(keychain --agents ssh \
                              --absolute --dir "$keychain_dir" \
                              --ignore-missing \
