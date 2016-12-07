@@ -10,9 +10,9 @@ _inPath alpine || return
 
 alpine()
 {
-  local flags_alpine=(-i -p "$XDG_CONFIG_HOME/alpine/pinerc")
-  #                    │  └─ use alternate .pinerc
-  #                    └──── go directly to index, bypassing main menu
+  set -- -i -p "$XDG_CONFIG_HOME/alpine/pinerc" "$@"
+  #       │  └─ use alternate .pinerc
+  #       └──── go directly to index, bypassing main menu
 
-  newwin command alpine ${flags_alpine[*]} "$@"
+  newwin command alpine "$@"
 }

@@ -4,24 +4,28 @@
 
 unalias ls ll 2>/dev/null
 
-flags_ls=(-A)
-#          └───── list (almost) all files
+ls()
+{
+  # list (almost) all files
+  set -- -Aq "$@"
+  #       │└──── print ? instead of nongraphic characters
+  #       └───── list (almost) all files
 
-if [[ $PLATFORM == windows ]]; then
-  flags_ls+=(--append-exe)
-  #            └─ append .exe if cygwin magic was needed
-fi
+  # append .exe if cygwin magic was needed
+  [[ $PLATFORM == windows ]] && set -- --append-exe "$@"
 
-# colourize output
-if _isGNU ls; then
-  flags_ls+=(--color=auto)
-else
-  flags_ls+=(-G)
-fi
+  if _isGNU ls; then
+    # display mtime in YYYY-MM-DD HH:MM format
+    set -- --time-style='+%Y-%m-%d %H:%M' "$@"
+    # colourize output
+    set -- --color=auto "$@"
+  else
+    # colourize output (BSD syntax)
+    set -- -G "$@"
+  fi
 
-export flags_ls
-
-ls() { command ls "${flags_ls[@]}" "$@"; }
+  command ls "$@"
+}
 
 # -----------------------------------------------------------------------------
 # variants
@@ -43,33 +47,29 @@ lst() { ll -rt "$@"; }
 lsd() { ll -d "${1+$1/}"*/; }
 #           └──── list subdirectories, not their contents
 
-lsl()
-{ # list all symbolic links in $1/$PWD
-  find "${1-.}" -maxdepth 1 -type l \
-  | xargs ls -d "${flags_ls[@]}"
-}
-
 # -----------------------------------------------------------------------------
 
 lsf()
 { # "full" info
 
-  local -a flags_lsf=(-i -l)
-  #                    │  └─ long-list output
-  #                    └──── print inode number
+  set -- -Ail "$@"
+  #       ││└──── long-list output
+  #       │└───── print inode number
+  #       └────── list (almost) all files
 
   if [[ $PLATFORM == mac ]]; then
-    flags_lsf+=(-@ -O -G)
-    #            │  │  └──── colourize output
-    #            │  └─────── print file flags
-    #            └────────── display extended attributes
-    /bin/ls "${flags_lsf[@]}" "$@"
+    set -- -@OG "$@"
+    #       ││└── colourize output
+    #       │└─── print file flags
+    #       └──── display extended attributes
+
+    /bin/ls "$@"
     return
   elif _isGNU ls; then
-    flags_lsf+=(--color=auto)
-  else #         ├────────── colourize output
-    flags_lsf+=(-G)
+    set -- --color=auto "$@"
+  else #    ├────────── colourize output
+    set -- -G "$@"
   fi
 
-  command ls "${flags_lsf[@]}" "$@"
+  command ls "$@"
 }

@@ -6,13 +6,25 @@ unalias grep 2>/dev/null
 
 grep()
 {
-  command grep -EsId skip --colour=auto --exclude-dir=.git "$@"
-  #             ││││      │             └─ skip .git directories
-  #             ││││      └─────────────── display results in colour
-  #             │││└────────────────────── silently skip directories by default
-  #             ││└─────────────────────── ignore binary files
-  #             │└──────────────────────── no errors about missing/unreadable files
-  #             └───────────────────────── use ERE syntax
+  set -- -EsI "$@"
+  #       ││└──────── ignore binary files
+  #       │└───────── no errors about missing/unreadable files
+  #       └────────── use ERE syntax
+
+  set -- -d skip -D skip "$@"
+  #       │       └── silently skip devices
+  #       └────────── silently skip directories
+
+  # display results in colour
+  (( TERM_COLOURDEPTH >= 8 )) && set -- --colour=auto "$@"
+
+  # skip version control directories
+  set -- \
+      --exclude-dir=.git \
+      --exclude-dir=.svn \
+      "$@"
+
+  command grep "$@"
 }
 
 # -----------------------------------------------------------------------------
@@ -20,12 +32,11 @@ grep()
 # -----------------------------------------------------------------------------
 
 g()
-{   # search files in the current directory
+{ # search files in the current directory
   grep --line-number "$@" *
 }
 
 gg()
-{   # search files and directories in the current directory
-  g -R "$@"
-  #  └─ recursive
+{ # search files and directories in the current directory
+  g --recursive "$@"
 }

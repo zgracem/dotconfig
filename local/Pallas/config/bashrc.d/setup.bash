@@ -2,7 +2,7 @@ setup()
 {
   local installer_dir="$dir_downloads/_Installers"
   local cyg_bin="${installer_dir}/setup-x86_64.exe"
-  local log_dir="/var/log"
+  local log_dir="$HOME/var/log/cygwin"
 
   # Where to save downloaded packages (Windows-style path).
   local pkg_dir
@@ -12,22 +12,20 @@ setup()
   local cyg_root
   cyg_root=$(cygpath -aw "/")
 
-  local -a flags=()
-
-  # Root installation directory (--root)
-  flags+=(-R "${cyg_root//\\/\\\\}")
-
-  # Directory to save downloaded packages in (--local-package-dir)
-  flags+=(-l "${pkg_dir}")
-
-  # More options:
-  flags+=(-gnXBM -a x86_64)
-  #        │││││  └── Architecture to install: x86_64 or x86 (--arch)
-  #        ││││└───── Semi-attended mode (--package-manager)
-  #        │││└────── Don't require admin privileges (--no-admin)
-  #        ││└─────── Don't verify setup.ini signatures (--no-verify)
-  #        │└──────── Don't make desktop/Start menu shortcuts (--no-shortcuts)
-  #        └───────── Also upgrade installed packages (--upgrade-also)
+  # Root installation directory (-R)
+  set -- --root "${cyg_root//\\/\\\\}" "$@"
+  # Directory to save downloaded packages in (-l)
+  set -- --local-package-dir "${pkg_dir}" "$@"
+  # Architecture to install: x86_64 or x86
+  set -- --arch x86_64 "$@"
+  # Semi-attended mode
+  set -- --package-manager "$@"
+  # Also upgrade installed packages
+  set -- --upgrade-also "$@"
+  # Don't verify setup.ini signature
+  set -- --no-verify "$@"
+  # Don't create Desktop/Start menu shortcuts (-n)
+  set -- --no-shortcuts "$@"
 
   if [[ ! -x $cyg_bin ]]; then
     scold "can't find ${cyg_bin}"
@@ -37,7 +35,7 @@ setup()
     return 1
   else
     # Otherwise setup.log will write to actual PWD for some annoying reason.
-    (cd "$log_dir" && run "$cyg_bin" "${flags[@]}" "$@")
+    (cd "$log_dir" && run "$cyg_bin" "$@")
   fi
 }
 

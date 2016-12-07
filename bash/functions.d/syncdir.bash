@@ -2,39 +2,39 @@
 
 syncdir()
 {
-    if (( $# >= 2 )); then
-        local src="${1%/}" # trim trailing slash
-        local dst="${2%/}" # trim trailing slash
-        shift 2
-    else
-        printf 'Usage: %s SOURCE [USER@][HOST:]DESTINATION [FLAGS ...]\n' $FUNCNAME >&2
-        return 1
-    fi
+  if (( $# >= 2 )); then
+    local src="${1%/}" # trim trailing slash
+    local dst="${2%/}" # trim trailing slash
+    shift 2
+  else
+    printf 'Usage: %s SOURCE [USER@][HOST:]DESTINATION [FLAGS ...]\n' $FUNCNAME >&2
+    return 1
+  fi
 
-    local -a flags=(--exclude=.DS_Store --exclude=.git)
-    local -a usrflags=("$@")
+  set -- --exclude=.DS_Store --exclude=.git "$@"
 
-    # recurse, and preserve symlinks, times, permissions [-a]
-    # but not group/owner
-    flags+=(--archive --no-group --no-owner)
+  # recurse, and preserve symlinks, times, permissions [-a]
+  # but not group/owner
+  set -- --archive --no-group --no-owner "$@"
 
-    # use SSH instead of RSH [-e]
-    flags+=(--rsh=$(type -P ssh))
+  # use SSH instead of RSH [-e]
+  set -- --rsh=$(type -P ssh) "$@"
 
-    # compress file data during the transfer [-z]
-    flags+=(--compress)
+  # compress file data during the transfer [-z]
+  set -- --compress "$@"
 
-    # find extraneous files during xfer, delete after
-    flags+=(--delete-delay)
+  # find extraneous files during xfer, delete after
+  set -- --delete-delay "$@"
 
-    # output numbers in a human-readable format [-h]
-    flags+=(--human-readable)
+  # output numbers in a human-readable format [-h]
+  set -- --human-readable "$@"
 
-    # show progress during transfer
-    flags+=(--progress)
-    # flags+=(--verbose) # [-v]
-    # flags+=(--dry-run) # [-n]
+  # show progress during transfer
+  set -- --progress "$@"
 
-    rsync ${flags[*]} ${usrflags[*]} "$src/" "$dst" \
-    | grep -v '/$'
+  # set -- --verbose "$@" # [-v]
+  # set -- --dry-run "$@" # [-n]
+
+  rsync "$@" "$src/" "$dst" \
+  | grep -v '/$'
 }
