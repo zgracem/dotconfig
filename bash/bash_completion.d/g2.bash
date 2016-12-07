@@ -2,28 +2,31 @@
 
 __z_complete_g2()
 {
-    local -a wordlist=()
-    local place
+  local -a wordlist=()
+  local place
 
-    # named variables
-    for place in ${!dir_*}; do
-        wordlist+=("${place#dir_}")
-    done
+  # named variables
+  for place in ${!dir_*}; do
+    wordlist+=("${place#dir_}")
+  done
 
-    # directories under ~
-    for place in "$HOME/"*/; do
-        place=${place#$HOME/}   # strip home path and leading slash
-        place=${place%/}        # strip trailing slash
-        wordlist+=("$place")
-    done
+  # bookmarked directories
+  wordlist+=("${!mydirs[@]}")
 
-    # directory stack
-    if [[ -n $DIRSTACK ]] && (( ${#DIRSTACK[@]} > 1 )); then
-        wordlist+=("${DIRSTACK[@]}")
-    fi
+  # directories under ~
+  for place in "$HOME/"*/; do
+    place=${place#$HOME/}   # strip home path and leading slash
+    place=${place%/}        # strip trailing slash
+    wordlist+=("$place")
+  done
 
-    compopt -o nospace
-    COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
+  # directory stack
+  if [[ -n $DIRSTACK ]] && (( ${#DIRSTACK[@]} > 1 )); then
+    wordlist+=("${DIRSTACK[@]}")
+  fi
+
+  compopt -o nospace
+  COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
 }
 
-complete -F __z_complete_g2 -- g2
+complete -o dirnames -o plusdirs -d -F __z_complete_g2 -- g2

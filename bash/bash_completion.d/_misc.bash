@@ -41,14 +41,30 @@
 # aliases -- for `alias` & `unalias`
 complete -a -- alias unalias
 
+# readline bindings
+complete -A binding bind
+
+# shell builtins
+complete -b builtin
+
 # directories & variables -- for `cd`
-complete -o nospace -dev -- cd
+complete -o nospace -dv -- cd
 
-# builtins, keywords & help topics -- for `help`
-complete -o nospace -bk -A helptopic -- help
+# help topics
+complete -o nospace -A helptopic -- help
 
-# variables & functions -- for `declare`, `export` & `unset`
-complete -ev -A function -- declare export unset
+# job control
+complete -j -P '"%' -S '"' -- disown fg jobs
+
+# shell options
+complete -A setopt -- set
+complete -A shopt -- shopt
+
+# variables & functions -- for `declare`, `export`, `typeset` and `unset`
+complete -v -A function -- declare export typeset unset
+
+# variables only -- for `readonly`
+complete -v -- readonly
 
 # files, directories, aliases, builtins, commands, keywords & functions -- for `sudo`
 complete -fdabck -A function -- sudo
@@ -61,11 +77,7 @@ complete -o nospace -fabck -A function -A helptopic -- type
 # -----------------------------------------------------------------------------
 
 # variables & functions -- for alias to `declare -p`
-complete -ev -A function -- d
-
-# shell options -- for `set` & `shopt`
-complete -A shopt -- shopt
-complete -A setopt -- set
+complete -v -A function -- d
 
 # files & directories -- for `trash`
 complete -o filenames -o plusdirs -fd -- trash

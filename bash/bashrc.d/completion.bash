@@ -2,10 +2,6 @@
 # ~/.config/bash/completion.bash
 # -----------------------------------------------------------------------------
 
-# bash-completion v2
-BASH_COMPLETION="/usr/local/share/bash-completion/bash_completion"
-[[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
-
 BASH_COMPLETION_DIR="$XDG_CONFIG_HOME/bash/bash_completion.d"
 
 if [[ -n $HOMEBREW_PREFIX ]]; then
@@ -34,6 +30,9 @@ FIGNORE="DS_Store:~:.swp:Application Scripts"
 # do not treat colon specially
 # >> http://tiswww.case.edu/php/chet/bash/FAQ [question E13]
 COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+
+# complete hostnames from this file
+HOSTFILE="$XDG_CONFIG_HOME/ssh/hosts"
 
 # -----------------------------------------------------------------------------
 # support functions
@@ -84,6 +83,11 @@ __z_complete_autoload()
 # load external completions
 # -----------------------------------------------------------------------------
 
+# # bash-completion v2
+# BASH_COMPLETION="/usr/local/share/bash-completion/bash_completion"
+# [[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
+# unset -v BASH_COMPLETION
+
 . "$BASH_COMPLETION_DIR/_misc.bash"
 
 if (( BASH_VERSINFO[0] >= 4 )); then
@@ -91,10 +95,11 @@ if (( BASH_VERSINFO[0] >= 4 )); then
   complete -D -F __z_complete_autoload -o bashdefault -o default
 else
   # Load them manually
+  unset -f __z_complete_autoload
   for file in "$BASH_COMPLETION_DIR"/[^_]*.bash; do
     [[ -f $file ]] && . "$file"
   done
   unset -v file
 fi
 
-unset -v BASH_COMPLETION BASH_COMPLETION_DIR HOMEBREW_COMPLETION
+unset -v BASH_COMPLETION_DIR HOMEBREW_COMPLETION
