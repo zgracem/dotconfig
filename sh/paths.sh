@@ -42,6 +42,36 @@ if [ -x /usr/local/bin/brew ]; then
   MANPATH=/usr/local/opt/ncurses/share/man:$MANPATH
 fi
 
+# Xcode
+if [ -x /usr/bin/xcode-select ]; then
+  case $HOSTNAME in
+    Athena*)
+      DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+      ;;
+    Erato*)
+      DEVELOPER_DIR="/Library/Developer/CommandLineTools"
+      ;;
+    Hiroko*)
+      DEVELOPER_DIR="/Developer"
+      ;;
+    *)
+      DEVELOPER_DIR=$(xcode-select --print-path)
+      ;;
+  esac
+
+  darwin_ver=$(uname -r)
+  if [ ${darwin_ver%%.*} -ge 15 ]; then
+    PATH=$PATH:$DEVELOPER_DIR/usr/bin
+    MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
+    PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
+    MANPATH=$MANPATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/share/man
+  else
+    PATH=$DEVELOPER_DIR/usr/bin:$PATH
+    MANPATH=$DEVELOPER_DIR/usr/share/man:$MANPATH
+  fi
+  unset -v DEVELOPER_DIR darwin_ver
+fi
+
 # -----------------------------------------------------------------------------
 # Linuxbrew
 # -----------------------------------------------------------------------------
