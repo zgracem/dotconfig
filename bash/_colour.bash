@@ -39,7 +39,7 @@ colours=(
 
 for c in "${!colours[@]}"; do
   printf -v "${colours[c]}"   $(( 30 + c ))
-  printf -v "bg${colours[c]}" $(( 40 + c ))
+  # printf -v "bg${colours[c]}" $(( 40 + c ))
 
   [[ $v == brdefault ]] && continue # There's no "bright default" colour.
 
@@ -48,13 +48,14 @@ for c in "${!colours[@]}"; do
   # (Inspired by Prompt, which doesn't offer that option.)
   if (( TERM_COLOURDEPTH >= 16 )); then
     printf -v "br${colours[c]}"   $((  90 + c ))
-    printf -v "bgbr${colours[c]}" $(( 100 + c ))
+    # printf -v "bgbr${colours[c]}" $(( 100 + c ))
   else
     printf -v "br${colours[c]}"   ${!colours[c]}
-    printf -v "bgbr${colours[c]}" $(( ${!colours[c]} + 10 ))
+    # printf -v "bgbr${colours[c]}" $(( ${!colours[c]} + 10 ))
   fi
 
-  colours+=("br${colours[c]}" "bg${colours[c]}" "bgbr${colours[c]}" )
+  colours+=("br${colours[c]}")
+  # colours+=("bg${colours[c]}" "bgbr${colours[c]}" )
 done
 
 unset -v p c
@@ -128,7 +129,6 @@ fi
 
 _z_colour_add_esc()
 {
-
   local -a indexes=("$@")
   local index var
 
