@@ -29,7 +29,7 @@ mv()
   #       │└─ verbose
   #       └── interactive
 
-  if [[ $PLATFORM == mac ]]; then
+  if [ "$PLATFORM" == "mac" ]; then
     # >> http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
     /bin/mv "$@"
   else
@@ -53,7 +53,7 @@ ps()
   set -- -a "$@"
   #       └─── show processes from all users
 
-  if [[ $PLATFORM == windows ]]; then
+  if [ "$PLATFORM" == "windows" ]; then
     set -- -W "$@"
     #       └─ also show Windows processes
   fi
@@ -86,7 +86,7 @@ if _inPath stow; then
   stow() { command stow --verbose "$@"; }
 fi
 
-if [[ $PLATFORM == mac ]]; then
+if [ "$PLATFORM" == "mac" ]; then
   killall() { command killall -v "$@"; }
   #                            └─ verbose
 fi

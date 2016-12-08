@@ -13,7 +13,7 @@ else
   OLDTERM="$TERM"
 
   # Darwin's full-screen system console
-  if [ $OLDTERM = "vt100" ] && [ "$PLATFORM" = "mac" ] && [ `tty` = "/dev/console" ]; then
+  if [ "$OLDTERM" = "vt100" ] && [ "$PLATFORM" = "mac" ] && [ "$(tty)" = "/dev/console" ]; then
     TERM=xnuppc
     export HV_DISABLE_PP=1
   fi
@@ -59,7 +59,7 @@ else
   fi
 
   # Verify the new TERM setting before we proceed.
-  if ! tput -T "$TERM" longname 2>&1 >/dev/null; then
+  if ! tput -T "$TERM" longname >/dev/null 2>&1; then
     echo "Error: tried to set TERM to unknown terminal $TERM" >&2
     TERM="$OLDTERM"
   fi
@@ -93,3 +93,8 @@ if [ -z "$PTERM" ]; then
   readonly PTERM="${PTERM:-$TERM}"
   export PTERM
 fi
+
+# Get the terminal colour depth (based on $TERM, not perfect but it'll do)
+TERM_COLOURDEPTH="$(tput -T"$PTERM" colors 2>/dev/null || 
+                    tput -T"$PTERM" Co 2>/dev/null)"
+export TERM_COLOURDEPTH=${TERM_COLOURDEPTH:=-1}

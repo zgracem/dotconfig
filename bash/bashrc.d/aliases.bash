@@ -30,8 +30,8 @@ alias  ttest="$dir_dropbox/src/test.sh"
 export rtest="$dir_dropbox/src/test.rb"
 alias  rtest="$rtest"
 
-alias pinback='"$HOME/scripts/pinback.sh" -t "$PINBOARD_API_KEY" \
-                                          -d "$HOME/Archive/pinboard" -fvx'
+alias pinback="~/scripts/pinback.sh -t '$PINBOARD_API_KEY' \
+                                    -d ~/Archive/pinboard -fvx"
 
 # -----------------------------------------------------------------------------
 

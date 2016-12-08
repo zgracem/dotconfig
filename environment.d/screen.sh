@@ -5,5 +5,5 @@ export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 
 # Solarized Light colour scheme
 if [ "$Z_SOLARIZED" = "light" ]; then
-  SCREENRC="$dir_config/screen/screenrc.light"
+  SCREENRC="$XDG_CONFIG_HOME/screen/screenrc.light"
 fi

@@ -36,13 +36,13 @@ verbose()
 # -----------------------------------------------------------------------------
 
 _inPath()
-{ # exits 0 if all arguments are installed in $PATH
-  type -P "$@" >/dev/null
+{ # exits 0 if $1 is installed in $PATH
+  command -v "$1" >/dev/null
 }
 
 _isGNU()
 { # exits 0 if $1 uses GNU switches
-  command "$1" --version &>/dev/null
+  command "$1" --version >/dev/null 2>&1
 }
 
 _isFunction()
@@ -52,12 +52,12 @@ _isFunction()
 
 _inScreen()
 { # exits 0 if inside a GNU screen session
-  [[ -n $STY && -p $SCREENDIR/$STY ]]
+  [ -n "$STY" ] && [ -p "$SCREENDIR/$STY" ]
 }
 
 _inTmux()
 { # exits 0 if inside a tmux session
-  [[ -S ${TMUX%%,*} ]]
+  [ -S "${TMUX%%,*}" ]
 
   # When a new session is created, tmux sets the environment variable TMUX to
   # "<socket>,<pid>,<session>". So we strip everything after (and including)

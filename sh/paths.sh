@@ -60,7 +60,7 @@ if [ -x /usr/bin/xcode-select ]; then
   esac
 
   darwin_ver=$(uname -r)
-  if [ ${darwin_ver%%.*} -ge 15 ]; then
+  if [ "${darwin_ver%%.*}" -ge 15 ]; then
     PATH=$PATH:$DEVELOPER_DIR/usr/bin
     MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
     PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin
@@ -76,7 +76,7 @@ fi
 # Linuxbrew
 # -----------------------------------------------------------------------------
 
-if [ -x $HOME/.linuxbrew/bin/brew ]; then
+if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
   PATH=$HOME/.linuxbrew/bin:$PATH
   MANPATH=$HOME/.linuxbrew/share/man:$MANPATH
 fi
@@ -85,7 +85,7 @@ fi
 # MSYS
 # -----------------------------------------------------------------------------
 
-if [ -n $MSYSTEM_PREFIX ]; then
+if [ -n "$MSYSTEM_PREFIX" ]; then
   PATH=$PATH:$MSYSTEM_PREFIX/bin
 fi
 
@@ -102,16 +102,18 @@ INFOPATH=$HOME/opt/share/info:$INFOPATH
 # -----------------------------------------------------------------------------
 
 fixpath()
-{
-  # Set IFS to a colon so the unquoted `$*` below splits the input properly.
-  local IFS=:
+(
+  # Enable ZSH word splitting so the IFS change below takes effect
+  [ -n "$ZSH_NAME" ] && setopt SH_WORD_SPLIT
 
-  # Enable ZSH word splitting so the IFS change above takes effect.
-  [[ -n $ZSH_NAME ]] && setopt SH_WORD_SPLIT
+  # Set IFS to a colon so the input gets split properly.
+  IFS=:
 
   # Check each directory: if it isn't already in the PATH, and if it exists,
   # append it to the PATH-in-progress (w/ a leading colon if necessary).
-  local d p; for d in $*; do
+  # The unquoted `$*` is deliberate, to force word splitting at each colon.
+  # shellcheck disable=SC2048
+  for d in $*; do
     case ":$p:" in
       *:$d:*) false ;;
       *) [ -d "$d" ] && p="${p:+$p:}$d" ;;
@@ -119,8 +121,8 @@ fixpath()
   done
 
   # Print the new PATH.
-  printf "$p"
-}
+  printf "%s" "$p"
+)
 
 PATH=$(    fixpath "$PATH")
 MANPATH=$( fixpath "$MANPATH")
