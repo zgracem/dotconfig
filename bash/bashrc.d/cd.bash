@@ -5,13 +5,3 @@ if [[ -z $MC_SID ]]; then
   alias --  -='pushd +1 1>/dev/null'  # -  = go back 1 dir
   alias -- --='pushd -0 1>/dev/null'  # -- = go forward 1 dir
 fi
-
-cdls()
-{ # change to, and immediately list, a directory
-  cd "$@" && ls
-}
-
-cdll()
-{ # change to, and immediately list (at length), a directory
-  cd "$@" && ll
-}

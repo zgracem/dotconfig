@@ -12,7 +12,7 @@ ls()
   #       └───── list (almost) all files
 
   # append .exe if cygwin magic was needed
-  [[ $PLATFORM == windows ]] && set -- --append-exe "$@"
+  [ "$PLATFORM" = "windows" ] && set -- --append-exe "$@"
 
   if _isGNU ls; then
     # display mtime in YYYY-MM-DD HH:MM format
@@ -57,7 +57,7 @@ lsf()
   #       │└───── print inode number
   #       └────── list (almost) all files
 
-  if [[ $PLATFORM == mac ]]; then
+  if [ "$PLATFORM" = "mac" ]; then
     set -- -@OG "$@"
     #       ││└── colourize output
     #       │└─── print file flags

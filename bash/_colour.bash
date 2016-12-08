@@ -4,7 +4,8 @@
 
 # get the terminal colour depth (based on $TERM, not perfect but it'll do)
 if [[ -z $TERM_COLOURDEPTH || -n $Z_RELOADING ]]; then
-  TERM_COLOURDEPTH="$(tput -T ${PTERM:-$TERM} colors)" || return
+  TERM_COLOURDEPTH="$(tput -T"${PTERM:-$TERM}" colors 2>/dev/null ||
+                      tput -T"${PTERM:-$TERM}" Co 2>/dev/null)" || return
 fi
 
 # skip this file if the terminal can't support at least eight colours

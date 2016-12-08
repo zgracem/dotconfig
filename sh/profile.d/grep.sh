@@ -15,8 +15,8 @@ grep()
   #       │       └── silently skip devices
   #       └────────── silently skip directories
 
-  # display results in colour
-  (( TERM_COLOURDEPTH >= 8 )) && set -- --colour=auto "$@"
+  # display results in colour if supported
+  [ $((TERM_COLOURDEPTH)) -ge 8 ] && set -- --colour=auto "$@"
 
   # skip version control directories
   set -- \

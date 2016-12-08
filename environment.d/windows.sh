@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------
 
 # If we have Windows admin privileges, we will be a member of group 544 or 0
-for g in `id -G`; do
+for g in $(id -G); do
   if [ "$g" -eq 0 ] || [ "$g" -eq 544 ]; then
     export WINDOWS_ADMIN=true
     break
