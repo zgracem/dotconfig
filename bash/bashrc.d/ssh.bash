@@ -2,15 +2,6 @@
 # SSH setup & shortcuts
 # -----------------------------------------------------------------------------
 
-# Symlink host-specific ssh_config (if any), or global file otherwise
-if [[ ! -L ~/.ssh/config ]]; then
-  if [[ -f ~/.local/config/ssh_config ]]; then
-    ln -sv "../.local/config/ssh_config" ~/.ssh/config
-  else
-    ln -sv "../.config/ssh/config" ~/.ssh/config
-  fi
-fi
-
 _ssh()
 {
   local host="$1"
