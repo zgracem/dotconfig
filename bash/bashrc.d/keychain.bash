@@ -1,9 +1,6 @@
 _inPath keychain || return
 
 if [[ -z $SSH_AGENT_PID ]]; then
-  keychain_dir="$XDG_RUNTIME_DIR/keychain"
-  [[ -d $keychain_dir ]] || mkdir -pv "$keychain_dir"
-
   # We need to ensure noclobber is off so keychain can overwrite the files
   # holding its environment info. If it was enabled, set a self-clearing trap
   # to turn it back on when this file RETURNs from being sourced.
@@ -13,7 +10,7 @@ if [[ -z $SSH_AGENT_PID ]]; then
   verbose "> ${Z_RELOADING+re-}initializing ssh-agent..."
 
   if keychain_env=$(keychain --agents ssh \
-                             --absolute --dir "$keychain_dir" \
+                             --absolute --dir "$XDG_RUNTIME_DIR/keychain" \
                              --ignore-missing \
                              --inherit any \
                              --quick --quiet \
@@ -25,5 +22,5 @@ if [[ -z $SSH_AGENT_PID ]]; then
     verbose 2 ">> export SSH_AGENT_PID=$SSH_AGENT_PID"
   fi
   
-  unset -v keychain_dir keychain_env
+  unset -v keychain_env
 fi
