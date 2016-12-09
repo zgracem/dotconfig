@@ -21,18 +21,27 @@ if [ -x /usr/local/bin/brew ]; then
   # GNU coreutils (w/out `g` prefix)
   PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+  #INFOPATH linked to /usr/local/share/info
 
   # GNU sed (installed --with-default-names)
   PATH=/usr/local/opt/gnu-sed/bin:$PATH
   MANPATH=/usr/local/opt/gnu-sed/share/man:$MANPATH
+  #INFOPATH linked to /usr/local/share/info
 
   # GNU tar (w/out `g` prefix)
   PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/gnu-tar/share/man:$MANPATH
+  #INFOPATH linked to /usr/local/share/info
+
+  # GNU binutils (w/ `g` prefix)
+  PATH=/usr/local/opt/binutils/bin:$PATH
+  MANPATH=/usr/local/opt/binutils/share/man:$MANPATH
+  INFOPATH=/usr/local/opt/binutils/share/info:$INFOPATH
 
   # GNU i18n/l10n utilities
   PATH=/usr/local/opt/gettext/bin:$PATH
   MANPATH=/usr/local/opt/gettext/share/man:$MANPATH
+  INFOPATH=/usr/local/opt/gettext/share/info:$INFOPATH
 
   # OpenSSL
   MANPATH=/usr/local/opt/openssl/share/man:$MANPATH
