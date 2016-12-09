@@ -322,15 +322,9 @@ _z_PS1_jobs()
   fi
 }
 
-# Notify iTerm of the current directory
-_z_PS1_update_iTerm()
-{
-  iterm::state
-}
-
-# Notify Terminal.app of the current directory
+# Notify Terminal.app (or mintty) of the current directory
 # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
-_z_PS1_update_Terminal()
+_z_PS1_update_cwd()
 {
   local ante="${DCS_ante}${OSC}7;" 
   local post="${BEL}${DCS_post}"
@@ -529,15 +523,13 @@ _z_prompt_cmd_del()
 # -----------------------------------------------------------------------------
 
 if [[ $TERM_PROGRAM == iTerm.app ]]; then
-  _z_prompt_cmd_add _z_PS1_update_iTerm
-else
-  unset -f _z_PS1_update_iTerm
+  _z_prompt_cmd_add iterm::state
 fi
 
-if [[ $TERM_PROGRAM == Apple_Terminal ]]; then
-  _z_prompt_cmd_add _z_PS1_update_Terminal
+if [[ $TERM_PROGRAM == Apple_Terminal || $TERM_PROGRAM == mintty ]]; then
+  _z_prompt_cmd_add _z_PS1_update_cwd
 else
-  unset -f _z_PS1_update_Terminal
+  unset -f _z_PS1_update_cwd
 fi
 
 if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
