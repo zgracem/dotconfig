@@ -18,6 +18,12 @@ else
     export HV_DISABLE_PP=1
   fi
 
+  # mintty
+  if [ "$OLDTERM" = "mintty-256color" ] || [ "$MSYSCON" = "mintty.exe" ] || command ps -p "$PPID" 2>&1 | grep -q mintty; then
+    TERM_PROGRAM=mintty
+    TERM=xterm-256color
+  fi
+
   if [ ! -S "${TMUX%%,*}" ] && [ ! -p "$SCREENDIR/$STY" ]; then
     # Old versions of Terminal.app
     if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ "$OLDTERM" != nsterm* ]; then
@@ -77,6 +83,9 @@ if [ -z "$PTERM" ]; then
         ;;
       iTerm.app)
         PTERM=iTerm.app
+        ;;
+      mintty)
+        PTERM=xterm-256color
         ;;
       PuTTY)
         PTERM=putty-256color
