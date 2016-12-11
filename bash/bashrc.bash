@@ -44,25 +44,25 @@ shopt -u sourcepath     # [don't] use PATH to find files to `.`
 # bash-4.0+ options
 # >> http://wiki.bash-hackers.org/scripting/bashchanges#shell_options
 
-if (( BASH_VERSINFO[0] >= 4 )); then
-  if (( BASH_VERSINFO[1] >= 2 )); then
-    # Execute a pipeline's last cmd in the current shell context
-    shopt -s lastpipe
-    # Abort runaway function nesting
-    FUNCNEST=128
-  fi
+this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 
-  if (( BASH_VERSINFO[1] >= 1 )); then
-    # Warn when exiting shell with stopped/running jobs
-    shopt -s checkjobs 
-    # `checkjobs` is available in 4.0, but buggy:
-    # >> https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
-  fi
+if (( this_bash >= 42 )); then
+  # Execute a pipeline's last cmd in the current shell context
+  shopt -s lastpipe
+  # Abort runaway function nesting
+  FUNCNEST=128
+fi
 
-  if (( BASH_VERSINFO[1] >= 0 )); then
-    # `**` matches directories and their files recursively
-    shopt -s globstar
-  fi
+if (( this_bash >= 41 )); then
+  # Warn when exiting shell with stopped/running jobs
+  shopt -s checkjobs 
+  # `checkjobs` is available in 4.0, but buggy:
+  # >> https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
+fi
+
+if (( this_bash >= 40 )); then
+  # `**` matches directories and their files recursively
+  shopt -s globstar
 fi
 
 # Require ^D × (n+1) to exit
@@ -78,7 +78,6 @@ fi
 # -----------------------------------------------------------------------------
 
 latest_bash=44
-this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 
 if (( this_bash < latest_bash )); then
   unset -v newer_bash
