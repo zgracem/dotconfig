@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 # This function will use Terminal.app's x-man-page:// handling if available.
-# Set Z_NO_MAN_URL to inhibit this behaviour.
+# Set Z_MAN_NO_URL or use `--no-url` to inhibit for the rest of the session.
 
 man()
 { # open man page in a new window with a helpful title
@@ -13,6 +13,12 @@ man()
     # stdout is being redirected somewhere, let it go
     command man "$@"
     return
+  fi
+
+  if [[ $1 == --no-url ]]; then
+    printf "%s\n" "export Z_MAN_NO_URL=1"
+    export Z_MAN_NO_URL=1
+    shift
   fi
 
   while getopts ':acCdDeEfHiIkKlLmMpPrRStTuVwWXZ7?' OPT; do
@@ -28,12 +34,12 @@ man()
   done
 
   # open the new window
-  if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_NO_MAN_URL ]]; then
+  if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_MAN_NO_URL ]]; then
     # let Terminal.app be clever about this
     open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
     return 0
   ## ZGM revised 2016-06-17 -- better than nothing for now
-  elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_NO_MAN_URL ]]; then
+  elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_MAN_NO_URL ]]; then
     open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
     # open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
     return 0
