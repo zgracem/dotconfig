@@ -7,8 +7,6 @@ _inPath dircolors || return
 if [[ -z $LS_COLORS || -n $Z_RELOADING ]]; then
   if [[ -n $HV_LOADED ]]; then
     dc_stub="thirty2k"
-  elif [[ -n $Z_SOLARIZED ]]; then
-    dc_stub="solarized_$Z_SOLARIZED"
   else
     dc_stub="default"
   fi
