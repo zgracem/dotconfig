@@ -20,10 +20,6 @@ mc()
 
   # ~/.local/share/mc/skins
   local MC_SKIN="zskin"
-  case $Z_SOLARIZED in
-    dark)   MC_SKIN="solarized_dark"  ;;
-    light)  MC_SKIN="solarized_light" ;;
-  esac
 
   # force xterm mode (for mouse support under tmux)
   set -- --xterm "$@"
