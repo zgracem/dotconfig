@@ -90,7 +90,7 @@ _wtf_file()
   local desc="${1/#$HOME/$'~'}"
   output="$desc"
 
-  # `file -b` returns "brief" output (no leading filename), `-p` avoids 
+  # `file -b` returns "brief" output (no leading filename), `-p` avoids
   # updating the file's access time if possible, and `h` doesn't follow
   # symlinks (we'll do that later if needed).
   local magic=$(command file -bhp "$1")
@@ -120,6 +120,66 @@ _wtf_file()
 }
 
 # -----------------------------------------------------------------------------
+# _wtf_var: Describes a variable (or function).
+# -----------------------------------------------------------------------------
+
+_wtf_var()
+{
+  local regex='^declare -([[:alpha:]-]+)( [^=]+=)?(.*)'
+  if [[ $(declare -p "$1" 2>/dev/null) =~ $regex ||
+        $(declare -Fp "$1" 2>/dev/null) =~ $regex ]]; then
+    local attribs="${BASH_REMATCH[1]}"
+
+    if [[ ${BASH_REMATCH[0]} == *=* ]]; then
+      local value="${BASH_REMATCH[0]#*=}"
+    fi
+  else
+    return 123
+  fi
+
+  local -a props
+  local form
+  local kind="variable"
+
+  case $attribs in
+    *t*)  props+=("traced")
+          ;;&
+    *x*)  props+=("exported")
+          ;;&
+    *r*)  props+=("read-only")
+          ;;&
+    *i*)  form="integer"
+          ;;&
+    *l*)  form="lowercase"
+          ;;&
+    *u*)  form="uppercase"
+          ;;&
+    *a*)  kind="indexed array"
+          ;;&
+    *A*)  kind="associative array"
+          ;;&
+    *f*)  kind="function"
+          value="yes" # to avoid a "null" flag below
+          ;;&
+    *n*)  kind="nameref variable"
+          ;;&
+    *)  : ;;
+  esac
+
+  if [[ $value == '""' ]]; then
+    props=("empty" "${props[@]}")
+  elif [[ $value == "()" ]]; then
+    props=("empty" "${props[@]}")
+  elif [[ -z $value ]]; then
+    props=("null" "${props[@]}")
+  fi
+
+  # concatenate with single spaces
+  props+=($form $kind)
+  printf "%s" "${props[*]}"
+}
+
+# -----------------------------------------------------------------------------
 # wtf: Explains what a thing is.
 # -----------------------------------------------------------------------------
 
@@ -128,7 +188,7 @@ wtf()
   # This function uses extended globbing patterns like `@(foo|bar)`, and so
   # requires the shell option `extglob` to be enabled.
   shopt -q extglob || shopt -s extglob
-  
+
   # By default, `wtf` displays only the first result.
   local one_and_done="true"
 
@@ -145,7 +205,7 @@ wtf()
       a)  unset -v one_and_done ;;
       f)  local skip_func="true" ;;
       s)  unset -v extra_output ;;
-      x)  local HV_DISABLE_PP="true" ;; 
+      x)  local HV_DISABLE_PP="true" ;;
     '?')  hv_err "-$OPTARG" "invalid option"
           return 1 ;;
     esac
@@ -155,7 +215,7 @@ wtf()
   # Accept only one subject term.
   (( $# == 1 )) || return 64
 
-  # Suppress fancy output from `hv_chevron` if not connected to a terminal.
+  # Suppress fancy output from `hv_arrow` if not connected to a terminal.
   if [[ ! -t 1 ]]; then
     local HV_DISABLE_PP="true"
   fi
@@ -166,6 +226,10 @@ wtf()
   # for files -- all other types are always singular.
   local -a types
   types=( $(type -at "$1" | uniq) )
+
+  if declare -p "$1" &>/dev/null; then
+    types+=(variable)
+  fi
 
   if (( ${#types[@]} == 0 )); then
     if [[ -e $1 || -L $1 ]]; then
@@ -179,9 +243,11 @@ wtf()
   for type in "${types[@]}"; do
     local output=""
     local desc=""
+    local colour=""
 
     case $type in
       file)
+        colour="yellow"
         # Are we querying a file directly? If so, it will have a slash in the
         # path (`type` will also return "/path/to/foo is /path/to/foo").
         if [[ $1 =~ / ]]; then
@@ -195,15 +261,15 @@ wtf()
             place=${place/#$HOME/$'~'}
             output+="${output:+\\n}${1} is ${place}"
 
-            hv_arrow    -f bryellow -b brblack "$1"
-            hv_arrow -t -f black -b yellow "${place}"
-            
+            hv_arrow    -f br$colour -b brblack "$1"
+            hv_arrow -t -f black -b $colour "${place}"
+
             if [[ -n $extra_output ]]; then
               desc=$(_wtf_is "$1")
             fi
 
             if [[ -n $desc ]]; then
-              hv_arrow -tn -f black -b bryellow "${desc}"
+              hv_arrow -tn -f black -b br$colour "${desc}"
               # Don't display a description for any additional items.
               unset -v extra_output desc
             elif [[ -z $HV_DISABLE_PP ]]; then
@@ -218,17 +284,19 @@ wtf()
         ;;
 
       alias)
+        colour="cyan"
         local def=${BASH_ALIASES[$1]}
         def=${def//\\/\\\\}
 
         output="$1 is aliased to ‘${def}’"
 
-        hv_arrow     -f brcyan -b brblack "$1"
-        hv_arrow -t  -f black -b cyan "$type"
-        hv_arrow -tn -f black -b brcyan "${def}"
+        hv_arrow     -f br$colour -b brblack "$1"
+        hv_arrow -t  -f black -b $colour "$type"
+        hv_arrow -tn -f black -b br$colour "${def}"
         ;;
 
       builtin|keyword)
+        colour="magenta"
         local name=$1
 
         if desc=$(help -d "$1" 2>/dev/null); then
@@ -285,43 +353,75 @@ wtf()
 
         output="$name ($type)"
 
-        hv_arrow     -f brmagenta -b brblack "$name"
-        hv_arrow -t  -f black -b magenta "$type"
+        hv_arrow     -f br$colour -b brblack "$name"
+        hv_arrow -t  -f black -b $colour "$type"
 
         if [[ -n $extra_output ]]; then
           output+=": $desc"
-          hv_arrow -tn -f black -b brmagenta "$desc"
+          hv_arrow -tn -f black -b br$colour "$desc"
         else
-          [[ -z $HV_DISABLE_PP ]] && printf "\n"
+          hv_arrow -n
         fi
         ;;
 
       function)
+        colour="blue"
         [[ -n $skip_func ]] && continue
-        output="$1 is a function"
-        hv_arrow    -f brblue -b brblack "$1"
-        hv_arrow -t -f black -b blue "function"
+        desc=$(_wtf_var "$1")
+
+        output="$1 is a $desc"
+        hv_arrow    -f br$colour -b brblack "$1"
+        hv_arrow -t -f black -b $colour "$desc"
 
         if desc=$(_wtf_func "$1"); then
           output+=" ($desc)"
-          hv_arrow -tn -f black -b brblue "$desc"
+          hv_arrow -tn -f black -b br$colour "$desc"
         else
-          [[ -z $HV_DISABLE_PP ]] && printf "\n"
+          hv_arrow -n
         fi
 
         if [[ -n $extra_output ]]; then
           # Also output function source.
-          if type -P source-highlight >/dev/null; then
-            declare -f "$1" | source-highlight -s bash -f esc
+          if [[ -n $HV_DISABLE_PP ]]; then
+            output+=$'\n'
+            output+="$(declare -f "$1")"
           else
-            declare -f "$1"
+            if type -P source-highlight >/dev/null; then
+              declare -f "$1" | source-highlight -s bash -f esc
+            else
+              declare -f "$1"
+            fi
           fi
+        fi
+        ;;
+
+      variable)
+        colour="blue"
+        desc=$(_wtf_var "$1")
+
+        local regex='^declare -[[:alpha:]-]+ [^=]+="(.*)"'
+
+        if [[ $desc != *array ]]; then
+          local value
+          printf -v value "%q" "${!1}"
+          value=${value//\\/\\\\}
+        fi
+
+        output="$1: $desc"
+        hv_arrow -f br$colour -b brblack "$1"
+        hv_arrow -t -f black -b $colour "$desc"
+
+        if [[ -n $value ]]; then
+          output+=": ‘$value’"
+          hv_arrow -tn -f black -b br$colour "$value"
+        else
+          hv_arrow -n
         fi
         ;;
     esac
 
     if [[ -n $HV_DISABLE_PP ]]; then
-      # Print plain-text output if `hv_chevron` has been suppressed.
+      # Print plain-text output if `hv_arrow` has been suppressed.
       printf "%b\n" "$output"
     fi
 
