@@ -17,7 +17,6 @@ rootme()
   # prompt+=$'\n'"Password: "
 
   sudo \
-    ${Z_SOLARIZED:+Z_SOLARIZED=$Z_SOLARIZED} \
     TMOUT=$tmout \
     -s
     # -p "${prompt}" \
