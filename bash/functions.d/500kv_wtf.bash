@@ -219,6 +219,8 @@ wtf()
 
       alias)
         local def=${BASH_ALIASES[$1]}
+        def=${def//\\/\\\\}
+
         output="$1 is aliased to ‘${def}’"
 
         hv_arrow     -f brcyan -b brblack "$1"
