@@ -5,5 +5,9 @@ if [ -d "$HOME/.rbenv" ]; then
   if command -v rbenv >/dev/null; then
     eval "$(rbenv init -)"
     MANPATH="$(rbenv prefix)/share/man:$MANPATH"
+    if declare -f fixpath >/dev/null; then
+      PATH=$(fixpath "$PATH")
+      MANPATH=$(fixpath "$MANPATH")
+    fi
   fi
 fi
