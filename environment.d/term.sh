@@ -1,3 +1,5 @@
+[ "$TERM" = "dumb" ] && return
+
 # See ~/etc/terminfo for custom .ti files + a script to compile & install them.
 export TERMINFO="$XDG_DATA_HOME/terminfo"
 
