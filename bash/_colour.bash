@@ -87,42 +87,6 @@ esac
 colours+=(colour_true colour_false colour_hi colour_dim colour_user)
 colours+=(reset)
 
-# -----------------------------------------------------------------------------
-# Solarized -- http://ethanschoonover.com/solarized
-# -----------------------------------------------------------------------------
-
-if [[ -n $Z_SOLARIZED ]]; then
-  base03=$brblack
-  base02=$black
-  base01=$brgreen
-  base00=$bryellow
-   base0=$brblue
-   base1=$brcyan
-   base2=$white
-   base3=$brwhite
-  orange=$brred
-  violet=$brmagenta
-
-  colours+=(base03 base02 base01 base00 base0 base1 base2 base3 orange violet)
-
-  # re/define semantic colours
-  case $Z_SOLARIZED in
-    dark)
-      colour_hi=$base2
-      colour_dim=$base01
-      ;;
-    light)
-      colour_hi=$base02
-      colour_dim=$base1
-
-      colour_true=$cyan
-      colour_false=$orange
-      ;;
-  esac
-
-  export Z_SOLARIZED
-fi
-
 # ------------------------------------------------------------------------------
 # add escape codes
 # ------------------------------------------------------------------------------

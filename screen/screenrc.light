@@ -1,4 +1,0 @@
-source $HOME/.config/screenrc
-
-# if Z_SOLARIZED=light
-hardstatus string '%{= wd}  %-w%{+r}%n %t%{-}%+w %=%d/%m %{k}%0c%{-}  '
