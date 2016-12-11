@@ -67,7 +67,7 @@ unset -v p c
 # used in PS1 -- see _prompt.bash
 : ${colour_user:=$blue}
 
-colour_true=$brgreen
+colour_true=$green
 colour_false=$red
 
 colour_hi=$brwhite   # highlight colour
