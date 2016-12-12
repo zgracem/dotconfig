@@ -82,15 +82,15 @@ rl()
           ;;
 
       functions)
-          files+=("$conf/bash/functions.d/"*)
+          files+=("$conf/bash/functions.d/"*.bash)
           ;;
 
       env|environment)
-          files+=("$conf/environment.d/"*)
+          files+=("$conf/environment.d/"*.sh)
           ;;
 
       local) 
-          files+=("$HOME/.local/config/bashrc.d/"*)
+          files+=("$HOME/.local/config/bashrc.d/"*.bash)
           ;;
 
       keychain) _inPath keychain || return
