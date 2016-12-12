@@ -122,7 +122,7 @@ rl()
     else
       verbose 2 ">> no files found for <$1>, searching functions..."
       # still nothing... maybe it's the name of a function?
-      local func; if func=$(_wtf_func "$1" 2>/dev/null); then
+      local func; if func=$(_z_whence "$1" 2>/dev/null); then
         func=${func%:*}       # remove trailing colon and line no.
         func=${func/#~/$HOME} # tilde-expand filename
         files+=("$func")
@@ -157,6 +157,36 @@ rl()
   return $ret
 }
 
+_z_whence()
+( # ← We need to enable advanced debugging behaviour to get function info
+  #   using only builtins, but it's not for everyday use, so this function is
+  #   executed in a (subshell) instead of as a { group }.
+  shopt -s extdebug
+
+  # Require at least one argument. (We will silently ignore $2 and beyond.)
+  (($#)) || return 64
+
+  # With `extdebug` enabled, `declare -F function_name` prints the function
+  # name, line number, and source file. We will capture the latter two
+  # in BASH_REMATCH with the following regex:
+  local re="^${1}[[:space:]]([[:digit:]]+)[[:space:]](.+)$"
+
+  local location
+  if location=$(declare -F "$1") && [[ $location =~ $re ]]; then
+    local source_file=${BASH_REMATCH[2]/#$HOME/$'~'}
+    local line_number=${BASH_REMATCH[1]}
+  else
+    return 1
+  fi
+
+  # If the function was declared at the command line, source_file will be
+  # "main" (and "the [line number] is not guaranteed to be meaningful").
+  # Otherwise, it will be the path to the file where the function was defined.
+  ### ZGM TODO: Document and handle more edge cases.
+
+  printf "%s:%d" "${source_file}" "${line_number}"
+)
+
 ef()
 { # find and edit shell functions
   (( $# == 1 )) || return 1
@@ -189,7 +219,7 @@ ef()
       return 1
     fi
   else
-    local src=$(_wtf_func "$func")
+    local src=$(_z_whence "$func")
     local src_file=${src%:*}
     local src_line=${src#*:}
 
