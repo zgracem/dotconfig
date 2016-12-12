@@ -216,6 +216,8 @@ shopt -u nullglob
 # And finally...
 # -----------------------------------------------------------------------------
 
+. ~/lib/bash/hvdc/wtf.bash
+
 # Final initialization scripts, except in subshells/when reloading/as root
 if   (( SHLVL <= 1 )) \
   && (( BASH_SUBSHELL < 1 )) \

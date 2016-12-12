@@ -180,7 +180,7 @@ GCC_COLORS+="quote=${cyan}"
 
 # 500 kV library for cool colour printing
 export HV_BG="reset"
-. ~/lib/bash/500kv.bash
+. ~/lib/bash/hvdc/wtf.bash
 
 # -----------------------------------------------------------------------------
 # cleanup
