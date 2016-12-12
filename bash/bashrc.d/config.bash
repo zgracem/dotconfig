@@ -184,7 +184,7 @@ _z_whence()
   # Otherwise, it will be the path to the file where the function was defined.
   ### ZGM TODO: Document and handle more edge cases.
 
-  printf "%s:%d" "${source_file}" "${line_number}"
+  printf "%s:%d" "$source_file" "$line_number"
 )
 
 ef()
@@ -231,71 +231,17 @@ ef()
   fi
 }
 
-if _inPath launchctl; then
-  rlenv()
-  { # reload OS-wide environment variables (GUI apps will require restart)
-    local plist="$HOME/Library/LaunchAgents/org.inescapable.environment.plist"
+_inPath launchctl || return
 
-    if [[ ! -e $plist ]]; then
-      ln -sv "$HOME/Dropbox/.config/misc/${plist##*/}" || return
-    else
-      launchctl unload "$plist" || return
-    fi
+rlenv()
+{ # reload OS-wide environment variables (GUI apps will require restart)
+  local plist="$HOME/Library/LaunchAgents/org.inescapable.environment.plist"
 
-    launchctl load "$plist" || return
-
-    [[ $TERM_PROGRAM == Apple_Terminal ]] && killall Terminal
-  }
-fi
-
-# -----------------------------------------------------------------------------
-# _z_config_symlink
-# Symlink files from ~/.config into ~
-# -----------------------------------------------------------------------------
-
-# Usage:
-#   _z_config_symlink target [symlink]
-#
-# - TARGET is relative to ~/.config
-# - SYMLINK is relative to ~
-#   - defaults to the basename of TARGET preceded by a dot
-#
-# Example: 
-#   _z_config_symlink "git/config" ".gitconfig"
-#   _z_config_symlink "vimrc"
-
-_z_config_symlink()
-{
-  local target
-
-  if [[ -e $HOME/.config/$1 ]]; then
-    target=".config/$1"
-  elif [[ -e $HOME/$1 ]]; then
-    target="$1"
+  if [[ ! -e $plist ]]; then
+    ln -sv "$HOME/Dropbox/.config/misc/${plist##*/}" || return
   else
-    scold "not found: $target"
-    return 1
+    launchctl unload "$plist" || return
   fi
 
-  if [[ -n $2 ]]; then
-    local symlink=$2
-  else
-    # default to ~/.whatever
-    local symlink=".${target##*/}"
-  fi
-
-  if [[ -L $HOME/$symlink ]]; then
-    # link already exists
-    return 0
-  elif [[ -f $HOME/$symlink ]]; then
-    local backup
-    if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
-      printf -v backup "$symlink~original_%(%Y%m%d)T"
-    else
-      backup="$symlink~original_$(date +%Y%m%d)"
-    fi
-    mv -v "$HOME/$symlink" "$HOME/$backup" || return
-  fi
-
-  ( cd "$HOME"; ln -sv "$target" "$symlink" )
+  launchctl load "$plist" || return
 }

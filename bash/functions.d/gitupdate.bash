@@ -7,6 +7,6 @@ gitupdate()
   local dir; for dir in "$target_dir"/**/.git; do
     [[ -d $dir ]] || continue
     dir="${dir%/.git}"
-    (command cd "$dir" && git pull) || return 1
+    (builtin cd "$dir" && git pull) || return 1
   done
 }
