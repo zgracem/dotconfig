@@ -188,23 +188,23 @@ export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 shopt -s nullglob
 
 # Private stuff
-for file in "$XDG_CONFIG_HOME"/bash/private.d/*; do
+for file in "$XDG_CONFIG_HOME"/bash/private.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 
 # Lesser function files
-for file in "$XDG_CONFIG_HOME"/bash/functions.d/*; do
+for file in "$XDG_CONFIG_HOME"/bash/functions.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 
 # Supplementary startup files
-for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*; do
+for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 
 # Machine specific files in ~/.local
 if [[ -d ~/.local/config/bashrc.d ]]; then
-  for file in ~/.local/config/bashrc.d/*; do
+  for file in ~/.local/config/bashrc.d/*.bash; do
     [[ -f $file ]] && . "$file"
   done
 fi
@@ -215,8 +215,6 @@ shopt -u nullglob
 # -----------------------------------------------------------------------------
 # And finally...
 # -----------------------------------------------------------------------------
-
-. ~/lib/bash/hvdc/wtf.bash
 
 # Final initialization scripts, except in subshells/when reloading/as root
 if   (( SHLVL <= 1 )) \
