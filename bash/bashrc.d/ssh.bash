@@ -7,7 +7,7 @@ _ssh()
   local host="$1"
   local title="${host%%.*}"
 
-  local send_env=(TERM_PROGRAM)
+  local send_env=(PTERM TERM_PROGRAM)
 
   # Because cygwin's ssh can't handle non-lowercase hostnames(?)
   [[ $OSTYPE == cygwin ]] && host=${host,,}

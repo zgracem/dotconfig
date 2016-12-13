@@ -1,4 +1,5 @@
 declare -A mydirs=(
+  [icloud]="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
   [bashlib]="$HOME/lib/bash"
   [defunct]="$HOME/src/_defunct"
   [dev]="$dir_scripts/dev"

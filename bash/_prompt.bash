@@ -119,8 +119,8 @@ _z_PS1_compress_pwd()
       k)  keep_dirs="$OPTARG" ;; 
       c)  keep_chars="$OPTARG" ;; 
       i)  indicator="$OPTARG" ;; 
-    '?')  hv_err "-$OPTARG" "invalid option"
-          return 1 ;;
+    '?')  scold "-$OPTARG: invalid option"
+          return 64 ;;
     esac
   done
   shift $((OPTIND - 1))
