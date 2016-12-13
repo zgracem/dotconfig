@@ -55,11 +55,8 @@ HISTIGNORE+=':ls*([1dflt]):ll'
 HISTIGNORE+=':exit:bye'
 
 # my own shortcuts
-HISTIGNORE+=':d *:ef *:manpdf *:etest:f:i:mmin:rl:tt:vnc:vsmm'
+HISTIGNORE+=':d *:ef *:manpdf *:etest:f:h:i:mmin:rl:tt:vnc:vsmm'
 HISTIGNORE+=':b@(a|rc|path|ps1)'
-
-# my help commands
-HISTIGNORE+=':@(h|wtf) *'
 
 # -----------------------------------------------------------------------------
 
