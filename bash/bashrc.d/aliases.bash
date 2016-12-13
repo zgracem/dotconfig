@@ -17,9 +17,6 @@ alias unmount='umount'
 alias vd='newwin vimdiff'
 alias which='builtin type'
 
-alias builtins='compgen -b | column'
-alias functions='compgen -A function | column'
-
 alias c='pbcopy'
 alias p='pbpaste'
 
@@ -29,9 +26,6 @@ alias  etest='_z_edit "$dir_dropbox/src/test.sh"'
 alias  ttest="$dir_dropbox/src/test.sh"
 export rtest="$dir_dropbox/src/test.rb"
 alias  rtest="$rtest"
-
-alias pinback="~/scripts/pinback.sh -t '$PINBOARD_API_KEY' \
-                                    -d ~/Archive/pinboard -fvx"
 
 # -----------------------------------------------------------------------------
 
