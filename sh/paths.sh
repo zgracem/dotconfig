@@ -102,7 +102,17 @@ MANPATH=$HOME/opt/share/man:$HOME/opt/man:$MANPATH
 INFOPATH=$HOME/opt/share/info:$INFOPATH
 
 # -----------------------------------------------------------------------------
-# remove nonexistent directories
+# rbenv
+# -----------------------------------------------------------------------------
+
+if [ -d "$HOME/.rbenv" ]; then
+  PATH=$HOME/.rbenv/shims:$PATH
+  MANPATH=$HOME/.rbenv/versions/$(cat "$HOME/.rbenv/version")/share/man:$MANPATH
+  unset -v RBENV_VERSION
+fi
+
+# -----------------------------------------------------------------------------
+# remove nonexistent/duplicate directories
 # -----------------------------------------------------------------------------
 
 fixpath()
