@@ -8,12 +8,19 @@
 <dict>
   <key>Label</key>
   <string>org.inescapable.environment</string>
+  <key>Disabled</key>
+  <false/>
+  <key>EnvironmentVariables</key>
+  <dict>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin</string>
+  </dict>
   <key>ProgramArguments</key>
   <array>
     <string>bash</string>
     <string>-c</string>
     <string>
-    while read -r subcmd || [[ -n $subcmd ]]; do [[ ${subcmd:0:1} != "#" ]] && eval "/bin/launchctl $subcmd"; done &lt; $HOME/.config/misc/launchd.conf
+    while read -r subcmd || [[ -n $subcmd ]]; do [[ ${subcmd:0:1} != "#" ]] && eval "/bin/launchctl $subcmd"; done &lt; "$HOME/.config/misc/launchd.conf"
     </string>
   </array>
   <key>RunAtLoad</key>

@@ -29,6 +29,7 @@ newwin()
   if _inTmux; then
     until [[ $# -eq 0 ]]; do
       printf -v args[$i] %q "$1"
+      ### for bash > 4.1:
       # printf -v arg %q "$1"
       # args[$i]=$arg
       ((i++))
