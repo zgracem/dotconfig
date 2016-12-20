@@ -6,7 +6,7 @@ map()
   if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
     scold "${FUNCNAME[0]}: invalid syntax"
     scold "Usage: ${FUNCNAME[0]} COMMAND: ITEM [ITEM ...]"
-    return 1
+    return 64
   fi
 
   local cmd

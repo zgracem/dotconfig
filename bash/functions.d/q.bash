@@ -21,7 +21,7 @@ q()
         scold "Usage: $FUNCNAME '-d /path/to/dir'"
         scold "       $FUNCNAME '-n $SSH_TTY'"
         scold "       some_command; $FUNCNAME"
-        return 1
+        return 64
         ;;
   esac
 
@@ -32,7 +32,7 @@ q()
   case $answer in
     *error*)  # Syntax error from [[
               scold "$FUNCNAME: bad expression"
-              return 1
+              return 2
               ;;
 
     true)     colour=$true_colour

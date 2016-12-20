@@ -12,7 +12,7 @@ auc::url()
     local year="${BASH_REMATCH[3]}${BASH_REMATCH[4]}"
   else
     scold "$FUNCNAME: invalid document number: $document"
-    return 1
+    return 65
   fi
 
   case $document in

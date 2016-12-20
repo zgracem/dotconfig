@@ -8,7 +8,7 @@ cyglink()
 
   if (( $# == 0 )); then
     scold "Usage: $FUNCNAME target link"
-    return 1
+    return 64
   else
     local target="$1"
     local link="$2"
@@ -16,7 +16,7 @@ cyglink()
 
   if [[ ! -d $target ]]; then
     scold "not a directory: $target"
-    return 1
+    return 65
   fi
 
   cmd /C mklink /J "$(cygpath -aw "$link")" "$(cygpath -aw "$target")"

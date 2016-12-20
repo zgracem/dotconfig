@@ -8,7 +8,7 @@ syncdir()
     shift 2
   else
     printf 'Usage: %s SOURCE [USER@][HOST:]DESTINATION [FLAGS ...]\n' $FUNCNAME >&2
-    return 1
+    return 64
   fi
 
   set -- --exclude=.DS_Store --exclude=.git "$@"

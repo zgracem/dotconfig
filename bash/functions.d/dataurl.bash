@@ -4,10 +4,10 @@ dataurl()
 
     if (( $# != 1 )); then
         scold "Usage: ${FUNCNAME[0]} IMAGE"
-        return 1
+        return 64
     elif [[ ! -f $1 ]]; then
         scold "file not found: $1"
-        return 1
+        return 65
     fi
 
     local img="$1"

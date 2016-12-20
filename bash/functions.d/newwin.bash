@@ -11,8 +11,6 @@ newwin()
       command tmux new-window
     elif _inScreen; then
       command screen
-    else
-      return 1
     fi
     return
   fi

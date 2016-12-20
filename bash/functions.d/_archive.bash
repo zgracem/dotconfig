@@ -7,7 +7,7 @@ roll()
 
   if (( $# < 2 )); then
     scold "Usage: $FUNCNAME archive.ext file [file ...]"
-    return 1
+    return 64
   fi
 
   local archive="$1"; shift
@@ -29,14 +29,14 @@ roll()
 
 tarup()
 { # tar + gzip an entire directory
-  (( $# == 1 )) || return 1
+  (( $# == 1 )) || return 64
   local dir="${1%/}"
   roll "$dir.tar.gz" "$dir/"
 }
 
 zipup()
 { # zip an entire directory
-  (( $# == 1 )) || return 1
+  (( $# == 1 )) || return 64
   local dir="${1%/}"
   roll "$dir.zip" "$dir/"
 }

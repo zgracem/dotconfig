@@ -25,7 +25,7 @@ obscure()
         ;;
       *)
         printf >&2 "Usage: %s\n" "$usage"
-        return 1
+        return 64
         ;;
     esac
 
