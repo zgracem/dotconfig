@@ -15,18 +15,15 @@ _ssh()
   # WebFaction's sshd doesn't AcceptEnv, so set important vars manually
   # >> http://superuser.com/a/163228
   if [[ $host == WebFaction ]]; then
-    local cmd="exec bash --login"
-    local assign
-    local export
+    local cmd="env"
 
     local var; for var in "${send_env[@]}"; do
       if [[ -n ${!var} ]]; then
-        assign+="${assign+; }$var=${!var}"
-        export+="${export+ }$var"
+        cmd+=" $var=${!var}"
       fi
     done
 
-    cmd="$assign; export $export; $cmd"
+    cmd="$cmd bash --login"
   fi
 
   newwin --title "$title" ssh -t "$host" "$cmd"
