@@ -5,16 +5,16 @@ _inPath agedu || return
 agedu()
 {
   # Directory to scan
-  set -- --scan "$HOME" "$@"
+  set -- --scan "${1:-$HOME}"
 
   # Location of database file
-  set -- --file "$XDG_RUNTIME_DIR/agedu.dat" "$@"
+  set -- "$@" --file "$XDG_RUNTIME_DIR/agedu.dat"
 
   # Web server preferences
-  set -- --web --address 10.0.1.10:60053 --auth none "$@"
+  set -- "$@" --web --address $(localip):60053 --auth none
 
   # Remove database file after web server stops
-  set -- --remove "$@"
+  set -- "$@" --remove
 
   command agedu "$@"
 }
