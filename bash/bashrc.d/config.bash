@@ -185,6 +185,7 @@ _z_whence()
   ### ZGM TODO: Document and handle more edge cases.
 
   printf "%s:%d" "$source_file" "$line_number"
+  [[ -t 1 ]] && printf "\n"
 )
 
 ef()
