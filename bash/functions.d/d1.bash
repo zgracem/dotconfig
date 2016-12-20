@@ -19,10 +19,10 @@ d1()
       fi
     else
       scold "zero-length file: $entry"
-      return 1
+      return 65
     fi
   else
     scold "editor error"
-    return 1
+    return 70
   fi
 }

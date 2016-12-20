@@ -6,6 +6,6 @@ catimg()
     command catimg "$@"
   else
     scold "not available :("
-    return 1
+    return 69
   fi
 }

@@ -83,5 +83,5 @@ g2()
     scold "$FUNCNAME: $1: not found"
   fi
 
-  return 1
+  return 66
 }

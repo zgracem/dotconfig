@@ -176,7 +176,7 @@ _z_whence()
     local source_file=${BASH_REMATCH[2]/#$HOME/$'~'}
     local line_number=${BASH_REMATCH[1]}
   else
-    return 1
+    return 66
   fi
 
   # If the function was declared at the command line, source_file will be
@@ -189,7 +189,7 @@ _z_whence()
 
 ef()
 { # find and edit shell functions
-  (( $# == 1 )) || return 1
+  (( $# == 1 )) || return 64
 
   local func=$1
   local dir="$XDG_CONFIG_HOME/bash"
@@ -210,13 +210,11 @@ ef()
       if [[ $answer =~ [yY] ]]; then
         printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
         _z_edit "$file:3:5"
-        return 0
-      else
-        return 1
       fi
+      return 0
     else
       # we are being called by another function like es(), so we're done
-      return 1
+      return 0
     fi
   else
     local src=$(_z_whence "$func")

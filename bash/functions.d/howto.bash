@@ -28,9 +28,6 @@ howto()
 
         if [[ $answer =~ [yY] ]]; then
             _z_edit "$file"
-            return 0
-        else
-            return 1
         fi
     fi
 }

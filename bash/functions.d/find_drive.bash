@@ -6,7 +6,7 @@ find_drive()
     local label=$1
   else
     scold "Usage: $FUNCNAME LABEL"
-    return 1
+    return 64
   fi
 
   if [[ $PLATFORM == windows ]]; then
@@ -28,9 +28,9 @@ find_drive()
 
   else
     scold "not available on this system"
-    return 1
+    return 71
   fi
   
   scold "volume not found: $label"
-  return 1
+  return 66
 }

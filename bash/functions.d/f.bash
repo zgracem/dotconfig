@@ -11,7 +11,7 @@ f()
       ;;
     *)
       scold 'not available on this system'
-      return 1
+      return 71
       ;;
   esac
 }

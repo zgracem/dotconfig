@@ -27,7 +27,7 @@ scan()
       ;;
     *)
       scold "Usage: ${usage}"
-      return 1
+      return 64
       ;;
   esac
 }

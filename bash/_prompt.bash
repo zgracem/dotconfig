@@ -205,14 +205,14 @@ _z_PS1_print_exit()
 
   [[ $Z_PROMPT_EXIT == true ]] || return $last_exit
   [[ $1 =~ ^[[:digit:]]+$ ]] && last_exit=$1
-  (( last_exit != 0 )) || return 0
+  (( last_exit == 0 )) && return 0
 
   # If terminated from a signal (128 >= $? >= 165), get signal name from `kill`
   # (`-l` = list) and print that instead.
   if (( last_exit > 128 )) && sigspec=$(builtin kill -l $last_exit 2>/dev/null); then
     last_exit=${sigspec#SIG}
   elif (( last_exit >= 64 && last_exit <= 78 )); then
-    # Someone's been reading `/usr/include/sysexits.h`... ;)
+    # Someone's been reading sysexits(3)... ;)
     local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
       [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
       [71]="OSERR"    [72]="OSFILE"   [73]="CANTCREAT"   [74]="IOERR"
@@ -247,7 +247,7 @@ _z_PS1_git_info()
   elif [[ $status =~ ${re_br%…} ]]; then
     branch="${BASH_REMATCH[1]}"
   else
-    return 1
+    return 70
   fi
   
   # count unstaged files (by counting newlines)
