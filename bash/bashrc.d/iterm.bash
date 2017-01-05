@@ -54,8 +54,9 @@ iterm::PS1_post()
 }
 
 iterm::version()
-{
-  iterm::esc "ShellIntegrationVersion=99"
+{ # Suppress "this account's scripts are out of date" warning
+  local version=99
+  iterm::esc "ShellIntegrationVersion=${version};shell=bash"
 }
 
 iterm::state
