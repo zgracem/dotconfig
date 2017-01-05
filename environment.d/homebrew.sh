@@ -21,23 +21,28 @@ fi
 # Only automatically `brew update` every 24 hours
 export HOMEBREW_AUTO_UPDATE_SECS=$(( 24 * 60 * 60 ))
 
-# If we're not in a GUI session on macOS:
-if [ -z "$Apple_PubSub_Socket_Render" ]; then
-  # don't print beer emoji
-  export HOMEBREW_NO_EMOJI=true
+# Check for macOS/iOS terminal clients w/ emoji support
+case $TERM_PROGRAM in
+  Apple_Terminal|iTerm.app|Prompt_2|Coda)
+    case "$(date +%B)" in
+      "October")
+        # Pumpkin Spice Homebrew!
+        # >> https://twitter.com/MacHomebrew/status/783028298351730688
+        export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x83' # 🎃
+        ;;
+      "December")       
+        # Santa brought me a bunch of software upgrades 
+        export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x81' # 🎁
+        ;;
+    esac
+    ;;
+  *)
+    # don't print beer emoji
+    export HOMEBREW_NO_EMOJI=true
+    ;;
+esac
 
+if [ -n "$SSH_CONNECTION" ]; then
   # make `brew home` et al. print the URL instead of launching a browser
   export HOMEBREW_BROWSER=/bin/echo
-else
-  case "$(date +%B)" in
-    "October")
-      # Pumpkin Spice Homebrew!
-      # >> https://twitter.com/MacHomebrew/status/783028298351730688
-      export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x83' # 🎃
-      ;;
-    "December")       
-      # Santa brought me a bunch of software upgrades 
-      export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x85' # 🎅
-      ;;
-  esac
 fi
