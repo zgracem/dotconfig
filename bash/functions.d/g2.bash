@@ -1,3 +1,6 @@
+# Requires bash 4+ (associative arrays)
+(( ${BASH_VERSINFO[0]} >= 4 )) || return
+
 declare -A mydirs=(
   [icloud]="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
   [bashlib]="$HOME/lib/bash"
