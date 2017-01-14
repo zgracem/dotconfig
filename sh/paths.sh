@@ -81,7 +81,7 @@ fi
 # -----------------------------------------------------------------------------
 
 if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-  PATH=$HOME/.linuxbrew/bin:$PATH
+  PATH=$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH
   MANPATH=$HOME/.linuxbrew/share/man:$MANPATH
 fi
 
