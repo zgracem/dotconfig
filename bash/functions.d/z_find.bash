@@ -21,12 +21,15 @@ _z_find()
       ;;
   esac
 
+  local line
+
   find -H "$scope" \
        -xtype $find_type \
-       -iname '*'"$term"'*' \
+       -iname "*$term*" \
        -print 2>/dev/null \
-  | sed "s|^$HOME|~|g" \
-  | command grep -i --colour=auto "$term"
+  | while read -r line; do
+    command grep -i --colour=auto "$term" <<< "${line/#$HOME/$'~'}";
+  done
 }
 
 # -----------------------------------------------------------------------------
