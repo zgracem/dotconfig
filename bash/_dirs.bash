@@ -23,6 +23,7 @@ case $PLATFORM in
       export USERPROFILE="$(cygpath -aw "$dir_winhome")"
     fi
     
+    dir_apps="$dir_winhome/Applications"
     dir_downloads="$dir_winhome/Downloads"
     dir_dropbox="$dir_winhome/Dropbox"
     ;;
@@ -30,9 +31,6 @@ esac
 
 # machine-specific
 case $HOSTNAME in
-  WS*|Pallas*)
-    dir_apps="$dir_winhome/Applications"
-    ;;&
   WS*)
     dir_downloads="$HOME/tmp"
     dir_dropbox="$HOME/Dropbox"

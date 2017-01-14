@@ -19,6 +19,85 @@ _z_rl_say()
   printf "$msg_fmt" "$filename"
 }
 
+_z_whence()
+( # ← We need to enable advanced debugging behaviour to get function info
+  #   using only builtins, but it's not for everyday use, so this function is
+  #   executed in a (subshell) instead of as a { group }.
+  shopt -s extdebug
+
+  # Require at least one argument. (We will silently ignore $2 and beyond.)
+  (($#)) || return 64
+
+  # With `extdebug` enabled, `declare -F function_name` prints the function
+  # name, line number, and source file. We will capture the latter two
+  # in BASH_REMATCH with the following regex:
+  local re="^${1}[[:space:]]([[:digit:]]+)[[:space:]](.+)$"
+
+  local location
+  if location=$(declare -F "$1") && [[ $location =~ $re ]]; then
+    local source_file=${BASH_REMATCH[2]/#$HOME/$'~'}
+    local line_number=${BASH_REMATCH[1]}
+  else
+    return 66
+  fi
+
+  # If the function was declared at the command line, source_file will be
+  # "main" (and "the [line number] is not guaranteed to be meaningful").
+  # Otherwise, it will be the path to the file where the function was defined.
+  ### ZGM TODO: Document and handle more edge cases.
+
+  printf "%s:%d" "$source_file" "$line_number"
+  [[ -t 1 ]] && printf "\n"
+)
+
+ef()
+{ # find and edit shell functions
+  (( $# == 1 )) || return 64
+
+  local func=$1
+  local dir="$XDG_CONFIG_HOME/bash"
+
+  if ! _isFunction "$func"; then
+    local file="$dir/functions.d/$func.bash"
+
+    if [[ -f $file ]]; then
+      _z_edit "$file"
+      return 0
+    elif (( ${#FUNCNAME[@]} == 1 )); then
+      # we're not being called by another function like es()
+      local answer=n
+
+      printf '%s' "$func does not exist. "
+      read -e -p "Create it ("${file/#$HOME/$'~'}")? [y/N] " answer
+
+      if [[ $answer =~ [yY] ]]; then
+        printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
+        _z_edit "$file:3:5"
+      fi
+      return 0
+    else
+      # we are being called by another function like es(), so we're done
+      return 0
+    fi
+  else
+    local src=$(_z_whence "$func")
+    local src_file=${src%:*}
+    local src_line=${src#*:}
+
+    src_file=${src_file/#~/$HOME}
+
+    if [[ -f $src_file ]]; then
+      _z_edit "${src_file}:${src_line}"
+    fi
+  fi
+}
+
+# rl() requires bash 4+ (case fall-through)
+if (( ${BASH_VERSINFO[0]} < 4 )); then
+  alias rl=". $XDG_CONFIG_HOME/bash/profile.bash"
+  return
+fi
+
 rl()
 { # note: requires extglob, globstar, nullglob
 
@@ -155,77 +234,4 @@ rl()
 
   unset -v Z_RELOADING Z_RL_VERBOSE
   return $ret
-}
-
-_z_whence()
-( # ← We need to enable advanced debugging behaviour to get function info
-  #   using only builtins, but it's not for everyday use, so this function is
-  #   executed in a (subshell) instead of as a { group }.
-  shopt -s extdebug
-
-  # Require at least one argument. (We will silently ignore $2 and beyond.)
-  (($#)) || return 64
-
-  # With `extdebug` enabled, `declare -F function_name` prints the function
-  # name, line number, and source file. We will capture the latter two
-  # in BASH_REMATCH with the following regex:
-  local re="^${1}[[:space:]]([[:digit:]]+)[[:space:]](.+)$"
-
-  local location
-  if location=$(declare -F "$1") && [[ $location =~ $re ]]; then
-    local source_file=${BASH_REMATCH[2]/#$HOME/$'~'}
-    local line_number=${BASH_REMATCH[1]}
-  else
-    return 66
-  fi
-
-  # If the function was declared at the command line, source_file will be
-  # "main" (and "the [line number] is not guaranteed to be meaningful").
-  # Otherwise, it will be the path to the file where the function was defined.
-  ### ZGM TODO: Document and handle more edge cases.
-
-  printf "%s:%d" "$source_file" "$line_number"
-  [[ -t 1 ]] && printf "\n"
-)
-
-ef()
-{ # find and edit shell functions
-  (( $# == 1 )) || return 64
-
-  local func=$1
-  local dir="$XDG_CONFIG_HOME/bash"
-
-  if ! _isFunction "$func"; then
-    local file="$dir/functions.d/$func.bash"
-
-    if [[ -f $file ]]; then
-      _z_edit "$file"
-      return 0
-    elif (( ${#FUNCNAME[@]} == 1 )); then
-      # we're not being called by another function like es()
-      local answer=n
-
-      printf '%s' "$func does not exist. "
-      read -e -p "Create it ("${file/#$HOME/$'~'}")? [y/N] " answer
-
-      if [[ $answer =~ [yY] ]]; then
-        printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
-        _z_edit "$file:3:5"
-      fi
-      return 0
-    else
-      # we are being called by another function like es(), so we're done
-      return 0
-    fi
-  else
-    local src=$(_z_whence "$func")
-    local src_file=${src%:*}
-    local src_line=${src#*:}
-
-    src_file=${src_file/#~/$HOME}
-
-    if [[ -f $src_file ]]; then
-      _z_edit "${src_file}:${src_line}"
-    fi
-  fi
 }
