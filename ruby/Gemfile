@@ -35,6 +35,9 @@ gem "ronn"
 # <github.com/genki/ruby-terminfo>
 gem "ruby-terminfo"
 
+# for Pushover notifications <github.com/bemurphy/rushover>
+gem "rushover"
+
 # calculate sun/moon position & phase <github.com/agileronin/suncalc-ruby>
 gem "suncalc"
 
@@ -57,8 +60,8 @@ gem "yard"
 # <github.com/threedaymonk/htmlentities>
 gem "htmlentities"
 
-# <github.com/middleman/middleman>
-gem "middleman", "~> 3.4"
+# # <github.com/middleman/middleman>
+# gem "middleman", "~> 3.4"
 
 # <github.com/sass/sass>
 gem "sass"

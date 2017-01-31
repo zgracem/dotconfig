@@ -5,9 +5,10 @@ require "pp"
 require "what_methods"  # object.what?(result)
                         # => method(s) that will produce result
 require "zgm/colour"
+require "zgm/object/blank"
 require "zgm/proxy"
 require "zgm/red_warnings"
-require "zgm/term"
+# require "zgm/term"
 
 include IRB
 
@@ -15,17 +16,26 @@ include IRB
 # http://irb.tools/
 # -----------------------------------------------------------------------------
 
+irb_version  = IRB.version.split(/[ (]/)[1]
+ruby_version = RUBY_DESCRIPTION.split(/[ (]/)[1]
+
+msg = "Welcome to %<i>sIRB %<i_v>s#{irb_version}%<x>s. " <<
+      "You are using %<r>sruby %<r_v>s#{ruby_version}%<x>s."
+
+colours = {
+  i:   "#{Colour.cyan}",
+  i_v: "#{Colour.brightcyan}",
+  r:   "#{Colour.magenta}",
+  r_v: "#{Colour.brightmagenta}",
+  x:   "#{Colour.reset}"
+}
+
 # `configure.rb` loads `implementation.rb`, which sets up the Irbtools module 
 # with a default welcome message. 
 require "irbtools/configure"
 
 # This overrides that default:
-Irbtools.welcome_message =
-  "Welcome to " <<
-  "#{Colour.cyan}" << IRB.version.split("(").first.upcase << 
-  "#{Colour.reset}. You are using " <<
-  "#{Colour.magenta}" << RUBY_DESCRIPTION.split(" (").first <<
-  "#{Colour.reset}."
+Irbtools.welcome_message = sprintf(msg, colours)
 
 # Now we load the rest of it:
 require "irbtools"

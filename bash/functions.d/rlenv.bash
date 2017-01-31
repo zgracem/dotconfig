@@ -5,7 +5,7 @@ rlenv()
   local plist="$HOME/Library/LaunchAgents/org.inescapable.environment.plist"
 
   if [[ ! -e $plist ]]; then
-    ln -sv "$HOME/Dropbox/.config/misc/${plist##*/}" || return
+    ln -sfv "$HOME/.config/misc/${plist##*/}" "${plist%/*}" || return
   else
     launchctl unload "$plist" || return
   fi

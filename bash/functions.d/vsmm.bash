@@ -13,9 +13,6 @@ vsmm()
     WS*)
       cygstart "$project_dir/misc/vsmm.sublime-project"
       ;;
-    *)
-      return 71
-      ;;
   esac
 
   return 0
