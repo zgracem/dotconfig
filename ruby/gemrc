@@ -1,6 +1,6 @@
 ---
 gem: --bindir ~/opt/bin
-install: --no-document -​-env-shebang
-update: --no-document -​-env-shebang -​-minimal-deps
+install: --no-rdoc -​-env-shebang
+update: --no-rdoc -​-env-shebang -​-minimal-deps
 uninstall: -​-executables
 query: --details
