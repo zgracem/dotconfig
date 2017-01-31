@@ -6,6 +6,7 @@ if [ -z "$LANGUAGE" ]; then
   export LANGUAGE='en_CA:en_US:en'
 fi
 
+# LANG: used as a substitute for any unset LC_* variable
 if [ -z "$LANG" ]; then
   # Some systems have 'en_CA.UTF-8', some have 'en_CA.utf8' -- search locales
   # to find whichever is available, and cache the result.

@@ -26,6 +26,11 @@ else
     TERM=xterm-256color
   fi
 
+  # Cathode.app
+  if [ "$TERMKIT_HOST_APP" = "Cathode" ]; then
+    TERM_PROGRAM="Cathode"
+  fi
+
   if [ ! -S "${TMUX%%,*}" ] && [ ! -p "$SCREENDIR/$STY" ]; then
     # Old versions of Terminal.app
     if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ "$OLDTERM" != nsterm* ]; then
