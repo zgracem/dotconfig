@@ -2,6 +2,11 @@
 c() { pbcopy; }
 p() { pbpaste; }
 
+tc()
+{ # copies standard input to clipboard and displays it on standard output
+  tee /dev/stdout < /dev/stdin | pbcopy
+}
+
 pbsort()
 { # sort contents of clipboard
   (pbpaste;echo) | sort -u | pbcopy
