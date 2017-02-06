@@ -15,7 +15,8 @@
 brew "dnsmasq"
 brew "getmail"
 brew "transmission"
-brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
+### Install w/ pip to get the youtube_dl Python module too.
+# brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
 
 # -----------------------------------------------------------------------------
 # media
@@ -76,6 +77,7 @@ brew "agedu"
 brew "keychain"
 brew "midnight-commander"
 brew "sf-pwgen" # github.com/anders/pwgen
+brew "unar"
 
 # dictionaries
 brew "dict"
