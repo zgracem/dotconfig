@@ -1,0 +1,123 @@
+# Wirb colour scheme
+# <https://github.com/janlelis/wirb>
+
+# containers
+hash_delimiter:             # { … }
+- :white
+- :default
+array_delimiter:            # [ … ]
+- :white
+- :default
+set_delimiter:              #  …{ … }…
+- :white
+- :default
+object_delimiter:           # #<>
+- :white
+- :default
+
+# delimiters
+comma:
+- :default
+- :default
+refers:
+- :default
+- :default
+
+# Class
+class:                      # Class #=> Class
+- :yellow
+- :bright
+object_class:               # c #=> #<Class:0x201c60f4>
+- :yellow
+- :bright
+class_separator:            # ::
+- :yellow
+- :bright
+
+# Object
+object_description_prefix:  # :
+- :default
+object_address:             # 0x201c60f4
+- :yellow
+object_variable_prefix:     # @
+- :white
+object_variable:            # var_name
+- :default
+object_description:         # 2002-01-01 ((2452276j,0s,0n),+0s,2299161j)
+- :default
+object_address_prefix:
+- :black
+- :magenta
+object_line_prefix:
+- :bright
+- :black
+object_line:
+- :blue
+object_line_number:
+- :green
+
+# Symbol
+symbol_prefix:
+- :green
+- :bright
+symbol:
+- :green
+symbol_string:
+- :green
+symbol_string_delimiter:
+- :green
+- :bright
+
+# String
+string:
+- :cyan
+string_delimiter:
+- :cyan
+- :bright
+
+# Regexp
+regexp:
+- :magenta
+regexp_delimiter:
+- :magenta
+- :bright
+regexp_flags:
+- :magenta
+- :faint
+
+# numbers
+number:
+- :cyan
+- :bright
+special_number:       # Infinity, NaN
+- :cyan
+- :bright
+- :black
+# - :italic
+range:                # .. in 3..5
+- :white
+rational_delimiter:   # () in (3/5)
+- :default
+rational_separator:   # /  in (3/5)
+- :white
+complex_delimiter:    # () in (3+5i)
+- :default
+
+# Misc
+time:
+- :blue
+- :bright
+- :black
+word:
+- :black
+- :magenta
+- :blink
+nil:
+- :black
+- :bright
+false:
+- :red
+- :bright
+true:
+- :green
+- :bright

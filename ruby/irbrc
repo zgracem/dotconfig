@@ -1,9 +1,13 @@
+# If this file fails to load, debug by executing as a normal Ruby file:
+#   ruby ~/.config/ruby/irbrc
+
 require "English"
 require "irb/completion"
-require "open-uri"
+require "pathname"
 require "pp"
-require "what_methods"  # object.what?(result)
-                        # => method(s) that will produce result
+# require "what_methods"  # object.what?(result)
+#                         # => method(s) that will produce result
+
 require "zgm/colour"
 require "zgm/object/blank"
 require "zgm/proxy"
@@ -12,32 +16,57 @@ require "zgm/red_warnings"
 
 include IRB
 
+irbrc_dir = Pathname.new(`readlink -e #{__FILE__}`.chomp).dirname.to_path
+
 # -----------------------------------------------------------------------------
 # http://irb.tools/
 # -----------------------------------------------------------------------------
 
-irb_version  = IRB.version.split(/[ (]/)[1]
-ruby_version = RUBY_DESCRIPTION.split(/[ (]/)[1]
-
-msg = "Welcome to %<i>sIRB %<i_v>s#{irb_version}%<x>s. " <<
-      "You are using %<r>sruby %<r_v>s#{ruby_version}%<x>s."
+irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
+welcome_msg   = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " <<
+                "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
 
 colours = {
-  i:   "#{Colour.cyan}",
-  i_v: "#{Colour.brightcyan}",
-  r:   "#{Colour.magenta}",
-  r_v: "#{Colour.brightmagenta}",
-  x:   "#{Colour.reset}"
+  i:   Colour.cyan.to_s,
+  i_v: Colour.brightcyan.to_s,
+  r:   Colour.magenta.to_s,
+  r_v: Colour.brightmagenta.to_s,
+  x:   Colour.reset.to_s
 }
 
 # `configure.rb` loads `implementation.rb`, which sets up the Irbtools module 
-# with a default welcome message. 
+# with default settings.
 require "irbtools/configure"
 
-# This overrides that default:
-Irbtools.welcome_message = sprintf(msg, colours)
+# Override default welcome message
+Irbtools.welcome_message = sprintf(welcome_msg, colours)
 
-# Now we load the rest of it:
+# Override default FancyIrb colours
+Irbtools.replace_library_callback :fancy_irb do
+  FancyIrb.start({
+    rocket_mode: true,       # activate or deactivate #=> rocket
+    rocket_prompt: '#=> ',   # prompt to use for the rocket
+    result_prompt: '=> ',    # prompt to use for normal output
+    east_asian_width: false, # set to true if you have double-width characters (slower)
+    colorize: {              # colors hash. Set to nil to deactivate colors
+      rocket_prompt: [:blue],
+      result_prompt: [:blue],
+      input_prompt:  nil,
+      irb_errors:    nil,
+      stderr:        [:red, :bright],
+      stdout:        nil,
+      input:         nil,
+     }
+  })
+end
+
+# Custom Wirb colour scheme
+Irbtools.replace_library_callback "wirb/wp" do
+  Wirb.start
+  Wirb.load_schema "#{irbrc_dir}/zgm.wirb.yaml"
+end
+
+# Now we load the rest of it
 require "irbtools"
 
 # -----------------------------------------------------------------------------
@@ -58,24 +87,24 @@ IRB.conf[:SAVE_HISTORY] = 2 ** 15
 # prompt
 # -----------------------------------------------------------------------------
 
-off = "#{Colour.reset}"
-dim = "#{Colour.brightblack}"
+off = Colour.reset.to_s
+dim = Colour.brightblack.to_s
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  :PROMPT_I => "#{Colour.blue}>>#{off} ",
+  PROMPT_I: "#{Colour.blue}>> " << off,
 
   # prompt when indenting code
-  :PROMPT_N => "#{dim}>" + "#{Colour.blue}>  " + off,
+  PROMPT_N: "#{dim}│  " << off,
 
   # prompt for continuing strings
-  :PROMPT_S => "#{dim}%l" + "#{Colour.cyan}> " + off,
+  PROMPT_S: "#{dim}│%l " << off,
 
   # prompt for continuing statement
-  :PROMPT_C => "#{dim}*" + "#{Colour.yellow}> " + off,
+  PROMPT_C: "#{dim}├ " << off,
 
   # prefix to statement output
-  :RETURN =>   "#{Colour.brightwhite}=>#{off} %s\n"
+  RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
 }
 
 IRB.conf[:PROMPT_MODE] = :ZGM
@@ -84,6 +113,29 @@ IRB.conf[:PROMPT_MODE] = :ZGM
 # helper methods
 # -----------------------------------------------------------------------------
 
-def echo
-  IRB.conf[:echo] = !IRB.conf[:echo]
+### Doesn't work w/ irbtools :(
+# def echo
+#   IRB.conf[:echo] = !IRB.conf[:echo]
+# end
+
+# Usage: w = ww
+def ww(c = :yeg)
+  require "weather_ca" unless defined?(WeatherCA)
+  WeatherCA::Location.new(c).weather
+end
+
+def str
+  "hello world"
+end
+
+def hsh
+  {red: "ruby", green: "emerald", blue: "sapphire"}
+end
+
+def ary
+  [0, 1, (1+0i), 2/3r, (5..8), 1.321e+34, Float::INFINITY]
+end
+
+def int
+  rand(10..1000)
 end
