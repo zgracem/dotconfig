@@ -1,5 +1,4 @@
 ---
-gem: --bindir ~/opt/bin
 install: --no-rdoc -​-env-shebang
 update: --no-rdoc -​-env-shebang -​-minimal-deps
 uninstall: -​-executables
