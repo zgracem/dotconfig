@@ -7,6 +7,14 @@ e()
   printf "%s\n" "$@"
 }
 
+x() 
+{ # execute a command for each arg passed on stdin
+  # Usage: <input> | x <command>
+  xargs -r -d"\n" "$@"; 
+  #      │  └── delimit w/ newline only (instead of all whitespace chars)
+  #      └───── do not run if input is empty
+}
+
 # -----------------------------------------------------------------------------
 # I/O functions
 # -----------------------------------------------------------------------------
