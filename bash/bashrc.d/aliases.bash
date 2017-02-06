@@ -10,15 +10,11 @@ alias .....='cd ../../../..'
 alias bell='tput bel' # 🔔
 alias bye='exit'
 alias d='declare -p'
-alias e='printf "%s\n"'
 alias i='newwin irb'
 alias svim='sudo XDG_DATA_HOME="$XDG_DATA_HOME" vim'
 alias unmount='umount'
 alias vd='newwin vimdiff'
 alias which='builtin type'
-
-alias c='pbcopy'
-alias p='pbpaste'
 
 alias hd='hexdump -C'
 
@@ -31,9 +27,6 @@ alias  rtest="$rtest"
 
 # share $PWD at localhost:17777 (port reserved by IANA)
 alias webshare='python -m SimpleHTTPServer 17777'
-
-# get external IP address
-alias myip='dig +short @resolver1.opendns.com myip.opendns.com'
 
 # start servers
 if [[ $HOSTNAME == Athena* ]]; then

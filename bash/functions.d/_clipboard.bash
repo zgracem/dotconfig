@@ -1,10 +1,12 @@
+# shortcuts
+c() { pbcopy; }
+p() { pbpaste; }
+
 pbsort()
 { # sort contents of clipboard
-  
-  # add a newline to the end for sorting purposes
-  (pbpaste;echo) \
-  | sort -u \
-  | pbcopy
+  (pbpaste;echo) | sort -u | pbcopy
+  #        │             └─ remove duplicates
+  #        └─────────────── add a newline to the end for sorting purposes
 }
 
 cppwd()
