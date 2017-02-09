@@ -1,5 +1,7 @@
 pidof()
-{ # returns the PID(s) of process(es) named $1, or false if nothing found
+{ #: - returns the PID(s) of process(es) named $1, or false if nothing found
+  #: $ pidof <name>
+  #: @ killall()
   local proc="$1"
   local pid
   pid=$(_z_pid | sed -nE "s/[[:space:]]*([[:digit:]]+) .*\<${proc}(\.exe)?$/\1/ip")
@@ -8,7 +10,8 @@ pidof()
 }
 
 pidis()
-{ # returns the name of the process with PID $1, or false if nothing found
+{ #: - returns the name of the process with PID $1, or false if nothing found
+  #: $ pidis <pid>
   local pid="$1"
   [[ $pid =~ ^[[:digit:]]+$ ]] || return 64
 
@@ -26,7 +29,8 @@ pidis()
 }
 
 _z_pid()
-{
+{ #: @ pidof
+  #: @ pidis
   local flags
   case $PLATFORM in
     windows)  flags="-sW" ;;

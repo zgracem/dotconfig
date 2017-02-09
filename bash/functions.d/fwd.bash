@@ -1,11 +1,11 @@
 fwd()
-{
-  # moves a file, leaving behind a symlink to the new location
+{ #: - moves a file, leaving behind a symlink to the new location
+  #: $ fwd <source> <destination>
   local src=$1
   local dst=$2
 
   if (( $# != 2 )); then
-    scold "Usage: $FUNCNAME <source> <destination>"
+    fdoc_usage >&2
     return 64
   fi
 

@@ -1,6 +1,7 @@
 newwin()
-{ # open in a new tmux/GNU screen window, if applicable
-  # Usage: newwin [-t|--title TITLE] [COMMAND] [ARGS]
+{ #: - runs COMMAND, opening a new tmux/GNU screen window, if applicable
+  #: $ newwin [-t|--title <title>] [<command>] [<args>]
+  #: | -t/--title = title of new window (default: <command>)
 
   local title_regex='^-?-t(itle)?$'
   local title cmd arg i=0

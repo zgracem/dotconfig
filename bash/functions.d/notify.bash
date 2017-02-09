@@ -1,5 +1,6 @@
 notify()
-{
+{ #: - send a Pushover notification
+  #: $ notify <message>
   local title=${HOSTNAME%%.*}
   local message="$*"
 

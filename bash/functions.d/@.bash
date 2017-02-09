@@ -1,2 +1,3 @@
-# converts a Unix timestamp to a regularly-formatted date and time
-function @ { date -d "@$1" +"%a %e %b %Y %T"; }
+#: - converts a Unix timestamp to an RFC 2822–formatted string
+#: $ @ <timestamp>
+function @ { date -d "@$1" --rfc-2822; }

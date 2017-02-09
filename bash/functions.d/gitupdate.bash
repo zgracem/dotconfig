@@ -1,6 +1,7 @@
 gitupdate()
-{ # updates all git repos in a given directory
-  local target_dir="${1:-$PWD}"
+{ #: - updates all git repos in a given directory (or PWD)
+  #: $ gitupdate [<dir>]
+  local target_dir="${1-$PWD}"
 
   local -a dirs=()
   

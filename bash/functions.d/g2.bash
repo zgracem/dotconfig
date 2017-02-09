@@ -14,7 +14,8 @@ declare -A mydirs=(
 )
 
 g2()
-{
+{ #: - go to a directory or directory alias
+  #: $ g2 <dir|alias>
   local name="$1"
   local place
 

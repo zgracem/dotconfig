@@ -1,18 +1,14 @@
 trash()
-{
+{ #: - move file(s) to the Trash
+  #: $ trash <file> [<file2> ...]
   if [[ $PLATFORM == mac ]]; then
     local f; for f in "$@"; do
       local filename
       if filename=$(readlink -e "$f"); then
-        osascript >/dev/null <<-EOF
-          set fileItself to POSIX file (POSIX path of "$filename")
-          tell application "Finder"
-            move fileItself to trash
-          end tell
-				EOF
-        # The above line MUST STAY tab-indented!
-        # Also, we can't do a normal `&&` because of the heredoc.
-        (( $? == 0 )) && echo "${filename/#$HOME/$'~'} → ~/.Trash"
+        osascript >/dev/null \
+          -e "set theFile to POSIX file (POSIX path of \"${filename}\")" \
+          -e 'tell app "Finder" to move theFile to trash' \
+        && echo "${filename/#$HOME/$'~'} → ~/.Trash"
       else
         scold "not found: $f"
         return 66

@@ -1,11 +1,12 @@
 # `find_drive` echoes the path to the root of the volume labeled $1.
 # It returns 0 on success and 1 on any kind of failure.
 find_drive()
-{
+{ #: - echoes the path to the root of the volume labeled $1
+  #: $ find_drive <label>
   if [[ -n $1 ]]; then
     local label=$1
   else
-    scold "Usage: $FUNCNAME LABEL"
+    fdoc_usage >&2
     return 64
   fi
 

@@ -1,13 +1,15 @@
 # Sourced from ~/scripts/util/confsync.sh
 
 syncdir()
-{
+{ #: - synchronizes the contents of two directories
+  #: $ syncdir <source> [[<user>@]<host>:]<destination> [<rsync options>]
+
   if (( $# >= 2 )); then
     local src="${1%/}" # trim trailing slash
     local dst="${2%/}" # trim trailing slash
     shift 2
   else
-    printf 'Usage: %s SOURCE [USER@][HOST:]DESTINATION [FLAGS ...]\n' $FUNCNAME >&2
+    fdoc_usage >&2
     return 64
   fi
 

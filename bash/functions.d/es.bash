@@ -1,5 +1,6 @@
 es()
-{ # edit a script
+{ #: - edit a script
+  #: $ es <script>
 
   local search="$1"
 

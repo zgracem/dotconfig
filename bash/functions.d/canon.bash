@@ -1,6 +1,7 @@
 canon()
-{
-  local input=${1:-$PWD}
+{ #: - get canonical path to $1 (or PWD)
+  #: * doesn't always resolve symlinks properly on Cygwin
+  local input=${1-$PWD}
   local dirname=$input
 
   if [[ -f $input ]]; then

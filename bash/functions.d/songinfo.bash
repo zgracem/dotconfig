@@ -1,7 +1,8 @@
 (_inPath id3v2 || _inPath mp4info) || return
 
 songinfo()
-{ # prints metadata for song files
+{ #: - prints metadata for song files
+  #: $ songinfo <file>
   local song="$1"
 
   case "$song" in

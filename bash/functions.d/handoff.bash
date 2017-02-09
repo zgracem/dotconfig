@@ -1,5 +1,6 @@
 handoff()
-{
+{ #: - send a URL as a push notification
+  #: $ handoff <url>
   local url="$1"
   local title="URL from ${HOSTNAME%%.*}"
   local device="zPhone"

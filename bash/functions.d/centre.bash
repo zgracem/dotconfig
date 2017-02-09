@@ -1,5 +1,6 @@
 centre()
-{
+{ #: - centres text in the terminal window
+  #: $ centre "<text>"
   local text="$*"
   local width padding
 
