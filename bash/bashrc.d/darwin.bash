@@ -24,16 +24,6 @@ alias restart="sudo shutdown -r now"
 alias screensaver='open -a ScreenSaverEngine'
 # /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 
-if [[ -d /Volumes/BOOTCAMP ]]; then
-  # bless(8) doesn't work if System Integrity Protection is enabled on El Cap+
-  if (( MACOS_VERSION < 11 )) || [[ $(csrutil status 2>&1) == *disabled. ]]; then
-    # load Windows on next boot
-    alias bootwin="sudo bless --mount /Volumes/BOOTCAMP --setBoot -nextonly "
-    # ...or right now
-    alias bootcamp="bootwin && restart"
-  fi
-fi
-
 # -----------------------------------------------------------------------------
 # environment variables
 # -----------------------------------------------------------------------------
