@@ -3,9 +3,9 @@
 # Executed by bash(1) on logout
 # -----------------------------------------------------------------------------
 
-# archive bash history if it's larger than 256 KB
+# archive bash history if it's larger than 128 KB
 if [[ -f $HISTFILE ]]; then
-  history_max_bytes=$(( 256 * 1024 ))
+  history_max_bytes=$(( 128 * 1024 ))
   history_size_bytes=$(wc -c "$HISTFILE" | cut -d" " -f1)
 
   if (( history_size_bytes >= history_max_bytes )); then
