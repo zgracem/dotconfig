@@ -1,6 +1,6 @@
 scratch()
-{ # create a temporary directory and change into it
-  # >> https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/scr.bash
+{ #: - create a temporary directory and change into it
+  #: > https://github.com/tejr/dotfiles/blob/master/bash/bashrc.d/scr.bash
 
   local dir
   local template="${1:-scratch}"

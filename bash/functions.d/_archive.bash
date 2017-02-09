@@ -3,10 +3,11 @@
 # ------------------------------------------------------------------------------
 
 roll()
-{ # create a new archive
+{ #: - create a new archive
+  #: $ roll <archive>.<ext> <file> [<file2> ...]
 
   if (( $# < 2 )); then
-    scold "Usage: $FUNCNAME archive.ext file [file ...]"
+    fdoc_usage >&2
     return 64
   fi
 
@@ -28,21 +29,24 @@ roll()
 }
 
 tarup()
-{ # tar + gzip an entire directory
+{ #: - archives an entire directory as a .tar.gz
+  #: $ tarup <directory>
   (( $# == 1 )) || return 64
   local dir="${1%/}"
   roll "$dir.tar.gz" "$dir/"
 }
 
 zipup()
-{ # zip an entire directory
+{ #: - archives an entire directory as a .zip
+  #: $ zipup <directory>
   (( $# == 1 )) || return 64
   local dir="${1%/}"
   roll "$dir.zip" "$dir/"
 }
 
 ex()
-{ # extract ALL the archives!
+{ #: - extract ALL the archives!
+  #: $ ex <archive> [<archive2> ...]
 
   local archive
   local -a archives=("$@")
@@ -73,6 +77,7 @@ ex()
 
 exls()
 { # list the contents of an archive
+  #: $ exls <archive>
 
   local archive
   local -a archives=("$@")

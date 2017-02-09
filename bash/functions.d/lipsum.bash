@@ -1,23 +1,54 @@
 lipsum()
-{ # return a paragraph of lorem ipsum text
-  local regex_help='-?-h(elp)?'
+( #: - returns lorem ipsum text
+  #: $ lipsum [count] [short|medium|long|verylong] [html_options]
+  #: | count = number of paragraphs to generate (default: 1)
+  #: | short, medium, (very)long = average paragraph length (default: medium)
+  #: | HTML options:
+  #: |   decorate = add bold, italic, and marked text
+  #: |   link = add links
+  #: |   ul, ol, dl = add unordered, numbered, and/or description lists
+  #: |   bq, code, headers = add blockquotes, code samples, and/or headings
+  #: |   all = all of the above
 
-  if [[ $1 =~ $regex_help ]]; then
-    echo "Usage: ${FUNCNAME[0]} [COUNT] [short|medium|long|verylong]"
-    return 0
-  fi
+  shopt -s extglob
 
-  local count="${1:-1}"
-  local length="${2:-medium}"
+  local url="http://loripsum.net/api"
+  local html=""
 
-  curl -sS "http://loripsum.net/api/${count}/prude/${length}" \
-  | sed -E 's#<[^>]*>##g'
+  while (( $# )); do
+    case $1 in
+      -h|--help)
+        fdoc "$FUNCNAME"
+        return
+        ;;
+      +([[:digit:]]))
+        local count=$1
+        shift
+        ;;
+      short|medium|long|verylong)
+        local length=$1
+        shift
+        ;;
+      decorate|link|ul|ol|dl|bq|code|headers)
+        html+="/$1"
+        shift
+        ;;
+      all)
+        html="/decorate/link/ul/ol/dl/bq/code/headers"
+        shift
+        ;;
+      *)
+        shift # discard unknown options
+        ;;
+    esac
+  done
 
-  # API parameters:
-  #   (integer) - The number of paragraphs to generate.
-  #   short, medium, long, verylong - The average length of a paragraph.
-  #   decorate - Add bold, italic and marked text.
-  #   link - Add links.
-  #   ul/ol/dl - Add unordered/numbered/description lists.
-  #   bq/code/headers - Add blockquotes/code samples/headers.
-}
+  url="${url}/${count-1}/prude/${length-medium}/${html}"
+
+  if [[ -z $html ]]; then
+    # strip HTML from output if none was requested
+    curl -sS "$url" | sed -E 's#<[^>]*>##g'
+  else
+    curl -sS "$url"
+  fi | cat -s # collapse multiple newlines
+)

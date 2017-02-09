@@ -1,5 +1,8 @@
 q()
-{
+{ #: - prints the exit status of a command or [[ … ]] expression
+  #: $ q '<expr>'         #=> status of `[[ $expr ]]`
+  #: $ <some_command>; q  #=> status of `some_command`
+
   # We have to capture this immediately, because $? will be overwritten.
   local last_exit=$?
 
@@ -18,9 +21,7 @@ q()
         local expr="$@"
         ;;
     *)  # 2+ arguments: You're doing it wrong.
-        scold "Usage: $FUNCNAME '-d /path/to/dir'"
-        scold "       $FUNCNAME '-n $SSH_TTY'"
-        scold "       some_command; $FUNCNAME"
+        fdoc_usage >&2
         return 64
         ;;
   esac

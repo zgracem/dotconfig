@@ -1,5 +1,5 @@
 reveal()
-{ # reveal $1 in Finder/Explorer
+{ #: - reveal $1 in Finder/Explorer
   local target="${1?}"
 
   case $PLATFORM in

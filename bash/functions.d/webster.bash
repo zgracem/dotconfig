@@ -1,9 +1,9 @@
 _inPath sdcv || return
 
-# Wrapper for StarDict + Webster's 1913
-# >> http://jsomers.net/blog/dictionary
 webster()
-{ 
+{ #: - search Webster's Dictionary, 1913 edition
+  #: > http://jsomers.net/blog/dictionary
+  #: < sdcv (StarDict)
   sdcv --non-interactive \
        --use-dict "Webster's Revised Unabridged Dictionary (1913)" \
        "$@"

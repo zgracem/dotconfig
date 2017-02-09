@@ -1,12 +1,15 @@
-# Find a file whose name contains a given string
-ff() { _z_find file "$PWD" "$@"; }
+ff()
+{ #: - finds file(s) in PWD whose name contains a given string
+  _z_find file "$PWD" "$@"
+}
 
-# Find a directory whose name contains a given string
-fd() { _z_find dir "$PWD" "$@"; }
+fd()
+{ #: - finds directory/ies in PWD whose name contains a given string
+  _z_find dir "$PWD" "$@"
+}
 
-# General finding function
 _z_find()
-{ # Usage: _z_find f[ile]|d[ir] SCOPE TERM
+{ #: $ _z_find f[ile]|d[ir] <scope> <term>
 
   local find_type=$1 scope=$2; shift 2
   local term=$@
@@ -34,15 +37,19 @@ _z_find()
 
 # -----------------------------------------------------------------------------
 
-# List all files under $PWD changed today
-today() { _z_find_daysold -1; }
+today()
+{ #: - lists all files in PWD changed today
+  _z_find_daysold -1
+}
 
-# List all files under $PWD changed this week
-thisweek() { _z_find_daysold -7; }
+thisweek()
+{ #: - lists all files in PWD changed this week
+  _z_find_daysold -7
+}
 
-# List all files in $PWD changed in the last $1 days
 _z_find_daysold()
-{
+{ #: - lists all files in PWD changed in the last $1 days
+  #: $ _z_find_daysold <days>
   local days="$1" age
   local number_re='^[-+]?[[:digit:]]+$'
 

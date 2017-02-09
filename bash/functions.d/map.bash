@@ -1,11 +1,11 @@
 map()
-{ # applies a function to each item in a list
-  # Usage: map COMMAND: ITEM [ITEM ...]
-  # >> http://redd.it/aks3u
+{ #: - applies a command to each item in a list
+  #: $ map <command>: <item> [<item> ...]
+  #: > http://redd.it/aks3u
 
   if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
     scold "${FUNCNAME[0]}: invalid syntax"
-    scold "Usage: ${FUNCNAME[0]} COMMAND: ITEM [ITEM ...]"
+    fdoc_usage >&2
     return 64
   fi
 

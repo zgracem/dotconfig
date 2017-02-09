@@ -1,5 +1,9 @@
 obscure()
-{
+{ #: - obscures a string of text
+  #: $ obscure --url|--html|--unicode <text>
+  #: | --url     = URL-encode TEXT
+  #: | --html    = convert TEXT to HTML entities
+  #: | --unicode = replace Latin characters in TEXT with Unicode look-alikes
   local usage="$FUNCNAME --url|--html|--unicode \"text\""
   local mode="$1"; shift
 
@@ -24,7 +28,7 @@ obscure()
         printf -v outchar "&#x%02x;" "'$inchar"
         ;;
       *)
-        printf >&2 "Usage: %s\n" "$usage"
+        fdoc_usage >&2
         return 64
         ;;
     esac

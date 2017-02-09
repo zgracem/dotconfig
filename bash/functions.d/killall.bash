@@ -1,7 +1,9 @@
 [[ $OSTYPE == cygwin ]] || return
 
 killall()
-{ # kill a process by name
+{ #: - kill a Cygwin process by name
+  #: < pidof()
+  #: < cygkill()
   local pid; if pid="$(pidof "$1")"; then
     cygkill "$pid"
   else

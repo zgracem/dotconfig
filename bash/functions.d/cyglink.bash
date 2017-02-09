@@ -1,13 +1,12 @@
 [[ $PLATFORM == windows ]] || return
 
 cyglink()
-{
-  # Creates a directory junction. (Helpful when running w/out admin rights.)
-  # NOTE: This function inverts the syntax of Windows' internal `MKLINK`
-  # command for consistency with e.g. ln(1).
+{ #: - creates a directory junction (helpful when running w/out admin rights)
+  #: $ cyglink <target> <link>
+  #: * inverts the syntax of Windows' `MKLINK` for consistency with e.g. ln(1)
 
   if (( $# == 0 )); then
-    scold "Usage: $FUNCNAME target link"
+    fdoc_usage >&2
     return 64
   else
     local target="$1"

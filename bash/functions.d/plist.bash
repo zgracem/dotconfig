@@ -1,3 +1,6 @@
 [[ $PLATFORM == mac ]] || return
 
-plist() { plutil -p "$1" | less -F; }
+plist()
+{ #: - display a .plist file in human-readable format
+  plutil -p "$1" | less -F
+}
