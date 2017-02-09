@@ -72,7 +72,7 @@ ef()
 
       if [[ $answer =~ [yY] ]]; then
         printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
-        _z_edit "$file:3:5"
+        _z_edit "$file:3:3"
       fi
       return 0
     else
