@@ -1,12 +1,12 @@
 # If this file fails to load, debug by executing as a normal Ruby file:
 #   ruby ~/.config/ruby/irbrc
 
-require "English"
+require "irb"
 require "irb/completion"
+
+require "English"
 require "pathname"
 require "pp"
-# require "what_methods"  # object.what?(result)
-#                         # => method(s) that will produce result
 
 require "zgm/colour"
 require "zgm/object/blank"

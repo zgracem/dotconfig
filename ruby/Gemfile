@@ -8,9 +8,6 @@ gem "bundler"
 # Show a method's code w/ syntax highlighting <github.com/janlelis/code>
 gem "code"
 
-# MRI core documentation & source <github.com/janlelis/core_docs>
-gem "core_docs"
-
 # <github.com/github/gemoji>
 gem "gemoji"
 
@@ -29,6 +26,9 @@ gem "plist"
 # power tools for the File class <github.com/djberg96/ptools>
 gem "ptools"
 
+# pure Ruby readline <github.com/ConnorAtherton/rb-readline>
+gem "rb-readline"
+
 # builds manual pages <github.com/rtomayko/ronn>
 gem "ronn"
 
@@ -46,9 +46,6 @@ gem "ttfunk"
 
 # <github.com/lang/unicode_utils>
 gem "unicode_utils"
-
-# <rubygems.org/gems/what_methods>
-gem "what_methods"
 
 # Yay! A Ruby Documentation Tool <github.com/lsegal/yard>
 gem "yard"
