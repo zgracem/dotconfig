@@ -45,9 +45,15 @@ brew "homebrew/dupes/ncurses"
 
 if OS.mac?
   brew "coreutils", args: ["HEAD"]
-  brew "moreutils", args: ["HEAD"]
+
   brew "gawk"
   brew "gnu-tar"
+
+  # parallel (moreutils must be installed `--without-parallel`)
+  brew "parallel"
+
+  # moreutils (conflicts w/ GNU parallel)
+  brew "moreutils", args: ["without-parallel"]
 
   # find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
   brew "findutils", args: ["default-names"]
@@ -77,6 +83,7 @@ end
 if MacOS.version >= "10.6"
   brew "rbenv"
   brew "ruby-build"
+  brew "rbenv-bundler"
 end
 
 brew "python"
