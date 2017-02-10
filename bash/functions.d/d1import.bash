@@ -7,7 +7,7 @@ d1import()
   local entry_date
 
   if [[ -z $entry_file ]]; then
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   elif [[ -r $entry_file ]]; then
     if entry_date=$(stat --printf=%y "$entry_file"); then

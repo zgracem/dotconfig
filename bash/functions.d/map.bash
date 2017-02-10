@@ -13,7 +13,7 @@ map()
   fi
 
   if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   fi
 

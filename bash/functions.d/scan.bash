@@ -29,7 +29,7 @@ scan()
       sudo lsof -i ":${noun}"
       ;;
     *)
-      fdoc_usage
+      fx_usage
       return 64
       ;;
   esac

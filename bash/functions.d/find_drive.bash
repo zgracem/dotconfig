@@ -6,7 +6,7 @@ find_drive()
   if [[ -n $1 ]]; then
     local label=$1
   else
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   fi
 
