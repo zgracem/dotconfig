@@ -1,5 +1,9 @@
-# change to, and immediately list, a directory
-cdls() { cd "$@" && ls; }
+cdls()
+{ #: -- change to, and immediately list, a directory
+  cd "$@" && ls
+}
 
-# change to, and immediately list (at length), a directory
-cdll() { cd "$@" && ll; }
+cdll()
+{ #: -- change to, and immediately list (at length), a directory
+  cd "$@" && ll
+}

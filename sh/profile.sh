@@ -11,11 +11,15 @@ export ENV=~/.config/environment.sh
 # Support functions
 # -----------------------------------------------------------------------------
 
-# exits 0 if $1 is installed in $PATH
-_inPath() { command -v "$1" >/dev/null; }
+_inPath()
+{ #: -- exits 0 if $1 is installed in $PATH
+  command -v "$1" >/dev/null
+}
 
-# exits 0 if $1 uses GNU switches
-_isGNU() { command "$1" --version >/dev/null 2>&1; }
+_isGNU()
+{ #: -- exits 0 if $1 uses GNU switches
+  command "$1" --version >/dev/null 2>&1
+}
 
 # -----------------------------------------------------------------------------
 
