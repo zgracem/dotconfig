@@ -4,7 +4,7 @@ dataurl()
   #: > https://github.com/mathiasbynens/dotfiles/blob/master/.functions
 
   if (( $# != 1 )); then
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   elif [[ ! -f $1 ]]; then
     scold "file not found: $1"

@@ -28,7 +28,7 @@ obscure()
         printf -v outchar "&#x%02x;" "'$inchar"
         ;;
       *)
-        fdoc_usage >&2
+        fx_usage >&2
         return 64
         ;;
     esac

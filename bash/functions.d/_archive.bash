@@ -7,7 +7,7 @@ roll()
   #: $ roll <archive>.<ext> <file> [<file2> ...]
 
   if (( $# < 2 )); then
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   fi
 

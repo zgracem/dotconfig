@@ -21,7 +21,7 @@ q()
         local expr="$@"
         ;;
     *)  # 2+ arguments: You're doing it wrong.
-        fdoc_usage >&2
+        fx_usage >&2
         return 64
         ;;
   esac

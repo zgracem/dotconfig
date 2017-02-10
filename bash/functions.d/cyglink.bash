@@ -6,7 +6,7 @@ cyglink()
   #: * inverts the syntax of Windows' `MKLINK` for consistency with e.g. ln(1)
 
   if (( $# == 0 )); then
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   else
     local target="$1"

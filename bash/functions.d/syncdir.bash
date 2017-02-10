@@ -9,7 +9,7 @@ syncdir()
     local dst="${2%/}" # trim trailing slash
     shift 2
   else
-    fdoc_usage >&2
+    fx_usage >&2
     return 64
   fi
 
