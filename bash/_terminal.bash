@@ -45,25 +45,25 @@ _dtterm()
 }
 
 mmin()
-{ # minimize (iconify) window
+{ #: -- minimizes (iconifies) window
   _dtterm "2t"
   rollback
 }
 
 mmax()
-{ # maximize (de-iconify) window
+{ #: -- maximizes (de-iconifies) window
   _dtterm "1t"
   rollback
 }
 
 setwintitle()
-{ # set the xterm-compatible window title
+{ #: -- sets the xterm-compatible window title
   local title="$*"
   printf '%b%s%b' "$CAP_ts" "$title" "$CAP_fs"
 }
 
 settabtitle()
-{ # set the tab title
+{ #: -- sets the tab title
   local title="$*"
   printf '%b%s%b' "${CAP_ts/2;/1;}" "$title" "$CAP_fs"
 }

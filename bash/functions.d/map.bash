@@ -1,5 +1,5 @@
 map()
-{ #: - applies a command to each item in a list (or stdin)
+{ #: -- applies a command to each item in a list (or stdin)
   #: $ map <command>: <item> [<item> ...]
   #: $ map <command> <<< <item>[\n<item>[\n<item>...]]
   #: > http://redd.it/aks3u

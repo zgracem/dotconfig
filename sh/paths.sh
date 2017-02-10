@@ -116,7 +116,9 @@ fi
 # -----------------------------------------------------------------------------
 
 fixpath()
-(
+( #: -- removes duplicate & nonexistent directories from colon-separated input
+  #: $ PATH=$(fixpath "$PATH")
+
   # Enable ZSH word splitting so the IFS change below takes effect
   [ -n "$ZSH_NAME" ] && setopt SH_WORD_SPLIT
 

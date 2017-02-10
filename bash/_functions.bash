@@ -6,12 +6,12 @@
 . ~/lib/bash/fxdoc.bash
 
 e()
-{ #: - print each argument to stdout on its own line
+{ #: -- print each argument to stdout on its own line
   printf "%s\n" "$@"
 }
 
 x() 
-{ #: - execute a command for each argument passed on stdin
+{ #: -- execute a command for each argument passed on stdin
   #: $ <input> | x <command>
   xargs -r -d"\n" "$@"; 
   #      │  └── delimit w/ newline only (instead of all whitespace chars)
@@ -23,12 +23,12 @@ x()
 # -----------------------------------------------------------------------------
 
 scold()
-{ #: - echo to standard error
+{ #: -- echo to standard error
   printf "%b\n" "$*" >&2
 }
 
 verbose()
-{ #: - prints a message, conditional on the value of $VERBOSITY
+{ #: -- prints a message, conditional on the value of $VERBOSITY
   #
   #: $ verbose [level] "message"
   #
@@ -55,27 +55,27 @@ verbose()
 # -----------------------------------------------------------------------------
 
 _inPath()
-{ #: - exits 0 if $1 is installed in $PATH
+{ #: -- exits 0 if $1 is installed in $PATH
   command -v "$1" >/dev/null
 }
 
 _isGNU()
-{ #: - exits 0 if $1 uses GNU switches
+{ #: -- exits 0 if $1 uses GNU switches
   command "$1" --version >/dev/null 2>&1
 }
 
 _isFunction()
-{ #: - exits 0 if $1 is defined as a function
+{ #: -- exits 0 if $1 is defined as a function
   declare -f "$1" >/dev/null
 }
 
 _inScreen()
-{ #: - exits 0 if inside a GNU screen session
+{ #: -- exits 0 if inside a GNU screen session
   [ -n "$STY" ] && [ -p "$SCREENDIR/$STY" ]
 }
 
 _inTmux()
-{ #: - exits 0 if inside a tmux session
+{ #: -- exits 0 if inside a tmux session
   [ -S "${TMUX%%,*}" ]
 
   # When a new session is created, tmux sets the environment variable TMUX to
