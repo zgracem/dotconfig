@@ -38,7 +38,7 @@ rollback()
   tput el   # clear to end of line (printf "${CSI}K")
 }
 
-dtterm()
+_dtterm()
 {
   local Ps="$1"
   printf "%b" "${DCS_ante}${CSI}${Ps}${DCS_post}"
@@ -46,13 +46,13 @@ dtterm()
 
 mmin()
 { # minimize (iconify) window
-  dtterm "2t"
+  _dtterm "2t"
   rollback
 }
 
 mmax()
 { # maximize (de-iconify) window
-  dtterm "1t"
+  _dtterm "1t"
   rollback
 }
 
