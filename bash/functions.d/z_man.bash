@@ -33,6 +33,11 @@ man()
     esac
   done
 
+  if [[ $1 == */* ]]; then
+    # b/c "x-man-page:///usr/share/man/man1/ls.1" doesn't work
+    local Z_MAN_NO_URL=1
+  fi
+
   # open the new window
   if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_MAN_NO_URL ]]; then
     # let Terminal.app be clever about this
