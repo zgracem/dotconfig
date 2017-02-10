@@ -10,7 +10,7 @@ vnc()
   if [[ -x $vnc_exe ]]; then
     vnc_conf=$(cygpath -aw "$vnc_conf")
     if run "$vnc_exe" -config "$vnc_conf"; then
-      dtterm "6t" # lower window
+      _dtterm "6t" # lower window
       rollback
     else
       return
