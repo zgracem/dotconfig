@@ -31,21 +31,24 @@ ls()
 # variants
 # -----------------------------------------------------------------------------
 
-ll() { ls -lgoh "$@"; }
-#          │││└── human-readable sizes
-#          ││└─── omit owner
-#          │└──── omit group
-#          └───── long-list output
+ll()
+{ #: - vertical output, info-heavy
+  set -- -lh "$@"
+  #       │└───── human-readable sizes
+  #       └────── long-list output
 
-ls1() { ls -1 "$@"; }
-#           └──── filenames only
+  # less info on narrower terminals
+  if (( COLUMNS < 100 )); then
+    set -- -go "$@"
+    #       │└─── omit owner
+    #       └──── omit group
+    if _isGNU ls; then
+      set -- --time-style='+%y-%m-%d %H:%M' "${@//--time-style=+%*/}"
+    fi
+  fi
 
-lst() { ll -rt "$@"; }
-#           │└─── sort by time
-#           └──── reverse sort (i.e. newest files last)
-
-lsd() { ll -d "${1+$1/}"*/; }
-#           └──── list subdirectories, not their contents
+  ls "$@"
+}
 
 # -----------------------------------------------------------------------------
 
