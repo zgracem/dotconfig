@@ -53,6 +53,9 @@ complete -o nospace -dv -- cd
 # help topics
 complete -o nospace -A helptopic -- help
 
+# hostnames
+complete -A hostname -o default -- dig ping
+
 # job control
 complete -j -P '"%' -S '"' -- disown fg jobs
 

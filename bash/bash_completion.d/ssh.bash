@@ -6,7 +6,7 @@ __z_complete_ssh_hosts()
   COMPREPLY=()
 
   local -a hosts
-  hosts=( $(sed -nE 's/Host ([^?*]+)$/\1/p' "$HOME/.ssh/config") ) || return
+  hosts=( $(sed -nE 's/\<Host ([^?*]+)$/\1/p' "$HOME/.ssh/config") ) || return
 
   local host
   for host in "${hosts[@]}"; do
@@ -15,4 +15,4 @@ __z_complete_ssh_hosts()
   done
 }
 
-complete -o default -o nospace -F __z_complete_ssh_hosts -- ssh
+complete -o default -F __z_complete_ssh_hosts -- ssh
