@@ -118,6 +118,24 @@ def echo
   IRB.conf[:echo] = !IRB.conf[:echo]
 end unless defined?(FancyIrb)
 
+def str
+  "hello world"
+end
+
+def hsh
+  {red: "ruby", green: "emerald", blue: "sapphire"}
+end
+
+def ary
+  [0, 1, (1+0i), 2/3r, (5..8), 1.321e+34, Float::INFINITY]
+end
+
+def int
+  rand(10..1000)
+end
+
+# weather gem
+
 # Usage: w = ww
 def ww(c = :yeg)
   require "weather_ca" unless defined?(WeatherCA)
@@ -135,22 +153,7 @@ def dd(x = "Edmonton")
   WeatherMeteo::Data::Xml.new(url)
 end
 
+# Usage: d=dd;c=cc(d)
 def cc(data = dd)
   WeatherMeteo::City.new(data)
-end
-
-def str
-  "hello world"
-end
-
-def hsh
-  {red: "ruby", green: "emerald", blue: "sapphire"}
-end
-
-def ary
-  [0, 1, (1+0i), 2/3r, (5..8), 1.321e+34, Float::INFINITY]
-end
-
-def int
-  rand(10..1000)
 end
