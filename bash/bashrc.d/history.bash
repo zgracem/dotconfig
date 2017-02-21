@@ -40,13 +40,13 @@ HISTCONTROL+=':ignorespace' # ignore commands that start w/ ' '
 HISTIGNORE='true:false'
 
 # navigation
-HISTIGNORE+=':-?(-):.+(.):cd:dirs:dirs *'
+HISTIGNORE+=':-:--:.:..:cd:dirs:dirs *'
 
 # job control
 HISTIGNORE+=':bg:fg:jobs'
 
 # misc. commands
-HISTIGNORE+=':clear:history*'
+HISTIGNORE+=':clear:help *:history:history *'
 
 # directory listings
 HISTIGNORE+=':ls*([1dflt]):ll'
@@ -55,8 +55,8 @@ HISTIGNORE+=':ls*([1dflt]):ll'
 HISTIGNORE+=':exit:bye'
 
 # my own shortcuts
-HISTIGNORE+=':d *:ef *:manpdf *:etest:f:h:i:mmin:rl:tt:vnc:vsmm'
-HISTIGNORE+=':b@(a|rc|path|ps1)'
+HISTIGNORE+=':d *:ef *:manpdf *:etest:f:h *:i:mmin:rl:tt:vnc:vsmm'
+HISTIGNORE+=':ba:brc:bpath:bps1'
 
 # -----------------------------------------------------------------------------
 
