@@ -14,5 +14,5 @@ f()
       return 71
       ;;
   esac
+  return 0
 }
-
