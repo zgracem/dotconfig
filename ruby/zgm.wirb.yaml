@@ -48,13 +48,13 @@ object_description:         # 2002-01-01 ((2452276j,0s,0n),+0s,2299161j)
 object_address_prefix:
 - :black
 - :magenta
-object_line_prefix:
+object_line_prefix:         # @
 - :bright
 - :black
-object_line:
+object_line:                # [includes trailing colon]
 - :blue
 object_line_number:
-- :green
+- :cyan
 
 # Symbol
 symbol_prefix:
