@@ -113,15 +113,30 @@ IRB.conf[:PROMPT_MODE] = :ZGM
 # helper methods
 # -----------------------------------------------------------------------------
 
-### Doesn't work w/ irbtools :(
-# def echo
-#   IRB.conf[:echo] = !IRB.conf[:echo]
-# end
+## Doesn't work w/ irbtools :(
+def echo
+  IRB.conf[:echo] = !IRB.conf[:echo]
+end unless defined?(FancyIrb)
 
 # Usage: w = ww
 def ww(c = :yeg)
   require "weather_ca" unless defined?(WeatherCA)
   WeatherCA::Location.new(c).weather
+end
+
+# Usage: d = dd
+def dd(x = "Edmonton")
+  unless defined?(WeatherMeteo::Data)
+    require "#{Dir.home}/src/ruby/gems/weather_meteo/lib/weather_meteo"
+  end
+  f = WeatherMeteo::Search.site("Edmonton", exact: true)
+  url = sprintf "%s/citypage_weather/xml/%s/%s_e.xml", 
+        WeatherMeteo::URL_PREFIX, f[0][:prov], f[0][:code]
+  WeatherMeteo::Data::Xml.new(url)
+end
+
+def cc(data = dd)
+  WeatherMeteo::City.new(data)
 end
 
 def str
