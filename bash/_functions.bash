@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 # load function self-documentation library
-. ~/lib/bash/fxdoc.bash
+. ~/lib/bash/fxdoc/_init.bash
 
 e()
 { #: -- print each argument to stdout on its own line
