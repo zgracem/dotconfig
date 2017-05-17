@@ -6,14 +6,12 @@ unalias grep 2>/dev/null
 
 grep()
 {
-  set -- -EsI "$@"
-  #       ││└──────── ignore binary files
-  #       │└───────── no errors about missing/unreadable files
-  #       └────────── use ERE syntax
-
-  set -- -d skip -D skip "$@"
-  #       │       └── silently skip devices
-  #       └────────── silently skip directories
+  set -- -EsI -d skip -D skip "$@"
+  #       │││  │       └───── silently skip devices
+  #       │││  └───────────── silently skip directories
+  #       ││└──────────────── ignore binary files
+  #       │└───────────────── no errors about missing/unreadable files
+  #       └────────────────── use ERE syntax
 
   # display results in colour if supported
   [ $((TERM_COLOURDEPTH)) -ge 8 ] && set -- --colour=auto "$@"
