@@ -122,11 +122,11 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   # # Reverses `sl` and `cx` if -v is specified (omit to set it to false)
   # GREP_COLORS+="rv:"
   # Matching text in any matching line, regardless of -v
-  GREP_COLORS+="mt=${yellow}:"
+  GREP_COLORS+="mt=${magenta}:"
   # Matching text in a selected line (if -v is omitted)
-  GREP_COLORS+="ms=${bryellow}:"
+  GREP_COLORS+="ms=${brmagenta}:"
   # Matching text in a context line (if -v is specified)
-  GREP_COLORS+="mc=${yellow}:"
+  GREP_COLORS+="mc=${magenta}:"
   # Filename in line prefix
   GREP_COLORS+="fn=${blue}:"
   # Line number in line prefix
