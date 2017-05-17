@@ -20,7 +20,7 @@ alias hd='hexdump -C'
 
 alias  etest='_z_edit "$dir_dropbox/src/test.sh"'
 alias  ttest="$dir_dropbox/src/test.sh"
-export rtest="$dir_dropbox/src/test.rb"
+export rtest="$dir_dropbox/src/ruby/_scratch/_test.rb"
 alias  rtest="$rtest"
 
 # -----------------------------------------------------------------------------
