@@ -70,7 +70,7 @@ PgUpDnScroll=no
 # Terminal
 # -----------------------------------------------------------------------------
 
-Term=mintty-256color
+Term=putty-256color
 Answerback=
 BellType=0
 BellFlash=yes
