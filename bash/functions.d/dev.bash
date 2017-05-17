@@ -2,35 +2,51 @@ dev()
 {
   local os=${OSTYPE%%+([^[:alpha:]])}
 
+  local ruby_dir="$HOME/Dropbox/src/ruby"
+  local www_dir="$HOME/Dropbox/www"
+  local proj_dir=""
+
   case $1 in
+    vsmm)
+      proj_dir=$dir_dropbox/www/vsmm
+      _z_dev_subl_project ".sublime/vsmm"
+      ;;
+    vs2017)
+      proj_dir=$dir_dropbox/www/vs2017
+      _z_dev_subl_project "etc/vs2017"
+      ;;
+
     ruby)
-      subl --project "$HOME/Dropbox/etc/rubydev.${os}.sublime-project"
+      proj_dir=$ruby_dir
+      _z_dev_subl_project "ruby"
       ;;
-    weather)
-      local lib=~/Dropbox/src/ruby/gems/weather_ca
-      cd "$lib"
-      _z_dev_subl "$lib"
+    schemer)
+      proj_dir=$ruby_dir/schemer
+      _z_dev_subl_project "schemer"
       ;;
+
     micro)
-      local proj_dir=~/Dropbox/www/microprocessor
+      proj_dir=$www_dir/microprocessor
       _z_dev_subl "$proj_dir"
-      _z_dev_middleman "$proj_dir"
       ;;
+
+    cp437|gonehome)
+      proj_dir=$www_dir/cp437
+      _z_dev_subl "$proj_dir"
+      ;;&
     gonehome)
-      local proj_dir=~/Dropbox/www/cp437
-      _z_dev_subl "$proj_dir" \
-                "$proj_dir/source/gonehome.html.md" \
-                "$proj_dir/source/css/gonehome.sass"
-      _z_dev_middleman "$proj_dir"
+      _z_dev_subl "$proj_dir/source/css/gonehome.sass"
       ;;
-    cp437)
-      local proj_dir=~/Dropbox/www/cp437
-      _z_dev_subl "$proj_dir"
-      _z_dev_middleman "$proj_dir"
-      ;;
+
     *)
-      local opts=($(declare -f $FUNCNAME \
-                    | sed -nE 's/.*[[:space:]]([[:alnum:]]+)\)$/\1/p'))
+      # parse out case statements for usage string
+      local opts=(
+        $(declare -f ${FUNCNAME[0]} \
+          | sed -nE 's/.*[[:space:]]([[:alnum:]|]+)\)$/\1/p' \
+          | sort \
+          | uniq)
+        )
+      # opts=${opts[*]}
 
       scold "Sorry, I don't know “$1”. Try:"
       scold "  ${opts[*]}"
@@ -38,28 +54,31 @@ dev()
       return 64
       ;;
   esac
-}
 
-_z_dev_middleman()
-{
-  [[ $HOSTNAME == Athena* ]] || return
-
-  local proj_dir="$1"; shift
-  
-  if [[ $PWD != $proj_dir ]]; then
-    cd "$proj_dir"
-  fi
-
-  if [[ -z $SSH_CONNECTION ]]; then
-    bundle exec middleman &
-  fi
+  cd "$proj_dir"
 }
 
 _z_dev_subl()
 {
-  if [[ -n $SSH_CONNECTION ]]; then
-    return
-  else
-    subl --add "$@"
-  fi
+  [[ -n $SSH_CONNECTION ]] && return
+  subl --add "$@"
 }
+
+_z_dev_subl_project()
+{
+  [[ -n $SSH_CONNECTION ]] && return
+  subl --project "${proj_dir}/${1}.${OSTYPE%%+([^[:alpha:]])}.sublime-project"
+}
+
+# _z_dev_middleman()
+# {
+#   [[ $HOSTNAME == Athena* ]] || return
+
+#   local proj_dir="$1"; shift
+  
+#   [[ $PWD == $proj_dir ]] || cd "$proj_dir"
+
+#   if [[ -z $SSH_CONNECTION ]]; then
+#     bundle exec middleman &
+#   fi
+# }
