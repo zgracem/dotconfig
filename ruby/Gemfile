@@ -2,63 +2,44 @@
 
 source "https://rubygems.org"
 
+# -----------------------------------------------------------------------------
+# Utilities
+# -----------------------------------------------------------------------------
+
 # <github.com/bundler/bundler>
 gem "bundler"
 
-# Show a method's code w/ syntax highlighting <github.com/janlelis/code>
-gem "code"
-
-# <github.com/github/gemoji>
-gem "gemoji"
+# <rubyworks.github.io/facets>
+gem "facets"
 
 # <github.com/janlelis/irbtools>
 gem "irbtools"
 
-# <github.com/flori/json>
-gem "json"
-
-# <github.com/markburns/numbers_in_words>
-gem "numbers_in_words"
+# <github.com/sparklemotion/nokogiri>
+gem "nokogiri"
 
 # <github.com/bleything/plist>
 gem "plist"
 
-# power tools for the File class <github.com/djberg96/ptools>
-gem "ptools"
-
-# pure Ruby readline <github.com/ConnorAtherton/rb-readline>
-gem "rb-readline"
-
-# builds manual pages <github.com/rtomayko/ronn>
-gem "ronn"
-
-# <github.com/genki/ruby-terminfo>
-gem "ruby-terminfo"
-
-# for Pushover notifications <github.com/bemurphy/rushover>
-gem "rushover"
-
-# calculate sun/moon position & phase <github.com/agileronin/suncalc-ruby>
-gem "suncalc"
-
-# TrueType font parser <github.com/prawnpdf/ttfunk>
-gem "ttfunk"
-
-# <github.com/lang/unicode_utils>
-gem "unicode_utils"
-
-# Yay! A Ruby Documentation Tool <github.com/lsegal/yard>
+# <github.com/lsegal/yard>
 gem "yard"
 
 # -----------------------------------------------------------------------------
-# webdev
+# Misc.
 # -----------------------------------------------------------------------------
 
-# <github.com/threedaymonk/htmlentities>
-gem "htmlentities"
+# <bindata.rubyforge.org>
+gem "bindata"
 
-# # <github.com/middleman/middleman>
-# gem "middleman", "~> 3.4"
+# <github.com/github/gemoji>
+gem "gemoji"
+
+# -----------------------------------------------------------------------------
+# Webdev/networking
+# -----------------------------------------------------------------------------
+
+# <github.com/middleman/middleman>
+gem "middleman"
 
 # <github.com/sass/sass>
 gem "sass"
@@ -66,18 +47,16 @@ gem "sass"
 # <github.com/slim-template/slim>
 gem "slim"
 
+# <github.com/astro/socksify-ruby>
+gem "socksify"
+
+gem "http"
+gem "net-scp"
+gem "net-ssh"
+
 # -----------------------------------------------------------------------------
 # APIs
 # -----------------------------------------------------------------------------
-
-# <github.com/dropbox/dropbox-sdk-ruby>
-gem "dropbox-sdk"
-
-# <github.com/google/google-api-ruby-client>
-gem "google-api-client"
-
-# <github.com/facebookarchive/instagram-ruby-gem>
-gem "instagram"
 
 # <github.com/oauth-xx/oauth-ruby>
 gem "oauth"
@@ -85,17 +64,77 @@ gem "oauth"
 # <github.com/tumblr/tumblr_client>
 gem "tumblr_client"
 
+# <github.com/ryw/pinboard>
+gem "pinboard"
+
 # -----------------------------------------------------------------------------
-# network stuff
+# Script requirements
 # -----------------------------------------------------------------------------
 
-gem "http"
-gem "net-scp"
-gem "net-ssh"
+# -- for Datamart
+# <github.com/trailblazer/representable>
+gem "representable"
 
-# <github.com/sparklemotion/nokogiri>
-gem "nokogiri"
+# -- for pdf_man
+# <github.com/rtomayko/ronn>
+gem "ronn"
 
-# <github.com/astro/socksify-ruby>
-gem "socksify"
+# -- for Pushover
+#<github.com/bemurphy/rushover>
+gem "rushover"
 
+# -- for astro
+# calculate sun/moon position & phase <github.com/agileronin/suncalc-ruby>
+gem "suncalc"
+
+# -- for zgm/songinfo
+# -- requires `brew install taglib`
+# <github.com/robinst/taglib-ruby>
+gem "taglib-ruby"
+
+# -- for uu
+# <github.com/lang/unicode_utils>
+gem "unicode_utils"
+
+# -- for vs2017
+
+# <github.com/barsoom/attr_extras>
+gem "attr_extras"
+# <github.com/facebookarchive/instagram-ruby-gem>
+gem "instagram"
+# <github.com/TamerShlash/symbolized>
+gem "symbolized"
+
+# -----------------------------------------------------------------------------
+
+# Show a method's code w/ syntax highlighting <github.com/janlelis/code>
+# gem "code"
+
+# <github.com/flori/json>
+# gem "json"
+
+# <github.com/markburns/numbers_in_words>
+# gem "numbers_in_words"
+
+# power tools for the File class <github.com/djberg96/ptools>
+# gem "ptools"
+
+# pure Ruby readline <github.com/ConnorAtherton/rb-readline>
+# gem "rb-readline"
+
+# <github.com/genki/ruby-terminfo>
+# gem "ruby-terminfo"
+
+# TrueType font parser <github.com/prawnpdf/ttfunk>
+# gem "ttfunk"
+
+# <github.com/threedaymonk/htmlentities>
+# gem "htmlentities"
+
+### APIs
+
+# <github.com/dropbox/dropbox-sdk-ruby>
+# gem "dropbox-sdk"
+
+# <github.com/google/google-api-ruby-client>
+# gem "google-api-client"
