@@ -71,3 +71,9 @@ defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool fals
 # # Proportional fonts
 # defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2StandardFontFamily 'Helvetica Neue'
 # defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2DefaultFontSize 14
+
+# Disable auto-playing video
+defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
