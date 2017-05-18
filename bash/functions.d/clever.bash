@@ -1,3 +1,5 @@
+CLEVER_SAVE_FILE="$HOME/src/clever.bash"
+
 clever()
 ( #: - saves the previous command for future reference
   #: $ clever [-f <file>] "<comment>"
