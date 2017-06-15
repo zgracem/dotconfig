@@ -13,3 +13,8 @@ ydl()
 
   youtube-dl -o "$dir_downloads/$output_fmt" "$@"
 }
+
+ydlq()
+{ #: - download video(s) quietly in the background
+  youtube-dl -q "$@" &
+}
