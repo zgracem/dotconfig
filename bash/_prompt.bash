@@ -220,7 +220,8 @@ _z_PS1_print_exit()
     last_exit=${exits[$last_exit]}
   fi
 
-  local screen_width=${COLUMNS:-$(tput cols)}
+  local screen_dimensions=( $(stty size) )
+  local screen_width=${screen_dimensions[1]}
   local padding=$(( screen_width - gutter ))
 
   # print exit code & return to beginning of line
