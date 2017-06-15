@@ -1,7 +1,7 @@
 pdfcrack()
 { #: - removes password protection from PDF documents
   #: < GhostScript (http://www.ghostscript.com/)
-  _inPath gs || return
+  _require gs || return
 
   case $PLATFORM in
     windows)

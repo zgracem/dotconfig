@@ -55,30 +55,42 @@ verbose()
 # -----------------------------------------------------------------------------
 
 _inPath()
-{ #: -- exits 0 if $1 is installed in $PATH
+{ #: -- returns 0 if $1 is installed in $PATH
   command -v "$1" >/dev/null
 }
 
 _isGNU()
-{ #: -- exits 0 if $1 uses GNU switches
+{ #: -- returns 0 if $1 uses GNU switches
   command "$1" --version >/dev/null 2>&1
 }
 
 _isFunction()
-{ #: -- exits 0 if $1 is defined as a function
+{ #: -- returns 0 if $1 is defined as a function
   declare -f "$1" >/dev/null
 }
 
 _inScreen()
-{ #: -- exits 0 if inside a GNU screen session
+{ #: -- returns 0 if inside a GNU screen session
   [ -n "$STY" ] && [ -p "$SCREENDIR/$STY" ]
 }
 
 _inTmux()
-{ #: -- exits 0 if inside a tmux session
+{ #: -- returns 0 if inside a tmux session
   [ -S "${TMUX%%,*}" ]
 
   # When a new session is created, tmux sets the environment variable TMUX to
   # "<socket>,<pid>,<session>". So we strip everything after (and including)
   # the first comma and test whether the resulting path is indeed a socket.
+}
+
+# -----------------------------------------------------------------------------
+# other
+# -----------------------------------------------------------------------------
+
+_require()
+{ #: -- like _inPath(), but fails with an error message
+  _inPath "$1" && return
+
+  command_not_found_handle "$1"
+  return 127
 }

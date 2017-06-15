@@ -1,5 +1,4 @@
-_inPath dict || return
-
-def() {
-  dict -d wn "$@"
+def()
+{
+  _require dict && dict -d wn "$@"
 }

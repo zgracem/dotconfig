@@ -1,7 +1,7 @@
-_inPath dayone || return
-
 d1()
 { #: - creates a new Day One entry
+  #: < dayone
+  _require dayone || return
 
   # create temp file to hold entry
   local entry
