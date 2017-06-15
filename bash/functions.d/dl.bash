@@ -3,7 +3,7 @@ dl()
   #: $ dl <url>
   if _inPath wget; then
     wget "$@"
-  elif inPath curl; then
+  elif _inPath curl; then
     curl -OJ "$@"
   fi
 }
