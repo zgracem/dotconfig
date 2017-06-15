@@ -13,7 +13,9 @@ export ENV=~/.config/environment.sh
 
 _inPath()
 { #: -- exits 0 if $1 is installed in $PATH
-  command -v "$1" >/dev/null
+  type -P "$1" >/dev/null
+  # command -v "$1" >/dev/null # ← returns true for functions, etc.
+
 }
 
 _isGNU()
