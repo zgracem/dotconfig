@@ -1,10 +1,9 @@
 # youtube-dl
 # >> http://rg3.github.io/youtube-dl/
 
-_inPath youtube-dl || return
-
 ydl()
 { #: - download video(s) to ~/Downloads
+  _require youtube-dl || return
 
   # get output format from configuration file
   local output_fmt

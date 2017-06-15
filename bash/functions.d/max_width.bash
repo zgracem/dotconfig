@@ -2,7 +2,12 @@ max_width()
 { #: - resize an image to a maximum number of pixels wide
   #: $ max_width <pixels> <file>
 
-  (( $# != 2 )) || return 64
+  if (( $# != 2 )); then
+    fx_usage >&2
+    return 64
+  fi
+
+  _require sips || return
 
   local new_width="$1"
   local file="$2"
