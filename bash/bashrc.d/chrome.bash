@@ -3,11 +3,6 @@
 
 export flags_chrome=()
 
-### ZGM disabled 2016-11-30 -- used for 1PasswordAnywhere, but a major security
-#   risk when surfing the web. Trying safer alternatives for a while.
-# flags_chrome+=('--allow-file-access')
-# flags_chrome+=('--allow-file-access-from-files')
-
 if [[ -n $SOCKS5_SERVER ]]; then
   flags_chrome+=('--host-resolver-rules="MAP * ~NOTFOUND, EXCLUDE '"${SOCKS5_SERVER%:*}"'"')
   flags_chrome+=('--proxy-server="socks5://'"${SOCKS5_SERVER}"'"')
