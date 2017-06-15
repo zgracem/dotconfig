@@ -54,15 +54,18 @@ verbose()
 # true/false functions
 # -----------------------------------------------------------------------------
 
-_inPath()
-{ #: -- returns 0 if $1 is installed in $PATH
-  command -v "$1" >/dev/null
-}
-
-_isGNU()
-{ #: -- returns 0 if $1 uses GNU switches
-  command "$1" --version >/dev/null 2>&1
-}
+### ZGM disabled 2017-06-15 -- separately declared in ~/.config/sh/profile.sh
+#
+# _inPath()
+# { #: -- returns 0 if $1 is installed in $PATH
+#   command -v "$1" >/dev/null
+# }
+#
+# _isGNU()
+# { #: -- returns 0 if $1 uses GNU switches
+#   command "$1" --version >/dev/null 2>&1
+# }
+##############################################################################
 
 _isFunction()
 { #: -- returns 0 if $1 is defined as a function
