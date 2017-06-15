@@ -4,8 +4,12 @@
 _inPath youtube-dl || return
 
 ydl()
-{ #: - download a video directly to ~/Downloads
+{ #: - download video(s) to ~/Downloads
+
+  # get output format from configuration file
   local output_fmt
-  output_fmt=$(sed -nE 's/^--output "([^"]+)".*/\1/p' ~/.config/youtube-dl/config)
+  local config_file="$XDG_CONFIG_HOME/youtube-dl/config"
+  output_fmt=$(sed -nE 's/^--output "([^"]+)".*/\1/p' "$config_file")
+
   youtube-dl -o "$dir_downloads/$output_fmt" "$@"
 }
