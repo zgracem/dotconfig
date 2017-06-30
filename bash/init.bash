@@ -17,9 +17,6 @@ if [[ -d $dir_scripts ]]; then
   fi
 fi
 
-# countdown (date & function set in private.d/countdown.bash)
-_isFunction liz && liz
-
 # print bash version if not the latest release (variables set in bashrc.bash)
 if (( this_bash < latest_bash )) || [[ -n $newer_bash ]] \
   || [[ ${BASH_VERSINFO[4]} != "release" ]] \
