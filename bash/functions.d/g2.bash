@@ -11,6 +11,7 @@ declare -A mydirs=(
   [local]="$HOME/.local"
   [scratch]="$HOME/tmp/_scratch"
   [vsmm]="$dir_dropbox/www/vsmm"
+  [history]="$HOME/.local/history"
 )
 
 g2()
