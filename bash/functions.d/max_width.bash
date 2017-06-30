@@ -11,6 +11,7 @@ max_width()
 
   local new_width="$1"
   local file="$2"
+  local new_file="${file%.*}_${new_width}px.${file##*.}"
   local old_width="" old_height="" ratio="" new_height=""
 
   # get current width and height
@@ -24,5 +25,5 @@ max_width()
   new_height=$(bc -q 2>/dev/null <<< "scale=0;$new_width/$ratio")
 
   # resize image
-  sips -z "$new_height" "$new_width" "$file" &>/dev/null
+  sips -z "$new_height" "$new_width" "$file" --out "$new_file" &>/dev/null
 }
