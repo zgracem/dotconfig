@@ -41,8 +41,8 @@
 # use an unencrypted connection to retrieve information about the video (YouTube only)
 --prefer-insecure
 
-# disguise as Chrome on Windows 7
---user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+# disguise user agent
+--user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
 
 # -----------------------------------------------------------------------------
 # video format options
