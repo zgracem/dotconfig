@@ -33,7 +33,6 @@ brew "reattach-to-user-namespace" if OS.mac?
 
 # other
 brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
-brew "fpp", args: ["HEAD"]
 brew "vim", args: ["override-system-vi"]
 brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
 brew "homebrew/dupes/less", args: ["with-pcre"]
