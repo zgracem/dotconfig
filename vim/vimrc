@@ -14,8 +14,8 @@ set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
 
 set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
 
-silent! call pathogen#infect()
-silent! call pathogen#helptags()
+silent! execute pathogen#infect()
+" silent! execute pathogen#helptags()
 
 " clear all vimrc-related autocmds 
 " >> http://ruderich.org/simon/config/vimrc
