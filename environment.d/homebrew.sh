@@ -18,8 +18,8 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
 fi
 
-# Don't automatically `brew update`
-export HOMEBREW_NO_AUTO_UPDATE=1
+# # Don't automatically `brew update`
+# export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Check for macOS/iOS terminal clients w/ emoji support
 case $TERM_PROGRAM in
