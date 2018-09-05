@@ -1,0 +1,5 @@
+# Place this file at ~/.hushlogin to suppress display of the system copyright
+# notice, date/time of last login, message of the day and other information
+# immediately after logging a user in.
+#
+# See `man login` for details.
