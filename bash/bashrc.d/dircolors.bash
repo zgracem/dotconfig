@@ -11,8 +11,8 @@ if [[ -z $LS_COLORS || -n $Z_RELOADING ]]; then
     dc_stub="default"
   fi
 
-  dc_src="$XDG_CONFIG_HOME/dircolors/$dc_stub.dircolors"
-  dc_cache="$XDG_CACHE_HOME/dircolors/$dc_stub.dircolors"
+  dc_src="$XDG_CONFIG_HOME/dircolors/$dc_stub.dir_colors"
+  dc_cache="$XDG_CACHE_HOME/dircolors/$dc_stub.dir_colors"
 
   if [[ -n $Z_RELOADING || ! -f $dc_cache || $dc_src -nt $dc_cache ]] \
     && [[ -f $dc_src ]]
