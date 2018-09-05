@@ -20,45 +20,51 @@ fi
 # -----------------------------------------------------------------------------
 
 # properties
-props=([0]=reset [1]=bold [2]=faint [4]=ul [5]=blink [7]=inv)
+reset=0; bold=1; faint=2; ul=4; blink=5; inv=7
+props=(reset bold faint ul blink inv)
 
 # PuTTY renders italics as inverted text for some reason.
 if [[ $TERM_PROGRAM != "PuTTY" && $TERM != putty* && $PTERM != putty* ]]; then
-  props+=([3]=italic)
+  italic=3
+  props+=(italic)
 fi
 
-for p in "${!props[@]}"; do
-  printf -v "${props[p]}" "$p"
-done
-
 # basic ANSI colours
-colours=(
-  [0]=black   [1]=red   [2]=green   [3]=yellow    [4]=blue
-  [5]=magenta [6]=cyan  [7]=white   [9]=default
-)
+black=30    
+red=31      
+green=32
+yellow=33   
+blue=34     
+magenta=35
+cyan=36     
+white=37    
+default=39
+colours=(black red green yellow blue magenta cyan white default)
 
-for c in "${!colours[@]}"; do
-  printf -v "${colours[c]}"   $(( 30 + c ))
-  # printf -v "bg${colours[c]}" $(( 40 + c ))
-
-  [[ $v == brdefault ]] && continue # There's no "bright default" colour.
-
+if (( TERM_COLOURDEPTH >= 16 )); then
   # Use aixterm codes to get actual *bright* colours where supported, instead
   # of relying on the emulator to display bold text as bright-but-unbold.
   # (Inspired by Prompt, which doesn't offer that option.)
-  if (( TERM_COLOURDEPTH >= 16 )); then
-    printf -v "br${colours[c]}"   $((  90 + c ))
-    # printf -v "bgbr${colours[c]}" $(( 100 + c ))
-  else
-    printf -v "br${colours[c]}"   ${!colours[c]}
-    # printf -v "bgbr${colours[c]}" $(( ${!colours[c]} + 10 ))
-  fi
-
-  colours+=("br${colours[c]}")
-  # colours+=("bg${colours[c]}" "bgbr${colours[c]}" )
-done
-
-unset -v p c
+  brblack=90  
+  brred=91  
+  brgreen=92 
+  bryellow=93 
+  brblue=94 
+  brmagenta=95 
+  brcyan=96   
+  brwhite=97
+else
+  # fall back to bold
+  brblack=1;$black    
+  brred=1;$red      
+  brgreen=1;$green
+  bryellow=1;$yellow  
+  brblue=1;$blue    
+  brmagenta=1;$magenta
+  brcyan=1;$cyan      
+  brwhite=1;$white
+fi
+colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 
 # -----------------------------------------------------------------------------
 # semantic colours
@@ -85,7 +91,7 @@ case $TERM_PROGRAM in
 esac
 
 colours+=(colour_true colour_false colour_hi colour_dim colour_user)
-colours+=(reset)
+# colours+=(reset)
 
 # ------------------------------------------------------------------------------
 # add escape codes
