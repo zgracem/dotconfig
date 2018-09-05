@@ -11,6 +11,7 @@ declare -A mydirs=(
   [local]="$HOME/.local"
   [scratch]="$HOME/tmp/_scratch"
   [vsmm]="$dir_dropbox/www/vsmm"
+  [vs9]="$dir_dropbox/www/vs2017"
   [history]="$HOME/.local/history"
 )
 

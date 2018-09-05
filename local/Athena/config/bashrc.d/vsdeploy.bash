@@ -1,1 +1,1 @@
-alias vsdeploy="$dir_dropbox/www/vsmm/scripts/deploy.sh"
+alias vsdeploy="$dir_dropbox/www/vs2017/bin/sync.sh"
