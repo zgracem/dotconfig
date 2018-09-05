@@ -6,107 +6,47 @@
 #   3. Drag the .plist file from the Desktop into the shortcuts area
 #   4. Manually delete any duplicates :(
 #
-# Source: <support.apple.com/en-ca/HT204006>
+# See also: <support.apple.com/en-ca/HT204006>
 
-require "plist" # `gem install plist` <github.com/patsplat/plist>
 require "yaml"
+require "plist" # `gem install plist` <github.com/patsplat/plist>
 
-timestamp  = Time.now.strftime("%F at %H.%M.%S")
-plist_file = "#{Dir.home}/Desktop/Text Substitutions #{timestamp}.plist"
-yaml_data  = YAML.load(DATA)
+def create_plist(output_file = nil)
+  timestamp = Time.now.strftime("%F at %H.%M.%S")
+  output_file ||= "#{Dir.home}/Desktop/Text Substitutions #{timestamp}.plist"
+  yaml_data = YAML.load(DATA)
 
-File.open(plist_file, "w+") { |f| f.write(yaml_data.to_plist) }
+  File.open(output_file, "w+") { |file| file.write(yaml_data.to_plist) }
+end
+
+# Debug function.
+def create_json
+  yaml_data = YAML.load(DATA)
+  json_output = JSON.pretty_generate(yaml_data)
+  puts json_output
+end
+
+create_plist
 
 __END__
 ---
-# Fractions
-
-- phrase:   ½
-  shortcut: 1//2
-- phrase:   ⅓
-  shortcut: 1//3
-- phrase:   ¼
-  shortcut: 1//4
-- phrase:   ⅕
-  shortcut: 1//5
-- phrase:   ⅙
-  shortcut: 1//6
-- phrase:   ⅛
-  shortcut: 1//8
-- phrase:   ⅔
-  shortcut: 2//3
-- phrase:   ¾
-  shortcut: 3//4
-- phrase:   ⅖
-  shortcut: 2//5
-- phrase:   ⅗
-  shortcut: 3//5
-- phrase:   ⅜
-  shortcut: 3//8
-- phrase:   ⅘
-  shortcut: 4//5
-- phrase:   ⅚
-  shortcut: 5//6
-- phrase:   ⅝
-  shortcut: 5//8
-- phrase:   ⅞
-  shortcut: 7//8
-
-# Greek letters
-
-- phrase:   α
-  shortcut: ;alpha
-- phrase:   β
-  shortcut: ;beta
-- phrase:   Δ
-  shortcut: ;delta
-- phrase:   λ
-  shortcut: ;lambda
-- phrase:   μ
-  shortcut: ;micro
-- phrase:   Ω
-  shortcut: ;omega
-
 # Arrows
 
-- phrase:   ↑
-  shortcut: ;uarr
-- phrase:   ↓
-  shortcut: ;darr
-- phrase:   →
-  shortcut: ;rarr
-- phrase:   ←
-  shortcut: ;larr
-- phrase:   ⇒
-  shortcut: ==>>
-
-# OS-related
-
-- phrase:   ⌥
-  shortcut: ;alt
-- phrase:   ⇧
-  shortcut: ;shift
-- phrase:   ⌘
-  shortcut: ;cmd
-- phrase:   ⌃
-  shortcut: ;ctrl
-- phrase:   ↩
-  shortcut: ;return
-- phrase:   ⎋
-  shortcut: ;esc
-- phrase:   ⌫
-  shortcut: ;backspace
+- phrase:   "→"
+  shortcut: "->>"
+- phrase:   "←"
+  shortcut: "<<-"
+- phrase:   "⇒"
+  shortcut: "==>>"
 
 # Typographical
 
 - phrase:   ©
-  shortcut: ;copy
+  shortcut: (c)
 - phrase:   ®
   shortcut: (r)
 - phrase:   ™
-  shortcut: tm
-- phrase:   €
-  shortcut: ;euro
+  shortcut: (tm)
 - phrase:   §
   shortcut: ssect
 - phrase:   ¶
@@ -114,7 +54,7 @@ __END__
 - phrase:   ·
   shortcut: mdd
 - phrase:   ə
-  shortcut: ;schwa
+  shortcut: sschwa
 
 # Emoji
 
@@ -125,7 +65,9 @@ __END__
 - phrase:   '¯\_(ツ)_/¯'
   shortcut: sshrug
 - phrase:   '🇨🇦'
-  shortcut: ;canada
+  shortcut: ccanada
+- phrase:   '👉👊'
+  shortcut: rrtj
 
 # Math
 
@@ -145,13 +87,13 @@ __END__
 # Other symbols
 
 - phrase:   ✓
-  shortcut: ;check
+  shortcut: ccheck
 - phrase:   ♪
-  shortcut: ;8th
+  shortcut: 8th
 - phrase:   ♫
-  shortcut: ;88th
+  shortcut: 88th
 - phrase:   ♪♫
-  shortcut: ;8ths
+  shortcut: 8ths
 
 # Phrases
 
@@ -160,6 +102,8 @@ __END__
 
 # For iPhone
 
+- phrase:   
+  shortcut: applesymbol
 - phrase:   <i></i>
   shortcut: <i
 - phrase:   <a href=""></a>
