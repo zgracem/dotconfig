@@ -16,24 +16,28 @@ include IRB
 # http://irb.tools/
 # -----------------------------------------------------------------------------
 
-irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
-welcome_msg   = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " <<
-                "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
-
-colours = {
-  i:   Colour.green.to_s,
-  i_v: Colour.brightgreen.to_s,
-  r:   Colour.magenta.to_s,
-  r_v: Colour.brightmagenta.to_s,
-  x:   Colour.reset.to_s
-}
-
 # `configure.rb` loads `implementation.rb`, which sets up the Irbtools module
-# with default settings.
+# with default settings
 require "irbtools/configure"
 
+# Get just the version number
+irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
+
+# Format string for sprintf call
+welcome_str   = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " <<
+                "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
+
+# Arguments for sprintf call
+fancy_colours = {
+  i:   "#{Colour.green}",
+  i_v: "#{Colour.brightgreen}",
+  r:   "#{Colour.magenta}",
+  r_v: "#{Colour.brightmagenta}",
+  x:   "#{Colour.reset}"
+}
+
 # Override default welcome message
-Irbtools.welcome_message = sprintf(welcome_msg, colours)
+Irbtools.welcome_message = sprintf(welcome_str, fancy_colours)
 
 # Override default FancyIrb colours
 Irbtools.replace_library_callback :fancy_irb do

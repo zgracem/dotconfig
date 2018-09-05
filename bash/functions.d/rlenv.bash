@@ -1,5 +1,5 @@
 rlenv()
-{ #: - reload OS-wide environment variables (GUI apps will require restart)
+{ #: - reload OS-wide environment variables (GUI apps will require relaunch)
   _require launchctl || return
 
   local plist="$HOME/Library/LaunchAgents/org.inescapable.environment.plist"
@@ -11,4 +11,5 @@ rlenv()
   fi
 
   launchctl load "$plist" || return
+  printf "%s\n" "Environment reloaded. GUI apps will require relaunch."
 }

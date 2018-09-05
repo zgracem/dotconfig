@@ -5,9 +5,9 @@ extractm4a()
   _require ffmpeg || return
 
   local input; for input in "$@"; do
-    ffmpeg -i "$in_file" -c:a copy -vn -sn "${input%.*}_extract.m4a"
-    #                     │         │   └─ no subtitles
-    #                     │         └───── no video
-    #                     └─────────────── copy audio as-is
+    ffmpeg -i "$input" -c:a copy -vn -sn "${input%.*}_extract.m4a"
+    #                   │         │   └─ no subtitles
+    #                   │         └───── no video
+    #                   └─────────────── copy audio as-is
   done
 }
