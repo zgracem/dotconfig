@@ -10,7 +10,7 @@ alias .....='cd ../../../..'
 alias bell='tput bel' # 🔔
 alias bye='exit'
 alias d='declare -p'
-alias i='newwin irb'
+alias i='newwin irb -rzgm/irb'
 alias svim='sudo XDG_DATA_HOME="$XDG_DATA_HOME" vim'
 alias unmount='umount'
 alias vd='newwin vimdiff'
@@ -29,7 +29,7 @@ alias  rtest="$rtest"
 alias webshare='python -m SimpleHTTPServer 17777'
 
 # start servers
-if [[ $HOSTNAME == Athena* ]]; then
+if _inPath bundle && _inPath middleman; then
   alias mm='bundle exec middleman'
 fi
 
