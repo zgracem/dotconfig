@@ -7,11 +7,11 @@ dev()
   local proj_dir=""
 
   case $1 in
-    vsmm)
-      proj_dir=$dir_dropbox/www/vsmm
-      _z_dev_subl_project ".sublime/vsmm"
-      ;;
-    vs2017)
+    # vsmm)
+    #   proj_dir=$dir_dropbox/www/vsmm
+    #   _z_dev_subl_project ".sublime/vsmm"
+    #   ;;
+    vs2017|vs9)
       proj_dir=$dir_dropbox/www/vs2017
       _z_dev_subl_project "etc/vs2017"
       ;;
@@ -24,9 +24,13 @@ dev()
       proj_dir=$ruby_dir/schemer
       _z_dev_subl_project "schemer"
       ;;
+    weather)
+      proj_dir=$ruby_dir
+      _z_dev_subl_project "weather"
+      ;;
 
     micro)
-      proj_dir=$www_dir/microprocessor
+      proj_dir=$HOME/www/2016/microprocessor
       _z_dev_subl "$proj_dir"
       ;;
 
@@ -50,12 +54,12 @@ dev()
 
       scold "Sorry, I don't know “$1”. Try:"
       scold "  ${opts[*]}"
-      
+
       return 64
       ;;
   esac
 
-  cd "$proj_dir"
+  [[ -n $proj_dir ]] && cd "$proj_dir"
 }
 
 _z_dev_subl()
@@ -75,7 +79,7 @@ _z_dev_subl_project()
 #   [[ $HOSTNAME == Athena* ]] || return
 
 #   local proj_dir="$1"; shift
-  
+
 #   [[ $PWD == $proj_dir ]] || cd "$proj_dir"
 
 #   if [[ -z $SSH_CONNECTION ]]; then

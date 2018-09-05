@@ -14,7 +14,7 @@ _ssh()
 
   # WebFaction's sshd doesn't AcceptEnv, so set important vars manually
   # >> http://superuser.com/a/163228
-  if [[ $host == WebFaction ]]; then
+  if [[ $host =~ WebFaction|vshraya ]]; then
     local cmd="env"
 
     local var; for var in "${send_env[@]}"; do
@@ -31,7 +31,7 @@ _ssh()
 
 alias  a='_ssh Athena'
 alias aa='_ssh Athena.remote'
-alias  m='_ssh Minerva'
 alias er='_ssh Erato'
 alias wf='_ssh WebFaction'
 alias hiroko='_ssh Hiroko'
+alias vssh='_ssh vshraya'
