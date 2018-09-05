@@ -36,6 +36,9 @@ else
     if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ "$OLDTERM" != nsterm* ]; then
       ver="${TERM_PROGRAM_VERSION%%.*}" # Major version (integer) only
       case 1 in
+        # $(( ver >= 400 ))*) # macOS 10.13
+        #   TERM=nsterm-build400
+        #   ;;
         $(( ver >= 377 ))*) # macOS 10.12
           TERM=nsterm-build377
           ;;
@@ -61,13 +64,13 @@ else
     
     # iTerm.app
     elif [ "$TERM_PROGRAM" = "iTerm.app" ] && [ "$OLDTERM" != "iTerm.app" ]; then
-      TERM="iTerm.app"
+      TERM="iterm" # alias for "iTerm.app", which doesn't work for some reason?????
     fi
   fi
 
   # Verify the new TERM setting before we proceed.
   if ! tput -T "$TERM" longname >/dev/null 2>&1; then
-    echo "Error: tried to set TERM to unknown terminal $TERM" >&2
+    # echo "Error: tried to set TERM to unknown terminal $TERM" >&2
     TERM="$OLDTERM"
   fi
   unset -v OLDTERM
