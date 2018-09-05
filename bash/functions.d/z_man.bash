@@ -44,10 +44,10 @@ man()
     open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
     return 0
   ## ZGM revised 2016-06-17 -- better than nothing for now
-  elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_MAN_NO_URL ]]; then
-    open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
-    # open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
-    return 0
+  # elif [[ $TERM_PROGRAM == iTerm.app && -z $Z_MAN_NO_URL ]]; then
+  #   open -b com.apple.terminal "x-man-page://$1${2:+/$2}"
+  #   # open -b com.googlecode.iterm2 "x-man-page://$1${2:+/$2}"
+  #   return 0
   else
     # get a nice title like "printf(1)" or "cron(8)"
     # or fail if man page doesn't exist
