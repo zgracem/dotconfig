@@ -6,6 +6,11 @@
 # Privacy & security
 # -----------------------------------------------------------------------------
 
+# Open new windows blank
+defaults write com.apple.Safari NewWindowBehavior -int 1
+defaults write com.apple.Safari NewTabBehavior -int 1
+defaults write com.apple.Safari HomePage -string "about:blank"
+
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
@@ -73,7 +78,7 @@ defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool fals
 # defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2DefaultFontSize 14
 
 # Disable auto-playing video
-defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false;
+defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false;
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false;
 defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
