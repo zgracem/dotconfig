@@ -17,6 +17,7 @@ fi
 # system commands
 # -----------------------------------------------------------------------------
 
+alias lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 alias lockscreen='"/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession" -suspend'
 alias gotosleep="pmset sleepnow"
 alias PlistBuddy="/usr/libexec/PlistBuddy"
