@@ -15,6 +15,9 @@ gem "facets"
 # <github.com/janlelis/irbtools>
 gem "irbtools"
 
+# <github.com/seattlerb/minitest>
+gem "minitest"
+
 # <github.com/sparklemotion/nokogiri>
 gem "nokogiri"
 
@@ -43,6 +46,7 @@ gem "middleman"
 
 # <github.com/sass/sass>
 gem "sass"
+gem "sassc"
 
 # <github.com/slim-template/slim>
 gem "slim"
@@ -96,12 +100,12 @@ gem "taglib-ruby"
 # <github.com/lang/unicode_utils>
 gem "unicode_utils"
 
+# -- for tinypng
+# <tinypng.com/developers/reference/ruby>
+gem "tinify"
+
 # -- for vs2017
 
-# <github.com/barsoom/attr_extras>
-gem "attr_extras"
-# <github.com/facebookarchive/instagram-ruby-gem>
-gem "instagram"
 # <github.com/TamerShlash/symbolized>
 gem "symbolized"
 
