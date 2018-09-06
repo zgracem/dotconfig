@@ -100,9 +100,9 @@ if (( this_bash < latest_bash )); then
   if [[ -x $newer_bash && $newer_bash != $SHELL ]]; then
     export SHELL="$newer_bash"
 
-    ### ZGM 2016-11-22 -- Why?
-    # # Temporarily export shell options so the new shell inherits them.
-    # export SHELLOPTS 2>/dev/null
+    ### ZGM 2016-11-22 -- Why? (to pass on execfail?)
+    # Temporarily export shell options so the new shell inherits them.
+    export SHELLOPTS 2>/dev/null
 
     # Prevent shell from exiting if `exec` fails.
     shopt -s execfail
@@ -119,7 +119,7 @@ fi
 
 # We don't actually want to *keep* those settings, though.
 shopt -u execfail
-# declare +x SHELLOPTS 2>/dev/null
+declare +x SHELLOPTS 2>/dev/null
 
 # -----------------------------------------------------------------------------
 # Essential environment variables
@@ -228,6 +228,13 @@ then
   if [[ -f ~/.local/config/init.bash ]]; then
     . ~/.local/config/init.bash
   fi
+fi
+
+# Print bash version if not the latest release
+if (( this_bash != latest_bash )) || [[ -n $newer_bash ]] \
+  || [[ ${BASH_VERSINFO[4]} != "release" ]] \
+  || [[ $BASH != $SHELL ]]; then
+  printf 'GNU bash, version %s (%s)\n' "$BASH_VERSION" "$MACHTYPE"
 fi
 
 # Clean up
