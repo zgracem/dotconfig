@@ -2,7 +2,7 @@
 # ~/.config/bash/bashrc.d/darwin.bash
 # -----------------------------------------------------------------------------
 
-[[ $OSTYPE == darwin* ]] || return
+[[ $PLATFORM == mac ]] || return
 
 DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
 MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
@@ -22,7 +22,7 @@ alias lockscreen='"/System/Library/CoreServices/Menu Extras/User.menu/Contents/R
 alias gotosleep="pmset sleepnow"
 alias PlistBuddy="/usr/libexec/PlistBuddy"
 alias restart="sudo shutdown -r now"
-alias screensaver='open -a ScreenSaverEngine'
+alias screensaver="open -a ScreenSaverEngine"
 # /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 
 # -----------------------------------------------------------------------------
