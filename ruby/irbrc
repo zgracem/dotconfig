@@ -24,7 +24,7 @@ require "irbtools/configure"
 irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
 
 # Format string for sprintf call
-welcome_str   = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " <<
+welcome_str   = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " +
                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
 
 # Arguments for sprintf call
