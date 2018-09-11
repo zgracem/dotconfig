@@ -18,12 +18,15 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
 fi
 
-# # Don't automatically `brew update`
-# export HOMEBREW_NO_AUTO_UPDATE=1
+# Only automatically `brew update` once an hour
+export HOMEBREW_AUTO_UPDATE_SECS=$(( 60 * 60 ))
+
+# Clean up old versions when upgrading (same as `brew upgrade --cleanup`)
+export HOMEBREW_UPGRADE_CLEANUP=1
 
 # Check for macOS/iOS terminal clients w/ emoji support
 case $TERM_PROGRAM in
-  Apple_Terminal|iTerm.app|Prompt_2|Coda)
+  Apple_Terminal|iTerm*|Prompt_2|Coda)
     case "$(date +%B)" in
       "October")
         # Pumpkin Spice Homebrew!
