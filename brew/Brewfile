@@ -8,9 +8,6 @@
 #   3. `brew bundle --file=$THIS_FILE`
 #   4. `brew bundle --file=~/.local/config/brew/Brewfile` [optional]
 
-tap "homebrew/dupes"
-tap "homebrew/versions"
-
 # -----------------------------------------------------------------------------
 # essentials
 # -----------------------------------------------------------------------------
@@ -25,7 +22,7 @@ brew "git", args: ["with-brewed-curl", "with-brewed-openssl"]
 
 # bash 4
 brew "bash", args: ["devel"]
-brew "homebrew/versions/bash-completion2"
+brew "bash-completion@2"
 
 # tmux
 brew "tmux"
@@ -35,8 +32,8 @@ brew "reattach-to-user-namespace" if OS.mac?
 brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
 brew "vim", args: ["override-system-vi"]
 brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
-brew "homebrew/dupes/less", args: ["with-pcre"]
-brew "homebrew/dupes/ncurses"
+brew "less", args: ["with-pcre"]
+brew "ncurses"
 
 # -----------------------------------------------------------------------------
 # GNU utilities
@@ -61,7 +58,7 @@ if OS.mac?
   brew "gnu-sed", args: ["default-names"]
 
   # grep (overwrite built-in)
-  brew "homebrew/dupes/grep", args: ["with-default-names"]
+  brew "grep", args: ["with-default-names"]
 end
 
 # -----------------------------------------------------------------------------
@@ -71,8 +68,8 @@ end
 brew "links"
 
 if OS.mac?
-  brew "homebrew/dupes/rsync"
-  brew "homebrew/dupes/whois"
+  brew "rsync"
+  brew "whois"
 end
 
 # -----------------------------------------------------------------------------
@@ -102,7 +99,7 @@ end
 brew "pngcrush"
 
 # OpenSSH
-brew "homebrew/dupes/openssh"
+brew "openssh"
 brew "ssh-copy-id"
 
 # text
@@ -114,5 +111,5 @@ brew "binutils"
 brew "ghostscript"
 brew "groff"
 brew "source-highlight" # for less
-brew "homebrew/dupes/srm"
+brew "srm"
 brew "stow"
