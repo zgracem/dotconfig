@@ -1,0 +1,6 @@
+#! /Users/zozo/opt/bin/bash
+# alias: brew tidy
+#:  * `tidy` [args...]
+#:    `brew tidy` is an alias for `brew cleanup`
+brew cleanup $*
+
