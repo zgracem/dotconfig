@@ -74,10 +74,10 @@ if [[ -n $SSH_CONNECTION && -z $TMUX && -z $STY ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# Switch to bash-4.4 if available
+# Switch to newer version of bash if available
 # -----------------------------------------------------------------------------
 
-latest_bash=44
+latest_bash=50
 
 if (( this_bash < latest_bash )); then
   unset -v newer_bash
