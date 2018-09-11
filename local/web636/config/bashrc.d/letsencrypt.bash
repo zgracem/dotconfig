@@ -1,3 +1,10 @@
+# installed using:
+#   unset -v GEMRC GEM_SPEC_CACHE;
+#   export GEM_HOME=$HOME/opt/stow/letsencrypt_webfaction/gems;
+#   export RUBYLIB=$GEM_HOME/lib;
+#   gem2.2 install letsencrypt_webfaction
+
+
 letsencrypt_webfaction()
 (
   export GEMRC= GEM_SPEC_CACHE=
