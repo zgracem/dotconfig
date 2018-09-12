@@ -5,6 +5,7 @@
 # This function will use Terminal.app's x-man-page:// handling if available.
 # Set Z_MAN_NO_URL or use `--no-url` to inhibit for the rest of the session.
 
+# shellcheck disable=SC2032,SC2033
 man()
 { # open man page in a new window with a helpful title
   local OPT OPTIND
@@ -16,7 +17,7 @@ man()
   fi
 
   if [[ $1 == --no-url ]]; then
-    printf "%s\n" "export Z_MAN_NO_URL=1"
+    printf '%s\n' "export Z_MAN_NO_URL=1"
     export Z_MAN_NO_URL=1
     shift
   fi

@@ -5,10 +5,12 @@
 
 # Source ~/.profile
 if [[ -r $HOME/.config/sh/profile.sh ]] ; then
+  # shellcheck source=../sh/profile.sh
   . "$HOME/.config/sh/profile.sh"
 fi
 
 # Abort if...
+# shellcheck disable=SC2128
 if ! test "$BASH_VERSINFO" || (( BASH_VERSINFO[0] < 3 )); then
   # ...bash is too old
   echo >&2 "this version of bash is too old!"
@@ -97,7 +99,7 @@ if (( this_bash < latest_bash )); then
       ;;
   esac
 
-  if [[ -x $newer_bash && $newer_bash != $SHELL ]]; then
+  if [[ -x $newer_bash && $newer_bash != "$SHELL" ]]; then
     export SHELL="$newer_bash"
 
     ### ZGM 2016-11-22 -- Why? (to pass on execfail?)
@@ -137,7 +139,7 @@ if [[ -z $HOME ]]; then
   # and try to query Directory Services; if that fails, Python will try to
   # resolve it.
   HOME=$(grep "^$USER" /etc/passwd | cut -f6 -d:) \
-  || HOME=$(dscl . -read /Users/$USER NFSHomeDirectory 2>/dev/null | cut -d' ' -f2) \
+  || HOME=$(dscl . -read "/Users/$USER" NFSHomeDirectory 2>/dev/null | cut -d' ' -f2) \
   || HOME=$(python -c 'import os;print os.path.expanduser("~")' 2>/dev/null) \
   || {
     # ...but if Python can't, then I'm out of ideas, so we'd better abort
@@ -157,8 +159,8 @@ fi
 if [[ -n $Z_RL_VERBOSE && $TIME_TEST_ACTIVE != true ]]; then
   .()
   {
-    printf $'\r'    # (tput cr) move cursor to beginning of line
-    printf $'\e[K'  # (tput el) clear to end of line
+    printf '%s' $'\r'    # (tput cr) move cursor to beginning of line
+    printf '%s' $'\e[K'  # (tput el) clear to end of line
 
     local f; for f in "$@"; do
       printf "%s" "${f/#$HOME/$'~'}"
@@ -170,18 +172,23 @@ fi
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 
 # Define important shell functions
+# shellcheck source=./_functions.bash
 . "$XDG_CONFIG_HOME/bash/_functions.bash"
 
 # Terminal-related setup
+# shellcheck source=./_terminal.bash
 . "$XDG_CONFIG_HOME/bash/_terminal.bash"
 
 # Load direction definitions ($dir_foo)
+# shellcheck source=./_dirs.bash
 . "$XDG_CONFIG_HOME/bash/_dirs.bash"
 
 # Define colours (before _prompt.bash loads)
+# shellcheck source=./_colour.bash
 . "$XDG_CONFIG_HOME/bash/_colour.bash"
 
 # Set fancy prompt
+# shellcheck source=./_prompt.bash
 . "$XDG_CONFIG_HOME/bash/_prompt.bash"
 
 # Temporarily enable
@@ -189,22 +196,26 @@ shopt -s nullglob
 
 # Private stuff
 for file in "$XDG_CONFIG_HOME"/bash/private.d/*.bash; do
+  # shellcheck disable=SC1090
   [[ -f $file ]] && . "$file"
 done
 
 # Lesser function files
 for file in "$XDG_CONFIG_HOME"/bash/functions.d/*.bash; do
+  # shellcheck disable=SC1090
   [[ -f $file ]] && . "$file"
 done
 
 # Supplementary startup files
 for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*.bash; do
+  # shellcheck disable=SC1090
   [[ -f $file ]] && . "$file"
 done
 
 # Machine specific files in ~/.local
 if [[ -d ~/.local/config/bashrc.d ]]; then
   for file in ~/.local/config/bashrc.d/*.bash; do
+    # shellcheck disable=SC1090
     [[ -f $file ]] && . "$file"
   done
 fi
@@ -223,9 +234,11 @@ if   (( SHLVL <= 1 )) \
   && [[ -z $Z_NO_INIT ]] \
   && (( EUID != 0 ))
 then
+  # shellcheck source=./init.bash
   . "$XDG_CONFIG_HOME/bash/init.bash"
 
   if [[ -f ~/.local/config/init.bash ]]; then
+    # shellcheck disable=SC1090
     . ~/.local/config/init.bash
   fi
 fi
@@ -233,7 +246,7 @@ fi
 # Print bash version if not the latest release
 if (( this_bash != latest_bash )) || [[ -n $newer_bash ]] \
   || [[ ${BASH_VERSINFO[4]} != "release" ]] \
-  || [[ $BASH != $SHELL ]]; then
+  || [[ $BASH != "$SHELL" ]]; then
   printf 'GNU bash, version %s (%s)\n' "$BASH_VERSION" "$MACHTYPE"
 fi
 

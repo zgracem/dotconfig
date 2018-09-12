@@ -23,7 +23,7 @@ roll()
     *.tar)      tar cf "$archive" "$@" ;;
     *.tgz)      tar czf "$archive" "$@" ;;
     *.zip)      zip -9r "$archive" "$@" ;;
-    *)          scold "$FUNCNAME: unsupported archive format: .${archive#*.}"
+    *)          scold "${FUNCNAME[0]}: unsupported archive format: .${archive#*.}"
                 return 1 ;;
   esac
 }
@@ -69,7 +69,7 @@ ex()
       *.Z)        uncompress "$archive" ;;
       *.zip)      unzip "$archive" ;;
       Payload)    cpio -imv -F "$archive" ;;
-      *)          scold "$FUNCNAME: $archive: not a recognized archive"
+      *)          scold "${FUNCNAME[0]}: $archive: not a recognized archive"
                   return 1 ;;
     esac
   done
@@ -93,7 +93,7 @@ exls()
       *.tgz)    tar tf "$archive"  ;;
       *.zip)    zip -sf "$archive" ;;
       Payload)  cpio -itv -F "$archive" ;;
-      *)        scold "$FUNCNAME: $archive: not a recognized archive"
+      *)        scold "${FUNCNAME[0]}: $archive: not a recognized archive"
                 return 1 ;;
     esac
   done

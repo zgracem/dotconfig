@@ -13,10 +13,10 @@ clear_scrollback()
   # clear scrollback in terminal
   case $TERM_PROGRAM in
     PuTTY|Apple_Terminal)
-      printf "%b" "${DCS_ante}${CSI}3J${DCS_post}"
+      printf '%b' "${DCS_ante}${CSI}3J${DCS_post}"
       ;;
     iTerm*)
-      printf "%b" "${OSC}50;ClearScrollback${BEL}"
+      printf '%b' "${OSC}50;ClearScrollback${BEL}"
       ;;
   esac
 }

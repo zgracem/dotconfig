@@ -11,5 +11,5 @@ rlenv()
   fi
 
   launchctl load "$plist" || return
-  printf "%s\n" "Environment reloaded. GUI apps will require relaunch."
+  printf '%s\n' "Environment reloaded. GUI apps will require relaunch."
 }

@@ -16,7 +16,7 @@ DCS_ante=""
 DCS_post=""
 
 if _inTmux || [[ $PTERM == tmux-256color ]]; then
-  DCS_ante="${DCS}tmux;\e"
+  DCS_ante="${DCS}tmux;\\e"
   DCS_post="${ST}"
 elif _inScreen || [[ $PTERM == screen-256color ]]; then
   DCS_ante="${DCS}"

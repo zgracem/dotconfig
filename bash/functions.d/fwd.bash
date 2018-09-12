@@ -24,7 +24,7 @@ fwd()
     then
       return 0      
     else
-      scold "$FUNCNAME: failed: $src_full <- $dst_full"
+      scold "${FUNCNAME[0]}: failed: $src_full <- $dst_full"
       if [[ -e $dst ]]; then
         mv -fv "$dst" "$1" || return 206
       fi

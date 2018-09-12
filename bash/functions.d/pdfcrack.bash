@@ -26,7 +26,7 @@ pdfcrack()
       -dPDFSETTINGS=/prepress \
       -dPassThroughJPEGImages=true \
       -sOutputFile="${file%.*}_nopassword.pdf" \
-      ${threads} \
+      "$threads" \
       "$file"
   done
 }

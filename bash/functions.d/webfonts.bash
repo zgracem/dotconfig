@@ -2,7 +2,7 @@ webfonts()
 { #: - converts TrueType and OpenType fonts for CSS @font-face use
   #: $ webfonts [<files>]
   #: | files = font files to convert (default: *.ttf and *.otf in PWD)
-  if [[ -z $@ ]]; then
+  if [[ -z $* ]]; then
     set -- "$PWD"/*.[ot]tf
   fi
 

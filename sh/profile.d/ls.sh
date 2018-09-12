@@ -38,12 +38,12 @@ ll()
   #       └────── long-list output
 
   # less info on narrower terminals
-  if (( COLUMNS < 100 )); then
+  if [ $(( COLUMNS < 100 )) = 1 ]; then
     set -- -go "$@"
     #       │└─── omit owner
     #       └──── omit group
     if _isGNU ls; then
-      set -- --time-style='+%y-%m-%d %H:%M' "${@//--time-style=+%*/}"
+      set -- --time-style='+%y-%m-%d %H:%M' "$@" # "${@//--time-style=+%*/}"
     fi
   fi
 

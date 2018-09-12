@@ -19,25 +19,25 @@ unset -v PROMPT_DIRTRIM
 # These can be set manually to override the default behaviour.
 
 # If false, skip all the colour setup so the prompt prints plain
-: ${Z_PROMPT_COLOUR:=true}
+: "${Z_PROMPT_COLOUR:=true}"
 
 # If true, print the exit status of the last command aligned right in red
-: ${Z_PROMPT_EXIT:=true}
+: "${Z_PROMPT_EXIT:=true}"
 
 # If true, make a slow call to `git` every time the prompt refreshes,
 # in exchange for info about the current git situation ("gituation")
-: ${Z_PROMPT_GIT:=false}
+: "${Z_PROMPT_GIT:=false}"
 
 # If false, display the hostname in the prompt only when connected via SSH.
 # If true, always display the hostname in the prompt, even in local sessions.
-: ${Z_PROMPT_HOST:=false}
+: "${Z_PROMPT_HOST:=false}"
 
 # If true, the prompt will display an indication of any active jobs
-: ${Z_PROMPT_JOBS:=true}
+: "${Z_PROMPT_JOBS:=true}"
 
 # If true, set window/tab title to "host@username: pwd"
-: ${Z_SET_WINTITLE:=true}
-: ${Z_SET_TABTITLE:=true}
+: "${Z_SET_WINTITLE:=true}"
+: "${Z_SET_TABTITLE:=true}"
 
 export ${!Z_PROMPT_*} ${!Z_SET_*}
 
@@ -76,7 +76,7 @@ esac
 
 # Display "user@hostname" if "user" isn't typical
 #   (set in ~/.config/sh/private.d/default_user.sh)
-if [[ $USER != $DEFAULT_USER ]]; then
+if [[ $USER != "$DEFAULT_USER" ]]; then
   Z_PROMPT_HOST=true
 fi
 
@@ -132,14 +132,14 @@ _z_PS1_compress_pwd()
   # ---------------------------------------------------------------------------
 
   # Get present working directory from invocation or environment.
-  local input=${@:-$PWD}
+  local input=${*:-$PWD}
 
   # Tilde-ify home directory if present.
   input="${input/#$HOME/$'~'}"
 
   # Use the slash as a separator to split PWD into an array of its elements.
   local -a in_parts
-  IFS=/ read -a in_parts <<< "${input}"
+  IFS=/ read -r -a in_parts <<< "${input}"
 
   # If PWD is under HOME, in_parts[0] will contain the leading tilde;
   # otherwise, it will be empty.
@@ -149,13 +149,13 @@ _z_PS1_compress_pwd()
           (( min_depth++ ))
           ;;
     "")   # PWD starts at root; remove the empty element from the array.
-          unset in_parts[0]
+          unset "in_parts[0]"
           ;;
   esac
 
   # Are there enough elements/characters to warrant compression?
-  if (( ${#in_parts[@]} < ${min_depth} )) \
-    && (( ${#input} < ${max_length} ))
+  if (( ${#in_parts[@]} < min_depth )) \
+    && (( ${#input} < max_length ))
   then
     # PWD is already short; just return what we were given.
     printf "%s" "$input"
@@ -163,7 +163,7 @@ _z_PS1_compress_pwd()
   else
     # Collect the trailing elements that will not be compressed.
     local -a end_parts=()
-    local n; for (( n = ${keep_dirs}; n > 0; n-- )); do
+    local n; for (( n = keep_dirs; n > 0; n-- )); do
       end_parts+=("${in_parts[-$n]}")
     done
 
@@ -176,11 +176,11 @@ _z_PS1_compress_pwd()
 
     # Iterate through the remaining elements, stopping where required.
     local -a out_parts=()
-    local i; for (( i = 1; i < ${stop_index}; i++ )); do
+    local i; for (( i = 1; i < stop_index; i++ )); do
       local part="${in_parts[$i]}"
 
       # No need to compress elements that are already <= $keep_chars long.
-      if (( ${#part} > (${keep_chars}) )); then
+      if (( ${#part} > keep_chars )); then
           part="${part:0:$keep_chars}${indicator}"
       fi
 
@@ -209,7 +209,7 @@ _z_PS1_print_exit()
 
   # If terminated from a signal (128 >= $? >= 165), get signal name from `kill`
   # (`-l` = list) and print that instead.
-  if (( last_exit > 128 )) && sigspec=$(builtin kill -l $last_exit 2>/dev/null); then
+  if (( last_exit > 128 )) && sigspec=$(builtin kill -l "$last_exit" 2>/dev/null); then
     last_exit=${sigspec#SIG}
   elif (( last_exit >= 64 && last_exit <= 78 )); then
     # Someone's been reading sysexits(3)... ;)
@@ -220,12 +220,13 @@ _z_PS1_print_exit()
     last_exit=${exits[$last_exit]}
   fi
 
+  # shellcheck disable=SC2207
   local screen_dimensions=( $(stty size) )
   local screen_width=${screen_dimensions[1]}
   local padding=$(( screen_width - gutter ))
 
   # print exit code & return to beginning of line
-  printf "%*s\r" $padding "$last_exit"
+  printf '%*s\r' $padding "$last_exit"
 }
 
 _z_PS1_git_info()
@@ -273,22 +274,22 @@ _z_PS1_git_info()
 
   # add '*' if there's anything to commit
   if [[ $dirty == true ]]; then
-    icons+=$esc_reset
-    icons+=$esc_false
+    icons+=${esc_reset:-}
+    icons+=${esc_false:-}
     icons+="*"
   fi
 
   # add '+' if there are untracked files
   if (( untracked > 0 )); then
-    icons+=$esc_reset
-    icons+=$esc_green
+    icons+=${esc_reset:-}
+    icons+=${esc_green:-}
     icons+="+"
   fi
 
   # add '»' if we're ahead of origin
   if (( ahead > 0 )); then
-    icons+=$esc_reset
-    icons+=$esc_yellow
+    icons+=${esc_reset:-}
+    icons+=${esc_yellow:-}
     icons+="»"
   fi
 
@@ -370,7 +371,7 @@ _z_PS1_update_titles()
   if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
     local PROMPT_DIRTRIM=1
     local pwd
-    pwd="\w"
+    pwd='\w'
     pwd=${pwd@P}
     pwd=${pwd//.../…}
   else
@@ -404,7 +405,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
       local name="PS1_${index#*_}"
 
       if [[ -n ${!index} && -z ${!name} ]] || [[ $Z_RELOADING == true ]]; then
-        printf -v $name "\[${!index}\]"
+        printf -v "$name" '\[%s\]' "${!index}"
       fi
     done
   }
@@ -423,7 +424,7 @@ PS1=""
 # prompt; and 2) so the tput calls in `_z_PS1_print_exit` get made before
 # anything else is printed.
 if [[ $Z_PROMPT_EXIT == true ]]; then
-  PS1+="${PS1_false}\[\$(_z_PS1_print_exit)\]${PS1_reset}"
+  PS1+="${PS1_false}\\[\$(_z_PS1_print_exit)\\]${PS1_reset}"
 fi
 
 # Print the hostname if we're remotely connected (otherwise we probably know
@@ -435,10 +436,10 @@ if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
       PS1+="${PS1_dim}"
       ;;
     *)
-      PS1+="${PS1_dim}\u@"
+      PS1+="${PS1_dim}\\u@"
       ;;
   esac
-  PS1+="\h${PS1_reset}:"
+  PS1+="\\h${PS1_reset}:"
 fi
 
 # Print the current path, highlighted and truncated if necessary.
@@ -492,7 +493,7 @@ _z_prompt_cmd_add()
     shift
   fi
 
-  local cmd="$@"
+  local cmd="$*"
 
   if [[ ! $PROMPT_COMMAND =~ $regex ]]; then
     if [[ $prepend == true ]]; then
@@ -555,7 +556,7 @@ unset -f _z_prompt_cmd_{add,del}
 # -----------------------------------------------------------------------------
 
 # Requires bash 4+ (case fall-through)
-(( ${BASH_VERSINFO[0]} >= 4 )) || return
+(( BASH_VERSINFO[0] >= 4 )) || return
 
 prompt()
 {
@@ -563,9 +564,9 @@ prompt()
 
   if [[ -n ${!var} ]]; then
     if [[ ${!var} == true ]]; then
-      printf -v $var "false"
+      printf -v "$var" "false"
     else
-      printf -v $var "true"
+      printf -v "$var" "true"
     fi
     
     if [[ ${1,,} == host ]]; then
@@ -574,8 +575,10 @@ prompt()
 
     echo "$var=${!var}"
   elif [[ -n $1 ]]; then
+    # shellcheck disable=SC2221,SC2222
     case ${1,,} in
       reset)
+        # shellcheck disable=SC2086
         unset -v ${!Z_PROMPT_*}
         ;;&
       reset|on)
@@ -583,22 +586,24 @@ prompt()
         ;;
       off)
         unset PS0
-        PS1="\\\$ "
-        PS2="> "
-        PS3="? "
-        PS4="+ "
+        PS1='\$ '
+        PS2='> '
+        PS3='? '
+        PS4='+ '
         ;;
       help|*)
-        local -a opts=( on off reset ${!Z_PROMPT_*} )
-        opts="${opts[@]##*_}"
-        opts="${opts,,}"
-        echo "Usage: $FUNCNAME [${opts// /|}]"
+        local -a opts=( on off reset )
+        # shellcheck disable=SC2206
+        opts+=(${!Z_PROMPT_*})
+
+        local options="${opts[*]##*_}"
+        options="${options,,}"
+        echo "Usage: ${FUNCNAME[0]} [${options// /|}]"
         ;;
     esac
   else
     local p v; for p in PS{0..4}; do v=${!p}
-      printf "%s=%q\n" "$p" "$v"
+      printf '%s=%q\n' "$p" "$v"
     done
   fi
 }
-

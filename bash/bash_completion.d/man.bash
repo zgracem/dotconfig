@@ -1,3 +1,4 @@
+# shellcheck disable=SC2206
 __z_complete_man()
 {
   local cur=${COMP_WORDS[COMP_CWORD]}
@@ -14,6 +15,7 @@ __z_complete_man()
     return 0
   fi
 
+  # shellcheck disable=SC2153
   if [[ -z $MANPATH ]]; then
     # skip MANPATH searching and just return commands
     COMPREPLY=( $(compgen -c -- "$cur") )
@@ -24,7 +26,7 @@ __z_complete_man()
 
   local sections="@([0-9lnp]|[0-9][px]|3?(gl|pm))"
   local section
-  if [[ "$prev" == $sections ]]; then
+  if [[ $prev == "$sections" ]]; then
     section=$prev
   else
     section='*'
@@ -45,9 +47,9 @@ __z_complete_man()
   # remove suffixes
   local suffixes=".@([glx]z|bz2|lzma|Z)"
   reply=( ${reply[@]%$suffixes} )
-  reply=( $( compgen -W '${reply[@]%.*}' -- "${cur//\\\\/}" ) )
+  reply=( $( compgen -W "${reply[@]%.*}" -- "${cur//\\\\/}" ) )
 
-  if [[ "$prev" != $sections ]]; then
+  if [[ $prev != "$sections" ]]; then
     # file-based completion
     compopt -o filenames 2>/dev/null #debug
     local extensions="@([0-9lnp]|[0-9][px]|man|3?(gl|pm))?(${suffixes})"

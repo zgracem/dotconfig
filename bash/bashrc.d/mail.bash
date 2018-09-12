@@ -8,6 +8,7 @@ if [[ -r $MAIL ]]; then
   # check mail every __ seconds
   MAILCHECK=60
   # custom notifications
+  # shellcheck disable=SC2016
   MAILPATH="$MAIL"'?New mail in $_':"$MBOX"'?New mail in $_'
 else
   unset -v MAIL MAILCHECK MAILPATH MBOX

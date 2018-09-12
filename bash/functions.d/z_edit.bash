@@ -16,7 +16,7 @@ _z_edit()
       local window_title="${EDITOR##*/}"
 
       if [[ $EDITOR == *vim && -n $line ]]; then
-        newwin --title "$window_title" "$EDITOR" +$line "$file"
+        newwin --title "$window_title" "$EDITOR" +"$line" "$file"
       else
         newwin --title "$window_title" "$EDITOR" "$file"
       fi

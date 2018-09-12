@@ -2,7 +2,7 @@ urlencode()
 { # pure bash URL-encoding
   # >> http://stackoverflow.com/a/10660730
 
-  local instring="${@:-$(</dev/stdin)}"
+  local instring="${*:-$(</dev/stdin)}"
   local outstring=""
 
   local i; for (( i = 0; i < ${#instring}; i++ )); do
@@ -16,5 +16,5 @@ urlencode()
     outstring+="$outchar"
   done
 
-  printf "%b\n" "$outstring"
+  printf '%b\n' "$outstring"
 }

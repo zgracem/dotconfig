@@ -14,9 +14,8 @@ alias  bps1='_z_edit $XDG_CONFIG_HOME/bash/_prompt.bash'
 _z_rl_say()
 {
   (( VERBOSITY > 0 )) || return
-  local msg_fmt="Reloading %s...\n"
   local filename="${1/#$HOME/$'~'}"
-  printf "$msg_fmt" "$filename"
+  printf 'Reloading %s...\n' "$filename"
 }
 
 _z_whence()
@@ -47,7 +46,7 @@ _z_whence()
   ### ZGM TODO: Document and handle more edge cases.
 
   printf "%s:%d" "$source_file" "$line_number"
-  [[ -t 1 ]] && printf "\n"
+  [[ -t 1 ]] && printf '\n'
 )
 
 ef()
@@ -68,10 +67,10 @@ ef()
       local answer=n
 
       printf '%s' "$func does not exist. "
-      read -e -p "Create it ("${file/#$HOME/$'~'}")? [y/N] " answer
+      read -r -e -p "Create it (${file/#$HOME/$'~'})? [y/N] " answer
 
       if [[ $answer =~ [yY] ]]; then
-        printf "%s()\n{\n  #function\n}\n" "$func" > "$file"
+        printf '%s()\n{\n  #function\n}\n' "$func" > "$file"
         _z_edit "$file:3:3"
       fi
       return 0
@@ -93,8 +92,8 @@ ef()
 }
 
 # rl() requires bash 4+ (case fall-through)
-if (( ${BASH_VERSINFO[0]} < 4 )); then
-  alias rl=". $XDG_CONFIG_HOME/bash/profile.bash"
+if (( BASH_VERSINFO[0] < 4 )); then
+  alias rl='. $XDG_CONFIG_HOME/bash/profile.bash'
   return
 fi
 
@@ -143,6 +142,7 @@ rl()
     # check ~/.local
     files+=("$HOME/.local/config/bashrc.d/$1"?(.*))
 
+    # shellcheck disable=SC2221,SC2222
     case $1 in
       functions|terminal|dirs|colour|prompt)
           files+=("$conf/bash/_$1.bash")
@@ -190,6 +190,7 @@ rl()
 
       tmux)
           if _inTmux; then
+            # shellcheck disable=SC2088
             _z_rl_say "~/.tmux.conf"
             [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
           fi
@@ -220,10 +221,12 @@ rl()
         if (( VERBOSITY >= 3 )); then
           verbose 3 ">>> begin xtrace"
           set -o xtrace
+          # shellcheck disable=SC1090
           . "$f"
           { set +o xtrace; } 2>/dev/null
           verbose 3 ">>> end xtrace"
         else
+          # shellcheck disable=SC1090
           . "$f"
         fi
       fi
@@ -233,5 +236,4 @@ rl()
   done
 
   unset -v Z_RELOADING Z_RL_VERBOSE
-  return $ret
 }

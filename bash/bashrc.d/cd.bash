@@ -3,9 +3,9 @@
 
 cd()
 {
-  local NEWPWD="${@:-$HOME}"
-  [[ $PWD == $NEWPWD ]] && return
-  builtin pushd "$NEWPWD" 1>/dev/null
+  local NEWPWD="${*:-$HOME}"
+  [[ $PWD == "$NEWPWD" ]] && return
+  builtin pushd "$NEWPWD" 1>/dev/null || return
 }
 
 alias --  -='pushd +1 1>/dev/null'  # -  = go back 1 dir

@@ -7,9 +7,9 @@ rot13()
 
   if [[ -f $1 ]]; then
     # file
-    tr $mask < "$1"
+    tr "$mask" < "$1"
   else
     # string or standard input
-    tr $mask <<< "${@-$(</dev/stdin)}"
+    tr "$mask" <<< "${@-$(</dev/stdin)}"
   fi
 }

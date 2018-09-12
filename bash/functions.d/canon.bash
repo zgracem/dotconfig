@@ -6,7 +6,7 @@ canon()
 
   if [[ -f $input ]]; then
     local basename=${input##*/} dirname=${input%/*}
-    if [[ -z $dirname || $input == $dirname ]]; then
+    if [[ -z $dirname || $input == "$dirname" ]]; then
       dirname=.
     fi
   fi
@@ -14,7 +14,7 @@ canon()
   if [[ -d $dirname ]]; then
     local canon_dir
     if canon_dir=$(builtin cd "$dirname" 2>/dev/null && pwd -P); then
-      printf "%s\n" "${canon_dir}${basename:+/$basename}"
+      printf '%s\n' "${canon_dir}${basename:+/$basename}"
       return
     fi
   fi

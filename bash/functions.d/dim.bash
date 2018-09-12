@@ -12,13 +12,13 @@ dim()
     if _inPath sips; then
       width=$(get_property pixelWidth "$image")
       height=$(get_property pixelHeight "$image")
-    elif [[ $info =~ '([[:digit:]]+) x ([[:digit:]]+)' ]]; then
+    elif [[ $info =~ ([[:digit:]]+)\ x\ ([[:digit:]]+) ]]; then
       width="${BASH_REMATCH[1]}"
       height="${BASH_REMATCH[2]}"
     fi
 
     if [[ -n $width && -n $height ]]; then
-      printf "%s: %d × %d\n" "$image" "$width" "$height"
+      printf '%s: %d × %d\n' "$image" "$width" "$height"
     else
       scold "$image: could not get dimensions"
       return 1

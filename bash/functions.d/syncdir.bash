@@ -20,7 +20,7 @@ syncdir()
   set -- --archive --no-group --no-owner "$@"
 
   # use SSH instead of RSH [-e]
-  set -- --rsh=$(type -P ssh) "$@"
+  set -- --rsh="$(type -P ssh)" "$@"
 
   # compress file data during the transfer [-z]
   set -- --compress "$@"

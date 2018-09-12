@@ -3,6 +3,6 @@ if _inPath sudo; then
   alias sudo='sudo '
 else
   # just pass through commands
-  sudo() { $*; }
+  sudo() { "$@"; }
   return
 fi

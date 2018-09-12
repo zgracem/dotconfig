@@ -5,13 +5,13 @@ auc::url()
   auc_url='http://www.auc.ab.ca/'
 
   if [[ -z $document ]]; then
-    read document < /dev/clipboard
+    read -r document < /dev/clipboard
   fi
 
   if [[ $document =~ $regex ]]; then
     local year="${BASH_REMATCH[3]}${BASH_REMATCH[4]}"
   else
-    scold "$FUNCNAME: invalid document number: $document"
+    scold "${FUNCNAME[0]}: invalid document number: $document"
     return 65
   fi
 

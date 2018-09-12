@@ -25,10 +25,11 @@ trash()
 
     local t
     local f; for f in "$@"; do
-      filebase=${f##*/}
+      local filebase=${f##*/}
       filebase=${filebase%/}
+      local fileext=${f##*.}
 
-      t="$dir_trash/$filebase"
+      t="$dir_trash/$filebase.$fileext"
 
       if [[ -e $t ]]; then
         t_base=${filebase%.*}

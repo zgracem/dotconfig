@@ -6,7 +6,7 @@ rootme()
 
   # rename window, if applicable
   if _inScreen; then
-    printf '%b' "\eksudo${ST}"
+    printf '%b' "\\eksudo${ST}"
   elif _inTmux; then
     tmux rename-window sudo 2>/dev/null
   fi
@@ -23,7 +23,7 @@ rootme()
 
   # restore window name
   if _inScreen; then
-    printf '%b' "\ekbash${ST}"
+    printf '%b' "\\ekbash${ST}"
   elif _inTmux; then
     tmux set-window-option automatic-rename on 2>/dev/null
   fi

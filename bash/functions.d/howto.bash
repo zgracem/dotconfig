@@ -18,7 +18,7 @@ howto()
   done
 
   if [[ -n $f ]]; then
-    printf "%b%s%b\n" "$esc_ul" "$f" "$esc_reset"
+    printf '%b%s%b\n' "$esc_ul" "$f" "$esc_reset"
     less -F "$f"
   else
     scold "not found: $search"

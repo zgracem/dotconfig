@@ -1,5 +1,5 @@
 # Requires bash 4+ (associative arrays)
-(( ${BASH_VERSINFO[0]} >= 4 )) || return
+(( BASH_VERSINFO[0] >= 4 )) || return
 
 declare -A mydirs=(
   [icloud]="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
@@ -68,9 +68,9 @@ g2()
       place="${mydirs[$name]}"
     elif [[ -d $HOME/$name${child:+/$child} ]]; then
       place="$HOME/$name"
-    elif [[ -n $DIRSTACK ]]; then
+    elif [[ -n ${DIRSTACK[0]} ]]; then
       local d; for d in "${DIRSTACK[@]}"; do
-        if [[ ${d##*/} == $name ]]; then
+        if [[ ${d##*/} == "$name" ]]; then
           place="${d/#~/$HOME}"
           break
         fi
@@ -81,12 +81,12 @@ g2()
   place="${place}${child:+/$child}"
 
   if [[ -d $place ]]; then
-    cd "$place"
+    cd "$place" || return
     return 0
   elif [[ -n $place ]]; then
-    scold "$FUNCNAME: $place: not found"
+    scold "${FUNCNAME[0]}: $place: not found"
   else
-    scold "$FUNCNAME: $1: not found"
+    scold "${FUNCNAME[0]}: $1: not found"
   fi
 
   return 66

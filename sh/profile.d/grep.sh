@@ -30,11 +30,11 @@ grep()
 # -----------------------------------------------------------------------------
 
 g()
-{ # search files in the current directory
-  grep --line-number "$@" *
+{ #: - search files in the current directory
+  grep --line-number "$@" -- ./*
 }
 
 gg()
-{ # search files and directories in the current directory
+{ #: - search files and directories in the current directory
   g --recursive "$@"
 }

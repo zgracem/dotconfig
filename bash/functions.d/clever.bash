@@ -18,5 +18,5 @@ clever()
     comment+=" -- $*"
   fi
 
-  printf "%s\n%s\n\n" "$comment" "$prev_cmd" | tee -a "$save_file"
+  printf '%s\n%s\n\n' "$comment" "$prev_cmd" | tee -a "$save_file"
 )

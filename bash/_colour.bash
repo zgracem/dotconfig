@@ -71,6 +71,7 @@ colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 # -----------------------------------------------------------------------------
 
 # used in PS1 -- see _prompt.bash
+# shellcheck disable=SC2223
 : ${colour_user:=$blue}
 
 colour_true=$green
@@ -107,7 +108,7 @@ _z_colour_add_esc()
     # $green -> $esc_green, $colour_true -> $esc_true
 
     if [[ -n ${!index} && -z ${!var} ]] || [[ -n $Z_RELOADING ]]; then
-      printf -v "$var" "${CSI}${!index}m"
+      printf -v "$var" "%sm" "${CSI}${!index}"
     fi
   done
 }
@@ -162,6 +163,7 @@ fi
 
 # colourize history output
 if (( TERM_COLOURDEPTH >= 16 )); then
+  # shellcheck disable=SC2154
   HISTTIMEFORMAT="${esc_dim}${HISTTIMEFORMAT}${esc_reset}"
 fi
 
@@ -172,6 +174,7 @@ if type -P stty >/dev/null; then
   bind 'set echo-control-characters off'
 
   # print a red "^C" on SIGINT
+  # shellcheck disable=SC2154
   trap 'printf "${esc_false}^C${esc_reset}"' INT
 fi
 
@@ -186,6 +189,7 @@ GCC_COLORS+="quote=${cyan}"
 
 # 500 kV library for cool colour printing
 export HV_BG="reset"
+# shellcheck source=../../lib/bash/hvdc/wtf.bash
 . ~/lib/bash/hvdc/wtf.bash
 
 # -----------------------------------------------------------------------------

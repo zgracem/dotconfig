@@ -16,7 +16,7 @@ find_drive()
 
     local caption volname _discard
     while read -r caption volname _discard; do
-      if [[ $volname == $label ]]; then
+      if [[ $volname == "$label" ]]; then
         caption="${caption,,}"
         echo "${root}${caption:0:1}"
         return 0

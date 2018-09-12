@@ -5,6 +5,6 @@ get_property()
   _require sips || return
   local property="$1" file="$2"
 
-  sips --getProperty $property "$file" \
+  sips --getProperty "$property" "$file" \
   | sed -nE "s#^[[:space:]]+$property: (.+)\$#\\1#p"
 }

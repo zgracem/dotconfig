@@ -4,16 +4,16 @@ obscure()
   #: | --url     = URL-encode TEXT
   #: | --html    = convert TEXT to HTML entities
   #: | --unicode = replace Latin characters in TEXT with Unicode look-alikes
-  local usage="$FUNCNAME --url|--html|--unicode \"text\""
+  local usage="${FUNCNAME[0]} --url|--html|--unicode \"text\""
   local mode="$1"; shift
 
   if [[ $mode == --unicode ]]; then
-    <<< "${@:-$(</dev/stdin)}" \
+    <<< "${*:-$(</dev/stdin)}" \
     sed "y/ABCDEHIJKLMNOPSTXYZacdeijlmopsvxy/ΑΒСⅮΕΗΙЈΚⅬΜΝΟΡЅΤΧΥΖасⅾеіјⅼⅿοрѕⅴху/"
     return
   fi
 
-  local instring="${@:-$(</dev/stdin)}"
+  local instring="${*:-$(</dev/stdin)}"
   local outstring=""
 
   local i; for (( i = 0; i < ${#instring}; i++ )); do
