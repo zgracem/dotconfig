@@ -47,6 +47,8 @@ brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
 # development
 # -----------------------------------------------------------------------------
 
+brew "shellcheck"
+
 brew "node"
 
 # >> https://github.com/zoltan-dulac/css3FontConverter
