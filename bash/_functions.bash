@@ -3,17 +3,18 @@
 # -----------------------------------------------------------------------------
 
 # load function self-documentation library
+# shellcheck source=../../lib/bash/fxdoc/_init.bash
 . ~/lib/bash/fxdoc/_init.bash
 
 e()
 { #: -- print each argument to stdout on its own line
-  printf "%s\n" "$@"
+  printf '%s\n' "$@"
 }
 
 x() 
 { #: -- execute a command for each argument passed on stdin
   #: $ <input> | x <command>
-  xargs -r -d"\n" "$@"; 
+  xargs -r -d'\n' "$@"; 
   #      │  └── delimit w/ newline only (instead of all whitespace chars)
   #      └───── do not run if input is empty
 }
@@ -24,7 +25,7 @@ x()
 
 scold()
 { #: -- echo to standard error
-  printf "%b\n" "$*" >&2
+  printf '%b\n' "$*" >&2
 }
 
 verbose()
@@ -46,7 +47,7 @@ verbose()
   fi
 
   if (( VERBOSITY >= level )); then
-    printf "%b\n" "$@"
+    printf '%b\n' "$@"
   fi
 }
 

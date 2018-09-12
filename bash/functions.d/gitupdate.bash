@@ -8,7 +8,7 @@ gitupdate()
   local dir; for dir in "$target_dir"/**/.git; do
     [[ -d $dir ]] || continue
     dir="${dir%/.git}"
-    printf "» %s\n" "$dir"
+    printf '» %s\n' "$dir"
     (builtin cd "$dir" && git pull) || return 70
   done
 }

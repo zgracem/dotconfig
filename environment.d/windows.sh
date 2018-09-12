@@ -42,6 +42,7 @@ if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
   CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
 
+# shellcheck disable=SC2039
 if [ "$OSTYPE" = "cygwin" ]; then
   export CYGWIN
 elif [ "$OSTYPE" = "msys" ]; then

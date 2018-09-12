@@ -11,7 +11,7 @@ agedu()
   set -- "$@" --file "$XDG_RUNTIME_DIR/agedu.dat"
 
   # Web server preferences
-  set -- "$@" --web --address $(localip):60053 --auth none
+  set -- "$@" --web --address "$(localip):60053" --auth none
 
   # Remove database file after web server stops
   set -- "$@" --remove

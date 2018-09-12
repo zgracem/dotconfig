@@ -6,6 +6,7 @@ dev()
   local www_dir="$HOME/Dropbox/www"
   local proj_dir=""
 
+  # shellcheck disable=SC2221,SC2222
   case $1 in
     # vsmm)
     #   proj_dir=$dir_dropbox/www/vsmm
@@ -44,22 +45,21 @@ dev()
 
     *)
       # parse out case statements for usage string
-      local opts=(
-        $(declare -f ${FUNCNAME[0]} \
-          | sed -nE 's/.*[[:space:]]([[:alnum:]|]+)\)$/\1/p' \
-          | sort \
-          | uniq)
-        )
-      # opts=${opts[*]}
+      scold "Sorry, I don't know '$1'. Try:"
 
-      scold "Sorry, I don't know “$1”. Try:"
+      mapfile -t opts \
+        < <(declare -f "${FUNCNAME[0]}" \
+            | sed -nE 's/.*[[:space:]]([[:alnum:]|]+)\)$/\1/p' \
+            | sort \
+            | uniq)
+
       scold "  ${opts[*]}"
 
       return 64
       ;;
   esac
 
-  [[ -n $proj_dir ]] && cd "$proj_dir"
+  [[ -n $proj_dir ]] && cd "$proj_dir" || return
 }
 
 _z_dev_subl()

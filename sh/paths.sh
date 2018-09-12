@@ -48,6 +48,7 @@ fi
 
 # Xcode
 if [ -x /usr/bin/xcode-select ]; then
+  # shellcheck disable=SC2039
   case $HOSTNAME in
     Athena*)
       DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"

@@ -41,7 +41,7 @@ mc()
     if [[ -r $MC_PWD_FILE ]]; then
       local MC_PWD=$(<"$MC_PWD_FILE")
       if [[ -d $MC_PWD ]]; then
-        cd "$MC_PWD"
+        cd "$MC_PWD" || return
       fi
       command rm -f "$MC_PWD_FILE"
     fi

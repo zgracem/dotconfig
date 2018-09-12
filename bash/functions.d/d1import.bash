@@ -13,11 +13,11 @@ d1import()
     if entry_date=$(stat --printf=%y "$entry_file"); then
       dayone -d="$entry_date" new < "$entry_file"
     else
-      scold "$FUNCNAME: failed to get date from $entry_file"
+      scold "${FUNCNAME[0]}: failed to get date from $entry_file"
       return 65
     fi
   else
-    scold "$FUNCNAME: failed to read $entry_file"
+    scold "${FUNCNAME[0]}: failed to read $entry_file"
     return 74
   fi
 }

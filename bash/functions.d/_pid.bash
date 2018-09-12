@@ -4,7 +4,7 @@ pidof()
   #: @ killall()
   local proc="$1"
   local pid
-  pid=$(_z_pid | sed -nE "s/[[:space:]]*([[:digit:]]+) .*\<${proc}(\.exe)?$/\1/ip")
+  pid=$(_z_pid | sed -nE "s/[[:space:]]*([[:digit:]]+) .*\\<${proc}(\\.exe)?$/\\1/ip")
 
   [[ -n $pid ]] && echo "$pid"
 }
@@ -16,7 +16,7 @@ pidis()
   [[ $pid =~ ^[[:digit:]]+$ ]] || return 64
 
   local proc
-  proc=$(_z_pid -p $pid | tail -n+2)
+  proc=$(_z_pid -p "$pid" | tail -n+2)
 
   if [[ -z $proc ]]; then
     return 1
@@ -45,5 +45,6 @@ _z_pid()
 
   [[ ${FUNCNAME[1]} == pidis ]] && flags=${flags/pid,/}
 
+  # shellcheck disable=SC2086
   command ps $flags "$@"
 }

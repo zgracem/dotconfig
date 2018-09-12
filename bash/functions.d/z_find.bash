@@ -12,7 +12,7 @@ _z_find()
 { #: $ _z_find f[ile]|d[ir] <scope> <term>
 
   local find_type=$1 scope=$2; shift 2
-  local term=$@
+  local term=$*
 
   case $find_type in
     f|d|file|dir)
@@ -27,7 +27,7 @@ _z_find()
   local line
 
   find -H "$scope" \
-       -xtype $find_type \
+       -xtype "$find_type" \
        -iname "*$term*" \
        -print 2>/dev/null \
   | while read -r line; do

@@ -1,6 +1,6 @@
 f()
 { #: - open a Finder/Explorer window for the current/specified directory
-  local here="${@-.}"
+  local here="${*-.}"
 
   case $PLATFORM in
     mac)

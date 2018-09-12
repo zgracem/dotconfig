@@ -21,7 +21,7 @@ __z_complete_g2()
   done
 
   # directory stack
-  if [[ -n $DIRSTACK ]] && (( ${#DIRSTACK[@]} > 1 )); then
+  if [[ -n ${DIRSTACK[0]} ]] && (( ${#DIRSTACK[@]} > 1 )); then
     wordlist+=("${DIRSTACK[@]}")
   fi
 

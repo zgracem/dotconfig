@@ -76,6 +76,7 @@ __z_complete_autoload()
   [[ -n $1 ]] || return
   local compspec="$XDG_CONFIG_HOME/bash/bash_completion.d/$1.bash"
   [[ -f $compspec ]] || return
+  # shellcheck disable=SC1090
   . "$compspec" &>/dev/null && return 124
 }
 
@@ -88,6 +89,7 @@ __z_complete_autoload()
 # [[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
 # unset -v BASH_COMPLETION
 
+# shellcheck source=../bash_completion.d/_misc.bash
 . "$BASH_COMPLETION_DIR/_misc.bash"
 
 if (( BASH_VERSINFO[0] >= 4 )); then
@@ -97,6 +99,7 @@ else
   # Load them manually
   unset -f __z_complete_autoload
   for file in "$BASH_COMPLETION_DIR"/[^_]*.bash; do
+    # shellcheck disable=SC1090
     [[ -f $file ]] && . "$file"
   done
   unset -v file

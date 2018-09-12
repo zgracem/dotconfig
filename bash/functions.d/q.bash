@@ -18,7 +18,7 @@ q()
         local expr="$last_exit -eq 0"
         ;;
     1)  # One argument: Evaluate like [[ (and pretty-print result).
-        local expr="$@"
+        local expr="$*"
         ;;
     *)  # 2+ arguments: You're doing it wrong.
         fx_usage >&2
@@ -32,7 +32,7 @@ q()
 
   case $answer in
     *error*)  # Syntax error from [[
-              scold "$FUNCNAME: bad expression"
+              scold "${FUNCNAME[0]}: bad expression"
               return 2
               ;;
 
@@ -48,7 +48,7 @@ q()
               ;;
   esac
 
-  printf "%b\n" "${colour}${answer}${esc_reset}"
+  printf '%b\n' "${colour}${answer}${esc_reset}"
 
   return $last_exit
 }

@@ -12,7 +12,7 @@ scratch()
   dir="$(mktemp -d -t ${template})" || return 73
 
   if [[ -d $dir ]]; then
-    cd "$dir"
+    cd "$dir" || return
   else
     return 73
   fi

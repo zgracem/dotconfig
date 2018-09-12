@@ -15,7 +15,7 @@ if [ -z "$LANG" ]; then
 
   if [ ! -f "$lang_file" ]; then
     locale -a 2>/dev/null \
-    | command grep -Ei "${LANGUAGE%%:*}\.utf-?8" \
+    | command grep -Ei "${LANGUAGE%%:*}\\.utf-?8" \
     > "$lang_file"    
   fi
 

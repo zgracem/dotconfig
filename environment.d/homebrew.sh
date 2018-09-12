@@ -31,11 +31,11 @@ case $TERM_PROGRAM in
       "October")
         # Pumpkin Spice Homebrew!
         # >> https://twitter.com/MacHomebrew/status/783028298351730688
-        export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x83' # 🎃
+        export HOMEBREW_INSTALL_BADGE="🎃" # $'\xf0\x9f\x8e\x83'
         ;;
       "December")       
         # Santa brought me a bunch of software upgrades 
-        export HOMEBREW_INSTALL_BADGE=$'\xf0\x9f\x8e\x81' # 🎁
+        export HOMEBREW_INSTALL_BADGE="🎁" # $'\xf0\x9f\x8e\x81'
         ;;
     esac
     ;;

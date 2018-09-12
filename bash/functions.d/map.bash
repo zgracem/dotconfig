@@ -5,14 +5,14 @@ map()
   #: > http://redd.it/aks3u
 
   if [[ ! -t 0 ]]; then
-    cmd="$@"
+    cmd="$*"
     local i; while read -r i || [[ -n $i ]]; do
       "$cmd" "$i"
     done
     return
   fi
 
-  if [[ $# -lt 2 ]] || [[ ! $@ =~ :[[:space:]] ]]; then
+  if [[ $# -lt 2 ]] || [[ ! $* =~ :[[:space:]] ]]; then
     fx_usage >&2
     return 64
   fi

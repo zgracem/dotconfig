@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090,SC2207
 # -----------------------------------------------------------------------------
 # macOS configuration script
 # Adapted from https://mths.be/macos

@@ -18,7 +18,7 @@ lipsum()
   while (( $# )); do
     case $1 in
       -h|--help)
-        fxdoc "$FUNCNAME"
+        fxdoc "${FUNCNAME[0]}"
         return
         ;;
       +([[:digit:]]))

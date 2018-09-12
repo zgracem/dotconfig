@@ -9,7 +9,7 @@ itunes()
 
   [[ -x $script ]] || return 69
 
-  cd "$dir"
+  cd "$dir" || return
 
   map "$script": "$@"
 )

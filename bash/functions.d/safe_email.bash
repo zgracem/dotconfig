@@ -2,7 +2,7 @@ safe_email()
 { #: - creates a (relatively) spam-proof email link
   #: $ safe_email user@example.com
   #: = <a href="mailto:user%40example%2ecom">user&#x40;example&#x2e;com</a>
-  local instring="${@:-$(</dev/stdin)}"
+  local instring="${*:-$(</dev/stdin)}"
   local outstring=""
   local outurl=""
 

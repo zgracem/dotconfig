@@ -5,6 +5,7 @@
 
 # Setup environment
 export ENV=~/.config/environment.sh
+# shellcheck source=../environment.sh
 . "$ENV"
 
 # -----------------------------------------------------------------------------
@@ -27,6 +28,7 @@ _isGNU()
 
 # Source supplementary startup files
 for file in ~/.config/sh/profile.d/*; do
+  # shellcheck disable=SC1090
   [ -r "$file" ] && . "$file"
   unset -v file
 done

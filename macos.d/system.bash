@@ -2,6 +2,7 @@
 # System
 # -----------------------------------------------------------------------------
 
+# shellcheck disable=SC2154
 if [[ -n $computer_name ]]; then
     # Set computer name (as done via System Preferences → Sharing)
     sudo scutil --set ComputerName  "${computer_name}"

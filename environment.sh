@@ -1,3 +1,4 @@
+#!/bin/sh
 # -----------------------------------------------------------------------------
 # ~/.config/environment.sh
 # Environment variables for all POSIX shells
@@ -13,6 +14,7 @@ export XDG_RUNTIME_DIR="$HOME/var/run"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Set up PATH, MANPATH, etc.
+# shellcheck source=sh/paths.sh
 [ -f "$XDG_CONFIG_HOME/sh/paths.sh" ] && . "$XDG_CONFIG_HOME/sh/paths.sh"
 
 # Make environment available to non-interactive bash shells
@@ -21,9 +23,9 @@ if [ -z "$BASH_ENV" ]; then
 fi
 
 # Fix missing environment variables
-[ -z "$USER" ] && export USER=$(whoami)
-[ -z "$HOSTNAME" ] && export HOSTNAME=$(uname -n)
-[ -z "$TMPDIR" ] && export TMPDIR=$(dirname "$(mktemp -u)")
+[ -z "$USER" ] && USER=$(whoami) && export USER
+[ -z "$HOSTNAME" ] && HOSTNAME=$(uname -n) && export HOSTNAME
+[ -z "$TMPDIR" ] && TMPDIR=$(dirname "$(mktemp -u)") && export TMPDIR
 
 # Add domain to names of shared hosts
 case $HOSTNAME in
@@ -37,7 +39,7 @@ esac
 
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
 # "noexec" (as it would be on a shared host) and change to a path we control.
-if [ ! -G $TMPDIR ] && mount|grep -q " on $TMPDIR.*noexec,"; then
+if [ ! -G "$TMPDIR" ] && mount|grep -q " on $TMPDIR.*noexec,"; then
   TMPDIR="$XDG_RUNTIME_DIR"
   [ -d "$TMPDIR" ] || mkdir -p "$TMPDIR"
 fi
@@ -51,6 +53,7 @@ esac
 export PLATFORM
 
 for env_file in "$XDG_CONFIG_HOME/environment.d/"*.sh; do
+  # shellcheck disable=SC1090
   [ -r "$env_file" ] && . "$env_file"
 done
 

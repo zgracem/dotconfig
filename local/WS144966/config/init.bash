@@ -4,7 +4,7 @@
 # launch apps
 # -----------------------------------------------------------------------------
 
-_isRunning() { command ps -sW | command grep -iq "${1}\.exe\$"; }
+_isRunning() { command ps -sW | command grep -iq "${1}\\.exe\\$"; }
 
 # Google Chrome
 if ! _isRunning chrome && [[ -n $ALL_PROXY ]]; then
@@ -13,7 +13,7 @@ fi
 
 # Dropbox
 _isRunning Dropbox \
-    || run "$(cygpath -au "$APPDATA\Dropbox\bin\Dropbox.exe")" "/home"
+    || run "$(cygpath -au "$APPDATA\\Dropbox\\bin\\Dropbox.exe")" "/home"
 
 # Pageant
 _isRunning pageant \

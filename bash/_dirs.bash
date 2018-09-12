@@ -14,7 +14,7 @@ case $PLATFORM in
 
   windows)
     if [[ -n $USERPROFILE ]]; then
-      : ${dir_winhome:="$(cygpath -au "$USERPROFILE")"}
+      : "${dir_winhome:="$(cygpath -au "$USERPROFILE")"}"
     else
       case $OSTYPE in
         cygwin) dir_winhome="/cygdrive/c/Users/$USER" ;;
