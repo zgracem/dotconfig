@@ -24,6 +24,9 @@ export HOMEBREW_AUTO_UPDATE_SECS=$(( 60 * 60 ))
 # Clean up old versions when upgrading (same as `brew upgrade --cleanup`)
 export HOMEBREW_UPGRADE_CLEANUP=1
 
+# Use a GUI text editor if available
+export HOMEBREW_EDITOR="$VISUAL"
+
 # Check for macOS/iOS terminal clients w/ emoji support
 case $TERM_PROGRAM in
   Apple_Terminal|iTerm*|Prompt_2|Coda)
