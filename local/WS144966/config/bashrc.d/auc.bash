@@ -26,7 +26,8 @@ auc::url()
       ;;
     *)
       # old-style decision (YYYY-###)
-      auc_url+='applications/decisions/Decisions'
+      auc_url+='regulatory_documents/ProceedingDocuments'
+      # auc_url+='applications/decisions/Decisions'
       ;;
   esac
 
