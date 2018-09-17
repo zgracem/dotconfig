@@ -10,9 +10,10 @@ declare -A mydirs=(
   [inbox]="$dir_dropbox/inbox"
   [local]="$HOME/.local"
   [scratch]="$HOME/tmp/_scratch"
-  [vsmm]="$dir_dropbox/www/vsmm"
   [vs9]="$dir_dropbox/www/vs2017"
   [history]="$HOME/.local/history"
+  [imprint]="$HOME/www/2018/imprint"
+  [ta]="$HOME/www/2018/2a18"
 )
 
 g2()
