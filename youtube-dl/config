@@ -18,9 +18,6 @@
 # do not overwrite files
 --no-overwrites
 
-# do not use the Last-modified header to set the file modification time
-# --no-mtime
-
 # -----------------------------------------------------------------------------
 # verbosity/simulation options
 # -----------------------------------------------------------------------------
@@ -42,7 +39,7 @@
 --prefer-insecure
 
 # disguise user agent
---user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+--user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36"
 
 # -----------------------------------------------------------------------------
 # video format options
