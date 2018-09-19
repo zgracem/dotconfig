@@ -2,6 +2,8 @@
 # default flags
 # -----------------------------------------------------------------------------
 
+_inPath exa && return
+
 unalias ls ll 2>/dev/null
 
 ls()
@@ -15,8 +17,6 @@ ls()
   [ "$PLATFORM" = "windows" ] && set -- --append-exe "$@"
 
   if _isGNU ls; then
-    # display mtime in YYYY-MM-DD HH:MM format
-    set -- --time-style='+%Y-%m-%d %H:%M' "$@"
     # colourize output
     set -- --color=auto "$@"
   else
