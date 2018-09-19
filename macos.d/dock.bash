@@ -17,24 +17,8 @@ defaults write com.apple.Dock launchanim -bool false
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.Dock show-process-indicators -bool true
 
-# # Automatically hide and show the Dock
-# defaults write com.apple.Dock autohide -bool true
-
-# # Remove the auto-hiding Dock delay
-# defaults write com.apple.Dock autohide-delay -float 0
-
-# # Speed up the animation when hiding/showing the Dock
-# defaults write com.apple.Dock autohide-time-modifier -float 0.25
-
-# # Make Dock icons of hidden applications translucent
-# defaults write com.apple.Dock showhidden -bool true
-
 # Enable spring loading for all Dock items
 defaults write com.apple.Dock enable-spring-load-actions-on-all-items -bool true
-
-# # Add a stack with recent applications
-# defaults write com.apple.Dock persistent-others -array-add \
-#   '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
 
 # Disable hot corners
 defaults write com.apple.Dock wvous-tl-corner   -int 0
@@ -66,9 +50,6 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Don't show Dashboard as a space
 defaults write com.apple.Dock dashboard-in-overlay -int 1
-
-# # Enable Dashboard dev mode (allows keeping widgets on the desktop)
-# defaults write com.apple.Dashboard devmode -bool true
 
 # Don't automatically rearrange spaces
 defaults write com.apple.Dock mru-spaces -int 0

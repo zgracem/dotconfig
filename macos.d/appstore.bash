@@ -2,12 +2,6 @@
 # Software Update/App Store
 # -----------------------------------------------------------------------------
 
-# # Enable the WebKit Developer Tools in the Mac App Store
-# defaults write com.apple.SoftwareUpdate WebKitDeveloperExtras -bool true
-
-# # Enable Debug Menu in the Mac App Store
-# defaults write com.apple.SoftwareUpdate ShowDebugMenu -bool true
-
 # Enable automatic update checks
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 

@@ -38,7 +38,7 @@ fi
 # Load preferences
 # -----------------------------------------------------------------------------
 
-source_dir=$(mdutil -t "${BASH_SOURCE[0]%/*}/macos")
+source_dir=$(mdutil -t "${BASH_SOURCE[0]%/*}/macos.d")
 
 shopt -s extglob nullglob
 
