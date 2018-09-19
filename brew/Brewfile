@@ -110,8 +110,8 @@ brew "multimarkdown"
 
 # misc.
 brew "binutils"
+brew "exa"
 brew "ghostscript"
 brew "groff"
 brew "source-highlight" # for less
-brew "srm"
 brew "stow"
