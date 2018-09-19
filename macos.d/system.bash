@@ -37,9 +37,6 @@ defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 if [[ $HARDWARE == MacBook* ]]; then
   # Disable the sudden motion sensor as it’s not useful for SSDs
   sudo pmset -a sms 0
-else
-  # # Enable the MacBook Air SuperDrive on any Mac
-  : # sudo nvram boot-args="mbasd=1"
 fi
 
 # Enable `>console` login
@@ -47,13 +44,9 @@ if (( MACOS_VERSION >= 10 )); then
     defaults write /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess -bool false
 fi
 
-# Require password 8 hours after sleep or screen saver begins
+# Require password 4 hours after sleep or screen saver begins
 defaults write com.apple.ScreenSaver askForPassword -int 1
-defaults write com.apple.ScreenSaver askForPasswordDelay -int $(( 8 * 60 * 60 ))
+defaults write com.apple.ScreenSaver askForPasswordDelay -int $(( 4 * 60 * 60 ))
 
 # Enable Screen Sharing
 sudo defaults write /Library/Preferences/com.apple.RemoteManagement VNCAlwaysStartOnConsole -bool true
-
-### ZGM disabled 2016-08-18 -- redundant w/ Server?
-# # Web Sharing -- enable Apache
-# sudo defaults write /System/Library/LaunchDaemons/org.apache.httpd Disabled -bool false

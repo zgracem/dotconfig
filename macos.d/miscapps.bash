@@ -10,6 +10,3 @@ defaults write com.apple.ImageCapture disableHotPlug -bool true
 
 # Help Viewer -- set windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
-
-# QuickTime Player -- auto-play videos when opened
-defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
