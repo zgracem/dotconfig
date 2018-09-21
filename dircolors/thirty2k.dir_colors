@@ -305,6 +305,7 @@ EXEC	31	# Unix
 *#      90
 
 # Unimportant non-text files - base01
+*.DS_Store    90
 *.bak    90
 *.BAK    90
 *.old    90
