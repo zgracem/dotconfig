@@ -12,6 +12,8 @@ fi
 if (( TERM_COLOURDEPTH >= 8 )); then
   export TERM_COLOURDEPTH
 else
+  printf >&2 "%s: %s only has %d colours\\n" \
+    "${BASH_SOURCE[0]}" "${PTERM:-$TERM}" "$TERM_COLOURDEPTH"
   return
 fi
 
@@ -30,38 +32,25 @@ if [[ $TERM_PROGRAM != "PuTTY" && $TERM != putty* && $PTERM != putty* ]]; then
 fi
 
 # basic ANSI colours
-black=30    
-red=31      
-green=32
-yellow=33   
-blue=34     
-magenta=35
-cyan=36     
-white=37    
-default=39
+black=30; red=31; green=32; yellow=33; blue=34; 
+magenta=35; cyan=36; white=37; default=39
 colours=(black red green yellow blue magenta cyan white default)
 
 if (( TERM_COLOURDEPTH >= 16 )); then
   # Use aixterm codes to get actual *bright* colours where supported, instead
   # of relying on the emulator to display bold text as bright-but-unbold.
   # (Inspired by Prompt, which doesn't offer that option.)
-  brblack=90  
-  brred=91  
-  brgreen=92 
-  bryellow=93 
-  brblue=94 
-  brmagenta=95 
-  brcyan=96   
-  brwhite=97
+  brblack=90; brred=91; brgreen=92; bryellow=93; 
+  brblue=94; brmagenta=95; brcyan=96; brwhite=97
 else
   # fall back to bold
-  brblack=1;$black    
-  brred=1;$red      
+  brblack=1;$black
+  brred=1;$red
   brgreen=1;$green
-  bryellow=1;$yellow  
-  brblue=1;$blue    
+  bryellow=1;$yellow
+  brblue=1;$blue
   brmagenta=1;$magenta
-  brcyan=1;$cyan      
+  brcyan=1;$cyan
   brwhite=1;$white
 fi
 colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
@@ -92,7 +81,6 @@ case $TERM_PROGRAM in
 esac
 
 colours+=(colour_true colour_false colour_hi colour_dim colour_user)
-# colours+=(reset)
 
 # ------------------------------------------------------------------------------
 # add escape codes
@@ -103,9 +91,9 @@ _z_colour_add_esc()
   local -a indexes=("$@")
   local index var
 
+  # $green -> $esc_green, $colour_true -> $esc_true
   for index in "${indexes[@]}"; do
     var="esc_${index#*_}"
-    # $green -> $esc_green, $colour_true -> $esc_true
 
     if [[ -n ${!index} && -z ${!var} ]] || [[ -n $Z_RELOADING ]]; then
       printf -v "$var" "%sm" "${CSI}${!index}"

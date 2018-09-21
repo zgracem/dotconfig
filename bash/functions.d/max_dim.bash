@@ -9,10 +9,10 @@ max_dim()
 
   _require sips || return
 
-  local new_size="$1"
+  local pixels="$1"
   local file="$2"
-  local new_file="${file%.*}_${new_size}px.${file##*.}"
+  local new_file="${file%.*}_${pixels}px.${file##*.}"
   
   # resize image
-  sips -Z "$new_size" "$file" --out "$new_file" &>/dev/null
+  sips -Z "$pixels" "$file" --out "$new_file" &>/dev/null
 }

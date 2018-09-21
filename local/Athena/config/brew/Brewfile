@@ -54,6 +54,7 @@ brew "node"
 # >> https://github.com/zoltan-dulac/css3FontConverter
 brew "fontforge"
 
+# >> https://github.com/bramstein/homebrew-webfonttools
 tap  "bramstein/webfonttools"
 brew "bramstein/webfonttools/sfnt2woff-zopfli"
 brew "bramstein/webfonttools/sfnt2woff"
