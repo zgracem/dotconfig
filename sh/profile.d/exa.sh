@@ -25,16 +25,37 @@ lsf()
 
 ## -----------------------------------------------------------------------------
 
-unset LS_COLORS
-# export EXA_COLORS="$LS_COLORS:"
-export EXA_COLORS=""
+# set LS_COLORS
+. "${BASH_SOURCE[0]%/*}/../../bash/bashrc.d/dircolors.bash"
+
+# replace bright aixterm colour codes w/ bold ANSI codes
+export EXA_COLORS="${LS_COLORS//=9/=1;3}"
+
+## Normal file
+EXA_COLORS+="fi=0:"
+## Directory
+EXA_COLORS+="di=34:"
+## Executable file
+EXA_COLORS+="ex=31:"
+## Named pipe
+EXA_COLORS+="pi=32;40:"
+## Socket
+EXA_COLORS+="so=33;40:"
+## Block device
+EXA_COLORS+="bd=36;40:"
+## Character device
+EXA_COLORS+="cd=36;40:"
+## Symlink
+EXA_COLORS+="ln=35:"
+## Arrow to broken symlink
+EXA_COLORS+="or=1;31:"
 
 ### PERMISSIONS
 
 ## User +r bit
-EXA_COLORS+="ur=1;33:"
+EXA_COLORS+="ur=33:"
 ## User +w bit
-EXA_COLORS+="uw=1;31:"
+EXA_COLORS+="uw=31:"
 ## User +x bit (files)
 EXA_COLORS+="ux=1;4;32:"
 ## User +x bit (file types)
@@ -52,9 +73,9 @@ EXA_COLORS+="tw=31:"
 ## Others +x bit
 EXA_COLORS+="tx=32:"
 ## Higher bits (files)
-# EXA_COLORS+="su="
+EXA_COLORS+="su=36:"
 ## Higher bits (other types)
-# EXA_COLORS+="sf="
+EXA_COLORS+="sf=36:"
 ## Extended attribute marker
 EXA_COLORS+="xa=1;37:"
 
@@ -83,9 +104,9 @@ EXA_COLORS+="gn=33:"
 ### HARD LINKS
 
 ## Number of links
-# EXA_COLORS+="lc="
+EXA_COLORS+="lc=1;37:"
 ## A multi-link file
-# EXA_COLORS+="lm="
+EXA_COLORS+="lm=37:"
 
 ### GIT
 
@@ -103,16 +124,16 @@ EXA_COLORS+="gt=36:"
 ### DETAILS AND METADATA
 
 ## Punctuation
-# EXA_COLORS+="xx="
+EXA_COLORS+="xx=0:"
 ## Timestamp
-# EXA_COLORS+="da="
+EXA_COLORS+="da=34:"
 ## File inode
-# EXA_COLORS+="in="
+EXA_COLORS+="in=37:"
 ## Number of blocks
-# EXA_COLORS+="bl="
+EXA_COLORS+="bl=36:"
 ## Table header row
 EXA_COLORS+="hd=4;37:"
-# Symlink path
+## Symlink path
 EXA_COLORS+="lp=35:"
 ## Control character
 EXA_COLORS+="cc=1;31:"
@@ -120,4 +141,18 @@ EXA_COLORS+="cc=1;31:"
 ### OVERLAYS
 
 ## Broken link path
-EXA_COLORS+="bO=45:"
+EXA_COLORS+="bO=35;40:"
+
+### EXTENSIONS
+
+EXA_COLORS+="*.DS_Store=30:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
+# EXA_COLORS+="=:"
