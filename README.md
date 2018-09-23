@@ -2,10 +2,15 @@
 
 ## Shell startup files
 
-* `environment.sh` loads environment variables from `environment.d/` for all POSIX shells
+* `environment.sh` loads environment variables from `environment.d/` 
+  for all POSIX shells
     * `launchctl` makes them available to macOS GUI apps
-* `sh/profile.sh` symlinks to `~/.profile` and sources the contents of `sh/profile.d/*.sh`
-* `bash/bashrc.bash` symlinks to `~/.bashrc` and sources the contents of `bash/**/*.bash`
+* `sh/profile.sh` symlinks to `~/.profile` and sources the contents of 
+  `sh/profile.d/*.sh`
+* `bash/bashrc.bash` symlinks to `~/.bashrc` and sources the contents of 
+  `bash/_*.bash` and `bash/*.d/*.bash`
+* Configurations for individual machines are under `local/`; the contents
+  of each hostname subdir are symlinked to `~/.local` on that machine
 
 ## Setting up a new homedir
 
