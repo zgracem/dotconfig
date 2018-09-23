@@ -7,15 +7,11 @@ alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'
 
-alias bell='tput bel' # 🔔
 alias bye='exit'
 alias d='declare -p'
 alias i='newwin irb -rzgm/irb'
-alias svim='sudo XDG_DATA_HOME="$XDG_DATA_HOME" vim'
-alias unmount='umount'
-alias vd='newwin vimdiff'
+alias vimsudo='sudo XDG_DATA_HOME="$XDG_DATA_HOME" vim'
 alias which='builtin type'
-
 alias xd='hexdump -C'
 
 alias  etest='_z_edit "$dir_dropbox/src/test.sh"'
