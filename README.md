@@ -2,10 +2,17 @@
 
 ## Shell startup files
 
-* `environment.sh` loads environment variables from `environment.d/` for all POSIX shells
+* `environment.sh` loads environment variables from `environment.d/*.sh` 
+  for all POSIX shells
     * `launchctl` makes them available to macOS GUI apps
-* `sh/profile.sh` symlinks to `~/.profile` and sources the contents of `sh/profile.d/*.sh`
-* `bash/bashrc.bash` symlinks to `~/.bashrc` and sources the contents of `bash/**/*.bash`
+* `sh/profile.sh` symlinks to `~/.profile` and sources the contents of 
+  `sh/profile.d/*.sh`
+* `bash/bashrc.bash` symlinks to `~/.bashrc` and sources the contents of 
+  `bash/_*.bash` and `bash/*.d/*.bash`
+* Configurations for individual machines are under `local/`. The contents
+  of each hostname subdir are symlinked to `~/.local` on that machine.
+    * `.bashrc` also sources the contents of `~/.local/config/bashrc.d`,
+      if present
 
 ## Setting up a new homedir
 
@@ -26,7 +33,7 @@ Minimum requirements:
     - `id_rsa.pub`
 - `etc/terminfo/` ← custom terminfo source files
 - `lib/bash/`
-    - [`f(x)doc`](https://github.com/zgracem/fxdoc)
+    - [`fxdoc`](https://github.com/zgracem/fxdoc)
     - [`wtf.bash`](https://github.com/zgracem/wtf.bash)
 
 Then:
