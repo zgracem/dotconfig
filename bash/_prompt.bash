@@ -98,7 +98,7 @@ _z_PS1_compress_pwd()
 
   # Compress if PWD is >= `$max_length` chars long, overriding `$min_depth`.
   # For shallowly-nested directories with long names.
-  local max_length=54
+  local max_length=60
 
   # Always retain the full names of the last `$keep_dirs` elements.
   local keep_dirs=1
@@ -234,7 +234,7 @@ _z_PS1_git_info()
   [[ $Z_PROMPT_GIT != true ]] && return
 
   local status="" branch="" icons=""
-  local ahead=0 unstaged=0 untracked=0 dirty=false
+  local ahead=0 behind=0 unstaged=0 untracked=0 dirty=false
 
   # bail immediately if we're not in a git repo
   git rev-parse --is-inside-work-tree &>/dev/null || return
@@ -267,9 +267,15 @@ _z_PS1_git_info()
   fi
 
   # get commits ahead (if any)
-  local re_ah=' \[ahead ([[:digit:]]+)\]'
+  local re_ah='\[ahead ([[:digit:]]+)'
   if [[ $status =~ $re_ah ]]; then
     ahead="${BASH_REMATCH[1]}"
+  fi
+
+  # get commits ahead (if any)
+  local re_bh='behind ([[:digit:]]+)\]'
+  if [[ $status =~ $re_bh ]]; then
+    behind="${BASH_REMATCH[1]}"
   fi
 
   # add '*' if there's anything to commit
@@ -279,18 +285,24 @@ _z_PS1_git_info()
     icons+="*"
   fi
 
-  # add '+' if there are untracked files
-  if (( untracked > 0 )); then
-    icons+=${esc_reset:-}
-    icons+=${esc_green:-}
-    icons+="+"
-  fi
+  # # add '*' if there are untracked files
+  # if (( untracked > 0 )); then
+  #   icons+=${esc_reset:-}
+  #   icons+=${esc_green:-}
+  #   icons+="*"
+  # fi
 
-  # add '»' if we're ahead of origin
-  if (( ahead > 0 )); then
+  # add '+' if we're ahead of origin, '−' if behind, '±' if both
+  if (( (ahead + behind) > 0 )); then
     icons+=${esc_reset:-}
     icons+=${esc_yellow:-}
-    icons+="»"
+    if (( ahead > 0 )) && (( behind == 0 )); then
+      icons+="+"
+    elif (( ahead == 0 )) && (( behind > 0 )); then
+      icons+="−"
+    elif (( ahead > 0 )) && (( behind > 0 )); then
+      icons+='±'
+    fi
   fi
 
   printf "${esc_reset}%b" \
@@ -298,15 +310,15 @@ _z_PS1_git_info()
     "${icons-}${esc_reset}"
 }
 
-_z_PS1_jobs()
-{
-  [[ $Z_PROMPT_JOBS != true ]] && return
+# _z_PS1_jobs()
+# {
+#   [[ $Z_PROMPT_JOBS != true ]] && return
 
-  local job_count="$(jobs|wc -l)"
-  if (( job_count > 0 )); then
-    printf ' %d' "${job_count}"
-  fi
-}
+#   local job_count="$(jobs|wc -l)"
+#   if (( job_count > 0 )); then
+#     printf ' %d' "${job_count}"
+#   fi
+# }
 
 _z_PS1_jobs()
 {
