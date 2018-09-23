@@ -16,7 +16,7 @@ alias unmount='umount'
 alias vd='newwin vimdiff'
 alias which='builtin type'
 
-alias hd='hexdump -C'
+alias xd='hexdump -C'
 
 alias  etest='_z_edit "$dir_dropbox/src/test.sh"'
 alias  ttest='"$dir_dropbox/src/test.sh"'
