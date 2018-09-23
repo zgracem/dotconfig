@@ -11,7 +11,7 @@
   `bash/_*.bash` and `bash/*.d/*.bash`
 * Configurations for individual machines are under `local/`. The contents
   of each hostname subdir are symlinked to `~/.local` on that machine.
-    * `.bashrc` also sources the contents of `~/.local/config/bashrc.d`,
+    * `.bashrc` also sources the contents of `~/.local/config/bashrc.d/*.bash`,
       if present
 
 ## Setting up a new homedir
