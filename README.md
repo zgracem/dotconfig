@@ -24,8 +24,10 @@ Minimum requirements:
     - `authorized_keys`
     - `config`
     - `id_rsa.pub`
-- `etc/terminfo/` ← custom terminfo source files, run `make install`
-- `lib/bash/` ← `HVDC` and `f(x)doc` bash libraries
+- `etc/terminfo/` ← custom terminfo source files
+- `lib/bash/`
+    - [`f(x)doc`](https://github.com/zgracem/fxdoc)
+    - [`wtf.bash`](https://github.com/zgracem/wtf.bash)
 
 Then:
 
