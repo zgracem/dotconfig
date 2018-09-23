@@ -177,8 +177,8 @@ GCC_COLORS+="quote=${cyan}"
 
 # 500 kV library for cool colour printing
 export HV_BG="reset"
-# shellcheck source=../../lib/bash/hvdc/wtf.bash
-. ~/lib/bash/hvdc/wtf.bash
+# shellcheck source=../../lib/bash/wtf.bash/wtf.bash
+. ~/lib/bash/wtf.bash/wtf.bash
 
 # -----------------------------------------------------------------------------
 # cleanup
