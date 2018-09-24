@@ -5,7 +5,7 @@ brew_cd()
   local destination="$1"; shift
 
   case $destination in
-    cache|cellar|prefix|repository)
+    cache|cellar|prefix|repo|repository)
       cd "$(brew --$destination)"
       ;;
     *)
