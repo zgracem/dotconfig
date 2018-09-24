@@ -1,6 +1,5 @@
-#! /Users/zozo/opt/bin/bash
+#!/usr/bin/env bash
 # alias: brew tidy
-#:  * `tidy` [args...]
-#:    `brew tidy` is an alias for `brew cleanup`
-brew cleanup $*
-
+#:  * `tidy`
+#:    `brew tidy` is an alias for `brew cleanup -s && brew prune`
+brew cleanup -s && brew prune
