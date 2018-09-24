@@ -36,7 +36,7 @@ brew "mplayer"
 
 brew "exif"
 brew "exiftool"
-brew "imagemagick" # , args: ["with-ghostscript"]
+brew "imagemagick@6" # , args: ["with-ghostscript"]
 brew "qrencode"
 brew "webkit2png"
 
