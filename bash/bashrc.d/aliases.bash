@@ -21,9 +21,6 @@ alias  rtest='"$rtest"'
 
 # -----------------------------------------------------------------------------
 
-# share $PWD at localhost:17777 (port reserved by IANA)
-alias webshare='python -m SimpleHTTPServer 17777'
-
 # start servers
 if _inPath bundle && _inPath middleman; then
   alias mm='bundle exec middleman'
