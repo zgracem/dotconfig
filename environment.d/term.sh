@@ -65,7 +65,7 @@ else
     
     # iTerm.app
     elif [ "$TERM_PROGRAM" = "iTerm.app" ] && [ "$OLDTERM" != "iTerm.app" ]; then
-      TERM="iterm" # alias for "iTerm.app", which doesn't work for some reason?????
+      TERM="iTerm2.app"
     fi
   fi
 
@@ -87,7 +87,7 @@ if [ -z "$PTERM" ]; then
         PTERM=nsterm
         ;;
       iTerm.app)
-        PTERM=iTerm.app
+        PTERM=iTerm2.app
         ;;
       mintty)
         PTERM=xterm-256color
