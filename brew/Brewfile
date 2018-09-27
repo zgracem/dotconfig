@@ -23,7 +23,7 @@ brew "curl", args: ["with-nghttp2"]
 brew "git", args: ["with-brewed-curl", "with-brewed-openssl"]
 
 # bash 4
-brew "bash", args: ["devel"]
+brew "bash"
 brew "bash-completion@2"
 
 # tmux
@@ -47,11 +47,8 @@ if OS.mac?
   brew "gawk"
   brew "gnu-tar"
 
-  # parallel (moreutils must be installed `--without-parallel`)
+  # parallel
   brew "parallel"
-
-  # moreutils (conflicts w/ GNU parallel)
-  brew "moreutils", args: ["without-parallel"]
 
   # find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
   brew "findutils", args: ["default-names"]
