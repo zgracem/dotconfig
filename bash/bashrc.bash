@@ -102,12 +102,11 @@ if (( this_bash < latest_bash )); then
   if [[ -x $newer_bash && $newer_bash != "$SHELL" ]]; then
     export SHELL="$newer_bash"
 
-    ### ZGM 2016-11-22 -- Why? (to pass on execfail?)
-    # Temporarily export shell options so the new shell inherits them.
-    export SHELLOPTS 2>/dev/null
-
     # Prevent shell from exiting if `exec` fails.
     shopt -s execfail
+
+    # Temporarily export shell options so the new shell inherits them.
+    export SHELLOPTS 2>/dev/null
 
     if shopt -pq login_shell; then
       exec -l "$SHELL"
@@ -156,7 +155,7 @@ fi
 
 # Call `rl -v` (see bashrc.d/config.bash) to troubleshoot slow shell startups.
 # Each filename will appear as it is sourced; slowpokes will visibly linger.
-if [[ -n $Z_RL_VERBOSE && $TIME_TEST_ACTIVE != true ]]; then
+if [[ -n $Z_RL_VERBOSE ]]; then
   .()
   {
     printf '%s' $'\r'    # (tput cr) move cursor to beginning of line

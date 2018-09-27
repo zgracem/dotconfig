@@ -89,7 +89,7 @@ __z_complete_autoload()
 # [[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
 # unset -v BASH_COMPLETION
 
-# shellcheck source=../bash_completion.d/_misc.bash
+# shellcheck disable=SC1090
 . "$BASH_COMPLETION_DIR/_misc.bash"
 
 if (( BASH_VERSINFO[0] >= 4 )); then

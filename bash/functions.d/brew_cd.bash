@@ -2,11 +2,11 @@ _inPath brew || return
 
 brew_cd()
 { #: - navigate to important Homebrew directories
-  local destination="$1"; shift
-
+  local destination="$1"
   case $destination in
     cache|cellar|prefix|repo|repository)
-      cd "$(brew --$destination)"
+      # shellcheck disable=SC2164
+      cd "$(brew "--$destination")"
       ;;
     *)
       printf "%s: destination unknown\\n" "$destination" >&2
