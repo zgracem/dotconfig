@@ -39,7 +39,7 @@ mc()
     command mc "$@"
 
     if [[ -r $MC_PWD_FILE ]]; then
-      local MC_PWD=$(<"$MC_PWD_FILE")
+      local MC_PWD; MC_PWD=$(<"$MC_PWD_FILE")
       if [[ -d $MC_PWD ]]; then
         cd "$MC_PWD" || return
       fi

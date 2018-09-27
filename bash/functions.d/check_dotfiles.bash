@@ -7,9 +7,8 @@ check_dotfiles()
   # SC2034: don't flag "unused" variables (OK)
   # SC2148: don't require shebang (OK)
   # SC2154: variable is referenced but not assigned (OK)
-  # SC2155: declare & assign separately to keep return values (OK)
   local err=0
-  export SHELLCHECK_OPTS="$SHELLCHECK_OPTS -e SC1091,SC2034,SC2148,SC2154,SC2155"
+  export SHELLCHECK_OPTS="$SHELLCHECK_OPTS -e SC1091,SC2034,SC2148,SC2154"
   _z_check_dotfiles_env "$@"  || ((err++))
   _z_check_dotfiles_sh "$@"   || ((err++))
   _z_check_dotfiles_bash "$@" || ((err++))

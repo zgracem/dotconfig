@@ -3,7 +3,8 @@
 # -----------------------------------------------------------------------------
 
 if [ -z "$NUMBER_OF_PROCESSORS" ]; then
-  export NUMBER_OF_PROCESSORS="$(getconf _NPROCESSORS_ONLN 2>/dev/null)"
+  NUMBER_OF_PROCESSORS="$(getconf _NPROCESSORS_ONLN 2>/dev/null)" \
+    && export NUMBER_OF_PROCESSORS
 fi
 
 if [ "$NUMBER_OF_PROCESSORS" -gt 1 ]; then
@@ -12,7 +13,8 @@ if [ "$NUMBER_OF_PROCESSORS" -gt 1 ]; then
 fi
 
 if command -v sysctl >/dev/null && [ -z "$PROCESSOR_ARCHITECTURE" ]; then
-  export PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)"
+  PROCESSOR_ARCHITECTURE="$(sysctl -n hw.machine 2>/dev/null)" \
+    && export PROCESSOR_ARCHITECTURE
 fi
 
 if [ -n "$PROCESSOR_ARCHITECTURE" ] && [ "${ARCHFLAGS#*-arch}" = "$ARCHFLAGS" ]; then

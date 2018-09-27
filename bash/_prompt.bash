@@ -325,7 +325,7 @@ _z_PS1_jobs()
 {
   [[ $Z_PROMPT_JOBS != true ]] && return
 
-  local jobs="$(jobs)"
+  local jobs; jobs="$(jobs)"
   [[ -n $jobs ]] || return
 
   # count newlines
@@ -345,7 +345,7 @@ _z_PS1_update_cwd()
   local post="${BEL}${DCS_post}"
 
   if [[ $HOSTNAME != *.* ]]; then
-    local HOSTNAME="$(uname -n)"
+    local HOSTNAME; HOSTNAME="$(uname -n)"
   fi
 
   # Format: file://hostname/path/to/pwd
