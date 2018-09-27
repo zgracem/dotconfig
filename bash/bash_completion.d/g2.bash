@@ -26,7 +26,7 @@ __z_complete_g2()
   fi
 
   compopt -o nospace
-  COMPREPLY=( $(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}" ) )
+  mapfile -t COMPREPLY < <(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}")
 }
 
 complete -o dirnames -o plusdirs -d -F __z_complete_g2 -- g2
