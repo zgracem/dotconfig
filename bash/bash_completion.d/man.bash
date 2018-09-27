@@ -18,7 +18,7 @@ __z_complete_man()
   # shellcheck disable=SC2153
   if [[ -z $MANPATH ]]; then
     # skip MANPATH searching and just return commands
-    COMPREPLY=( $(compgen -c -- "$cur") )
+    mapfile -t COMPREPLY < <(compgen -c -- "$cur")
     return 0
   else
     local manpath=$MANPATH:
@@ -47,7 +47,7 @@ __z_complete_man()
   # remove suffixes
   local suffixes=".@([glx]z|bz2|lzma|Z)"
   reply=( ${reply[@]%$suffixes} )
-  reply=( $( compgen -W "${reply[@]%.*}" -- "${cur//\\\\/}" ) )
+  mapfile -t reply < <(compgen -W "${reply[@]%.*}" -- "${cur//\\\\/}")
 
   if [[ $prev != "$sections" ]]; then
     # file-based completion

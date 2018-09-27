@@ -9,6 +9,5 @@ check_dotfiles()
   local SHELLCHECK_OPTS="$SHELLCHECK_OPTS -e SC2034,SC2154,SC2155"
   shellcheck -s sh "$@" "$XDG_CONFIG_HOME/environment.sh" "$XDG_CONFIG_HOME/environment.d"/*.sh
   shellcheck -s sh "$@" "$XDG_CONFIG_HOME/sh"/**/*.sh
-  # SC2207 = prefer mapfile to split output (TODO: fix)
-  shellcheck -s bash -e SC2207 "$@" "$XDG_CONFIG_HOME/bash"/**/*.bash
+  shellcheck -s bash "$@" "$XDG_CONFIG_HOME/bash"/**/*.bash
 }

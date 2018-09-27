@@ -6,7 +6,8 @@ __z_complete_ssh_hosts()
   COMPREPLY=()
 
   local -a hosts
-  hosts=( $(sed -nE 's/\<Host ([^?*]+)$/\1/p' "$HOME/.ssh/config") ) || return
+  mapfile -t hosts < <(sed -nE 's/\<Host ([^?*]+)$/\1/p' "$HOME/.ssh/config") \
+    || return
 
   local host
   for host in "${hosts[@]}"; do
