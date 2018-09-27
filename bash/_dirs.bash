@@ -37,4 +37,5 @@ case $HOSTNAME in
     ;;
 esac
 
+# shellcheck disable=SC2086
 export ${!dir_*}

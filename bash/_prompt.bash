@@ -39,6 +39,7 @@ unset -v PROMPT_DIRTRIM
 : "${Z_SET_WINTITLE:=true}"
 : "${Z_SET_TABTITLE:=true}"
 
+# shellcheck disable=SC2086
 export ${!Z_PROMPT_*} ${!Z_SET_*}
 
 # -----------------------------------------------------------------------------
@@ -272,7 +273,7 @@ _z_PS1_git_info()
     ahead="${BASH_REMATCH[1]}"
   fi
 
-  # get commits ahead (if any)
+  # get commits behind (if any)
   local re_bh='behind ([[:digit:]]+)\]'
   if [[ $status =~ $re_bh ]]; then
     behind="${BASH_REMATCH[1]}"
@@ -421,6 +422,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
       fi
     done
   }
+  # shellcheck disable=SC2086
   _z_PS1_esc_colours ${!esc_*}
   unset -f _z_PS1_esc_colours
 fi
