@@ -13,7 +13,6 @@
 # -----------------------------------------------------------------------------
 
 brew "dnsmasq"
-brew "getmail"
 brew "transmission"
 ### Install w/ pip to get the youtube_dl Python module too.
 # brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
@@ -37,7 +36,6 @@ brew "mplayer"
 brew "exif"
 brew "exiftool"
 brew "imagemagick@6" # , args: ["with-ghostscript"]
-brew "qrencode"
 brew "webkit2png"
 
 # imagesnap requires full Xcode to compile (not just CLT)
@@ -66,11 +64,9 @@ brew "bramstein/webfonttools/woff2"
 # fun & games
 # -----------------------------------------------------------------------------
 
-tap  "homebrew/games"
-brew "homebrew/games/nethack"
-
 brew "cowsay"
 brew "figlet"
+brew "nethack"
 
 # -----------------------------------------------------------------------------
 # misc.
@@ -90,7 +86,6 @@ brew "sdcv"
 brew "ghostscript"
 
 # shells
-brew "fish"
 brew "zsh"
 brew "zsh-syntax-highlighting"
 
@@ -98,75 +93,3 @@ brew "zsh-syntax-highlighting"
 brew "aspell", args: ["with-lang-en"]
 brew "pandoc"
 brew "recode"
-
-# -----------------------------------------------------------------------------
-# casks
-# -----------------------------------------------------------------------------
-
-# essentials
-
-cask "1password"
-cask "alfred"
-cask "dropbox"
-cask "google-chrome"
-cask "iterm2"
-cask "slack"
-# cask "sublime-text"
-cask "the-unarchiver"
-cask "transmission"
-cask "transmit"
-
-# utilities
-
-cask "dayone-cli"
-cask "file-juicer"
-cask "flux"
-cask "go2shell"
-cask "grandperspective"
-cask "istat-menus"
-cask "magicprefs"
-cask "senuti"
-cask "superduper"
-
-# audio/video
-
-cask "fission"
-cask "handbrake"
-cask "kid3"
-cask "metaz"
-cask "vlc"
-cask "xact"
-
-# etc.
-
-cask "black-screen"
-cask "mactracker"
-cask "onyx"
-cask "real-vnc"
-cask "skype"
-cask "steam"
-cask "xquartz"
-cask "xscreensaver"
-
-# QuickLook
-
-cask "suspicious-package"
-cask "quicklook-json"
-cask "qlmarkdown"
-cask "qlstephen"
-cask "qlcolorcode"
-
-# -----------------------------------------------------------------------------
-# Mac App Store
-# -----------------------------------------------------------------------------
-
-brew "mas"
-
-mas "Day One", id: 1055511498
-mas "Divvy", id: 413857545
-mas "Persistent Color Picker", id: 442921390
-mas "Server", id: 883878097
-mas "Sip", id: 507257563
-mas "The Archive Browser", id: 510232205
-mas "Tweetbot", id: 557168941
-mas "Xcode", id: 497799835
