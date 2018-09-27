@@ -79,7 +79,7 @@ ef()
       return 0
     fi
   else
-    local src=$(_z_whence "$func")
+    local src; src=$(_z_whence "$func")
     local src_file=${src%:*}
     local src_line=${src#*:}
 

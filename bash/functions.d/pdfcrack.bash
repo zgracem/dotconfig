@@ -3,13 +3,15 @@ pdfcrack()
   #: < GhostScript (http://www.ghostscript.com/)
   _require gs || return
 
+  local dir_fonts
+
   case $PLATFORM in
     windows)
-      local dir_fonts=$(cygpath -au "$WINDIR/Fonts")
+      dir_fonts=$(cygpath -au "$WINDIR/Fonts")
       ;;
     mac)
-      local dir_fonts="/Library/Fonts"
-      local threads="-dNumRenderingThreads=$(sysctl -n hw.availcpu)"
+      dir_fonts="/Library/Fonts"
+      local threads; threads="-dNumRenderingThreads=$(sysctl -n hw.availcpu)"
       ;;
     *)
       scold 'not available on this system'

@@ -20,7 +20,7 @@ case $PLATFORM in
         cygwin) dir_winhome="/cygdrive/c/Users/$USER" ;;
         msys)   dir_winhome="/c/Users/$USER" ;;
       esac
-      export USERPROFILE="$(cygpath -aw "$dir_winhome")"
+      USERPROFILE="$(cygpath -aw "$dir_winhome")" && export USERPROFILE
     fi
     
     dir_apps="$dir_winhome/Applications"
