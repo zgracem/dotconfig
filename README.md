@@ -13,6 +13,8 @@
   of each hostname subdir are symlinked to `~/.local` on that machine.
     * `.bashrc` also sources the contents of `~/.local/config/bashrc.d/*.bash`,
       if present
+* `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced 
+  immediately before the first prompt.
 
 ## Setting up a new homedir
 
@@ -49,4 +51,5 @@ ln -s .config/vimrc             ~/.vimrc
 
 # after restarting the shell
 cd ~/etc/terminfo && make install
+# then restart the whole terminal emulator
 ```
