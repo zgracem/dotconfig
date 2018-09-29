@@ -26,10 +26,6 @@ if _inPath bundle && _inPath middleman; then
   alias mm='bundle exec middleman'
 fi
 
-if _inPath bundle && _inPath jekyll; then
-  alias jj='bundle exec jekyll'
-fi
-
 # chmod
 alias 400='chmod -v 400'
 alias 600='chmod -v 600'
