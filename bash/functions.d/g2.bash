@@ -14,6 +14,7 @@ declare -A mydirs=(
   [history]="$HOME/.local/history"
   [imprint]="$HOME/www/2018/imprint"
   [ta]="$HOME/www/2018/2a18"
+  [proj]="$HOME/Dropbox/Projects"
 )
 
 g2()
