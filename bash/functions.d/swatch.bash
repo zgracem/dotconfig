@@ -8,7 +8,7 @@ swatch()
   #: < ImageMagick
 
   local colour="$1" size="${2-256}"
-  local out_file="${3-swatch_${colour#\#}.png}"
+  local out_file="${3-swatch_${colour#$'#'}.png}"
 
   # allow hex COLOURs without a leading `#`
   if [[ $colour =~ ^[[:xdigit:]]{6,8}$ ]]; then
