@@ -22,7 +22,7 @@ defaults write -g NSWindowResizeTime -float 0.001
 # Disable the over-the-top focus ring animation
 defaults write -g NSUseAnimatedFocusRing -bool false
 
-# Disable transparency in the menu bar and elsewhere on Yosemite
+# Disable transparency in the menu bar and elsewhere
 if (( MACOS_VERSION >= 10 )); then
   defaults write com.apple.universalaccess reduceTransparency -bool true
 fi
@@ -32,3 +32,6 @@ defaults write -g AppleFontSmoothing -int 2
 
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+# Disable shadow in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true

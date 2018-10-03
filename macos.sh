@@ -8,8 +8,6 @@
 # Configuration & setup
 # -----------------------------------------------------------------------------
 
-computer_name=
-
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -47,29 +45,5 @@ for pref in "${source_dir}"/*.bash; do
 done
 
 # -----------------------------------------------------------------------------
-# Kill affected applications
-# -----------------------------------------------------------------------------
-
-declare -a apps=(
-  "Activity Monitor"
-  "cfprefsd"
-  "Dock"
-  "Finder"
-  "Google Chrome"
-  "iTunes"
-  "Mail"
-  "mds"
-  "Messages"
-  "Photos"
-  "Safari"
-  "SystemUIServer"
-  "Terminal"
-  "Transmission"
-  "TextEdit"
-)
-
-# for app in "${apps[@]}"; do
-#   killall "$app" &>/dev/null
-# done
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."

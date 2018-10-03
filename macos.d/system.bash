@@ -2,7 +2,8 @@
 # System
 # -----------------------------------------------------------------------------
 
-# shellcheck disable=SC2154
+computer_name=""
+
 if [[ -n $computer_name ]]; then
     # Set computer name (as done via System Preferences → Sharing)
     sudo scutil --set ComputerName  "${computer_name}"
@@ -17,14 +18,10 @@ defaults write -g NSQuitAlwaysKeepsWindows -bool false
 # Disable automatic termination of inactive apps
 defaults write -g NSDisableAutomaticTermination -bool true
 
-# Automatically quit printer app once the print jobs complete
+# Automatically quit printer app once print jobs are complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# # Disable Notification Center and remove the menu bar icon
-# launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
-
 # Enable access for assistive devices pre-Mavericks.
-# Post-Mavericks, use <github.com/jacobsalmela/tccutil>.
 if (( MACOS_VERSION < 9 )); then
   sudo touch "/private/var/db/.AccessibilityAPIEnabled"
 fi
@@ -41,7 +38,7 @@ fi
 
 # Enable `>console` login
 if (( MACOS_VERSION >= 10 )); then
-    defaults write /Library/Preferences/com.apple.loginwindow.plist DisableConsoleAccess -bool false
+    defaults write /Library/Preferences/com.apple.loginwindow DisableConsoleAccess -bool false
 fi
 
 # Require password 4 hours after sleep or screen saver begins
@@ -50,3 +47,6 @@ defaults write com.apple.ScreenSaver askForPasswordDelay -int $(( 4 * 60 * 60 ))
 
 # Enable Screen Sharing
 sudo defaults write /Library/Preferences/com.apple.RemoteManagement VNCAlwaysStartOnConsole -bool true
+
+# Disable infrared receiver
+defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -int 0
