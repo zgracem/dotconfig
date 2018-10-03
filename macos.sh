@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC1090,SC2207
 # -----------------------------------------------------------------------------
 # macOS configuration script
 # Adapted from https://mths.be/macos
@@ -22,9 +21,11 @@ while true; do
 done 2>/dev/null &
 
 # Set helpful variables
-export HARDWARE=$(sysctl -n hw.model)
-export DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
-export MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+HARDWARE=$(sysctl -n hw.model)
+mapfile -t DARWIN_VERSINFO < <(uname -r | tr '.' ' ')
+mapfile -t MACOS_VERSINFO < <(sw_vers -productVersion | tr '.' ' ')
+
+export HARDWARE DARWIN_VERSINFO MACOS_VERSINFO
 export MACOS_VERSION=${MACOS_VERSINFO[1]}
 
 if [[ -z ${MACOS_VERSINFO[2]} ]]; then

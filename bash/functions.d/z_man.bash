@@ -5,14 +5,13 @@
 # This function will use Terminal.app's x-man-page:// handling if available.
 # Set Z_MAN_NO_URL or use `--no-url` to inhibit for the rest of the session.
 
-# shellcheck disable=SC2032,SC2033
 man()
 { # open man page in a new window with a helpful title
   local OPT OPTIND
 
   if [[ ! -t 1 ]]; then
     # stdout is being redirected somewhere, let it go
-    command man "$@"
+    command "man" "$@"
     return
   fi
 
@@ -25,7 +24,7 @@ man()
   while getopts ':acCdDeEfHiIkKlLmMpPrRStTuVwWXZ7?' OPT; do
     case $OPT in
       [dfhkVwW?])
-        command man "$@"
+        command "man" "$@"
         return
         ;;
       *)
@@ -56,12 +55,12 @@ man()
     title=$(_z_mantitle "$@") || return
 
     if _inScreen; then
-      screen -t "$title" man "$@"
+      screen -t "$title" "man" "$@"
     elif _inTmux; then
       tmux new-window -n "$title" "MANLESS= man $*"
     else
       setwintitle "$title"
-      command man "$@"
+      command "man" "$@"
     fi
   fi
 }
@@ -70,7 +69,7 @@ _z_mantitle()
 {
   local manfile title section
 
-  manfile=$(command man -w "$@") || return
+  manfile=$(command "man" -w "$@") || return
 
   title=${manfile##*/} # strip path
   title=${title%.gz}   # strip extension (if any)

@@ -35,6 +35,7 @@ else
     # Old versions of Terminal.app
     if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ "$OLDTERM" != nsterm* ]; then
       ver="${TERM_PROGRAM_VERSION%%.*}" # Major version (integer) only
+      # Deliberately use a constant here to test truthiness
       # shellcheck disable=SC2194
       case 1 in
         # $(( ver >= 400 ))*) # macOS 10.13

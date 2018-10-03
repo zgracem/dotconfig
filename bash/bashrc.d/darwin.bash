@@ -1,12 +1,11 @@
-# shellcheck disable=SC2207
 # -----------------------------------------------------------------------------
 # ~/.config/bash/bashrc.d/darwin.bash
 # -----------------------------------------------------------------------------
 
 [[ $PLATFORM == mac ]] || return
 
-DARWIN_VERSINFO=($(uname -r | tr '.' ' '))
-MACOS_VERSINFO=($(sw_vers -productVersion | tr '.' ' '))
+mapfile -t DARWIN_VERSINFO < <(uname -r | tr '.' ' ')
+mapfile -t MACOS_VERSINFO < <(sw_vers -productVersion | tr '.' ' ')
 MACOS_VERSION=${MACOS_VERSINFO[1]}
 
 if [[ -z ${MACOS_VERSINFO[2]} ]]; then

@@ -38,8 +38,7 @@ HOSTFILE="$XDG_CONFIG_HOME/ssh/hosts"
 # support functions
 # -----------------------------------------------------------------------------
 
-# template:
-
+##### template #####
 # __z_complete_THING()
 # {
 #   local cmd=$1
@@ -53,6 +52,8 @@ HOSTFILE="$XDG_CONFIG_HOME/ssh/hosts"
 # }
 #
 # complete -F __z_complete_THING THING
+#
+##### end template #####
 
 __z_complete_files()
 { # Usage: __z_complete_files EXT DIR... 
@@ -76,7 +77,6 @@ __z_complete_autoload()
   [[ -n $1 ]] || return
   local compspec="$XDG_CONFIG_HOME/bash/bash_completion.d/$1.bash"
   [[ -f $compspec ]] || return
-  # shellcheck disable=SC1090
   . "$compspec" &>/dev/null && return 124
 }
 
@@ -84,12 +84,6 @@ __z_complete_autoload()
 # load external completions
 # -----------------------------------------------------------------------------
 
-# # bash-completion v2
-# BASH_COMPLETION="/usr/local/share/bash-completion/bash_completion"
-# [[ -f $BASH_COMPLETION ]] && . "$BASH_COMPLETION"
-# unset -v BASH_COMPLETION
-
-# shellcheck disable=SC1090
 . "$BASH_COMPLETION_DIR/_misc.bash"
 
 if (( BASH_VERSINFO[0] >= 4 )); then
@@ -99,7 +93,6 @@ else
   # Load them manually
   unset -f __z_complete_autoload
   for file in "$BASH_COMPLETION_DIR"/[^_]*.bash; do
-    # shellcheck disable=SC1090
     [[ -f $file ]] && . "$file"
   done
   unset -v file

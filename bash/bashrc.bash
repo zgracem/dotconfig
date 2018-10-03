@@ -9,7 +9,8 @@ if [[ -r $HOME/.config/sh/profile.sh ]] ; then
   . "$HOME/.config/sh/profile.sh"
 fi
 
-# Abort if...
+### Abort if...
+# Allow testing of array variable as a whole
 # shellcheck disable=SC2128
 if ! test "$BASH_VERSINFO" || (( BASH_VERSINFO[0] < 3 )); then
   # ...bash is too old
@@ -195,26 +196,22 @@ shopt -s nullglob
 
 # Private stuff
 for file in "$XDG_CONFIG_HOME"/bash/private.d/*.bash; do
-  # shellcheck disable=SC1090
   [[ -f $file ]] && . "$file"
 done
 
 # Lesser function files
 for file in "$XDG_CONFIG_HOME"/bash/functions.d/*.bash; do
-  # shellcheck disable=SC1090
   [[ -f $file ]] && . "$file"
 done
 
 # Supplementary startup files
 for file in "$XDG_CONFIG_HOME"/bash/bashrc.d/*.bash; do
-  # shellcheck disable=SC1090
   [[ -f $file ]] && . "$file"
 done
 
 # Machine specific files in ~/.local
 if [[ -d ~/.local/config/bashrc.d ]]; then
   for file in ~/.local/config/bashrc.d/*.bash; do
-    # shellcheck disable=SC1090
     [[ -f $file ]] && . "$file"
   done
 fi
@@ -237,7 +234,6 @@ then
   . "$XDG_CONFIG_HOME/bash/init.bash"
 
   if [[ -f ~/.local/config/init.bash ]]; then
-    # shellcheck disable=SC1090
     . ~/.local/config/init.bash
   fi
 fi
