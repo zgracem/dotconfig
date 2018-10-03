@@ -311,16 +311,6 @@ _z_PS1_git_info()
     "${icons-}${esc_reset}"
 }
 
-# _z_PS1_jobs()
-# {
-#   [[ $Z_PROMPT_JOBS != true ]] && return
-
-#   local job_count="$(jobs|wc -l)"
-#   if (( job_count > 0 )); then
-#     printf ' %d' "${job_count}"
-#   fi
-# }
-
 _z_PS1_jobs()
 {
   [[ $Z_PROMPT_JOBS != true ]] && return
