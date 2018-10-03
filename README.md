@@ -44,7 +44,6 @@ Then:
 
 ```bash
 ln -s .config/hushlogin         ~/.hushlogin
-ln -s .config/inputrc           ~/.inputrc
 ln -s .config/sh/profile.sh     ~/.profile
 ln -s .config/bash/profile.bash ~/.bash_profile
 ln -s .config/bash/bashrc.bash  ~/.bashrc
