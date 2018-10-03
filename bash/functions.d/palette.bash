@@ -11,12 +11,16 @@ palette()
   local size="${2-16}"
 
   local -a colours=()
-  mapfile -t colours < <(
-    convert "$image" +dither -colors "$size" \
-      -define histogram:unique-colors=true -format "%c" histogram:info: \
-    | sort -r \
-    | grep -o '#[[:xdigit:]]{6}'
-  )
-
+  mapfile -t colours < <(_z_get_palette "$image" "$size")
   swatches "${colours[@]}"
+}
+
+_z_get_palette()
+{
+  local image="$1"
+  local size="$2"
+  
+  convert "$image" +dither -colors "$size" \
+    -define histogram:unique-colors=true -format "%c" histogram:info: \
+  | grep --color=never -o '#[[:xdigit:]]{6}'
 }
