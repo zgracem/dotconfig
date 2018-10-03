@@ -2,23 +2,25 @@
 # Dock & hot corners
 # -----------------------------------------------------------------------------
 
-# Set the icon size of Dock items to 64 pixels
+# Set the icon size of Dock items to 64 pixels & lock it
 defaults write com.apple.Dock tilesize -int 64
+defaults write com.apple.Dock size-immutable -bool true
 
 # Change minimize/maximize window effect
-defaults write com.apple.dock mineffect -string "scale"
-
-# Minimize windows into their application’s icon
-defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.Dock mineffect -string "scale"
 
 # Don't animate opening applications from the Dock
 defaults write com.apple.Dock launchanim -bool false
+defaults write com.apple.Dock no-bouncing -bool false
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.Dock show-process-indicators -bool true
 
 # Enable spring loading for all Dock items
 defaults write com.apple.Dock enable-spring-load-actions-on-all-items -bool true
+
+# Enable scroll gestures
+defaults write com.apple.Dock scroll-to-open -bool true
 
 # Disable hot corners
 defaults write com.apple.Dock wvous-tl-corner   -int 0
@@ -29,17 +31,6 @@ defaults write com.apple.Dock wvous-bl-corner   -int 0
 defaults write com.apple.Dock wvous-bl-modifier -int 0
 defaults write com.apple.Dock wvous-br-corner   -int 0
 defaults write com.apple.Dock wvous-br-modifier -int 0
-# Possible values:
-#  0: no-op
-#  2: Mission Control
-#  3: Show application windows
-#  4: Desktop
-#  5: Start screen saver
-#  6: Disable screen saver
-#  7: Dashboard
-# 10: Put display to sleep
-# 11: Launchpad
-# 12: Notification Center
 
 # -----------------------------------------------------------------------------
 # Dashboard, Spaces, and Mission Control

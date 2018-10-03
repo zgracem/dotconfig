@@ -45,9 +45,6 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
-# # Add a context menu item for showing the Web Inspector in web views
-# defaults write -g WebKitDeveloperExtras -bool true
-
 # -----------------------------------------------------------------------------
 # Appearance & behaviour
 # -----------------------------------------------------------------------------
@@ -69,16 +66,8 @@ defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
 # Disable auto-correct
 defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
 
-# # Fixed-width fonts
-# defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2FixedFontFamily Monaco
-# defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2DefaultFixedFontSize 11
-
-# # Proportional fonts
-# defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2StandardFontFamily 'Helvetica Neue'
-# defaults write com.apple.Safari Safari.ContentPageGroupIdentifier.WebKit2DefaultFontSize 14
-
 # Disable auto-playing video
-defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false;
-defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false;
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false;
+defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false

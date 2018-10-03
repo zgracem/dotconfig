@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 # Dictionary -- use only one window
-defaults write -app Dictionary ProhibitNewWindowForRequest -bool TRUE
+defaults write com.apple.Dictionary ProhibitNewWindowForRequest -bool TRUE
 
 # Image Capture/Photos -- don't automatically open when cameras are plugged in
 defaults write com.apple.ImageCapture disableHotPlug -bool true

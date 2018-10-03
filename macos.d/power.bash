@@ -14,11 +14,13 @@ if [[ $HARDWARE == MacBook* ]]; then
 fi
 
 # Energy Saver defaults
-sudo systemsetup -setwakeonnetworkaccess on \
-                 -setrestartpowerfailure on \
-                 -setrestartfreeze on \
-                 -setallowpowerbuttontosleepcomputer on \
-                 -setremotelogin on \
-                 -setcomputersleep "Never" \
-                 -setdisplaysleep "60" \
-                 -setharddisksleep "Never"
+sudo systemsetup \
+  -setcomputersleep "Never" \
+  -setdisplaysleep "30" \
+  -setharddisksleep "Never" \
+  -setwakeonnetworkaccess on \
+  -setrestartpowerfailure on \
+  -setrestartfreeze on \
+  -setallowpowerbuttontosleepcomputer on \
+  -setremotelogin on \
+  -setremoteappleevents on
