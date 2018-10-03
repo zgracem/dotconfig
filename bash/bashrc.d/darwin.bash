@@ -18,13 +18,13 @@ fi
 # system commands
 # -----------------------------------------------------------------------------
 
+alias dnsflush="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 alias lockscreen='"/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession" -suspend'
 alias gotosleep="pmset sleepnow"
 alias PlistBuddy="/usr/libexec/PlistBuddy"
 alias restart="sudo shutdown -r now"
 alias screensaver="open -a ScreenSaverEngine"
-# /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 
 # -----------------------------------------------------------------------------
 # environment variables
