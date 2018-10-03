@@ -8,20 +8,15 @@ swatch()
   #: < ImageMagick
 
   local colour="$1" size="${2-256}"
-  local out_file="swatch_${colour#\#}.png"
+  local out_file="${3-swatch_${colour#\#}.png}"
 
   # allow hex COLOURs without a leading `#`
   if [[ $colour =~ ^[[:xdigit:]]{6,8}$ ]]; then
     colour="#${colour}"
   fi
 
-  # allow both `256` and `256x128` as arguments for SIZE
-  if [[ $size =~ ^[[:digit:]]+$ ]]; then
-    size="${size}x${size}"
-  fi
-
-  convert -size "${size}" "canvas:${colour}" "$out_file" \
-    && echo "${out_file}"
+  convert -size "${size}x${size}" "canvas:${colour}" "$out_file" \
+    && echo "$out_file"
 }
 
 swatches()
@@ -31,16 +26,21 @@ swatches()
   #: < ImageMagick
 
   local -a colours=("$@")
-  local timestamp="${EPOCHREALTIME-$(date +%s.%N)}"
-  local out_file="swatches_${timestamp#*.}.png"
+  # use nanoseconds for timestamp so this can run in parallel
+  local timestamp="${EPOCHREALTIME-$(date +%s.%N)}"; timestamp=${timestamp#*.}
+  local out_file="swatches_${timestamp}.png"
 
   local -a tmp_files=()
-  local colour; for colour in "${colours[@]}"; do
-    tmp_files+=("$(swatch "${colour}")")
-  done
+  mapfile -t tmp_files < <(_z_make_swatches "${colours[@]}")
+  montage "${tmp_files[@]}" -geometry "+0+0" "$out_file" || return
 
-  montage "${tmp_files[@]}" -geometry "+0+0" "${out_file}" && {
-    rm -f "${tmp_files[@]}" &>/dev/null
-    echo "${out_file}"
-  }
+  rm -f "${tmp_files[@]}" &>/dev/null
+  echo "$out_file"
 }
+
+_z_make_swatches()
+( 
+  export -f swatch
+  # for parallel, but not for everyone (hence the subshell)
+  parallel -k swatch {} 128 .swatch_{}.png ::: "$@"
+)
