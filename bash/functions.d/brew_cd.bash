@@ -6,8 +6,7 @@ brew_cd()
   local destination="$1"
   case $destination in
     cache|cellar|prefix|repo|repository)
-      # shellcheck disable=SC2164
-      cd "$(brew "--$destination")"
+      cd "$(brew "--$destination")" || return
       ;;
     *)
       printf "%s: destination unknown\\n" "$destination" >&2

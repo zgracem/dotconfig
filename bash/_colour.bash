@@ -60,8 +60,7 @@ colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 # -----------------------------------------------------------------------------
 
 # used in PS1 -- see _prompt.bash
-# shellcheck disable=SC2223
-: ${colour_user:=$blue}
+: "${colour_user:=$blue}"
 
 colour_true=$green
 colour_false=$red
@@ -101,6 +100,7 @@ _z_colour_add_esc()
   done
 }
 
+# Leave these unquoted so they expand properly.
 # shellcheck disable=SC2086
 _z_colour_add_esc ${colours[*]} ${props[*]}
 

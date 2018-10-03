@@ -1,3 +1,4 @@
+# Allow lazy array assignment.
 # shellcheck disable=SC2206
 __z_complete_man()
 {
@@ -15,13 +16,12 @@ __z_complete_man()
     return 0
   fi
 
-  # shellcheck disable=SC2153
   if [[ -z $MANPATH ]]; then
     # skip MANPATH searching and just return commands
     mapfile -t COMPREPLY < <(compgen -c -- "$cur")
     return 0
   else
-    local manpath=$MANPATH:
+    local man_path=$MANPATH:
   fi
 
   local sections="@([0-9lnp]|[0-9][px]|3?(gl|pm))"
@@ -33,13 +33,13 @@ __z_complete_man()
   fi
 
   if [[ -n $cur ]]; then
-    manpath="${manpath//://*man$section/$cur* } ${manpath//://*cat$section/$cur* }"
+    man_path="${man_path//://*man$section/$cur* } ${man_path//://*cat$section/$cur* }"
   else
-    manpath="${manpath//://*man$section/ } ${manpath//://*cat$section/ }"
+    man_path="${man_path//://*man$section/ } ${man_path//://*cat$section/ }"
   fi
 
   # collect man page filenames
-  local -a reply=( ${manpath} )
+  local -a reply=( ${man_path} )
 
   # remove paths
   reply=( ${reply[@]##*/?(:)} )

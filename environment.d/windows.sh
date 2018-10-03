@@ -42,6 +42,7 @@ if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
   CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
 fi
 
+# OSTYPE is not defined in POSIX
 # shellcheck disable=SC2039
 if [ "$OSTYPE" = "cygwin" ]; then
   export CYGWIN

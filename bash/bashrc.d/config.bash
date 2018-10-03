@@ -142,6 +142,7 @@ rl()
     # check ~/.local
     files+=("$HOME/.local/config/bashrc.d/$1"?(.*))
 
+    # Permit case fall-through
     # shellcheck disable=SC2221,SC2222
     case $1 in
       functions|terminal|dirs|colour|prompt)
@@ -190,6 +191,7 @@ rl()
 
       tmux)
           if _inTmux; then
+            # Don't expand tilde
             # shellcheck disable=SC2088
             _z_rl_say "~/.tmux.conf"
             [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
@@ -221,12 +223,10 @@ rl()
         if (( VERBOSITY >= 3 )); then
           verbose 3 ">>> begin xtrace"
           set -o xtrace
-          # shellcheck disable=SC1090
           . "$f"
           { set +o xtrace; } 2>/dev/null
           verbose 3 ">>> end xtrace"
         else
-          # shellcheck disable=SC1090
           . "$f"
         fi
       fi

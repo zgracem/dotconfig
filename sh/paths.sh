@@ -48,6 +48,7 @@ fi
 
 # Xcode
 if [ -x /usr/bin/xcode-select ]; then
+  # HOSTNAME is undefined in POSIX but will always(?) be present on a Mac
   # shellcheck disable=SC2039
   case $HOSTNAME in
     Athena*)

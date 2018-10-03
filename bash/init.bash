@@ -3,7 +3,6 @@
 # sourced at the end of ~/.bashrc
 # -----------------------------------------------------------------------------
 
-# shellcheck disable=SC2154
 if [[ -d $dir_scripts ]]; then
   # cute banner
   "$dir_scripts/login/loginbanner.sh"

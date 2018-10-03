@@ -53,7 +53,6 @@ esac
 export PLATFORM
 
 for env_file in "$XDG_CONFIG_HOME/environment.d/"*.sh; do
-  # shellcheck disable=SC1090
   [ -r "$env_file" ] && . "$env_file"
 done
 

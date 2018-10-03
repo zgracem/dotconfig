@@ -37,6 +37,7 @@ newwin()
 
     command tmux new-window -n "$title" "$cmd ${args[*]}"
   elif _inScreen; then
+    # Leave `cmd` unquoted so it expands properly.
     # shellcheck disable=SC2086
     command screen -t "$title" $cmd "$@"
   else

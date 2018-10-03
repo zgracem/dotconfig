@@ -6,6 +6,7 @@ dev()
   local www_dir="$HOME/Dropbox/www"
   local proj_dir=""
 
+  # Allow case fall-through (bash 4+)
   # shellcheck disable=SC2221,SC2222
   case $1 in
     # vsmm)

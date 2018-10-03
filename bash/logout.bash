@@ -21,7 +21,6 @@ fi
 
 # run machine-specific logout file
 if [[ -f ~/.local/config/logout.bash ]]; then
-  # shellcheck disable=SC1090
   . ~/.local/config/logout.bash
 fi
 

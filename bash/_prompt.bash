@@ -39,6 +39,7 @@ unset -v PROMPT_DIRTRIM
 : "${Z_SET_WINTITLE:=true}"
 : "${Z_SET_TABTITLE:=true}"
 
+# Leaving these unquoted so they expand properly.
 # shellcheck disable=SC2086
 export ${!Z_PROMPT_*} ${!Z_SET_*}
 
@@ -221,8 +222,7 @@ _z_PS1_print_exit()
     last_exit=${exits[$last_exit]}
   fi
 
-  # shellcheck disable=SC2207
-  local screen_dimensions=( $(stty size) )
+  local screen_dimensions; read -r -a screen_dimensions < <(stty size)
   local screen_width=${screen_dimensions[1]}
   local padding=$(( screen_width - gutter ))
 
@@ -412,6 +412,7 @@ if [[ $Z_PROMPT_COLOUR == true ]]; then
       fi
     done
   }
+  # Leaving this unquoted so it expands properly.
   # shellcheck disable=SC2086
   _z_PS1_esc_colours ${!esc_*}
   unset -f _z_PS1_esc_colours
@@ -579,9 +580,11 @@ prompt()
 
     echo "$var=${!var}"
   elif [[ -n $1 ]]; then
+    # Ignore shellcheck warnings; bash 4+ supports case fall-through
     # shellcheck disable=SC2221,SC2222
     case ${1,,} in
       reset)
+        # Leaving this unquoted so it expands properly.
         # shellcheck disable=SC2086
         unset -v ${!Z_PROMPT_*}
         ;;&
@@ -596,10 +599,7 @@ prompt()
         PS4='+ '
         ;;
       help|*)
-        local -a opts=( on off reset )
-        # shellcheck disable=SC2206
-        opts+=(${!Z_PROMPT_*})
-
+        local -a opts; read -r -a opts <<< "on off reset ${!Z_PROMPT_*}"
         local options="${opts[*]##*_}"
         options="${options,,}"
         echo "Usage: ${FUNCNAME[0]} [${options// /|}]"

@@ -45,6 +45,7 @@ _z_pid()
 
   [[ ${FUNCNAME[1]} == pidis ]] && flags=${flags/pid,/}
 
+  # Leave `flags` unquoted so it expands properly
   # shellcheck disable=SC2086
   command ps $flags "$@"
 }
