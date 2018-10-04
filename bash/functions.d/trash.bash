@@ -1,11 +1,8 @@
+_inPath trash && return
+
 trash()
 { #: - move file(s) to the Trash
   #: $ trash <file> [<file2> ...]
-  if _inPath trash; then
-    trash "$@"
-    return
-  fi
-
   if [[ $PLATFORM == mac ]]; then
     local f; for f in "$@"; do
       local filename
