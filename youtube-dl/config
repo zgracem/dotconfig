@@ -5,7 +5,7 @@
 # general options
 # -----------------------------------------------------------------------------
 
-# continue on download errors, for example to skip unavailable videos in a playlist
+# continue on download errors, e.g. to skip unavailable videos in a playlist
 --ignore-errors
 
 # -----------------------------------------------------------------------------
@@ -35,7 +35,7 @@
 # suppress HTTPS certificate validation
 --no-check-certificate
 
-# use an unencrypted connection to retrieve information about the video (YouTube only)
+# use unencrypted connection to retrieve video info (YouTube only)
 --prefer-insecure
 
 # disguise user agent
@@ -51,15 +51,9 @@
 # do not download the DASH manifest on YouTube videos
 --youtube-skip-dash-manifest
 
-# merge to MP4
-# --merge-output-format mp4
-
 # -----------------------------------------------------------------------------
 # post-processing options
 # -----------------------------------------------------------------------------
-
-# write metadata to the video file
-# --add-metadata
 
 # prefer ffmpeg over avconv for running the postprocessors
 --prefer-ffmpeg
