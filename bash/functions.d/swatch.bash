@@ -19,6 +19,8 @@ swatch()
     && echo "$out_file"
 }
 
+_inPath parallel || return
+
 swatches()
 { #: - create a single image in PWD with multiple colour swatches
   #: $ swatches <colour> [colours ...]
