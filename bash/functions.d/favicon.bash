@@ -1,4 +1,4 @@
-_inPath sips && _inPath convert || return
+_inPath convert || return
 
 favicon()
 { #: - create a multi-size favicon.ico from a single PNG file
@@ -16,7 +16,7 @@ favicon()
   local -a imgs=()
   local size; for size in 16 32 48 128; do
     local size_img="favicon_${size}.png"
-    sips -Z "$size" "$img" --out "$size_img" >/dev/null || return
+    convert "$img" -resize "$size" "$size_img" >/dev/null || return
     imgs+=("$size_img")
   done
 
