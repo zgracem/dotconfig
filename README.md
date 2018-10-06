@@ -43,13 +43,7 @@ Minimum requirements:
 Then:
 
 ```bash
-ln -s .config/hushlogin         ~/.hushlogin
-ln -s .config/sh/profile.sh     ~/.profile
-ln -s .config/bash/profile.bash ~/.bash_profile
-ln -s .config/bash/bashrc.bash  ~/.bashrc
-ln -s .config/bash/logout.bash  ~/.bash_logout
-ln -s .config/vimrc             ~/.vimrc
-
+cd ~/.config && make shell-files && make symlinks
 # after restarting the shell
 cd ~/etc/terminfo && make install
 # then restart the whole terminal emulator
