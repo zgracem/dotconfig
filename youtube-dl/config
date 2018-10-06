@@ -1,3 +1,4 @@
+# vim:ft=sh
 # -----------------------------------------------------------------------------
 # ~/.config/youtube-dl/config
 # >> http://rg3.github.io/youtube-dl/
@@ -31,12 +32,6 @@
 # -----------------------------------------------------------------------------
 # workarounds
 # -----------------------------------------------------------------------------
-
-# suppress HTTPS certificate validation
---no-check-certificate
-
-# use unencrypted connection to retrieve video info (YouTube only)
---prefer-insecure
 
 # disguise user agent
 --user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36"
