@@ -7,6 +7,11 @@ swatch()
   #: | SIZE   = size of the square output swatch in pixels (default: 256)
   #: < ImageMagick
 
+  if (( $# < 1 )); then
+    fx_usage >&2
+    return 64
+  fi
+
   local colour="$1" size="${2-256}"
   local out_file="${3-swatch_${colour#$'#'}.png}"
 
