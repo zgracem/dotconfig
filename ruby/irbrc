@@ -1,3 +1,4 @@
+# vim:ft=ruby
 # If this file fails to load, debug by executing as a normal Ruby file:
 #   ruby ~/.config/ruby/irbrc
 

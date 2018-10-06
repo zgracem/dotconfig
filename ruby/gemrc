@@ -1,5 +1,6 @@
+# vim:ft=yaml
 ---
-install: --no-rdoc -​-env-shebang
-update: --no-rdoc -​-env-shebang -​-minimal-deps
-uninstall: -​-executables
+install: --no-rdoc --env-shebang
+update: --no-rdoc --env-shebang --minimal-deps
+uninstall: --executables
 query: --details
