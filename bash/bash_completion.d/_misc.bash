@@ -38,16 +38,16 @@
 
 # -----------------------------------------------------------------------------
 
-# aliases -- for `alias` & `unalias`
+# aliases
 complete -a -- alias unalias
 
 # readline bindings
-complete -A binding bind
+complete -A -- binding bind
 
 # shell builtins
-complete -b builtin
+complete -b -- builtin
 
-# directories & variables -- for `cd`
+# directories & variables
 complete -o nospace -dv -- cd
 
 # help topics
@@ -63,16 +63,16 @@ complete -j -P '"%' -S '"' -- disown fg jobs
 complete -A setopt -- set
 complete -A shopt -- shopt
 
-# variables & functions -- for `declare`, `export`, `typeset` and `unset`
+# variables & functions
 complete -v -A function -- declare export typeset unset
 
-# variables only -- for `readonly`
+# variables only
 complete -v -- readonly
 
-# files, directories, aliases, builtins, commands, keywords & functions -- for `sudo`
+# files, directories, aliases, builtins, commands, keywords & functions
 complete -fdabck -A function -- sudo
 
-# files, aliases, builtins, commands, keywords, functions & help topics -- for `type`
+# files, aliases, builtins, commands, keywords, functions & help topics
 complete -o nospace -fabck -A function -A helptopic -- type
 
 # -----------------------------------------------------------------------------

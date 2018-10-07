@@ -98,4 +98,4 @@ else
   unset -v file
 fi
 
-unset -v BASH_COMPLETION_DIR HOMEBREW_COMPLETION
+unset -v BASH_COMPLETION_DIR
