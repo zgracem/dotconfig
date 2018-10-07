@@ -3,13 +3,14 @@ rot13()
   #: $ rot13 "uryyb jbeyq"
   #: $ rot13 mystery.txt > zlfgrel.txt
   #: $ spoilers | rot13
-  local mask='a-zA-Z n-za-mN-ZA-M'
+  local set1="a-mn-zA-MN-Z" 
+  local set2="n-za-mN-ZA-M"
 
   if [[ -f $1 ]]; then
     # file
-    tr "$mask" < "$1"
+    tr "$set1" "$set2" < "$1"
   else
     # string or standard input
-    tr "$mask" <<< "${@-$(</dev/stdin)}"
+    tr "$set1" "$set2" <<< "${@-$(</dev/stdin)}"
   fi
 }
