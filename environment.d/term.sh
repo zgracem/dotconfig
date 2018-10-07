@@ -69,7 +69,9 @@ else
     
     # iTerm.app
     elif [ "$TERM_PROGRAM" = "iTerm.app" ] && [ "$OLDTERM" != "iTerm.app" ]; then
-      TERM="iTerm2.app"
+      ### ZGM disabled 2018-10-07 -- terminfo is broken :(
+      # TERM="iTerm2.app"
+      TERM="xterm-256color"
     fi
   fi
 
