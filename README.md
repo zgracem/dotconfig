@@ -27,10 +27,9 @@ Minimum requirements:
     - `dircolors/`
     - `environment.d/`
     - `sh/`
+    - `vim/`
     - `environment.sh`
-    - `hushlogin`
     - `inputrc`
-    - `vimrc`
 - `.ssh/` ← not in this repo, obvs.
     - `authorized_keys`
     - `config`

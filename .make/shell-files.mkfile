@@ -1,18 +1,23 @@
-# -----------------------------------------------------------------------------
-# symlinks
-# -----------------------------------------------------------------------------
-
 .PHONY: shell-files
 
-SHELL_FILES := ~/.hushlogin ~/.profile ~/.bash_profile ~/.bashrc ~/.bash_logout
+SHELL_FILES := ~/.hushlogin \
+							 ~/.profile \
+							 ~/.bash_sessions_disable \
+							 ~/.bash_profile \
+							 ~/.bashrc \
+							 ~/.bash_logout
 
-~/.hushlogin: hushlogin
-~/.profile: sh/profile.sh
-~/.bash_profile: bash/profile.bash
-~/.bashrc: bash/bashrc.bash
-~/.bash_logout: bash/logout.bash
+.src/skel/%:
+	install -pm 0644 -- $< $(HOME)
+
+~/.hushlogin: .src/skel/.hushlogin
+~/.profile: .src/skel/.profile
+~/.bash_sessions_disable: .src/skel/.bash_sessions_disable
+~/.bash_profile: .src/skel/.bash_profile
+~/.bashrc: .src/skel/.bashrc
+~/.bash_logout: .src/skel/.bash_logout
 
 $(SHELL_FILES):
-	ln -s .config/$< $@
+	install -pm 0644 -- $< $(HOME)
 
 shell-files: $(SHELL_FILES)
