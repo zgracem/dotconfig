@@ -1,5 +1,5 @@
 # Aliases that aren't really output files but we can `make` anyway
-.PHONY: ssh
+.PHONY: ssh-config
 
 PROXY_SERVER := 127.0.0.1
 PROXY_PORT := 8080
