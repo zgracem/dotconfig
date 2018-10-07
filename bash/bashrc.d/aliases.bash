@@ -24,12 +24,9 @@ export rtest='"$dir_dropbox/src/ruby/_scratch/_test.rb"'
 # -----------------------------------------------------------------------------
 
 # start servers
-if _inPath bundle && _inPath middleman; then
-  alias mm='bundle exec middleman'
-fi
-
-if _inPath bundle && _inPath jekyll; then
-  alias jj='bundle exec jekyll'
+if _inPath bundle; then
+  _inPath middleman && alias mm='bundle exec middleman'
+  _inPath jekyll && alias jj='bundle exec jekyll'
 fi
 
 # chmod
