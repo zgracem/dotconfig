@@ -26,7 +26,7 @@ unset -v PROMPT_DIRTRIM
 
 # If true, make a slow call to `git` every time the prompt refreshes,
 # in exchange for info about the current git situation ("gituation")
-: "${Z_PROMPT_GIT:=false}"
+: "${Z_PROMPT_GIT:=true}"
 
 # If false, display the hostname in the prompt only when connected via SSH.
 # If true, always display the hostname in the prompt, even in local sessions.
