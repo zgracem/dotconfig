@@ -6,7 +6,7 @@ __z_complete_es()
   local -a script_dirs=( "$dir_scripts" "$dir_scripts"/*/ )
   local -a wordlist
 
-  mapfile -t wordlist  < <(__z_complete_files sh "${script_dirs[@]}")
+  mapfile -t wordlist  < <(__z_complete_filenames sh "${script_dirs[@]}")
   mapfile -t COMPREPLY < <(compgen -W "${wordlist[*]}" -- "${COMP_WORDS[COMP_CWORD]}")
 }
 

@@ -55,9 +55,9 @@ HOSTFILE="$XDG_CONFIG_HOME/ssh/hosts"
 #
 ##### end template #####
 
-__z_complete_files()
-{ # Usage: __z_complete_files EXT DIR... 
-  # Returns *.EXT in each DIR
+__z_complete_filenames()
+{ # Usage: __z_complete_filenames EXT DIR... 
+  # Returns *.EXT, minus .EXT, in each DIR
 
   local extension="$1"; shift
 
