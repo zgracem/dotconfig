@@ -5,18 +5,17 @@
 * `environment.sh` loads environment variables from `environment.d/*.sh` 
   for all POSIX shells
     * `launchctl` makes them available to macOS GUI apps
-* `~/.profile` symlinks to `sh/profile.sh` and sources the contents of 
+* `sh/profile.sh` symlinks to `~/.profile` and sources the contents of 
   `sh/profile.d/*.sh`
-* `~/.bashrc` symlinks to `bash/bashrc.bash` and sources the contents of 
+* `bash/bashrc.bash` symlinks to `~/.bashrc` and sources the contents of 
   `bash/_*.bash` and `bash/*.d/*.bash`
-* Configurations for individual machines are under `local/`. The contents
-  of each hostname subdir are symlinked to `~/.local` on that machine.
-    * `.bashrc` also sources the contents of `~/.local/config/bashrc.d/*.bash`,
-      if present
+* `local/` has per-machine configurations. The contents of each hostname subdir
+  are symlinked to `~/.local` on that machine.
+    * `~/.bashrc` also sources `~/.local/config/bashrc.d/*.bash`, if present
 * `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced 
   immediately before the first prompt.
-* `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are 
-  sourced when the shell exits.
+* `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are sourced
+  when the shell exits.
 
 ## Setting up a new homedir
 
