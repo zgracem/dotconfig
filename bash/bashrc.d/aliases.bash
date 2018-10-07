@@ -16,8 +16,10 @@ alias xd='hexdump -C'
 
 alias  etest='_z_edit "$dir_dropbox/src/test.sh"'
 alias  ttest='"$dir_dropbox/src/test.sh"'
-export rtest="$dir_dropbox/src/ruby/_scratch/_test.rb"
 alias  rtest='"$rtest"'
+# The use of single & double quotes here is deliberate
+# shellcheck disable=SC2016
+export rtest='"$dir_dropbox/src/ruby/_scratch/_test.rb"'
 
 # -----------------------------------------------------------------------------
 
