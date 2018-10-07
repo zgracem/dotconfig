@@ -1,0 +1,6 @@
+# ~/.bash_sessions_disable
+# -----------------------------------------------------------------------------
+# This file is required to disable save/restore functionality in macOS's
+# Terminal.app on El Capitan (10.11) or later.
+#
+# See /etc/bashrc_Apple_Terminal for details.
