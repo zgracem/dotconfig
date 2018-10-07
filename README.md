@@ -42,7 +42,7 @@ Minimum requirements:
 Then:
 
 ```bash
-cd ~/.config && make shell-files && make symlinks
+cd ~/.config && make shell-files symlinks
 # after restarting the shell
 cd ~/etc/terminfo && make install
 # then restart the whole terminal emulator
