@@ -4,8 +4,8 @@
 
 [[ $PLATFORM == mac ]] || return
 
-mapfile -t DARWIN_VERSINFO < <(uname -r | tr '.' ' ')
-mapfile -t MACOS_VERSINFO < <(sw_vers -productVersion | tr '.' ' ')
+mapfile -t DARWIN_VERSINFO < <(uname -r | tr '.' '\n')
+mapfile -t MACOS_VERSINFO < <(sw_vers -productVersion | tr '.' '\n')
 MACOS_VERSION=${MACOS_VERSINFO[1]}
 
 if [[ -z ${MACOS_VERSINFO[2]} ]]; then
@@ -17,13 +17,13 @@ fi
 # system commands
 # -----------------------------------------------------------------------------
 
-alias dnsflush="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-alias lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+alias dnsflush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
+alias lsregister='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
 alias lockscreen='"/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession" -suspend'
-alias gotosleep="pmset sleepnow"
-alias PlistBuddy="/usr/libexec/PlistBuddy"
-alias restart="sudo shutdown -r now"
-alias screensaver="open -a ScreenSaverEngine"
+alias gotosleep='pmset sleepnow'
+alias PlistBuddy='/usr/libexec/PlistBuddy'
+alias restart='sudo shutdown -r now'
+alias screensaver='open -a ScreenSaverEngine'
 
 # -----------------------------------------------------------------------------
 # environment variables
