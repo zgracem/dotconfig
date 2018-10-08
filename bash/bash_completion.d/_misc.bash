@@ -42,7 +42,7 @@
 complete -a -- alias unalias
 
 # readline bindings
-complete -A -- binding bind
+complete -A binding -- bind
 
 # shell builtins
 complete -b -- builtin
