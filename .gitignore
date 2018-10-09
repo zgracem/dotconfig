@@ -1,0 +1,25 @@
+# -----------------------------------------------------------------------------
+# ~/.config/.gitignore
+# -----------------------------------------------------------------------------
+
+# private
+alpine/
+jrnl
+letsencrypt/
+ssh/
+ssh?config*
+vnc/
+.netrc
+
+# messy/boring
+zsh/
+
+# unnecessary
+configstore/
+ruby/Gemfile.lock
+*.bak
+*.old
+*~
+*~orig
+*~original
+*~old
