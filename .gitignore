@@ -3,13 +3,10 @@
 # -----------------------------------------------------------------------------
 
 # private
-alpine/
 jrnl
 letsencrypt/
 ssh/
 ssh?config*
-vnc/
-.netrc
 
 # messy/boring
 zsh/
@@ -20,6 +17,6 @@ ruby/Gemfile.lock
 *.bak
 *.old
 *~
+*~old
 *~orig
 *~original
-*~old

@@ -1,6 +1,6 @@
-NETRC=$XDG_CONFIG_HOME/
+NETRC=$HOME/.private/
 
-if [ -f "$NETRC/.netrc" ]; then
+if [ -f "${NETRC}.netrc" ]; then
   export NETRC
 else
   unset -v NETRC
