@@ -195,7 +195,7 @@ export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 shopt -s nullglob
 
 # Private stuff
-for file in "$XDG_CONFIG_HOME"/bash/private.d/*.bash; do
+for file in "$HOME"/.private/bashrc.d/*.bash; do
   [[ -f $file ]] && . "$file"
 done
 

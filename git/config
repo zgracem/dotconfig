@@ -1,5 +1,5 @@
 [include]
-	path = ~/.config/git/config.private
+	path = ~/.private/git/config
 
 [core]
 	autocrlf = input

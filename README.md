@@ -29,7 +29,8 @@ Minimum requirements:
     - `vim/`
     - `environment.sh`
     - `inputrc`
-- `.ssh/` ← not in this repo, obvs.
+- `.private/` ← encrypted repo
+- `.ssh/` ← not version controlled
     - `authorized_keys`
     - `config`
     - `id_rsa.pub`
