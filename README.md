@@ -1,15 +1,18 @@
 # ~/.config
 
+Some people prune bonsai trees. I refactor my dotfiles.
+
 ## Shell startup files
 
 * `environment.sh` loads environment variables from `environment.d/*.sh` 
   for all POSIX shells
     * `launchctl` makes them available to macOS GUI apps
-* `~/.profile` is a symlink to `sh/profile.sh`, and sources `sh/profile.d/*.sh`
-* `~/.bashrc` is a symlink to `bash/bashrc.bash`, and sources `bash/_*.bash`, 
-  `bash/*.d/*.bash`, and (if present) `~/.local/config/bashrc.d/*.bash`
-  * `~/.local` contains symlinks to the contents of `local/$HOSTNAME`,
-    if it exists
+* `~/.profile` symlinks to `sh/profile.sh`, and sources the contents of 
+  `sh/profile.d`
+* `~/.bashrc` symlinks to `bash/bashrc.bash`, and sources `bash/_*.bash`,
+  the contents of `bash/*.d`, and (if present) the contents of
+  `~/.local/config/bashrc.d`
+    * `~/.local` symlinks to `~/.config/local/$HOSTNAME`, if it exists
 * `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced 
   immediately before the first prompt
 * `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are sourced
@@ -28,7 +31,9 @@ Minimum requirements:
     - `environment.sh`
     - `inputrc`
 - `.private/` ← from encrypted repo
-- `.ssh/` ← symlink to `~/.private/ssh`
+    - `bashrc.d`
+    - `environment.d`
+    - `ssh`
 - `etc/terminfo/` ← custom terminfo source files
 - `lib/bash/`
     - [`fxdoc`](https://github.com/zgracem/fxdoc)
@@ -37,6 +42,7 @@ Minimum requirements:
 Then:
 
 ```bash
+cd ~ && ln -s .private/ssh ~/.ssh
 cd ~/.config && make shell-files symlinks
 # after restarting the shell
 cd ~/etc/terminfo && make install
