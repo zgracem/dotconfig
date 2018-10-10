@@ -253,7 +253,7 @@ EXA_COLORS+="gt=36:"
 ## Punctuation
 EXA_COLORS+="xx=0:"
 ## Timestamp
-EXA_COLORS+="da=34:"
+EXA_COLORS+="da=39:"
 ## File inode
 EXA_COLORS+="in=37:"
 ## Number of blocks
