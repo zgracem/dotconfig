@@ -1,6 +1,6 @@
 # shortcuts
-c() { pbcopy; }
-p() { pbpaste; }
+alias c=pbcopy
+alias p=pbpaste
 
 pbsort()
 { #: - sort contents of clipboard in place
