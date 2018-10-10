@@ -27,11 +27,8 @@ Minimum requirements:
     - `vim/`
     - `environment.sh`
     - `inputrc`
-- `.private/` ← encrypted repo
-- `.ssh/` ← not version controlled
-    - `authorized_keys`
-    - `config`
-    - `id_rsa.pub`
+- `.private/` ← from encrypted repo
+- `.ssh/` ← symlink to `~/.private/ssh`
 - `etc/terminfo/` ← custom terminfo source files
 - `lib/bash/`
     - [`fxdoc`](https://github.com/zgracem/fxdoc)
