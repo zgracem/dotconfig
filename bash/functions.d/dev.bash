@@ -6,18 +6,11 @@ dev()
   local www_dir="$HOME/Dropbox/www"
   local proj_dir=""
 
-  # Allow case fall-through (bash 4+)
-  # shellcheck disable=SC2221,SC2222
   case $1 in
-    # vsmm)
-    #   proj_dir=$dir_dropbox/www/vsmm
-    #   _z_dev_subl_project ".sublime/vsmm"
-    #   ;;
-    vs2017|vs9)
+    vs9)
       proj_dir=$dir_dropbox/www/vs2017
       _z_dev_subl_project "etc/vs2017"
       ;;
-
     ruby)
       proj_dir=$ruby_dir
       _z_dev_subl_project "ruby"
@@ -26,22 +19,17 @@ dev()
       proj_dir=$ruby_dir/schemer
       _z_dev_subl_project "schemer"
       ;;
+    snippets)
+      proj_dir=$ruby_dir/alfred_snippets
+      _z_dev_subl_project ".sublime/snippets"
+      ;;
     weather)
       proj_dir=$ruby_dir
       _z_dev_subl_project "weather"
       ;;
-
-    micro)
-      proj_dir=$HOME/www/2016/microprocessor
-      _z_dev_subl "$proj_dir"
-      ;;
-
-    cp437|gonehome)
+    cp437)
       proj_dir=$www_dir/cp437
       _z_dev_subl "$proj_dir"
-      ;;&
-    gonehome)
-      _z_dev_subl "$proj_dir/source/css/gonehome.sass"
       ;;
 
     *)
