@@ -4,5 +4,5 @@ uuid()
 { #: - generate a UUID and copy it to the clipboard
   local uuid; uuid=$(uuidgen)
   printf '%s' "$uuid" | pbcopy
-  echo "$uuid"
+  printf '%s\n' "$uuid"
 }
