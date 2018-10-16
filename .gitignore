@@ -5,8 +5,6 @@
 # private
 jrnl
 letsencrypt/
-ssh/
-ssh?config*
 
 # messy/boring
 zsh/
