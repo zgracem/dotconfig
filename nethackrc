@@ -21,8 +21,8 @@ OPTIONS=!mail
 # -----------------------------------------------------------------------------
 
 # use IBM extended characters
-OPTIONS=IBMgraphics
-OPTIONS=eight_bit_tty
+#OPTIONS=IBMgraphics
+#OPTIONS=eight_bit_tty
 
 # display colour
 OPTIONS=color
@@ -43,10 +43,10 @@ OPTIONS=hilite_pet
 # statushilites
 # -----------------------------------------------------------------------------
 
-OPTIONS=statushilites
+#OPTIONS=statushilites
 
-OPTIONS=hilite_status:armor-class/updown/green/red hitpoints/33%/red/normal
-# OPTIONS=hilite_status: hunger/150/red/normal
+#OPTIONS=hilite_status:armor-class/updown/green/red hitpoints/33%/red/normal
+#OPTIONS=hilite_status: hunger/150/red/normal
 
 # -----------------------------------------------------------------------------
 # interface
@@ -88,7 +88,7 @@ OPTIONS=fruit:pomegranate
 
 # 0 = use [yuhjklbn] to move
 # 1 = use number pad to move
-OPTIONS=number_pad=1
+OPTIONS=number_pad=0
 
 # do not make the spacebar a synonym for `.` (rest)
 OPTIONS=!rest_on_space
