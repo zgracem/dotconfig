@@ -86,12 +86,13 @@ if (( this_bash < latest_bash )); then
   unset -v newer_bash
   case $HOSTNAME in
     WS*)
-      # If I launch Cygwin with anything besides /bin/bash, the session crashes
-      # immediately. I don't know why. -- ZGM 2016-09-16
-      newer_bash=/usr/local/bin/bash
+      # - If I launch Cygwin with anything besides /bin/bash, the session 
+      # crashes immediately. I don't know why. -- ZGM 2016-09-16
+      # - Moved from /usr/local to ~/opt -- ZGM 2018-10-18
+      newer_bash="$HOME/opt/bin/bash"
       ;;
     web*)
-      # I'm obviously not allowed to change anything on my shared host.
+      # I'm obviously not allowed to change anything on my shared hosts.
       newer_bash="$HOME/.linuxbrew/bin/bash"
       ;;
     *)
