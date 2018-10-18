@@ -6,7 +6,12 @@ palette()
   #: | IMAGE = path to source image
   #: | SIZE  = number of colours in the palette (default: 16)
   #: < ImageMagick
-  
+
+  if (( $# == 0 )); then
+    fx_usage >&2
+    return 64
+  fi
+
   local image="$1"
   local size="${2-16}"
 
@@ -19,7 +24,7 @@ _z_get_palette()
 {
   local image="$1"
   local size="$2"
-  
+
   convert "$image" +dither -colors "$size" \
     -define histogram:unique-colors=true -format "%c" histogram:info: \
   | grep --color=never -o '#[[:xdigit:]]{6}'

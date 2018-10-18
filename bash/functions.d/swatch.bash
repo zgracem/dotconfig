@@ -32,6 +32,11 @@ swatches()
   #: | COLOUR = each a hex colour like "#ff33cc" or a named colour like "pink"
   #: < ImageMagick
 
+  if (( $# == 0 )); then
+    fx_usage >&2
+    return 64
+  fi
+
   local -a colours=("$@")
   # use nanoseconds for timestamp so this can run in parallel
   local timestamp="${EPOCHREALTIME-$(date +%s.%N)}"; timestamp=${timestamp#*.}
@@ -46,7 +51,7 @@ swatches()
 }
 
 _z_make_swatches()
-( 
+(
   export -f swatch
   # for parallel, but not for everyone (hence the subshell)
   parallel -k swatch {} 128 .swatch_{}.png ::: "$@"
