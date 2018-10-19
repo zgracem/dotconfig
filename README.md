@@ -31,13 +31,13 @@ Minimum requirements:
     - `environment.sh`
     - `inputrc`
 - `.private/` ← from encrypted repo
-    - `bashrc.d`
-    - `environment.d`
-    - `ssh`
+    - `bashrc.d/`
+    - `environment.d/`
+    - `ssh/`
 - `etc/terminfo/` ← custom terminfo source files
 - `lib/bash/`
-    - [`fxdoc`](https://github.com/zgracem/fxdoc)
-    - [`wtf.bash`](https://github.com/zgracem/wtf.bash)
+    - [`fxdoc/`](https://github.com/zgracem/fxdoc)
+    - [`wtf.bash/`](https://github.com/zgracem/wtf.bash)
 
 Then:
 
