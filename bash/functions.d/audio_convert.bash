@@ -31,5 +31,5 @@ audio_convert()
       return 1 ;;
   esac
 
-  afconvert "$in_file" "$out_file" -f "$f"
+  afconvert -f "$f" "$in_file" "$out_file"
 }
