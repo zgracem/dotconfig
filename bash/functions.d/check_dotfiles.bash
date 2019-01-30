@@ -21,19 +21,22 @@ _z_check_dotfiles_env()
   local syntax="sh"
   local -a files=("$XDG_CONFIG_HOME/environment.sh"
                   "$XDG_CONFIG_HOME/environment.d"/*.sh)
-  shellcheck -s "$syntax" "$@" "${files[@]}"
+  local -a opts=("$@")
+  shellcheck -s "$syntax" "${opts[@]}" "${files[@]}"
 }
 
 _z_check_dotfiles_sh()
 {
   local syntax="sh"
   local -a files=("$XDG_CONFIG_HOME/sh"/**/*.sh)
-  shellcheck -s "$syntax" "$@" "${files[@]}"
+  local -a opts=("$@")
+  shellcheck -s "$syntax" "${opts[@]}" "${files[@]}"
 }
 
 _z_check_dotfiles_bash()
 {
   local syntax="bash"
   local -a files=("$XDG_CONFIG_HOME/bash"/**/*.bash)
-  shellcheck -s "$syntax" "$@" "${files[@]}"
+  local -a opts=("$@")
+  shellcheck -s "$syntax" "${opts[@]}" "${files[@]}"
 }
