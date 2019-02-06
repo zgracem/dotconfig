@@ -11,7 +11,7 @@ pdfcrack()
       ;;
     mac)
       dir_fonts="/Library/Fonts"
-      local threads; threads="-dNumRenderingThreads=$(sysctl -n hw.availcpu)"
+      local threads; threads="-dNumRenderingThreads=${NUMBER_OF_PROCESSORS:-1}"
       ;;
     *)
       scold 'not available on this system'
