@@ -1,7 +1,8 @@
+_inPath osascript || return
+
 playcount()
 {	#: - set the play count of the selected item(s) in iTunes to $1
   #: * this function is extremely fragile!
-	_require osascriptt || return
 
 	local ct=$1
 	osascript <<-EOT

@@ -1,8 +1,8 @@
+_inPath gs || return
+
 pdfcrack()
 { #: - removes password protection from PDF documents
   #: < GhostScript (http://www.ghostscript.com/)
-  _require gs || return
-
   local dir_fonts
 
   case $PLATFORM in

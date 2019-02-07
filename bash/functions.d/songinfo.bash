@@ -1,7 +1,8 @@
+(_inPath id3v2 && _inPath mp4info) || return
+
 songinfo()
 { #: - prints metadata for song files
   #: $ songinfo <file>
-  (_require id3v2 || _require mp4info) || return
 
   local song="$1"
 

@@ -1,9 +1,9 @@
+_inPath ffmpeg || return
+
 makemp3()
 { #: - converts an audio file to MP3 (libmp3lame, max quality VBR)
   #: $ makemp3 <file> [<file> ...]
   #: < ffmpeg
-  _require ffmpeg || return
-
   local input; for input in "$@"; do
     ffmpeg -i "$input" \
       -codec:a libmp3lame -qscale:a 0 \
