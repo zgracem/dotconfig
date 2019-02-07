@@ -12,7 +12,7 @@
 # internet stuff
 # -----------------------------------------------------------------------------
 
-brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
+brew "youtube-dl"
 
 # -----------------------------------------------------------------------------
 # media
@@ -20,14 +20,14 @@ brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
 
 # audio/video
 
-brew "ffmpeg", args: ["with-openssl", "with-rtmpdump"]
+brew "ffmpeg"
 brew "mplayer"
 
 # images
 
 brew "exif"
 brew "exiftool"
-brew "imagemagick", args: ["with-ghostscript"]
+brew "imagemagick"
 brew "qrencode"
 brew "webkit2png"
 

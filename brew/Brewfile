@@ -19,8 +19,8 @@ brew "gcc" if OS.linux?
 
 # for Homebrew
 brew "openssl"
-brew "curl", args: ["with-nghttp2"]
-brew "git", args: ["with-brewed-curl", "with-brewed-openssl"]
+brew "curl"
+brew "git"
 
 # bash 4
 brew "bash"
@@ -31,10 +31,10 @@ brew "tmux"
 brew "reattach-to-user-namespace" if OS.mac?
 
 # other
-brew "dtrx", args: ["with-cabextract", "with-lha", "with-unshield"]
-brew "vim", args: ["override-system-vi"]
-brew "wget", args: ["HEAD", "enable-iri", "with-pcre"]
-brew "less", args: ["with-pcre"]
+brew "dtrx"
+brew "vim"
+brew "wget"
+brew "less"
 brew "ncurses"
 
 # -----------------------------------------------------------------------------
@@ -42,7 +42,7 @@ brew "ncurses"
 # -----------------------------------------------------------------------------
 
 if OS.mac?
-  brew "coreutils", args: ["HEAD"]
+  brew "coreutils"
 
   brew "gawk"
   brew "gnu-tar"
@@ -50,14 +50,14 @@ if OS.mac?
   # parallel
   brew "parallel"
 
-  # find, locate, updatedb, and xargs (do not prepend "g" to the binaries)
-  brew "findutils", args: ["default-names"]
+  # find, locate, updatedb, and xargs
+  brew "findutils"
 
-  # sed (overwrite built-in)
-  brew "gnu-sed", args: ["default-names"]
+  # sed
+  brew "gnu-sed"
 
-  # grep (overwrite built-in)
-  brew "grep", args: ["with-default-names"]
+  # grep
+  brew "grep"
 end
 
 # -----------------------------------------------------------------------------

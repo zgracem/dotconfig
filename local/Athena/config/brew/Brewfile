@@ -15,7 +15,7 @@
 brew "dnsmasq"
 brew "transmission"
 ### Install w/ pip to get the youtube_dl Python module too.
-# brew "youtube-dl", args: ["HEAD", "with-rtmpdump"]
+# brew "youtube-dl"
 
 # -----------------------------------------------------------------------------
 # media
@@ -24,7 +24,7 @@ brew "transmission"
 # audio/video
 
 brew "atomicparsley"
-brew "ffmpeg", args: ["with-openssl", "with-rtmpdump"]
+brew "ffmpeg"
 brew "id3v2"
 brew "lame"
 brew "mkvtoolnix"
@@ -35,7 +35,7 @@ brew "mplayer"
 
 brew "exif"
 brew "exiftool"
-brew "imagemagick@6" # , args: ["with-ghostscript"]
+brew "imagemagick@6"
 brew "webkit2png"
 
 # imagesnap requires full Xcode to compile (not just CLT)
@@ -90,6 +90,6 @@ brew "zsh"
 brew "zsh-syntax-highlighting"
 
 # text
-brew "aspell", args: ["with-lang-en"]
+brew "aspell"
 brew "pandoc"
 brew "recode"
