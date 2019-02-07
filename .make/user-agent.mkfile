@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 # The custom user-agent string (change this periodically)
-USER_AGENT := Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36
+USER_AGENT := Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
 
 # List of output files that need a custom user-agent string
 CUSTOM_UA := curl/.curlrc wget/wgetrc youtube-dl/config
