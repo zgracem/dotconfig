@@ -18,8 +18,9 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
 fi
 
-# Only automatically `brew update` once an hour
-export HOMEBREW_AUTO_UPDATE_SECS=$(( 60 * 60 ))
+# Old-style manual triggering of `brew update` and `brew cleanup`
+export HOMEBREW_NO_AUTO_UPDATE=true
+export HOMEBREW_NO_INSTALL_CLEANUP=true
 
 # Use a GUI text editor if available
 export HOMEBREW_EDITOR="$VISUAL"
