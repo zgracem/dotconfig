@@ -8,7 +8,6 @@ XDG_CACHE_HOME ?= ~/var/cache
 VPATH = .
 
 include .make/shell-files.mkfile
-include .make/ssh-config.mkfile
 include .make/symlinks.mkfile
 include .make/user-agent.mkfile
 
