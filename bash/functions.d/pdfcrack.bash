@@ -4,6 +4,8 @@ pdfcrack()
 { #: - removes password protection from PDF documents
   #: < GhostScript (http://www.ghostscript.com/)
   local dir_fonts
+  local file="$1"
+  local password="$2"
 
   case $PLATFORM in
     windows)
@@ -11,7 +13,6 @@ pdfcrack()
       ;;
     mac)
       dir_fonts="/Library/Fonts"
-      local threads; threads="-dNumRenderingThreads=${NUMBER_OF_PROCESSORS:-1}"
       ;;
     *)
       scold 'not available on this system'
@@ -19,16 +20,13 @@ pdfcrack()
       ;;
   esac
 
-  for file in "$@"; do
-    gs \
-      -dSAFER -dBATCH -dNOPAUSE \
-      -sDEVICE=pdfwrite \
-      -sPDFPassword= \
-      -sFONTPATH="$dir_fonts" \
-      -dPDFSETTINGS=/prepress \
-      -dPassThroughJPEGImages=true \
-      -sOutputFile="${file%.*}_nopassword.pdf" \
-      "$threads" \
-      "$file"
-  done
+  gs \
+    -dSAFER -dBATCH -dNOPAUSE \
+    -sDEVICE=pdfwrite \
+    -sPDFPassword="$password" \
+    -sFONTPATH="$dir_fonts" \
+    -dPDFSETTINGS=/prepress \
+    -dPassThroughJPEGImages=true \
+    -sOutputFile="${file%.*}_nopassword.pdf" \
+    "$file"
 }
