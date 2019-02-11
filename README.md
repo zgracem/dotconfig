@@ -6,13 +6,13 @@ Some people prune bonsai trees. I refactor my dotfiles.
 
 * `environment.sh` loads environment variables from `environment.d/*.sh` 
   for all POSIX shells
-    * `launchctl` makes them available to macOS GUI apps
-* `~/.profile` symlinks to `sh/profile.sh`, and sources the contents of 
+    * `misc/launchd.conf` makes them available to macOS GUI apps
+* `~/.profile` is a symlink to `sh/profile.sh`, and sources the contents of 
   `sh/profile.d`
-* `~/.bashrc` symlinks to `bash/bashrc.bash`, and sources `bash/_*.bash`,
+* `~/.bashrc` is a symlink to `bash/bashrc.bash`, and sources `bash/_*.bash`,
   the contents of `bash/*.d`, and (if present) the contents of
   `~/.local/config/bashrc.d`
-    * `~/.local` symlinks to `~/.config/local/$HOSTNAME`, if it exists
+    * `~/.local` is a symlink to `~/.config/local/$HOSTNAME`, if it exists
 * `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced 
   immediately before the first prompt
 * `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are sourced
