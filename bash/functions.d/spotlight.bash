@@ -1,6 +1,6 @@
 [[ $PLATFORM == mac ]] || return
 
-sp()
+spotlight()
 { #: - performs a Spotlight search for files named $1
   local term=$*
   mdfind -name "$term" | while read -r line; do
