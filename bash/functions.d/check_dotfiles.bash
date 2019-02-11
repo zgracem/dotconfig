@@ -1,3 +1,5 @@
+_inPath shellcheck || return
+
 check_dotfiles()
 ( #: - checks syntax of ~/.config/**/*.{bash,sh}
   #: $ check_dotfiles [shellcheck_options]
