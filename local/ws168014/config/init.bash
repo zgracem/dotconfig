@@ -4,7 +4,7 @@
 # launch apps
 # -----------------------------------------------------------------------------
 
-_isRunning() { command ps -sW | command grep -iq "${1}\\.exe\\$"; }
+_isRunning() { command ps -sW | command grep -iq "${1}\\.exe\$"; }
 
 # Google Chrome
 if ! _isRunning chrome && [[ -n $ALL_PROXY ]]; then
