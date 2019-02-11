@@ -9,10 +9,4 @@ if [[ -d $dir_scripts ]]; then
 
   # astronomical info -- requires suncalc and weather_ca gems
   [[ $HOSTNAME == Athena* ]] && "$dir_scripts/login/astro.rb"
-
-  # run only on first login of the day:
-  if "$dir_scripts/login/matins.sh"; then
-    # this day in history...
-    "$dir_scripts/login/today_in_history.sh"
-  fi
 fi
