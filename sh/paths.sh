@@ -23,8 +23,8 @@ if [ -x /usr/local/bin/brew ]; then
   MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   #INFOPATH linked to /usr/local/share/info
 
-  # GNU sed (installed --with-default-names)
-  PATH=/usr/local/opt/gnu-sed/bin:$PATH
+  # GNU sed (w/out `g` prefix)
+  PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/gnu-sed/share/man:$MANPATH
   #INFOPATH linked to /usr/local/share/info
 
