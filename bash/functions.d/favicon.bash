@@ -5,6 +5,7 @@ favicon()
   #: $ favicon [img [ico]]
   #: | img = a 256 × 256 PNG file (default: ./favicon.png)
   #: | ico = the output icon file (default: ./favicon.ico)
+  #: < ImageMagick
   local img="${1:-favicon.png}"
   local out_file="${2:-favicon.ico}"
 

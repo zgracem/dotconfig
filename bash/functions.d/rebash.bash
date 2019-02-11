@@ -1,8 +1,6 @@
 rebash()
 { # start a fresh environment
 
-  # clear_scrollback
-
   exec -c env - \
     HOME="$HOME" TERM="$TERM" \
     ${TERM_PROGRAM:+TERM_PROGRAM="$TERM_PROGRAM"} \

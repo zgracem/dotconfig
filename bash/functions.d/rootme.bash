@@ -11,15 +11,7 @@ rootme()
     tmux rename-window sudo 2>/dev/null
   fi
 
-  # local prompt="${esc_user}%u${esc_reset}@%H"
-  # prompt+=" → "
-  # prompt+="${esc_brred}%U${esc_reset}@%h"
-  # prompt+=$'\n'"Password: "
-
-  sudo \
-    TMOUT=$tmout \
-    -s
-    # -p "${prompt}" \
+  sudo TMOUT=$tmout -s
 
   # restore window name
   if _inScreen; then
