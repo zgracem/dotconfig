@@ -106,7 +106,6 @@ brew "dos2unix"
 brew "multimarkdown"
 
 # misc.
-brew "binutils"
 brew "exa"
 brew "ghostscript"
 brew "groff"
