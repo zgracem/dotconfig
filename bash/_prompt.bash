@@ -254,7 +254,7 @@ _z_PS1_git_info()
   fi
   
   # count unstaged files (by counting newlines)
-  unstaged=${status//[^$'\x0a']/}
+  unstaged=${status//[^$'\n']/}
   unstaged=${#unstaged}
 
   # count untracked files
@@ -369,7 +369,7 @@ _z_PS1_update_titles()
   # Window title, e.g. "user@Hostname.local: ~/share/man/man1"
   local win_title="${USER}@${HOSTNAME}: ${PWD/#$HOME/$'~'}"
 
-  # Tab title, e.g. "Athena: ~/.../man1"
+  # Tab title, e.g. "Athena: ~/…/man1"
   local tab_title="${SSH_CONNECTION+${HOSTNAME%%.*}: }"
   if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
     local PROMPT_DIRTRIM=1
