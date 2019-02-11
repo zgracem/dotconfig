@@ -1,5 +1,0 @@
-" save in M:\
-
-let $HOME="Z:\\home\\uxhj"
-let $MYVIMRC="Z:\\home\\uxhj\\Dropbox\\.config\\vimrc"
-source $MYVIMRC
