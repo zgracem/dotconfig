@@ -6,10 +6,13 @@
 jrnl
 
 # messy/boring
+fish/
 zsh/
 
 # unnecessary
 configstore/
+fish/fish_variables
+fish/fishd.*
 ruby/Gemfile.lock
 *.bak
 *.old
