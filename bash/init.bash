@@ -5,9 +5,7 @@
 
 if [[ -d $dir_scripts ]]; then
   # cute login banner
-  if [[ -n $SSH_CONNECTION ]]; then
-    "$dir_scripts/login/loginbanner.sh"
-  fi  
+  "$dir_scripts/login/loginbanner.sh"
 
   # astronomical info 
   # -- requires suncalc and weather_ca gems
