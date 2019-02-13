@@ -37,3 +37,7 @@ fi
 if [ -z "$TZ" ]; then
   export TZ='America/Edmonton'
 fi
+
+if [ -z "$TIME_STYLE" ]; then
+  export TIME_STYLE='long-iso'
+fi
