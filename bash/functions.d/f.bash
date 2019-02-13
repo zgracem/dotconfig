@@ -1,5 +1,5 @@
 f()
-{ #: - open a Finder/Explorer window for the current/specified directory
+{ #: - open a Finder/Explorer window for $PWD/$1
   local here="${*-.}"
 
   case $PLATFORM in
