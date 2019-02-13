@@ -1,0 +1,61 @@
+# -----------------------------------------------------------------------------
+# quick navigation
+# -----------------------------------------------------------------------------
+
+function ..; cd .. ; end
+function ...; cd ../.. ; end
+function ....; cd ../../.. ; end
+function .....; cd ../../../.. ; end
+
+# -----------------------------------------------------------------------------
+# macOS & misc.
+# -----------------------------------------------------------------------------
+
+if test (uname -s) = "Darwin"
+  alias dnsflush 'sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder'
+  alias PlistBuddy '/usr/libexec/PlistBuddy'
+  alias spotlight 'mdfind -name'
+  abbr sp spotlight
+end
+
+if test $short_hostname = "Athena"
+  alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
+end
+
+alias d 'set --show'
+alias e 'printf "%s\n"'
+alias l 'less -F'
+alias s 'subl --add'
+alias tt 'tmux new-session -A -s main'
+alias wtf 'type'
+
+# -----------------------------------------------------------------------------
+# cp, mv, rm -- make interactive and verbose
+# -----------------------------------------------------------------------------
+
+alias cp 'command cp -aiv'
+
+if is-gnu rm
+  alias rm 'command rm -Iv'
+else
+  alias rm 'command rm -iv'
+end
+
+if test (uname -s) = "Darwin"
+  # >> http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+  alias mv '/bin/mv -iv'
+else
+  alias mv 'command mv -iv'
+end
+
+# -----------------------------------------------------------------------------
+# misc. verbosity
+# -----------------------------------------------------------------------------
+
+alias chmod 'command chmod -v'
+alias dtrx 'command dtrx --verbose'
+alias killall 'command killall -v'
+alias ln 'command ln -v'
+alias mkdir 'command mkdir -v'
+alias rename 'command rename --verbose'
+alias stow 'command stow --verbose'
