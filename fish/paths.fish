@@ -20,6 +20,10 @@ set -p MANPATH /usr/local/opt/gnu-sed/share/man
 set -p PATH /usr/local/opt/gnu-tar/libexec/gnubin
 set -p MANPATH /usr/local/opt/gnu-tar/share/man
 
+# man-db (w/out `g` prefix)
+set -p PATH /usr/local/opt/man-db/libexec/bin
+set -p MANPATH /usr/local/opt/man-db/share/man
+
 # GNU i18n/l10n utilities
 set -p PATH /usr/local/opt/gettext/bin
 set -p MANPATH /usr/local/opt/gettext/share/man
