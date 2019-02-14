@@ -11,6 +11,5 @@ function fish_prompt --description 'Display the interactive prompt'
   __fish_prompt_git
   __fish_prompt_jobs
 
-  set -l glyph "¶"
-  echo -ns (set_color $fish_color_user) " $glyph " (set_color normal)
+  echo -n (set_color $fish_color_user) "¶" (set_color normal)
 end
