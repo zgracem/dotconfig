@@ -29,6 +29,8 @@ alias s 'subl --add'
 alias tt 'tmux new-session -A -s main'
 alias wtf 'type'
 
+in-path vimdiff; or alias vimdiff 'vim -d'
+
 # -----------------------------------------------------------------------------
 # cp, mv, rm -- make interactive and verbose
 # -----------------------------------------------------------------------------
