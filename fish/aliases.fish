@@ -24,7 +24,7 @@ end
 
 alias d 'set --show'
 alias e 'printf "%s\n"'
-alias l 'less -F'
+alias l 'less --quit-if-one-screen'
 alias s 'subl --add'
 alias tt 'tmux new-session -A -s main'
 alias wtf 'type'
