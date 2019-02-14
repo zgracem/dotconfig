@@ -2,15 +2,13 @@
 # ls || exa
 # -----------------------------------------------------------------------------
 
-functions -e ls ll lsf
+functions --erase ls ll lsf
 
 if in-path exa
   alias ls 'exa --all'
   alias ll 'ls --long'
   alias lsf 'll --group --inode --extended'
 else
-  functions -e ls ll lsf
-
   function ls --description 'List (almost) all files'
     set params -A -q
     #           │  └─ print ? instead of nongraphic characters
