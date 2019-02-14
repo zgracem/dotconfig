@@ -1,5 +1,5 @@
 function __fish_prompt_pwd --description 'Format the current directory for the prompt'
-  set -l max (math "$COLUMNS / 4") # maximum length = 1/4rd window width
+  set -l max (math --scale 0 "$COLUMNS / 4") # maximum length = 1/4rd window width
 
   set -l short_path (pwd | string replace -r ".*/" "")   # basename of current dir
   set -l short_path_length (string length $short_path)
@@ -14,7 +14,7 @@ function __fish_prompt_pwd --description 'Format the current directory for the p
 
   # is $PWD too long, and if so, by how much?
   set -l long_path_length (string length $long_path)
-  set -l excess (math "$long_path_length - $max")
+  set -l excess (math --scale 0 "$long_path_length - $max")
 
   if test $excess -gt 0
     # cut to $max chars long, trim leading detritus and add leader
