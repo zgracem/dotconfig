@@ -97,6 +97,7 @@ set -g __fish_prompt_color_git_branch brblack
 set -g __fish_prompt_color_git_needs_add red
 set -g __fish_prompt_color_git_needs_commit yellow
 set -g __fish_prompt_color_git_needs_push cyan
+set -g __fish_prompt_color_git_clean green
 set -g __fish_prompt_color_jobs yellow
 
 # -----------------------------------------------------------------------------
