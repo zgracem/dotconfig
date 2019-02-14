@@ -36,7 +36,7 @@ set -g fish_color_selection --background=brblack white
 set -g fish_color_search_match --background=brblack
 
 # the color for parameter expansion operators like '*' and '~'
-set -g fish_color_operator bryellow
+set -g fish_color_operator brcyan
 
 # the color used to highlight character escapes like '\n' and '\x70'
 set -g fish_color_escape brmagenta
