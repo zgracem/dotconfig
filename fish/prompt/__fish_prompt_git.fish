@@ -29,9 +29,9 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   else if test $staged -gt 0
     set_color $__fish_prompt_color_git_needs_commit
     echo -n '•'
-  else
-    set_color $__fish_prompt_color_git_clean
-    echo -n '•'
+  # else
+  #   set_color $__fish_prompt_color_git_clean
+  #   echo -n '•'
   end
 
   set -l ahead_behind (string match -r '(?<=branch.ab )\+(\d+) -(\d+)' $git_status)
