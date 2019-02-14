@@ -33,7 +33,7 @@ else
 
   if [ ! -S "${TMUX%%,*}" ] && [ ! -p "$SCREENDIR/$STY" ]; then
     # Old versions of Terminal.app
-    if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ "$OLDTERM" != nsterm* ]; then
+    if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && ! echo "$OLDTERM" | grep -q nsterm; then
       ver="${TERM_PROGRAM_VERSION%%.*}" # Major version (integer) only
       # Deliberately use a constant here to test truthiness
       # shellcheck disable=SC2194
