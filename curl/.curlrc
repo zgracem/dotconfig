@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
 # ~/.config/curl/.curlrc
 # export CURL_HOME=~/.config/curl
+# Generated from ~/.config/.src/curlrc.m4
 # -----------------------------------------------------------------------------
 
 # [-#] display simple progress bar
