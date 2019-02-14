@@ -38,11 +38,11 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   if test (math "$ahead + $behind") -gt 0
     set_color $__fish_prompt_color_git_needs_push
     if test $ahead -gt 0 -a $behind -eq 0
-      echo -n "+"
+      echo -n "↑" # "+"
     else if test $ahead -eq 0 -a $behind -gt 0
-      echo -n "−"
+      echo -n "↓" # "−"
     else if test $ahead -gt 0 -a $behind -gt 0
-      echo -n "±"
+      echo -n "↕" # "±"
     end
   end
 
