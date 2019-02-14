@@ -6,7 +6,7 @@
 set -g fish_color_normal normal
 
 # the color for commands
-set -g fish_color_command white
+set -g fish_color_command white --bold
 
 # the color for quoted blocks of text
 set -g fish_color_quote cyan
@@ -33,7 +33,7 @@ set -g fish_color_match magenta
 set -g fish_color_selection --background=brblack white
 
 # the color used to highlight history search matches (must be a background)
-set -g fish_color_search_match --background=brblack
+set -g fish_color_search_match --background=black
 
 # the color for parameter expansion operators like '*' and '~'
 set -g fish_color_operator brcyan
@@ -79,7 +79,7 @@ set -g fish_pager_color_secondary --background=normal
 # undocumented
 # -----------------------------------------------------------------------------
 
-set -g fish_color_valid_path green --underline
+set -g fish_color_valid_path blue --underline
 set -g fish_color_history_current --bold
 set -g fish_color_cwd_root red
 
@@ -115,7 +115,7 @@ eval (cat $ls_colors_file | \
   string replace "LS_COLORS=" "set -x LS_COLORS " | \
   string replace "export LS_COLORS" "")
 
-set -e ls_colors_file
+set --erase ls_colors_file
 
 if in-path exa
   set EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS")
@@ -123,8 +123,8 @@ end
 
 if not is-gnu ls
   # Generated at http://geoff.greer.fm/lscolors/
-  set -gx LSCOLORS 'exFxdacabxgagaabadHbHd'
   set -gx CLICOLOR 1
+  set -gx LSCOLORS 'exFxdacabxgagaabadHbHd'
 end
 
 # -----------------------------------------------------------------------------
