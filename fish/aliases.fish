@@ -49,13 +49,13 @@ else
 end
 
 # -----------------------------------------------------------------------------
-# misc. verbosity
+# misc., mostly verbosity
 # -----------------------------------------------------------------------------
 
 alias chmod 'command chmod -v'
 alias dtrx 'command dtrx --verbose'
 alias killall 'command killall -v'
 alias ln 'command ln -v'
-alias mkdir 'command mkdir -v'
+alias mkdir 'command mkdir -pv'
 alias rename 'command rename --verbose'
 alias stow 'command stow --verbose'
