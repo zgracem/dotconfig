@@ -18,7 +18,7 @@ if test (uname -s) = "Darwin"
   abbr sp spotlight
 end
 
-if test "$short_hostname" = "Athena"
+if uname -n | grep -q "Athena"
   alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
 end
 
