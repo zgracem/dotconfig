@@ -11,5 +11,13 @@ function fish_prompt --description 'Display the interactive prompt'
   __fish_prompt_git
   __fish_prompt_jobs
 
-  echo -n (set_color $fish_color_user) "¶" (set_color normal)
+  if test (id -u) != "0"
+    set color_user $fish_color_user
+    set glyph "¶"
+  else
+    set color_user $fish_color_cwd_root
+    set glyph "#"
+  end
+
+  echo -n (set_color $color_user) $glyph (set_color normal)
 end
