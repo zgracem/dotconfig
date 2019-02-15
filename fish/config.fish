@@ -19,4 +19,5 @@ source "$__fish_config_dir/aliases.fish"
 
 if status is-interactive
   source "$__fish_config_dir/colours.fish"
+  fish_vi_key_bindings insert
 end
