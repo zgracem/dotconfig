@@ -37,8 +37,8 @@ set -p PATH $HOME/opt/bin $HOME/bin
 set -p MANPATH $HOME/opt/share/man $HOME/opt/man
 
 # rbenv
-if test -d $HOME/.rbenv
-  if test -d $HOME/.rbenv/bin
+if test -d "$HOME/.rbenv"
+  if test -d "$HOME/.rbenv/bin"
     # non-Homebrew installation
     set -p PATH $HOME/.rbenv/bin
   end

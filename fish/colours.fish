@@ -106,7 +106,7 @@ set -g __fish_prompt_color_jobs yellow
 
 set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if not test -f $ls_colors_file
+if not test -f "$ls_colors_file"
   cd "$XDG_CONFIG_HOME/dircolors"
   and make --quiet all
   cd -
