@@ -2,7 +2,7 @@
 # >> https://github.com/facebook/PathPicker
 # >> https://github.com/tmux-plugins/tmux-fpp
 
-(_inPath fpp && _inTmux) || return
+(_inTmux && _inPath fpp) || return
 
 # add `set -g @fpp_key f` to .tmux.conf
 fpp_key=$(tmux show-option -gvq "@fpp_key") || fpp_key="f"
