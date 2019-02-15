@@ -22,8 +22,10 @@ if uname -n | grep -q "Athena"
   alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
 end
 
+alias bye 'exit'
 alias d 'set --show'
 alias e 'printf "%s\n"'
+alias i 'irb -rzgm/irb'
 alias l 'less --quit-if-one-screen'
 alias s 'subl --add'
 alias tt 'tmux new-session -A -s main'
