@@ -104,16 +104,15 @@ set -g __fish_prompt_color_jobs yellow
 # LS_COLORS
 # -----------------------------------------------------------------------------
 
-set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors"
+set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
 if not test -f $ls_colors_file
-  cd "$XDG_CONFIG_HOME/dircolors"; and make --quiet all
+  cd "$XDG_CONFIG_HOME/dircolors"
+  and make --quiet all
   cd -
 end
 
-eval (cat $ls_colors_file | \
-  string replace "LS_COLORS=" "set -x LS_COLORS " | \
-  string replace "export LS_COLORS" "")
+set -gx LS_COLORS (string split ' ' < $ls_colors_file)[3]
 
 set --erase ls_colors_file
 
