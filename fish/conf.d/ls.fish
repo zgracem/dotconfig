@@ -14,7 +14,7 @@ else
     #           │  └─ print ? instead of nongraphic characters
     #           └──── list (almost) all files
 
-    if string match "CYGWIN*" (uname -s) >/dev/null
+    if cygwin?
       # append .exe if cygwin magic was needed
       set -a params "--append-exe"
     end
@@ -53,7 +53,7 @@ else
     #           │  └──── print inode number
     #           └─────── list (almost) all files
 
-    if test (uname -s) = "Darwin" >/dev/null
+    if macos?
       set -a params -@ -O -G
       #              │  │  └─ colourize output
       #              │  └──── print file flags
