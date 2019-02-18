@@ -20,7 +20,7 @@
     <string>bash</string>
     <string>-c</string>
     <string>
-    while read -r subcmd || [[ -n $subcmd ]]; do [[ ${subcmd:0:1} != "#" ]] && eval "/bin/launchctl $subcmd"; done &lt; "$HOME/.config/misc/launchd.conf"
+    while read -r subcmd || [[ -n $subcmd ]]; do [[ ${subcmd:0:1} != "#" ]] &amp;&amp; eval "/bin/launchctl $subcmd"; done &lt; "$HOME/.config/misc/launchd.conf"
     </string>
   </array>
   <key>RunAtLoad</key>
