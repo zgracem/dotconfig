@@ -60,5 +60,5 @@ if test -d "$HOME/.rbenv"
   set -p MANPATH $HOME/.rbenv/versions/(cat "$HOME/.rbenv/version")/share/man
 end
 
-set PATH (fixpath $PATH)
-set MANPATH (fixpath $MANPATH)
+set PATH (__fish_path_fixer $PATH)
+set MANPATH (__fish_path_fixer $MANPATH)

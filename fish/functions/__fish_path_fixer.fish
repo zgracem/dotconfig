@@ -1,4 +1,4 @@
-function fixpath --description 'Removes duplicate and missing dirs from a PATH variable'
+function __fish_path_fixer --description 'Removes duplicate and missing dirs from a PATH variable'
   set -l dir
   set -l out_PATH
 
