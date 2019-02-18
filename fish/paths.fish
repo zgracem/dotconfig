@@ -59,3 +59,6 @@ if test -d "$HOME/.rbenv"
   set -p PATH $HOME/.rbenv/shims
   set -p MANPATH $HOME/.rbenv/versions/(cat "$HOME/.rbenv/version")/share/man
 end
+
+set PATH (fixpath $PATH)
+set MANPATH (fixpath $MANPATH)
