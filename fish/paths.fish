@@ -1,36 +1,50 @@
 set -p fish_function_path "$__fish_config_dir/prompt"
 
 # base paths
-set -x PATH /usr/bin /bin /usr/sbin /sbin
-set -x MANPATH /usr/share/man /usr/man
+set --export PATH /usr/bin /bin /usr/sbin /sbin
+set --export MANPATH /usr/share/man /usr/man
 
 # /usr/local
 set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
-# GNU coreutils (w/out `g` prefix)
-set -p PATH /usr/local/opt/coreutils/libexec/gnubin
-set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
+# Homebrew
+if test -x /usr/local/bin/brew
+  # GNU coreutils (w/out `g` prefix)
+  set -p PATH /usr/local/opt/coreutils/libexec/gnubin
+  set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
 
-# GNU sed (w/out `g` prefix)
-set -p PATH /usr/local/opt/gnu-sed/libexec/gnubin
-set -p MANPATH /usr/local/opt/gnu-sed/share/man
+  # GNU sed (w/out `g` prefix)
+  set -p PATH /usr/local/opt/gnu-sed/libexec/gnubin
+  set -p MANPATH /usr/local/opt/gnu-sed/share/man
 
-# GNU tar (w/out `g` prefix)
-set -p PATH /usr/local/opt/gnu-tar/libexec/gnubin
-set -p MANPATH /usr/local/opt/gnu-tar/share/man
+  # GNU tar (w/out `g` prefix)
+  set -p PATH /usr/local/opt/gnu-tar/libexec/gnubin
+  set -p MANPATH /usr/local/opt/gnu-tar/share/man
 
-# man-db (w/out `g` prefix)
-set -p PATH /usr/local/opt/man-db/libexec/bin
-set -p MANPATH /usr/local/opt/man-db/share/man
+  # man-db (w/out `g` prefix)
+  set -p PATH /usr/local/opt/man-db/libexec/bin
+  set -p MANPATH /usr/local/opt/man-db/share/man
 
-# GNU i18n/l10n utilities
-set -p PATH /usr/local/opt/gettext/bin
-set -p MANPATH /usr/local/opt/gettext/share/man
+  # GNU i18n/l10n utilities
+  set -p PATH /usr/local/opt/gettext/bin
+  set -p MANPATH /usr/local/opt/gettext/share/man
 
-# ncurses
-set -p PATH /usr/local/opt/ncurses/bin
-set -p MANPATH /usr/local/opt/ncurses/share/man
+  # ncurses
+  set -p PATH /usr/local/opt/ncurses/bin
+  set -p MANPATH /usr/local/opt/ncurses/share/man
+end
+
+if test (uname -s) = "Linux"
+  for d in $HOME/.linuxbrew /home/linuxbrew/.linuxbrew
+    if test -x $d/bin/brew
+      set -p PATH $d/bin $d/sbin
+      set -p MANPATH $d/share/man
+      break
+    end
+  end
+  set --erase d
+end
 
 # $HOME
 set -p PATH $HOME/opt/bin $HOME/bin

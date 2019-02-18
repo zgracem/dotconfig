@@ -87,9 +87,15 @@ fi
 # Linuxbrew
 # -----------------------------------------------------------------------------
 
-if [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-  PATH=$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH
-  MANPATH=$HOME/.linuxbrew/share/man:$MANPATH
+if [ "$(uname -s)" = "Linux" ]; then
+  for d in "$HOME" /home/linuxbrew; do
+    if [ -x "$d/.linuxbrew/bin/brew" ]; then
+      PATH=$d/.linuxbrew/bin:$d/.linuxbrew/sbin:$PATH
+      MANPATH=$d/.linuxbrew/share/man:$MANPATH
+      break
+    fi
+  done
+  unset -v d
 fi
 
 # -----------------------------------------------------------------------------
