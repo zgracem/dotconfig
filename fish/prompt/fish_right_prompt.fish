@@ -9,8 +9,9 @@ function fish_right_prompt --description 'Display the right side of the interact
 
   # __fish_right_prompt_mode
 
-  # if test $COLUMNS -gt 80
+  # if test $COLUMNS -gt 132
   #   set_color $__fish_prompt_color_clock
   #   echo -s (date +%T) " "
+  #   set_color normal
   # end
 end
