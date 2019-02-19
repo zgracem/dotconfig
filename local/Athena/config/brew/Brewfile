@@ -47,8 +47,6 @@ brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
 
 brew "shellcheck"
 
-brew "node"
-
 # >> https://github.com/zoltan-dulac/css3FontConverter
 brew "fontforge"
 
@@ -66,14 +64,12 @@ brew "bramstein/webfonttools/woff2"
 
 brew "cowsay"
 brew "figlet"
-brew "nethack"
 
 # -----------------------------------------------------------------------------
 # misc.
 # -----------------------------------------------------------------------------
 
 brew "agedu"
-brew "keychain"
 brew "midnight-commander"
 brew "sf-pwgen" # github.com/anders/pwgen
 brew "unar"
@@ -85,11 +81,6 @@ brew "sdcv"
 # pdf
 brew "ghostscript"
 
-# shells
-brew "zsh"
-brew "zsh-syntax-highlighting"
-
 # text
-brew "aspell"
 brew "pandoc"
 brew "recode"

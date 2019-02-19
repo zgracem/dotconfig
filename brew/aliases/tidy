@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# alias: brew tidy
-#:  * `tidy`
-#:    `brew tidy` is an alias for `brew cleanup -s && brew prune`
-brew cleanup -s && brew prune

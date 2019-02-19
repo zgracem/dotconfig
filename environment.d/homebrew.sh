@@ -22,6 +22,9 @@ fi
 # export HOMEBREW_NO_AUTO_UPDATE=true
 # export HOMEBREW_NO_INSTALL_CLEANUP=true
 
+# Always use the latest stable tag (even if developer commands have been run)
+export HOMEBREW_UPDATE_TO_TAG=1
+
 # Use a GUI text editor if available
 export HOMEBREW_EDITOR="$VISUAL"
 
