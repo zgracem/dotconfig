@@ -1,6 +1,5 @@
-# Defined in /var/folders/pr/vgpfbx6s4z521scq38jpq44m0000gn/T//fish.GDf7Fu/reveal.fish @ line 1
 function reveal --description 'Reveal $1 in Finder/Explorer'
-	test -n "$argv[1]"; or return 1
+  test -n "$argv[1]"; or return 1
 
   switch (uname -s)
     case 'Darwin'
