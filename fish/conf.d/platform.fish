@@ -1,7 +1,7 @@
 function "macos?"
-  test (uname -s) = "Darwin"
+  uname -s | string match -eq "Darwin"
 end
 
 function "cygwin?"
-  uname -s | grep -q "CYGWIN"
+  uname -s | string match -eq "CYGWIN"
 end

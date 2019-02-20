@@ -21,7 +21,7 @@ if test (uname -s) = "Darwin"
   abbr --add --global sp spotlight
 end
 
-if uname -n | grep -q "Athena"
+if uname -n | string match -eq "Athena"
   alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
 end
 
