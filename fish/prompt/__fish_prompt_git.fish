@@ -3,7 +3,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   if not in-path git; return 1; end
 
   # fail if we're not inside a git repo
-  if not command git rev-parse --is-inside-work-tree >/dev/null 2>&1
+  if not set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
     return 1
   end
 
@@ -47,6 +47,11 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     else if test $ahead -gt 0 -a $behind -gt 0
       echo -n "↕" # "±"
     end
+  end
+
+  if test -r $git_dir/refs/stash
+    set_color $__fish_prompt_color_git_stashed
+    echo -n "▼"
   end
 
   set_color normal
