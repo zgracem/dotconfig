@@ -36,6 +36,7 @@ brew "mplayer"
 brew "exif"
 brew "exiftool"
 brew "imagemagick@6"
+brew "pngcrush"
 brew "webkit2png"
 
 # imagesnap requires full Xcode to compile (not just CLT)
@@ -80,6 +81,10 @@ brew "sdcv"
 
 # pdf
 brew "ghostscript"
+
+# shells
+brew "zsh"
+brew "zsh-syntax-highlighting"
 
 # text
 brew "pandoc"

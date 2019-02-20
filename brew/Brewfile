@@ -73,14 +73,14 @@ end
 # development
 # -----------------------------------------------------------------------------
 
-if MacOS.version >= "10.6"
+if OS.mac? && MacOS.version >= "10.6"
   brew "rbenv"
   brew "rbenv-default-gems"
   brew "ruby-build"
   brew "rbenv-bundler"
+  brew "python"
 end
 
-brew "python"
 brew "jq"
 
 tap  "sass/sass"
@@ -97,17 +97,12 @@ if OS.mac?
   brew "watch"
 end
 
-# images
-brew "pngcrush"
-
 # OpenSSH
 brew "openssh"
 brew "ssh-copy-id"
 
 # shells
 brew "fish"
-brew "zsh"
-brew "zsh-syntax-highlighting"
 
 # text
 brew "dos2unix"
