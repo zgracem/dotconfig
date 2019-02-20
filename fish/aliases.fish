@@ -7,6 +7,9 @@ function ...; cd ../.. ; end
 function ....; cd ../../.. ; end
 function .....; cd ../../../.. ; end
 
+# https://fishshell.com/docs/current/faq.html#faq-cd-minus
+abbr --add --global -- '-' 'cd -'
+
 # -----------------------------------------------------------------------------
 # macOS & misc.
 # -----------------------------------------------------------------------------
@@ -15,7 +18,7 @@ if test (uname -s) = "Darwin"
   alias dnsflush 'sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder'
   alias PlistBuddy '/usr/libexec/PlistBuddy'
   alias spotlight 'mdfind -name'
-  abbr sp spotlight
+  abbr --add --global sp spotlight
 end
 
 if uname -n | grep -q "Athena"
