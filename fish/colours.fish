@@ -94,6 +94,7 @@ set -g fish_color_separator brwhite
 set -g __fish_prompt_color_clock brblack
 set -g __fish_prompt_color_exit red
 set -g __fish_prompt_color_git_branch brblack
+set -g __fish_prompt_color_git_stashed brblack
 set -g __fish_prompt_color_git_needs_add red
 set -g __fish_prompt_color_git_needs_commit yellow
 set -g __fish_prompt_color_git_needs_push cyan
