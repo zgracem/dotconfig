@@ -3,13 +3,12 @@
 
 HOMEBREW_BREW_FILE="$(command -v brew)"
 if [ -n "$HOMEBREW_BREW_FILE" ]; then
-  export HOMEBREW_BREW_FILE
+  export HOMEBREW_PREFIX="${HOMEBREW_BREW_FILE%/bin/brew}"
 else
-  unset -v HOMEBREW_BREW_FILE
   return
 fi
 
-export HOMEBREW_PREFIX="${HOMEBREW_BREW_FILE%/bin/brew}"
+unset -v HOMEBREW_BREW_FILE
 
 if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   # HOME-based paths for Linuxbrew
