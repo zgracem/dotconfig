@@ -9,12 +9,7 @@ jrnl
 zsh/
 
 # unnecessary
-configstore/
 fish/fish_variables
 ruby/Gemfile.lock
-*.bak
-*.old
 *~
-*~old
-*~orig
-*~original
+*~orig*
