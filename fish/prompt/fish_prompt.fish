@@ -3,7 +3,8 @@ function fish_prompt --description 'Display the interactive prompt'
     echo -ns (set_color $fish_color_host) (prompt_hostname) (set_color normal) ":"
   end
 
-  __fish_prompt_pwd
+  echo -ns (set_color $fish_color_cwd) (prompt_pwd)
+
   __fish_prompt_git
   __fish_prompt_jobs
 
