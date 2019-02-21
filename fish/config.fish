@@ -2,16 +2,16 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-set -q USER; or set USER (id -un)
-set -q HOSTNAME; or set HOSTNAME (uname -n)
+set -q USER; or set -gx USER (id -un)
+set -q HOSTNAME; or set -gx HOSTNAME (uname -n)
 
 # -----------------------------------------------------------------------------
 
 set FISH_VERSINFO (string split "." "$FISH_VERSION")
 
 if test $FISH_VERSINFO[1] -lt 3
-  echo "This configuration file cannot run on fish $FISH_VERSION"
-  exit
+  echo >&2 "This configuration file cannot run on fish $FISH_VERSION"
+  exit 1
 end
 
 source "$__fish_config_dir/paths.fish"
