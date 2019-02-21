@@ -77,7 +77,7 @@ case $TERM_PROGRAM in
 esac
 
 # Display "user@hostname" if "user" isn't typical
-#   (set in ~/.config/sh/private.d/default_user.sh)
+#   (set in ~/.private/environment.d/default_user.sh)
 if [[ $USER != "$DEFAULT_USER" ]]; then
   Z_PROMPT_HOST=true
 fi
