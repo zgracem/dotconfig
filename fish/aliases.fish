@@ -26,7 +26,6 @@ if uname -n | string match -eq "Athena"
 end
 
 alias bye 'exit'
-alias d 'set --show'
 alias e 'printf "%s\n"'
 alias i 'irb -rzgm/irb'
 alias l 'less --quit-if-one-screen'
