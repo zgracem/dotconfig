@@ -10,6 +10,7 @@ zsh/
 
 # unnecessary
 fish/fish_variables
+fish/fishd.*
 ruby/Gemfile.lock
 *~
 *~orig*
