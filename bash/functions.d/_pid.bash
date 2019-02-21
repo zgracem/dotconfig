@@ -13,7 +13,7 @@ pidis()
 { #: - returns the name of the process with PID $1, or false if nothing found
   #: $ pidis <pid>
   local pid="$1"
-  [[ $pid =~ ^[[:digit:]]+$ ]] || return 64
+  [[ $pid =~ ^[[:digit:]]+$ ]] || return 1
 
   local proc
   proc=$(_z_pid -p "$pid" | tail -n+2)

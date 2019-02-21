@@ -5,7 +5,7 @@ brew_cd()
   #: $ brew_cd [cache|cellar|prefix [package]|repo[sitory]]
   if ! (( $# )); then
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   local destination="$1"; shift

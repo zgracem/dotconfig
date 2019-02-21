@@ -8,7 +8,7 @@ roll()
 
   if (( $# < 2 )); then
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   local archive="$1"; shift
@@ -31,7 +31,7 @@ roll()
 tarup()
 { #: - archives an entire directory as a .tar.gz
   #: $ tarup <directory>
-  (( $# == 1 )) || return 64
+  (( $# == 1 )) || return 1
   local dir="${1%/}"
   roll "$dir.tar.gz" "$dir/"
 }
@@ -39,7 +39,7 @@ tarup()
 zipup()
 { #: - archives an entire directory as a .zip
   #: $ zipup <directory>
-  (( $# == 1 )) || return 64
+  (( $# == 1 )) || return 1
   local dir="${1%/}"
   roll "$dir.zip" "$dir/"
 }

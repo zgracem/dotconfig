@@ -91,5 +91,5 @@ g2()
     scold "${FUNCNAME[0]}: $1: not found"
   fi
 
-  return 66
+  return 1
 }

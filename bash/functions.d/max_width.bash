@@ -6,7 +6,7 @@ max_width()
 
   if (( $# != 2 )); then
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   local new_width="$1"

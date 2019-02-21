@@ -44,7 +44,7 @@ dev()
 
       scold "  ${opts[*]}"
 
-      return 64
+      return 1
       ;;
   esac
 

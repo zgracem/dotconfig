@@ -22,7 +22,7 @@ q()
         ;;
     *)  # 2+ arguments: You're doing it wrong.
         fx_usage >&2
-        return 64
+        return 1
         ;;
   esac
 

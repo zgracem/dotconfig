@@ -9,6 +9,6 @@ function reveal --description 'Reveal $1 in Finder/Explorer'
       "$windir/explorer" /select, (cygpath -w $argv[1])
     case '*'
       echo >&2 "not available on this system"
-      return 71
+      return 1
   end
 end

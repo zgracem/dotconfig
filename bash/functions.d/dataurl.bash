@@ -5,10 +5,10 @@ dataurl()
 
   if (( $# != 1 )); then
     fx_usage >&2
-    return 64
+    return 1
   elif [[ ! -f $1 ]]; then
     scold "file not found: $1"
-    return 65
+    return 1
   fi
 
   local img="$1"

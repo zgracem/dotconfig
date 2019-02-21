@@ -30,7 +30,7 @@ scan()
       ;;
     *)
       fx_usage
-      return 64
+      return 1
       ;;
   esac
 }

@@ -9,11 +9,11 @@ scratch()
     template+='.XXXXXXXX'
   fi
 
-  dir="$(mktemp -d -t ${template})" || return 73
+  dir="$(mktemp -d -t ${template})" || return 1
 
   if [[ -d $dir ]]; then
     cd "$dir" || return
   else
-    return 73
+    return 1
   fi
 }

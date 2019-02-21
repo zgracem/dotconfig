@@ -16,7 +16,7 @@ _z_whence()
   shopt -s extdebug
 
   # Require at least one argument. (We will silently ignore $2 and beyond.)
-  (($#)) || return 64
+  (($#)) || return 1
 
   # With `extdebug` enabled, `declare -F function_name` prints the function
   # name, line number, and source file. We will capture the latter two
@@ -28,7 +28,7 @@ _z_whence()
     local source_file=${BASH_REMATCH[2]/#$HOME/$'~'}
     local line_number=${BASH_REMATCH[1]}
   else
-    return 66
+    return 1
   fi
 
   # If the function was declared at the command line, source_file will be
@@ -42,7 +42,7 @@ _z_whence()
 
 ef()
 { # find and edit shell functions
-  (( $# == 1 )) || return 64
+  (( $# == 1 )) || return 1
 
   local func=$1
   local dir="$XDG_CONFIG_HOME/bash"

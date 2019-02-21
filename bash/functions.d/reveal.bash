@@ -11,7 +11,7 @@ reveal()
       ;;
     *)
       scold 'not available on this system'
-      return 71
+      return 1
       ;;
   esac
 }

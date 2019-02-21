@@ -20,7 +20,7 @@ _z_find()
       ;;
     *)
       scold "Usage: ${FUNCNAME[0]} f[ile]|d[ir] SCOPE TERM"
-      return 64
+      return 1
       ;;
   esac
 
@@ -55,10 +55,10 @@ _z_find_daysold()
 
   if ! [[ $days =~ $number_re ]]; then
     scold "Error: $days: not a number"
-    return 65
+    return 1
   elif ! _isGNU find; then
     scold "Error: GNU find(1) required"
-    return 69
+    return 1
   fi
 
   # No +/- prefix means "exactly", which is less useful w/ minutes

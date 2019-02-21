@@ -14,7 +14,7 @@ map()
 
   if [[ $# -lt 2 ]] || [[ ! $* =~ :[[:space:]] ]]; then
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   local cmd

@@ -29,10 +29,10 @@ setup()
 
   if [[ ! -x $cyg_bin ]]; then
     scold "can't find ${cyg_bin}"
-    return 66
+    return 1
   elif ! mkdir -p "$log_dir"; then
     scold "can't create $log_dir"
-    return 73
+    return 1
   else
     # Otherwise setup.log will write to actual PWD for some annoying reason.
     (cd "$log_dir" && run "$cyg_bin" "$@")

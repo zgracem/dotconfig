@@ -10,7 +10,7 @@ syncdir()
     shift 2
   else
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   set -- --exclude=.DS_Store --exclude=.git "$@"

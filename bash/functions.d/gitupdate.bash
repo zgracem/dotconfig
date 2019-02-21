@@ -9,6 +9,6 @@ gitupdate()
     [[ -d $dir ]] || continue
     dir="${dir%/.git}"
     printf '» %s\n' "$dir"
-    (builtin cd "$dir" && git pull) || return 70
+    (builtin cd "$dir" && git pull) || return 1
   done
 }

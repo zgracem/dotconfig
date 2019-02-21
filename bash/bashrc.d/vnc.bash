@@ -15,7 +15,7 @@ vnc()
     fi
   else
     scold "not found: $vnc_exe"
-    return 69
+    return 1
   fi
 }
 
@@ -36,6 +36,6 @@ vnc5()
     fi
   else
     scold "not found: $vnc_exe"
-    return 69
+    return 1
   fi
 }

@@ -29,7 +29,7 @@ obscure()
         ;;
       *)
         fx_usage >&2
-        return 64
+        return 1
         ;;
     esac
 

@@ -9,7 +9,7 @@ swatch()
 
   if (( $# < 1 )); then
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   local colour="$1" size="${2-256}"
@@ -34,7 +34,7 @@ swatches()
 
   if (( $# == 0 )); then
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   local -a colours=("$@")

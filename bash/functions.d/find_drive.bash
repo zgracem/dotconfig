@@ -7,7 +7,7 @@ find_drive()
     local label=$1
   else
     fx_usage >&2
-    return 64
+    return 1
   fi
 
   if [[ $PLATFORM == windows ]]; then
@@ -29,9 +29,9 @@ find_drive()
 
   else
     scold "not available on this system"
-    return 71
+    return 1
   fi
   
   scold "volume not found: $label"
-  return 66
+  return 1
 }

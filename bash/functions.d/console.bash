@@ -17,7 +17,7 @@ console()
 
   if [[ -z $log_file ]]; then
     scold "${FUNCNAME[0]}: no log file found"
-    return 72
+    return 1
   fi
 
   if [[ $1 == -w ]] && _inTmux; then

@@ -11,7 +11,7 @@ favicon()
 
   if [[ $img != *.png ]]; then
     scold "$img: not a .png file!"
-    return 65
+    return 1
   fi
 
   local -a imgs=()

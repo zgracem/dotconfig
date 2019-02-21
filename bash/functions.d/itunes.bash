@@ -7,7 +7,7 @@ itunes()
   local script="$dir_scripts/util/itunes-album-art.sh"
   local dir="$HOME/Desktop"
 
-  [[ -x $script ]] || return 69
+  [[ -x $script ]] || return 1
 
   cd "$dir" || return
 

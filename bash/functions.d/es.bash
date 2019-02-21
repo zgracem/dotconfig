@@ -20,7 +20,7 @@ es()
     0)  # No script; try editing a function instead & exit w/ ef()'s error code
         ef "$1" || {
           scold "not found: $1"
-          return 66
+          return 1
         }
         ;;
     1)  _z_edit "${scripts[0]}"

@@ -13,7 +13,7 @@ trash()
         && echo "${filename/#$HOME/$'~'} → ~/.Trash"
       else
         scold "not found: $f"
-        return 66
+        return 1
       fi
     done
 	elif (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 42 )); then
@@ -46,6 +46,6 @@ trash()
     done
   else
   	scold "bash ${BASH_VERSINFO[0]}.${BASH_VERSINFO[1]}: not supported"
-  	return 69
+  	return 1
   fi
 }

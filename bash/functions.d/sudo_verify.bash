@@ -8,6 +8,6 @@ sudo_verify()
     sudo -k         # ...revoke sudo privileges...
     return 0        # ...success!
   else              # user could not verify...
-    return 77       # ...failure :(
+    return 1        # ...failure :(
   fi
 }

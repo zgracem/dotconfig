@@ -122,7 +122,7 @@ _z_PS1_compress_pwd()
       c)  keep_chars="$OPTARG" ;; 
       i)  indicator="$OPTARG" ;; 
     '?')  scold "-$OPTARG: invalid option"
-          return 64 ;;
+          return 1 ;;
     esac
   done
   shift $((OPTIND - 1))
@@ -250,7 +250,7 @@ _z_PS1_git_info()
   elif [[ $status =~ ${re_br%…} ]]; then
     branch="${BASH_REMATCH[1]}"
   else
-    return 70
+    return 1
   fi
   
   # count unstaged files (by counting newlines)

@@ -7,7 +7,7 @@ cyglink()
 
   if (( $# == 0 )); then
     fx_usage >&2
-    return 64
+    return 1
   else
     local target="$1"
     local link="$2"
@@ -15,7 +15,7 @@ cyglink()
 
   if [[ ! -d $target ]]; then
     scold "not a directory: $target"
-    return 65
+    return 1
   fi
 
   cmd /C mklink /J "$(cygpath -aw "$link")" "$(cygpath -aw "$target")"
