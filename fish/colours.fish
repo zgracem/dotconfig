@@ -113,7 +113,7 @@ if not test -f "$ls_colors_file"
   cd -
 end
 
-set -gx LS_COLORS (string split ' ' < $ls_colors_file)[3]
+set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' ')[3]
 
 set --erase ls_colors_file
 
