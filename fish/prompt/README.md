@@ -3,7 +3,7 @@
 My `fish` prompt is minimalist, but provides a surprising amount of information
 as and when it becomes relevant, including:
 
-* Hostname, appears when connecting remotely
+* User and hostname, appear only when connecting remotely
 * Current working directory, abbreviated but still readable at a glance
 * Basic `git` status: just the branch name, with indicators for untracked,
   unstaged, uncommitted, unsynced and stashed files

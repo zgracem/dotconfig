@@ -1,6 +1,10 @@
 function fish_prompt --description 'Display the interactive prompt'
   if set -q SSH_CONNECTION
-    echo -ns (set_color $fish_color_host) (prompt_hostname) (set_color normal) ":"
+    set_color $fish_color_host
+    if test "$USER" != "$DEFAULT_USER"
+      echo -ns $USER "@"
+    end
+    echo -ns (prompt_hostname) (set_color normal) ":"
   end
 
   echo -ns (set_color $fish_color_cwd) (prompt_pwd)
@@ -12,7 +16,7 @@ function fish_prompt --description 'Display the interactive prompt'
     set color_user $fish_color_user
     set glyph "¶"
   else
-    set color_user $fish_color_cwd_root
+    set color_user $fish_color_user_root
     set glyph "#"
   end
 

@@ -91,6 +91,7 @@ set -g fish_color_separator brwhite
 # prompt
 # -----------------------------------------------------------------------------
 
+set -g fish_color_user_root $fish_color_cwd_root
 set -g __fish_prompt_color_clock brblack
 set -g __fish_prompt_color_exit red
 set -g __fish_prompt_color_git_branch brblack
