@@ -35,7 +35,7 @@ if test -x /usr/local/bin/brew
   set -p MANPATH /usr/local/opt/ncurses/share/man
 end
 
-if test (uname -s) = "Linux"
+if linux?
   for d in $HOME/.linuxbrew /home/linuxbrew/.linuxbrew
     if test -x $d/bin/brew
       set -p PATH $d/bin $d/sbin
