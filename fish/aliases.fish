@@ -33,7 +33,7 @@ alias s 'subl --add'
 alias tt 'tmux new-session -A -s main'
 alias unset 'set --erase'
 alias unstow 'stow --delete'
-abbr -add --global wtf 'type'
+abbr --add --global wtf 'type'
 
 in-path vimdiff; or alias vimdiff 'vim -d'
 
