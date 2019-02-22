@@ -19,13 +19,13 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     echo -n "+"
   end
 
-  set -l staged (string replace -rf '^1 \S\. .*' '•' $git_status | string join "" | string length)
+  set -l staged (count (string match -ar '^1 \S\. .*' $git_status))
   or set -l staged 0
 
-  set -l unstaged (string replace -rf '^1 \.\S .*' '•' $git_status | string join "" | string length)
+  set -l unstaged (count (string match -ar '^1 \.\S .*' $git_status))
   or set -l unstaged 0
 
-  set -l untracked (string replace -rf '^\? .*' '•' $git_status | string join "" | string length)
+  set -l untracked (count (string match -ar '^\? .*' $git_status))
   or set -l untracked 0
 
   if test (math "$unstaged + $untracked") -gt 0
