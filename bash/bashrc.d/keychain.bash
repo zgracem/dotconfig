@@ -11,7 +11,7 @@ if [[ -z $SSH_AGENT_PID ]]; then
     printf '%b\n' "> ${Z_RELOADING+re-}initializing ssh-agent..."
   fi
 
-  if keychain_env=$(keychain --agents ssh \
+  if keychain_env=$(SHELL=$BASH keychain --agents ssh \
                              --absolute --dir "$XDG_RUNTIME_DIR/keychain" \
                              --ignore-missing \
                              --inherit any \
