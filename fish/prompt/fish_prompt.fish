@@ -12,7 +12,7 @@ function fish_prompt --description 'Display the interactive prompt'
   __fish_prompt_git
   __fish_prompt_jobs
 
-  if test (id -u) != "0"
+  if test (id -u) -ne 0
     set color_user $fish_color_user
     set glyph "¶"
   else

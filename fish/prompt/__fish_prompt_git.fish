@@ -1,14 +1,14 @@
 function __fish_prompt_git --description 'Display git info in the fish prompt'
   # fail if git isn't even installed
-  if not in-path git; return 1; end
+  if not in-path git; return 0; end
 
   # fail if we're not inside a git repo
   if not set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
-    return 1
+    return $status
   end
 
   set -l git_status (command git status --branch --porcelain=v2 2>/dev/null)
-  or return
+  or return $status
 
   set -l git_branch (string match -r '(?<=branch.head ).*' $git_status)
 

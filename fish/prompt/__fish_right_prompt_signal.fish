@@ -10,10 +10,12 @@ function __fish_right_prompt_signal --description 'Converts an exit code into a 
                   OSERR OSFILE CANTCREAT IOERR TEMPFAIL PROTOCOL NOPERM CONFIG
 
   if test $code -gt 128 -a $code -le 165
-    echo -n $signals[(math "$code - 128")]
+    set exit $signals[(math "$code - 128")]
   else if test $code -ge 64 -a $code -le 78
-    echo -n $sysexits[(math "$code - 63")]
+    set exit $sysexits[(math "$code - 63")]
   else
-    echo -n $code
+    set exit $code
   end
+
+  echo -n "$exit "
 end

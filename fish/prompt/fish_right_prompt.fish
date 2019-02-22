@@ -8,9 +8,11 @@ function fish_right_prompt --description 'Display the right side of the interact
     set_color normal 
   end
   
-  set_color $__fish_prompt_color_duration
-  __fish_right_prompt_timer "$time"
-  set_color normal
+  begin
+    set_color $__fish_prompt_color_duration
+    __fish_right_prompt_timer $time
+    set_color normal
+  end
 
   # if test $fish_key_bindings = "fish_vi_key_bindings"
   #   __fish_right_prompt_mode
