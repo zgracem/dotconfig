@@ -10,5 +10,9 @@ as and when it becomes relevant, including:
 * Background job count, if > 0
 * Non-zero exit statuses appear against the right margin, as numbers or (if
   applicable) signal names
-* The right margin can also include the current time and an indicator of the 
-  current `vi` mode
+* The right margin can also include the duration of the last command, the
+  current time, and/or an indicator of the current `vi` mode
+
+Prompt-related functions live in this directory to avoid cluttering up
+`../functions`. Its path must be added to `$fish_function_path` so they can
+auto-load.

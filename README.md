@@ -7,16 +7,17 @@ Some people prune bonsai trees. I refactor my dotfiles.
 * `environment.sh` loads environment variables from `environment.d/*.sh` 
   for all POSIX shells
     * `misc/launchd.conf` makes them available to macOS GUI apps
-* `~/.profile` is a symlink to `sh/profile.sh`, and sources the contents of 
+    * `fish/config.fish` accesses them by bootstrapping `fish` through `sh`
+* `~/.profile` is a symlink to `sh/profile.sh`, which sources the contents of 
   `sh/profile.d`
-* `~/.bashrc` is a symlink to `bash/bashrc.bash`, and sources `bash/_*.bash`,
+* `~/.bashrc` is a symlink to `bash/bashrc.bash`, which sources `bash/_*.bash`,
   the contents of `bash/*.d`, and (if present) the contents of
   `~/.local/config/bashrc.d`
     * `~/.local` is a symlink to `~/.config/local/$HOSTNAME`, if it exists
-* `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced 
-  immediately before the first prompt
-* `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are sourced
-  when the shell exits
+    * `bash/init.bash` and (if present) `~/.local/config/init.bash` are 
+      sourced immediately before the first prompt
+    * `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are 
+      sourced when `bash` exits
 
 ## Setting up a new homedir
 
