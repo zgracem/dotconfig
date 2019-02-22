@@ -9,7 +9,7 @@ set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
 # Homebrew
-if test -x /usr/local/bin/brew
+if [ -x /usr/local/bin/brew ]
   # GNU coreutils (w/out `g` prefix)
   set -p PATH /usr/local/opt/coreutils/libexec/gnubin
   set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
@@ -37,7 +37,7 @@ end
 
 if linux?
   for d in $HOME/.linuxbrew /home/linuxbrew/.linuxbrew
-    if test -x $d/bin/brew
+    if [ -x $d/bin/brew ]
       set -p PATH $d/bin $d/sbin
       set -p MANPATH $d/share/man
       break
@@ -51,8 +51,8 @@ set -p PATH $HOME/opt/bin $HOME/bin
 set -p MANPATH $HOME/opt/share/man $HOME/opt/man
 
 # rbenv
-if test -d "$HOME/.rbenv"
-  if test -d "$HOME/.rbenv/bin"
+if [ -d "$HOME/.rbenv" ]
+  if [ -d "$HOME/.rbenv/bin" ]
     # non-Homebrew installation
     set -p PATH $HOME/.rbenv/bin
   end

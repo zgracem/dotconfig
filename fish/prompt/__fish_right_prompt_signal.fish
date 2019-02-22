@@ -9,9 +9,9 @@ function __fish_right_prompt_signal --description 'Converts an exit code into a 
   set -l sysexits USAGE DATAERR NOINPUT NOUSER NOHOST UNAVAILABLE SOFTWARE \
                   OSERR OSFILE CANTCREAT IOERR TEMPFAIL PROTOCOL NOPERM CONFIG
 
-  if test $code -gt 128 -a $code -le 165
+  if [ $code -gt 128 -a $code -le 165 ]
     set exit $signals[(math "$code - 128")]
-  else if test $code -ge 64 -a $code -le 78
+  else if [ $code -ge 64 -a $code -le 78 ]
     set exit $sysexits[(math "$code - 63")]
   else
     set exit $code

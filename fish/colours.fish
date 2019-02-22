@@ -80,7 +80,7 @@ set -g fish_pager_color_secondary --background=normal
 # -----------------------------------------------------------------------------
 
 set -g fish_color_valid_path blue --underline
-set -g fish_color_history_current --bold
+set -g fish_color_history_current brmagenta --bold
 set -g fish_color_cwd_root red
 
 set -g fish_color_status brmagenta
@@ -109,7 +109,7 @@ set -g __fish_prompt_color_jobs yellow
 
 set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if not test -f "$ls_colors_file"
+if not [ -f "$ls_colors_file" ]
   cd "$XDG_CONFIG_HOME/dircolors"
   and make --quiet all
   cd -
