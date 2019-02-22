@@ -14,7 +14,7 @@ abbr --add --global -- '-' 'cd -'
 # macOS & misc.
 # -----------------------------------------------------------------------------
 
-if test (uname -s) = "Darwin"
+if macos?
   alias dnsflush 'sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder'
   alias PlistBuddy '/usr/libexec/PlistBuddy'
   alias spotlight 'mdfind -name'
@@ -31,10 +31,13 @@ alias i 'irb -rzgm/irb'
 alias l 'less --quit-if-one-screen'
 alias s 'subl --add'
 alias tt 'tmux new-session -A -s main'
+alias unset 'set --erase'
 alias unstow 'stow --delete'
-alias wtf 'type'
+abbr -add --global wtf 'type'
 
 in-path vimdiff; or alias vimdiff 'vim -d'
+
+in-path bundle; and in-path middleman; and alias mm 'bundle exec middleman'
 
 # -----------------------------------------------------------------------------
 # cp, mv, rm -- make interactive and verbose
@@ -48,7 +51,7 @@ else
   alias rm 'command rm -iv'
 end
 
-if test (uname -s) = "Darwin"
+if macos?
   # >> http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
   alias mv '/bin/mv -iv'
 else
