@@ -4,21 +4,21 @@ function __fish_right_prompt_mode --description 'Display the current mode for th
     switch $fish_bind_mode
       case default
         set_color blue
-        echo -n 'e'
+        set -l mode 'e'
       case insert
         set_color green
-        echo -n 'i'
+        set -l mode 'i'
       case replace_one
         set_color yellow
-        echo -n 'r'
+        set -l mode 'r'
       case visual
         set_color brblue
-        echo -n 'v'
+        set -l mode 'v'
       case '*'
         set_color --bold red
-        echo -n '?'
+        set -l mode '?'
     end
     set_color normal
-    echo -n ' '
+    echo -n "$mode "
   end
 end
