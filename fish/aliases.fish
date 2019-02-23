@@ -46,6 +46,16 @@ abbr --add --global gp  git push
 abbr --add --global gpl git pull
 abbr --add --global gf  git fetch
 
+# ssh
+alias vshraya 'ssh vshraya'
+alias wf 'ssh WebFaction'
+
+if string match -eq .local $hostname
+  alias athena 'ssh Athena.local'
+else
+  alias athena 'ssh Athena.remote'
+end
+
 # -----------------------------------------------------------------------------
 # cp, mv, rm -- make interactive and verbose
 # -----------------------------------------------------------------------------
