@@ -7,7 +7,7 @@ Some people prune bonsai trees. I refactor my dotfiles.
 * `environment.sh` loads environment variables from `environment.d/*.sh` 
   for all POSIX shells
     * `misc/launchd.conf` makes them available to macOS GUI apps
-    * `fish/config.fish` accesses them by bootstrapping `fish` through `sh`
+    * `fish/conf.d/___env.fish` does the same for `fish`
 * `~/.profile` is a symlink to `sh/profile.sh`, which sources the contents of 
   `sh/profile.d`
 * `~/.bashrc` is a symlink to `bash/bashrc.bash`, which sources `bash/_*.bash`,

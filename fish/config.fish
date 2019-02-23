@@ -14,12 +14,6 @@ if [ $FISH_VERSINFO[1] -lt 3 ]
   exit 1
 end
 
-if [ -z "$ENV" ]
-  # Use sh(1) to populate the environment from ~/.config/environment.d.
-  # Both the -l and -i flags are needed to prevent an infinite loop.
-  exec sh -l -i -c "exec "(status fish-path)
-end
-
 source "$__fish_config_dir/paths.fish"
 source "$__fish_config_dir/aliases.fish"
 
