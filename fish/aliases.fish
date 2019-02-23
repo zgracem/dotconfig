@@ -25,7 +25,7 @@ if uname -n | string match -eq "Athena"
   alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
 end
 
-alias bye 'exit'
+alias bye 'kill %self'
 alias e 'printf "%s\n"'
 alias i 'irb -rzgm/irb'
 alias l 'less --quit-if-one-screen'
