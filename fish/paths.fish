@@ -1,3 +1,9 @@
+# Because $__fish_data_dir/config.fish emulates path_helper(8) on macOS and
+# reads the contents of /etc/{,man}paths{,.d} -- and we want the contents of
+# those so we don't have to go digging ourselves -- we start by prepending to
+# whatever PATH is already set. Duplicate entries will be removed later by
+# __fish_path_fixer, with our settings here taking precedence.
+
 # base paths
 set --export PATH /usr/bin /bin /usr/sbin /sbin $PATH
 set --export MANPATH /usr/share/man /usr/man $MANPATH
@@ -7,7 +13,7 @@ set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
 # Homebrew
-if [ -x /usr/local/bin/brew ]
+if macos?; and [ -x /usr/local/bin/brew ]
   # GNU coreutils (w/out `g` prefix)
   set -p PATH /usr/local/opt/coreutils/libexec/gnubin
   set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
@@ -33,15 +39,16 @@ if [ -x /usr/local/bin/brew ]
   set -p MANPATH /usr/local/opt/ncurses/share/man
 end
 
+# Linuxbrew
 if linux?
-  for d in $HOME/.linuxbrew /home/linuxbrew/.linuxbrew
-    if [ -x $d/bin/brew ]
-      set -p PATH $d/bin $d/sbin
-      set -p MANPATH $d/share/man
+  for dir in $HOME/.linuxbrew /home/linuxbrew/.linuxbrew
+    if [ -x $dir/bin/brew ]
+      set -p PATH $dir/bin $dir/sbin
+      set -p MANPATH $dir/share/man
       break
     end
   end
-  set --erase d
+  set --erase dir
 end
 
 # $HOME
