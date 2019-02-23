@@ -2,11 +2,6 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-set -q USER; or set -gx USER (id -un)
-set -q HOSTNAME; or set -gx HOSTNAME (uname -n)
-
-# -----------------------------------------------------------------------------
-
 set FISH_VERSINFO (string split "." "$FISH_VERSION")
 
 if [ $FISH_VERSINFO[1] -lt 3 ]
