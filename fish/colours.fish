@@ -35,7 +35,7 @@ set -g fish_color_selection --background=brblack white
 # the color used to highlight history search matches (must be a background)
 set -g fish_color_search_match --background=black
 
-# the color for parameter expansion operators like '*' and '~'
+# the color for parameter expansion operators like '*', '~', and '()'
 set -g fish_color_operator brcyan
 
 # the color used to highlight character escapes like '\n' and '\x70'
@@ -83,7 +83,7 @@ set -g fish_color_valid_path blue --underline
 set -g fish_color_history_current brmagenta --bold
 set -g fish_color_cwd_root red
 
-set -g fish_color_status brmagenta
+set -g fish_color_status blue
 set -g fish_color_dimmed normal
 set -g fish_color_separator brwhite
 
