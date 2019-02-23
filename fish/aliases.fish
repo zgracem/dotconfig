@@ -39,6 +39,13 @@ in-path vimdiff; or alias vimdiff 'vim -d'
 
 in-path bundle; and in-path middleman; and alias mm 'bundle exec middleman'
 
+# git
+abbr --add --global gb  git branch
+abbr --add --global gco git checkout
+abbr --add --global gp  git push
+abbr --add --global gpl git pull
+abbr --add --global gf  git fetch
+
 # -----------------------------------------------------------------------------
 # cp, mv, rm -- make interactive and verbose
 # -----------------------------------------------------------------------------
