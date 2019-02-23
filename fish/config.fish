@@ -19,5 +19,6 @@ source "$__fish_config_dir/aliases.fish"
 
 if status is-interactive
   source "$__fish_config_dir/colours.fish"
+  set -p fish_function_path "$__fish_config_dir/prompt"
   fish_vi_key_bindings insert
 end

@@ -1,5 +1,3 @@
-set -p fish_function_path "$__fish_config_dir/prompt"
-
 # base paths
 set --export PATH /usr/bin /bin /usr/sbin /sbin
 set --export MANPATH /usr/share/man /usr/man
