@@ -1,11 +1,14 @@
 function prompt_pwd --description 'Print the current working directory, shortened to fit the prompt'
+  set -q argv[1]
+  or set -l argv[1] (pwd)
+
   set -q fish_prompt_pwd_dir_length
   or set -l fish_prompt_pwd_dir_length 3
 
   set -q fish_prompt_pwd_dir_glyph
   or set -l fish_prompt_pwd_dir_glyph "…"
 
-  set -l cwd_parts (pwd | string replace -r "^$HOME(?=\$|/)" "~" | string split "/")
+  set -l cwd_parts (echo $argv[1] | string replace -r "^$HOME(?=\$|/)" "~" | string split "/")
 
   for i in (seq 1 (math (count $cwd_parts) - 1))
     if [ (string length $cwd_parts[$i]) -gt $fish_prompt_pwd_dir_length ]
