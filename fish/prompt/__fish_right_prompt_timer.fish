@@ -1,5 +1,4 @@
-function __fish_right_prompt_timer
-	set -l ms $argv[1]
+function __fish_right_prompt_timer -a ms
   set -l time
 
   if [ "$ms" -le 999 ]

@@ -1,6 +1,4 @@
-function __fish_right_prompt_signal --description 'Converts an exit code into a named signal or sysexit'
-  set -l code $argv[1]
-
+function __fish_right_prompt_signal --description 'Converts an exit code into a named signal or sysexit' -a code
   # Source: `kill -l`
   set -l signals  HUP INT QUIT ILL TRAP ABRT EMT FPE KILL BUS SEGV SYS PIPE \
                   ALRM TERM URG STOP TSTP CONT CHLD TTIN TTOU IO XCPU XFSZ \

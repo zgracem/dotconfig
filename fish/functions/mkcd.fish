@@ -1,4 +1,4 @@
-function mkcd --description 'Create a directory, then move into it'
-  command mkdir -p $argv[1]
-  and cd $argv[1]
+function mkcd --description 'Create a directory, then move into it' -a dir
+  command mkdir -p $dir
+  and cd $dir
 end

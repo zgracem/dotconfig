@@ -1,3 +1,3 @@
-function ret
-  return $argv[1]
+function ret -a code
+  return $code
 end
