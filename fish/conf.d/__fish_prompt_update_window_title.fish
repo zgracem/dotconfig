@@ -2,7 +2,7 @@ function __fish_prompt_update_window_title --on-event fish_prompt
   __fish_prompt_set_window_title (fish_title)
 end
 
-function __fish_prompt_set_window_title
+function __fish_prompt_set_window_title -a title
   set BEL "\a"
   set DCS "\eP"
   set OSC "\e]"
@@ -19,5 +19,5 @@ function __fish_prompt_set_window_title
   set CAP_ts $DCS_ante $OSC "2;"
   set CAP_fs $BEL $DCS_post
 
-  echo -nes $CAP_ts "$argv" $CAP_fs
+  echo -nes $CAP_ts "$title" $CAP_fs
 end
