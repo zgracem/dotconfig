@@ -11,7 +11,8 @@ function prompt_pwd --description 'Print the current working directory, shortene
   set -l cwd (string replace -r "^$HOME(?=\$|/)" "~" $argv[1])
   set -l cwd_parts (string split "/" "$cwd")
 
-  if [ (count $cwd_parts) -le 1 ]
+  if [ (count $cwd_parts) -le 1 ];
+    or [ (id -u) -eq 0 ] # root gets the unobscured path
     echo $cwd
     return 0
   else
