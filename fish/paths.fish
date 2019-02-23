@@ -1,6 +1,6 @@
 # base paths
-set --export PATH /usr/bin /bin /usr/sbin /sbin
-set --export MANPATH /usr/share/man /usr/man
+set --export PATH /usr/bin /bin /usr/sbin /sbin $PATH
+set --export MANPATH /usr/share/man /usr/man $MANPATH
 
 # /usr/local
 set -p PATH /usr/local/bin /usr/local/sbin
