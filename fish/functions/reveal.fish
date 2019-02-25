@@ -1,5 +1,5 @@
 function reveal --description 'Reveal $1 in Finder/Explorer'
-  test -n "$argv[1]"; or return 1
+  set -q argv[1]; or set argv[1] (pwd)
 
   switch (uname -s)
     case 'Darwin'
