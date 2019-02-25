@@ -16,7 +16,7 @@ abbr --add --global -- '-' 'cd -'
 
 if macos?
   alias dnsflush 'sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder'
-  alias PlistBuddy '/usr/libexec/PlistBuddy'
+  alias plistbuddy '/usr/libexec/PlistBuddy'
   alias spotlight 'mdfind -name'
   abbr --add --global sp spotlight
 end
