@@ -1,16 +1,16 @@
 function __fish_right_prompt_timer -a ms
   set -l time
 
-  if [ "$ms" -le 999 ]
+  if [ "$ms" -lt 1000 ]
     # < 1.0s
     set time $ms"ms"
-  else if [ "$ms" -le 59999 ]
+  else if [ "$ms" -lt 60000 ]
     # < 60.0s
     set time (math -s1 "$ms / 1000")"s"
-  else if [ "$ms" -le 3599999 ]
+  else if [ "$ms" -lt 3600000 ]
     # < 60.0m
     set time (math -s1 "$ms / 1000 / 60")"m"
-  else if [ "$ms" -le 86399999 ]
+  else if [ "$ms" -lt 86400000 ]
     # < 24.0h
     set time (math -s1 "$ms / 1000 / 60 / 60")"h"
   else
