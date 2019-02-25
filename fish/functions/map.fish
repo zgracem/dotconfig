@@ -1,23 +1,24 @@
 function map --description 'Apply a command to each item in a list'
+  # Usage: map cmd --switch: one two three
+  # Same as: cmd --switch one; and cmd --switch two; and cmd --switch three
   # Based on <http://redd.it/aks3u>
-  set -l a
   set -l cmd
-  set -l args
+  set -l cmd_argv
   set -l _command_complete 0
 
-  for a in $argv
+  for arg in $argv
     if [ $_command_complete -eq 1 ]
-      set args $args $a
-    else if string match -q "*:" $a
-      set cmd $cmd (string trim -rc: $a)
+      set -p cmd_argv $arg
+    else if string match -q "*:" $arg
+      set -p cmd (string trim -rc: $arg)
       set _command_complete 1
     else
-      set cmd $cmd $a
+      set -p cmd $arg
     end
   end
 
-  for a in $args
-    eval (string escape $cmd) (string escape $a)
+  for argument in $cmd_argv
+    eval (string escape $cmd) (string escape $argument)
     or return
   end
 end
