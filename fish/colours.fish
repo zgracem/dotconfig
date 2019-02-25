@@ -119,10 +119,6 @@ set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' '
 
 set --erase ls_colors_file
 
-if in-path exa
-  set EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS")
-end
-
 if not is-gnu ls
   # Generated at http://geoff.greer.fm/lscolors/
   set -gx CLICOLOR 1
@@ -150,3 +146,47 @@ set -gx LESS_TERMEND (set_color normal)
 
 set -gx GCC_COLORS  "error=91:warning=33:note=34:caret=95:locus=90:quote=36"
 set -gx GREP_COLORS "sl=0:cx=90:mt=4;35:ms=4;95:mc=4;35:fn=34:ln=36:bn=32:se=90"
+
+# -----------------------------------------------------------------------------
+# exa
+# -----------------------------------------------------------------------------
+
+if in-path exa
+  set -gx EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS")
+  set EXA_COLORS "$EXA_COLORS:ur=33"
+  set EXA_COLORS "$EXA_COLORS:uw=31"
+  set EXA_COLORS "$EXA_COLORS:ux=1;4;32"
+  set EXA_COLORS "$EXA_COLORS:ue=1;32"
+  set EXA_COLORS "$EXA_COLORS:gr=33"
+  set EXA_COLORS "$EXA_COLORS:gw=31"
+  set EXA_COLORS "$EXA_COLORS:gx=32"
+  set EXA_COLORS "$EXA_COLORS:tr=33"
+  set EXA_COLORS "$EXA_COLORS:tw=31"
+  set EXA_COLORS "$EXA_COLORS:tx=32"
+  set EXA_COLORS "$EXA_COLORS:su=36"
+  set EXA_COLORS "$EXA_COLORS:sf=36"
+  set EXA_COLORS "$EXA_COLORS:xa=1;37"
+  set EXA_COLORS "$EXA_COLORS:sn=36"
+  set EXA_COLORS "$EXA_COLORS:sb=1;36"
+  set EXA_COLORS "$EXA_COLORS:df=1;36"
+  set EXA_COLORS "$EXA_COLORS:ds=36"
+  set EXA_COLORS "$EXA_COLORS:uu=32"
+  set EXA_COLORS "$EXA_COLORS:un=33"
+  set EXA_COLORS "$EXA_COLORS:gu=32"
+  set EXA_COLORS "$EXA_COLORS:gn=33"
+  set EXA_COLORS "$EXA_COLORS:lc=1;37"
+  set EXA_COLORS "$EXA_COLORS:lm=37"
+  set EXA_COLORS "$EXA_COLORS:ga=1;32"
+  set EXA_COLORS "$EXA_COLORS:gm=1;33"
+  set EXA_COLORS "$EXA_COLORS:gd=1;31"
+  set EXA_COLORS "$EXA_COLORS:gv=36"
+  set EXA_COLORS "$EXA_COLORS:gt=36"
+  set EXA_COLORS "$EXA_COLORS:xx=0"
+  set EXA_COLORS "$EXA_COLORS:da=39"
+  set EXA_COLORS "$EXA_COLORS:in=37"
+  set EXA_COLORS "$EXA_COLORS:bl=36"
+  set EXA_COLORS "$EXA_COLORS:hd=4;37"
+  set EXA_COLORS "$EXA_COLORS:lp=35"
+  set EXA_COLORS "$EXA_COLORS:cc=1;31"
+  set EXA_COLORS "$EXA_COLORS:bO=35;40"
+end
