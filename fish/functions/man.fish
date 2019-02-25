@@ -4,7 +4,6 @@ function man --description 'Display manual pages in a new window with a nice tit
     return
   end
 
-  # TODO: replace with fish_opt/argparse
   if [ (string sub -l 1 -- $argv[1]) = "-" ]
     switch (string sub -s 2 -- $argv[1])
     case '*d*' '*f*' '*h*' '*k*' '*V*' '*w*' '*W*' '*?*'
