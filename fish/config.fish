@@ -2,10 +2,10 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-set FISH_VERSINFO (string split "." "$FISH_VERSION")
-
-if [ $FISH_VERSINFO[1] -lt 3 ]
+if [ (string split "." "$FISH_VERSION")[1] -lt 3 ]
+  set_color >&2 red
   echo >&2 "This configuration file cannot run on fish $FISH_VERSION"
+  set_color >&2 normal
   exit 1
 end
 
