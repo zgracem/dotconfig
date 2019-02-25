@@ -15,7 +15,9 @@ abbr --add --global -- '-' 'cd -'
 # -----------------------------------------------------------------------------
 
 if macos?
+  alias airport '/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
   alias dnsflush 'sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder'
+  alias lsregister '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
   alias plistbuddy '/usr/libexec/PlistBuddy'
   alias spotlight 'mdfind -name'
   abbr --add --global sp spotlight
@@ -33,6 +35,7 @@ alias s 'subl --add'
 alias tt 'tmux new-session -A -s main'
 alias unset 'set --erase'
 alias unstow 'stow --delete'
+alias xd 'hexdump -C'
 abbr --add --global wtf 'type'
 
 in-path vimdiff; or alias vimdiff 'vim -d'
