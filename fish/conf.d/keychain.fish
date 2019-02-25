@@ -1,4 +1,4 @@
-if [ -z "$SSH_AGENT_PID" ]
+if status is-interactive; and [ -z "$SSH_AGENT_PID" ]
   set -l keys id_ed25519 id_rsa
   set -l keychain_env \
     (keychain --eval --quick --quiet \
