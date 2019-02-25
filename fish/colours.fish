@@ -15,7 +15,7 @@ set -g fish_color_quote cyan
 set -g fish_color_redirection yellow
 
 # the color for process separators like ';' and '&'
-set -g fish_color_end yellow
+set -g fish_color_end bryellow
 
 # the color used to highlight "potential errors"
 set -g fish_color_error red
@@ -27,7 +27,7 @@ set -g fish_color_param normal
 set -g fish_color_comment brblack --italics
 
 # the color used to highlight matching parentheses
-set -g fish_color_match magenta
+set -g fish_color_match cyan
 
 # the color used when selecting text (in vi visual mode)
 set -g fish_color_selection --background=brblack white
@@ -93,7 +93,7 @@ set -g fish_color_separator brwhite
 
 set -g fish_color_user_root $fish_color_cwd_root
 set -g __fish_prompt_color_clock brblack
-set -g __fish_prompt_color_duration --dim
+set -g __fish_prompt_color_duration brblack
 set -g __fish_prompt_color_exit red
 set -g __fish_prompt_color_git_branch brblack
 set -g __fish_prompt_color_git_stashed brblack
@@ -109,7 +109,7 @@ set -g __fish_prompt_color_jobs yellow
 
 set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if not [ -f "$ls_colors_file" ]
+if [ ! -f "$ls_colors_file" ]
   cd "$XDG_CONFIG_HOME/dircolors"
   and make --quiet all
   cd -
