@@ -47,13 +47,13 @@ abbr --add --global gpl git pull
 abbr --add --global gf  git fetch
 
 # ssh
-alias vshraya 'ssh vshraya'
-alias wf 'ssh WebFaction'
+alias vshraya '_ssh vshraya'
+alias wf '_ssh WebFaction'
 
 if string match -eq .local $hostname
-  alias athena 'ssh Athena.local'
+  alias athena '_ssh Athena.local'
 else
-  alias athena 'ssh Athena.remote'
+  alias athena '_ssh Athena.remote'
 end
 
 # -----------------------------------------------------------------------------
