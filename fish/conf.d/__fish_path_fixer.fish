@@ -4,10 +4,10 @@ function __fish_path_fixer --description 'Removes duplicate and missing dirs fro
   set -l FIXED_PATH
 
   for dir in $ORIGINAL_PATH
-    if contains $dir $FIXED_PATH
+    if contains -- $dir $FIXED_PATH
       continue
     else
-      test -d "$dir"; and set -a FIXED_PATH $dir
+      test -d "$dir"; and set FIXED_PATH $FIXED_PATH $dir
     end
   end
 

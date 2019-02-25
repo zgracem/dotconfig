@@ -1,5 +1,5 @@
 function __fish_prompt_jobs --description 'Helper function for fish_prompt'
-  jobs -q; or return 0
+  jobs >/dev/null; or return 0
 
   set job_count (jobs | wc -l)
 
