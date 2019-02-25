@@ -3,9 +3,11 @@
 # -----------------------------------------------------------------------------
 
 if [ (string split "." "$FISH_VERSION")[1] -lt 3 ]
-  set_color >&2 red
-  echo >&2 "This configuration file cannot run on fish $FISH_VERSION"
-  set_color >&2 normal
+  begin
+    set_color red
+    echo "This configuration file cannot run on fish $FISH_VERSION"
+    set_color normal
+  end >&2
   exit 1
 end
 
