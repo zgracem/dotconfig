@@ -223,6 +223,11 @@ shopt -u nullglob
 # And finally...
 # -----------------------------------------------------------------------------
 
+# Addresses https://github.com/fish-shell/fish-shell/issues/5663
+if [[ $SHELL == *fish ]]; then
+  reset
+fi
+
 # Final initialization scripts, except in subshells/when reloading/as root
 if   (( SHLVL <= 1 )) \
   && (( BASH_SUBSHELL < 1 )) \
