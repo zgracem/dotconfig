@@ -1,5 +1,5 @@
 function manpdf
-	set -lx MANPDF_DIR "$XDG_DATA_HOME/doc/pdf"
+  set -lx MANPDF_DIR "$XDG_DATA_HOME/doc/pdf"
   if [ ! -d "$MANPDF_DIR" ]
     set MANPDF_DIR "$HOME/Dropbox/share/doc/pdf"
   end
