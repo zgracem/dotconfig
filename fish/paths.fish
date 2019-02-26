@@ -65,5 +65,8 @@ if [ -d "$HOME/.rbenv" ]
   set -p MANPATH $HOME/.rbenv/versions/(cat "$HOME/.rbenv/version")/share/man
 end
 
+# fish
+set -p MANPATH $__fish_data_dir/man
+
 set PATH (__fish_path_fixer $PATH)
 set MANPATH (__fish_path_fixer $MANPATH)
