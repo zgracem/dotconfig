@@ -1,4 +1,5 @@
-if status is-interactive; and [ -z "$SSH_AGENT_PID" ]
+if status is-interactive; and in-path keychain; and not set -q SSH_AGENT_PID
+  set -lx SHELL (status fish-path)
   set -l keys id_ed25519 id_rsa
   set -l keychain_env \
     (keychain --eval --quick --quiet \
