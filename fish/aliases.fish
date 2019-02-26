@@ -24,12 +24,12 @@ if macos?
   abbr --add --global sp spotlight
 end
 
-if string match -eq "Athena" $hostname
+if string match -eq 'Athena' $hostname
   alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
 end
 
 alias bye 'kill %self'
-alias e 'printf "%s\n"'
+alias e 'printf "%s\\n"'
 alias i 'irb -rzgm/irb'
 alias l 'less --quit-if-one-screen'
 alias s 'subl --add'
@@ -39,9 +39,8 @@ alias unstow 'stow --delete'
 alias xd 'hexdump -C'
 abbr --add --global wtf 'type'
 
-in-path vimdiff; or alias vimdiff 'vim -d'
-
 in-path bundle; and in-path middleman; and alias mm 'bundle exec middleman'
+in-path vimdiff; or alias vimdiff 'vim -d'
 
 # git
 abbr --add --global gb  git branch
@@ -51,14 +50,13 @@ abbr --add --global gp  git push
 abbr --add --global gpl git pull
 
 # ssh
-alias vshraya '_ssh vshraya'
-alias wf '_ssh WebFaction'
-
-if string match -eq .local $hostname
+if string match -eq '.local' $hostname
   alias athena '_ssh Athena.local'
 else
   alias athena '_ssh Athena.remote'
 end
+alias vshraya '_ssh vshraya'
+alias wf '_ssh WebFaction'
 
 # -----------------------------------------------------------------------------
 # cp, mv, rm -- make interactive and verbose
