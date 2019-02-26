@@ -12,7 +12,10 @@ function fish_prompt --description 'Display the interactive prompt'
   __fish_prompt_git
   __fish_prompt_jobs
 
-  if [ (id -u) -ne 0 ]
+  if set -q fish_private_mode
+    set color_user $fish_color_dimmed
+    set glyph "?"
+  else if [ (id -u) -ne 0 ]
     set color_user $fish_color_user
     set glyph "¶"
   else

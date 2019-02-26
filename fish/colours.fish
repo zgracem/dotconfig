@@ -84,7 +84,7 @@ set -g fish_color_history_current brmagenta --bold
 set -g fish_color_cwd_root red
 
 set -g fish_color_status blue
-set -g fish_color_dimmed --dim
+set -g fish_color_dimmed brblack
 set -g fish_color_separator brwhite
 
 # -----------------------------------------------------------------------------
