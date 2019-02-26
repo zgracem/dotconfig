@@ -17,13 +17,14 @@ abbr --add --global -- '-' 'cd -'
 if macos?
   alias airport '/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
   alias dnsflush 'sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder'
+  alias lockscreen '/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
   alias lsregister '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
   alias plistbuddy '/usr/libexec/PlistBuddy'
   alias spotlight 'mdfind -name'
   abbr --add --global sp spotlight
 end
 
-if uname -n | string match -eq "Athena"
+if string match -eq "Athena" $hostname
   alias vsdeploy "$HOME/Dropbox/www/vs2017/bin/sync.sh"
 end
 
@@ -45,9 +46,9 @@ in-path bundle; and in-path middleman; and alias mm 'bundle exec middleman'
 # git
 abbr --add --global gb  git branch
 abbr --add --global gco git checkout
+abbr --add --global gf  git fetch
 abbr --add --global gp  git push
 abbr --add --global gpl git pull
-abbr --add --global gf  git fetch
 
 # ssh
 alias vshraya '_ssh vshraya'
