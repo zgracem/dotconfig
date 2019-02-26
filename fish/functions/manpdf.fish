@@ -1,4 +1,7 @@
 function manpdf
+  # https://github.com/zgracem/manpdf
+  in-path manpdf; or return 127
+  
   set -lx MANPDF_DIR "$XDG_DATA_HOME/doc/pdf"
   if [ ! -d "$MANPDF_DIR" ]
     set MANPDF_DIR "$HOME/Dropbox/share/doc/pdf"
