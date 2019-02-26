@@ -1,5 +1,6 @@
 function brew
   in-path brew; or return 127
+
   switch $argv[1]
   case 'update'
     # Addresses https://github.com/Homebrew/brew/issues/5791

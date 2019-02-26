@@ -1,11 +1,11 @@
 function "macos?"
-  uname -s | string match -eq "Darwin"
+  uname -s | string match -eq 'Darwin'
 end
 
 function "cygwin?"
-  uname -s | string match -eq "CYGWIN"
+  uname -s | string match -eq 'CYGWIN'
 end
 
 function "linux?"
-  uname -s | string match -eq "Linux"
+  uname -s | string match -eq 'Linux'
 end

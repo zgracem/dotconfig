@@ -4,7 +4,6 @@
 # whatever PATH is already set. Duplicate entries will be removed later by
 # __fish_path_fixer, with our settings here taking precedence.
 
-# base paths
 set --export PATH /usr/bin /bin /usr/sbin /sbin $PATH
 set --export MANPATH /usr/share/man /usr/man $MANPATH
 
@@ -67,6 +66,8 @@ end
 
 # fish
 set -p MANPATH $__fish_data_dir/man
+
+# -----------------------------------------------------------------------------
 
 set PATH (__fish_path_fixer $PATH)
 set MANPATH (__fish_path_fixer $MANPATH)
