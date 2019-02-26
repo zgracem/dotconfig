@@ -7,5 +7,5 @@ else if in-path curl
     curl -OJ $argv
   end
 else
-  return 127
+  exit 127
 end
