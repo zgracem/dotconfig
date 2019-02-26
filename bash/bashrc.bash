@@ -223,7 +223,10 @@ shopt -u nullglob
 # And finally...
 # -----------------------------------------------------------------------------
 
-# Addresses https://github.com/fish-shell/fish-shell/issues/5663
+# Addresses an issue in fish < 3.1 where the terminal isn't correctly reset
+# when fish exits back into bash.
+#   See https://github.com/fish-shell/fish-shell/issues/5663
+#   and https://github.com/fish-shell/fish-shell/commit/2418e1e
 if [[ $SHELL == *fish ]]; then
   reset
 fi
