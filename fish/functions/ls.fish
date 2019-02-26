@@ -1,5 +1,7 @@
 if in-path exa
-  alias ls 'exa --all'
+  function ls --wraps exa --description 'List (almost) all files'
+    exa --all $argv
+  end
 else
   function ls --description 'List (almost) all files'
     set params -A -q

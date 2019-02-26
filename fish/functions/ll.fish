@@ -1,7 +1,9 @@
 if in-path exa
-  alias ll 'ls --long'
+  function ll --wraps exa --description 'List files vertically, info-heavy'
+    ls --long $argv
+  end
 else
-  function ll --description 'List files vertically, info-heavy'
+  function ll --wraps ls --description 'List files vertically, info-heavy'
     set params -l -h
     #           │  └─ human-readable sizes
     #           └──── long-list output

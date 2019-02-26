@@ -1,7 +1,9 @@
 if in-path exa
-  alias lsf 'll --group --inode --extended'
+  function lsf --wraps exa --description 'List files with "full" info'
+    ll --group --inode --extended $argv
+  end
 else
-  function lsf --description 'List files with "full" info'
+  function lsf --wraps ls --description 'List files with "full" info'
     set params -A -i -l
     #           │  │  └─ long-list output
     #           │  └──── print inode number
