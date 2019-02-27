@@ -44,6 +44,7 @@ in-path vimdiff; or alias vimdiff 'vim -d'
 
 # git
 abbr --add --global gb  git branch
+abbr --add --global gc  git commit
 abbr --add --global gco git checkout
 abbr --add --global gf  git fetch
 abbr --add --global gp  git push
