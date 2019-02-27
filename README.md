@@ -13,7 +13,8 @@ Some people prune bonsai trees. I refactor my dotfiles.
 * `~/.bashrc` is a symlink to `bash/bashrc.bash`, which sources `bash/_*.bash`,
   the contents of `bash/*.d`, and (if present) the contents of
   `~/.local/config/bashrc.d`
-    * `~/.local` is a symlink to `~/.config/local/$HOSTNAME`, if it exists
+    * `~/.local/config` is a symlink to `~/.config/local/$HOSTNAME/config`,
+      if it exists
     * `bash/init.bash` and (if present) `~/.local/config/init.bash` are 
       sourced immediately before the first prompt
     * `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are 
