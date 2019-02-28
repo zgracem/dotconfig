@@ -16,7 +16,7 @@ function prompt_pwd --description 'Print the current working directory, shortene
     return 0
   else
     for i in (seq 1 (math (count $cwd_parts) - 1))
-      if [ (string length $cwd_parts[$i]) -gt $fish_prompt_pwd_dir_length ]
+      if [ (string length $cwd_parts[$i]) -gt (math $fish_prompt_pwd_dir_length + 1) ]
         set cwd_parts[$i] (string sub -l $fish_prompt_pwd_dir_length "$cwd_parts[$i]")"$fish_prompt_pwd_dir_glyph"
       end
     end
