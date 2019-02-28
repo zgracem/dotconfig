@@ -24,12 +24,25 @@ brew "transmission"
 # audio/video
 
 brew "atomicparsley"
-brew "ffmpeg"
 brew "id3v2"
 brew "lame"
 brew "mkvtoolnix"
 brew "mp4v2"
 brew "mplayer"
+
+# ffmpeg with options
+tap  "varenc/ffmpeg"
+brew "varenc/ffmpeg/ffmpeg", args: [
+  "HEAD",
+  "with-fdk-aac",
+  "with-libssh",
+  "with-openh264",
+  "with-openssl",
+  "with-rtmpdump",
+  "with-two-lame",
+  "with-webp",
+  "with-xvid"
+]
 
 # images
 
