@@ -15,7 +15,7 @@ set -g fish_color_quote cyan
 set -g fish_color_redirection yellow
 
 # the color for process separators like ';' and '&'
-set -g fish_color_end bryellow
+set -g fish_color_end br$fish_color_quote
 
 # the color used to highlight "potential errors"
 set -g fish_color_error red
@@ -32,20 +32,20 @@ set -g fish_color_match cyan
 # the color used when selecting text (in vi visual mode)
 set -g fish_color_selection --background=brblack white
 
-# the color used to highlight history search matches (must be a background)
+# the background color used to highlight history search matches
 set -g fish_color_search_match --background=black
 
 # the color for parameter expansion operators like '*', '~', and '()'
-set -g fish_color_operator brcyan
+set -g fish_color_operator br$fish_color_redirection
 
 # the color used to highlight character escapes like '\n' and '\x70'
 set -g fish_color_escape brmagenta
 
-# the color used for the current working directory in the default prompt
-set -g fish_color_cwd brwhite
-
 # the color used for autosuggestions
 set -g fish_color_autosuggestion brblack
+
+# the color used for the current working directory in the default prompt
+set -g fish_color_cwd brwhite
 
 # the color used to print the current username in some of fish default prompts
 set -g fish_color_user blue
@@ -79,8 +79,8 @@ set -g fish_pager_color_secondary --background=normal
 # undocumented
 # -----------------------------------------------------------------------------
 
-set -g fish_color_valid_path blue --underline
-set -g fish_color_history_current brmagenta --bold
+set -g fish_color_valid_path green --underline
+set -g fish_color_history_current brmagenta --bold # What is this???
 set -g fish_color_cwd_root red
 
 set -g fish_color_status blue
@@ -155,7 +155,7 @@ if in-path exa
   set -gx EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS")
   set EXA_COLORS "$EXA_COLORS:ur=33"
   set EXA_COLORS "$EXA_COLORS:uw=31"
-  set EXA_COLORS "$EXA_COLORS:ux=1;4;32"
+  set EXA_COLORS "$EXA_COLORS:ux=32"
   set EXA_COLORS "$EXA_COLORS:ue=1;32"
   set EXA_COLORS "$EXA_COLORS:gr=33"
   set EXA_COLORS "$EXA_COLORS:gw=31"
