@@ -1,4 +1,4 @@
-function exls --description 'Lists the contents of archives'
+function exls --description 'List the contents of archives'
   for archive in $argv
     switch $archive
       case '*.7z'
