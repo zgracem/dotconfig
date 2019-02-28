@@ -92,11 +92,11 @@ set -g fish_color_separator brwhite
 # -----------------------------------------------------------------------------
 
 set -g fish_color_user_root $fish_color_cwd_root
-set -g __fish_prompt_color_clock brblack
-set -g __fish_prompt_color_duration brblack
-set -g __fish_prompt_color_exit red
-set -g __fish_prompt_color_git_branch brblack
-set -g __fish_prompt_color_git_stashed brblack
+set -g __fish_prompt_color_clock $fish_color_dimmed
+set -g __fish_prompt_color_duration $fish_color_dimmed
+set -g __fish_prompt_color_exit $fish_color_error
+set -g __fish_prompt_color_git_branch $fish_color_dimmed
+set -g __fish_prompt_color_git_stashed $fish_color_dimmed
 set -g __fish_prompt_color_git_needs_add red
 set -g __fish_prompt_color_git_needs_commit yellow
 set -g __fish_prompt_color_git_needs_push cyan
