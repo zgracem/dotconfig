@@ -21,6 +21,8 @@ alias  rtest='"$rtest"'
 # shellcheck disable=SC2016
 export rtest='"$dir_dropbox/src/ruby/_scratch/_test.rb"'
 
+alias tfish='tmux new-session -A fish'
+
 # -----------------------------------------------------------------------------
 
 # start servers
