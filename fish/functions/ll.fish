@@ -1,6 +1,6 @@
 if in-path exa
   function ll --wraps exa --description 'List files vertically, info-heavy'
-    ls --long $argv
+    ls --long --time-style=long-iso $argv
   end
 else
   function ll --wraps ls --description 'List files vertically, info-heavy'
