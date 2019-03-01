@@ -1,3 +1,3 @@
 function cp --wraps cp
-	command cp -aiv $argv
+  command cp -aiv $argv
 end

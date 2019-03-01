@@ -1,6 +1,5 @@
-# Defined in /Users/zozo/var/run/fish/fish.IW8fCm/g2.fish @ line 2
 function g2 --description 'Go somewhere' --argument destination
-	switch $destination
+  switch $destination
     case 'defunct'; cd "$HOME/src/_defunct"
     case 'stow';    cd "$HOME/opt/stow"
     case 'inbox';   cd "$HOME/Dropbox/inbox"

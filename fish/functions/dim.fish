@@ -1,5 +1,5 @@
 function dim -a image --description 'Get the pixel dimensions of an image'
-	set -l regex '.*: (\d+)$'
+  set -l regex '.*: (\d+)$'
   set -l width
   set -l height
 

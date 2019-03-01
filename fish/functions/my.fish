@@ -1,5 +1,5 @@
 function my --description 'Display network information'
-	switch "$argv[1]"
+  switch "$argv[1]"
     case 'ip' 'localip' 'router' 'ssid'
       eval "_my_$argv[1]"
     case ''
