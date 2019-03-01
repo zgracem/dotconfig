@@ -1,7 +1,9 @@
 function __fish_right_prompt_timer -a ms
   set -l time
 
-  if [ "$ms" -lt 1000 ]
+  if [ "$ms" -eq 0 ]
+    return
+  else if [ "$ms" -lt 1000 ]
     # < 1.0s
     set time $ms"ms"
   else if [ "$ms" -lt 60000 ]
