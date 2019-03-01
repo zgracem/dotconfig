@@ -19,6 +19,17 @@ else
   source "$__fish_config_dir/paths.fish"
   source "$__fish_config_dir/aliases.fish"
 
+  set -g __fish_config_dir_local ~/.local/config/fish
+
+  if test -d $__fish_config_dir_local
+    if test -d $__fish_config_dir_local/conf.d
+      for file in $__fish_config_dir_local/conf.d/*.fish
+        source "$file";
+      end
+    end
+    set -p fish_function_path $__fish_config_dir_local/functions
+  end
+
   if status is-interactive
     source "$__fish_config_dir/colours.fish"
     set -p fish_function_path "$__fish_config_dir/prompt"
