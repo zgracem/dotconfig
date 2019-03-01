@@ -108,7 +108,7 @@ fi
 # Switch to alternate shell if available
 # -----------------------------------------------------------------------------
 
-: ${PREFERRED_SHELL:=fish}
+: ${PREFERRED_SHELL=fish}
 
 case $HOSTNAME in
   WS*)
@@ -131,9 +131,6 @@ if [[ $PREFERRED_SHELL != $SHELL ]] || [[ ${PREFERRED_SHELL##*/} != ${SHELL##*/}
     # Prevent shell from exiting if `exec` fails
     shopt -s execfail
 
-    # Temporarily export shell options so the new shell (if bash) inherits them.
-    export SHELLOPTS 2>/dev/null
-
     if shopt -pq login_shell; then
       exec -l "$SHELL"
     else
@@ -146,7 +143,6 @@ fi
 
 # We don't actually want to *keep* those settings, though.
 shopt -u execfail
-declare +x SHELLOPTS 2>/dev/null
 
 # -----------------------------------------------------------------------------
 # Other config files
