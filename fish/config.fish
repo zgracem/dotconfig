@@ -6,21 +6,17 @@ set -gx FISH_VERSINFO (string split "." "$FISH_VERSION")
 
 if [ $FISH_VERSINFO[1] -lt 3 ]
   begin
-    set_color black --background red
-    echo -n " >>> "
-    set_color bryellow
-    echo -n "This configuration file cannot run on fish" $FISH_VERSION
-    set_color black
-    echo    " <<< "
-    set_color normal
+    echo (set_color black --background red) ">>>" (set_color bryellow) \
+      "This configuration file cannot run on fish" $FISH_VERSION \
+      (set_color black) "<<<" (set_color normal)
   end >&2
   exit 1
 else
   source "$__fish_config_dir/paths.fish"
   source "$__fish_config_dir/aliases.fish"
 
+  # load per-machine configuration if available
   set -g __fish_config_dir_local ~/.local/config/fish
-
   if test -d $__fish_config_dir_local
     if test -d $__fish_config_dir_local/conf.d
       for file in $__fish_config_dir_local/conf.d/*.fish
@@ -31,8 +27,13 @@ else
   end
 
   if status is-interactive
+    # setup colours
     source "$__fish_config_dir/colours.fish"
+
+    # activate custom prompt
     set -p fish_function_path "$__fish_config_dir/prompt"
+
+    # use vi key bindings & start in insert mode
     fish_vi_key_bindings insert
   end
 end
