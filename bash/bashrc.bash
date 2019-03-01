@@ -48,6 +48,7 @@ shopt -u sourcepath     # [don't] use PATH to find files to `.`
 # >> http://wiki.bash-hackers.org/scripting/bashchanges#shell_options
 
 this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
+latest_bash=50
 
 if (( this_bash >= 42 )); then
   # Execute a pipeline's last cmd in the current shell context
@@ -77,19 +78,47 @@ if [[ -n $SSH_CONNECTION && -z $TMUX && -z $STY ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# Switch to newer version of bash if available
+# Ensure HOME is set
+# -----------------------------------------------------------------------------
+
+if [[ -z $HOME ]]; then
+  # This happened to me once. Ever. Then I wrote this. *Everything* breaks if
+  # HOME is suddenly empty or unset, and if that's the case, it's probably not
+  # even the biggest problem, so notify the user immediately.
+  printf "HOME not found, searching... " >&2
+
+  # First, the simplest: grep the system passwd(5) file and take the homedir
+  # from the sixth (`-f6`) colon-delimited (`-d:`) field. If grep fails,
+  # it will pass the false exit status through (because `pipefail` is set)
+  # and try to query Directory Services; if that fails, Python will try to
+  # resolve it.
+  HOME=$(grep "^$USER" /etc/passwd | cut -f6 -d:) \
+  || HOME=$(dscl . -read "/Users/$USER" NFSHomeDirectory 2>/dev/null | cut -d' ' -f2) \
+  || HOME=$(python -c 'import os;print os.path.expanduser("~")' 2>/dev/null) \
+  || {
+    # ...but if Python can't, then I'm out of ideas, so we'd better abort
+    # before things get even worse.
+    printf 'failed!\n' >&2; return 1;
+  }
+
+  printf '%s\n' "$HOME"
+fi
+
+# -----------------------------------------------------------------------------
+# Switch to alternate shell if available
 # -----------------------------------------------------------------------------
 
 : ${PREFERRED_SHELL:=fish}
 
 case $HOSTNAME in
   WS*)
-    # If I launch Cygwin with anything besides /bin/bash, the session crashes
-    # immediately. I still don't know why. -- ZGM 2019-03-01
+    # The way I launch Cygwin (via PuTTY + cygtermd) doesn't accommodate the
+    # concept of "login shell" -- if I start with anything besides /bin/bash,
+    # the session crashes immediately. I don't know why. -- ZGM 2019-03-01
     PREFERRED_SHELL="$HOME/opt/bin/fish"
     ;;
   web*)
-    # I'm obviously not allowed to change anything on my shared hosts.
+    # I'm not allowed to change anything on my shared hosts.
     PREFERRED_SHELL="$HOME/.linuxbrew/bin/fish"
     ;;
 esac
@@ -118,33 +147,6 @@ fi
 # We don't actually want to *keep* those settings, though.
 shopt -u execfail
 declare +x SHELLOPTS 2>/dev/null
-
-# -----------------------------------------------------------------------------
-# Essential environment variables
-# -----------------------------------------------------------------------------
-
-if [[ -z $HOME ]]; then
-  # This happened to me once. Ever. Then I wrote this. *Everything* breaks if
-  # HOME is suddenly empty or unset, and if that's the case, it's probably not
-  # even the biggest problem, so notify the user immediately.
-  printf "HOME not found, searching... " >&2
-
-  # First, the simplest: grep the system passwd(5) file and take the homedir
-  # from the sixth (`-f6`) colon-delimited (`-d:`) field. If grep fails,
-  # it will pass the false exit status through (because `pipefail` is set)
-  # and try to query Directory Services; if that fails, Python will try to
-  # resolve it.
-  HOME=$(grep "^$USER" /etc/passwd | cut -f6 -d:) \
-  || HOME=$(dscl . -read "/Users/$USER" NFSHomeDirectory 2>/dev/null | cut -d' ' -f2) \
-  || HOME=$(python -c 'import os;print os.path.expanduser("~")' 2>/dev/null) \
-  || {
-    # ...but if Python can't, then I'm out of ideas, so we'd better abort
-    # before things get even worse.
-    printf 'failed!\n' >&2; return 1;
-  }
-
-  printf '%s\n' "$HOME"
-fi
 
 # -----------------------------------------------------------------------------
 # Other config files
@@ -243,7 +245,7 @@ then
 fi
 
 # Print bash version if not the latest release
-if (( this_bash != latest_bash )) || [[ -n $newer_bash ]] \
+if (( this_bash != latest_bash )) \
   || [[ ${BASH_VERSINFO[4]} != "release" ]] \
   || [[ $BASH != "$SHELL" ]]; then
   printf 'GNU bash, version %s (%s)\n' "$BASH_VERSION" "$MACHTYPE"
@@ -256,5 +258,5 @@ if _isFunction .; then
   unset -f .
 fi
 
-unset -v file latest_bash this_bash newer_bash
+unset -v file latest_bash this_bash
 unset -v Z_IN_BASHRC
