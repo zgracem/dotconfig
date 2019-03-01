@@ -33,12 +33,15 @@ alias e 'printf "%s\\n"'
 alias i 'irb -rzgm/irb'
 alias l 'less --quit-if-one-screen'
 alias s 'subl --add'
-alias unset 'set --erase'
-alias unstow 'stow --delete'
-alias xd 'hexdump -C'
+
+abbr --add --global unset 'set --erase'
+abbr --add --global unstow 'stow --delete'
+abbr --add --global xd 'hexdump -C'
 abbr --add --global wtf 'type'
 
-in-path bundle; and in-path middleman; and alias mm 'bundle exec middleman'
+in-path bundle; and in-path middleman;
+  and abbr --add --global mm 'bundle exec middleman'
+
 in-path vimdiff; or alias vimdiff 'vim -d'
 
 # git
