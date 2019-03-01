@@ -7,10 +7,10 @@ function grep
   #           └────────────────── use ERE syntax
 
   # display results in colour if supported
-  set -a params --colour=auto
+  set params $params --colour=auto
 
   # skip version control directories
-  set -a params --exclude-dir=.git --exclude-dir=.svn
+  set params $params --exclude-dir=.git --exclude-dir=.svn
 
   command grep $params $argv
 end

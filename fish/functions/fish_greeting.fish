@@ -1,5 +1,6 @@
 function fish_greeting --description 'Prints a greeting message on startup'
   status is-interactive; or return
+  test $FISH_VERSINFO[1] -ge 3; or return
   echo -s \
     (set_color cyan)   '<' \
     (set_color brcyan) '°' \

@@ -6,7 +6,10 @@ function fish_title --description 'Update the window title'
 
   printf "%s@%s: %s" $USER $long_hostname (pwd | string replace -r "^$HOME" "~")
 
-  if not string match -rq '.*/?\bfish' (status current-command)
+  set -l cur_cmd (status current-command 2>/dev/null)
+  or return
+
+  if not string match -rq '.*/?\bfish' $cur_cmd
     and not set -q ITERM_SESSION_ID
     printf " [%s]" (status current-command)
   end
