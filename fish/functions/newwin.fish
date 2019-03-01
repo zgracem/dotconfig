@@ -11,5 +11,5 @@ function newwin --description 'Open a command in a new tmux window'
   set -q _flag_title
   or set _flag_title (string split -r -m1 / $argv[1])[-1]
 
-  command tmux new-window -n $_flag_title (string escape "$argv")
+  command tmux new-window -n $_flag_title (string escape -- $argv)
 end
