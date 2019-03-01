@@ -80,33 +80,29 @@ fi
 # Switch to newer version of bash if available
 # -----------------------------------------------------------------------------
 
-latest_bash=50
+: ${PREFERRED_SHELL:=fish}
 
-if (( this_bash < latest_bash )); then
-  unset -v newer_bash
-  case $HOSTNAME in
-    WS*)
-      # - If I launch Cygwin with anything besides /bin/bash, the session 
-      # crashes immediately. I don't know why. -- ZGM 2016-09-16
-      newer_bash="/usr/local/bin/bash"
-      ;;
-    web*)
-      # I'm obviously not allowed to change anything on my shared hosts.
-      newer_bash="$HOME/.linuxbrew/bin/bash"
-      ;;
-    *)
-      # If present, probably newer than the default.
-      newer_bash="$HOME/opt/bin/bash"
-      ;;
-  esac
+case $HOSTNAME in
+  WS*)
+    # If I launch Cygwin with anything besides /bin/bash, the session crashes
+    # immediately. I still don't know why. -- ZGM 2019-03-01
+    PREFERRED_SHELL="$HOME/opt/bin/fish"
+    ;;
+  web*)
+    # I'm obviously not allowed to change anything on my shared hosts.
+    PREFERRED_SHELL="$HOME/.linuxbrew/bin/fish"
+    ;;
+esac
 
-  if [[ -x $newer_bash && $newer_bash != "$SHELL" ]]; then
-    export SHELL="$newer_bash"
 
-    # Prevent shell from exiting if `exec` fails.
+if [[ $PREFERRED_SHELL != $SHELL ]] || [[ ${PREFERRED_SHELL##*/} != ${SHELL##*/} ]]; then
+  if PREFERRED_SHELL=$(type -P $PREFERRED_SHELL) && [[ -x $PREFERRED_SHELL ]]; then
+    export SHELL=$PREFERRED_SHELL
+
+    # Prevent shell from exiting if `exec` fails
     shopt -s execfail
 
-    # Temporarily export shell options so the new shell inherits them.
+    # Temporarily export shell options so the new shell (if bash) inherits them.
     export SHELLOPTS 2>/dev/null
 
     if shopt -pq login_shell; then
@@ -115,8 +111,8 @@ if (( this_bash < latest_bash )); then
       exec "$SHELL"
     fi
   else
-    unset -v newer_bash
-  fi  
+    unset -v PREFERRED_SHELL
+  fi
 fi
 
 # We don't actually want to *keep* those settings, though.
