@@ -3,16 +3,15 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   if not in-path git; return 0; end
 
   # fail if we're not inside a git repo
-  if not set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
-    return $status
-  end
+  set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
+  or return 0
 
   set -l git_status (command git status --branch --porcelain=v2 2>/dev/null)
   or return $status
 
   set -l git_branch (string match -r '(?<=branch.head ).*' $git_status)
-
-  echo -n (set_color $__fish_prompt_color_git_branch) "$git_branch"
+  set_color $__fish_prompt_color_git_branch
+  echo -n " $git_branch"
 
   if [ -r $git_dir/refs/stash ]
     set_color $__fish_prompt_color_git_stashed
@@ -34,9 +33,9 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   else if [ $staged -gt 0 ]
     set_color $__fish_prompt_color_git_needs_commit
     echo -n '•'
-  # else
-  #   set_color $__fish_prompt_color_git_clean
-  #   echo -n '•'
+  else if [ -n "$__fish_prompt_show_git_clean" ]
+    set_color $__fish_prompt_color_git_clean
+    echo -n '•'
   end
 
   set -l ahead_behind (string match -r '(?<=branch.ab )\+(\d+) -(\d+)' $git_status)
