@@ -37,8 +37,5 @@ else
 
     # activate custom prompt
     set -p fish_function_path "$__fish_config_dir/prompt"
-
-    # use vi key bindings & start in insert mode
-    fish_vi_key_bindings insert
   end
 end
