@@ -11,7 +11,7 @@ function gh --description 'Open the current repo in GitHub'
 
   if set -q argv[1]
     set -l file
-    pushd (dirname $argv[1])
+    pushd (dirname $argv[1]); or return
       set -l git_dir (git rev-parse --show-toplevel)
       set -l relative_pwd (realpath $PWD | string replace "$git_dir" "")
 
