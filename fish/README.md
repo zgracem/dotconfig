@@ -1,6 +1,6 @@
                      ___
       ___======____=---=)
-    /T            \_--===)        
+    /T            \_--===)
     [ \ (0)   \~    \_-==)        This directory contains configuration files
      \      / )J~~    \-=)        for fish, the friendly interactive shell.
       \\___/  )JJ~~~   \)
