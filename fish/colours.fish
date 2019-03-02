@@ -1,107 +1,107 @@
-# -----------------------------------------------------------------------------
-# syntax highlighting
-# -----------------------------------------------------------------------------
+if not set -q zgm_colours
+  set -U zgm_colours ✓
 
-# the default color
-set -g fish_color_normal normal
+  # the default color
+  set -U fish_color_normal normal
 
-# the color for commands
-set -g fish_color_command white --bold
+  # the color for commands
+  set -U fish_color_command white --bold
 
-# the color for quoted blocks of text
-set -g fish_color_quote cyan
+  # the color for quoted blocks of text
+  set -U fish_color_quote cyan
 
-# the color for IO redirections
-set -g fish_color_redirection yellow
+  # the color for IO redirections
+  set -U fish_color_redirection yellow
 
-# the color for process separators like ';' and '&'
-set -g fish_color_end br$fish_color_quote
+  # the color for process separators like ';' and '&'
+  set -U fish_color_end br$fish_color_quote
 
-# the color used to highlight "potential errors"
-set -g fish_color_error red
+  # the color used to highlight "potential errors"
+  set -U fish_color_error red
 
-# the color for regular command parameters
-set -g fish_color_param normal
+  # the color for regular command parameters
+  set -U fish_color_param normal
 
-# the color used for code comments
-set -g fish_color_comment brblack --italics
+  # the color used for code comments
+  set -U fish_color_comment brblack --italics
 
-# the color used to highlight matching parentheses
-set -g fish_color_match cyan
+  # the color used to highlight matching parentheses
+  set -U fish_color_match cyan
 
-# the color used when selecting text (in vi visual mode)
-set -g fish_color_selection --background=brblack white
+  # the color used when selecting text (in vi visual mode)
+  set -U fish_color_selection --background=brblack white
 
-# the background color used to highlight history search matches
-set -g fish_color_search_match --background=black
+  # the background color used to highlight history search matches
+  set -U fish_color_search_match --background=black
 
-# the color for parameter expansion operators like '*', '~', and '()'
-set -g fish_color_operator br$fish_color_redirection
+  # the color for parameter expansion operators like '*', '~', and '()'
+  set -U fish_color_operator br$fish_color_redirection
 
-# the color used to highlight character escapes like '\n' and '\x70'
-set -g fish_color_escape brmagenta
+  # the color used to highlight character escapes like '\n' and '\x70'
+  set -U fish_color_escape brmagenta
 
-# the color used for autosuggestions
-set -g fish_color_autosuggestion brblack
+  # the color used for autosuggestions
+  set -U fish_color_autosuggestion brblack
 
-# the color used for the current working directory in the default prompt
-set -g fish_color_cwd brwhite
+  # the color used for the current working directory in the default prompt
+  set -U fish_color_cwd brwhite
 
-# the color used to print the current username in some of fish default prompts
-set -g fish_color_user blue
+  # the color used to print the current username in some default prompts
+  set -U fish_color_user blue
 
-# the color used to print the current host system in some of fish default prompts
-set -g fish_color_host brblack
+  # the color used to print the current host system in some default prompts
+  set -U fish_color_host brblack
 
-# the color for the '^C' indicator on a canceled command
-set -g fish_color_cancel red
+  # the color for the '^C' indicator on a canceled command
+  set -U fish_color_cancel red
 
-# -----------------------------------------------------------------------------
-# completion highlighting
-# -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
+  # completion highlighting
+  # ---------------------------------------------------------------------------
 
-# the color of the prefix string, i.e. the string that is to be completed
-set -g fish_pager_color_prefix brblack
+  # the color of the prefix string, i.e. the string that is to be completed
+  set -U fish_pager_color_prefix brblack
 
-# the color of the completion itself
-set -g fish_pager_color_completion white
+  # the color of the completion itself
+  set -U fish_pager_color_completion white
 
-# the color of the completion description
-set -g fish_pager_color_description brblack --italics
+  # the color of the completion description
+  set -U fish_pager_color_description brblack --italics
 
-# the color of the progress bar at the bottom left corner
-set -g fish_pager_color_progress blue
+  # the color of the progress bar at the bottom left corner
+  set -U fish_pager_color_progress blue
 
-# the background color of the every second completion
-set -g fish_pager_color_secondary --background=normal
+  # the background color of the every second completion
+  set -U fish_pager_color_secondary --background=normal
 
-# -----------------------------------------------------------------------------
-# undocumented
-# -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
+  # undocumented
+  # ---------------------------------------------------------------------------
 
-set -g fish_color_valid_path green --underline
-set -g fish_color_history_current brmagenta --bold # What is this???
-set -g fish_color_cwd_root red
+  set -U fish_color_valid_path green --underline
+  set -U fish_color_history_current brmagenta --bold # What is this???
+  set -U fish_color_cwd_root red
 
-set -g fish_color_status blue
-set -g fish_color_dimmed brblack
-set -g fish_color_separator brwhite
+  set -U fish_color_status blue
+  set -U fish_color_dimmed brblack
+  set -U fish_color_separator brwhite
 
-# -----------------------------------------------------------------------------
-# prompt
-# -----------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
+  # prompt
+  # ---------------------------------------------------------------------------
 
-set -g fish_color_user_root $fish_color_cwd_root
-set -g __fish_prompt_color_clock $fish_color_dimmed
-set -g __fish_prompt_color_duration $fish_color_dimmed
-set -g __fish_prompt_color_exit $fish_color_error
-set -g __fish_prompt_color_git_branch $fish_color_dimmed
-set -g __fish_prompt_color_git_stashed $fish_color_dimmed
-set -g __fish_prompt_color_git_needs_add red
-set -g __fish_prompt_color_git_needs_commit yellow
-set -g __fish_prompt_color_git_needs_push cyan
-set -g __fish_prompt_color_git_clean green
-set -g __fish_prompt_color_jobs yellow
+  set -U fish_color_user_root $fish_color_cwd_root
+  set -U __fish_prompt_color_clock $fish_color_dimmed
+  set -U __fish_prompt_color_duration $fish_color_dimmed
+  set -U __fish_prompt_color_exit $fish_color_error
+  set -U __fish_prompt_color_git_branch $fish_color_dimmed
+  set -U __fish_prompt_color_git_stashed $fish_color_dimmed
+  set -U __fish_prompt_color_git_needs_add red
+  set -U __fish_prompt_color_git_needs_commit yellow
+  set -U __fish_prompt_color_git_needs_push cyan
+  set -U __fish_prompt_color_git_clean green
+  set -U __fish_prompt_color_jobs yellow
+end
 
 # -----------------------------------------------------------------------------
 # LS_COLORS
