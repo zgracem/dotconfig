@@ -1,5 +1,12 @@
-if not set -q zgm_colours
-  set -U zgm_colours ✓
+if not set -q __zgm_init_colours
+  echo -s (set_color ff0000) S (set_color ff7100) o (set_color ffa900) u \
+          (set_color fff800) r (set_color c5fc00) c (set_color 8bff00) i \
+          (set_color 00ff07) n (set_color 00ff9a) "g " (set_color 00ffe8) c \
+          (set_color 00ddff) o (set_color 008fff) l (set_color 0040ff) o \
+          (set_color 3100ff) u (set_color 6900ff) r (set_color b800ff) s \
+          (set_color ff00ec) … (set_color normal)
+
+  set -U __zgm_init_colours ✓
 
   # the default color
   set -U fish_color_normal normal
@@ -109,13 +116,15 @@ end
 
 set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if [ ! -f "$ls_colors_file" ]
-  cd "$XDG_CONFIG_HOME/dircolors"
-  and make --quiet all
-  cd -
+if [ -d "$XDG_CACHE_HOME/dircolors" -a ! -f "$ls_colors_file" ]
+  pushd "$XDG_CONFIG_HOME/dircolors"
+    and make --quiet all
+    and popd
 end
 
-set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' ')[3]
+if [ -f "$ls_colors_file" ]
+  set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' ')[3]
+end
 
 set --erase ls_colors_file
 
