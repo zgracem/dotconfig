@@ -79,7 +79,7 @@ if not set -q zgm_colours
   # ---------------------------------------------------------------------------
 
   set -U fish_color_valid_path green --underline
-  set -U fish_color_history_current brmagenta --bold # What is this???
+  set -U fish_color_history_current blue
   set -U fish_color_cwd_root red
 
   set -U fish_color_status blue
