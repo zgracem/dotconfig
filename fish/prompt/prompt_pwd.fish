@@ -10,13 +10,13 @@ function prompt_pwd --description 'Print the current working directory, shortene
   set -l cwd (string replace -r "^$HOME(?=\$|/)" "~" $argv[1])
   set -l cwd_parts (string split "/" "$cwd")
 
-  if [ (count $cwd_parts) -le 1 ]
-    or [ (id -u) -eq 0 ] # root gets the unobscured path
+  if test (count $cwd_parts) -le 1
+    or test (id -u) -eq 0 # root gets the unobscured path
     echo $cwd
     return 0
   else
     for i in (seq 1 (math (count $cwd_parts) - 1))
-      if [ (string length $cwd_parts[$i]) -gt (math $fish_prompt_pwd_dir_length + 1) ]
+      if test (string length $cwd_parts[$i]) -gt (math $fish_prompt_pwd_dir_length + 1)
         set cwd_parts[$i] (string sub -l $fish_prompt_pwd_dir_length "$cwd_parts[$i]")"$fish_prompt_pwd_dir_glyph"
       end
     end

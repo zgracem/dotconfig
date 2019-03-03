@@ -8,11 +8,11 @@ function fish_breakpoint_prompt --description 'A prompt to be used when `breakpo
   # set -l lineno (status -L0 line-number)
   # set -l filename (status -L0 filename | string split /)[-1]
 
-  if [ -z "$function" -o "$function" = 'Not a function' ]
+  if test -z "$function" -o "$function" = 'Not a function'
     set function 'main'
   end
 
-  if [ $last_exit -ne 0 ]
+  if test $last_exit -ne 0
     set_color $fish_color_error
   else
     set_color $fish_color_status

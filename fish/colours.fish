@@ -116,13 +116,13 @@ end
 
 set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if [ -d "$XDG_CACHE_HOME/dircolors" -a ! -f "$ls_colors_file" ]
+if test -d "$XDG_CACHE_HOME/dircolors" -a ! -f "$ls_colors_file"
   pushd "$XDG_CONFIG_HOME/dircolors"
     and make --quiet all
     and popd
 end
 
-if [ -f "$ls_colors_file" ]
+if test -f "$ls_colors_file"
   set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' ')[3]
 end
 

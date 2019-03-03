@@ -8,7 +8,7 @@ else
     #           │  └─ human-readable sizes
     #           └──── long-list output
 
-    if [ $COLUMNS -le 100 ]
+    if test $COLUMNS -le 100
       set -a params -g -o
       #              │  └─ omit owner
       #              └──── omit group

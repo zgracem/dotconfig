@@ -5,7 +5,7 @@ function errno -a num --description 'Display information about error codes'
     set num $last_exit
   end
 
-  if [ "$num" -eq 0 ]
+  if test "$num" -eq 0
     echo -s "[ Exit code " (set_color brgreen) $num (set_color normal) " ]"
     echo "OK"
     return 0

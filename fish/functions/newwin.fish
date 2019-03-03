@@ -3,7 +3,7 @@ function newwin --description 'Open a command in a new tmux window'
 
   if not in-tmux
     return 1
-  else if [ (count $argv) -eq 0 ]
+  else if test (count $argv) -eq 0
     command tmux new-window
     return
   end
