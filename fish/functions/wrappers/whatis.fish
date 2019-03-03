@@ -8,7 +8,7 @@ function whatis -a term --wraps $cmd --description 'Search the whatis database f
   test -n "$output"; or return 16
 
   # Collapse needless whitespace in $output
-  string replace -r '\s+' ' ' $output
+  string replace -ar '\s+' ' ' $output
 end
 
 set --erase cmd
