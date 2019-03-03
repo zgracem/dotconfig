@@ -4,11 +4,11 @@ set cmd 'whatis'; in-path gwhatis; and set cmd 'gwhatis'
 
 function whatis -a term --wraps $cmd --description 'Search the whatis database for exact matches'
   set -l args $argv[2..-1]
-  set -l output (command whatis --regex '\b'"$term"'\b' $args 2>/dev/null | sort -u)
+  set -l output (command whatis --regex '\b'"$term"'\b[^-]' $args 2>/dev/null | sort -u)
   test -n "$output"; or return 16
 
   # Collapse needless whitespace in $output
-  string replace -r '\s+' ' ' "$output"
+  string replace -r '\s+' ' ' $output
 end
 
 set --erase cmd
