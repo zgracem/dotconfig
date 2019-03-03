@@ -1,11 +1,16 @@
 if status is-interactive; and in-path keychain; and not set -q SSH_AGENT_PID
-  set -lx SHELL (status fish-path)
-  set -l keys id_ed25519 id_rsa
-  set -l keychain_env (keychain --eval --quick --quiet \
-              --absolute --dir "$XDG_RUNTIME_DIR/keychain" \
-              --inherit any \
-              --ignore-missing $keys)
-  or exit
+  set -Ue SSH_AUTH_SOCK
+  set -l keys id_{ed25519,rsa}
 
-  eval $keychain_env
+  set -l keychain_dir "$XDG_RUNTIME_DIR/keychain"
+  set -l ssh_env $keychain_dir/.env
+
+  set -l params --eval --quick --quiet
+  set -a params --absolute --dir "$keychain_dir"
+  set -a params --inherit any --ignore-missing
+
+  set -lx SHELL (status fish-path)
+  keychain $params $keys > $ssh_env
+  command chmod 600 $ssh_env
+  source $ssh_env
 end
