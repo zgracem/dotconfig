@@ -1,6 +1,8 @@
 # -----------------------------------------------------------------------------
-# quick navigation
+# aliases & abbreviations
 # -----------------------------------------------------------------------------
+
+# quick navigation
 
 function ..; cd .. ; end
 function ...; cd ../.. ; end
@@ -10,9 +12,7 @@ function .....; cd ../../../.. ; end
 # https://fishshell.com/docs/current/faq.html#faq-cd-minus
 abbr --add --global -- '-' 'cd -'
 
-# -----------------------------------------------------------------------------
 # macOS & misc.
-# -----------------------------------------------------------------------------
 
 if macos?
   function airport; /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv; end
@@ -50,6 +50,7 @@ if macos?
   abbr --add --global sp 'mdfind -name'
 end
 
+abbr --add --global fkr 'fish_key_reader --continuous'
 abbr --add --global unset 'set --erase'
 abbr --add --global unstow 'stow --delete'
 abbr --add --global xd 'hexdump -C'
