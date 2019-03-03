@@ -1,4 +1,4 @@
-function rl
+function rl --description 'Reload configuration files'
 	if test (count $argv) -eq 0
     source "$__fish_config_dir/config.fish"
     return

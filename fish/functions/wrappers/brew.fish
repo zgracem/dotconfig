@@ -1,4 +1,4 @@
-function brew
+function brew --description 'The missing package manager for macOS'
   in-path brew; or return 127
 
   switch $argv[1]

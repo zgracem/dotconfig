@@ -15,9 +15,9 @@ abbr --add --global -- '-' 'cd -'
 # macOS & misc.
 
 if macos?
-  function airport; /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv; end
+  function airport --description 'Get information for 802.11 interface'; /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv; end
   function lockscreen; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend; end
-  function lsregister; /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister $argv; end
+  function lsregister --description 'Manage the Launch Services database'; /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister $argv; end
 end
 
 if string match -eq 'Athena' $hostname
