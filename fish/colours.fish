@@ -1,10 +1,10 @@
 if not set -q __zgm_init_colours
-  echo -s (set_color ff0000) S (set_color ff7100) o (set_color ffa900) u \
-          (set_color fff800) r (set_color c5fc00) c (set_color 8bff00) i \
-          (set_color 00ff07) n (set_color 00ff9a) "g " (set_color 00ffe8) c \
-          (set_color 00ddff) o (set_color 008fff) l (set_color 0040ff) o \
-          (set_color 3100ff) u (set_color 6900ff) r (set_color b800ff) s \
-          (set_color ff00ec) … (set_color normal)
+  echo -s (set_color f00) S (set_color f70) o (set_color fa0) u \
+          (set_color ff0) r (set_color cf0) c (set_color 8f0) i \
+          (set_color 0f0) n (set_color 0f9) "g " (set_color 0fe) c \
+          (set_color 0df) o (set_color 08f) l (set_color 04f) o \
+          (set_color 30f) u (set_color 60f) r (set_color b0f) s \
+          (set_color f0e) … (set_color normal)
 
   set -U __zgm_init_colours ✓
 
@@ -33,7 +33,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_comment brblack --italics
 
   # the color used to highlight matching parentheses
-  set -U fish_color_match cyan
+  set -U fish_color_match brcyan --underline
 
   # the color used when selecting text (in vi visual mode)
   set -U fish_color_selection --background=brblack white
