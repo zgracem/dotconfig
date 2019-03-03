@@ -6,6 +6,11 @@ function rl
 
   set -l errors 0
   for arg in $argv
+    switch "$arg"
+    case colours
+      set --erase -U __zgm_init_colours
+    end
+
     if functions -q $arg
       set -l function_file (functions -D $arg)
       if test -f "$function_file"
