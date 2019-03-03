@@ -3,4 +3,6 @@ function fish_user_key_bindings
   # TODO: Make this work in vi or hybrid mode.
   bind '!' bind_bang
   bind '$' bind_dollar
+
+  bind \c_ 'commandline -f repaint'
 end
