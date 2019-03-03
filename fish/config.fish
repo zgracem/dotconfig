@@ -38,4 +38,9 @@ else
     # activate custom prompt
     set -p fish_function_path "$__fish_config_dir/prompt"
   end
+
+  status test-feature qmark-noglob
+  if test $status -eq 1
+    set -Ua fish_features qmark-noglob
+  end
 end
