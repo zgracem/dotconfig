@@ -18,6 +18,9 @@ function rl
     else if test -f "$__fish_config_dir/$arg.fish"
       source "$__fish_config_dir/$arg.fish"
       or set errors (math $errors + 1)
+    else if test -f "$__fish_config_dir/conf.d/$arg.fish"
+      source "$__fish_config_dir/conf.d/$arg.fish"
+      or set errors (math $errors + 1)
     else
       echo >&2 "couldn't reload '$arg'"
       set errors (math $errors + 1)
