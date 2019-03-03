@@ -4,5 +4,5 @@ function fish_user_key_bindings
   bind '!' bind_bang
   bind '$' bind_dollar
 
-  bind \c_ 'commandline -f repaint'
+  bind \c_ 'commandline -f repaint' # This is Ctrl + /
 end

@@ -67,4 +67,3 @@ abbr --add --global gco git checkout
 abbr --add --global gf  git fetch
 abbr --add --global gp  git push
 abbr --add --global gpl git pull
-
