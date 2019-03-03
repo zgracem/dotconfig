@@ -4,7 +4,7 @@ function ef -a function --wraps funcsave --description 'Edit a function interact
   set -l function_line $function_info[3]
 
   switch $function_source
-  case 'n/a' '-'
+  case 'n/a' '-' 'stdin'
     set function_source "$__fish_config_dir/functions/$function.fish"
   end
 
@@ -13,14 +13,15 @@ function ef -a function --wraps funcsave --description 'Edit a function interact
   end
 
   if test $function_line -gt 1
-    set function_source "$function_source:$function_line"
+    $VISUAL "$function_source:$function_line"
+  else
+    $VISUAL $function_source
   end
 
-  if $VISUAL $function_source
-    and test -f $function_source
-    source (string split : "$function_source")[1]
+  if test -f $function_source
+    source $function_source
   else
-    echo >&2 "editor failed or was cancelled"
+    echo >&2 "file not found: $function_source"
     return $status
   end
 end
