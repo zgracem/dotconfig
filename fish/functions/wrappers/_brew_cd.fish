@@ -1,4 +1,4 @@
-function __brew_cd
+function _brew_cd
   switch $argv[1]
   case 'cache' 'cellar' 'prefix' 'repo' 'repository'
     cd (command brew --$argv[1] $argv[2..-1])

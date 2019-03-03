@@ -6,7 +6,7 @@ function brew --description 'The missing package manager for macOS'
     # Addresses https://github.com/Homebrew/brew/issues/5791
     env SHELL=(type -P bash) brew $argv
   case 'cd'
-    __brew_cd $argv[2..-1]
+    _brew_cd $argv[2..-1]
   case '*'
     command brew $argv
   end

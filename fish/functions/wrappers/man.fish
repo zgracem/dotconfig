@@ -17,7 +17,7 @@ function man --description 'Display manual pages in a new window with a nice tit
   end
 
   # Get a nice title for the window.
-  set -l title (__man_title $argv); or return $status
+  set -l title (_man_title $argv); or return $status
 
   if in-tmux
     tmux new-window -n $title "env MANLESS= man $argv"

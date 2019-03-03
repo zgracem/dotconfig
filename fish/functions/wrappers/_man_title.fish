@@ -1,4 +1,4 @@
-function __man_title
+function _man_title
   set -l manfile (command man -w $argv)
   or return $status
 
