@@ -21,7 +21,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_redirection yellow
 
   # the color for process separators like ';' and '&'
-  set -U fish_color_end br$fish_color_quote
+  set -U fish_color_end br$fish_color_redirection
 
   # the color used to highlight "potential errors"
   set -U fish_color_error red
@@ -42,7 +42,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_search_match --background=black
 
   # the color for parameter expansion operators like '*', '~', and '()'
-  set -U fish_color_operator br$fish_color_redirection
+  set -U fish_color_operator br$fish_color_quote
 
   # the color used to highlight character escapes like '\n' and '\x70'
   set -U fish_color_escape brmagenta
