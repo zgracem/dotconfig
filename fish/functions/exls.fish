@@ -9,11 +9,7 @@ function exls --description 'List the contents of archives'
         pkgutil --payload-files $archive
       case '*.rar'
         unrar vb $archive; echo
-      case '*.tar*'
-        tar tf $archive
-      case '*.tbz2'
-        tar tf $archive
-      case '*.tgz'
+      case '*.tar*' '*.tbz2' '*.tgz'
         tar tf $archive
       case '*.zip'
         zip -sf $archive

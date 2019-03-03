@@ -1,11 +1,11 @@
 function ex --description 'Extract most kinds of archives'
   for archive in $argv
     switch $archive
-      case '*.tar.bz2'
+      case '*.tar.bz2' '*.tbz2'
         tar xjf $archive
       case '*.bz2'
         bunzip2 $archive
-      case '*.tar.gz'
+      case '*.tar.gz' '*.tgz'
         tar xzf $archive
       case '*.gz'
         gunzip $archive
@@ -23,10 +23,6 @@ function ex --description 'Extract most kinds of archives'
         unrar x $archive
       case '*.tar'
         tar xf $archive
-      case '*.tbz2'
-        tar xjf $archive
-      case '*.tgz'
-        tar xzf $archive
       case '*.Z'
         uncompress $archive
       case '*.zip'
