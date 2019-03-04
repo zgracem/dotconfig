@@ -33,5 +33,5 @@ function __fish_prompt_set_title
   set -l CAP_ts $DCS_ante $OSC "$Ps;"
   set -l CAP_fs $BEL $DCS_post
 
-  echo -ens $CAP_ts "$argv[1]" $CAP_fs
+  echo -ens $CAP_ts $argv[1] $CAP_fs
 end
