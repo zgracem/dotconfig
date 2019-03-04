@@ -1,3 +1,7 @@
 function _my_ip
-  dig +short @resolver1.opendns.com myip.opendns.com
+  if in-path dig
+    dig +short @resolver1.opendns.com myip.opendns.com
+  else if in-path nslookup
+    echo (nslookup myip.opendns.com resolver1.opendns.com 2>/dev/null | string replace -fr '^Address: +(.*)' '$1')[-1]
+  end
 end
