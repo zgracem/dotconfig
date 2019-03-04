@@ -8,12 +8,12 @@ function map --description 'Apply a command to each item in a list'
 
   for arg in $argv
     if test $_command_complete -eq 1
-      set -p cmd_argv $arg
+      set -a cmd_argv $arg
     else if string match -q "*:" $arg
-      set -p cmd (string trim -rc: $arg)
+      set -a cmd (string trim -rc: $arg)
       set _command_complete 1
     else
-      set -p cmd $arg
+      set -a cmd $arg
     end
   end
 
