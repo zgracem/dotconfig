@@ -1,8 +1,8 @@
-# The way `funced` currently works (3.0.2) results in data loss: its use of
-# `fish_indent` strips comments & all code outside the main function definition
-# from any file it touches. I'm reluctant to call this a bug in fish but it's
-# definitely not behaviour I want, so here's a minimal reimplementation that
-# behaves the way I prefer.
+# The way `funced` currently works can result in data loss: specifically, it
+# can strip comments, and code outside the main function definition, from any
+# file it touches. I'm reluctant to call this a bug in fish but it's definitely
+# not behaviour I want, so here's a minimal reimplementation that behaves the
+# way I prefer.
 function funced -a function --wraps funcsave --description 'Edit a function interactively'
   set -l function_info (functions --details --verbose -- $function)
   set -l function_source $function_info[1]
@@ -13,8 +13,12 @@ function funced -a function --wraps funcsave --description 'Edit a function inte
     set function_source "$__fish_config_dir/functions/$function.fish"
   end
 
-  if functions -q $function; and not test -f $function_source
-    functions -- $function >$function_source
+  if not test -f $function_source
+    if functions -q $function
+      functions -- $function | string replace \t "  " >$function_source
+    else
+      echo -e "function $function --description ''\\n  \\nend" >$function_source
+    end
   end
 
   if test $function_line -gt 1
@@ -31,6 +35,6 @@ function funced -a function --wraps funcsave --description 'Edit a function inte
     source $function_source
   else
     echo >&2 "file not found: $function_source"
-    return
+    return 1
   end
 end
