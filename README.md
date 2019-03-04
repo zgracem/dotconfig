@@ -28,10 +28,10 @@ Minimum requirements:
     - `bash/`
     - `dircolors/`
     - `environment.d/`
+    - `readline/`
     - `sh/`
     - `vim/`
     - `environment.sh`
-    - `inputrc`
 - `.private/` ← from encrypted repo
     - `bashrc.d/`
     - `environment.d/`
@@ -57,4 +57,5 @@ These dotfiles are written to be portable between macOS (10.5+), Cygwin,
 MSYS2, Windows 10's Linux Subsystem, and both BSD and GNU flavours of \*nix. 
 Everything in `environment.d/` and `sh/` is compatible with any POSIX shell.
 Bash configuration files can be run (with gracefully degrading functionality)
-on anything from bash-3.2 to the latest 5.x release.
+on anything from bash-3.2 to the latest 5.x release. Sadly, most of my fish 
+configuration files can only run on fish 3.0.0 or newer.
