@@ -153,9 +153,27 @@ set -gx LESS_TERMEND (set_color normal)
 # other
 # -----------------------------------------------------------------------------
 
-set -gx GCC_COLORS  "error=91:warning=33:note=34:caret=95:locus=90:quote=36"
-set -gx GREP_COLORS "sl=0:cx=90:mt=4;35:ms=4;95:mc=4;35:fn=34:ln=36:bn=32:se=90"
-set -gx JQ_COLORS "90:91:92:35:36:39:39"
+set -gx GCC_COLORS \
+  "error="(get_color brred) \
+  "warning="(get_color yellow) \
+  "note="(get_color blue) \
+  "caret="(get_color brmagenta) \
+  "locus="(get_color brblack) \
+  "quote="(get_color cyan)
+
+set -gx GREP_COLORS "sl=0" "cx="(get_color brblack) "se="(get_color brblack) \
+  "mt="(get_color magenta --underline) "ms="(get_color brmagenta --underline) \
+  "mc="(get_color magenta --underline) \
+  "fn="(get_color blue) "ln="(get_color cyan) "bn="(get_color green)
+
+# null:false:true:numbers:strings:arrays:objects
+set -gx JQ_COLORS \
+  (get_color brblack) (get_color brred) (get_color brgreen) (get_color magenta) \
+  (get_color cyan) (get_color normal) (get_color normal)
+
+set GCC_COLORS (string join : $GCC_COLORS)
+set GREP_COLORS (string join : $GREP_COLORS)
+set JQ_COLORS (string join : $JQ_COLORS)
 
 # -----------------------------------------------------------------------------
 # exa
