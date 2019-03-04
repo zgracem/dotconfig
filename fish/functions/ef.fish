@@ -13,7 +13,11 @@ function ef -a function --wraps funcsave --description 'Edit a function interact
   end
 
   if test $function_line -gt 1
-    $VISUAL "$function_source:$function_line"
+    if string match -q "*vim" "$VISUAL"
+      $VISUAL +$function_line $function_source
+    else
+      $VISUAL $function_source:$function_line
+    end
   else
     $VISUAL $function_source
   end
