@@ -296,6 +296,9 @@ if type -P stty >/dev/null; then
   trap 'printf "${esc_false}^C${esc_reset}"' INT
 fi
 
+# jq
+export JQ_COLORS="${brblack}:${brred}:${brgreen}:${magenta}:${cyan}:${default}:${default}"
+
 # gcc diagnostics
 export GCC_COLORS=""
 GCC_COLORS+="error=${brred}:"

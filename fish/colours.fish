@@ -155,6 +155,7 @@ set -gx LESS_TERMEND (set_color normal)
 
 set -gx GCC_COLORS  "error=91:warning=33:note=34:caret=95:locus=90:quote=36"
 set -gx GREP_COLORS "sl=0:cx=90:mt=4;35:ms=4;95:mc=4;35:fn=34:ln=36:bn=32:se=90"
+set -gx JQ_COLORS "90:91:92:35:36:39:39"
 
 # -----------------------------------------------------------------------------
 # exa
