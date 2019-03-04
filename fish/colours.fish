@@ -90,7 +90,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_history_current blue
   set -U fish_color_cwd_root red
 
-  set -U fish_color_status blue
+  set -U fish_color_status brblue
   set -U fish_color_dimmed brblack
   set -U fish_color_separator brwhite
 
