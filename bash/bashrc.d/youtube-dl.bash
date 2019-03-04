@@ -4,7 +4,7 @@ _inPath youtube-dl || return
 
 ydl()
 ( #: - download video(s) to ~/Downloads
-  cd "$dir_downloads" && youtube-dl "$@"
+  cd "$XDG_DOWNLOAD_DIR" && youtube-dl "$@"
 )
 
 ydlq()

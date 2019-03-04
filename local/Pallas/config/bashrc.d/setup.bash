@@ -1,6 +1,6 @@
 setup()
 {
-  local installer_dir="$dir_downloads/_Installers"
+  local installer_dir="$XDG_DOWNLOAD_DIR/_Installers"
   local cyg_bin="${installer_dir}/setup-x86_64.exe"
   local log_dir="$HOME/var/log/cygwin"
 
