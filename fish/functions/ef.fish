@@ -26,6 +26,6 @@ function ef -a function --wraps funcsave --description 'Edit a function interact
     source $function_source
   else
     echo >&2 "file not found: $function_source"
-    return $status
+    return
   end
 end

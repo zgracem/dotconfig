@@ -7,7 +7,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   or return 0
 
   set -l git_status (command git status --branch --porcelain=v2 2>/dev/null)
-  or return $status
+  or return
 
   set -l git_branch (string match -r '(?<=branch.head ).*' $git_status)
   set_color $__fish_prompt_color_git_branch

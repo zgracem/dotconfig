@@ -6,7 +6,7 @@ function manpdf
   if test ! -d "$MANPDF_DIR"
     set MANPDF_DIR "$HOME/Dropbox/share/doc/pdf"
   end
-  set -l pdf (command manpdf $argv); or return $status
+  set -l pdf (command manpdf $argv); or return
   if string match -q "/*" "$pdf"
     echo "$pdf"
     return 0

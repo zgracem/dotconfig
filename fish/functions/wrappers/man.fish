@@ -10,14 +10,14 @@ function man --description 'Display manual pages in a new window with a nice tit
     switch (string sub --start 2 -- $argv[1])
     case '*d*' '*f*' '*h*' '*k*' '*V*' '*w*' '*W*' '*?*'
       command man $argv
-      return $status
+      return
     case '*'
       true
     end
   end
 
   # Get a nice title for the window.
-  set -l title (_man_title $argv); or return $status
+  set -l title (_man_title $argv); or return
 
   if in-tmux
     tmux new-window -n $title "env MANLESS= man $argv"
