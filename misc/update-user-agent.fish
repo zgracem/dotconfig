@@ -17,7 +17,7 @@ function generate-user-agent
   case 'CYGWIN*' 'MSYS*'
     set -l win_version (uname -s | string replace -rf '.*_NT-([\d.]+).*' '$1')
     set system_id "Windows NT $win_version; Win64; x64"
-    set -l chrome_paths 'C:\\Program Files (x86)' "C:\\Users\\$USER\\AppData\\Local"
+    set -l chrome_paths 'C:\\Program Files (x86)' "$LOCALAPPDATA"
     for p in $chrome_paths
       set chrome_path "$p\\Google\\Chrome\\Application\\chrome.exe"
       if test -e (cygpath -au "$chrome_path")
