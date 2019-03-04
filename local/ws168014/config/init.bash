@@ -8,7 +8,7 @@ _isRunning() { command ps -sW | command grep -iq "${1}\\.exe\$"; }
 
 # Google Chrome
 if ! _isRunning chrome && [[ -n $ALL_PROXY ]]; then
-  "$dir_scripts/cygwin/chrome.sh"
+  "$HOME/scripts/cygwin/chrome.sh"
 fi
 
 # Dropbox

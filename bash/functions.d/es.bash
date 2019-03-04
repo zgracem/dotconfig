@@ -4,7 +4,7 @@ es()
 
   local search="$1"
 
-  local -a script_dirs=( "$dir_scripts" "$dir_scripts"/*/ )
+  local -a script_dirs=( "$HOME/scripts" "$HOME/scripts"/*/ )
   local -a script_exts=(sh rb)
   local -a scripts=()
 

@@ -4,7 +4,7 @@ itunes()
   #: | album_id = the number at the end of the album's iTunes Store URL
   #: < itunes-album-art.sh
 
-  local script="$dir_scripts/util/itunes-album-art.sh"
+  local script="$HOME/scripts/util/itunes-album-art.sh"
   local dir="$HOME/Desktop"
 
   [[ -x $script ]] || return 1

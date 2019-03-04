@@ -3,14 +3,14 @@
 # sourced at the end of ~/.bashrc
 # -----------------------------------------------------------------------------
 
-if [[ -d $dir_scripts ]]; then
+if [[ -d $HOME/scripts ]]; then
   # cute login banner
-  "$dir_scripts/login/loginbanner.sh"
+  "$HOME/scripts/login/loginbanner.sh"
 
   # astronomical info 
   # -- requires suncalc and weather_ca gems
   # -- runs only on first login of the day
-  if [[ $HOSTNAME == Athena* ]] && "$dir_scripts/login/matins.sh"; then
-    "$dir_scripts/login/astro.rb"
+  if [[ $HOSTNAME == Athena* ]] && "$HOME/scripts/login/matins.sh"; then
+    "$HOME/scripts/login/astro.rb"
   fi
 fi

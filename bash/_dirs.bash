@@ -2,8 +2,6 @@
 # ~/.config/bash/_dirs.bash
 # -----------------------------------------------------------------------------
 
-dir_scripts="$HOME/scripts"
-
 # platform-specific
 case $PLATFORM in
   mac)

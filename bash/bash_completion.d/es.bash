@@ -3,7 +3,7 @@
 __z_complete_es()
 {
   # must be kept in sync w/ same declaration in es()
-  local -a script_dirs=( "$dir_scripts" "$dir_scripts"/*/ )
+  local -a script_dirs=( "$HOME/scripts" "$HOME/scripts"/*/ )
   local -a wordlist
 
   mapfile -t wordlist  < <(__z_complete_filenames sh "${script_dirs[@]}")
