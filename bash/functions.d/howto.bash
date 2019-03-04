@@ -6,7 +6,7 @@ howto()
 
   local -a howto_dirs=(
     "$HOME/txt/howto"
-    "$dir_dropbox/Projects/howto"
+    "$HOME/Dropbox/Projects/howto"
   )
   local -a howto_files=()
 

@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 subl_dir="${dir_apps}/Sublime Text 3/Data"
-save_dir="${dir_dropbox}/Archive/WS144966"
+save_dir="${HOME}/Dropbox/Archive/WS144966"
 
 sessions_file="${subl_dir}/Local/Auto Save Session.sublime_session"
 save_file="$save_dir/Auto Save Session.sublime_session"

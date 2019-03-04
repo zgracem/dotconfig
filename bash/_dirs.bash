@@ -2,7 +2,6 @@
 # ~/.config/bash/_dirs.bash
 # -----------------------------------------------------------------------------
 
-dir_dropbox="$HOME/Dropbox"
 dir_scripts="$HOME/scripts"
 
 # platform-specific
@@ -25,7 +24,6 @@ case $PLATFORM in
     
     dir_apps="$dir_winhome/Applications"
     dir_downloads="$dir_winhome/Downloads"
-    dir_dropbox="$dir_winhome/Dropbox"
     ;;
 esac
 
@@ -33,7 +31,6 @@ esac
 case $HOSTNAME in
   WS*)
     dir_downloads="$HOME/tmp"
-    dir_dropbox="$HOME/Dropbox"
     ;;
 esac
 

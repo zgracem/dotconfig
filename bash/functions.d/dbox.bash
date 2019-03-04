@@ -4,7 +4,7 @@ dbox()
   local target="${1-$PWD}"
   local thing; thing=$(readlink -e "$target") || return
 
-  if [[ $thing == $dir_dropbox/* ]]; then
+  if [[ $thing == $HOME/Dropbox/* ]]; then
     local db_path=${BASH_REMATCH[1]// /%20}
   else
     scold "$target: does not appear to be in Dropbox"
