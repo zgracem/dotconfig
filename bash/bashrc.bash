@@ -108,7 +108,7 @@ fi
 # Switch to alternate shell if available
 # -----------------------------------------------------------------------------
 
-: ${PREFERRED_SHELL=fish}
+: "${PREFERRED_SHELL=fish}"
 
 case $HOSTNAME in
   WS*)
@@ -124,8 +124,8 @@ case $HOSTNAME in
 esac
 
 
-if [[ $PREFERRED_SHELL != $SHELL ]] || [[ ${PREFERRED_SHELL##*/} != ${SHELL##*/} ]]; then
-  if PREFERRED_SHELL=$(type -P $PREFERRED_SHELL) && [[ -x $PREFERRED_SHELL ]]; then
+if [[ $PREFERRED_SHELL != "$SHELL" ]] || [[ ${PREFERRED_SHELL##*/} != "${SHELL##*/}" ]]; then
+  if PREFERRED_SHELL=$(type -P "$PREFERRED_SHELL") && [[ -x $PREFERRED_SHELL ]]; then
     export SHELL=$PREFERRED_SHELL
 
     # Prevent shell from exiting if `exec` fails
