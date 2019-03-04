@@ -1,10 +1,11 @@
 if not set -q __zgm_init_colours
-  echo -s (set_color f00) S (set_color f70) o (set_color fa0) u \
-          (set_color ff0) r (set_color cf0) c (set_color 8f0) i \
-          (set_color 0f0) n (set_color 0f9) "g " (set_color 0fe) c \
-          (set_color 0df) o (set_color 08f) l (set_color 04f) o \
-          (set_color 30f) u (set_color 60f) r (set_color b0f) s \
-          (set_color f0e) … (set_color normal)
+  set -l colours f00 f70 fa0 ff0 cf0 8f0 0f0 0f9 0f9 0fe 0df 08f 04f 30f 60f b0f f0e
+  set -l message "Sourcing colours…"
+
+  for i in (seq 1 (count $colours))
+    echo -ns (set_color $colours[$i]) (string sub --length 1 --start $i "$message")
+  end
+  echo (set_color normal)
 
   set -U __zgm_init_colours ✓
 
