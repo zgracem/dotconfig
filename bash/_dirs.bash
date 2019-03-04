@@ -5,7 +5,7 @@
 # platform-specific
 case $PLATFORM in
   mac)
-    dir_apps="/Applications"
+    export APPLICATIONS="/Applications"
     XDG_DOWNLOAD_DIR="$HOME/Downloads"
     ;;
 
@@ -20,7 +20,7 @@ case $PLATFORM in
       USERPROFILE="$(cygpath -aw "$dir_winhome")" && export USERPROFILE
     fi
     
-    dir_apps="$dir_winhome/Applications"
+    export APPLICATIONS="$dir_winhome/Applications"
     XDG_DOWNLOAD_DIR="$dir_winhome/Downloads"
     ;;
 esac
@@ -34,4 +34,4 @@ esac
 
 # Leave this unquoted so it expands properly.
 # shellcheck disable=SC2086
-export ${!dir_*} ${!XDG_*}
+export ${!XDG_*}

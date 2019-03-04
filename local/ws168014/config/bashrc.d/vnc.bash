@@ -2,7 +2,7 @@
 
 vnc()
 {
-  local vnc_dir="$dir_apps/RealVNC"
+  local vnc_dir="$APPLICATIONS/RealVNC"
   local vnc_exe="$vnc_dir/VNC-Viewer-6.1.0-Windows-32bit.exe"
   local vnc_host="10.0.1.10:1"
 
@@ -21,7 +21,7 @@ vnc()
 
 vnc5()
 {
-  local vnc_dir="$dir_apps/RealVNC"
+  local vnc_dir="$APPLICATIONS/RealVNC"
   local vnc_exe="$vnc_dir/vncviewer.exe"
   local vnc_host="10.0.1.10:1"
   local vnc_conf="$HOME/.private/vnc/vnc.conf"

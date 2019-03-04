@@ -2,7 +2,7 @@
 # WS168014:~/.local/logout.bash
 # ------------------------------------------------------------------------------
 
-subl_dir="${dir_apps}/Sublime Text 3/Data"
+subl_dir="${APPLICATIONS}/Sublime Text 3/Data"
 save_dir="${HOME}/Dropbox/Archive/WS144966"
 
 sessions_file="${subl_dir}/Local/Auto Save Session.sublime_session"

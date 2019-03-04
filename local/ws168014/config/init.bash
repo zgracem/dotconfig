@@ -17,6 +17,6 @@ _isRunning Dropbox \
 
 # Pageant
 _isRunning pageant \
-    || run "$dir_apps/WinSCP/pageant.exe" "$(cygpath -aw ~/.ssh/key.ppk)"
+    || run "$APPLICATIONS/WinSCP/pageant.exe" "$(cygpath -aw ~/.ssh/key.ppk)"
 
 # unset -f _isRunning
