@@ -2,6 +2,8 @@
 # ~/.config/bash/_dirs.bash
 # -----------------------------------------------------------------------------
 
+source "$XDG_CONFIG_HOME/user-dirs.dirs"
+
 # platform-specific
 case $PLATFORM in
   mac)
