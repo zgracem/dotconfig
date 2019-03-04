@@ -14,7 +14,9 @@ set -gx XDG_RUNTIME_DIR $HOME/var/run
 # read defaults from ~/.config/user-dirs.dirs
 while read line
   set -l pattern '^(XDG_[[:upper:]]+_DIR)="([^"]+)"$'
-  eval (string replace -r $pattern 'set -gx $1 $2' $line)
+  if string match -rq $pattern "$line"
+    eval (string replace -r $pattern 'set -gx $1 $2' $line)
+  end
 end < $XDG_CONFIG_HOME/user-dirs.dirs
 
 # Cygwin/MSYS
@@ -44,6 +46,7 @@ if uname -s | string match -q '*_NT-*'
     set -gx XDG_DOWNLOAD_DIR $HOME/tmp
     set -gx XDG_MUSIC_DIR "$XDG_DOCUMENTS_DIR/My Music"
     set -gx XDG_PICTURES_DIR "$XDG_DOCUMENTS_DIR/My Pictures"
+    set -gx XDG_VIDEOS_DIR "$XDG_DOCUMENTS_DIR/My Videos"
   end
 end
 
