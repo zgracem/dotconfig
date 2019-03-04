@@ -51,6 +51,8 @@ if macos?
 end
 
 abbr --add --global fkr 'fish_key_reader --continuous'
+
+abbr --add --global dirsize 'du -sh'
 abbr --add --global unset 'set --erase'
 abbr --add --global unstow 'stow --delete'
 abbr --add --global xd 'hexdump -C'
@@ -58,6 +60,12 @@ abbr --add --global wtf 'type'
 
 in-path bundle; and in-path middleman;
   and abbr --add --global mm 'bundle exec middleman'
+
+if in-path wget
+  abbr --add --global dl 'wget'
+else if in-path curl
+  abbr --add --global dl 'curl -OJ'
+end
 
 # git
 
