@@ -38,6 +38,7 @@ if uname -s | string match -q '*_NT-*'
   set -gx XDG_DOCUMENTS_DIR "$user_profile/My Documents"
   set -gx XDG_DOWNLOAD_DIR "$user_profile/Downloads"
   set -gx XDG_MUSIC_DIR "$user_profile/Music"
+  set -gx XDG_PUBLICSHARE_DIR (cygpath -au "$PUBLIC")
   set -gx XDG_VIDEOS_DIR "$user_profile/Videos"
 
   switch $hostname
@@ -52,5 +53,7 @@ end
 
 # Linux
 if uname -s | string match -q 'Linux'
+  set -gx XDG_DESKTOP_DIR $HOME/.desktop
+  set -gx XDG_DOCUMENTS_DIR $HOME/doc
   set -gx XDG_DOWNLOAD_DIR $HOME/tmp
 end
