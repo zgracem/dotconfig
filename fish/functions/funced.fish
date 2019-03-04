@@ -1,4 +1,9 @@
-function ef -a function --wraps funcsave --description 'Edit a function interactively'
+# The way `funced` currently works (3.0.2) results in data loss: its use of
+# `fish_indent` strips comments & all code outside the main function definition
+# from any file it touches. I'm reluctant to call this a bug in fish but it's
+# definitely not behaviour I want, so here's a minimal reimplementation that
+# behaves the way I prefer.
+function funced -a function --wraps funcsave --description 'Edit a function interactively'
   set -l function_info (functions --details --verbose -- $function)
   set -l function_source $function_info[1]
   set -l function_line $function_info[3]
