@@ -174,7 +174,7 @@ rl()
           ;;
 
       inputrc)
-          local inputrc="${INPUTRC:-$HOME/.config/inputrc}"
+          local inputrc="${INPUTRC:-$HOME/.config/readline/inputrc}"
           _z_rl_say "$inputrc"
           [[ -z $dry_run ]] && bind -f "$inputrc"
           return

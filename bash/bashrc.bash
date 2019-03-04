@@ -163,7 +163,7 @@ if [[ -n $Z_RL_VERBOSE ]]; then
   }
 fi
 
-export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 # Define important shell functions
 # shellcheck source=./_functions.bash

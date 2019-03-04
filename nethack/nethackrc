@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# ~/.config/nethackrc
-# export NETHACKOPTIONS="@$HOME/.config/nethackrc"
+# ~/.config/nethack/nethackrc
+# export NETHACKOPTIONS="@$HOME/.config/nethack/nethackrc"
 # -----------------------------------------------------------------------------
 
 OPTIONS=name:Zozo
