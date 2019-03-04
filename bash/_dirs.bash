@@ -24,6 +24,8 @@ case $PLATFORM in
     
     export APPLICATIONS="$dir_winhome/Applications"
     XDG_DOWNLOAD_DIR="$dir_winhome/Downloads"
+
+    unset -v dir_winhome
     ;;
 esac
 
