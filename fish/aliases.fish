@@ -46,32 +46,32 @@ function wf; _ssh WebFaction; end
 # -----------------------------------------------------------------------------
 
 if macos?
-  abbr --add --global plistbuddy '/usr/libexec/PlistBuddy'
-  abbr --add --global sp 'mdfind -name'
+  abbr -a -g plistbuddy '/usr/libexec/PlistBuddy'
+  abbr -a -g sp 'mdfind -name'
 end
 
-abbr --add --global fkr 'fish_key_reader --continuous'
+abbr -a -g fkr 'fish_key_reader --continuous'
 
-abbr --add --global dirsize 'du -sh'
-abbr --add --global unset 'set --erase'
-abbr --add --global unstow 'stow --delete'
-abbr --add --global xd 'hexdump -C'
-abbr --add --global wtf 'type'
+abbr -a -g dirsize 'du -sh'
+abbr -a -g unset 'set --erase'
+abbr -a -g unstow 'stow --delete'
+abbr -a -g xd 'hexdump -C'
+abbr -a -g wtf 'type'
 
 in-path bundle; and in-path middleman;
-  and abbr --add --global mm 'bundle exec middleman'
+  and abbr -a -g mm 'bundle exec middleman'
 
 if in-path wget
-  abbr --add --global dl 'wget'
+  abbr -a -g dl 'wget'
 else if in-path curl
-  abbr --add --global dl 'curl -OJ'
+  abbr -a -g dl 'curl -OJ'
 end
 
 # git
 
-abbr --add --global gb  git branch
-abbr --add --global gc  git commit
-abbr --add --global gco git checkout
-abbr --add --global gf  git fetch
-abbr --add --global gp  git push
-abbr --add --global gpl git pull
+abbr -a -g gb  git branch
+abbr -a -g gc  git commit
+abbr -a -g gco git checkout
+abbr -a -g gf  git fetch
+abbr -a -g gp  git push
+abbr -a -g gpl git pull
