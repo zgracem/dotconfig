@@ -17,9 +17,9 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
 fi
 
-# # Old-style manual triggering of `brew update` and `brew cleanup`
+# Old-style manual triggering of `brew cleanup`
+export HOMEBREW_NO_INSTALL_CLEANUP=true
 # export HOMEBREW_NO_AUTO_UPDATE=true
-# export HOMEBREW_NO_INSTALL_CLEANUP=true
 
 # Always use the latest stable tag (even if developer commands have been run)
 export HOMEBREW_UPDATE_TO_TAG=1
