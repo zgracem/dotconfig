@@ -1,3 +1,4 @@
+# vim:ft=sh
 XDG_DESKTOP_DIR="$HOME/Desktop"
 XDG_DOWNLOAD_DIR="$HOME/Downloads"
 XDG_TEMPLATES_DIR="$HOME/.config/.src"

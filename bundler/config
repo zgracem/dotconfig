@@ -1,3 +1,4 @@
+# vim:ft=yaml
 ---
 BUNDLE_GEM__TEST: false
 BUNDLE_GEM__MIT: true
