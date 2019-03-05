@@ -22,7 +22,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_redirection yellow
 
   # the color for process separators like ';' and '&'
-  set -U fish_color_end br$fish_color_redirection
+  set -U fish_color_end bryellow
 
   # the color used to highlight "potential errors"
   set -U fish_color_error red
@@ -43,7 +43,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_search_match --background=black
 
   # the color for parameter expansion operators like '*', '~', and '()'
-  set -U fish_color_operator br$fish_color_quote
+  set -U fish_color_operator bryellow
 
   # the color used to highlight character escapes like '\n' and '\x70'
   set -U fish_color_escape brmagenta
@@ -167,10 +167,16 @@ set -gx GREP_COLORS "sl=0" "cx="(get_color brblack) "se="(get_color brblack) \
   "mc="(get_color magenta --underline) \
   "fn="(get_color blue) "ln="(get_color cyan) "bn="(get_color green)
 
-# null:false:true:numbers:strings:arrays:objects
-set -gx JQ_COLORS \
-  (get_color brblack) (get_color brred) (get_color brgreen) (get_color magenta) \
-  (get_color cyan) (get_color normal) (get_color normal)
+begin
+  set -l jq_null (get_color brblack)
+  set -l jq_false (get_color brred)
+  set -l jq_true (get_color brgreen)
+  set -l jq_int (get_color magenta)
+  set -l jq_str (get_color cyan)
+  set -l jq_arr (get_color normal)
+  set -l jq_obj (get_color normal)
+  set -gx JQ_COLORS $jq_null $jq_false $jq_true $jq_int $jq_str $jq_arr $jq_obj
+end
 
 set GCC_COLORS (string join : $GCC_COLORS)
 set GREP_COLORS (string join : $GREP_COLORS)
@@ -181,41 +187,43 @@ set JQ_COLORS (string join : $JQ_COLORS)
 # -----------------------------------------------------------------------------
 
 if in-path exa
-  set -gx EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS")
-  set EXA_COLORS "$EXA_COLORS:ur=33"
-  set EXA_COLORS "$EXA_COLORS:uw=31"
-  set EXA_COLORS "$EXA_COLORS:ux=32"
-  set EXA_COLORS "$EXA_COLORS:ue=1;32"
-  set EXA_COLORS "$EXA_COLORS:gr=33"
-  set EXA_COLORS "$EXA_COLORS:gw=31"
-  set EXA_COLORS "$EXA_COLORS:gx=32"
-  set EXA_COLORS "$EXA_COLORS:tr=33"
-  set EXA_COLORS "$EXA_COLORS:tw=31"
-  set EXA_COLORS "$EXA_COLORS:tx=32"
-  set EXA_COLORS "$EXA_COLORS:su=36"
-  set EXA_COLORS "$EXA_COLORS:sf=36"
-  set EXA_COLORS "$EXA_COLORS:xa=1;37"
-  set EXA_COLORS "$EXA_COLORS:sn=36"
-  set EXA_COLORS "$EXA_COLORS:sb=1;36"
-  set EXA_COLORS "$EXA_COLORS:df=1;36"
-  set EXA_COLORS "$EXA_COLORS:ds=36"
-  set EXA_COLORS "$EXA_COLORS:uu=32"
-  set EXA_COLORS "$EXA_COLORS:un=33"
-  set EXA_COLORS "$EXA_COLORS:gu=32"
-  set EXA_COLORS "$EXA_COLORS:gn=33"
-  set EXA_COLORS "$EXA_COLORS:lc=1;37"
-  set EXA_COLORS "$EXA_COLORS:lm=37"
-  set EXA_COLORS "$EXA_COLORS:ga=1;32"
-  set EXA_COLORS "$EXA_COLORS:gm=1;33"
-  set EXA_COLORS "$EXA_COLORS:gd=1;31"
-  set EXA_COLORS "$EXA_COLORS:gv=36"
-  set EXA_COLORS "$EXA_COLORS:gt=36"
-  set EXA_COLORS "$EXA_COLORS:xx=0"
-  set EXA_COLORS "$EXA_COLORS:da=39"
-  set EXA_COLORS "$EXA_COLORS:in=37"
-  set EXA_COLORS "$EXA_COLORS:bl=36"
-  set EXA_COLORS "$EXA_COLORS:hd=4;37"
-  set EXA_COLORS "$EXA_COLORS:lp=35"
-  set EXA_COLORS "$EXA_COLORS:cc=1;31"
-  set EXA_COLORS "$EXA_COLORS:bO=35;40"
+  set -gx EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS" | string split :)
+  set -a EXA_COLORS "ur="(get_color yellow)
+  set -a EXA_COLORS "uw="(get_color red)
+  set -a EXA_COLORS "ux="(get_color green)
+  set -a EXA_COLORS "ue="(get_color green --bold)
+  set -a EXA_COLORS "gr="(get_color yellow)
+  set -a EXA_COLORS "gw="(get_color red)
+  set -a EXA_COLORS "gx="(get_color green)
+  set -a EXA_COLORS "tr="(get_color yellow)
+  set -a EXA_COLORS "tw="(get_color red)
+  set -a EXA_COLORS "tx="(get_color green)
+  set -a EXA_COLORS "su="(get_color cyan)
+  set -a EXA_COLORS "sf="(get_color cyan)
+  set -a EXA_COLORS "xa="(get_color white --bold)
+  set -a EXA_COLORS "sn="(get_color cyan)
+  set -a EXA_COLORS "sb="(get_color cyan --bold)
+  set -a EXA_COLORS "df="(get_color cyan --bold)
+  set -a EXA_COLORS "ds="(get_color cyan)
+  set -a EXA_COLORS "uu="(get_color green)
+  set -a EXA_COLORS "un="(get_color yellow)
+  set -a EXA_COLORS "gu="(get_color green)
+  set -a EXA_COLORS "gn="(get_color yellow)
+  set -a EXA_COLORS "lc="(get_color white --bold)
+  set -a EXA_COLORS "lm="(get_color white)
+  set -a EXA_COLORS "ga="(get_color green --bold)
+  set -a EXA_COLORS "gm="(get_color yellow --bold)
+  set -a EXA_COLORS "gd="(get_color red --bold)
+  set -a EXA_COLORS "gv="(get_color cyan)
+  set -a EXA_COLORS "gt="(get_color cyan)
+  set -a EXA_COLORS "xx="(get_color normal)
+  set -a EXA_COLORS "da="(get_color normal)
+  set -a EXA_COLORS "in="(get_color white)
+  set -a EXA_COLORS "bl="(get_color cyan)
+  set -a EXA_COLORS "hd="(get_color white --underline)
+  set -a EXA_COLORS "lp="(get_color magenta)
+  set -a EXA_COLORS "cc="(get_color red --bold)
+  set -a EXA_COLORS "bO="(get_color --background=black magenta)
+
+  set EXA_COLORS (string join : $EXA_COLORS)
 end
