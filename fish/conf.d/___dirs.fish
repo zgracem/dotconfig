@@ -15,7 +15,7 @@ set -gx XDG_RUNTIME_DIR $HOME/var/run
 while read line
   set -l pattern '^(XDG_[[:upper:]]+_DIR)="([^"]+)"$'
   if string match -rq $pattern "$line"
-    eval (string replace -r $pattern 'set -gx $1 $2' $line)
+    eval "export $line"
   end
 end < $XDG_CONFIG_HOME/user-dirs.dirs
 
