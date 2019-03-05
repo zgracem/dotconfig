@@ -39,7 +39,7 @@ else
     set -p fish_function_path "$__fish_config_dir/prompt"
   end
 
-  set fish_function_path (__fish_path_fixer $fish_function_path | string split :)
+  __fish_fix_path fish_function_path
 
   status test-feature qmark-noglob
   if test $status -eq 1

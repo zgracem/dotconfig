@@ -2,7 +2,7 @@
 # reads the contents of /etc/{,man}paths{,.d} -- and we want the contents of
 # those so we don't have to go digging ourselves -- we start by prepending to
 # whatever PATH is already set. Duplicate entries will be removed later by
-# __fish_path_fixer, with our settings here taking precedence.
+# __fish_fix_path, with our settings here taking precedence.
 
 set --export PATH /usr/bin /bin /usr/sbin /sbin $PATH
 set --export MANPATH /usr/share/man /usr/man $MANPATH
@@ -69,5 +69,5 @@ set -p MANPATH $__fish_data_dir/man
 
 # -----------------------------------------------------------------------------
 
-set PATH (__fish_path_fixer $PATH)
-set MANPATH (__fish_path_fixer $MANPATH)
+__fish_fix_path PATH
+__fish_fix_path MANPATH

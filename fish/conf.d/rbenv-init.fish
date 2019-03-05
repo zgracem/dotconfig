@@ -1,4 +1,4 @@
 if in-path rbenv
   source (rbenv init - | psub)
-  set -g PATH (__fish_path_fixer $PATH)
+  __fish_fix_path PATH
 end
