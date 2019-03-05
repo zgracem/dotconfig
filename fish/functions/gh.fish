@@ -5,7 +5,7 @@ function gh --description 'Open the current repo in GitHub'
   set -l git_status (command git status --branch --porcelain=v2)
   or return
   set -l branch (string match -r '(?<=branch.head ).*' $git_status)
-  set -l repo (git remote show -n origin | string replace -rf ".*Fetch URL:.*?(\w+/\w+)\.git" '$1')
+  set -l repo (git remote show -n origin | string replace -rf ".*Fetch URL:.*?(\w+/[\w-]+)\.git" '$1')
 
   set -l url "$url_base/$repo"
 
