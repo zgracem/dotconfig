@@ -9,3 +9,7 @@ end
 function "linux?" --description 'Returns true if running on Linux'
   uname -s | string match -eq 'Linux'
 end
+
+function "wsl?" --description 'Returns true if running on Windows Subsystem for Linux'
+  uname -r | string match -eq 'Microsoft'
+end
