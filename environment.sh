@@ -4,6 +4,10 @@
 # Environment variables for all POSIX shells
 # -----------------------------------------------------------------------------
 
+if [ "$Z_ENV_SOURCED" = "true" -a -z "$Z_RELOADING" ]; then
+  return 0
+fi
+
 # XDG Basedir Spec
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -58,3 +62,5 @@ for env_file in "$XDG_CONFIG_HOME/environment.d/"*.sh \
 done
 
 unset -v env_file
+
+export Z_ENV_SOURCED=true
