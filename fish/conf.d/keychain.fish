@@ -7,10 +7,10 @@ if status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
   set -l ssh_env $keychain_dir/.env
 
   set -l params --eval --quick --quiet
-  set -a params --absolute --dir "$keychain_dir"
-  set -a params --inherit any --ignore-missing
+  set params $params --absolute --dir "$keychain_dir"
+  set params $params --inherit any --ignore-missing
 
-  set -lx SHELL (status fish-path)
+  set -lx SHELL (status fish-path 2>/dev/null; or type -P fish)
   keychain $params $keys > $ssh_env
   command chmod 600 $ssh_env
   source $ssh_env
