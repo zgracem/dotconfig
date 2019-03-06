@@ -3,9 +3,10 @@ if not set -q __zgm_init_colours
   set -l message "Sourcing colours…"
 
   for i in (seq 1 (count $colours))
-    echo -ns (set_color $colours[$i]) (string sub --length 1 --start $i "$message")
+    set_color $colours[$i]
+    string sub --length 1 --start $i "$message"
   end
-  echo (set_color normal)
+  set_color normal
 
   # the default color
   set -U fish_color_normal normal
