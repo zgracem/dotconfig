@@ -7,8 +7,6 @@ if not set -q __zgm_init_colours
   end
   echo (set_color normal)
 
-  set -U __zgm_init_colours ✓
-
   # the default color
   set -U fish_color_normal normal
 
@@ -109,6 +107,8 @@ if not set -q __zgm_init_colours
   set -U __fish_prompt_color_git_needs_push cyan
   set -U __fish_prompt_color_git_clean green
   set -U __fish_prompt_color_jobs yellow
+
+  set -U __zgm_init_colours ✓
 end
 
 # -----------------------------------------------------------------------------
@@ -123,7 +123,7 @@ if test ! -f $ls_colors_file -a -d (dirname $ls_colors_file)
   popd
 end
 
-if test -f "$ls_colors_file"
+if test -f $ls_colors_file
   set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' ')[3]
 end
 
