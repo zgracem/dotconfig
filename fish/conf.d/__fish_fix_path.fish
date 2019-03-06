@@ -11,8 +11,8 @@ function __fish_fix_path -a var --description 'Remove duplicate and missing dirs
   end
 
   if not string upper -q "$var"
-    set -g $var "$FIXED_PATH"
+    set -gx $var "$FIXED_PATH"
   else
-    set -g $var $FIXED_PATH
+    set -gx $var $FIXED_PATH
   end
 end
