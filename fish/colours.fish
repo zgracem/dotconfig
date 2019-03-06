@@ -117,8 +117,8 @@ end
 
 set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if test -d "$XDG_CACHE_HOME/dircolors" -a ! -f "$ls_colors_file"
-  pushd "$XDG_CONFIG_HOME/dircolors"
+if test ! -f $ls_colors_file -a -d (dirname $ls_colors_file)
+  pushd (dirname $ls_colors_file)
     and make --quiet all
   popd
 end

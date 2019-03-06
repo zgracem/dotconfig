@@ -6,6 +6,8 @@ function rl --description 'Reload configuration files'
 
   set -l errors 0
   for arg in $argv
+    set -l error_message "couldn't find file for ‘$arg’"
+
     switch "$arg"
     case colours
       set --erase -U __zgm_init_colours
@@ -17,7 +19,7 @@ function rl --description 'Reload configuration files'
         source "$function_file"
         or set errors (math $errors + 1)
       else
-        echo >&2 "couldn't find file for '$arg': $function_file"
+        echo >&2 "$error_message: $function_file"
         set errors (math $errors + 1)
       end
     else if test -f "$__fish_config_dir/$arg.fish"
@@ -27,7 +29,7 @@ function rl --description 'Reload configuration files'
       source "$__fish_config_dir/conf.d/$arg.fish"
       or set errors (math $errors + 1)
     else
-      echo >&2 "couldn't reload '$arg'"
+      echo >&2 $error_message
       set errors (math $errors + 1)
     end
   end
