@@ -1,5 +1,5 @@
 function set_terminal_title --description 'Set the xterm-compatible terminal title'
-  argparse --min-args 1 --exclusive window,tab,both 'w/window' 't/tab' 'b/both' -- $argv
+  argparse -n set_terminal_title --min-args 1 --exclusive window,tab,both 'w/window' 't/tab' 'b/both' -- $argv
 
   set -l BEL "\a"
   set -l DCS "\eP"
