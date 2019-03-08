@@ -4,7 +4,7 @@ if not set -q __zgm_init_colours
 
   for i in (seq 1 (count $colours))
     set_color $colours[$i]
-    string sub --length 1 --start $i "$message"
+    string sub --start $i --length 1 "$message"
   end
   set_color normal
 

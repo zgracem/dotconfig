@@ -15,18 +15,36 @@ abbr --add --global -- '-' 'cd -'
 # macOS & misc.
 
 if macos?
-  function airport --description 'Get information for 802.11 interface'; /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv; end
-  function lockscreen; /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend; end
-  function lsregister --description 'Manage the Launch Services database'; /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister $argv; end
+  function airport --description 'Get information for 802.11 interface'
+    /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv
+  end
+
+  function lockscreen --description 'Lock the screen'
+    /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+  end
+
+  function lsregister --description 'Manage the Launch Services database'
+    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister $argv
+  end
 end
 
 if string match -eq 'Athena' $hostname
-  function vsdeploy; "$HOME/Dropbox/www/vs2017/bin/sync.sh" $argv; end
+  function vsdeploy
+    ~/Dropbox/www/vs2017/bin/sync.sh $argv
+  end
 end
 
-function bye --description 'Exit the shell'; kill %self; end
-function e --description 'Print each argument to a new line'; printf "%s\\n" $argv; end
-function l --wraps less; less --quit-if-one-screen $argv; end
+function bye --description 'Exit the shell'
+  kill %self
+end
+
+function e --description 'Print each argument to a new line'
+  printf "%s\\n" $argv
+end
+
+function l --wraps less
+  less --quit-if-one-screen $argv
+end
 
 # ssh
 
