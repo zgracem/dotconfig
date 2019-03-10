@@ -6,6 +6,7 @@ function max_dim -a pixels file --description 'Resize an image to fit within a s
   else if in-path convert
     convert $file -resize "$pixels"x"$pixels" $new_file
   else
+    echo >&2 "error: don't know how to resize images"
     return 127
   end
 end
