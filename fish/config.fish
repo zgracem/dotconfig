@@ -37,9 +37,13 @@ else
 
     # activate custom prompt
     set -p fish_function_path "$__fish_config_dir/prompt"
+
+    # source vendor completions
+    set -p fish_complete_path "$HOME/opt/etc/fish/completions"
   end
 
   __fish_fix_path fish_function_path
+  __fish_fix_path fish_complete_path
 
   status test-feature qmark-noglob
   if test $status -eq 1
