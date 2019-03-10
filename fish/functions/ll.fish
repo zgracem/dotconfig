@@ -14,7 +14,7 @@ else
       #              └──── omit group
       if is-gnu ls
         # shorter timestamps
-        set -a params --time-style='+%y-%m-%d %H:%M'
+        set -a params --time-style=long-iso
       end
     end
 
