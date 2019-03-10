@@ -9,8 +9,8 @@ function map --description 'Apply a command to each item in a list'
   for arg in $argv
     if test $_command_complete -eq 1
       set -a cmd_argv $arg
-    else if string match -q "*:" $arg
-      set -a cmd (string trim -rc: $arg)
+    else if string match -q -- "*:" $arg
+      set -a cmd (string trim -rc: -- $arg)
       set _command_complete 1
     else
       set -a cmd $arg
@@ -18,7 +18,7 @@ function map --description 'Apply a command to each item in a list'
   end
 
   for argument in $cmd_argv
-    eval (string escape $cmd) (string escape $argument)
+    eval (string escape -- $cmd) (string escape -- $argument)
     or return
   end
 end
