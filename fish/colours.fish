@@ -189,6 +189,7 @@ set JQ_COLORS (string join : $JQ_COLORS)
 
 if in-path exa
   set -gx EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS" | string split :)
+  # Permissions & attributes
   set -a EXA_COLORS "ur="(get_color yellow)
   set -a EXA_COLORS "uw="(get_color red)
   set -a EXA_COLORS "ux="(get_color green)
@@ -202,21 +203,26 @@ if in-path exa
   set -a EXA_COLORS "su="(get_color cyan)
   set -a EXA_COLORS "sf="(get_color cyan)
   set -a EXA_COLORS "xa="(get_color white --bold)
+  # File sizes
   set -a EXA_COLORS "sn="(get_color cyan)
   set -a EXA_COLORS "sb="(get_color cyan --bold)
   set -a EXA_COLORS "df="(get_color cyan --bold)
   set -a EXA_COLORS "ds="(get_color cyan)
+  # Owners and groups
   set -a EXA_COLORS "uu="(get_color green)
   set -a EXA_COLORS "un="(get_color yellow)
   set -a EXA_COLORS "gu="(get_color green)
   set -a EXA_COLORS "gn="(get_color yellow)
+  # Hard links
   set -a EXA_COLORS "lc="(get_color white --bold)
   set -a EXA_COLORS "lm="(get_color white)
+  # git
   set -a EXA_COLORS "ga="(get_color green --bold)
   set -a EXA_COLORS "gm="(get_color yellow --bold)
   set -a EXA_COLORS "gd="(get_color red --bold)
   set -a EXA_COLORS "gv="(get_color cyan)
   set -a EXA_COLORS "gt="(get_color cyan)
+  # Details and metadata
   set -a EXA_COLORS "xx="(get_color normal)
   set -a EXA_COLORS "da="(get_color normal)
   set -a EXA_COLORS "in="(get_color white)
