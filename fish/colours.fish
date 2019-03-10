@@ -1,11 +1,14 @@
 if not set -q __zgm_init_colours
-  set -l colours f00 f70 fa0 ff0 cf0 8f0 0f0 0f9 0f9 0fe 0df 08f 04f 30f 60f b0f f0e
   set -l message "Sourcing colours…"
-
-  for i in (seq 1 (count $colours))
-    echo -ns (set_color $colours[$i]) (string sub --start $i --length 1 "$message")
+  if in-path lolcat
+    echo $message | lolcat --animate
+  else
+    set -l colours f00 f70 fa0 ff0 cf0 8f0 0f0 0f9 0f9 0fe 0df 08f 04f 30f 60f b0f f0e
+    for i in (seq 1 (count $colours))
+      echo -ns (set_color $colours[$i]) (string sub --start $i --length 1 "$message")
+    end
+    echo (set_color normal)
   end
-  echo (set_color normal)
 
   # the default color
   set -U fish_color_normal normal
