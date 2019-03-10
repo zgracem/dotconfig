@@ -22,7 +22,7 @@ function man --description 'Display manual pages in a new window with a nice tit
   if in-tmux
     tmux new-window -n $title "env MANLESS= man $argv"
   else
-    set_terminal_title --window $title
+    set_terminal_title --both $title
     command man $argv
   end
 end
