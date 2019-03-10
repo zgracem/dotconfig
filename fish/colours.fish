@@ -98,16 +98,16 @@ if not set -q __zgm_init_colours
   # ---------------------------------------------------------------------------
 
   set -U fish_color_user_root $fish_color_cwd_root
-  set -U __fish_prompt_color_clock $fish_color_dimmed
-  set -U __fish_prompt_color_duration $fish_color_dimmed
-  set -U __fish_prompt_color_exit $fish_color_error
-  set -U __fish_prompt_color_git_branch $fish_color_dimmed
-  set -U __fish_prompt_color_git_stashed $fish_color_dimmed
-  set -U __fish_prompt_color_git_needs_add red
-  set -U __fish_prompt_color_git_needs_commit yellow
-  set -U __fish_prompt_color_git_needs_push cyan
-  set -U __fish_prompt_color_git_clean green
-  set -U __fish_prompt_color_jobs yellow
+  set -U fish_prompt_color_clock $fish_color_dimmed
+  set -U fish_prompt_color_duration $fish_color_dimmed
+  set -U fish_prompt_color_exit $fish_color_error
+  set -U fish_prompt_color_git_branch $fish_color_dimmed
+  set -U fish_prompt_color_git_stashed $fish_color_dimmed
+  set -U fish_prompt_color_git_needs_add red
+  set -U fish_prompt_color_git_needs_commit yellow
+  set -U fish_prompt_color_git_needs_push cyan
+  set -U fish_prompt_color_git_clean green
+  set -U fish_prompt_color_jobs yellow
 
   set -U __zgm_init_colours ✓
 end
