@@ -1,15 +1,20 @@
 function dim -a image --description 'Get the pixel dimensions of an image'
-  set -l regex '.*: (\d+)$'
+  function _sips_getProperty -a property image
+    set -l regex '.*: (\d+)$'
+    sips --getProperty $property $image | string replace -rf $regex '$1'
+  end
+
   set -l width
   set -l height
 
   if in-path sips
-    set width (sips --getProperty pixelWidth $image | string replace -rf $regex '$1')
+    set width (_sips_getProperty pixelWidth $image)
     or return
-    set height (sips --getProperty pixelHeight $image | string replace -rf $regex '$1')
+    set height (_sips_getProperty pixelHeight $image)
     or return
   else
-    set -l dims (file -bp $image | string replace -rf '.*, (\d+) ?x ?(\d+),.*' '$1\n$2')
+    set -l regex '.*, (\d+) ?x ?(\d+),.*'
+    set -l dims (file -bp $image | string replace -rf $regex '$1\n$2')
     or return
 
     set width $dims[1]
