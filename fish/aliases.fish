@@ -75,6 +75,7 @@ abbr -a -g unset 'set --erase'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexdump -C'
 abbr -a -g wtf 'type'
+abbr -a -g ydl 'youtube-dl'
 
 in-path bundle; and in-path middleman;
   and abbr -a -g mm 'bundle exec middleman'
