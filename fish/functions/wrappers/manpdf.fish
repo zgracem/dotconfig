@@ -6,13 +6,13 @@ function manpdf
   if test ! -d "$MANPDF_DIR"
     set MANPDF_DIR "$HOME/Dropbox/share/doc/pdf"
   end
+
   set -l pdf (command manpdf $argv); or return
   if string match -q "/*" "$pdf"
     echo "$pdf"
-    return 0
-  else if test -n "$SSH_CONNECTION"
-    echo "$pdf"
-  else
-    open "$pdf"
+
+    if test -z "$SSH_CONNECTION"
+      open "$pdf"
+    end
   end
 end
