@@ -109,12 +109,19 @@ brew "fish"
 brew "dos2unix"
 brew "multimarkdown"
 
+# pdf
+brew "ghostscript"
+brew "qpdf"
+
+# fun, games
+brew "figlet"
+brew "lolcat"
+brew "nethack"
+
 # misc.
 brew "exa"
-brew "ghostscript"
 brew "groff"
 brew "keychain"
-brew "nethack"
 brew "source-highlight" # for less
 brew "stow"
 brew "the_silver_searcher"
