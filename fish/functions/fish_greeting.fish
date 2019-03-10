@@ -3,21 +3,13 @@ function fish_greeting --description 'Prints a greeting message on startup'
   test $FISH_VERSINFO[1] -ge 3; or return
 
   if in-path lolcat
-    echo -s \
-      (echo "<°)))><" | lolcat --force --spread=0.5 --seed 8) \
-      ' Welcome to ' (set_color brwhite) 'fish' (set_color normal) \
-      ', version ' (set_color brwhite) "$FISH_VERSION"
+    echo -n '<°)))><' | lolcat --force --spread=0.5 --seed=8
   else
-    echo -s \
-      (set_color 1f998f cyan)   '<' \
-      (set_color 15e6df brcyan) '°' \
-      (set_color 1895ff brblue) ')))' \
-      (set_color 1f998f cyan)   '>' \
-      (set_color 29994f green)  '<' \
-      (set_color 7c8a8b normal) ' Welcome to ' \
-      (set_color 9fb3b3 white)  'fish' \
-      (set_color 7c8a8b normal) ', version ' \
-      (set_color 9fb3b3 white)  "$FISH_VERSION"
+    echo -ns (set_color f3a) '<' (set_color f28) '°' (set_color f66) ')))' \
+      (set_color f80) '>' (set_color fa0) '<' (set_color normal)
   end
-  set_color normal
+
+  printf ' Welcome to %bfish%b, version %b%s%b\\n' \
+    (set_color brwhite) (set_color normal) \
+    (set_color brwhite) $FISH_VERSION (set_color normal)
 end
