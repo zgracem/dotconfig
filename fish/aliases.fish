@@ -68,6 +68,7 @@ if macos?
   abbr -a -g sp 'mdfind -name'
 end
 
+abbr -a -g ef 'funced'
 abbr -a -g fkr 'fish_key_reader --continuous'
 
 abbr -a -g dirsize 'du -sh'
