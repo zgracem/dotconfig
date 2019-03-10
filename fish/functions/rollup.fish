@@ -1,4 +1,4 @@
-function roll --description 'Create a new archive'
+function rollup --description 'Create a new archive'
   set -l archive $argv[1]
   set -l contents $argv[2..-1]
 
