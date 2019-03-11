@@ -1,0 +1,5 @@
+complete --command vsdeploy --short p --desc 'only fix permissions'
+complete --command vsdeploy --short s --desc 'only sync source w/ server'
+complete --command vsdeploy --short m --desc 'only sync media w/ server'
+complete --command vsdeploy --short b --desc 'only build on server'
+complete --command vsdeploy --short d --desc 'sync source and build docs on server'
