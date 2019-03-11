@@ -1,22 +1,24 @@
 function __fish_right_prompt_mode --description 'Display the current mode for the prompt'
   if test "$fish_key_bindings" = "fish_vi_key_bindings"
     or test "$fish_key_bindings" = "fish_hybrid_key_bindings"
+    set -l color
+    set -l mode
     switch $fish_bind_mode
       case default
-        set -l color blue
-        set -l mode 'e'
+        set color blue
+        set mode 'e'
       case insert
-        set -l color green
-        set -l mode 'i'
+        set color green
+        set mode 'i'
       case replace_one
-        set -l color yellow
-        set -l mode 'r'
+        set color yellow
+        set mode 'r'
       case visual
-        set -l color brblue
-        set -l mode 'v'
+        set color brblue
+        set mode 'v'
       case '*'
-        set -l color --bold red
-        set -l mode '?'
+        set color --bold red
+        set mode '?'
     end
     set_color $color
     echo -n "$mode "
