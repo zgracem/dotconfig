@@ -14,7 +14,7 @@ set -p MANPATH /usr/local/share/man
 # Homebrew
 if test -d "$HOMEBREW_PREFIX"
   # use Homebrew's cURL if present
-  set -p PATH "$HOMEBREW_PREFIX/opt/curl/bin"
+  set -p PATH $HOMEBREW_PREFIX/opt/curl/bin
 end
 
 if macos?; and test -x /usr/local/bin/brew
@@ -45,7 +45,7 @@ end
 
 # Linuxbrew
 if linux?
-  for dir in $HOME/.linuxbrew /home/linuxbrew/.linuxbrew
+  for dir in ~/.linuxbrew /home/linuxbrew/.linuxbrew
     if test -x $dir/bin/brew
       set -p PATH $dir/bin $dir/sbin
       set -p MANPATH $dir/share/man
@@ -56,17 +56,17 @@ if linux?
 end
 
 # $HOME
-set -p PATH $HOME/opt/bin $HOME/bin
-set -p MANPATH $HOME/opt/share/man $HOME/opt/man
+set -p PATH ~/opt/bin ~/bin
+set -p MANPATH ~/opt/share/man ~/opt/man
 
 # rbenv
-if test -d "$HOME/.rbenv"
-  if test -d "$HOME/.rbenv/bin"
+if test -d ~/.rbenv
+  if test -d ~/.rbenv/bin
     # non-Homebrew installation
-    set -p PATH $HOME/.rbenv/bin
+    set -p PATH ~/.rbenv/bin
   end
-  set -p PATH $HOME/.rbenv/shims
-  set -p MANPATH $HOME/.rbenv/versions/(cat "$HOME/.rbenv/version")/share/man
+  set -p PATH ~/.rbenv/shims
+  set -p MANPATH ~/.rbenv/versions/(cat ~/.rbenv/version)/share/man
 end
 
 # fish
