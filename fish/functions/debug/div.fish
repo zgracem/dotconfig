@@ -1,5 +1,10 @@
 function div --description 'Print a divider across the terminal'
-  set -l line (for i in (seq 1 $COLUMNS); echo -n \u2500; end)
+  set -l symbol \u2500
+  if set -q argv[1]
+    set symbol (string sub -l1 $argv[1])
+  end
+
+  set -l line (for i in (seq 1 $COLUMNS); echo -n $symbol; end)
   if in-path lolcat
     echo $line | lolcat --spread 8
   else
