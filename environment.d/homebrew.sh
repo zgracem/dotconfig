@@ -17,9 +17,14 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
 fi
 
-# Old-style manual triggering of `brew cleanup`
-export HOMEBREW_NO_INSTALL_CLEANUP=true
-# export HOMEBREW_NO_AUTO_UPDATE=true
+# # Old-style manual triggering of `brew cleanup`
+# export HOMEBREW_NO_INSTALL_CLEANUP=1
+
+# # Old-style manual triggering of `brew update`
+# export HOMEBREW_NO_AUTO_UPDATE=1
+
+# # Be verbose (for troubleshooting)
+# export HOMEBREW_VERBOSE=1
 
 # Always use the latest stable tag (even if developer commands have been run)
 export HOMEBREW_UPDATE_TO_TAG=1
@@ -44,7 +49,7 @@ case $TERM_PROGRAM in
     ;;
   *)
     # don't print beer emoji
-    export HOMEBREW_NO_EMOJI=true
+    export HOMEBREW_NO_EMOJI=1
     ;;
 esac
 
