@@ -29,7 +29,7 @@ if not set -q __zgm_init_colours
   set -U fish_color_error red
 
   # the color for regular command parameters
-  set -U fish_color_param normal
+  set -U fish_color_param white
 
   # the color used for code comments
   set -U fish_color_comment brblack --italics
