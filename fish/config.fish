@@ -2,7 +2,7 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-set -gx FISH_VERSINFO (string split "." "$FISH_VERSION")
+set -gx FISH_VERSINFO (string split "." "$FISH_VERSION" | string split "-")
 
 if test $FISH_VERSINFO[1] -lt 3
   begin
