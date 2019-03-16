@@ -4,7 +4,7 @@ function div --description 'Print a divider across the terminal'
     set symbol (string sub -l1 $argv[1])
   end
 
-  set -l line (for i in (seq 1 $COLUMNS); echo -n $symbol; end)
+  set -l line (string repeat -N -n$COLUMNS $symbol)
   if in-path lolcat
     echo $line | lolcat --spread 8
   else
