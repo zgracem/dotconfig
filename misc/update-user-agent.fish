@@ -54,7 +54,7 @@ if test "$argv[1]" = "test"
   generate-user-agent
   exit
 else
-  set files curlrc wgetrc youtube-dl
+  set files {curlrc,wgetrc,youtube-dl}
   touch $XDG_CONFIG_HOME/.src/$files.m4
   cd $XDG_CONFIG_HOME
   and make USER_AGENT=(generate-user-agent) user-agent
