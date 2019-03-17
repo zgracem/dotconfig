@@ -6,6 +6,6 @@ function fish_tab_title --description 'Update the tab title'
   if test (count $cwd_parts) -le 2
     echo -n $cwd
   else
-    string join / $cwd_parts[1] "…" $cwd_parts[-1]
+    string join / -- $cwd_parts[1] "…" $cwd_parts[-1]
   end
 end

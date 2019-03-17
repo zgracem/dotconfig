@@ -22,5 +22,5 @@ function prompt_pwd --description 'Print the current working directory, shortene
     end
   end
 
-  string join "/" $cwd_parts
+  string join -- "/" $cwd_parts
 end
