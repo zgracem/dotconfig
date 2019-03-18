@@ -10,77 +10,77 @@ if not set -q __zgm_init_colours
     echo (set_color normal)
   end
 
-  # the default color
+  # default color
   set -U fish_color_normal normal
 
-  # the color for commands
+  # commands
   set -U fish_color_command white --bold
 
-  # the color for quoted blocks of text
+  # quoted blocks of text
   set -U fish_color_quote cyan
 
-  # the color for IO redirections
+  # IO redirections
   set -U fish_color_redirection yellow
 
-  # the color for process separators like ';' and '&'
+  # process separators like ';' and '&'
   set -U fish_color_end bryellow
 
-  # the color used to highlight "potential errors"
+  # "potential errors"
   set -U fish_color_error red
 
-  # the color for regular command parameters
+  # regular command parameters
   set -U fish_color_param white
 
-  # the color used for code comments
+  # code comments
   set -U fish_color_comment brblack --italics
 
-  # the color used to highlight matching parentheses
+  # matching parentheses
   set -U fish_color_match brcyan --underline
 
-  # the color used when selecting text (in vi visual mode)
+  # selected text (in vi visual mode)
   set -U fish_color_selection --background=brblack white
 
-  # the background color used to highlight history search matches
+  # history search matches (background colour)
   set -U fish_color_search_match --background=black
 
-  # the color for parameter expansion operators like '*', '~', and '()'
+  # parameter expansion operators like '*', '~', and '()'
   set -U fish_color_operator bryellow
 
-  # the color used to highlight character escapes like '\n' and '\x70'
+  # character escapes like '\n' and '\x70'
   set -U fish_color_escape brmagenta
 
-  # the color used for autosuggestions
+  # autosuggestions
   set -U fish_color_autosuggestion brblack
 
-  # the color used for the current working directory in the default prompt
+  # the current working directory in the default prompt
   set -U fish_color_cwd brwhite
 
-  # the color used to print the current username in some default prompts
+  # the current username in some default prompts
   set -U fish_color_user blue
 
-  # the color used to print the current host system in some default prompts
+  # the current host system in some default prompts
   set -U fish_color_host brblack
 
-  # the color for the '^C' indicator on a canceled command
+  # the '^C' indicator on a canceled command
   set -U fish_color_cancel red
 
   # ---------------------------------------------------------------------------
   # completion highlighting
   # ---------------------------------------------------------------------------
 
-  # the color of the prefix string, i.e. the string that is to be completed
+  # the prefix string, i.e. the string that is to be completed
   set -U fish_pager_color_prefix brblack
 
-  # the color of the completion itself
+  # the completion itself
   set -U fish_pager_color_completion white
 
-  # the color of the completion description
+  # the completion description
   set -U fish_pager_color_description brblack --italics
 
-  # the color of the progress bar at the bottom left corner
+  # the progress bar at the bottom left corner
   set -U fish_pager_color_progress blue
 
-  # the background color of the every second completion
+  # every second completion's background colour
   set -U fish_pager_color_secondary --background=normal
 
   # ---------------------------------------------------------------------------
