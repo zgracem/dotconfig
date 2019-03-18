@@ -19,6 +19,10 @@ if macos?
     /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv
   end
 
+  function firefox --description 'Launch Mozilla Firefox'
+    open -b org.mozilla.firefox $argv
+  end
+
   function lockscreen --description 'Lock the screen'
     /System/Library/CoreServices/'Menu Extras'/User.menu/Contents/Resources/CGSession -suspend
   end

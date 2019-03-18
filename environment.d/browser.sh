@@ -8,8 +8,8 @@ fi
 # Use GUI app if not logged in remotely
 if [ -z "$SSH_CONNECTION" ]; then
   if [ "$PLATFORM" = "windows" ] ; then
-    # Wrapper script for Google Chrome
-    BROWSER="$HOME/bin/chrome"
+    # Wrapper script for Firefox
+    BROWSER="$HOME/bin/firefox"
   else
     BROWSER=open
   fi
