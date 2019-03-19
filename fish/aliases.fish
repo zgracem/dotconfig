@@ -58,12 +58,10 @@ end
 
 # ssh
 
-function athena
-  if string match -eq '.local' $hostname
-    _ssh Athena.local
-  else
-    _ssh Athena.remote
-  end
+if string match -eq '.local' $hostname
+  function athena; _ssh Athena.local; end
+else
+  function athena; _ssh Athena.remote; end
 end
 
 function vshraya; _ssh vshraya; end
