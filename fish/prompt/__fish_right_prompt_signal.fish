@@ -15,5 +15,5 @@ function __fish_right_prompt_signal --description 'Converts an exit code into a 
     set exit $code
   end
 
-  echo -n "$exit "
+  echo -n $exit
 end

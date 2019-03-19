@@ -2,7 +2,7 @@ function __fish_right_prompt_timer -a ms
   set -l time
 
   if test "$ms" -eq 0
-    return
+    return 1
   else if test "$ms" -lt 1000
     # < 1.0s
     set time $ms"ms"
@@ -20,5 +20,5 @@ function __fish_right_prompt_timer -a ms
     set time (math -s2 "$ms / 1000 / 60 / 60 / 24")"d"
   end
 
-  echo "$time "
+  echo -n $time
 end
