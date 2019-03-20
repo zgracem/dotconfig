@@ -87,7 +87,7 @@ fi
 # Linuxbrew
 # -----------------------------------------------------------------------------
 
-if [ "$(uname -s)" = "Linux" ]; then
+if [ "$PLATFORM" = "linux" ]; then
   for d in "$HOME" /home/linuxbrew; do
     if [ -x "$d/.linuxbrew/bin/brew" ]; then
       PATH=$d/.linuxbrew/bin:$d/.linuxbrew/sbin:$PATH
@@ -96,6 +96,16 @@ if [ "$(uname -s)" = "Linux" ]; then
     fi
   done
   unset -v d
+fi
+
+# -----------------------------------------------------------------------------
+# Visual Studio Code
+# -----------------------------------------------------------------------------
+
+if [ -d "/Applications/Visual Studio Code.app" ]; then
+  PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+elif [ -d "$LOCALAPPDATA\\Programs\\Microsoft VS Code" ]; then
+  PATH=$PATH:"$(cygpath -au "$LOCALAPPDATA\\Programs\\Microsoft VS Code\\bin")"
 fi
 
 # -----------------------------------------------------------------------------
