@@ -16,19 +16,20 @@ else
   source "$__fish_config_dir/aliases.fish"
 
   # function subdirectories
-  for dir in $__fish_config_dir/functions/**/
+  for dir in $__fish_config_dir/functions $__fish_config_dir/functions/**/
     set -p fish_function_path (string trim -rc/ $dir)
   end
 
-  # load per-machine configuration if available
-  set -g __fish_config_dir_local ~/.local/config/fish
-  if test -d $__fish_config_dir_local
-    if test -d $__fish_config_dir_local/conf.d
-      for file in $__fish_config_dir_local/conf.d/*.fish
-        source "$file"
+  # load private and per-machine configuration if available
+  set other_config_dirs ~/.local/config/fish ~/.private/fish
+
+  for dir in $other_config_dirs
+    if test -d $dir
+      if test -d $dir/conf.d
+        for file in $dir/conf.d/*.fish; source "$file"; end
       end
+      set -p fish_function_path $dir/functions
     end
-    set -p fish_function_path $__fish_config_dir_local/functions
   end
 
   if status is-interactive
@@ -42,6 +43,7 @@ else
     set -p fish_complete_path "$HOME/opt/etc/fish/completions"
   end
 
+  # remove duplicate & nonexistent directories
   __fish_fix_path fish_function_path
   __fish_fix_path fish_complete_path
 
