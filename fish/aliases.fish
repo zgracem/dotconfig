@@ -64,6 +64,7 @@ else
   function athena; _ssh Athena.remote; end
 end
 
+function dh; _ssh Dreamhost; end
 function vshraya; _ssh vshraya; end
 function wf; _ssh WebFaction; end
 
