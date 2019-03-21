@@ -15,6 +15,9 @@ gem "facets"
 # <github.com/janlelis/irbtools>
 gem "irbtools"
 
+# <github.com/bitboxer/manpages>
+gem "manpages"
+
 # <github.com/seattlerb/minitest>
 gem "minitest"
 
@@ -30,6 +33,9 @@ gem "yard"
 # -----------------------------------------------------------------------------
 # Misc.
 # -----------------------------------------------------------------------------
+
+# <github.com/busyloop/lolcat>
+gem "lolcat"
 
 # <bindata.rubyforge.org>
 gem "bindata"
@@ -111,26 +117,11 @@ gem "symbolized"
 
 # -----------------------------------------------------------------------------
 
-# Show a method's code w/ syntax highlighting <github.com/janlelis/code>
-# gem "code"
-
-# <github.com/flori/json>
-# gem "json"
-
 # <github.com/markburns/numbers_in_words>
 # gem "numbers_in_words"
 
 # power tools for the File class <github.com/djberg96/ptools>
 # gem "ptools"
-
-# pure Ruby readline <github.com/ConnorAtherton/rb-readline>
-# gem "rb-readline"
-
-# <github.com/genki/ruby-terminfo>
-# gem "ruby-terminfo"
-
-# TrueType font parser <github.com/prawnpdf/ttfunk>
-# gem "ttfunk"
 
 # <github.com/threedaymonk/htmlentities>
 # gem "htmlentities"
