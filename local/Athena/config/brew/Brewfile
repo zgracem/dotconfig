@@ -77,7 +77,6 @@ brew "bramstein/webfonttools/woff2"
 # -----------------------------------------------------------------------------
 
 brew "agedu"
-brew "midnight-commander"
 brew "sf-pwgen" # github.com/anders/pwgen
 brew "unar"
 

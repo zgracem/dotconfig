@@ -31,7 +31,6 @@ brew "reattach-to-user-namespace" if OS.mac?
 # other
 brew "dtrx"
 brew "vim"
-brew "wget"
 brew "less"
 brew "ncurses"
 
@@ -64,11 +63,8 @@ end
 
 brew "links"
 brew "lynx"
-
-if OS.mac?
-  brew "rsync"
-  brew "whois"
-end
+brew "rsync" if OS.mac?
+brew "wget"
 
 # -----------------------------------------------------------------------------
 # development
@@ -79,7 +75,6 @@ if OS.mac? && MacOS.version >= "10.6"
   brew "rbenv-default-gems"
   brew "ruby-build"
   brew "rbenv-bundler"
-  brew "python"
 end
 
 brew "jq"
@@ -91,6 +86,14 @@ brew "sass/sass/sass"
 # other stuff
 # -----------------------------------------------------------------------------
 
+brew "exa"
+brew "fish"
+brew "groff"
+brew "keychain"
+brew "source-highlight" # for less
+brew "stow"
+brew "the_silver_searcher"
+
 if OS.mac?
   brew "man-db"
   brew "rename"
@@ -101,9 +104,6 @@ end
 # OpenSSH
 brew "openssh"
 brew "ssh-copy-id"
-
-# shells
-brew "fish"
 
 # text
 brew "dos2unix"
@@ -117,11 +117,3 @@ brew "qpdf"
 brew "figlet"
 brew "lolcat"
 brew "nethack"
-
-# misc.
-brew "exa"
-brew "groff"
-brew "keychain"
-brew "source-highlight" # for less
-brew "stow"
-brew "the_silver_searcher"
