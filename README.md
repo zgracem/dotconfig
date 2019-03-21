@@ -36,7 +36,6 @@ Minimum requirements:
     - `bashrc.d/`
     - `environment.d/`
     - `ssh/`
-- `etc/terminfo/` ← custom terminfo source files
 - `lib/bash/`
     - [`fxdoc/`](https://github.com/zgracem/fxdoc)
     - [`wtf.bash/`](https://github.com/zgracem/wtf.bash)
@@ -46,9 +45,6 @@ Then:
 ```bash
 cd ~ && ln -s .private/ssh ~/.ssh
 cd ~/.config && make shell-files symlinks
-# after restarting the shell
-cd ~/etc/terminfo && make install
-# then restart the whole terminal emulator
 ```
 
 ## Notes on compatibility & portability
