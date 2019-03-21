@@ -1,6 +1,14 @@
 function __fish_prompt_git --description 'Display git info in the fish prompt'
+  set -l icon_stash "+"
+  set -l icon_dirty "•"
+  set -l icon_clean "√"
+  set -l icon_ahead "↑" # "+"
+  set -l icon_behind "↓" # "−"
+  set -l icon_ahead_and_behind "↕" # "±"
+
   # fail if git isn't even installed
-  if not in-path git; return 0; end
+  in-path git
+  or return 0
 
   # fail if we're not inside a git repo
   set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
@@ -15,7 +23,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
 
   if test -r $git_dir/refs/stash
     set_color $fish_prompt_color_git_stashed
-    echo -n "+"
+    echo -n $icon_stash
   end
 
   set -l staged (count (string match -ar '^1 \S\. .*' $git_status))
@@ -29,13 +37,13 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
 
   if test (math "$unstaged + $untracked") -gt 0
     set_color $fish_prompt_color_git_needs_add
-    echo -n '•'
+    echo -n $icon_dirty
   else if test $staged -gt 0
     set_color $fish_prompt_color_git_needs_commit
-    echo -n '•'
+    echo -n $icon_dirty
   else if test -n "$__fish_prompt_show_git_clean"
     set_color $fish_prompt_color_git_clean
-    echo -n '•'
+    echo -n $icon_clean
   end
 
   set -l ahead_behind (string match -r '(?<=branch.ab )\+(\d+) -(\d+)' $git_status)
@@ -45,11 +53,11 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   if test (math "$ahead + $behind") -gt 0
     set_color $fish_prompt_color_git_needs_push
     if test $ahead -gt 0 -a $behind -eq 0
-      echo -n "↑" # "+"
+      echo -n $icon_ahead
     else if test $ahead -eq 0 -a $behind -gt 0
-      echo -n "↓" # "−"
+      echo -n $icon_behind
     else if test $ahead -gt 0 -a $behind -gt 0
-      echo -n "↕" # "±"
+      echo -n $icon_ahead_and_behind
     end
   end
 
