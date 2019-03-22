@@ -21,14 +21,13 @@ else
   end
 
   # load private and per-machine configuration if available
-  set other_config_dirs ~/.local/config/fish ~/.private/fish
-
-  for dir in $other_config_dirs
+  for dir in ~/.local/config/fish ~/.private/fish
     if test -d $dir
       if test -d $dir/conf.d
         for file in $dir/conf.d/*.fish; source "$file"; end
       end
       set -p fish_function_path $dir/functions
+      set -p fish_complete_path $dir/completions
     end
   end
 
@@ -50,5 +49,11 @@ else
   status test-feature qmark-noglob
   if test $status -eq 1
     set -Ua fish_features qmark-noglob
+  end
+
+  if cygwin?
+    # fish_help_browser overrides the browser that may be defined by $BROWSER.
+    # The variable may be an array containing a browser name plus options.
+    set -g fish_help_browser "$LOCALAPPDATA\\Mozilla Firefox\\firefox.exe"
   end
 end
