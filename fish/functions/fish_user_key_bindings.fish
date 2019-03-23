@@ -4,6 +4,6 @@ function fish_user_key_bindings
   bind '!' bind_bang
   bind '$' bind_dollar
 
-  bind \cd ':' # unbind ^D from exit
+  bind \cd bind_eof # unbind ^D from exit
   bind \c_ 'commandline -f repaint' # ^/ redraws current line, not whole screen
 end
