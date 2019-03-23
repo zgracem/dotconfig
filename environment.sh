@@ -4,7 +4,7 @@
 # Environment variables for all POSIX shells
 # -----------------------------------------------------------------------------
 
-if [ "$Z_ENV_SOURCED" = "true" -a -z "$Z_RELOADING" ]; then
+if [ "$Z_ENV_SOURCED" = "true" ] && [ -z "$Z_RELOADING" ]; then
   return 0
 fi
 
