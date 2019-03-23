@@ -44,16 +44,8 @@ if string match -eq 'Athena' $hostname
   end
 end
 
-function bye --description 'Exit the shell'
-  kill %self
-end
-
 function e --description 'Print each argument to a new line'
   printf "%s\\n" $argv
-end
-
-function l --wraps less
-  less --quit-if-one-screen $argv
 end
 
 # ssh
@@ -77,14 +69,15 @@ if macos?
   abbr -a -g sp 'mdfind -name'
 end
 
+abbr -a -g bye 'exit'
 abbr -a -g ef 'funced'
 abbr -a -g fkr 'fish_key_reader --continuous'
+abbr -a -g unset 'set --erase'
+abbr -a -g wtf 'type'
 
 abbr -a -g dirsize 'du -sh'
-abbr -a -g unset 'set --erase'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexdump -C'
-abbr -a -g wtf 'type'
 abbr -a -g ydl 'youtube-dl'
 
 in-path bundle; and in-path middleman;
