@@ -1,6 +1,8 @@
 function my --description 'Display network information'
+  set -l commands ip localip router ssid
+
   switch "$argv[1]"
-    case 'ip' 'localip' 'router' 'ssid'
+    case $commands
       eval "_my_$argv[1]"
     case ''
       echo "Public IP:" (_my_ip)
