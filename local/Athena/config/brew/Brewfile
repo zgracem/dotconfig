@@ -15,7 +15,7 @@
 brew "dnsmasq"
 brew "transmission"
 ### Install w/ pip to get the youtube_dl Python module too.
-# brew "youtube-dl"
+brew "youtube-dl"
 
 # -----------------------------------------------------------------------------
 # media
