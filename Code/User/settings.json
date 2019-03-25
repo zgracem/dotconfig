@@ -1,0 +1,41 @@
+{
+  "editor.fontFamily": "Native, 'SF Mono', 'Powerline Consolas', Consolas, monospace",
+  "editor.fontSize": 13,
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "editor.wordWrap": "bounded",
+  "editor.rulers": [
+    80,
+    118
+  ],
+  "editor.wordWrapColumn": 118,
+  "editor.minimap.maxColumn": 118,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderControlCharacters": true,
+  "editor.occurrencesHighlight": false,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.cursorStyle": "line-thin",
+  "editor.formatOnPaste": true,
+  "editor.scrollBeyondLastLine": true,
+  "editor.snippetSuggestions": "top",
+  "editor.tabCompletion": "on",
+  "explorer.confirmDelete": false,
+  "files.hotExit": "onExit",
+  "search.smartCase": true,
+  "search.usePCRE2": true,
+  "window.restoreWindows": "all",
+  "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
+  "window.titleBarStyle": "native",
+  "window.zoomLevel": 0,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.tabCloseButton": "off",
+  "workbench.statusBar.feedback.visible": false,
+  "files.associations": {
+    "*.mkfile": "makefile"
+  },
+  "files.defaultLanguage": "markdown",
+  "window.nativeTabs": true,
+  "editor.lineHeight": 18,
+  "workbench.colorTheme": "Solarized Dark"
+}
