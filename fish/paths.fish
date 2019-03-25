@@ -57,7 +57,7 @@ end
 
 # $HOME
 set -p PATH ~/opt/bin ~/bin
-set -p MANPATH ~/opt/share/man ~/opt/man
+set -p MANPATH ~/opt/share/man ~/share/man
 
 # rbenv
 if test -d ~/.rbenv

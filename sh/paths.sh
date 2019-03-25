@@ -121,7 +121,7 @@ fi
 # -----------------------------------------------------------------------------
 
 PATH=$HOME/bin:$HOME/opt/bin:$PATH
-MANPATH=$HOME/opt/share/man:$HOME/opt/man:$HOME/share/man:$MANPATH
+MANPATH=$HOME/opt/share/man:$HOME/share/man:$MANPATH
 INFOPATH=$HOME/opt/share/info:$INFOPATH
 
 # -----------------------------------------------------------------------------
