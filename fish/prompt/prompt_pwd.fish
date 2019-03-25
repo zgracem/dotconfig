@@ -7,7 +7,7 @@ function prompt_pwd --description 'Print the current working directory, shortene
   set -q fish_prompt_pwd_dir_glyph
   or set -l fish_prompt_pwd_dir_glyph "…"
 
-  set -l cwd (string replace -r "^$HOME(?=\$|/)" "~" $argv[1])
+  set -l cwd (short_home $argv[1])
   set -l cwd_parts (string split "/" "$cwd")
 
   if test (count $cwd_parts) -le 1
@@ -22,5 +22,5 @@ function prompt_pwd --description 'Print the current working directory, shortene
     end
   end
 
-  string join -- "/" $cwd_parts
+  string join "/" -- $cwd_parts
 end

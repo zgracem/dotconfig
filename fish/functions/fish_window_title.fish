@@ -4,5 +4,5 @@ function fish_window_title --description 'Update the window title'
   or set -g long_hostname (/bin/hostname -f 2>/dev/null)
   or set -g long_hostname $hostname
 
-  printf "%s@%s: %s" $USER $long_hostname (pwd | string replace -r "^$HOME" "~")
+  printf "%s@%s: %s" $USER $long_hostname (pwd | short_home)
 end
