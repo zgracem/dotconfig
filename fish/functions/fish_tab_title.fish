@@ -3,7 +3,7 @@ function fish_tab_title --description 'Update the tab title'
   set -q short_hostname
   or set -g short_hostname (string split "." $hostname)[1]
 
-  set -l cwd (pwd | short_home)
+  set -l cwd (short_home "$PWD")
   set -l cwd_parts (string split "/" "$cwd")
 
   echo -n "$short_hostname:"
