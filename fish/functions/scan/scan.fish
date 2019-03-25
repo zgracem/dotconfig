@@ -1,5 +1,5 @@
 function scan --description 'Scan for network information'
-  set -l commands file pid port ssh wifi
+  set -l commands file fs pid port ssh wifi
 
   switch "$argv[1]"
     case $commands
