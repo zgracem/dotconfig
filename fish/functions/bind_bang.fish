@@ -1,9 +1,9 @@
 function bind_bang
-  switch (commandline -t)[-1]
+  switch (commandline --current-token)[-1]
     case "!"
-      commandline -t $history[1]
-      commandline -f repaint
+      commandline --current-token $history[1]
+      commandline --function repaint
     case "*"
-      commandline -i !
+      commandline --insert !
   end
 end

@@ -1,9 +1,9 @@
 function bind_dollar
-  switch (commandline -t)[-1]
+  switch (commandline --current-token)[-1]
     case "!"
-      commandline -t ""
-      commandline -f history-token-search-backward
+      commandline --current-token ""
+      commandline --function history-token-search-backward
     case "*"
-      commandline -i '$'
+      commandline --insert '$'
   end
 end
