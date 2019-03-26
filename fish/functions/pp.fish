@@ -9,6 +9,9 @@ function pp -a file --description 'Pretty-print data and source code'
     plutil -p $file
   case '*.fish'
     fish_indent --ansi < $file
+  case '*.csv'
+    # http://stackoverflow.com/questions/1875305/command-line-csv-viewer
+    sed 's/,,/, ,/g;s/,,/, ,/g' $file | column -s, -t
   case '*'
     if in-path src-hilite-lesspipe.sh
       src-hilite-lesspipe.sh $file
