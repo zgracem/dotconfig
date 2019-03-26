@@ -9,5 +9,5 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 
 [vs]: https://code.visualstudio.com/docs/getstarted/settings
 
-Run `./sync-extensions.fish` to install everything listed in `extensions` and
-uninstall everything _not_ listed.
+Run `./misc/vscode-sync-extensions.fish` to install everything listed in 
+`extensions` and uninstall everything _not_ listed.
