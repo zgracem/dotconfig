@@ -1,6 +1,7 @@
 {
   "editor.fontFamily": "Native, 'SF Mono', 'Powerline Consolas', Consolas, monospace",
   "editor.fontSize": 13,
+  "editor.lineHeight": 18,
   "editor.tabSize": 2,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
@@ -32,10 +33,16 @@
   "workbench.editor.tabCloseButton": "off",
   "workbench.statusBar.feedback.visible": false,
   "files.associations": {
-    "*.mkfile": "makefile"
+    "vimrc": "viml",
+    "*.mkfile": "makefile",
+    "*.sublime-settings": "json",
+    "*.sublime-build": "json",
+    "*.sublime-syntax": "yaml",
+    "*.sublime-keymap": "json"
   },
   "files.defaultLanguage": "markdown",
-  "window.nativeTabs": true,
-  "editor.lineHeight": 18,
-  "workbench.colorTheme": "Solarized Dark"
+  "workbench.colorTheme": "Solarized Dark",
+  "window.nativeTabs": true, // macOS only
+  "editor.renderLineHighlight": "all",
+  "editor.lightbulb.enabled": false,
 }
