@@ -42,7 +42,6 @@
   },
   "files.defaultLanguage": "markdown",
   "workbench.colorTheme": "Solarized Dark",
-  "window.nativeTabs": true, // macOS only
   "editor.renderLineHighlight": "all",
   "editor.lightbulb.enabled": false,
 }
