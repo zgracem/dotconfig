@@ -80,10 +80,6 @@ brew "agedu"
 brew "sf-pwgen" # github.com/anders/pwgen
 brew "unar"
 
-# dictionaries
-brew "dict"
-brew "sdcv"
-
 # shells
 brew "zsh"
 brew "zsh-syntax-highlighting"
