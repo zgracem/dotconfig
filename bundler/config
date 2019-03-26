@@ -1,4 +1,5 @@
 # vim:ft=yaml
+# export BUNDLE_USER_CONFIG=~/.config/bundler/config
 ---
 BUNDLE_GEM__TEST: false
 BUNDLE_GEM__MIT: true

@@ -1,3 +1,4 @@
+; export npm_config_userconfig=~/.config/npm/npmrc
 loglevel = warn
 progress = false
 prefix = ${XDG_DATA_HOME}/npm
