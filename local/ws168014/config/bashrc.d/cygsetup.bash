@@ -1,4 +1,4 @@
-setup()
+cygsetup()
 {
   local installer_dir="$XDG_DOWNLOAD_DIR/cygwin64"
   local cyg_bin="${installer_dir}/cygwin64.exe"
