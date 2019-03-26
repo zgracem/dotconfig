@@ -2,11 +2,12 @@
 # WS168014:~/.local/logout.bash
 # ------------------------------------------------------------------------------
 
-subl_dir="${APPLICATIONS}/Sublime Text 3/Data"
-save_dir="${HOME}/Dropbox/Archive/WS144966"
+sessions_dir="${APPLICATIONS}/Sublime Text 3/Data/Local"
+save_dir="${HOME}/Dropbox/Archive/WS168014"
+file_basename="Auto Save Session.sublime_session"
 
-sessions_file="${subl_dir}/Local/Auto Save Session.sublime_session"
-save_file="$save_dir/Auto Save Session.sublime_session"
+sessions_file="${sessions_dir}/${file_basename}"
+save_file="${save_dir}/${file_basename}"
 # save_file="$save_dir/$(command date +%F_%H.%M.%S).sublime_session"
 
 if [[ -r $sessions_file && -d $save_dir ]]; then
