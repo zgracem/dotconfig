@@ -2,27 +2,34 @@
 
 # Based on: https://github.com/MikeMcQuaid/dotfiles/blob/d72d627/script/install-vscode-extensions
 
+# To update the extensions file with the current loadout:
+#   code --list-extensions > ~/.config/Code/User/extensions
+
 if not command -sq code
   echo >&2 "error: VS Code not found"
   exit 1
 end
 
-set desired_extensions (cat $XDG_CONFIG_HOME/Code/User/extensions)
+set desired_extensions (cat ~/.config/Code/User/extensions)
 set installed_extensions (code --list-extensions)
+
+function verbose
+  echo -s (set_color blue) "$argv[1]:" (set_color normal) " $argv[2]"
+end
 
 for extension in $desired_extensions
   if contains $extension $installed_extensions
-    set_color blue; echo "already installed: $extension"; set_color normal #debug
+    verbose "already installed" $extension #debug
     continue
   else
-    set_color blue; echo "installing: $extension"; set_color normal #debug
+    verbose "installing" $extension #debug
     code --install-extension $extension
   end
 end
 
 for extension in $installed_extensions
   if not contains $extension $desired_extensions
-    set_color blue; echo "uninstalling: $extension"; set_color normal #debug
+    verbose "uninstalling" $extension #debug
     code --uninstall-extension $extension
   end
 end
