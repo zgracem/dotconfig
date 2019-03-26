@@ -29,6 +29,10 @@ if _inPath bundle; then
   _inPath jekyll && alias jj='bundle exec jekyll'
 fi
 
+if [[ $HOSTNAME == Athena* ]]; then
+  alias vsdeploy='"$HOME/Dropbox/www/vs2017/bin/sync.sh"'
+fi
+
 # chmod
 alias 400='chmod -v 400'
 alias 600='chmod -v 600'
