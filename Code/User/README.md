@@ -4,7 +4,7 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 
 [vs]: https://code.visualstudio.com/docs/getstarted/settings
 
-`settings.json` and `keybindings.json` should be symlinked into:
+`snippets/`, `settings.json` and `keybindings.json` should be symlinked into:
 
 - **Windows:** `%APPDATA%\Code\User`
 - **macOS:**   `$HOME/Library/Application Support/Code/User`
