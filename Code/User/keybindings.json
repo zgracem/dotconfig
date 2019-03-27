@@ -1,8 +1,43 @@
 // Place your key bindings in this file to override the defaults
 [
   {
-    "key": "ctrl+k",
-    "command": "workbench.action.terminal.clear",
-    "when": "terminalFocus"
+    "key": "ctrl+j",
+    "command": "editor.action.joinLines",
+    "when": "editorTextFocus"
   },
+  {
+    "key": "ctrl+k ctrl+l",
+    "command": "editor.action.transformToLowercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k ctrl+u",
+    "command": "editor.action.transformToUppercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+k",
+    "command": "editor.action.deleteLines",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+/",
+    "command": "editor.action.blockComment",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus"
+  }
 ]
