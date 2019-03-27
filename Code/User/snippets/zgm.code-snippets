@@ -1,0 +1,23 @@
+{
+  "Divider_hash": {
+    "prefix": "#div",
+    "body": [
+      "# -----------------------------------------------------------------------------\n\n"
+    ],
+    "description": "Dividing line"
+  },
+  "Divider_slashes": {
+    "prefix": "//div",
+    "body": [
+      "// ----------------------------------------------------------------------------\n\n"
+    ],
+    "description": "Dividing line"
+  },
+  "Today": {
+    "prefix": "today",
+    "body": [
+      "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+    ],
+    "description": "Current date (YYYY-MM-DD)"
+  },
+}
