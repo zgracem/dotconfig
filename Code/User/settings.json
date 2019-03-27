@@ -1,5 +1,5 @@
 {
-  "editor.fontFamily": "Native, 'SF Mono', 'Powerline Consolas', Consolas, monospace",
+  "editor.fontFamily": "Office Code Pro, SF Mono, Consolas, monospace",
   "editor.fontSize": 13,
   "editor.lineHeight": 18,
   "editor.tabSize": 2,
@@ -44,4 +44,7 @@
   "workbench.colorTheme": "Solarized Dark",
   "editor.renderLineHighlight": "all",
   "editor.lightbulb.enabled": false,
+  "breadcrumbs.enabled": true,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.settings.openDefaultSettings": true,
 }
