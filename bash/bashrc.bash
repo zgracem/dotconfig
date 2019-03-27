@@ -59,7 +59,7 @@ fi
 
 if (( this_bash >= 41 )); then
   # Warn when exiting shell with stopped/running jobs
-  shopt -s checkjobs 
+  shopt -s checkjobs
   # `checkjobs` is available in 4.0, but buggy:
   # >> https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
 fi
@@ -115,16 +115,16 @@ case $HOSTNAME in
     # The way I launch Cygwin (via PuTTY + cygtermd) doesn't accommodate the
     # concept of "login shell" -- if I start with anything besides /bin/bash,
     # the session crashes immediately. I don't know why. -- ZGM 2019-03-01
-    PREFERRED_SHELL="$HOME/opt/bin/fish"
+    : "${PREFERRED_SHELL=$HOME/opt/bin/fish}"
     ;;
   web*)
     # I'm not allowed to change anything on my shared hosts.
-    PREFERRED_SHELL="$HOME/.linuxbrew/bin/fish"
+    : "${PREFERRED_SHELL=$HOME/.linuxbrew/bin/fish}"
     ;;
 esac
 
 
-if [[ $PREFERRED_SHELL != "$SHELL" ]] || [[ ${PREFERRED_SHELL##*/} != "${SHELL##*/}" ]]; then
+if [[ ${PREFERRED_SHELL##*/} != "${SHELL##*/}" ]]; then
   if PREFERRED_SHELL=$(type -P "$PREFERRED_SHELL") && [[ -x $PREFERRED_SHELL ]]; then
     export SHELL=$PREFERRED_SHELL
 

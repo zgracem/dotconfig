@@ -31,6 +31,11 @@ else
     TERM_PROGRAM="Cathode"
   fi
 
+  # Visual Studio Code
+  if [ "$TERM_PROGRAM" = "vscode" ]; then
+    TERM=xterm-256color
+  fi
+
   if [ ! -S "${TMUX%%,*}" ] && [ ! -p "$SCREENDIR/$STY" ]; then
     # Old versions of Terminal.app
     if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && ! echo "$OLDTERM" | grep -q nsterm; then
@@ -66,7 +71,7 @@ else
           # This is probably god-awfully old; just leave it alone.
           : ;;
       esac
-    
+
     # iTerm.app
     elif [ "$TERM_PROGRAM" = "iTerm.app" ] && [ "$OLDTERM" != "iTerm.app" ]; then
       ### ZGM disabled 2018-10-07 -- terminfo is broken :(
@@ -115,6 +120,6 @@ if [ -z "$PTERM" ]; then
 fi
 
 # Get the terminal colour depth (based on $TERM, not perfect but it'll do)
-TERM_COLOURDEPTH="$(tput -T"$PTERM" colors 2>/dev/null || 
+TERM_COLOURDEPTH="$(tput -T"$PTERM" colors 2>/dev/null ||
                     tput -T"$PTERM" Co 2>/dev/null)"
 export TERM_COLOURDEPTH=${TERM_COLOURDEPTH:=-1}
