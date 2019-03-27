@@ -1,7 +1,7 @@
 {
   "editor.fontFamily": "Office Code Pro, SF Mono, Consolas, monospace",
   "editor.fontSize": 13,
-  "editor.lineHeight": 16,
+  "editor.lineHeight": 18,
   "editor.tabSize": 2,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
@@ -27,7 +27,6 @@
   "search.usePCRE2": true,
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
-  "window.titleBarStyle": "native",
   "window.zoomLevel": 0,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.tabCloseButton": "off",
@@ -38,7 +37,8 @@
     "*.sublime-settings": "json",
     "*.sublime-build": "json",
     "*.sublime-syntax": "yaml",
-    "*.sublime-keymap": "json"
+    "*.sublime-keymap": "json",
+    "*.plist": "xml"
   },
   "files.defaultLanguage": "markdown",
   "workbench.colorTheme": "Solarized Dark",
@@ -52,4 +52,15 @@
   "terminal.integrated.env.windows": {
     "PREFERRED_SHELL": "bash"
   },
+  "terminal.integrated.shell.osx": "/usr/local/bin/bash",
+  "terminal.integrated.shellArgs.osx": [],
+  "terminal.integrated.env.osx": { "PREFERRED_SHELL": "bash" },
+  "terminal.integrated.scrollback": 10240,
+  "terminal.external.osxExec": "iTerm.app",
+  "workbench.startupEditor": "none",
+  "window.doubleClickIconToClose": true,
+  "workbench.settings.editor": "json",
+  "window.openFoldersInNewWindow": "on",
+  "window.openFilesInNewWindow": "off",
+  "window.newWindowDimensions": "inherit",
 }
