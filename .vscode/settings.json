@@ -1,5 +1,0 @@
-// see also settings in ~/.config/.editorconfig
-{
-  "files.encoding": "utf8",
-  "files.trimFinalNewlines": true
-}
