@@ -13,23 +13,14 @@ end
 set desired_extensions (cat ~/.config/Code/User/extensions)
 set installed_extensions (code --list-extensions)
 
-function verbose
-  echo -s (set_color blue) "$argv[1]:" (set_color normal) " $argv[2]"
-end
-
 for extension in $desired_extensions
-  if contains $extension $installed_extensions
-    verbose "already installed" $extension #debug
-    continue
-  else
-    verbose "installing" $extension #debug
+  if not contains $extension $installed_extensions
     code --install-extension $extension
   end
 end
 
 for extension in $installed_extensions
   if not contains $extension $desired_extensions
-    verbose "uninstalling" $extension #debug
     code --uninstall-extension $extension
   end
 end
