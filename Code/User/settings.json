@@ -36,6 +36,8 @@
   "files.eol": "\n",
   "files.hotExit": "onExit",
   "files.insertFinalNewline": true,
+  "ruby.intellisense": "rubyLocate",
+  "ruby.useLanguageServer": true,
   "search.smartCase": true,
   "search.usePCRE2": true,
   "terminal.external.osxExec": "iTerm.app",
