@@ -70,5 +70,5 @@
   "yaml.format.enable": true,
   "yaml.format.proseWrap": "always",
   "yaml.format.printWidth": 80,
-  "yaml.validate": true,
+  "yaml.validate": true
 }

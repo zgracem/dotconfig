@@ -118,22 +118,3 @@ gem "tinify"
 
 # <github.com/TamerShlash/symbolized>
 gem "symbolized"
-
-# -----------------------------------------------------------------------------
-
-# <github.com/markburns/numbers_in_words>
-# gem "numbers_in_words"
-
-# power tools for the File class <github.com/djberg96/ptools>
-# gem "ptools"
-
-# <github.com/threedaymonk/htmlentities>
-# gem "htmlentities"
-
-### APIs
-
-# <github.com/dropbox/dropbox-sdk-ruby>
-# gem "dropbox-sdk"
-
-# <github.com/google/google-api-ruby-client>
-# gem "google-api-client"
