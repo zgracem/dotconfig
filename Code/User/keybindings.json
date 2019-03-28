@@ -3,17 +3,17 @@
   {
     "key": "ctrl+j",
     "command": "editor.action.joinLines",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+k ctrl+l",
     "command": "editor.action.transformToLowercase",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+k ctrl+u",
     "command": "editor.action.transformToUppercase",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+shift+l",
@@ -23,12 +23,12 @@
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.deleteLines",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+shift+/",
     "command": "editor.action.blockComment",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+d",
@@ -38,10 +38,30 @@
   {
     "key": "ctrl+shift+d",
     "command": "editor.action.copyLinesDownAction",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+t",
     "command": "extension.transpose"
+  },
+  {
+    "key": "f9",
+    "command": "-editor.debug.action.toggleBreakpoint",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "f9",
+    "command": "editor.action.sortLinesAscending",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+f9",
+    "command": "-editor.debug.action.toggleInlineBreakpoint",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+f9",
+    "command": "editor.action.sortLinesDescending",
+    "when": "editorTextFocus && !editorReadonly"
   }
 ]
