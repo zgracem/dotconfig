@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------------------
 # Athena:~/.local/config/Brewfile
+# vim:ft=ruby
 # -----------------------------------------------------------------------------
 
 # Instructions:
@@ -14,8 +15,7 @@
 
 brew "dnsmasq"
 brew "transmission"
-### Install w/ pip to get the youtube_dl Python module too.
-brew "youtube-dl"
+brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
 
 # -----------------------------------------------------------------------------
 # media
@@ -49,11 +49,9 @@ brew "varenc/ffmpeg/ffmpeg", args: [
 brew "exif"
 brew "exiftool"
 brew "imagemagick@6"
+brew "imagesnap"
 brew "pngcrush"
 brew "webkit2png"
-
-# imagesnap requires full Xcode to compile (not just CLT)
-brew "imagesnap" if system "[[ -x /Applications/Xcode.app ]]"
 
 # -----------------------------------------------------------------------------
 # development
@@ -79,10 +77,6 @@ brew "bramstein/webfonttools/woff2"
 brew "agedu"
 brew "sf-pwgen" # github.com/anders/pwgen
 brew "unar"
-
-# shells
-brew "zsh"
-brew "zsh-syntax-highlighting"
 
 # text
 brew "pandoc"

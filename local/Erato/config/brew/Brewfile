@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------------------
 # Erato:~/.local/config/Brewfile
+# vim:ft=ruby
 # -----------------------------------------------------------------------------
 
 # Instructions:
@@ -27,6 +28,5 @@ brew "varenc/ffmpeg/ffmpeg", args: [
 brew "agedu"
 brew "ghostscript"
 brew "imagemagick@6"
-brew "keychain"
 brew "pngcrush"
 brew "youtube-dl"
