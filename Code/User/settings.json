@@ -59,7 +59,7 @@
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
   "window.zoomLevel": 0,
-  "workbench.colorTheme": "Solarized Dark",
+  "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
