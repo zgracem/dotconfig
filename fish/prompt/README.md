@@ -2,12 +2,12 @@
 
 <img src="https://raw.githubusercontent.com/zgracem/dotconfig/master/fish/prompt/prompt.png" width="890" height="23">
 
-My minimalist `fish` prompt progressively discloses information as and when
-it becomes relevant, including:
+My minimalist `fish` prompt progressively discloses information as and when it
+becomes relevant, including:
 
 * User and hostname appear only when connecting remotely
 * Current working directory, abbreviated but still readable at a glance
-* Basic git status: branch name, with coloured indicators for untracked, 
+* Basic git status: branch name, with coloured indicators for untracked,
   unstaged, uncommitted, unsynced and stashed files
 * Background job count, if > 0
 * Non-zero exit statuses appear against the right margin, as numbers or (if
@@ -15,6 +15,6 @@ it becomes relevant, including:
 * The right margin can also include the duration of the last command, the
   current time, and/or an indicator of the current `vi` mode
 
-Prompt-related functions live here to avoid cluttering up `../functions`.
-The path to this directory must be added to `$fish_function_path` so everything
-can auto-load.
+Prompt-related functions live here to avoid cluttering up `../functions`. The
+path to this directory must be added to `$fish_function_path` so everything can
+auto-load.

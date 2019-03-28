@@ -4,7 +4,6 @@
 `$__fish_sysconf_dir/conf.d`, and are sourced before the contents of
 `$__fish_config_dir/config.fish`.
 
-Use this directory for configuration that needs to be available before or
-while `config.fish` is sourced, and for functions that cannot be autoloaded
-(event handlers, function name/filename mismatches, files with multiple 
-functions...).
+Use this directory for configuration that needs to be available before or while
+`config.fish` is sourced, and for functions that cannot be autoloaded (event
+handlers, function name/filename mismatches, files with multiple functions...).
