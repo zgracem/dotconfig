@@ -6,6 +6,7 @@
   "editor.fontSize": 13,
   "editor.formatOnPaste": true,
   "editor.lightbulb.enabled": false,
+  "editor.links": false,
   "editor.lineHeight": 18,
   "editor.minimap.maxColumn": 118,
   "editor.multiCursorModifier": "ctrlCmd",
