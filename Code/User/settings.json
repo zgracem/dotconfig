@@ -66,4 +66,8 @@
   "workbench.settings.editor": "json",
   "workbench.settings.openDefaultSettings": true,
   "workbench.statusBar.feedback.visible": false,
+  "yaml.format.enable": true,
+  "yaml.format.proseWrap": "always",
+  "yaml.format.printWidth": 80,
+  "yaml.validate": true,
 }
