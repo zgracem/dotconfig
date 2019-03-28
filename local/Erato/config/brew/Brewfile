@@ -1,0 +1,32 @@
+# -----------------------------------------------------------------------------
+# Erato:~/.local/config/Brewfile
+# -----------------------------------------------------------------------------
+
+# Instructions:
+#   1. Install Homebrew
+#   2. `brew tap homebrew/bundle`
+#   3. `brew bundle --file=~/.config/brew/Brewfile`
+#   4. `brew bundle --file=$THIS_FILE`
+
+# -----------------------------------------------------------------------------
+
+# ffmpeg with options
+tap  "varenc/ffmpeg"
+brew "varenc/ffmpeg/ffmpeg", args: [
+  "HEAD",
+  "with-fdk-aac",
+  "with-libssh",
+  "with-openh264",
+  "with-openssl",
+  "with-rtmpdump",
+  "with-two-lame",
+  "with-webp",
+  "with-xvid"
+]
+
+brew "agedu"
+brew "ghostscript"
+brew "imagemagick@6"
+brew "keychain"
+brew "pngcrush"
+brew "youtube-dl"
