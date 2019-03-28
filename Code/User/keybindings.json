@@ -39,5 +39,9 @@
     "key": "ctrl+shift+d",
     "command": "editor.action.copyLinesDownAction",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+t",
+    "command": "extension.transpose"
   }
 ]
