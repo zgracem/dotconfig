@@ -12,5 +12,5 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 Run `~/.config/misc/vscode-sync-extensions.fish` to install everything listed 
 in `extensions` and uninstall everything _not_ listed.
 
-Run `code --list-extensions > ~/.config/Code/User/extensions` to update the
+Run `code --list-extensions | tee ~/.config/Code/User/extensions` to update the
 extensions file with the current loadout.

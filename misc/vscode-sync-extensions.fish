@@ -3,7 +3,7 @@
 # Based on: https://github.com/MikeMcQuaid/dotfiles/blob/d72d627/script/install-vscode-extensions
 
 # To update the extensions file with the current loadout:
-#   code --list-extensions > ~/.config/Code/User/extensions
+#   code --list-extensions | tee ~/.config/Code/User/extensions
 
 if not command -sq code
   echo >&2 "error: VS Code not found"
