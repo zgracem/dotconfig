@@ -36,6 +36,7 @@
   "files.eol": "\n",
   "files.hotExit": "onExit",
   "files.insertFinalNewline": true,
+  "markdown.extension.syntax.decorations": false,
   "ruby.intellisense": "rubyLocate",
   "ruby.useLanguageServer": true,
   "search.smartCase": true,
