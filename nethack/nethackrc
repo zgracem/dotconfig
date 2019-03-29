@@ -40,15 +40,6 @@ OPTIONS=sparkle
 OPTIONS=hilite_pet
 
 # -----------------------------------------------------------------------------
-# statushilites
-# -----------------------------------------------------------------------------
-
-#OPTIONS=statushilites
-
-#OPTIONS=hilite_status:armor-class/updown/green/red hitpoints/33%/red/normal
-#OPTIONS=hilite_status: hunger/150/red/normal
-
-# -----------------------------------------------------------------------------
 # interface
 # -----------------------------------------------------------------------------
 
@@ -133,3 +124,63 @@ OPTIONS=horsename:Silver
 # silent when climbing stairs
 MSGTYPE=hide "You descend .*"
 MSGTYPE=hide "You climb .*"
+
+# -----------------------------------------------------------------------------
+# statushilites
+# -----------------------------------------------------------------------------
+
+OPTIONS=statushilites
+
+# HP
+OPTIONS=hilite_status:hitpoints/100%/gray&normal
+OPTIONS=hilite_status:hitpoints/<100%/green&normal
+OPTIONS=hilite_status:hitpoints/<66%/yellow&normal
+OPTIONS=hilite_status:hitpoints/<50%/orange&normal
+OPTIONS=hilite_status:hitpoints/<33%/red&bold
+OPTIONS=hilite_status:hitpoints/<15%/red&inverse
+
+## Pw
+OPTIONS=hilite_status:power/100%/gray&normal
+OPTIONS=hilite_status:power/<100%/green&normal
+OPTIONS=hilite_status:power/<66%/yellow&normal
+OPTIONS=hilite_status:power/<50%/orange&normal
+OPTIONS=hilite_status:power/<33%/red&bold
+
+## Carry
+OPTIONS=hilite_status:cap/burdened/yellow/stressed/orange/strained/red&bold/overtaxed/red&inverse/overloaded/red&inverse&blink
+
+## Hunger
+OPTIONS=hilite_status:hunger/satiated/yellow/hungry/orange/weak/red&bold/fainting/red&inverse/fainted/red&inverse&blink
+
+## Mental
+OPTIONS=hilite_status:condition/hallu/yellow
+OPTIONS=hilite_status:condition/conf/orange
+OPTIONS=hilite_status:condition/stun/red&bold
+
+## Health
+OPTIONS=hilite_status:condition/termill/red&inverse
+OPTIONS=hilite_status:condition/foodpois/red&inverse
+OPTIONS=hilite_status:condition/slime/red&inverse
+
+# gold
+OPTIONS=hilite_status:gold/up/yellow/down/brown
+
+# St, Dx, Co, In, Wi, Ch
+OPTIONS=hilite_status:characteristics/up/green/down/red
+
+# -----------------------------------------------------------------------------
+# menucolors
+# -----------------------------------------------------------------------------
+
+OPTIONS=menucolors
+
+# blessed items in green
+MENUCOLOR=" blessed " = green
+# holy water in green
+MENUCOLOR=" holy " = green
+# cursed items in red
+MENUCOLOR=" cursed " = red
+# unholy water in red
+MENUCOLOR=" unholy " = red
+# cursed worn items in orange and underlined
+MENUCOLOR=" cursed .* (being worn)" = orange&underline
