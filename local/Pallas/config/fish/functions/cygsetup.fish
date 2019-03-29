@@ -31,6 +31,6 @@ function cygsetup --description 'Launch the Cygwin installer'
     echo >&2 "can't create $log_dir"
     return 1
   else
-    pushd $log_dir; and run $cyg_bin $params; and popd
+    pushd $log_dir; and run $cyg_bin $params $argv; and popd
   end
 end
