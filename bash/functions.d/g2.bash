@@ -51,13 +51,6 @@ g2()
         place="$HOME/Music/iTunes/iTunes Media/Music"
       fi
       ;;
-
-    drive)
-      if place=$(find_drive "$myDrive" 2>/dev/null); then
-        # also set environment variable
-        export dir_drive=$place
-      fi
-      ;;
   esac
 
   if [[ -z $place ]]; then

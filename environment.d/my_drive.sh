@@ -1,1 +1,0 @@
-export myDrive="SILVER"
