@@ -3,7 +3,7 @@ function scan --description 'Scan for network information'
 
   switch "$argv[1]"
     case $commands
-      eval "_my_$argv[1]"
+      eval "_scan_$argv[1]"
     case ''
       echo -s "Usage: scan <" (string join "|" $commands) ">" >&2
       return 1
