@@ -7,15 +7,13 @@
 #   1. Install Homebrew
 #   2. `brew tap homebrew/bundle`
 #   3. `brew bundle --file=~/.config/brew/Brewfile`
-#   4. `brew bundle --file=$THIS_FILE`
+#   4. `brew bundle --file=~/.local/config/brew/Brewfile` [this file]
 
 # -----------------------------------------------------------------------------
 
 brew "agedu"
+brew "ffmpeg" # without options
 brew "ghostscript"
 brew "imagemagick@6"
 brew "pngcrush"
 brew "youtube-dl"
-
-# ffmpeg without options
-brew "ffmpeg"

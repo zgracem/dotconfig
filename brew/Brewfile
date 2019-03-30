@@ -6,7 +6,7 @@
 # Instructions:
 #   1. Install Homebrew
 #   2. `brew tap homebrew/bundle`
-#   3. `brew bundle --file=$THIS_FILE`
+#   3. `brew bundle --file=~/.config/brew/Brewfile` [this file]
 #   4. `brew bundle --file=~/.local/config/brew/Brewfile` [optional]
 
 # -----------------------------------------------------------------------------
@@ -21,8 +21,9 @@ brew "openssl"
 brew "curl"
 brew "git"
 
-# bash 5
+# shells
 brew "bash"
+brew "fish"
 
 # tmux
 brew "tmux"
@@ -30,9 +31,17 @@ brew "reattach-to-user-namespace" if OS.mac?
 
 # other
 brew "dtrx"
-brew "vim"
+brew "exa"
+brew "groff"
+brew "jq"
+brew "keychain"
 brew "less"
 brew "ncurses"
+brew "source-highlight" # for less
+brew "stow"
+brew "the_silver_searcher"
+brew "vim"
+brew "wget"
 
 # -----------------------------------------------------------------------------
 # GNU utilities
@@ -40,34 +49,23 @@ brew "ncurses"
 
 if OS.mac?
   brew "coreutils"
-
-  brew "gawk"
-  brew "gnu-tar"
-
-  # parallel
-  brew "parallel"
-
-  # find, locate, updatedb, and xargs
   brew "findutils"
-
-  # sed
+  brew "gawk"
   brew "gnu-sed"
-
-  # grep
+  brew "gnu-tar"
   brew "grep"
+  brew "parallel"
 end
 
 # -----------------------------------------------------------------------------
-# internet stuff
+# text-only browsers
 # -----------------------------------------------------------------------------
 
 brew "links"
 brew "lynx"
-brew "rsync" if OS.mac?
-brew "wget"
 
 # -----------------------------------------------------------------------------
-# development
+# ruby
 # -----------------------------------------------------------------------------
 
 if OS.mac? && MacOS.version >= "10.6"
@@ -77,29 +75,21 @@ if OS.mac? && MacOS.version >= "10.6"
   brew "rbenv-bundler"
 end
 
-brew "jq"
-
-tap  "sass/sass"
-brew "sass/sass/sass"
-
 # -----------------------------------------------------------------------------
 # other stuff
 # -----------------------------------------------------------------------------
 
-brew "exa"
-brew "fish"
-brew "groff"
-brew "keychain"
-brew "source-highlight" # for less
-brew "stow"
-brew "the_silver_searcher"
-
 if OS.mac?
   brew "man-db"
   brew "rename"
+  brew "rsync"
   brew "tree"
   brew "watch"
 end
+
+# Dart Sass
+tap  "sass/sass"
+brew "sass/sass/sass"
 
 # OpenSSH
 brew "openssh"
@@ -118,3 +108,34 @@ brew "figlet"
 brew "lolcat"
 brew "nethack"
 brew "screenfetch"
+
+# -----------------------------------------------------------------------------
+# casks
+# -----------------------------------------------------------------------------
+
+if OS.mac?
+  tap "homebrew/cask"
+
+  cask "1password"
+  cask "alfred"
+  cask "divvy"
+  cask "dropbox"
+  cask "file-juicer"
+  cask "firefox"
+  cask "fission"
+  cask "flux"
+  cask "go2shell"
+  cask "grandperspective"
+  cask "iterm2"
+  cask "mactracker"
+  cask "qlcolorcode"
+  cask "qlmarkdown"
+  cask "qlstephen"
+  cask "sublime-text"
+  cask "superduper"
+  cask "the-unarchiver"
+  cask "transmission"
+  cask "transmit"
+  cask "visual-studio-code"
+  cask "vlc"
+end
