@@ -41,10 +41,6 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+t",
-    "command": "extension.transpose"
-  },
-  {
     "key": "f9",
     "command": "-editor.debug.action.toggleBreakpoint",
     "when": "editorTextFocus"
