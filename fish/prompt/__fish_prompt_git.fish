@@ -14,7 +14,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
   or return 0
 
-  set -l git_status (command git status --branch --porcelain=v2 2>/dev/null)
+  set -l git_status (git status --branch --porcelain=v2 2>/dev/null)
   or return
 
   set -l git_branch (string match -r '(?<=branch.head ).*' $git_status)
