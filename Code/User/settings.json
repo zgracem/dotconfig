@@ -23,6 +23,9 @@
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
+  "emojisense.emojiDecoratorsEnabled": false,
+  "emojisense.markupCompletionsEnabled": false,
+  "emojisense.unicodeCompletionsEnabled": true,
   "explorer.confirmDelete": false,
   "files.associations": {
     "ignore": "ignore",
