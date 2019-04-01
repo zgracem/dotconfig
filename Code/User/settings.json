@@ -31,10 +31,8 @@
     "ignore": "ignore",
     "vimrc": "viml",
     "*.mkfile": "makefile",
-    "*.sublime-settings": "json",
-    "*.sublime-build": "json",
+    "*.sublime-{settings,build,keymap}": "json",
     "*.sublime-syntax": "yaml",
-    "*.sublime-keymap": "json",
     "*.plist": "xml",
     "*.[1-9]": "troff"
   },
