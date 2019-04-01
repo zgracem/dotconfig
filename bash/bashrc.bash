@@ -108,36 +108,36 @@ fi
 # Switch to alternate shell if available
 # -----------------------------------------------------------------------------
 
-: "${PREFERRED_SHELL=fish}"
+if [[ -z $PREFERRED_SHELL ]]; then
+  case $HOSTNAME in
+    WS*)
+      # The way I launch Cygwin (via PuTTY + cygtermd) doesn't accommodate the
+      # concept of "login shell" -- if I start with anything besides /bin/bash,
+      # the session crashes immediately. I don't know why. -- ZGM 2019-03-01
+      PREFERRED_SHELL=$HOME/opt/bin/fish
+      ;;
+    web*)
+      # I'm not allowed to change anything on my shared hosts.
+      PREFERRED_SHELL=$HOME/.linuxbrew/bin/fish
+      ;;
+    *)
+      PREFERRED_SHELL=$(type -P fish)
+      ;;
+  esac
+fi
 
-case $HOSTNAME in
-  WS*)
-    # The way I launch Cygwin (via PuTTY + cygtermd) doesn't accommodate the
-    # concept of "login shell" -- if I start with anything besides /bin/bash,
-    # the session crashes immediately. I don't know why. -- ZGM 2019-03-01
-    : "${PREFERRED_SHELL=$HOME/opt/bin/fish}"
-    ;;
-  web*)
-    # I'm not allowed to change anything on my shared hosts.
-    : "${PREFERRED_SHELL=$HOME/.linuxbrew/bin/fish}"
-    ;;
-esac
+: "${PREFERRED_SHELL=$(type -P bash)}"
 
+if [[ $PREFERRED_SHELL != $SHELL ]]; then
+  export SHELL=$PREFERRED_SHELL
 
-if [[ ${PREFERRED_SHELL##*/} != "${SHELL##*/}" ]]; then
-  if PREFERRED_SHELL=$(type -P "$PREFERRED_SHELL") && [[ -x $PREFERRED_SHELL ]]; then
-    export SHELL=$PREFERRED_SHELL
+  # Prevent shell from exiting if `exec` fails
+  shopt -s execfail
 
-    # Prevent shell from exiting if `exec` fails
-    shopt -s execfail
-
-    if shopt -pq login_shell; then
-      exec -l "$SHELL"
-    else
-      exec "$SHELL"
-    fi
+  if shopt -pq login_shell; then
+    exec -l "$SHELL"
   else
-    unset -v PREFERRED_SHELL
+    exec "$SHELL"
   fi
 fi
 
