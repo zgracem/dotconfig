@@ -45,6 +45,7 @@
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.syntax.decorations": false,
+  "reflowMarkdown.preferredLineLength": 79,
   "ruby.intellisense": "rubyLocate",
   "ruby.useLanguageServer": true,
   "search.smartCase": true,
