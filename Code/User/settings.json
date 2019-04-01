@@ -36,14 +36,7 @@
     "*.sublime-syntax": "yaml",
     "*.sublime-keymap": "json",
     "*.plist": "xml",
-    "*.1": "troff",
-    "*.2": "troff",
-    "*.3": "troff",
-    "*.4": "troff",
-    "*.5": "troff",
-    "*.6": "troff",
-    "*.7": "troff",
-    "*.8": "troff"
+    "*.[1-9]": "troff"
   },
   "files.defaultLanguage": "markdown",
   "files.eol": "\n",
