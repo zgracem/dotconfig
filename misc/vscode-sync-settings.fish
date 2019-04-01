@@ -1,31 +1,50 @@
 #!/usr/bin/env fish
 
 # This script uses jq <https://github.com/stedolan/jq> to concatenate cross-
-# platform settings with those specific to my proxy-bound, admin-less Windows
+# platform settings with those specific to my proxy-bound, admin-less Windows 7
 # machine at work.
 
-if not string match -eq 'CYGWIN' (uname -s)
-  echo >&2 "error: this script is for Windows only"
-  exit 1
-else if not command -sq jq
-  echo >&2 "error: jq not found"
-  exit 127
+set config_dir ~/.config/Code/User
+
+switch (uname -s)
+case 'CYGWIN*'
+  if not command -sq jq
+    echo >&2 "error: jq not found"
+    exit 127
+  end
+
+  set dir (cygpath -au "$APPDATA/Code/User")
+
+  ### sync settings
+
+  set base_settings $config_dir/settings.json
+  set more_settings $config_dir/settings.windows.json
+
+  if not test -d $dir
+    echo >&2 "error: not found:" $dir
+    exit 1
+  end
+
+  jq '. + '(jq -cj '.' $more_settings) $base_settings > $dir/settings.json
+
+  ### sync keybindings
+
+  command cp -af $config_dir/keybindings.json $dir
+
+  ### sync snippets
+
+  if not test -L $dir/snippets
+    cmd /C mklink /J (cygpath -aw $dir/snippets) (cygpath -aw $config_dir/snippets)
+  end
+
+case 'Darwin'
+  set dir "$HOME/Library/Application Support/Code/User"
+
+  if not test -L $dir/settings.json
+    mkdir -p $dir
+    test -f $dir/settings.json; and mv $dir/settings.json $dir/settings.json~original
+    ln -sf $config_dir/settings.json $dir
+    ln -sf $config_dir/keybindings.json $dir
+    ln -sf $config_dir/snippets $dir
+  end
 end
-
-set output_dir (cygpath -au "$APPDATA/Code/User")
-
-### sync settings
-
-set base_settings ~/.config/Code/User/settings.json
-set more_settings ~/.config/Code/User/settings.windows.json
-
-if not test -d $output_dir
-  echo >&2 "error: not found:" $output_dir
-  exit 1
-end
-
-jq '. + '(jq -cj '.' $more_settings) $base_settings > $output_dir/settings.json
-
-### sync keybindings
-
-cp -af ~/.config/Code/User/keybindings.json $output_dir
