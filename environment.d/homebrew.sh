@@ -37,18 +37,22 @@ export HOMEBREW_EDITOR="$VISUAL"
 
 # Check for macOS/iOS terminal clients w/ emoji support
 case $TERM_PROGRAM in
-  Apple_Terminal|iTerm*|Prompt_2|Coda)
+  Apple_Terminal|iTerm*|Prompt_2|Coda|vscode)
     case "$(date +%B)" in
       "October")
         # Pumpkin Spice Homebrew!
         # >> https://twitter.com/MacHomebrew/status/783028298351730688
-        export HOMEBREW_INSTALL_BADGE="🎃" # $'\xf0\x9f\x8e\x83'
+        HOMEBREW_INSTALL_BADGE="🎃" # $'\xf0\x9f\x8e\x83'
         ;;
       "December")
         # Santa brought me a bunch of software upgrades
-        export HOMEBREW_INSTALL_BADGE="🎁" # $'\xf0\x9f\x8e\x81'
+        HOMEBREW_INSTALL_BADGE="🎁" # $'\xf0\x9f\x8e\x81'
+        ;;
+      *)
+        HOMEBREW_INSTALL_BADGE="🍻"
         ;;
     esac
+    export HOMEBREW_INSTALL_BADGE
     ;;
   *)
     # don't print beer emoji
