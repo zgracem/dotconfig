@@ -9,11 +9,14 @@
 #   3. `brew bundle --file=~/.config/brew/Brewfile`
 #   4. `brew bundle --file=~/.local/config/brew/Brewfile` [this file]
 
+tap "homebrew/command-not-found"
+tap "zachwick/license"
+
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
-brew "dnsmasq"
+brew "dnsmasq", restart_service: true
 brew "transmission"
 brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
 
