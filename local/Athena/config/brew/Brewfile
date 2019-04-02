@@ -10,13 +10,14 @@
 #   4. `brew bundle --file=~/.local/config/brew/Brewfile` [this file]
 
 tap "homebrew/command-not-found"
+tap "homebrew/services"
 tap "zachwick/license"
 
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
-brew "dnsmasq", restart_service: true
+brew "dnsmasq", restart_service: :changed
 brew "transmission"
 brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
 
@@ -31,7 +32,6 @@ brew "id3v2"
 brew "lame"
 brew "mkvtoolnix"
 brew "mp4v2"
-brew "mplayer"
 
 # ffmpeg with options
 tap  "varenc/ffmpeg"
@@ -69,7 +69,6 @@ brew "fontforge"
 tap  "bramstein/webfonttools"
 brew "bramstein/webfonttools/sfnt2woff-zopfli"
 brew "bramstein/webfonttools/sfnt2woff"
-brew "bramstein/webfonttools/sfntly"
 brew "bramstein/webfonttools/ttf2eot"
 brew "bramstein/webfonttools/woff2"
 

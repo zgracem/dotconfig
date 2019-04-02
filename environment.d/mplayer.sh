@@ -1,1 +1,0 @@
-export MPLAYER_HOME="$XDG_CONFIG_HOME/mplayer"
