@@ -21,6 +21,9 @@
   "editor.snippetSuggestions": "top",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
+  "[markdown]": {
+    "editor.tabSize": 4
+  },
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emojisense.emojiDecoratorsEnabled": false,

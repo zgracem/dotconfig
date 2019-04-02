@@ -10,6 +10,7 @@ trim_trailing_whitespace = true
 
 [*.markdown]
 trim_trailing_whitespace = false
+indent_size = 4
 
 [{Makefile,*.mkfile}]
 indent_style = tab
