@@ -6,22 +6,23 @@ if [ -z "$LANGUAGE" ]; then
   export LANGUAGE='en_CA:en_US:en'
 fi
 
-# LANG: used as a substitute for any unset LC_* variable
-if [ -z "$LANG" ]; then
-  # Some systems have 'en_CA.UTF-8', some have 'en_CA.utf8' -- search locales
-  # to find whichever is available, and cache the result.
-  lang_file="$XDG_DATA_HOME/locale/LANG"
+# LANG: used as a substitute for any unset LC_* variable.
+# Some systems have 'en_CA.UTF-8', some have 'en_CA.utf8' -- search locales
+# to find whichever is available, and cache the result.
+lang_file="$XDG_DATA_HOME/locale/LANG"
+
+if [ ! -f "$lang_file" ]; then
   mkdir -pv "${lang_file%/*}"
-
-  if [ ! -f "$lang_file" ]; then
-    locale -a 2>/dev/null \
-    | command grep -Ei "${LANGUAGE%%:*}\\.utf-?8" \
-    > "$lang_file"    
-  fi
-
-  read -r LANG < "$lang_file"
-  unset -v lang_file
+  locale -a 2>/dev/null \
+  | command grep -Ei "${LANGUAGE%%:*}\\.utf-?8" \
+  > "$lang_file"
 fi
+
+if [ -z "$LANG" ]; then
+  read -r LANG < "$lang_file"
+fi
+
+unset -v lang_file
 
 if [ -z "$LC_ALL" ]; then
   # LC_COLLATE="$LANG"  # collation information for regular expressions and sorting
