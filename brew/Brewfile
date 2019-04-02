@@ -123,6 +123,7 @@ if OS.mac?
   cask "alfred"
   cask "divvy"
   cask "dropbox"
+  cask "fantastical"
   cask "file-juicer"
   cask "firefox"
   cask "fission"
@@ -131,9 +132,11 @@ if OS.mac?
   cask "grandperspective"
   cask "iterm2"
   cask "mactracker"
+  cask "qladdict" # preview .srt subtitle files
+  cask "ql-ansilove" # preview ANSI art
   cask "qlcolorcode"
   cask "qlmarkdown"
-  cask "qlstephen"
+  cask "qlstephen" # preview text files w/ no extension (e.g. README)
   cask "sublime-text"
   cask "superduper"
   cask "the-unarchiver"
