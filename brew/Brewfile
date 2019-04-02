@@ -54,7 +54,8 @@ if OS.mac?
   brew "gnu-sed"
   brew "gnu-tar"
   brew "grep"
-  brew "parallel"
+  brew "moreutils"
+  brew "parallel", link: false
 end
 
 # -----------------------------------------------------------------------------
