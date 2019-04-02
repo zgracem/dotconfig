@@ -22,6 +22,14 @@ if macos?; and test -x /usr/local/bin/brew
   set -p PATH /usr/local/opt/coreutils/libexec/gnubin
   set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
 
+  # GNU findutils (w/out `g` prefix)
+  set -p PATH /usr/local/opt/findutils/libexec/gnubin
+  set -p MANPATH /usr/local/opt/findutils/share/man
+
+  # GNU grep (w/out `g` prefix)
+  set -p PATH /usr/local/opt/grep/libexec/gnubin
+  set -p MANPATH /usr/local/opt/grep/share/man
+
   # GNU sed (w/out `g` prefix)
   set -p PATH /usr/local/opt/gnu-sed/libexec/gnubin
   set -p MANPATH /usr/local/opt/gnu-sed/share/man

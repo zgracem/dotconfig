@@ -23,6 +23,16 @@ if [ -x /usr/local/bin/brew ]; then
   MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   #INFOPATH linked to /usr/local/share/info
 
+  # GNU findutils (w/out `g` prefix)
+  PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
+  MANPATH=/usr/local/opt/findutils/share/man:$PATH
+  INFOPATH=/usr/local/opt/findutils/share/info:$PATH
+
+  # GNU grep (w/out `g` prefix)
+  PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
+  MANPATH=/usr/local/opt/grep/share/man:$PATH
+  INFOPATH=/usr/local/opt/grep/share/info:$PATH
+
   # GNU sed (w/out `g` prefix)
   PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
   MANPATH=/usr/local/opt/gnu-sed/share/man:$MANPATH
@@ -132,7 +142,7 @@ if [ -d "$HOME/.rbenv" ]; then
   if [ -d "$HOME/.rbenv/bin" ]; then
     # non-Homebrew install
     PATH=$HOME/.rbenv/bin:$PATH
-  fi    
+  fi
   PATH=$HOME/.rbenv/shims:$PATH
   MANPATH=$HOME/.rbenv/versions/$(cat "$HOME/.rbenv/version")/share/man:$MANPATH
   unset -v RBENV_VERSION
