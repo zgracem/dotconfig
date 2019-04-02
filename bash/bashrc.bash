@@ -128,7 +128,7 @@ fi
 
 : "${PREFERRED_SHELL=$(type -P bash)}"
 
-if [[ $PREFERRED_SHELL != $SHELL ]]; then
+if [[ $PREFERRED_SHELL != "$SHELL" ]]; then
   export SHELL=$PREFERRED_SHELL
 
   # Prevent shell from exiting if `exec` fails
