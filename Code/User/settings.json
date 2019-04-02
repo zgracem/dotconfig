@@ -40,6 +40,7 @@
   "files.eol": "\n",
   "files.hotExit": "onExit",
   "files.insertFinalNewline": true,
+  "gitblame.statusBarMessageFormat": "${author.name} (${time.ago})",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.syntax.decorations": false,
