@@ -5,9 +5,6 @@
 # private
 jrnl
 
-# messy/boring
-zsh/
-
 # unnecessary
 fish/fish_variables
 fish/fishd.*
