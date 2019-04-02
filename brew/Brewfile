@@ -83,7 +83,8 @@ end
 # -----------------------------------------------------------------------------
 
 if OS.mac?
-  brew "man-db"
+  tap "alhadis/troff"
+  brew "alhadis/troff/man-db"
   brew "rename"
   brew "rsync"
   brew "tree"
