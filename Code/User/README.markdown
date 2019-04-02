@@ -9,14 +9,22 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 - **Windows:** `%APPDATA%\Code\User`
 - **macOS:**   `$HOME/Library/Application Support/Code/User`
 
-Run `~/.config/bin/vscode-sync-settings.fish` on Windows/Cygwin machines
-without admin privileges to concatenate `settings.windows.json` with the base
-`settings.json` file and install it to `$APPDATA`.
+On Windows/Cygwin machines without admin privileges, to concatenate the base
+`settings.json` file with `settings.windows.json` and install it to `$APPDATA`:
+
+    ~/.config/bin/vscode-sync-settings.fish
 
 ## Extensions
 
-Run `~/.config/bin/vscode-sync-extensions.fish` to install everything listed in
-`extensions` and uninstall everything _not_ listed.
+To install everything listed in `extensions` (and uninstall everything _not_
+listed):
 
-Run `code --list-extensions | tee ~/.config/Code/User/extensions` to update the
-extensions file with the current loadout.
+    ~/.config/bin/vscode-sync-extensions.fish
+
+To overwrite `extensions` with the current loadout:
+
+    code --list-extensions | tee ~/.config/Code/User/extensions
+
+To list `extensions` combined with the current loadout (`fish` syntax):
+
+    cat ~/.config/Code/User/extensions (code --list-extensions | psub) | sort -uf
