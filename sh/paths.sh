@@ -25,12 +25,12 @@ if [ -x /usr/local/bin/brew ]; then
 
   # GNU findutils (w/out `g` prefix)
   PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
-  MANPATH=/usr/local/opt/findutils/share/man:$PATH
+  MANPATH=/usr/local/opt/findutils/share/man:$MANPATH
   INFOPATH=/usr/local/opt/findutils/share/info:$PATH
 
   # GNU grep (w/out `g` prefix)
   PATH=/usr/local/opt/grep/libexec/gnubin:$PATH
-  MANPATH=/usr/local/opt/grep/share/man:$PATH
+  MANPATH=/usr/local/opt/grep/share/man:$MANPATH
   INFOPATH=/usr/local/opt/grep/share/info:$PATH
 
   # GNU sed (w/out `g` prefix)
