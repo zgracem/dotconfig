@@ -23,6 +23,9 @@ fi
 # # Old-style manual triggering of `brew update`
 # export HOMEBREW_NO_AUTO_UPDATE=1
 
+# Only auto-update every 10 minutes (default is 60 secs, yikes)
+export HOMEBREW_AUTO_UPDATE_SECS=600
+
 # # Be verbose (for troubleshooting)
 # export HOMEBREW_VERBOSE=1
 
@@ -41,8 +44,8 @@ case $TERM_PROGRAM in
         # >> https://twitter.com/MacHomebrew/status/783028298351730688
         export HOMEBREW_INSTALL_BADGE="🎃" # $'\xf0\x9f\x8e\x83'
         ;;
-      "December")       
-        # Santa brought me a bunch of software upgrades 
+      "December")
+        # Santa brought me a bunch of software upgrades
         export HOMEBREW_INSTALL_BADGE="🎁" # $'\xf0\x9f\x8e\x81'
         ;;
     esac
