@@ -1,4 +1,4 @@
-function _my_ip
+function _my_ip --description 'Display current public IP address'
   if in-path ip
     ip -o route get to 1.1.1.1 | string replace -rf '.*src ([\d.]+).*' '$1'
   else if in-path dig

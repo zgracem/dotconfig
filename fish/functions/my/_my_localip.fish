@@ -1,4 +1,4 @@
-function _my_localip
+function _my_localip --description 'Display current local IP address'
   if macos?
     set -l pattern '^.*Setup:/Network/Interface/(en\d)/AirPort$'
     set -l netcard (echo list | scutil | string replace -fr $pattern '$1')
