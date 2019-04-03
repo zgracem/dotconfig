@@ -57,6 +57,7 @@ else
 end
 
 function dh; _ssh Dreamhost; end
+function erato; _ssh Erato; end
 function vshraya; _ssh vshraya; end
 function wf; _ssh WebFaction; end
 
@@ -79,6 +80,12 @@ abbr -a -g dirsize 'du -sh'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexdump -C'
 abbr -a -g ydl 'youtube-dl'
+
+abbr -a -g 555 'chmod 0555'
+abbr -a -g 600 'chmod 0600'
+abbr -a -g 644 'chmod 0644'
+abbr -a -g 700 'chmod 0700'
+abbr -a -g 755 'chmod 0755'
 
 in-path bundle; and in-path middleman;
   and abbr -a -g mm 'bundle exec middleman'
