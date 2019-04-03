@@ -2,12 +2,11 @@
 # ~/.config/brew/Brewfile
 # vim:ft=ruby
 # -----------------------------------------------------------------------------
-
 # Instructions:
 #   1. Install Homebrew
-#   2. `brew tap homebrew/bundle`
-#   3. `brew bundle --file=~/.config/brew/Brewfile` [this file]
-#   4. `brew bundle --file=~/.local/config/brew/Brewfile` [optional]
+#   2. brew bundle --file=~/.config/brew/Brewfile       # this file
+#   3. brew bundle --file=~/.local/config/brew/Brewfile # optional
+# -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # essentials
@@ -31,25 +30,21 @@ brew "reattach-to-user-namespace" if OS.mac?
 
 # other
 brew "dtrx"
-brew "exa"
-brew "groff"
+brew "ghostscript"
 brew "jq"
-brew "help2man"
-brew "jrnl"
 brew "keychain"
 brew "less"
-brew "ncurses"
-brew "source-highlight" # for less
 brew "stow"
 brew "the_silver_searcher"
 brew "vim"
 brew "wget"
-
-# -----------------------------------------------------------------------------
-# GNU utilities
-# -----------------------------------------------------------------------------
+brew "multimarkdown"
 
 if OS.mac?
+  brew "rename"
+  brew "rsync"
+
+  # GNU utilities
   brew "coreutils"
   brew "findutils"
   brew "gawk"
@@ -61,51 +56,23 @@ if OS.mac?
 end
 
 # -----------------------------------------------------------------------------
-# text-only browsers
+# more
 # -----------------------------------------------------------------------------
 
+brew "dos2unix"
+brew "exa"
+brew "jrnl"
 brew "links"
 brew "lynx"
-
-# -----------------------------------------------------------------------------
-# ruby
-# -----------------------------------------------------------------------------
-
-if OS.mac? && MacOS.version >= "10.6"
-  brew "rbenv"
-  brew "rbenv-default-gems"
-  brew "ruby-build"
-  brew "rbenv-bundler"
-end
-
-# -----------------------------------------------------------------------------
-# other stuff
-# -----------------------------------------------------------------------------
+brew "openssh"
+brew "qpdf"
+brew "source-highlight" # for less
+brew "ssh-copy-id"
 
 if OS.mac?
-  tap "alhadis/troff"
-  brew "alhadis/troff/man-db"
-  brew "rename"
-  brew "rsync"
   brew "tree"
   brew "watch"
 end
-
-# Dart Sass
-tap  "sass/sass"
-brew "sass/sass/sass"
-
-# OpenSSH
-brew "openssh"
-brew "ssh-copy-id"
-
-# text
-brew "dos2unix"
-brew "multimarkdown"
-
-# pdf
-brew "ghostscript"
-brew "qpdf"
 
 # fun, games
 brew "figlet"
@@ -114,15 +81,39 @@ brew "nethack"
 brew "screenfetch"
 
 # -----------------------------------------------------------------------------
+# development stuff
+# -----------------------------------------------------------------------------
+
+brew "groff"
+brew "help2man"
+brew "ncurses"
+
+if OS.mac?
+  tap "alhadis/troff"
+  brew "alhadis/troff/man-db"
+end
+
+# ruby
+if OS.mac? && MacOS.version >= "10.6"
+  brew "rbenv"
+  brew "rbenv-default-gems"
+  brew "ruby-build"
+  brew "rbenv-bundler"
+end
+
+# Dart Sass
+tap  "sass/sass"
+brew "sass/sass/sass"
+
+# -----------------------------------------------------------------------------
 # casks
 # -----------------------------------------------------------------------------
 
-if OS.mac?
+if OS.mac? && MacOS.version >= "10.11"
   tap "homebrew/cask"
 
   cask "1password"
   cask "alfred"
-  cask "divvy"
   cask "dropbox"
   cask "fantastical"
   cask "file-juicer"
@@ -133,8 +124,8 @@ if OS.mac?
   cask "grandperspective"
   cask "iterm2"
   cask "mactracker"
-  cask "qladdict" # preview .srt subtitle files
   cask "ql-ansilove" # preview ANSI art
+  cask "qladdict" # preview .srt subtitle files
   cask "qlcolorcode"
   cask "qlmarkdown"
   cask "qlstephen" # preview text files w/ no extension (e.g. README)
