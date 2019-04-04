@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
 # ~/.config/nethack/nethackrc
 # export NETHACKOPTIONS="@$HOME/.config/nethack/nethackrc"
+# vim: ft=ini
 # -----------------------------------------------------------------------------
 
 OPTIONS=name:Zozo
