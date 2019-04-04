@@ -16,15 +16,17 @@ On Windows/Cygwin machines without admin privileges, to concatenate the base
 
 ## Extensions
 
-To install everything listed in `extensions` (and uninstall everything _not_
-listed):
+Use `~/.config/bin/vscode-extensions` to manage extensions against the
+`extensions` file in this directory.
 
-    ~/.config/bin/vscode-sync-extensions.fish
+To install everything listed in `extensions`:
+
+    ~/.config/bin/vscode-extensions install
+
+To uninstall everything _not_ listed:
+
+    ~/.config/bin/vscode-extensions cleanup
 
 To overwrite `extensions` with the current loadout:
 
-    code --list-extensions | tee ~/.config/Code/User/extensions
-
-To list `extensions` combined with the current loadout (`fish` syntax):
-
-    cat ~/.config/Code/User/extensions (code --list-extensions | psub) | sort -uf
+    ~/.config/bin/vscode-extensions dump
