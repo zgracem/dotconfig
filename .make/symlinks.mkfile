@@ -6,14 +6,16 @@
 # Output files
 SYMLINKS := ~/.stow-global-ignore \
 						~/.stowrc \
-						~/.tmux.conf
+						~/.tmux.conf \
+						~/.vimrc
 
 # Map input files to output files
 ~/.stow-global-ignore: stow/stow-global-ignore
 ~/.stowrc: stow/stowrc
 ~/.tmux.conf: tmux/tmux.conf
+~/.vimrc: vim/vimrc
 
-# How to generate 
+# How to generate
 $(SYMLINKS):
 	ln -s .config/$< $@
 
