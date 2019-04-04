@@ -1,4 +1,4 @@
-function json2yaml --description "Convert a JSON file to YAML"
+function json2yaml --description "Convert JSON to YAML"
   set -l src
   if set -q argv[1]
     set src "Pathname.new(ARGV[0])"
@@ -9,5 +9,7 @@ function json2yaml --description "Convert a JSON file to YAML"
     return 1
   end
 
-  ruby -rjson -rpathname -ryaml -e "puts JSON.load($src).to_yaml" $argv[1]
+  set -l cmd "puts JSON.load($src).to_yaml"
+  set -l libs json pathname yaml
+  ruby -r$libs -e $cmd $argv[1]
 end
