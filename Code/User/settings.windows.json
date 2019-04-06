@@ -1,4 +1,3 @@
 {
-  "http.proxyStrictSSL": false,
   "ruby.useLanguageServer": false
 }
