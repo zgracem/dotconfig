@@ -1,4 +1,3 @@
-complete -c scan --no-files
 complete -c scan -a wifi --description 'List all public SSIDs nearby'
 complete -c scan -a ssh --description 'List all SSH-enabled hosts on the current domain'
 complete -c scan -a port --description 'Track access on <port>'
