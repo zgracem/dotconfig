@@ -38,7 +38,7 @@ Minimum requirements:
 
 Then:
 
-```bash
+```sh
 cd ~ && ln -s .private/ssh ~/.ssh
 cd ~/.config && make shell-files symlinks
 ```

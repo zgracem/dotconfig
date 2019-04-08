@@ -7,12 +7,14 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 `snippets/`, `settings.json` and `keybindings.json` should be symlinked into:
 
 - **Windows:** `%APPDATA%\Code\User`
-- **macOS:**   `$HOME/Library/Application Support/Code/User`
+- **macOS:** `$HOME/Library/Application Support/Code/User`
 
 On Windows/Cygwin machines without admin privileges, to concatenate the base
 `settings.json` file with `settings.windows.json` and install it to `$APPDATA`:
 
-    ~/.config/bin/vscode-sync-settings.fish
+```sh
+~/.config/bin/vscode-sync-settings.fish
+```
 
 ## Extensions
 
@@ -21,12 +23,18 @@ Use `~/.config/bin/vscode-extensions` to manage extensions against the
 
 To install everything listed in `extensions`:
 
-    ~/.config/bin/vscode-extensions install
+```sh
+~/.config/bin/vscode-extensions install
+```
 
 To uninstall everything _not_ listed:
 
-    ~/.config/bin/vscode-extensions cleanup
+```sh
+~/.config/bin/vscode-extensions cleanup
+```
 
 To overwrite `extensions` with the current loadout:
 
-    ~/.config/bin/vscode-extensions dump
+```sh
+~/.config/bin/vscode-extensions dump
+```
