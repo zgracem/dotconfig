@@ -5,9 +5,12 @@
 # private
 jrnl
 
-# unnecessary
+# not intended for human interaction
 fish/fish_variables
 fish/fishd.*
+htop/
+
+# unnecessary
 ruby/Gemfile.lock
 *~
 *~orig*
