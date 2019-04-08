@@ -18,6 +18,9 @@ gem "htmlentities"
 # <github.com/janlelis/irbtools>
 gem "irbtools"
 
+# <github.com/flori/json>
+gem "json"
+
 # <github.com/bitboxer/manpages>
 gem "manpages"
 
