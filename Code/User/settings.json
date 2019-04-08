@@ -41,7 +41,7 @@
   "files.hotExit": "onExit",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "gitblame.statusBarMessageFormat": "${author.name} • ${time.ago} • ${commit.hash_short,7}",
+  "gitblame.statusBarMessageFormat": "[${commit.hash_short,7}] ${commit.summary} (${time.ago}) <${author.name}>",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.syntax.decorations": false,
