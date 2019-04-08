@@ -6,13 +6,12 @@ Some people prune bonsai trees. I refactor my dotfiles.
 
 * `environment.sh` loads environment variables from `environment.d/*.sh` for all
   POSIX shells
-    * `misc/launchd.conf` makes them available to macOS GUI apps
     * `fish/conf.d/___env.fish` does the same for `fish`
-* `~/.profile` is a symlink to `sh/profile.sh`, which sources the contents of 
-  `sh/profile.d`
+    * `misc/launchd.conf` makes them available to macOS GUI apps
+* `~/.profile` is a symlink to `sh/profile.sh`, which sources
+  `sh/profile.d/*.sh`
 * `~/.bashrc` is a symlink to `bash/bashrc.bash`, which sources `bash/_*.bash`,
-  the contents of `bash/*.d`, and (if present) the contents of
-  `~/.local/config/bashrc.d`
+  `bash/*.d/*.bash`, and (if present) `~/.local/config/bashrc.d/*.bash`
     * `~/.local/config` is a symlink to `~/.config/local/$HOSTNAME/config`, if
       it exists
     * `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced
@@ -36,9 +35,6 @@ Minimum requirements:
     - `bashrc.d/`
     - `environment.d/`
     - `ssh/`
-- `lib/bash/`
-    - [`fxdoc/`](https://github.com/zgracem/fxdoc)
-    - [`wtf.bash/`](https://github.com/zgracem/wtf.bash)
 
 Then:
 
@@ -46,6 +42,8 @@ Then:
 cd ~ && ln -s .private/ssh ~/.ssh
 cd ~/.config && make shell-files symlinks
 ```
+
+Then restart the shell.
 
 ## Notes on compatibility & portability
 
