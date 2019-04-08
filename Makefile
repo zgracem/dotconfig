@@ -7,9 +7,9 @@ XDG_CACHE_HOME ?= ~/var/cache
 
 VPATH = .
 
-include .make/shell-files.mkfile
-include .make/symlinks.mkfile
-include .make/user-agent.mkfile
+include .make/shell-files.make
+include .make/symlinks.make
+include .make/user-agent.make
 
 all:
 	@echo Target ‘$@’ not implemented.

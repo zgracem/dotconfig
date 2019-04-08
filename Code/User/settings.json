@@ -31,7 +31,6 @@
   "files.associations": {
     "ignore": "ignore",
     "vimrc": "viml",
-    "*.mkfile": "makefile",
     "*.sublime-{settings,build,keymap}": "json",
     "*.sublime-syntax": "yaml",
     "*.plist": "xml",
