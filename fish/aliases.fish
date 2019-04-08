@@ -44,10 +44,6 @@ if string match -eq 'Athena' $hostname
   end
 end
 
-function e --description 'Print each argument to a new line'
-  printf "%s\\n" $argv
-end
-
 # ssh
 
 if string match -eq '.local' $hostname
@@ -98,6 +94,7 @@ end
 
 # git
 
+abbr -a -g ga  git add
 abbr -a -g gb  git branch
 abbr -a -g gc  git commit
 abbr -a -g gco git checkout
