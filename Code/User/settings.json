@@ -70,6 +70,8 @@
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "terminal.integrated.shellArgs.osx": [],
   "window.doubleClickIconToClose": true,
+  "window.enableMenuBarMnemonics": false,
+  "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "inherit",
   "window.openFilesInNewWindow": "off",
   "window.openFoldersInNewWindow": "on",
