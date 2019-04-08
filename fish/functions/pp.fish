@@ -13,7 +13,9 @@ function pp -a file --description 'Pretty-print data and source code'
     # http://stackoverflow.com/questions/1875305/command-line-csv-viewer
     sed 's/,,/, ,/g;s/,,/, ,/g' $file | column -s, -t
   case '*'
-    if in-path src-hilite-lesspipe.sh
+    if in-path bat
+      bat --plain --paging=never $file
+    else if in-path src-hilite-lesspipe.sh
       src-hilite-lesspipe.sh $file
     else
       set -l ext (string split -r -m1 . $file)[-1]
