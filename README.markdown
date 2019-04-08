@@ -53,3 +53,15 @@ Then restart the shell.
 * Bash configuration files can be run (with gracefully degrading functionality)
   on anything from bash-3.2 to the latest 5.x release.
 * Sadly, most of my fish configuration files can only run on fish 3.0 or newer.
+
+## General usage
+
+* I try to conform to the [XDG Base Directory Specification][xdg]:
+  configuration for `foo` lives in `~/.config/foo/`, etc.
+* Dropbox syncs everything between Windows and macOS machines, and a custom
+  `rsync` script pushes changes to Linux machines.
+* Files that can be safely published to this GitHub repo live in `~/.config`.
+  Everything else lives in `~/.private`, which is encrypted by [Keybase][].
+
+[xdg]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+[Keybase]: https://keybase.io/zgm
