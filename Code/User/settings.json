@@ -6,13 +6,14 @@
   "editor.fontSize": 13,
   "editor.formatOnPaste": true,
   "editor.lightbulb.enabled": false,
-  "editor.links": false,
   "editor.lineHeight": 18,
+  "editor.links": false,
   "editor.minimap.maxColumn": 118,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "boundary",
   "editor.rulers": [
     80,
     118
@@ -21,9 +22,6 @@
   "editor.snippetSuggestions": "top",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
-  "[markdown]": {
-    "editor.tabSize": 4
-  },
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emojisense.emojiDecoratorsEnabled": false,
@@ -43,7 +41,8 @@
   "files.eol": "\n",
   "files.hotExit": "onExit",
   "files.insertFinalNewline": true,
-  "gitblame.statusBarMessageFormat": "${author.name} (${time.ago})",
+  "files.trimTrailingWhitespace": true,
+  "gitblame.statusBarMessageFormat": "${author.name} • ${time.ago} • ${commit.hash_short,7}",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.syntax.decorations": false,
@@ -85,7 +84,12 @@
   "workbench.settings.editor": "json",
   "workbench.statusBar.feedback.visible": false,
   "yaml.format.enable": true,
-  "yaml.format.proseWrap": "always",
   "yaml.format.printWidth": 80,
-  "yaml.validate": true
+  "yaml.format.proseWrap": "always",
+  "yaml.validate": true,
+  "[markdown]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "tehnix.vscode-tidymarkdown",
+    "files.trimTrailingWhitespace": false
+  }
 }
