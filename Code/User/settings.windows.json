@@ -1,3 +1,5 @@
 {
-  "ruby.useLanguageServer": false
+  "ruby.useLanguageServer": false,
+  "window.enableMenuBarMnemonics": false,
+  "window.menuBarVisibility": "toggle"
 }
