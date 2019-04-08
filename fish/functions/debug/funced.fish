@@ -1,8 +1,11 @@
-# The way `funced` currently works can result in data loss: specifically, it
-# can strip comments, and code outside the main function definition, from any
-# file it touches. I'm reluctant to call this a bug in fish but it's definitely
-# not behaviour I want, so here's a minimal reimplementation that behaves the
-# way I prefer.
+# The way `funced` currently works can result in data loss.
+#
+# Specifically, it uses the `functions` builtin to print the interpreted source
+# code of the function, which preserves only some comments, and ignores (and
+# therefore destroys) everything outside the main function definition.
+# I'm reluctant to call this a bug in fish but it's definitely not behaviour
+# I want, so here's a minimal reimplementation that behaves the way I prefer
+# (i.e. it only uses `functions` when there's no existing function file.)
 function funced -a function --wraps funcsave --description 'Edit a function interactively'
   set -l function_info (functions --details --verbose -- $function)
   set -l function_source $function_info[1]
