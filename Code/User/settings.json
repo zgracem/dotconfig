@@ -29,12 +29,13 @@
   "emojisense.unicodeCompletionsEnabled": true,
   "explorer.confirmDelete": false,
   "files.associations": {
-    "ignore": "ignore",
-    "vimrc": "viml",
-    "*.sublime-{settings,build,keymap}": "json",
-    "*.sublime-syntax": "yaml",
+    "*.[1-9]": "troff",
+    "*.make": "makefile",
     "*.plist": "xml",
-    "*.[1-9]": "troff"
+    "*.sublime-syntax": "yaml",
+    "*.sublime-{settings,build,keymap}": "json",
+    "ignore": "ignore",
+    "vimrc": "viml"
   },
   "files.defaultLanguage": "markdown",
   "files.eol": "\n",
@@ -87,8 +88,8 @@
   "yaml.format.proseWrap": "always",
   "yaml.validate": true,
   "[markdown]": {
-    "editor.tabSize": 4,
     "editor.defaultFormatter": "tehnix.vscode-tidymarkdown",
+    "editor.tabSize": 4,
     "files.trimTrailingWhitespace": false
   }
 }
