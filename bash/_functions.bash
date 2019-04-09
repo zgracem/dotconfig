@@ -6,15 +6,15 @@
 # shellcheck source=../../lib/bash/fxdoc/_init.bash
 . ~/lib/bash/fxdoc/_init.bash
 
-e()
+p()
 { #: -- print each argument to stdout on its own line
   printf '%s\n' "$@"
 }
 
-x() 
+x()
 { #: -- execute a command for each argument passed on stdin
   #: $ <input> | x <command>
-  xargs -r -d'\n' "$@"; 
+  xargs -r -d'\n' "$@";
   #      │  └── delimit w/ newline only (instead of all whitespace chars)
   #      └───── do not run if input is empty
 }
@@ -85,16 +85,4 @@ _inTmux()
   # When a new session is created, tmux sets the environment variable TMUX to
   # "<socket>,<pid>,<session>". So we strip everything after (and including)
   # the first comma and test whether the resulting path is indeed a socket.
-}
-
-# -----------------------------------------------------------------------------
-# other
-# -----------------------------------------------------------------------------
-
-_require()
-{ #: -- like _inPath(), but fails with an error message
-  _inPath "$1" && return
-
-  command_not_found_handle "$1"
-  return 127
 }

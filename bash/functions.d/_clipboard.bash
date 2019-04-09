@@ -1,7 +1,3 @@
-# shortcuts
-alias c=pbcopy
-alias p=pbpaste
-
 pbsort()
 { #: - sort contents of clipboard in place
   (pbpaste;echo) | sort -u | pbcopy
