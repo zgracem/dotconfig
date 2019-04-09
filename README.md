@@ -29,13 +29,14 @@ Some people prune bonsai trees. I refactor my dotfiles.
 * On Windows, I use nightly builds of the venerable [PuTTY]; on Mac, I prefer
   [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt].
 * As of April 2019, I'm transitioning from a long-term relationship with
-  Sublime Text to something more... passionate... with Visual Studio Code.
+  Sublime Text to something more... passionate... with [Visual Studio Code].
 * Files that can be safely published to this GitHub repo live in `~/.config/`.
   Everything else lives in `~/.private/`, which is encrypted by [Keybase].
 
-[PuTTY]: http://www.chiark.greenend.org.uk/~sgtatham/putty/
-[iTerm2]: http://www.iterm2.com/
-[Prompt]: http://panic.com/prompt/
+[PuTTY]: https://www.chiark.greenend.org.uk/~sgtatham/putty/
+[iTerm2]: https://www.iterm2.com/
+[Prompt]: https://panic.com/prompt/
+[Visual Studio Code]: https://code.visualstudio.com/
 [Keybase]: https://keybase.io/zgm
 
 ### Shell startup files
