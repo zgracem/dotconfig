@@ -80,6 +80,9 @@
   "yaml.format.printWidth": 80,
   "yaml.format.proseWrap": "always",
   "yaml.validate": true,
+  "[makefile]": {
+    "editor.insertSpaces": false
+  },
   "[markdown]": {
     "editor.defaultFormatter": "tehnix.vscode-tidymarkdown",
     "editor.tabSize": 4,
