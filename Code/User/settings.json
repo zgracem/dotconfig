@@ -51,6 +51,8 @@
     2154,
     2148
   ],
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.env.osx": {
     "PREFERRED_SHELL": "bash"
