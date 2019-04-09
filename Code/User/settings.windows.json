@@ -1,4 +1,5 @@
 {
+  "editor.fontSize": 13,
   "ruby.useLanguageServer": false,
   "window.enableMenuBarMnemonics": false,
   "window.menuBarVisibility": "toggle"
