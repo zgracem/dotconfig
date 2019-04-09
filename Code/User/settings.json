@@ -39,6 +39,10 @@
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.syntax.decorations": false,
+  "material-icon-theme.files.associations": {
+    "config": "settings"
+  },
+  "material-icon-theme.folders.color": "#93a1a1",
   "reflowMarkdown.resizeHeaderDashLines": true,
   "ruby.intellisense": "rubyLocate",
   "ruby.useLanguageServer": true,
@@ -74,6 +78,7 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
   "workbench.statusBar.feedback.visible": false,
   "yaml.format.enable": true,
