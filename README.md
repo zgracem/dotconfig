@@ -92,7 +92,7 @@ In ascending order of difficulty:
 * Fork it? I guess? Everything's _extremely_ personalized; I do not expect and
   cannot guarantee that these will work "out of the box" for anyone but me.
 
-[licence]: https://github.com/zgracem/dotconfig/blob/master/LICENSE
+[licence]: https://github.com/zgracem/dotconfig/blob/master/LICENCE
 
 The only condition—and it's a personal request, not a legal requirement—is that
 if you find anything in this repo interesting or useful, [drop me a note][email]
