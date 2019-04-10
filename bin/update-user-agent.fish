@@ -35,7 +35,7 @@ function generate-user-agent
   set -l format "Mozilla/5.0 ($system_id) AppleWebKit/$webkit_version (KHTML, like Gecko) Chrome/%s Safari/$webkit_version"
 
   if command -sq wmic; and test -n "$chrome_path"
-    set chrome_path (string replace -a '\\' '\\\\' "$chrome_path")
+    set chrome_path (string escape -- $chrome_path)
     set chrome_version (wmic datafile where "name=\"$chrome_path\"" get Version /value)
   else if test -x "$chrome_path"
     set -l cmd (string escape -- $chrome_path)
