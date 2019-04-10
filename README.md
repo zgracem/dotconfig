@@ -7,16 +7,19 @@ Some people prune bonsai trees. I refactor my dotfiles.
 
 ### Notes on compatibility & portability
 
-* These dotfiles are written to be portable between macOS (10.5+), Cygwin,
-  MSYS2, Windows 10's Linux Subsystem, and both BSD and GNU flavours of \*nix.
-* I try to conform to the [XDG Base Directory Specification][xdg]:
-  configuration for `foo` lives in `~/.config/foo/`, etc.
-* Everything in `environment.d/` and `sh/` is compatible with any POSIX shell.
+* These dotfiles are written to be portable between macOS (~10.5+), Cygwin,
+  MSYS2, Windows 10's Subsystem for Linux, and both BSD and GNU flavours of
+  \*nix.
+* I try to conform to the [XDG Basedir Spec]: configuration for `foo` lives in
+  `~/.config/foo/`, etc.
+* Everything in `environment.d/` and `sh/` is compatible with any POSIX shell,
+  as enforced by [`bin/check_dotfiles.sh`].
 * My bash config files can be run (with gracefully degrading functionality) on
   anything from bash-3.2 to the latest 5.x release.
 * Sadly, most of my fish configuration files can only run on 3.0.0 or newer.
 
-[xdg]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+[XDG Basedir Spec]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+[`bin/check_dotfiles.sh`]: https://github.com/zgracem/dotconfig/blob/master/bin/check_dotfiles.sh
 
 ### General usage
 
@@ -28,8 +31,8 @@ Some people prune bonsai trees. I refactor my dotfiles.
   custom `rsync` script pushes changes to my Linux boxes.
 * On Windows, I use nightly builds of the venerable [PuTTY]; on Mac, I prefer
   [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt].
-* As of April 2019, I'm transitioning from a long-term relationship with
-  Sublime Text to something more... passionate... with [Visual Studio Code].
+* As of April 2019, I'm transitioning from a long-term relationship with Sublime
+  Text to something more... _passionate_... with [Visual Studio Code].
 * Files that can be safely published to this GitHub repo live in `~/.config/`.
   Everything else lives in `~/.private/`, which is encrypted by [Keybase].
 
@@ -39,10 +42,10 @@ Some people prune bonsai trees. I refactor my dotfiles.
 [Visual Studio Code]: https://code.visualstudio.com/
 [Keybase]: https://keybase.io/zgm
 
-### Shell startup files
+### Shell startup
 
-* `environment.sh` loads environment variables from `environment.d/*.sh` for all
-  POSIX shells
+* `~/.config/environment.sh` loads environment variables for all POSIX shells
+  from `environment.d/*.sh`
     * `fish/conf.d/___env.fish` does the same for `fish`
     * `misc/launchd.conf` makes them available to macOS GUI apps
 * `~/.profile` is a symlink to `sh/profile.sh`, which sources
