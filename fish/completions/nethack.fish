@@ -1,11 +1,14 @@
-function __fish_complete_nethack
-    set -l roles Archeologist Barbarian Cave{man,woman} Healer Knight Monk \
-        Priest{,ess} Rogue Ranger Samurai Tourist Valkyrie Wizard
-    set -l races Human Elf Dwarf Gnome Orc
+# NetHack <https://nethack.org/>
 
-    for r in $$argv[1]
-        printf "%s\t%s\n" (string sub -l 3 $r) $r
-    end
+function __fish_complete_nethack
+  set -l roles Archeologist Barbarian Cave{man,woman} Healer Knight Monk \
+               Priest{,ess} Rogue Ranger Samurai Tourist Valkyrie Wizard
+
+  set -l races Human Elf Dwarf Gnome Orc
+
+  for r in $$argv[1]
+    printf "%s\t%s\n" (string sub -l 3 $r) $r
+  end
 end
 
 complete -c nethack -s d -ra "(__fish_complete_directories)" -d 'Specify a playground directory'
