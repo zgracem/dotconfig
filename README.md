@@ -1,10 +1,10 @@
-# 🔩 ~/.config
+# ~/.config 🔩
 
 Some people prune bonsai trees. I refactor my dotfiles. 🌱
 
-## 👩‍💻 How I use this repo
+## How I use this repo 👩‍💻
 
-### 💼 Notes on compatibility & portability
+### Notes on compatibility & portability 💼
 
 * These dotfiles are written to be portable between macOS (~10.5+), Cygwin,
   MSYS2, Windows 10's Subsystem for Linux, and both BSD and GNU flavours of
@@ -20,7 +20,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 [XDG Basedir Spec]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 [`bin/check_dotfiles.sh`]: https://github.com/zgracem/dotconfig/blob/master/bin/check_dotfiles.sh
 
-### 💁 General usage
+### General usage 💁
 
 * My main machine at home is a 2015 iMac that dual boots macOS Mojave and
   Windows 10; I also have a 2011 MacBook Air running High Sierra. My day-job
@@ -44,7 +44,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 [Visual Studio Code]: https://code.visualstudio.com/
 [Keybase]: https://keybase.io/zgm
 
-### 🌅 Shell startup
+### Shell startup 🌅
 
 * `~/.config/environment.sh` loads environment variables for all POSIX shells
   from `environment.d/*.sh`
@@ -61,7 +61,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
     * `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are
       sourced when `bash` exits
 
-### 🏡 Setting up a new homedir
+### Setting up a new homedir 🏡
 
 Minimum requirements:
 
@@ -89,7 +89,7 @@ cd ~/.config && make shell-files symlinks
 
 Then restart the shell.
 
-## 🙋 How you can use this repo
+## How you can use this repo 🙋
 
 In ascending order of difficulty:
 
@@ -103,12 +103,12 @@ In ascending order of difficulty:
 [licence]: https://github.com/zgracem/dotconfig/blob/master/LICENCE
 
 The only condition—and it's a personal request, not a legal requirement—is that
-if you find anything in this repo interesting or useful, [drop me a note 📫][email]
-and say so.
+if you find anything here interesting or useful, [drop me a note 📫][email] and
+say so.
 
 [email]: mailto:zgm%40inescapable%2eorg
 
-## 📈 Lineage
+## Lineage 📈
 
 Since 2011, these dotfiles have evolved alongside my understanding of the world
 of the command line, and much of that understanding has been illuminated by
