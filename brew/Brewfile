@@ -80,6 +80,7 @@ brew "figlet"
 brew "lolcat"
 brew "nethack"
 brew "screenfetch"
+brew "zgracem/fortune-clean/fortune"
 
 # -----------------------------------------------------------------------------
 # development stuff
