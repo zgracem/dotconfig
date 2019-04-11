@@ -1,4 +1,9 @@
 {
+  "bracket-pair-colorizer-2.colors": [
+    "#af8700",
+    "#dc322f",
+    "#0087ff"
+  ],
   "breadcrumbs.enabled": true,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.copyWithSyntaxHighlighting": false,
