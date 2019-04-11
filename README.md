@@ -30,7 +30,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
   `rsync` script pushes changes to my Linux boxes. 🔄
 * On Windows, I use nightly builds of the venerable [PuTTY]; on Mac, I prefer
   [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt].
-* My first love will always be bash, but since March 2019 I've been using—and
+* My first love will always be bash, but since February 2019 I've been using—and
   loving—[fish] as my primary shell. 🐟
 * As of April 2019, I'm transitioning from a long-term relationship with Sublime
   Text to something more... _passionate_... with [Visual Studio Code][]. 💋
