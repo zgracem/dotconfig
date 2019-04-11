@@ -2,6 +2,7 @@ ban.troff
 bierner.emojisense
 bungcip.better-toml
 chrislajoie.vscode-modelines
+eamodio.gitlens
 EditorConfig.EditorConfig
 fallenwood.vimL
 lunaryorn.fish-ide
@@ -19,5 +20,4 @@ tehnix.vscode-tidymarkdown
 timonwong.shellcheck
 tuxtina.json2yaml
 v4run.transpose
-waderyan.gitblame
 yzhang.markdown-all-in-one
