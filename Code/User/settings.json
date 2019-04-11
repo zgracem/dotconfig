@@ -1,5 +1,6 @@
 {
   "breadcrumbs.enabled": true,
+  "editor.acceptSuggestionOnEnter": "smart",
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
   "editor.fontFamily": "Office Code Pro, SF Mono, Consolas, monospace",
@@ -35,7 +36,7 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "gitblame.statusBarMessageFormat": "${author.name} • ${commit.summary} • ${commit.hash_short,7} • ${time.ago}",
+  "gitblame.statusBarMessageFormat": "${author.name} • ${time.ago} • ${commit.summary} • ${commit.hash_short,7}",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.syntax.decorations": false,
@@ -69,7 +70,6 @@
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "terminal.integrated.shellArgs.osx": [],
   "window.doubleClickIconToClose": true,
-  "window.newWindowDimensions": "inherit",
   "window.openFilesInNewWindow": "off",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
