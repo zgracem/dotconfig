@@ -9,6 +9,7 @@
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
   "editor.fontFamily": "Office Code Pro, SF Mono, Consolas, monospace",
+  "editor.formatOnPaste": true,
   "editor.lightbulb.enabled": false,
   "editor.links": false,
   "editor.minimap.maxColumn": 118,
@@ -97,6 +98,7 @@
   },
   "[markdown]": {
     "editor.defaultFormatter": "tehnix.vscode-tidymarkdown",
+    "editor.formatOnPaste": false,
     "editor.tabSize": 4,
     "files.trimTrailingWhitespace": false
   }

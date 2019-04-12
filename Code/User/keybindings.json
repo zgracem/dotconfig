@@ -6,12 +6,27 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
+    "key": "cmd+j",
+    "command": "editor.action.joinLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
     "key": "ctrl+k ctrl+l",
     "command": "editor.action.transformToLowercase",
     "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+k ctrl+u",
+    "command": "editor.action.transformToUppercase",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+k cmd+l",
+    "command": "editor.action.transformToLowercase",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+k cmd+u",
     "command": "editor.action.transformToUppercase",
     "when": "editorTextFocus && !editorReadonly"
   },
@@ -23,11 +38,6 @@
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.deleteLines",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+shift+/",
-    "command": "editor.action.blockComment",
     "when": "editorTextFocus && !editorReadonly"
   },
   {
@@ -63,5 +73,25 @@
   {
     "key": "ctrl+t",
     "command": "extension.transpose"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-emojisense.quickEmoji",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-emojisense.quickEmojiTerminal",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "-emojisense.quickEmojitextTerminal",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "-emojisense.quickEmojitext",
+    "when": "editorTextFocus"
   }
 ]
