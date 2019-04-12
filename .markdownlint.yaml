@@ -1,0 +1,9 @@
+ul-indent:
+  indent: 4
+line-length:
+  line_length: 118
+no-duplicate-heading:
+  siblings_only: true
+no-inline-html:
+  allowed_elements:
+    - img

@@ -65,20 +65,20 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 
 Minimum requirements:
 
-- `.config/` ← this repo
-    - `bash/`
-    - `dircolors/`
-    - `environment.d/`
-    - `fish/`
-    - `readline/`
-    - `sh/`
-    - `vim/`
-    - `environment.sh`
-- `.private/` ← from encrypted repo
-    - `bashrc.d/`
-    - `environment.d/`
-    - `fish/`
-    - `ssh/`
+* `.config/` ← this repo
+    * `bash/`
+    * `dircolors/`
+    * `environment.d/`
+    * `fish/`
+    * `readline/`
+    * `sh/`
+    * `vim/`
+    * `environment.sh`
+* `.private/` ← from encrypted repo
+    * `bashrc.d/`
+    * `environment.d/`
+    * `fish/`
+    * `ssh/`
 
 Then:
 
