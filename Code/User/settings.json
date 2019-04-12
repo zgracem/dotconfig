@@ -48,23 +48,6 @@
   "gitlens.statusBar.format": "${author} • ${agoOrDate} • ${message} • ${id}",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
-  "markdownlint.config": {
-    "line-length": false,
-    "no-duplicate-heading": {
-      "siblings_only": true
-    },
-    "single-title": {
-      "front_matter_title": ""
-    },
-    "no-trailing-punctuation": {
-      "punctuation": ",;"
-    },
-    "no-inline-html": {
-      "allowed_elements": [
-        "i"
-      ]
-    }
-  },
   "material-icon-theme.files.associations": {
     "config": "settings"
   },
