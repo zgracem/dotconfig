@@ -9,7 +9,6 @@ EditorConfig.EditorConfig
 fallenwood.vimL
 lunaryorn.fish-ide
 maelvalais.autoconf
-marvhen.reflow-markdown
 mrmlnc.vscode-apache
 OnlyLys.leaper
 PKief.material-icon-theme
@@ -22,4 +21,3 @@ tehnix.vscode-tidymarkdown
 timonwong.shellcheck
 tuxtina.json2yaml
 v4run.transpose
-yzhang.markdown-all-in-one
