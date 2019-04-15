@@ -51,6 +51,11 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
+    "key": "cmd+shift+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
     "key": "f9",
     "command": "-editor.debug.action.toggleBreakpoint",
     "when": "editorTextFocus"
