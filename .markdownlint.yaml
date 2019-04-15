@@ -4,7 +4,7 @@ ul-indent:
 
 # MD013
 line-length:
-  line_length: 118
+  line_length: 80
 
 # MD024
 no-duplicate-heading:

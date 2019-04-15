@@ -49,6 +49,9 @@
   "gitlens.statusBar.format": "${author} • ${agoOrDate} • ${message} • ${id}",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
+  "markdownlint.config": {
+    "MD033": false
+  },
   "material-icon-theme.files.associations": {
     "config": "settings"
   },
