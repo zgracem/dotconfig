@@ -1,6 +1,6 @@
 # ~/.config/environment.d
 
-The files in this directory are sourced during the startup of any POSIX shell
+`*.sh` files in this directory are sourced during the startup of any POSIX shell
 (plus fish) to produce a consistent environment.
 
 In addition, `~/.config/misc/launchd.conf` makes that environment available to
