@@ -44,23 +44,6 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 [Visual Studio Code]: https://code.visualstudio.com/
 [Keybase]: https://keybase.io/zgm
 
-### Shell startup 🌅
-
-* `~/.config/environment.sh` loads environment variables for all POSIX shells
-  from `environment.d/*.sh`
-    * `fish/conf.d/___env.fish` does the same for `fish`
-    * `misc/launchd.conf` makes them available to macOS GUI apps
-* `~/.profile` is a symlink to `sh/profile.sh`, which sources
-  `sh/profile.d/*.sh`
-* `~/.bashrc` is a symlink to `bash/bashrc.bash`, which sources `bash/_*.bash`,
-  `bash/*.d/*.bash`, and (if present) `~/.local/config/bashrc.d/*.bash`
-    * `~/.local/config` is a symlink to `~/.config/local/$HOSTNAME/config`, if
-      it exists
-    * `bash/init.bash` and (if present) `~/.local/config/init.bash` are sourced
-      immediately before the first prompt
-    * `bash/logout.bash` and (if present) `~/.local/config/logout.bash` are
-      sourced when `bash` exits
-
 ### Setting up a new homedir 🏡
 
 Minimum requirements:
