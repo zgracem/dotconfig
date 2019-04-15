@@ -9,6 +9,9 @@ jrnl
 fish/fish_variables
 fish/fishd.*
 htop/
+vifm/vifminfo
+vifm/vimfiles
+vifm/*-help.txt
 
 # unnecessary
 ruby/Gemfile.lock
