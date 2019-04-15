@@ -35,6 +35,7 @@
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
     "*.sublime-{settings,build,keymap}": "json",
+    "*.vifm": "viml",
     "ignore": "ignore",
     "vimrc": "viml"
   },
@@ -104,5 +105,16 @@
     "editor.formatOnPaste": false,
     "editor.tabSize": 4,
     "files.trimTrailingWhitespace": false
+  },
+  "material-icon-theme.folders.associations": {
+    ".src": "src",
+    "Code": "vscode",
+    "dircolors": "theme",
+    "environment.d": "environment",
+    "functions.d": "functions",
+    "git": "git",
+    "npm": "node",
+    "snippets": "template",
+    "ssh": "keys"
   }
 }
