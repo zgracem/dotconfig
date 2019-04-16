@@ -1,0 +1,19 @@
+{
+  "ul-indent": {
+    "indent": 4
+  },
+  "line-length": {
+    "line_length": 80
+  },
+  "no-duplicate-heading": {
+    "siblings_only": true
+  },
+  "single-title": {
+    "front_matter_title": ""
+  },
+  "no-inline-html": {
+    "allowed_elements": [
+      "img"
+    ]
+  }
+}
