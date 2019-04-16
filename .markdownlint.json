@@ -10,10 +10,5 @@
   },
   "single-title": {
     "front_matter_title": ""
-  },
-  "no-inline-html": {
-    "allowed_elements": [
-      "img"
-    ]
   }
 }
