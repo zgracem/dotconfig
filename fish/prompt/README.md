@@ -1,6 +1,6 @@
 # ~/.config/fish/prompt
 
-<img src="https://raw.githubusercontent.com/zgracem/dotconfig/master/fish/prompt/prompt.png" width="890" height="23">
+![Screenshot]
 
 My minimalist `fish` prompt progressively discloses information as and when it
 becomes relevant, including:
@@ -18,3 +18,5 @@ becomes relevant, including:
 Prompt-related functions live here to avoid cluttering up `../functions`. The
 path to this directory must be added to `$fish_function_path` so everything can
 auto-load.
+
+[Screenshot]: https://raw.githubusercontent.com/zgracem/dotconfig/master/fish/prompt/prompt.png
