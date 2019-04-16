@@ -2,6 +2,12 @@
 
 Formerly the jewel of my dotfiles. 💎
 
+As of April 2019, most of the good stuff has been ported to [fish].
+
+[fish]: https://github.com/zgracem/dotconfig/tree/master/fish
+
+***
+
 `./bashrc.bash` should be symlinked from `~/.bashrc`. It sources the following:
 
 - `./_*.bash`
