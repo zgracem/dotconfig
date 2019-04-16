@@ -1,0 +1,6 @@
+[submodule "bat/syntaxes/terminfo"]
+	path = bat/syntaxes/terminfo
+	url = git@github.com:zgracem/terminfo.sublime-syntax.git
+[submodule "bat/syntaxes/groff"]
+	path = bat/syntaxes/groff
+	url = git@github.com:zgracem/groff.sublime-syntax.git
