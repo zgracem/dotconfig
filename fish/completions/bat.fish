@@ -1,5 +1,5 @@
 # bat <https://github.com/sharkdp/bat>
-# Generated using help2man and fish_update_completions
+
 complete -c bat -s l -l language -x -d 'Explicitly set the language for syntax highlighting'
 complete -c bat -l list-languages -d 'Display a list of supported languages for syntax highlighting'
 complete -c bat -s m -l map-syntax -d 'Map a file extension or file name to an existing syntax'

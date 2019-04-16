@@ -1,8 +1,7 @@
 # cygpath
-# Generated using help2man and fish_update_completions
 
 complete -c cygpath -s d -l dos -d 'Print DOS/short form of NAMEs (C:PROGRA~1)'
-complete -c cygpath -s m -l mixed -d 'Like --windows, but with regular slashes (C:/WINNT)'
+complete -c cygpath -s m -l mixed -d 'Like -w, but with regular slashes (C:/WINNT)'
 complete -c cygpath -s M -l mode -d 'Report on mode of file (binmode or textmode)'
 complete -c cygpath -s u -l unix -d '(default) print Unix form of NAMEs (/cygdrive/c/winnt)'
 complete -c cygpath -s w -l windows -d 'Print Windows form of NAMEs (C:WINNT)'
@@ -13,7 +12,7 @@ complete -c cygpath -s p -l path -d 'NAME is a PATH list (i.e. , "/bin:/usr/bin"
 complete -c cygpath -s U -l proc-cygdrive -d 'Emit /proc/cygdrive path instead of /cygdrive prefix'
 complete -c cygpath -s s -l short-name -d 'Print DOS (short) form of NAMEs (with -w, -m only)'
 complete -c cygpath -s C -l codepage -r -a 'ANSI OEM UTF8' -d 'Print DOS/Windows/mixed pathname in CODEPAGE'
-complete -c cygpath -s A -l allusers -d 'Use "All Users" instead of current user for -D, -O, -P'
+complete -c cygpath -s A -l allusers -d 'Use "All Users" instead of current user (for -D, -O, -P)'
 complete -c cygpath -s D -l desktop -d 'Output "Desktop" directory'
 complete -c cygpath -s H -l homeroot -d 'Output "Profiles" directory (home root)'
 complete -c cygpath -s O -l mydocs -d 'Output "My Documents" directory'
@@ -22,7 +21,7 @@ complete -c cygpath -s S -l sysdir -d 'Output system directory'
 complete -c cygpath -s W -l windir -d 'Output "Windows" directory'
 complete -c cygpath -s F -l folder -x -d 'Output special folder with numeric ID'
 complete -c cygpath -s f -l file -r -d 'Read FILE for input (use - to read from STDIN)'
-complete -c cygpath -s o -l option -d 'Read options from FILE as well (for use with --file)'
+complete -c cygpath -s o -l option -d 'Read options from FILE as well (for use with -f)'
 complete -c cygpath -s c -l close -x -d 'Close HANDLE (for use in captured process)'
 complete -c cygpath -s i -l ignore -d 'Ignore missing argument'
 complete -c cygpath -s h -l help -d 'Output usage information'
