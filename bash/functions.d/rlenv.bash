@@ -7,7 +7,7 @@ rlenv()
   if [[ -e $plist ]]; then
     launchctl unload "$plist" || return
   else
-    ln -sfv "$HOME/.config/misc/${plist##*/}" "${plist%/*}" || return
+    ln -sfv "$HOME/.config/etc/${plist##*/}" "${plist%/*}" || return
   fi
 
   launchctl load "$plist" || return
