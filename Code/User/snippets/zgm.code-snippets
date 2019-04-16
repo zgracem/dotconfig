@@ -40,6 +40,13 @@
     ],
     "description": "Current date (YYYY-MM-DD)"
   },
+  "Timestamp": {
+    "prefix": "now",
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}-06:00"
+    ],
+    "description": "ISO-formatted timestamp"
+  },
   "Markdown_frontmatter": {
     "prefix": "mdfm",
     "body": [
