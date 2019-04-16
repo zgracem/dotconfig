@@ -2,7 +2,7 @@
 # bat <https://github.com/sharkdp/bat>
 # -----------------------------------------------------------------------------
 
---theme="Monokai Extended"
+--theme="Oceanic Next"
 --italic-text=always
 --pager="less -FR"
 --tabs=2
