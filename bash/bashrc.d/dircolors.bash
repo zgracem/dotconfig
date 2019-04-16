@@ -5,13 +5,7 @@
 _inPath dircolors || return
 
 if [[ -z $LS_COLORS || -n $Z_RELOADING ]]; then
-  if [[ -n $HV_LOADED ]]; then
-    dc_stub="thirty2k"
-  else
-    dc_stub="default"
-  fi
-
-  dc_cache="$XDG_CACHE_HOME/dircolors/$dc_stub.ls_colors"
+  dc_cache="$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors"
 
   # build new .ls_colors files if needed
   (cd "$XDG_CONFIG_HOME/dircolors" && make --quiet all)
