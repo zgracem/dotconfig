@@ -5,7 +5,7 @@
     "#0087ff"
   ],
   "breadcrumbs.enabled": true,
-  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.acceptSuggestionOnEnter": "off",
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
   "editor.fontFamily": "Office Code Pro, SF Mono, Consolas, monospace",
@@ -86,12 +86,19 @@
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
+  "workbench.colorCustomizations": {
+    "badge.background": "#d33682",
+    "badge.foreground": "#fdf6e3",
+    "activityBarBadge.background": "#d33682",
+    "activityBarBadge.foreground": "#fdf6e3"
+  },
   "workbench.colorTheme": "Solarized Dark",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
+  "workbench.startupEditor": "welcomePageInEmptyWorkbench",
   "workbench.statusBar.feedback.visible": false,
   "yaml.format.enable": true,
   "yaml.format.printWidth": 80,
@@ -108,12 +115,15 @@
   },
   "material-icon-theme.folders.associations": {
     ".src": "src",
+    "bashrc.d": "config",
+    "brew": "packages",
     "Code": "vscode",
     "dircolors": "theme",
     "environment.d": "environment",
     "functions.d": "functions",
     "git": "git",
     "npm": "node",
+    "skel": "template",
     "snippets": "template",
     "ssh": "keys"
   }
