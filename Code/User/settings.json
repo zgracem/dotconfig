@@ -1,9 +1,10 @@
 {
   "bracket-pair-colorizer-2.colors": [
-    "#af8700",
-    "#dc322f",
-    "#0087ff"
+    "#b58900",
+    "#6c71c4",
+    "#268bd2"
   ],
+  "bracket-pair-colorizer-2.unmatchedScopeColor": "#dc322f",
   "breadcrumbs.enabled": true,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.copyWithSyntaxHighlighting": false,
