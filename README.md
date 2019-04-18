@@ -29,7 +29,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 * Dropbox keeps things synced between my Windows and Mac machines, and a custom
   `rsync` script pushes changes to my Linux boxes. 🔄
 * On Windows, I use nightly builds of the venerable [PuTTY]; on Mac, I prefer
-  [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt].
+  [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt]. ⌨️
 * My first love will always be bash, but since February 2019 I've been using—and
   loving—[fish] as my primary shell. 🐟
 * As of April 2019, I'm transitioning from a long-term relationship with Sublime
