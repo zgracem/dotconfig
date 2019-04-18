@@ -91,13 +91,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
-  "workbench.colorCustomizations": {
-    "badge.background": "#d33682",
-    "badge.foreground": "#fdf6e3",
-    "activityBarBadge.background": "#d33682",
-    "activityBarBadge.foreground": "#fdf6e3"
-  },
-  "workbench.colorTheme": "Solarized Dark",
+  "workbench.colorTheme": "One Monokai",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
