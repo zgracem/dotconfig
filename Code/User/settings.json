@@ -73,6 +73,18 @@
     2154,
     2148
   ],
+  "spellright.addToSystemDictionary": true,
+  "spellright.configurationScope": "user",
+  "spellright.documentTypes": [
+    "markdown",
+    "plaintext",
+    "git-commit"
+  ],
+  "spellright.language": [
+    "en_CA",
+    "en_US"
+  ],
+  "spellright.suggestionsInHints": false,
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
   "terminal.external.osxExec": "iTerm.app",
