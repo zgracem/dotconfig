@@ -81,8 +81,7 @@
     "git-commit"
   ],
   "spellright.language": [
-    "en_CA",
-    "en_US"
+    "en"
   ],
   "spellright.suggestionsInHints": false,
   "telemetry.enableTelemetry": false,
@@ -98,7 +97,6 @@
   "terminal.integrated.shell.osx": "/usr/local/bin/bash",
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "terminal.integrated.shellArgs.osx": [],
-  "window.doubleClickIconToClose": true,
   "window.openFilesInNewWindow": "off",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
