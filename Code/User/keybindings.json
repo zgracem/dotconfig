@@ -98,5 +98,25 @@
     "key": "ctrl+shift+i",
     "command": "-emojisense.quickEmojitext",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "-emojisense.quickEmojitext",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "-emojisense.quickEmojitextTerminal",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-emojisense.quickEmoji",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-emojisense.quickEmojiTerminal",
+    "when": "terminalFocus"
   }
 ]
