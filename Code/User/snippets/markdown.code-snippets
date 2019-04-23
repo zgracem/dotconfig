@@ -16,5 +16,15 @@
       "$0"
     ],
     "description": "Heading 2"
+  },
+  "Markdown_frontmatter": {
+    "prefix": "mdfm",
+    "body": [
+      "---",
+      "title: $1",
+      "---",
+      "$0"
+    ],
+    "description": "Markdown YAML frontmatter"
   }
 }
