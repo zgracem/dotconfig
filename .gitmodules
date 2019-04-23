@@ -4,6 +4,3 @@
 [submodule "bat/syntaxes/groff"]
 	path = bat/syntaxes/groff
 	url = git@github.com:zgracem/groff.sublime-syntax.git
-[submodule "bat/themes/oceanic-next"]
-	path = bat/themes/oceanic-next
-	url = git@github.com:voronianski/oceanic-next-color-scheme.git
