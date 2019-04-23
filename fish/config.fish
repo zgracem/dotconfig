@@ -46,11 +46,6 @@ else
   __fish_fix_path fish_function_path
   __fish_fix_path fish_complete_path
 
-  status test-feature qmark-noglob
-  if test $status -eq 1
-    set -Ua fish_features qmark-noglob
-  end
-
   if cygwin?
     # fish_help_browser overrides the browser that may be defined by $BROWSER.
     # The variable may be an array containing a browser name plus options.

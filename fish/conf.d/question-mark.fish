@@ -1,5 +1,10 @@
 # As of fish 3.0.2, this requires `set -Ua fish_features qmark-noglob` to work
 # like it does in bash -- i.e. as a bare `?`, not a quoted `"?"`
+status test-feature qmark-noglob
+if test $status -eq 1
+  set -Ua fish_features qmark-noglob
+end
+
 function '?' --description 'Prints the exit status of the last command'
   set -l last_exit $status
 
