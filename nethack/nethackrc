@@ -122,6 +122,49 @@ OPTIONS=horsename:Silver
 # messages
 # -----------------------------------------------------------------------------
 
+OPTIONS=msgtype_regex
+
+# delayed instadeaths <https://github.com/majutsushi/etc/blob/master/nethackrc>
+MSGTYPE=stop "^The .+ swings itself around you!"
+MSGTYPE=stop "^The python grabs you!"
+MSGTYPE=stop "^You don't feel very well."
+MSGTYPE=stop "^You are turning a little green."
+MSGTYPE=stop "^Your limbs are getting oozy."
+MSGTYPE=stop "^Your skin begins to peel away."
+MSGTYPE=stop "^You are turning into a green slime."
+MSGTYPE=stop "^You are slowing down."
+MSGTYPE=stop "^Your limbs are stiffening."
+MSGTYPE=stop "^It constricts your throat!"
+MSGTYPE=stop "^You find it hard to breathe."
+MSGTYPE=stop "^You're gasping for air."
+MSGTYPE=stop "^Your blood is having trouble reaching your brain."
+MSGTYPE=stop "^You can no longer breathe."
+MSGTYPE=stop "^You're turning blue."
+MSGTYPE=stop "^Your consciousness is fading."
+MSGTYPE=stop "^You feel deathly sick."
+MSGTYPE=stop "^You feel (much|even) worse."
+MSGTYPE=stop "^You regain consciousness."
+
+# near-deaths <https://github.com/sartak/conf/blob/master/nethackrc>
+MSGTYPE=stop "You hear the (wai|how)ling of the (CwnAnnwn|Banshee)"
+MSGTYPE=stop "*, your life force is running out"
+MSGTYPE=stop "*, all your powers will be lost"
+MSGTYPE=stop "* is about to die"
+
+# vibrating square
+MSGTYPE=stop "^You feel a strange vibration "
+# time to #enhance
+MSGTYPE=stop "^You feel more confident "
+# potential inventory cursing
+MSGTYPE=stop "^You feel a malignant aura surround "
+
+# status effects
+MSGTYPE=stop "^You.* feel hungry"
+MSGTYPE=stop "munchies"
+MSGTYPE=stop "^You( are beginning to)? feel weak"
+MSGTYPE=stop "* needs food, badly!"
+MSGTYPE=stop "^You faint from lack of food."
+
 # silent when climbing stairs
 MSGTYPE=hide "You descend .*"
 MSGTYPE=hide "You climb .*"
