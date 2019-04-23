@@ -124,6 +124,10 @@ if [[ -z $PREFERRED_SHELL ]]; then
       PREFERRED_SHELL=$(type -P fish)
       ;;
   esac
+
+  if [[ ! -x $PREFERRED_SHELL ]]; then
+    PREFERRED_SHELL=$(type -P fish 2>/dev/null || type -P bash)
+  fi
 fi
 
 : "${PREFERRED_SHELL=$(type -P bash)}"
