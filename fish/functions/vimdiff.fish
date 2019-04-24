@@ -1,4 +1,4 @@
-function vimdiff --wraps vimdiff --description 'Show differences with Vim'
+function vimdiff --description 'Show differences with Vim'
   if in-path vimdiff
     command vimdiff $argv
   else

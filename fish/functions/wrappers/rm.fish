@@ -1,4 +1,4 @@
-function rm --wraps rm --description 'Remove directory entries'
+function rm --description 'Remove directory entries'
   if is-gnu rm
     command rm -Iv $argv
   else

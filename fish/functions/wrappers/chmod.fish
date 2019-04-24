@@ -1,3 +1,3 @@
-function chmod --wraps chmod
+function chmod
   command chmod -v $argv
 end

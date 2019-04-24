@@ -1,4 +1,4 @@
-function bat --wraps bat --description 'A cat clone with wings'
+function bat --description 'A cat clone with wings'
   set -l args
   for arg in $argv
     switch "$arg"
