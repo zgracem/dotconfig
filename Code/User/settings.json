@@ -77,7 +77,6 @@
   "spellright.configurationScope": "user",
   "spellright.documentTypes": [
     "markdown",
-    "plaintext",
     "git-commit"
   ],
   "spellright.language": [
