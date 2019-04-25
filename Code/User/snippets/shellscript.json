@@ -1,0 +1,9 @@
+{
+	"Hashbang": {
+		"prefix": "!env",
+		"body": [
+			"#!/usr/bin/env ${1|bash,sh|}"
+		],
+		"description": "#!/usr/bin/env"
+	}
+}
