@@ -22,7 +22,8 @@
     "body": [
       "---",
       "title: $1",
-      "---",
+      "date: ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
+      "---\n",
       "$0"
     ],
     "description": "Markdown YAML frontmatter"
