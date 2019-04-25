@@ -118,5 +118,10 @@
     "key": "cmd+i",
     "command": "-emojisense.quickEmojiTerminal",
     "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+k l",
+    "command": "extension.toggleLineEndings",
+    "when": "editorTextFocus"
   }
 ]
