@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/3/syntax.html
-# Generated from: https://github.com/Phidica/sublime-fish/blob/ccbdb38/fish.tmLanguage
+# Generated from: https://github.com/Phidica/sublime-fish/blob/75b2294/fish.tmLanguage
 name: friendly interactive shell (fish)
 file_extensions:
   - fish
@@ -12,30 +12,23 @@ contexts:
     - include: comment-external
     - include: line-continuation
     - match: \)|end
-      comment: In an ideal world, command-call-standard would be performing this match because fish highlights the strings which follow as arguments. But we can't do that in a tmLanguage
+      comment: In an ideal world,
       push:
-        - meta_scope: meta.function-call.fish invalid.illegal.function-call.fish
+        - meta_scope: invalid.illegal.function-call.fish
         - match: '(?=[\s;&)|<>])'
           pop: true
+    - match: \&
+      comment: The first character of a pipeline can't be an '&', and the base pipeline scope won't be able to mark it as invalid so we have to do so here
+      scope: invalid.illegal.function-call.fish
     - match: (?=\S)
-      comment: Anonymous scope - Base scope pipeline goes up until one of the definitive ends (newline and ';') or the sequences that could be an end if we're actually inside a $self scope right now (')' and "end")
+      comment: Anonymous scope - Base scope pipeline, goes up until a definitive end (typical control operators) or the sequences that could be an end if we're actually inside a $self scope right now (')' and "end")
       push:
-        - match: \n|(;)|(?=\))|(?=end)
+        - match: '(\n)|([;&])|(?=\)|end)'
           captures:
-            1: meta.function-call.operator.fish keyword.operator.control.fish
+            1: meta.function-call.operator.fish
+            2: meta.function-call.operator.fish keyword.operator.control.fish
           pop: true
-        - match: '(?:[&|]|(?:[0-9]+)?(?:<|>>?|\^\^?))'
-          comment: Match operators ('&', pipe, and redirect) which cannot start a pipeline because they must be consumed within or after a pipeline
-          scope: invalid.illegal.operator.fish
-        - include: comment-internal-end
-        - match: (?=\S)
-          comment: The reason we match '&' here is because we explicitly require it come after a command (unlike ';' which can be alone on a line)
-          push:
-            - match: '(?=[\n;)])|(&)'
-              captures:
-                1: meta.function-call.operator.fish keyword.operator.control.fish
-              pop: true
-            - include: pipeline
+        - include: pipeline
   argument:
     - match: '(?![\s;&)|<>^])'
       comment: End arg if it precedes whitespace or operators (excluding stderr redirect '^' due to a fish quirk)
@@ -47,7 +40,7 @@ contexts:
           captures:
             0: meta.string.unquoted.fish punctuation.definition.process.fish
           push:
-            - meta_scope: meta.parameter.argument.process-expansion.fish
+            - meta_scope: meta.function-call.fish meta.parameter.argument.process-expansion.fish
             - match: '(?=[\s;&)|<>])'
               pop: true
             - match: '(?:self|last)(?=$|[\s;&)|<>])'
@@ -56,11 +49,11 @@ contexts:
             - include: parameter-patterns
         - match: '(?:[+-]?)(?:[0-9]+\.?[0-9]*|[0-9]*\.?[0-9]+)(?=$|[\s;&)|<>])'
           comment: Treat a sequence of integers (with possible sign and decimal separator) as a standalone constant. Do this separate to the
-          scope: meta.parameter.argument.numeric.fish meta.string.unquoted.fish constant.numeric.fish
+          scope: meta.function-call.fish meta.parameter.argument.numeric.fish meta.string.unquoted.fish constant.numeric.fish
         - match: '(?![\s($])'
           comment: This scope can be used by plugins to locate arguments which don't *start* with command substitution or variable expansion and may directly resolve to file paths. Of course, they could have command substitution or variable expansion further on in them, but looking ahead for that too is nontrivial
           push:
-            - meta_scope: meta.parameter.argument.path.fish
+            - meta_scope: meta.function-call.fish meta.parameter.argument.path.fish
             - match: '(?=[\s;&)|<>])'
               pop: true
             - match: \~
@@ -70,15 +63,30 @@ contexts:
         - match: (?!\s)
           comment: Use standard parameter patterns for whatever doesn't match the above
           push:
-            - meta_scope: meta.parameter.argument.fish
+            - meta_scope: meta.function-call.fish meta.parameter.argument.fish
             - match: '(?=[\s;&)|<>])'
               pop: true
             - include: parameter-patterns
   command-call-meta:
-    - match: '(builtin|command|exec)\b(?!\s+[-&|])'
-      comment: These meta commands force the parameter to behave as a standard command. They stop at piping
+    - match: |-
+        (?x)
+        (builtin|command|exec)\b
+        (?# Look ahead for control operations after whitespace)
+        (?!\s*
+          (?:
+            (?# Find options)
+            -
+          |
+            (?# Find simple control operations)
+            [\n;&)|]
+          |
+            (?# Find redirection, which may be into a pipe but we don't care)
+            (?:[0-9]+)?(?:<|>>?)|\^\^?
+          )
+        )
+      comment: These meta commands force the parameter to behave as a standard command. They stop when their subcommand is piped. Notably, if the command is followed by redirection, then the redirection is legal and the command just prints its help text, so in that case we avoid opening this scope such that the command is caught elsewhere as a standard command
       captures:
-        1: support.function.fish
+        1: meta.function-call.fish support.function.fish meta.string.unquoted.fish
       push:
         - match: |-
             (?x)
@@ -89,43 +97,31 @@ contexts:
                 [\n;&)]
               |
                 (?# Find piping)
-                (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
               )
             )
           pop: true
+        - include: separator-whitespace
         - include: line-continuation
         - include: command-call-standard
-    - match: '(not)\b(?!\s+[-&|])'
-      comment: This meta command acts as a unary operator on the command to the right, which can also be a meta command. It only applies to one command and stops at piping
-      captures:
-        1: keyword.operator.word.fish
+    - match: '(?=(not)\b(?!\s*[\n;)-]))'
+      comment: If the command is followed by redirection, then the redirection is illegal so we have to open the scope and let it be caught by
       push:
-        - match: |-
-            (?x)
-            (?# Look ahead for control operations after whitespace)
-            (?=\s*
-              (?:
-                (?# Find simple control operations)
-                [\n;&)]
-              |
-                (?# Find piping)
-                (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
-              )
-            )
+        - match: '(?=[\n;&)])'
           pop: true
-        - include: line-continuation
-        - include: command-call-meta
-        - include: command-call-standard
+        - match: '(not)\b(?!\s*[\n;)-])'
+          comment: If the command is followed by an "&", then that's invalid
+          captures:
+            1: meta.function-call.fish keyword.operator.word.fish meta.string.unquoted.fish
+          push:
+            - match: '(?![^\n\S]|\&|\\\n)'
+              pop: true
+            - include: separator-whitespace
+            - match: \&
+              scope: invalid.illegal.function-call.fish
+            - include: line-continuation
+        - include: pipeline
   command-call-standard:
-    - match: '\#'
-      comment: A command call can't be a comment, but this match will only be satisfied if the command is first after a pipe because comments are otherwise consumed earlier
-      push:
-        - meta_scope: invalid.illegal.function-call.fish
-        - match: '(?=[\n)])'
-          pop: true
-    - match: "(?:[&|<>^])"
-      comment: Match an operator which cannot start a command call but does not stop the next characters from being interpreted as a command
-      scope: invalid.illegal.operator.fish
     - match: (?=\S)
       comment: Anonymous scope - A complete command comprising a name element and optional parameter, redirection, and comment elements
       push:
@@ -138,7 +134,7 @@ contexts:
                 [\n;&)]
               |
                 (?# Find a pipe operator)
-                (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
               )
             )
           pop: true
@@ -151,20 +147,21 @@ contexts:
             - match: '\[(?=[\s<>]|\\\n)'
               comment: "Look for the alternate form of test, which uses a matching pair of '[' ']'"
               captures:
-                0: support.function.test.begin.fish
+                0: meta.function-call.fish support.function.test.begin.fish
               push:
                 - match: '(\])|(\n|[;&)|].*)'
                   captures:
-                    1: support.function.test.end.fish
+                    1: meta.function-call.fish support.function.test.end.fish
                     2: invalid.illegal.function-call.fish
                   pop: true
+                - include: separator-whitespace
                 - include: line-continuation
                 - include: parameter
                 - include: redirection
             - match: '(?:break|continue|return)(?=[\s;&)|<>])'
               comment: Look for loop/function control commands. We perform no checking on the validity of their scope (because only allowing them in the correct scope won't work if they are used within if-blocks) or parameters (because fish does that during execution not parsing)
               captures:
-                0: keyword.control.conditional.fish
+                0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
             - match: (?!\s)
               comment: Anonymous scope - A generic name element
               push:
@@ -183,7 +180,7 @@ contexts:
                 - match: (?!\s)
                   comment: Otherwise, treat the element as a fraction of a name made of arbitrary strings (which breaks at an escaped newline)
                   push:
-                    - meta_scope: variable.function.fish
+                    - meta_scope: meta.function-call.fish variable.function.fish
                     - match: '(?=[\s;&()|<>])'
                       pop: true
                     - match: \$
@@ -193,12 +190,12 @@ contexts:
         - match: \%
           comment: A command name can't begin with a process expansion operator (however the variable expansion operator '$' is allowed)
           push:
-            - meta_scope: invalid.illegal.function-call.fish
+            - meta_scope: meta.function-call.fish invalid.illegal.function-call.fish
             - match: '(?=[\s;&)|<>])'
               pop: true
             - include: string
         - include: redirection
-        - match: '(?:[^\n\S]+)'
+        - match: '(?=[^\n\S]+)'
           comment: Match any whitespace characters that aren't the newline
           push:
             - match: |-
@@ -210,7 +207,7 @@ contexts:
                     [\n;&)]
                   |
                     (?# Find a pipe operator)
-                    (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                    (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
                   )
                 )
               pop: true
@@ -226,13 +223,14 @@ contexts:
                         [\n;&)]
                       |
                         (?# Find a pipe operator)
-                        (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                        (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
                       |
                         (?# Find a double hyphen)
                         --[\s;&)|<>]
                       )
                     )
                   pop: true
+                - include: separator-whitespace
                 - include: line-continuation
                 - include: comment-internal-end
                 - include: redirection
@@ -249,7 +247,7 @@ contexts:
                         [\n;&)]
                       |
                         (?# Find a pipe operator)
-                        (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                        (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
                       )
                     )
                   pop: true
@@ -271,10 +269,11 @@ contexts:
                             [\n;&)]
                           |
                             (?# Find a pipe operator)
-                            (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                            (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
                           )
                         )
                       pop: true
+                    - include: separator-whitespace
                     - include: line-continuation
                     - include: comment-internal-end
                     - include: redirection
@@ -283,22 +282,22 @@ contexts:
     - match: '(begin|while|if|for|switch|function)\s*([&|<>])'
       comment: Block commands cannot be backgrounded, piped, or redirected
       captures:
-        1: variable.function.fish
+        1: meta.function-call.fish variable.function.fish meta.string.unquoted.fish
         2: invalid.illegal.operator.fish
     - match: (begin)\s*(\))
       comment: The begin command uniquely cannot be the last command in a command substitution
       captures:
-        1: variable.function.fish
+        1: meta.function-call.fish variable.function.fish meta.string.unquoted.fish
         2: invalid.illegal.operator.fish
     - match: 'begin(?=\s*$|\s*[\n;]|\s+[^\s-])'
       comment: The begin command can be alone on a line or followed by any command that doesn't start with a '-'. If a '-' is seen it shouldn't be treated as a block
       captures:
-        0: keyword.control.conditional.fish
+        0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
       push:
         - meta_scope: meta.block.begin.fish
         - match: 'end(?=$|[\s;&)|<>])'
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           pop: true
         - include: main
     - match: '(?=while\s+[^\s;)-])'
@@ -307,22 +306,23 @@ contexts:
         - meta_scope: meta.block.while.fish
         - match: 'end(?=$|[\s;&)|<>])'
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           pop: true
         - match: while
           comment: Anonymous scope - Capture the command name we know is there, include a single instance of a pipeline, and end when an operator is seen
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           push:
-            - match: '\s*(?=[\n;&)])'
+            - match: '(?=[\n;&)])'
               pop: true
             - include: line-continuation
             - include: pipeline
-        - match: '\n|(;)|([&)])'
-          comment: Anonymous scope - Capture the operator we know is there, include the base scope, and end when an `end` command is seen
+        - match: '(\n)|(;)|([&)])'
+          comment: Todo - Let the $self scope handle invalid operators
           captures:
-            1: keyword.operator.control.fish
-            2: invalid.illegal.operator.fish
+            1: meta.function-call.operator.fish
+            2: meta.function-call.operator.fish keyword.operator.control.fish
+            3: invalid.illegal.operator.fish
           push:
             - match: '(?=end(?:$|[\s;&)|<>]))'
               pop: true
@@ -333,7 +333,7 @@ contexts:
         - meta_scope: meta.block.if.fish
         - match: 'end(?=$|[\s;&)|<>])'
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           pop: true
         - include: command-call-standard-block-if-internal
     - match: '(?=for\s+[^\s;)-])'
@@ -342,14 +342,17 @@ contexts:
         - meta_scope: meta.block.for-in.fish
         - match: 'end(?=$|[\s;&)|<>])'
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           pop: true
-        - match: (for)(?:\s+)
+        - match: (for)(\s+)
           comment: Anonymous scope - Capture the command name we know is there, include a single instance of a parameter (the varname), and end when the whitespace after the varname is captured
           captures:
-            1: keyword.control.conditional.fish
+            1: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
+            2: meta.function-call.fish
           push:
             - match: \s+
+              captures:
+                0: meta.function-call.fish
               pop: true
             - include: line-continuation
             - include: parameter
@@ -360,18 +363,20 @@ contexts:
         - match: in(?=\s)
           comment: Anonymous scope - Capture the command name which might be there, include an arbitrary number of arguments, and end when the control operator is seen
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           push:
-            - match: '\s*(?=[\n;&)])'
+            - match: '(?=[\n;&)])'
               pop: true
+            - include: separator-whitespace
             - include: line-continuation
             - include: comment-internal-end
             - include: argument
-        - match: '\n|(;)|([&)])'
-          comment: Anonymous scope - Capture the operator we know is there, include the base scope, and end when an `end` command is seen
+        - match: '(\n)|(;)|([&)])'
+          comment: Todo - Let the $self scope handle invalid operators
           captures:
-            1: keyword.operator.control.fish
-            2: invalid.illegal.operator.fish
+            1: meta.function-call.operator.fish
+            2: meta.function-call.operator.fish keyword.operator.control.fish
+            3: invalid.illegal.operator.fish
           push:
             - match: '(?=end(?:$|[\s;&)|<>]))'
               pop: true
@@ -379,23 +384,25 @@ contexts:
         - match: '\S+?(?=[\s;&)])'
           comment: Anything beside line continuation, "in", or a control operator is invalid
           scope: invalid.illegal.function-call.fish
+        - include: separator-whitespace
     - match: '(?=switch\s+[^\s;)-])'
       comment: If the command name is followed by a valid string (not anything that closes the scope or a string starting with a '-') then open the scope
       push:
         - meta_scope: meta.block.switch.fish
         - match: 'end(?=$|[\s;&)|<>])'
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           pop: true
         - match: (?=switch)
           comment: Anonymous scope - Match the valid part of the switch statement, then look for an invalid part
           push:
-            - match: '\s*(?=[\n;&)])'
+            - match: '(?=[\n;&)])'
               pop: true
-            - match: (switch)(?:\s+)
+            - match: (switch)(\s+)
               comment: Anonymous scope - Capture the command name we know is there, include a single instance of a parameter (the value), and end when whitespace or a control operator is seen
               captures:
-                1: keyword.control.conditional.fish
+                1: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
+                2: meta.function-call.fish
               push:
                 - match: '(?=[\s;&)])'
                   pop: true
@@ -406,29 +413,34 @@ contexts:
                   scope: invalid.illegal.operator.fish
             - match: \s+
               comment: Anonymous scope - Capture whitespace which might be there, match any non-control-operator strings as invalid, and end when a control operator is seen
+              captures:
+                0: meta.function-call.fish
               push:
                 - match: '(?=[\n;&)])'
                   pop: true
                 - match: '\S+?(?=[\s;&)])'
                   scope: invalid.illegal.string.fish
-        - match: '\n|(;)|([&)])'
-          comment: Anonymous scope - Capture the operator we know is there, include the base scope, and end when an `end` command is seen
+        - match: '(\n)|(;)|([&)])'
+          comment: Todo - Let the $self scope handle invalid operators
           captures:
-            1: keyword.operator.control.fish
-            2: invalid.illegal.operator.fish
+            1: meta.function-call.operator.fish
+            2: meta.function-call.operator.fish keyword.operator.control.fish
+            3: invalid.illegal.operator.fish
           push:
             - match: '(?=end(?:$|[\s;&)|<>]))'
               pop: true
             - match: 'case(?=[\s;&)])'
-              comment: Anonymous scope - Capture the command name which might be there, include an arbitrary number of arguments, and end when the control operator is captured
+              comment: Todo - Double check this catches pipes, redirection into pipe, all that
               captures:
-                0: keyword.control.conditional.fish
+                0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
               push:
-                - match: '\n|(;)|([&)])'
+                - match: '(\n)|(;)|([&)])'
                   captures:
-                    1: keyword.operator.control.fish
-                    2: invalid.illegal.operator.fish
+                    1: meta.function-call.operator.fish
+                    2: meta.function-call.operator.fish keyword.operator.control.fish
+                    3: invalid.illegal.operator.fish
                   pop: true
+                - include: separator-whitespace
                 - include: line-continuation
                 - include: comment-internal-end
                 - include: argument
@@ -442,22 +454,34 @@ contexts:
         - meta_scope: meta.block.function.fish
         - match: 'end(?=$|[\s;&)|<>])'
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           pop: true
         - match: (?=function)
           comment: Anonymous scope - Match the defined name of the function statement, then look for further parameters
           push:
-            - match: '\s*(?=[\n;&)])'
+            - match: |-
+                (?x)
+                (?# Look ahead for operators)
+                (?=
+                  (?:
+                    (?# Find a control operator)
+                    [\n;&)]
+                  |
+                    (?# Find a redirect or pipe operator)
+                    (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)\|?
+                  )
+                )
               pop: true
-            - match: (function)(?:\s+)
+            - match: (function)\s+
               comment: Anonymous scope - Capture the command name we know is there, include a single instance of a parameter (the value), and end when whitespace or a control operator is seen
               captures:
-                1: keyword.control.conditional.fish
+                0: meta.function-call.fish
+                1: keyword.control.conditional.fish meta.string.unquoted.fish
               push:
-                - match: '(?=[\s;&)])'
+                - match: '(?=[\s;&)|<>])'
                   pop: true
                 - include: line-continuation
-                - match: "(?:[()|<>])"
+                - match: "[|<>]"
                   push:
                     - meta_scope: invalid.illegal.string.fish
                     - match: '(?=[\s;&)])'
@@ -465,28 +489,43 @@ contexts:
                 - match: (?!\\\n)
                   comment: Anonymous scope - Start when an escaped newline isn't present, and end when whitespace or an operator is seen
                   push:
-                    - match: '(?=[\s;&()|<>])'
+                    - match: '(?=[\s;&|<>])'
                       pop: true
-                    - match: (?!\s)
+                    - match: '(?![\s)])'
+                      comment: This is all the usual things a parameter is allowed to contain
                       push:
-                        - meta_scope: entity.name.function.fish
-                        - match: '(?=[\s;&()|<>])'
+                        - meta_scope: meta.function-call.fish meta.parameter.argument.fish entity.name.function.fish
+                        - match: '(?=[\s;&)|<>])'
                           pop: true
-                        - include: parameter
-            - match: \s+
-              comment: Anonymous scope - Capture whitespace which might be there, then match anything normal for a command call
+                        - include: parameter-patterns
+                    - match: \)
+                      comment: fish sees a closing parenthesis as mismatched, since command substitution is allowed
+                      scope: invalid.illegal.string.fish
+            - match: '(?=[^\n\S])'
+              comment: Anonymous scope - Capture whitespace which might be there, then match anything normal for a command call, except redirections!
               push:
-                - match: '(?=[\n;&)])'
+                - match: |-
+                    (?x)
+                    (?# Look ahead for operators)
+                    (?=
+                      (?:
+                        (?# Find a control operator)
+                        [\n;&)]
+                      |
+                        (?# Find a redirect or pipe operator)
+                        (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)\|?
+                      )
+                    )
                   pop: true
+                - include: separator-whitespace
                 - include: line-continuation
                 - include: comment-internal-end
-                - include: redirection
                 - include: parameter
-        - match: '\n|(;)|([&)])'
+        - match: '(\n)|(;)|(?=[&)|]|(?:[0-9]+)?(?:<|>>?)|\^\^?)'
           comment: Anonymous scope - Capture the operator we know is there, include the base scope, and end when an `end` command is seen
           captures:
-            1: keyword.operator.control.fish
-            2: invalid.illegal.operator.fish
+            1: meta.function-call.operator.fish
+            2: meta.function-call.operator.fish keyword.operator.control.fish
           push:
             - match: '(?=end(?:$|[\s;&)|<>]))'
               pop: true
@@ -500,17 +539,18 @@ contexts:
         - match: if
           comment: Anonymous scope - Match the command name we know is there, include a single instance of a pipeline, and end when a control operator is seen
           captures:
-            0: keyword.control.conditional.fish
+            0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
           push:
-            - match: '\s*(?=[\n;&])'
+            - match: '(?=[\n;&])'
               pop: true
             - include: line-continuation
             - include: pipeline
-        - match: \n|(;)|(&)
+        - match: (\n)|(;)|(&)
           comment: Anonymous scope - Match the operator we know is there, then include the base scope or an `else` structure
           captures:
-            1: keyword.operator.control.fish
-            2: invalid.illegal.operator.fish
+            1: meta.function-call.operator.fish
+            2: meta.function-call.operator.fish keyword.operator.control.fish
+            3: invalid.illegal.operator.fish
           push:
             - match: '(?=end(?:$|[\s;&)|<>]))'
               pop: true
@@ -522,20 +562,22 @@ contexts:
                 - match: 'else(?=\s*[\s;])'
                   comment: Anonymous scope - Match the `else` we know is there and any comment, and mark anything besides an `if` as illegal
                   captures:
-                    0: keyword.control.conditional.fish
+                    0: meta.function-call.fish keyword.control.conditional.fish meta.string.unquoted.fish
                   push:
-                    - match: '\s*(?=[\n;&]|if(?:\s*\n|\s+[^\s;]))'
+                    - match: '(?=[\n;&]|if(?:\s*\n|\s+[^\s;]))'
                       pop: true
+                    - include: separator-whitespace
                     - include: line-continuation
                     - include: comment-internal-end
                     - match: '\S+?(?=[\s;&])'
                       comment: Anything else is illegal
                       scope: invalid.illegal.string.fish
-                - match: \n|(;)|(&)
+                - match: (\n)|(;)|(&)
                   comment: Anonymous scope - Match the operator which will be there if no `if` was seen, then include the base scope which marks further `else` commands as invalid
                   captures:
-                    1: keyword.operator.control.fish
-                    2: invalid.illegal.operator.fish
+                    1: meta.function-call.operator.fish
+                    2: meta.function-call.operator.fish keyword.operator.control.fish
+                    3: invalid.illegal.operator.fish
                   push:
                     - match: '(?=end(?:$|[\s;&)|<>]))'
                       pop: true
@@ -594,13 +636,11 @@ contexts:
         - include: variable-expansion
         - include: string-quoted
         - match: '(?:[+-]?[0-9]+)(?=[\s;&)|<>]|\]|\.\.)'
+          comment: There's no need to apply meta.string.unquoted to anything inside of an index expansion, as if it needs to be applied then it would have been handled already. The fact index expansion can appear inside of quotes (after a variable expansion) makes it tricky to decide what is or isn't "unquoted"
           scope: constant.numeric.fish
-        - match: '(?![\s''"]|\.\.)'
-          comment: 'Begin/end string as before with the addition of breaking at a '']'' or ".."'
-          push:
-            - match: '(?=[\s;&)|<>''"]|\]|\.\.)'
-              pop: true
-            - include: string-unquoted-patterns
+        - match: \S
+          comment: Anything else is invalid
+          scope: invalid.illegal.index.fish
   line-continuation:
     - match: (?=\\\n)
       comment: End when an unescaped newline is seen, the first character of a line isn't whitespace or a comment character or the escaped newline itself, or if the next character after some consumed whitespace isn't more whitespace or a comment character
@@ -624,11 +664,11 @@ contexts:
           pop: true
         - match: '(?:--)(?=[\s;&)|<>])'
           comment: End of options (parameter of just two hyphens)
-          scope: meta.parameter.option.end.fish variable.parameter.fish punctuation.definition.option.end.fish meta.string.unquoted.fish
+          scope: meta.function-call.fish meta.parameter.option.end.fish variable.parameter.fish punctuation.definition.option.end.fish meta.string.unquoted.fish
         - match: (?=--)
           comment: Long option (parameter starting with two hyphens)
           push:
-            - meta_scope: meta.parameter.option.long.fish
+            - meta_scope: meta.function-call.fish meta.parameter.option.long.fish
             - match: '(?=[\s;&)|<>])'
               pop: true
             - match: (?:--)
@@ -667,7 +707,7 @@ contexts:
           captures:
             0: punctuation.definition.option.short.fish meta.string.unquoted.fish
           push:
-            - meta_scope: meta.parameter.option.short.fish variable.parameter.fish
+            - meta_scope: meta.function-call.fish meta.parameter.option.short.fish variable.parameter.fish
             - match: '(?=[\s;&)|<>])'
               pop: true
             - include: parameter-patterns
@@ -675,7 +715,7 @@ contexts:
   parameter-patterns:
     - include: command-substitution
     - match: (?=\$)
-      comment: Give variable expansion the unquoted string scope
+      comment: Give variable expansion the unquoted string scope, since if it appears inside a string it gets the quoted string scope and we should mirror that
       push:
         - meta_scope: meta.string.unquoted.fish
         - match: (?!\$)
@@ -683,35 +723,62 @@ contexts:
         - include: variable-expansion
     - include: string
   pipeline:
-    - match: '(?:[&|]|(?:[0-9]+)?(?:<|>>?|\^\^?))'
-      comment: Todo - Restructure pipeline so that this match isn't duplicated from the base scope, which it must also be for any other scopes which implement their own control operator consumption. Might require the unary operator commands to become an explicit recursive match (though we tried this once and it was more complicated than anything should be)
-      scope: invalid.illegal.operator.fish
-    - match: (and|or)\b(?!\s+-)
-      comment: Todo - These commands cannot be followed by backgrounding, piping, or redirection alone. Add logic to catch these cases. It will be extensive...
-      scope: meta.function-call.fish keyword.operator.word.fish
-    - include: line-continuation
-    - match: (not)\b(?!\s+-)
-      comment: This is a hack for now, which allows nesting of 'not' and 'and'/'or' commands. A better solution will be explicit recursivity in these commands
-      scope: meta.function-call.fish keyword.operator.word.fish
+    - match: '(?=(and|or)\b(?!\s*[\n;)-]))'
+      comment: If the command is followed by redirection, then the redirection is illegal so we have to open the scope and let it be caught by
+      push:
+        - match: '(?=[\n;&)])'
+          pop: true
+        - match: '(and|or)\b(?!\s*[\n;)-])'
+          comment: If the command is followed by an "&", then that's invalid
+          captures:
+            1: meta.function-call.fish keyword.operator.word.fish meta.string.unquoted.fish
+          push:
+            - match: '(?![^\n\S]|\&|\\\n)'
+              pop: true
+            - include: separator-whitespace
+            - match: \&
+              scope: invalid.illegal.function-call.fish
+            - include: line-continuation
+        - include: pipeline
+    - include: pipeline-segment
+  pipeline-segment:
+    - match: '(?=[&|]|(?:[0-9]+)?(?:<|>>?)|\^\^?)'
+      comment: Match operators (background, pipe, and redirect) which cannot start a pipeline because they must be consumed within or after a pipeline
+      push:
+        - match: |-
+            (?x)
+            (?# Look ahead to ensure no more operators after whitespace)
+            (?=\n)
+            |
+            (?!
+              \s*
+              (?:
+                (?# Find a control operator)
+                [\n;&)|]
+              |
+                (?# Find a pipe operator)
+                (?:[0-9]+)?(?:<|>>?)|\^\^?
+              )
+            )
+          pop: true
+        - match: '(?:[&|]|(?:[0-9]+)?(?:<|>>?)|\^\^?)'
+          scope: invalid.illegal.function-call.fish
     - match: '(?:case|else|end)(?=[\s;&)|<>])'
       comment: Match a command which is illegal in the base scope
       scope: invalid.illegal.function-call.fish
     - match: '(?=[^\s#])'
-      comment: Anonymous scope - Pipeline. Define a pipeline as either one command call, or multiple command calls linked by pipe operators ('|', '2>|', etc). The pipeline terminates at the first encounter of any control operator
+      comment: Anonymous scope - A pipeline which may be one command call or multiple command calls linked by pipe operators ('|', '2>|', etc). The pipeline terminates at the first encounter of any control operator
       push:
-        - match: '(\s*)(?=[\n;&)])'
-          captures:
-            1: meta.function-call.fish
+        - match: '(?=[\n;&)])'
           pop: true
         - match: |-
             (?x)
-            (?# Negative lookahead for piping)
+            (?# Negative lookahead for whitespace, comments, piping)
             (?!
-              (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+              \s|\#|(?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
             )
-          comment: Match the first command of a potential pipeline
+          comment: Anonymous scope - Match the command of a pipeline segment
           push:
-            - meta_scope: meta.function-call.fish
             - match: |-
                 (?x)
                 (?# Look ahead for operators after whitespace)
@@ -721,7 +788,7 @@ contexts:
                     [\n;&)]
                   |
                     (?# Find a pipe operator)
-                    (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                    (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
                   )
                 )
               pop: true
@@ -731,159 +798,193 @@ contexts:
             (?x)
             (?# Look ahead for piping)
             (?=
-              (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+              (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
             )
-          comment: Match a second or later command of a pipeline, starting with the connective piping
+          comment: Anonymous scope - Match piping which may lead to a second command, and if it does recurse into
           push:
-            - meta_scope: meta.function-call.fish
             - match: '(?=\s*[\n;&)])'
               pop: true
             - match: |-
                 (?x)
-                (?# Look ahead for piping followed by either control operators or piping)
+                (?# Look ahead for piping followed by either control operators or redirection)
                 (?=
-                  (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                  (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|
                   \s*
                   (?:
                     $
                   |
                     [\n;&)]
                   |
-                    (?:(?:[0-9]+)?(?:<|>>?|\^\^?))?\|
+                    (?:(?:[0-9]+)?(?:<|>>?)|\^\^?)
                   )
                 )
-              comment: Match a pipe not followed by a command, hence a malformed segment of the pipeline
+              comment: Match a pipe not followed by a command, hence a malformed segment of the pipeline. However, we make an exception for the case where a pipe is followed by another pipe, and match it further down
               push:
                 - match: '(?=\s*$|\s*[\n;&)])'
                   pop: true
-                - match: '(?:(?:[0-9]+)?(?:<|>|>>))?\|(?=\s*$|\s*[\n)])'
+                - match: '(?:(?:[0-9]+)?(?:<|>>?)|\^\^?)?\|(?=\s*$|\s*[\n)])'
                   comment: If the pipeline would end implicitly (ie, with a newline or close parenthesis), then mark the pipe itself invalid
-                  scope: invalid.illegal.operator.fish
+                  scope: meta.function-call.fish invalid.illegal.operator.fish
                 - match: |-
                     (?x)
-                    (?# Consume valid piping; captures 1 2 3)
-                    (?:([0-9]+)?(<|>>?|\^\^?))?(\|)
+                    (?# Consume valid piping; captures 1 2 3 4)
+                    (?:([0-9]+)?(<|>>?)|(\^\^?))?(\|)
                     (?# Consume whitespace)
                     \s*
-                    (?# Consume remainder; capture 4)
+                    (?# Consume remainder; capture 5)
                     (.*)
-                  comment: If the pipeline would end with an explicit operator or encounter a second set of piping, then mark the first set of piping as valid and beyond as invalid
+                  comment: If the pipeline would end with an explicit operator or encounter anything that we determined was invalid above, then mark the first set of piping as valid and everything beyond as invalid
+                  scope: meta.function-call.fish
                   captures:
                     1: meta.pipe.fish constant.numeric.file-descriptor.fish
-                    2: meta.pipe.fish keyword.operator.redirect.fish
-                    3: meta.pipe.fish keyword.operator.pipe.fish
-                    4: invalid.illegal.function-call.fish
-            - match: '(?:([0-9]+)?(<|>>?|\^\^?))?(\|)'
-              comment: Pick up a legitimate pipe
-              scope: meta.pipe.fish
+                    2: meta.pipe.fish keyword.operator.pipe.redirect.fish
+                    3: meta.pipe.fish keyword.operator.pipe.redirect.fish
+                    4: meta.pipe.fish keyword.operator.pipe.fish
+                    5: invalid.illegal.function-call.fish
+            - match: '(?:([0-9]+)?(<|>>?)|(\^\^?))?(\|)((?:\s*\|)+)?'
+              comment: Pick up extra pipes after the first and mark them invalid, but in fish 3 it's valid syntax so don't get greedy with the highlighting
+              scope: meta.function-call.fish meta.pipe.fish
               captures:
                 1: constant.numeric.file-descriptor.fish
                 2: keyword.operator.pipe.redirect.fish
-                3: keyword.operator.pipe.fish
-            - include: line-continuation
-            - include: command-call-meta
-            - include: command-call-standard
+                3: keyword.operator.pipe.redirect.fish
+                4: keyword.operator.pipe.fish
+                5: invalid.illegal.function-call.fish
+            - match: '\#'
+              comment: After a pipe can't be a comment
+              push:
+                - meta_scope: meta.function-call.fish invalid.illegal.function-call.fish
+                - match: '(?=[\n)])'
+                  pop: true
+            - match: '(and|or)\b(?!\s*[\n;-])'
+              comment: This match should generally be pretty similar to the match which seeks a valid "and"/"or" in
+              scope: meta.function-call.fish invalid.illegal.function-call.fish
+            - include: separator-whitespace
+            - match: (?=\\\n)
+              comment: Keep the scope going over escaped newlines and comments
+              push:
+                - meta_scope: meta.function-call.fish
+                - match: (?!\\\n)
+                  pop: true
+                - include: line-continuation
+            - include: pipeline-segment
   redirection:
-    - match: '(?=(?:[0-9]+(?:<|>|>>)|>>|\^\^|[<>^])\&)'
+    - match: '(?=(?:[0-9]+(?:<|>>|>)|>>|\^\^|[<>^])\&)'
       comment: End at anything that would end a parameter, including redirections *if* they are *not* this same type of redirection (ie, have an '&'), in which case this scope stays open and we match the next one. The negative lookahead for <>^ at the end is to keep ST2 happy (not hanging)
       push:
-        - match: '(?=[\s;&)|]|(?:[0-9]+(?:<|>|>>)|>>|\^\^|[<>^])(?![&<>^]))'
+        - match: '(?=[\s;&)|]|(?:[0-9]+(?:<|>>|>)|>>|\^\^|[<>^])(?![&<>^]))'
           pop: true
-        - match: '(?:([0-9]+)(<|>|>>)|(>>|\^\^|[<>^]))(\&)\s*'
+        - match: '(?:([0-9]+)(<|>>|>)|(>>|\^\^|[<>^]))(\&)\s*'
           comment: We have to try and catch an '&' here because if it is seen by the outer end match then it will be considered a valid operator and the redirection scope will immediately terminate
           captures:
-            1: constant.numeric.file-descriptor.fish
+            0: meta.function-call.fish meta.redirection.fish
+            1: meta.string.unquoted.fish constant.numeric.file-descriptor.fish
             2: keyword.operator.redirect.fish
             3: keyword.operator.redirect.fish
             4: keyword.operator.redirect.dereference.fish
           push:
-            - meta_scope: meta.redirection.fish
             - match: '(\&.*$)|(?![&\\])'
               captures:
+                0: meta.function-call.fish meta.redirection.fish
                 1: invalid.illegal.file-descriptor.fish
               pop: true
             - include: line-continuation
-        - match: (?=\\\n)
-          push:
-            - meta_scope: meta.redirection.fish
-            - match: (?!\\\n)
-              pop: true
-            - include: line-continuation
+        - include: line-continuation
         - match: (?=\()
           comment: Evaluates to a string which may be an integer
           push:
-            - meta_scope: meta.redirection.fish
+            - meta_scope: meta.function-call.fish meta.redirection.fish
             - match: (?!\()
               pop: true
             - include: command-substitution
         - match: (?=\$)
           comment: Evaluates to a string which may be an integer
           push:
-            - meta_scope: meta.redirection.fish
+            - meta_scope: meta.function-call.fish meta.redirection.fish
             - match: (?!\$)
               pop: true
             - include: variable-expansion
         - match: '(?=[''"])'
           comment: May be a quoted integer, which is allowed
           push:
-            - meta_scope: meta.redirection.fish
+            - meta_scope: meta.function-call.fish meta.redirection.fish
             - match: '(?![''"])'
               pop: true
             - include: string-quoted
         - match: '(?:[0-9]+)(?=$|[\s;&)|<>])'
-          scope: meta.redirection.file-descriptor.fish constant.numeric.file-descriptor.fish
+          scope: meta.function-call.fish meta.redirection.file-descriptor.fish meta.string.unquoted.fish constant.numeric.file-descriptor.fish
         - match: '(?:-)(?=$|[\s;&)|<>])'
-          scope: meta.redirection.file-descriptor.fish keyword.operator.redirect.close.fish
+          scope: meta.function-call.fish meta.redirection.file-descriptor.fish meta.string.unquoted.fish keyword.operator.redirect.close.fish
         - match: (?:\S+.*)$
           comment: Anything else is illegal
-          scope: meta.redirection.fish invalid.illegal.file-descriptor.fish
-    - match: '(?=(?:[0-9]+(?:<|>|>>)|>>|\^\^|[<>^])\??)'
+          scope: meta.function-call.fish meta.redirection.fish invalid.illegal.file-descriptor.fish
+    - match: '(?=(?:[0-9]+(?:<|>>|>)|>>|\^\^|[<>^])\??)'
       comment: End at anything that would end a parameter, including redirections *if* they are *not* this same type of redirection (ie, redirection into file descriptor, or into pipe), in which case this scope stays open and we match the next one
       push:
-        - match: '(?=[\s;&)|]|(?:[0-9]+(?:<|>|>>)|>>|\^\^|[<>^])[&|])'
+        - match: '(?=[\s;&)|]|(?:[0-9]+(?:<|>>|>)|>>|\^\^|[<>^])[&|])'
           pop: true
-        - match: '(?:([0-9]+)(<|>|>>)|(>>|\^\^|[<>^]))(\?)?\s*'
+        - match: '(?:([0-9]+)(<|>>|>)|(>>|\^\^|[<>^]))(\?)?\s*'
           comment: We have to try and catch bad operators here because if they are seen by the outer end match then they will be considered valid and the redirection scope will immediately terminate
           captures:
-            1: constant.numeric.file-descriptor.fish
+            0: meta.function-call.fish meta.redirection.fish
+            1: meta.string.unquoted.fish constant.numeric.file-descriptor.fish
             2: keyword.operator.redirect.fish
             3: keyword.operator.redirect.fish
             4: keyword.operator.redirect.clobber-test.fish
           push:
-            - meta_scope: meta.redirection.fish
             - match: "((?:[&?]|[0-9]*[<>^]).*$)|(?![&?<>^])"
               captures:
+                0: meta.function-call.fish meta.redirection.fish
                 1: invalid.illegal.path.fish
               pop: true
             - include: line-continuation
-        - match: (?=\\\n)
+        - include: line-continuation
+        - match: '\{|(?=\})'
+          comment: A redirection path cannot contain brace expansion
           push:
-            - meta_scope: meta.redirection.fish
-            - match: (?!\\\n)
+            - meta_scope: meta.function-call.fish meta.redirection.fish invalid.illegal.path.fish
+            - match: '[\s;&)|}]'
               pop: true
-            - include: line-continuation
-        - match: (?=\()
-          comment: Evaluates to a string, so path cannot begin with '('
+        - match: "[*?]"
+          comment: A redirection path cannot contain wildcard expansion
+          scope: meta.function-call.fish meta.redirection.fish invalid.illegal.path.fish
+        - match: "(?:[&?]|[0-9]*[<>^]).*$"
+          comment: Check for characters which are associated with redirection, so path cannot begin with them
+          scope: meta.function-call.fish meta.redirection.fish invalid.illegal.path.fish
+        - match: \~
+          scope: meta.function-call.fish meta.redirection.path.fish meta.string.unquoted.fish keyword.operator.tilde.fish
+        - match: '(?![\s;&()|<>${}*?])'
+          comment: Use strings to build a file path, but break out if any invalid elements or elements that wouldn't form a literal path are encountered
           push:
-            - meta_scope: meta.redirection.fish
+            - meta_scope: meta.function-call.fish meta.redirection.path.fish
+            - match: '(?=[\s;&()|<>${}*?])'
+              pop: true
+            - include: string-quoted
+            - match: '(?![\s;&()|<>${}*?]|[''"])'
+              comment: Should use the same patterns as the above begin/end, but also add the quotes so the
+              push:
+                - meta_scope: meta.string.unquoted.fish
+                - match: '(?=[\s;&()|<>${}*?]|[''"])'
+                  pop: true
+                - include: string-unquoted-patterns-escapes
+        - match: (?=\()
+          comment: A raw path cannot begin with '(' since this undergoes command substitution
+          push:
+            - meta_scope: meta.function-call.fish meta.redirection.fish
             - match: (?!\()
               pop: true
             - include: command-substitution
         - match: (?=\$)
-          comment: Evaluates to a string, so path cannot begin with '$'
+          comment: We also make sure that variable expansion is scoped as an unquoted string, since if it appears inside quotes then it gets scoped as a quoted string and we should mirror that
           push:
-            - meta_scope: meta.redirection.fish
+            - meta_scope: meta.function-call.fish meta.redirection.fish meta.string.unquoted
             - match: (?!\$)
               pop: true
             - include: variable-expansion
-        - match: "(?:[&?]|[0-9]*[<>^]).*$"
-          comment: Check for characters which are associated with redirection, so path cannot begin with them. Don't put them in the meta.redirection.path scope, so that only valid paths are in there
-          scope: meta.redirection.fish invalid.illegal.path.fish
-        - match: \~
-          scope: meta.redirection.path.fish keyword.operator.tilde.fish
-        - match: '(?:\''(?:\\[\''\\]|[^\''\\])*\''|\"(?:\\[\"$\n\\]|[^\"$\n\\])*\"|(?:\\[abefnrtv $\\*?#(){}\[\]<>^&;|"'']|\\[~%]|\\[xX][0-9A-Fa-f]{1,2}|\\[0-7]{1,3}|\\u[0-9A-Fa-f]{1,4}|\\U[0-9A-Fa-f]{1,8}|\\c[?-~]|[^\s$\\*?~%#()<>&|;"'']|\\(?=[^abefnrtv\s$\\*?#(){}\[\]<>^&;|"''xXuUc])|\\\n|[~%#])+)+'
-          comment: Use the function call match to build a file path, as the syntax is fairly similar (possibly identical, after exceptions caught above? I haven't checked)
-          scope: meta.redirection.path.fish
+  separator-whitespace:
+    - match: '(?:[^\n\S]+)'
+      comment: Fundamental structure used to separate elements of a command call; it's any whitespace that isn't a newline, predominantly meaning spaces or tabs
+      scope: meta.function-call.fish
   string:
     - include: string-quoted
     - include: string-unquoted
@@ -922,6 +1023,42 @@ contexts:
           pop: true
         - include: string-unquoted-patterns
   string-unquoted-patterns:
+    - include: string-unquoted-patterns-escapes
+    - match: '\{'
+      captures:
+        0: punctuation.section.braces.begin.fish
+      push:
+        - meta_scope: meta.braces.brace-expansion.fish
+        - match: '(\})|(\n|[;&)|].*)'
+          captures:
+            1: punctuation.section.braces.end.fish
+            2: invalid.illegal.punctuation.section.fish
+          pop: true
+        - match: \,
+          scope: punctuation.section.braces.separator.fish
+        - include: command-substitution
+        - include: variable-expansion
+        - match: '(?:[^\n\S]+)'
+          comment: Unescaped spaces aren't allowed, as technically that separates the braces into two separate arguments. Don't consume a newline though, so the scope end capture can get it
+          scope: invalid.illegal.whitespace.fish
+        - include: string-quoted
+        - match: '(?:[+-]?)(?:[0-9]+\.?[0-9]*|[0-9]*\.?[0-9]+)(?=$|[\s;&)|<>]|\}|\,)'
+          scope: constant.numeric.fish
+        - match: '(?![\s;&)|<>''"])'
+          comment: "Begin/end string as before with the addition of breaking at a '}' or ','"
+          push:
+            - match: '(?=[\s;&)|<>''"]|\}|\,)'
+              pop: true
+            - match: \\\,
+              scope: constant.character.escape.fish
+            - include: string-unquoted-patterns
+    - match: (\*\*)|(\*)|(\?)
+      scope: meta.wildcard-expansion.fish
+      captures:
+        1: keyword.operator.double-star.fish
+        2: keyword.operator.single-star.fish
+        3: keyword.operator.question-mark.fish
+  string-unquoted-patterns-escapes:
     - match: |-
         (?x)
         \\[abefnrtv $\\*?#(){}\[\]<>^&|;"']
@@ -942,40 +1079,6 @@ contexts:
     - match: \\\n
       comment: Just for convenience we separate the newline escape
       scope: constant.character.escape.fish
-    - match: '\{'
-      captures:
-        0: punctuation.section.braces.begin.fish
-      push:
-        - meta_scope: meta.braces.brace-expansion.fish
-        - match: '(\})|(\n|[;&)|].*)'
-          captures:
-            1: punctuation.section.braces.end.fish
-            2: invalid.illegal.punctuation.section.fish
-          pop: true
-        - match: \,
-          scope: punctuation.section.braces.separator.fish
-        - include: command-substitution
-        - include: variable-expansion
-        - match: '(?:[^\S\n]+)'
-          comment: Unescaped spaces aren't allowed, as technically that separates the braces into two separate arguments. Don't consume a newline though, so the scope end capture can get it
-          scope: invalid.illegal.whitespace.fish
-        - include: string-quoted
-        - match: '(?:[+-]?)(?:[0-9]+\.?[0-9]*|[0-9]*\.?[0-9]+)(?=$|[\s;&)|<>]|\}|\,)'
-          scope: constant.numeric.fish
-        - match: '(?![\s;&)|<>''"])'
-          comment: "Begin/end string as before with the addition of breaking at a '}' or ','"
-          push:
-            - match: '(?=[\s;&)|<>''"]|\}|\,)'
-              pop: true
-            - match: \\\,
-              scope: constant.character.escape.fish
-            - include: string-unquoted-patterns
-    - match: (\*\*)|(\*)|(\?)
-      scope: meta.wildcard-expansion.fish
-      captures:
-        1: keyword.operator.double-star.fish
-        2: keyword.operator.single-star.fish
-        3: keyword.operator.question-mark.fish
   variable-expansion:
     - include: variable-expansion-illegal
     - match: (?=\$)
