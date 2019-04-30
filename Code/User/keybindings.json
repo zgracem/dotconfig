@@ -123,5 +123,10 @@
     "key": "ctrl+k l",
     "command": "extension.toggleLineEndings",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k l",
+    "command": "extension.toggleLineEndings",
+    "when": "editorTextFocus"
   }
 ]
