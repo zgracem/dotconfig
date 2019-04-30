@@ -35,6 +35,7 @@
   "explorer.confirmDelete": false,
   "files.associations": {
     "*.[1-9]": "troff",
+    "*.ignore": "ignore",
     "*.make": "makefile",
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
