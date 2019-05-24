@@ -77,6 +77,7 @@
     2154,
     2148
   ],
+  "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "spellright.addToSystemDictionary": true,
   "spellright.configurationScope": "user",
   "spellright.documentTypes": [
