@@ -59,6 +59,10 @@ if linux?
   set --erase dir
 end
 
+# npm
+
+set -p PATH ~/.local/share/npm/bin
+
 # $HOME
 set -p PATH ~/opt/bin ~/bin
 set -p MANPATH ~/opt/share/man ~/share/man
