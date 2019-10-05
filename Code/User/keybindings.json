@@ -128,5 +128,10 @@
     "key": "cmd+k l",
     "command": "extension.toggleLineEndings",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k shift+m",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Launch Sublime Merge"
   }
 ]

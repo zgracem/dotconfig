@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "reveal": "silent",
+    "showReuseMessage": false
+  },
+  "osx": {
+    "options": {
+      "env": {
+        "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "XDG_CONFIG_HOME": "${env:HOME}/.config"
+      }
+    }
+  },
+  "tasks": [
+    {
+      "label": "Launch Sublime Merge",
+      "type": "shell",
+      "command": "smerge ."
+    },
+    {
+      "label": "Lint dotfiles",
+      "type": "shell",
+      "command": "bin/check_dotfiles.sh",
+      "problemMatcher": {
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      },
+      "presentation": {
+        "revealProblems": "onProblem"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Update user-agent",
+      "type": "shell",
+      "command": "bin/update-user-agent.fish"
+    },
+    {
+      "label": "Dump environment",
+      "type": "shell",
+      "command": "env | sort",
+      "presentation": {
+        "clear": true,
+        "reveal": "always"
+      }
+    }
+  ]
+}
