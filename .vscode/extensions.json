@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "chrislajoie.vscode-modelines",
+    "EditorConfig.EditorConfig",
+    "fallenwood.vimL",
+    "lunaryorn.fish-ide",
+    "maelvalais.autoconf",
+    "skyapps.fish-vscode",
+    "stkb.rewrap",
+    "tehnix.vscode-tidymarkdown",
+    "timonwong.shellcheck",
+    "yzhang.markdown-all-in-one"
+  ]
+}
