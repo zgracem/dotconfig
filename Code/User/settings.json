@@ -21,7 +21,7 @@
   "editor.occurrencesHighlight": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.renderWhitespace": "boundary",
+  "editor.renderWhitespace": "selection",
   "editor.rulers": [
     80,
     118
@@ -35,6 +35,7 @@
   "explorer.confirmDelete": false,
   "files.associations": {
     "*.[1-9]": "troff",
+    "*.cue": "cuesheet",
     "*.ignore": "ignore",
     "*.make": "makefile",
     "*.plist": "xml",
@@ -52,7 +53,7 @@
   "gitlens.defaultDateFormat": "D MMMM YYYY @ HH:mm",
   "gitlens.defaultDateShortFormat": "YYYY-mm-DD",
   "gitlens.settings.mode": "advanced",
-  "gitlens.statusBar.format": "${author} • ${agoOrDate} • ${message} • ${id}",
+  "gitlens.statusBar.format": "${author}, ${agoOrDate} • ${message} (${id})",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "markdown.extension.italic.indicator": "_",
@@ -69,7 +70,6 @@
   "ruby.intellisense": "rubyLocate",
   "ruby.useLanguageServer": true,
   "search.smartCase": true,
-  "search.usePCRE2": true,
   "shellcheck.exclude": [
     1090,
     1091,

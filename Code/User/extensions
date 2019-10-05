@@ -3,8 +3,8 @@ ban.spellright
 ban.troff
 bierner.emojisense
 bungcip.better-toml
-chrislajoie.vscode-modelines
 castwide.solargraph
+chrislajoie.vscode-modelines
 CoenraadS.bracket-pair-colorizer-2
 DavidAnson.vscode-markdownlint
 eamodio.gitlens
@@ -19,12 +19,14 @@ PKief.material-icon-theme
 plus5keen.word-counter
 rebornix.ruby
 redhat.vscode-yaml
-robinbentley.sass-indented
 sianglim.slim
 skyapps.fish-vscode
 stkb.rewrap
+syler.sass-indented
 tehnix.vscode-tidymarkdown
 timonwong.shellcheck
+Togusa09.tmlanguage
 tuxtina.json2yaml
 v4run.transpose
 yzhang.markdown-all-in-one
+zgm.cuesheet
