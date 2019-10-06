@@ -17,15 +17,7 @@ case 'CYGWIN*'
 
   ### sync settings
 
-  set base_settings (cygpath -aw $config_dir/settings.json)
-  set more_settings (cygpath -aw $config_dir/settings.windows.json)
-
-  if not test -d $dir
-    echo >&2 "error: not found:" $dir
-    exit 1
-  end
-
-  jq '. + '(jq -cj '.' $more_settings) $base_settings > $dir/settings.json
+  command cp -af $config_dir/settings.json $dir/settings.json
 
   ### sync keybindings
 

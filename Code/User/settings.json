@@ -67,8 +67,8 @@
     "config": "settings"
   },
   "material-icon-theme.folders.color": "#93a1a1",
-  "ruby.intellisense": "rubyLocate",
-  "ruby.useLanguageServer": true,
+  "ruby.intellisense": false,
+  "ruby.useLanguageServer": false,
   "search.smartCase": true,
   "shellcheck.exclude": [
     1090,
@@ -85,7 +85,9 @@
     "git-commit"
   ],
   "spellright.language": [
-    "en"
+    "en",
+    "en_CA",
+    "en_US"
   ],
   "spellright.suggestionsInHints": false,
   "telemetry.enableTelemetry": false,
@@ -101,6 +103,9 @@
   "terminal.integrated.shell.osx": "/usr/local/bin/bash",
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "terminal.integrated.shellArgs.osx": [],
+  "window.doubleClickIconToClose": true,
+  "window.enableMenuBarMnemonics": false,
+  "window.menuBarVisibility": "toggle",
   "window.openFilesInNewWindow": "off",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
