@@ -33,6 +33,7 @@
   "editor.wordWrapColumn": 118,
   "emojisense.emojiDecoratorsEnabled": false,
   "explorer.confirmDelete": false,
+  "extensions.showRecommendationsOnlyOnDemand": true,
   "files.associations": {
     "*.[1-9]": "troff",
     "*.cue": "cuesheet",
