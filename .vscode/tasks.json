@@ -4,6 +4,7 @@
     "reveal": "silent",
     "showReuseMessage": false
   },
+  "problemMatcher": [],
   "osx": {
     "options": {
       "env": {
