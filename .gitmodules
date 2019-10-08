@@ -4,3 +4,6 @@
 [submodule "bat/syntaxes/groff"]
 	path = bat/syntaxes/groff
 	url = git@github.com:zgracem/groff.sublime-syntax.git
+[submodule "bat/syntaxes/sublime-fish"]
+	path = bat/syntaxes/sublime-fish
+	url = git@github.com:Phidica/sublime-fish.git
