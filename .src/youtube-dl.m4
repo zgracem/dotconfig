@@ -1,4 +1,5 @@
 # vim:ft=sh
+# shellcheck disable=SC2215
 # -----------------------------------------------------------------------------
 # ~/.config/youtube-dl/config
 # >> http://rg3.github.io/youtube-dl/

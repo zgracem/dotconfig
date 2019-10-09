@@ -1,3 +1,4 @@
+# vim:ft=ini
 # -----------------------------------------------------------------------------
 # ~/.config/curl/.curlrc
 # export CURL_HOME=~/.config/curl

@@ -1,3 +1,4 @@
+; vim:ft=ini
 ; export npm_config_userconfig=~/.config/npm/npmrc
 loglevel = warn
 progress = false
