@@ -70,6 +70,7 @@
   "material-icon-theme.folders.color": "#93a1a1",
   "ruby.intellisense": false,
   "ruby.useLanguageServer": false,
+  "scm.defaultViewMode": "tree",
   "search.smartCase": true,
   "shellcheck.exclude": [
     1090,
@@ -79,16 +80,15 @@
     2148
   ],
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
-  "spellright.addToSystemDictionary": true,
+  "spellright.addToSystemDictionary": false,
   "spellright.configurationScope": "user",
   "spellright.documentTypes": [
     "markdown",
     "git-commit"
   ],
+  "spellright.groupDictionaries": false,
   "spellright.language": [
-    "en",
-    "en_CA",
-    "en_US"
+    "en_CA"
   ],
   "spellright.suggestionsInHints": false,
   "telemetry.enableTelemetry": false,
@@ -118,7 +118,6 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "welcomePageInEmptyWorkbench",
-  "workbench.statusBar.feedback.visible": false,
   "yaml.format.enable": true,
   "yaml.format.printWidth": 80,
   "yaml.format.proseWrap": "always",

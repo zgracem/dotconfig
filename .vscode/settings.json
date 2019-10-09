@@ -1,5 +1,7 @@
 {
   "files.exclude": {
-    "htop": true,
+    ".gitattributes": true,
+    ".gitmodules": true,
+    "htop": true
   }
 }
