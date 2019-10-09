@@ -61,7 +61,7 @@ end
 
 # npm
 
-set -p PATH ~/.local/share/npm/bin
+set -p PATH $XDG_DATA_HOME/npm/bin
 
 # $HOME
 set -p PATH ~/opt/bin ~/bin
