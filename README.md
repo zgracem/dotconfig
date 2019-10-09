@@ -22,10 +22,10 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 
 ### General usage 💁
 
-* My main machine at home is a 2015 iMac that dual boots macOS Mojave and
+* My main machine at home is a 2015 iMac that dual boots macOS Catalina and
   Windows 10; I also have a 2011 MacBook Air running High Sierra. My day-job
-  computer is a very fast Dell with Windows 7, Cygwin, and no admin login 🤦‍♀.
-  And I frequently SSH into web servers running various flavours of Linux 🐧.
+  computer is a very fast Dell with Windows 10, Cygwin, and no admin login 🤦‍♀.
+  I also frequently SSH into web servers running various flavours of Linux 🐧.
 * Dropbox keeps things synced between my Windows and Mac machines, and a custom
   `rsync` script pushes changes to my Linux boxes. 🔄
 * On Windows, I use nightly builds of the venerable [PuTTY]; on Mac, I prefer
