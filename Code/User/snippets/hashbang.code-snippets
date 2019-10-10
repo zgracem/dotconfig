@@ -1,0 +1,23 @@
+{
+  "shellscript hashbang": {
+    "prefix": "!env",
+    "body": [
+      "#!/usr/bin/env ${1|bash,sh|}"
+    ],
+    "scope": "shellscript"
+  },
+  "fish hashbang": {
+    "prefix": "!env",
+    "body": [
+      "#!/usr/bin/env ${1:fish}"
+    ],
+    "scope": "fish"
+  },
+  "ruby hashbang": {
+    "prefix": "!env",
+    "body": [
+      "#!/usr/bin/env ${1:ruby}"
+    ],
+    "scope": "ruby"
+  }
+}
