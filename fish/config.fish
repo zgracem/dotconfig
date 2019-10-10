@@ -52,4 +52,8 @@ else
     # N.B. This must be a GUI app; fish will use cygstart(1) to launch it.
     set -g fish_help_browser "$LOCALAPPDATA\\Mozilla Firefox\\firefox.exe"
   end
+
+  if test -f ~/.lastpwd
+    cd (cat ~/.lastpwd)
+  end
 end
