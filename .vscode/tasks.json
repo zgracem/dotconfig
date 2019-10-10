@@ -20,7 +20,7 @@
       "command": "smerge ."
     },
     {
-      "label": "Lint dotfiles",
+      "label": "Lint POSIX shell files",
       "type": "shell",
       "command": "bin/check_dotfiles.sh",
       "problemMatcher": {
@@ -44,6 +44,24 @@
         "kind": "test",
         "isDefault": true
       }
+    },
+    {
+      "label": "Lint fish files",
+      "type": "shell",
+      "command": "bin/check_fish_files.fish",
+      "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceFolder}/fish"],
+        "pattern": {
+          "regexp": "^(.+) \\(line (\\d+)\\): (.+)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
+        }
+      },
+      "presentation": {
+        "revealProblems": "onProblem"
+      },
+      "group": "test"
     },
     {
       "label": "Update user-agent",
