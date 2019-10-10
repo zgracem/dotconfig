@@ -11,7 +11,7 @@ function max_width -a new_w file -d 'Resize an image to fit within a specified p
   else if in-path convert
     convert $file -resize $new_w $new_file
   else
-    echo >&2 "error: don't know how to resize images"
+    echo >&2 "error: need ‘sips’ or ‘convert’ to resize images"
     return 127
   end
 end
