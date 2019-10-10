@@ -1,4 +1,4 @@
-function _errno_fish --argument num
+function _errno_fish -a num
   test "$num" -ge 121 -a "$num" -le 127
   or return
 

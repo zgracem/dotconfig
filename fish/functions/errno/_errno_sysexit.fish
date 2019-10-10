@@ -1,4 +1,4 @@
-function _errno_sysexit --argument num
+function _errno_sysexit -a num
   test "$num" -ge 64 -a "$num" -le 78
   or return
 

@@ -1,4 +1,4 @@
-function _errno_curl --argument num
+function _errno_curl -a num
   set -l curl_errors
     set curl_errors[1] "Unsupported protocol"
     set curl_errors[2] "Failed to initialize"

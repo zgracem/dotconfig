@@ -1,4 +1,4 @@
-function _errno_signal --argument num
+function _errno_signal -a num
   test "$num" -gt 128 -a "$num" -le 165
   or return
 

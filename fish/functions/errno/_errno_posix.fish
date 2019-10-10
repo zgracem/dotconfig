@@ -1,4 +1,4 @@
-function _errno_posix --argument num
+function _errno_posix -a num
   test "$num" -le 133
   or return
 

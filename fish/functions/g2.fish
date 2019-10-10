@@ -1,4 +1,4 @@
-function g2 --description 'Go somewhere' --argument destination
+function g2 --description 'Go somewhere' -a destination
   switch $destination
     case 'inbox';   cd "$HOME/Dropbox/inbox"
     case 'proj';    cd "$HOME/Dropbox/Projects"
