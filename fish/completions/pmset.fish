@@ -84,10 +84,10 @@ function __fish_complete_pmset_moreargs
   end
 end
 
+complete -c pmset --no-files
 complete -c pmset -a "(__fish_complete_pmset_settings; __fish_complete_pmset_moreargs)"
 complete -c pmset -s a -x -a "(__fish_complete_pmset_settings)" -d 'Apply settings to all'
 complete -c pmset -s b -x -a "(__fish_complete_pmset_settings)" -d 'Apply settings to battery'
 complete -c pmset -s c -x -a "(__fish_complete_pmset_settings)" -d 'Apply settings to charger'
 complete -c pmset -s u -x -a "(__fish_complete_pmset_settings -u)" -d 'Apply settings to UPS'
-complete -c pmset -s g -x -d 'Display current settings'
-complete -c pmset -s g -a "(__fish_complete_pmset_getting)"
+complete -c pmset -s g -x -a "(__fish_complete_pmset_getting)" -d 'Display current settings'
