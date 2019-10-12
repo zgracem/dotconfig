@@ -53,6 +53,7 @@ else
     set -g fish_help_browser "$LOCALAPPDATA\\Mozilla Firefox\\firefox.exe"
   end
 
+  # See functions/update_lastpwd.fish
   if test -f ~/.lastpwd
     cd (cat ~/.lastpwd)
   end
