@@ -1,4 +1,4 @@
-function dim -a image --description 'Get the pixel dimensions of an image'
+function dim --description 'Get the pixel dimensions of an image' -a image
   set -l width
   set -l height
 

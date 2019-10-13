@@ -1,4 +1,4 @@
-function db -a target --description 'Open a file or directory at dropbox.com'
+function db --description 'Open a file or directory at dropbox.com' -a target
   set -l url_base 'dropbox.com'
   set -l url "$url_base/home"
   set -l dropbox_dir $HOME/Dropbox

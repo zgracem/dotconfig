@@ -1,4 +1,4 @@
-function errno -a num --description 'Display information about error codes'
+function errno --description 'Display information about error codes' -a num
   set -l last_exit $status
 
   if test -z "$num"

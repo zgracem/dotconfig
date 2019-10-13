@@ -1,4 +1,4 @@
-function app_version -a app --description 'Get version number from an .app bundle or .exe file'
+function app_version --description 'Get version number from an .app bundle or .exe file' -a app
   if test -x /usr/libexec/PlistBuddy
     set -l info "$app/Contents/Info.plist"
 

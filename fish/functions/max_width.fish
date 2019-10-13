@@ -1,4 +1,4 @@
-function max_width -a new_w file -d 'Resize an image to fit within a specified pixel width'
+function max_width -d 'Resize an image to fit within a specified pixel width' -a new_w file
   set -l new_file (string replace -r '(.*)\.(.*)' '$1_'$new_w'px.$2' $file)
 
   if in-path sips

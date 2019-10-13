@@ -6,7 +6,7 @@
 # I'm reluctant to call this a bug in fish but it's definitely not behaviour
 # I want, so here's a minimal reimplementation that behaves the way I prefer
 # (i.e. it only uses `functions` when there's no existing function file.)
-function funced -a function --wraps funcsave --description 'Edit a function interactively'
+function funced --wraps funcsave --description 'Edit a function interactively' -a function
   set -l function_info (functions --details --verbose -- $function)
   set -l function_source $function_info[1]
   set -l function_line $function_info[3]

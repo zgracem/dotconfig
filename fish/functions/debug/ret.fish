@@ -1,3 +1,3 @@
-function ret -a code --description 'Set the exit status'
+function ret --description 'Set the exit status' -a code
   return $code
 end

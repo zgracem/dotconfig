@@ -1,4 +1,4 @@
-function pp -a file --description 'Pretty-print data and source code'
+function pp --description 'Pretty-print data and source code' -a file
   switch "$file"
   case ''
     echo >&2 'Usage: pp <file>'
