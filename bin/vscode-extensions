@@ -35,6 +35,8 @@ function do_diff
 end
 
 function main
+  set -l help_string "Subcommands: cleanup diff dump install list sync"
+
   switch "$argv[1]"
   case install cleanup list diff
     eval do_$argv[1]
@@ -44,9 +46,10 @@ function main
   case dump
     do_list > $extensions_file
   case ""
-    echo "Subcommands: cleanup diff dump install list sync"
+    echo $help_string
   case "*"
     echo >&2 "error: don't know how to $argv[1]"
+    echo >&2 $help_string
     exit 1
   end
 end
