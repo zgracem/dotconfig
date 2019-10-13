@@ -34,17 +34,21 @@ function do_diff
   diff $extensions_file (do_list | psub)
 end
 
-switch "$argv[1]"
-case install cleanup list diff
-  eval do_$argv[1]
-case sync
-  do_install
-  do_cleanup
-case dump
-  do_list > $extensions_file
-case ""
-  echo "Subcommands: cleanup diff dump install list sync"
-case "*"
-  echo >&2 "error: don't know how to $argv[1]"
-  exit 1
+function main
+  switch "$argv[1]"
+  case install cleanup list diff
+    eval do_$argv[1]
+  case sync
+    do_install
+    do_cleanup
+  case dump
+    do_list > $extensions_file
+  case ""
+    echo "Subcommands: cleanup diff dump install list sync"
+  case "*"
+    echo >&2 "error: don't know how to $argv[1]"
+    exit 1
+  end
 end
+
+main $argv
