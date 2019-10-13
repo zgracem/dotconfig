@@ -34,11 +34,16 @@ function do_diff
   diff $extensions_file (do_list | psub)
 end
 
+function do_json
+  set -l jq_script '.recommendations=[$exts|rtrimstr("\n")|split("\n")]'
+  echo '{}' | jq --monochrome-output --rawfile exts (do_list | psub) $jq_script
+end
+
 function main
-  set -l help_string "Subcommands: cleanup diff dump install list sync"
+  set -l help_string "Subcommands: cleanup diff dump install json list sync"
 
   switch "$argv[1]"
-  case install cleanup list diff
+  case install cleanup list diff json
     eval do_$argv[1]
   case sync
     do_install
