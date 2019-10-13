@@ -4,10 +4,10 @@ function __fish_seen_scan_subcmd
   __fish_seen_subcommand_from $scan_commands
 end
 
-complete -c scan -n "not __fish_seen_scan_subcmd" -a wifi -d 'List all public SSIDs nearby'
-complete -c scan -n "not __fish_seen_scan_subcmd" -a ssh -d 'List all SSH-enabled hosts on the current domain'
-complete -c scan -n "not __fish_seen_scan_subcmd" -a fs -d 'Continuous stream of file system access info'
-complete -c scan -n "not __fish_seen_scan_subcmd" -a port -d 'Track access on <port>'
-complete -c scan -n "not __fish_seen_scan_subcmd" -a pid -d 'Track access by process ID'
+complete -c scan -n "not __fish_seen_scan_subcmd" -a wifi -d (__fish_describe_function _scan_wifi)
+complete -c scan -n "not __fish_seen_scan_subcmd" -a ssh -d (__fish_describe_function _scan_ssh)
+complete -c scan -n "not __fish_seen_scan_subcmd" -a fs -d (__fish_describe_function _scan_fs)
+complete -c scan -n "not __fish_seen_scan_subcmd" -a port -d (__fish_describe_function _scan_port)
+complete -c scan -n "not __fish_seen_scan_subcmd" -a pid -d (__fish_describe_function _scan_pid)
 complete -c scan -n "__fish_seen_subcommand_from pid" -x -a "(__fish_complete_pids)"
-complete -c scan -n "not __fish_seen_scan_subcmd" -a file -d 'Track access to a file'
+complete -c scan -n "not __fish_seen_scan_subcmd" -a file -d (__fish_describe_function _scan_file)

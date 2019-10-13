@@ -1,5 +1,5 @@
 complete -c my --no-files
-complete -c my -a ip -d 'Display current public IP address'
-complete -c my -a localip -d 'Display current local IP address'
-complete -c my -a router -d 'Display current router address'
-complete -c my -a ssid -d 'Display current SSID'
+complete -c my -a ip -d (__fish_describe_function _my_ip)
+complete -c my -a localip -d (__fish_describe_function _my_localip)
+complete -c my -a router -d (__fish_describe_function _my_router)
+complete -c my -a ssid -d (__fish_describe_function _my_ssid)
