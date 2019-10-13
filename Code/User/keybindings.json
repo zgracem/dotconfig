@@ -133,5 +133,13 @@
     "key": "cmd+k shift+m",
     "command": "workbench.action.tasks.runTask",
     "args": "Launch Sublime Merge"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "-guid.insert"
+  },
+  {
+    "key": "shift+alt+cmd+[",
+    "command": "-guid.insertMany"
   }
 ]
