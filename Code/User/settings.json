@@ -118,6 +118,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+  "xmlTools.enableXmlTreeViewCursorSync": true,
   "yaml.format.enable": true,
   "yaml.format.printWidth": 80,
   "yaml.format.proseWrap": "always",
