@@ -69,7 +69,7 @@
   },
   "material-icon-theme.folders.color": "#93a1a1",
   "ruby.intellisense": false,
-  "ruby.useLanguageServer": false,
+  "ruby.useLanguageServer": true,
   "scm.defaultViewMode": "tree",
   "search.smartCase": true,
   "shellcheck.exclude": [
