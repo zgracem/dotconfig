@@ -17,7 +17,7 @@ if test -d "$HOMEBREW_PREFIX"
   set -p PATH $HOMEBREW_PREFIX/opt/curl/bin
 end
 
-if macos?; and test -x /usr/local/bin/brew
+if is-macos; and test -x /usr/local/bin/brew
   # GNU coreutils (w/out `g` prefix)
   set -p PATH /usr/local/opt/coreutils/libexec/gnubin
   set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
@@ -48,7 +48,7 @@ if macos?; and test -x /usr/local/bin/brew
 end
 
 # Linuxbrew
-if linux?
+if is-linux
   for dir in ~/.linuxbrew /home/linuxbrew/.linuxbrew
     if test -x $dir/bin/brew
       set -p PATH $dir/bin $dir/sbin

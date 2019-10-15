@@ -5,7 +5,7 @@ function bat --description 'A cat clone with wings'
     case "cache" "-*"
       set -a args $arg
     case "*"
-      if cygwin?
+      if is-cygwin
         set -a args (cygpath --windows $arg)
       else
         set -a args $arg

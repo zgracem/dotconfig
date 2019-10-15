@@ -8,7 +8,7 @@ else
     #           │  └─ print ? instead of nongraphic characters
     #           └──── list (almost) all files
 
-    if cygwin?
+    if is-cygwin
       # append .exe if cygwin magic was needed
       set -a params "--append-exe"
     end

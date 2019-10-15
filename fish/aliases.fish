@@ -14,7 +14,7 @@ abbr --add --global -- '-' 'cd -'
 
 # macOS & misc.
 
-if macos?
+if is-macos
   function airport --description 'Get information for 802.11 interface'
     /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv
   end
@@ -61,7 +61,7 @@ function wf; _ssh WebFaction; end
 # abbreviations
 # -----------------------------------------------------------------------------
 
-if macos?
+if is-macos
   abbr -a -g plistbuddy '/usr/libexec/PlistBuddy'
   abbr -a -g sp 'mdfind -name'
 end

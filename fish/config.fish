@@ -46,7 +46,7 @@ else
   __fish_fix_path fish_function_path
   __fish_fix_path fish_complete_path
 
-  if cygwin?
+  if is-cygwin
     # fish_help_browser overrides the browser that may be defined by $BROWSER.
     # The variable may be an array containing a browser name plus options.
     # N.B. This must be a GUI app; fish will use cygstart(1) to launch it.

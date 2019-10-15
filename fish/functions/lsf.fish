@@ -9,7 +9,7 @@ else
     #           │  └──── print inode number
     #           └─────── list (almost) all files
 
-    if macos?
+    if is-macos
       set -a params -@ -O -G
       #              │  │  └─ colourize output
       #              │  └──── print file flags
