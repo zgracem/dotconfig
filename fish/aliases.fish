@@ -39,7 +39,7 @@ if is-macos
 end
 
 if string match -eq 'Athena' $hostname
-  function vsdeploy
+  function vsdeploy --description 'Deploy vivekshraya.com'
     ~/Dropbox/www/vs2017/bin/sync.sh $argv
   end
 end
@@ -52,7 +52,6 @@ else
   function athena; _ssh Athena.remote; end
 end
 
-function dh; _ssh Dreamhost; end
 function erato; _ssh Erato; end
 function vshraya; _ssh vshraya; end
 function wf; _ssh WebFaction; end

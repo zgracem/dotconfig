@@ -1,4 +1,4 @@
-function manpdf
+function manpdf --description 'View a manual page as PDF'
   # https://github.com/zgracem/manpdf
   in-path manpdf; or return 127
 

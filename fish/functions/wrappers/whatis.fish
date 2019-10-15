@@ -1,4 +1,4 @@
-function _whatis --argument-names term
+function _whatis --description 'Display one-line manual page descriptions' --argument-names term
   set -l args $argv[2..-1]
   set -l output (command whatis --regex '\b'"$term"'\b[^-]' $args 2>/dev/null | sort -u)
   test -n "$output"; or return 16
