@@ -65,7 +65,7 @@
     "config": "settings"
   },
   "ruby.intellisense": false,
-  "ruby.useLanguageServer": true,
+  "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
   "search.smartCase": true,
   "shellcheck.exclude": [
