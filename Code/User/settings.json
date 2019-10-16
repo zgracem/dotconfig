@@ -64,7 +64,6 @@
   "material-icon-theme.files.associations": {
     "config": "settings"
   },
-  "material-icon-theme.folders.color": "#93a1a1",
   "ruby.intellisense": false,
   "ruby.useLanguageServer": true,
   "scm.defaultViewMode": "tree",
@@ -108,7 +107,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}${separator}${appName}",
-  "workbench.colorTheme": "One Monokai",
+  "workbench.colorTheme": "Material Theme",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
