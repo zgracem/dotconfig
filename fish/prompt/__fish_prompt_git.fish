@@ -1,7 +1,7 @@
 function __fish_prompt_git --description 'Display git info in the fish prompt'
   set -l icon_stash "+"
   set -l icon_dirty "•"
-  set -l icon_clean "√"
+  set -l icon_clean "✓"
   set -l icon_ahead "↑" # "+"
   set -l icon_behind "↓" # "−"
   set -l icon_ahead_and_behind "↕" # "±"
