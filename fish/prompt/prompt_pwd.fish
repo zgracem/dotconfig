@@ -11,7 +11,6 @@ function prompt_pwd --description 'Print the current working directory, shortene
   set -l cwd_parts (string split "/" "$cwd")
 
   if test (count $cwd_parts) -le 1
-    or test (id -u) -eq 0 # root gets the unobscured path
     echo $cwd
     return 0
   else

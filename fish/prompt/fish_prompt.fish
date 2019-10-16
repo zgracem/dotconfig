@@ -9,7 +9,11 @@ function fish_prompt --description 'Display the interactive prompt'
   end
 
   set_color $fish_color_cwd
-  echo -n (prompt_pwd)
+  if test (id -u) -eq 0 # root gets an unobscured path
+    echo -n (pwd)
+  else
+    echo -n (prompt_pwd)
+  end
 
   __fish_prompt_git
   __fish_prompt_jobs
