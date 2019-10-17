@@ -70,10 +70,7 @@
   "search.smartCase": true,
   "shellcheck.exclude": [
     1090,
-    1091,
-    2034,
-    2154,
-    2148
+    1091
   ],
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "spellright.addToSystemDictionary": false,
