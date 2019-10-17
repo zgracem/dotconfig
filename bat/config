@@ -4,7 +4,7 @@
 # shellcheck disable=SC2215
 # -----------------------------------------------------------------------------
 
---theme="Monokai Extended"
+--theme="TwoDark"
 --italic-text=always
 --pager="less -FR"
 --tabs=2
