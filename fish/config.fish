@@ -54,7 +54,8 @@ if is-cygwin
   set -g fish_help_browser "$LOCALAPPDATA\\Mozilla Firefox\\firefox.exe"
 end
 
-# See functions/update_lastpwd.fish
+# See conf.d/_update_lastpwd.fish
 if test -f ~/.lastpwd
+  and status is-interactive
   cd (cat ~/.lastpwd)
 end
