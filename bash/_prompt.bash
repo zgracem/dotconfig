@@ -66,7 +66,7 @@ case $TERM_PROGRAM in
     Z_SET_WINTITLE=false
     Z_SET_TABTITLE=false
     ;;
-  Coda) # has a very narrow status line (panic.com/coda-ios) 
+  Coda) # has a very narrow status line (panic.com/coda-ios)
     Z_SET_WINTITLE=false
     Z_SET_TABTITLE=false
     ;;
@@ -112,15 +112,15 @@ _z_PS1_compress_pwd()
   local indicator="…"
 
   # -----------------------------------------------------------------------------
-  
+
   local OPT OPTIND OPTARG
   while getopts ':d:l:k:c:i:' OPT; do
     case $OPT in
       d)  min_depth="$OPTARG" ;;
       l)  max_length="$OPTARG" ;;
-      k)  keep_dirs="$OPTARG" ;; 
-      c)  keep_chars="$OPTARG" ;; 
-      i)  indicator="$OPTARG" ;; 
+      k)  keep_dirs="$OPTARG" ;;
+      c)  keep_chars="$OPTARG" ;;
+      i)  indicator="$OPTARG" ;;
     '?')  scold "-$OPTARG: invalid option"
           return 1 ;;
     esac
@@ -252,7 +252,7 @@ _z_PS1_git_info()
   else
     return 1
   fi
-  
+
   # count unstaged files (by counting newlines)
   unstaged=${status//[^$'\n']/}
   unstaged=${#unstaged}
@@ -331,7 +331,7 @@ _z_PS1_jobs()
 # Based on: /etc/bashrc_Apple_Terminal (El Capitan)
 _z_PS1_update_cwd()
 {
-  local ante="${DCS_ante}${OSC}7;" 
+  local ante="${DCS_ante}${OSC}7;"
   local post="${BEL}${DCS_post}"
 
   if [[ $HOSTNAME != *.* ]]; then
@@ -572,7 +572,7 @@ prompt()
     else
       printf -v "$var" "true"
     fi
-    
+
     if [[ ${1,,} == host ]]; then
       rl prompt
     fi
