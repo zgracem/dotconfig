@@ -1,0 +1,14 @@
+# ignore non-constant sourcing
+disable=SC1090
+
+# don't follow sourced files
+disable=SC1091
+
+# don't flag "unused" variables
+disable=SC2034
+
+# variable is referenced but not assigned
+disable=SC2154
+
+# don't require shebang
+disable=SC2148
