@@ -6,9 +6,9 @@ set -gx FISH_VERSINFO (string split "." "$FISH_VERSION" | string split "-")
 
 if test $FISH_VERSINFO[1] -lt 3
   begin
-    echo (set_color black --background red) ">>>" (set_color bryellow) \
-      "This configuration file cannot run on fish" $FISH_VERSION \
-      (set_color black) "<<<" (set_color normal)
+    set_color red --reverse
+    echo " This configuration file cannot run on fish $FISH_VERSION "
+    set_color normal
   end >&2
   exit 1
 end
