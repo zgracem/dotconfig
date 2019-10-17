@@ -35,7 +35,6 @@ if is-macos
     lsregister -kill -r -domain local -domain system -domain user
     and killall Finder
   end
-
 end
 
 if string match -eq 'Athena' $hostname
