@@ -39,7 +39,7 @@ function do_json
     echo >&2 'jq not found'
     return 1
   end
-  set -l jq_script '.recommendations=[$exts|rtrimstr("\n")|split("\n")]'
+  set -l jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
   echo '{}' | jq --monochrome-output --rawfile exts (do_list | psub) $jq_script
 end
 
