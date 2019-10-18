@@ -1,4 +1,4 @@
-# install with `gem install -g $THIS_FILE`
+# install with `gem install -g ~/.config/ruby/Gemfile`
 
 source "https://rubygems.org"
 
