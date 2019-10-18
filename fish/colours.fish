@@ -151,21 +151,6 @@ if not is-gnu ls
 end
 
 # -----------------------------------------------------------------------------
-# colourize man pages
-# -----------------------------------------------------------------------------
-
-# begin/end "bold" mode -- used for man page headers
-set -gx LESS_TERMCAP_md (set_color green)
-set -gx LESS_TERMCAP_me (set_color normal)
-
-# begin/end "underline" mode -- used to highlight variables
-set -gx LESS_TERMCAP_us (set_color yellow)
-set -gx LESS_TERMCAP_ue (set_color normal)
-
-# reset everything
-set -gx LESS_TERMEND (set_color normal)
-
-# -----------------------------------------------------------------------------
 # other
 # -----------------------------------------------------------------------------
 

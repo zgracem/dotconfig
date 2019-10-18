@@ -1,9 +1,20 @@
-function man --description 'Display manual pages in a new window with a nice title'
+function man --description 'Display manual pages' # in a new window with colours and a nice title
   # Let man pipe to other things.
   if not isatty stdout
     command man $argv
     return
   end
+
+  # begin/end "bold" mode -- used for man page headers
+  set -x LESS_TERMCAP_md (set_color green)
+  set -x LESS_TERMCAP_me (set_color normal)
+
+  # begin/end "underline" mode -- used to highlight variables
+  set -x LESS_TERMCAP_us (set_color yellow)
+  set -x LESS_TERMCAP_ue (set_color normal)
+
+  # reset
+  set -x LESS_TERMEND (set_color normal)
 
   # Some switches don't open a man page. Let those do their thing.
   if test (string sub --length 1 -- $argv[1]) = "-"
