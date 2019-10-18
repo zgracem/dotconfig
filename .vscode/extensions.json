@@ -1,12 +1,13 @@
 {
   "recommendations": [
     "chrislajoie.vscode-modelines",
+    "DavidAnson.vscode-markdownlint",
     "EditorConfig.EditorConfig",
     "fallenwood.vimL",
     "maelvalais.autoconf",
     "stkb.rewrap",
-    "tehnix.vscode-tidymarkdown",
     "timonwong.shellcheck",
+    "tuxtina.json2yaml",
     "yzhang.markdown-all-in-one"
   ]
 }
