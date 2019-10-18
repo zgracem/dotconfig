@@ -126,22 +126,12 @@
     "files.trimTrailingWhitespace": false
   },
   "material-icon-theme.folders.associations": {
-    "_layout": "template",
-    ".src": "src",
-    "bashrc.d": "config",
-    "brew": "packages",
     "Code": "vscode",
-    "dircolors": "theme",
     "environment.d": "environment",
     "etc": "other",
-    "films": "video",
-    "functions.d": "functions",
     "git": "git",
-    "mp3": "audio",
-    "notes": "markdown",
     "npm": "node",
     "skel": "template",
-    "snippets": "template",
     "ssh": "keys"
   }
 }
