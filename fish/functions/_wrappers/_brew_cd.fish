@@ -1,3 +1,4 @@
+# See $__fish_config_dir/functions/_wrappers/brew.fish for enabling code
 function _brew_cd -a destination
   switch $destination
   case 'cache' 'cellar' 'prefix' 'repo' 'repository'
