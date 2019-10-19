@@ -124,6 +124,8 @@
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "welcomePageInEmptyWorkbench",
   "xmlTools.enableXmlTreeViewCursorSync": true,
+  "xmlTools.enableXmlTreeViewMetadata": false,
+  "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
   "yaml.format.enable": true,
   "yaml.format.printWidth": 80,
   "yaml.format.proseWrap": "always",
