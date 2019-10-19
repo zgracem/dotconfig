@@ -64,7 +64,15 @@
   "material-icon-theme.files.associations": {
     "config": "settings"
   },
-  "ruby.intellisense": false,
+  "material-icon-theme.folders.associations": {
+    "Code": "vscode",
+    "environment.d": "environment",
+    "etc": "other",
+    "git": "git",
+    "npm": "node",
+    "skel": "template",
+    "ssh": "keys"
+  },
   "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
   "search.smartCase": true,
@@ -84,8 +92,8 @@
     "en_CA"
   ],
   "spellright.suggestionsInHints": false,
-  "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.env.osx": {
     "PREFERRED_SHELL": "bash"
@@ -124,14 +132,5 @@
     "editor.tabSize": 4,
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
-  },
-  "material-icon-theme.folders.associations": {
-    "Code": "vscode",
-    "environment.d": "environment",
-    "etc": "other",
-    "git": "git",
-    "npm": "node",
-    "skel": "template",
-    "ssh": "keys"
   }
 }
