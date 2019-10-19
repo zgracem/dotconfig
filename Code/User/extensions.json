@@ -30,6 +30,7 @@
     "tuxtina.json2yaml",
     "v4run.transpose",
     "yzhang.markdown-all-in-one",
-    "zgm.cuesheet"
+    "zgm.cuesheet",
+    "zgm.vscode-fish"
   ]
 }
