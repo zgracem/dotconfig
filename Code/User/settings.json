@@ -128,7 +128,7 @@
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
   "yaml.format.enable": true,
   "yaml.format.printWidth": 80,
-  "yaml.format.proseWrap": "always",
+  "yaml.format.proseWrap": "preserve",
   "yaml.validate": true,
   "[makefile]": {
     "editor.insertSpaces": false
