@@ -73,6 +73,7 @@
     "skel": "template",
     "ssh": "keys"
   },
+  "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
   "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
   "search.smartCase": true,
@@ -81,6 +82,9 @@
     1091
   ],
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
+  "shellcheck.run": "onSave",
+  "shellcheck.useWorkspaceRootAsCwd": true,
+  "solargraph.commandPath": "/Users/zozo/.rbenv/shims/solargraph",
   "spellright.addToSystemDictionary": false,
   "spellright.configurationScope": "user",
   "spellright.documentTypes": [
