@@ -19,9 +19,9 @@ et al. to `$APPDATA`:
 ## Extensions
 
 Use `~/.config/bin/vscode-extensions` to manage extensions against the
-`extensions` file in this directory.
+`extensions.json` file in this directory.
 
-To install everything listed in `extensions`:
+To install everything listed in `extensions.json`:
 
 ```sh
 ~/.config/bin/vscode-extensions install
@@ -33,8 +33,11 @@ To uninstall everything _not_ listed:
 ~/.config/bin/vscode-extensions cleanup
 ```
 
-To overwrite `extensions` with the current loadout:
+To overwrite `extensions.json` with the current loadout:
 
 ```sh
 ~/.config/bin/vscode-extensions dump
 ```
+
+You can also copy `extensions.json` into a project's `.vscode` directory and use
+it as a template for workspace recommendations.

@@ -6,8 +6,13 @@ if not command --quiet code
   exit 1
 end
 
-set extensions_file ~/.config/Code/User/extensions
-set desired_extensions (cat $extensions_file)
+if not command --quiet jq
+  echo >&2 "error: jq not found"
+  exit 1
+end
+
+set extensions_file ~/.config/Code/User/extensions.json
+set desired_extensions (jq --raw-output .recommendations[] $extensions_file)
 set installed_extensions (code --list-extensions); or exit
 
 function do_install
@@ -31,14 +36,10 @@ function do_list
 end
 
 function do_diff
-  diff $extensions_file (do_list | psub)
+  diff (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
 end
 
 function do_json
-  if not command --quiet jq
-    echo >&2 'jq not found'
-    return 1
-  end
   set -l jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
   echo '{}' | jq --monochrome-output --rawfile exts (do_list | psub) $jq_script
 end
@@ -53,7 +54,7 @@ function main
     do_install
     do_cleanup
   case dump
-    do_list > $extensions_file
+    do_json > $extensions_file
   case ""
     echo $help_string
   case "*"
