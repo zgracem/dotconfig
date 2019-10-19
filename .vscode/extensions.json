@@ -8,6 +8,7 @@
     "stkb.rewrap",
     "timonwong.shellcheck",
     "tuxtina.json2yaml",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "zgm.vscode-fish"
   ]
 }
