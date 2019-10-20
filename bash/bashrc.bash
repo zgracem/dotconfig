@@ -4,9 +4,9 @@
 # -----------------------------------------------------------------------------
 
 # Source ~/.profile
-if [[ -r $XDG_CONFIG_HOME/sh/profile.sh ]] ; then
+if [[ -r $HOME/.config/sh/profile.sh ]] ; then
   # shellcheck source=../sh/profile.sh
-  . "$XDG_CONFIG_HOME/sh/profile.sh"
+  . "$HOME/.config/sh/profile.sh"
 fi
 
 ### Abort if...
