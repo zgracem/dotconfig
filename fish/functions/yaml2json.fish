@@ -9,7 +9,7 @@ function yaml2json --description "Convert YAML to JSON"
     return 1
   end
 
-  set -l cmd "puts YAML.load($src.read).to_json"
+  set -l cmd "puts YAML.safe_load($src.read).to_json"
   set -l libs json pathname yaml
   ruby -r$libs -e $cmd $argv[1]
 end
