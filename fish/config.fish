@@ -14,7 +14,6 @@ if test $FISH_VERSINFO[1] -lt 3
 end
 
 source "$__fish_config_dir/paths.fish"
-source "$__fish_config_dir/aliases.fish"
 
 # function subdirectories
 for dir in $__fish_config_dir/functions $__fish_config_dir/functions/**/
@@ -33,6 +32,9 @@ for dir in ~/.local/config/fish ~/.private/fish
 end
 
 if status is-interactive
+  # setup abbreviations
+  source "$__fish_config_dir/aliases.fish"
+
   # setup colours
   source "$__fish_config_dir/colours.fish"
 
