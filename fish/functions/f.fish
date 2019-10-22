@@ -1,5 +1,5 @@
 function f --description 'Open a Finder/Explorer window for $PWD/$1' -a target
-  set -q target; or set target (pwd)
+  set -q target[1]; or set target (pwd)
 
   switch (uname -s)
     case 'Darwin'

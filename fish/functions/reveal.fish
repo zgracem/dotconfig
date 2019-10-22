@@ -1,5 +1,5 @@
 function reveal --description 'Reveal $1 in Finder/Explorer' -a target
-  set -q target; or set target (pwd)
+  set -q target[1]; or set target (pwd)
 
   switch (uname -s)
     case 'Darwin'
