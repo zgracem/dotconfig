@@ -17,7 +17,7 @@ source "$__fish_config_dir/paths.fish"
 
 # function subdirectories
 for dir in $__fish_config_dir/functions $__fish_config_dir/functions/**/
-  set -p fish_function_path (string trim -rc/ $dir)
+  set -p fish_function_path (string trim --right --chars=/ $dir)
 end
 
 # load private and per-machine configuration if available
