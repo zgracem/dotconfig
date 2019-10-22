@@ -92,16 +92,16 @@ dim = Colour.brightblack.to_s
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.blue}>> " << off,
+  PROMPT_I: "#{Colour.blue}>> #{off}",
 
   # prompt when indenting code
-  PROMPT_N: "#{dim}│  " << off,
+  PROMPT_N: "#{dim}│  #{off}",
 
   # prompt for continuing strings
-  PROMPT_S: "#{dim}│%l " << off,
+  PROMPT_S: "#{dim}│%l #{off}",
 
   # prompt for continuing statement
-  PROMPT_C: "#{dim}├ " << off,
+  PROMPT_C: "#{dim}├ #{off}",
 
   # prefix to statement output
   RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
