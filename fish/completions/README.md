@@ -3,7 +3,7 @@
 This directory contains custom completion files I've written for fish, which
 supplement or replace the included completions. I saved a lot of tedious typing
 thanks to [`help2man`][h2m] and the built-in [`fish_update_completions`][fuc]
-utility
+utility.
 
 [h2m]: https://www.gnu.org/software/help2man/
 [fuc]: https://fishshell.com/docs/current/commands.html#fish_update_completions
