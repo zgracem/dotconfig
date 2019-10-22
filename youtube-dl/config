@@ -51,5 +51,5 @@
 # post-processing options
 # -----------------------------------------------------------------------------
 
-# prefer ffmpeg over avconv for running the postprocessors
---prefer-ffmpeg
+# prefer avconv over ffmpeg for running the postprocessors
+--prefer-avconv
