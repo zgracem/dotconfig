@@ -12,7 +12,7 @@ function __fish_complete_nethack
 end
 
 complete -c nethack -s d -ra "(__fish_complete_directories)" -d 'Specify a playground directory'
-complete -c nethack -s n -x -d 'Suppress printing any news from the game administrator'
+complete -c nethack -s n -d 'Suppress printing any news from the game administrator'
 complete -c nethack -s p -x -a "(__fish_complete_nethack roles)" -d 'Specify profession'
 complete -c nethack -s r -x -a "(__fish_complete_nethack races)" -d 'Specify race'
 complete -c nethack -s D -d 'Start in debugging (wizard) mode'
