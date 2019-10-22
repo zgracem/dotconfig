@@ -17,10 +17,4 @@ function fish_right_prompt --description 'Display the right side of the interact
   if test -n "$__fish_prompt_show_vi_mode"
     __fish_right_prompt_mode
   end
-
-  # if test $COLUMNS -gt 132
-  #   set_color $fish_prompt_color_clock
-  #   echo -s (date +%T) " "
-  #   set_color normal
-  # end
 end
