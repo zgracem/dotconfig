@@ -83,6 +83,7 @@
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
   "solargraph.commandPath": "/Users/zozo/.rbenv/shims/solargraph",
+  "solargraph.formatting": true,
   "spellright.addToSystemDictionary": false,
   "spellright.configurationScope": "user",
   "spellright.documentTypes": [
