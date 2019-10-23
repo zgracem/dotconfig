@@ -1,0 +1,49 @@
+### Layout ###
+
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: aligned
+
+### Metrics ###
+
+Metrics/LineLength:
+  Max: 118
+
+### Style ###
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+Style/AutoResourceCleanup:
+  Enabled: true
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: "()"
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+Style/SpecialGlobalVars:
+  EnforcedStyle: use_english_names
+
+Style/StringHashKeys:
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: percent
