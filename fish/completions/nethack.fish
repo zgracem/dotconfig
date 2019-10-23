@@ -1,5 +1,3 @@
-# NetHack <https://nethack.org/>
-
 function __fish_complete_nethack
   set -l roles Archeologist Barbarian Cave{man,woman} Healer Knight Monk \
                Priest{,ess} Rogue Ranger Samurai Tourist Valkyrie Wizard
