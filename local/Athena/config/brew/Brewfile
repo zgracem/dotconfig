@@ -34,9 +34,10 @@ brew "mkvtoolnix"
 brew "mp4v2"
 
 # ffmpeg with options
-tap  "varenc/ffmpeg"
-brew "varenc/ffmpeg/ffmpeg", args: [
+tap  "homebrew-ffmpeg/ffmpeg"
+brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: [
   "HEAD",
+  "enable-videotoolbox",
   "with-fdk-aac",
   "with-libssh",
   "with-openh264",
