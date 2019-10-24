@@ -1,4 +1,4 @@
-# ~/.config/fish/functions/my
+# my
 
 ## Synopsis
 

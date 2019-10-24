@@ -1,4 +1,4 @@
-# ~/.config/fish/functions/scan
+# scan
 
 ## Synopsis
 

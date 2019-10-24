@@ -13,6 +13,7 @@ if test $FISH_VERSINFO[1] -lt 3
   exit 1
 end
 
+# setup PATH and friends
 source "$__fish_config_dir/paths.fish"
 
 # function subdirectories
@@ -21,15 +22,10 @@ for dir in $__fish_config_dir/functions $__fish_config_dir/functions/**/
 end
 
 # load private and per-machine configuration if available
-for dir in ~/.local/config/fish ~/.private/fish
-  if test -d $dir
-    if test -d $dir/conf.d
-      for file in $dir/conf.d/*.fish; source "$file"; end
-    end
-    set -p fish_function_path $dir/functions
-    set -p fish_complete_path $dir/completions
-  end
-end
+set -g fish_package_path ~/.local/config/fish ~/.private/fish
+
+# personal minimal package manager for fish
+source "$__fish_config_dir/packages.fish"
 
 if status is-interactive
   # setup abbreviations
