@@ -60,7 +60,6 @@ if is-linux
 end
 
 # npm
-
 set -p PATH $XDG_DATA_HOME/npm/bin
 
 # $HOME
