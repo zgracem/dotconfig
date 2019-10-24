@@ -121,6 +121,7 @@ if not set -q __zgm_init_colours
   set -U fish_prompt_color_git_needs_push cyan
   set -U fish_prompt_color_git_clean green
   set -U fish_prompt_color_jobs yellow
+  set -U fish_prompt_color_ruby brred
 
   set -U __zgm_init_colours ✓
 end

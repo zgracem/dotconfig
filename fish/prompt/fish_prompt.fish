@@ -15,6 +15,7 @@ function fish_prompt --description 'Display the interactive prompt'
     echo -n (prompt_pwd)
   end
 
+  __fish_prompt_rbenv
   __fish_prompt_git
   __fish_prompt_jobs
 

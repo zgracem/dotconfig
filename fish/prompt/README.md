@@ -10,6 +10,7 @@ becomes relevant, including:
 * Basic git status: branch name, with coloured indicators for untracked,
   unstaged, uncommitted, unsynced and stashed files
 * Background job count, if > 0
+* Local rbenv version, if different from the global version
 * Non-zero exit statuses appear against the right margin, as numbers or (if
   applicable) signal names
 * The right margin can also include the duration of the last command, the
