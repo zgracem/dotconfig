@@ -49,7 +49,7 @@
   "gitlens.codeLens.enabled": false,
   "gitlens.defaultDateFormat": "D MMMM YYYY @ HH:mm",
   "gitlens.defaultDateShortFormat": "YYYY-mm-DD",
-  "gitlens.statusBar.format": "${author}, ${agoOrDate} · ${message} · ${id}",
+  "gitlens.statusBar.format": "${author}, ${agoOrDate} · ${message}",
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
