@@ -32,7 +32,7 @@ if is-macos
   end
 
   function lscleanup --description 'Clean up the Launch Services database'
-    lsregister -kill -r -domain local -domain system -domain user
+    lsregister -v -kill -r -domain local,system,user
     and killall Finder
   end
 end
