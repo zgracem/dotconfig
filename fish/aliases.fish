@@ -37,7 +37,7 @@ if is-macos
   end
 end
 
-if string match -eq 'Athena' $hostname
+if string match -q 'Athena*' $hostname
   function vsdeploy --description 'Deploy vivekshraya.com'
     ~/Dropbox/www/vs2017/bin/sync.sh $argv
   end
@@ -45,8 +45,9 @@ end
 
 # ssh
 
-if string match -eq '.local' $hostname
+if string match -q '*.local' $hostname
   function athena; _ssh Athena.local; end
+  function erato; _ssh Erato; end
 else
   function athena; _ssh Athena.remote; end
 end

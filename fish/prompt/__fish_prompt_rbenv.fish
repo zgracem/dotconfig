@@ -1,5 +1,6 @@
 function __fish_prompt_rbenv
-  command -q rbenv; or return
+  command -sq rbenv; or return
+
   set -l global_version (cat ~/.rbenv/version)
   set -l local_version (rbenv version | string split " ")[1]
 
