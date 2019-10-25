@@ -1,11 +1,9 @@
 ### Layout ###
 
+# Left-align keys, rockets, and values
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
-
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: aligned
 
 ### Metrics ###
 
@@ -14,36 +12,35 @@ Metrics/LineLength:
 
 ### Style ###
 
-Style/Alias:
-  EnforcedStyle: prefer_alias_method
-
+# Suggest auto-cleaning versions of methods when available
 Style/AutoResourceCleanup:
   Enabled: true
 
+# Allow non-ASCII symbols in comments
 Style/AsciiComments:
   Enabled: false
 
+# Don't enforce the presence or absence of frozen_string_literal
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+# Use 1.9 hash syntax ({a: 1}) exclusively
 Style/HashSyntax:
   EnforcedStyle: ruby19_no_mixed_keys
 
+# Use %() for strings and defaults for everything else
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     default: "()"
 
+# Allow rescuing without specifying an error class
 Style/RescueStandardError:
   EnforcedStyle: implicit
 
-Style/SpecialGlobalVars:
-  EnforcedStyle: use_english_names
-
+# Prefer symbols instead of strings as hash keys
 Style/StringHashKeys:
   Enabled: true
 
+# Enforce double quotes around string literals by default
 Style/StringLiterals:
   EnforcedStyle: double_quotes
-
-Style/SymbolArray:
-  EnforcedStyle: percent
