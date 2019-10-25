@@ -52,7 +52,6 @@ else
   function athena; _ssh Athena.remote; end
 end
 
-function erato; _ssh Erato; end
 function vshraya; _ssh vshraya; end
 function wf; _ssh WebFaction; end
 
@@ -61,18 +60,15 @@ function wf; _ssh WebFaction; end
 # -----------------------------------------------------------------------------
 
 if is-macos
-  abbr -a -g plistbuddy '/usr/libexec/PlistBuddy'
+  abbr -a -g plbuddy '/usr/libexec/PlistBuddy'
   abbr -a -g sp 'mdfind -name'
 end
 
 abbr -a -g bye 'exit'
-abbr -a -g ef 'funced'
-abbr -a -g fkr 'fish_key_reader --continuous'
-abbr -a -g unset 'set --erase'
-abbr -a -g wtf 'type'
-
 abbr -a -g dirsize 'du -sh'
+abbr -a -g unset 'set --erase'
 abbr -a -g unstow 'stow --delete'
+abbr -a -g wtf 'type'
 abbr -a -g xd 'hexdump -C'
 abbr -a -g ydl 'youtube-dl'
 
