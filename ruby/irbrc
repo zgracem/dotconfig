@@ -9,9 +9,9 @@ require "English"
 require "pathname"
 require "pp"
 
-require "zgm/irb"
+require "zgm/colour"
 
-include IRB
+include IRB # rubocop:disable Style/MixinUsage
 
 # -----------------------------------------------------------------------------
 # http://irb.tools/
@@ -24,44 +24,44 @@ require "irbtools/configure"
 # Get just the version number
 irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
 
-# Format string for sprintf call
-welcome_str   = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " +
-                "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
+# Format string for #format call
+welcome_string = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " \
+                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
 
-# Arguments for sprintf call
+# Arguments for #format call
 fancy_colours = {
-  i:   "#{Colour.green}",
-  i_v: "#{Colour.brightgreen}",
-  r:   "#{Colour.magenta}",
-  r_v: "#{Colour.brightmagenta}",
-  x:   "#{Colour.reset}"
+  i:   Colour.green.to_s,
+  i_v: Colour.brightgreen.to_s,
+  r:   Colour.magenta.to_s,
+  r_v: Colour.brightmagenta.to_s,
+  x:   Colour.reset.to_s
 }
 
 # Override default welcome message
-Irbtools.welcome_message = sprintf(welcome_str, fancy_colours)
+Irbtools.welcome_message = format(welcome_string, fancy_colours)
 
 # Override default FancyIrb colours
 Irbtools.replace_library_callback :fancy_irb do
-  FancyIrb.start({
-    rocket_mode: true,       # activate or deactivate #=> rocket
-    rocket_prompt: '#=> ',   # prompt to use for the rocket
-    result_prompt: '=> ',    # prompt to use for normal output
-    east_asian_width: false, # set to true if you have double-width characters (slower)
-    colorize: {              # colors hash. Set to nil to deactivate colors
-      rocket_prompt: [:blue],
-      result_prompt: [:blue],
+  FancyIrb.start(
+    rocket_mode:      true,   # activate or deactivate #=> rocket
+    rocket_prompt:    "#=> ", # prompt to use for the rocket
+    result_prompt:    "=> ",  # prompt to use for normal output
+    east_asian_width: false,  # set to true if you have double-width characters (slower)
+    colorize:         {       # colors hash. Set to nil to deactivate colors
+      rocket_prompt: %i[blue],
+      result_prompt: %i[blue],
       input_prompt:  nil,
       irb_errors:    nil,
-      stderr:        [:red, :bright],
+      stderr:        %i[red bright],
       stdout:        nil,
-      input:         nil,
-     }
-  })
+      input:         nil
+    }
+  )
 end
 
 # Custom Wirb colour scheme
 Irbtools.replace_library_callback "wirb/wp" do
-  irbrc_dir = Pathname.new(__dir__).expand_path.realpath.to_path
+  irbrc_dir = Pathname.new(__dir__).expand_path.realpath
   Wirb.start
   Wirb.load_schema "#{irbrc_dir}/zgm.wirb.yaml"
 end
@@ -80,8 +80,8 @@ IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:USE_READLINE] = true
 
 IRB.conf[:HISTORY_FILE] = File.expand_path("~/.local/history/irb_history")
-IRB.conf[:EVAL_HISTORY] = 2 ** 10
-IRB.conf[:SAVE_HISTORY] = 2 ** 15
+IRB.conf[:EVAL_HISTORY] = 2**10
+IRB.conf[:SAVE_HISTORY] = 2**15
 
 # -----------------------------------------------------------------------------
 # prompt
@@ -92,16 +92,16 @@ dim = Colour.brightblack.to_s
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.blue}>> #{off}",
+  PROMPT_I: "#{Colour.blue}>>#{off} ",
 
   # prompt when indenting code
-  PROMPT_N: "#{dim}│  #{off}",
+  PROMPT_N: "#{dim}│#{off}  ",
 
   # prompt for continuing strings
-  PROMPT_S: "#{dim}│%l #{off}",
+  PROMPT_S: "#{dim}│%l#{off} ",
 
   # prompt for continuing statement
-  PROMPT_C: "#{dim}├ #{off}",
+  PROMPT_C: "#{dim}├#{off} ",
 
   # prefix to statement output
   RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
@@ -113,7 +113,9 @@ IRB.conf[:PROMPT_MODE] = :ZGM
 # helper methods
 # -----------------------------------------------------------------------------
 
-## Doesn't work w/ irbtools :(
-def echo
-  IRB.conf[:echo] = !IRB.conf[:echo]
-end unless defined?(FancyIrb)
+# ## Doesn't work w/ irbtools :(
+# unless defined?(FancyIrb)
+#   def echo
+#     IRB.conf[:echo] = !IRB.conf[:echo]
+#   end
+# end
