@@ -17,23 +17,17 @@ if [ "${HOMEBREW_PREFIX#*linuxbrew}" != "$HOMEBREW_PREFIX" ]; then
   export HOMEBREW_TEMP="$XDG_RUNTIME_DIR/homebrew"
 fi
 
-# # Old-style manual triggering of `brew cleanup`
-# export HOMEBREW_NO_INSTALL_CLEANUP=1
-
-# # Old-style manual triggering of `brew update`
-# export HOMEBREW_NO_AUTO_UPDATE=1
-
-# Only auto-update every 10 minutes (default is 60 secs, yikes)
+# Only auto-update every 10 minutes
 export HOMEBREW_AUTO_UPDATE_SECS=600
 
-# # Be verbose (for troubleshooting)
-# export HOMEBREW_VERBOSE=1
-
-# Always use the latest stable tag (even if developer commands have been run)
-export HOMEBREW_UPDATE_TO_TAG=1
+# Use `bat` for `brew cat`
+export HOMEBREW_BAT=1
 
 # Use a GUI text editor if available
 export HOMEBREW_EDITOR="$VISUAL"
+
+# Always use the latest stable tag (even if developer commands have been run)
+export HOMEBREW_UPDATE_TO_TAG=1
 
 # Check for macOS/iOS terminal clients w/ emoji support
 case $TERM_PROGRAM in
