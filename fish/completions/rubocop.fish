@@ -1,40 +1,49 @@
-complete -c rubocop -s L -l list-target-files -d 'List all files RuboCop will inspect'
-complete -c rubocop -l except -d 'Disable the given cop(s)'
-complete -c rubocop -l only -d 'Run only the given cop(s)'
-complete -c rubocop -l only-guide-cops -d 'Run only cops for rules that link to a style guide'
-complete -c rubocop -s c -l config -d 'Specify configuration file'
-complete -c rubocop -l force-exclusion -d 'Force excluding files specified in the configuration `Exclude`'
-complete -c rubocop -l ignore-parent-exclusion -d 'Prevent from inheriting AllCops/Exclude from parent folders'
-complete -c rubocop -l force-default-config -d 'Use default configuration even if configuration files are present'
-complete -c rubocop -l auto-gen-config -d 'Generate a configuration file acting as a TODO list'
-complete -c rubocop -l exclude-limit -x -d 'Used together with --auto-gen-config to set the limit for how many Exclude pr…'
-complete -c rubocop -l auto-gen-only-exclude -n "__fish_seen_argument -l auto-gen-config" -d 'Generate only Exclude parameters and not Max'
-complete -c rubocop -l no-auto-gen-timestamp -n "__fish_seen_argument -l auto-gen-config" -d 'Do not include the date and time'
-complete -c rubocop -l no-offense-counts -n "__fish_seen_argument -l auto-gen-config" -d 'Do not include offense counts'
-complete -c rubocop -l disable-uncorrectable -n "__fish_seen_argument -l auto-correct" -d 'Annotate any offenses that do not support autocorrect'
-complete -c rubocop -l init -d 'Generate a .rubocop.yml file in the current directory'
-complete -c rubocop -s f -xa 'autogenconf clang disabled emacs files fuubar html json offenses pacman progress quiet simple tap worst' -l format -d 'Choose an output formatter'
-complete -c rubocop -s o -l out -r -d 'Write output to a file instead of STDOUT'
-complete -c rubocop -s r -l require -d 'Require Ruby file'
-complete -c rubocop -l fail-level -xa 'A R C W E F' -d 'Minimum severity for exit with error code'
-complete -c rubocop -l display-only-fail-level-offenses -n "__fish_seen_argument -l fail-level" -d 'Only output offense messages at the specified --fail-level or above'
-complete -c rubocop -l show-cops -d 'Shows the given cops, or all cops by default, and their configurations'
-complete -c rubocop -s F -l fail-fast -d 'Inspect files in order of modification time and stop after the first offense'
-complete -c rubocop -s C -l cache -xa 'true false' -d 'Use result caching or don\'t'
-complete -c rubocop -s d -l debug -d 'Display debug info'
-complete -c rubocop -s D -l display-cop-names -d 'Display cop names in offense messages'
-complete -c rubocop -s D -l no-display-cop-names -d 'Don\'t display cop names in offense messages'
-complete -c rubocop -s E -l extra-details -d 'Display extra details in offense messages'
-complete -c rubocop -s S -l display-style-guide -d 'Display style guide URLs in offense messages'
-complete -c rubocop -s a -l auto-correct -d 'Auto-correct offenses'
-complete -c rubocop -l ignore-disable-comments -d 'Run cops even when they are disabled locally with a comment'
-complete -c rubocop -l safe -d 'Run only safe cops'
-complete -c rubocop -l color -d 'Force color output on '
-complete -c rubocop -l no-color -d 'Force color output off'
-complete -c rubocop -s v -l version -d 'Display version'
-complete -c rubocop -s V -l verbose-version -d 'Display verbose version'
-complete -c rubocop -s P -l parallel -d 'Use available CPUs to execute inspection in parallel'
-complete -c rubocop -s l -l lint -d 'Run only lint cops'
-complete -c rubocop -s x -l fix-layout -n "__fish_seen_argument -l auto-correct" -d 'Run only layout cops, with auto-correct on'
-complete -c rubocop -l safe-auto-correct -n "__fish_seen_argument -l auto-correct" -d 'Run auto-correct only when it\'s safe'
-complete -c rubocop -s s -l stdin -rf -d 'Pipe source from STDIN, using FILE in offense reports'
+function __fish_complete_rubocop_levels
+  set -l levels All Refactor Convention Warning Error Fatal
+
+  for level in $levels
+    printf "%s\t%s\n" (string sub --length=1 $level) $level
+  end
+end
+
+complete -c rubocop -s L -l list-target-files -d "List all files RuboCop will inspect"
+complete -c rubocop -l except -d "Disable the given cop(s)"
+complete -c rubocop -l only -d "Run only the given cop(s)"
+complete -c rubocop -l only-guide-cops -d "Run only cops for rules that link to a style guide"
+complete -c rubocop -s c -l config -r -d "Specify config file"
+complete -c rubocop -l force-exclusion -d "Force excluding files"
+complete -c rubocop -l ignore-parent-exclusion -d "Prevent inheriting AllCops/Exclude"
+complete -c rubocop -l force-default-config -d "Use default configuration even if config files are present"
+complete -c rubocop -l auto-gen-config -d "Generate a config file acting as a TODO list"
+complete -c rubocop -l exclude-limit -n "__fish_seen_argument -l auto-gen-config" -x -d "Set the limit for how many Exclude properties to generate"
+complete -c rubocop -l auto-gen-only-exclude -n "__fish_seen_argument -l auto-gen-config" -d "Generate only Exclude parameters and not Max"
+complete -c rubocop -l no-auto-gen-timestamp -n "__fish_seen_argument -l auto-gen-config" -d "Do not include the date and time"
+complete -c rubocop -l no-offense-counts -n "__fish_seen_argument -l auto-gen-config" -d "Do not include offense counts"
+complete -c rubocop -l disable-uncorrectable -n "__fish_seen_argument -l auto-correct" -d "Annotate any offenses that do not support autocorrect"
+complete -c rubocop -l init -d "Generate .rubocop.yml in the current directory"
+complete -c rubocop -s f -l format -xa "autogenconf clang disabled emacs files fuubar html json offenses pacman progress quiet simple tap worst" -d "Choose an output formatter"
+complete -c rubocop -s o -l out -r -d "Write output to FILE instead of STDOUT"
+complete -c rubocop -s r -l require -r -d "Require Ruby FILE"
+complete -c rubocop -l fail-level -xa "(__fish_complete_rubocop_levels)" -d "Minimum severity for exit with error code"
+complete -c rubocop -l display-only-fail-level-offenses -n "__fish_seen_argument -l fail-level" -d "Only output messages at --fail-level or above"
+complete -c rubocop -l show-cops -d "Shows cops and their configurations"
+complete -c rubocop -s F -l fail-fast -d "Inspect files in order of modification time and stop after the first offense"
+complete -c rubocop -s C -l cache -x -a "true" -d "Use result caching"
+complete -c rubocop -s C -l cache -x -a "false" -d "Don't use result caching"
+complete -c rubocop -s d -l debug -d "Display debug info"
+complete -c rubocop -s D -l display-cop-names -d "Display cop names in offense messages"
+complete -c rubocop -s D -l no-display-cop-names -d "Don't display cop names in offense messages"
+complete -c rubocop -s E -l extra-details -d "Display extra details in offense messages"
+complete -c rubocop -s S -l display-style-guide -d "Display style guide URLs in offense messages"
+complete -c rubocop -s a -l auto-correct -d "Auto-correct offenses"
+complete -c rubocop -l ignore-disable-comments -d "Run even locally disabled cops"
+complete -c rubocop -l safe -d "Run only safe cops"
+complete -c rubocop -l color -d "Force color output on"
+complete -c rubocop -l no-color -d "Force color output off"
+complete -c rubocop -s v -l version -d "Display version"
+complete -c rubocop -s V -l verbose-version -d "Display verbose version"
+complete -c rubocop -s P -l parallel -d "Use available CPUs to execute inspection in parallel"
+complete -c rubocop -s l -l lint -d "Run only lint cops"
+complete -c rubocop -s x -l fix-layout -n "__fish_seen_argument -l auto-correct" -d "Run only layout cops, with auto-correct on"
+complete -c rubocop -l safe-auto-correct -n "__fish_seen_argument -l auto-correct" -d "Run auto-correct only when it's safe"
+complete -c rubocop -s s -l stdin -rf -d "Pipe source from STDIN, using FILE in offense reports"
