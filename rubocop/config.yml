@@ -5,6 +5,22 @@ Layout/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
 
+# Enforce order of definitions within a class body
+Layout/ClassStructure:
+  Enabled: true
+
+# Require a line break before the first element of a multi-line array/hash
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+# Each item must start on a separate line
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
 ### Metrics ###
 
 Metrics/LineLength:
@@ -19,6 +35,14 @@ Style/AutoResourceCleanup:
 # Allow non-ASCII symbols in comments
 Style/AsciiComments:
   Enabled: false
+
+# Prefer e.g. `find` to `detect` and `reduce` to `inject`
+Style/CollectionMethods:
+  Enabled: true
+
+# Use Time over DateTime
+Style/DateTime:
+  Enabled: true
 
 # Don't enforce the presence or absence of frozen_string_literal
 Style/FrozenStringLiteralComment:
