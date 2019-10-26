@@ -37,8 +37,8 @@ gem "plist"
 gem "yard"
 
 # for Visual Studio Code
-gem "ruby-debug-ide"
 gem "debase"
+gem "ruby-debug-ide"
 
 # -----------------------------------------------------------------------------
 # Misc.
@@ -100,11 +100,11 @@ gem "representable"
 gem "ronn"
 
 # -- for Pushover
-#<github.com/bemurphy/rushover>
+# <github.com/bemurphy/rushover>
 gem "rushover"
 
 # -- for astro
-# calculate sun/moon position & phase <github.com/agileronin/suncalc-ruby>
+# <github.com/agileronin/suncalc-ruby>
 gem "suncalc"
 
 # -- for zgm/songinfo
@@ -121,6 +121,5 @@ gem "unicode_utils"
 gem "tinify"
 
 # -- for vs2017
-
 # <github.com/TamerShlash/symbolized>
 gem "symbolized"
