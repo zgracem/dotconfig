@@ -21,9 +21,6 @@ gem "irbtools"
 # <github.com/flori/json>
 gem "json"
 
-# <github.com/bitboxer/manpages>
-gem "manpages"
-
 # <github.com/seattlerb/minitest>
 gem "minitest"
 
@@ -39,6 +36,7 @@ gem "yard"
 # for Visual Studio Code
 gem "debase"
 gem "ruby-debug-ide"
+gem "solargraph"
 
 # -----------------------------------------------------------------------------
 # Misc.
@@ -46,9 +44,6 @@ gem "ruby-debug-ide"
 
 # <github.com/busyloop/lolcat>
 gem "lolcat"
-
-# <bindata.rubyforge.org>
-gem "bindata"
 
 # <github.com/github/gemoji>
 gem "gemoji"
@@ -83,9 +78,6 @@ gem "oauth"
 
 # <github.com/tumblr/tumblr_client>
 gem "tumblr_client"
-
-# <github.com/ryw/pinboard>
-gem "pinboard"
 
 # -----------------------------------------------------------------------------
 # Script requirements
