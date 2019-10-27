@@ -126,10 +126,6 @@
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
-  "yaml.format.enable": true,
-  "yaml.format.printWidth": 80,
-  "yaml.format.proseWrap": "preserve",
-  "yaml.validate": true,
   "[makefile]": {
     "editor.insertSpaces": false
   },
