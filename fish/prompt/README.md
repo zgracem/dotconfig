@@ -13,8 +13,8 @@ becomes relevant, including:
 * Local rbenv version, if different from the global version
 * Non-zero exit statuses appear against the right margin, as numbers or (if
   applicable) signal names
-* The right margin can also include the duration of the last command, the
-  current time, and/or an indicator of the current `vi` mode
+* The right margin can also include the duration of the last command and/or an
+  indicator of the current `vi` mode
 
 Prompt-related functions live here to avoid cluttering up `../functions`. The
 path to this directory must be added to `$fish_function_path` so everything can
