@@ -20,6 +20,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   set -l git_branch (string match -r '(?<=branch.head ).*' $git_status)
   set_color $fish_prompt_color_git_branch
   echo -n " $git_branch"
+  set_color normal
 
   if test -r $git_dir/refs/stash
     set_color $fish_prompt_color_git_stashed
