@@ -71,7 +71,6 @@
     "skel": "template",
     "ssh": "keys"
   },
-  "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
   "search.maintainFileSearchCache": true,
   "search.smartCase": true,
