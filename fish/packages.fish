@@ -7,7 +7,7 @@ end
 
 __fish_fix_path fish_package_path
 
-function __package_init --on-variable fish_package_path
+function __package_init
   for dir in $fish_package_path
     if test -d "$dir"
       if test -d "$dir/conf.d"
