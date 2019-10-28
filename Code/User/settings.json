@@ -74,6 +74,7 @@
   },
   "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
+  "search.maintainFileSearchCache": true,
   "search.smartCase": true,
   "shellcheck.exclude": [
     1090,
