@@ -56,7 +56,6 @@ if is-linux
       break
     end
   end
-  set --erase dir
 end
 
 # npm
