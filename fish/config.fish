@@ -2,9 +2,7 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-set -gx FISH_VERSINFO (string split "." "$FISH_VERSION" | string split "-")
-
-if test $FISH_VERSINFO[1] -lt 3
+if test (fish_version major) -lt 3
   begin
     set_color red --reverse
     echo " This configuration file cannot run on fish $FISH_VERSION "
