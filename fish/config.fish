@@ -40,8 +40,8 @@ if status is-interactive
 end
 
 # remove duplicate & nonexistent directories
-__fish_fix_path fish_function_path
-__fish_fix_path fish_complete_path
+_fix_path fish_function_path
+_fix_path fish_complete_path
 
 if is-cygwin
   # fish_help_browser overrides the browser that may be defined by $BROWSER.
