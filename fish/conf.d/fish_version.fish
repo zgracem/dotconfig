@@ -9,17 +9,11 @@ function fish_version -d 'Display information about the current fish version'
   case patch
     echo $info[3]
   case revision
-    if set -q info[4]
-      echo $info[4]
-    else
-      return 1
-    end
+    set -q info[4]; or return 1
+    echo $info[4]
   case commit
-    if set -q info[5]
-      string sub -s2 $info[5]
-    else
-      return 1
-    end
+    set -q info[5]; or return 1
+    string sub -s2 $info[5]
   case state
     if set -q info[6]
       echo $info[6]
