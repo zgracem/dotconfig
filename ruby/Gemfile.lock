@@ -257,7 +257,7 @@ GEM
     unicode_utils (1.4.0)
     wirb (2.1.2)
       paint (>= 0.9, < 3.0)
-    yard (0.9.8)
+    yard (0.9.20)
 
 PLATFORMS
   ruby
