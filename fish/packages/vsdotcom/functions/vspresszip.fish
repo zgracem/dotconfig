@@ -3,6 +3,6 @@ function vspresszip -d 'Create/update a .zip file' -a slug
   test -d $dir; or return 1
 
   pushd $dir
-  rollup "zip/vivekshraya_press_$slug.zip" *"$slug"_*.jpg
+  rollup "zip/vivekshraya_"$slug"_press.zip" *"$slug"_*.jpg
   popd
 end
