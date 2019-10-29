@@ -57,7 +57,8 @@
   "markdown.extension.syntax.decorations": false,
   "markdown.extension.toc.githubCompatibility": true,
   "markdownlint.config": {
-    "MD033": false
+    "MD033": false,
+    "MD041": false
   },
   "material-icon-theme.files.associations": {
     "config": "settings"
