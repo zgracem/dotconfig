@@ -53,3 +53,6 @@
 
 # prefer avconv over ffmpeg for running the postprocessors
 --prefer-avconv
+
+# embed thumbnail in the audio as cover art
+--embed-thumbnail
