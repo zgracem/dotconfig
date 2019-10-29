@@ -1,17 +1,21 @@
 # screenfetch <https://github.com/KittyKatt/screenFetch>
 
 function __fish_complete_screenfetch_distros
-  set -l distros "Alpine Linux" Antergos "Arch Linux" BLAG BunsenLabs CentOS \
-  Chakra Chapeau "Chrome OS" "Chromium OS" CrunchBang CRUX Debian Deepin \
-  Devuan "Dragonfly BSD" Dragora "elementary OS" "Evolve OS" Exherbo Fedora \
-  FreeBSD Frugalware Fuduntu Funtoo Fux Gentoo gNewSense Haiku "Jiyuu Linux" \
-  "Kali Linux" KaOS "KDE neon" Kogaion Korora "Linux Mint" LinuxDeepin LMDE \
-  Logos "Mac OS X" Mageia Mandrake Mandriva Manjaro Mer NetBSD Netrunner NixOS \
-  OpenBSD openSUSE "Oracle Linux" "Parabola GNU/Linux-libre" Pardus \
-  "Parrot Security" PCLinuxOS PeppermintOS "Qubes OS" Raspbian \
-  "Red Hat Enterprise Linux" ROSA Sabayon SailfishOS "Scientific Linux" \
-  Slackware Solus SparkyLinux SteamOS "SUSE Linux Enterprise" SwagArch \
-  TinyCore Trisquel Ubuntu Viperr Void "Windows+Cygwin" "Windows+MSYS2"
+  set -l distros ALDOS "Alpine Linux" "Amazon Linux" Antergos "Arch Linux" \
+    ArcoLinux "Artix Linux" "blackPanther OS" BLAG BunsenLabs CentOS Chakra \
+    Chapeau "Chrome OS" "Chromium OS" CrunchBang CRUX Debian Deepin DesaOS \
+    Devuan "Dragonfly BSD" Dragora "elementary OS" EuroLinux "Evolve OS" \
+    Exherbo Fedora FreeBSD Frugalware Fuduntu Funtoo Fux Gentoo gNewSense \
+    "Guix System" Haiku "Hyperbola GNU/Linux-libre" januslinux "Jiyuu Linux" \
+    "Kali Linux" KaOS "KDE neon" Kogaion Korora "Linux Mint" LinuxDeepin LMDE \
+    Logos "Mac OS X" Mageia Mandrake Mandriva Manjaro Mer NetBSD Netrunner \
+    NixOS OBRevenge OpenBSD openSUSE "Oracle Linux" "OS Elbrus" \
+    "Parabola GNU/Linux-libre" Pardus "Parrot Security" PCLinuxOS PeppermintOS \
+    "Proxmox VE" PureOS "Qubes OS" Raspbian "Red Hat Enterprise Linux" ROSA \
+    Sabayon SailfishOS "Scientific Linux" Siduction Slackware Solus \
+    "Source Mage GNU/Linux" SparkyLinux SteamOS Sulin "SUSE Linux Enterprise" \
+    SwagArch TinyCore Trisquel Ubuntu Viperr Void "Windows+Cygwin" \
+    "Windows+MSYS2" "Zorin OS"
 
   for d in $distros; printf '%s\\n' $d; end
 end
