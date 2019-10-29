@@ -31,7 +31,7 @@ gem "nokogiri"
 gem "plist"
 
 # <github.com/lsegal/yard>
-gem "yard"
+gem "yard", ">= 0.9.20"
 
 # for Visual Studio Code
 gem "debase"

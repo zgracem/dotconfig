@@ -294,4 +294,4 @@ DEPENDENCIES
   tinify
   tumblr_client
   unicode_utils
-  yard
+  yard (>= 0.9.20)
