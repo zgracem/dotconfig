@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# ~/.config/youtube-dl/config                <http://rg3.github.io/youtube-dl/>
+# ~/.config/youtube-dl/config          <https://ytdl-org.github.io/youtube-dl/>
 # vim:ft=sh
 # shellcheck disable=SC2215
 # Generated from ~/.config/.src/youtube-dl.m4
