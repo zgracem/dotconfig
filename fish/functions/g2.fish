@@ -5,7 +5,7 @@ function g2 --description 'Go somewhere' -a destination
     case 'stow';    cd "$HOME/opt/stow"
     case 'defunct'; cd "$HOME/Dropbox/Archive/src"
     case 'scratch'; cd "$HOME/tmp/_scratch"
-    case 'vs9';     cd (realpath "$HOME/www/2017/vs9")
+    case 'vs9';     cd "$HOME/Dropbox/www/vs2017"
     case 'imprint'; cd "$HOME/www/2018/imprint"
     case '2a';      cd "$HOME/www/2018/2a18"
     case 'desktop'; cd "$XDG_DESKTOP_DIR"
