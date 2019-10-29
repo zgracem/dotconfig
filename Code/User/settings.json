@@ -116,7 +116,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}",
-  "workbench.colorTheme": "Material Theme",
+  "workbench.colorTheme": "Material Theme Darker",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
