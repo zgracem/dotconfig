@@ -6,19 +6,17 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 
 ### Notes on compatibility & portability 💼
 
-* These dotfiles are written to be portable between macOS (~10.5+), Cygwin,
+* These dotfiles are written to be portable between macOS (10.6+), Cygwin,
   MSYS2, Windows 10's Subsystem for Linux, and both BSD and GNU flavours of
   \*nix.
 * I try to conform to the [XDG Basedir Spec]: configuration for `foo` lives in
   `~/.config/foo/`, etc.
-* Everything in `environment.d/` and `sh/` is compatible with any POSIX shell,
-  as enforced by [`bin/check_dotfiles.sh`]. 👮
+* Everything in `environment.d/` and `sh/` is compatible with any POSIX shell.
 * My bash config files can be run (with gracefully degrading functionality) on
-  any version from 3.2 to the latest 5.x release.
-* Sadly, most of my fish configuration files can only run on version 3.0+.
+  versions 3.2 to the latest 5.x release.
+* Alas, most of my fish configuration files can only run on version 3.0+.
 
 [XDG Basedir Spec]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
-[`bin/check_dotfiles.sh`]: https://github.com/zgracem/dotconfig/blob/master/bin/check_dotfiles.sh
 
 ### General usage 💁
 
@@ -32,8 +30,8 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
   [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt]. ⌨️
 * My first love will always be bash, but since February 2019 I've been using—and
   loving—[fish] as my primary shell. 🐟
-* As of April 2019, I'm transitioning from a long-term relationship with Sublime
-  Text to something more... _passionate_... with [Visual Studio Code][]. 💋
+* My primary text editor is [VSCode], which integrates [markdownlint],
+  [rubocop], and [shellcheck] to make sure I dot my q's and cross my p's.
 * Files that can be safely published to this GitHub repo live in `~/.config/`.
   Everything else lives in `~/.private/`, which is encrypted by [Keybase]. 🔐
 
@@ -41,27 +39,18 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 [iTerm2]: https://www.iterm2.com/
 [Prompt]: https://panic.com/prompt/
 [fish]: https://fishshell.com/
-[Visual Studio Code]: https://code.visualstudio.com/
+[VSCode]: https://github.com/Microsoft/vscode
+[markdownlint]: https://github.com/DavidAnson/markdownlint/
+[rubocop]: https://github.com/rubocop-hq/rubocop
+[shellcheck]: https://www.shellcheck.net/
 [Keybase]: https://keybase.io/zgm
 
 ### Setting up a new homedir 🏡
 
 Minimum requirements:
 
-* `.config/` ← this repo
-    * `bash/`
-    * `dircolors/`
-    * `environment.d/`
-    * `fish/`
-    * `readline/`
-    * `sh/`
-    * `vim/`
-    * `environment.sh`
-* `.private/` ← from encrypted repo
-    * `bashrc.d/`
-    * `environment.d/`
-    * `fish/`
-    * `ssh/`
+* `~/.config/`  ← this repo
+* `~/.private/` ← from encrypted repo
 
 Then:
 
