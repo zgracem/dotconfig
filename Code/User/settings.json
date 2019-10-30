@@ -22,7 +22,7 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "top",
+  "editor.snippetSuggestions": "none",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
