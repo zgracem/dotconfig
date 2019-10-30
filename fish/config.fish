@@ -5,7 +5,7 @@
 if test (fish_version major) -lt 3
   begin
     set_color red --reverse
-    echo " This configuration file cannot run on fish $FISH_VERSION "
+    echo " This configuration file cannot run on fish $version "
     set_color normal
   end >&2
   exit 1
