@@ -12,31 +12,6 @@ function .....; cd ../../../.. ; end
 # https://fishshell.com/docs/current/faq.html#faq-cd-minus
 abbr --add --global -- '-' 'cd -'
 
-# macOS & misc.
-
-if is-macos
-  function airport --description 'Get information for 802.11 interface'
-    /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport $argv
-  end
-
-  function firefox --description 'Launch Mozilla Firefox'
-    open -b org.mozilla.firefox $argv
-  end
-
-  function lockscreen --description 'Lock the screen'
-    /System/Library/CoreServices/'Menu Extras'/User.menu/Contents/Resources/CGSession -suspend
-  end
-
-  function lsregister --description 'Manage the Launch Services database'
-    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister $argv
-  end
-
-  function lscleanup --description 'Clean up the Launch Services database'
-    lsregister -v -kill -r -domain local,system,user
-    and killall Finder
-  end
-end
-
 # ssh
 
 if string match -q '*.local' $hostname
