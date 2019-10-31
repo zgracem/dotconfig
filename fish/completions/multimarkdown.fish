@@ -1,5 +1,8 @@
 # MultiMarkdown <https://fletcher.github.io/MultiMarkdown-6/>
 
+set -l formats html latex beamer memoir mmd odt fodt epub opml bundle bundlezip
+set -l langs en es de fr he nl sv
+
 complete -c multimarkdown -l help -d 'Display this help and exit'
 complete -c multimarkdown -l version -d 'Display version info and exit'
 complete -c multimarkdown -s b -l batch -d 'Process each file separately'
@@ -11,10 +14,10 @@ complete -c multimarkdown -l nosmart -d 'Disable smart typography'
 complete -c multimarkdown -l nolabels -d 'Disable id attributes for headers'
 complete -c multimarkdown -l notransclude -d 'Disable file transclusion'
 complete -c multimarkdown -l opml -d 'Convert OPML source to plain text before processing'
-complete -c multimarkdown -s t -l to -r -a 'html latex beamer memoir mmd odt fodt epub opml bundle bundlezip' -d 'Convert to FORMAT'
+complete -c multimarkdown -s t -l to -r -a "$formats" -d 'Convert to FORMAT'
 complete -c multimarkdown -s o -l output -r -d 'Send output to FILE'
 complete -c multimarkdown -s a -l accept -d 'Accept all CriticMarkup changes'
 complete -c multimarkdown -s r -l reject -d 'Reject all CriticMarkup changes'
-complete -c multimarkdown -s l -l lang -r -a 'en es de fr he nl sv' -d 'Language/smart quote localization'
+complete -c multimarkdown -s l -l lang -r -a "$langs" -d 'Language/smart quote localization'
 complete -c multimarkdown -s m -l metadata-keys -d 'List all metadata keys'
 complete -c multimarkdown -s e -l extract -x -d 'Extract specified metadata key'

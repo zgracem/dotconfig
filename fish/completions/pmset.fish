@@ -1,6 +1,8 @@
 # pmset
 
 function __fish_complete_pmset_settings
+  argparse (fish_opt --short=u) -- $argv
+
   set -l settings \
     'displaysleep,Display sleep timer' \
     'disksleep,Disk spindown timer' \
@@ -20,7 +22,7 @@ function __fish_complete_pmset_settings
     'ttyskeepawake,Prevent idle system sleep when any tty is "active"' \
     'destroyfvkeyonstandby,Destroy FileVault key when going to standby mode'
 
-  if test "$argv[1]" = "-u"
+  if set -q _flag_u
     set -a settings \
       'haltlevel,Battery level at which to trigger emergency shutdown' \
       'haltafter,Duration in minutes after which to trigger emergency shutdown' \
