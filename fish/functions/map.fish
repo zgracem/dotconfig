@@ -1,6 +1,6 @@
 function map --description 'Apply a command to each item in a list'
-  # Usage: map cmd --switch: one two three
-  # Same as: cmd --switch one; and cmd --switch two; and cmd --switch three
+  # Usage: map cmd --opt: one two three
+  # Same as: cmd --opt one; and cmd --opt two; and cmd --opt three
   # Based on <http://redd.it/aks3u>
   set -l cmd
   set -l cmd_argv

@@ -40,7 +40,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 [Prompt]: https://panic.com/prompt/
 [fish]: https://fishshell.com/
 [VSCode]: https://github.com/Microsoft/vscode
-[markdownlint]: https://github.com/DavidAnson/markdownlint/
+[markdownlint]: https://github.com/DavidAnson/markdownlint
 [rubocop]: https://github.com/rubocop-hq/rubocop
 [shellcheck]: https://www.shellcheck.net/
 [Keybase]: https://keybase.io/zgm

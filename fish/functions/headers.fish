@@ -6,6 +6,4 @@ else if in-path curl
   function headers --wraps curl --description 'Display HTTP headers for a given URL'
     curl -Is $argv
   end
-else
-  exit 127
 end

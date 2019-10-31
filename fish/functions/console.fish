@@ -1,6 +1,6 @@
 function console --description 'Scan system messages'
-  set -q argv[1]; or set argv /var/log/system.log /var/log/messages
-  # set -l locations $argv[1] /var/log/system.log /var/log/messages
+  set -q argv[1]
+  or set argv /var/log/system.log /var/log/messages
 
   for logfile in $argv
     test -r "$logfile"; and break
