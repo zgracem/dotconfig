@@ -62,6 +62,7 @@ end
 brew "bat"
 brew "dos2unix"
 brew "exa"
+brew "hexyl"
 brew "jrnl"
 brew "links"
 brew "lynx"
