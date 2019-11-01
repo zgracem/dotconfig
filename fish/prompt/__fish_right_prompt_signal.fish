@@ -1,4 +1,6 @@
 function __fish_right_prompt_signal --description 'Converts an exit code into a named signal or sysexit' -a code
+  test $code -ne 0; or return 0
+
   # Source: `kill -l`
   set -l signals  HUP INT QUIT ILL TRAP ABRT EMT FPE KILL BUS SEGV SYS PIPE \
                   ALRM TERM URG STOP TSTP CONT CHLD TTIN TTOU IO XCPU XFSZ \
@@ -15,5 +17,7 @@ function __fish_right_prompt_signal --description 'Converts an exit code into a 
     set exit $code
   end
 
-  echo -n $exit
+  set_color $fish_prompt_color_exit
+  echo -n "$exit "
+  set_color normal
 end

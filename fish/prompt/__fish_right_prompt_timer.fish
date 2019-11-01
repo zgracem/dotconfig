@@ -20,5 +20,7 @@ function __fish_right_prompt_timer -a ms
     set time (math -s2 "$ms / 1000 / 60 / 60 / 24")"d"
   end
 
-  echo -n $time
+  set_color $fish_prompt_color_duration
+  echo -n "$time "
+  set_color normal
 end
