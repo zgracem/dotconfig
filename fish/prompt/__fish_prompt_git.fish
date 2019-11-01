@@ -51,8 +51,11 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
   set -l ahead $ahead_behind[2]
   set -l behind $ahead_behind[3]
 
-  test -n "$ahead"; or set -l ahead 0
-  test -n "$behind"; or set -l behind 0
+  test -n "$ahead"
+  or set -l ahead 0
+
+  test -n "$behind"
+  or set -l behind 0
 
   if test "$ahead" -gt 0 -o "$behind" -gt 0
     set_color $fish_prompt_color_git_needs_push
