@@ -15,14 +15,14 @@ abbr --add --global -- '-' 'cd -'
 # ssh
 
 if string match -q '*.local' $hostname
-  function athena; _ssh Athena.local; end
-  function erato; _ssh Erato; end
+  abbr -a -g athena '_ssh Athena.local'
+  abbr -a -g erato '_ssh Erato'
 else
-  function athena; _ssh Athena.remote; end
+  abbr -a -g athena '_ssh Athena.remote'
 end
 
-function vshraya; _ssh vshraya; end
-function wf; _ssh WebFaction; end
+abbr -a -g vshraya '_ssh vshraya'
+abbr -a -g wf '_ssh WebFaction'
 
 # -----------------------------------------------------------------------------
 # abbreviations
