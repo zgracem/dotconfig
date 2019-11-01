@@ -2,10 +2,10 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-if test (fish_version major) -lt 3
+if test (fish_version major) -le 2
   begin
-    set_color red --reverse
-    echo " This configuration file cannot run on fish $version "
+    set_color brred --reverse
+    echo "*** This configuration file cannot run on fish $version ***"
     set_color normal
   end >&2
   exit 1
