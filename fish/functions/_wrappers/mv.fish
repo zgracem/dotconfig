@@ -1,7 +1,10 @@
-function mv --description 'Move files'
-  if is-macos # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+if is-macos
+  function mv --description 'Move files'
+    # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
     /bin/mv -iv $argv
-  else
+  end
+else
+  function mv --description 'Move files'
     command mv -iv $argv
   end
 end
