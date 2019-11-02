@@ -6,5 +6,6 @@ function flushdns --description 'Flush the DNS cache'
     ipconfig /flushdns
   else
     echo >&2 "don't know how to flush DNS on" (uname -s)
+    return 1
   end
 end
