@@ -38,6 +38,20 @@ man()
     local Z_MAN_NO_URL=1
   fi
 
+  # colourize
+  local CSI="$(printf '%b' '\e[')"
+
+  # begin/end "bold" mode -- used for man page headers
+  export LESS_TERMCAP_md="${CSI}32m"
+  export LESS_TERMCAP_me="${CSI}0m"
+
+  # begin/end "underline" mode -- used to highlight variables
+  export LESS_TERMCAP_us="${CSI}33m"
+  export LESS_TERMCAP_ue="${CSI}0m"
+
+  # reset everything
+  export LESS_TERMEND="${CSI}0m"
+
   # open the new window
   if [[ $TERM_PROGRAM == Apple_Terminal && -z $Z_MAN_NO_URL ]]; then
     # let Terminal.app be clever about this
