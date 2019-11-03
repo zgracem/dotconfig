@@ -5,17 +5,6 @@ function man --description 'Display manual pages' # in a new window with colours
     return
   end
 
-  # begin/end "bold" mode -- used for man page headers
-  set -x LESS_TERMCAP_md (set_color green)
-  set -x LESS_TERMCAP_me (set_color normal)
-
-  # begin/end "underline" mode -- used to highlight variables
-  set -x LESS_TERMCAP_us (set_color yellow)
-  set -x LESS_TERMCAP_ue (set_color normal)
-
-  # reset
-  set -x LESS_TERMEND (set_color normal)
-
   # Some switches don't open a man page. Let those do their thing.
   if test (string sub --length 1 -- $argv[1]) = "-"
     switch (string sub --start 2 -- $argv[1])
@@ -26,6 +15,17 @@ function man --description 'Display manual pages' # in a new window with colours
       true
     end
   end
+
+  # begin/end "bold" mode -- used for man page headers
+  set -lx LESS_TERMCAP_md (set_color green)
+  set -lx LESS_TERMCAP_me (set_color normal)
+
+  # begin/end "underline" mode -- used to highlight variables
+  set -lx LESS_TERMCAP_us (set_color yellow)
+  set -lx LESS_TERMCAP_ue (set_color normal)
+
+  # reset
+  set -lx LESS_TERMEND (set_color normal)
 
   # Get a nice title for the window.
   set -l title (_man_title $argv); or return
