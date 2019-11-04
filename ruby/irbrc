@@ -7,7 +7,6 @@ require "irb/completion"
 
 require "English"
 require "pathname"
-require "pp"
 
 require "zgm/colour"
 
@@ -113,9 +112,45 @@ IRB.conf[:PROMPT_MODE] = :ZGM
 # helper methods
 # -----------------------------------------------------------------------------
 
-# ## Doesn't work w/ irbtools :(
-# unless defined?(FancyIrb)
-#   def echo
-#     IRB.conf[:echo] = !IRB.conf[:echo]
-#   end
-# end
+# 🐵-patching
+class Object
+  def my_methods
+    (methods - Object.instance_methods).sort
+  end
+end
+
+# misc. objects
+
+def str
+  "Hëllo, wórld!\n"
+end
+
+def hsh
+  {
+    red:    "ruby",
+    green:  "emerald",
+    blue:   "sapphire",
+    violet: "amethyst",
+    white:  %w[diamond glass]
+  }
+end
+
+def arr
+  hsh.values.flatten
+end
+
+def int
+  rand(10..1000)
+end
+
+def regex
+  /\A\h+\z/i
+end
+
+def set
+  Set.new(arr.map(&:to_sym))
+end
+
+def uri
+  URI("https://user:p4s$w0rd@example.org:80/path/to/resource.cgi?colour=blue#top")
+end
