@@ -21,12 +21,6 @@ gem "irbtools"
 # <github.com/flori/json>
 gem "json"
 
-# <github.com/seattlerb/minitest>
-gem "minitest"
-
-# <github.com/sparklemotion/nokogiri>
-gem "nokogiri"
-
 # <github.com/bleything/plist>
 gem "plist"
 
@@ -45,18 +39,18 @@ gem "solargraph"
 # <github.com/busyloop/lolcat>
 gem "lolcat"
 
-# <github.com/github/gemoji>
-gem "gemoji"
-
 # -----------------------------------------------------------------------------
 # Webdev/networking
 # -----------------------------------------------------------------------------
+
+gem "http"
+gem "net-scp"
+gem "net-ssh"
 
 # <github.com/middleman/middleman>
 gem "middleman"
 
 # <github.com/sass/sass>
-gem "sass"
 gem "sassc"
 
 # <github.com/slim-template/slim>
@@ -64,10 +58,6 @@ gem "slim"
 
 # <github.com/astro/socksify-ruby>
 gem "socksify"
-
-gem "http"
-gem "net-scp"
-gem "net-ssh"
 
 # -----------------------------------------------------------------------------
 # APIs
