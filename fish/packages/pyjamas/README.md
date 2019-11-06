@@ -1,16 +1,20 @@
 # PYJamas
 
-Move comfortably between **P**roperty lists, **Y**AML, and **J**SON.
+Move comfortably between **P**roperty lists, **Y**AML, and **J**SON (and TOML).
 
-Supports filename arguments and/or standard input:
+## Usage
 
-| Command      | Files | STDIN |
-| ------------ | :---: | :---: |
-| `json2plist` |   ✓   |   ✓   |
-| `json2yaml`  |   ✓   |   ✓   |
-| `plist2json` |   ✓   |       |
-| `plist2yaml` |   ✓   |       |
-| `yaml2json`  |   ✓   |   ✓   |
-| `yaml2plist` |   ✓   |   ✓   |
+```sh
+# Convert property list file to JSON
+pyjamas --out=json HardToRead.plist
 
-**Note:** `plist2*` requires macOS's `plutil(1)`.
+# Works with stdin, just pass -i/--in=FORMAT too
+cat v4.yaml | pyjamas -i yaml -o toml > v5.toml
+```
+
+## Requirements
+
+* `ruby` must be in your `PATH`.
+* TOML support requires [`toml-rb`].
+
+[`toml-rb`]: https://github.com/emancu/toml-rb
