@@ -19,7 +19,7 @@ if not set -q __zgm_init_colours
     for i in (seq 1 (count $colours))
       echo -ns (set_color $colours[$i]) (string sub --start $i --length 1 "$message")
     end
-    echo (set_color normal)
+    echo (set_color normal) # prints final newline
   end
 
   # default color
