@@ -9,7 +9,7 @@
   "editor.acceptSuggestionOnEnter": "off",
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
-  "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
+  "editor.fontFamily": "IBMPlexMono-Light, Office Code Pro, Consolas, monospace",
   "editor.lightbulb.enabled": false,
   "editor.links": false,
   "editor.minimap.maxColumn": 118,
