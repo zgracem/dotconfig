@@ -42,9 +42,6 @@ case $TERM_PROGRAM in
         # Santa brought me a bunch of software upgrades
         HOMEBREW_INSTALL_BADGE="🎁" # $'\xf0\x9f\x8e\x81'
         ;;
-      *)
-        HOMEBREW_INSTALL_BADGE="🍻"
-        ;;
     esac
     export HOMEBREW_INSTALL_BADGE
     ;;
