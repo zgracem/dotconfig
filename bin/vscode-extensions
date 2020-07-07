@@ -1,12 +1,12 @@
 #!/usr/bin/env fish
 # vim:ft=fish
 
-if not command --quiet code
+if not command --search --quiet code
   echo >&2 "error: VS Code not found"
   exit 1
 end
 
-if not command --quiet jq
+if not command --search --quiet jq
   echo >&2 "error: jq not found"
   exit 1
 end
