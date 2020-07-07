@@ -9,6 +9,7 @@ jrnl
 fish/fish_variables*
 fish/fishd.*
 htop/
+syncplay.ini
 vifm/vifminfo
 vifm/vimfiles
 vifm/*-help.txt
