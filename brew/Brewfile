@@ -96,6 +96,8 @@ brew "ncurses"
 if OS.mac?
   tap  "alhadis/troff"
   brew "alhadis/troff/man-db"
+  brew "spotifyd"
+  brew "spotify-tui"
 end
 
 # ruby

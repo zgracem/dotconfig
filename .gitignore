@@ -4,6 +4,8 @@
 
 # private
 jrnl
+spotify-tui/.spotify_token_cache.json
+spotify-tui/client.yml
 
 # not intended for human interaction
 fish/fish_variables*
