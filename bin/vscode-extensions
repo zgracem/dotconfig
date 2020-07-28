@@ -41,7 +41,7 @@ end
 
 function do_json
   set -l jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
-  echo '{}' | jq --monochrome-output --rawfile exts (do_list | psub) $jq_script
+  jq --null-input --monochrome-output --rawfile exts (do_list | psub) $jq_script
 end
 
 function main

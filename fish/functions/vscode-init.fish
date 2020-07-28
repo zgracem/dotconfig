@@ -9,6 +9,6 @@ function vscode-init --description 'Initialize directory for use with VS Code'
   end
 
   if not test -f "$dir/extensions.json"
-    echo '{}' | jq '.recommendations=[]' > "$dir/extensions.json"
+    jq --null-input '.recommendations=[]' > "$dir/extensions.json"
   end
 end
