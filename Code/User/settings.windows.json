@@ -6,6 +6,7 @@
     "en_CA",
     "en_US"
   ],
+  "terminal.integrated.shell.windows": "",
   "window.doubleClickIconToClose": true,
   "window.enableMenuBarMnemonics": false,
   "window.menuBarVisibility": "toggle"

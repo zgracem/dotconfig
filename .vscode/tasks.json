@@ -67,10 +67,7 @@
       "label": "Update user-agent",
       "type": "shell",
       "command": "bin/update-user-agent.fish",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      "group": "build"
     },
     {
       "label": "Dump environment",

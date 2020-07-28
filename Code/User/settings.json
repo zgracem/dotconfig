@@ -4,10 +4,9 @@
     "#6c71c4",
     "#268bd2"
   ],
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "last",
   "bracket-pair-colorizer-2.unmatchedScopeColor": "#dc322f",
-  "code-eol.style": {
-    "opacity" : 0.33
-  },
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
@@ -56,8 +55,9 @@
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.extension.syntax.decorations": false,
-  "markdown.extension.toc.githubCompatibility": true,
   "markdownlint.config": {
+    "MD007": { "indent": 4 },
+    "MD024": false,
     "MD033": false,
     "MD041": false
   },
@@ -117,7 +117,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}",
-  "workbench.colorTheme": "Material Theme Darker",
+  "workbench.colorTheme": "Material Theme Palenight",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",

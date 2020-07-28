@@ -1,8 +1,10 @@
 {
   "recommendations": [
+    "ahmadawais.shades-of-purple",
     "ban.spellright",
     "ban.troff",
     "bierner.emojisense",
+    "bungcip.better-toml",
     "castwide.solargraph",
     "chrislajoie.vscode-modelines",
     "CoenraadS.bracket-pair-colorizer-2",
@@ -10,9 +12,13 @@
     "DotJoshJohnson.xml",
     "eamodio.gitlens",
     "EditorConfig.EditorConfig",
+    "Equinusocio.vsc-community-material-theme",
     "Equinusocio.vsc-material-theme",
+    "equinusocio.vsc-material-theme-icons",
     "fallenwood.vimL",
     "heaths.vscode-guid",
+    "idleberg.applescript",
+    "jq-syntax-highlighting.jq-syntax-highlighting",
     "maelvalais.autoconf",
     "mrmlnc.vscode-apache",
     "OnlyLys.leaper",
@@ -23,14 +29,17 @@
     "richie5um2.vscode-sort-json",
     "RobbOwen.synthwave-vscode",
     "sianglim.slim",
+    "slevesque.vscode-autohotkey",
     "stkb.rewrap",
     "syler.sass-indented",
     "timonwong.shellcheck",
     "Togusa09.tmlanguage",
     "tuxtina.json2yaml",
     "v4run.transpose",
+    "wingrunr21.vscode-ruby",
     "yzhang.markdown-all-in-one",
     "zgm.cuesheet",
-    "zgm.vscode-fish"
+    "zgm.vscode-fish",
+    "zhuangtongfa.material-theme"
   ]
 }

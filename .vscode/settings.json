@@ -2,6 +2,10 @@
   "files.exclude": {
     ".gitattributes": true,
     ".gitmodules": true,
-    "htop": true
+    "htop": true,
+    "syncplay.ini": true,
+    "vifm-help.txt": true,
+    "vifminfo": true,
+    "vifmfiles": true,
   }
 }

@@ -9,8 +9,8 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 - **Windows:** `%APPDATA%\Code\User`
 - **macOS:** `$HOME/Library/Application Support/Code/User`
 
-On Windows/Cygwin machines without admin privileges, to install `settings.json`
-et al. to `$APPDATA`:
+On Windows/Cygwin machines without admin privileges, to concatenate the base
+`settings.json` file with `settings.windows.json` and install it to `$APPDATA`:
 
 ```sh
 ~/.config/bin/vscode-sync-settings.fish
