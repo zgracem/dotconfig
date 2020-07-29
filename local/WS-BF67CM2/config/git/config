@@ -1,5 +1,0 @@
-[include]
-  path = ~/.config/git/config
-
-[core]
-  gitproxy = ~/scripts/libexec/git-socks-proxy.sh

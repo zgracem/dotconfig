@@ -1,5 +1,5 @@
 function cygsetup --description 'Launch the Cygwin installer'
-  set -l installer_dir "$HOME/tmp/cygwin64"
+  set -l installer_dir (cygpath -au "$USERPROFILE")"/cygwin64"
   set -l cyg_bin "$installer_dir/cygwin64.exe"
   set -l pkg_dir (cygpath -aw "$installer_dir/pkg")
   set -l log_dir "$HOME/var/log/cygwin"
@@ -11,8 +11,6 @@ function cygsetup --description 'Launch the Cygwin installer'
   set -a params --root $cyg_root
   # Directory to save downloaded packages in (-l)
   set -a params --local-package-dir $pkg_dir
-  # Architecture to install: x86_64 or x86
-  set -a params --arch x86_64
   # Semi-attended mode
   set -a params --package-manager
   # Also upgrade installed packages
@@ -31,6 +29,8 @@ function cygsetup --description 'Launch the Cygwin installer'
     echo >&2 "can't create $log_dir"
     return 1
   else
-    pushd $log_dir; and run $cyg_bin $params $argv; and popd
+    pushd $log_dir;
+      and run $cyg_bin $params $argv;
+    and popd
   end
 end
