@@ -18,6 +18,6 @@ SHELL_FILES := ~/.hushlogin \
 ~/.bash_logout: .src/skel/.bash_logout
 
 $(SHELL_FILES):
-	install -pm 0644 -- $< $(HOME)
+	/bin/install -pm 0644 -- $< $(HOME)
 
 shell-files: $(SHELL_FILES)

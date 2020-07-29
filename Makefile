@@ -1,5 +1,5 @@
-HOSTNAME := $(shell hostname -f)
-TEMPDIR := $(shell mktemp -d -t dotfiles.XXXXXX)
+HOSTNAME := $(shell /bin/hostname -f)
+TEMPDIR := $(shell /bin/mktemp -d -t dotfiles.XXXXXX)
 
 XDG_CONFIG_HOME ?= ~/.config
 XDG_DATA_HOME ?= ~/.local/share

@@ -17,7 +17,7 @@ SYMLINKS := ~/.stow-global-ignore \
 
 # How to generate
 $(SYMLINKS):
-	ln -s .config/$< $@
+	/bin/ln -s .config/$< $@
 
 # Map alias to list of output files
 symlinks: $(SYMLINKS)
