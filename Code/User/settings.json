@@ -80,6 +80,7 @@
     1090,
     1091
   ],
+  "shellcheck.enable": false,
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
@@ -111,8 +112,6 @@
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "terminal.integrated.shellArgs.osx": [],
   "window.doubleClickIconToClose": true,
-  "window.enableMenuBarMnemonics": false,
-  "window.menuBarVisibility": "toggle",
   "window.openFilesInNewWindow": "off",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",

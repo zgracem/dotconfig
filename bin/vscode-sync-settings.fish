@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 # This script uses jq <https://github.com/stedolan/jq> to concatenate cross-
-# platform settings with those specific to my proxy-bound, admin-less Windows 7
+# platform settings with those specific to my proxy-bound, admin-less Windows 10
 # machine at work.
 
 set config_dir ~/.config/Code/User
@@ -25,7 +25,9 @@ case 'CYGWIN*'
     exit 1
   end
 
-  jq '. + '(jq -cj '.' $more_settings) $base_settings > $dir/settings.json
+  set more_json (jq --compact-output --join-output '.' $more_settings)
+
+  jq --sort-keys ". + $more_json" $base_settings > $dir/settings.json
 
   ### sync keybindings
 
@@ -33,7 +35,7 @@ case 'CYGWIN*'
 
   ### sync snippets
 
-  if not test -L $dir/snippets
+  if not test -e $dir/snippets
     cmd /C mklink /J (cygpath -aw $dir/snippets) (cygpath -aw $config_dir/snippets)
   end
 

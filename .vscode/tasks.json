@@ -13,6 +13,13 @@
       }
     }
   },
+  "windows": {
+    "options": {
+      "env": {
+        "PATH": "/home/${env:USERNAME}/opt/bin:/home/${env:USERNAME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env:PATH}"
+      }
+    }
+  },
   "tasks": [
     {
       "label": "Launch Sublime Merge",
