@@ -1,5 +1,5 @@
 function cygsetup --description 'Launch the Cygwin installer'
-  set -l installer_dir (cygpath -au "$USERPROFILE")"/cygwin64"
+  set -l installer_dir (cygpath -au "$USERPROFILE")"/Applications/cygwin64"
   set -l cyg_bin "$installer_dir/cygwin64.exe"
   set -l pkg_dir (cygpath -aw "$installer_dir/pkg")
   set -l log_dir "$HOME/var/log/cygwin"
