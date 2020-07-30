@@ -154,6 +154,17 @@ end
 # other
 # -----------------------------------------------------------------------------
 
+# begin/end "bold" mode -- man page headers
+set -gx LESS_TERMCAP_md (set_color green)
+set -gx LESS_TERMCAP_me (set_color normal)
+
+# begin/end "underline" mode -- highlights man page variables
+set -gx LESS_TERMCAP_us (set_color yellow)
+set -gx LESS_TERMCAP_ue (set_color normal)
+
+# reset
+set -gx LESS_TERMEND (set_color normal)
+
 set -gx GCC_COLORS \
   "error="(get_color brred) \
   "warning="(get_color yellow) \

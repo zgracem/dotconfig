@@ -16,17 +16,6 @@ function man --description 'Display manual pages' # in a new window with colours
     end
   end
 
-  # begin/end "bold" mode -- used for man page headers
-  set -lx LESS_TERMCAP_md (set_color green)
-  set -lx LESS_TERMCAP_me (set_color normal)
-
-  # begin/end "underline" mode -- used to highlight variables
-  set -lx LESS_TERMCAP_us (set_color yellow)
-  set -lx LESS_TERMCAP_ue (set_color normal)
-
-  # reset
-  set -lx LESS_TERMEND (set_color normal)
-
   # Get a nice title for the window.
   set -l title (_man_title $argv); or return
 
