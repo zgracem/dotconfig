@@ -22,7 +22,7 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "bottom",
+  "editor.snippetSuggestions": "top",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
@@ -132,7 +132,7 @@
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "terminal.integrated.shellArgs.osx": [],
   "window.doubleClickIconToClose": true,
-  "window.openFilesInNewWindow": "off",
+  "window.openFilesInNewWindow": "default",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorLong}${separator}${rootName}",
