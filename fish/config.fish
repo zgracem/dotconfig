@@ -15,7 +15,7 @@ end
 source "$__fish_config_dir/paths.fish"
 
 # function subdirectories
-for dir in $__fish_config_dir/functions $__fish_config_dir/functions/**/
+for dir in $__fish_config_dir/functions{,/**/} ~/.private/fish/functions
   set -p fish_function_path (string trim --right --chars=/ $dir)
 end
 
