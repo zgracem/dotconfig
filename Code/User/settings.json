@@ -56,10 +56,22 @@
   "markdown.extension.list.indentationSize": "adaptive",
   "markdown.extension.syntax.decorations": false,
   "markdownlint.config": {
-    "MD024": false,
     "MD007": { "indent": 2 },
+    "MD009": { "strict": true },
+    "MD010": { "code_blocks": false },
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD025": false,
+    "MD026": { "punctuation": ",;" },
+    "MD028": false,
+    "MD032": false,
     "MD033": false,
-    "MD041": false
+    "MD036": false,
+    "MD040": false,
+    "MD041": false,
+    "MD043": false,
+    "MD044": false,
+    "MD045": false
   },
   "material-icon-theme.files.associations": {
     "config": "settings"
@@ -130,6 +142,9 @@
     "editor.insertSpaces": false
   },
   "[markdown]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": true
+    },
     "editor.formatOnPaste": false,
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
