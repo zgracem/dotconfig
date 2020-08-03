@@ -1,14 +1,14 @@
 {
   "recommendations": [
     "chrislajoie.vscode-modelines",
-    "DavidAnson.vscode-markdownlint",
+    "redhat.vscode-yaml",
+    "richie5um2.vscode-sort-json",
+    "bungcip.better-toml",
     "EditorConfig.EditorConfig",
     "fallenwood.vimL",
     "maelvalais.autoconf",
-    "stkb.rewrap",
     "timonwong.shellcheck",
     "tuxtina.json2yaml",
-    "yzhang.markdown-all-in-one",
     "zgm.vscode-fish"
   ]
 }
