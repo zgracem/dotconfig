@@ -29,6 +29,7 @@ gem "yard", ">= 0.9.20"
 
 # for Visual Studio Code
 gem "debase"
+gem "rcodetools"
 gem "ruby-debug-ide"
 gem "solargraph"
 
