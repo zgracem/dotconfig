@@ -24,13 +24,16 @@ gem "json", ">= 2.3.0"
 # <github.com/bleything/plist>
 gem "plist"
 
+# <github.com/rtomayko/ronn>
+gem "ronn", "~> 0.7"
+
+# <github.com/TamerShlash/symbolized>
+gem "symbolized"
+
 # <github.com/lsegal/yard>
 gem "yard", ">= 0.9.20"
 
 # for Visual Studio Code
-gem "debase"
-gem "rcodetools"
-gem "ruby-debug-ide"
 gem "solargraph"
 
 # -----------------------------------------------------------------------------
@@ -47,6 +50,7 @@ gem "lolcat"
 gem "http"
 gem "net-scp"
 gem "net-ssh"
+gem "nokogiri", ">= 1.10.10"
 
 # <github.com/middleman/middleman>
 gem "middleman"
@@ -74,35 +78,7 @@ gem "tumblr_client"
 # Script requirements
 # -----------------------------------------------------------------------------
 
-# -- for Datamart
-# <github.com/trailblazer/representable>
-gem "representable"
-
-# -- for pdf_man
-# <github.com/rtomayko/ronn>
-gem "ronn"
-
-# -- for Pushover
-# <github.com/bemurphy/rushover>
-gem "rushover"
-
-# -- for astro
-# <github.com/agileronin/suncalc-ruby>
-gem "suncalc"
-
 # -- for zgm/songinfo
 # -- requires `brew install taglib`
 # <github.com/robinst/taglib-ruby>
 gem "taglib-ruby"
-
-# -- for uu
-# <github.com/lang/unicode_utils>
-gem "unicode_utils"
-
-# -- for tinypng
-# <tinypng.com/developers/reference/ruby>
-gem "tinify"
-
-# -- for vs2017
-# <github.com/TamerShlash/symbolized>
-gem "symbolized"
