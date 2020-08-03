@@ -53,11 +53,11 @@
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
   "markdown.extension.italic.indicator": "_",
-  "markdown.extension.list.indentationSize": "inherit",
+  "markdown.extension.list.indentationSize": "adaptive",
   "markdown.extension.syntax.decorations": false,
   "markdownlint.config": {
-    "MD007": { "indent": 4 },
     "MD024": false,
+    "MD007": { "indent": 2 },
     "MD033": false,
     "MD041": false
   },
@@ -131,7 +131,6 @@
   },
   "[markdown]": {
     "editor.formatOnPaste": false,
-    "editor.tabSize": 4,
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
   }
