@@ -19,7 +19,7 @@ gem "htmlentities"
 gem "irbtools"
 
 # <github.com/flori/json>
-gem "json"
+gem "json", ">= 2.3.0"
 
 # <github.com/bleything/plist>
 gem "plist"
