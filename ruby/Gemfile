@@ -78,6 +78,10 @@ gem "tumblr_client"
 # Script requirements
 # -----------------------------------------------------------------------------
 
+# -- for BitBar weather app
+# <github.com/trailblazer/representable>
+gem "representable"
+
 # -- for zgm/songinfo
 # -- requires `brew install taglib`
 # <github.com/robinst/taglib-ruby>
