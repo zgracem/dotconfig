@@ -86,3 +86,7 @@ gem "representable"
 # -- requires `brew install taglib`
 # <github.com/robinst/taglib-ruby>
 gem "taglib-ruby"
+
+# -----------------------------------------------------------------------------
+
+gem "tiny_dancer", github: "zgracem/tiny-dancer", branch: "master"

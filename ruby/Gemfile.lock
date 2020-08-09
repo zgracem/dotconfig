@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/zgracem/tiny-dancer.git
+  revision: 3076f065c83574e4c479674f2413939219cde63f
+  specs:
+    tiny_dancer (0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -28,6 +34,8 @@ GEM
     debugging (1.1.1)
       binding.repl (~> 3.0)
       paint (>= 0.9, < 3.0)
+    declarative (0.0.20)
+    declarative-option (0.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
@@ -181,6 +189,10 @@ GEM
     regexp_parser (1.7.1)
     reline (0.1.4)
       io-console (~> 0.5)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     reverse_markdown (2.0.0)
       nokogiri
     rexml (3.2.4)
@@ -242,6 +254,7 @@ GEM
       simple_oauth
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
@@ -269,6 +282,7 @@ DEPENDENCIES
   nokogiri (>= 1.10.10)
   oauth
   plist
+  representable
   ronn (~> 0.7)
   sassc
   slim
@@ -276,5 +290,6 @@ DEPENDENCIES
   solargraph
   symbolized
   taglib-ruby
+  tiny_dancer!
   tumblr_client
   yard (>= 0.9.20)
