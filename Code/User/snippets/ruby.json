@@ -1,0 +1,12 @@
+{
+  "def_inspect": {
+    "prefix": "def inspect",
+    "body": [
+      "# @return [String]",
+      "def inspect",
+      "  %(#<#{self.class.name}:#{${1:@type}}>)",
+      "end"
+    ],
+    "description": "#inspect"
+  }
+}
