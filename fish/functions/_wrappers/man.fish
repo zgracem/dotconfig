@@ -6,8 +6,8 @@ function man --description 'Display manual pages' # in a new window with colours
   end
 
   # Some switches don't open a man page. Let those do their thing.
-  if test (string sub --length 1 -- $argv[1]) = "-"
-    switch (string sub --start 2 -- $argv[1])
+  if test (string sub --length 1 -- "$argv[1]") = "-"
+    switch (string sub --start 2 -- "$argv[1]")
     case '*d*' '*f*' '*h*' '*k*' '*V*' '*w*' '*W*' '*?*'
       command man $argv
       return

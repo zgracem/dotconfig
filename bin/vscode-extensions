@@ -12,7 +12,7 @@ if not command --search --quiet jq
 end
 
 set extensions_file ~/.config/Code/User/extensions.json
-set desired_extensions (jq --raw-output .recommendations[] $extensions_file)
+set desired_extensions (jq --raw-output '.recommendations[]' $extensions_file)
 set installed_extensions (code --list-extensions); or exit
 
 function do_install
@@ -40,7 +40,7 @@ function do_diff
 end
 
 function do_json
-  set -l jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
+  set --local jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
   jq --null-input --monochrome-output --rawfile exts (do_list | psub) $jq_script
 end
 
@@ -54,20 +54,19 @@ function do_sync
 end
 
 function get_commands
-  set --local pattern1 'do_[a-z]+'
-  set --local pattern2 '(?<=function do_)[a-z]+$'
-  ag --no-filename --no-numbers --only-matching $pattern2 (status filename) \
+  set --local pattern '(?<=function do_)[a-z]+$'
+  ag --no-filename --no-numbers --only-matching $pattern (status filename) \
   | sort -u
 end
 
 function get_help
-  set -l commands (get_commands)
+  set --local commands (get_commands)
   echo "Subcommands: $commands"
 end
 
 function main
   switch "$argv[1]"
-  case $commands
+  case (get_commands)
     eval do_$argv[1]
   case help ""
     get_help

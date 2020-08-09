@@ -6,7 +6,7 @@ if is-macos
     if string match -rq -- $cli_rx $argv
       command code $argv
     else
-      open -a "Visual Studio Code" -- $argv
+      open -b com.microsoft.VSCode -- $argv
     end
   end
 end
