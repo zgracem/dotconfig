@@ -6,7 +6,7 @@
   ],
   "bracket-pair-colorizer-2.unmatchedScopeColor": "#dc322f",
   "breadcrumbs.enabled": true,
-  "breadcrumbs.filePath": "last",
+  "breadcrumbs.filePath": "on",
   "code-runner.clearPreviousOutput": true,
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
@@ -34,9 +34,12 @@
   "editor.find.autoFindInSelection": "multiline",
   "editor.find.seedSearchStringFromSelection": false,
   "editor.fontFamily": "Native-Light, IBMPlexMono-Light, Office Code Pro, Consolas, monospace",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.hover.delay": 120,
   "editor.lightbulb.enabled": false,
   "editor.links": false,
   "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": false,
   "editor.renderControlCharacters": true,
@@ -46,7 +49,10 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "top",
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggest.filterGraceful": false,
+  "editor.suggest.shareSuggestSelections": true,
+  "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
@@ -97,6 +103,7 @@
     "MD044": false,
     "MD045": false
   },
+  "markdownlint.run": "onSave",
   "material-icon-theme.files.associations": {
     "config": "settings"
   },
@@ -163,7 +170,7 @@
   "window.openFilesInNewWindow": "default",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
-  "window.title": "${dirty}${activeEditorLong}${separator}${rootName}",
+  "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
   "workbench.colorTheme": "Material Theme Palenight",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
@@ -182,6 +189,9 @@
       "source.fixAll.markdownlint": true
     },
     "editor.formatOnPaste": false,
+    "editor.quickSuggestions": {
+      "other": false
+    },
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
   }
