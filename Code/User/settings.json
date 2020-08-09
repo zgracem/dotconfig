@@ -7,6 +7,26 @@
   "bracket-pair-colorizer-2.unmatchedScopeColor": "#dc322f",
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "last",
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.customCommand": "echo $PATH",
+  "code-runner.enableAppInsights": false,
+  "code-runner.executorMap": {
+    "fish": "fish -C 'set -gx TERM dumb'",
+    "html": "links -dump",
+    "markdown": "multimarkdown -s --nolabels",
+    "ruby": "ruby -w",
+    "sass": "/usr/local/bin/sass --no-source-map -C -t expanded --trace",
+    "scss": "/usr/local/bin/scss --no-source-map -C -t expanded --trace",
+    "slim": "slimrb --option format=:html --option tabsize=2 --pretty --trace",
+    "troff": "man -Pcat"
+  },
+  "code-runner.executorMapByGlob": {
+    "*.[1-9].md": "ronn --pipe < $fullFileName | man -Pcat -Eutf8 -l -",
+    "*.ti": "tic -Lxfq $fullFileName"
+  },
+  "code-runner.ignoreSelection": true,
+  "code-runner.runInTerminal": false,
+  "code-runner.temporaryFileName": "",
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",

@@ -1,4 +1,18 @@
 {
+  "code-runner.customCommand": "echo %PATH%",
+  "code-runner.executorMap": {
+    "ahk": "C:\\Users\\uxhj\\Applications\\AutoHotkey\\AutoHotkeyU64.exe /force /restart /ErrorStdOut=UTF-8",
+    "bat": "cmd /c",
+    "fish": "Z:\\bin\\fish.exe",
+    "html": "Z:\\bin\\links.exe -dump",
+    "markdown": "Z:\\usr\\local\\bin\\multimarkdown.exe --snippet --nolabels",
+    "perl": "Z:\\bin\\perl.exe",
+    "powershell": "powershell -ExecutionPolicy ByPass -File",
+    "python": "Z:\\bin\\python.exe",
+    "ruby": "Z:\\bin\\ruby -w",
+    "troff": "Z:\\bin\\man -P 'less +G;q' $fileName"
+  },
+  "code-runner.terminalRoot": "/cygdrive/",
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontSize": 12,
   "editor.fontWeight": "200",
