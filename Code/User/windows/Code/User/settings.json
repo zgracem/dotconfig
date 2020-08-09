@@ -1,0 +1,15 @@
+{
+  "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
+  "editor.fontSize": 12,
+  "editor.fontWeight": "200",
+  "ruby.interpreter.commandPath": "Z:\\bin\\ruby",
+  "ruby.useLanguageServer": false,
+  "shellcheck.executablePath": "Z:\\home\\uxhj\\opt\\bin\\shellcheck",
+  "spellright.language": [
+    "en_CA",
+    "en_US"
+  ],
+  "window.doubleClickIconToClose": true,
+  "window.enableMenuBarMnemonics": false,
+  "window.menuBarVisibility": "toggle"
+}

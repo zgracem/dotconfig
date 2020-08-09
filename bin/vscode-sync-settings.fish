@@ -18,7 +18,7 @@ case 'CYGWIN*'
   ### sync settings
 
   set base_settings (cygpath -aw $config_dir/settings.json)
-  set more_settings (cygpath -aw $config_dir/settings.windows.json)
+  set more_settings (cygpath -aw $config_dir/windows/Code/User/settings.json)
 
   if not test -d $dir
     echo >&2 "error: not found:" $dir
