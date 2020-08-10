@@ -5,6 +5,7 @@
 # machine at work.
 
 set config_dir ~/.config/Code/User
+set win_config $config_dir/windows/Code/User
 
 switch (uname -s)
 case 'CYGWIN*'
@@ -18,7 +19,7 @@ case 'CYGWIN*'
   ### sync settings
 
   set base_settings (cygpath -aw $config_dir/settings.json)
-  set more_settings (cygpath -aw $config_dir/windows/Code/User/settings.json)
+  set more_settings (cygpath -aw $win_config/settings.json)
 
   if not test -d $dir
     echo >&2 "error: not found:" $dir
@@ -27,7 +28,9 @@ case 'CYGWIN*'
 
   set more_json (jq --compact-output --join-output '.' $more_settings)
 
-  jq --sort-keys ". + $more_json" $base_settings > $dir/settings.json
+  jq --sort-keys ". + $more_json" $base_settings \
+  | jq -L $win_config --from-file $win_config/exclude.jq \
+  > $dir/settings.json
 
   ### sync keybindings
 

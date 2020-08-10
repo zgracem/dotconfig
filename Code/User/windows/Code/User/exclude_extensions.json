@@ -1,0 +1,10 @@
+{
+  "keys": [
+    "code-runner.executorMapByGlob",
+    "terminal.external.osxExec"
+  ],
+  "regexes": [
+    "\\.osx$",
+    "^solargraph\\."
+  ]
+}
