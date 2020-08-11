@@ -34,7 +34,7 @@
   "editor.find.addExtraSpaceOnTop": false,
   "editor.find.autoFindInSelection": "multiline",
   "editor.find.seedSearchStringFromSelection": false,
-  "editor.fontFamily": "Native-Light, IBMPlexMono-Light, Office Code Pro, Consolas, monospace",
+  "editor.fontFamily": "Native-Light, IBMPlexMono-Light, OfficeCodePro-Light, Consolas, monospace",
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 120,
   "editor.lightbulb.enabled": false,

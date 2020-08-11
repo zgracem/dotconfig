@@ -16,7 +16,7 @@
   "code-runner.terminalRoot": "/cygdrive/",
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontSize": 12,
-  "editor.fontWeight": "200",
+  "editor.fontWeight": "300",
   "ruby.interpreter.commandPath": "Z:\\bin\\ruby",
   "ruby.useLanguageServer": false,
   "shellcheck.executablePath": "Z:\\home\\uxhj\\opt\\bin\\shellcheck",
