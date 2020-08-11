@@ -1,4 +1,4 @@
-# Create symlinks for file that absolutely *must* be in the home directory >:(
+# Create symlinks for files that absolutely *must* be in the home directory >:(
 
 # Alias
 .PHONY: symlinks
