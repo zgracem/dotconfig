@@ -10,6 +10,7 @@ spotify-tui/client.yml
 # not intended for human interaction
 fish/fish_variables*
 fish/fishd.*
+spicetify_data/*/
 syncplay.ini
 vifm/vifminfo
 vifm/vimfiles
