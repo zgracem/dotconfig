@@ -179,7 +179,7 @@
   "workbench.editor.tabCloseButton": "off",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
-  "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+  "workbench.startupEditor": "none",
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
