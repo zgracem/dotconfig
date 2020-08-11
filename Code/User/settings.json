@@ -73,6 +73,7 @@
   },
   "files.defaultLanguage": "${activeEditorLanguage}",
   "files.eol": "\n",
+  "files.hotExit": "onExitAndWindowClose",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "gitlens.codeLens.enabled": false,
