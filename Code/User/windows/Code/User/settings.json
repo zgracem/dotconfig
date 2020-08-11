@@ -5,6 +5,7 @@
     "bat": "cmd /c",
     "fish": "Z:\\bin\\fish.exe",
     "html": "Z:\\bin\\links.exe -dump",
+    "jq": "Z:\\bin\\jq.exe --null-input --from-file",
     "markdown": "Z:\\usr\\local\\bin\\multimarkdown.exe --snippet --nolabels",
     "perl": "Z:\\bin\\perl.exe",
     "powershell": "powershell -ExecutionPolicy ByPass -File",
