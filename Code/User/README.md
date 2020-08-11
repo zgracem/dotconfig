@@ -4,13 +4,17 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 
 [vs]: https://code.visualstudio.com/docs/getstarted/settings
 
-`snippets/`, `settings.json` and `keybindings.json` should be symlinked into:
+## Setup
+
+`settings.json`, `keybindings.json`, and `snippets/` should be symlinked into:
 
 - **Windows:** `%APPDATA%\Code\User`
 - **macOS:** `$HOME/Library/Application Support/Code/User`
 
-On Windows/Cygwin machines without admin privileges, to concatenate the base
-`settings.json` file with `settings.windows.json` and install it to `$APPDATA`:
+On Windows/Cygwin machines without admin privileges, this script concatenates
+the base `settings.json` with the Windows-specific `windows/…/settings.json` and
+filters out non-Windows settings from `windows/…/macos_settings.json`, then
+installs the results to `%APPDATA%\Code\User`:
 
 ```sh
 ~/.config/bin/vscode-sync-settings.fish
