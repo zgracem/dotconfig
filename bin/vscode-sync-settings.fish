@@ -29,7 +29,7 @@ case 'CYGWIN*'
   set more_json (jq --compact-output --join-output '.' $more_settings)
 
   jq --sort-keys ". + $more_json" $base_settings \
-  | jq -L $win_config --from-file $win_config/exclude.jq \
+  | jq -L $win_config --from-file $win_config/filter_macos_settings.jq \
   > $dir/settings.json
 
   ### sync keybindings

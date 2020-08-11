@@ -1,4 +1,4 @@
-import "exclude_extensions" as $FILTERS;
+import "macos_settings" as $FILTERS;
 
 def _match_keys(exp):
   [ keys[] | select( test(exp) ) ];
