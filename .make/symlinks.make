@@ -4,12 +4,14 @@
 .PHONY: symlinks
 
 # Output files
-SYMLINKS := ~/.stow-global-ignore \
+SYMLINKS := ~/.jq
+						~/.stow-global-ignore \
 						~/.stowrc \
 						~/.tmux.conf \
 						~/.vimrc
 
 # Map input files to output files
+~/.jq: jq
 ~/.stow-global-ignore: stow/stow-global-ignore
 ~/.stowrc: stow/stowrc
 ~/.tmux.conf: tmux/tmux.conf
