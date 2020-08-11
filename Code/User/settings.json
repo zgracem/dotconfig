@@ -84,6 +84,7 @@
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
+  "jqPlayground.binaryPath": "/usr/local/bin/jq",
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.list.indentationSize": "adaptive",
   "markdown.extension.syntax.decorations": false,
