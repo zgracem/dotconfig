@@ -16,7 +16,6 @@
 brew "gcc" if OS.linux?
 
 # for Homebrew
-brew "openssl"
 brew "curl"
 brew "git"
 
@@ -52,7 +51,6 @@ if OS.mac?
   brew "gnu-tar"
   brew "grep"
   brew "moreutils"
-  brew "parallel", link: false
 end
 
 # -----------------------------------------------------------------------------

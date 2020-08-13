@@ -11,14 +11,13 @@
 
 tap "homebrew/command-not-found"
 tap "homebrew/services"
-tap "zachwick/license"
 
 # -----------------------------------------------------------------------------
 # internet stuff
 # -----------------------------------------------------------------------------
 
 brew "dnsmasq", restart_service: :changed
-brew "transmission"
+brew "transmission-cli"
 brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
 
 # -----------------------------------------------------------------------------
@@ -29,7 +28,6 @@ brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
 
 brew "atomicparsley"
 brew "id3v2"
-brew "lame"
 brew "mkvtoolnix"
 brew "mp4v2"
 
@@ -70,7 +68,6 @@ brew "fontforge"
 tap  "bramstein/webfonttools"
 brew "bramstein/webfonttools/sfnt2woff-zopfli"
 brew "bramstein/webfonttools/sfnt2woff"
-brew "bramstein/webfonttools/ttf2eot"
 brew "bramstein/webfonttools/woff2"
 
 # -----------------------------------------------------------------------------
