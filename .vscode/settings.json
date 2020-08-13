@@ -1,16 +1,10 @@
 {
   "files.exclude": {
-    ".gitattributes": true,
-    ".gitmodules": true,
+    ".git{attributes,modules}": true,
     "htop": true,
-    "spicetify_data/Backup": true,
-    "spicetify_data/CustomApps": true,
-    "spicetify_data/Extensions": true,
-    "spicetify_data/Extracted": true,
-    "spicetify_data/Themes": true,
+    "spicetify_data/{Backup,CustomApps,Extensions,Extracted,Themes}": true,
     "syncplay.ini": true,
     "vifm-help.txt": true,
-    "vifminfo": true,
-    "vifmfiles": true,
+    "vifm{info,files}": true
   }
 }
