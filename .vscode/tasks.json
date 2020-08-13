@@ -23,8 +23,17 @@
   "tasks": [
     {
       "label": "Launch Sublime Merge",
-      "type": "shell",
-      "command": "smerge ."
+      "osx": {
+        "type": "shell",
+        "command": "smerge"
+      },
+      "windows": {
+        "type": "process",
+        "command": "C:/Users/uxhj/Applications/Sublime Merge/sublime_merge.exe"
+      },
+      "args": [
+        "${workspaceFolder}"
+      ]
     },
     {
       "label": "Lint POSIX shell files",
