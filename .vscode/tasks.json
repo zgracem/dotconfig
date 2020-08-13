@@ -57,7 +57,10 @@
       "type": "shell",
       "command": "bin/check_fish_files.fish",
       "problemMatcher": {
-        "fileLocation": ["relative", "${workspaceFolder}/fish"],
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}/fish"
+        ],
         "pattern": {
           "regexp": "^(.+) \\(line (\\d+)\\): (.+)$",
           "file": 1,
