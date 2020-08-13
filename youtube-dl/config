@@ -57,3 +57,6 @@
 # prefer avconv over ffmpeg for running the postprocessors
 --prefer-avconv
 
+# run custom post-processing script to add metadata etc.
+--write-info-json
+--exec "/Users/zozo/Dropbox/scripts/libexec/youtube-dl-post.fish {}"
