@@ -1,5 +1,5 @@
 function mkcomp
-  set -l src_dir $HOME/var/tmp/help2man
+  set -l src_dir $HOME/var/tmp/help2man # has ./man1, ./man6, etc.
   set -l comp_dir $HOME/.config/fish/completions
   set -l man_files
 
@@ -24,6 +24,4 @@ function mkcomp
 
   set -lx MANPATH $src_dir
   fish_update_completions --manpath --progress --directory=$comp_dir
-
-  command rm -f $man_files
 end
