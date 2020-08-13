@@ -1,0 +1,11 @@
+# vim:ft=sh
+
+# export HOMEBREW_BAT=1
+# export HOMEBREW_BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config_homebrew"
+
+--theme="TwoDark"
+--italic-text=always
+--pager=""
+--tabs=2
+--paging=never
+--language=ruby

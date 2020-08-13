@@ -22,6 +22,7 @@ export HOMEBREW_AUTO_UPDATE_SECS=600
 
 # Use `bat` for `brew cat`
 export HOMEBREW_BAT=1
+export HOMEBREW_BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
 
 # Use a GUI text editor if available
 export HOMEBREW_EDITOR="$VISUAL"
