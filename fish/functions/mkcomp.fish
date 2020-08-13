@@ -19,7 +19,7 @@ function mkcomp
     help2man --no-info --no-discard-stderr --output=$man_dir/$cmd.$section $cmd
     or return
 
-    set man_files $man_files $man_dir/$cmd.$section
+    set -a man_files $man_dir/$cmd.$section
   end
 
   set -lx MANPATH $src_dir
