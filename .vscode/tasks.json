@@ -29,7 +29,7 @@
       },
       "windows": {
         "type": "process",
-        "command": "C:/Users/uxhj/Applications/Sublime Merge/sublime_merge.exe"
+        "command": "${env:USERPROFILE}/Applications/Sublime Merge/sublime_merge.exe"
       },
       "args": [
         "${workspaceFolder}"

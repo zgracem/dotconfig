@@ -6,5 +6,10 @@
     "syncplay.ini": true,
     "vifm-help.txt": true,
     "vifm{info,files}": true
-  }
+  },
+  "git.detectSubmodules": false,
+  "shellcheck.enable": true,
+  "shellcheck.exclude": [
+    2148
+  ]
 }
