@@ -77,6 +77,7 @@
   "files.hotExit": "onExitAndWindowClose",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "git.defaultCloneDirectory": "/Users/zozo/.local/src/github",
   "gitlens.codeLens.enabled": false,
   "gitlens.defaultDateFormat": "YYYY-MM-DD @ HH:mm",
   "gitlens.defaultDateShortFormat": "YYYY-MM-DD",

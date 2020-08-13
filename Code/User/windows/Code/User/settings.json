@@ -17,6 +17,7 @@
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontSize": 12,
   "editor.fontWeight": "300",
+  "git.defaultCloneDirectory": "Z:\\home\\UXHJ\\.local\\src",
   "ruby.interpreter.commandPath": "Z:\\bin\\ruby",
   "ruby.useLanguageServer": false,
   "shellcheck.executablePath": "Z:\\home\\UXHJ\\opt\\bin\\shellcheck",
