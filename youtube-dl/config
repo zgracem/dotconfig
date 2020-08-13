@@ -10,6 +10,9 @@
 # continue on download errors, e.g. to skip unavailable videos in a playlist
 --ignore-errors
 
+# bypass geographic restriction via faking X-Forwarded-For HTTP header
+--geo-bypass
+
 # -----------------------------------------------------------------------------
 # filesystem options
 # -----------------------------------------------------------------------------
@@ -54,5 +57,3 @@
 # prefer avconv over ffmpeg for running the postprocessors
 --prefer-avconv
 
-# embed thumbnail in the audio as cover art
---embed-thumbnail
