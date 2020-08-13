@@ -1,5 +1,5 @@
 function mkcomp
-  set -l src_dir $HOME/Dropbox/text/man
+  set -l src_dir $HOME/var/tmp/help2man
   set -l comp_dir $HOME/.config/fish/completions
   set -l man_files
 
