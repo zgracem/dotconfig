@@ -34,7 +34,8 @@
   "editor.find.addExtraSpaceOnTop": false,
   "editor.find.autoFindInSelection": "multiline",
   "editor.find.seedSearchStringFromSelection": false,
-  "editor.fontFamily": "Native-Light, IBMPlexMono-Light, OfficeCodePro-Light, Consolas, monospace",
+  "editor.fontFamily": "Native, IBM Plex Mono, Office Code Pro, Consolas, monospace",
+  "editor.fontWeight": "300",
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 120,
   "editor.lightbulb.enabled": false,
@@ -50,9 +51,9 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "bottom",
-  "editor.suggest.filterGraceful": false,
+  "editor.snippetSuggestions": "none",
   "editor.suggest.shareSuggestSelections": true,
+  "editor.suggest.showSnippets": false,
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
@@ -125,7 +126,6 @@
   "scm.defaultViewMode": "tree",
   "search.maintainFileSearchCache": true,
   "search.smartCase": true,
-  "shellcheck.enable": false,
   "shellcheck.exclude": [
     1090,
     1091
@@ -179,6 +179,7 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
+  "workbench.editor.untitled.labelFormat": "name",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",

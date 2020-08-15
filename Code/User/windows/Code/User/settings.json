@@ -3,7 +3,7 @@
   "code-runner.executorMap": {
     "ahk": "C:\\Users\\uxhj\\Applications\\AutoHotkey\\AutoHotkeyU64.exe /force /restart /ErrorStdOut=UTF-8",
     "bat": "cmd /c",
-    "fish": "Z:\\bin\\fish.exe",
+    "fish": "Z:\\bin\\fish.exe -C 'set -gx TERM dumb'",
     "html": "Z:\\bin\\links.exe -dump",
     "jq": "Z:\\bin\\jq.exe --null-input --from-file",
     "markdown": "Z:\\home\\UXHJ\\opt\\stow\\MultiMarkdown-6.5.1\\bin\\multimarkdown.exe --snippet --nolabels",
@@ -11,7 +11,7 @@
     "powershell": "powershell -ExecutionPolicy ByPass -File",
     "python": "Z:\\bin\\python.exe",
     "ruby": "Z:\\bin\\ruby -w",
-    "troff": "Z:\\bin\\man -P 'less +G;q' $fileName"
+    "troff": "Z:\\bin\\man -Pcat"
   },
   "code-runner.terminalRoot": "/cygdrive/",
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
