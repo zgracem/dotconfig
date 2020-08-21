@@ -81,21 +81,3 @@ brew "unar"
 # text
 brew "pandoc"
 brew "recode"
-
-# -----------------------------------------------------------------------------
-# additional casks
-# -----------------------------------------------------------------------------
-
-cask "bitbar"
-cask "calibre"
-cask "handbrake"
-cask "istat-menus"
-cask "keybase"
-cask "kid3"
-cask "metaz"
-cask "mpv"
-cask "onyx"
-cask "senuti"
-cask "steam"
-cask "sublime-merge"
-cask "xact"
