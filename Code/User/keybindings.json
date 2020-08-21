@@ -31,7 +31,7 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "cmd+shift+l",
+    "key": "ctrl+shift+l",
     "command": "editor.action.insertCursorAtEndOfEachLineSelected",
     "when": "editorTextFocus"
   },
