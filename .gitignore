@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------
 
 # private
+.op/
 jrnl
 spotify-tui/.spotify_token_cache.json
 spotify-tui/client.yml
