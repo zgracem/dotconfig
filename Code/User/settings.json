@@ -128,6 +128,32 @@
   "scm.defaultViewMode": "tree",
   "search.maintainFileSearchCache": true,
   "search.smartCase": true,
+  "settingsSync.ignoredExtensions": [
+    "castwide.solargraph",
+    "eamodio.gitlens"
+  ],
+  "settingsSync.ignoredSettings": [
+    "code-runner.customCommand",
+    "code-runner.executorMap",
+    "code-runner.executorMapByGlob",
+    "code-runner.terminalRoot",
+    "editor.fontFamily",
+    "editor.fontSize",
+    "editor.fontWeight",
+    "git.defaultCloneDirectory",
+    "jqPlayground.binaryPath",
+    "shellcheck.executablePath",
+    "spellright.language",
+    "terminal.external.osxExec",
+    "terminal.integrated.automationShell.osx",
+    "terminal.integrated.env.osx",
+    "terminal.integrated.shell.osx",
+    "terminal.integrated.shellArgs.osx",
+    "window.doubleClickIconToClose",
+    "window.enableMenuBarMnemonics",
+    "window.menuBarVisibility"
+  ],
+  "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.exclude": [
     1090,
     1091
