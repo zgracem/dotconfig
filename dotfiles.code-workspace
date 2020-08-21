@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "~/.config",
+			"path": "."
+		},
+		{
+			"name": "~/.private",
+			"path": "../.private"
+		}
+	],
+	"settings": {
+		"workbench.colorTheme": "Solarized Dark"
+	}
+}
