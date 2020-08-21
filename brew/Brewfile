@@ -109,36 +109,3 @@ end
 # Dart Sass
 tap  "sass/sass"
 brew "sass/sass/sass"
-
-# -----------------------------------------------------------------------------
-# casks
-# -----------------------------------------------------------------------------
-
-if OS.mac? && MacOS.version >= "10.11"
-  tap "homebrew/cask"
-
-  cask "1password"
-  cask "alfred"
-  cask "dropbox"
-  cask "fantastical"
-  cask "file-juicer"
-  cask "firefox"
-  cask "fission"
-  cask "flux"
-  cask "go2shell"
-  cask "grandperspective"
-  cask "iterm2"
-  cask "mactracker"
-  cask "ql-ansilove" # preview ANSI art
-  cask "qladdict" # preview .srt subtitle files
-  cask "qlcolorcode"
-  cask "qlmarkdown"
-  cask "qlstephen" # preview text files w/ no extension (e.g. README)
-  cask "sublime-text"
-  cask "superduper"
-  cask "the-unarchiver"
-  cask "transmission"
-  cask "transmit"
-  cask "visual-studio-code"
-  cask "vlc"
-end

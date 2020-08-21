@@ -1,0 +1,70 @@
+# -----------------------------------------------------------------------------
+# ~/.config/brew/Caskfile
+# vim:ft=ruby
+# -----------------------------------------------------------------------------
+# brew bundle --file=$XDG_CONFIG_HOME/brew/Caskfile
+# -----------------------------------------------------------------------------
+
+if OS.mac? && MacOS.version >= "10.11"
+  tap  "homebrew/cask"
+
+  cask "1password"
+  cask "acorn"
+  cask "alfred"
+  cask "bitbar"
+  cask "discord"
+  cask "dropbox"
+  cask "fantastical"
+  cask "file-juicer"
+  cask "firefox"
+  cask "fission"
+  cask "flux"
+  cask "go2shell"
+  cask "google-chrome"
+  cask "grandperspective"
+  cask "handbrake"
+  cask "istat-menus"
+  cask "iterm2"
+  cask "kid3"
+  cask "metaz"
+  cask "minecraft"
+  cask "name-mangler"
+  cask "pdf-expert"
+  cask "ql-ansilove" # preview ANSI art
+  cask "qladdict" # preview .srt subtitle files
+  cask "qlcolorcode"
+  cask "qlmarkdown"
+  cask "qlstephen" # preview text files w/ no extension (e.g. README)
+  cask "sip"
+  cask "spotify"
+  cask "steam"
+  cask "sublime-merge"
+  cask "sublime-text"
+  cask "superduper"
+  cask "syncplay"
+  cask "the-unarchiver"
+  cask "transmission"
+  cask "transmit"
+  cask "visual-studio-code"
+  cask "vlc"
+  cask "winclone"
+  cask "xact"
+end
+
+# -----------------------------------------------------------------------------
+# mas
+# -----------------------------------------------------------------------------
+
+if OS.mac?
+  brew "mas"
+  mas "ApolloOne", id: 1044484672
+  mas "Day One", id: 1055511498
+  mas "Divvy", id: 413857545
+  mas "Fantastical", id: 435003921
+  # mas "GarageBand", id: 682658836
+  # mas "Keynote", id: 409183694
+  # mas "Numbers", id: 409203825
+  # mas "Pages", id: 409201541
+  mas "The Archive Browser", id: 510232205
+  mas "Xcode", id: 497799835
+end
