@@ -2,10 +2,7 @@
 # ~/.config/brew/Brewfile
 # vim:ft=ruby
 # -----------------------------------------------------------------------------
-# Instructions:
-#   1. Install Homebrew
-#   2. brew bundle --file=~/.config/brew/Brewfile       # this file
-#   3. brew bundle --file=~/.local/config/brew/Brewfile # optional
+# brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
