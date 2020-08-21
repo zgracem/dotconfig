@@ -144,6 +144,14 @@
   "solargraph.references": false,
   "solargraph.rename": false,
   "solargraph.symbols": false,
+  "sortJSON.contextMenu": {
+    "sortJSONAlphaNumReverse": false,
+    "sortJSONKeyLength": false,
+    "sortJSONKeyLengthReverse": false,
+    "sortJSONReverse": false,
+    "sortJSONTypeReverse": false,
+    "sortJSONValuesReverse": false
+  },
   "sortJSON.orderUnderride": [
     "[makefile]",
     "[markdown]"
