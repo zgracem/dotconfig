@@ -5,6 +5,8 @@
 # brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile
 # -----------------------------------------------------------------------------
 
+tap "homebrew/command-not-found"
+tap "homebrew/services"
 # -----------------------------------------------------------------------------
 # essentials
 # -----------------------------------------------------------------------------
@@ -26,7 +28,6 @@ brew "reattach-to-user-namespace" if OS.mac?
 
 # other
 brew "dtrx"
-brew "ghostscript"
 brew "jq"
 brew "keychain"
 brew "less"
@@ -34,7 +35,6 @@ brew "stow"
 brew "the_silver_searcher"
 brew "vim"
 brew "wget"
-brew "multimarkdown"
 
 if OS.mac?
   brew "rename"
@@ -55,22 +55,35 @@ end
 # -----------------------------------------------------------------------------
 
 brew "bat"
-brew "dos2unix"
 brew "exa"
 brew "fd"
 brew "hexyl"
 brew "jrnl"
-brew "links"
-brew "lynx"
 brew "openssh"
-brew "qpdf"
 brew "source-highlight" # for less
 brew "ssh-copy-id"
+brew "unar"
 
 if OS.mac?
+  brew "sf-pwgen" # github.com/anders/pwgen
   brew "tree"
   brew "watch"
 end
+
+# internet stuff
+brew "dnsmasq", restart_service: :changed if OS.mac?
+brew "links"
+brew "lynx"
+brew "transmission-cli"
+brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
+
+# documents
+brew "dos2unix"
+brew "ghostscript"
+brew "multimarkdown"
+brew "pandoc"
+brew "qpdf"
+brew "recode"
 
 # fun, games
 brew "figlet"
@@ -81,18 +94,58 @@ tap  "zgracem/fortune-clean"
 brew "zgracem/fortune-clean/fortune"
 
 # -----------------------------------------------------------------------------
+# audio/video
+# -----------------------------------------------------------------------------
+
+brew "atomicparsley"
+brew "id3v2"
+brew "mkvtoolnix"
+brew "mp4v2"
+
+# Spotify
+if OS.mac?
+  brew "spotifyd", restart_service: :changed
+  tap  "rigellute/tap"
+  brew "rigellute/tap/spotify-tui"
+end
+
+# ffmpeg with options
+tap  "homebrew-ffmpeg/ffmpeg"
+brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: [
+  "HEAD",
+  "with-fdk-aac",
+  "with-libssh",
+  "with-openh264",
+  "with-openssl",
+  "with-rtmpdump",
+  "with-two-lame",
+  "with-webp",
+  "with-xvid"
+]
+
+# images
+brew "imagemagick@6", link: true
+
+if OS.mac?
+  brew "exif"
+  brew "exiftool"
+  brew "imagesnap"
+  brew "pngcrush"
+  brew "webkit2png"
+end
+
+# -----------------------------------------------------------------------------
 # development stuff
 # -----------------------------------------------------------------------------
 
 brew "groff"
 brew "help2man"
 brew "ncurses"
+brew "shellcheck"
 
 if OS.mac?
   tap  "alhadis/troff"
   brew "alhadis/troff/man-db"
-  brew "spotifyd"
-  brew "spotify-tui"
 end
 
 # ruby
@@ -106,3 +159,10 @@ end
 # Dart Sass
 tap  "sass/sass"
 brew "sass/sass/sass"
+
+# web fonts
+brew "fontforge"
+tap  "bramstein/webfonttools"
+brew "bramstein/webfonttools/sfnt2woff-zopfli"
+brew "bramstein/webfonttools/sfnt2woff"
+brew "bramstein/webfonttools/woff2"
