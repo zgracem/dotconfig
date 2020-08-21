@@ -112,45 +112,71 @@ IRB.conf[:PROMPT_MODE] = :ZGM
 # helper methods
 # -----------------------------------------------------------------------------
 
-# 🐵-patching
+# Excludes instance methods common to all Ruby {Object}s 🐵
+# @return [Array<Symbol>]
 class Object
   def my_methods
     (methods - Object.instance_methods).sort
   end
 end
 
-# misc. objects
+# Create misc. objects for testing
+module Sample
+  extend self
 
-def str
-  "Hëllo, wórld!\n"
-end
+  # @return [String]
+  def string
+    "Hëllo, wórld!\n"
+  end
+  alias str string
 
-def hsh
-  {
-    red:    "ruby",
-    green:  "emerald",
-    blue:   "sapphire",
-    violet: "amethyst",
-    white:  %w[diamond glass]
-  }
-end
+  # @return [Integer]
+  alias original_hash hash
 
-def arr
-  hsh.values.flatten
-end
+  # @return [Hash]
+  def hash
+    {
+      red:    "ruby",
+      green:  "emerald",
+      blue:   "sapphire",
+      violet: "amethyst",
+      white:  %w[diamond glass]
+    }
+  end
 
-def int
-  rand(10..1000)
-end
+  # @return [Array<String>]
+  def array
+    hsh.values.flatten
+  end
+  alias ary array
 
-def regex
-  /\A\h+\z/i
-end
+  # @return [Integer]
+  def integer
+    rand(10..1000)
+  end
+  alias int integer
 
-def set
-  Set.new(arr.map(&:to_sym))
-end
+  # @return [Float]
+  def float
+    rand(10.0..100.0)
+  end
 
-def uri
-  URI("https://user:p4s$w0rd@example.org:80/path/to/resource.cgi?colour=blue#top")
+  # @return [Regexp]
+  def regex
+    /\A\h+\z/i
+  end
+  alias regexp regex
+
+  # @return [Set]
+  def set
+    require "set"
+    Set.new(arr.map(&:to_sym))
+  end
+
+  # @return [URI]
+  def uri
+    require "uri"
+    URI("https://user:p4s$w0rd@example.org:8000/path/to/resource.cgi?param=value#anchor")
+  end
+  alias url uri
 end
