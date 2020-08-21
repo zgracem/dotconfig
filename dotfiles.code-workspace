@@ -11,5 +11,41 @@
 	],
 	"settings": {
 		"workbench.colorTheme": "Solarized Dark"
+	},
+	"tasks": {
+    "version": "2.0.0",
+    "osx": {
+      "options": {
+        "env": {
+          "PATH": "/usr/local/bin:${env:PATH}",
+          "XDG_CONFIG_HOME": "${env:HOME}/.config"
+        }
+      }
+    },
+		"tasks": [
+			{
+				"label": "Launch Sublime Merge",
+				"osx": {
+					"type": "shell",
+					"command": "smerge"
+				},
+				"windows": {
+					"type": "process",
+					"command": "${env:USERPROFILE}/Applications/Sublime Merge/sublime_merge.exe"
+				},
+				"args": [
+					"${workspaceFolder}"
+				]
+			},
+			{
+				"label": "Dump environment",
+				"type": "shell",
+				"command": "env | sort",
+				"presentation": {
+					"clear": true,
+					"reveal": "always"
+				}
+			}
+		]
 	}
 }

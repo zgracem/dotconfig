@@ -22,20 +22,6 @@
   },
   "tasks": [
     {
-      "label": "Launch Sublime Merge",
-      "osx": {
-        "type": "shell",
-        "command": "smerge"
-      },
-      "windows": {
-        "type": "process",
-        "command": "${env:USERPROFILE}/Applications/Sublime Merge/sublime_merge.exe"
-      },
-      "args": [
-        "${workspaceFolder}"
-      ]
-    },
-    {
       "label": "Lint POSIX shell files",
       "type": "shell",
       "command": "bin/check_dotfiles.sh",
@@ -87,15 +73,6 @@
       "type": "shell",
       "command": "bin/update-user-agent.fish",
       "group": "build"
-    },
-    {
-      "label": "Dump environment",
-      "type": "shell",
-      "command": "env | sort",
-      "presentation": {
-        "clear": true,
-        "reveal": "always"
-      }
     }
   ]
 }
