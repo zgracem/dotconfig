@@ -148,6 +148,7 @@ brew "groff"
 brew "help2man"
 brew "ncurses"
 brew "shellcheck"
+brew "taglib" # for taglib-ruby gem
 
 if OS.mac?
   tap  "alhadis/troff"

@@ -89,4 +89,4 @@ gem "taglib-ruby"
 
 # -----------------------------------------------------------------------------
 
-gem "tiny_dancer", github: "zgracem/tiny-dancer", branch: "master"
+gem "tiny_dancer" #, github: "zgracem/tiny-dancer", branch: "master"
