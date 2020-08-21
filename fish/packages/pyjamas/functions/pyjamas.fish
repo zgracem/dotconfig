@@ -4,14 +4,14 @@ function pyjamas --description "Convert configuration files between formats"
 
   set -l src
   set -l ext
+  set -q _flag_in; and set ext $_flag_in
+
   if set -q argv[1]
     set src "Pathname.new(ARGV[0])"
-    set ext (string split "." -- $argv[1])[-1]
+    set -q ext; or set ext (string split "." -- $argv[1])[-1]
   else if not isatty stdin
     set src "ARGF"
-    if set -q _flag_in
-      set ext $_flag_in
-    else
+    if not set -q _flag_in
       echo >&2 "don't know what kind of file this is! (specify with -i/--in)"
       return 1
     end
