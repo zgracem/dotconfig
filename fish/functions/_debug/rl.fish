@@ -1,12 +1,38 @@
 function rl --description 'Reload configuration files'
+  set -g rl_exit 0
+
+  function _yikes
+    echo >&2 "$argv"
+    set -g rl_exit (math $rl_exit + 1)
+    return $rl_exit
+  end
+
+  function __source_v
+    for file in $argv
+      if source $file
+        short_home $file
+      else
+        _yikes "error sourcing file: $file"
+        return 1
+      end
+    end
+  end
+
+  function _source_f
+    if test -f "$argv[1]"
+      __source_v "$argv[1]"
+    else
+      return 1
+    end
+  end
+
   if test (count $argv) -eq 0
-    source "$__fish_config_dir/config.fish"
+    __source_v "$__fish_config_dir/config.fish"
     return
   end
 
-  set -l errors 0
   for arg in $argv
-    set -l error_message "couldn't find file for ‘$arg’"
+    set --local error_message "couldn't find file for ‘$arg’"
 
     switch "$arg"
     case colours
@@ -17,25 +43,15 @@ function rl --description 'Reload configuration files'
     end
 
     if functions -q $arg
-      set -l function_file (functions -D $arg)
-      if test -f "$function_file"
-        source "$function_file"
-        or set errors (math $errors + 1)
-      else
-        echo >&2 "$error_message: $function_file"
-        set errors (math $errors + 1)
-      end
-    else if test -f "$__fish_config_dir/$arg.fish"
-      source "$__fish_config_dir/$arg.fish"
-      or set errors (math $errors + 1)
-    else if test -f "$__fish_config_dir/conf.d/$arg.fish"
-      source "$__fish_config_dir/conf.d/$arg.fish"
-      or set errors (math $errors + 1)
+      set --local function_file (functions -D $arg)
+      _source_f "$function_file"
+        or _yikes "$error_message: $function_file"
     else
-      echo >&2 $error_message
-      set errors (math $errors + 1)
+      _source_f "$__fish_config_dir/$arg.fish"
+        or _source_f "$__fish_config_dir/conf.d/$arg.fish"
+        or _yikes $error_message
     end
   end
 
-  return $errors
+  return $rl_exit
 end
