@@ -1,4 +1,4 @@
-if string match -q 'Athena.*' $hostname
+if string match -q 'Citadel.*' $hostname
   function vspresszip -d 'Create/update a .zip file' -a slug
     set -l zip_file
     if string match -q '*_*' $slug

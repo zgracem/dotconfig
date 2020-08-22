@@ -29,8 +29,6 @@ _ssh()
   newwin --title "$title" ssh -t "$host" "$cmd"
 }
 
-alias  a='_ssh Athena'
-alias aa='_ssh Athena.remote'
 alias er='_ssh Erato'
 alias wf='_ssh WebFaction'
 alias hiroko='_ssh Hiroko'

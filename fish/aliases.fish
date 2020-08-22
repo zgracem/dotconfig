@@ -15,10 +15,10 @@ abbr --add --global -- '-' 'cd -'
 # ssh
 
 if string match -q '*.local' $hostname
-  abbr -a -g athena '_ssh Athena.local'
+  abbr -a -g citadel '_ssh Citadel.local'
   abbr -a -g erato '_ssh Erato'
 else
-  abbr -a -g athena '_ssh Athena.remote'
+  abbr -a -g citadel '_ssh Citadel.remote'
 end
 
 abbr -a -g vshraya '_ssh vshraya'

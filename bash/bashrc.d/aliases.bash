@@ -29,7 +29,7 @@ if _inPath bundle; then
   _inPath jekyll && alias jj='bundle exec jekyll'
 fi
 
-if [[ $HOSTNAME == Athena* ]]; then
+if [[ $HOSTNAME == Citadel* ]]; then
   alias vsdeploy='"$HOME/Dropbox/www/vs2017/bin/sync.sh"'
 fi
 
