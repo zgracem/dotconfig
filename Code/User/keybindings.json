@@ -140,6 +140,6 @@
   {
     "key": "backspace",
     "command": "markdown.extension.onBackspaceKey",
-    "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown' && !suggestWidgetVisible"
+    "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown'"
   }
 ]

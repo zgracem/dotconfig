@@ -143,6 +143,7 @@ module Sample
       white:  %w[diamond glass]
     }
   end
+  alias hsh hash
 
   # @return [Array<String>]
   def array
