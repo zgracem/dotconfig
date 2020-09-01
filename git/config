@@ -25,8 +25,8 @@
 
 [difftool]
 	prompt = false
-  # Be able to abort all diffs with `:cq` or `:cquit`
-  trustExitCode = true
+	# Be able to abort all diffs with `:cq` or `:cquit`
+	trustExitCode = true
 
 [push]
 	default = simple
