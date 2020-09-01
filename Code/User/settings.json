@@ -154,9 +154,7 @@
     "terminal.integrated.env.osx",
     "terminal.integrated.shell.osx",
     "terminal.integrated.shellArgs.osx",
-    "window.doubleClickIconToClose",
-    "window.enableMenuBarMnemonics",
-    "window.menuBarVisibility"
+    "window.doubleClickIconToClose"
   ],
   "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.exclude": [
