@@ -186,7 +186,7 @@
     "[makefile]",
     "[markdown]"
   ],
-  "spellright.addToSystemDictionary": false,
+  "spellright.addToSystemDictionary": true,
   "spellright.configurationScope": "user",
   "spellright.documentTypes": [
     "markdown",
