@@ -158,8 +158,8 @@
   ],
   "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.exclude": [
-    1090,
-    1091
+    "1090",
+    "1091"
   ],
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "shellcheck.run": "onSave",
