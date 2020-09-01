@@ -1,10 +1,4 @@
 {
-  "bracket-pair-colorizer-2.colors": [
-    "#b58900",
-    "#6c71c4",
-    "#268bd2"
-  ],
-  "bracket-pair-colorizer-2.unmatchedScopeColor": "#dc322f",
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "on",
   "code-runner.clearPreviousOutput": true,
