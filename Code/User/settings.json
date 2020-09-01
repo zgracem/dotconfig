@@ -196,6 +196,8 @@
   "spellright.language": [
     "en_CA"
   ],
+  "spellright.notificationClass": "information",
+  "spellright.recheckOnSave": false,
   "spellright.suggestionsInHints": false,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
