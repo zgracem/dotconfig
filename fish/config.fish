@@ -37,6 +37,7 @@ if status is-interactive
 
   # source vendor completions
   set -p fish_complete_path "$HOME/opt/etc/fish/completions"
+  set -p fish_complete_path "$__fish_config_dir/completions"
 end
 
 # remove duplicate & nonexistent directories

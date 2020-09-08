@@ -78,6 +78,7 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "git.defaultCloneDirectory": "/Users/zozo/.local/src/github",
+  "git.path": "/usr/local/bin/git",
   "gitlens.blame.avatars": false,
   "gitlens.codeLens.enabled": false,
   "gitlens.defaultDateFormat": "YYYY-MM-DD @ HH:mm",
