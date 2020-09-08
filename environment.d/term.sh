@@ -43,6 +43,9 @@ else
       # Deliberately use a constant here to test truthiness
       # shellcheck disable=SC2194
       case 1 in
+        $(( ver >= 433 ))*) # macOS 10.15
+          TERM=nsterm
+          ;;
         $(( ver >= 421 ))*) # macOS 10.14
           TERM=nsterm
           ;;
