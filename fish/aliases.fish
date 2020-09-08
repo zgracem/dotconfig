@@ -47,10 +47,8 @@ abbr -a -g 644 'chmod 0644'
 abbr -a -g 700 'chmod 0700'
 abbr -a -g 755 'chmod 0755'
 
-if in-path bundle; and in-path middleman
-  abbr -a -g mm 'bundle exec middleman'
-  abbr -a -g mmn 'bundle exec middleman 2>/dev/null'
-end
+in-path bundle; and in-path middleman;
+  and abbr -a -g mm 'bundle exec middleman 2>/dev/null'
 
 if in-path wget
   abbr -a -g dl 'wget'
