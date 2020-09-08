@@ -32,7 +32,8 @@
   "editor.find.autoFindInSelection": "multiline",
   "editor.find.seedSearchStringFromSelection": false,
   "editor.foldingHighlight": false,
-  "editor.fontFamily": "Native, IBM Plex Mono, Office Code Pro, Consolas, monospace",
+  "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
+  "editor.fontSize": 12,
   "editor.fontWeight": "300",
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 120,
@@ -186,7 +187,8 @@
   },
   "sortJSON.orderUnderride": [
     "[makefile]",
-    "[markdown]"
+    "[markdown]",
+    "[plaintext]"
   ],
   "spellright.addToSystemDictionary": true,
   "spellright.configurationScope": "user",
@@ -251,5 +253,8 @@
     },
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
+  },
+  "[plaintext]": {
+    "editor.wordBasedSuggestions": false
   }
 }
