@@ -35,7 +35,6 @@
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontSize": 12,
   "editor.fontWeight": "300",
-  "editor.formatOnSaveMode": "modifications",
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 120,
   "editor.lightbulb.enabled": false,
