@@ -67,8 +67,8 @@
     "*.ignore": "ignore",
     "*.make": "makefile",
     "*.plist": "xml",
-    "*.sublime-syntax": "yaml",
     "*.sublime-{settings,build,keymap}": "json",
+    "*.sublime-syntax": "yaml",
     "*.vifm": "viml",
     "ignore": "ignore",
     "vimrc": "viml"
@@ -198,10 +198,12 @@
     "sortJSONValuesReverse": false
   },
   "sortJSON.orderUnderride": [
+    "[fish]",
     "[makefile]",
     "[markdown]",
     "[plaintext]",
-    "[ruby]"
+    "[ruby]",
+    "[yaml]"
   ],
   "spellright.addToSystemDictionary": true,
   "spellright.configurationScope": "user",
@@ -275,5 +277,8 @@
   },
   "[ruby]": {
     "editor.formatOnSave": true
+  },
+  "[yaml]": {
+    "editor.wordWrapColumn": 80
   }
 }
