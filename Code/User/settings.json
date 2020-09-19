@@ -252,6 +252,10 @@
   "yaml.format.enable": true,
   "yaml.format.printWidth": 80,
   "yaml.format.proseWrap": "always",
+  "[fish]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
   "[makefile]": {
     "editor.insertSpaces": false
   },
