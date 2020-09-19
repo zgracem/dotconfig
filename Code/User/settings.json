@@ -142,6 +142,8 @@
   "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
   "search.collapseResults": "auto",
+  "search.searchEditor.defaultNumberOfContextLines": 2,
+  "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "search.showLineNumbers": true,
   "search.smartCase": true,
   "settingsSync.ignoredExtensions": [
