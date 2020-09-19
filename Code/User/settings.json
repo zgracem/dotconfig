@@ -267,8 +267,7 @@
     "editor.quickSuggestions": {
       "other": false
     },
-    "editor.wordWrap": "bounded",
-    "files.trimTrailingWhitespace": false
+    "editor.wordWrap": "bounded"
   },
   "[plaintext]": {
     "editor.wordBasedSuggestions": false
