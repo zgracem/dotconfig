@@ -97,13 +97,23 @@
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.extension.syntax.decorations": false,
   "markdownlint.config": {
-    "MD007": { "indent": 4 },
-    "MD009": { "strict": true },
-    "MD010": { "code_blocks": false },
+    "MD007": {
+      "indent": 4
+    },
+    "MD009": {
+      "strict": true
+    },
+    "MD010": {
+      "code_blocks": false
+    },
     "MD013": false,
-    "MD024": { "siblings_only": true },
+    "MD024": {
+      "siblings_only": true
+    },
     "MD025": false,
-    "MD026": { "punctuation": ",;" },
+    "MD026": {
+      "punctuation": ",;"
+    },
     "MD028": false,
     "MD032": false,
     "MD033": false,
