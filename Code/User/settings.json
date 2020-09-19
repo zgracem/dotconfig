@@ -141,6 +141,8 @@
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
   "ruby.useLanguageServer": false,
   "scm.defaultViewMode": "tree",
+  "search.collapseResults": "auto",
+  "search.showLineNumbers": true,
   "search.smartCase": true,
   "settingsSync.ignoredExtensions": [
     "castwide.solargraph"
