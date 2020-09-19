@@ -237,7 +237,7 @@
   "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.colorTheme": "Material Theme Palenight High Contrast",
   "workbench.editor.highlightModifiedTabs": true,
-  "workbench.editor.restoreViewState": false,
+  "workbench.editor.restoreViewState": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
   "workbench.editor.tabSizing": "shrink",
