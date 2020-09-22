@@ -10,7 +10,9 @@
 		}
 	],
 	"settings": {
-		"workbench.colorTheme": "Solarized Dark"
+    "workbench.colorTheme": "Better Solarized Dark Italics",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.tree.indent": 8
 	},
 	"tasks": {
     "version": "2.0.0",
