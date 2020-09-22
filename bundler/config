@@ -1,7 +1,8 @@
-# vim:ft=yaml
-# export BUNDLE_USER_CONFIG=~/.config/bundler/config
 ---
-BUNDLE_GEM__TEST: false
-BUNDLE_GEM__MIT: true
-BUNDLE_GEM__COC: true
+BUNDLE_GEM__TEST: "false"
+BUNDLE_GEM__MIT: "true"
+BUNDLE_GEM__COC: "true"
 BUNDLE_BUILD__NOKOGIRI: "nil"
+BUNDLE_CLEAN: "false"
+BUNDLE_UPDATE_REQUIRES_ALL_FLAG: "true"
+BUNDLE_IGNORE_MESSAGES__HTTPARTY: "true"
