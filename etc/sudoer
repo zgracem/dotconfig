@@ -1,9 +1,9 @@
 # /etc/sudoers.d/sudoer_$USER
 
-Defaults    editor    =  "/usr/local/bin/vim"
+Defaults editor = "/usr/local/bin/vim"
 
 # pass important multiplexer-related variables
-Defaults    env_keep += "STY TMUX"
+Defaults env_keep += "STY TMUX"
 
 # pass location of custom terminfo files
-Defaults    env_keep += "TERMINFO TERMINFO_DIRS"
+Defaults env_keep += "TERMINFO TERMINFO_DIRS"
