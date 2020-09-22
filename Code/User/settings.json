@@ -132,18 +132,6 @@
     "MD044": false,
     "MD045": false
   },
-  "material-icon-theme.files.associations": {
-    "config": "settings"
-  },
-  "material-icon-theme.folders.associations": {
-    "Code": "vscode",
-    "environment.d": "environment",
-    "etc": "other",
-    "git": "git",
-    "npm": "node",
-    "skel": "template",
-    "ssh": "keys"
-  },
   "outline.problems.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
   "ruby.useLanguageServer": false,
