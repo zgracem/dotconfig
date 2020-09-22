@@ -528,9 +528,9 @@ _z_prompt_cmd_del()
 
 # -----------------------------------------------------------------------------
 
-if [[ $TERM_PROGRAM == iTerm.app ]]; then
-  _z_prompt_cmd_add iterm::state
-fi
+# if [[ $TERM_PROGRAM == iTerm.app ]]; then
+#   _z_prompt_cmd_add iterm::state
+# fi
 
 if [[ $TERM_PROGRAM == Apple_Terminal || $TERM_PROGRAM == mintty ]]; then
   _z_prompt_cmd_add _z_PS1_update_cwd
