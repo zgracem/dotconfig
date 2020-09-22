@@ -136,8 +136,6 @@
   "outline.problems.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
   "ruby.useLanguageServer": false,
-  "scm.defaultViewMode": "tree",
-  "search.collapseResults": "auto",
   "search.searchEditor.defaultNumberOfContextLines": 2,
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
   "search.showLineNumbers": true,
@@ -178,7 +176,6 @@
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
   "solargraph.bundlerPath": "/Users/zozo/.rbenv/shims/bundle",
-  "solargraph.checkGemVersion": false,
   "solargraph.commandPath": "/Users/zozo/.rbenv/shims/solargraph",
   "solargraph.completion": true,
   "solargraph.definitions": true,
@@ -215,7 +212,6 @@
   "spellright.language": [
     "en_CA"
   ],
-  "spellright.notificationClass": "information",
   "spellright.recheckOnSave": false,
   "spellright.suggestionsInHints": false,
   "synthwave84.disableGlow": true,
@@ -230,11 +226,8 @@
     "PREFERRED_SHELL": "bash"
   },
   "terminal.integrated.scrollback": 10240,
-  "terminal.integrated.shell.osx": "/usr/local/bin/bash",
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
-  "terminal.integrated.shellArgs.osx": [],
   "window.newWindowDimensions": "offset",
-  "window.openFilesInNewWindow": "default",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
@@ -242,7 +235,6 @@
   "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.colorTheme": "Monokai Pro (Filter Octagon)",
   "workbench.editor.highlightModifiedTabs": true,
-  "workbench.editor.restoreViewState": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
   "workbench.editor.tabSizing": "shrink",
@@ -256,9 +248,6 @@
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
-  "yaml.format.enable": true,
-  "yaml.format.printWidth": 80,
-  "yaml.format.proseWrap": "always",
   "[fish]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 4
