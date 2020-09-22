@@ -1,0 +1,31 @@
+---
+Label: org.inescapable.environment
+Disabled: false
+# LimitLoadToSessionType: Aqua
+# Program: /usr/local/bin/bash
+ProgramArguments:
+- "bash"
+- "-c"
+- 'while read -r subcmd || [[ -n $subcmd ]]; do [[ ${subcmd:0:1} != "#" ]] && eval "/bin/launchctl $subcmd"; done'
+EnableGlobbing: true
+KeepAlive:
+  SuccessfulExit: true
+RunAtLoad: true
+WorkingDirectory: "/Users/zozo"
+EnvironmentVariables:
+  PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+ThrottleInterval: 60
+WatchPaths:
+- /Users/zozo/Dropbox/.config/environment.d
+# StartInterval: 60
+# StartCalendarInterval:
+# - Minute: 0
+#   Hour: 4
+#   Day: 1..31
+#   Weekday: 0..6
+#   Month: 1..12
+StandardInPath: "/Users/zozo/Dropbox/.config/etc/launchd.conf"
+# StandardErrorPath: "/dev/null"
+# StandardOutPath: "/dev/null"
+# Nice: 0
+ProcessType: Background # Standard|Adaptive|Interactive
