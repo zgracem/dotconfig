@@ -2,10 +2,7 @@
   "files.exclude": {
     ".git{attributes,modules}": true,
     "htop": true,
-    "spicetify_data/{Backup,CustomApps,Extensions,Extracted,Themes}": true,
-    "syncplay.ini": true,
-    "vifm-help.txt": true,
-    "vifm{info,files}": true
+    "syncplay.ini": true
   },
   "git.detectSubmodules": false,
   "shellcheck.enable": true,
