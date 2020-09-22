@@ -261,9 +261,6 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
-  "[makefile]": {
-    "editor.insertSpaces": false
-  },
   "[markdown]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
