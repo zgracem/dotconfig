@@ -67,8 +67,8 @@
     "*.ignore": "ignore",
     "*.make": "makefile",
     "*.plist": "xml",
-    "*.sublime-{settings,build,keymap}": "json",
     "*.sublime-syntax": "yaml",
+    "*.sublime-{settings,build,keymap}": "json",
     "*.vifm": "viml",
     "ignore": "ignore",
     "vimrc": "viml"
@@ -94,16 +94,16 @@
   "insertGuid.showCodeSnippets": false,
   "jqPlayground.binaryPath": "/usr/local/bin/jq",
   "json.maxItemsComputed": 8192,
-  "markdownShortcuts.icons.bold": false,
-  "markdownShortcuts.icons.italic": false,
-  "markdownShortcuts.icons.strikethrough": false,
-  "markdownShortcuts.icons.bullets": false,
-  "markdownShortcuts.icons.link": false,
-  "markdownShortcuts.icons.image": false,
-  "markdownShortcuts.icons.citations": false,
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.extension.syntax.decorations": false,
+  "markdownShortcuts.icons.bold": false,
+  "markdownShortcuts.icons.bullets": false,
+  "markdownShortcuts.icons.citations": false,
+  "markdownShortcuts.icons.image": false,
+  "markdownShortcuts.icons.italic": false,
+  "markdownShortcuts.icons.link": false,
+  "markdownShortcuts.icons.strikethrough": false,
   "markdownlint.config": {
     "MD007": {
       "indent": 4
