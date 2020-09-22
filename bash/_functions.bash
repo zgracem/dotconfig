@@ -4,7 +4,7 @@
 
 # load function self-documentation library
 # shellcheck source=../../lib/bash/fxdoc/_init.bash
-. ~/lib/bash/fxdoc/_init.bash
+. ~/Dropbox/lib/bash/fxdoc/_init.bash
 
 p()
 { #: -- print each argument to stdout on its own line
