@@ -52,7 +52,7 @@ if is-cygwin
 end
 
 # See conf.d/_update_lastpwd.fish
-if test -f ~/.lastpwd; and status is-interactive
-  set -l dir (cat ~/.lastpwd)
+if test -f $__fish_user_data_dir/last_pwd; and status is-interactive
+  set -l dir (cat $__fish_user_data_dir/last_pwd)
   test -d "$dir"; and cd "$dir"
 end
