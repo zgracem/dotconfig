@@ -62,6 +62,7 @@
   "editor.wordWrapColumn": 118,
   "emojisense.emojiDecoratorsEnabled": false,
   "emojisense.markupCompletionsEnabled": false,
+  "extensions.closeExtensionDetailsOnViewChange": false,
   "extensions.showRecommendationsOnlyOnDemand": true,
   "files.associations": {
     "*.[1-9]": "troff",
@@ -80,6 +81,7 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "git.defaultCloneDirectory": "/Users/zozo/.local/src/github",
+  "git.openDiffOnClick": false,
   "git.path": "/usr/local/bin/git",
   "gitlens.blame.avatars": false,
   "gitlens.codeLens.enabled": false,
@@ -98,6 +100,8 @@
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.extension.syntax.decorations": false,
+  "markdown.extension.toc.levels": "1..3",
+  "markdown.extension.toc.orderedList": true,
   "markdownShortcuts.icons.bold": false,
   "markdownShortcuts.icons.bullets": false,
   "markdownShortcuts.icons.citations": false,
@@ -135,6 +139,7 @@
   },
   "outline.problems.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
+  "ruby.pathToBundler": "/Users/zozo/.rbenv/shims/bundle",
   "ruby.useLanguageServer": false,
   "search.searchEditor.defaultNumberOfContextLines": 2,
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
@@ -168,6 +173,7 @@
     "window.doubleClickIconToClose"
   ],
   "settingsSync.keybindingsPerPlatform": false,
+  "shellcheck.enableQuickFix": true,
   "shellcheck.exclude": [
     "1090",
     "1091"
@@ -187,6 +193,7 @@
   "solargraph.rename": true,
   "solargraph.symbols": true,
   "sortJSON.contextMenu": {
+    "sortJSONAlphaNum": false,
     "sortJSONAlphaNumReverse": false,
     "sortJSONKeyLength": false,
     "sortJSONKeyLengthReverse": false,
@@ -203,7 +210,7 @@
     "[yaml]"
   ],
   "spellright.addToSystemDictionary": true,
-  "spellright.configurationScope": "user",
+  "spellright.configurationUpdate": false,
   "spellright.documentTypes": [
     "markdown",
     "git-commit"
@@ -215,6 +222,7 @@
   "spellright.recheckOnSave": false,
   "spellright.suggestionsInHints": false,
   "synthwave84.disableGlow": true,
+  "task.saveBeforeRun": "prompt",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "terminal.external.osxExec": "iTerm.app",
@@ -227,13 +235,15 @@
   },
   "terminal.integrated.scrollback": 10240,
   "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
+  "window.closeWhenEmpty": true,
   "window.newWindowDimensions": "offset",
   "window.openFoldersInNewWindow": "on",
   "window.restoreWindows": "all",
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
   "window.titleSeparator": " · ",
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.colorTheme": "Monokai Pro (Filter Octagon)",
+  "workbench.colorTheme": "Monokai Pro (Filter Machine)",
+  "workbench.editor.closeEmptyGroups": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
