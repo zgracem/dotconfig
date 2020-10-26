@@ -16,8 +16,7 @@ include IRB # rubocop:disable Style/MixinUsage
 # http://irb.tools/
 # -----------------------------------------------------------------------------
 
-# `configure.rb` loads `implementation.rb`, which sets up the Irbtools module
-# with default settings
+# Load `implementation.rb`, setup Irbtools module with default settings
 require "irbtools/configure"
 
 # Get just the version number
