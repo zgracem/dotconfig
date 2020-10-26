@@ -30,7 +30,6 @@
   "editor.colorDecorators": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
-  "editor.find.addExtraSpaceOnTop": false,
   "editor.find.seedSearchStringFromSelection": false,
   "editor.foldingHighlight": false,
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
@@ -245,6 +244,7 @@
   "workbench.colorTheme": "Monokai Pro (Filter Machine)",
   "workbench.editor.closeEmptyGroups": false,
   "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
   "workbench.editor.tabSizing": "shrink",
@@ -270,7 +270,8 @@
     "editor.quickSuggestions": {
       "other": false
     },
-    "editor.wordWrap": "bounded"
+    "editor.wordWrap": "bounded",
+    "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
     "editor.wordBasedSuggestions": false
