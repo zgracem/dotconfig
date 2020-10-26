@@ -1,19 +1,19 @@
 {
-	"folders": [
-		{
-			"name": "~/.config",
-			"path": "."
-		},
-		{
-			"name": "~/.private",
-			"path": "../.private"
-		}
-	],
-	"settings": {
+  "folders": [
+    {
+      "name": "~/.config",
+      "path": "."
+    },
+    {
+      "name": "~/.private",
+      "path": "../.private"
+    }
+  ],
+  "settings": {
     "workbench.colorTheme": "Better Solarized Dark Italics",
     "workbench.tree.indent": 8
-	},
-	"tasks": {
+  },
+  "tasks": {
     "version": "2.0.0",
     "osx": {
       "options": {
@@ -23,30 +23,30 @@
         }
       }
     },
-		"tasks": [
-			{
-				"label": "Launch Sublime Merge",
-				"osx": {
-					"type": "shell",
-					"command": "smerge"
-				},
-				"windows": {
-					"type": "process",
-					"command": "${env:USERPROFILE}/Applications/Sublime Merge/sublime_merge.exe"
-				},
-				"args": [
-					"${workspaceFolder}"
-				]
-			},
-			{
-				"label": "Dump environment",
-				"type": "shell",
-				"command": "env | sort",
-				"presentation": {
-					"clear": true,
-					"reveal": "always"
-				}
-			}
-		]
-	}
+    "tasks": [
+      {
+        "label": "Launch Sublime Merge",
+        "osx": {
+          "type": "shell",
+          "command": "smerge"
+        },
+        "windows": {
+          "type": "process",
+          "command": "${env:USERPROFILE}/Applications/Sublime Merge/sublime_merge.exe"
+        },
+        "args": [
+          "${workspaceFolder}"
+        ]
+      },
+      {
+        "label": "Dump environment",
+        "type": "shell",
+        "command": "env | sort",
+        "presentation": {
+          "clear": true,
+          "reveal": "always"
+        }
+      }
+    ]
+  }
 }
