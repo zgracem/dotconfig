@@ -2,6 +2,6 @@
 # export GEMRC=~/.config/ruby/gemrc
 ---
 install: --no-rdoc --env-shebang
-update: --no-rdoc --env-shebang --minimal-deps
+update: --no-rdoc --env-shebang --minimal-deps --conservative
 uninstall: --executables
 query: --details
