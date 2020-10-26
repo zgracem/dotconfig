@@ -8,5 +8,9 @@
       "end"
     ],
     "description": "#inspect"
+  },
+  "frozen_string_literal": {
+    "prefix": "frozen",
+    "body": "# frozen_string_literal: true\n\n"
   }
 }
