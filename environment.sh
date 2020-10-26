@@ -33,7 +33,7 @@ fi
 
 # Add domain to names of shared hosts
 case $HOSTNAME in
-  WS[[:digit:]]*|web[[:digit:]]*)
+  WS-*|web[[:digit:]]*)
     if FULL_HOSTNAME=$(hostname -f 2>/dev/null); then
       HOSTNAME=$FULL_HOSTNAME
     fi
