@@ -3,7 +3,7 @@
 
 [core]
 	autocrlf = input
-	safecrlf = true
+	safecrlf = false
 	excludesfile = ~/.config/git/ignore
 	filemode = false
 
