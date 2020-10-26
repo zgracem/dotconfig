@@ -100,7 +100,7 @@ function rl --description "Reload configuration files"
     case colours
       set --erase -U __zgm_init_colours
     case keychain
-      command killall ssh-agent 2>/dev/null
+      command killall -v ssh-agent
       set --erase -g SSH_AGENT_PID
     end
 
