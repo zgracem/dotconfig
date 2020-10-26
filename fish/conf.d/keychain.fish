@@ -1,5 +1,5 @@
 if status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
-  set -l keys id_{ed25519,rsa}
+  set -l keys id_{ed25519,rsa_2020}
 
   set -Ue SSH_AUTH_SOCK
   set -Ue SSH_AGENT_PID
