@@ -116,9 +116,9 @@ if [[ -z $PREFERRED_SHELL ]]; then
       # the session crashes immediately. I don't know why. -- ZGM 2019-03-01
       PREFERRED_SHELL=$HOME/opt/bin/fish
       ;;
-    web*)
-      # I'm not allowed to change anything on my shared hosts.
-      PREFERRED_SHELL=$HOME/.linuxbrew/bin/fish
+    opal*)
+      # I'm not allowed to change anything on my shared host
+      PREFERRED_SHELL=$HOME/opt/bin/fish
       ;;
     *)
       PREFERRED_SHELL=$(type -P fish)

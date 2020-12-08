@@ -22,7 +22,7 @@ else
 end
 
 abbr -a -g vshraya '_ssh vshraya'
-abbr -a -g wf '_ssh WebFaction'
+abbr -a -g opal '_ssh opalstack'
 
 # -----------------------------------------------------------------------------
 # abbreviations
