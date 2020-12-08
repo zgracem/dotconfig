@@ -236,8 +236,10 @@ if   (( SHLVL <= 1 )) \
   && [[ -z $Z_NO_INIT ]] \
   && (( EUID != 0 ))
 then
-  # shellcheck source=./init.bash
-  . "$XDG_CONFIG_HOME/bash/init.bash"
+  if [[ -f "$XDG_CONFIG_HOME/bash/init.bash" ]]; then
+    # shellcheck source=./init.bash
+    . "$XDG_CONFIG_HOME/bash/init.bash"
+  fi
 
   if [[ -f ~/.local/config/init.bash ]]; then
     . ~/.local/config/init.bash
