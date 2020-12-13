@@ -62,7 +62,7 @@
   "emojisense.emojiDecoratorsEnabled": false,
   "emojisense.markupCompletionsEnabled": false,
   "extensions.closeExtensionDetailsOnViewChange": false,
-  "extensions.showRecommendationsOnlyOnDemand": true,
+  "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.[1-9]": "troff",
     "*.ignore": "ignore",
