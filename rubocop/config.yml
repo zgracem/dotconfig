@@ -45,6 +45,10 @@ Style/AutoResourceCleanup:
 Style/AsciiComments:
   Enabled: false
 
+# Allow =begin/=end block comments
+Style/BlockComments:
+  Enabled: false
+
 # Prefer e.g. `find` to `detect` and `reduce` to `inject`
 Style/CollectionMethods:
   Enabled: true
