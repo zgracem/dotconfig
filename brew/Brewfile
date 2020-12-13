@@ -93,6 +93,7 @@ brew "fortune"
 brew "figlet"
 brew "lolcat"
 brew "nethack"
+brew "openjdk" # java(1) for Minecraft mods
 brew "ponysay"
 brew "screenfetch"
 
