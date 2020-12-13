@@ -23,6 +23,11 @@ Layout/MultilineHashKeyLineBreaks:
 
 ### Metrics ###
 
+Metrics/BlockLength:
+  IgnoredMethods:
+    - helpers
+    - refine
+
 Metrics/LineLength:
   Max: 118
 
