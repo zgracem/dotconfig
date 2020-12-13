@@ -1,0 +1,7 @@
+inherit_from: ../rubocop/config.yml
+
+Naming/FileName:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false

@@ -61,6 +61,7 @@ brew "bat"
 brew "exa"
 brew "fd"
 brew "hexyl"
+brew "htop"
 brew "openssh"
 brew "source-highlight" # for less
 brew "ssh-copy-id", link: true
@@ -117,16 +118,16 @@ end
 
 # ffmpeg with options
 tap  "homebrew-ffmpeg/ffmpeg"
-brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: [
-  "HEAD",
-  "with-fdk-aac",
-  "with-libssh",
-  "with-openh264",
-  "with-openssl",
-  "with-rtmpdump",
-  "with-two-lame",
-  "with-webp",
-  "with-xvid"
+brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
+  HEAD
+  with-fdk-aac
+  with-libssh
+  with-openh264
+  with-openssl
+  with-rtmpdump
+  with-two-lame
+  with-webp
+  with-xvid
 ]
 
 # images
@@ -144,8 +145,10 @@ end
 # development stuff
 # -----------------------------------------------------------------------------
 
+brew "cmake"
 brew "groff"
 brew "help2man"
+brew "hub"
 brew "ncurses"
 brew "shellcheck"
 brew "taglib" # for taglib-ruby gem

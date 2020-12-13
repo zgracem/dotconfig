@@ -12,6 +12,7 @@ if OS.mac? && MacOS.version >= "10.11"
   cask "acorn"
   cask "alfred"
   cask "discord"
+  cask "dotnet"
   cask "dropbox"
   cask "fantastical"
   cask "file-juicer"
@@ -25,15 +26,14 @@ if OS.mac? && MacOS.version >= "10.11"
   cask "istat-menus"
   cask "iterm2"
   cask "kid3"
+  cask "loopback"
   cask "metaz"
   cask "minecraft"
   cask "name-mangler"
   cask "pdf-expert"
   cask "ql-ansilove" # preview ANSI art
   cask "qladdict" # preview .srt subtitle files
-  cask "qlcolorcode"
   cask "qlmarkdown"
-  cask "qlstephen" # preview text files w/ no extension (e.g. README)
   cask "sip"
   cask "spotify"
   cask "steam"
@@ -61,10 +61,13 @@ if OS.mac?
   mas "Day One", id: 1055511498
   mas "Divvy", id: 413857545
   mas "Fantastical", id: 435003921
-  # mas "GarageBand", id: 682658836
-  # mas "Keynote", id: 409183694
-  # mas "Numbers", id: 409203825
-  # mas "Pages", id: 409201541
+  mas "GarageBand", id: 682658836
+  mas "iMovie", id: 408981434
+  mas "Keynote", id: 409183694
+  mas "Mactracker", id: 430255202
+  mas "Numbers", id: 409203825
+  mas "Pages", id: 409201541
   mas "The Archive Browser", id: 510232205
+  mas "Things", id: 904280696
   mas "Xcode", id: 497799835
 end
