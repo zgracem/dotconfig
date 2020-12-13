@@ -33,7 +33,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 * My primary text editor is [VSCode], which integrates [markdownlint],
   [rubocop], and [shellcheck] to make sure I dot my q's and cross my p's.
 * Files that can be safely published to this GitHub repo live in `~/.config/`.
-  Everything else lives in `~/.private/`, which is encrypted by [Keybase]. 🔐
+  Everything else lives in `~/.private/`. 🔐
 
 [PuTTY]: https://www.chiark.greenend.org.uk/~sgtatham/putty/
 [iTerm2]: https://www.iterm2.com/
@@ -43,7 +43,6 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 [markdownlint]: https://github.com/DavidAnson/markdownlint
 [rubocop]: https://github.com/rubocop-hq/rubocop
 [shellcheck]: https://www.shellcheck.net/
-[Keybase]: https://keybase.io/zgm
 
 ### Setting up a new homedir 🏡
 
