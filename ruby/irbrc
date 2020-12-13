@@ -88,6 +88,8 @@ IRB.conf[:SAVE_HISTORY] = 2**15
 off = Colour.reset.to_s
 dim = Colour.brightblack.to_s
 
+IRB.conf[:PROMPT] ||= {}
+
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
   PROMPT_I: "#{Colour.blue}>>#{off} ",
