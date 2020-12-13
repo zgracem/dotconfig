@@ -16,7 +16,7 @@ gem "facets"
 gem "htmlentities"
 
 # <github.com/janlelis/irbtools>
-gem "irbtools"
+gem "irbtools", require: "irbtools/binding"
 
 # <github.com/flori/json>
 gem "json", ">= 2.3.0"
@@ -89,4 +89,4 @@ gem "taglib-ruby"
 
 # -----------------------------------------------------------------------------
 
-gem "tiny_dancer" #, github: "zgracem/tiny-dancer", branch: "master"
+# gem "tiny_dancer", github: "zgracem/tiny-dancer", branch: "master"

@@ -121,16 +121,16 @@ end
 
 # Create misc. objects for testing
 module Sample
-  extend self
+  module_function
 
   # @return [String]
   def string
     "Hëllo, wórld!\n"
   end
-  alias str string
+  alias_method :str, :string
 
   # @return [Integer]
-  alias original_hash hash
+  alias_method :original_hash, :hash
 
   # @return [Hash]
   def hash
@@ -142,19 +142,19 @@ module Sample
       white:  %w[diamond glass]
     }
   end
-  alias hsh hash
+  alias_method :hsh, :hash
 
   # @return [Array<String>]
   def array
-    hsh.values.flatten
+    hash.values.flatten
   end
-  alias ary array
+  alias_method :ary, :array
 
   # @return [Integer]
   def integer
     rand(10..1000)
   end
-  alias int integer
+  alias_method :int, :integer
 
   # @return [Float]
   def float
@@ -165,7 +165,7 @@ module Sample
   def regex
     /\A\h+\z/i
   end
-  alias regexp regex
+  alias_method :regexp, :regex
 
   # @return [Set]
   def set
@@ -178,5 +178,5 @@ module Sample
     require "uri"
     URI("https://user:p4s$w0rd@example.org:8000/path/to/resource.cgi?param=value#anchor")
   end
-  alias url uri
+  alias_method :url, :uri
 end

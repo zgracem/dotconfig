@@ -33,6 +33,10 @@ Metrics/LineLength:
 
 ### Style ###
 
+# Always use `alias_method` for methods of modules and classes at runtime
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
 # Suggest auto-cleaning versions of methods when available
 Style/AutoResourceCleanup:
   Enabled: true
