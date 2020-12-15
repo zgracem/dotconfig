@@ -4,7 +4,7 @@ function install-github-fish
     set install_dir "$HOME/opt/stow/fish-HEAD"
 
     if test -d "$src_dir/.git"
-        rm -rf "$build_dir"
+        rm -rf "$build_dir" >/dev/null
         cd "$src_dir"; or return
         git pull --force; or return
     else
