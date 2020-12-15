@@ -29,7 +29,7 @@ abbr -a -g opal '_ssh opalstack'
 # -----------------------------------------------------------------------------
 
 if is-macos
-  abbr -a -g plbuddy '/usr/libexec/PlistBuddy'
+  abbr -a -g buddy '/usr/libexec/PlistBuddy'
   abbr -a -g sp 'mdfind -name'
 end
 
