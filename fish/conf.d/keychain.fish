@@ -7,12 +7,13 @@ if status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
   set -l keychain_dir "$XDG_RUNTIME_DIR/keychain"
   set -l ssh_env $keychain_dir/.env
 
-  set -l params      --eval --quick --quiet
-  set params $params --dir "$keychain_dir" --absolute
-  set params $params --inherit any --ignore-missing
+  set -l params --eval --quick --inherit any
+  set -a params --dir "$keychain_dir" --absolute
+  set -a params --quiet --ignore-missing
 
   if test -d "$keychain_dir"
     set -lx SHELL (status fish-path 2>/dev/null; or command -s fish)
+
     keychain $params $keys > $ssh_env
 
     if test -s $ssh_env # ssh-agent loaded, or existing agent found
