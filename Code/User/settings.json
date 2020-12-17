@@ -1,4 +1,22 @@
 {
+  "autoSnippet.snippets": [
+    {
+      "language": "gemfile",
+      "snippet": "new_Gemfile"
+    },
+    {
+      "language": "markdown",
+      "snippet": "Markdown_frontmatter"
+    },
+    {
+      "language": "ruby",
+      "snippet": "frozen_string_literal"
+    },
+    {
+      "language": "shellscript",
+      "snippet": "shellscript_hashbang"
+    }
+  ],
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "on",
   "code-runner.clearPreviousOutput": true,

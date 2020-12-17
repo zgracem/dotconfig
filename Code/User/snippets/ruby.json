@@ -11,6 +11,9 @@
   },
   "frozen_string_literal": {
     "prefix": "frozen",
-    "body": "# frozen_string_literal: true\n\n"
+    "body": [
+      "$LINE_COMMENT frozen_string_literal: true\n\n"
+    ],
+    "description": "# frozen_string_literal: true"
   }
 }

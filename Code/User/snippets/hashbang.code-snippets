@@ -1,19 +1,19 @@
 {
-  "shellscript hashbang": {
+  "shellscript_hashbang": {
     "prefix": "!env",
     "body": [
       "#!/usr/bin/env ${1|bash,sh|}"
     ],
     "scope": "shellscript"
   },
-  "fish hashbang": {
+  "fish_hashbang": {
     "prefix": "!env",
     "body": [
       "#!/usr/bin/env ${1:fish}"
     ],
     "scope": "fish"
   },
-  "ruby hashbang": {
+  "ruby_hashbang": {
     "prefix": "!env",
     "body": [
       "#!/usr/bin/env ${1:ruby}"

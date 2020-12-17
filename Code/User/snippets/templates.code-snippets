@@ -1,0 +1,12 @@
+{
+  "new_Gemfile": {
+    "prefix": "gemfile",
+    "body": [
+      "$LINE_COMMENT frozen_string_literal: true\n",
+      "source \"https://rubygems.org\"\n",
+      "$0"
+    ],
+    "description": "Gemfile template",
+    "scope": "gemfile"
+  }
+}
