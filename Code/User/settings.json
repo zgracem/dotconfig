@@ -173,7 +173,6 @@
     "editor.fontFamily",
     "editor.fontSize",
     "editor.fontWeight",
-    "git.defaultCloneDirectory",
     "http.proxy",
     "http.proxyAuthorization",
     "http.proxyStrictSSL",
