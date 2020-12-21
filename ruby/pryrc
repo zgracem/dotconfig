@@ -1,2 +1,2 @@
 # vim:ft=ruby
-Pry.config.history.file = "~/.local/history/pry_history"
+Pry.config.history_file = "~/.local/history/pry_history"
