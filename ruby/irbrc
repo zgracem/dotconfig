@@ -30,12 +30,14 @@ IRB.conf[:SAVE_HISTORY] = 2**15
 
 off = Colour.reset.to_s
 dim = Colour.brightblack.to_s
+context = "#{Colour.italic}%m#{Colour.noitalic}"
+chevron = "#{Colour.blue}>#{off}"
 
 IRB.conf[:PROMPT] ||= {}
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.blue}>>#{off} ",
+  PROMPT_I: "#{Colour.dim}#{context}:%n#{off} #{chevron} ",
 
   # prompt when indenting code
   PROMPT_N: "#{dim}│#{off}  ",
