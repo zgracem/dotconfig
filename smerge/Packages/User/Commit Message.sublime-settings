@@ -1,0 +1,8 @@
+{
+    "commit_message": true,
+    "mini_diff": "auto",
+    "rulers": [ 72 ],
+    "spell_check": true,
+    "syntax": "Packages/Markdown/Markdown.sublime-syntax",
+    "word_wrap": true
+}
