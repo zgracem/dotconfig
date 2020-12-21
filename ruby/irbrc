@@ -10,63 +10,6 @@ require "pathname"
 
 require "zgm/colour"
 
-include IRB # rubocop:disable Style/MixinUsage
-
-# -----------------------------------------------------------------------------
-# http://irb.tools/
-# -----------------------------------------------------------------------------
-
-# Load `implementation.rb`, setup Irbtools module with default settings
-require "irbtools/configure"
-
-# Get just the version number
-irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
-
-# Format string for #format call
-welcome_string = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " \
-                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
-
-# Arguments for #format call
-fancy_colours = {
-  i:   Colour.green.to_s,
-  i_v: Colour.brightgreen.to_s,
-  r:   Colour.magenta.to_s,
-  r_v: Colour.brightmagenta.to_s,
-  x:   Colour.reset.to_s
-}
-
-# Override default welcome message
-Irbtools.welcome_message = format(welcome_string, fancy_colours)
-
-# Override default FancyIrb colours
-Irbtools.replace_library_callback :fancy_irb do
-  FancyIrb.start(
-    rocket_mode:      true,   # activate or deactivate #=> rocket
-    rocket_prompt:    "#=> ", # prompt to use for the rocket
-    result_prompt:    "=> ",  # prompt to use for normal output
-    east_asian_width: false,  # set to true if you have double-width characters (slower)
-    colorize:         {       # colors hash. Set to nil to deactivate colors
-      rocket_prompt: %i[blue],
-      result_prompt: %i[blue],
-      input_prompt:  nil,
-      irb_errors:    nil,
-      stderr:        %i[red bright],
-      stdout:        nil,
-      input:         nil
-    }
-  )
-end
-
-# Custom Wirb colour scheme
-Irbtools.replace_library_callback "wirb/wp" do
-  irbrc_dir = Pathname.new(__dir__).expand_path.realpath
-  Wirb.start
-  Wirb.load_schema "#{irbrc_dir}/zgm.wirb.yaml"
-end
-
-# Now we load the rest of it
-require "irbtools"
-
 # -----------------------------------------------------------------------------
 # settings
 # -----------------------------------------------------------------------------
@@ -182,3 +125,25 @@ module Sample
   end
   alias_method :url, :uri
 end
+
+# ----------------------------------------------------------------------------
+# Fancy greeting
+# ----------------------------------------------------------------------------
+
+# Get just the version number
+irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
+
+# Format string for #printf call
+welcome_string = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " \
+                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
+
+# Arguments for #printf call
+fancy_colours = {
+  i:   Colour.green.to_s,
+  i_v: Colour.brightgreen.to_s,
+  r:   Colour.magenta.to_s,
+  r_v: Colour.brightmagenta.to_s,
+  x:   Colour.reset.to_s
+}
+
+printf(welcome_string, fancy_colours)

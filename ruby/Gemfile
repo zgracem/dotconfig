@@ -15,9 +15,6 @@ gem "facets"
 # <github.com/threedaymonk/htmlentities>
 gem "htmlentities"
 
-# <github.com/janlelis/irbtools>
-gem "irbtools", require: "irbtools/binding"
-
 # <github.com/flori/json>
 gem "json", ">= 2.3.0"
 
