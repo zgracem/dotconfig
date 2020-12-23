@@ -137,7 +137,7 @@ irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
 
 # Format string for #printf call
 welcome_string = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " \
-                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s."
+                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s.\n"
 
 # Arguments for #printf call
 fancy_colours = {
