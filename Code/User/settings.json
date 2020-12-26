@@ -231,7 +231,7 @@
   "spellright.language": [
     "en_CA"
   ],
-  "spellright.recheckOnSave": false,
+  "spellright.recheckOnSave": true,
   "spellright.suggestionsInHints": false,
   "synthwave84.disableGlow": true,
   "task.saveBeforeRun": "never",
