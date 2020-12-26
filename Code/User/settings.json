@@ -27,7 +27,7 @@
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
   "code-runner.executorMap": {
-    "fish": "fish -C 'set -gx TERM dumb'",
+    "fish": "/Users/zozo/opt/bin/fish -C 'set -gx TERM dumb'",
     "html": "links -dump",
     "jq": "jq --null-input --from-file",
     "markdown": "multimarkdown -s --nolabels",
