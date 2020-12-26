@@ -67,7 +67,6 @@ SKEL = .skel
 curl/.curlrc: curl/_curlrc.m4
 wget/wgetrc: wget/wgetrc.m4
 youtube-dl/config: youtube-dl/config.m4
-user-agent.txt: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 $(CUSTOM_UA): user-agent.txt
 
 # ----------------------------------------------------------------------------
