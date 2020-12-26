@@ -223,7 +223,6 @@
     "sortJSONValuesReverse": false
   },
   "spellright.addToSystemDictionary": true,
-  "spellright.configurationUpdate": false,
   "spellright.documentTypes": [
     "markdown",
     "git-commit"
