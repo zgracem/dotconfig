@@ -276,6 +276,12 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
+  "[json]": {
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true
+  },
   "[markdown]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
