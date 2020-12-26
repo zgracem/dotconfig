@@ -92,7 +92,7 @@
     "ignore": "ignore",
     "vimrc": "viml"
   },
-  "files.defaultLanguage": "${activeEditorLanguage}",
+  "files.defaultLanguage": "plaintext",
   "files.eol": "\n",
   "files.hotExit": "onExitAndWindowClose",
   "files.insertFinalNewline": true,
