@@ -8,7 +8,7 @@
   "osx": {
     "options": {
       "env": {
-        "PATH": "/usr/local/bin:${env:PATH}",
+        "PATH": "${env:PATH}",
         "XDG_CONFIG_HOME": "${env:HOME}/.config"
       }
     }
