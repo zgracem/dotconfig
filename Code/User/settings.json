@@ -43,6 +43,7 @@
   },
   "code-runner.ignoreSelection": true,
   "code-runner.runInTerminal": false,
+  "code-runner.saveFileBeforeRun": true,
   "code-runner.showRunIconInEditorTitleMenu": false,
   "code-runner.temporaryFileName": "",
   "debug.showInlineBreakpointCandidates": false,
