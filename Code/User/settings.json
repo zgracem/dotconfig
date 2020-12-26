@@ -288,7 +288,7 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.wordBasedSuggestions": false
+    "editor.quickSuggestions": false
   },
   "[ruby]": {
     "editor.formatOnSave": true
