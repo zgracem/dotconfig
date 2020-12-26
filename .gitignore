@@ -16,6 +16,7 @@ ruby/irbrc_history
 syncplay.ini
 
 # unnecessary
+.contrib/
 *~
 *~orig*
 *.old
