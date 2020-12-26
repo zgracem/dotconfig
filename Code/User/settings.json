@@ -276,6 +276,7 @@
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
   "[fish]": {
+    "editor.detectIndentation": false,
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
