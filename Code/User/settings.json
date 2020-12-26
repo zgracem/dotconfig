@@ -15,6 +15,10 @@
     {
       "language": "shellscript",
       "snippet": "shellscript_hashbang"
+    },
+    {
+      "language": "fish",
+      "snippet": "fish_hashbang"
     }
   ],
   "breadcrumbs.enabled": true,
