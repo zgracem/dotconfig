@@ -1,4 +1,5 @@
 function install-github-fish
+    set prev_wd $PWD
     set src_dir "$HOME/.local/src/github.com/fish-shell"
     set build_dir "$src_dir/build"
     set install_dir "$HOME/opt/stow/fish-HEAD"
@@ -19,4 +20,5 @@ function install-github-fish
 
     make
     and make install
+    and cd "$prev_wd"
 end
