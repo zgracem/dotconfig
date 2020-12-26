@@ -221,14 +221,6 @@
     "sortJSONTypeReverse": false,
     "sortJSONValuesReverse": false
   },
-  "sortJSON.orderUnderride": [
-    "[fish]",
-    "[makefile]",
-    "[markdown]",
-    "[plaintext]",
-    "[ruby]",
-    "[yaml]"
-  ],
   "spellright.addToSystemDictionary": true,
   "spellright.configurationUpdate": false,
   "spellright.documentTypes": [

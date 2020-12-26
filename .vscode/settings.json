@@ -1,12 +1,7 @@
 {
   "files.exclude": {
-    ".git{attributes,modules}": true,
     "htop": true,
     "syncplay.ini": true
   },
-  "git.detectSubmodules": false,
-  "shellcheck.enable": true,
-  "shellcheck.exclude": [
-    "2148"
-  ]
+  "git.detectSubmodules": false
 }

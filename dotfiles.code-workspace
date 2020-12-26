@@ -10,6 +10,21 @@
     }
   ],
   "settings": {
+    "files.exclude": {
+      ".git{attributes,modules}": true
+    },
+    "shellcheck.enable": true,
+    "shellcheck.exclude": [
+      "2148"
+    ],
+    "sortJSON.orderUnderride": [
+      "[fish]",
+      "[makefile]",
+      "[markdown]",
+      "[plaintext]",
+      "[ruby]",
+      "[yaml]"
+    ],
     "workbench.colorTheme": "Better Solarized Dark Italics",
     "workbench.tree.indent": 8
   },
@@ -18,7 +33,7 @@
     "osx": {
       "options": {
         "env": {
-          "PATH": "/usr/local/bin:${env:PATH}",
+          "PATH": "${env:PATH}",
           "XDG_CONFIG_HOME": "${env:HOME}/.config"
         }
       }
@@ -45,7 +60,8 @@
         "presentation": {
           "clear": true,
           "reveal": "always"
-        }
+        },
+        "problemMatcher": []
       }
     ]
   }
