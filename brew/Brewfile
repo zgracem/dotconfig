@@ -158,6 +158,11 @@ if OS.mac?
   brew "alhadis/troff/man-db"
 end
 
+# JavaScript
+brew "node"
+brew "typescript"
+brew "yarn"
+
 # ruby
 if OS.mac? && MacOS.version >= "10.6"
   brew "rbenv"
