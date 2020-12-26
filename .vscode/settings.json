@@ -7,6 +7,6 @@
   "git.detectSubmodules": false,
   "shellcheck.enable": true,
   "shellcheck.exclude": [
-    2148
+    "2148"
   ]
 }
