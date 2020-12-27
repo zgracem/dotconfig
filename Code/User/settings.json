@@ -199,6 +199,11 @@
   "spellright.language": [
     "en_CA"
   ],
+  "spellright.notificationClassByParser": {
+    "code": "information",
+    "markdown": "error",
+    "plain": "warning"
+  },
   "spellright.recheckOnSave": true,
   "spellright.suggestionsInHints": false,
   "synthwave84.disableGlow": true,
