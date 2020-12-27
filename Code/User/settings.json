@@ -248,13 +248,16 @@
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
   "[fish]": {
     "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
   "[json]": {
+    "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
   "[jsonc]": {
+    "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
   "[markdown]": {
@@ -275,6 +278,7 @@
     "editor.formatOnSave": true
   },
   "[yaml]": {
+    "editor.formatOnSave": true,
     "editor.wordWrapColumn": 80
   }
 }
