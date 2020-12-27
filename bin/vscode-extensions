@@ -2,13 +2,13 @@
 # vim:ft=fish
 
 if not command --search --quiet code
-  echo >&2 "error: VS Code not found"
-  exit 1
+    echo >&2 "error: VS Code not found"
+    exit 1
 end
 
 if not command --search --quiet jq
-  echo >&2 "error: jq not found"
-  exit 1
+    echo >&2 "error: jq not found"
+    exit 1
 end
 
 set extensions_file ~/.config/Code/User/extensions.json
@@ -16,65 +16,65 @@ set desired_extensions (jq --raw-output '.recommendations[]' $extensions_file)
 set installed_extensions (code --list-extensions); or exit
 
 function do_install
-  for extension in $desired_extensions
-    if not contains $extension $installed_extensions
-      code --install-extension $extension
+    for extension in $desired_extensions
+        if not contains $extension $installed_extensions
+            code --install-extension $extension
+        end
     end
-  end
 end
 
 function do_cleanup
-  for extension in $installed_extensions
-    if not contains $extension $desired_extensions
-      code --uninstall-extension $extension
+    for extension in $installed_extensions
+        if not contains $extension $desired_extensions
+            code --uninstall-extension $extension
+        end
     end
-  end
 end
 
 function do_list
-  printf "%s\\n" $installed_extensions
+    printf "%s\\n" $installed_extensions
 end
 
 function do_diff
-  diff -u (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
+    diff -u (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
 end
 
 function do_json
-  set --local jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
-  jq --null-input --monochrome-output --rawfile exts (do_list | psub) $jq_script
+    set --local jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
+    jq --null-input --monochrome-output --rawfile exts (do_list | psub) $jq_script
 end
 
 function do_dump
-  do_json > $extensions_file
+    do_json >$extensions_file
 end
 
 function do_sync
-  do_install
-  do_cleanup
+    do_install
+    do_cleanup
 end
 
 function get_commands
-  set --local pattern '(?<=function do_)[a-z]+$'
-  ag --no-filename --no-numbers --only-matching $pattern (status filename) \
-  | sort -u
+    set --local pattern '(?<=function do_)[a-z]+$'
+    ag --no-filename --no-numbers --only-matching $pattern (status filename) \
+        | sort -u
 end
 
 function get_help
-  set --local commands (get_commands)
-  echo "Subcommands: $commands"
+    set --local commands (get_commands)
+    echo "Subcommands: $commands"
 end
 
 function main
-  switch "$argv[1]"
-  case (get_commands)
-    eval do_$argv[1]
-  case help ""
-    get_help
-  case "*"
-    echo >&2 "error: don't know how to $argv[1]"
-    get_help >&2
-    exit 1
-  end
+    switch "$argv[1]"
+        case (get_commands)
+            eval do_$argv[1]
+        case help ""
+            get_help
+        case "*"
+            echo >&2 "error: don't know how to $argv[1]"
+            get_help >&2
+            exit 1
+    end
 end
 
 main $argv

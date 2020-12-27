@@ -4,6 +4,6 @@
 # their user-agent string, based on the current version of Google Chrome.
 
 if set -q XDG_CONFIG_HOME
-  cd $XDG_CONFIG_HOME
-  make -B user-agent
+    cd $XDG_CONFIG_HOME
+    make -B user-agent
 end
