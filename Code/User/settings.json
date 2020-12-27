@@ -105,6 +105,9 @@
   "git.defaultCloneDirectory": "/Users/zozo/.local/src/github",
   "git.openDiffOnClick": false,
   "git.path": "/usr/local/bin/git",
+  "gitlens.advanced.blame.customArguments": [
+    "-w"
+  ],
   "gitlens.blame.avatars": false,
   "gitlens.codeLens.enabled": false,
   "gitlens.defaultDateFormat": "YYYY-MM-DD @ HH:mm",
