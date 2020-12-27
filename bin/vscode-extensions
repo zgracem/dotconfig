@@ -36,7 +36,7 @@ function do_list
 end
 
 function do_diff
-  diff (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
+  diff -u (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
 end
 
 function do_json
