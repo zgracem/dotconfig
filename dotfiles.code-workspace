@@ -19,9 +19,9 @@
     ],
     "sortJSON.orderUnderride": [
       "[fish]",
+      "[ini]",
       "[json]",
       "[jsonc]",
-      "[makefile]",
       "[markdown]",
       "[plaintext]",
       "[ruby]",

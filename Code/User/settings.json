@@ -252,6 +252,10 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
+  "[ini]": {
+    "editor.wordWrap": "off",
+    "files.trimTrailingWhitespace": false
+  },
   "[json]": {
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
