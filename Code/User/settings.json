@@ -118,7 +118,7 @@
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
   "jqPlayground.binaryPath": "/usr/local/bin/jq",
-  "json.maxItemsComputed": 8192,
+  "json.maxItemsComputed": 20480,
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.extension.syntax.decorations": false,
