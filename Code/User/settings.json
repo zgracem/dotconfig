@@ -132,32 +132,7 @@
   "markdownShortcuts.icons.link": false,
   "markdownShortcuts.icons.strikethrough": false,
   "markdownlint.config": {
-    "MD007": {
-      "indent": 4
-    },
-    "MD009": {
-      "strict": true
-    },
-    "MD010": {
-      "code_blocks": false
-    },
-    "MD013": false,
-    "MD024": {
-      "siblings_only": true
-    },
-    "MD025": false,
-    "MD026": {
-      "punctuation": ",;"
-    },
-    "MD028": false,
-    "MD032": false,
-    "MD033": false,
-    "MD036": false,
-    "MD040": false,
-    "MD041": false,
-    "MD043": false,
-    "MD044": false,
-    "MD045": false
+    "extends": ".config/.markdownlint.yaml"
   },
   "outline.problems.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",

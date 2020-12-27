@@ -1,0 +1,147 @@
+---
+# Enable all rules
+default: true
+
+# # MD001: Heading levels should only increment by one level at a time
+# heading-increment: true
+
+# # MD003: Heading style
+# heading-style:
+#   style: consistent
+
+# # MD004: Unordered list style
+# ul-style:
+#   style: consistent
+
+# # MD005: Inconsistent indentation for list items at the same level
+# list-indent: true
+
+# MD007: Unordered list indentation
+ul-indent:
+  indent: 4
+
+# MD009: Trailing spaces
+no-trailing-spaces:
+  br_spaces: 2
+  list_item_empty_lines: true
+  strict: true
+
+# MD010: Hard tabs
+no-hard-tabs:
+  code_blocks: false
+
+# # MD011: Reversed link syntax
+# no-reversed-links: true
+
+# # MD012: Multiple consecutive blank lines
+# no-multiple-blanks:
+#   maximum: 1
+
+# MD013: Line length
+line-length:
+  line_length: 80
+  headings: false
+  code_blocks: true
+  code_block_line_length: 118
+  tables: false
+  stern: true
+
+# # MD014: Dollar signs used before commands without showing output
+# commands-show-output: true
+
+# # MD018-021: No/multiple spaces after/inside hash on atx-style heading
+# no-missing-space-atx: true
+# no-multiple-space-atx: true
+# no-missing-space-closed-atx: true
+# no-multiple-space-closed-atx: true
+
+# # MD022: Headings should be surrounded by blank lines
+# blanks-around-headings:
+#   lines_above: 1
+#   lines_below: 1
+
+# # MD023: Headings must start at the beginning of the line
+# heading-start-left: true
+
+# MD024: Multiple headings with the same content
+no-duplicate-heading:
+  siblings_only: true
+
+# MD025: Multiple top level headings in the same document
+single-title:
+  front_matter_title: ""
+
+# MD026: Trailing punctuation in heading
+no-trailing-punctuation:
+  punctuation: ".,;"
+
+# # MD027: Multiple spaces after blockquote
+# no-multiple-space-blockquote: true
+
+# MD028: Blank line between two blockquotes
+no-blanks-blockquote: false
+
+# MD029: Ordered list item prefix
+ol-prefix:
+  style: one
+
+# # MD030: Spaces after list markers
+# list-marker-space: true
+
+# MD031: Fenced code blocks should be surrounded by blank lines
+blanks-around-fences:
+  list_items: false
+
+# # MD032: Lists should be surrounded by blank lines
+# blanks-around-lists: true
+
+# MD033: Inline HTML
+no-inline-html:
+  allowed_elements:
+    - img
+    - span
+    - wbr
+
+# # MD034: Bare URL used
+# no-bare-urls: true
+
+# # MD035: Horizontal rule style
+# hr-style:
+#   style: consistent
+
+# MD036: Emphasis used instead of a heading
+no-emphasis-as-heading: false
+
+# # MD037-039: Spaces inside emphasis, code, and link spans
+# no-space-in-emphasis: true
+# no-space-in-code: true
+# no-space-in-links: true
+
+# # MD040: Fenced code blocks should have a language specified
+# fenced-code-language: true
+
+# MD041: First line in file should be a top level heading
+first-line-heading: false
+
+# # MD042: No empty links
+# no-empty-links: true
+
+# # MD043: Required heading structure
+# required-headings: false
+
+# # MD044: Proper names should have the correct capitalization
+# proper-names: false
+
+# # MD045: Images should have alternate text (alt text)
+# no-alt-text: true
+
+# MD046: Code block style
+code-block-style:
+  style: fenced
+
+# # MD047: Files should end with a single newline character
+# single-trailing-newline: true
+
+# MD048: Code fence style
+code-fence-style:
+  style: backtick
