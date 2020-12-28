@@ -1,9 +1,9 @@
 function fish_logo --description 'Display the fish logo'
-  set -l red (set_color f00)
-  set -l ora (set_color f80)
-  set -l yel (set_color ff0)
+    set -l red (set_color f00)
+    set -l ora (set_color f80)
+    set -l yel (set_color ff0)
 
-  echo '                 '$red'___
+    echo '                 '$red'___
   ___======____='$ora'-'$yel'-'$ora'-='$red')
 /T            \_'$yel'--='$ora'=='$red')
 [ \ '$ora'('$yel'0'$ora')   '$red'\~    \_'$yel'-='$ora'='$red')

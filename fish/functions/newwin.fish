@@ -1,16 +1,16 @@
 function newwin --description 'Open a command in a new tmux window'
-  argparse --name=newwin 't/title=' -- $argv
+    argparse --name=newwin 't/title=' -- $argv
 
-  if not in-tmux
-    eval $argv
-    return
-  else if test (count $argv) -eq 0
-    tmux new-window
-    return
-  end
+    if not in-tmux
+        eval $argv
+        return
+    else if test (count $argv) -eq 0
+        tmux new-window
+        return
+    end
 
-  set -q _flag_title
-  or set _flag_title (string split -r -m1 / $argv[1])[-1]
+    set -q _flag_title
+    or set _flag_title (string split -r -m1 / $argv[1])[-1]
 
-  tmux new-window -n $_flag_title (string escape -- $argv)
+    tmux new-window -n $_flag_title (string escape -- $argv)
 end

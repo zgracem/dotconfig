@@ -1,9 +1,9 @@
 function __fish_complete_rubocop_levels
-  set -l levels All Refactor Convention Warning Error Fatal
+    set -l levels All Refactor Convention Warning Error Fatal
 
-  for level in $levels
-    printf "%s\t%s\n" (string sub --length=1 $level) $level
-  end
+    for level in $levels
+        printf "%s\t%s\n" (string sub --length=1 $level) $level
+    end
 end
 
 complete -c rubocop -s L -l list-target-files -d "List all files RuboCop will inspect"
@@ -28,8 +28,8 @@ complete -c rubocop -l fail-level -xa "(__fish_complete_rubocop_levels)" -d "Min
 complete -c rubocop -l display-only-fail-level-offenses -n "__fish_seen_argument -l fail-level" -d "Only output messages at --fail-level or above"
 complete -c rubocop -l show-cops -d "Shows cops and their configurations"
 complete -c rubocop -s F -l fail-fast -d "Inspect files in order of modification time and stop after the first offense"
-complete -c rubocop -s C -l cache -x -a "false" -d "Don't use result caching"
-complete -c rubocop -s C -l cache -x -a "true" -d "Use result caching"
+complete -c rubocop -s C -l cache -x -a false -d "Don't use result caching"
+complete -c rubocop -s C -l cache -x -a true -d "Use result caching"
 complete -c rubocop -s d -l debug -d "Display debug info"
 complete -c rubocop -s D -l display-cop-names -d "Display cop names in offense messages"
 complete -c rubocop -s D -l no-display-cop-names -d "Don't display cop names in offense messages"

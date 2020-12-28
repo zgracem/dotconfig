@@ -1,13 +1,13 @@
 function brew --description 'The missing package manager for macOS'
-  in-path brew; or return 127
+    in-path brew; or return 127
 
-  switch $argv[1]
-  case 'update'
-    # Addresses https://github.com/Homebrew/brew/issues/5791
-    env SHELL=(command -s bash) brew $argv
-  case 'cd'
-    _brew_cd $argv[2..-1]
-  case '*'
-    command brew $argv
-  end
+    switch $argv[1]
+        case update
+            # Addresses https://github.com/Homebrew/brew/issues/5791
+            env SHELL=(command -s bash) brew $argv
+        case cd
+            _brew_cd $argv[2..-1]
+        case '*'
+            command brew $argv
+    end
 end

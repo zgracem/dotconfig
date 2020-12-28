@@ -17,7 +17,7 @@ function __fish_seen_all_subcommands
 end
 
 function __fish_complete_op_cmds
-    argparse 's/short' -- $argv
+    argparse s/short -- $argv
 
     set -l op_commands \
         "add,Grant access to groups or vaults" \
@@ -46,7 +46,7 @@ function __fish_complete_op_cmds
 end
 
 function __fish_complete_op_subcmds
-    argparse 's/short' -- $argv
+    argparse s/short -- $argv
 
     set op_add_subcmds \
         "group,Grant a group access to a vault" \
@@ -73,8 +73,8 @@ function __fish_complete_op_subcmds
 
     set op_edit_subcmds \
         "group,Edit a group's name or description" \
-        "item,Edit an item's details"  \
-        "user,Edit a user's name or Travel Mode status"  \
+        "item,Edit an item's details" \
+        "user,Edit a user's name or Travel Mode status" \
         "vault,Edit a vault's name"
 
     set op_get_subcmds \
@@ -111,17 +111,17 @@ end
 
 function __fish_complete_op_categories
     set op_categories \
-        "Login" "Bank Account" "Membership" "Server" \
-        "Secure Note" "Database" "Outdoor License" "Social Security Number" \
-        "Credit Card" "Driver License" "Passport" "Software License" \
-        "Identity" "Email Account" "Reward Program" "Wireless Router"
+        Login "Bank Account" Membership Server \
+        "Secure Note" Database "Outdoor License" "Social Security Number" \
+        "Credit Card" "Driver License" Passport "Software License" \
+        Identity "Email Account" "Reward Program" "Wireless Router"
 
     printf "%s\n" $op_categories
 end
 
 # Commands
 
-complete op -n "__fish_is_first_arg" -x -a "(__fish_complete_op_cmds)"
+complete op -n __fish_is_first_arg -x -a "(__fish_complete_op_cmds)"
 
 # Subcommands
 

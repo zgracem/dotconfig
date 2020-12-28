@@ -7,37 +7,37 @@
 # I want, so here's a minimal reimplementation that behaves the way I prefer
 # (i.e. it only uses `functions` when there's no existing function file.)
 function funced --wraps funcsave --description 'Edit a function interactively' -a function
-  set -l function_info (functions --details --verbose -- $function)
-  set -l function_source $function_info[1]
-  set -l function_line $function_info[3]
+    set -l function_info (functions --details --verbose -- $function)
+    set -l function_source $function_info[1]
+    set -l function_line $function_info[3]
 
-  switch $function_source
-  case 'n/a' '-' 'stdin'
-    set function_source "$__fish_config_dir/functions/$function.fish"
-  end
-
-  if not test -f $function_source
-    if functions -q $function
-      functions -- $function | string replace \t "  " >$function_source
-    else
-      echo -e "function $function --description ''\\n  \\nend" >$function_source
+    switch $function_source
+        case n/a - stdin
+            set function_source "$__fish_config_dir/functions/$function.fish"
     end
-  end
 
-  if test $function_line -gt 1
-    if string match -q "*vim" "$VISUAL"
-      $VISUAL +$function_line $function_source
-    else
-      $VISUAL $function_source:$function_line
+    if not test -f $function_source
+        if functions -q $function
+            functions -- $function | string replace \t "  " >$function_source
+        else
+            echo -e "function $function --description ''\\n  \\nend" >$function_source
+        end
     end
-  else
-    $VISUAL $function_source
-  end
 
-  if test -f $function_source
-    source $function_source
-  else
-    echo >&2 "file not found: $function_source"
-    return 1
-  end
+    if test $function_line -gt 1
+        if string match -q "*vim" "$VISUAL"
+            $VISUAL +$function_line $function_source
+        else
+            $VISUAL $function_source:$function_line
+        end
+    else
+        $VISUAL $function_source
+    end
+
+    if test -f $function_source
+        source $function_source
+    else
+        echo >&2 "file not found: $function_source"
+        return 1
+    end
 end

@@ -13,47 +13,47 @@ set -gx XDG_RUNTIME_DIR ~/var/run
 
 # read defaults from ~/.config/user-dirs.dirs
 while read line
-  set -l pattern '^(XDG_[[:upper:]]+_DIR)="([^"]+)"$'
-  if string match -rq $pattern "$line"
-    eval "export $line"
-  end
-end < $XDG_CONFIG_HOME/user-dirs.dirs
+    set -l pattern '^(XDG_[[:upper:]]+_DIR)="([^"]+)"$'
+    if string match -rq $pattern "$line"
+        eval "export $line"
+    end
+end <$XDG_CONFIG_HOME/user-dirs.dirs
 
 # Cygwin/MSYS
 if uname -s | string match -q '*_NT-*'
-  set user_profile
-  if test -n "$USERPROFILE"
-    set user_profile (cygpath -au $USERPROFILE)
-  else
-    switch (uname -s)
-    case 'CYGWIN*'
-      set user_profile /cygdrive/c/Users/$USER
-    case 'MSYS*'
-      set user_profile /c/Users/$USER
+    set user_profile
+    if test -n "$USERPROFILE"
+        set user_profile (cygpath -au $USERPROFILE)
+    else
+        switch (uname -s)
+            case 'CYGWIN*'
+                set user_profile /cygdrive/c/Users/$USER
+            case 'MSYS*'
+                set user_profile /c/Users/$USER
+        end
+        set -gx USERPROFILE (cygpath -aw $user_profile)
     end
-    set -gx USERPROFILE (cygpath -aw $user_profile)
-  end
 
-  set -gx XDG_DESKTOP_DIR "$user_profile/Desktop"
-  set -gx XDG_DOCUMENTS_DIR "$user_profile/My Documents"
-  set -gx XDG_DOWNLOAD_DIR "$user_profile/Downloads"
-  set -gx XDG_MUSIC_DIR "$user_profile/Music"
-  set -gx XDG_PUBLICSHARE_DIR (cygpath -au "$PUBLIC")
-  set -gx XDG_VIDEOS_DIR "$user_profile/Videos"
+    set -gx XDG_DESKTOP_DIR "$user_profile/Desktop"
+    set -gx XDG_DOCUMENTS_DIR "$user_profile/My Documents"
+    set -gx XDG_DOWNLOAD_DIR "$user_profile/Downloads"
+    set -gx XDG_MUSIC_DIR "$user_profile/Music"
+    set -gx XDG_PUBLICSHARE_DIR (cygpath -au "$PUBLIC")
+    set -gx XDG_VIDEOS_DIR "$user_profile/Videos"
 
-  switch $hostname
-  case 'WS*'
-    set -gx XDG_DOCUMENTS_DIR (cygpath -au "$HOMESHARE\\My Documents")
-    set -gx XDG_DOWNLOAD_DIR ~/tmp
-    set -gx XDG_MUSIC_DIR "$XDG_DOCUMENTS_DIR/My Music"
-    set -gx XDG_PICTURES_DIR "$XDG_DOCUMENTS_DIR/My Pictures"
-    set -gx XDG_VIDEOS_DIR "$XDG_DOCUMENTS_DIR/My Videos"
-  end
+    switch $hostname
+        case 'WS*'
+            set -gx XDG_DOCUMENTS_DIR (cygpath -au "$HOMESHARE\\My Documents")
+            set -gx XDG_DOWNLOAD_DIR ~/tmp
+            set -gx XDG_MUSIC_DIR "$XDG_DOCUMENTS_DIR/My Music"
+            set -gx XDG_PICTURES_DIR "$XDG_DOCUMENTS_DIR/My Pictures"
+            set -gx XDG_VIDEOS_DIR "$XDG_DOCUMENTS_DIR/My Videos"
+    end
 end
 
 # Linux
-if uname -s | string match -q 'Linux'
-  set -gx XDG_DESKTOP_DIR ~/.desktop
-  set -gx XDG_DOCUMENTS_DIR ~/doc
-  set -gx XDG_DOWNLOAD_DIR ~/tmp
+if uname -s | string match -q Linux
+    set -gx XDG_DESKTOP_DIR ~/.desktop
+    set -gx XDG_DOCUMENTS_DIR ~/doc
+    set -gx XDG_DOWNLOAD_DIR ~/tmp
 end
