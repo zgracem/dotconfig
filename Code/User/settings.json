@@ -248,10 +248,12 @@
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
   "[fish]": {
+    "editor.defaultFormatter": "zgm.vscode-fish",
     "editor.detectIndentation": false,
-    "editor.formatOnSave": true,
     "editor.insertSpaces": true,
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
   },
   "[ini]": {
     "editor.wordWrap": "off",
