@@ -1,6 +1,10 @@
 {
   "autoSnippet.snippets": [
     {
+      "language": "fish",
+      "snippet": "fish_hashbang"
+    },
+    {
       "language": "gemfile",
       "snippet": "new_Gemfile"
     },
@@ -15,10 +19,6 @@
     {
       "language": "shellscript",
       "snippet": "shellscript_hashbang"
-    },
-    {
-      "language": "fish",
-      "snippet": "fish_hashbang"
     }
   ],
   "breadcrumbs.enabled": true,
@@ -250,10 +250,10 @@
   "[fish]": {
     "editor.defaultFormatter": "zgm.vscode-fish",
     "editor.detectIndentation": false,
-    "editor.insertSpaces": true,
-    "editor.tabSize": 4,
     "editor.formatOnSave": false,
-    "editor.formatOnSaveMode": "file"
+    "editor.formatOnSaveMode": "file",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
   },
   "[ini]": {
     "editor.wordWrap": "off",
