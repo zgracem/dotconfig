@@ -19,6 +19,10 @@
     {
       "language": "shellscript",
       "snippet": "shellscript_hashbang"
+    },
+    {
+      "language": "yaml",
+      "snippet": "new_YAML"
     }
   ],
   "breadcrumbs.enabled": true,

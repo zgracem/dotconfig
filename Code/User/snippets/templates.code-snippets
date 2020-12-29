@@ -8,5 +8,15 @@
     ],
     "description": "Gemfile template",
     "scope": "gemfile"
+  },
+  "new_YAML": {
+    "prefix": "yaml",
+    "body": [
+      "%YAML 1.2",
+      "---",
+      "$0"
+    ],
+    "description": "YAML 1.2 template",
+    "scope": "yaml"
   }
 }
