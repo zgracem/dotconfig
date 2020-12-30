@@ -1,8 +1,9 @@
 function install-github-fish
-    set prev_wd $PWD
-    set src_dir "$HOME/.local/src/github.com/fish-shell"
-    set build_dir "$src_dir/build"
-    set install_dir "$HOME/opt/stow/fish-HEAD"
+    set -l prev_wd $PWD
+    set -l src_dir "$HOME/.local/src/github.com/fish-shell"
+    set -l build_dir "$src_dir/build"
+    set -l fish_prefix "$HOME/opt/stow/fish-HEAD"
+    set -l install__fish_data_dir "$fish_prefix/share/fish"
 
     if test -d "$src_dir/.git"
         rm -rf "$build_dir" >/dev/null
@@ -16,9 +17,19 @@ function install-github-fish
 
     mkdir -p "$build_dir"; and cd "$build_dir"; or return
 
-    cmake .. -DCMAKE_INSTALL_PREFIX=$install_dir; or return
+    cmake .. -DCMAKE_INSTALL_PREFIX=$fish_prefix; or return
 
     make
     and make install
-    and cd "$prev_wd"
+    or return
+
+    set -l fish_completions_dir (pkg-config --variable completionsdir fish); or return
+    set -l vendor_completions_dir $fish_prefix/share/fish/vendor_completions.d
+    if test (count $vendor_completions_dir/*.fish) -eq 0
+        command mkdir -p (dirname $vendor_completions_dir)
+        command rm -rf $vendor_completions_dir
+        command ln -s $fish_completions_dir $vendor_completions_dir; or return
+    end
+
+    cd "$prev_wd"
 end
