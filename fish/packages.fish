@@ -8,19 +8,32 @@ end
 _fix_path fish_package_path
 
 function __package_init
-    for dir in $fish_package_path
-        if test -d "$dir"
-            if test -d "$dir/conf.d"
-                for file in $dir/conf.d/*.fish
+    for package_dir in $fish_package_path
+        set -l bootstrapped 0
+
+        if test -d "$package_dir"
+            if test -d "$package_dir/conf.d"
+                for file in $package_dir/conf.d/*.fish
                     source "$file"
+                    # If anything in conf.d/*.fish exits 101, the package is
+                    # assumed to have "bootstrapped" itself and auto-loading
+                    # immediately stops.
+                    if test $status -eq 101
+                        set bootstrapped 1
+                        break
+                    end
                 end
             end
 
-            set -p fish_function_path $dir/functions
-            set -p fish_complete_path $dir/completions
+            if test $bootstrapped -eq 1
+                continue
+            end
 
-            if test -f "$dir/init.fish"
-                source "$dir/init.fish"
+            set -p fish_function_path $package_dir/functions
+            set -p fish_complete_path $package_dir/completions
+
+            if test -f "$package_dir/init.fish"
+                source "$package_dir/init.fish"
             end
         end
     end
