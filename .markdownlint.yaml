@@ -38,13 +38,13 @@ no-hard-tabs:
 #   maximum: 1
 
 # MD013: Line length
-line-length:
-  line_length: 80
-  headings: false
-  code_blocks: true
-  code_block_line_length: 118
-  tables: false
-  stern: true
+line-length: false
+  # line_length: 80
+  # headings: false
+  # code_blocks: true
+  # code_block_line_length: 118
+  # tables: false
+  # stern: true
 
 # # MD014: Dollar signs used before commands without showing output
 # commands-show-output: true
@@ -83,7 +83,7 @@ no-blanks-blockquote: false
 
 # MD029: Ordered list item prefix
 ol-prefix:
-  style: one
+  style: ordered
 
 # # MD030: Spaces after list markers
 # list-marker-space: true
