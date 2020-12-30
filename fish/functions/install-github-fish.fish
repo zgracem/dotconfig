@@ -7,12 +7,18 @@ function install-github-fish
     __install-github-fish_git-acquire
     or return
 
-   __install-github-fish_make-fish
+    __install-github-fish_unstow
+    or return
+
+    __install-github-fish_make-fish
     or return
 
     __install-github-fish_link-completions
 
-   cd "$prev_wd"
+    __install-github-fish_stow
+    or return
+
+    cd "$prev_wd"
 end
 
 function __install-github-fish_git-acquire
@@ -42,4 +48,14 @@ function __install-github-fish_link-completions
         command rm -rf $vendor_completions_dir
         command ln -s $fish_completions_dir $vendor_completions_dir; or return
     end
+end
+
+function __install-github-fish_unstow
+    cd "$fish_prefix/.."
+    and stow --delete (basename $fish_prefix)
+end
+
+function __install-github-fish_stow
+    cd "$fish_prefix/.."
+    and stow (basename $fish_prefix)
 end
