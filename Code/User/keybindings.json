@@ -1,23 +1,34 @@
 [
+  // Change text to upper/lower/title case (à la Sublime Text)
   {
     "key": "ctrl+k ctrl+l",
     "command": "editor.action.transformToLowercase",
-    "when": "editorTextFocus && !editorReadonly"
+    "when": "isWindows && editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+k ctrl+u",
     "command": "editor.action.transformToUppercase",
-    "when": "editorTextFocus && !editorReadonly"
+    "when": "isWindows && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+k shift+t",
+    "command": "editor.action.transformToTitlecase",
+    "when": "isWindows && editorTextFocus && !editorReadonly"
   },
   {
     "key": "cmd+k cmd+l",
     "command": "editor.action.transformToLowercase",
-    "when": "editorTextFocus && !editorReadonly"
+    "when": "isMac && editorTextFocus && !editorReadonly"
   },
   {
     "key": "cmd+k cmd+u",
     "command": "editor.action.transformToUppercase",
-    "when": "editorTextFocus && !editorReadonly"
+    "when": "isMac && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+k shift+t",
+    "command": "editor.action.transformToTitlecase",
+    "when": "isMac && editorTextFocus && !editorReadonly"
   },
   // Windows-ish shortcuts on Mac
   {
