@@ -104,21 +104,20 @@
     "key": "cmd+i",
     "command": "-emojisense.quickEmojiTerminal"
   },
-  // Tasks
-  {
-    "key": "cmd+k shift+m",
-    "command": "workbench.action.tasks.runTask",
-    "args": "Launch Sublime Merge"
-  },
-  // Misc.
+  // yzhang.markdown-all-in-one
   {
     "key": "backspace",
-    "command": "-markdown.extension.onBackspaceKey",
-    "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown' && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine'"
+    "command": "-markdown.extension.onBackspaceKey"
   },
   {
     "key": "backspace",
     "command": "markdown.extension.onBackspaceKey",
     "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown'"
+  },
+  // Tasks
+  {
+    "key": "cmd+k shift+m",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Launch Sublime Merge"
   }
 ]
