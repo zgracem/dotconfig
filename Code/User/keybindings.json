@@ -114,6 +114,15 @@
     "command": "markdown.extension.onBackspaceKey",
     "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown'"
   },
+  // heaths.vscode-guid
+  {
+    "key": "shift+cmd+[",
+    "command": "-guid.insert"
+  },
+  {
+    "key": "shift+alt+cmd+[",
+    "command": "-guid.insertMany"
+  },
   // Tasks
   {
     "key": "cmd+k shift+m",
