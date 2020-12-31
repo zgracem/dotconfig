@@ -1,10 +1,5 @@
 [
   {
-    "key": "cmd+j",
-    "command": "editor.action.joinLines",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
     "key": "ctrl+k ctrl+l",
     "command": "editor.action.transformToLowercase",
     "when": "editorTextFocus && !editorReadonly"
@@ -24,15 +19,21 @@
     "command": "editor.action.transformToUppercase",
     "when": "editorTextFocus && !editorReadonly"
   },
+  // Windows-ish shortcuts on Mac
+  {
+    "key": "cmd+j",
+    "command": "editor.action.joinLines",
+    "when": "isMac && editorTextFocus && !editorReadonly"
+  },
   {
     "key": "ctrl+shift+l",
     "command": "editor.action.insertCursorAtEndOfEachLineSelected",
-    "when": "editorTextFocus"
+    "when": "isMac && editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.deleteLines",
-    "when": "editorTextFocus && !editorReadonly"
+    "when": "isMac && editorTextFocus && !editorReadonly"
   },
   {
     "key": "f9",
