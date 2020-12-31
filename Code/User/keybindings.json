@@ -128,5 +128,26 @@
     "key": "cmd+k shift+m",
     "command": "workbench.action.tasks.runTask",
     "args": "Launch Sublime Merge"
+  },
+  // Open Workspace Settings
+  {
+    "key": "shift+ctrl+,",
+    "command": "-editor.action.inPlaceReplace.up",
+    "when": "isWindows"
+  },
+  {
+    "key": "shift+ctrl+,",
+    "command": "workbench.action.openWorkspaceSettingsFile",
+    "when": "isWindows"
+  },
+  {
+    "key": "shift+cmd+,",
+    "command": "-editor.action.inPlaceReplace.up",
+    "when": "isMac"
+  },
+  {
+    "key": "shift+cmd+,",
+    "command": "workbench.action.openWorkspaceSettingsFile",
+    "when": "isMac"
   }
 ]
