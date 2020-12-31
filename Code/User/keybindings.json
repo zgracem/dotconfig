@@ -1,10 +1,4 @@
-// Place your key bindings in this file to override the defaults
 [
-  {
-    "key": "ctrl+j",
-    "command": "editor.action.joinLines",
-    "when": "editorTextFocus && !editorReadonly"
-  },
   {
     "key": "cmd+j",
     "command": "editor.action.joinLines",
@@ -38,21 +32,6 @@
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.deleteLines",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+d",
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+shift+d",
-    "command": "editor.action.copyLinesDownAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "cmd+shift+d",
-    "command": "editor.action.copyLinesDownAction",
     "when": "editorTextFocus && !editorReadonly"
   },
   {
@@ -123,14 +102,6 @@
     "key": "cmd+k shift+m",
     "command": "workbench.action.tasks.runTask",
     "args": "Launch Sublime Merge"
-  },
-  {
-    "key": "shift+cmd+[",
-    "command": "-guid.insert"
-  },
-  {
-    "key": "shift+alt+cmd+[",
-    "command": "-guid.insertMany"
   },
   {
     "key": "backspace",
