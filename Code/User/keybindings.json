@@ -46,6 +46,7 @@
     "command": "editor.action.deleteLines",
     "when": "isMac && editorTextFocus && !editorReadonly"
   },
+  // F9 = Sort Lines Ascending
   {
     "key": "f9",
     "command": "-editor.debug.action.toggleBreakpoint"
@@ -64,11 +65,13 @@
     "command": "editor.action.sortLinesDescending",
     "when": "editorTextFocus && !editorReadonly"
   },
+  // v4run.transpose
   {
     "key": "ctrl+t",
     "command": "extension.transpose",
     "when": "editorTextFocus && !editorReadonly"
   },
+  // bierner.emojisense
   {
     "key": "ctrl+i",
     "command": "-emojisense.quickEmoji"
@@ -101,11 +104,13 @@
     "key": "cmd+i",
     "command": "-emojisense.quickEmojiTerminal"
   },
+  // Tasks
   {
     "key": "cmd+k shift+m",
     "command": "workbench.action.tasks.runTask",
     "args": "Launch Sublime Merge"
   },
+  // Misc.
   {
     "key": "backspace",
     "command": "-markdown.extension.onBackspaceKey",
