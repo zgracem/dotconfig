@@ -48,8 +48,7 @@
   },
   {
     "key": "f9",
-    "command": "-editor.debug.action.toggleBreakpoint",
-    "when": "editorTextFocus"
+    "command": "-editor.debug.action.toggleBreakpoint"
   },
   {
     "key": "f9",
@@ -58,8 +57,7 @@
   },
   {
     "key": "shift+f9",
-    "command": "-editor.debug.action.toggleInlineBreakpoint",
-    "when": "editorTextFocus"
+    "command": "-editor.debug.action.toggleInlineBreakpoint"
   },
   {
     "key": "shift+f9",
@@ -68,47 +66,40 @@
   },
   {
     "key": "ctrl+t",
-    "command": "extension.transpose"
+    "command": "extension.transpose",
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "key": "ctrl+i",
-    "command": "-emojisense.quickEmoji",
-    "when": "editorTextFocus"
+    "command": "-emojisense.quickEmoji"
   },
   {
     "key": "ctrl+i",
-    "command": "-emojisense.quickEmojiTerminal",
-    "when": "terminalFocus"
+    "command": "-emojisense.quickEmojiTerminal"
   },
   {
     "key": "ctrl+shift+i",
-    "command": "-emojisense.quickEmojitextTerminal",
-    "when": "terminalFocus"
+    "command": "-emojisense.quickEmojitextTerminal"
   },
   {
     "key": "ctrl+shift+i",
-    "command": "-emojisense.quickEmojitext",
-    "when": "editorTextFocus"
+    "command": "-emojisense.quickEmojitext"
   },
   {
     "key": "shift+cmd+i",
-    "command": "-emojisense.quickEmojitext",
-    "when": "editorTextFocus"
+    "command": "-emojisense.quickEmojitext"
   },
   {
     "key": "shift+cmd+i",
-    "command": "-emojisense.quickEmojitextTerminal",
-    "when": "terminalFocus"
+    "command": "-emojisense.quickEmojitextTerminal"
   },
   {
     "key": "cmd+i",
-    "command": "-emojisense.quickEmoji",
-    "when": "editorTextFocus"
+    "command": "-emojisense.quickEmoji"
   },
   {
     "key": "cmd+i",
-    "command": "-emojisense.quickEmojiTerminal",
-    "when": "terminalFocus"
+    "command": "-emojisense.quickEmojiTerminal"
   },
   {
     "key": "cmd+k shift+m",
