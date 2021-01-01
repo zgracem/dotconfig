@@ -13,6 +13,9 @@
     "files.exclude": {
       ".git{attributes,modules}": true
     },
+    "search.exclude": {
+      "bat/syntaxes/": true
+    },
     "shellcheck.enable": true,
     "shellcheck.exclude": [
       "2148"
