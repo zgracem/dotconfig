@@ -1,13 +1,12 @@
 # Because $__fish_data_dir/config.fish emulates path_helper(8) on macOS and
-# reads the contents of /etc/{,man}paths{,.d} -- and we want the contents of
-# those so we don't have to go digging ourselves -- we start by prepending to
-# whatever PATH is already set. Duplicate entries will be removed later by
-# _fix_path, with our settings here taking precedence.
+# reads the contents of /etc/{,man}paths{,.d}, we want the contents of
+# those so we don't have to go digging ourselves. Add typical defaults at the
+# end in case something weird has gone wrong.
+set --export PATH $PATH /usr/bin /bin /usr/sbin /sbin
+set --export MANPATH $MANPATH /usr/share/man /usr/man
 
-set --export PATH /usr/bin /bin /usr/sbin /sbin $PATH
-set --export MANPATH /usr/share/man /usr/man $MANPATH
-
-# /usr/local
+# Now we start prepending to whatever PATH is already set. Duplicate entries
+# will be removed later by _fix_path, with our settings here taking precedence.
 set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
