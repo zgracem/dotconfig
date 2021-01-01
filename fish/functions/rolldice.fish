@@ -1,4 +1,4 @@
-function roll --description 'Roll some dice'
+function rolldice --description 'Roll some dice'
     set -l regex '\b(\d+)?d?(\d+)\b'
     set -l totals
 
