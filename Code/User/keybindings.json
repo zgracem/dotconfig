@@ -49,7 +49,8 @@
   // F9 = Sort Lines Ascending
   {
     "key": "f9",
-    "command": "-editor.debug.action.toggleBreakpoint"
+    "command": "-editor.debug.action.toggleBreakpoint",
+    "when": "editorTextFocus"
   },
   {
     "key": "f9",
@@ -58,7 +59,8 @@
   },
   {
     "key": "shift+f9",
-    "command": "-editor.debug.action.toggleInlineBreakpoint"
+    "command": "-editor.debug.action.toggleInlineBreakpoint",
+    "when": "editorTextFocus"
   },
   {
     "key": "shift+f9",
@@ -117,11 +119,13 @@
   // heaths.vscode-guid
   {
     "key": "shift+cmd+[",
-    "command": "-guid.insert"
+    "command": "-guid.insert",
+    "when": "editorTextFocus"
   },
   {
     "key": "shift+alt+cmd+[",
-    "command": "-guid.insertMany"
+    "command": "-guid.insertMany",
+    "when": "editorTextFocus"
   },
   // Tasks
   {
@@ -153,11 +157,13 @@
   // Restart extension host
   {
     "key": "cmd+k cmd+r",
-    "command": "-workbench.action.keybindingsReference"
+    "command": "-workbench.action.keybindingsReference",
+    "when": "isMac"
   },
   {
     "key": "ctrl+k ctrl+r",
-    "command": "-workbench.action.keybindingsReference"
+    "command": "-workbench.action.keybindingsReference",
+    "when": "isWindows"
   },
   {
     "key": "cmd+k cmd+r",
