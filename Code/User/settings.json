@@ -91,15 +91,15 @@
   "extensions.closeExtensionDetailsOnViewChange": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
+    "*.JSON-tmLanguage": "json",
+    "*.YAML-tmLanguage": "yaml",
     "*.[1-9]": "troff",
     "*.ignore": "ignore",
-    "*.JSON-tmLanguage": "json",
     "*.make": "makefile",
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
     "*.sublime-{settings,build,keymap}": "json",
     "*.vifm": "viml",
-    "*.YAML-tmLanguage": "yaml",
     "ignore": "ignore",
     "vimrc": "viml"
   },
