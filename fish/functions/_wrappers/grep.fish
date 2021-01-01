@@ -1,3 +1,4 @@
+# Overrides $__fish_data_dir/functions/grep.fish
 function grep --description 'Print lines that match patterns'
     set params -EsI -d skip -D skip
     #           │││  │       └───── silently skip devices

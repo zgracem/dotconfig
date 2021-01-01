@@ -1,3 +1,4 @@
+# Overrides $__fish_data_dir/functions/ll.fish
 if in-path exa
     function ll --wraps exa --description 'List files vertically, info-heavy'
         ls --long --time-style=long-iso $argv

@@ -1,3 +1,4 @@
+# Overrides $__fish_data_dir/functions/man.fish
 function man --description 'Display manual pages' # in a new window with colours and a nice title
     # Let man pipe to other things.
     if not isatty stdout

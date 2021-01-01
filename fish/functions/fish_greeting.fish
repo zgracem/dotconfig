@@ -1,3 +1,4 @@
+# Overrides $__fish_data_dir/functions/fish_greeting.fish
 function fish_greeting --description 'Prints a greeting message on startup'
     status is-interactive; or return
     test (fish_version major) -ge 3; or return

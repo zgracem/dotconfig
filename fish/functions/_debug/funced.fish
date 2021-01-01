@@ -1,4 +1,5 @@
-# The way `funced` currently works can result in data loss.
+# Overrides $__fish_data_dir/functions/funced.fish because the way `funced`
+# currently works can result in data loss.
 #
 # Specifically, it uses the `functions` builtin to print the interpreted source
 # code of the function, which preserves only some comments, and ignores (and
