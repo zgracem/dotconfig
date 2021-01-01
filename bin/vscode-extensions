@@ -36,7 +36,7 @@ function do_list
 end
 
 function do_diff
-    diff -u (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
+    diff -y --suppress-common-lines (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
 end
 
 function do_json
@@ -45,7 +45,7 @@ function do_json
 end
 
 function do_dump
-    do_json >$extensions_file
+    do_json | tee $extensions_file
 end
 
 function do_sync
