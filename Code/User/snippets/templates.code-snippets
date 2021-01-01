@@ -1,4 +1,14 @@
 {
+  "Markdown_frontmatter": {
+    "prefix": "mdfm",
+    "body": [
+      "---",
+      "title: $1${3:\ndate: ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}}",
+      "---\n",
+      "$0"
+    ],
+    "description": "Markdown YAML frontmatter"
+  },
   "new_Gemfile": {
     "prefix": "gemfile",
     "body": [
@@ -9,11 +19,27 @@
     "description": "Gemfile template",
     "scope": "gemfile"
   },
+  "new_JSON": {
+    "prefix": "json",
+    "body": [
+      "{",
+      "\t$0",
+      "}\n"
+    ],
+    "description": "JSON template (empty object)",
+    "scope": "json,jsonc"
+  },
+  "shellscript_hashbang": {
+    "prefix": "!env",
+    "body": [
+      "#!/usr/bin/env ${1|bash,sh|}\n\n"
+    ],
+    "scope": "shellscript"
+  },
   "new_YAML": {
     "prefix": "yaml",
     "body": [
-      "%YAML 1.2",
-      "---",
+      "${1:%YAML 1.2\n---}",
       "$0"
     ],
     "description": "YAML 1.2 template",

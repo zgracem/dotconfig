@@ -1,12 +1,12 @@
 {
   "autoSnippet.snippets": [
     {
-      "language": "fish",
-      "snippet": "fish_hashbang"
-    },
-    {
       "language": "gemfile",
       "snippet": "new_Gemfile"
+    },
+    {
+      "language": "json",
+      "snippet": "new_JSON"
     },
     {
       "language": "markdown",
@@ -278,9 +278,7 @@
       "source.fixAll.markdownlint": true
     },
     "editor.formatOnPaste": false,
-    "editor.quickSuggestions": {
-      "other": false
-    },
+    "editor.wordBasedSuggestions": false,
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
   },

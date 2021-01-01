@@ -1,33 +1,35 @@
 {
   "Divider": {
     "prefix": "ddiv",
-    "body": [
-      "${LINE_COMMENT:#} ----------------------------------------------------------------------------\n"
-    ],
-    "description": "Dividing line"
+    "body": "${LINE_COMMENT:#} ----------------------------------------------------------------------------\n",
+    "description": "A dividing line"
   },
-  "Box": {
+  "Comment box": {
     "prefix": "bbox",
     "body": [
       "${LINE_COMMENT:#} ----------------------------------------------------------------------------",
       "${LINE_COMMENT:#} $1",
       "${LINE_COMMENT:#} ----------------------------------------------------------------------------\n",
       "$0"
-    ],
-    "description": "Comment box"
+    ]
   },
   "Today": {
-    "prefix": "today",
-    "body": [
-      "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
-    ],
+    "prefix": "ttoday",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
     "description": "Current date (YYYY-MM-DD)"
   },
   "Timestamp": {
-    "prefix": "now",
-    "body": [
-      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}-06:00"
-    ],
-    "description": "ISO-formatted timestamp"
+    "prefix": "nnow",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+    "description": "Current time (YYYY-MM-DD hh:mm:ss)"
+  },
+  // "hello": {
+  //   "prefix": "hello",
+  //   "body": "${BLOCK_COMMENT_START:$LINE_COMMENT} Hello, world!${BLOCK_COMMENT_END/.+/ $0/}"
+  // },
+  "Pasted URL": {
+    "prefix": "pburl",
+    "body": "${CLIPBOARD/.*(https?:\\/\\/[^\\s\"']+).*/${1}/}"
   }
 }
+// pburl

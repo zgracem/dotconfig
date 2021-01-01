@@ -16,15 +16,5 @@
       "$0"
     ],
     "description": "Heading 2 (Setext)"
-  },
-  "Markdown_frontmatter": {
-    "prefix": "mdfm",
-    "body": [
-      "---",
-      "title: $1${3:\ndate: ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}}",
-      "---\n",
-      "$0"
-    ],
-    "description": "Markdown YAML frontmatter"
   }
 }

@@ -15,5 +15,11 @@
       "$LINE_COMMENT frozen_string_literal: true\n\n"
     ],
     "description": "# frozen_string_literal: true"
+  },
+  "hashbang_ruby": {
+    "prefix": "!env",
+    "body": [
+      "#!/usr/bin/env ${1:ruby}\n\n"
+    ]
   }
 }
