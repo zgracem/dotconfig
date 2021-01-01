@@ -133,13 +133,6 @@
   "markdown.extension.syntax.decorations": false,
   "markdown.extension.toc.levels": "1..3",
   "markdown.extension.toc.orderedList": true,
-  "markdownShortcuts.icons.bold": false,
-  "markdownShortcuts.icons.bullets": false,
-  "markdownShortcuts.icons.citations": false,
-  "markdownShortcuts.icons.image": false,
-  "markdownShortcuts.icons.italic": false,
-  "markdownShortcuts.icons.link": false,
-  "markdownShortcuts.icons.strikethrough": false,
   "markdownlint.config": {
     "extends": ".config/.markdownlint.yaml"
   },
