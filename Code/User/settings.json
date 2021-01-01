@@ -230,7 +230,6 @@
   "window.titleSeparator": " · ",
   "workbench.activityBar.iconClickBehavior": "focus",
   "workbench.colorTheme": "Monokai Pro (Filter Machine)",
-  "workbench.editor.closeEmptyGroups": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
