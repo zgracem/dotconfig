@@ -1,26 +1,31 @@
-function g2 --description 'Go somewhere' -a destination
-    switch $destination
+function g2 --description 'Go somewhere' -a alias
+    set -l destination (string split / --max=1 -- $alias)
+    set -l dir
+    switch $destination[1]
         case inbox
-            cd "$HOME/Dropbox/inbox"
+            set dir "$HOME/Dropbox/inbox"
         case proj
-            cd "$HOME/Dropbox/Projects"
+            set dir "$HOME/Dropbox/Projects"
         case stow
-            cd "$HOME/opt/stow"
+            set dir "$HOME/opt/stow"
         case defunct
-            cd "$HOME/Dropbox/Archive/src"
+            set dir "$HOME/Dropbox/Archive/src"
         case scratch
-            cd "$HOME/tmp/_scratch"
+            set dir "$HOME/tmp/_scratch"
         case vs9
-            cd "$HOME/Dropbox/www/vs2017"
+            set dir "$HOME/Dropbox/www/vs2017"
         case imprint
-            cd "$HOME/www/2018/imprint"
+            set dir "$HOME/www/2018/imprint"
         case 2a
-            cd "$HOME/www/2018/2a18"
+            set dir "$HOME/www/2018/2a18"
         case desktop
-            cd "$XDG_DESKTOP_DIR"
+            set dir "$XDG_DESKTOP_DIR"
         case dl
-            cd "$XDG_DOWNLOAD_DIR"
+            set dir "$XDG_DOWNLOAD_DIR"
         case '*'
+            echo >&2 "don't know how to go to $destination!"
             return 1
     end
+    set destination[1] $dir
+    cd (string join / -- $destination)
 end
