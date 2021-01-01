@@ -56,6 +56,17 @@
     "command": "editor.action.deleteLines",
     "when": "isMac && editorTextFocus && !editorReadonly"
   },
+  // Ctrl/Cmd+Shift+D to duplicate lines
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "isWindows && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+shift+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "isMac && editorTextFocus && !editorReadonly"
+  },
   // F9 = Sort Lines Ascending
   {
     "key": "f9",
