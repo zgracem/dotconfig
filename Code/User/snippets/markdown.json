@@ -16,5 +16,9 @@
       "$0"
     ],
     "description": "Heading 2 (Setext)"
+  },
+  "inline_link": {
+    "prefix": "hhref",
+    "body": "[$TM_SELECTED_TEXT](${CLIPBOARD/.*(https?:\\/\\/[^\\s\"']+).*/${1}/})"
   }
 }

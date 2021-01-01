@@ -1,4 +1,14 @@
 [
+  // Snippets
+  {
+    "key": "ctrl+l",
+    "command": "editor.action.insertSnippet",
+    "when": "editorTextFocus && !editorReadonly && editorLangId == 'markdown'",
+    "args": {
+      "langId": "markdown",
+      "name": "inline_link"
+    }
+  },
   // Change text to upper/lower/title case (à la Sublime Text)
   {
     "key": "ctrl+k ctrl+l",
