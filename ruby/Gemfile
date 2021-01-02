@@ -6,17 +6,8 @@ source "https://rubygems.org"
 # Utilities
 # -----------------------------------------------------------------------------
 
-# <github.com/bundler/bundler>
-gem "bundler"
-
-# <rubyworks.github.io/facets>
-gem "facets"
-
 # <github.com/threedaymonk/htmlentities>
 gem "htmlentities"
-
-# <github.com/flori/json>
-gem "json", ">= 2.3.0"
 
 # <github.com/bleything/plist>
 gem "plist"
@@ -61,9 +52,6 @@ gem "sassc"
 # <github.com/slim-template/slim>
 gem "slim"
 
-# <github.com/astro/socksify-ruby>
-gem "socksify"
-
 # -----------------------------------------------------------------------------
 # APIs
 # -----------------------------------------------------------------------------
@@ -81,11 +69,6 @@ gem "tumblr_client"
 # -- for BitBar weather app
 # <github.com/trailblazer/representable>
 gem "representable"
-
-# -- for zgm/songinfo
-# -- requires `brew install taglib`
-# <github.com/robinst/taglib-ruby>
-gem "taglib-ruby"
 
 # -----------------------------------------------------------------------------
 
