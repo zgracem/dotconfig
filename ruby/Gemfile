@@ -72,4 +72,4 @@ gem "representable"
 
 # -----------------------------------------------------------------------------
 
-# gem "tiny_dancer", github: "zgracem/tiny-dancer", branch: "master"
+gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git"
