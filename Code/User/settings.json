@@ -138,6 +138,8 @@
   "markdownlint.config": {
     "extends": ".config/.markdownlint.yaml"
   },
+  "oneDarkPro.editorTheme": "oneDarkProFlat",
+  "oneDarkPro.italic": true,
   "outline.problems.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
   "ruby.pathToBundler": "/Users/zozo/.rbenv/shims/bundle",
@@ -231,7 +233,7 @@
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
   "window.titleSeparator": " · ",
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.colorTheme": "Monokai Pro (Filter Octagon)",
+  "workbench.colorTheme": "Monokai Pro (Filter Machine)",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
