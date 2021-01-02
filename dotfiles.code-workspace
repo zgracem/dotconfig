@@ -43,6 +43,13 @@
         }
       }
     },
+    "presentation": {
+      "reveal": "silent",
+      "panel": "dedicated",
+      "showReuseMessage": false,
+      "clear": true
+    },
+    "problemMatcher": [],
     "tasks": [
       {
         "label": "Launch Sublime Merge",
@@ -63,10 +70,8 @@
         "type": "shell",
         "command": "env | sort",
         "presentation": {
-          "clear": true,
           "reveal": "always"
-        },
-        "problemMatcher": []
+        }
       }
     ]
   }
