@@ -1,4 +1,4 @@
-function op_signin --description "Sign into 1Password's CLI tool"
+function op-signin --description "Sign into 1Password's CLI tool"
     argparse f/force -- $argv
 
     function _1p_

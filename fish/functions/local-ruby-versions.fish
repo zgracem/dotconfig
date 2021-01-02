@@ -1,4 +1,4 @@
-function local_ruby_versions --description "List all .ruby-version files and their values"
+function local-ruby-versions --description "List all .ruby-version files and their values"
     for req in fd rbenv
         if not in-path $req
             echo >&2 "fatal error: this command requires `$req`"
