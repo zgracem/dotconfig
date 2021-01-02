@@ -70,6 +70,14 @@ gem "tumblr_client"
 # <github.com/trailblazer/representable>
 gem "representable"
 
-# -----------------------------------------------------------------------------
+# -- for uu{char,debug,grep}
+gem "gemoji"
+gem "unicode_utils"
 
+# -----------------------------------------------------------------------------
+# local gems
+# ----------------------------------------------------------------------------
+
+gem "bunter", git: "git@github.com:zgracem/bunter.git"
 gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git"
+gem "weather_meteo", path: "#{ENV['HOME']}/Dropbox/lib/ruby/weather_meteo"
