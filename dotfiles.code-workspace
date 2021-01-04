@@ -25,6 +25,7 @@
       "[ini]",
       "[json]",
       "[jsonc]",
+      "[makefile]",
       "[markdown]",
       "[plaintext]",
       "[ruby]",
