@@ -166,11 +166,13 @@
     "shellcheck.executablePath",
     "solargraph.bundlerPath",
     "solargraph.commandPath",
+    "spellright.configurationScope",
     "spellright.language",
     "terminal.external.osxExec",
     "terminal.integrated.automationShell.osx",
     "terminal.integrated.env.osx",
     "terminal.integrated.shell.osx",
+    "terminal.integrated.shell.windows",
     "terminal.integrated.shellArgs.osx",
     "window.doubleClickIconToClose"
   ],
