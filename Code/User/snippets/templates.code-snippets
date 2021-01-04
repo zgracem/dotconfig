@@ -39,7 +39,7 @@
   "new_YAML": {
     "prefix": "yaml",
     "body": [
-      "${1:%YAML 1.2\n---}",
+      "---",
       "$0"
     ],
     "description": "YAML 1.2 template",
