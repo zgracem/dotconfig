@@ -41,9 +41,6 @@ gem "net-scp"
 gem "net-ssh"
 gem "nokogiri", ">= 1.10.10"
 
-# <ipinfo.io>
-gem "IPinfo"
-
 # <github.com/middleman/middleman>
 gem "middleman"
 
