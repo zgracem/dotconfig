@@ -40,17 +40,21 @@ function pyjamas --description "Convert configuration files between formats"
     end
 
     set -l output
+    set -l lang $_flag_out
+
     switch "$_flag_out"
         case json
             set output "$input.to_json"
             set -a libs json
         case plist
+            set lang xml
             set output "$input.to_plist"
             set -a libs plist
         case toml
             set output "TomlRB.dump($input)"
             set -a libs toml-rb
         case yaml
+            set lang yaml
             set output "$input.to_yaml"
             set -a libs yaml
         case '*'
@@ -58,5 +62,11 @@ function pyjamas --description "Convert configuration files between formats"
             return 1
     end
 
-    ruby -r$libs -e "puts $output" $argv[1]
+    if isatty stdout; and in-path bat
+        eval "function _at; cat | bat --style=plain --language=$lang; end"
+    else
+        function _at; cat; end
+    end
+
+    ruby -r$libs -e "puts $output" $argv[1] | _at
 end
