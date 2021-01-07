@@ -3,12 +3,11 @@ function pyjamas --description "Convert configuration files between formats"
     or return
 
     set -l src
-    set -l ext
-    set -q _flag_in; and set ext $_flag_in
+    set -q _flag_in; and set -l ext_in $_flag_in
 
     if set -q argv[1]
         set src "Pathname.new(ARGV[0])"
-        set -q ext; or set ext (string split "." -- $argv[1])[-1]
+        set ext_in (string split "." -- $argv[1])[-1]
     else if not isatty stdin
         set src ARGF
         if not set -q _flag_in
@@ -22,7 +21,7 @@ function pyjamas --description "Convert configuration files between formats"
 
     set -l input
     set -l libs pathname
-    switch "$ext"
+    switch "$ext_in"
         case json
             set input "JSON.load($src)"
             set -a libs json
@@ -36,7 +35,7 @@ function pyjamas --description "Convert configuration files between formats"
             set input "YAML.load($src.read)"
             set -a libs yaml
         case '*'
-            echo >&2 "don't know how to read a “$ext” file"
+            echo >&2 "don't know how to read a “$ext_in” file"
             return 1
     end
 
