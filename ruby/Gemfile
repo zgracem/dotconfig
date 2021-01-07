@@ -10,9 +10,6 @@ ruby "~> 2.6.0"
 # <github.com/threedaymonk/htmlentities>
 gem "htmlentities"
 
-# <github.com/bleything/plist>
-gem "plist"
-
 # <github.com/rtomayko/ronn>
 gem "ronn", "~> 0.7"
 
@@ -67,6 +64,12 @@ gem "tumblr_client"
 # -- for BitBar weather app
 # <github.com/trailblazer/representable>
 gem "representable"
+
+# -- for pyjamas (fish function)
+# <github.com/bleything/plist>
+gem "plist"
+# <https://github.com/emancu/toml-rb>
+gem "toml-rb"
 
 # -- for uu{char,debug,grep}
 gem "gemoji"
