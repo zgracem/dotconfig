@@ -1,0 +1,32 @@
+# bat <https://github.com/sharkdp/bat>
+# Based on: https://github.com/sharkdp/bat/blob/master/assets/completions/bat.fish
+
+complete -c bat -s l -l language -x -d 'Set the language for syntax highlighting' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l list-languages -d 'Display a list of supported languages for syntax highlighting' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s m -l map-syntax -d 'Map a file extension or file name to an existing syntax' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l theme -d 'Set the theme for syntax highlighting' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l list-themes -d 'Display a list of supported themes for syntax highlighting' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l style -d 'Configure which elements to display in addition to file contents' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s p -l plain -d 'Only show plain style, no decorations' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s n -l number -d 'Only show line numbers, no other decorations' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s A -l show-all -d 'Show non-printable characters like space, tab or newline' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s r -x -l line-range -d 'Only print the specified range of lines for each file' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s H -x -l highlight-line -x -d 'Highlight the N-th line with a different background color' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l color -x -a 'auto never always' -d 'Specify when to use colored output' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l italic-text -x -a 'always never' -d 'Specify when to use italic text in the output' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l decorations -x -a 'auto never always' -d 'Specify when to use decorations specified via --style' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l paging -x -a 'auto never always' -d 'Specify when to use the pager' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l pager -x -d 'Determine which pager is used' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l wrap -x -a 'auto never character' -d 'Specify the text-wrapping mode' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l tabs -x -d 'Set the tab width to T spaces' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s u -l unbuffered -d 'This option exists for POSIX-compliance reasons' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l terminal-width -x -d 'Set the width of the terminal' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s h -l help -d 'Print this help message' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -s V -l version -d 'Show version information' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l config-dir -d 'Display location of configuration directory' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l config-file -d 'Display location of configuration file' -n 'not __fish_seen_subcommand_from cache'
+
+# Sub-command 'cache' completions
+complete -c bat -a 'cache' -d 'Modify the syntax/language definition cache' -n 'not __fish_seen_subcommand_from cache'
+complete -c bat -l build -f -d 'Parse syntaxes/language definitions into cache' -n '__fish_seen_subcommand_from cache'
+complete -c bat -l clear -f -d 'Reset syntaxes/language definitions to default settings' -n '__fish_seen_subcommand_from cache'
