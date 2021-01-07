@@ -79,6 +79,6 @@ gem "unicode_utils"
 # local gems
 # ----------------------------------------------------------------------------
 
-gem "bunter", git: "git@github.com:zgracem/bunter.git"
+gem "bunter", git: "git@github.com:zgracem/bunter.git", branch: "main"
 gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git"
 gem "weather_meteo", path: "#{ENV['HOME']}/Dropbox/lib/ruby/weather_meteo"
