@@ -31,7 +31,7 @@ function pyjamas --description "Convert configuration files between formats"
         case toml
             set input "TomlRB.parse($src.read)"
             set -a libs toml-rb
-        case yaml
+        case yml yaml
             set input "YAML.load($src.read)"
             set -a libs yaml
         case '*'
@@ -53,7 +53,7 @@ function pyjamas --description "Convert configuration files between formats"
         case toml
             set output "TomlRB.dump($input)"
             set -a libs toml-rb
-        case yaml
+        case yml yaml
             set lang yaml
             set output "$input.to_yaml"
             set -a libs yaml
