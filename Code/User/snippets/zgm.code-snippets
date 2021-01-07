@@ -22,14 +22,5 @@
     "prefix": "nnow",
     "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
     "description": "Current time (YYYY-MM-DD hh:mm:ss)"
-  },
-  // "hello": {
-  //   "prefix": "hello",
-  //   "body": "${BLOCK_COMMENT_START:$LINE_COMMENT} Hello, world!${BLOCK_COMMENT_END/.+/ $0/}"
-  // },
-  "Pasted URL": {
-    "prefix": "pburl",
-    "body": "${CLIPBOARD/.*(https?:\\/\\/[^\\s\"']+).*/${1}/}"
   }
 }
-// pburl
