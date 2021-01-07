@@ -9,7 +9,7 @@ function g2 --description 'Go somewhere' -a alias
         case stow
             set dir "$HOME/opt/stow"
         case defunct
-            set dir "$HOME/Dropbox/Archive/src"
+            set dir "$HOME/Dropbox/src.old"
         case scratch
             set dir "$HOME/tmp/_scratch"
         case vs9

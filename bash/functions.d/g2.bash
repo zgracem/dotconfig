@@ -4,7 +4,7 @@
 declare -A mydirs=(
   [icloud]="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
   [bashlib]="$HOME/lib/bash"
-  [defunct]="$HOME/Dropbox/Archive/src"
+  [defunct]="$HOME/Dropbox/src.old"
   [dev]="$HOME/scripts/dev"
   [stow]="$HOME/opt/stow"
   [inbox]="$HOME/Dropbox/inbox"
