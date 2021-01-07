@@ -26,7 +26,9 @@ function funced --wraps funcsave --description 'Edit a function interactively' -
     end
 
     if test $function_line -gt 1
-        if string match -q "*vim" "$VISUAL"
+        if string match -rq "\bcode\b" "$VISUAL"
+            $VISUAL --goto $function_source:$function_line
+        else if string match -rq "*vim" "$VISUAL"
             $VISUAL +$function_line $function_source
         else
             $VISUAL $function_source:$function_line
