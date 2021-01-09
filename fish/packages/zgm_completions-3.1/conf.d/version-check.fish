@@ -26,24 +26,6 @@ end
 
 # ----------------------------------------------------------------------------
 
-if test -n "$VSCODE_PID" -a "$TERM" = "dumb"
-    set -l versions 1.{22,50}.0 2.{3.0,39.8} 3.{0,1}.{0,1,2} \
-        3.1.2-{1578-gd3192d37a,1827-gf03ff8cd0} 3.1.3 3.2.0 4.0.0
-
-    echo "current fish : $FISH_VERSION"
-
-    for _version_ in (string join \n $versions | sort)
-        if _fish_is_newer_than $_version_
-            echo "    newer than" $_version_
-        else
-            echo "not newer than" $_version_
-        end
-    end
-    exit
-end
-
-# ----------------------------------------------------------------------------
-
 if _fish_is_older_than 3.1.0
     set -g -p fish_complete_path (realpath (dirname (status filename))/..)/completions
 end
