@@ -42,6 +42,11 @@
   },
   // Windows-ish shortcuts on Mac
   {
+    "key": "ctrl+j",
+    "command": "editor.action.joinLines",
+    "when": "isWindows && editorTextFocus && !editorReadonly"
+  },
+  {
     "key": "cmd+j",
     "command": "editor.action.joinLines",
     "when": "isMac && editorTextFocus && !editorReadonly"
