@@ -3,6 +3,15 @@
 #   https://github.com/sharkdp/bat/blob/c8478ce/assets/completions/bat.fish
 #   https://github.com/fish-shell/fish-shell/blob/76195df/share/completions/bat.fish
 
+function __complete_cheat -a token
+    set -l fake_command f31da432189ba783d9270c6c0944c309
+    complete -C"$fake_command $token"
+end
+
+function __bat_complete_language -a comp
+    command bat --list-languages | string split -f1 : | string match -e "$comp"
+end
+
 function __bat_complete_languages
     for spec in (command bat --list-languages)
         set -l name (string split -f1 : $spec)
@@ -17,7 +26,7 @@ end
 
 function __bat_complete_themes
     command bat --list-themes \
-    | sed -E '/^($|\s|Further themes can be installed to)/d;s/$/\t/'
+        | sed -E '/^($|\s|Further themes can be installed to)/d;s/$/\t/'
 end
 
 function __bat_cache
@@ -26,13 +35,25 @@ end
 
 function __bat_complete_map_syntax
     set -l token (commandline -ct)
+    set -l comps
 
-    # If token is empty, complete files by calling `complete -C` on a fake
-    # command name -- like `__fish_complete_directories` does, except filtering
-    # out directories this time...
-    # if test -z "$token"
-    #     set token (complete -C"856ccaf5c2451403763967ab48aa54aa7825a7845f360bd5773f6e2968187745 ")
-    # end
+    if string match -qr '(?<glob>.+):(?<syntax>.*)' -- $token
+        # If token ends with a colon, complete with the list of language names.
+        set comps $glob:(__bat_complete_language $syntax)
+    else if string match -qr '\*' -- $token
+        # If token contains a globbing character (`*`), complete only possible
+        # globs in the current directory
+        set comps (__complete_cheat $token | string match -er '[*]'):
+    else
+        # Try to complete files by calling `complete -C` on a fake command name,
+        # like `__fish_complete_directories` does, except this one filters for
+        # files (and globs).
+        set comps (__complete_cheat $token | string match -erv '/$'):
+    end
+
+    if set -q comps[1]
+        printf "%s\t\n" $comps
+    end
 end
 
 function __bat_no_excl
@@ -99,7 +120,7 @@ complete -c bat -s l -l language -x -k -a "(__bat_complete_languages)" -d "Set t
 complete -c bat -s r -l line-range -x -d "Only print lines [M]:[N] (either optional)" -n __bat_no_excl
 complete -c bat -l list-languages -f -d "List syntax highlighting languages" -n __fish_is_first_arg
 complete -c bat -l list-themes -f -d "List syntax highlighting themes" -n __fish_is_first_arg
-complete -c bat -s m -l map-syntax -d "Map <glob pattern>:<language syntax>" -n __bat_no_excl
+complete -c bat -s m -l map-syntax -x -a "(__bat_complete_map_syntax)" -d "Map <glob pattern>:<language syntax>" -n __bat_no_excl
 complete -c bat -s n -l number -d "Only show line numbers, no other decorations" -n __bat_no_excl
 complete -c bat -l pager -x -a less\tdefault -d "Which pager to use" -n __bat_no_excl
 complete -c bat -l paging -x -a "$paging_opts" -d "When to use the pager" -n __bat_no_excl
