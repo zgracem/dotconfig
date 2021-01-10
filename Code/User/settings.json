@@ -93,10 +93,10 @@
   "extensions.closeExtensionDetailsOnViewChange": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
+    "*.*ignore": "ignore",
     "*.JSON-tmLanguage": "json",
     "*.YAML-tmLanguage": "yaml",
     "*.[1-9]": "troff",
-    "*.ignore": "ignore",
     "*.make": "makefile",
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
