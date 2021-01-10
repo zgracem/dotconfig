@@ -101,9 +101,7 @@
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
     "*.sublime-{settings,build,keymap}": "json",
-    "*.vifm": "viml",
-    "ignore": "ignore",
-    "vimrc": "viml"
+    "ignore": "ignore"
   },
   "files.defaultLanguage": "${activeEditorLanguage}",
   "files.eol": "\n",
