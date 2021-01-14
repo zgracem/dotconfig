@@ -1,4 +1,14 @@
-set -l formats json plist toml yaml
+function __pyjamas_formats
+    set --local function_file (status filename | string replace completions functions)
+    set --local pj_formats (string replace -rf '^\s*case ((?:\w+) ?)+$' '$1' <$function_file | sort -u)
+    echo -ns $pj_formats\t\n
+end
 
-complete -c pyjamas -s i -l in -xa "$formats" -d "Input format"
-complete -c pyjamas -s o -l out -xa "$formats" -d "Output format"
+function __pyjamas_modes
+    set --local formats (__pyjamas_formats | string trim)
+    string match --invert --regex '\A(\w+):(?:\1)' $formats:$formats\t
+end
+
+complete -c pyjamas -s i -l in -x -a "(__pyjamas_formats)" -d "Specify input format"
+complete -c pyjamas -s o -l out -x -a "(__pyjamas_formats)" -d "Specify output format (req'd)"
+complete -c pyjamas -s m -l mode -x -a "(__pyjamas_modes)" -d "Mode (INPUT:OUTPUT)"

@@ -1,6 +1,10 @@
 function pyjamas --description "Convert configuration files between formats"
-    argparse -n pyjamas 'i/in=' 'o/out=' -- $argv
+    argparse -xh,{i,o,m} -x{i,o},m 'i/in=' 'o/out=' 'm/mode=' -- $argv
     or return
+
+    if set -q _flag_mode
+        string split ":" $_flag_mode | read -L _flag_in _flag_out
+    end
 
     set -l src
     set -q _flag_in; and set -l ext_in $_flag_in
@@ -11,7 +15,7 @@ function pyjamas --description "Convert configuration files between formats"
     else if not isatty stdin
         set src ARGF
         if not set -q _flag_in
-            echo >&2 "don't know what kind of file this is! (specify with -i/--in)"
+            echo >&2 "unknown file type! (specify with --in or --mode)"
             return 1
         end
     else
@@ -21,6 +25,7 @@ function pyjamas --description "Convert configuration files between formats"
 
     set -l input
     set -l libs pathname
+
     switch "$ext_in"
         case json
             set input "JSON.load($src)"
@@ -35,7 +40,7 @@ function pyjamas --description "Convert configuration files between formats"
             set input "YAML.load($src.read)"
             set -a libs yaml
         case '*'
-            echo >&2 "don't know how to read a “$ext_in” file"
+            echo >&2 "don't know how to read a “$ext_in” file!"
             return 1
     end
 
@@ -58,7 +63,7 @@ function pyjamas --description "Convert configuration files between formats"
             set output "$input.to_yaml"
             set -a libs yaml
         case '*'
-            echo >&2 "don't know how to make a “$_flag_out” file"
+            echo >&2 "don't know how to make a “$_flag_out” file!"
             return 1
     end
 
