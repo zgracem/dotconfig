@@ -7,7 +7,7 @@ function manpdf --description 'View a manual page as PDF'
         set MANPDF_DIR "$HOME/Dropbox/share/doc/pdf"
     end
 
-    set -l pdf (command manpdf $argv); or return
+    set -l pdf (command manpdf -f $argv); or return
     if string match -q "/*" "$pdf"
         echo "$pdf"
 
