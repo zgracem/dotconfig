@@ -1,4 +1,14 @@
 {
+  "fish_function": {
+    "prefix": "ffunc",
+    "body": [
+      "function ${1:$TM_FILENAME_BASE}",
+      "\t$0",
+      "end"
+    ],
+    "description": "fish shell function definition",
+    "scope": "fish"
+  },
   "new_Gemfile": {
     "prefix": "!new",
     "body": [

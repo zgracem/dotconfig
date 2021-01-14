@@ -1,6 +1,10 @@
 {
   "autoSnippet.snippets": [
     {
+      "language": "fish",
+      "snippet": "fish_function"
+    },
+    {
       "language": "gemfile",
       "snippet": "new_Gemfile"
     },
