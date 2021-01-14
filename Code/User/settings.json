@@ -10,7 +10,7 @@
     },
     {
       "language": "markdown",
-      "snippet": "Markdown_frontmatter"
+      "snippet": "YAML_frontmatter"
     },
     {
       "language": "ruby",

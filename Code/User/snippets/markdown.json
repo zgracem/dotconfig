@@ -19,6 +19,7 @@
   },
   "inline_link": {
     "prefix": "hhref",
-    "body": "[$TM_SELECTED_TEXT](${CLIPBOARD/.*(https?:\\/\\/[^\\s\"']+).*/${1}/})"
+    "body": "[$TM_SELECTED_TEXT](${CLIPBOARD/.*(https?:\\/\\/[^\\s\"']+).*/${1}/})",
+    "description": "Inline link (^L)"
   }
 }
