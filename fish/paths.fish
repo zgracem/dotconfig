@@ -44,6 +44,9 @@ if is-macos; and test -x /usr/local/bin/brew
     # ncurses
     set -p PATH /usr/local/opt/ncurses/bin
     set -p MANPATH /usr/local/opt/ncurses/share/man
+
+    # openjdk
+    set -p PATH /usr/local/opt/openjdk/bin
 end
 
 # Linuxbrew
