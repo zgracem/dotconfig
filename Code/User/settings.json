@@ -252,6 +252,10 @@
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+  "[applescript]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
   "[fish]": {
     "editor.defaultFormatter": "zgm.vscode-fish",
     "editor.detectIndentation": false,

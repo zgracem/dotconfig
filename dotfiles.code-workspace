@@ -21,6 +21,7 @@
       "2148"
     ],
     "sortJSON.orderUnderride": [
+      "[applescript]",
       "[fish]",
       "[ini]",
       "[json]",
