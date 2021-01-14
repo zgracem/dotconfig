@@ -132,6 +132,7 @@ brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
 
 # images
 brew "imagemagick@6", link: true
+brew "webp"
 
 if OS.mac?
   brew "exif"
