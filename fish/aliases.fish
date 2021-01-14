@@ -38,7 +38,6 @@ abbr -a -g dirsize 'du -sh'
 abbr -a -g ss 'set --show'
 abbr -a -g unset 'set --erase'
 abbr -a -g unstow 'stow --delete'
-abbr -a -g wtf type
 abbr -a -g xd 'hexdump -C'
 abbr -a -g ydl youtube-dl
 
