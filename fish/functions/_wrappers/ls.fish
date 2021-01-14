@@ -1,7 +1,7 @@
 # Overrides $__fish_data_dir/functions/ls.fish
 if in-path exa
     function ls --wraps exa --description 'List (almost) all files'
-        exa --all $argv
+        exa --all --color-scale $argv
     end
 else
     function ls --description 'List (almost) all files'

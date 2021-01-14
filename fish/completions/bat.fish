@@ -4,6 +4,8 @@
 #   https://github.com/fish-shell/fish-shell/blob/76195df/share/completions/bat.fish
 
 function __complete_cheat -a token
+    # Try to complete files by calling `complete -C` on a fake command name,
+    # like `__fish_complete_directories` does.
     set -l fake_command f31da432189ba783d9270c6c0944c309
     complete -C"$fake_command $token"
 end
@@ -45,9 +47,7 @@ function __bat_complete_map_syntax
         # globs in the current directory
         set comps (__complete_cheat $token | string match -er '[*]'):
     else
-        # Try to complete files by calling `complete -C` on a fake command name,
-        # like `__fish_complete_directories` does, except this one filters for
-        # files (and globs).
+        # Complete files (and globs).
         set comps (__complete_cheat $token | string match -erv '/$'):
     end
 

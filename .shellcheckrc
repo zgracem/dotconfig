@@ -12,3 +12,6 @@ disable=SC2154
 
 # don't require shebang
 disable=SC2148
+
+# OK to declare and assign together
+disable=SC2155

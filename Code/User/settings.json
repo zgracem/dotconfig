@@ -54,7 +54,6 @@
   "code-runner.temporaryFileName": "",
   "debug.showInlineBreakpointCandidates": false,
   "diffEditor.ignoreTrimWhitespace": false,
-  "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.colorDecorators": false,
   "editor.copyWithSyntaxHighlighting": false,
