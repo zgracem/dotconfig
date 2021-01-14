@@ -11,7 +11,7 @@ function manpdf --description 'View a manual page as PDF'
     if string match -q "/*" "$pdf"
         echo "$pdf"
 
-        if test -z "$SSH_CONNECTION"
+        if set -q SSH_CONNECTION
             open "$pdf"
         end
     end

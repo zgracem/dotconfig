@@ -41,7 +41,7 @@ function rolldice --description 'Roll some dice'
         set -a totals "($total)"
     end
 
-    if test (count $totals) -gt 1
+    if set -q totals[2]
         set -l grand_total (string join " + " $totals)
         sum $grand_total
     end

@@ -90,7 +90,7 @@ function rl --description "Reload configuration files"
     end
 
     # With no arguments, reload the main config file
-    if test (count $argv) -eq 0
+    if not set -q argv[1]
         set --append files_to_reload "$__fish_config_dir/config.fish"
     end
 
@@ -127,7 +127,7 @@ function rl --description "Reload configuration files"
             end
         end
 
-        if test (count $checked_files) -gt 0
+        if set -q checked_files[1]
             set --append files_to_reload $checked_files
         else
             _increment_errors

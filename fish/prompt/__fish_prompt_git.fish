@@ -42,7 +42,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     else if test $staged -gt 0
         set_color $fish_prompt_color_git_needs_commit
         echo -n $icon_dirty
-    else if test -n "$__fish_prompt_show_git_clean"
+    else if set -q __fish_prompt_show_git_clean
         set_color $fish_prompt_color_git_clean
         echo -n $icon_clean
     end

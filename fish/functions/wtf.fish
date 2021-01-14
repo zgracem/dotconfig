@@ -1,5 +1,5 @@
 function wtf -d "Display information about commands"
-    test -n "$argv"; or return 1
+    set -q argv[1]; or return 1
 
     for subject in $argv
         for type in (type -at $subject)
