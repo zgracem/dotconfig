@@ -198,7 +198,7 @@ set JQ_COLORS (string join : $JQ_COLORS)
 # -----------------------------------------------------------------------------
 
 if in-path exa
-    set -gx EXA_COLORS (string replace -a "=9" "=1;3" "$LS_COLORS" | string split :)
+    set -gx EXA_COLORS (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
     # Permissions & attributes
     set -a EXA_COLORS "ur="(get_color yellow)
     set -a EXA_COLORS "uw="(get_color red)
