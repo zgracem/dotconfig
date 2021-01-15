@@ -199,7 +199,11 @@ set JQ_COLORS (string join : $JQ_COLORS)
 
 if in-path exa
     set -gx EXA_COLORS (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
-    # Permissions & attributes
+
+    ### Permissions & ownership
+
+    # [u]ser/[g]roup/o[t]hers +
+    #   [r]ead/[w]rite/e[x]ecute (regular)/[e]xecute (other)
     set -a EXA_COLORS "ur="(get_color brgreen)
     set -a EXA_COLORS "uw="(get_color bryellow)
     set -a EXA_COLORS "ux="(get_color brcyan)
@@ -210,37 +214,66 @@ if in-path exa
     set -a EXA_COLORS "tr="(get_color yellow)
     set -a EXA_COLORS "tw="(get_color brred)
     set -a EXA_COLORS "tx="(get_color cyan)
+
+    # [s]etuid/setgid/sticky bits on reg[u]lar files & other [f]iles
     set -a EXA_COLORS "su="(get_color cyan)
     set -a EXA_COLORS "sf="(get_color cyan)
-    set -a EXA_COLORS "xa="(get_color white)
-    # File sizes
-    set -a EXA_COLORS "sn="(get_color cyan)
-    set -a EXA_COLORS "sb="(get_color cyan --bold)
-    set -a EXA_COLORS "df="(get_color cyan --bold)
-    set -a EXA_COLORS "ds="(get_color cyan)
-    # Owners and groups
+
+    # [U]sers & [g]roups; yo[u] or [n]ot you
     set -a EXA_COLORS "uu="(get_color green)
     set -a EXA_COLORS "un="(get_color yellow)
     set -a EXA_COLORS "gu="(get_color cyan)
     set -a EXA_COLORS "gn="(get_color yellow)
+
+    ### Attributes
+
+    # e[x]tended [a]ttributes
+    set -a EXA_COLORS "xa="(get_color white)
+
+    # File [s]ize: [n]umber & [b]yte unit
+    set -a EXA_COLORS "sn="(get_color cyan)
+    set -a EXA_COLORS "sb="(get_color cyan --bold)
+
+    # Number of blocks
+    set -a EXA_COLORS "bl="(get_color cyan)
+
+    # File date
+    set -a EXA_COLORS "da="(get_color white)
+
+    # inode number
+    set -a EXA_COLORS "in="(get_color normal)
+
+    # Device's major (df) and minor (ds) ID
+    set -a EXA_COLORS "df="(get_color cyan --bold)
+    set -a EXA_COLORS "ds="(get_color cyan)
+
     # Hard links
     set -a EXA_COLORS "lc="(get_color white)
     set -a EXA_COLORS "lm="(get_color brwhite)
+
+    ### Details & metadata
+
     # git
     set -a EXA_COLORS "ga="(get_color brgreen --bold)
     set -a EXA_COLORS "gm="(get_color bryellow --bold)
     set -a EXA_COLORS "gd="(get_color brred)
     set -a EXA_COLORS "gv="(get_color cyan)
     set -a EXA_COLORS "gt="(get_color cyan)
-    # Details and metadata
-    set -a EXA_COLORS "xx="(get_color brblack)
-    set -a EXA_COLORS "da="(get_color white)
-    set -a EXA_COLORS "in="(get_color normal)
-    set -a EXA_COLORS "bl="(get_color cyan)
-    set -a EXA_COLORS "hd="(get_color white --underline)
+
+    # Path of a symlink
     set -a EXA_COLORS "lp="(get_color magenta)
-    set -a EXA_COLORS "cc="(get_color brblack)
+
+    # Overlay style for broken symlinks
     set -a EXA_COLORS "bO="(get_color black --bold)
+
+    # Header row of table
+    set -a EXA_COLORS "hd="(get_color white --underline)
+
+    # Punctuation
+    set -a EXA_COLORS "xx="(get_color brblack)
+
+    # Escape characters
+    set -a EXA_COLORS "cc="(get_color brblack)
 
     set EXA_COLORS (string join : $EXA_COLORS)
 end
