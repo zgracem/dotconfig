@@ -12,7 +12,7 @@ function local-ruby-versions --description "List all .ruby-version files and the
     set --local sep /
 
     for rv_file in $rv_files
-        set --local rb_version (cat $rv_file)
+        read --local rb_version <$rv_file
         set --local project_dir (dirname $rv_file | string replace "$HOME" "~")
 
         printf "%s%s%s\n" $rb_version $sep $project_dir

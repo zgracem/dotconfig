@@ -2,7 +2,7 @@ function __fish_prompt_rbenv
     in-path rbenv
     or return 0
 
-    set -l global_version (cat ~/.rbenv/version)
+    read -l global_version <~/.rbenv/version
     set -l local_version (rbenv version | string split " ")[1]
 
     if test "$global_version" != "$local_version"

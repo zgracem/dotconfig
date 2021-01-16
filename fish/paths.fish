@@ -73,8 +73,9 @@ if test -d ~/.rbenv
         # non-Homebrew installation
         set -p PATH ~/.rbenv/bin
     end
+    read -l ruby_version <~/.rbenv/version
     set -p PATH ~/.rbenv/shims
-    set -p MANPATH ~/.rbenv/versions/(cat ~/.rbenv/version)/share/man
+    set -p MANPATH ~/.rbenv/versions/$ruby_version/share/man
 end
 
 # fish
