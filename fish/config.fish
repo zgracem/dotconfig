@@ -15,9 +15,8 @@ end
 source "$__fish_config_dir/paths.fish"
 
 # function subdirectories
-for dir in $__fish_config_dir/functions{,/**/} ~/.private/fish/functions
-    set -p fish_function_path (string trim --right --chars=/ $dir)
-end
+set -p fish_function_path $__fish_config_dir/functions/_{debug,wrappers}
+set -p fish_function_path ~/.private/fish/functions
 
 # load private and per-machine configuration if available
 set -g fish_package_path ~/.local/config/fish ~/.private/fish
