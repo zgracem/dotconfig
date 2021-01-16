@@ -1,4 +1,4 @@
-function prefimport -d "import defaults to \$domain from YAML"
+function __flannel_import -d "import defaults to \$domain from YAML"
     argparse --min-args 1 n/dryrun -- $argv; or return
 
     set -l test_domain org.inescapable.flannel.test
