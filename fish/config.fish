@@ -40,8 +40,8 @@ if status is-interactive
 end
 
 # remove duplicate & nonexistent directories
-_fix_path fish_function_path
-_fix_path fish_complete_path
+fix-path fish_function_path
+fix-path fish_complete_path
 
 if is-cygwin
     # fish_help_browser overrides the browser that may be defined by $BROWSER.
@@ -50,7 +50,7 @@ if is-cygwin
     set -g fish_help_browser "$LOCALAPPDATA\\Mozilla Firefox\\firefox.exe"
 end
 
-# See conf.d/_update_lastpwd.fish
+# See conf.d/update-lastpwd.fish
 if test -f $__fish_user_data_dir/last_pwd; and status is-interactive
     read -l dir <$__fish_user_data_dir/last_pwd
     test -d "$dir"; and cd "$dir"

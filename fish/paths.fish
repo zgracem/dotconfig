@@ -6,7 +6,7 @@ set --export PATH $PATH /usr/bin /bin /usr/sbin /sbin
 set --export MANPATH $MANPATH /usr/share/man /usr/man
 
 # Now we start prepending to whatever PATH is already set. Duplicate entries
-# will be removed later by _fix_path, with our settings here taking precedence.
+# will be removed later by fix-path, with our settings here taking precedence.
 set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
@@ -83,5 +83,5 @@ set -p MANPATH $__fish_data_dir/man
 
 # -----------------------------------------------------------------------------
 
-_fix_path PATH
-_fix_path MANPATH
+fix-path PATH
+fix-path MANPATH

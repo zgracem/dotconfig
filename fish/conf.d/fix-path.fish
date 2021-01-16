@@ -1,4 +1,4 @@
-function _fix_path --description 'Remove duplicate and missing dirs from a path variable' -a var
+function fix-path --description 'Remove duplicate and missing dirs from a path variable' -a var
     set -l ORIGINAL_PATH $$var
     set -l FIXED_PATH
 
