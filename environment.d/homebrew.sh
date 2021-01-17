@@ -24,9 +24,6 @@ export HOMEBREW_AUTO_UPDATE_SECS=600
 export HOMEBREW_BAT=1
 export HOMEBREW_BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config_homebrew"
 
-# Use a GUI text editor if available
-export HOMEBREW_EDITOR="$VISUAL"
-
 # Always use the latest stable tag (even if developer commands have been run)
 export HOMEBREW_UPDATE_TO_TAG=1
 
