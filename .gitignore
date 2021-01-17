@@ -12,6 +12,7 @@ spotify-tui/client.yml
 brew/*.lock.json
 fish/fish_variables*
 fish/fishd.*
+iterm2/
 ruby/irbrc_history
 syncplay.ini
 
