@@ -29,7 +29,6 @@ brew "tmux"
 brew "reattach-to-user-namespace" if OS.mac?
 
 # other
-brew "dtrx"
 brew "jq"
 brew "keychain"
 brew "less"
