@@ -92,6 +92,8 @@
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
   "emojisense.emojiDecoratorsEnabled": false,
   "emojisense.markupCompletionsEnabled": false,
+  "explorer.incrementalNaming": "smart",
+  "explorer.openEditors.visible": 0,
   "extensions.closeExtensionDetailsOnViewChange": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
