@@ -4,8 +4,8 @@ function get_color --description 'Get the partial escape code for a terminal col
             echo 0
         case '*'
             set_color $argv \
-                | string split \x1b \
-                | string replace -afr '\[(\d+)m' '$1' \
+                | string split -n \x1b\[ \
+                | string trim -r -cm \
                 | string join ';'
     end
 end
@@ -130,19 +130,17 @@ end
 # LS_COLORS
 # -----------------------------------------------------------------------------
 
-set ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
+set -l ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
 
-if test ! -f $ls_colors_file -a -d (dirname $ls_colors_file)
+if test -d (dirname $ls_colors_file) -a ! -f $ls_colors_file
     pushd (dirname $ls_colors_file)
     and make --quiet all
     and popd
 end
 
 if test -f $ls_colors_file
-    set -gx LS_COLORS (string replace -a "'" "" < $ls_colors_file | string split ' ')[3]
+    set -gx LS_COLORS (tr -d "\'" <$ls_colors_file | string split -f3 " ")
 end
-
-set --erase ls_colors_file
 
 if not is-gnu ls
     # Generated at http://geoff.greer.fm/lscolors/
