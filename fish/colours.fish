@@ -130,19 +130,20 @@ end
 # LS_COLORS
 # -----------------------------------------------------------------------------
 
-set -l ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
+if is-gnu ls
+    set -l ls_colors_dir $XDG_CACHE_HOME/dircolors
+    set -l ls_colors_file "$ls_colors_dir/thirty2k.ls_colors.fish"
 
-if test -d (dirname $ls_colors_file) -a ! -f $ls_colors_file
-    pushd (dirname $ls_colors_file)
-    and make --quiet all
-    and popd
-end
+    test -d $ls_colors_dir; or mkdir -p $ls_colors_dir
 
-if test -f $ls_colors_file
+    if not test -f $ls_colors_file
+        pushd $XDG_CONFIG_HOME/dircolors
+        and make --quiet all
+        and popd
+    end
+
     set -gx LS_COLORS (tr -d "\'" <$ls_colors_file | string split -f3 " ")
-end
-
-if not is-gnu ls
+else
     # Generated at http://geoff.greer.fm/lscolors/
     set -gx CLICOLOR 1
     set -gx LSCOLORS exFxdacabxgagaabadHbHd
@@ -196,7 +197,7 @@ set JQ_COLORS (string join : $JQ_COLORS)
 # -----------------------------------------------------------------------------
 
 if in-path exa
-    set -gx EXA_COLORS (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
+    set -gx EXA_COLORS # (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
 
     ### Permissions & ownership
 
