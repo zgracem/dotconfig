@@ -11,6 +11,9 @@ if fish_is_older_than 3.1.2
     exit 1
 end
 
+# setup environment
+source "$__fish_config_dir/__env.fish"
+
 # setup PATH and friends
 source "$__fish_config_dir/paths.fish"
 

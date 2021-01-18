@@ -1,0 +1,1 @@
+set -gx TMUX_TMPDIR $XDG_RUNTIME_DIR
