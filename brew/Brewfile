@@ -29,6 +29,7 @@ brew "tmux"
 brew "reattach-to-user-namespace" if OS.mac?
 
 # other
+brew "fd"
 brew "jq"
 brew "keychain"
 brew "less"
@@ -49,7 +50,6 @@ if OS.mac?
   brew "gnu-sed"
   brew "gnu-tar"
   brew "grep"
-  brew "moreutils"
 end
 
 # -----------------------------------------------------------------------------
@@ -58,17 +58,16 @@ end
 
 brew "bat"
 brew "exa"
-brew "fd"
 brew "hexyl"
 brew "htop"
-brew "openssh"
+brew "parallel"
 brew "source-highlight" # for less
-brew "ssh-copy-id", link: true
-brew "unar"
+brew "sponge"
 
 if OS.mac?
-  brew "sf-pwgen" # github.com/anders/pwgen
+  brew "sf-pwgen"
   brew "tree"
+  brew "unar"
   brew "watch"
 end
 
@@ -76,8 +75,10 @@ end
 brew "dnsmasq", restart_service: :changed if OS.mac?
 brew "links"
 brew "lynx"
+brew "openssh"
+brew "ssh-copy-id", link: true
 brew "transmission-cli"
-brew "youtube-dl" # install w/ pip to get the youtube_dl Python module too.
+brew "youtube-dl" # also install w/ pip to get youtube_dl Python module
 
 # documents
 brew "dos2unix"
@@ -111,8 +112,6 @@ if OS.mac?
   brew "spotifyd", restart_service: :changed
   tap  "rigellute/tap"
   brew "rigellute/tap/spotify-tui"
-  tap  "khanhas/tap"
-  brew "khanhas/tap/spicetify-cli"
 end
 
 # ffmpeg with options
@@ -130,14 +129,14 @@ brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
 ]
 
 # images
+brew "exif"
+brew "exiftool"
 brew "imagemagick@6", link: true
+brew "pngcrush"
 brew "webp"
 
 if OS.mac?
-  brew "exif"
-  brew "exiftool"
   brew "imagesnap"
-  brew "pngcrush"
   brew "webkit2png"
 end
 
@@ -146,30 +145,27 @@ end
 # -----------------------------------------------------------------------------
 
 brew "cmake"
-brew "groff"
-brew "help2man"
 brew "hub"
 brew "ncurses"
 brew "shellcheck"
 brew "taglib" # for taglib-ruby gem
 
-if OS.mac?
-  tap  "alhadis/troff"
-  brew "alhadis/troff/man-db"
-end
+# documentation
+brew "groff"
+brew "help2man"
+brew "alhadis/troff/man-db" if OS.mac?
 
 # JavaScript
+brew "coffeescript"
 brew "node"
 brew "typescript"
 brew "yarn"
 
 # ruby
-if OS.mac? && MacOS.version >= "10.6"
-  brew "rbenv"
-  brew "rbenv-default-gems"
-  brew "ruby-build"
-  brew "rbenv-bundler"
-end
+brew "rbenv"
+brew "rbenv-default-gems"
+brew "ruby-build"
+brew "rbenv-bundler"
 
 # Dart Sass
 tap  "sass/sass"
