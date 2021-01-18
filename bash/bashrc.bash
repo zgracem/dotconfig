@@ -105,7 +105,7 @@ if [[ -z $HOME ]]; then
 fi
 
 # -----------------------------------------------------------------------------
-# Switch to alternate shell if available
+# Switch to alternate shell if necessary
 # -----------------------------------------------------------------------------
 
 if [[ -z $PREFERRED_SHELL ]]; then
@@ -120,17 +120,14 @@ if [[ -z $PREFERRED_SHELL ]]; then
       # I'm not allowed to change anything on my shared host
       PREFERRED_SHELL=$HOME/opt/bin/fish
       ;;
-    *)
-      PREFERRED_SHELL=$(type -P fish)
-      ;;
   esac
 
   if [[ ! -x $PREFERRED_SHELL ]]; then
-    PREFERRED_SHELL=$(type -P fish 2>/dev/null || type -P bash)
+    PREFERRED_SHELL=$(type -P fish 2>/dev/null)
   fi
 fi
 
-: "${PREFERRED_SHELL=$(type -P bash)}"
+: "${PREFERRED_SHELL:=$(type -P bash)}"
 
 if [[ $PREFERRED_SHELL != "$SHELL" ]]; then
   export SHELL=$PREFERRED_SHELL
