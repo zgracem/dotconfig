@@ -14,13 +14,6 @@ abbr --add --global -- '-' 'cd -'
 
 # ssh
 
-if string match -q '*.local' $hostname
-    abbr -a -g citadel '_ssh Citadel.local'
-    abbr -a -g erato '_ssh Erato'
-else
-    abbr -a -g citadel '_ssh Citadel.remote'
-end
-
 abbr -a -g vshraya '_ssh vshraya'
 abbr -a -g opal '_ssh opalstack'
 
@@ -28,18 +21,12 @@ abbr -a -g opal '_ssh opalstack'
 # abbreviations
 # -----------------------------------------------------------------------------
 
-if is-macos
-    abbr -a -g buddy /usr/libexec/PlistBuddy
-    abbr -a -g sp 'mdfind -name'
-end
-
 abbr -a -g bye exit
 abbr -a -g dirsize 'du -sh'
 abbr -a -g ss 'set --show'
 abbr -a -g unset 'set --erase'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexdump -C'
-abbr -a -g ydl youtube-dl
 
 abbr -a -g 555 'chmod 0555'
 abbr -a -g 600 'chmod 0600'
