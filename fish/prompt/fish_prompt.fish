@@ -5,9 +5,9 @@ function fish_prompt --description 'Display the interactive prompt'
 
     if set -q SSH_CONNECTION
         set_color $fish_color_host
-        # DEFAULT_USER is set in ~/.private/environment.d/default_user.sh
-        test "$USER" != "$DEFAULT_USER"; and echo -ns "$USER" "@"
-        echo -ns (prompt_hostname) (set_color normal) ":"
+        echo -ns $USER @ (prompt_hostname)
+        set_color normal
+        echo -n :
     end
 
     set_color $fish_color_cwd
@@ -16,7 +16,9 @@ function fish_prompt --description 'Display the interactive prompt'
     else
         echo -n (prompt_pwd)
     end
+
     set_color normal
+    echo -n " "
 
     __fish_prompt_rbenv
     __fish_prompt_git
@@ -24,15 +26,15 @@ function fish_prompt --description 'Display the interactive prompt'
 
     if set -q root_user
         set_color $fish_color_user_root
-        set glyph "#"
+        echo -n "#"
     else if set -q fish_private_mode
         set_color $fish_color_dimmed
-        set glyph "?"
+        echo -n "?"
     else
         set_color $fish_color_user
-        set glyph "¶"
+        echo -n "¶"
     end
-    echo -n " $glyph "
 
     set_color normal
+    echo -n " "
 end

@@ -18,5 +18,5 @@ function fish_status_to_signal -d "Convert an exit code into a named signal, if 
         end
     end
 
-    echo $code
+    echo -n $code
 end

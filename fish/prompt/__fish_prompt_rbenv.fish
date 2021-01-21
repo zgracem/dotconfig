@@ -7,7 +7,9 @@ function __fish_prompt_rbenv
 
     if test "$global_version" != "$local_version"
         set_color $fish_prompt_color_ruby
-        echo -n " $local_version"
+        echo -n $local_version
+
         set_color normal
+        echo -n " "
     end
 end

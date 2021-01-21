@@ -21,6 +21,8 @@ function __fish_right_prompt_timer -a ms
     end
 
     set_color $fish_prompt_color_duration
-    echo -n "$time "
+    echo -n $time
+
     set_color normal
+    echo -n " "
 end
