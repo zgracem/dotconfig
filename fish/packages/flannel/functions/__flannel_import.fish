@@ -1,5 +1,5 @@
 function __flannel_import -d "import defaults to \$domain from YAML"
-    argparse --min-args 1 n/dryrun -- $argv; or return
+    argparse --min-args 1 n/dry-run -- $argv; or return
 
     set -l test_domain org.inescapable.flannel.test
 
@@ -16,7 +16,7 @@ function __flannel_import -d "import defaults to \$domain from YAML"
 
             set short_domain (string replace --regex "\A$FLANNEL_DRAWER/(.+)\.yaml\Z" '$1' $file)
 
-            if set -q _flag_dryrun
+            if set -q _flag_dry_run
                 set domain $test_domain
             end
 
@@ -24,7 +24,7 @@ function __flannel_import -d "import defaults to \$domain from YAML"
                 set exit OK 0
 
                 set_color brgreen; echo -n $short_domain
-                if set -q _flag_dryrun
+                if set -q _flag_dry_run
                     set_color normal
                     set_color --italics; echo -n " ($test_domain)"
                 end
@@ -39,7 +39,7 @@ function __flannel_import -d "import defaults to \$domain from YAML"
     end
 
     if test $exit[2] -eq 0
-        set -q _flag_dryrun; and defaults delete $test_domain 2>/dev/null
+        set -q _flag_dry_run; and defaults delete $test_domain 2>/dev/null
     else
         set_color red; printf >&2 "$exit[1]\n" $short_domain
         set_color normal

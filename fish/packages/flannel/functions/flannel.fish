@@ -1,46 +1,43 @@
 function flannel
-    argparse n/dryrun b/byhost=+ o/old=+ -- $argv; or return
+    argparse --ignore-unknown n/dry-run -- $argv; or return
 
-    set -l host C8E68D40-A53C-50DE-90B4-4A5973272E7F
-    set -l prefs_dir ~/Library/Preferences
-    set -l old_prefs_dir /Volumes/Hub/Athena/Preferences
+    function _hi
+        echo -ns (set_color brgreen) "$argv" (set_color normal) \n
+    end
 
     switch $argv[1]
-        case touch
-            gtouch $FLANNEL_DRAWER/$argv[2..-1].yaml
-        case export
-            for byhost_file in $_flag_byhost
-                set -a argv $prefs_dir/$byhost_file.$host.plist
-            end
+        case dump # each DOMAIN to file(s) in PWD
+            __flannel_dump $_flag_dry_run $argv[2..-1]
 
-            set -q argv[2]; or set argv[2] -globalDomain
+        case import # each DOMAIN from FLANNEL_DRAWER
+            __flannel_import $_flag_dry_run $argv[2..-1]
 
-            for domain in $argv[2..-1]
-                defaults export $domain - | pyjamas --mode plist:yaml
-            end
+        case export # each DOMAIN to stdout
+            __flannel_export $_flag_dry_run $argv[2..-1]
 
-            for file in $_flag_old
-                set -l domain (basename -s .plist $argv[1])
-                set -l old_pref_file $old_prefs_dir/$domain.plist
-
-                if test -f "$old_pref_file"
-                    plutil -convert xml1 $old_pref_file -o - | pyjamas --mode plist:yaml
+        case print # each FILE to stdout
+            for file in $argv[2..-1]
+                if test -f $file
+                    if set -q _flag_dry_run
+                        echo plutil -convert xml1 (_hi $file) -o -
+                    else
+                        plutil -convert xml1 $file -o - | pyjamas --mode plist:yaml
+                        or return
+                    end
                 else
-                    echo >&2 "file not found! $old_pref_file"
-                    return 1
+                    echo >&2 "file not found! $file"
+                    set -q _flag_dry_run; or return 1
                 end
             end
-        case dump
-            for domain in $argv[2..-1]
-                set -l yaml_file $FLANNEL_DRAWER/$domain.yaml
-                if test -f $yaml_file
-                    echo >&2 "file exists!" $yaml_file
-                    continue
-                end
-                flannel export $domain >$yaml_file
+
+        case touch # each DOMAIN's file in FLANNEL_DRAWER
+            set -l files $FLANNEL_DRAWER/$argv[2..-1].yaml
+
+            if set -q _flag_dry_run
+                printf "gtouch %s\n" (_hi $files)
+            else
+                gtouch $files
             end
-        case import
-            set -q _flag_dryrun; and set _flag_dryrun --dryrun
-            __flannel_import $_flag_dryrun $argv[2..-1]
+
     end
 end
