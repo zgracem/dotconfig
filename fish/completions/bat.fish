@@ -6,7 +6,7 @@
 function __complete_cheat -a token
     # Try to complete files by calling `complete -C` on a fake command name,
     # like `__fish_complete_directories` does.
-    set -l fake_command f31da432189ba783d9270c6c0944c309
+    set -l fake_command aaabccccdeeeeefffffffffgghhhhhhiiiii
     complete -C"$fake_command $token"
 end
 

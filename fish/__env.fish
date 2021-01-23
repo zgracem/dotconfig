@@ -4,10 +4,10 @@ if set -gxq __z_env_loaded
 end
 
 # XDG Basedir Spec
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/var/cache"
-export XDG_RUNTIME_DIR="$HOME/var/run"
+set -gx XDG_CONFIG_HOME ~/.config
+set -gx XDG_DATA_HOME ~/.local/share
+set -gx XDG_CACHE_HOME ~/var/cache
+set -gx XDG_RUNTIME_DIR ~/var/run
 
 test -z "$TMPDIR"; or set -gx TMPDIR (dirname (mktemp -u))
 
@@ -16,16 +16,6 @@ test -z "$TMPDIR"; or set -gx TMPDIR (dirname (mktemp -u))
 if not test -G $TMPDIR; and mount | grep -q " on $TMPDIR.*noexec,"
     set -gx TMPDIR $XDG_RUNTIME_DIR
     mkdir -p $TMPDIR
-end
-
-set -gx PLATFORM unknown
-switch (uname -s)
-    case "*_NT-*"
-        set PLATFORM windows
-    case Darwin
-        set PLATFORM mac
-    case Linux
-        set PLATFORM linux
 end
 
 for env_file in $__fish_config_dir/__env/*.fish

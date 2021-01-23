@@ -1,4 +1,4 @@
-string match -q $PLATFORM windows; or exit
+string match -q "*_NT-*" (uname -s); or exit
 
 # -----------------------------------------------------------------------------
 # Shell variables
