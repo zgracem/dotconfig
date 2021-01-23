@@ -30,8 +30,8 @@ function ex --description 'Extract most kinds of archives'
             case Payload
                 cpio -imv -F $archive
             case '*'
-                echo >&2 -s "error: don't know how to extract ." \
-                    (string split -r -m1 . $archive)[-1]" files"
+                set -l type (string split -r -m1 . $archive)[-1]
+                echo >&2 -s "error: don't know how to extract .$type files"
                 return 1
         end
     end

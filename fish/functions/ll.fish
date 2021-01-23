@@ -5,18 +5,14 @@ if in-path exa
     end
 else
     function ll --wraps ls --description 'List files vertically, info-heavy'
+        # [l]ong output w/ [h]uman-readable sizes
         set params -l -h
-        #           │  └─ human-readable sizes
-        #           └──── long-list output
 
         if test $COLUMNS -le 100
+            # don't display [g]roup or [o]wner
             set -a params -g -o
-            #              │  └─ omit owner
-            #              └──── omit group
-            if is-gnu ls
-                # shorter timestamps
-                set -a params --time-style=long-iso
-            end
+            # shorter timestamps
+            is-gnu ls; and set -a params --time-style=long-iso
         end
 
         ls $params $argv

@@ -5,14 +5,11 @@ if in-path exa
     end
 else
     function ls --description 'List (almost) all files'
+        # list [A]ll files; print [q]uestion mark for nongraphic characters
         set params -A -q
-        #           │  └─ print ? instead of nongraphic characters
-        #           └──── list (almost) all files
 
-        if is-cygwin
-            # append .exe if cygwin magic was needed
-            set -a params --append-exe
-        end
+        # append .exe if cygwin magic was needed
+        is-cygwin; and set -a params --append-exe
 
         # colourize output
         if is-gnu ls

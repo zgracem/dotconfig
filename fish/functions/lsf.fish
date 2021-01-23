@@ -4,16 +4,16 @@ if in-path exa
     end
 else
     function lsf --wraps ls --description 'List files with "full" info'
-        set params -A -i -l
-        #           │  │  └─ long-list output
-        #           │  └──── print inode number
-        #           └─────── list (almost) all files
+        # [l]ong list of [A]ll files; show [i]node numbers
+        set params -l -A -i
 
         if is-macos
-            set -a params -@ -O -G
-            #              │  │  └─ colourize output
-            #              │  └──── print file flags
-            #              └─────── display extended attributes
+            # display extended attributes and file flags
+            set -a params -@ -O
+
+            # colourize output
+            set -a params -G
+
             /bin/ls $params $argv
             return
         else if is-gnu ls
