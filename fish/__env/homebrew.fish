@@ -5,10 +5,10 @@ set -gx HOMEBREW_AUTO_UPDATE_SECS 600
 
 # Use `bat` for `brew cat`
 set -gx HOMEBREW_BAT 1
-set -gx HOMEBREW_BAT_CONFIG_PATH "$XDG_CONFIG_HOME/bat/config_homebrew"
+set -gx HOMEBREW_BAT_CONFIG_PATH $XDG_CONFIG_HOME/bat/config_homebrew
 
 # `brew bundle`
-set -gx HOMEBREW_BUNDLE_FILE "$XDG_CONFIG_HOME/brew/Brewfile"
+set -gx HOMEBREW_BUNDLE_FILE $XDG_CONFIG_HOME/brew/Brewfile
 
 # Delete cached files after 30 days (default is 120 days)
 set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 30
@@ -17,7 +17,7 @@ set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 30
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
 # File listing default formulae for `brew livecheck` to check
-set -gx HOMEBREW_LIVECHECK_WATCHLIST "$XDG_CONFIG_HOME/brew/livecheck_watchlist"
+set -gx HOMEBREW_LIVECHECK_WATCHLIST $XDG_CONFIG_HOME/brew/livecheck_watchlist
 
 # `brew update` will only mention installed formulae
 set -gx HOMEBREW_UPDATE_REPORT_ONLY_INSTALLED 1
