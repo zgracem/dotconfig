@@ -89,7 +89,7 @@
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
-  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+  "emmet.showExpandedAbbreviation": "never",
   "emojisense.emojiDecoratorsEnabled": false,
   "emojisense.markupCompletionsEnabled": false,
   "explorer.incrementalNaming": "smart",
@@ -119,14 +119,25 @@
     "-w"
   ],
   "gitlens.blame.avatars": false,
+  "gitlens.blame.heatmap.location": "left",
+  "gitlens.changes.locations": [
+    "overview",
+    "gutter"
+  ],
   "gitlens.codeLens.enabled": false,
-  "gitlens.defaultDateFormat": "YYYY-MM-DD @ HH:mm",
+  "gitlens.currentLine.format": "${author, }${agoOrDate}${ (pullRequest)}${ • message|50?}",
+  "gitlens.defaultDateFormat": "YYYY-MM-DD · HH:mm",
   "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
+  "gitlens.defaultTimeFormat": "HH:mm",
+  "gitlens.heatmap.ageThreshold": 180,
   "gitlens.hovers.annotations.enabled": false,
   "gitlens.hovers.annotations.over": "annotation",
   "gitlens.menus": false,
   "gitlens.mode.statusBar.enabled": false,
-  "gitlens.statusBar.format": "${author}, ${agoOrDate} · ${message}",
+  "gitlens.sortBranchesBy": "date:desc",
+  "gitlens.statusBar.format": "${author, }${agoOrDate}${ (pullRequest)} · ${message}",
+  "gitlens.views.branches.showBranchComparison": false,
+  "gitlens.views.lineHistory.enabled": true,
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
@@ -214,7 +225,7 @@
   ],
   "spellright.notificationClassByParser": {
     "code": "information",
-    "markdown": "error",
+    "markdown": "warning",
     "plain": "warning"
   },
   "spellright.recheckOnSave": true,
@@ -274,12 +285,10 @@
     "files.trimTrailingWhitespace": false
   },
   "[json]": {
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+    "editor.formatOnPaste": true
   },
   "[jsonc]": {
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+    "editor.formatOnPaste": true
   },
   "[makefile]": {
     "editor.insertSpaces": false
@@ -294,13 +303,15 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.quickSuggestions": false
+    "editor.quickSuggestions": false,
+    "editor.wordBasedSuggestions": false
   },
   "[ruby]": {
     "editor.formatOnSave": true
   },
   "[yaml]": {
     "editor.formatOnSave": true,
+    "editor.wordBasedSuggestions": false,
     "editor.wordWrapColumn": 80
   }
 }
