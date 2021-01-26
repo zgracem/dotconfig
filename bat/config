@@ -1,10 +1,4 @@
-# -----------------------------------------------------------------------------
-# bat <https://github.com/sharkdp/bat>
 # vim:ft=sh
 # shellcheck disable=SC2215
-# -----------------------------------------------------------------------------
-
---theme="TwoDark"
 --italic-text=always
---pager="less -FR"
---tabs=2
+--tabs=0
