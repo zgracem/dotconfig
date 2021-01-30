@@ -1,32 +1,38 @@
 function prompt_pwd --description 'Print the current working directory, shortened to fit the prompt'
-    set -q argv[1]
-    or set -l argv[1] (pwd)
+    set -q argv[1]; or set -l argv $PWD
 
-    # Show this many characters in abbreviated components
-    set -q fish_prompt_pwd_length
-    or set -l fish_prompt_pwd_length 3
+    set -l glyph "…"
 
-    # Keep this many trailing components unabbreviated
-    set -q fish_prompt_pwd_keep
-    or set -l fish_prompt_pwd_keep 1
+    set -l min_part 3
+    set -l max_part 11
+    set -l max_path 48
 
-    # Use this character to indicate shortened components
-    set -q fish_prompt_pwd_glyph
-    or set -l fish_prompt_pwd_glyph "…"
+    # Step 0: replace leading homedir w/ a tilde
+    set -l path (string replace -r "^$HOME" "~" $argv[1] | string split /)
+    set -l pathc (seq (math (count $path) - 1))
 
-    set -l cwd (short_home $argv[1])
-    set -l cwd_parts (string split "/" "$cwd")
+    # First pass: truncate extra-long directory names
+    for i in $pathc
+        test (string length "$path") -le $max_path; and break
 
-    if test (count $cwd_parts) -le $fish_prompt_pwd_keep
-        echo $cwd
-        return 0
-    else
-        for i in (seq 1 (math (count $cwd_parts) - $fish_prompt_pwd_keep))
-            if test (string length $cwd_parts[$i]) -gt (math $fish_prompt_pwd_length + 1)
-                set cwd_parts[$i] (string sub -l $fish_prompt_pwd_length "$cwd_parts[$i]")"$fish_prompt_pwd_glyph"
-            end
+        set -l part $path[$i]
+        if test (string length $part) -gt $max_part
+            set path[$i] (string sub -l$max_part $part | string trim)
+            set path[$i] $path[$i]$glyph
         end
     end
 
-    string join / -- $cwd_parts
+    # Second pass: compact leading elements
+    set -l actual_min_part (math $min_part + (string length $glyph))
+    for i in $pathc
+        test (string length "$path") -le $max_path; and break
+
+        set -l part $path[$i]
+        if test (string length $part) -gt $actual_min_part
+            set path[$i] (string sub -l$min_part $part | string trim)
+            set path[$i] $path[$i]$glyph
+        end
+    end
+
+    string join / -- $path
 end
