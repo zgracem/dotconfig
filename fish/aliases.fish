@@ -21,10 +21,8 @@ abbr -a -g opal '_ssh opalstack'
 # abbreviations
 # -----------------------------------------------------------------------------
 
-abbr -a -g bye exit
 abbr -a -g dirsize 'du -sh'
-abbr -a -g ss 'set --show'
-abbr -a -g unset 'set --erase'
+abbr -a -g s 'set -S'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexdump -C'
 
