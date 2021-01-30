@@ -11,10 +11,12 @@ function wtf -d "Display information about commands"
                     end
                     functions $subject
                 case builtin
-                    echo -ns (set_color --bold --italic brcyan) $subject
-                    echo (set_color normal) "is a builtin"
+                    set_color --bold --italic brcyan
+                    echo -ns $subject
+                    set_color normal
+                    echo " is a builtin"
                 case file
-                    exa -1 (type -aP $subject)
+                    exa -l -s none -r (type -aP $subject)
             end
         end
     end
