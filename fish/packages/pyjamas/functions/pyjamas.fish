@@ -11,7 +11,7 @@ function pyjamas --description "Convert configuration files between formats"
 
     if set -q argv[1]
         set src "Pathname.new(ARGV[0])"
-        set ext_in (string split "." -- $argv[1])[-1]
+        set -q ext_in; or set ext_in (string split "." -- $argv[1])[-1]
     else if not isatty stdin
         set src ARGF
         if not set -q _flag_in
