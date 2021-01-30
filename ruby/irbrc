@@ -108,6 +108,12 @@ module Sample
     rand(10.0..100.0)
   end
 
+  # @return [Pathname]
+  def pathname
+    Pathname("/Users/zozo/Documents/mesons_and_gluons.pdf")
+  end
+  alias_method :path, :pathname
+
   # @return [Regexp]
   def regex
     /\A\h+\z/i
