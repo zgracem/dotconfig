@@ -27,7 +27,7 @@ function fish_prompt --description 'Display the interactive prompt'
     if set -q root_user
         set_color $fish_color_user_root
         echo -n "#"
-    else if set -q fish_private_mode
+    else if test -n "$fish_private_mode"
         set_color $fish_color_dimmed
         echo -n "?"
     else
