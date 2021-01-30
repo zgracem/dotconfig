@@ -116,10 +116,6 @@ if [[ -z $PREFERRED_SHELL ]]; then
       # the session crashes immediately. I don't know why. -- ZGM 2019-03-01
       PREFERRED_SHELL=$HOME/opt/bin/fish
       ;;
-    opal*)
-      # I'm not allowed to change anything on my shared host
-      PREFERRED_SHELL=$HOME/opt/bin/fish
-      ;;
   esac
 
   if [[ ! -x $PREFERRED_SHELL ]]; then
