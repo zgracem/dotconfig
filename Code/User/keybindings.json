@@ -159,6 +159,21 @@
     "command": "workbench.action.tasks.runTask",
     "args": "Launch Sublime Merge"
   },
+  // formulahendry.code-runner
+  {
+    "key": "ctrl+alt+n",
+    "command": "-code-runner.run"
+  },
+  {
+    "key": "cmd+alt+enter",
+    "command": "code-runner.run",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+alt+enter",
+    "command": "code-runner.run",
+    "when": "isWindows"
+  },
   // Open Workspace Settings
   {
     "key": "shift+ctrl+,",
@@ -200,5 +215,5 @@
     "key": "ctrl+k ctrl+r",
     "command": "workbench.action.restartExtensionHost",
     "when": "isWindows"
-  }
+  },
 ]
