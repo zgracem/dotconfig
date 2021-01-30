@@ -1,6 +1,9 @@
 function rl --description "Reload configuration files"
+    argparse 'v/verbose' -- $argv; or return
+
     set --global _rl_errors 0
     set --erase --local files_to_reload
+    set -q _flag_verbose; and set -lx verbose 1
 
     # Prints arguments to standard error
     function _yikes
@@ -9,7 +12,7 @@ function rl --description "Reload configuration files"
 
     # Prints each argument, with any leading $HOME replaced by "~"
     function _confirm
-        short_home $argv
+        set -qx verbose; and short_home $argv
     end
 
     # Returns true if $file exists

@@ -1,5 +1,4 @@
 if set -gxq __z_env_loaded
-    echo >&2 "tried to reload environment from $__z_env_loaded -- aborting"
     exit
 end
 
