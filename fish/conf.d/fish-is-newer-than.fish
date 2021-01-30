@@ -1,4 +1,4 @@
-function fish_is_newer_than -a test_version
+function fish-is-newer-than -a test_version
     function __fish_versinfo -a fish_ver
         set -l version_info (string split "." "$fish_ver" | string split "-")
 

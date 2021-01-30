@@ -1,4 +1,4 @@
-if fish_is_older_than 3.1.0
+if fish-is-older-than 3.1.0
     set -g -p fish_complete_path (realpath (dirname (status filename))/..)/completions
 end
 
