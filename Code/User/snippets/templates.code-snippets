@@ -51,7 +51,7 @@
     "prefix": "!front",
     "body": [
       "---",
-      "title: $1${2:\ndate: ${3:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}}",
+      "title: $1${3:\ndate: ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}}",
       "---\n",
       "$0"
     ],
