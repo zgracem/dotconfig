@@ -22,6 +22,16 @@
   },
   "tasks": [
     {
+      "label": "Launch Sublime Merge",
+      "osx": {
+        "command": "smerge ."
+      },
+      "type": "shell",
+      "presentation": {
+        "reveal": "never"
+      }
+    },
+    {
       "label": "Lint POSIX shell files",
       "type": "shell",
       "command": "bin/check_dotfiles.sh",
