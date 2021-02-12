@@ -28,6 +28,9 @@ if not set -q __zgm_init_colours
     # commands
     set -U fish_color_command white --bold
 
+    # keywords
+    set -U fish_color_keyword brmagenta
+
     # quoted blocks of text
     set -U fish_color_quote cyan
 
@@ -59,7 +62,7 @@ if not set -q __zgm_init_colours
     set -U fish_color_operator bryellow
 
     # character escapes like '\n' and '\x70'
-    set -U fish_color_escape brmagenta
+    set -U fish_color_escape brred
 
     # autosuggestions
     set -U fish_color_autosuggestion brblack
@@ -142,7 +145,7 @@ if is-gnu ls
         and popd
     end
 
-    set -gx LS_COLORS (tr -d "\'" <$ls_colors_file | string split -f3 " ")
+    set -gx LS_COLORS (string match -r "(?<=')(?:[^=]+=[\d;]+:)+" <$ls_colors_file)
 else
     # Generated at http://geoff.greer.fm/lscolors/
     set -gx CLICOLOR 1
