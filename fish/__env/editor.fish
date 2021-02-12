@@ -1,4 +1,5 @@
-set --erase GIT_EDITOR SUDO_EDITOR
+set --erase GIT_EDITOR
+set --erase SUDO_EDITOR
 
 # Set all default editors to vim
 set -gx EDITOR vim

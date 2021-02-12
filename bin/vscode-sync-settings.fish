@@ -52,7 +52,7 @@ switch (uname -s)
         end >$app_data/settings.json
 
         ### sync keybindings: overwrite
-        command cp -af $config_dir/keybindings.json $app_data
+        command ln -sf $config_dir/keybindings.json $app_data
 
         ### sync snippets: create a symlink/directory junction if one doesn't exist
         if not test -e $app_data/snippets

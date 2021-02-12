@@ -37,11 +37,6 @@ if [ "${CYGWIN#*winsymlinks}" = "$CYGWIN" ]; then
   fi
 fi
 
-# Don't warn on using MS-DOS-style paths instead of POSIX-style
-if [ "${CYGWIN#*dosfilewarning}" = "$CYGWIN" ]; then
-  CYGWIN="${CYGWIN+$CYGWIN }nodosfilewarning"
-fi
-
 # OSTYPE is not defined in POSIX
 # shellcheck disable=SC2039
 if [ "$OSTYPE" = "cygwin" ]; then
