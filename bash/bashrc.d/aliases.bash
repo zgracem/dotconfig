@@ -30,7 +30,7 @@ if _inPath bundle; then
 fi
 
 if [[ $HOSTNAME == Citadel* ]]; then
-  alias vsdeploy='"$HOME/Dropbox/www/vs2017/bin/sync.sh"'
+  alias vsdeploy='"$HOME/Dropbox/VS/www/vsdotcom/bin/sync.sh"'
 fi
 
 # chmod

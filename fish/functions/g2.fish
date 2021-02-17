@@ -13,11 +13,11 @@ function g2 --description 'Go somewhere' -a alias
         case scratch
             set dir "$HOME/tmp/_scratch"
         case vs9
-            set dir "$HOME/Dropbox/www/vs2017"
+            set dir "$HOME/Dropbox/VS/www/vsdotcom"
         case imprint
-            set dir "$HOME/www/2018/imprint"
+            set dir "$HOME/Dropbox/VS/www/vsbooks"
         case 2a
-            set dir "$HOME/www/2018/2a18"
+            set dir "$HOME/Dropbox/VS/www/2adotcom"
         case desktop
             set dir "$XDG_DESKTOP_DIR"
         case dl

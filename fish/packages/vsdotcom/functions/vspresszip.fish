@@ -7,8 +7,8 @@ if string match -q 'Citadel.*' $hostname
             set zip_file "zip/vivekshraya_"$slug"_press.zip"
         end
 
-        pushd $HOME/Dropbox/www/vs2017/src/media/images/press
-        rollup "$zip_file" *"$slug"_*.jpg
+        pushd $HOME/Dropbox/VS/www/vsdotcom/src/media/images/press
+        roll "$zip_file" *"$slug"*.jpg
         popd
     end
 end
