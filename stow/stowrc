@@ -1,2 +1,3 @@
 --verbose
---no-folding
+--dir=$HOME/opt/stow
+--target=$HOME/opt
