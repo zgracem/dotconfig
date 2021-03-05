@@ -58,8 +58,8 @@
   "code-runner.temporaryFileName": "",
   "debug.showInlineBreakpointCandidates": false,
   "diffEditor.ignoreTrimWhitespace": false,
-  "editor.acceptSuggestionOnCommitCharacter": true,
-  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.acceptSuggestionOnEnter": "off",
   "editor.colorDecorators": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
@@ -88,7 +88,7 @@
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.showSnippets": true,
   "editor.suggestSelection": "recentlyUsedByPrefix",
-  "editor.tabCompletion": "onlySnippets",
+  "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
@@ -127,14 +127,17 @@
     "gutter"
   ],
   "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
   "gitlens.currentLine.format": "${author, }${agoOrDate}${ (pullRequest)}${ • message|50?}",
   "gitlens.defaultDateFormat": "YYYY-MM-DD · HH:mm",
   "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
   "gitlens.defaultTimeFormat": "HH:mm",
   "gitlens.heatmap.ageThreshold": 180,
+  "gitlens.heatmap.toggleMode": "file",
   "gitlens.hovers.annotations.enabled": false,
   "gitlens.hovers.annotations.over": "annotation",
   "gitlens.hovers.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
   "gitlens.menus": false,
   "gitlens.mode.statusBar.enabled": false,
   "gitlens.sortBranchesBy": "date:desc",
@@ -289,10 +292,12 @@
     "files.trimTrailingWhitespace": false
   },
   "[json]": {
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false
   },
   "[jsonc]": {
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false
   },
   "[makefile]": {
     "editor.insertSpaces": false
@@ -315,7 +320,9 @@
   },
   "[yaml]": {
     "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "editor.quickSuggestions": true,
     "editor.wordBasedSuggestions": false,
-    "editor.wordWrapColumn": 80
+    "editor.wordWrapColumn": 80,
   }
 }
