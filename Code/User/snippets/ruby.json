@@ -9,17 +9,26 @@
     ],
     "description": "#inspect"
   },
+  "def_initialize": {
+    "prefix": "def initialize",
+    "body": [
+      "def initialize${2:(${1:*args})}",
+      "\t$0",
+      "end"
+    ],
+    "description": "#new"
+  },
   "frozen_string_literal": {
     "prefix": "frozen",
     "body": [
       "$LINE_COMMENT frozen_string_literal: true\n\n"
     ],
-    "description": "# frozen_string_literal: true"
+    "description": "`frozen_string_literal` comment"
   },
   "hashbang_ruby": {
     "prefix": "!env",
     "body": [
-      "#!/usr/bin/env ${1:ruby}\n\n"
+      "#!/usr/bin/env ruby\n\n"
     ]
   }
 }
