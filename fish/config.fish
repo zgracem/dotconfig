@@ -17,6 +17,9 @@ source "$__fish_config_dir/__env.fish"
 # setup PATH and friends
 source "$__fish_config_dir/paths.fish"
 
+# stop here if not an interactive session
+status is-interactive; or exit
+
 # function subdirectories
 set -p fish_function_path $__fish_config_dir/functions/_{debug,wrappers}
 set -p fish_function_path ~/.private/fish/functions
@@ -27,19 +30,17 @@ set -g fish_package_path ~/.local/config/fish ~/.private/fish
 # personal minimal package manager for fish
 source "$__fish_config_dir/packages.fish"
 
-if status is-interactive
-    # setup abbreviations
-    source "$__fish_config_dir/aliases.fish"
+# setup abbreviations
+source "$__fish_config_dir/aliases.fish"
 
-    # setup colours
-    source "$__fish_config_dir/colours.fish"
+# setup colours
+source "$__fish_config_dir/colours.fish"
 
-    # activate custom prompt
-    set -p fish_function_path "$__fish_config_dir/prompt"
+# activate custom prompt
+set -p fish_function_path "$__fish_config_dir/prompt"
 
-    # source vendor completions
-    set -p fish_complete_path "$HOME/opt/etc/fish/completions"
-end
+# source vendor completions
+set -p fish_complete_path "$HOME/opt/etc/fish/completions"
 
 # remove duplicate & nonexistent directories
 fix-path fish_function_path
