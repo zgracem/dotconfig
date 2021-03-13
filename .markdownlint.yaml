@@ -69,7 +69,7 @@ no-duplicate-heading:
 
 # MD025: Multiple top level headings in the same document
 single-title:
-  front_matter_title: ""
+  front_matter_title: ^\s*(title|subject)\s*[:=]
 
 # MD026: Trailing punctuation in heading
 no-trailing-punctuation:
