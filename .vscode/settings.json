@@ -2,7 +2,7 @@
   "files.exclude": {
     "htop": true,
     "iterm2": true,
-    "StardewValley/Saves": true,
+    "StardewValley/{ErrorLogs,Saves}": true,
     "syncplay.ini": true
   },
   "git.detectSubmodules": false
