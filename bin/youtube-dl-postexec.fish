@@ -1,62 +1,65 @@
 #!/usr/bin/env fish
 
-# youtube-dl's config needs:
+# $XDG_CONFIG_HOME/youtube-dl/config needs:
 #   --write-info-json
 # and
 #   --exec /path/to/youtube-dl-postexec.fish {}
 
 set --global video_file "$argv[1]"
 
-set file_parts (string split -rm1 . "$video_file")
-set base_dir (dirname $file_parts[1])
-set --global base_name (basename $file_parts[1])
+set --local file_parts (string split -rm1 . "$video_file")
+set --local base_dir (dirname $file_parts[1])
+set --global video_basename (basename $file_parts[1])
 
-# `youtube-dl --write-info-json` saves the JSON with the same filename as the
+# `youtube-dl --write-info-json` saves metadata to the same path as the
 # download, but with the extension ".info.json".
-set --global json_file (string join / $base_dir $base_name).info.json
+set --global metadata_file (string join / $base_dir $video_basename).info.json
+
+function bail -a message code
+    test -n "$code"; or set -l code 1
+
+    echo >&2 $message
+    exit $code
+end
 
 function _url_to_hex -a url
-    set --global temp_dir (mktemp -d -t $base_name"_XXXXXX")
-    set --local urls_txt "$temp_dir/$base_name.txt"
-    set --local urls_json "$temp_dir/$base_name.json"
-    set --local urls_plist "$temp_dir/$base_name.plist"
+    set --global temp_dir (mktemp -d -t $video_basename"_XXXXXX")
+    set --local urls "$temp_dir/$video_basename"
 
-    if not jq -r '.webpage_url' $json_file >$urls_txt
-        echo "failed to parse file: $json_file" >&2
-        return 1
-    end
+    jq -r '.webpage_url' $metadata_file >$urls.txt
+    or bail "failed to parse: $metadata_file"
 
-    if not jq -Rsc '.' $urls_txt >$urls_json
-        echo "failed to parse file: $urls_txt" >&2
-        return 1
-    end
+    jq -Rsc '.' $urls.txt >$urls.json
+    or bail "failed to parse: $urls.txt"
 
-    plutil -convert binary1 -o $urls_plist $urls_json
-    or return
+    plutil -convert binary1 -o $urls.plist $urls.json
+    or bail "failed to convert to plist: $urls.json"
 
-    set --local hex (xxd -p -u $urls_plist)
-    or return
+    set --local hex (xxd -p -u $urls.plist)
+    or bail "failed to process to hex: $urls.plist"
 
     string join "" $hex
 
-    set --global temp_files $json_file $urls_txt $urls_json $urls_plist
+    # set --global temp_files $metadata_file $urls.txt $urls.json $urls.plist
 end
 
 function set_where_from
-    set --local hex (_url_to_hex)
-    or exit
+    set --local attr com.apple.metadata:kMDItemWhereFroms
+    set --local metadata (_url_to_hex)
 
-    xattr -wx com.apple.metadata:kMDItemWhereFroms "$hex" $video_file
-    or exit
+    xattr -wx $attr "$metadata" $video_file
+    or bail "xattr failed to set $attr to `$metadata`"
 end
 
 function set_quarantine
-    set --local md (printf "0081;%x;youtube-dl;%s" (date +%s) (uuidgen))
-    xattr -w com.apple.quarantine "$md" $video_file
-    or exit
+    set --local attr com.apple.quarantine
+    set --local metadata (printf "0081;%x;youtube-dl;%s" (date +%s) (uuidgen))
+
+    xattr -w $attr "$metadata" $video_file
+    or bail "xattr failed to set $attr to `$metadata`"
 end
 
-set_where_from
 set_quarantine
+set_where_from
 
 # set -q temp_files; and rm -f $temp_files
