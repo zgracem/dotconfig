@@ -14,8 +14,7 @@ fish/fish_variables*
 fish/fishd.*
 iterm2/
 ruby/irbrc_history
-StardewValley/ErrorLogs
-StardewValley/Saves
+StardewValley/
 syncplay.ini
 
 # unnecessary
