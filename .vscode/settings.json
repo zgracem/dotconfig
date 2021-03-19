@@ -3,7 +3,10 @@
     "htop": true,
     "iterm2": true,
     "StardewValley/{ErrorLogs,Saves}": true,
-    "syncplay.ini": true
+    "syncplay.ini": true,
+    "**/{*rc,config}": {
+      "when": "$(basename).m4"
+    }
   },
   "git.detectSubmodules": false
 }

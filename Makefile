@@ -64,7 +64,7 @@ SKEL = .skel
 
 # user-agent
 
-curl/.curlrc: curl/_curlrc.m4
+curl/.curlrc: curl/.curlrc.m4
 wget/wgetrc: wget/wgetrc.m4
 youtube-dl/config: youtube-dl/config.m4
 $(CUSTOM_UA): user-agent.txt
@@ -85,4 +85,4 @@ user-agent.txt:
 USER_AGENT = $(shell cat $(CURDIR)/user-agent.txt)
 
 $(CUSTOM_UA):
-	m4 -D _USER_AGENT_="$(USER_AGENT)" $< > $@
+	m4 -D _HOME_="$(HOME)" -D _USER_AGENT_="$(USER_AGENT)" $< > $@
