@@ -59,4 +59,4 @@
 
 # run custom post-processing script to add metadata etc.
 --write-info-json
---exec "/Users/zozo/.config/bin/youtube-dl-postexec.fish {}"
+--exec "/Users/zozo/.config/youtube-dl/postexec.fish {}"
