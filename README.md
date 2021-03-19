@@ -2,47 +2,42 @@
 
 Some people prune bonsai trees. I refactor my dotfiles. 🌱
 
-## How I use this repo 👩‍💻
+## How I use this repo 💁🏻‍♀️
 
-### Notes on compatibility & portability 💼
+### Notes on compatibility 💼
 
-* These dotfiles are written to be portable between macOS (10.6+), Cygwin,
-  MSYS2, Windows 10's Subsystem for Linux, and both BSD and GNU flavours of
-  \*nix.
-* I try to conform to the [XDG Basedir Spec]: configuration for `foo` lives in
-  `~/.config/foo/`, etc.
+* These dotfiles are *mostly* portable between macOS (10.6+), Cygwin, MSYS2,
+  Windows Subsystem for Linux, and both BSD and GNU flavours of \*nix.
+* I try to conform to the [XDG Basedir Spec], so configuration for `foo` lives
+  in `~/.config/foo/`, etc.
 * Everything in `environment.d/` and `sh/` is compatible with any POSIX shell.
 * My bash config files can be run (with gracefully degrading functionality) on
   versions 3.2 to the latest 5.x release.
-* Alas, most of my fish configuration files can only run on version 3.0+.
+* Alas, most of my fish configuration files can only run on version 3.2+.
 
 [XDG Basedir Spec]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
-### General usage 💁
+### General usage 👩🏻‍💻
 
-* My main machine at home is a 2020 iMac that dual boots macOS Catalina and
-  Windows 10; I also have a 2011 MacBook Air running High Sierra. My day-job
-  computer has Windows 10, Cygwin, and no admin login 🤦‍♀. I also occasionally
-  SSH into web servers running various flavours of Linux 🐧.
-* Dropbox keeps things synced between my Windows and Mac machines, and a custom
-  `rsync` script pushes changes to my Linux boxes. 🔄
-* On Windows, I use nightly builds of the venerable [PuTTY]; on Mac, I prefer
-  [iTerm2] over the built-in Terminal.app; on iOS, there is only [Prompt]. ⌨️
-* My first love will always be bash, but since February 2019 I've been using—and
-  loving—[fish] as my primary shell. 🐟
-* My primary text editor is [VSCode], which integrates [markdownlint],
-  [rubocop], and [shellcheck] to make sure I dot my q's and cross my p's.
-* Files that can be safely published to this GitHub repo live in `~/.config/`.
-  Everything else lives in `~/.private/`. 🔐
+* 🖥️ At home, I use a 2020 iMac that dual-boots macOS Catalina and Windows 10,
+  with an mid-2011 MacBook Air running High Sierra for "emergencies." My day-job
+  computer has Windows 10, Cygwin, and no admin privileges 🤦🏻‍♀️, and from time to
+  time I need to SSH into various Linux web servers 🐧.
+* 🔄 Dropbox keeps everything synced between my Windows and Mac machines, and
+  a custom `rsync` script pushes changes to my Linux boxes.
+* ⌨️ On Windows, I use the venerable [PuTTY]; on macOS, I prefer [iTerm2];
+  on iOS, there is only [Prompt].
+* 🐟 I've been using [fish] as my primary shell since February 2019, though bash
+  will always be my first love.
+* 🗒 My primary text editor on all platforms is [VSCode].
+* 🔐 Files that can be safely published to GitHub live in `~/.config/`.
+  Everything else lives in `~/.private/`.
 
 [PuTTY]: https://www.chiark.greenend.org.uk/~sgtatham/putty/
 [iTerm2]: https://www.iterm2.com/
 [Prompt]: https://panic.com/prompt/
 [fish]: https://fishshell.com/
 [VSCode]: https://github.com/Microsoft/vscode
-[markdownlint]: https://github.com/DavidAnson/markdownlint
-[rubocop]: https://github.com/rubocop-hq/rubocop
-[shellcheck]: https://www.shellcheck.net/
 
 ### Setting up a new homedir 🏡
 
@@ -60,7 +55,7 @@ cd ~/.config && make shell-files symlinks
 
 Then restart the shell.
 
-## How you can use this repo 🙋
+## How you can use this repo 🙋🏻‍♀️
 
 In ascending order of difficulty:
 
