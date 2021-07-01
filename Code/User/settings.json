@@ -35,13 +35,14 @@
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
   "code-runner.executorMap": {
+    "erb": "erb",
     "fish": "fish -C 'set -gx TERM dumb'",
     "html": "links -html-margin 0 -dump",
     "jq": "jq --null-input --from-file",
     "markdown": "multimarkdown --snippet --nolabels",
     "ruby": "ruby -w",
-    "sass": "sass --no-source-map --style=expanded --trace",
-    "scss": "sass --no-source-map --style=expanded --trace",
+    "sass": "sass --no-source-map --trace",
+    "scss": "sass --no-source-map --trace",
     "slim": "slimrb --option format=:html --option tabsize=2 --pretty --trace",
     "troff": "man -Pcat"
   },
