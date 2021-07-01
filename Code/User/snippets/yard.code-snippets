@@ -1,12 +1,113 @@
 {
+  "YARD tag: @abstract": {
+    "body": "$LINE_COMMENT @abstract ${0:Subclass and override {#run} to implement a custom Threadable class}",
+    "prefix": "# @abstract",
+    "scope": "ruby"
+  },
+  "YARD tag: @example": {
+    "body": [
+      "$LINE_COMMENT @example ${1:Reverse a string}",
+      "$LINE_COMMENT\t${0:\"mystring\".reverse #=> \"gnirtsym\"}"
+    ],
+    "prefix": "# @example",
+    "scope": "ruby"
+  },
+  "YARD tag: @note": {
+    "body": "$LINE_COMMENT @note ${0:This method should only be used in outer space.}",
+    "prefix": "# @note",
+    "scope": "ruby"
+  },
+  "YARD tag: @option": {
+    "body": [
+      "$LINE_COMMENT @param ${1:opts} [Hash] options to create a message with",
+      "$LINE_COMMENT @option ${1} :${2:subject} [${3:String}] ${0:the message subject}"
+    ],
+    "prefix": "# @option",
+    "scope": "ruby"
+  },
+  "YARD tag: @overload": {
+    "body": [
+      "$LINE_COMMENT @overload ${1:set}(key, value)",
+      "$LINE_COMMENT \tSets a value on key",
+      "$LINE_COMMENT \t@param key [Symbol] describe key param",
+      "$LINE_COMMENT \t@param value [Object] describe value param",
+      "$LINE_COMMENT @overload ${1:set}(value)",
+      "$LINE_COMMENT \tSets a value on the default key",
+      "$LINE_COMMENT \t@param value [Object] describe value param"
+    ],
+    "prefix": "# @overload",
+    "scope": "ruby"
+  },
   "YARD tag: @param": {
-    "prefix": "# @param",
     "body": "$LINE_COMMENT @param ${1:url} [${2:String}] ${0:the URL to download}",
+    "prefix": "# @param",
+    "scope": "ruby"
+  },
+  "YARD tag: @private": {
+    "body": "$LINE_COMMENT @private",
+    "prefix": "# @private",
+    "scope": "ruby"
+  },
+  "YARD tag: @raise": {
+    "body": "$LINE_COMMENT @raise [${1:AccountBalanceError}] ${0:if the account does not have sufficient funds}",
+    "prefix": "# @raise",
     "scope": "ruby"
   },
   "YARD tag: @return": {
+    "body": "$LINE_COMMENT @return [${1:Array<String>}] ${0:a list of files}",
     "prefix": "# @return",
-    "body": "$LINE_COMMENT @return [${1:${3:Array<${2:String}>}}] ${0:a list of files}",
+    "scope": "ruby"
+  },
+  "YARD tag: @see": {
+    "body": "$LINE_COMMENT @see ${0:${1:https://ntp.org/documentation.html} ${2:NTP Documentation}}",
+    "prefix": "# @see",
+    "scope": "ruby"
+  },
+  "YARD tag: @todo": {
+    "body": "$LINE_COMMENT @todo ${0:Add support for Jabberwocky service.}",
+    "prefix": "# @todo",
+    "scope": "ruby"
+  },
+  "YARD tag: @yield": {
+    "body": "$LINE_COMMENT @yield [${1:x, y, z}] ${0:gives 3 random numbers to the block}",
+    "prefix": "# @yield",
+    "scope": "ruby"
+  },
+  "YARD tag: @yieldparam": {
+    "body": "$LINE_COMMENT @yieldparam ${1:name} [${2:String}] ${0:the name that is yielded}",
+    "prefix": "# @yieldparam",
+    "scope": "ruby"
+  },
+  "YARD tag: @yieldreturn": {
+    "body": "$LINE_COMMENT @yieldreturn [${1:Fixnum}] ${0:the original number plus five}",
+    "prefix": "# @yieldreturn",
+    "scope": "ruby"
+  },
+  "YARD tag: @!attribute": {
+    "body": [
+      "$LINE_COMMENT @!attribute [${1|rw,r,w|}] ${2:count}",
+      "$LINE_COMMENT \t@return [${3:Fixnum}] ${0:the size of the list}"
+    ],
+    "prefix": "# @!attribute",
+    "scope": "ruby"
+  },
+  "YARD tag: @!endgroup": {
+    "body": "$LINE_COMMENT @!endgroup",
+    "prefix": "# @!endgroup",
+    "scope": "ruby"
+  },
+  "YARD tag: @!group": {
+    "body": "$LINE_COMMENT @!group Callbacks",
+    "prefix": "# @!group",
+    "scope": "ruby"
+  },
+  "YARD tag: @!method": {
+    "body": [
+      "$LINE_COMMENT @!method ${1:quit}(${2:username})",
+      "$LINE_COMMENT \t${0:Sends a quit message to the server for a `username`.}",
+      "$LINE_COMMENT \t@param ${2:username} [${3:String}] ${0:the username to quit}"
+    ],
+    "prefix": "# @!method",
     "scope": "ruby"
   }
 }
