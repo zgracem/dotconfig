@@ -164,6 +164,7 @@
   "oneDarkPro.italic": true,
   "outline.problems.enabled": false,
   "problems.showCurrentInStatus": true,
+  "redhat.telemetry.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
   "ruby.pathToBundler": "/Users/zozo/.rbenv/shims/bundle",
   "ruby.useLanguageServer": false,
@@ -279,9 +280,11 @@
   "workbench.tree.indent": 16,
   "workbench.tree.renderIndentGuides": "always",
   "workbench.view.alwaysShowHeaderActions": true,
-  "xmlTools.enableXmlTreeViewCursorSync": true,
-  "xmlTools.enableXmlTreeViewMetadata": false,
-  "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+  "xml.server.preferBinary": true,
+  "xml.server.workDir": "~/var/cache/redhat.vscode-xml",
+  "xml.symbols.maxItemsComputed": 65536,
+  "xml.validation.namespaces.enabled": "onNamespaceEncountered",
+  "xml.validation.schema.enabled": "onValidSchema",
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4
