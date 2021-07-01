@@ -104,6 +104,7 @@
     "*.JSON-tmLanguage": "json",
     "*.YAML-tmLanguage": "yaml",
     "*.[1-9]": "troff",
+    "*.geojson": "json",
     "*.make": "makefile",
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
