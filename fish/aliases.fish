@@ -45,6 +45,9 @@ if in-path code
     abbr -a -g vsx "~/.config/bin/vscode-extensions"
 end
 
+abbr -a -g sdmods open -a Finder \"$HOME/Library/Application Support/Steam/SteamApps/common/Stardew Valley/Contents/MacOS/Mods\"
+abbr -a -g sdsaves open -a Finder \~/.config/StardewValley/Saves
+
 # git
 
 abbr -a -g ga git add
