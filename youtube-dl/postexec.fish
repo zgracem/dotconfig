@@ -39,19 +39,21 @@ function binary_plist_url -a json_file
     | string join ""
 end
 
-# Extracts the source URL from the metadata associated with $file;
+# Extracts the source URL from the metadata associated with $video_file;
 # converts it to an ASCII hex representation of a binary representation
 # of an entire XML property list representing that single string
 # (because NextStep is still 100% good decisions 20 years later...);
-# then writes that string to $file's "WhereFrom" Spotlight attribute.
-function set_wherefrom -a file
-    set -l metadata_file (metadata_filename $file)
+# then writes that string to $video_file's "WhereFrom" Spotlight attribute.
+function set_wherefrom -a video_file metadata_file
+    test -n "$metadata_file"
+    or set -l metadata_file (metadata_filename $video_file)
+
     set -l hex_url (binary_plist_url $metadata_file)
     or bail "failed to process: $metadata_file"
 
     set -l attr com.apple.metadata:kMDItemWhereFroms
 
-    xattr -wx $attr $hex_url $file
+    xattr -wx $attr $hex_url $video_file
     or bail "xattr failed to set $attr to `$hex_url`"
 end
 
