@@ -4,5 +4,6 @@
     "rulers": [ 72 ],
     "spell_check": true,
     "syntax": "Packages/Markdown/Markdown.sublime-syntax",
-    "word_wrap": true
+    "word_wrap": true,
+    "dictionary": "Packages/Language - English/en_CA.dic",
 }
