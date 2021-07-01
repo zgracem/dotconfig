@@ -54,3 +54,7 @@ abbr -a -g gco git checkout
 abbr -a -g gf git fetch
 abbr -a -g gp git push
 abbr -a -g gpl git pull
+
+# VS admin
+function vs; vsdotcom $argv; end
+complete --command vs --wraps vsdotcom
