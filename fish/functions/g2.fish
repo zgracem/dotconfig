@@ -22,6 +22,12 @@ function g2 --description 'Go somewhere' -a alias
             set dir "$XDG_DESKTOP_DIR"
         case dl
             set dir "$XDG_DOWNLOAD_DIR"
+        case github
+            set dir "$HOME/.local/src/github.com"
+        case ruby
+            set dir "$HOME/Dropbox/src"
+        case scripts
+            set dir "$HOME/Dropbox/src/shell"
         case '*'
             echo >&2 "don't know how to go to $destination!"
             return 1
