@@ -244,14 +244,33 @@
   "telemetry.enableTelemetry": false,
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.automationShell.osx": "/usr/local/bin/bash",
+  "terminal.integrated.defaultProfile.osx": "bash",
+  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
   "terminal.integrated.env.osx": {
     "PREFERRED_SHELL": "bash"
   },
   "terminal.integrated.env.windows": {
     "PREFERRED_SHELL": "bash"
   },
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "icon": "terminal-bash",
+      "path": "bash"
+    },
+    "fish": {
+      "icon": "terminal",
+      "path": "fish"
+    }
+  },
+  "terminal.integrated.profiles.windows": {
+    "Cygwin bash": {
+      "icon": "terminal-bash",
+      "path": [
+        "Z:\\bin\\bash.exe"
+      ]
+    }
+  },
   "terminal.integrated.scrollback": 10240,
-  "terminal.integrated.shell.windows": "Z:\\bin\\bash.exe",
   "window.closeWhenEmpty": true,
   "window.enableMenuBarMnemonics": false,
   "window.menuBarVisibility": "toggle",
