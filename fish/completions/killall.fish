@@ -14,9 +14,9 @@ if uname -s | string match -q Darwin
 
     complete -c killall --erase
 
-    complete -c killall -n __fish_is_first_token -xa "(__fish_complete_process_names)"
-    complete -c killall -o help -n __fish_is_first_token -d "Print help and exit"
-    complete -c killall -s l -n __fish_is_first_token -d "List signals and exit"
+    complete -c killall -n "__fish_is_nth_token 1" -xa "(__fish_complete_process_names)"
+    complete -c killall -o help -n "__fish_is_nth_token 1" -d "Print help and exit"
+    complete -c killall -s l -n "__fish_is_nth_token 1" -d "List signals and exit"
     complete -c killall -s s -d "Simulate only, send no signal"
     complete -c killall -s d -d "Print detailed info about process, send no signal"
     complete -c killall -s v -d "Be more verbose"
