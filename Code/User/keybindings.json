@@ -174,6 +174,19 @@
     "command": "code-runner.run",
     "when": "isWindows"
   },
+  // Open Settings to the side
+  {
+    "key": "ctrl+,",
+    "command": "workbench.action.openSettings",
+    "when": "isWindows",
+    "args": { "openToSide": true }
+  },
+  {
+    "key": "cmd+,",
+    "command": "workbench.action.openSettings",
+    "when": "isMac",
+    "args": { "openToSide": true }
+  },
   // Open Workspace Settings
   {
     "key": "shift+ctrl+,",
@@ -183,7 +196,8 @@
   {
     "key": "shift+ctrl+,",
     "command": "workbench.action.openWorkspaceSettingsFile",
-    "when": "isWindows"
+    "when": "isWindows",
+    "args": { "openToSide": true }
   },
   {
     "key": "shift+cmd+,",
@@ -193,7 +207,8 @@
   {
     "key": "shift+cmd+,",
     "command": "workbench.action.openWorkspaceSettingsFile",
-    "when": "isMac"
+    "when": "isMac",
+    "args": { "openToSide": true }
   },
   // Restart extension host
   {
