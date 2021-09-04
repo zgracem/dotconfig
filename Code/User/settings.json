@@ -178,8 +178,7 @@
   "search.sortOrder": "default",
   "security.workspace.trust.untrustedFiles": "open",
   "settingsSync.ignoredExtensions": [
-    "castwide.solargraph",
-    "zgm.vscode-fish"
+    "castwide.solargraph"
   ],
   "settingsSync.ignoredSettings": [
     "code-runner.customCommand",
