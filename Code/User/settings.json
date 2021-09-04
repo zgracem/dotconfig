@@ -319,6 +319,7 @@
     "files.trimTrailingWhitespace": false
   },
   "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": false
   },
