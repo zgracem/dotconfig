@@ -176,6 +176,7 @@
   "search.showLineNumbers": true,
   "search.smartCase": true,
   "search.sortOrder": "default",
+  "security.workspace.trust.untrustedFiles": "open",
   "settingsSync.ignoredExtensions": [
     "castwide.solargraph",
     "zgm.vscode-fish"
