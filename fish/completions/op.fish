@@ -100,6 +100,10 @@ function __fish_complete_op_subcmds
         "group,Revoke a group's access to a vault" \
         "user,Revoke a user's access to a vault or group"
 
+    if string match -q "$argv[1]" "help"
+        set op_help_subcmds (__fish_complete_op_cmds -s)
+    end
+
     set subcmd_var "op_"$argv[1]"_subcmds"
 
     if set -q _flag_short
