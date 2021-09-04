@@ -47,6 +47,9 @@ if is-macos; and test -x /usr/local/bin/brew
 
     # openjdk
     set -p PATH /usr/local/opt/openjdk/bin
+
+    # Xcode
+    set -a MANPATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man
 end
 
 # Linuxbrew
