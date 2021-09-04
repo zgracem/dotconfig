@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "adzero.vscode-sievehighlight",
     "ban.spellright",
     "ban.troff",
     "bierner.emojisense",
@@ -18,6 +19,7 @@
     "fallenwood.vimL",
     "formulahendry.code-runner",
     "ginfuru.ginfuru-better-solarized-dark-theme",
+    "GracefulPotato.rbs-syntax",
     "Gruntfuggly.auto-snippet",
     "heaths.vscode-guid",
     "hogashi.crontab-syntax-highlight",
@@ -28,6 +30,7 @@
     "jq-syntax-highlighting.jq-syntax-highlighting",
     "liviuschera.noctis",
     "maelvalais.autoconf",
+    "mechatroner.rainbow-csv",
     "monokai.theme-monokai-pro-vscode",
     "mrmlnc.vscode-apache",
     "ms-vscode.hexeditor",
