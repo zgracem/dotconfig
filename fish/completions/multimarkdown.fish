@@ -1,7 +1,8 @@
 # MultiMarkdown <https://fletcher.github.io/MultiMarkdown-6/>
 
-set -l formats html latex beamer memoir mmd odt fodt epub opml bundle bundlezip
-set -l langs en es de fr he nl sv
+set -l __mmd_help (multimarkdown --help | string collect)
+set -l formats (echo "$__mmd_help" | string replace -fr '.+FORMAT = ((?:\w+\|?)+)' '$1' | tr '|' ' ')
+set -l langs (echo "$__mmd_help" | string replace -fr '.+LANG = ((?:\w+\|?)+)' '$1' | tr '|' ' ')
 
 complete -c multimarkdown -l help -d 'Display this help and exit'
 complete -c multimarkdown -l version -d 'Display version info and exit'
