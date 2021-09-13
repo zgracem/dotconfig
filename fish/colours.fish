@@ -175,10 +175,12 @@ set -gx GCC_COLORS \
     "locus="(get_color brblack) \
     "quote="(get_color cyan)
 
-set -gx GREP_COLORS "sl=0" "cx="(get_color brblack) "se="(get_color brblack) \
-    "mt="(get_color magenta --underline) "ms="(get_color brmagenta --underline) \
-    "mc="(get_color magenta --underline) \
-    "fn="(get_color blue) "ln="(get_color cyan) "bn="(get_color green)
+set -gx __grep_match_color (get_color brmagenta --underline)
+set -gx __grep_file_color (get_color blue)
+set -gx __grep_line_color (get_color cyan)
+
+set -gx GREP_COLORS "se="(get_color brblack) \
+    "mt=$__grep_match_color" "fn=$__grep_file_color" "ln=$__grep_line_color"
 
 begin
     set -l jq_null (get_color brblack)
