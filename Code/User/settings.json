@@ -314,6 +314,10 @@
     "editor.wordWrap": "off",
     "files.trimTrailingWhitespace": false
   },
+  "[javascript]": {
+    "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter",
+    "editor.tabSize": 2
+  },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features",
     "editor.formatOnPaste": true,
