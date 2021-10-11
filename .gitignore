@@ -13,6 +13,7 @@ brew/*.lock.json
 fish/fish_variables*
 fish/fishd.*
 iterm2/
+mozilla/*.moz
 ruby/irbrc_history
 StardewValley/
 syncplay.ini
