@@ -174,20 +174,39 @@
     "command": "code-runner.run",
     "when": "isWindows"
   },
-  // Open Settings to the side
+
+  // Ctrl/Cmd+, = Open Settings as JSON to the side
+
   {
     "key": "ctrl+,",
-    "command": "workbench.action.openSettings",
+    "command": "workbench.action.openSettingsJson",
     "when": "isWindows",
     "args": { "openToSide": true }
   },
   {
     "key": "cmd+,",
-    "command": "workbench.action.openSettings",
+    "command": "workbench.action.openSettingsJson",
     "when": "isMac",
     "args": { "openToSide": true }
   },
-  // Open Workspace Settings
+
+  // Ctrl/Cmd+Alt+, = Open settings as UI to the side
+
+  {
+    "key": "ctrl+alt+,",
+    "command": "workbench.action.openSettings2",
+    "when": "isWindows",
+    "args": { "openToSide": true }
+  },
+  {
+    "key": "cmd+alt+,",
+    "command": "workbench.action.openSettings2",
+    "when": "isMac",
+    "args": { "openToSide": true }
+  },
+
+  // Ctrl/Cmd+Shift+, = Open workspace settings as JSON to the side (Alt for UI)
+
   {
     "key": "shift+ctrl+,",
     "command": "-editor.action.inPlaceReplace.up",
@@ -196,6 +215,12 @@
   {
     "key": "shift+ctrl+,",
     "command": "workbench.action.openWorkspaceSettingsFile",
+    "when": "isWindows",
+    "args": { "openToSide": true }
+  },
+  {
+    "key": "shift+ctrl+alt+,",
+    "command": "workbench.action.openWorkspaceSettings",
     "when": "isWindows",
     "args": { "openToSide": true }
   },
@@ -210,7 +235,12 @@
     "when": "isMac",
     "args": { "openToSide": true }
   },
-  // Restart extension host
+  {
+    "key": "shift+cmd+alt+,",
+    "command": "workbench.action.openWorkspaceSettings",
+    "when": "isMac",
+    "args": { "openToSide": true }
+  },
   {
     "key": "cmd+k cmd+r",
     "command": "-workbench.action.keybindingsReference",
