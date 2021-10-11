@@ -31,9 +31,9 @@ switch $TERM_PROGRAM
         switch (date +%B)
             case October
                 # https://twitter.com/MacHomebrew/status/783028298351730688
-                set -gx HOMEBREW_INSTALL_BADGE="🎃"
+                set -gx HOMEBREW_INSTALL_BADGE "🎃"
             case December
-                set -gx HOMEBREW_INSTALL_BADGE="🎁"
+                set -gx HOMEBREW_INSTALL_BADGE "🎁"
         end
     case "*"
         set -gx HOMEBREW_NO_EMOJI 1
