@@ -63,12 +63,13 @@
   "editor.colorDecorators": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
-  "editor.find.seedSearchStringFromSelection": false,
+  "editor.find.seedSearchStringFromSelection": "never",
   "editor.foldingHighlight": false,
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontSize": 13,
   "editor.fontWeight": "300",
   "editor.formatOnSaveMode": "modifications",
+  "editor.guides.bracketPairs": true,
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 200,
   "editor.lightbulb.enabled": false,
@@ -240,8 +241,7 @@
   "spellright.suggestionsInHints": true,
   "synthwave84.disableGlow": true,
   "task.saveBeforeRun": "never",
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
+  "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.automationShell.osx": "/usr/local/bin/bash",
   "terminal.integrated.defaultProfile.osx": "bash",
@@ -291,7 +291,6 @@
   "workbench.editor.untitled.labelFormat": "name",
   "workbench.fontAliasing": "default",
   "workbench.iconTheme": "eq-material-theme-icons",
-  "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",
   "workbench.tree.indent": 16,
   "workbench.tree.renderIndentGuides": "always",
@@ -349,8 +348,8 @@
   "[yaml]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
-    "editor.quickSuggestions": true,
-    "editor.wordBasedSuggestions": false,
+    "editor.quickSuggestions": false,
+    "editor.wordBasedSuggestions": true,
     "editor.wordWrapColumn": 80
   }
 }

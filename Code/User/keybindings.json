@@ -1,5 +1,6 @@
 [
   // Snippets
+
   {
     "key": "ctrl+l",
     "command": "editor.action.insertSnippet",
@@ -9,7 +10,9 @@
       "name": "inline_link"
     }
   },
+
   // Change text to upper/lower/title case (à la Sublime Text)
+
   {
     "key": "ctrl+k ctrl+l",
     "command": "editor.action.transformToLowercase",
@@ -40,28 +43,17 @@
     "command": "editor.action.transformToTitlecase",
     "when": "isMac && editorTextFocus && !editorReadonly"
   },
-  // Windows-ish shortcuts on Mac
-  {
-    "key": "ctrl+j",
-    "command": "editor.action.joinLines",
-    "when": "isWindows && editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "cmd+j",
-    "command": "editor.action.joinLines",
-    "when": "isMac && editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+shift+l",
-    "command": "editor.action.insertCursorAtEndOfEachLineSelected",
-    "when": "isMac && editorTextFocus && !editorReadonly"
-  },
+
+  // Ctrl+Shift+K = delete lines (on Mac, like on Windows)
+
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.deleteLines",
     "when": "isMac && editorTextFocus && !editorReadonly"
   },
-  // Ctrl/Cmd+Shift+D to duplicate lines
+
+  // Ctrl/Cmd+Shift+D = duplicate lines
+
   {
     "key": "ctrl+shift+d",
     "command": "editor.action.copyLinesDownAction",
@@ -72,7 +64,9 @@
     "command": "editor.action.copyLinesDownAction",
     "when": "isMac && editorTextFocus && !editorReadonly"
   },
+
   // F9 = Sort Lines Ascending
+
   {
     "key": "f9",
     "command": "-editor.debug.action.toggleBreakpoint",
@@ -93,13 +87,17 @@
     "command": "editor.action.sortLinesDescending",
     "when": "editorTextFocus && !editorReadonly"
   },
+
   // v4run.transpose
+
   {
     "key": "ctrl+t",
     "command": "extension.transpose",
     "when": "editorTextFocus && !editorReadonly"
   },
+
   // bierner.emojisense
+
   {
     "key": "ctrl+i",
     "command": "-emojisense.quickEmoji"
@@ -132,7 +130,9 @@
     "key": "cmd+i",
     "command": "-emojisense.quickEmojiTerminal"
   },
+
   // yzhang.markdown-all-in-one
+
   {
     "key": "backspace",
     "command": "-markdown.extension.onBackspaceKey"
@@ -142,7 +142,9 @@
     "command": "markdown.extension.onBackspaceKey",
     "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown'"
   },
+
   // heaths.vscode-guid
+
   {
     "key": "shift+cmd+[",
     "command": "-guid.insert",
@@ -153,13 +155,17 @@
     "command": "-guid.insertMany",
     "when": "editorTextFocus"
   },
+
   // Tasks
+
   {
     "key": "cmd+k shift+m",
     "command": "workbench.action.tasks.runTask",
     "args": "Launch Sublime Merge"
   },
+
   // formulahendry.code-runner
+
   {
     "key": "ctrl+alt+n",
     "command": "-code-runner.run"
@@ -241,6 +247,9 @@
     "when": "isMac",
     "args": { "openToSide": true }
   },
+
+  // Ctrl/Cmd+K, Ctrl/Cmd+R = Restart extension host
+
   {
     "key": "cmd+k cmd+r",
     "command": "-workbench.action.keybindingsReference",
@@ -261,4 +270,25 @@
     "command": "workbench.action.restartExtensionHost",
     "when": "isWindows"
   },
+
+  // Ctrl/Cmd+J = join lines
+
+  {
+    "key": "cmd+j",
+    "command": "-workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
+  },
+  {
+    "key": "cmd+j",
+    "command": "editor.action.joinLines",
+    "when": "isMac && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "editor.action.joinLines",
+    "when": "isWindows && editorTextFocus && !editorReadonly"
+  }
 ]
