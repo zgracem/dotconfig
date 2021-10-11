@@ -296,11 +296,8 @@
   "workbench.tree.indent": 16,
   "workbench.tree.renderIndentGuides": "always",
   "workbench.view.alwaysShowHeaderActions": true,
-  "xml.server.preferBinary": true,
-  "xml.server.workDir": "~/var/cache/redhat.vscode-xml",
-  "xml.symbols.maxItemsComputed": 65536,
-  "xml.validation.namespaces.enabled": "onNamespaceEncountered",
-  "xml.validation.schema.enabled": "onValidSchema",
+  "xmlTools.enableXmlTreeViewCursorSync": true,
+  "xmlTools.enableXmlTreeViewMetadata": false,
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4
