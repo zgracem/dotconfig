@@ -21,7 +21,7 @@ function wtf -d "Display information about commands"
                     echo " is a builtin"
                 case file
                     if in-path exa
-                        exa -l -s none -r (type -aP $subject)
+                        exa --long --sort none (type -aP $subject)
                     else
                         ll (type -aP $subject)
                     end
