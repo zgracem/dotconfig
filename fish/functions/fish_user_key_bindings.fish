@@ -9,4 +9,10 @@ function fish_user_key_bindings
 
     # Ctrl-/ redraws current line, not whole screen
     bind \c_ 'commandline -f repaint'
+
+    # Source: https://github.com/fish-shell/fish-shell/issues/8336#issuecomment-937370264
+    # Right Arrow (→) accepts a single word from the autosuggestion
+    bind \e\[C bind_smart_forward
+    # Shift-Right Arrow accepts the entire autosuggestion
+    bind -k sright forward-char
 end
