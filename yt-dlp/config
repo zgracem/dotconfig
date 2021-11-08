@@ -1,17 +1,30 @@
 # -----------------------------------------------------------------------------
-# ~/.config/youtube-dl/config          <https://ytdl-org.github.io/youtube-dl/>
+# $XDG_CONFIG_HOME/yt-dlp/config            <https://github.com/yt-dlp/yt-dlp>
 # vim:ft=sh
 # shellcheck disable=SC2215
-# Generated from ~/.config/.src/youtube-dl.m4
+# Generated from $XDG_CONFIG_HOME/yt-dlp/config.m4
 # -----------------------------------------------------------------------------
 # general options
 # -----------------------------------------------------------------------------
 
-# continue on download errors, e.g. to skip unavailable videos in a playlist
---ignore-errors
-
 # bypass geographic restriction via faking X-Forwarded-For HTTP header
 --geo-bypass
+
+# ----------------------------------------------------------------------------
+# youtube-dl compatibility options
+# ----------------------------------------------------------------------------
+
+# prevent downloading live chat as a subtitle track
+--compat-options no-live-chat
+
+# prevent listing unavailable videos for YouTube playlists
+--compat-options no-youtube-unavailable-videos
+
+# use AtomicParsley to embed thumbnails instead of mutagen
+--compat-options embed-thumbnail-atomicparsley
+
+# prevent removing fields such as filenames from infojson
+--compat-options no-clean-infojson
 
 # -----------------------------------------------------------------------------
 # filesystem options
@@ -23,6 +36,9 @@
 # do not overwrite files
 --no-overwrites
 
+# do not fetch comments unless it can be done quickly
+--no-write-comments
+
 # -----------------------------------------------------------------------------
 # verbosity/simulation options
 # -----------------------------------------------------------------------------
@@ -30,33 +46,36 @@
 # display progress in console titlebar
 --console-title
 
-# do NOT contact the youtube-dl server for debugging
---no-call-home
-
 # -----------------------------------------------------------------------------
 # workarounds
 # -----------------------------------------------------------------------------
 
 # disguise user agent
---user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+--user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"
 
 # -----------------------------------------------------------------------------
 # video format options
 # -----------------------------------------------------------------------------
 
-# get best mp4 quality
---format bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best
+# get best MP4 video when possible
+--format bestvideo*[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/bestvideo*+bestaudio/best
 
 # do not download the DASH manifest on YouTube videos
---youtube-skip-dash-manifest
+--no-youtube-include-dash-manifest
 
 # -----------------------------------------------------------------------------
 # post-processing options
 # -----------------------------------------------------------------------------
 
-# prefer avconv over ffmpeg for running the postprocessors
---prefer-avconv
+# location of the ffmpeg binary
+--ffmpeg-location /usr/local/bin/ffmpeg
+
+# embed thumbnail in the video as cover art
+--embed-thumbnail
+
+# embed metadata to the video file (incl. chapters)
+--embed-metadata
 
 # run custom post-processing script to add metadata etc.
 --write-info-json
---exec "/Users/zozo/.config/youtube-dl/postexec.fish {}"
+--exec "/Users/zozo/.config/yt-dlp/postexec.fish {}"

@@ -7,6 +7,7 @@
 
 tap "homebrew/command-not-found"
 tap "homebrew/services"
+tap "yt-dlp/taps"
 tap "zgracem/caveats"
 
 # -----------------------------------------------------------------------------
@@ -78,7 +79,7 @@ brew "lynx"
 brew "openssh"
 brew "ssh-copy-id", link: true
 brew "transmission-cli"
-brew "youtube-dl" # also install w/ pip to get youtube_dl Python module
+brew "yt-dlp/taps/yt-dlp"
 
 # documents
 brew "dos2unix"

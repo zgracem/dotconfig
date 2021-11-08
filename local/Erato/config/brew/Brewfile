@@ -16,4 +16,4 @@ brew "ffmpeg" # without options
 brew "ghostscript"
 brew "imagemagick@6"
 brew "pngcrush"
-brew "youtube-dl"
+brew "yt-dlp/taps/yt-dlp"

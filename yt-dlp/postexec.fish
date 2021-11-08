@@ -1,11 +1,11 @@
 #!/usr/bin/env fish
 # ----------------------------------------------------------------------------
-# `$XDG_CONFIG_HOME/youtube-dl/config` must contain
+# `$XDG_CONFIG_HOME/yt-dlp/config` must contain
 #
 #   --write-info-json
 #   --exec /path/to/this-script.fish {}
 #
-# so that `youtube-dl` will create a JSON file of metadata alongside the video
+# so that `yt-dlp` will create a JSON file of metadata alongside the video
 # and call this script with the downloaded video as the only argument.
 # ----------------------------------------------------------------------------
 
@@ -29,12 +29,16 @@ function metadata_filename -a video_filename
     end
 end
 
+function webpage_url -a json_file
+    jq .webpage_url $json_file
+end
+
 # `jq` extracts the value of "webpage_url" from metadata in $json_file;
 # `plutil` converts that string to a binary property list;
 # `xxd` prints that binary plist as `-p`lain `-u`ppercase hex bytes;
 # `string join` removes newlines.
 function binary_plist_url -a json_file
-    plutil -convert binary1 -o - (jq .webpage_url $json_file | psub) \
+    plutil -convert binary1 -o - (webpage_url $json_file | psub) \
     | xxd -p -u \
     | string join ""
 end
@@ -48,25 +52,41 @@ function set_wherefrom -a video_file metadata_file
     test -n "$metadata_file"
     or set -l metadata_file (metadata_filename $video_file)
 
+    set -l url (webpage_url $metadata_file)
+    or bail "failed to extract URL fron $metadata_file"
+
+    echo "url = $url" #debug
+
     set -l hex_url (binary_plist_url $metadata_file)
     or bail "failed to process: $metadata_file"
+
+    echo "hex = $hex_url" #debug
 
     set -l attr com.apple.metadata:kMDItemWhereFroms
 
     xattr -wx $attr $hex_url $video_file
     or bail "xattr failed to set $attr to `$hex_url`"
+
+    echo "att = $attr" #debug
 end
 
 # Creates a string from the current UNIX epoch, the name of the application,
 # and a new UUID, and applies it to $file to set its quarantine attribute.
 function set_quarantine_timestamp -a file
-    set -l timestamp_parts 0081 (printf "%x" (date +%s)) youtube-dl (uuidgen)
+    set -l hex_epoch (printf "%x" (date +%s))
+    set -l app yt-dlp
+    set -l uuid (uuidgen)
 
-    set -l attr com.apple.quarantine
+    set -l timestamp_parts 0081 $hex_epoch $app $uuid
     set -l metadata (string join \; $timestamp_parts)
 
+    echo "now = $metadata" #debug
+
+    set -l attr com.apple.quarantine
     xattr -w $attr $metadata $file
     or bail "xattr failed to set $attr to `$metadata`"
+
+    echo "att = $attr" #debug
 end
 
 # ----------------------------------------------------------------------------
