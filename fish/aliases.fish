@@ -32,9 +32,6 @@ abbr -a -g 644 'chmod 0644'
 abbr -a -g 700 'chmod 0700'
 abbr -a -g 755 'chmod 0755'
 
-in-path bundle; and in-path middleman
-and abbr -a -g mm 'bundle exec middleman'
-
 if in-path wget
     abbr -a -g dl wget
 else if in-path curl
@@ -57,7 +54,3 @@ abbr -a -g gco git checkout
 abbr -a -g gf git fetch
 abbr -a -g gp git push
 abbr -a -g gpl git pull
-
-# VS admin
-function vs; vsdotcom $argv; end
-complete --command vs --wraps vsdotcom
