@@ -52,5 +52,19 @@
     "body": [
       "#!/usr/bin/env ruby\n\n"
     ]
+  },
+  "rubocop_disable_enable": {
+    "prefix": "# rubocop:disable",
+    "body": [
+      "# rubocop:disable ${1:Layout/LineLength, Style/StringLiterals}",
+      "$0",
+      "# rubocop:enable ${1}"
+    ],
+    "description": "rubocop: disable/enable"
+  },
+  "rubocop_disable": {
+    "prefix": "# rubocop:disable",
+    "body": "# rubocop:disable ${1:Layout/LineLength, Style/StringLiterals}",
+    "description": "rubocop: disable/enable"
   }
 }

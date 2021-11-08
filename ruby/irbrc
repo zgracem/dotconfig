@@ -24,6 +24,8 @@ IRB.conf[:HISTORY_FILE] = File.expand_path("~/.local/history/irb_history")
 IRB.conf[:EVAL_HISTORY] = 2**10
 IRB.conf[:SAVE_HISTORY] = 2**15
 
+IRB.conf[:BACK_TRACE_LIMIT] = 5
+
 # -----------------------------------------------------------------------------
 # prompt
 # -----------------------------------------------------------------------------
@@ -37,16 +39,16 @@ IRB.conf[:PROMPT] ||= {}
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.dim}#{context}:%n#{off} #{chevron} ",
+  PROMPT_I: "#{Colour.dim}#{context}:%03n#{off} #{chevron} ",
 
   # prompt when indenting code
-  PROMPT_N: "#{dim}│#{off}  ",
+  PROMPT_N: "%i#{dim}│#{off}  ",
 
   # prompt for continuing strings
-  PROMPT_S: "#{dim}│%l#{off} ",
+  PROMPT_S: "%i#{dim}│%l#{off} ",
 
   # prompt for continuing statement
-  PROMPT_C: "#{dim}├#{off} ",
+  PROMPT_C: "%i#{dim}├#{off} ",
 
   # prefix to statement output
   RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
