@@ -20,7 +20,7 @@ end
 # out: /path/to/video.info.json
 function metadata_filename -a video_filename
     set -l basename (string split -r -m1 -f1 . $video_filename)
-    set -l metadata_file $basename.info.json
+    set -g metadata_file $basename.info.json
 
     if test -f $metadata_file
         echo -n $basename.info.json
@@ -55,43 +55,53 @@ function set_wherefrom -a video_file metadata_file
     set -l url (webpage_url $metadata_file)
     or bail "failed to extract URL fron $metadata_file"
 
-    echo "url = $url" #debug
-
     set -l hex_url (binary_plist_url $metadata_file)
     or bail "failed to process: $metadata_file"
-
-    echo "hex = $hex_url" #debug
 
     set -l attr com.apple.metadata:kMDItemWhereFroms
 
     xattr -wx $attr $hex_url $video_file
     or bail "xattr failed to set $attr to `$hex_url`"
-
-    echo "att = $attr" #debug
 end
 
-# Creates a string from the current UNIX epoch, the name of the application,
-# and a new UUID, and applies it to $file to set its quarantine attribute.
-function set_quarantine_timestamp -a file
+function quarantine_timestamp
     set -l hex_epoch (printf "%x" (date +%s))
     set -l app yt-dlp
     set -l uuid (uuidgen)
 
     set -l timestamp_parts 0081 $hex_epoch $app $uuid
-    set -l metadata (string join \; $timestamp_parts)
+    string join \; $timestamp_parts
+end
 
-    echo "now = $metadata" #debug
+# Creates a string from the current UNIX epoch, the name of the application,
+# and a new UUID, and applies it to $file to set its quarantine attribute.
+function set_quarantine_timestamp -a file
+    set -l timestamp (quarantine_timestamp)
 
     set -l attr com.apple.quarantine
-    xattr -w $attr $metadata $file
-    or bail "xattr failed to set $attr to `$metadata`"
+    xattr -w $attr $timestamp $file
+    or bail "xattr failed to set $attr to `$timestamp`"
+end
 
-    echo "att = $attr" #debug
+function cleanup
+    set -l fish_user_paths $HOME/bin
+    trash $argv
 end
 
 # ----------------------------------------------------------------------------
 # main()
 # ----------------------------------------------------------------------------
 
-set_quarantine_timestamp $argv
-set_wherefrom $argv
+function main
+    argparse keep -- $argv
+    or return
+
+    set_quarantine_timestamp $argv[1]
+    set_wherefrom $argv[1]
+
+    if not set -q _flag_keep
+        cleanup $metadata_file
+    end
+end
+
+main $argv
