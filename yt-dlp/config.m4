@@ -73,9 +73,6 @@
 # embed thumbnail in the video as cover art
 --embed-thumbnail
 
-# embed metadata to the video file (incl. chapters)
---embed-metadata
-
 # run custom post-processing script to add metadata etc.
 --write-info-json
 --exec "_HOME_/.config/yt-dlp/postexec.fish {}"
