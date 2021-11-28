@@ -32,7 +32,8 @@ SYMLINKS = \
 CUSTOM_UA = \
 	curl/.curlrc \
 	wget/wgetrc \
-	yt-dlp/config
+	yt-dlp/config \
+	../.private/yt-dlp/config
 
 # Map aliases to groups of target files:
 shell-files: $(SHELL_FILES)
@@ -67,6 +68,7 @@ SKEL = .skel
 curl/.curlrc: curl/.curlrc.m4
 wget/wgetrc: wget/wgetrc.m4
 yt-dlp/config: yt-dlp/config.m4
+../.private/yt-dlp/config: ../.private/yt-dlp/config.m4
 $(CUSTOM_UA): user-agent.txt
 
 # ----------------------------------------------------------------------------

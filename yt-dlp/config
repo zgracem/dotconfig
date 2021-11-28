@@ -20,11 +20,18 @@
 # prevent listing unavailable videos for YouTube playlists
 --compat-options no-youtube-unavailable-videos
 
-# use AtomicParsley to embed thumbnails instead of mutagen
---compat-options embed-thumbnail-atomicparsley
-
 # prevent removing fields such as filenames from infojson
 --compat-options no-clean-infojson
+
+# -----------------------------------------------------------------------------
+# download options
+# -----------------------------------------------------------------------------
+
+# use aria2 for downloads (`brew install aria2`)
+--downloader aria2c
+
+# download multiple fragments of a dash/hlsnative video concurrently
+--concurrent-fragments 2
 
 # -----------------------------------------------------------------------------
 # filesystem options
