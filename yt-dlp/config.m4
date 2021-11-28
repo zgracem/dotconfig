@@ -61,24 +61,11 @@
 --user-agent "_USER_AGENT_"
 
 # -----------------------------------------------------------------------------
-# video format options
-# -----------------------------------------------------------------------------
-
-# get best MP4 video when possible
---format bestvideo*[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/bestvideo*+bestaudio/best
-
-# do not download the DASH manifest on YouTube videos
---no-youtube-include-dash-manifest
-
-# -----------------------------------------------------------------------------
 # post-processing options
 # -----------------------------------------------------------------------------
 
 # location of the ffmpeg binary
 --ffmpeg-location /usr/local/bin/ffmpeg
-
-# embed thumbnail in the video as cover art
---embed-thumbnail
 
 # run custom post-processing script to add metadata etc.
 --write-info-json

@@ -1,0 +1,20 @@
+# -----------------------------------------------------------------------------
+# $XDG_CONFIG_HOME/yt-dlp/config-youtube
+# vim:ft=sh
+# shellcheck disable=SC2215
+# ----------------------------------------------------------------------------
+# video format options
+# -----------------------------------------------------------------------------
+
+# get best MP4 video when possible
+--format bestvideo*[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/bestvideo*+bestaudio/best
+
+# do not download the DASH manifest on YouTube videos
+--no-youtube-include-dash-manifest
+
+# -----------------------------------------------------------------------------
+# post-processing options
+# -----------------------------------------------------------------------------
+
+# embed thumbnail in the video as cover art
+--embed-thumbnail
