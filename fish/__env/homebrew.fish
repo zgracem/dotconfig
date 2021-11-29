@@ -1,5 +1,8 @@
 command -sq brew; or exit
 
+# Don't display hints about setting environment variables
+set -gx HOMEBREW_NO_ENV_HINTS 1
+
 # Only auto-update every 10 minutes (default is 5 minutes)
 set -gx HOMEBREW_AUTO_UPDATE_SECS 600
 
