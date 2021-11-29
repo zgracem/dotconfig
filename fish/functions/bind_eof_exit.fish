@@ -13,6 +13,7 @@ function bind_eof_exit
     # reset timer if expired
     if test (math "$now - $__eof_press") -gt $timeout_eof
         echo $msg
+        commandline --function repaint
         set -U __eof_press $now
         set -U __eof_count 0
     end
@@ -24,6 +25,7 @@ function bind_eof_exit
     # hasn't been pressed enough times
     if test $__eof_count -lt $ignore_eof
         echo $msg
+        commandline --function repaint
         return 1
     end
 
