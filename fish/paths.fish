@@ -50,6 +50,7 @@ if is-macos; and test -x /usr/local/bin/brew
 
     # Xcode
     set -a MANPATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man
+    set -a MANPATH /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
 end
 
 # Linuxbrew
