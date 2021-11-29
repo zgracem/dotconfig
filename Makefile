@@ -30,6 +30,7 @@ SYMLINKS = \
 	~/.vimrc
 
 CUSTOM_UA = \
+	aria2/aria2.conf \
 	curl/.curlrc \
 	wget/wgetrc \
 	yt-dlp/config \
@@ -65,6 +66,7 @@ SKEL = .skel
 
 # user-agent
 
+aria2/aria2.conf: aria2/aria2.conf.m4
 curl/.curlrc: curl/.curlrc.m4
 wget/wgetrc: wget/wgetrc.m4
 yt-dlp/config: yt-dlp/config.m4
