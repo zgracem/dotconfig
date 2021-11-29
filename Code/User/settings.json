@@ -345,6 +345,9 @@
   "[ruby]": {
     "editor.formatOnSave": true
   },
+  "[scss]": {
+    "editor.formatOnSave": false
+  },
   "[yaml]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
