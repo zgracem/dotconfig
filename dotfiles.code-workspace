@@ -32,9 +32,10 @@
       "[markdown]",
       "[plaintext]",
       "[ruby]",
+      "[scss]",
       "[yaml]"
     ],
-    "workbench.colorTheme": "Better Solarized Dark Italics",
+    "workbench.colorTheme": "Ocean Eyes Medium",
     "workbench.tree.indent": 8
   },
   "tasks": {
