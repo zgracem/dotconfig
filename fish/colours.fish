@@ -3,11 +3,7 @@ if not set -q __zgm_init_colours
     if in-path lolcat
         echo $message | lolcat --animate
     else
-        set -l colours f00 f70 fa0 ff0 cf0 8f0 0f0 0f9 0f9 0fe 0df 08f 04f 30f 60f b0f f0e
-        for i in (seq 1 (count $colours))
-            echo -ns (set_color $colours[$i]) (string sub --start $i --length 1 "$message")
-        end
-        echo (set_color normal) # prints final newline
+        echo $message
     end
 
     # default color
@@ -26,7 +22,7 @@ if not set -q __zgm_init_colours
     set -U fish_color_redirection yellow
 
     # process separators like ';' and '&'
-    set -U fish_color_end bryellow
+    set -U fish_color_end yellow
 
     # "potential errors"
     set -U fish_color_error red
