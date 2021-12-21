@@ -23,6 +23,7 @@
     "sortJSON.orderUnderride": [
       "[applescript]",
       "[fish]",
+      "[html]",
       "[ini]",
       "[javascript]",
       "[json]",

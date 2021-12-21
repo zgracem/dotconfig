@@ -146,6 +146,7 @@
   "gitlens.sortBranchesBy": "date:desc",
   "gitlens.statusBar.format": "${author, }${agoOrDate}${ (pullRequest)} · ${message}",
   "gitlens.views.branches.showBranchComparison": false,
+  "html.format.endWithNewline": true,
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
@@ -308,6 +309,10 @@
     "editor.formatOnSaveMode": "file",
     "editor.insertSpaces": true,
     "editor.tabSize": 4
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.formatOnSave": false
   },
   "[ini]": {
     "editor.wordWrap": "off",
