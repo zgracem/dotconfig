@@ -4,9 +4,11 @@ No more fussing with binary .plists or squinting at XML: `flannel` uses
 [`pyjamas`] (get it?) to make working with macOS preference files as easy as
 hand-editing a YAML file.
 
+[`pyjamas`]: ../pyjamas
+
 ## Usage
 
-All commands accept a `-n|--dry-run` flag that only prints what would be done
+All commands accept the flag `-n|--dry-run` to only print what would be done
 without actually executing.
 
 ```fish
