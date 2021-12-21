@@ -150,6 +150,7 @@
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "jqPlayground.binaryPath": "/usr/local/bin/jq",
   "json.maxItemsComputed": 20480,
   "markdown.extension.italic.indicator": "_",
@@ -319,7 +320,6 @@
     "files.trimTrailingWhitespace": false
   },
   "[javascript]": {
-    "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter",
     "editor.tabSize": 2
   },
   "[json]": {
