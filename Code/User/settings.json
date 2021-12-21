@@ -92,6 +92,13 @@
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
+  "editor.unicodeHighlight.allowedCharacters": {
+    "×": true,
+    "‘": true,
+    "’": true,
+    "“": true,
+    "”": true
+  },
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
@@ -245,7 +252,10 @@
   "task.saveBeforeRun": "never",
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
-  "terminal.integrated.automationShell.osx": "/usr/local/bin/bash",
+  "terminal.integrated.automationProfile.osx": {
+    "icon": "terminal-bash",
+    "path": "/usr/local/bin/bash"
+  },
   "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.defaultProfile.windows": "Cygwin bash",
   "terminal.integrated.env.osx": {
