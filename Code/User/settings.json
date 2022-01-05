@@ -35,7 +35,7 @@
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
   "code-runner.executorMap": {
-    "erb": "erb",
+    "erb": "erb -T-",
     "fish": "fish -C 'set -gx TERM dumb'",
     "html": "links -html-margin 0 -dump",
     "jq": "jq --null-input --from-file",
