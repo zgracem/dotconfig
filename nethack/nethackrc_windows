@@ -1,7 +1,6 @@
 # -----------------------------------------------------------------------------
-# ~/.config/nethack/nethackrc
+# %USERPROFILE%\NetHack\.nethackrc
 # vim:ft=ini
-# export NETHACKOPTIONS="@$XDG_CONFIG_HOME/nethack/nethackrc"
 # -----------------------------------------------------------------------------
 
 OPTIONS=name:Zozo
@@ -230,3 +229,34 @@ MENUCOLOR=" cursed " = red
 MENUCOLOR=" unholy " = red
 # cursed worn items in orange and underlined
 MENUCOLOR=" cursed .* (being worn)" = orange&underline
+
+# ----------------------------------------------------------------------------
+# win32 port
+# ----------------------------------------------------------------------------
+
+# use IBM extended characters
+OPTIONS=symset:IBMgraphics_2,roguesymset:RogueEpyx
+
+# mouse support (no OS adjustments)
+OPTIONS=mouse_support:2
+
+# game window settings
+# map_mode : tiles, ascii4x6, ascii6x8, ascii8x8, ascii16x8, ascii7x12,
+#            ascii8x12, ascii16x12, ascii12x16, ascii10x18, fit_to_screen,
+#            ascii_fit_to_screen, tiles_fit_to_screen
+OPTIONS=map_mode:ascii10x18,scroll_margin:10
+
+# message window settings
+OPTIONS=font_message:Arial,font_size_message:10,align_message:top
+
+# menu settings
+OPTIONS=font_menu:Arial,font_size_menu:10
+
+# text settings
+OPTIONS=font_text:Consolas,font_size_text:12
+
+# status window settings
+OPTIONS=font_status:Consolas,font_size_status:12
+
+# "Nethack mode" colors
+OPTIONS=windowcolors:status white/trueblack
