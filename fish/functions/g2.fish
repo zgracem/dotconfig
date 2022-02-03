@@ -6,28 +6,22 @@ function g2 --description 'Go somewhere' -a alias
 
     set -l dir
     switch $destination[1]
-        case proj
-            set dir "$HOME/Projects"
-        case stow
-            set dir "$HOME/opt/stow"
-        case defunct
-            set dir "$HOME/old/src"
-        case scratch
-            set dir "$HOME/tmp/_scratch"
-        case vs9
-            set dir "$HOME/VS/www/vsdotcom"
-        case imprint
-            set dir "$HOME/VS/www/vsbooks"
-        case 2a
-            set dir "$HOME/VS/www/2adotcom"
         case desktop
             set dir "$XDG_DESKTOP_DIR"
         case dl
             set dir "$XDG_DOWNLOAD_DIR"
-        case git
-            set dir "$HOME/GitHub"
+        case local
+            set dir "$HOME/.local"
         case hub
             set dir "$HOME/.local/src/github.com"
+        case scratch
+            set dir "$HOME/tmp/_scratch"
+        case defunct
+            set dir "$HOME/old/src"
+        case git
+            set dir "$HOME/GitHub"
+        case proj
+            set dir "$HOME/Projects"
         case ruby
             set dir "$dropbox/dev/ruby"
         case scripts
@@ -38,6 +32,14 @@ function g2 --description 'Go somewhere' -a alias
             set dir "$steam_dir/steamapps"
         case steamuser
             set dir "$steam_dir/userdata"
+        case stow
+            set dir "$HOME/opt/stow"
+        case vs9
+            set dir "$HOME/VS/www/vsdotcom"
+        case 2a
+            set dir "$HOME/VS/www/2adotcom"
+        case imprint
+            set dir "$HOME/VS/www/vsbooks"
         case '*'
             echo >&2 "don't know how to go to $destination!"
             return 1
