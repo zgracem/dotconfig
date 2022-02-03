@@ -6,32 +6,32 @@ function g2 --description 'Go somewhere' -a alias
 
     set -l dir
     switch $destination[1]
-        case inbox
-            set dir "$dropbox/inbox"
         case proj
-            set dir "$dropbox/Projects"
+            set dir "$HOME/Projects"
         case stow
             set dir "$HOME/opt/stow"
         case defunct
-            set dir "$dropbox/src.old"
+            set dir "$HOME/old/src"
         case scratch
             set dir "$HOME/tmp/_scratch"
         case vs9
-            set dir "$dropbox/VS/www/vsdotcom"
+            set dir "$HOME/VS/www/vsdotcom"
         case imprint
-            set dir "$dropbox/VS/www/vsbooks"
+            set dir "$HOME/VS/www/vsbooks"
         case 2a
-            set dir "$dropbox/VS/www/2adotcom"
+            set dir "$HOME/VS/www/2adotcom"
         case desktop
             set dir "$XDG_DESKTOP_DIR"
         case dl
             set dir "$XDG_DOWNLOAD_DIR"
-        case github
+        case git
+            set dir "$HOME/GitHub"
+        case hub
             set dir "$HOME/.local/src/github.com"
         case ruby
-            set dir "$dropbox/src"
+            set dir "$dropbox/dev/ruby"
         case scripts
-            set dir "$dropbox/src/shell"
+            set dir "$dropbox/dev/shell"
         case steam
             set dir "$steam_dir"
         case steamapps

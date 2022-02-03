@@ -8,7 +8,7 @@ dev()
 
   case $1 in
     vs9)
-      proj_dir=$HOME/Dropbox/VS/www/vsdotcom
+      proj_dir=$HOME/VS/www/vsdotcom
       _z_dev_subl_project "etc/vs2017"
       ;;
     ruby)

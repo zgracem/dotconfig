@@ -44,7 +44,7 @@ set -p fish_function_path "$__fish_config_dir/prompt"
 
 # source vendor completions
 set -p fish_complete_path "$HOME/opt/etc/fish/completions"
-set -p fish_complete_path "$HOME/Dropbox/VS/www/vsdotcom/etc/fish/completions"
+set -p fish_complete_path "$HOME/VS/www/vsdotcom/etc/fish/completions"
 
 # remove duplicate & nonexistent directories
 fix-path fish_function_path

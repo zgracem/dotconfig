@@ -10,10 +10,10 @@ declare -A mydirs=(
   [inbox]="$HOME/Dropbox/inbox"
   [local]="$HOME/.local"
   [scratch]="$HOME/tmp/_scratch"
-  [vs9]="$HOME/Dropbox/VS/www/vsdotcom"
+  [vs9]="$HOME/VS/www/vsdotcom"
   [history]="$HOME/.local/history"
-  [imprint]="$HOME/Dropbox/VS/www/vsbooks"
-  [ta]="$HOME/Dropbox/VS/www/2adotcom"
+  [imprint]="$HOME/VS/www/vsbooks"
+  [ta]="$HOME/VS/www/2adotcom"
   [proj]="$HOME/Dropbox/Projects"
 )
 

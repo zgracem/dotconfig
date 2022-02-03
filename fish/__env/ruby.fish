@@ -1,4 +1,4 @@
-set -gx RUBYLIB $HOME/Dropbox/lib/ruby
+set -gx RUBYLIB $HOME/lib/ruby
 
 set -gx RI --format=ansi
 
