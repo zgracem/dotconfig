@@ -33,6 +33,9 @@ source "$__fish_config_dir/packages.fish"
 # setup abbreviations
 source "$__fish_config_dir/aliases.fish"
 
+# setup keybindings
+source "$__fish_config_dir/bindings.fish"
+
 # setup colours
 source "$__fish_config_dir/colours.fish"
 
