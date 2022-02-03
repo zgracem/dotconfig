@@ -5,5 +5,5 @@
     "spell_check": true,
     "syntax": "Packages/Markdown/Markdown.sublime-syntax",
     "word_wrap": true,
-    "dictionary": "Packages/Language - English/en_CA.dic",
+    "dictionary": "/Users/zozo/opt/share/myspell/myspell/en_CA.dic",
 }
