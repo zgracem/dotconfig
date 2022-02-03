@@ -348,6 +348,7 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
     },
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.formatOnPaste": false,
     "editor.wordBasedSuggestions": false,
     "editor.wordWrap": "bounded",
