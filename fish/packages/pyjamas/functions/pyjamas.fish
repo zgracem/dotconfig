@@ -24,7 +24,7 @@ function pyjamas --description "Convert configuration files between formats"
     end
 
     set -l input
-    set -l libs pathname
+    set -l libs date pathname
 
     switch "$ext_in"
         case json
@@ -37,7 +37,7 @@ function pyjamas --description "Convert configuration files between formats"
             set input "TomlRB.parse($src.read)"
             set -a libs toml-rb
         case yml yaml
-            set input "YAML.load($src.read)"
+            set input "YAML.safe_load($src.read, permitted_classes: [Date, Symbol], aliases: true)"
             set -a libs yaml
         case '*'
             echo >&2 "don't know how to read a “$ext_in” file!"
