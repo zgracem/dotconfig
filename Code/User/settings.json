@@ -99,6 +99,7 @@
     "“": true,
     "”": true
   },
+  "editor.unicodeHighlight.includeStrings": false,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
@@ -130,6 +131,9 @@
   "gitlens.advanced.blame.customArguments": [
     "-w"
   ],
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
   "gitlens.blame.avatars": false,
   "gitlens.blame.heatmap.location": "left",
   "gitlens.changes.locations": [
