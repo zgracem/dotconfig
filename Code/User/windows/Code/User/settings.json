@@ -1,5 +1,39 @@
 {
+  "autoSnippet.snippets": [
+    {
+      "language": "fish",
+      "snippet": "fish_function"
+    },
+    {
+      "language": "gemfile",
+      "snippet": "new_Gemfile"
+    },
+    {
+      "language": "json",
+      "snippet": "new_JSON"
+    },
+    {
+      "language": "markdown",
+      "snippet": "YAML_frontmatter"
+    },
+    {
+      "language": "ruby",
+      "snippet": "frozen_string_literal"
+    },
+    {
+      "language": "shellscript",
+      "snippet": "shellscript_hashbang"
+    },
+    {
+      "language": "yaml",
+      "snippet": "new_YAML"
+    }
+  ],
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "on",
+  "code-runner.clearPreviousOutput": true,
   "code-runner.customCommand": "echo %PATH%",
+  "code-runner.enableAppInsights": false,
   "code-runner.executorMap": {
     "ahk": "C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe /force /restart /ErrorStdOut=UTF-8",
     "bat": "cmd /c",
@@ -16,15 +50,292 @@
     "slim": "slimrb.exe --option format=:html --option tabsize=2 --pretty --trace",
     "troff": "C:\\cygwin64\\bin\\man.exe -Pcat"
   },
+  "code-runner.ignoreSelection": true,
+  "code-runner.runInTerminal": false,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.showRunCommandInEditorContextMenu": false,
+  "code-runner.showRunCommandInExplorerContextMenu": false,
+  "code-runner.showRunIconInEditorTitleMenu": false,
+  "code-runner.temporaryFileName": "",
   "code-runner.terminalRoot": "/cygdrive/",
+  "debug.showInlineBreakpointCandidates": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.colorDecorators": false,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.cursorStyle": "line-thin",
+  "editor.find.seedSearchStringFromSelection": "never",
+  "editor.foldingHighlight": false,
+  "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
+  "editor.fontSize": 13,
+  "editor.fontWeight": "300",
+  "editor.formatOnSaveMode": "modifications",
+  "editor.guides.bracketPairs": true,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.hover.delay": 200,
+  "editor.lightbulb.enabled": false,
+  "editor.links": false,
+  "editor.maxTokenizationLineLength": 40960,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.occurrencesHighlight": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "selection",
+  "editor.rulers": [
+    80,
+    118
+  ],
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggest.shareSuggestSelections": true,
+  "editor.suggest.showSnippets": true,
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.unicodeHighlight.allowedCharacters": {
+    "×": true,
+    "‘": true,
+    "’": true,
+    "“": true,
+    "”": true
+  },
+  "editor.unicodeHighlight.includeStrings": false,
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 118,
+  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+  "emojisense.emojiDecoratorsEnabled": false,
+  "emojisense.markupCompletionsEnabled": false,
+  "explorer.incrementalNaming": "smart",
+  "explorer.openEditors.visible": 0,
+  "extensions.closeExtensionDetailsOnViewChange": false,
+  "extensions.ignoreRecommendations": true,
+  "files.associations": {
+    "*.JSON-tmLanguage": "json",
+    "*.YAML-tmLanguage": "yaml",
+    "*.[1-9]": "troff",
+    "*.geojson": "json",
+    "*.make": "makefile",
+    "*.plist": "xml",
+    "*.sublime-syntax": "yaml",
+    "*.sublime-{settings,build,keymap}": "json",
+    "*ignore": "ignore"
+  },
+  "files.defaultLanguage": "${activeEditorLanguage}",
+  "files.eol": "\n",
+  "files.hotExit": "onExitAndWindowClose",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "git.defaultCloneDirectory": "C:\\cygwin64\\home\\zgm\\.local\\src",
+  "git.openDiffOnClick": false,
   "git.path": "C:\\Program Files\\Git\\cmd\\git.exe",
+  "gitlens.advanced.blame.customArguments": [
+    "-w"
+  ],
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "gitlens.blame.avatars": false,
+  "gitlens.blame.heatmap.location": "left",
+  "gitlens.changes.locations": [
+    "overview",
+    "gutter"
+  ],
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": true,
+  "gitlens.currentLine.format": "${author, }${agoOrDate}${ (pullRequest)}${ • message|50?}",
+  "gitlens.defaultDateFormat": "YYYY-MM-DD · HH:mm",
+  "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
+  "gitlens.defaultTimeFormat": "HH:mm",
+  "gitlens.heatmap.ageThreshold": 180,
+  "gitlens.heatmap.toggleMode": "file",
+  "gitlens.hovers.annotations.enabled": true,
+  "gitlens.hovers.annotations.over": "annotation",
+  "gitlens.hovers.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.menus": false,
+  "gitlens.mode.statusBar.enabled": false,
+  "gitlens.sortBranchesBy": "date:desc",
+  "gitlens.statusBar.format": "${author, }${agoOrDate}${ (pullRequest)} · ${message}",
+  "gitlens.views.branches.showBranchComparison": false,
+  "html.format.endWithNewline": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.wrapLineLength": 0,
+  "insertGuid.showCodeSnippets": false,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "jqPlayground.binaryPath": "C:\\cygwin64\\bin\\jq.exe",
+  "json.maxItemsComputed": 20480,
+  "markdown.extension.italic.indicator": "_",
+  "markdown.extension.list.indentationSize": "inherit",
+  "markdown.extension.syntax.decorations": false,
+  "markdown.extension.toc.levels": "1..3",
+  "markdown.extension.toc.orderedList": true,
+  "minify.js": {
+    "compress": {
+      "collapse_vars": true,
+      "passes": 2,
+      "reduce_vars": true
+    }
+  },
+  "oneDarkPro.editorTheme": "One Dark Pro Flat",
+  "oneDarkPro.italic": true,
+  "outline.problems.enabled": false,
+  "problems.showCurrentInStatus": true,
+  "redhat.telemetry.enabled": false,
   "ruby.interpreter.commandPath": "C:\\cygwin64\\bin\\ruby.exe",
   "ruby.pathToBundler": "C:\\cygwin64\\home\\zgm\\bin\\bundler.exe",
-  "shellcheck.executablePath": "C:\\cygwin64\\home\\zgm\\opt\\stow\\shellcheck\\bin\\shellcheck.exe",
+  "ruby.useLanguageServer": false,
+  "search.collapseResults": "auto",
+  "search.searchEditor.defaultNumberOfContextLines": 2,
+  "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
+  "search.showLineNumbers": true,
+  "search.smartCase": true,
+  "search.sortOrder": "default",
+  "security.workspace.trust.untrustedFiles": "open",
+  "settingsSync.ignoredExtensions": [
+    "castwide.solargraph"
+  ],
+  "settingsSync.ignoredSettings": [
+    "code-runner.customCommand",
+    "code-runner.executorMap",
+    "code-runner.executorMapByGlob",
+    "code-runner.terminalRoot",
+    "editor.fontFamily",
+    "editor.fontSize",
+    "editor.fontWeight",
+    "jqPlayground.binaryPath",
+    "spellright.configurationScope",
+    "spellright.language",
+    "terminal.external.osxExec",
+    "terminal.integrated.automationShell.osx",
+    "terminal.integrated.env.osx",
+    "terminal.integrated.shell.osx",
+    "window.doubleClickIconToClose"
+  ],
   "terminal.integrated.shell.windows": "C:\\cygwin64\\bin\\bash.exe",
+  "settingsSync.keybindingsPerPlatform": false,
+  "shellcheck.enableQuickFix": true,
+  "shellcheck.exclude": [
+    "1090",
+    "1091"
+  ],
+  "shellcheck.run": "onSave",
+  "shellcheck.useWorkspaceRootAsCwd": true,
+  "sortJSON.contextMenu": {
+    "sortJSONAlphaNum": false,
+    "sortJSONAlphaNumReverse": false,
+    "sortJSONKeyLength": false,
+    "sortJSONKeyLengthReverse": false,
+    "sortJSONReverse": false,
+    "sortJSONTypeReverse": false,
+    "sortJSONValuesReverse": false
+  },
+  "spellright.addToSystemDictionary": true,
+  "spellright.configurationUpdate": false,
+  "spellright.documentTypes": [
+    "markdown",
+    "git-commit"
+  ],
+  "spellright.groupDictionaries": false,
+  "spellright.language": [
+    "en_CA"
+  ],
+  "spellright.notificationClassByParser": {
+    "code": "information",
+    "markdown": "warning",
+    "plain": "warning"
+  },
+  "spellright.recheckOnSave": true,
+  "spellright.suggestionsInHints": true,
+  "synthwave84.disableGlow": true,
+  "task.saveBeforeRun": "never",
+  "telemetry.telemetryLevel": "off",
+  "window.closeWhenEmpty": true,
   "window.doubleClickIconToClose": true,
   "window.enableMenuBarMnemonics": false,
-  "window.menuBarVisibility": "toggle"
+  "window.menuBarVisibility": "toggle",
+  "window.newWindowDimensions": "offset",
+  "window.openFilesInNewWindow": "off",
+  "window.openFoldersInNewWindow": "on",
+  "window.restoreWindows": "all",
+  "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
+  "window.titleSeparator": " · ",
+  "workbench.activityBar.iconClickBehavior": "focus",
+  "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.pinnedTabSizing": "shrink",
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.tabCloseButton": "off",
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.untitled.hint": "hidden",
+  "workbench.editor.untitled.labelFormat": "name",
+  "workbench.iconTheme": "eq-material-theme-icons",
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 16,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "xmlTools.enableXmlTreeViewCursorSync": true,
+  "xmlTools.enableXmlTreeViewMetadata": false,
+  "[applescript]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[fish]": {
+    "editor.defaultFormatter": "zgm.vscode-fish",
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": false,
+    "editor.formatOnSaveMode": "file",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.formatOnSave": false
+  },
+  "[ini]": {
+    "editor.wordWrap": "off",
+    "files.trimTrailingWhitespace": false
+  },
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false
+  },
+  "[jsonc]": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false
+  },
+  "[makefile]": {
+    "editor.insertSpaces": false
+  },
+  "[markdown]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": true
+    },
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.formatOnPaste": false,
+    "editor.wordBasedSuggestions": false,
+    "editor.wordWrap": "bounded",
+    "files.trimTrailingWhitespace": false
+  },
+  "[plaintext]": {
+    "editor.quickSuggestions": false,
+    "editor.wordBasedSuggestions": false
+  },
+  "[ruby]": {
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.formatOnSave": false
+  },
+  "[yaml]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "editor.quickSuggestions": false,
+    "editor.wordBasedSuggestions": true,
+    "editor.wordWrapColumn": 80
+  }
 }

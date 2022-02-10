@@ -11,15 +11,6 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 - **Windows:** `%APPDATA%\Code\User`
 - **macOS:** `$HOME/Library/Application Support/Code/User`
 
-On Windows/Cygwin machines without admin privileges, this script concatenates
-the base `settings.json` with the Windows-specific `windows/…/settings.json` and
-filters out non-Windows settings from `windows/…/macos_settings.json`, then
-installs the results to `%APPDATA%\Code\User`:
-
-```sh
-~/.config/bin/vscode-sync-settings.fish
-```
-
 ## Extensions
 
 Use `~/.config/bin/vscode-extensions` to manage extensions against the
