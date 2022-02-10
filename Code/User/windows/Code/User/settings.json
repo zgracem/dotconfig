@@ -207,12 +207,22 @@
     "spellright.configurationScope",
     "spellright.language",
     "terminal.external.osxExec",
+    "terminal.integrated.automationProfile.osx",
     "terminal.integrated.automationShell.osx",
+    "terminal.integrated.automationProfile.windows",
+    "terminal.integrated.automationShell.windows",
+    "terminal.integrated.defaultProfile.osx",
+    "terminal.integrated.defaultProfile.windows",
     "terminal.integrated.env.osx",
+    "terminal.integrated.env.windows",
+    "terminal.integrated.profiles.osx",
+    "terminal.integrated.profiles.windows",
+    "terminal.integrated.scrollback",
     "terminal.integrated.shell.osx",
+    "terminal.integrated.shell.windows",
+    "terminal.integrated.shellArgs.osx",
     "window.doubleClickIconToClose"
   ],
-  "terminal.integrated.shell.windows": "C:\\cygwin64\\bin\\bash.exe",
   "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.enableQuickFix": true,
   "shellcheck.exclude": [
@@ -250,6 +260,22 @@
   "synthwave84.disableGlow": true,
   "task.saveBeforeRun": "never",
   "telemetry.telemetryLevel": "off",
+  "terminal.integrated.automationProfile.windows": {
+    "icon": "terminal-bash",
+    "path": "C:\\cygwin64\\bin\\bash.exe"
+  },
+  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
+  "terminal.integrated.profiles.windows": {
+    "Cygwin bash": {
+      "env": {
+        "PREFERRED_SHELL": "bash"
+      },
+      "icon": "terminal-bash",
+      "path": "C:\\cygwin64\\bin\\bash.exe"
+    }
+  },
+  "terminal.integrated.scrollback": 10240,
+  "terminal.integrated.shell.windows": "C:\\cygwin64\\bin\\bash.exe",
   "window.closeWhenEmpty": true,
   "window.doubleClickIconToClose": true,
   "window.enableMenuBarMnemonics": false,

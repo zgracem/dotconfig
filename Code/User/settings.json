@@ -202,8 +202,17 @@
     "spellright.configurationScope",
     "spellright.language",
     "terminal.external.osxExec",
+    "terminal.integrated.automationProfile.osx",
     "terminal.integrated.automationShell.osx",
+    "terminal.integrated.automationProfile.windows",
+    "terminal.integrated.automationShell.windows",
+    "terminal.integrated.defaultProfile.osx",
+    "terminal.integrated.defaultProfile.windows",
     "terminal.integrated.env.osx",
+    "terminal.integrated.env.windows",
+    "terminal.integrated.profiles.osx",
+    "terminal.integrated.profiles.windows",
+    "terminal.integrated.scrollback",
     "terminal.integrated.shell.osx",
     "terminal.integrated.shell.windows",
     "terminal.integrated.shellArgs.osx",
@@ -256,30 +265,22 @@
     "icon": "terminal-bash",
     "path": "/usr/local/bin/bash"
   },
-  "terminal.integrated.defaultProfile.osx": "bash",
-  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
-  "terminal.integrated.env.osx": {
-    "PREFERRED_SHELL": "bash"
-  },
-  "terminal.integrated.env.windows": {
-    "PREFERRED_SHELL": "bash"
-  },
+  "terminal.integrated.confirmOnExit": "hasChildProcesses",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.enableBell": true,
+  "terminal.integrated.enableFileLinks": false,
   "terminal.integrated.profiles.osx": {
     "bash": {
+      "env": {
+        "PREFERRED_SHELL": "bash"
+      },
       "icon": "terminal-bash",
-      "path": "bash"
+      "path": "/usr/local/bin/bash"
     },
     "fish": {
       "icon": "terminal",
-      "path": "fish"
-    }
-  },
-  "terminal.integrated.profiles.windows": {
-    "Cygwin bash": {
-      "icon": "terminal-bash",
-      "path": [
-        "Z:\\bin\\bash.exe"
-      ]
+      "path": "/usr/local/bin/fish"
     }
   },
   "terminal.integrated.scrollback": 10240,
