@@ -1,7 +1,7 @@
-# install with `gem install -g ~/.config/ruby/Gemfile`
+# install with `cd ~/.config/ruby && bundle install`
 
 source "https://rubygems.org"
-ruby "~> 2.6.0"
+ruby "~> 3.1.0"
 
 # -----------------------------------------------------------------------------
 # Utilities
@@ -36,7 +36,7 @@ gem "lolcat"
 gem "http"
 gem "net-scp"
 gem "net-ssh"
-gem "nokogiri", ">= 1.11.0.rc4"
+gem "nokogiri", ">= 1.12.5"
 
 # <github.com/middleman/middleman>
 gem "middleman"
@@ -81,4 +81,3 @@ gem "unicode_utils"
 
 gem "bunter", git: "git@github.com:zgracem/bunter.git", branch: "main"
 gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git"
-gem "weather_meteo", path: "#{ENV['HOME']}/lib/ruby/weather_meteo"
