@@ -267,9 +267,6 @@
   "terminal.integrated.defaultProfile.windows": "Cygwin bash",
   "terminal.integrated.profiles.windows": {
     "Cygwin bash": {
-      "env": {
-        "PREFERRED_SHELL": "bash"
-      },
       "icon": "terminal-bash",
       "path": "C:\\cygwin64\\bin\\bash.exe"
     }
