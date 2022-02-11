@@ -276,9 +276,6 @@
   "terminal.integrated.enableFileLinks": false,
   "terminal.integrated.profiles.osx": {
     "bash": {
-      "env": {
-        "PREFERRED_SHELL": "bash"
-      },
       "icon": "terminal-bash",
       "path": "/usr/local/bin/bash"
     },
