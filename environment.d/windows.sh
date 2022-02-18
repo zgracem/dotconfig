@@ -1,20 +1,5 @@
 [ "$PLATFORM" = "windows" ] || return
 
-# -----------------------------------------------------------------------------
-# Shell variables
-# ------------------------------------------------------------------------------
-
-# If we have Windows admin privileges, we will be a member of group 544 or 0
-for g in $(id -G); do
-  if [ "$g" -eq 0 ] || [ "$g" -eq 544 ]; then
-    export WINDOWS_ADMIN=true
-    break
-  fi
-  unset -v WINDOWS_ADMIN
-done
-
-unset -v g
-
 # File extensions considered "executable" by cmd.com (minimal set)
 if [ -z "$PATHEXT" ]; then
   PATHEXT=".COM;.EXE;.BAT"
@@ -45,16 +30,3 @@ elif [ "$OSTYPE" = "msys" ]; then
   export MSYS="$CYGWIN"
   unset -v CYGWIN
 fi
-
-# -----------------------------------------------------------------------------
-# Default printer
-# -----------------------------------------------------------------------------
-
-key="/proc/registry/HKEY_CURRENT_USER/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device"
-
-if [ -z "$PRINTER" ] && [ -e "$key" ]; then
-  read -r PRINTER < "$key"
-  export PRINTER="${PRINTER%%,*}"
-fi
-
-unset -v key

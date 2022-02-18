@@ -14,7 +14,6 @@ all:
 # ----------------------------------------------------------------------------
 
 SHELL_FILES = \
-	~/.bash_logout \
 	~/.bash_profile \
 	~/.bash_sessions_disable \
 	~/.bashrc \
@@ -48,7 +47,6 @@ user-agent: user-agent.txt $(CUSTOM_UA)
 # shell-files
 
 SKEL = .skel
-~/.bash_logout: $(SKEL)/.bash_logout
 ~/.bash_profile: $(SKEL)/.bash_profile
 ~/.bash_sessions_disable: $(SKEL)/.bash_sessions_disable
 ~/.bashrc: $(SKEL)/.bashrc

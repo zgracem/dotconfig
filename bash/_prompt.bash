@@ -52,36 +52,6 @@ if (( TERM_COLOURDEPTH < 8 )); then
   Z_PROMPT_COLOUR=false
 fi
 
-# Only change window title if supported by current terminal
-if [[ ! $PTERM =~ ^(xterm|putty|nsterm|iTerm) ]]; then
-  Z_SET_WINTITLE=false
-  Z_SET_TABTITLE=false
-fi
-
-case $TERM_PROGRAM in
-  PuTTY) # doesn't have meaningful "tab titles"
-    Z_SET_TABTITLE=false
-    ;;
-  Prompt*) # doesn't have a status line (panic.com/prompt)
-    Z_SET_WINTITLE=false
-    Z_SET_TABTITLE=false
-    ;;
-  Coda) # has a very narrow status line (panic.com/coda-ios)
-    Z_SET_WINTITLE=false
-    Z_SET_TABTITLE=false
-    ;;
-  Apple_Terminal) # has its own functions for this
-    Z_SET_WINTITLE=false
-    Z_SET_TABTITLE=false
-    ;;
-esac
-
-# Display "user@hostname" if "user" isn't typical
-#   (set in ~/.private/environment.d/default_user.sh)
-if [[ $USER != "$DEFAULT_USER" ]]; then
-  Z_PROMPT_HOST=true
-fi
-
 # -----------------------------------------------------------------------------
 # Functions
 # -----------------------------------------------------------------------------
@@ -423,20 +393,12 @@ fi
 
 PS1=""
 
-# Print exit status of last command. This has to come first for two reasons:
-# 1) So the last exit status doesn't get overwritten by anything else in the
-# prompt; and 2) so the tput calls in `_z_PS1_print_exit` get made before
-# anything else is printed.
-if [[ $Z_PROMPT_EXIT == true ]]; then
-  PS1+="${PS1_false}\\[\$(_z_PS1_print_exit)\\]${PS1_reset}"
-fi
-
 # Print the hostname if we're remotely connected (otherwise we probably know
 # which machine we're sitting in front of), and the username if it's not the
 # one we usually log in with.
 if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
   case $USER in
-    $DEFAULT_USER)
+    "$DEFAULT_USER")
       PS1+="${PS1_dim}"
       ;;
     *)
@@ -446,22 +408,13 @@ if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
   PS1+="\\h${PS1_reset}:"
 fi
 
-# Print the current path, highlighted and truncated if necessary.
-PS1+="${PS1_hi}\$(_z_PS1_compress_pwd)${PS1_reset}"
+# Print the current path, highlighted
+PS1+="${PS1_hi}\\w${PS1_reset}"
 
-# info about current git branch, if any (function supplies colours)
-PS1+="\$(_z_PS1_git_info)"
-
-# number of background jobs, if any
-PS1+="${PS1_yellow}\$(_z_PS1_jobs)${PS1_reset}"
-
-# § for me, # for root, ? if we're in incognito mode
-if [[ -n $Z_INCOGNITO ]]; then
-  PS1+=" ${PS1_brblack}?"
-elif (( EUID == 0 )); then
+# § for me, # for root
+if (( EUID == 0 )); then
   PS1+=" ${PS1_user}#"
 else
-  # PS1+=" ${PS1_user}\\\$"
   PS1+=" ${PS1_user}§"
 fi
 
@@ -510,103 +463,7 @@ _z_prompt_cmd_add()
   return 0
 }
 
-_z_prompt_cmd_del()
-{ # remove a command from PROMPT_COMMAND
-  local regex=" ?${*}[ ;]*"
-
-  if [[ $PROMPT_COMMAND =~ $regex ]]; then
-    # capture command + any leading space + trailing semicolon
-    local cmd=${BASH_REMATCH[0]}
-
-    # remove that from existing PROMPT_COMMAND
-    PROMPT_COMMAND=${PROMPT_COMMAND/$cmd/}
-
-    # remove any orphaned trailing semicolon
-    PROMPT_COMMAND=${PROMPT_COMMAND%;}
-  fi
-}
-
-# -----------------------------------------------------------------------------
-
-# if [[ $TERM_PROGRAM == iTerm.app ]]; then
-#   _z_prompt_cmd_add iterm::state
-# fi
-
-if [[ $TERM_PROGRAM == Apple_Terminal || $TERM_PROGRAM == mintty ]]; then
-  _z_prompt_cmd_add _z_PS1_update_cwd
-else
-  unset -f _z_PS1_update_cwd
-fi
-
-if [[ $Z_SET_WINTITLE == true || $Z_SET_TABTITLE == true ]]; then
-  _z_prompt_cmd_add _z_PS1_update_titles
-fi
-
 # append to HISTFILE
 _z_prompt_cmd_add -p "history -a"
 
-# # read from HISTFILE -- enable if you want tmux sessions to share history
-# _z_prompt_cmd_add -p "history -n"
-
-# -----------------------------------------------------------------------------
-# cleanup
-# -----------------------------------------------------------------------------
-
-unset -f _z_prompt_cmd_{add,del}
-# unset -v ${!PS1_*}
-
-# -----------------------------------------------------------------------------
-# control function
-# -----------------------------------------------------------------------------
-
-# Requires bash 4+ (case fall-through)
-(( BASH_VERSINFO[0] >= 4 )) || return
-
-prompt()
-{
-  local var="Z_PROMPT_${1^^}"
-
-  if [[ -n ${!var} ]]; then
-    if [[ ${!var} == true ]]; then
-      printf -v "$var" "false"
-    else
-      printf -v "$var" "true"
-    fi
-
-    if [[ ${1,,} == host ]]; then
-      rl prompt
-    fi
-
-    echo "$var=${!var}"
-  elif [[ -n $1 ]]; then
-    # Ignore shellcheck warnings; bash 4+ supports case fall-through
-    # shellcheck disable=SC2221,SC2222
-    case ${1,,} in
-      reset)
-        # Leaving this unquoted so it expands properly.
-        # shellcheck disable=SC2086
-        unset -v ${!Z_PROMPT_*}
-        ;;&
-      reset|on)
-        rl prompt
-        ;;
-      off)
-        unset PS0
-        PS1='\$ '
-        PS2='> '
-        PS3='? '
-        PS4='+ '
-        ;;
-      help|*)
-        local -a opts; read -r -a opts <<< "on off reset ${!Z_PROMPT_*}"
-        local options="${opts[*]##*_}"
-        options="${options,,}"
-        echo "Usage: ${FUNCNAME[0]} [${options// /|}]"
-        ;;
-    esac
-  else
-    local p v; for p in PS{0..4}; do v=${!p}
-      printf '%s=%q\n' "$p" "$v"
-    done
-  fi
-}
+unset -f _z_prompt_cmd_add

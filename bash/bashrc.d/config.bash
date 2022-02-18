@@ -160,7 +160,7 @@ rl()
           files+=("$conf/environment.d/"*.sh)
           ;;
 
-      local) 
+      local)
           files+=("$HOME/.local/config/bashrc.d/"*.bash)
           ;;
 
