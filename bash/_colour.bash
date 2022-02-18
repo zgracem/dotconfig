@@ -32,7 +32,7 @@ if [[ $TERM_PROGRAM != "PuTTY" && $TERM != putty* && $PTERM != putty* ]]; then
 fi
 
 # basic ANSI colours
-black=30; red=31; green=32; yellow=33; blue=34; 
+black=30; red=31; green=32; yellow=33; blue=34;
 magenta=35; cyan=36; white=37; default=39
 colours=(black red green yellow blue magenta cyan white default)
 
@@ -40,7 +40,7 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   # Use aixterm codes to get actual *bright* colours where supported, instead
   # of relying on the emulator to display bold text as bright-but-unbold.
   # (Inspired by Prompt, which doesn't offer that option.)
-  brblack=90; brred=91; brgreen=92; bryellow=93; 
+  brblack=90; brred=91; brgreen=92; bryellow=93;
   brblue=94; brmagenta=95; brcyan=96; brwhite=97
 else
   # fall back to bold
@@ -101,7 +101,7 @@ _z_colour_add_esc()
 }
 
 # Leave these unquoted so they expand properly.
-# shellcheck disable=SC2086
+# shellcheck disable=SC2048,SC2086
 _z_colour_add_esc ${colours[*]} ${props[*]}
 
 # -----------------------------------------------------------------------------
@@ -285,17 +285,6 @@ if (( TERM_COLOURDEPTH >= 16 )); then
   HISTTIMEFORMAT="${esc_dim}${HISTTIMEFORMAT}${esc_reset}"
 fi
 
-# print a red "^C" when a command is aborted
-if type -P stty >/dev/null; then
-  # disable echoing of control characters
-  stty -ctlecho >/dev/null
-  bind 'set echo-control-characters off'
-
-  # print a red "^C" on SIGINT
-  # shellcheck disable=SC2154
-  trap 'printf "${esc_false}^C${esc_reset}"' INT
-fi
-
 # jq
 export JQ_COLORS="${brblack}:${brred}:${brgreen}:${magenta}:${cyan}:${default}:${default}"
 
@@ -308,15 +297,10 @@ GCC_COLORS+="caret=${brmagenta}:"
 GCC_COLORS+="locus=${colour_dim}:"
 GCC_COLORS+="quote=${cyan}"
 
-# 500 kV library for cool colour printing
-export HV_BG="reset"
-# shellcheck source=../../lib/bash/wtf.bash/wtf.bash
-. ~/lib/bash/wtf.bash/wtf.bash
-
 # -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
 
-# shellcheck disable=SC2086
+# shellcheck disable=SC2048,SC2086
 unset -v ${!colour_*} ${colours[*]} colours ${props[*]} props
 unset -f _z_colour_add_esc

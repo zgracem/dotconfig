@@ -31,31 +31,6 @@ CAP_fs="${BEL}${DCS_post}"   # from_status_line
 # Functions
 # -----------------------------------------------------------------------------
 
-rollback()
-{
-  tput cuu1 # move cursor up one line (printf "\eM")
-  tput cr   # move cursor to beginning of line (printf "\r")
-  tput el   # clear to end of line (printf "${CSI}K")
-}
-
-_dtterm()
-{
-  local Ps="$1"
-  printf "%b" "${DCS_ante}${CSI}${Ps}${DCS_post}"
-}
-
-mmin()
-{ #: -- minimizes (iconifies) window
-  _dtterm "2t"
-  rollback
-}
-
-mmax()
-{ #: -- maximizes (de-iconifies) window
-  _dtterm "1t"
-  rollback
-}
-
 setwintitle()
 { #: -- sets the xterm-compatible window title
   local title="$*"
