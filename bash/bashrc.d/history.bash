@@ -57,30 +57,3 @@ HISTIGNORE+=':exit:bye'
 # my own shortcuts
 HISTIGNORE+=':d *:ef *:manpdf *:etest:f:h *:i:mmin:rl:tt:vnc:vsmm'
 HISTIGNORE+=':ba:brc:bpath:bps1'
-
-# -----------------------------------------------------------------------------
-
-tophist()
-{ # history sorted by frequency of use
-  history \
-  | awk "{print \$4}" \
-  | awk "BEGIN{FS=\"|\"}{print \$1}" \
-  | sort \
-  | uniq -c \
-  | sort -nr \
-  | head -n 20
-}
-
-incognito()
-{
-  if [[ :$SHELLOPTS: == *:history:* ]]; then
-    set +o history
-    echo 'incognito mode enabled'
-    Z_INCOGNITO=true
-  else
-    set -o history
-    echo 'incognito mode disabled'
-    unset -v Z_INCOGNITO
-  fi
-  rl prompt
-}

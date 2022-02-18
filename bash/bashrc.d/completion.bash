@@ -56,7 +56,7 @@ HOSTFILE="$XDG_CONFIG_HOME/ssh/hosts"
 ##### end template #####
 
 __z_complete_filenames()
-{ # Usage: __z_complete_filenames EXT DIR... 
+{ # Usage: __z_complete_filenames EXT DIR...
   # Returns *.EXT, minus .EXT, in each DIR
 
   local extension="$1"; shift
@@ -81,21 +81,42 @@ __z_complete_autoload()
 }
 
 # -----------------------------------------------------------------------------
-# load external completions
+# misc. completions
 # -----------------------------------------------------------------------------
 
-. "$BASH_COMPLETION_DIR/_misc.bash"
+# aliases
+complete -a -- alias unalias
 
-if (( BASH_VERSINFO[0] >= 4 )); then
-  # Load completions dynamically
-  complete -D -F __z_complete_autoload -o bashdefault -o default
-else
-  # Load them manually
-  unset -f __z_complete_autoload
-  for file in "$BASH_COMPLETION_DIR"/[^_]*.bash; do
-    [[ -f $file ]] && . "$file"
-  done
-  unset -v file
-fi
+# readline bindings
+complete -A binding -- bind
 
-unset -v BASH_COMPLETION_DIR
+# shell builtins
+complete -b -- builtin
+
+# directories & variables
+complete -o nospace -dv -- cd
+
+# help topics
+complete -o nospace -A helptopic -- help
+
+# hostnames
+complete -A hostname -o default -- dig ping
+
+# job control
+complete -j -P '"%' -S '"' -- disown fg jobs
+
+# shell options
+complete -A setopt -- set
+complete -A shopt -- shopt
+
+# variables & functions
+complete -v -A function -- declare export typeset unset
+
+# variables only
+complete -v -- readonly
+
+# files, directories, aliases, builtins, commands, keywords & functions
+complete -fdabck -A function -- sudo
+
+# files, aliases, builtins, commands, keywords, functions & help topics
+complete -o nospace -fabck -A function -A helptopic -- type
