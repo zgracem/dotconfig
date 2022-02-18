@@ -272,8 +272,15 @@
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableBell": true,
   "terminal.integrated.enableFileLinks": false,
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.ignoreProcessNames": [
+    "bash",
+    "zsh",
+    "fish"
+  ],
   "terminal.integrated.profiles.osx": {
     "bash": {
       "icon": "terminal-bash",
@@ -284,6 +291,7 @@
       "path": "/usr/local/bin/fish"
     }
   },
+  "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10240,
   "window.closeWhenEmpty": true,
   "window.enableMenuBarMnemonics": false,
