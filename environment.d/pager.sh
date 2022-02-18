@@ -1,9 +1,6 @@
 export PAGER=less
 export MANPAGER=$PAGER
 
-# used by Midnight Commander
-export VIEWER="vim -R"
-
 if command -v mandb >/dev/null; then
   # don't let man-db use grotty to output SGR codes (preserves colour)
   export GROFF_NO_SGR=1
