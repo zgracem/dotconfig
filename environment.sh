@@ -14,9 +14,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/var/cache"
 export XDG_RUNTIME_DIR="$HOME/var/run"
 
-# Location of zsh config files
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
 # Set up PATH, MANPATH, etc.
 # shellcheck source=sh/paths.sh
 [ -f "$XDG_CONFIG_HOME/sh/paths.sh" ] && . "$XDG_CONFIG_HOME/sh/paths.sh"
@@ -33,11 +30,11 @@ fi
 
 # Add domain to names of shared hosts
 case $HOSTNAME in
-  WS-*|web[[:digit:]]*)
-    if FULL_HOSTNAME=$(hostname -f 2>/dev/null); then
-      HOSTNAME=$FULL_HOSTNAME
+  WS-*|web[[:digit:]]*|opal[[:digit:]]*)
+    if full_hostname=$(hostname -f 2>/dev/null); then
+      HOSTNAME=$full_hostname
     fi
-    unset -v FULL_HOSTNAME
+    unset -v full_hostname
     ;;
 esac
 
