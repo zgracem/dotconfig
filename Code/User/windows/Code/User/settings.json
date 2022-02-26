@@ -272,7 +272,6 @@
     }
   },
   "terminal.integrated.scrollback": 10240,
-  "terminal.integrated.shell.windows": "C:\\cygwin64\\bin\\bash.exe",
   "window.closeWhenEmpty": true,
   "window.doubleClickIconToClose": true,
   "window.enableMenuBarMnemonics": false,
