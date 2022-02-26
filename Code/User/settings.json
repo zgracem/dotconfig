@@ -231,6 +231,7 @@
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
+  "slimLint.executablePath": "/Users/zozo/.rbenv/shims/slim-lint",
   "solargraph.bundlerPath": "/Users/zozo/.rbenv/shims/bundle",
   "solargraph.commandPath": "/Users/zozo/.rbenv/shims/solargraph",
   "solargraph.diagnostics": true,
