@@ -21,11 +21,13 @@ source "$__fish_config_dir/paths.fish"
 status is-interactive; or exit
 
 # function subdirectories
-set -p fish_function_path $__fish_config_dir/functions/_{debug,wrappers}
-set -p fish_function_path ~/.private/fish/functions
+set -p fish_function_path "$__fish_config_dir/functions/_debug"
+set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
+set -p fish_function_path "$__fish_config_dir/functions"
+set -p fish_function_path "$HOME/.private/fish/functions"
 
 # load private and per-machine configuration if available
-set -g fish_package_path ~/.local/config/fish ~/.private/fish
+set -g fish_package_path "$HOME/.local/config/fish" "$HOME/.private/fish"
 
 # personal minimal package manager for fish
 source "$__fish_config_dir/packages.fish"
