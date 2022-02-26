@@ -36,7 +36,7 @@ gem "lolcat"
 gem "http"
 gem "net-scp"
 gem "net-ssh"
-gem "nokogiri", ">= 1.12.5"
+gem "nokogiri", ">= 1.13.2"
 
 # <github.com/middleman/middleman>
 gem "middleman"
