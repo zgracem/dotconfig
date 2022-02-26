@@ -1,6 +1,8 @@
 {
   "recommendations": [
     "adzero.vscode-sievehighlight",
+    "aliariff.slim-lint",
+    "amodio.amethyst-theme",
     "ban.spellright",
     "ban.troff",
     "bierner.emojisense",
@@ -8,11 +10,9 @@
     "castwide.solargraph",
     "chrislajoie.vscode-modelines",
     "chrmarti.ssh",
-    "DaltonMenezes.aura-theme",
     "DavidAnson.vscode-markdownlint",
     "davidnussio.vscode-jq-playground",
     "DotJoshJohnson.xml",
-    "eamodio.amethyst-theme",
     "eamodio.gitlens",
     "EditorConfig.EditorConfig",
     "Equinusocio.vsc-community-material-theme",
@@ -28,12 +28,15 @@
     "HookyQR.minify",
     "idleberg.applescript",
     "jeff-hykin.better-cpp-syntax",
+    "jeff-hykin.better-objc-syntax",
+    "jeff-hykin.better-shellscript-syntax",
     "jq-syntax-highlighting.jq-syntax-highlighting",
     "lonefy.vscode-JS-CSS-HTML-formatter",
     "maelvalais.autoconf",
     "mechatroner.rainbow-csv",
     "monokai.theme-monokai-pro-vscode",
     "mrmlnc.vscode-apache",
+    "mrmlnc.vscode-json5",
     "ms-vscode.hexeditor",
     "PKief.material-icon-theme",
     "plus5keen.word-counter",
@@ -43,6 +46,7 @@
     "redhat.vscode-yaml",
     "richie5um2.vscode-sort-json",
     "RobbOwen.synthwave-vscode",
+    "SethCox.ocean-eyes",
     "sianglim.slim",
     "slevesque.vscode-autohotkey",
     "stkb.rewrap",
@@ -55,6 +59,7 @@
     "yzhang.markdown-all-in-one",
     "zgm.cuesheet",
     "zgm.vscode-fish",
+    "zgm.vscode-sed",
     "zhuangtongfa.material-theme"
   ]
 }
