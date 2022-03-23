@@ -113,6 +113,7 @@
     "*.JSON-tmLanguage": "json",
     "*.YAML-tmLanguage": "yaml",
     "*.[1-9]": "troff",
+    "*.cscollection": "json",
     "*.geojson": "json",
     "*.make": "makefile",
     "*.plist": "xml",
