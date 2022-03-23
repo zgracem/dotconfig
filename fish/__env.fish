@@ -27,4 +27,4 @@ for token_file in ~/.private/tokens/*
     read -gx (basename $token_file) <$token_file
 end
 
-set -gx __z_env_loaded (date +"%F %T")
+set -g __z_env_loaded (date +"%F %T")

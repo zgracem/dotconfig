@@ -41,6 +41,10 @@ if is-macos; and test -x /usr/local/bin/brew
     set -p PATH /usr/local/opt/gettext/bin
     set -p MANPATH /usr/local/opt/gettext/share/man
 
+    # curl
+    set -p PATH /usr/local/opt/curl/bin
+    set -p MANPATH /usr/local/opt/curl/share/man
+
     # ncurses
     set -p PATH /usr/local/opt/ncurses/bin
     set -p MANPATH /usr/local/opt/ncurses/share/man
@@ -49,6 +53,7 @@ if is-macos; and test -x /usr/local/bin/brew
     set -p PATH /usr/local/opt/openjdk/bin
 
     # Xcode
+    set -a PATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
     set -a MANPATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man
     set -a MANPATH /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
 end

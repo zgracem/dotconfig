@@ -1,6 +1,6 @@
 set -gx MBOX ~/.mail/mbox
 set -gx DEAD ~/.mail/dead.letter
-mkdir -p (dirname $MBOX)
+# mkdir -p (dirname $MBOX)
 
 if not set -q MAIL
     set -gx MAIL "/var/mail/$USER"
@@ -8,4 +8,4 @@ if not set -q MAIL
 end
 
 set -gx MAILCAPS $XDG_DATA_HOME/mailcap
-test -d $MAILCAPS; or set --erase MAILCAPS
+test -r $MAILCAPS; or set --erase MAILCAPS

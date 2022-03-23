@@ -3,5 +3,5 @@
 `*.sh` files in this directory are sourced during the startup of any POSIX shell
 to produce a consistent environment.
 
-In addition, `~/.config/launchd/org.inescapable.environment.plist.yaml` makes
-that environment available to macOS GUI apps via `launchd(8)`.
+In addition, `~/.config/launchd/Makefile` makes that environment available to
+macOS GUI apps via `launchd(8)`.

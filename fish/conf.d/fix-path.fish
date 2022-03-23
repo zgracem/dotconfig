@@ -10,6 +10,11 @@ function fix-path --description 'Remove duplicate and missing dirs from a path v
         end
     end
 
+    if test (count $FIXED_PATH) -eq 0
+        set --erase --global $var
+        return
+    end
+
     # PATH variables with colons break in fish 3.3
     # https://github.com/fish-shell/fish-shell/issues/8095
     set -gx $var $FIXED_PATH
