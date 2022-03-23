@@ -12,7 +12,7 @@ end
 
 complete -c flannel -s n -l dry-run
 complete -c flannel -n "__fish_is_nth_token 1" -x -a "(__flannel_complete_cmds)"
-complete -c flannel -n "__fish_seen_subcommand_from dump export" -x -a "(__fish_defaults_domains)"
-complete -c flannel -n "__fish_seen_subcommand_from dump export" -o app -a "(__flannel_complete_apps)"
+# complete -c flannel -n "__fish_seen_subcommand_from dump export" -x -a "(__fish_defaults_domains)"
+# complete -c flannel -n "__fish_seen_subcommand_from dump export" -o app -a "(__flannel_complete_apps)"
 complete -c flannel -n "__fish_seen_subcommand_from import touch" -x -a "(__flannel_complete_from_drawer)"
 complete -c flannel -n "__fish_seen_subcommand_from print" -r -F
