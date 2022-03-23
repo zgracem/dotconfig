@@ -121,7 +121,7 @@ no-emphasis-as-heading: false
 # fenced-code-language: true
 
 # MD041: First line in file should be a top level heading
-first-line-heading: false
+first-line-heading: true
 
 # MD042: No empty links
 # no-empty-links: true
