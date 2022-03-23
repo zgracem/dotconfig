@@ -1,4 +1,4 @@
-# ruby -rplist -ryaml -e"puts YAML.load(File.read(ARGV[0])).to_plist" "$HOME/.config/launchd/org.inescapable.environment.plist.yaml" > "$HOME/.config/launchd/org.inescapable.environment.plist"
+# ruby -rplist -ryaml -e"puts YAML.safe_load(File.read(ARGV[0])).to_plist" "$HOME/.config/launchd/org.inescapable.environment.plist.yaml" > "$HOME/.config/launchd/org.inescapable.environment.plist"
 ---
 Label: org.inescapable.environment
 Disabled: false
