@@ -5,16 +5,13 @@ function op-signin --description "Sign into 1Password's CLI tool"
         jq -r ".accounts[0].$argv[1]" $XDG_CONFIG_HOME/.op/config; or return
     end
 
-    set -l my (_1p_ shorthand)
-    set -l op_env_var "OP_SESSION_$my"
+    set -l me (_1p_ userUUID)
+    set -l op_env_var "OP_SESSION_$me"
 
     if set -q $op_env_var; and not set -q _flag_force
         echo "already signed in, use --force to reauthenticate"
         return
     end
 
-    set -l op_account (_1p_ email)
-    set -l op_secret (_1p_ accountKey)
-
-    set -gx $op_env_var (eval "op signin $my $op_account $op_secret --raw")
+    set -gx $op_env_var (eval "op signin --account personal --raw")
 end

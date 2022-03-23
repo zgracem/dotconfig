@@ -7,11 +7,14 @@ all:
 	@echo Target ‘$@’ not implemented.
 
 # Phony targets that we want to `make <alias>` anyway:
-.PHONY: shell-files symlinks user-agent
+.PHONY: completions shell-files symlinks user-agent
 
 # ----------------------------------------------------------------------------
 # Targets
 # ----------------------------------------------------------------------------
+
+COMPLETIONS = \
+	fish/completions/op.fish
 
 SHELL_FILES = \
 	~/.bash_profile \
@@ -36,6 +39,7 @@ CUSTOM_UA = \
 	../.private/yt-dlp/config
 
 # Map aliases to groups of target files:
+completions: $(COMPLETIONS)
 shell-files: $(SHELL_FILES)
 symlinks: $(SYMLINKS)
 user-agent: user-agent.txt $(CUSTOM_UA)
@@ -43,6 +47,10 @@ user-agent: user-agent.txt $(CUSTOM_UA)
 # ----------------------------------------------------------------------------
 # Prerequisites for targets
 # ----------------------------------------------------------------------------
+
+# completions
+
+fish/completions/op.fish: /usr/local/bin/op
 
 # shell-files
 
@@ -74,6 +82,9 @@ $(CUSTOM_UA): user-agent.txt
 # ----------------------------------------------------------------------------
 # Recipes for targets
 # ----------------------------------------------------------------------------
+
+fish/completions/op.fish:
+	op completion fish > $@
 
 $(SHELL_FILES):
 	/usr/bin/install -p -m 0644 -- $< $@
