@@ -1,8 +1,8 @@
 # MultiMarkdown <https://fletcher.github.io/MultiMarkdown-6/>
 
-set -l __mmd_help (multimarkdown --help | string collect)
-set -l formats (echo "$__mmd_help" | string replace -fr '.+FORMAT = ((?:\w+\|?)+)' '$1' | tr '|' ' ')
-set -l langs (echo "$__mmd_help" | string replace -fr '.+LANG = ((?:\w+\|?)+)' '$1' | tr '|' ' ')
+set -l __mmd_help "$(multimarkdown --help | string collect)"
+set -l formats (string match -rg 'FORMAT = ((?:\w+\|?)+)' "$__mmd_help" | tr '|' ' ')
+set -l langs (string match -rg 'LANG = ((?:\w+\|?)+)' "$__mmd_help" | tr '|' ' ')
 
 complete -c multimarkdown -l help -d 'Display this help and exit'
 complete -c multimarkdown -l version -d 'Display version info and exit'
