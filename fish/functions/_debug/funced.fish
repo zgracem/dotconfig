@@ -18,10 +18,11 @@ function funced --wraps funcsave --description 'Edit a function interactively' -
     end
 
     if not test -f $function_source
+        set -l foursp "    "
         if functions -q $function
-            functions -- $function | string replace \t "  " >$function_source
+            functions -- $function | string replace \t "$foursp" >$function_source
         else
-            echo -e "function $function --description ''\\n  \\nend" >$function_source
+            echo -e "function $function --description ''\\n$foursp\\nend" >$function_source
         end
     end
 
