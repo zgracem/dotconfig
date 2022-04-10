@@ -14,7 +14,7 @@ function __flannel_import -d "import defaults to \$domain from YAML"
         for file in $FLANNEL_DRAWER{,/private}/$domain.yaml
             test -f "$file"; or break
 
-            set short_domain (string replace --regex "\A$FLANNEL_DRAWER/(.+)\.yaml\Z" '$1' $file)
+            set short_domain (string match -rg "\A$FLANNEL_DRAWER/(.+)\.yaml\Z" $file)
 
             if set -q _flag_dry_run
                 set domain $test_domain

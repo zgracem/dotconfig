@@ -1,6 +1,6 @@
 function __pyjamas_formats
     set --local function_file (status filename | string replace completions functions)
-    set --local pj_formats (string replace -rf '^\s*case ((?:\w+) ?)+$' '$1' <$function_file | sort -u)
+    set --local pj_formats (string match -rg '^\s*case ((?:\w+) ?)+$' <$function_file | sort -u)
     echo -ns $pj_formats\t\n
 end
 

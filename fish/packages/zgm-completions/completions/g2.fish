@@ -2,7 +2,7 @@
 
 function __fish_complete_g2_parsefile -a rx
     set -l func_file $__fish_config_dir/functions/g2.fish
-    string replace --filter --regex "^\s+$rx\$" '$1' <$func_file
+    string match -rg "^\s+$rx\$" <$func_file
 end
 
 function __fish_complete_g2

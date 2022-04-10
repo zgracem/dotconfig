@@ -1,7 +1,7 @@
 function get_color256
     set -l CSI \e\[
     set -l sgr_params (set_color $argv | string split $CSI \
-        | string replace -rf '(\d+)m' '$1')
+        | string match -rg '(\d+)m')
     or return
 
     set -l params_out

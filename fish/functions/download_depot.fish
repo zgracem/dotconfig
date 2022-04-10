@@ -71,7 +71,7 @@ end
 
 function _steam_logged_in_user
     set -l file "$HOME/Library/Application Support/Steam/config/loginusers.vdf"
-    string replace -f -r '^\s+"AccountName"\s+"([^"]+)"$' '$1' <$file
+    string match -rg '^\s+"AccountName"\s+"([^"]+)"$' <$file
 end
 
 function _steam_account_id
