@@ -12,9 +12,9 @@ function fish-is-newer-than -a test_version
     set -l this_ver (__fish_versinfo $version)
     set -l that_ver (__fish_versinfo $test_version)
 
-    test "$version" = unknown; and return 0
+    string match -q unknown "$version"; and return 0
 
-    test "$this_ver" = "$that_ver"; and return 1
+    string match -q "$this_ver" "$that_ver"; and return 1
 
     for level in 1 2 3 4
         test "$this_ver[$level]" -gt "$that_ver[$level]"; and return 0
