@@ -79,6 +79,7 @@
   "editor.minimap.showSlider": "always",
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": false,
+  "editor.quickSuggestions": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "selection",
@@ -87,11 +88,11 @@
     118
   ],
   "editor.snippetSuggestions": "bottom",
+  "editor.stickyTabStops": true,
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.showSnippets": true,
   "editor.suggestSelection": "recentlyUsedByPrefix",
-  "editor.tabCompletion": "on",
-  "editor.tabSize": 2,
+  "editor.tabCompletion": "onlySnippets",
   "editor.unicodeHighlight.allowedCharacters": {
     "×": true,
     "‘": true,
@@ -323,6 +324,7 @@
   "workbench.view.alwaysShowHeaderActions": true,
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
+  "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4
@@ -377,6 +379,13 @@
   },
   "[scss]": {
     "editor.formatOnSave": false
+  },
+  "[tsv]": {
+    "editor.insertSpaces": false,
+    "editor.quickSuggestions": false,
+    "editor.tabCompletion": "off",
+    "editor.tabSize": 8,
+    "editor.wordWrap": "off"
   },
   "[yaml]": {
     "editor.formatOnSave": true,

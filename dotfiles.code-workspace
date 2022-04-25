@@ -33,9 +33,10 @@
       "[plaintext]",
       "[ruby]",
       "[scss]",
+      "[tsv]",
       "[yaml]"
     ],
-    "workbench.colorTheme": "Ocean Eyes Medium",
+    "workbench.colorTheme": "Better Solarized Dark Italics",
     "workbench.tree.indent": 8
   },
   "tasks": {
