@@ -1,3 +1,8 @@
+# On Windows 10 v.1803 >= Build 17134.48 (Update KB4103721, 2018-05-08), you
+# must also execute the following in a PowerShell session w/ admin privileges:
+#
+#     Set-Service ssh-agent -StartupType Manual
+#
 if status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
     set -l keys id_{ed25519,rsa_2020}
 
@@ -14,6 +19,7 @@ if status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
     if test -d "$keychain_dir"
         set -lx SHELL (status fish-path 2>/dev/null; or command -s fish)
 
+        set -p PATH ~/opt/bin /usr/local/bin
         keychain $params $keys >$ssh_env
 
         if test -s $ssh_env # ssh-agent loaded, or existing agent found
