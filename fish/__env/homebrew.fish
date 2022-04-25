@@ -10,6 +10,9 @@ set -gx HOMEBREW_AUTO_UPDATE_SECS 600
 set -gx HOMEBREW_BAT 1
 set -gx HOMEBREW_BAT_CONFIG_PATH $XDG_CONFIG_HOME/bat/config_homebrew
 
+# Use Bootsnap to speed up repeated `brew` calls
+set -gx HOMEBREW_BOOTSNAP 1
+
 # `brew bundle`
 set -gx HOMEBREW_BUNDLE_FILE $XDG_CONFIG_HOME/brew/Brewfile
 
