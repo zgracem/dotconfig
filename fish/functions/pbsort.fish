@@ -1,3 +1,3 @@
 function pbsort
- pbpaste | sort -u | pbcopy; 
+    pbpaste | sort -u | pbcopy
 end
