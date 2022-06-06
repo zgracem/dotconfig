@@ -25,9 +25,6 @@ set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 # File listing default formulae for `brew livecheck` to check
 set -gx HOMEBREW_LIVECHECK_WATCHLIST $XDG_CONFIG_HOME/brew/livecheck_watchlist
 
-# `brew update` will only mention installed formulae
-set -gx HOMEBREW_UPDATE_REPORT_ONLY_INSTALLED 1
-
 # Always use the latest stable tag (even if developer commands have been run)
 set -gx HOMEBREW_UPDATE_TO_TAG 1
 
