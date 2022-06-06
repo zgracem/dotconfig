@@ -43,7 +43,7 @@
     "ruby": "ruby",
     "sass": "sass --no-source-map --trace",
     "scss": "sass --no-source-map --trace",
-    "slim": "slimrb --option format=:html --option tabsize=2 --pretty --trace",
+    "slim": "slimrb --option format=:html --option tabsize=2 --option sort_attrs=false --pretty --trace",
     "troff": "man -Pcat"
   },
   "code-runner.executorMapByGlob": {
@@ -205,6 +205,8 @@
     "editor.fontSize",
     "editor.fontWeight",
     "jqPlayground.binaryPath",
+    "slimLint.executablePath",
+    "solargraph.bundlerPath",
     "spellright.configurationScope",
     "spellright.language",
     "terminal.external.osxExec",
@@ -272,9 +274,19 @@
     "icon": "terminal-bash",
     "path": "/usr/local/bin/bash"
   },
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "icon": "terminal-bash",
+      "path": "/usr/local/bin/bash"
+    },
+    "fish": {
+      "icon": "terminal",
+      "path": "/usr/local/bin/fish"
+    }
+  },
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.defaultProfile.osx": "fish",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableBell": true,
   "terminal.integrated.enableFileLinks": false,
@@ -286,16 +298,6 @@
     "zsh",
     "fish"
   ],
-  "terminal.integrated.profiles.osx": {
-    "bash": {
-      "icon": "terminal-bash",
-      "path": "/usr/local/bin/bash"
-    },
-    "fish": {
-      "icon": "terminal",
-      "path": "/usr/local/bin/fish"
-    }
-  },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10240,
   "window.closeWhenEmpty": true,
