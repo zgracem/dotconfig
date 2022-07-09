@@ -80,6 +80,11 @@
   "editor.minimap.showSlider": "always",
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": false,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "off",
+    "other": "on"
+  },
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "selection",
@@ -205,6 +210,8 @@
     "editor.fontSize",
     "editor.fontWeight",
     "jqPlayground.binaryPath",
+    "slimLint.executablePath",
+    "solargraph.bundlerPath",
     "spellright.configurationScope",
     "spellright.language",
     "terminal.external.osxExec",
@@ -232,6 +239,8 @@
   ],
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
+  "slimLint.executablePath": "/Users/zozo/.rbenv/shims/slim-lint",
+  "solargraph.bundlerPath": "/Users/zozo/.rbenv/shims/bundle",
   "solargraph.commandPath": "/Users/zozo/.rbenv/shims/solargraph",
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
@@ -301,7 +310,7 @@
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
   "window.titleSeparator": " · ",
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+  "workbench.colorTheme": "Ocean Eyes Dark",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
@@ -311,7 +320,6 @@
   "workbench.editor.untitled.labelFormat": "name",
   "workbench.fontAliasing": "default",
   "workbench.iconTheme": "eq-material-theme-icons",
-  "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",
   "workbench.tree.indent": 16,
   "workbench.tree.renderIndentGuides": "always",
@@ -365,7 +373,11 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
     "editor.wordBasedSuggestions": false
   },
   "[ruby]": {
@@ -376,7 +388,11 @@
   },
   "[tsv]": {
     "editor.insertSpaces": false,
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
     "editor.wordWrap": "off"
@@ -384,8 +400,12 @@
   "[yaml]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
-    "editor.quickSuggestions": false,
-    "editor.wordBasedSuggestions": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.wordBasedSuggestions": true,
     "editor.wordWrapColumn": 80
   }
 }

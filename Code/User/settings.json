@@ -79,7 +79,11 @@
   "editor.minimap.showSlider": "always",
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": false,
-  "editor.quickSuggestions": false,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "off",
+    "other": "on"
+  },
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "selection",
@@ -301,6 +305,7 @@
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10240,
   "window.closeWhenEmpty": true,
+  "window.commandCenter": true,
   "window.enableMenuBarMnemonics": false,
   "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "offset",
@@ -310,7 +315,7 @@
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
   "window.titleSeparator": " · ",
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+  "workbench.colorTheme": "Ocean Eyes Dark",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
@@ -373,18 +378,27 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
     "editor.wordBasedSuggestions": false
   },
   "[ruby]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "[scss]": {
     "editor.formatOnSave": false
   },
   "[tsv]": {
     "editor.insertSpaces": false,
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
     "editor.wordWrap": "off"
@@ -392,7 +406,11 @@
   "[yaml]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
     "editor.wordBasedSuggestions": true,
     "editor.wordWrapColumn": 80
   }
