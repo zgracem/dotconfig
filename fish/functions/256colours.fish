@@ -10,7 +10,8 @@ function 256colours
     end
 
     for n in $colours
-        set -l nnn (printf "%03d" $n)
+        # set -l nnn (printf "%03d" $n)
+        set -l nnn "█▓▒░ ░▒▓█"
         echo -e "\e[7;38;5;$n;48;5;16m" $nnn "\e[0m"
     end | column $width
 end

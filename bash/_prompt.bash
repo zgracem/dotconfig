@@ -414,6 +414,8 @@ PS1+="${PS1_hi}\\w${PS1_reset}"
 # § for me, # for root
 if (( EUID == 0 )); then
   PS1+=" ${PS1_user}#"
+elif [ "$ITERM_PROFILE" = "ANSI" ]; then
+  PS1+=" ${PS1_user}$"
 else
   PS1+=" ${PS1_user}§"
 fi
