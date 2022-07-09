@@ -290,5 +290,18 @@
     "key": "ctrl+j",
     "command": "editor.action.joinLines",
     "when": "isWindows && editorTextFocus && !editorReadonly"
+  },
+
+  // Ctrl+B = Compile Papyrus
+
+  {
+    "key": "ctrl+b",
+    "command": "-papyrus.compile",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "papyrus.compile",
+    "when": "editorFocus && editorLangId == 'papyrus'"
   }
 ]
