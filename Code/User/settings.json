@@ -181,6 +181,7 @@
     "jqPlayground.binaryPath",
     "slimLint.executablePath",
     "solargraph.bundlerPath",
+    "solargraph.commandPath",
     "spellright.configurationScope",
     "spellright.language",
     "window.doubleClickIconToClose"
