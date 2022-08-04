@@ -1,34 +1,4 @@
 {
-  "autoSnippet.snippets": [
-    {
-      "language": "fish",
-      "snippet": "fish_function"
-    },
-    {
-      "language": "gemfile",
-      "snippet": "new_Gemfile"
-    },
-    {
-      "language": "json",
-      "snippet": "new_JSON"
-    },
-    {
-      "language": "markdown",
-      "snippet": "YAML_frontmatter"
-    },
-    {
-      "language": "ruby",
-      "snippet": "frozen_string_literal"
-    },
-    {
-      "language": "shellscript",
-      "snippet": "shellscript_hashbang"
-    },
-    {
-      "language": "yaml",
-      "snippet": "new_YAML"
-    }
-  ],
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "on",
   "code-runner.clearPreviousOutput": true,
