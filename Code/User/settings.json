@@ -183,21 +183,6 @@
     "solargraph.bundlerPath",
     "spellright.configurationScope",
     "spellright.language",
-    "terminal.external.osxExec",
-    "terminal.integrated.automationProfile.osx",
-    "terminal.integrated.automationShell.osx",
-    "terminal.integrated.automationProfile.windows",
-    "terminal.integrated.automationShell.windows",
-    "terminal.integrated.defaultProfile.osx",
-    "terminal.integrated.defaultProfile.windows",
-    "terminal.integrated.env.osx",
-    "terminal.integrated.env.windows",
-    "terminal.integrated.profiles.osx",
-    "terminal.integrated.profiles.windows",
-    "terminal.integrated.scrollback",
-    "terminal.integrated.shell.osx",
-    "terminal.integrated.shell.windows",
-    "terminal.integrated.shellArgs.osx",
     "window.doubleClickIconToClose"
   ],
   "settingsSync.keybindingsPerPlatform": false,
@@ -248,9 +233,14 @@
     "icon": "terminal-bash",
     "path": "/usr/local/bin/bash"
   },
+  "terminal.integrated.automationProfile.windows": {
+    "icon": "terminal-bash",
+    "path": "C:\\cygwin64\\bin\\bash.exe"
+  },
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableBell": true,
   "terminal.integrated.enableFileLinks": false,
@@ -270,6 +260,16 @@
     "fish": {
       "icon": "terminal",
       "path": "/usr/local/bin/fish"
+    }
+  },
+  "terminal.integrated.profiles.windows": {
+    "Cygwin bash": {
+      "icon": "terminal-bash",
+      "path": "C:\\cygwin64\\bin\\bash.exe"
+    },
+    "Cygwin fish": {
+      "icon": "terminal",
+      "path": "C:\\cygwin64\\usr\\bin\\fish.exe"
     }
   },
   "terminal.integrated.rightClickBehavior": "default",
