@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "adzero.vscode-sievehighlight",
+    "af4jm.vscode-icalendar",
     "aliariff.slim-lint",
     "amodio.amethyst-theme",
     "ban.spellright",
@@ -46,6 +47,7 @@
     "redhat.vscode-yaml",
     "richie5um2.vscode-sort-json",
     "RobbOwen.synthwave-vscode",
+    "Scrivener07.papyrus",
     "SethCox.ocean-eyes",
     "sianglim.slim",
     "slevesque.vscode-autohotkey",
