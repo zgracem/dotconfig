@@ -127,6 +127,10 @@ shopt -u nullglob
 # And finally...
 # -----------------------------------------------------------------------------
 
+if [[ $TERM_PROGRAM == "vscode" ]]; then
+  . "/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration-bash.sh"
+fi
+
 # Print bash version
 printf 'GNU bash, version %s (%s)\n' "$BASH_VERSION" "$MACHTYPE"
 

@@ -1,4 +1,10 @@
 function fish_prompt --description 'Display the interactive prompt'
+    __vsc_fish_prompt_before
+    __fish_prompt
+    __vsc_fish_prompt_after
+end
+
+function __fish_prompt
     if test (id -u) -eq 0
         set -l root_user yes
     end
