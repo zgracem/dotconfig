@@ -81,8 +81,8 @@
   "editor.occurrencesHighlight": false,
   "editor.quickSuggestions": {
     "comments": "on",
-    "strings": "off",
-    "other": "on"
+    "other": "on",
+    "strings": "off"
   },
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
@@ -278,19 +278,9 @@
     "icon": "terminal-bash",
     "path": "/usr/local/bin/bash"
   },
-  "terminal.integrated.defaultProfile.osx": "fish",
-  "terminal.integrated.profiles.osx": {
-    "bash": {
-      "icon": "terminal-bash",
-      "path": "/usr/local/bin/bash"
-    },
-    "fish": {
-      "icon": "terminal",
-      "path": "/usr/local/bin/fish"
-    }
-  },
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.defaultProfile.osx": "fish",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableBell": true,
   "terminal.integrated.enableFileLinks": false,
@@ -302,6 +292,16 @@
     "zsh",
     "fish"
   ],
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "icon": "terminal-bash",
+      "path": "/usr/local/bin/bash"
+    },
+    "fish": {
+      "icon": "terminal",
+      "path": "/usr/local/bin/fish"
+    }
+  },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10240,
   "window.closeWhenEmpty": true,
@@ -380,8 +380,8 @@
   "[plaintext]": {
     "editor.quickSuggestions": {
       "comments": "off",
-      "strings": "off",
-      "other": "off"
+      "other": "off",
+      "strings": "off"
     },
     "editor.wordBasedSuggestions": false
   },
@@ -396,8 +396,8 @@
     "editor.insertSpaces": false,
     "editor.quickSuggestions": {
       "comments": "off",
-      "strings": "off",
-      "other": "off"
+      "other": "off",
+      "strings": "off"
     },
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
@@ -408,8 +408,8 @@
     "editor.formatOnType": false,
     "editor.quickSuggestions": {
       "comments": "off",
-      "strings": "off",
-      "other": "off"
+      "other": "off",
+      "strings": "off"
     },
     "editor.wordBasedSuggestions": true,
     "editor.wordWrapColumn": 80
