@@ -301,6 +301,7 @@
   "terminal.integrated.scrollback": 10240,
   "window.closeWhenEmpty": true,
   "window.doubleClickIconToClose": true,
+  "window.commandCenter": true,
   "window.enableMenuBarMnemonics": false,
   "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "offset",
@@ -381,7 +382,8 @@
     "editor.wordBasedSuggestions": false
   },
   "[ruby]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
   },
   "[scss]": {
     "editor.formatOnSave": false

@@ -304,6 +304,7 @@
   },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10240,
+  "terminal.integrated.shellIntegration.enabled": false,
   "window.closeWhenEmpty": true,
   "window.commandCenter": true,
   "window.enableMenuBarMnemonics": false,
