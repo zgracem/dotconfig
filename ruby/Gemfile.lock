@@ -11,9 +11,14 @@ GIT
 
 GIT
   remote: git@github.com:zgracem/tiny-dancer.git
-  revision: 3076f065c83574e4c479674f2413939219cde63f
+  revision: 08d22b978e8c576f0a27aa79993884fd6ff964d5
+  branch: main
   specs:
-    tiny_dancer (0.2.0)
+    tiny_dancer (0.3.0)
+      activesupport (~> 6.1)
+      fileutils (~> 1.6.0)
+      pathname (~> 0.2.0)
+      tinify (~> 1.5.1)
 
 GEM
   remote: https://rubygems.org/
@@ -55,6 +60,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    fileutils (1.6.0)
     gemoji (3.0.1)
     haml (5.2.2)
       temple (>= 0.8.0)
@@ -72,6 +78,7 @@ GEM
     http-cookie (1.0.4)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
+    httpclient (2.8.3)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
@@ -150,6 +157,7 @@ GEM
     parser (3.1.0.0)
       ast (~> 2.4.1)
     parslet (2.0.0)
+    pathname (0.2.0)
     plist (3.6.0)
     public_suffix (4.0.6)
     racc (1.6.0)
@@ -214,6 +222,8 @@ GEM
     temple (0.8.2)
     thor (1.2.1)
     tilt (2.0.10)
+    tinify (1.5.1)
+      httpclient (~> 2.6)
     toml (0.3.0)
       parslet (>= 1.8.0, < 3.0.0)
     toml-rb (2.1.2)

@@ -83,4 +83,4 @@ gem "unicode_utils"
 # ----------------------------------------------------------------------------
 
 gem "bunter", git: "git@github.com:zgracem/bunter.git", branch: "main"
-gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git"
+gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git", branch: "main"
