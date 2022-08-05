@@ -5,10 +5,6 @@ function fish_prompt --description 'Display the interactive prompt'
 end
 
 function __fish_prompt
-    if test (id -u) -eq 0
-        set -l root_user yes
-    end
-
     if set -q SSH_CONNECTION
         set_color $fish_color_host
         echo -ns $USER @ (prompt_hostname)
@@ -17,7 +13,7 @@ function __fish_prompt
     end
 
     set_color $fish_color_cwd
-    if set -q root_user # root gets an unobscured path
+    if fish_is_root_user # root gets an unobscured path
         echo -n (pwd)
     else
         echo -n (prompt_pwd)
@@ -30,7 +26,7 @@ function __fish_prompt
     __fish_prompt_git
     __fish_prompt_jobs
 
-    if set -q root_user
+    if fish_is_root_user
         set_color $fish_color_user_root
         echo -n "#"
     else if test -n "$fish_private_mode"
