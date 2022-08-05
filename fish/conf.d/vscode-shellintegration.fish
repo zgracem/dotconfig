@@ -2,63 +2,63 @@
 # Visual Studio Code terminal integration for fish
 # <https://code.visualstudio.com/docs/terminal/shell-integration>
 # ----------------------------------------------------------------------------
-# To install:
+# Manual installation:
 #
-# 1) Place this file at `~/.config/fish/conf.d/vscode-shellintegration.fish`.
+#   (1) Add the following to the end of `$__fish_config_dir/config.fish`,
+#       adjusting the value of VSCODE accordingly:
 #
-# 2) Add `__vsc_fish_prompt_before` and `__vsc_fish_prompt_after` to the
-#    beginning and end, respectively, of the function defined in
-#    `~/.config/fish/functions/fish_prompt.fish`:
+#         string match -q "$TERM_PROGRAM" "vscode"
+#         and set -l VSCODE ~/GitHub/vscode/src
+#         and . "$VSCODE/vs/workbench/contrib/terminal/browser/media/shellIntegration-fish.fish"
 #
-#     function fish_prompt
-#         __vsc_fish_prompt_before
-#         # ...existing code...
-#         __vsc_fish_prompt_after
-#     end
-#
-# 3) Likewise, add `__vsc_fish_rprompt_before` and `__vsc_fish_rprompt_after` to
-#    `~/.config/fish/functions/fish_right_prompt.fish`, if it exists:
-#
-#     function fish_right_prompt
-#         __vsc_fish_rprompt_before
-#         # ...existing code...
-#         __vsc_fish_rprompt_after
-#     end
-#
-#
-# 3) Restart fish.
+#   (2) Restart fish.
+# ----------------------------------------------------------------------------
+# TODO: Confirm all escape sequences once they are finalized.
+# See microsoft/vscode#155639 and microsoft/vscode#139400 for discussion.
 # ----------------------------------------------------------------------------
 
-function __vsc_esc
-    string match -q "$TERM_PROGRAM" "vscode"
-    and builtin printf "\e]633;%s\a" (string join ";" $argv)
+# Helper function
+function __vsc_esc -d "Emit escape sequences for VS Code shell integration"
+    builtin printf "\e]633;%s\007" (string join ";" $argv)
 end
 
-function __vsc_preexec --on-event fish_preexec
+# Sent right before executing an interactive command.
+# Marks the beginning of command output.
+function __vsc_cmd_executed --on-event fish_preexec
     __vsc_esc C
     __vsc_esc E "$argv"
 end
 
-function __vsc_postexec --on-event fish_postexec
+# Sent right after an interactive command has finished executing.
+# Marks the end of command output.
+function __vsc_cmd_finished --on-event fish_postexec
     __vsc_esc D $status
 end
 
+# Sent whenever a new fish prompt is about to be displayed.
+# Updates the current working directory.
 function __vsc_update_cwd --on-event fish_prompt
     __vsc_esc P "Cwd=$PWD"
 end
 
-function __vsc_fish_prompt_before
+# Sent at the start of the prompt.
+# Marks the beginning of the prompt (and, implicitly, a new line).
+function __vsc_fish_prompt_start
     __vsc_esc A
 end
 
-function __vsc_fish_prompt_after
+# Sent at the end of the prompt.
+# Marks the beginning of the user's command input.
+function __vsc_fish_cmd_start
     __vsc_esc B
 end
 
-function __vsc_fish_rprompt_before
+# Sent at the start of the right-side prompt, if any.
+function __vsc_fish_right_prompt_start
     __vsc_esc H
 end
 
-function __vsc_fish_rprompt_after
+# Sent at the end of the right-side prompt, if any.
+function __vsc_fish_right_prompt_end
     __vsc_esc I
 end
