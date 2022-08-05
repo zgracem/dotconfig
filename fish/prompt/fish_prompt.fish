@@ -1,10 +1,4 @@
 function fish_prompt --description 'Display the interactive prompt'
-    __vsc_fish_prompt_before
-    __fish_prompt
-    __vsc_fish_prompt_after
-end
-
-function __fish_prompt
     if set -q SSH_CONNECTION
         set_color $fish_color_host
         echo -ns $USER @ (prompt_hostname)

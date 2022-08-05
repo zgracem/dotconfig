@@ -17,6 +17,14 @@
 # See microsoft/vscode#155639 and microsoft/vscode#139400 for discussion.
 # ----------------------------------------------------------------------------
 
+# Don't run in scripts, other terminals, or more than once per session.
+status is-interactive
+and string match --quiet "$TERM_PROGRAM" "vscode"
+and ! set --query VSCODE_SHELL_INTEGRATION
+or return
+
+set --global VSCODE_SHELL_INTEGRATION 1
+
 # Helper function
 function __vsc_esc -d "Emit escape sequences for VS Code shell integration"
     builtin printf "\e]633;%s\007" (string join ";" $argv)
@@ -62,3 +70,26 @@ end
 function __vsc_fish_right_prompt_end
     __vsc_esc I
 end
+
+# Preserve the user's existing prompt, and wrap it in our escape sequences.
+functions --copy fish_prompt __vsc_fish_prompt
+
+function fish_prompt
+    __vsc_fish_prompt_start
+    __vsc_fish_prompt
+    __vsc_fish_cmd_start
+end
+
+# Likewise for the right-side prompt, if it exists.
+if functions --query fish_right_prompt
+    functions --copy fish_right_prompt __vsc_fish_right_prompt
+
+    function fish_right_prompt
+        __vsc_fish_right_prompt_start
+        __vsc_fish_right_prompt
+        __vsc_fish_right_prompt_end
+    end
+end
+
+# Ctrl+X adds a mark to the left of the line it was triggered on.
+bind \cx 'builtin printf "\e]1337;SetMark\007"'
