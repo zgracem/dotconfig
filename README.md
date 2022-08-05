@@ -19,7 +19,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 
 ### General usage 👩🏻‍💻
 
-* 🖥️ At home, I use a 2020 iMac that dual-boots macOS Catalina and Windows 10,
+* 🖥️ At home, I use a 2020 iMac that dual-boots the latest macOS and Windows 10,
   with an mid-2011 MacBook Air running High Sierra for "emergencies." My day-job
   computer has Windows 10, Cygwin, and no admin privileges 🤦🏻‍♀️, and from time to
   time I need to SSH into various Linux web servers 🐧.
@@ -63,7 +63,7 @@ In ascending order of difficulty:
   files explaining their contents, usage, setup, etc.
 * ⚖️ Clone it. You're [more than welcome][licence] to integrate anything cool
   you find into your own dotfiles.
-* 🍴 Fork it? I guess? Everything's _extremely_ personalized; I do not expect
+* 🍴 Fork it? I guess? Everything's *extremely* personalized; I do not expect
   and cannot guarantee that these will work "out of the box" for anyone but me.
 
 [licence]: https://github.com/zgracem/dotconfig/blob/master/LICENCE
