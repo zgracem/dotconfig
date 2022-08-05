@@ -16,6 +16,16 @@
 #         __vsc_fish_prompt_after
 #     end
 #
+# 3) Likewise, add `__vsc_fish_rprompt_before` and `__vsc_fish_rprompt_after` to
+#    `~/.config/fish/functions/fish_right_prompt.fish`, if it exists:
+#
+#     function fish_right_prompt
+#         __vsc_fish_rprompt_before
+#         # ...existing code...
+#         __vsc_fish_rprompt_after
+#     end
+#
+#
 # 3) Restart fish.
 # ----------------------------------------------------------------------------
 
@@ -43,4 +53,12 @@ end
 
 function __vsc_fish_prompt_after
     __vsc_esc B
+end
+
+function __vsc_fish_rprompt_before
+    __vsc_esc H
+end
+
+function __vsc_fish_rprompt_after
+    __vsc_esc I
 end
