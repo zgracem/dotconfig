@@ -1,8 +1,6 @@
 function fish_prompt --description 'Display the interactive prompt'
     if set -q SSH_CONNECTION
-        set_color $fish_color_host
-        echo -ns $USER @ (prompt_hostname)
-        set_color normal
+        prompt_login
         echo -n :
     end
 
@@ -13,24 +11,19 @@ function fish_prompt --description 'Display the interactive prompt'
         echo -n (prompt_pwd)
     end
 
-    set_color normal
-    echo -n " "
+    echo -ns (set_color normal) " "
 
     __fish_prompt_rbenv
     __fish_prompt_git
     __fish_prompt_jobs
 
     if fish_is_root_user
-        set_color $fish_color_user_root
-        echo -n "#"
+        echo -ns (set_color $fish_color_user_root) "#"
     else if test -n "$fish_private_mode"
-        set_color $fish_color_dimmed
-        echo -n "?"
+        echo -ns (set_color $fish_color_dimmed) "?"
     else
-        set_color $fish_color_user
-        echo -n "¶"
+        echo -ns (set_color $fish_color_user) "¶"
     end
 
-    set_color normal
-    echo -n " "
+    echo -ns (set_color normal) " "
 end
