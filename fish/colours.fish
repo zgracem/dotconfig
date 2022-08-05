@@ -59,6 +59,7 @@ if not set -q __zgm_init_colours
 
     # the current host system in some default prompts
     set -U fish_color_host brblack
+    set -U fish_color_host_remote brblack
 
     # the '^C' indicator on a canceled command
     set -U fish_color_cancel red
