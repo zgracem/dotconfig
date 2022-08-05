@@ -1,6 +1,7 @@
 if in-path bat
     function bat --description 'A cat clone with wings'
         set -l args
+        string match -q "$argv[1]" cache; or set -p argv --italic-text=always
         for arg in $argv
             switch "$arg"
                 case cache "-*"

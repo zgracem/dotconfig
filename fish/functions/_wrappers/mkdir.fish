@@ -1,3 +1,5 @@
 function mkdir --description 'Make directories'
-    command mkdir -pv $argv
+    set -p argv -p
+    set -p argv -v
+    command mkdir $argv
 end

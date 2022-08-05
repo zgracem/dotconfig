@@ -1,3 +1,4 @@
 function ln --description 'Make links between files'
-    command ln -v $argv
+    set -p argv -v
+    command ln $argv
 end

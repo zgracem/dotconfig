@@ -1,23 +1,25 @@
 # Overrides $__fish_data_dir/functions/ls.fish
 if in-path exa
     function ls --wraps exa --description 'List (almost) all files'
-        exa --all --color-scale $argv
+        set -p argv --all
+        set -p argv --color-scale
+        command exa $argv
     end
 else
     function ls --description 'List (almost) all files'
         # list [A]ll files; print [q]uestion mark for nongraphic characters
-        set params -A -q
+        set -p argv -A -q
 
         # append .exe if cygwin magic was needed
-        is-cygwin; and set -a params --append-exe
+        is-cygwin; and set -p argv --append-exe
 
         # colourize output
         if is-gnu ls
-            set -a params --color=auto
+            set -p argv --color=auto
         else
-            set -a params -G
+            set -p argv -G
         end
 
-        command ls $params $argv
+        command ls $argv
     end
 end

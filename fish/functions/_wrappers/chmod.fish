@@ -1,9 +1,11 @@
 if is-gnu chmod
     function chmod --description 'Change the mode of files'
-        command chmod --changes $argv
+        set -p argv --changes
+        command chmod $argv
     end
 else
     function chmod --description 'Change the mode of files'
-        command chmod -v $argv
+        set -p argv -v
+        command chmod $argv
     end
 end

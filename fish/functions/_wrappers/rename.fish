@@ -1,3 +1,4 @@
 function rename --description 'Rename multiple files'
-    command rename --verbose $argv
+    set -p argv --verbose
+    command rename $argv
 end
