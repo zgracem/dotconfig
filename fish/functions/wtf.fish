@@ -7,7 +7,7 @@ function wtf -d "Display information about commands"
                 case function
                     set -l srcfile (functions -D $subject)
                     if test "$srcfile" != "stdin"
-                        if in-path exa
+                        if command -sq exa
                             exa -l $srcfile
                         else
                             ll $srcfile
@@ -20,7 +20,7 @@ function wtf -d "Display information about commands"
                     set_color normal
                     echo " is a builtin"
                 case file
-                    if in-path exa
+                    if command -sq exa
                         exa --long --sort none (type -aP $subject)
                     else
                         ll (type -aP $subject)

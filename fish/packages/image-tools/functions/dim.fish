@@ -2,7 +2,7 @@ function dim --description 'Get the pixel dimensions of an image' -a image
     set -l width
     set -l height
 
-    if in-path sips
+    if command -sq sips
         set width (_sips_getProperty pixelWidth $image)
         or return
         set height (_sips_getProperty pixelHeight $image)

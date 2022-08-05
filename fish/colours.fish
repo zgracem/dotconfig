@@ -1,6 +1,6 @@
 if not set -q __zgm_init_colours
     set -l message "Sourcing colours…"
-    if in-path lolcat
+    if command -sq lolcat
         echo $message | lolcat --animate
     else
         echo $message
@@ -186,7 +186,7 @@ set JQ_COLORS (string join : $JQ_COLORS)
 # exa
 # -----------------------------------------------------------------------------
 
-if in-path exa
+if command -sq exa
     set -gx EXA_COLORS # (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
 
     ### Permissions & ownership

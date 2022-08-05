@@ -7,7 +7,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     set -l icon_ahead_and_behind "↕" # "±"
 
     # fail if git isn't even installed
-    in-path git
+    command -sq git
     or return 0
 
     # fail if we're not inside a git repo

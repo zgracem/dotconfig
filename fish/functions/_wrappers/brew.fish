@@ -1,4 +1,4 @@
-if in-path brew
+if command -sq brew
     function brew --description 'The missing package manager for macOS'
         switch $argv[1]
             case cd

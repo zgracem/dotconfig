@@ -1,5 +1,5 @@
 function pdfcount --description 'Count PDF pages in the current directory'
-    if not in-path qpdf
+    if not command -sq qpdf
         echo >&2 "error: not found: qpdf"
         return 127
     end

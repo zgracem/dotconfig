@@ -32,13 +32,13 @@ abbr -a -g 644 'chmod 0644'
 abbr -a -g 700 'chmod 0700'
 abbr -a -g 755 'chmod 0755'
 
-if in-path wget
+if command -sq wget
     abbr -a -g dl wget
-else if in-path curl
+else if command -sq curl
     abbr -a -g dl 'curl -OJ'
 end
 
-if in-path code
+if command -sq code
     abbr -a -g vsx "~/.config/bin/vscode-extensions"
 end
 

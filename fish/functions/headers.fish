@@ -6,9 +6,9 @@ function headers
         _headers_wget $argv
     else if set -q _flag_curl
         _headers_curl $argv
-    else if in-path wget
+    else if command -sq wget
         _headers_wget $argv
-    else if in-path curl
+    else if command -sq curl
         _headers_curl $argv
     end
 end
