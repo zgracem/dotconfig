@@ -64,3 +64,7 @@ if status is-interactive; and not string match -q $TERM_PROGRAM vscode; and test
     read -l dir <$__fish_user_data_dir/last_pwd
     test -d "$dir"; and cd "$dir"
 end
+
+string match -q "$TERM_PROGRAM" "vscode"
+and set -l VSCODE ~/GitHub/vscode/src
+and . "$VSCODE/vs/workbench/contrib/terminal/browser/media/shellIntegration-fish.fish"
