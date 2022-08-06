@@ -22,6 +22,8 @@ abbr -a -g opal '_ssh opalstack'
 # -----------------------------------------------------------------------------
 
 abbr -a -g dirsize 'du -sh'
+abbr -a -g dr defaults read
+abbr -a -g fdd fd --type d
 abbr -a -g s 'set -S'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexdump -C'
@@ -42,15 +44,5 @@ if command -sq code
     abbr -a -g vsx "~/.config/bin/vscode-extensions"
 end
 
-abbr -a -g sdmods open -a Finder \"$HOME/Library/Application Support/Steam/SteamApps/common/Stardew Valley/Contents/MacOS/Mods\"
-abbr -a -g sdsaves open -a Finder \~/.config/StardewValley/Saves
-
 # git
-
-abbr -a -g ga git add
-abbr -a -g gb git branch
-abbr -a -g gc git commit
-abbr -a -g gco git checkout
-abbr -a -g gf git fetch
-abbr -a -g gp git push
-abbr -a -g gpl git pull
+abbr -a -g gc git checkout -b
