@@ -1,5 +1,5 @@
 # Overrides $__fish_data_dir/functions/ll.fish
-if in-path exa
+if command -sq exa
     function ll --wraps exa --description 'List files vertically, info-heavy'
         ls --long $argv
     end

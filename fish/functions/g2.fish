@@ -26,6 +26,10 @@ function g2 --description 'Go somewhere' -a alias
             set dir "$dropbox/dev/ruby"
         case scripts
             set dir "$dropbox/dev/shell"
+        case sdmods
+            set dir "$steam_dir/steamapps/common/Stardew Valley/Contents/MacOS/Mods"
+        case sdsaves
+            set dir "$XDG_CONFIG_DIR/StardewValley/Saves"
         case steam
             set dir "$steam_dir"
         case steamapps

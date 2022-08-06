@@ -2,7 +2,7 @@ function hfind -d "Search fish's command history"
     set -l term (string match -er -- '\A\w' $argv)
     set -l bat_pager "'less -FR -p\"$term\"'"
 
-    if isatty stdout; and in-path bat
+    if isatty stdout; and command -sq bat
         set -l bat_opts --language=fish --style=plain --pager=$bat_pager
         eval "function _at; cat | bat $bat_opts; end"
     else

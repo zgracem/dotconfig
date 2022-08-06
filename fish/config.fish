@@ -65,6 +65,7 @@ if status is-interactive; and not string match -q $TERM_PROGRAM vscode; and test
     test -d "$dir"; and cd "$dir"
 end
 
-string match -q "$TERM_PROGRAM" "vscode"
+# VS Code shell integration (experimental)
+string match -q "$TERM_PROGRAM" vscode
 and set -l VSCODE ~/GitHub/vscode/src
 and . "$VSCODE/vs/workbench/contrib/terminal/browser/media/shellIntegration-fish.fish"

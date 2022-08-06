@@ -1,6 +1,6 @@
 set -l tbcopy_desc "Read to clipboard and write to standard output"
 
-if in-path pbcopy
+if command -sq pbcopy
     function tbcopy -d $tbcopy_desc
         set -l tmpfile (gmktemp -t tbcopy.XXXXXXXX); or return
         cat >$tmpfile

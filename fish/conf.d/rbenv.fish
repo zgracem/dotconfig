@@ -1,4 +1,4 @@
-if in-path rbenv
+if command -sq rbenv
     test -d $HOME/.rbenv; or mkdir $HOME/.rbenv
     test -f $HOME/.rbenv/version; or rbenv global system
 

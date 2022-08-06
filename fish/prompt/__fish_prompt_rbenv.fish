@@ -1,5 +1,5 @@
 function __fish_prompt_rbenv
-    in-path rbenv
+    command -sq rbenv
     or return 0
 
     read -l global_version <~/.rbenv/version
