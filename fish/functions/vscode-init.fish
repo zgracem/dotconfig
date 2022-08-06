@@ -1,6 +1,6 @@
 function vscode-init --description 'Initialize directory for use with VS Code'
     set -l dir $PWD/.vscode
-    set -l skel $HOME/old/etc/vscode-workspace-skel
+    set -l skel $HOME/etc/vscode-workspace-skel
     set -q argv[1]; and set dir $argv[1]/.vscode
 
     mkdir -p "$dir"
