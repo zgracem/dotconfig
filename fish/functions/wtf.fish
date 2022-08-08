@@ -6,7 +6,7 @@ function wtf -d "Display information about commands"
             switch $type
                 case function
                     set -l srcfile (functions -D $subject)
-                    if test "$srcfile" != "stdin"
+                    if test $srcfile != "stdin"
                         if command -sq exa
                             exa -l $srcfile
                         else

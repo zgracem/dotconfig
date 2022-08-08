@@ -32,7 +32,7 @@ function rolldice --description 'Roll some dice'
 
         set -l total (string join " + " $results)
 
-        if test "$times" -gt 1
+        if test $times -gt 1
             echo $arg "»" (sum $total)
         else
             echo $arg "»" $total
