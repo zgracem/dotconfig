@@ -15,16 +15,11 @@ function rl --description "Reload configuration files"
         set -qx verbose; and short_home $argv
     end
 
-    # Returns true if $file exists
-    function _exist -a file
-        path is -f "$file"
-    end
-
     # Checks whether $file exists:
     #   if it does, returns true;
     #   if not, updates the error counter and returns false.
     function _must_exist -a file
-        if _exist "$file"
+        if path is -f "$file"
             return 0
         else
             _increment_errors
@@ -114,7 +109,7 @@ function rl --description "Reload configuration files"
         set --local files_to_check $dirs_to_check/"$arg.fish"
 
         for config_file in $files_to_check
-            _exist "$config_file"; and set --append checked_files "$config_file"
+            path is -f "$config_file"; and set --append checked_files "$config_file"
         end
 
         # Search functions
@@ -124,7 +119,7 @@ function rl --description "Reload configuration files"
 
         # Search completion dirs and take only the first result
         for completion_file in $fish_complete_path/"$arg.fish"
-            if _exist "$completion_file"
+            if path is -f "$completion_file"
                 set --append checked_files "$completion_file"
                 break
             end
