@@ -15,11 +15,6 @@ function fix-path --description 'Remove duplicate and missing dirs from a path v
         return
     end
 
-    # PATH variables with colons break in fish 3.3
-    # https://github.com/fish-shell/fish-shell/issues/8095
-    set -gx $var $FIXED_PATH
-    return
-
     # If the original variable name was uppercase, export it back to itself as
     # a single string; fish will separate its elements properly with colons.
     # Otherwise export it as a regular fish list.
