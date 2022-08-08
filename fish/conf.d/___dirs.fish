@@ -22,7 +22,7 @@ end <$XDG_CONFIG_HOME/user-dirs.dirs
 # Cygwin/MSYS
 if uname -s | string match -q '*_NT-*'
     set user_profile
-    if test -n "$USERPROFILE"
+    if set -q USERPROFILE
         set user_profile (cygpath -au $USERPROFILE)
     else
         switch (uname -s)

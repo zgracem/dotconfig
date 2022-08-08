@@ -16,10 +16,10 @@ function incognito --description "Toggle fish's private mode on and off"
             exec fish --private
         end
     else
-        if test -z "$fish_private_mode"
-            set --global fish_private_mode on
-        else
+        if set -q fish_private_mode
             set --global --erase fish_private_mode
+        else
+            set --global fish_private_mode on
         end
     end
 end

@@ -8,7 +8,7 @@ set -gx XDG_DATA_HOME ~/.local/share
 set -gx XDG_CACHE_HOME ~/var/cache
 set -gx XDG_RUNTIME_DIR ~/var/run
 
-test -n "$TMPDIR"; or set -gx TMPDIR (dirname (mktemp -u))
+set -q TMPDIR; or set -gx TMPDIR (dirname (mktemp -u))
 
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
 # "noexec" (as it would be on a shared host) and change to a path under HOME.

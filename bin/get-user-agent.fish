@@ -42,7 +42,7 @@ function get-chrome-version-windows
         end
     end
 
-    if test -n "$chrome_path"
+    if set -q chrome_path
         if command -sq wmic
             set -l chrome_path_escaped (string escape -- $chrome_path)
             wmic datafile where "name=\"$chrome_path_escaped\"" get Version /value
