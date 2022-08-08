@@ -26,7 +26,7 @@ abbr -a -g dr defaults read
 abbr -a -g fdd fd --type d
 abbr -a -g s 'set -S'
 abbr -a -g unstow 'stow --delete'
-abbr -a -g xd 'hexdump -C'
+abbr -a -g xd 'hexyl --border=none'
 
 abbr -a -g 555 'chmod 0555'
 abbr -a -g 600 'chmod 0600'
