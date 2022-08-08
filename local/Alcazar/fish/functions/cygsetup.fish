@@ -30,7 +30,7 @@ function cygsetup --description 'Launch the Cygwin installer'
   # Don't create Desktop/Start menu shortcuts (-n)
   set -a params --no-shortcuts
 
-  if not path is -x "$cyg_bin"
+  if not path is -x $cyg_bin
     echo >&2 "can't find $cyg_bin"
     return 1
   else if not mkdir -p "$log_dir"

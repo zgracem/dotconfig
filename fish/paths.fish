@@ -11,7 +11,7 @@ set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
 # Homebrew
-if path is -d "$HOMEBREW_PREFIX"
+if path is -d $HOMEBREW_PREFIX
     # use Homebrew's cURL if present
     set -p PATH $HOMEBREW_PREFIX/opt/curl/bin
 end

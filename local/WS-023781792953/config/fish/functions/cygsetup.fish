@@ -22,7 +22,7 @@ function cygsetup --description 'Launch the Cygwin installer'
   # Don't require admin privileges
   set -a params --no-admin
 
-  if not path is -x "$cyg_bin"
+  if not path is -x $cyg_bin
     echo >&2 "can't find $cyg_bin"
     return 1
   else if not mkdir -p "$log_dir"

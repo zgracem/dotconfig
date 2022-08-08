@@ -4,7 +4,7 @@
 # version of Google Chrome.
 
 function get-chrome-version -a chrome_path
-    if path is -x "$chrome_path"
+    if path is -x $chrome_path
         set -l chrome_path_escaped (string escape -- $chrome_path)
         set -l chrome_version (eval "$chrome_path_escaped --version"); or exit
         if test -n "$chrome_version"
@@ -42,7 +42,7 @@ function get-chrome-version-windows
         end
     end
 
-    if test -n $chrome_path
+    if test -n "$chrome_path"
         if command -sq wmic
             set -l chrome_path_escaped (string escape -- $chrome_path)
             wmic datafile where "name=\"$chrome_path_escaped\"" get Version /value

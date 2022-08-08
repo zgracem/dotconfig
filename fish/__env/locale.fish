@@ -9,7 +9,7 @@ set -q LANGUAGE; or set -gx LANGUAGE "en_CA:en_US:en"
 # Search locales to find whichever is available, and cache the result.
 set -l lang_file $XDG_DATA_HOME/locale/LANG
 
-if not path is -f "$lang_file"
+if not path is -f $lang_file
     mkdir -pv (basename $lang_file)
     set -l lang (string split -f1 : $LANGUAGE)
     locale -a 2>/dev/null | string match -ir $lang"\.utf-?8\$" >"$lang_file"

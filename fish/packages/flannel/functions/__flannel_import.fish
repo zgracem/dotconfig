@@ -12,7 +12,7 @@ function __flannel_import -d "import defaults to \$domain from YAML"
     for domain in $argv
         set short_domain $domain
         for file in $FLANNEL_DRAWER{,/private}/$domain.yaml
-            path is -f "$file"; or break
+            path is -f $file; or break
 
             set short_domain (string match -rg "\A$FLANNEL_DRAWER/(.+)\.yaml\Z" $file)
 
