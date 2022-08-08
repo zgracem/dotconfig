@@ -12,7 +12,7 @@ test -n "$TMPDIR"; or set -gx TMPDIR (dirname (mktemp -u))
 
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
 # "noexec" (as it would be on a shared host) and change to a path under HOME.
-if not test -G $TMPDIR; and mount | grep -q " on $TMPDIR.*noexec,"
+if not path is --perm=group $TMPDIR; and mount | grep -q " on $TMPDIR.*noexec,"
     set -gx TMPDIR $XDG_RUNTIME_DIR
     mkdir -p $TMPDIR
 end

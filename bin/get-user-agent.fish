@@ -21,7 +21,7 @@ end
 
 function get-chrome-version-macos
     set -l chrome_cask "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb"
-    if not test -e $chrome_cask
+    if not path is -f $chrome_cask
         printf >&2 "failure in %s: file not found at %s\n" (status function) $chrome_cask
         exit 1
     end
@@ -35,7 +35,7 @@ end
 function get-chrome-version-windows
     for dir in 'C:\\Program Files (x86)' "$LOCALAPPDATA"
         set -g chrome_path "$dir\\Google\\Chrome\\Application\\chrome.exe"
-        if test -e (cygpath -au "$chrome_path")
+        if path is -f (cygpath -au "$chrome_path")
             break
         else
             set --erase chrome_path

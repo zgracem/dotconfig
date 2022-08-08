@@ -47,6 +47,6 @@ end
 
 set -l hkcu /proc/registry/HKEY_CURRENT_USER
 set -l printer_key "$hkcu/Software/Microsoft/Windows NT/CurrentVersion/Windows/Device"
-if not set -q PRINTER; and test -e $printer_key
+if not set -q PRINTER; and path is -r $printer_key
     string replace -r ',.*' '' <$printer_key | read -gx PRINTER
 end

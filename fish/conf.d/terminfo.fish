@@ -7,7 +7,7 @@ set -gx --path TERMINFO_DIRS $XDG_DATA_HOME/terminfo /usr{/local/opt/ncurses,}/s
 fix-path TERMINFO_DIRS
 set -gx TERMINFO $TERMINFO_DIRS[1]
 
-if not test -e $TERMINFO
+if not path is -d $TERMINFO
     set --erase TERMINFO
     exit
 end
