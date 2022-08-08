@@ -5,10 +5,10 @@
 # brew bundle --file=$XDG_CONFIG_HOME/brew/Brewfile
 # -----------------------------------------------------------------------------
 
-tap "homebrew/command-not-found"
-tap "homebrew/services"
-tap "yt-dlp/taps"
-tap "zgracem/caveats"
+tap  "homebrew/bundle"
+tap  "homebrew/command-not-found"
+tap  "homebrew/services"
+tap  "zgracem/caveats"
 
 # -----------------------------------------------------------------------------
 # essentials
@@ -30,6 +30,7 @@ brew "tmux"
 brew "reattach-to-user-namespace" if OS.mac?
 
 # other
+brew "dtrx"
 brew "fd"
 brew "jq"
 brew "keychain"
@@ -44,9 +45,11 @@ if OS.mac?
   brew "rsync"
 
   # GNU utilities
+  brew "binutils"
   brew "coreutils"
   brew "diffutils"
   brew "findutils"
+  brew "inetutils"
   brew "gawk"
   brew "gnu-sed"
   brew "gnu-tar"
@@ -79,7 +82,8 @@ brew "lynx"
 brew "openssh"
 brew "ssh-copy-id", link: true
 brew "transmission-cli"
-brew "yt-dlp/taps/yt-dlp"
+brew "youtube-dl"
+brew "yt-dlp"
 
 # documents
 brew "dos2unix"
@@ -108,13 +112,6 @@ brew "id3v2"
 brew "mkvtoolnix"
 brew "mp4v2"
 
-# Spotify
-if OS.mac?
-  brew "spotifyd", restart_service: :changed
-  tap  "rigellute/tap"
-  brew "rigellute/tap/spotify-tui"
-end
-
 # ffmpeg with options
 tap  "homebrew-ffmpeg/ffmpeg"
 brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
@@ -132,7 +129,7 @@ brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
 # images
 brew "exif"
 brew "exiftool"
-brew "imagemagick@6", link: true
+brew "imagemagick"
 brew "pngcrush"
 brew "webp"
 
@@ -145,7 +142,16 @@ end
 # development stuff
 # -----------------------------------------------------------------------------
 
-brew "cmake"
+if OS.mac?
+  brew "autoconf"
+  brew "cmake"
+  brew "glib"
+  brew "gmp"
+  brew "gsl"
+  brew "llvm"
+  brew "texinfo"
+end
+
 brew "hub"
 brew "ncurses"
 brew "shellcheck"

@@ -5,14 +5,17 @@
 # brew bundle --file=$XDG_CONFIG_HOME/brew/Caskfile
 # -----------------------------------------------------------------------------
 
-if OS.mac? && MacOS.version >= "10.11"
+if OS.mac?
   tap  "homebrew/cask"
+  tap  "homebrew/cask-versions"
 
   cask "1password"
+  cask "1password-cli"
   cask "acorn"
   cask "alfred"
   cask "discord"
-  cask "dotnet"
+  cask "disk-drill"
+  cask "dotnet-sdk"
   cask "dropbox"
   cask "fantastical"
   cask "file-juicer"
@@ -58,6 +61,7 @@ end
 if OS.mac?
   brew "mas"
   mas "ApolloOne", id: 1044484672
+  mas "ColorSlurp", id: 1287239339
   mas "Day One", id: 1055511498
   mas "Divvy", id: 413857545
   mas "Fantastical", id: 435003921
