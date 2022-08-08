@@ -16,8 +16,8 @@ set -gx HOMEBREW_BOOTSNAP 1
 # `brew bundle`
 set -gx HOMEBREW_BUNDLE_FILE $XDG_CONFIG_HOME/brew/Brewfile
 
-# Delete cached files after 30 days (default is 120 days)
-set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 30
+# Delete cached files after 7 days (default is 120 days)
+set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 7
 
 # Print install times for each formula
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1

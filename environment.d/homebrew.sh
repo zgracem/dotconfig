@@ -22,8 +22,8 @@ export HOMEBREW_BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config_homebrew"
 # `brew bundle`
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 
-# Delete cached files after 30 days (default is 120 days)
-export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
+# Delete cached files after 7 days (default is 120 days)
+export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
 
 # Print install times for each formula
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
