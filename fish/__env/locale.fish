@@ -11,7 +11,7 @@ set -l lang_file $XDG_DATA_HOME/locale/LANG
 
 if not test -f "$lang_file"
     mkdir -pv (basename $lang_file)
-    set -l lang (string split : -f1 $LANGUAGE)
+    set -l lang (string split -f1 : $LANGUAGE)
     locale -a 2>/dev/null | string match -ir $lang"\.utf-?8\$" >"$lang_file"
 end
 

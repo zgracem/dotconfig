@@ -17,8 +17,7 @@ function arls --description 'List the contents of archives'
             case Payload
                 cpio -itv -F $archive
             case '*'
-                set -l type (string split -r -m1 . $archive)[-1]
-                echo >&2 -s "error: don't know how to list .$type files"
+                echo >&2 "error: don't know how to list "(path extension $archive)" files"
                 return 1
         end
     end

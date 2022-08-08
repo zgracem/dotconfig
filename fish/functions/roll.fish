@@ -20,8 +20,7 @@ function roll --description 'Create a new archive'
         case '*.zip'
             zip -9r $archive $contents
         case '*'
-            echo >&2 -s "error: don't know how to make ." \
-                (string split -r -m1 . $archive)[-1]" files"
+            echo >&2 "error: don't know how to make "(path extension $archive)" files"
             return 1
     end
 end

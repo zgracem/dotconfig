@@ -19,11 +19,10 @@ end
 #  in: /path/to/video.mp4
 # out: /path/to/video.info.json
 function metadata_filename -a video_filename
-    set -l basename (string split -r -m1 -f1 . $video_filename)
-    set -g metadata_file $basename.info.json
+    set -g metadata_file (path change-extension .info.json $video_filename)
 
     if test -f $metadata_file
-        echo -n $basename.info.json
+        echo -n $metadata_file
     else
         bail "metadata not found: $metadata_file"
     end
