@@ -16,10 +16,9 @@ function fix-path --description 'Remove duplicate and missing dirs from a path v
     end
 
     # If the original variable name was uppercase, export it back to itself as
-    # a single string; fish will separate its elements properly with colons.
-    # Otherwise export it as a regular fish list.
+    # a path variable. Otherwise, export it as a regular fish list.
     if not string upper -q "$var"
-        set -gx $var "$FIXED_PATH"
+        set -gx --path $var $FIXED_PATH
     else
         set -gx $var $FIXED_PATH
     end

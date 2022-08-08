@@ -152,7 +152,7 @@ set -gx LESS_TERMCAP_ue (set_color normal)
 # reset
 set -gx LESS_TERMEND (set_color normal)
 
-set -gx GCC_COLORS \
+set -gx --path GCC_COLORS \
     "error="(get_color brred) \
     "warning="(get_color yellow) \
     "note="(get_color blue) \
@@ -164,7 +164,7 @@ set -gx __grep_match_color (get_color brmagenta --underline)
 set -gx __grep_file_color (get_color blue)
 set -gx __grep_line_color (get_color cyan)
 
-set -gx GREP_COLORS "se="(get_color brblack) \
+set -gx --path GREP_COLORS "se="(get_color brblack) \
     "mt=$__grep_match_color" "fn=$__grep_file_color" "ln=$__grep_line_color"
 
 begin
@@ -175,19 +175,15 @@ begin
     set -l jq_str (get_color cyan)
     set -l jq_arr (get_color normal)
     set -l jq_obj (get_color normal)
-    set -gx JQ_COLORS $jq_null $jq_false $jq_true $jq_int $jq_str $jq_arr $jq_obj
+    set -gx --path JQ_COLORS $jq_null $jq_false $jq_true $jq_int $jq_str $jq_arr $jq_obj
 end
-
-set GCC_COLORS (string join : $GCC_COLORS)
-set GREP_COLORS (string join : $GREP_COLORS)
-set JQ_COLORS (string join : $JQ_COLORS)
 
 # -----------------------------------------------------------------------------
 # exa
 # -----------------------------------------------------------------------------
 
 if command -sq exa
-    set -gx EXA_COLORS # (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
+    set -gx --path EXA_COLORS # (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
 
     ### Permissions & ownership
 
@@ -263,6 +259,4 @@ if command -sq exa
 
     # Escape characters
     set -a EXA_COLORS "cc="(get_color256 brblack)
-
-    set EXA_COLORS (string join : $EXA_COLORS)
 end
