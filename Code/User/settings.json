@@ -75,6 +75,7 @@
     "”": true
   },
   "editor.unicodeHighlight.includeStrings": false,
+  "editor.unicodeHighlight.includeComments": false,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
