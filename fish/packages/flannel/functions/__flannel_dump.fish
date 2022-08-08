@@ -6,7 +6,7 @@ function __flannel_dump
     for domain in $argv[2..-1]
         set -l yaml_file $PWD/$domain@$timestamp.yaml
 
-        if test -f $yaml_file
+        if path is -f $yaml_file
             # add nanoseconds to timestamp
             set timestamp (gdate +%Y%m%d_%H%M%S.%N | string replace -r '0{1,3}$' '')
             set yaml_file $PWD/$domain@$timestamp.yaml

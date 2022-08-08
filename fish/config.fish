@@ -60,9 +60,9 @@ if is-cygwin
 end
 
 # See conf.d/update-lastpwd.fish
-if status is-interactive; and not string match -q $TERM_PROGRAM vscode; and test -f $__fish_user_data_dir/last_pwd
+if status is-interactive; and not string match -q $TERM_PROGRAM vscode; and path is -f $__fish_user_data_dir/last_pwd
     read -l dir <$__fish_user_data_dir/last_pwd
-    test -d "$dir"; and cd "$dir"
+    path is -d "$dir"; and cd "$dir"
 end
 
 # VS Code shell integration (experimental)

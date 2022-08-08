@@ -124,7 +124,7 @@ if is-gnu ls
 
     test -d $ls_colors_dir; or mkdir -p $ls_colors_dir
 
-    if not test -f $ls_colors_file
+    if not path is -f $ls_colors_file
         pushd $XDG_CONFIG_HOME/dircolors
         and make --quiet all
         and popd

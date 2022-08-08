@@ -5,7 +5,7 @@ function fix-path --description 'Remove duplicate and missing dirs from a path v
     for dir in $ORIGINAL_PATH
         if contains -- $dir $FIXED_PATH
             continue
-        else if test -d "$dir"
+        else if path is -d "$dir"
             set FIXED_PATH $FIXED_PATH $dir
         end
     end

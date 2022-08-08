@@ -16,7 +16,7 @@ if status is-interactive; and command -sq keychain; and not set -gq SSH_AGENT_PI
     set -a params --dir "$keychain_dir" --absolute
     set -a params --quiet --ignore-missing
 
-    if test -d "$keychain_dir"
+    if path is -d "$keychain_dir"
         set -lx SHELL (status fish-path 2>/dev/null; or command -s fish)
 
         set -p PATH ~/opt/bin /usr/local/bin

@@ -11,8 +11,8 @@ function __package_init
     for package_dir in $fish_package_path
         set -l bootstrapped 0
 
-        if test -d "$package_dir"
-            if test -d "$package_dir/conf.d"
+        if path is -d "$package_dir"
+            if path is -d "$package_dir/conf.d"
                 for file in $package_dir/conf.d/*.fish
                     source "$file"
                     # If anything in conf.d/*.fish exits 101, the package is
@@ -32,7 +32,7 @@ function __package_init
             set -p fish_function_path $package_dir/functions
             set -p fish_complete_path $package_dir/completions
 
-            if test -f "$package_dir/init.fish"
+            if path is -f "$package_dir/init.fish"
                 source "$package_dir/init.fish"
             end
         end

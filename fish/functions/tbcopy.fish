@@ -7,7 +7,7 @@ if command -sq pbcopy
         pbcopy <$tmpfile
         cat $tmpfile
     end
-else if test -w /dev/clipboard
+else if path is -w /dev/clipboard
     function tbcopy -d $tbcopy_desc
         tee /dev/clipboard
     end

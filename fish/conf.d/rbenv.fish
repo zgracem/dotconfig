@@ -1,6 +1,6 @@
 if command -sq rbenv
-    test -d $HOME/.rbenv; or mkdir $HOME/.rbenv
-    test -f $HOME/.rbenv/version; or rbenv global system
+    path is -d $HOME/.rbenv; or mkdir $HOME/.rbenv
+    path is -f $HOME/.rbenv/version; or rbenv global system
 
     set -l plugin_dir $HOME/.rbenv/plugins/rbenv-default-gems
     if test ! -d $plugin_dir

@@ -4,7 +4,7 @@
 # version of Google Chrome.
 
 function get-chrome-version -a chrome_path
-    if test -x "$chrome_path"
+    if path is -x "$chrome_path"
         set -l chrome_path_escaped (string escape -- $chrome_path)
         set -l chrome_version (eval "$chrome_path_escaped --version"); or exit
         if test -n "$chrome_version"

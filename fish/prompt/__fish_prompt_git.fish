@@ -24,7 +24,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     set_color normal
 
     # stash icon
-    if test -r $git_dir/refs/stash
+    if path is -r $git_dir/refs/stash
         set_color $fish_prompt_color_git_stashed
         echo -n $icon_stash
     end

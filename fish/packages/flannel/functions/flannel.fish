@@ -17,7 +17,7 @@ function flannel
 
         case print # each FILE to stdout
             for file in $argv[2..-1]
-                if test -f $file
+                if path is -f $file
                     if set -q _flag_dry_run
                         echo plutil -convert xml1 (_hi $file) -o -
                     else

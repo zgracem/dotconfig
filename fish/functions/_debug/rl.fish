@@ -17,7 +17,7 @@ function rl --description "Reload configuration files"
 
     # Returns true if $file exists
     function _exist -a file
-        test -f "$file"
+        path is -f "$file"
     end
 
     # Checks whether $file exists:

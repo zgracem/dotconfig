@@ -4,8 +4,8 @@ set -gx DEAD ~/.mail/dead.letter
 
 if not set -q MAIL
     set -gx MAIL "/var/mail/$USER"
-    test -r $MAIL; or set --erase MAIL
+    path is -r $MAIL; or set --erase MAIL
 end
 
 set -gx MAILCAPS $XDG_DATA_HOME/mailcap
-test -r $MAILCAPS; or set --erase MAILCAPS
+path is -r $MAILCAPS; or set --erase MAILCAPS

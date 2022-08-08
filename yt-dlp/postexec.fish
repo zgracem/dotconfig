@@ -21,7 +21,7 @@ end
 function metadata_filename -a video_filename
     set -g metadata_file (path change-extension .info.json $video_filename)
 
-    if test -f $metadata_file
+    if path is -f $metadata_file
         echo -n $metadata_file
     else
         bail "metadata not found: $metadata_file"

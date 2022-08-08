@@ -13,7 +13,7 @@ function funced --wraps funcsave --description 'Edit a function interactively' -
             set function_source "$__fish_config_dir/functions/$function.fish"
     end
 
-    if not test -f $function_source
+    if not path is -f $function_source
         set -l foursp "    "
         if functions -q $function
             functions -- $function | string replace \t "$foursp" >$function_source
@@ -34,7 +34,7 @@ function funced --wraps funcsave --description 'Edit a function interactively' -
         $VISUAL $function_source
     end
 
-    if test -f $function_source
+    if path is -f $function_source
         source $function_source
     else
         echo >&2 "file not found: $function_source"
