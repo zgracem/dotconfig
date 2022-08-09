@@ -268,11 +268,8 @@
   "terminal.integrated.profiles.windows": {
     "Cygwin bash": {
       "icon": "terminal-bash",
-      "path": "C:\\cygwin64\\bin\\bash.exe"
-    },
-    "Cygwin fish": {
-      "icon": "terminal",
-      "path": "C:\\cygwin64\\usr\\bin\\fish.exe"
+      "path": "C:\\cygwin64\\bin\\fish.exe",
+      "args": ["--login"]
     }
   },
   "terminal.integrated.rightClickBehavior": "default",

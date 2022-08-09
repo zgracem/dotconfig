@@ -1,34 +1,4 @@
 {
-  "autoSnippet.snippets": [
-    {
-      "language": "fish",
-      "snippet": "fish_function"
-    },
-    {
-      "language": "gemfile",
-      "snippet": "new_Gemfile"
-    },
-    {
-      "language": "json",
-      "snippet": "new_JSON"
-    },
-    {
-      "language": "markdown",
-      "snippet": "YAML_frontmatter"
-    },
-    {
-      "language": "ruby",
-      "snippet": "frozen_string_literal"
-    },
-    {
-      "language": "shellscript",
-      "snippet": "shellscript_hashbang"
-    },
-    {
-      "language": "yaml",
-      "snippet": "new_YAML"
-    }
-  ],
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "on",
   "code-runner.clearPreviousOutput": true,
@@ -82,8 +52,8 @@
   "editor.occurrencesHighlight": false,
   "editor.quickSuggestions": {
     "comments": "on",
-    "strings": "off",
-    "other": "on"
+    "other": "on",
+    "strings": "on"
   },
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
@@ -92,10 +62,11 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "bottom",
+  "editor.snippetSuggestions": "top",
   "editor.stickyTabStops": true,
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.showSnippets": true,
+  "editor.suggestOnTriggerCharacters": false,
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabCompletion": "onlySnippets",
   "editor.unicodeHighlight.allowedCharacters": {
@@ -105,6 +76,7 @@
     "“": true,
     "”": true
   },
+  "editor.unicodeHighlight.includeComments": false,
   "editor.unicodeHighlight.includeStrings": false,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
@@ -212,23 +184,9 @@
     "jqPlayground.binaryPath",
     "slimLint.executablePath",
     "solargraph.bundlerPath",
+    "solargraph.commandPath",
     "spellright.configurationScope",
     "spellright.language",
-    "terminal.external.osxExec",
-    "terminal.integrated.automationProfile.osx",
-    "terminal.integrated.automationShell.osx",
-    "terminal.integrated.automationProfile.windows",
-    "terminal.integrated.automationShell.windows",
-    "terminal.integrated.defaultProfile.osx",
-    "terminal.integrated.defaultProfile.windows",
-    "terminal.integrated.env.osx",
-    "terminal.integrated.env.windows",
-    "terminal.integrated.profiles.osx",
-    "terminal.integrated.profiles.windows",
-    "terminal.integrated.scrollback",
-    "terminal.integrated.shell.osx",
-    "terminal.integrated.shell.windows",
-    "terminal.integrated.shellArgs.osx",
     "window.doubleClickIconToClose"
   ],
   "settingsSync.keybindingsPerPlatform": false,
@@ -273,32 +231,56 @@
   "synthwave84.disableGlow": true,
   "task.saveBeforeRun": "never",
   "telemetry.telemetryLevel": "off",
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.automationProfile.osx": {
+    "icon": "terminal-bash",
+    "path": "/usr/local/bin/bash"
+  },
   "terminal.integrated.automationProfile.windows": {
     "icon": "terminal-bash",
     "path": "C:\\cygwin64\\bin\\bash.exe"
   },
-  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
-  "terminal.integrated.profiles.windows": {
-    "Cygwin bash": {
-      "icon": "terminal-bash",
-      "path": "C:\\cygwin64\\bin\\bash.exe"
-    }
-  },
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableBell": true,
   "terminal.integrated.enableFileLinks": false,
-  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontSize": 14,
   "terminal.integrated.fontWeight": "300",
-  "terminal.integrated.fontWeightBold": "600",
+  "terminal.integrated.fontWeightBold": "500",
   "terminal.integrated.ignoreProcessNames": [
     "bash",
     "zsh",
     "fish"
   ],
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "icon": "terminal-bash",
+      "path": "/usr/local/bin/bash"
+    },
+    "fish": {
+      "icon": "terminal",
+      "path": "/usr/local/bin/fish"
+    }
+  },
+  "terminal.integrated.profiles.windows": {
+    "Cygwin bash": {
+      "icon": "terminal-bash",
+      "path": "C:\\cygwin64\\bin\\fish.exe",
+      "args": ["--login"]
+    }
+  },
   "terminal.integrated.rightClickBehavior": "default",
   "terminal.integrated.scrollback": 10240,
+  "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.tabs.description": "${process}",
+  "terminal.integrated.tabs.focusMode": "singleClick",
+  "terminal.integrated.tabs.hideCondition": "never",
+  "terminal.integrated.tabs.separator": " · ",
+  "terminal.integrated.tabs.showActiveTerminal": "never",
+  "terminal.integrated.tabs.title": "${sequence}",
   "window.closeWhenEmpty": true,
   "window.doubleClickIconToClose": true,
   "window.commandCenter": true,
@@ -374,11 +356,6 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    },
     "editor.wordBasedSuggestions": false
   },
   "[ruby]": {
@@ -390,11 +367,6 @@
   },
   "[tsv]": {
     "editor.insertSpaces": false,
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    },
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
     "editor.wordWrap": "off"
@@ -402,11 +374,6 @@
   "[yaml]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    },
     "editor.wordBasedSuggestions": true,
     "editor.wordWrapColumn": 80
   }
