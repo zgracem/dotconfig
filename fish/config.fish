@@ -67,4 +67,5 @@ end
 
 # VS Code shell integration (experimental)
 set -l VSCODE ~/GitHub/vscode/src
+is-cygwin; and set VSCODE ~/.local/src/github.com/vscode/src
 . "$VSCODE/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish"

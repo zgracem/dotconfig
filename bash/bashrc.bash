@@ -128,7 +128,17 @@ shopt -u nullglob
 # -----------------------------------------------------------------------------
 
 if [[ $TERM_PROGRAM == "vscode" ]]; then
-  . "/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration-bash.sh"
+  case $PLATFORM in
+  mac)
+    vscode="/Applications/Visual Studio Code.app/Contents/Resources/app/out"
+    ;;
+  windows)
+    vscode="$(cygpath -au "$LOCALAPPDATA")/Programs/Microsoft VS Code/resources/app/out"
+    ;;
+  esac
+
+  [[ -d $vscode ]] && . "$vscode/vs/workbench/contrib/terminal/browser/media/shellIntegration-bash.sh"
+  unset -v vscode
 fi
 
 # Print bash version
