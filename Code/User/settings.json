@@ -63,9 +63,9 @@
   ],
   "editor.snippetSuggestions": "top",
   "editor.stickyTabStops": true,
-  "editor.suggestOnTriggerCharacters": false,
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.showSnippets": true,
+  "editor.suggestOnTriggerCharacters": false,
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.tabCompletion": "onlySnippets",
   "editor.unicodeHighlight.allowedCharacters": {
@@ -75,8 +75,8 @@
     "“": true,
     "”": true
   },
-  "editor.unicodeHighlight.includeStrings": false,
   "editor.unicodeHighlight.includeComments": false,
+  "editor.unicodeHighlight.includeStrings": false,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
