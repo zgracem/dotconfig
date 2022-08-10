@@ -47,12 +47,6 @@ function __vsc_escape_cmd -d "Serialize the command line"
         | string join "\x0a"
 end
 
-# Report (fake) shell integration version to iTerm.
-function __iterm_si_version
-    string match -q $TERM_PROGRAM "iTerm.app"
-    and __iterm_esc ShellIntegrationVersion=69 shell=fish
-end
-
 # ----------------------------------------------------------------------------
 
 # Mark the beginning of the prompt (and, implicitly, a new line).
@@ -128,10 +122,7 @@ function __si_cmd_check --on-event fish_prompt
 end
 
 # Ctrl+X adds a mark to the line it was triggered on.
-function __si_mark_line -d "Mark the current line in the terminal"
-    __iterm_esc SetMark
-end
-bind \cx __si_mark_line
+bind \cx '__iterm_esc SetMark'
 
 # ----------------------------------------------------------------------------
 
@@ -144,4 +135,6 @@ function fish_prompt
     __si_cmd_start
 end
 
-__iterm_si_version
+# Report (fake) shell integration version to iTerm.
+string match -q $TERM_PROGRAM "iTerm.app"
+and __iterm_esc ShellIntegrationVersion=69 shell=fish
