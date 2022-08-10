@@ -210,8 +210,8 @@ if has("statusline")
   if has("gui_running")
     set titlestring=
   else
-    "let s:hostname = system("echo ${HOSTNAME%%.*}")
-    let &titleold = expand("$USER") . "@" . system('printf "${HOSTNAME%%.*}"') . ": " . system('printf "${PWD/#$HOME/$''~''}"')
+    "let s:hostname = system("hostname -s")
+    let &titleold = expand("$USER") . "@" . system("hostname -s") . ": " . expand("$PWD")
     set titlestring=
   endif
 
