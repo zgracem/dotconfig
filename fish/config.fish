@@ -64,8 +64,3 @@ if status is-interactive; and not string match -q $TERM_PROGRAM vscode; and path
     read -l dir <$__fish_user_data_dir/last_pwd
     path is -d $dir; and cd $dir
 end
-
-# VS Code shell integration (experimental)
-set -l VSCODE ~/GitHub/vscode/src
-is-cygwin; and set VSCODE ~/.local/src/github.com/vscode/src
-. "$VSCODE/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish"
