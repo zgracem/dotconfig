@@ -61,7 +61,7 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "top",
+  "editor.snippetSuggestions": "bottom",
   "editor.stickyTabStops": true,
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.showSnippets": true,
