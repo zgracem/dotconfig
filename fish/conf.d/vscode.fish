@@ -30,6 +30,11 @@ end
 # Sent right before executing an interactive command.
 # Marks the beginning of command output.
 function __vsc_cmd_output_start --on-event fish_preexec
+    # Ignore commands with leading spaces or in private mode
+    if string match --quiet -- " *" "$argv"; or set --query fish_private_mode
+        set argv ""
+    end
+
     __vsc_esc C
     __vsc_esc E (__vsc_escape_cmd "$argv")
 
