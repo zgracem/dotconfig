@@ -1,27 +1,14 @@
 # ----------------------------------------------------------------------------
 # Visual Studio Code terminal integration for fish
 # <https://code.visualstudio.com/docs/terminal/shell-integration>
-# ----------------------------------------------------------------------------
-# Manual installation:
-#
-#   (1) Add the following to the end of `$__fish_config_dir/config.fish`,
-#       adjusting the value of VSCODE accordingly:
-#
-#         string match -q "$TERM_PROGRAM" "vscode"
-#         and set -l VSCODE ~/GitHub/vscode/src
-#         and . "$VSCODE/vs/workbench/contrib/terminal/browser/media/shellIntegration-fish.fish"
-#
-#   (2) Restart fish.
-# ----------------------------------------------------------------------------
-# TODO: Confirm all escape sequences once they are finalized.
-# See microsoft/vscode#155639 and microsoft/vscode#139400 for discussion.
+# With ideas from: <https://github.com/kidonng/vscode.fish>
 # ----------------------------------------------------------------------------
 
 # Don't run in scripts, other terminals, or more than once per session.
 status is-interactive
 and string match --quiet "$TERM_PROGRAM" "vscode"
 and ! set --query VSCODE_SHELL_INTEGRATION
-or return
+or exit
 
 set --global VSCODE_SHELL_INTEGRATION 1
 
@@ -32,14 +19,14 @@ end
 
 # Sent right before executing an interactive command.
 # Marks the beginning of command output.
-function __vsc_cmd_executed --on-event fish_preexec
+function __vsc_cmd_output_start --on-event fish_preexec
     __vsc_esc C
     __vsc_esc E "$argv"
 end
 
 # Sent right after an interactive command has finished executing.
 # Marks the end of command output.
-function __vsc_cmd_finished --on-event fish_postexec
+function __vsc_cmd_output_end --on-event fish_postexec
     __vsc_esc D $status
 end
 
