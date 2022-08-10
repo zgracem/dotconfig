@@ -64,6 +64,3 @@ if status is-interactive; and not string match -q $TERM_PROGRAM vscode; and path
     read -l dir <$__fish_user_data_dir/last_pwd
     path is -d $dir; and cd $dir
 end
-
-# Terminal–shell integration
-source "$__fish_config_dir/terminal.fish"
