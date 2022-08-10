@@ -8,6 +8,12 @@ and set --query TERM_PROGRAM
 and ! set --query SHELL_INTEGRATION
 or exit
 
+switch $TERM_PROGRAM
+    case vscode
+        set --global VSCODE_SHELL_INTEGRATION 1
+    case iTerm.app
+        set --global ITERM_SHELL_INTEGRATION_INSTALLED Yes
+end
 set --global SHELL_INTEGRATION $TERM_PROGRAM
 
 # Setup variables
