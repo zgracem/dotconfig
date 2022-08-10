@@ -14,8 +14,8 @@ abbr --add --global -- '-' 'cd -'
 
 # ssh
 
-abbr -a -g vshraya '_ssh vshraya'
-abbr -a -g opal '_ssh opalstack'
+abbr -a -g vshraya 'sfish vshraya'
+abbr -a -g opal 'sfish opalstack'
 
 # -----------------------------------------------------------------------------
 # abbreviations
