@@ -355,7 +355,8 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.wordBasedSuggestions": false
+    "editor.wordBasedSuggestions": false,
+    "files.insertFinalNewline": true
   },
   "[ruby]": {
     "editor.formatOnSave": true,
@@ -369,6 +370,9 @@
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
     "editor.wordWrap": "off"
+  },
+  "[viml]": {
+    "files.trimTrailingWhitespace": false
   },
   "[yaml]": {
     "editor.formatOnSave": true,
