@@ -8,18 +8,15 @@ and set --query TERM_PROGRAM
 and ! set --query SHELL_INTEGRATION
 or exit
 
+set --global SHELL_INTEGRATION $TERM_PROGRAM
 switch $TERM_PROGRAM
     case vscode
         set --global VSCODE_SHELL_INTEGRATION 1
     case iTerm.app
         set --global ITERM_SHELL_INTEGRATION_INSTALLED Yes
 end
-set --global SHELL_INTEGRATION $TERM_PROGRAM
 
-# Setup variables
 set --global __si_Ps 133
-set --global __iterm_Ps 1337
-set --global __vsc_Ps 633
 
 function __si_esc -d "Emit escape sequences for shell integration"
     set --local OSC "\e]"
@@ -28,12 +25,12 @@ function __si_esc -d "Emit escape sequences for shell integration"
 end
 
 function __iterm_esc -d "Emit escape sequences for iTerm.app shell integration"
-    set --local --export __si_Ps $__iterm_Ps
+    set --local --export __si_Ps 1337
     __si_esc $argv
 end
 
 function __vsc_esc -d "Emit escape sequences for VS Code shell integration"
-    set --local --export __si_Ps $__vsc_Ps
+    set --local --export __si_Ps 633
     __si_esc $argv
 end
 
@@ -46,8 +43,6 @@ function __vsc_escape_cmd -d "Serialize the command line"
         | string replace --all ";" "\x3b" \
         | string join "\x0a"
 end
-
-# ----------------------------------------------------------------------------
 
 # Mark the beginning of the prompt (and, implicitly, a new line).
 function __si_prompt_start
@@ -125,11 +120,6 @@ function __si_cmd_check --on-event fish_prompt
         __si_cmd_cancelled
     end
 end
-
-# Ctrl+X adds a mark to the line it was triggered on.
-bind \cx '__iterm_esc SetMark'
-
-# ----------------------------------------------------------------------------
 
 # Preserve the user's existing prompt, and wrap it in our escape sequences.
 functions --copy fish_prompt __original_fish_prompt
