@@ -93,7 +93,7 @@ $(SYMLINKS):
 	/bin/ln -s .config/$< $@
 
 user-agent.txt:
-	bin/get-user-agent.fish > $@
+	bin/user-agent-get.fish > $@
 
 USER_AGENT = $(shell cat $(CURDIR)/user-agent.txt)
 
