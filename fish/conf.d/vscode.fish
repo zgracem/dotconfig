@@ -32,12 +32,31 @@ end
 function __vsc_cmd_output_start --on-event fish_preexec
     __vsc_esc C
     __vsc_esc E (__vsc_escape_cmd "$argv")
+
+    set --global _vsc_cmd_active
 end
 
 # Sent right after an interactive command has finished executing.
 # Marks the end of command output.
 function __vsc_cmd_output_end --on-event fish_postexec
     __vsc_esc D $status
+end
+
+# Sent when a command line is cleared or reset, but no command was run.
+# Marks the cleared line with neither success nor failure.
+function __vsc_cmd_cancelled --on-event fish_cancel
+    __vsc_esc E
+    __vsc_esc D
+end
+
+# Runs whenever a new fish prompt is about to be displayed.
+# Marks the line as cancelled if no command was actually run.
+function __vsc_cmd_check --on-event fish_prompt
+    if set --query _vsc_cmd_active
+        set --erase _vsc_cmd_active
+    else
+        __vsc_cmd_cancelled
+    end
 end
 
 # Sent whenever a new fish prompt is about to be displayed.
