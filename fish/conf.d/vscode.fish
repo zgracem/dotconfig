@@ -17,11 +17,21 @@ function __vsc_esc -d "Emit escape sequences for VS Code shell integration"
     builtin printf "\e]633;%s\007" (string join ";" $argv)
 end
 
+# Escapes backslashes, newlines, and semicolons to serialize the command line.
+function __vsc_escape_cmd
+    set --local commandline "$argv"
+    # `string replace` automatically breaks its input apart on any newlines.
+    # Then `string join` at the end will bring it all back together.
+    string replace --all -- "\\" "\\\\" $commandline \
+        | string replace --all ";" "\x3b" \
+        | string join "\x0a"
+end
+
 # Sent right before executing an interactive command.
 # Marks the beginning of command output.
 function __vsc_cmd_output_start --on-event fish_preexec
     __vsc_esc C
-    __vsc_esc E "$argv"
+    __vsc_esc E (__vsc_escape_cmd "$argv")
 end
 
 # Sent right after an interactive command has finished executing.
