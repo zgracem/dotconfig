@@ -9,7 +9,6 @@ spotify-tui/.spotify_token_cache.json
 spotify-tui/client.yml
 
 # not intended for human interaction
-brew/*.lock.json
 fish/fish_variables*
 fish/fishd.*
 iterm2/

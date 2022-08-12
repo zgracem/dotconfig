@@ -1,0 +1,523 @@
+{
+  "entries": {
+    "tap": {
+      "homebrew/cask": {
+        "revision": "8e824db47b152a835e3ed9458ad28402127fad8e"
+      },
+      "homebrew/cask-versions": {
+        "revision": "60c0c8339888255fffb6ffa895ecd533ff455d73"
+      }
+    },
+    "cask": {
+      "1password": {
+        "version": "8.8.0",
+        "options": {
+          "full_name": "1password"
+        }
+      },
+      "acorn": {
+        "version": "7.2,16105",
+        "options": {
+          "full_name": "acorn",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "alfred": {
+        "version": "5.0.1,2067",
+        "options": {
+          "full_name": "alfred",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "fantastical": {
+        "version": "3.6.6,1454",
+        "options": {
+          "full_name": "fantastical",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "file-juicer": {
+        "version": "4.96",
+        "options": {
+          "full_name": "file-juicer",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "fission": {
+        "version": "2.8.1",
+        "options": {
+          "full_name": "fission",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "go2shell": {
+        "version": "2.5,25",
+        "options": {
+          "full_name": "go2shell",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "google-chrome": {
+        "version": "104.0.5112.79",
+        "options": {
+          "full_name": "google-chrome",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "grandperspective": {
+        "version": "3.0.0",
+        "options": {
+          "full_name": "grandperspective",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "handbrake": {
+        "version": "1.5.1",
+        "options": {
+          "full_name": "handbrake",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "istat-menus": {
+        "version": "6.62",
+        "options": {
+          "full_name": "istat-menus",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "iterm2": {
+        "version": "3.4.16",
+        "options": {
+          "full_name": "iterm2",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "kid3": {
+        "version": "3.9.2",
+        "options": {
+          "full_name": "kid3",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "metaz": {
+        "version": "1.0.3",
+        "options": {
+          "full_name": "metaz",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "minecraft": {
+        "version": "1.1.26",
+        "options": {
+          "full_name": "minecraft",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "name-mangler": {
+        "version": "3.8,3339",
+        "options": {
+          "full_name": "name-mangler",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "pdf-expert": {
+        "version": "3.0.25,850",
+        "options": {
+          "full_name": "pdf-expert",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "ql-ansilove": {
+        "version": "1.0-beta",
+        "options": {
+          "full_name": "ql-ansilove",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "qladdict": {
+        "version": "1.3.0",
+        "options": {
+          "full_name": "qladdict",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "qlmarkdown": {
+        "version": "1.0.15",
+        "options": {
+          "full_name": "qlmarkdown",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "spotify": {
+        "version": "1.1.91.824,07f1e963,9",
+        "options": {
+          "full_name": "spotify",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "steam": {
+        "version": "4.0",
+        "options": {
+          "full_name": "steam",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "sublime-merge": {
+        "version": "2074",
+        "options": {
+          "full_name": "sublime-merge",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "sublime-text": {
+        "version": "4126",
+        "options": {
+          "full_name": "sublime-text",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "superduper": {
+        "version": "3.6.2,125",
+        "options": {
+          "full_name": "superduper",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "syncplay": {
+        "version": "1.6.9",
+        "options": {
+          "full_name": "syncplay",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "the-unarchiver": {
+        "version": "4.3.5,139,1652457131",
+        "options": {
+          "full_name": "the-unarchiver",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "transmission": {
+        "version": "3.00",
+        "options": {
+          "full_name": "transmission",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "transmit": {
+        "version": "5.8.8",
+        "options": {
+          "full_name": "transmit",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "visual-studio-code": {
+        "version": "1.70.1",
+        "options": {
+          "full_name": "visual-studio-code",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "vlc": {
+        "version": "3.0.17.3",
+        "options": {
+          "full_name": "vlc",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "xact": {
+        "version": "2.50",
+        "options": {
+          "full_name": "xact",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "1password-cli": {
+        "version": "2.6.1",
+        "options": {
+          "full_name": "1password-cli",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "discord": {
+        "version": "0.0.268",
+        "options": {
+          "full_name": "discord",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "disk-drill": {
+        "version": "4.7.382",
+        "options": {
+          "full_name": "disk-drill",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "dotnet-sdk": {
+        "version": "6.0.400,2382b0d3-f865-4818-b3aa-47a94ccedba8,cd1eb0d061a1e1d8d0373603c4e82a97",
+        "options": {
+          "full_name": "dotnet-sdk",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "dropbox": {
+        "version": "154.4.5363",
+        "options": {
+          "full_name": "dropbox",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "firefox": {
+        "version": "103.0.2",
+        "options": {
+          "args": {
+            "appdir": "/Applications"
+          },
+          "full_name": "firefox"
+        }
+      },
+      "swiftbar": {
+        "version": "1.4.3",
+        "options": {
+          "full_name": "swiftbar",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "winclone": {
+        "version": "10.1,50060",
+        "options": {
+          "full_name": "winclone",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "1password7": {
+        "version": "7.9.6",
+        "options": {
+          "args": {
+            "appdir": "/Applications"
+          },
+          "full_name": "1password7"
+        }
+      },
+      "nova": {
+        "version": "9.4",
+        "options": {
+          "full_name": "nova",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "soundsource": {
+        "version": "5.5.4",
+        "options": {
+          "full_name": "soundsource",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "the-archive-browser": {
+        "version": "1.11.2,111,1504018288",
+        "options": {
+          "full_name": "the-archive-browser",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "tor-browser": {
+        "version": "11.5.1",
+        "options": {
+          "full_name": "tor-browser",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "visual-studio-code-insiders": {
+        "version": "latest",
+        "options": {
+          "full_name": "visual-studio-code-insiders",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      }
+    },
+    "brew": {
+      "mas": {
+        "version": "1.8.6",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_monterey": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:379d46e2657be295321f1603dc1df28130ea0b5b264ceb192a9ba488d77c7a98",
+              "sha256": "379d46e2657be295321f1603dc1df28130ea0b5b264ceb192a9ba488d77c7a98"
+            },
+            "arm64_big_sur": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:918a1484de106940f7bebc936e1ded87d7b65652054b09204887ad0651937ec4",
+              "sha256": "918a1484de106940f7bebc936e1ded87d7b65652054b09204887ad0651937ec4"
+            },
+            "monterey": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:6b313f2f66d028cb7782c108d6e502ce73ccb9c08fac3bece0b057fcce5c4689",
+              "sha256": "6b313f2f66d028cb7782c108d6e502ce73ccb9c08fac3bece0b057fcce5c4689"
+            },
+            "big_sur": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:50b50f51219143fcb69c730b52b74011a76104f66348ea727d0200f7b375ae25",
+              "sha256": "50b50f51219143fcb69c730b52b74011a76104f66348ea727d0200f7b375ae25"
+            },
+            "catalina": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:d241d3b9156b033f3d2c31684a44de726297e07fd9bd5e3ccc4c36e4f1c3baf3",
+              "sha256": "d241d3b9156b033f3d2c31684a44de726297e07fd9bd5e3ccc4c36e4f1c3baf3"
+            }
+          }
+        }
+      }
+    },
+    "mas": {
+      "ApolloOne": {
+        "id": "1044484672",
+        "version": "3.1.3"
+      },
+      "Day One": {
+        "id": "1055511498",
+        "version": "7.13"
+      },
+      "Divvy": {
+        "id": "413857545",
+        "version": "1.5.2"
+      },
+      "ColorSlurp": {
+        "id": "1287239339",
+        "version": "3.5.0"
+      },
+      "GarageBand": {
+        "id": "682658836",
+        "version": "10.4.6"
+      },
+      "iMovie": {
+        "id": "408981434",
+        "version": "10.3.4"
+      },
+      "Keynote": {
+        "id": "409183694",
+        "version": "12.1"
+      },
+      "Mactracker": {
+        "id": "430255202",
+        "version": "7.11.5"
+      },
+      "Numbers": {
+        "id": "409203825",
+        "version": "12.1"
+      },
+      "Pages": {
+        "id": "409201541",
+        "version": "12.1"
+      },
+      "Things": {
+        "id": "904280696",
+        "version": "3.15.19"
+      },
+      "Xcode": {
+        "id": "497799835",
+        "version": "13.4.1"
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "monterey": {
+        "HOMEBREW_VERSION": "3.5.9",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "315eb4494e863c546859add2ea221ce039d1a7e7",
+        "CLT": "13.4.0.0.1.1651278267",
+        "Xcode": "13.4.1",
+        "macOS": "12.3.1"
+      }
+    }
+  }
+}
