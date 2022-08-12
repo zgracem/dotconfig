@@ -16,6 +16,9 @@ set -gx HOMEBREW_BOOTSNAP 1
 # `brew bundle`
 set -gx HOMEBREW_BUNDLE_FILE $XDG_CONFIG_HOME/brew/Brewfile
 
+# Install Homebrew Cask apps in ~/Applications
+set -gx HOMEBREW_CASK_OPTS --appdir=$HOME/Applications
+
 # Delete cached files after 7 days (default is 120 days)
 set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 7
 

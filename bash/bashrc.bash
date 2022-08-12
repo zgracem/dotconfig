@@ -130,7 +130,7 @@ shopt -u nullglob
 if [[ $TERM_PROGRAM == "vscode" ]]; then
   case $PLATFORM in
   mac)
-    vscode="/Applications/Visual Studio Code.app/Contents/Resources/app/out"
+    vscode="$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/out"
     ;;
   windows)
     vscode="$(cygpath -au "$LOCALAPPDATA")/Programs/Microsoft VS Code/resources/app/out"

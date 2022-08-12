@@ -6,10 +6,13 @@
 # -----------------------------------------------------------------------------
 
 if OS.mac?
+  # Also set in HOMEBREW_CASK_OPTS
+  cask_args appdir: "~/Applications"
+
   tap  "homebrew/cask"
   tap  "homebrew/cask-versions"
 
-  cask "1password7"
+  cask "1password7", args: { appdir: "/Applications" }
   cask "1password-cli"
   cask "acorn"
   cask "alfred"
@@ -19,7 +22,7 @@ if OS.mac?
   cask "dropbox"
   cask "fantastical"
   cask "file-juicer"
-  cask "firefox"
+  cask "firefox", args: { appdir: "/Applications" }
   cask "fission"
   cask "go2shell"
   cask "google-chrome"
