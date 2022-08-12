@@ -27,8 +27,7 @@ function __bat_complete_languages
 end
 
 function __bat_complete_themes
-    command bat --list-themes \
-        | sed -E '/^($|\s|Further themes can be installed to)/d;s/$/\t/'
+    command bat --list-themes | command cat
 end
 
 function __bat_cache
