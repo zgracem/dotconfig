@@ -1,13 +1,9 @@
-if is-gnu rm
-    function rm --description 'Remove directory entries'
-        set -p argv -I
-        set -p argv -v
-        command rm $argv
+function rm --description 'Remove directory entries'
+    if status is-interactive; and is-gnu rm
+        set -p argv -I # prompt before large operations
+    else
+        set -p argv -i # request confirmation before each file
     end
-else
-    function rm --description 'Remove directory entries'
-        set -p argv -i
-        set -p argv -v
-        command rm $argv
-    end
+    set -p argv -v # verbose
+    command rm $argv
 end
