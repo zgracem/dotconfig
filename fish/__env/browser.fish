@@ -9,6 +9,6 @@ if not set -q SSH_CONNECTION
         # Wrapper script for Firefox
         set BROWSER "$HOME/bin/firefox"
     else
-        set BROWSER (type -P open)
+        set BROWSER (command -s open)
     end
 end

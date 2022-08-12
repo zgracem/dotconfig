@@ -50,5 +50,5 @@ end
 
 if set -q SSH_CONNECTION
     # make `brew home` et al. print the URL instead of launching a browser
-    set -gx HOMEBREW_BROWSER (type -P echo)
+    set -gx HOMEBREW_BROWSER (command -s echo)
 end
