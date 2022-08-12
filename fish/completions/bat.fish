@@ -17,12 +17,12 @@ end
 function __bat_complete_languages
     for spec in (command bat --list-languages)
         set -l name (string split -f1 : $spec)
-        printf "%s\t\n" $name
         for ext in (string split -f2 : $spec | string split ,)
             test -n "$ext"; or continue
             string match -rq '[/*]' $ext; and continue
             printf "%s\t%s\n" $ext $name
         end
+        printf "%s\t\n" $name
     end
 end
 
