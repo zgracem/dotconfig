@@ -1,10 +1,12 @@
 if command -sq brew
     function brew --description 'The missing package manager for macOS'
+        # Implement `brew cd <location>` to quickly move to Homebrew dirs.
+        set -l homebrew_dirs cache caskroom cellar prefix repo repository
         switch $argv[1]
             case cd
-                set -e argv[1]
+                set --erase argv[1] # shift `cd` out of the arguments
                 switch $argv[1]
-                    case cache cellar prefix repo repository
+                    case $homebrew_dirs
                         cd (command brew --$argv[1] $argv[2..-1])
                     case '*'
                         printf >&2 "%s: destination unknown\\n" "$destination"
