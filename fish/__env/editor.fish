@@ -5,7 +5,7 @@ set --erase SUDO_EDITOR
 set -gx EDITOR vim
 set -gx VISUAL $EDITOR
 
-# Use GUI app if not logged in remotely
+# Use GUI app for VISUAL if not logged in remotely
 if not set -q SSH_CONNECTION
     if path is -x $HOME/bin/code-wait
         set VISUAL "$HOME/bin/code-wait"

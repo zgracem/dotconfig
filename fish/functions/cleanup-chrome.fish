@@ -4,5 +4,5 @@ function cleanup-chrome
     set -l detritus {,$HOME}/Library/{Launch{Agents,Daemons},Application Support,Caches,Preferences}/{Google,com.google.}*
     test (count $detritus) -gt 0; or return
 
-    rm -rf $detritus
+    rm -rfv $detritus
 end
