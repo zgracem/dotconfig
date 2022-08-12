@@ -69,14 +69,12 @@ if OS.mac?
   mas "ColorSlurp", id: 1287239339
   mas "Day One", id: 1055511498
   mas "Divvy", id: 413857545
-  mas "Fantastical", id: 435003921
   mas "GarageBand", id: 682658836
   mas "iMovie", id: 408981434
   mas "Keynote", id: 409183694
   mas "Mactracker", id: 430255202
   mas "Numbers", id: 409203825
   mas "Pages", id: 409201541
-  mas "The Archive Browser", id: 510232205
   mas "Things", id: 904280696
   mas "Xcode", id: 497799835
 end
