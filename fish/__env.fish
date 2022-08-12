@@ -1,6 +1,4 @@
-if set -gxq __z_env_loaded
-    exit
-end
+set -q __z_env_loaded; and exit
 
 # XDG Basedir Spec
 set -gx XDG_CONFIG_HOME ~/.config
