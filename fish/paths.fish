@@ -52,9 +52,10 @@ if is-macos; and path is -d $HOMEBREW_PREFIX
     set -p PATH $HOMEBREW_PREFIX/opt/openjdk/bin
 
     # Xcode
-    set -a PATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-    set -a MANPATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man
-    set -a MANPATH /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
+    set -l XCODE /Applications/Xcode.app/Contents/Developer
+    set -a PATH $XCODE/Toolchains/XcodeDefault.xctoolchain/usr/bin
+    set -a MANPATH $XCODE/Toolchains/XcodeDefault.xctoolchain/usr/share/man
+    set -a MANPATH $XCODE/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
 end
 
 # Linuxbrew
