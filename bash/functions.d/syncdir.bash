@@ -37,6 +37,6 @@ syncdir()
   # set -- --verbose "$@" # [-v]
   # set -- --dry-run "$@" # [-n]
 
-  rsync "$@" "$src/" "$dst" \
-  | grep -v '/$'
+  rsync "$@" "$src/" "$dst" |
+    grep -v '/$'
 }

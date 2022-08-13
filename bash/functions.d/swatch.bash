@@ -20,8 +20,8 @@ swatch()
     colour="#${colour}"
   fi
 
-  convert -size "${size}x${size}" "canvas:${colour}" "$out_file" \
-    && echo "$out_file"
+  convert -size "${size}x${size}" "canvas:${colour}" "$out_file" &&
+       echo "$out_file"
 }
 
 _inPath parallel || return
