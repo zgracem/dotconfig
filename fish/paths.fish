@@ -25,6 +25,14 @@ if is-macos; and path is -x /usr/local/bin/brew
     set -p PATH /usr/local/opt/findutils/libexec/gnubin
     set -p MANPATH /usr/local/opt/findutils/share/man
 
+    # GNU binutils
+    set -p PATH /usr/local/opt/binutils/bin
+    set -p MANPATH /usr/local/opt/binutils/share/man
+
+    # GNU inetutils (w/out `g` prefix)
+    set -p PATH /usr/local/opt/inetutils/libexec/gnubin
+    set -p MANPATH /usr/local/opt/inetutils/share/man
+
     # GNU grep (w/out `g` prefix)
     set -p PATH /usr/local/opt/grep/libexec/gnubin
     set -p MANPATH /usr/local/opt/grep/share/man
@@ -36,10 +44,6 @@ if is-macos; and path is -x /usr/local/bin/brew
     # GNU tar (w/out `g` prefix)
     set -p PATH /usr/local/opt/gnu-tar/libexec/gnubin
     set -p MANPATH /usr/local/opt/gnu-tar/share/man
-
-    # GNU i18n/l10n utilities
-    set -p PATH /usr/local/opt/gettext/bin
-    set -p MANPATH /usr/local/opt/gettext/share/man
 
     # curl
     set -p PATH /usr/local/opt/curl/bin
