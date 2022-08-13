@@ -39,6 +39,8 @@ brew "stow"
 brew "the_silver_searcher"
 brew "vim"
 brew "wget"
+tap  "zgracem/formulae", "file://#{Dir.home}/Dropbox/Projects/homebrew-formulae"
+brew "zgracem/formulae/unrar"
 
 if OS.mac?
   brew "rename"
