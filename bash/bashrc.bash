@@ -73,7 +73,7 @@ IGNOREEOF=2
 
 # Kill ssh sessions after 8 hours' inactivity, unless tmux is active
 if [[ -n $SSH_CONNECTION && -z $TMUX ]]; then
-  TMOUT=$(( 8 * 60 * 60 ))
+  TMOUT=$((8 * 60 * 60))
 fi
 
 # -----------------------------------------------------------------------------

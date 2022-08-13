@@ -12,7 +12,7 @@ fi
 if [[ $TERM_COLOURDEPTH -ge 8 ]]; then
   export TERM_COLOURDEPTH
 else
-  printf >&2 "%s: %s only has %d colours\\n" \
+  printf >&2 '%s: %s only has %d colours\n' \
     "${BASH_SOURCE[0]}" "${PTERM:-$TERM}" "$TERM_COLOURDEPTH"
   return
 fi

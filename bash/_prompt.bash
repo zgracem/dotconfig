@@ -113,14 +113,14 @@ _z_PS1_compress_pwd()
 
   # Use the slash as a separator to split PWD into an array of its elements.
   local -a in_parts
-  IFS=/ read -r -a in_parts <<< "${input}"
+  IFS=/ read -r -a in_parts <<<"${input}"
 
   # If PWD is under HOME, in_parts[0] will contain the leading tilde;
   # otherwise, it will be empty.
   case ${in_parts[0]} in
     "~")  # Because a leading tilde is so short, it doesn't count when
           # determining minimum depth.
-          (( min_depth++ ))
+          ((min_depth++))
           ;;
     "")   # PWD starts at root; remove the empty element from the array.
           unset "in_parts[0]"
@@ -140,15 +140,15 @@ _z_PS1_compress_pwd()
     done
 
     # The stopping point required to preserve uncompressed trailing elements.
-    local stop_index=$(( ${#in_parts[@]} - ${#end_parts[@]} ))
+    local stop_index=$((${#in_parts[@]} - ${#end_parts[@]}))
 
     if [[ -z ${in_parts[0]} ]]; then
-      (( stop_index++ ))
+      ((stop_index++))
     fi
 
     # Iterate through the remaining elements, stopping where required.
     local -a out_parts=()
-    local i; for (( i = 1; i < stop_index; i++ )); do
+    local i; for ((i = 1; i < stop_index; i++)); do
       local part="${in_parts[$i]}"
 
       # No need to compress elements that are already <= $keep_chars long.
@@ -194,7 +194,7 @@ _z_PS1_print_exit()
 
   local screen_dimensions; read -r -a screen_dimensions < <(stty size)
   local screen_width=${screen_dimensions[1]}
-  local padding=$(( screen_width - gutter ))
+  local padding=$((screen_width - gutter))
 
   # print exit code & return to beginning of line
   printf '%*s\r' $padding "$last_exit"
@@ -230,7 +230,7 @@ _z_PS1_git_info()
   # count untracked files
   local re_ut=$'\n''(\? | \?|\?\?)'
   if [[ $status =~ $re_ut ]]; then
-    untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
+    untracked=$((${#BASH_REMATCH[@]} - 1))
   fi
 
   if [[ $unstaged -gt 0 ]] || [[ $untracked -gt 0 ]]; then
@@ -290,7 +290,7 @@ _z_PS1_jobs()
 
   # count newlines
   jobs="${jobs//[^$'\n']/}"
-  local job_count=$(( ${#jobs} + 1 )) # no trailing newline at EOT
+  local job_count=$((${#jobs} + 1)) # no trailing newline at EOT
 
   if [[ $job_count -gt 0 ]]; then
     printf ' %d' "${job_count}"
@@ -316,7 +316,7 @@ _z_PS1_update_cwd()
     local LC_CTYPE=C LC_ALL=
 
     local i ch hexch
-    for (( i = 0; i < ${#PWD}; i++ )); do
+    for ((i = 0; i < ${#PWD}; i++)); do
       ch=${PWD:i:1}
       if [[ $ch =~ [[:alnum:]/._~-] ]]; then
         pwd_url+="$ch"

@@ -23,5 +23,5 @@ function ?
     text="false [$last_exit]"
   fi
 
-  printf "%b\\n" "${colour}${text}${reset}"
+  printf '%b\n'  "${colour}${text}${reset}"
 }

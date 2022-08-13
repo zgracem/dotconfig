@@ -61,7 +61,7 @@ ef()
       read -r -e -p "Create it (${file/#$HOME/$'~'})? [y/N] " answer
 
       if [[ $answer =~ [yY] ]]; then
-        printf '%s()\n{\n  #function\n}\n' "$func" > "$file"
+        printf '%s()\n{\n  #function\n}\n' "$func" >"$file"
         _z_edit "$file:3:3"
       fi
       return 0
@@ -137,57 +137,58 @@ rl()
     # shellcheck disable=SC2221,SC2222
     case $1 in
       functions|terminal|dirs|colour|prompt)
-          files+=("$conf/bash/_$1.bash")
-          ;;&
+        files+=("$conf/bash/_$1.bash")
+        ;;&
 
       init)   # normally not sourced on reload
-          files+=("$HOME/.local/config/init.bash")
-          ;;
+        files+=("$HOME/.local/config/init.bash")
+        ;;
 
       prompt) # reload colours first
-          files=("$conf/bash/_colour.bash" "${files[@]}")
-          ;;
+        files=("$conf/bash/_colour.bash" "${files[@]}")
+        ;;
 
       colour) # also reload prompt
-          files+=("$conf/bash/_prompt.bash")
-          ;;
+        files+=("$conf/bash/_prompt.bash")
+        ;;
 
       functions)
-          files+=("$conf/bash/functions.d/"*.bash)
-          ;;
+        files+=("$conf/bash/functions.d/"*.bash)
+        ;;
 
       env|environment)
-          files+=("$conf/environment.d/"*.sh)
-          ;;
+        files+=("$conf/environment.d/"*.sh)
+        ;;
 
       local)
-          files+=("$HOME/.local/config/bashrc.d/"*.bash)
-          ;;
+        files+=("$HOME/.local/config/bashrc.d/"*.bash)
+        ;;
 
-      keychain) _inPath keychain || return
-          verbose "> deleting ssh-agent keys..."
-          [[ -z $dry_run ]] && keychain --quiet --clear
-          verbose "> killing all currently running agent processes..."
-          [[ -z $dry_run ]] && keychain --quiet --stop all
-          verbose "> unsetting environment variables..."
-          [[ -z $dry_run ]] && unset -v SSH_AGENT_PID SSH_AUTH_SOCK
-          ;;
+      keychain)
+        _inPath keychain || return
+        verbose "> deleting ssh-agent keys..."
+        [[ -z $dry_run ]] && keychain --quiet --clear
+        verbose "> killing all currently running agent processes..."
+        [[ -z $dry_run ]] && keychain --quiet --stop all
+        verbose "> unsetting environment variables..."
+        [[ -z $dry_run ]] && unset -v SSH_AGENT_PID SSH_AUTH_SOCK
+        ;;
 
       inputrc)
-          local inputrc="${INPUTRC:-$XDG_CONFIG_HOME/readline/inputrc}"
-          _z_rl_say "$inputrc"
-          [[ -z $dry_run ]] && bind -f "$inputrc"
-          return
-          ;;
+        local inputrc="${INPUTRC:-$XDG_CONFIG_HOME/readline/inputrc}"
+        _z_rl_say "$inputrc"
+        [[ -z $dry_run ]] && bind -f "$inputrc"
+        return
+        ;;
 
       tmux)
-          if _inTmux; then
-            # Don't expand tilde
-            # shellcheck disable=SC2088
-            _z_rl_say "~/.tmux.conf"
-            [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
-          fi
-          ;;
+        if _inTmux; then
+          # Don't expand tilde
+          # shellcheck disable=SC2088
+          _z_rl_say "~/.tmux.conf"
+          [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
+        fi
+        ;;
     esac
 
     if [[ ${#files[@]} -gt 0 ]]; then

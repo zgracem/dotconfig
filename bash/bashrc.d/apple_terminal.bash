@@ -8,4 +8,3 @@ if [[ $TERM_PROGRAM == Apple_Terminal && -n $TERM_SESSION_ID ]]; then
 else
   return 0
 fi
-

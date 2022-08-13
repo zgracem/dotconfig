@@ -21,7 +21,7 @@ case $PLATFORM in
       esac
       USERPROFILE="$(cygpath -aw "$dir_winhome")" && export USERPROFILE
     fi
-    
+
     export APPLICATIONS="$dir_winhome/Applications"
     XDG_DOWNLOAD_DIR="$dir_winhome/Downloads"
 
