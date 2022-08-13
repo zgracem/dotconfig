@@ -4,7 +4,7 @@
 
 _z_rl_say()
 {
-  (( VERBOSITY > 0 )) || return
+  [[ $VERBOSITY -gt 0 ]] || return
   local filename="${1/#$HOME/$'~'}"
   printf 'Reloading %s...\n' "$filename"
 }
@@ -42,7 +42,7 @@ _z_whence()
 
 ef()
 { # find and edit shell functions
-  (( $# == 1 )) || return 1
+  [[ $# -eq 1 ]] || return 1
 
   local func=$1
   local dir="$XDG_CONFIG_HOME/bash"
@@ -53,7 +53,7 @@ ef()
     if [[ -f $file ]]; then
       _z_edit "$file"
       return 0
-    elif (( ${#FUNCNAME[@]} == 1 )); then
+    elif [[ ${#FUNCNAME[@]} -eq 1 ]]; then
       # we're not being called by another function like es()
       local answer=n
 
@@ -61,7 +61,7 @@ ef()
       read -r -e -p "Create it (${file/#$HOME/$'~'})? [y/N] " answer
 
       if [[ $answer =~ [yY] ]]; then
-        printf '%s()\n{\n  #function\n}\n' "$func" > "$file"
+        printf '%s()\n{\n  #function\n}\n' "$func" >"$file"
         _z_edit "$file:3:3"
       fi
       return 0
@@ -83,7 +83,7 @@ ef()
 }
 
 # rl() requires bash 4+ (case fall-through)
-if (( BASH_VERSINFO[0] < 4 )); then
+if [[ ${BASH_VERSINFO[0]} -lt 4 ]]; then
   alias rl='. $XDG_CONFIG_HOME/bash/profile.bash'
   return
 fi
@@ -107,7 +107,7 @@ rl()
   while [[ ${1:0:1} == "-" ]]; do
     if [[ $1 == -n ]]; then
       local dry_run=true
-      (( VERBOSITY < 1 && VERBOSITY++ ))
+      [[ $VERBOSITY -lt 1 ]] && (( VERBOSITY++ ))
       verbose "> dry run"
       shift
     elif [[ $1 == -+(v) ]]; then
@@ -122,9 +122,9 @@ rl()
   done
 
   # Used in .bashrc
-  (( VERBOSITY > 0 )) && export Z_RL_VERBOSE=true
+  [[ $VERBOSITY -gt 0 ]] && export Z_RL_VERBOSE=true
 
-  if (( $# == 0 )); then
+  if [[ $# -eq 0 ]]; then
     files+=("$conf/bash/profile.bash")
   else
     # search under ~/.config/environment.d, ~/.config/bash, and ~/.config/sh
@@ -137,60 +137,61 @@ rl()
     # shellcheck disable=SC2221,SC2222
     case $1 in
       functions|terminal|dirs|colour|prompt)
-          files+=("$conf/bash/_$1.bash")
-          ;;&
+        files+=("$conf/bash/_$1.bash")
+        ;;&
 
       init)   # normally not sourced on reload
-          files+=("$HOME/.local/config/init.bash")
-          ;;
+        files+=("$HOME/.local/config/init.bash")
+        ;;
 
       prompt) # reload colours first
-          files=("$conf/bash/_colour.bash" "${files[@]}")
-          ;;
+        files=("$conf/bash/_colour.bash" "${files[@]}")
+        ;;
 
       colour) # also reload prompt
-          files+=("$conf/bash/_prompt.bash")
-          ;;
+        files+=("$conf/bash/_prompt.bash")
+        ;;
 
       functions)
-          files+=("$conf/bash/functions.d/"*.bash)
-          ;;
+        files+=("$conf/bash/functions.d/"*.bash)
+        ;;
 
       env|environment)
-          files+=("$conf/environment.d/"*.sh)
-          ;;
+        files+=("$conf/environment.d/"*.sh)
+        ;;
 
       local)
-          files+=("$HOME/.local/config/bashrc.d/"*.bash)
-          ;;
+        files+=("$HOME/.local/config/bashrc.d/"*.bash)
+        ;;
 
-      keychain) _inPath keychain || return
-          verbose "> deleting ssh-agent keys..."
-          [[ -z $dry_run ]] && keychain --quiet --clear
-          verbose "> killing all currently running agent processes..."
-          [[ -z $dry_run ]] && keychain --quiet --stop all
-          verbose "> unsetting environment variables..."
-          [[ -z $dry_run ]] && unset -v SSH_AGENT_PID SSH_AUTH_SOCK
-          ;;
+      keychain)
+        _inPath keychain || return
+        verbose "> deleting ssh-agent keys..."
+        [[ -z $dry_run ]] && keychain --quiet --clear
+        verbose "> killing all currently running agent processes..."
+        [[ -z $dry_run ]] && keychain --quiet --stop all
+        verbose "> unsetting environment variables..."
+        [[ -z $dry_run ]] && unset -v SSH_AGENT_PID SSH_AUTH_SOCK
+        ;;
 
       inputrc)
-          local inputrc="${INPUTRC:-$XDG_CONFIG_HOME/readline/inputrc}"
-          _z_rl_say "$inputrc"
-          [[ -z $dry_run ]] && bind -f "$inputrc"
-          return
-          ;;
+        local inputrc="${INPUTRC:-$XDG_CONFIG_HOME/readline/inputrc}"
+        _z_rl_say "$inputrc"
+        [[ -z $dry_run ]] && bind -f "$inputrc"
+        return
+        ;;
 
       tmux)
-          if _inTmux; then
-            # Don't expand tilde
-            # shellcheck disable=SC2088
-            _z_rl_say "~/.tmux.conf"
-            [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
-          fi
-          ;;
+        if _inTmux; then
+          # Don't expand tilde
+          # shellcheck disable=SC2088
+          _z_rl_say "~/.tmux.conf"
+          [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
+        fi
+        ;;
     esac
 
-    if (( ${#files[@]} > 0 )); then
+    if [[ ${#files[@]} -gt 0 ]]; then
       verbose 2 ">> $(declare -p files)"
     else
       verbose 2 ">> no files found for <$1>, searching functions..."
@@ -211,7 +212,7 @@ rl()
     if [[ -f $f ]]; then
       _z_rl_say "$f"
       if [[ -z $dry_run ]]; then
-        if (( VERBOSITY >= 3 )); then
+        if [[ $VERBOSITY -ge 3 ]]; then
           verbose 3 ">>> begin xtrace"
           set -o xtrace
           . "$f"

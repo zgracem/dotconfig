@@ -38,7 +38,7 @@ ll()
   #       └────── long-list output
 
   # less info on narrower terminals
-  if [ $(( COLUMNS < 100 )) = 1 ]; then
+  if [ $COLUMNS -lt 100 ]; then
     set -- -go "$@"
     #       │└─── omit owner
     #       └──── omit group

@@ -10,7 +10,7 @@ fi
 lang_file="$XDG_DATA_HOME/locale/LANG"
 
 if [ -f "$lang_file" ] && [ -z "$LANG" ]; then
-  read -r LANG < "$lang_file"
+  read -r LANG <"$lang_file"
 fi
 
 unset -v lang_file

@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 # Source ~/.profile
-if [[ -r $HOME/.config/sh/profile.sh ]] ; then
+if [[ -r $HOME/.config/sh/profile.sh ]]; then
   # shellcheck source=../sh/profile.sh
   . "$HOME/.config/sh/profile.sh"
 fi
@@ -12,7 +12,7 @@ fi
 ### Abort if...
 # Allow testing of array variable as a whole
 # shellcheck disable=SC2128
-if ! test "$BASH_VERSINFO" || (( BASH_VERSINFO[0] < 3 )); then
+if ! test "$BASH_VERSINFO" || [[ ${BASH_VERSINFO[0]} -lt 3 ]]; then
   # ...bash is too old
   echo >&2 "this version of bash is too old!"
   return
@@ -49,21 +49,21 @@ shopt -u sourcepath     # [don't] use PATH to find files to `.`
 
 this_bash="${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}"
 
-if (( this_bash >= 42 )); then
+if [[ $this_bash -ge 42 ]]; then
   # Execute a pipeline's last cmd in the current shell context
   shopt -s lastpipe
   # Abort runaway function nesting
   FUNCNEST=128
 fi
 
-if (( this_bash >= 41 )); then
+if [[ $this_bash -ge 41 ]]; then
   # Warn when exiting shell with stopped/running jobs
   shopt -s checkjobs
   # `checkjobs` is available in 4.0, but buggy:
   # >> https://lists.gnu.org/archive/html/bug-bash/2009-02/msg00176.html
 fi
 
-if (( this_bash >= 40 )); then
+if [[ $this_bash -ge 40 ]]; then
   # `**` matches directories and their files recursively
   shopt -s globstar
 fi
@@ -73,7 +73,7 @@ IGNOREEOF=2
 
 # Kill ssh sessions after 8 hours' inactivity, unless tmux is active
 if [[ -n $SSH_CONNECTION && -z $TMUX ]]; then
-  TMOUT=$(( 8 * 60 * 60 ))
+  TMOUT=$((8 * 60 * 60))
 fi
 
 # -----------------------------------------------------------------------------

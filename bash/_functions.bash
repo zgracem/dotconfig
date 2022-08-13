@@ -34,7 +34,7 @@ verbose()
     shift
   fi
 
-  if (( VERBOSITY >= level )); then
+  if [[ $VERBOSITY -ge $level ]]; then
     printf '%b\n' "$@"
   fi
 }

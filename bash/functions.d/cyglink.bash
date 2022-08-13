@@ -5,7 +5,7 @@ cyglink()
   #: $ cyglink <target> <link>
   #: * inverts the syntax of Windows' `MKLINK` for consistency with e.g. ln(1)
 
-  if (( $# == 0 )); then
+  if [[ $# -eq 0 ]]; then
     fx_usage >&2
     return 1
   else

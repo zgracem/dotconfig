@@ -7,7 +7,7 @@ swatch()
   #: | SIZE   = size of the square output swatch in pixels (default: 256)
   #: < ImageMagick
 
-  if (( $# < 1 )); then
+  if [[ $# -lt 1 ]]; then
     fx_usage >&2
     return 1
   fi
@@ -20,8 +20,8 @@ swatch()
     colour="#${colour}"
   fi
 
-  convert -size "${size}x${size}" "canvas:${colour}" "$out_file" \
-    && echo "$out_file"
+  convert -size "${size}x${size}" "canvas:${colour}" "$out_file" &&
+       echo "$out_file"
 }
 
 _inPath parallel || return
@@ -32,7 +32,7 @@ swatches()
   #: | COLOUR = each a hex colour like "#ff33cc" or a named colour like "pink"
   #: < ImageMagick
 
-  if (( $# == 0 )); then
+  if [[ $# -eq 0 ]]; then
     fx_usage >&2
     return 1
   fi

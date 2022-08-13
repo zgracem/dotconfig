@@ -40,7 +40,7 @@ esac
 
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
 # "noexec" (as it would be on a shared host) and change to a path we control.
-if [ ! -G "$TMPDIR" ] && mount|grep -q " on $TMPDIR.*noexec,"; then
+if [ ! -G "$TMPDIR" ] && mount | grep -q " on $TMPDIR.*noexec,"; then
   TMPDIR="$XDG_RUNTIME_DIR"
   [ -d "$TMPDIR" ] || mkdir -p "$TMPDIR"
 fi
