@@ -91,8 +91,10 @@ _z_PS1_compress_pwd()
       k)  keep_dirs="$OPTARG" ;;
       c)  keep_chars="$OPTARG" ;;
       i)  indicator="$OPTARG" ;;
-    '?')  scold "-$OPTARG: invalid option"
-          return 1 ;;
+    '?')
+          scold "-$OPTARG: invalid option"
+          return 1
+                   ;;
     esac
   done
   shift $((OPTIND - 1))
@@ -126,9 +128,7 @@ _z_PS1_compress_pwd()
   esac
 
   # Are there enough elements/characters to warrant compression?
-  if (( ${#in_parts[@]} < min_depth )) \
-    && (( ${#input} < max_length ))
-  then
+  if (( ${#in_parts[@]} < min_depth )) && (( ${#input} < max_length )); then
     # PWD is already short; just return what we were given.
     printf "%s" "$input"
     return
@@ -153,7 +153,7 @@ _z_PS1_compress_pwd()
 
       # No need to compress elements that are already <= $keep_chars long.
       if (( ${#part} > keep_chars )); then
-          part="${part:0:$keep_chars}${indicator}"
+          part="${part:0:keep_chars}${indicator}"
       fi
 
       # Add the result to the array of compressed elements.

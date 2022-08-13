@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 
 # Source ~/.profile
-if [[ -r $HOME/.config/sh/profile.sh ]] ; then
+if [[ -r $HOME/.config/sh/profile.sh ]]; then
   # shellcheck source=../sh/profile.sh
   . "$HOME/.config/sh/profile.sh"
 fi
