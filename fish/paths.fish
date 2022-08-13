@@ -11,12 +11,7 @@ set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
 # Homebrew
-if path is -d $HOMEBREW_PREFIX
-    # use Homebrew's cURL if present
-    set -p PATH $HOMEBREW_PREFIX/opt/curl/bin
-end
-
-if is-macos; and path is -x /usr/local/bin/brew
+if is-macos; and path is -d $HOMEBREW_PREFIX
     # GNU coreutils (w/out `g` prefix)
     set -p PATH /usr/local/opt/coreutils/libexec/gnubin
     set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
