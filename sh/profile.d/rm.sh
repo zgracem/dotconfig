@@ -1,7 +1,13 @@
 if _isGNU rm; then
-  rm() { command rm -Iv "$@"; }
+  rm()
+  {
+    command rm -Iv "$@"
+  }
 else
-  rm() { command rm -iv "$@"; }
-  #                  │└─ verbose
-  #                  └── interactive
+  rm()
+  {
+    command rm -iv "$@"
+    #           │└─ verbose
+    #           └── interactive
+  }
 fi
