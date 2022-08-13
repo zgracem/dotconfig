@@ -198,7 +198,7 @@
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
   "shellformat.path": "/usr/local/bin/shfmt",
-  "shellformat.flag": "--keep-padding --func-next-line",
+  "shellformat.flag": "--keep-padding --func-next-line --simplify",
   "slimLint.executablePath": "/Users/zozo/.rbenv/shims/slim-lint",
   "solargraph.bundlerPath": "/Users/zozo/.rbenv/shims/bundle",
   "solargraph.commandPath": "/Users/zozo/.rbenv/shims/solargraph",
