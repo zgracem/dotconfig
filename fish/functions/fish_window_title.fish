@@ -1,3 +1,4 @@
+# See $__fish_config_dir/packages/split-title
 function fish_window_title --description 'Update the window title'
     set -q long_hostname
     or set -g long_hostname (/bin/hostname -f 2>/dev/null)
