@@ -3,32 +3,33 @@
 #
 #     Set-Service ssh-agent -StartupType Manual
 #
-if status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
-    set -l keys id_{ed25519,rsa_2020}
+fish-is-newer-than 2.5; and status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
+or exit
 
-    set -Ue SSH_AUTH_SOCK
-    set -Ue SSH_AGENT_PID
+set -l keys id_{ed25519,rsa_2020}
 
-    set -l keychain_dir "$XDG_RUNTIME_DIR/keychain"
-    set -l ssh_env $keychain_dir/.env
+set -Ue SSH_AUTH_SOCK
+set -Ue SSH_AGENT_PID
 
-    set -l params --eval --quick --inherit any
-    set -a params --dir "$keychain_dir" --absolute
-    set -a params --quiet --ignore-missing
+set -l keychain_dir "$XDG_RUNTIME_DIR/keychain"
+set -l ssh_env $keychain_dir/.env
 
-    if path is -d $keychain_dir
-        set -lx SHELL (status fish-path 2>/dev/null; or command -s fish)
+set -l params --eval --quick --inherit any
+set -a params --dir "$keychain_dir" --absolute
+set -a params --quiet --ignore-missing
 
-        set -p PATH ~/opt/bin /usr/local/bin
-        keychain $params $keys >$ssh_env
+if path is -d $keychain_dir
+    set -lx SHELL (status fish-path 2>/dev/null; or command -s fish)
 
-        if test -s $ssh_env # ssh-agent loaded, or existing agent found
-            command chmod 600 $ssh_env
-            source $ssh_env
-            exit 0
-        else # `keychain` command failed and (hopefully) printed to stderr
-            command rm $ssh_env
-            exit 1
-        end
+    set -p PATH ~/opt/bin /usr/local/bin
+    keychain $params $keys >$ssh_env
+
+    if test -s $ssh_env # ssh-agent loaded, or existing agent found
+        command chmod 600 $ssh_env
+        source $ssh_env
+        exit 0
+    else # `keychain` command failed and (hopefully) printed to stderr
+        command rm $ssh_env
+        exit 1
     end
 end

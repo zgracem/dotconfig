@@ -2,9 +2,9 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-if fish-is-older-than 3.4
+if fish-is-older-than 3.1
     begin
-        set_color brred --reverse
+        echo -e '\e[1;7;91m'
         echo "*** These configuration files should not run on fish $version ***"
         set_color normal
     end >&2

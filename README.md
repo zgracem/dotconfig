@@ -13,7 +13,7 @@ Some people prune bonsai trees. I refactor my dotfiles. 🌱
 * Everything in `environment.d/` and `sh/` is compatible with any POSIX shell.
 * My bash config files can be run (with gracefully degrading functionality) on
   versions 3.2 to the latest 5.x release.
-* Alas, most of my fish configuration files will only run on version 3.4+.
+* Alas, most of my fish configuration files will only run on version 3.1+.
 
 [XDG Basedir Spec]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
