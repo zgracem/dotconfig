@@ -43,36 +43,36 @@ else
       # Deliberately use a constant here to test truthiness
       # shellcheck disable=SC2194
       case 1 in
-        $(( ver >= 433 ))*) # macOS 10.15
+        $((ver >= 433))*) # macOS 10.15
           TERM=nsterm
           ;;
-        $(( ver >= 421 ))*) # macOS 10.14
+        $((ver >= 421))*) # macOS 10.14
           TERM=nsterm
           ;;
-        $(( ver >= 400 ))*) # macOS 10.13
+        $((ver >= 400))*) # macOS 10.13
           TERM=nsterm-build400
           ;;
-        $(( ver >= 377 ))*) # macOS 10.12
+        $((ver >= 377))*) # macOS 10.12
           TERM=nsterm-build377
           ;;
-        $(( ver >= 361 ))*) # OS X 10.11
+        $((ver >= 361))*) # OS X 10.11
           TERM=nsterm-build361
           ;;
-        $(( ver >= 343 ))*) # OS X 10.10
+        $((ver >= 343))*) # OS X 10.10
           TERM=nsterm-build343
           ;;
-        $(( ver >= 326 ))*) # OS X 10.9
+        $((ver >= 326))*) # OS X 10.9
           TERM=nsterm-build326
           ;;
-        $(( ver >= 303 ))*) # OS X 10.7 & 10.8
+        $((ver >= 303))*) # OS X 10.7 & 10.8
           TERM=nsterm-256color
           ;;
-        $(( ver >= 240 ))*) # OS X 10.5
+        $((ver >= 240))*) # OS X 10.5
           TERM=nsterm-16color
           ;;
-        *)
-          # This is probably god-awfully old; just leave it alone.
-          : ;;
+        *) # This is probably god-awfully old; just leave it alone.
+          :
+          ;;
       esac
 
     # iTerm.app
