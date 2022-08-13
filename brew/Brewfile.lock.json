@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/command-not-found": {
-        "revision": "e634d80b0d4cb6e774af0aa8a0cf0211bef4bc1e"
+        "revision": "e74469b673268af250e54e7b728da83332840abb"
       },
       "homebrew/services": {
         "revision": "cf6ecbf582820fdc63475da68ff78695782657c2"
@@ -3707,7 +3707,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.5.9",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "315eb4494e863c546859add2ea221ce039d1a7e7",
+        "Homebrew/homebrew-core": "ba22bb6477b0770d1b52a3554aa3e24edaeb4fb2",
         "CLT": "13.4.0.0.1.1651278267",
         "Xcode": "13.4.1",
         "macOS": "12.3.1"
