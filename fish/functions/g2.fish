@@ -6,14 +6,20 @@ function g2 --description 'Go somewhere' -a alias
 
     set -l dir
     switch $destination[1]
+        case config
+            set dir "$XDG_CONFIG_HOME"
         case desktop
             set dir "$XDG_DESKTOP_DIR"
+        case docs
+            set dir "$XDG_DOCUMENTS_DIR"
         case dl
             set dir "$XDG_DOWNLOAD_DIR"
         case local
             set dir "$HOME/.local"
         case hub
             set dir "$HOME/.local/src/github.com"
+        case private
+            set dir "$HOME/.private"
         case scratch
             set dir "$HOME/tmp/_scratch"
         case defunct
@@ -29,7 +35,7 @@ function g2 --description 'Go somewhere' -a alias
         case sdmods
             set dir "$steam_dir/steamapps/common/Stardew Valley/Contents/MacOS/Mods"
         case sdsaves
-            set dir "$XDG_CONFIG_DIR/StardewValley/Saves"
+            set dir "$XDG_CONFIG_HOME/StardewValley/Saves"
         case steam
             set dir "$steam_dir"
         case steamapps

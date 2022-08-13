@@ -3,9 +3,12 @@ function archive-layers
     set -l used_dir /Volumes/Hub/Art/used
     # set -l _flag_dry_run TRUE
 
+    function list-acorn-layers
+        $XDG_CONFIG_HOME/bin/acorn-layers.applescript $argv
+    end
+
     for file in $argv
-        # ~/bin/acorn-layers.applescript
-        set -l layers (acorn-layers $file | ag -o 'IMG[_ ]\d{4}')
+        set -l layers (list-acorn-layers $file | ag -o 'IMG[_ ]\d{4}')
 
         if test -z "$layers"
             echo >&2 "*** No `IMG_####` layers:" (basename $file)
