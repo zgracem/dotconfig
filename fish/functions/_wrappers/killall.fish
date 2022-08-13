@@ -1,4 +1,4 @@
-if command -sq killall
+if in-path killall
     function killall --description 'Kill processes by name'
         set -p argv -v
         command killall $argv

@@ -1,4 +1,4 @@
-command -sq pip; or exit
+in-path pip; or exit
 
 # Can't use environment variables like $HOME in pip.conf
 set -gx PIP_CACHE_DIR $HOME/var/cache/pip

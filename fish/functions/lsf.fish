@@ -1,4 +1,4 @@
-if command -sq exa
+if in-path exa
     function lsf --wraps exa --description 'List files with "full" info'
         ll --group --inode --extended $argv
     end

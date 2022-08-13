@@ -1,7 +1,7 @@
 set -gx BROWSER
 
 # Set default browser to links, if available
-command -sq links; and set BROWSER links
+in-path links; and set BROWSER links
 
 # Use GUI app if not logged in remotely
 if not set -q SSH_CONNECTION

@@ -1,4 +1,4 @@
-command -sq bat; or exit
+in-path bat; or exit
 
 function bat --description 'A cat clone with wings'
     set -l args

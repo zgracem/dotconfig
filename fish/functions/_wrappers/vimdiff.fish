@@ -1,5 +1,5 @@
 function vimdiff --description 'Show differences with Vim'
-    if command -sq vimdiff
+    if in-path vimdiff
         command vimdiff $argv
     else
         set -p argv -d

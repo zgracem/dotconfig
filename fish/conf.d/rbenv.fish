@@ -1,4 +1,4 @@
-command -sq rbenv; or exit
+in-path rbenv; or exit
 
 path is -d $HOME/.rbenv; or mkdir $HOME/.rbenv
 path is -f $HOME/.rbenv/version; or rbenv global system

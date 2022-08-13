@@ -7,7 +7,7 @@ function _whatis --description 'Display one-line manual page descriptions' --arg
     string replace -ar '\s+' ' ' $output
 end
 
-if command -sq gwhatis
+if in-path gwhatis
     function whatis --wraps gwhatis
         _whatis $argv
     end

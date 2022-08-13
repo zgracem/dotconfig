@@ -1,4 +1,4 @@
-command -sq brew; or exit
+in-path brew; or exit
 
 set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
 

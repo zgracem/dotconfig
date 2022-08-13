@@ -1,4 +1,4 @@
-command -sq brew; or exit
+in-path brew; or exit
 
 function brew --description 'The missing package manager for macOS'
     # Implement `brew cd <location>` to quickly move to Homebrew dirs.

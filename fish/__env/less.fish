@@ -14,7 +14,7 @@ set -gx LESSCHARSET utf-8
 set -gx LESSHISTFILE /dev/null
 
 # source highlighting
-if set -l highlighter (command -sq src-hilite-lesspipe.sh)
+if set -l highlighter (command -v src-hilite-lesspipe.sh 2>/dev/null)
     set -gx LESSOPEN "| $highlighter %s"
     set -a LESS --RAW-CONTROL-CHARS # [-R] output raw ANSI (e.g. \e[1;31m)
 end

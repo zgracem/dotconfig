@@ -1,6 +1,6 @@
 function manpdf --description 'View a manual page as PDF'
     # https://github.com/zgracem/manpdf
-    command -sq manpdf; or return 127
+    in-path manpdf; or return 127
 
     set -lx MANPDF_DIR "$XDG_DATA_HOME/doc/pdf"
 
