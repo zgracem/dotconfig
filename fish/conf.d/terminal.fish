@@ -16,6 +16,9 @@ switch $TERM_PROGRAM
         string match -q screen "$ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX$TERM"
         and exit
         set --global ITERM_SHELL_INTEGRATION_INSTALLED Yes
+    case '*'
+        set --erase SHELL_INTEGRATION
+        exit
 end
 
 function __si_initialize --on-event fish_prompt
