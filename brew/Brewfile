@@ -161,7 +161,7 @@ brew "taglib" # for taglib-ruby gem
 brew "groff"
 brew "help2man"
 if OS.mac?
-  tap  "alhadis/troff/"
+  tap  "alhadis/troff"
   brew "alhadis/troff/man-db"
 end
 

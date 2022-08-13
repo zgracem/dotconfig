@@ -27,6 +27,9 @@
         "options": {
           "clone_target": "file:///Users/zozo/Dropbox/Projects/homebrew-formulae"
         }
+      },
+      "alhadis/troff": {
+        "revision": "f098067d28618f918c3b4cf24b7f2b044ce4ba84"
       }
     },
     "brew": {
