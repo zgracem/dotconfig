@@ -13,43 +13,43 @@ set -p MANPATH /usr/local/share/man
 # Homebrew
 if is-macos; and path is -d $HOMEBREW_PREFIX
     # GNU coreutils (w/out `g` prefix)
-    set -p PATH /usr/local/opt/coreutils/libexec/gnubin
-    set -p MANPATH /usr/local/opt/coreutils/libexec/gnuman
+    set -p PATH $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman
 
     # GNU findutils (w/out `g` prefix)
-    set -p PATH /usr/local/opt/findutils/libexec/gnubin
-    set -p MANPATH /usr/local/opt/findutils/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/findutils/libexec/gnubin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/findutils/share/man
 
     # GNU binutils
-    set -p PATH /usr/local/opt/binutils/bin
-    set -p MANPATH /usr/local/opt/binutils/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/binutils/bin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/binutils/share/man
 
     # GNU inetutils (w/out `g` prefix)
-    set -p PATH /usr/local/opt/inetutils/libexec/gnubin
-    set -p MANPATH /usr/local/opt/inetutils/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/inetutils/libexec/gnubin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/inetutils/share/man
 
     # GNU grep (w/out `g` prefix)
-    set -p PATH /usr/local/opt/grep/libexec/gnubin
-    set -p MANPATH /usr/local/opt/grep/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/grep/libexec/gnubin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/grep/share/man
 
     # GNU sed (w/out `g` prefix)
-    set -p PATH /usr/local/opt/gnu-sed/libexec/gnubin
-    set -p MANPATH /usr/local/opt/gnu-sed/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/gnu-sed/share/man
 
     # GNU tar (w/out `g` prefix)
-    set -p PATH /usr/local/opt/gnu-tar/libexec/gnubin
-    set -p MANPATH /usr/local/opt/gnu-tar/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/gnu-tar/share/man
 
     # curl
-    set -p PATH /usr/local/opt/curl/bin
-    set -p MANPATH /usr/local/opt/curl/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/curl/bin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/curl/share/man
 
     # ncurses
-    set -p PATH /usr/local/opt/ncurses/bin
-    set -p MANPATH /usr/local/opt/ncurses/share/man
+    set -p PATH $HOMEBREW_PREFIX/opt/ncurses/bin
+    set -p MANPATH $HOMEBREW_PREFIX/opt/ncurses/share/man
 
     # openjdk
-    set -p PATH /usr/local/opt/openjdk/bin
+    set -p PATH $HOMEBREW_PREFIX/opt/openjdk/bin
 
     # Xcode
     set -a PATH /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
@@ -61,8 +61,9 @@ end
 if is-linux
     for dir in ~/.linuxbrew /home/linuxbrew/.linuxbrew
         if path is -x $dir/bin/brew
-            set -p PATH $dir/bin $dir/sbin
-            set -p MANPATH $dir/share/man
+            set -gx HOMEBREW_PREFIX $dir
+            set -p PATH $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+            set -p MANPATH $HOMEBREW_PREFIX/share/man
             break
         end
     end

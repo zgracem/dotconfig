@@ -1,5 +1,7 @@
 command -sq brew; or exit
 
+set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
+
 # Don't display hints about setting environment variables
 set -gx HOMEBREW_NO_ENV_HINTS 1
 
