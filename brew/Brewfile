@@ -160,7 +160,10 @@ brew "taglib" # for taglib-ruby gem
 # documentation
 brew "groff"
 brew "help2man"
-brew "alhadis/troff/man-db" if OS.mac?
+if OS.mac?
+  tap  "alhadis/troff/"
+  brew "alhadis/troff/man-db"
+end
 
 # JavaScript
 brew "coffeescript"
