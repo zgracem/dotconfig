@@ -62,7 +62,7 @@
     80,
     118
   ],
-  "editor.snippetSuggestions": "top",
+  "editor.snippetSuggestions": "bottom",
   "editor.stickyTabStops": true,
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.showSnippets": true,
@@ -356,7 +356,8 @@
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.wordBasedSuggestions": false
+    "editor.wordBasedSuggestions": false,
+    "files.insertFinalNewline": true
   },
   "[ruby]": {
     "editor.formatOnSave": true,
@@ -370,6 +371,9 @@
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
     "editor.wordWrap": "off"
+  },
+  "[viml]": {
+    "files.trimTrailingWhitespace": false
   },
   "[yaml]": {
     "editor.formatOnSave": true,
