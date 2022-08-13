@@ -25,7 +25,6 @@ if OS.mac?
   cask "firefox", args: { appdir: "/Applications" }
   cask "fission"
   cask "go2shell"
-  cask "google-chrome"
   cask "grandperspective"
   cask "handbrake"
   cask "istat-menus"

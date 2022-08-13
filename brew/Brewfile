@@ -146,8 +146,6 @@ if OS.mac?
   brew "autoconf"
   brew "cmake"
   brew "glib"
-  brew "gmp"
-  brew "gsl"
   brew "llvm"
   brew "texinfo"
 end
