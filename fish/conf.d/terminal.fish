@@ -13,6 +13,8 @@ switch $TERM_PROGRAM
     case vscode
         set --global VSCODE_SHELL_INTEGRATION 1
     case iTerm.app
+        string match -q screen "$ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX$TERM"
+        and exit
         set --global ITERM_SHELL_INTEGRATION_INSTALLED Yes
 end
 
