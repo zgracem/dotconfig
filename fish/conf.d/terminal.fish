@@ -126,13 +126,28 @@ function __si_initialize --on-event fish_prompt
         end
     end
 
-    # Preserve the user's existing prompt, and wrap it in our escape sequences.
+    # Preserve the user's existing prompt to wrap in escape sequences.
     functions --copy fish_prompt __original_fish_prompt
 
-    function fish_prompt
-        __si_prompt_start
-        __original_fish_prompt
-        __si_cmd_start
+    # Only override fish_mode_prompt if it is non-empty.
+    if __fish_has_mode_prompt
+        functions --copy fish_mode_prompt __original_fish_mode_prompt
+
+        function fish_mode_prompt
+            __si_prompt_start
+            __original_fish_mode_prompt
+        end
+
+        function fish_prompt
+            __original_fish_prompt
+            __si_cmd_start
+        end
+    else
+        function fish_prompt
+            __si_prompt_start
+            __original_fish_prompt
+            __si_cmd_start
+        end
     end
 
     # Report (fake) shell integration version to iTerm.
