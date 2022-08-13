@@ -155,6 +155,7 @@ end
 brew "hub"
 brew "ncurses"
 brew "shellcheck"
+brew "shfmt"
 brew "taglib" # for taglib-ruby gem
 
 # documentation
