@@ -21,6 +21,12 @@
       },
       "homebrew/bundle": {
         "revision": "4756e4c4cf95485c5ea4da27375946c1dac2c71d"
+      },
+      "zgracem/formulae": {
+        "revision": "c08ec339bf2711fbf2ef37c68826c298e8189b48",
+        "options": {
+          "clone_target": "file:///Users/zozo/Dropbox/Projects/homebrew-formulae"
+        }
       }
     },
     "brew": {
@@ -3689,6 +3695,10 @@
             }
           }
         }
+      },
+      "zgracem/formulae/unrar": {
+        "version": "6.1.7",
+        "bottle": false
       }
     }
   },
