@@ -4,7 +4,7 @@ syncdir()
 { #: - synchronizes the contents of two directories
   #: $ syncdir <source> [[<user>@]<host>:]<destination> [<rsync options>]
 
-  if (( $# >= 2 )); then
+  if [[ $# -ge 2 ]]; then
     local src="${1%/}" # trim trailing slash
     local dst="${2%/}" # trim trailing slash
     shift 2

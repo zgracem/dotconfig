@@ -48,7 +48,7 @@ export ${!Z_PROMPT_*} ${!Z_SET_*}
 # -----------------------------------------------------------------------------
 
 # Only use colours if supported by current terminal
-if (( TERM_COLOURDEPTH < 8 )); then
+if [[ $TERM_COLOURDEPTH -lt 8 ]]; then
   Z_PROMPT_COLOUR=false
 fi
 
@@ -100,8 +100,8 @@ _z_PS1_compress_pwd()
   shift $((OPTIND - 1))
 
   # Sanity check
-  # (( min_depth <= keep_dirs )) && min_depth=$keep_dirs
-  # (( keep_dirs > min_depth )) && min_depth=$keep_dirs
+  # [[ $min_depth -le $keep_dirs ]] && min_depth=$keep_dirs
+  # [[ $keep_dirs -gt $min_depth ]] && min_depth=$keep_dirs
 
   # ---------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ _z_PS1_compress_pwd()
   esac
 
   # Are there enough elements/characters to warrant compression?
-  if (( ${#in_parts[@]} < min_depth )) && (( ${#input} < max_length )); then
+  if [[ ${#in_parts[@]} -lt $min_depth ]] && [[ ${#input} -lt $max_length ]]; then
     # PWD is already short; just return what we were given.
     printf "%s" "$input"
     return
@@ -152,7 +152,7 @@ _z_PS1_compress_pwd()
       local part="${in_parts[$i]}"
 
       # No need to compress elements that are already <= $keep_chars long.
-      if (( ${#part} > keep_chars )); then
+      if [[ ${#part} -gt $keep_chars ]]; then
           part="${part:0:keep_chars}${indicator}"
       fi
 
@@ -177,13 +177,13 @@ _z_PS1_print_exit()
 
   [[ $Z_PROMPT_EXIT == true ]] || return $last_exit
   [[ $1 =~ ^[[:digit:]]+$ ]] && last_exit=$1
-  (( last_exit == 0 )) && return 0
+  [[ $last_exit -eq 0 ]] && return 0
 
   # If terminated from a signal (128 >= $? >= 165), get signal name from `kill`
   # (`-l` = list) and print that instead.
-  if (( last_exit > 128 )) && sigspec=$(builtin kill -l "$last_exit" 2>/dev/null); then
+  if [[ $last_exit -gt 128 ]] && sigspec=$(builtin kill -l "$last_exit" 2>/dev/null); then
     last_exit=${sigspec#SIG}
-  elif (( last_exit >= 64 && last_exit <= 78 )); then
+  elif [[ $last_exit -ge 64 ]] && [[ $last_exit -le 78 ]]; then
     # Someone's been reading sysexits(3)... ;)
     local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
       [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
@@ -233,7 +233,7 @@ _z_PS1_git_info()
     untracked=$(( ${#BASH_REMATCH[@]} - 1 ))
   fi
 
-  if (( unstaged > 0 )) || (( untracked > 0 )); then
+  if [[ $unstaged -gt 0 ]] || [[ $untracked -gt 0 ]]; then
     dirty=true
   fi
 
@@ -257,21 +257,21 @@ _z_PS1_git_info()
   fi
 
   # # add '*' if there are untracked files
-  # if (( untracked > 0 )); then
+  # if [[ $untracked -gt 0 ]]; then
   #   icons+=${esc_reset:-}
   #   icons+=${esc_green:-}
   #   icons+="*"
   # fi
 
   # add '+' if we're ahead of origin, '−' if behind, '±' if both
-  if (( (ahead + behind) > 0 )); then
+  if [[ $((ahead + behind)) -gt 0 ]]; then
     icons+=${esc_reset:-}
     icons+=${esc_yellow:-}
-    if (( ahead > 0 )) && (( behind == 0 )); then
+    if [[ $ahead -gt 0 ]] && [[ $behind -eq 0 ]]; then
       icons+="+"
-    elif (( ahead == 0 )) && (( behind > 0 )); then
+    elif [[ $ahead -eq 0 ]] && [[ $behind -gt 0 ]]; then
       icons+="−"
-    elif (( ahead > 0 )) && (( behind > 0 )); then
+    elif [[ $ahead -gt 0 ]] && [[ $behind -gt 0 ]]; then
       icons+='±'
     fi
   fi
@@ -292,7 +292,7 @@ _z_PS1_jobs()
   jobs="${jobs//[^$'\n']/}"
   local job_count=$(( ${#jobs} + 1 )) # no trailing newline at EOT
 
-  if (( job_count > 0 )); then
+  if [[ $job_count -gt 0 ]]; then
     printf ' %d' "${job_count}"
   fi
 }
@@ -340,7 +340,7 @@ _z_PS1_update_titles()
   local win_title="${USER}@${HOSTNAME}: ${PWD/#$HOME/$'~'}"
 
   # Tab title, e.g. "Athena: ~/…/man1"
-  if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 44 )); then
+  if [[ ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} -ge 44 ]]; then
     local PROMPT_DIRTRIM=1
     local pwd
     pwd='\w'
@@ -362,7 +362,7 @@ _z_PS1_update_titles()
 
 if [[ $Z_PROMPT_COLOUR == true ]]; then
   # root gets red prompt
-  if (( EUID == 0 )); then
+  if [[ $EUID -eq 0 ]]; then
     esc_user=${esc_brred}
   fi
 
@@ -412,7 +412,7 @@ fi
 PS1+="${PS1_hi}\\w${PS1_reset}"
 
 # § for me, # for root
-if (( EUID == 0 )); then
+if [[ $EUID -eq 0 ]]; then
   PS1+=" ${PS1_user}#"
 elif [ "$ITERM_PROFILE" = "ANSI" ]; then
   PS1+=" ${PS1_user}$"

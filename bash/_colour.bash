@@ -9,7 +9,7 @@ if [[ -z $TERM_COLOURDEPTH || -n $Z_RELOADING ]]; then
 fi
 
 # skip this file if the terminal can't support at least eight colours
-if (( TERM_COLOURDEPTH >= 8 )); then
+if [[ $TERM_COLOURDEPTH -ge 8 ]]; then
   export TERM_COLOURDEPTH
 else
   printf >&2 "%s: %s only has %d colours\\n" \
@@ -36,7 +36,7 @@ black=30; red=31; green=32; yellow=33; blue=34;
 magenta=35; cyan=36; white=37; default=39
 colours=(black red green yellow blue magenta cyan white default)
 
-if (( TERM_COLOURDEPTH >= 16 )); then
+if [[ $TERM_COLOURDEPTH -ge 16 ]]; then
   # Use aixterm codes to get actual *bright* colours where supported, instead
   # of relying on the emulator to display bold text as bright-but-unbold.
   # (Inspired by Prompt, which doesn't offer that option.)
@@ -70,7 +70,7 @@ colour_dim=$brblack  # secondary colour
 
 case $TERM_PROGRAM in
   Apple_Terminal)
-    if (( ${TERM_PROGRAM_VERSION%%.*} >= 377 )); then
+    if [[ ${TERM_PROGRAM_VERSION%%.*} -ge 377 ]]; then
       colour_dim=$faint
     fi
     ;;
@@ -108,7 +108,7 @@ _z_colour_add_esc ${colours[*]} ${props[*]}
 # grep
 # -----------------------------------------------------------------------------
 
-if (( TERM_COLOURDEPTH >= 16 )); then
+if [[ $TERM_COLOURDEPTH -ge 16 ]]; then
   export GREP_COLORS=""
 
   # Whole selected (matching) lines; or non-matching lines if -v is specified
@@ -280,7 +280,7 @@ EXA_COLORS+="*.DS_Store=30:"
 # -----------------------------------------------------------------------------
 
 # colourize history output
-if (( TERM_COLOURDEPTH >= 16 )); then
+if [[ $TERM_COLOURDEPTH -ge 16 ]]; then
   # shellcheck disable=SC2154
   HISTTIMEFORMAT="${esc_dim}${HISTTIMEFORMAT}${esc_reset}"
 fi

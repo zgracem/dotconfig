@@ -14,7 +14,7 @@ HISTTIMEFORMAT='%F %T '
 
 # history file
 
-if (( ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} >= 43 )); then
+if [[ ${BASH_VERSINFO[0]}${BASH_VERSINFO[1]} -ge 43 ]]; then
   HISTSIZE=-1                 # unlimited session history
   HISTFILESIZE=-1             # unlimited $HISTFILE size
 else
