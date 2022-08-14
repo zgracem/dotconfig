@@ -1,5 +1,5 @@
 function _ssh --wraps ssh --description 'Open an SSH session in a new window'
-    set -l cmd "ssh -t $argv"
+    set -l cmd "command ssh -t $argv"
     set -l title (string split -f1 . $argv[1])
 
     if in-tmux
