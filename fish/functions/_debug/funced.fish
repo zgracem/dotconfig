@@ -14,11 +14,12 @@ function funced --wraps funcsave --description 'Edit a function interactively' -
     end
 
     if not path is -f $function_source
-        set -l foursp "    "
         if functions -q $function
-            functions -- $function | string replace \t "$foursp" >$function_source
+            functions --no-details -- $function >$function_source
+        else if string match -q -- "-*" $function
+            echo "function -- $function;end" | fish_indent >$function_source
         else
-            echo -e "function $function --description ''\\n$foursp\\nend" >$function_source
+            echo "function $function;end" | fish_indent >$function_source
         end
     end
 
