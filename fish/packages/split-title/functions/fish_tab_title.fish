@@ -1,4 +1,3 @@
-# See $__fish_config_dir/packages/split-title
 function fish_tab_title --description 'Update the tab title'
     set -l cwd (short_home $PWD)
     set -l cwd_parts (string split "/" "$cwd")

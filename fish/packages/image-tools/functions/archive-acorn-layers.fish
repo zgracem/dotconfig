@@ -1,4 +1,4 @@
-function archive-layers
+function archive-acorn-layers
     set -l inbox ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
     set -l used_dir /Volumes/Hub/Art/used
     # set -l _flag_dry_run TRUE
