@@ -1,4 +1,4 @@
-function cleanup-spotify
+function cleanup-spotify -d "Cleanup Spotify cache"
     killall -v Spotify
 
     set -l launch_agent ~/Library/LaunchAgents/com.spotify.webhelper.plist

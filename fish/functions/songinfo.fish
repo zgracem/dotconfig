@@ -1,4 +1,4 @@
-function songinfo
+function songinfo -d "Print metadata for audio files"
     set -l songs $argv
     for song in $songs
         switch $song

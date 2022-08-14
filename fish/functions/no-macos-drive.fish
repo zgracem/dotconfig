@@ -1,4 +1,4 @@
-function no-macos-drive
+function no-macos-drive -d "Prevent macOS from writing metadata"
     set -l url "http://blog.hostilefork.com/trashes-fseventsd-and-spotlight-v100/"
     echo "This file disables Spotlight indexing for this drive."\n$url > .metadata_never_index
     realpath .metadata_never_index

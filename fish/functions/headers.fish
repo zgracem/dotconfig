@@ -1,4 +1,4 @@
-function headers
+function headers -d "Print HTTP response headers for a URL"
     argparse -xw,c w/wget c/curl -- $argv
     or return
 

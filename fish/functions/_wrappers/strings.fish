@@ -1,6 +1,6 @@
 # `-a` scans the whole file instead of using insecure libbfd
 # >> https://lcamtuf.blogspot.ca/2014/10/psa-dont-run-strings-on-untrusted-files.html
-function strings
+function strings -d "Display printable strings in file(s)"
     set -p argv -a
     if in-path strings
         command strings $argv
