@@ -120,4 +120,5 @@ function __si_initialize --on-event fish_prompt
     # Report (fake) shell integration version to iTerm.
     string match -q $TERM_PROGRAM "iTerm.app"
     and __iterm_esc ShellIntegrationVersion=69 shell=fish
+    and __si_update_cwd
 end
