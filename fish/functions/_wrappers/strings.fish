@@ -1,13 +1,12 @@
 # `-a` scans the whole file instead of using insecure libbfd
 # >> https://lcamtuf.blogspot.ca/2014/10/psa-dont-run-strings-on-untrusted-files.html
-if in-path strings
-    function strings
-        set -p argv -a
+function strings
+    set -p argv -a
+    if in-path strings
         command strings $argv
-    end
-else if in-path gstrings
-    function strings
-        set -p argv -a
+    else if in-path gstrings
         command gstrings $argv
+    else
+        return 127
     end
 end
