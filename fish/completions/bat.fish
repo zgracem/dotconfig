@@ -82,7 +82,7 @@ function __bat_style_opts
         "header,alias for header-filename" \
         "header-filename,filename above content" \
         "header-filesize,filesize above content" \
-        "grid,lines b/w sidebar, header, content" \
+        "grid,lines b/w sidebar/header/content" \
         "numbers,line numbers in sidebar" \
         "rule,separate files" \
         "snip,separate ranges"
