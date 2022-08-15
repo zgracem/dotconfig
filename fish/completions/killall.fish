@@ -1,17 +1,6 @@
 # macOS `killall`
 
 if uname -s | string match -q Darwin
-    function __fish_complete_ttys
-        ps a -o tty | sed 1d | uniq
-    end
-
-    function __fish_complete_process_names
-        set -l re '^\s*\d+\) "([^"\(]+).*".+'
-        lsappinfo list | string match -rg $re | sort -u | while read -l proc
-            string trim -r $proc
-        end
-    end
-
     complete -c killall --erase
 
     complete -c killall -n "__fish_is_nth_token 1" -xa "(__fish_complete_process_names)"
