@@ -26,10 +26,6 @@ function __bat_complete_languages
     end
 end
 
-function __bat_complete_themes
-    command bat --list-themes | command cat
-end
-
 function __bat_cache
     __fish_seen_subcommand_from cache
 end
@@ -133,7 +129,7 @@ complete -c bat -s A -l show-all -d "Show non-printable characters" -n __bat_no_
 complete -c bat -l style -x -k -a "$style_opts" -d "Configure which elements to display in addition to file contents" -n __bat_no_excl
 complete -c bat -l tabs -x -a "$tabs_opts" -d "Set tab width" -n __bat_no_excl
 complete -c bat -l terminal-width -x -d "Set terminal width, +offset, or -offset" -n __bat_no_excl
-complete -c bat -l theme -x -a "(__bat_complete_themes)" -d "Set the syntax highlighting theme" -n __bat_no_excl
+complete -c bat -l theme -x -a "(command bat --list-themes | command cat)" -d "Set the syntax highlighting theme" -n __bat_no_excl
 complete -c bat -s V -l version -f -d "Show version information" -n __fish_is_first_arg
 complete -c bat -l wrap -x -a "$wrap_opts" -d "Text-wrapping mode" -n __bat_no_excl
 
