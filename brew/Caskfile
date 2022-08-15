@@ -46,7 +46,6 @@ if OS.mac?
   cask "superduper"
   cask "swiftbar"
   cask "syncplay"
-  cask "the-archive-browser"
   cask "the-unarchiver"
   cask "tor-browser"
   cask "transmission"
@@ -74,6 +73,7 @@ if OS.mac?
   mas "Mactracker", id: 430255202
   mas "Numbers", id: 409203825
   mas "Pages", id: 409201541
+  mas "The Archive Browser", id: 510232205
   mas "Things", id: 904280696
   mas "Xcode", id: 497799835
 end

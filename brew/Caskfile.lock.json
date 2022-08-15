@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "8e824db47b152a835e3ed9458ad28402127fad8e"
+        "revision": "3a9d303069e5d608360a3589cbf88299878a28b2"
       },
       "homebrew/cask-versions": {
-        "revision": "60c0c8339888255fffb6ffa895ecd533ff455d73"
+        "revision": "60d891acf8584c3eeb0fa98973d4b273104bcb84"
       }
     },
     "cask": {
@@ -34,7 +34,7 @@
         }
       },
       "fantastical": {
-        "version": "3.6.6,1454",
+        "version": "3.6.9,1466",
         "options": {
           "full_name": "fantastical",
           "args": {
@@ -505,6 +505,10 @@
       "Xcode": {
         "id": "497799835",
         "version": "13.4.1"
+      },
+      "The Archive Browser": {
+        "id": "510232205",
+        "version": "1.11.2"
       }
     }
   },
@@ -513,7 +517,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.5.9",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "315eb4494e863c546859add2ea221ce039d1a7e7",
+        "Homebrew/homebrew-core": "a2948a7c2a213df8399bdd7c0a95365fdaf04e89",
         "CLT": "13.4.0.0.1.1651278267",
         "Xcode": "13.4.1",
         "macOS": "12.3.1"
