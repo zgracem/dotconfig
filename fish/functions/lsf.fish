@@ -5,7 +5,7 @@ if in-path exa
 else
     function lsf --wraps ls --description 'List files with "full" info'
         # [l]ong list of [A]ll files; show [i]node numbers
-        set params -l -A -i
+        set -l params -l -A -i
 
         if is-macos
             # display extended attributes and file flags

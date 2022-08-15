@@ -9,17 +9,15 @@ function rolldice --description 'Roll some dice'
     end
 
     for arg in $argv
-        set -l die
-        set -l times
         set -l rematch (string match -ar $regex $arg)
 
         switch (count $rematch)
             case 3
-                set die $rematch[3]
-                set times $rematch[2]
+                set -f die $rematch[3]
+                set -f times $rematch[2]
             case 2
-                set die $rematch[2]
-                set times 1
+                set -f die $rematch[2]
+                set -f times 1
             case '*'
                 echo >&2 "error: don't know how to roll “$arg”" # "(got" (count $rematch) "matches, expected 2 or 3)"
                 return 1

@@ -14,13 +14,12 @@ function set_terminal_title --description 'Set the xterm-compatible terminal tit
         set dcs_post $ST
     end
 
-    set -l Ps
     if set -q _flag_window
-        set Ps 2
+        set -f Ps 2
     else if set -q _flag_tab
-        set Ps 1
+        set -f Ps 1
     else if set -q _flag_both
-        set Ps 0
+        set -f Ps 0
     else
         echo >&2 "failed to specify which title to set"
         return 121

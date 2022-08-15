@@ -49,18 +49,17 @@ end
 
 function __bat_complete_map_syntax
     set -l token (commandline -ct)
-    set -l comps
 
     if string match -qr '(?<glob>.+):(?<syntax>.*)' -- $token
         # If token ends with a colon, complete with the list of language names.
-        set comps $glob:(__bat_complete_language $syntax)
+        set -f comps $glob:(__bat_complete_language $syntax)
     else if string match -qr '\*' -- $token
         # If token contains a globbing character (`*`), complete only possible
         # globs in the current directory
-        set comps (__bat_complete_files $token | string match -er '[*]'):
+        set -f comps (__bat_complete_files $token | string match -er '[*]'):
     else
         # Complete files (and globs).
-        set comps (__bat_complete_files $token | string match -erv '/$'):
+        set -f comps (__bat_complete_files $token | string match -erv '/$'):
     end
 
     if set -q comps[1]
