@@ -3,8 +3,8 @@
 #   https://github.com/sharkdp/bat/blob/06b8dcb/assets/completions/bat.fish
 #   https://github.com/fish-shell/fish-shell/blob/ea8a2b2/share/completions/bat.fish
 
-function __complete_cheat -a token
-    # Try to complete files by calling `complete -C` on a fake command name,
+function __bat_complete_files -a token
+    # Cheat to complete files by calling `complete -C` on a fake command name,
     # like `__fish_complete_directories` does.
     set -l fake_command aaabccccdeeeeefffffffffgghhhhhhiiiii
     complete -C"$fake_command $token"
@@ -40,10 +40,10 @@ function __bat_complete_map_syntax
     else if string match -qr '\*' -- $token
         # If token contains a globbing character (`*`), complete only possible
         # globs in the current directory
-        set comps (__complete_cheat $token | string match -er '[*]'):
+        set comps (__bat_complete_files $token | string match -er '[*]'):
     else
         # Complete files (and globs).
-        set comps (__complete_cheat $token | string match -erv '/$'):
+        set comps (__bat_complete_files $token | string match -erv '/$'):
     end
 
     if set -q comps[1]
