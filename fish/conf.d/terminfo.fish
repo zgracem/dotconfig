@@ -4,7 +4,7 @@ string match -q $TERM dumb; and exit
 set --erase TERMCAP
 
 if fish-is-newer-than 3.0
-    set -gx --path TERMINFO_DIRS $XDG_DATA_HOME/terminfo /usr{/local/opt/ncurses,}/share/terminfo
+    set -gx --path TERMINFO_DIRS $XDG_DATA_HOME/terminfo /usr/local/opt/ncurses/share/terminfo /usr/share/terminfo
     fix-path TERMINFO_DIRS
     set -gx TERMINFO $TERMINFO_DIRS[1]
 else
