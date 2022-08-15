@@ -72,20 +72,23 @@ set -l italic_text_opts '
     never\tdefault
 '
 
-set -l style_opts '
-    default\trecommended\ components
-    auto\tsame\ as\ "default"\ unless\ piped
-    full\tall\ components
-    plain\tno\ components
-    changes\tGit\ change\ markers
-    header\talias\ for\ header-filename
-    header-filename\tfilename\ above\ content
-    header-filesize\tfilesize\ above\ content
-    grid\tlines\ b/w\ sidebar,\ header,\ content
-    numbers\tline\ numbers\ in\ sidebar
-    rule\tseparate\ files
-    snip\tseparate\ ranges
-'
+function __bat_style_opts
+    set -l style_opts \
+        "default,recommended components" \
+        "auto,same as 'default' unless piped" \
+        "full,all components" \
+        "plain,no components" \
+        "changes,Git change markers" \
+        "header,alias for header-filename" \
+        "header-filename,filename above content" \
+        "header-filesize,filesize above content" \
+        "grid,lines b/w sidebar, header, content" \
+        "numbers,line numbers in sidebar" \
+        "rule,separate files" \
+        "snip,separate ranges"
+
+    string replace , \t $style_opts
+end
 
 # While --tabs theoretically takes any number, most people should be OK with these.
 # Specifying a list lets us explain what 0 does.
@@ -126,7 +129,7 @@ complete -c bat -s p -l plain -d "Disable decorations" -n __bat_no_excl
 complete -c bat -o pp -d "Disable decorations and paging" -n __bat_no_excl
 complete -c bat -s P -d "Disable paging" -n __bat_no_excl
 complete -c bat -s A -l show-all -d "Show non-printable characters" -n __bat_no_excl
-complete -c bat -l style -x -k -a "$style_opts" -d "Configure which elements to display in addition to file contents" -n __bat_no_excl
+complete -c bat -l style -x -k -a "(__fish_complete_list , __bat_style_opts)" -d "Configure which elements to display in addition to file contents" -n __bat_no_excl
 complete -c bat -l tabs -x -a "$tabs_opts" -d "Set tab width" -n __bat_no_excl
 complete -c bat -l terminal-width -x -d "Set terminal width, +offset, or -offset" -n __bat_no_excl
 complete -c bat -l theme -x -a "(command bat --list-themes | command cat)" -d "Set the syntax highlighting theme" -n __bat_no_excl
