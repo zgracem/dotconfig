@@ -1,6 +1,6 @@
 if in-path killall
     function killall --description 'Kill processes by name'
-        set -p argv -v
+        set -p argv -v # verbose
         command killall $argv
     end
 else if is-cygwin
