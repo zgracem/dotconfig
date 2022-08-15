@@ -1,4 +1,4 @@
-# unar <https://unarchiver.c3.cx/commandline>
+# unar <https://theunarchiver.com/command-line>
 
 complete -c unar -s o -o output-directory -r -d 'Directory for writing archive contents'
 complete -c unar -s f -o force-overwrite -d 'Always overwrite existing files'

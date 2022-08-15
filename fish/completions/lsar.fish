@@ -1,4 +1,4 @@
-# lsar <https://unarchiver.c3.cx/commandline>
+# lsar <https://theunarchiver.com/command-line>
 
 complete -c lsar -s l -o long -d 'Print more information'
 complete -c lsar -s t -o test -d 'Test integrity of archive if possible'
