@@ -1,3 +1,4 @@
+is-cygwin; or exit
 in-path bat; or exit
 
 function bat --description 'A cat clone with wings'
@@ -7,11 +8,7 @@ function bat --description 'A cat clone with wings'
             case cache "-*"
                 set -a args $arg
             case "*"
-                if is-cygwin
-                    set -a args (cygpath --windows $arg)
-                else
-                    set -a args $arg
-                end
+                set -a args (cygpath --windows $arg)
         end
     end
 
