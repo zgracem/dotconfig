@@ -8,7 +8,7 @@ function man --description 'Display manual pages' # in a new window with colours
 
     # Some switches don't open a man page. Let those do their thing.
     set -l switches d f h k V w W "?"
-    if string match -q -- "-" (string sub --length 1 -- "$argv[1]")
+    if string match -q -- "-*" "$argv[1]"
         switch (string sub --start 2 -- "$argv[1]")
             case "'*"$switches"*'"
                 command man $argv
