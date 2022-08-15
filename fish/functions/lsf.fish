@@ -1,6 +1,6 @@
 if in-path exa
     function lsf --wraps exa --description 'List files with "full" info'
-        ll --group --inode --extended $argv
+        exa --long --group --inode --extended $argv
     end
 else
     function lsf --wraps ls --description 'List files with "full" info'

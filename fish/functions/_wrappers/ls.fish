@@ -1,12 +1,10 @@
 # Overrides $__fish_data_dir/functions/ls.fish
 if in-path exa
-    function ls --wraps exa --description 'List (almost) all files'
-        set -p argv --all
-        set -p argv --color-scale
-        command exa $argv
+    function ls --wraps exa --description 'List files'
+        exa $argv
     end
 else
-    function ls --description 'List (almost) all files'
+    function ls --description 'List files'
         # list [A]ll files; print [q]uestion mark for nongraphic characters
         set -p argv -A -q
 
