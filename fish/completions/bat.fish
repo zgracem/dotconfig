@@ -1,7 +1,24 @@
 # bat <https://github.com/sharkdp/bat>
+# ----------------------------------------------------------------------------
 # Based on:
 #   https://github.com/sharkdp/bat/blob/06b8dcb/assets/completions/bat.fish
 #   https://github.com/fish-shell/fish-shell/blob/ea8a2b2/share/completions/bat.fish
+# ----------------------------------------------------------------------------
+# Improvements over the completions shipping with bat v0.21.0:
+#
+# - Better columned layout of completions, with less verbose completion
+#   descriptions. Notably, default options are indicated in the
+#   option-completion text, not the description of the option itself.
+# - Supports all documented switches, including `-pp`, `-d/--diff`,
+#   `--diff-context`, `--file-name`, `-f/--force-colorization`,
+#   `--ignored-suffix`, `--acknowledgements` and `--diagnostic`.
+# - Supports all `bat cache` subcommands and options, including `--source`,
+#   `--target`, and `--blank`.
+# - Fully supports `bat --map-syntax <from_glob>:<to_syntax>`.
+# - Supports multiple (comma-separated) arguments to `bat --style`.
+# - Typical output options (e.g. `--color`) won't be suggested if previous
+#   options override typical output (e.g. `--list-languages`).
+# ----------------------------------------------------------------------------
 
 function __bat_complete_files -a token
     # Cheat to complete files by calling `complete -C` on a fake command name,
@@ -51,12 +68,20 @@ function __bat_complete_map_syntax
     end
 end
 
-function __bat_no_excl
+function __bat_no_excl -d "Returns true if no exclusive arguments seen"
     not __bat_cache; and not __fish_seen_argument \
         -s h -l help \
         -s V -l version \
+        -l acknowledgements \
         -l config-dir -l config-file \
+        -l diagnostic \
         -l list-languages -l list-themes
+end
+
+function __bat_cache_no_excl
+    __bat_cache; and not __fish_seen_argument \
+        -s h -l help \
+        -l acknowledgements -l build -l clear
 end
 
 set -l color_opts '
@@ -106,16 +131,20 @@ set -l wrap_opts '
     character\t
 '
 
+complete -c bat -l acknowledgements -d "Print acknowledgements" -n __fish_is_first_arg
 complete -c bat -l color -x -a "$color_opts" -d "When to use colored output" -n __bat_no_excl
 complete -c bat -l config-dir -f -d "Display location of configuration directory" -n __fish_is_first_arg
 complete -c bat -l config-file -f -d "Display location of configuration file" -n __fish_is_first_arg
 complete -c bat -l decorations -x -a "$decorations_opts" -d "When to use --style decorations" -n __bat_no_excl
-complete -c bat -s d -l diff -d "Only show lines with Git changes"
-complete -c bat -l diff-content -x -d "Show N context lines around Git changes" -n "__fish_seen_argument -s d -l diff"
+complete -c bat -l diagnostic -d "Print diagnostic info for bug reports" -n __fish_is_first_arg
+complete -c bat -s d -l diff -d "Only show lines with Git changes" -n __bat_no_excl
+complete -c bat -l diff-context -x -d "Show N context lines around Git changes" -n "__fish_seen_argument -s d -l diff"
 complete -c bat -l file-name -x -d "Specify the display name" -n __bat_no_excl
-complete -c bat -s f -l force-colorization -d "Force color and decorations"
-complete -c bat -s h -l help -f -d "Print help information" -n "__fish_is_first_arg; or __bat_cache"
-complete -c bat -s H -l highlight-line -x -d "Highlight Nth line" -n __bat_no_excl
+complete -c bat -s f -l force-colorization -d "Force color and decorations" -n __bat_no_excl
+complete -c bat -s h -d "Print a concise overview" -n __fish_is_first_arg
+complete -c bat -l help -f -d "Print all help information" -n __fish_is_first_arg
+complete -c bat -s H -l highlight-line -x -d "Highlight line(s) N[:M]" -n __bat_no_excl
+complete -c bat -l ignored-suffix -x -d "Ignore extension" -n __bat_no_excl
 complete -c bat -l italic-text -x -a "$italic_text_opts" -d "When to use italic text in the output" -n __bat_no_excl
 complete -c bat -s l -l language -x -k -a "(__bat_complete_languages)" -d "Set the syntax highlighting language" -n __bat_no_excl
 complete -c bat -s r -l line-range -x -d "Only print lines [M]:[N] (either optional)" -n __bat_no_excl
@@ -138,8 +167,11 @@ complete -c bat -l wrap -x -a "$wrap_opts" -d "Text-wrapping mode" -n __bat_no_e
 
 # Sub-command "cache" completions
 complete -c bat -a cache -d "Modify the syntax/language definition cache" -n __fish_use_subcommand
-complete -c bat -l build -f -d "Parse new definitions into cache" -n __bat_cache
-complete -c bat -l clear -f -d "Reset definitions to defaults" -n __bat_cache
-complete -c bat -l blank -f -d "Overwrite default data instead of appending" -n "__bat_cache; and __fish_seen_argument -l build"
-complete -c bat -l source -x -a "(__fish_complete_directories)" -d "Load cache from DIR" -n "__bat_cache; and __fish_seen_argument -l build"
-complete -c bat -l target -x -a "(__fish_complete_directories)" -d "Store cache in DIR" -n "__bat_cache; and __fish_seen_argument -l build -l clear"
+complete -c bat -l build -f -d "Parse new definitions into cache" -n __bat_cache_no_excl
+complete -c bat -l clear -f -d "Reset definitions to defaults" -n __bat_cache_no_excl
+complete -c bat -l blank -f -d "Create new data instead of appending" -n "__bat_cache; and not __fish_seen_argument -l clear"
+complete -c bat -l source -x -a "(__fish_complete_directories)" -d "Load syntaxes and themes from DIR" -n "__bat_cache; and not __fish_seen_argument -l clear"
+complete -c bat -l target -x -a "(__fish_complete_directories)" -d "Store cache in DIR" -n __bat_cache
+complete -c bat -l acknowledgements -d "Build acknowledgements.bin" -n __bat_cache_no_excl
+complete -c bat -s h -d "Print a concise overview of bat-cache help" -n __bat_cache_no_excl
+complete -c bat -l help -f -d "Print all bat-cache help" -n __bat_cache_no_excl
