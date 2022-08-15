@@ -137,7 +137,7 @@ complete -c bat -s V -l version -f -d "Show version information" -n __fish_is_fi
 complete -c bat -l wrap -x -a "$wrap_opts" -d "Text-wrapping mode" -n __bat_no_excl
 
 # Sub-command "cache" completions
-complete -c bat -a cache -d "Modify the syntax/language definition cache" -n __fish_is_first_arg
+complete -c bat -a cache -d "Modify the syntax/language definition cache" -n __fish_use_subcommand
 complete -c bat -l build -f -d "Parse new definitions into cache" -n __bat_cache
 complete -c bat -l clear -f -d "Reset definitions to defaults" -n __bat_cache
 complete -c bat -l blank -f -d "Overwrite default data instead of appending" -n "__bat_cache; and __fish_seen_argument -l build"
