@@ -1,7 +1,7 @@
 # bat <https://github.com/sharkdp/bat>
 # Based on:
-#   https://github.com/sharkdp/bat/blob/c8478ce/assets/completions/bat.fish
-#   https://github.com/fish-shell/fish-shell/blob/76195df/share/completions/bat.fish
+#   https://github.com/sharkdp/bat/blob/06b8dcb/assets/completions/bat.fish
+#   https://github.com/fish-shell/fish-shell/blob/ea8a2b2/share/completions/bat.fish
 
 function __complete_cheat -a token
     # Try to complete files by calling `complete -C` on a fake command name,
@@ -77,11 +77,14 @@ set -l italic_text_opts '
 '
 
 set -l style_opts '
-    auto\tdefault/same\ as\ "full"
+    default\trecommended\ components
+    auto\tsame\ as\ "default"\ unless\ piped
     full\tall\ components
     plain\tno\ components
     changes\tGit\ change\ markers
-    header\tfilename\ above\ content
+    header\talias\ for\ header-filename
+    header-filename\tfilename\ above\ content
+    header-filesize\tfilesize\ above\ content
     grid\tlines\ b/w\ sidebar,\ header,\ content
     numbers\tline\ numbers\ in\ sidebar
     rule\tseparate\ files
@@ -138,6 +141,6 @@ complete -c bat -l wrap -x -a "$wrap_opts" -d "Text-wrapping mode" -n __bat_no_e
 complete -c bat -a cache -d "Modify the syntax/language definition cache" -n __fish_is_first_arg
 complete -c bat -l build -f -d "Parse new definitions into cache" -n __bat_cache
 complete -c bat -l clear -f -d "Reset definitions to defaults" -n __bat_cache
-complete -c bat -l blank -f -d "Overwrite default data instead of appending" -n "__bat_cache; and _fish_seen_argument -l build"
-complete -c bat -l source -x -a "(__fish_complete_directories)" -d "Load cache from DIR" -n "__bat_cache; and _fish_seen_argument -l build"
-complete -c bat -l target -x -a "(__fish_complete_directories)" -d "Store cache in DIR" -n "__bat_cache; and _fish_seen_argument -l build -l clear"
+complete -c bat -l blank -f -d "Overwrite default data instead of appending" -n "__bat_cache; and __fish_seen_argument -l build"
+complete -c bat -l source -x -a "(__fish_complete_directories)" -d "Load cache from DIR" -n "__bat_cache; and __fish_seen_argument -l build"
+complete -c bat -l target -x -a "(__fish_complete_directories)" -d "Store cache in DIR" -n "__bat_cache; and __fish_seen_argument -l build -l clear"
