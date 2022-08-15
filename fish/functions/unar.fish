@@ -1,4 +1,6 @@
-function ex --description 'Extract most kinds of archives'
+in-path unar; and exit
+
+function unar --description 'Extract most kinds of archives'
     for archive in $argv
         switch $archive
             case '*.tar.bz2' '*.tbz2'

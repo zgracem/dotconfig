@@ -1,4 +1,6 @@
-function arls --description 'List the contents of archives'
+in-path lsar; and exit
+
+function lsar --description 'List the contents of archives'
     for archive in $argv
         switch $archive
             case '*.7z'
