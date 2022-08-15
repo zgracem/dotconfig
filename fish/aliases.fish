@@ -22,8 +22,8 @@ abbr -a -g opal 'sfish opalstack'
 # -----------------------------------------------------------------------------
 
 abbr -a -g dirsize 'du -sh'
-abbr -a -g dr defaults read
-abbr -a -g fdd fd --type d
+abbr -a -g dr 'defaults read'
+abbr -a -g fdd 'fd --type d'
 abbr -a -g s 'set -S'
 abbr -a -g unstow 'stow --delete'
 abbr -a -g xd 'hexyl --border=none'
@@ -45,4 +45,4 @@ if in-path code
 end
 
 # git
-abbr -a -g gc git checkout -b
+abbr -a -g gc 'git checkout -b'
