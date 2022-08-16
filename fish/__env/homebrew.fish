@@ -10,8 +10,10 @@ set -gx HOMEBREW_NO_ENV_HINTS 1
 set -gx HOMEBREW_AUTO_UPDATE_SECS 600
 
 # Use `bat` for `brew cat`
-set -gx HOMEBREW_BAT 1
-set -gx HOMEBREW_BAT_CONFIG_PATH $XDG_CONFIG_HOME/bat/config_homebrew
+if in-path bat
+    set -gx HOMEBREW_BAT 1
+    set -gx HOMEBREW_BAT_CONFIG_PATH $XDG_CONFIG_HOME/bat/config_homebrew
+end
 
 # Use Bootsnap to speed up repeated `brew` calls
 set -gx HOMEBREW_BOOTSNAP 1
