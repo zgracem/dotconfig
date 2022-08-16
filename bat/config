@@ -1,4 +1,11 @@
 # vim:ft=sh
 # shellcheck disable=SC2215
 --italic-text=always
+--pager="less -FR"
 --tabs=0
+--theme=TwoDark
+
+--map-syntax="*.[1-9]:troff"
+--map-syntax="*.plist:xml"
+--map-syntax="*.sublime-syntax:yaml"
+--map-syntax="*ignore:ignore"
