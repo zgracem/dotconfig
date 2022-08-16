@@ -6,8 +6,8 @@ set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
 # (e.g. HOMEBREW_NO_AUTO_UPDATE, HOMEBREW_NO_INSTALL_CLEANUP)
 set -gx HOMEBREW_NO_ENV_HINTS 1
 
-# Only auto-update every 10 minutes (default is 5 minutes)
-set -gx HOMEBREW_AUTO_UPDATE_SECS 600
+# Only auto-update every 15 minutes (default is 5 minutes)
+set -gx HOMEBREW_AUTO_UPDATE_SECS 900
 
 # Use `bat` for `brew cat`
 if in-path bat
