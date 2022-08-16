@@ -14,10 +14,11 @@
 #   `--ignored-suffix`, `--acknowledgements` and `--diagnostic`.
 # - Supports all `bat cache` subcommands and options, including `--source`,
 #   `--target`, and `--blank`.
-# - Fully supports `bat --map-syntax <from_glob>:<to_syntax>`.
+# - Fully supports `bat --map-syntax <glob pattern>:<language syntax>`.
 # - Supports multiple (comma-separated) arguments to `bat --style`.
 # - Typical output options (e.g. `--color`) won't be suggested if previous
 #   options override typical output (e.g. `--list-languages`).
+# - Repeated {{PROJECT_EXECUTABLE}} calls simplified for ease of reading.
 # ----------------------------------------------------------------------------
 
 function __bat_complete_files -a token
@@ -27,11 +28,11 @@ function __bat_complete_files -a token
     complete -C"$fake_command $token"
 end
 
-function __bat_complete_language -a comp
+function __bat_complete_one_language -a comp
     command bat --list-languages | string split -f1 : | string match -e "$comp"
 end
 
-function __bat_complete_languages
+function __bat_complete_list_languages
     for spec in (command bat --list-languages)
         set -l name (string split -f1 : $spec)
         for ext in (string split -f2 : $spec | string split ,)
@@ -43,16 +44,12 @@ function __bat_complete_languages
     end
 end
 
-function __bat_cache
-    __fish_seen_subcommand_from cache
-end
-
 function __bat_complete_map_syntax
     set -l token (commandline -ct)
 
     if string match -qr '(?<glob>.+):(?<syntax>.*)' -- $token
         # If token ends with a colon, complete with the list of language names.
-        set -f comps $glob:(__bat_complete_language $syntax)
+        set -f comps $glob:(__bat_complete_one_language $syntax)
     else if string match -qr '\*' -- $token
         # If token contains a globbing character (`*`), complete only possible
         # globs in the current directory
@@ -67,8 +64,13 @@ function __bat_complete_map_syntax
     end
 end
 
-function __bat_no_excl -d "Returns true if no exclusive arguments seen"
-    not __bat_cache; and not __fish_seen_argument \
+function __bat_cache_subcommand
+    __fish_seen_subcommand_from cache
+end
+
+# Returns true if no exclusive arguments seen.
+function __bat_no_excl_args
+    not __bat_cache_subcommand; and not __fish_seen_argument \
         -s h -l help \
         -s V -l version \
         -l acknowledgements \
@@ -77,24 +79,12 @@ function __bat_no_excl -d "Returns true if no exclusive arguments seen"
         -l list-languages -l list-themes
 end
 
+# Returns true if the 'cache' subcommand is seen without any exclusive arguments.
 function __bat_cache_no_excl
-    __bat_cache; and not __fish_seen_argument \
+    __bat_cache_subcommand; and not __fish_seen_argument \
         -s h -l help \
         -l acknowledgements -l build -l clear
 end
-
-set -l color_opts '
-    auto\tdefault
-    never\t
-    always\t
-'
-set -l decorations_opts $color_opts
-set -l paging_opts $color_opts
-
-set -l italic_text_opts '
-    always\t
-    never\tdefault
-'
 
 function __bat_style_opts
     set -l style_opts \
@@ -114,6 +104,27 @@ function __bat_style_opts
     string replace , \t $style_opts
 end
 
+# Use option argument descriptions to indicate which is the default, saving
+# horizontal space and making sure the option description isn't truncated.
+set -l color_opts '
+    auto\tdefault
+    never\t
+    always\t
+'
+set -l decorations_opts $color_opts
+set -l paging_opts $color_opts
+
+set -l italic_text_opts '
+    always\t
+    never\tdefault
+'
+
+set -l wrap_opts '
+    auto\tdefault
+    never\t
+    character\t
+'
+
 # While --tabs theoretically takes any number, most people should be OK with these.
 # Specifying a list lets us explain what 0 does.
 set -l tabs_opts '
@@ -124,53 +135,47 @@ set -l tabs_opts '
     8\t
 '
 
-set -l wrap_opts '
-    auto\tdefault
-    never\t
-    character\t
-'
-
 complete -c bat -l acknowledgements -d "Print acknowledgements" -n __fish_is_first_arg
-complete -c bat -l color -x -a "$color_opts" -d "When to use colored output" -n __bat_no_excl
+complete -c bat -l color -x -a "$color_opts" -d "When to use colored output" -n __bat_no_excl_args
 complete -c bat -l config-dir -f -d "Display location of configuration directory" -n __fish_is_first_arg
 complete -c bat -l config-file -f -d "Display location of configuration file" -n __fish_is_first_arg
-complete -c bat -l decorations -x -a "$decorations_opts" -d "When to use --style decorations" -n __bat_no_excl
+complete -c bat -l decorations -x -a "$decorations_opts" -d "When to use --style decorations" -n __bat_no_excl_args
 complete -c bat -l diagnostic -d "Print diagnostic info for bug reports" -n __fish_is_first_arg
-complete -c bat -s d -l diff -d "Only show lines with Git changes" -n __bat_no_excl
+complete -c bat -s d -l diff -d "Only show lines with Git changes" -n __bat_no_excl_args
 complete -c bat -l diff-context -x -d "Show N context lines around Git changes" -n "__fish_seen_argument -s d -l diff"
-complete -c bat -l file-name -x -d "Specify the display name" -n __bat_no_excl
-complete -c bat -s f -l force-colorization -d "Force color and decorations" -n __bat_no_excl
+complete -c bat -l file-name -x -d "Specify the display name" -n __bat_no_excl_args
+complete -c bat -s f -l force-colorization -d "Force color and decorations" -n __bat_no_excl_args
 complete -c bat -s h -d "Print a concise overview" -n __fish_is_first_arg
 complete -c bat -l help -f -d "Print all help information" -n __fish_is_first_arg
-complete -c bat -s H -l highlight-line -x -d "Highlight line(s) N[:M]" -n __bat_no_excl
-complete -c bat -l ignored-suffix -x -d "Ignore extension" -n __bat_no_excl
-complete -c bat -l italic-text -x -a "$italic_text_opts" -d "When to use italic text in the output" -n __bat_no_excl
-complete -c bat -s l -l language -x -k -a "(__bat_complete_languages)" -d "Set the syntax highlighting language" -n __bat_no_excl
-complete -c bat -s r -l line-range -x -d "Only print lines [M]:[N] (either optional)" -n __bat_no_excl
+complete -c bat -s H -l highlight-line -x -d "Highlight line(s) N[:M]" -n __bat_no_excl_args
+complete -c bat -l ignored-suffix -x -d "Ignore extension" -n __bat_no_excl_args
+complete -c bat -l italic-text -x -a "$italic_text_opts" -d "When to use italic text in the output" -n __bat_no_excl_args
+complete -c bat -s l -l language -x -k -a "(__bat_complete_list_languages)" -d "Set the syntax highlighting language" -n __bat_no_excl_args
+complete -c bat -s r -l line-range -x -d "Only print lines [M]:[N] (either optional)" -n __bat_no_excl_args
 complete -c bat -l list-languages -f -d "List syntax highlighting languages" -n __fish_is_first_arg
 complete -c bat -l list-themes -f -d "List syntax highlighting themes" -n __fish_is_first_arg
-complete -c bat -s m -l map-syntax -x -a "(__bat_complete_map_syntax)" -d "Map <glob pattern>:<language syntax>" -n __bat_no_excl
-complete -c bat -s n -l number -d "Only show line numbers, no other decorations" -n __bat_no_excl
-complete -c bat -l pager -x -a less\tdefault -d "Which pager to use" -n __bat_no_excl
-complete -c bat -l paging -x -a "$paging_opts" -d "When to use the pager" -n __bat_no_excl
-complete -c bat -s p -l plain -d "Disable decorations" -n __bat_no_excl
-complete -c bat -o pp -d "Disable decorations and paging" -n __bat_no_excl
-complete -c bat -s P -d "Disable paging" -n __bat_no_excl
-complete -c bat -s A -l show-all -d "Show non-printable characters" -n __bat_no_excl
-complete -c bat -l style -x -k -a "(__fish_complete_list , __bat_style_opts)" -d "Configure which elements to display in addition to file contents" -n __bat_no_excl
-complete -c bat -l tabs -x -a "$tabs_opts" -d "Set tab width" -n __bat_no_excl
-complete -c bat -l terminal-width -x -d "Set terminal width, +offset, or -offset" -n __bat_no_excl
-complete -c bat -l theme -x -a "(command bat --list-themes | command cat)" -d "Set the syntax highlighting theme" -n __bat_no_excl
+complete -c bat -s m -l map-syntax -x -a "(__bat_complete_map_syntax)" -d "Map <glob pattern>:<language syntax>" -n __bat_no_excl_args
+complete -c bat -s n -l number -d "Only show line numbers, no other decorations" -n __bat_no_excl_args
+complete -c bat -l pager -x -a less\tdefault -d "Which pager to use" -n __bat_no_excl_args
+complete -c bat -l paging -x -a "$paging_opts" -d "When to use the pager" -n __bat_no_excl_args
+complete -c bat -s p -l plain -d "Disable decorations" -n __bat_no_excl_args
+complete -c bat -o pp -d "Disable decorations and paging" -n __bat_no_excl_args
+complete -c bat -s P -d "Disable paging" -n __bat_no_excl_args
+complete -c bat -s A -l show-all -d "Show non-printable characters" -n __bat_no_excl_args
+complete -c bat -l style -x -k -a "(__fish_complete_list , __bat_style_opts)" -d "Specify which non-content elements to display" -n __bat_no_excl_args
+complete -c bat -l tabs -x -a "$tabs_opts" -d "Set tab width" -n __bat_no_excl_args
+complete -c bat -l terminal-width -x -d "Set terminal <width>, +<offset>, or -<offset>" -n __bat_no_excl_args
+complete -c bat -l theme -x -a "(command bat --list-themes | command cat)" -d "Set the syntax highlighting theme" -n __bat_no_excl_args
 complete -c bat -s V -l version -f -d "Show version information" -n __fish_is_first_arg
-complete -c bat -l wrap -x -a "$wrap_opts" -d "Text-wrapping mode" -n __bat_no_excl
+complete -c bat -l wrap -x -a "$wrap_opts" -d "Text-wrapping mode" -n __bat_no_excl_args
 
 # Sub-command "cache" completions
 complete -c bat -a cache -d "Modify the syntax/language definition cache" -n __fish_use_subcommand
 complete -c bat -l build -f -d "Parse new definitions into cache" -n __bat_cache_no_excl
 complete -c bat -l clear -f -d "Reset definitions to defaults" -n __bat_cache_no_excl
-complete -c bat -l blank -f -d "Create new data instead of appending" -n "__bat_cache; and not __fish_seen_argument -l clear"
-complete -c bat -l source -x -a "(__fish_complete_directories)" -d "Load syntaxes and themes from DIR" -n "__bat_cache; and not __fish_seen_argument -l clear"
-complete -c bat -l target -x -a "(__fish_complete_directories)" -d "Store cache in DIR" -n __bat_cache
+complete -c bat -l blank -f -d "Create new data instead of appending" -n "__bat_cache_subcommand; and not __fish_seen_argument -l clear"
+complete -c bat -l source -x -a "(__fish_complete_directories)" -d "Load syntaxes and themes from DIR" -n "__bat_cache_subcommand; and not __fish_seen_argument -l clear"
+complete -c bat -l target -x -a "(__fish_complete_directories)" -d "Store cache in DIR" -n __bat_cache_subcommand
 complete -c bat -l acknowledgements -d "Build acknowledgements.bin" -n __bat_cache_no_excl
 complete -c bat -s h -d "Print a concise overview of bat-cache help" -n __bat_cache_no_excl
 complete -c bat -l help -f -d "Print all bat-cache help" -n __bat_cache_no_excl
