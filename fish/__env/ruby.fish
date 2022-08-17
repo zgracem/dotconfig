@@ -5,3 +5,12 @@ set -gx RI --format=ansi
 # is upgraded):
 in-path brew
 and set -gx RUBY_CONFIGURE_OPTS "--with-openssl-dir=/usr/local/opt/openssl@1.1"
+
+if in-path solargraph
+    set -gx SOLARGRAPH_CACHE $XDG_CACHE_HOME/solargraph/cache
+    if path is -d $XDG_CACHE_HOME
+        mkdir -p $SOLARGRAPH_CACHE
+    else
+        set --erase SOLARGRAPH_CACHE
+    end
+end
