@@ -11,19 +11,24 @@ function fish_prompt --description 'Display the interactive prompt'
         echo -n (prompt_pwd)
     end
 
-    echo -ns (set_color normal) " "
+    set_color normal
+    echo -n " "
 
     __fish_prompt_rbenv
     __fish_prompt_git
     __fish_prompt_jobs
 
     if fish_is_root_user
-        echo -ns (set_color $fish_color_user_root) "#"
+        set_color $fish_prompt_color_ps_root
+        echo -n "#"
     else if set -q fish_private_mode
-        echo -ns (set_color $fish_color_dimmed) "?"
+        set_color $fish_color_dimmed
+        echo -n "?"
     else
-        echo -ns (set_color $fish_color_user) "¶"
+        set_color $fish_prompt_color_ps
+        echo -n "¶"
     end
 
-    echo -ns (set_color normal) " "
+    set_color normal
+    echo -n " "
 end

@@ -2,7 +2,9 @@ function flannel
     argparse --ignore-unknown n/dry-run -- $argv; or return
 
     function _hi
-        echo -ns (set_color brgreen) "$argv" (set_color normal) \n
+        set_color brgreen
+        echo "$argv"
+        set_color normal
     end
 
     switch $argv[1]

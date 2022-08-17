@@ -99,7 +99,8 @@ if not set -q __zgm_init_colours
     # prompt
     # ---------------------------------------------------------------------------
 
-    set -U fish_color_user_root $fish_color_cwd_root
+    set -U fish_prompt_color_ps blue
+    set -U fish_prompt_color_ps_root $fish_color_cwd_root
     set -U fish_prompt_color_duration $fish_color_dimmed
     set -U fish_prompt_color_exit $fish_color_error
     set -U fish_prompt_color_git_branch $fish_color_dimmed

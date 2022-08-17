@@ -22,5 +22,8 @@ function fish_breakpoint_prompt --description 'A prompt to be used when `breakpo
     set_color $fish_color_dimmed
     echo -n " $function() "
 
-    echo -ns (set_color $fish_color_status) "»" (set_color normal) " "
+    set_color $fish_color_status
+    echo -n "»"
+    set_color normal
+    echo -n " "
 end

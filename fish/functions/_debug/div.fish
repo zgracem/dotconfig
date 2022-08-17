@@ -8,6 +8,8 @@ function div --description 'Print a divider across the terminal'
     if in-path lolcat
         echo $line | lolcat --spread 8
     else
-        echo -s (set_color brwhite) $line (set_color normal)
+        set_color brwhite
+        echo $line
+        set_color normal
     end
 end

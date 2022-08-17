@@ -11,8 +11,10 @@ function '?' --description 'Prints the exit status of the last command'
     set -l last_exit $status
 
     if test $last_exit -eq 0
-        echo -ns (set_color brgreen) OK
-        echo (set_color green) "($last_exit)"
+        set_color brgreen
+        echo -n OK
+        set_color green
+        echo -n " ($last_exit)"
         set_color normal
         return
     end
@@ -35,6 +37,7 @@ function '?' --description 'Prints the exit status of the last command'
         echo -ns false
     end
 
-    echo (set_color red) "($last_exit)"
+    set_color red
+    echo "($last_exit)"
     set_color normal
 end
