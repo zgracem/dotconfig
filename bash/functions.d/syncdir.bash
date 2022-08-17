@@ -1,5 +1,7 @@
 # Sourced from ~/scripts/util/confsync.sh
 
+printf >&2 "\e[4;91mWarning!\e[0m 'syncdir.bash' is deprecated!\n"
+
 syncdir()
 { #: - synchronizes the contents of two directories
   #: $ syncdir <source> [[<user>@]<host>:]<destination> [<rsync options>]
