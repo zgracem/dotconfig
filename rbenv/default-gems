@@ -1,4 +1,17 @@
+# https://github.com/rbenv/rbenv-default-gems
+
+# CLI
 lolcat
+
+# IDE
 solargraph
+slim_lint
+
+# General
 symbolized
 yard >=0.9.20
+
+# Webdev
+middleman
+sassc
+slim
