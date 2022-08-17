@@ -25,7 +25,7 @@ set -q CYGWIN; and set -gx CYGWIN (string split " " $CYGWIN)
 
 # create Windows-native symlinks (if we have admin privileges)
 if not string match -eq winsymlinks "$CYGWIN"
-    if string match -q $WINDOWS_ADMIN true
+    if string match -q true "$WINDOWS_ADMIN"
         set -a CYGWIN winsymlinks:nativestrict
     else
         set -a CYGWIN winsymlinks:lnk
@@ -34,9 +34,9 @@ end
 
 # OSTYPE is not defined in POSIX
 # shellcheck disable=SC2039
-if string match -q $OSTYPE cygwin
+if string match -q cygwin "$OSTYPE"
     set -gx CYGWIN "$CYGWIN"
-else if string match -q $OSTYPE msys
+else if string match -q msys "$OSTYPE"
     set -gx MSYS "$CYGWIN"
     set --erase CYGWIN
 end

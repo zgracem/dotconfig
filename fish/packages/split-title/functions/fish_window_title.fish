@@ -3,7 +3,7 @@ function fish_window_title --description 'Update the window title'
     or set -g long_hostname (/bin/hostname -f 2>/dev/null)
     or set -g long_hostname $hostname
 
-    string match -q "$TERM_PROGRAM" "vscode"
+    string match -q vscode "$TERM_PROGRAM"
     or printf "%s@%s: " $USER $long_hostname
     short_home $PWD
 end
