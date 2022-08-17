@@ -1,2 +1,3 @@
-# GITHUB_API_TOKEN, GITHUB_TOKEN, HOMEBREW_GITHUB_API_TOKEN
-. "$HOME/.private/environment.d/github.sh"
+if command -v brew >/dev/null; then
+  export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.private/tokens/HOMEBREW_GITHUB_API_TOKEN)
+fi

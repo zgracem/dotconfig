@@ -1,2 +1,2 @@
-# DISCORD_TOKEN
-. "$HOME/.private/environment.d/discord.sh"
+# Discord
+export DISCORD_TOKEN=$(cat ~/.private/tokens/DISCORD_TOKEN)

@@ -1,2 +1,2 @@
-# VSCODE_PUBLISHER_TOKEN for publishing VS Code extensions
-. "$HOME/.private/environment.d/vscode.sh"
+# for publishing VS Code extensions
+export VSCODE_PUBLISHER_TOKEN=$(cat ~/.private/tokens/VSCODE_PUBLISHER_TOKEN)
