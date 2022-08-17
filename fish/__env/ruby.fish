@@ -1,5 +1,3 @@
-set -gx RUBYLIB $HOME/lib/ruby
-
 set -gx RI --format=ansi
 
 set -gx IRBRC $XDG_CONFIG_HOME/ruby/irbrc

@@ -1,4 +1,3 @@
-export RUBYLIB="$HOME/lib/ruby"
 export IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
 
 # ruby-build installs a non-Homebrew OpenSSL for each Ruby version installed
