@@ -11,11 +11,11 @@ if fish-is-older-than 3.1
     exit 1
 end
 
-# setup environment
-source "$__fish_config_dir/__env.fish"
-
 # setup PATH and friends
 source "$__fish_config_dir/paths.fish"
+
+# setup environment
+source "$__fish_config_dir/__env.fish"
 
 # stop here if not an interactive session
 status is-interactive; or exit
