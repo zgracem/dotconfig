@@ -1,3 +1,4 @@
+# Overrides $__fish_data_dir/functions/prompt_pwd.fish
 function prompt_pwd --description 'Print the current working directory, shortened to fit the prompt'
     set -q argv[1]; or set -l argv $PWD
 

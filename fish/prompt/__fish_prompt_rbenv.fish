@@ -2,14 +2,16 @@ function __fish_prompt_rbenv
     in-path rbenv
     or return 0
 
-    read -l global_version <~/.rbenv/version
-    set -l local_version (rbenv version | string split -f1 " ")
+    set -q GLOBAL_RBENV_VERSION
+    or read -g GLOBAL_RBENV_VERSION <~/.rbenv/version
+    set -g LOCAL_RBENV_VERSION (rbenv version | string split -f1 " ")
 
-    if not string match -q "$global_version" "$local_version"
-        set_color $fish_prompt_color_ruby
-        echo -n $local_version
+    string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"
+    and return
 
-        set_color normal
-        echo -n " "
-    end
+    set_color $fish_prompt_color_ruby
+    echo -n $LOCAL_RBENV_VERSION
+
+    set_color normal
+    echo -n " "
 end
