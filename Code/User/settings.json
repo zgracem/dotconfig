@@ -354,9 +354,16 @@
     "editor.formatOnPaste": false,
     "editor.wordBasedSuggestions": false,
     "editor.wordWrap": "bounded",
-    "files.trimTrailingWhitespace": false
+    "files.trimTrailingWhitespace": false,
   },
   "[plaintext]": {
+    "editor.bracketPairColorization.enabled": true,
+    "editor.language.colorizedBracketPairs": [
+      ["[", "]"],
+      ["(", ")"],
+      ["{", "}"],
+      ["<", ">"]
+    ],
     "editor.wordBasedSuggestions": false,
     "files.insertFinalNewline": true
   },
