@@ -55,7 +55,7 @@ if not set -q __zgm_init_colours
     set -U fish_color_cwd brwhite
 
     # the current username in some default prompts
-    set -U fish_color_user blue
+    set -U fish_color_user brblack
 
     # the current host system in some default prompts
     set -U fish_color_host brblack
