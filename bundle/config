@@ -1,3 +1,4 @@
+# https://bundler.io/man/bundle-config.1.html
 ---
 BUNDLE_GEM__TEST: "false"
 BUNDLE_GEM__MIT: "true"
