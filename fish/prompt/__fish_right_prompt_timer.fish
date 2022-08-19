@@ -1,7 +1,13 @@
 function __fish_right_prompt_timer -a ms
-    if test $ms -eq 0
-        return 1
-    else if test $ms -lt 1000
+    set_color $fish_prompt_color_duration
+    __fish_human_readable_ms $ms
+
+    set_color normal
+    echo -n " "
+end
+
+function __fish_human_readable_ms -a ms
+    if test $ms -lt 1000
         # < 1.0s
         set -f time $ms"ms"
     else if test $ms -lt 60000
@@ -18,9 +24,5 @@ function __fish_right_prompt_timer -a ms
         set -f time (math -s2 "$ms / 1000 / 60 / 60 / 24")"d"
     end
 
-    set_color $fish_prompt_color_duration
     echo -n $time
-
-    set_color normal
-    echo -n " "
 end
