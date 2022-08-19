@@ -1,6 +1,8 @@
 # Sourced from ~/scripts/util/confsync.sh
 
-printf >&2 "\e[4;91mWarning!\e[0m 'syncdir.bash' is deprecated!\n"
+if test -z "$Z_IN_BASHRC"; then
+  printf >&2 "\e[4;91mWarning!\e[0m 'syncdir.bash' is deprecated!\n"
+fi
 
 syncdir()
 { #: - synchronizes the contents of two directories
