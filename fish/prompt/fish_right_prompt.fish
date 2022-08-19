@@ -2,7 +2,7 @@ function fish_right_prompt --description 'Display the right side of the interact
     set -l exit $status
     set -l time $CMD_DURATION
 
-    __fish_right_prompt_signal $exit
-    __fish_right_prompt_timer $time
-    __fish_right_prompt_mode
+    __fish_rprompt_signal $exit
+    __fish_rprompt_timer $time
+    __fish_rprompt_mode
 end

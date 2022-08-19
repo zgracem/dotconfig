@@ -1,4 +1,4 @@
-function __fish_right_prompt_signal -a code
+function __fish_rprompt_signal -a code
     test $code -ne 0; or return
 
     set_color $fish_prompt_color_exit
