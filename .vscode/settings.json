@@ -4,9 +4,8 @@
     "iterm2": true,
     "StardewValley/{ErrorLogs,Saves}": true,
     "syncplay.ini": true,
-    "**/{*rc,config}": {
-      "when": "$(basename).m4"
-    }
+    "**/*.conf": { "when": "$(basename).conf.m4" },
+    "**/{*rc,config}": { "when": "$(basename).m4" }
   },
   "git.detectSubmodules": false
 }
