@@ -1,7 +1,9 @@
 function archive-acorn-layers
+    argparse 'n/dry-run' -- $argv
+    or return
+
     set -l inbox ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
     set -l used_dir /Volumes/Hub/Art/used
-    # set -l _flag_dry_run TRUE
 
     function list-acorn-layers
         $XDG_CONFIG_HOME/bin/acorn-layers.applescript $argv
@@ -19,7 +21,7 @@ function archive-acorn-layers
             set -l layer_file $inbox/$layer.JPG
             if path is -f $layer_file
                 if set -lq _flag_dry_run
-                    echo ">>> Would archive:" (basename $layer_file)
+                    echo "~~~ Would archive:" $layer_file
                 else
                     /bin/mv $layer_file $used_dir
                     and echo ">>> Archived:" (basename $layer_file)
