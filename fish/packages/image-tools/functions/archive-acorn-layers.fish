@@ -1,5 +1,5 @@
 function archive-acorn-layers
-    argparse 'n/dry-run' -- $argv
+    argparse n/dry-run -- $argv
     or return
 
     set -l inboxes ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
@@ -41,7 +41,7 @@ function archive-acorn-layers
                     continue
                 else if path is -f $layer_file
                     if set -lq _flag_dry_run
-                        echo "~~~ Would archive:" $layer_file
+                        echo "~~~ Would archive:" (short_home $layer_file)
                     else
                         /bin/mv $layer_file $used_dir
                         and echo ">>> Archived:" (basename $layer_file)
