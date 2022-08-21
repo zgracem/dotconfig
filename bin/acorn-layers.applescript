@@ -1,8 +1,13 @@
 #!/usr/bin/env osascript
 
 on run argv
-	set theFile to POSIX file (item 1 of argv) as alias
-	-- set theFile to POSIX file "/Users/zozo/Pictures/test.acorn" as alias
+	set filePath to (item 1 of argv)
+	if filePath does not start with "/"
+		set currentDir to the POSIX path of (POSIX file (do shell script "pwd"))
+		set filePath to currentDir & "/" & (item 1 of argv)
+	end if
+	set theFile to POSIX file filePath as alias
+
 	set verbosePreference to false
 
 	tell application "Acorn"
