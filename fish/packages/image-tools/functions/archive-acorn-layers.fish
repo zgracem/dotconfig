@@ -22,7 +22,7 @@ function archive-acorn-layers
             continue
         end
 
-        for layer in $layers
+        for layer in (unique $layers)
             switch $layer
                 case "IMG*"
                     set -f used_dir $used_art_dir
@@ -36,7 +36,7 @@ function archive-acorn-layers
             end
 
             set -f --erase found
-            for layer_file in $layer_files
+            for layer_file in (unique $layer_files)
                 if set -fq found[1]
                     continue
                 else if path is -f $layer_file
