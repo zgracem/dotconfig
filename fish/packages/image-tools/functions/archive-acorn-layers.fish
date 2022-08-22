@@ -1,6 +1,8 @@
 function archive-acorn-layers
-    argparse n/dry-run -- $argv
+    argparse n/dry-run q/quiet s/silent -- $argv
     or return
+
+    set -q _flag_silent; and set -l _flag_quiet 1
 
     set -l inboxes ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
     set -a inboxes /Volumes/Hub/Art/inbox.old
@@ -15,9 +17,13 @@ function archive-acorn-layers
     end
 
     for file in $argv
+        if test (count $argv) -gt 1; and not set -q _flag_silent
+            echo "### Processing:" $file
+        end
+
         set -l layers (list-acorn-layers $file)
 
-        if test -z "$layers"
+        if test -z "$layers"; and not set -q _flag_quiet
             echo >&2 "*** No archivable layers:" (basename $file)
             continue
         end
@@ -40,22 +46,24 @@ function archive-acorn-layers
                 if set -fq found[1]
                     continue
                 else if path is -f $layer_file
+                    set -f found $layer_file
                     if set -lq _flag_dry_run
                         echo "~~~ Would archive:" (short_home $layer_file)
                     else
                         /bin/mv $layer_file $used_dir
-                        and echo ">>> Archived:" (basename $layer_file)
+                        and not set -q _flag_silent
+                        and echo ">>> Archived:" (short_home $layer_file)
                     end
-                    set -f found $layer_file
+                    continue
                 else if path is -f $used_dir/$layer.jpg
-                    echo "*** Already archived:" (basename $layer_file)
                     set -f found $used_dir/$layer.jpg
-                else
-                    echo >&2 "*** File not found:" $layer.jpg
+                    set -q _flag_quiet
+                    or echo -- "--- Already archived:" (basename $layer_file)
+                    continue
                 end
             end
 
-            if not set -fq found[1]
+            if not set -fq found[1]; and not set -q _flag_quiet
                 echo >&2 "*** File not found for layer: $layer"
             end
         end
