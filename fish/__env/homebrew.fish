@@ -1,7 +1,5 @@
 in-path brew; or exit
 
-set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
-
 # Don't display hints about setting environment variables
 # (e.g. HOMEBREW_NO_AUTO_UPDATE, HOMEBREW_NO_INSTALL_CLEANUP)
 set -gx HOMEBREW_NO_ENV_HINTS 1

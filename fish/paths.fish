@@ -11,7 +11,8 @@ set -p PATH /usr/local/bin /usr/local/sbin
 set -p MANPATH /usr/local/share/man
 
 # Homebrew
-if is-macos; and path is -d $HOMEBREW_PREFIX
+if is-macos; and in-path brew
+    set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
     # GNU coreutils (w/out `g` prefix)
     set -p PATH $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
     set -p MANPATH $HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman
