@@ -31,7 +31,7 @@ IRB.conf[:BACK_TRACE_LIMIT] = 5
 # -----------------------------------------------------------------------------
 
 off = Colour.reset.to_s
-dim = Colour.brightblack.to_s
+dim = Colour.dim
 context = "#{Colour.italic}%m#{Colour.noitalic}"
 chevron = "#{Colour.blue}>#{off}"
 
@@ -39,7 +39,7 @@ IRB.conf[:PROMPT] ||= {}
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.dim}#{context}:%03n#{off} #{chevron} ",
+  PROMPT_I: "#{dim}#{context}:%03n#{off} #{chevron} ",
 
   # prompt when indenting code
   PROMPT_N: "%i#{dim}│#{off}  ",
