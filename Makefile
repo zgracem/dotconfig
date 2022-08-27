@@ -91,7 +91,7 @@ $(SYMLINKS):
 	/bin/ln -s .config/$< $@
 
 user-agent.txt:
-	bin/user-agent-get.fish > $@
+	.vscode/bin/user-agent-get.fish > $@
 
 USER_AGENT = $(shell cat $(CURDIR)/user-agent.txt)
 
