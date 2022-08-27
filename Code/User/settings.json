@@ -347,11 +347,13 @@
     "editor.insertSpaces": false
   },
   "[markdown]": {
+    "editor.autoSurround": "languageDefined",
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
     },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.formatOnPaste": false,
+    "editor.tabSize": 4,
     "editor.wordBasedSuggestions": false,
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false,
@@ -364,6 +366,7 @@
       ["{", "}"],
       ["<", ">"]
     ],
+    "editor.autoSurround": "quotes",
     "editor.wordBasedSuggestions": false,
     "files.insertFinalNewline": true
   },
