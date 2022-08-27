@@ -2,10 +2,16 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "3a9d303069e5d608360a3589cbf88299878a28b2"
+        "revision": "2846d6f018012db5ec0c102d5e0ffa6c8fddf1ae"
       },
       "homebrew/cask-versions": {
-        "revision": "60d891acf8584c3eeb0fa98973d4b273104bcb84"
+        "revision": "674c2ef8c280ddb52a1921b0cb36987a8d603d99"
+      },
+      "zgracem/formulae": {
+        "revision": "81d5bb25c7a3b398bafc84a7ac6260005052ffd6",
+        "options": {
+          "clone_target": "file:///Users/zozo/Dropbox/Projects/homebrew-formulae"
+        }
       }
     },
     "cask": {
@@ -187,7 +193,7 @@
         }
       },
       "spotify": {
-        "version": "1.1.91.824,07f1e963,9",
+        "version": "1.1.92.647,a4397eb7,7",
         "options": {
           "full_name": "spotify",
           "args": {
@@ -205,7 +211,7 @@
         }
       },
       "sublime-merge": {
-        "version": "2074",
+        "version": "2077",
         "options": {
           "full_name": "sublime-merge",
           "args": {
@@ -268,7 +274,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.70.1",
+        "version": "1.70.2",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -295,7 +301,7 @@
         }
       },
       "1password-cli": {
-        "version": "2.6.1",
+        "version": "2.6.2",
         "options": {
           "full_name": "1password-cli",
           "args": {
@@ -331,7 +337,7 @@
         }
       },
       "dropbox": {
-        "version": "154.4.5363",
+        "version": "155.4.5495",
         "options": {
           "full_name": "dropbox",
           "args": {
@@ -340,7 +346,7 @@
         }
       },
       "firefox": {
-        "version": "103.0.2",
+        "version": "104.0",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -376,7 +382,7 @@
         }
       },
       "nova": {
-        "version": "9.4",
+        "version": "9.5",
         "options": {
           "full_name": "nova",
           "args": {
@@ -415,6 +421,15 @@
         "version": "latest",
         "options": {
           "full_name": "visual-studio-code-insiders",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "sublime-text3": {
+        "version": "3.211",
+        "options": {
+          "full_name": "zgracem/formulae/sublime-text3",
           "args": {
             "appdir": "~/Applications"
           }
@@ -472,7 +487,7 @@
       },
       "ColorSlurp": {
         "id": "1287239339",
-        "version": "3.5.0"
+        "version": "3.5.2"
       },
       "GarageBand": {
         "id": "682658836",
@@ -515,12 +530,12 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.5.9",
+        "HOMEBREW_VERSION": "3.5.10",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "a2948a7c2a213df8399bdd7c0a95365fdaf04e89",
+        "Homebrew/homebrew-core": "924804ffe228c48b5ca77738a7450a56fcecc9af",
         "CLT": "13.4.0.0.1.1651278267",
         "Xcode": "13.4.1",
-        "macOS": "12.3.1"
+        "macOS": "12.5.1"
       }
     }
   }

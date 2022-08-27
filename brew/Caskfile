@@ -11,6 +11,7 @@ if OS.mac?
 
   tap  "homebrew/cask"
   tap  "homebrew/cask-versions"
+  tap  "zgracem/formulae", "file://#{Dir.home}/Dropbox/Projects/homebrew-formulae"
 
   cask "1password7", args: { appdir: "/Applications" }
   cask "1password-cli"
@@ -42,7 +43,7 @@ if OS.mac?
   cask "spotify"
   cask "steam"
   cask "sublime-merge"
-  cask "sublime-text"
+  cask "zgracem/formulae/sublime-text3"
   cask "superduper"
   cask "swiftbar"
   cask "syncplay"
