@@ -36,6 +36,7 @@ if OS.mac?
   cask "name-mangler"
   cask "nova"
   cask "pdf-expert"
+  cask "qlcolorcode"
   cask "qlmarkdown"
   cask "soundsource"
   cask "spotify"
