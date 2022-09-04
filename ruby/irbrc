@@ -8,6 +8,8 @@ require "irb/completion"
 require "English"
 require "pathname"
 
+lib = Pathname.new("#{Dir.home}/lib/ruby").realpath.to_s
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "zgm/colour"
 
 # -----------------------------------------------------------------------------
