@@ -32,7 +32,7 @@ function archive-acorn-layers
             switch $layer
                 case "IMG*"
                     set -f used_dir $used_art_dir
-                    set -f layer_files $inboxes/$layer.JPG
+                    set -f layer_files $inboxes/$layer.{jpg,JPG,jpeg}
                 case "*-unsplash"
                     set -f used_dir $used_stock_dir
                     set -l layer_dirs $stock_dirs/**/
