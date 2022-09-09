@@ -17,6 +17,7 @@ COMPLETIONS = \
 	fish/completions/op.fish
 
 SHELL_FILES = \
+	~/.bash_logout \
 	~/.bash_profile \
 	~/.bash_sessions_disable \
 	~/.bashrc \
@@ -54,6 +55,7 @@ fish/completions/op.fish: /usr/local/bin/op
 # shell-files
 
 SKEL = .skel
+~/.bash_logout: $(SKEL)/.bash_logout
 ~/.bash_profile: $(SKEL)/.bash_profile
 ~/.bash_sessions_disable: $(SKEL)/.bash_sessions_disable
 ~/.bashrc: $(SKEL)/.bashrc
