@@ -1,3 +1,4 @@
+# https://solargraph.org/guides/configuration
 reporters:
 # - require_not_found
 - rubocop
