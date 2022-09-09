@@ -7,7 +7,7 @@ all:
 	@echo Target ‘$@’ not implemented.
 
 # Phony targets that we want to `make <alias>` anyway:
-.PHONY: completions shell-files symlinks user-agent
+.PHONY: completions jq shell-files symlinks user-agent
 
 # ----------------------------------------------------------------------------
 # Targets
@@ -15,6 +15,10 @@ all:
 
 COMPLETIONS = \
 	fish/completions/op.fish
+
+JQ_MODULE_DIR := $(XDG_CONFIG_HOME)/jq
+JQ_MODULES = $(wildcard $(JQ_MODULE_DIR)/*.jq $(JQ_MODULE_DIR)/*.json)
+JQ_TARGETS = $(patsubst $(JQ_MODULE_DIR)/%, $(HOME)/.jq/%, $(JQ_MODULES))
 
 SHELL_FILES = \
 	~/.bash_logout \
@@ -40,6 +44,7 @@ CUSTOM_UA = \
 
 # Map aliases to groups of target files:
 completions: $(COMPLETIONS)
+jq: $(JQ_TARGETS)
 shell-files: $(SHELL_FILES)
 symlinks: $(SYMLINKS)
 user-agent: user-agent.txt $(CUSTOM_UA)
@@ -51,6 +56,10 @@ user-agent: user-agent.txt $(CUSTOM_UA)
 # completions
 
 fish/completions/op.fish: /usr/local/bin/op
+
+# jq modules
+
+$(JQ_TARGETS): $(HOME)/.jq/%: $(XDG_CONFIG_HOME)/jq/%
 
 # shell-files
 
@@ -85,6 +94,9 @@ $(CUSTOM_UA): user-agent.txt
 
 fish/completions/op.fish:
 	op completion fish > $@
+
+$(JQ_TARGETS):
+	/bin/cp -a -- $< $@
 
 $(SHELL_FILES):
 	/usr/bin/install -p -m 0644 -- $< $@
