@@ -113,8 +113,11 @@ $(CUSTOM_UA): user-agent.txt
 fish/completions/op.fish:
 	op completion fish > $@
 
-$(JQ_TARGETS):
-	/bin/cp -a -- $< $@
+$(HOME)/.jq:
+	/usr/bin/install -d $@
+
+$(JQ_TARGETS): | $(HOME)/.jq
+	/usr/bin/install -p -m 0644 -- $< $@
 
 /usr/local/etc/dnsmasq.conf:
 	/usr/bin/install -p -m 0644 $< $@
