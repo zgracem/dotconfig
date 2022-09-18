@@ -98,8 +98,6 @@
   "files.defaultLanguage": "${activeEditorLanguage}",
   "files.eol": "\n",
   "files.hotExit": "onExitAndWindowClose",
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
   "git.defaultCloneDirectory": "/Users/zozo/.local/src/github",
   "git.openDiffOnClick": false,
   "git.path": "/usr/local/bin/git",
@@ -297,28 +295,18 @@
   "yaml.format.enable": false,
   "yaml.format.proseWrap": "always",
   "yaml.maxItemsComputed": 20480,
-  "[applescript]": {
-    "editor.insertSpaces": false,
-    "editor.tabSize": 4
-  },
   "[fish]": {
     "editor.defaultFormatter": "zgm.vscode-fish",
     "editor.detectIndentation": false,
     "editor.formatOnSave": false,
-    "editor.formatOnSaveMode": "file",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 4
+    "editor.formatOnSaveMode": "file"
   },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features",
     "editor.formatOnSave": false
   },
   "[ini]": {
-    "editor.wordWrap": "off",
-    "files.trimTrailingWhitespace": false
-  },
-  "[javascript]": {
-    "editor.tabSize": 2
+    "editor.wordWrap": "off"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -330,9 +318,6 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": false
   },
-  "[makefile]": {
-    "editor.insertSpaces": false
-  },
   "[markdown]": {
     "editor.autoSurround": "languageDefined",
     "editor.codeActionsOnSave": {
@@ -340,10 +325,8 @@
     },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.formatOnPaste": false,
-    "editor.tabSize": 4,
     "editor.wordBasedSuggestions": false,
-    "editor.wordWrap": "bounded",
-    "files.trimTrailingWhitespace": false
+    "editor.wordWrap": "bounded"
   },
   "[plaintext]": {
     "editor.autoSurround": "quotes",
@@ -358,8 +341,7 @@
     "files.insertFinalNewline": true
   },
   "[ruby]": {
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
+    "editor.formatOnSave": true
   },
   "[scss]": {
     "editor.formatOnSave": false
@@ -368,13 +350,8 @@
     "editor.formatOnSave": false
   },
   "[tsv]": {
-    "editor.insertSpaces": false,
     "editor.tabCompletion": "off",
-    "editor.tabSize": 8,
     "editor.wordWrap": "off"
-  },
-  "[viml]": {
-    "files.trimTrailingWhitespace": false
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",

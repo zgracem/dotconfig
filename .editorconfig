@@ -8,19 +8,33 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.applescript]
+indent_size = 4
+indent_style = tab
+
 [*.fish]
 indent_size = 4
 
 [*.ini]
 trim_trailing_whitespace = false
 
+[{*.js,*.json}]
+indent_size = 2
+
 [*.md]
-trim_trailing_whitespace = false
 indent_size = 4
+trim_trailing_whitespace = false
+
+[*.rb]
+indent_size = 2
 
 [*.tsv]
 indent_size = 8
 indent_style = tab
 
-[{Makefile,*.make}]
+[{Makefile,*.make,*.mk}]
+indent_size = 4
 indent_style = tab
+
+[{vimrc,.vimrc,*.vim}]
+trim_trailing_whitespace = false
