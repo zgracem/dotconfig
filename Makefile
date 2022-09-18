@@ -7,7 +7,7 @@ all:
 	@echo Target ‘$@’ not implemented.
 
 # Phony targets that we want to `make <alias>` anyway:
-.PHONY: completions jq shell-files symlinks user-agent
+.PHONY: completions jq shell-files symlinks user-agent vscode-mac
 
 # ----------------------------------------------------------------------------
 # Targets
@@ -28,12 +28,17 @@ SHELL_FILES = \
 	~/.hushlogin \
 	~/.profile
 
-SYMLINKS = \
+HOMEDIR_SYMLINKS = \
 	~/.editorconfig \
 	~/.stow-global-ignore \
 	~/.stowrc \
 	~/.tmux.conf \
 	~/.vimrc
+
+VSCODE_MACOS_SYMLINKS = \
+	~/Library/AppSupport/Code/User/settings.json \
+	~/Library/AppSupport/Code/User/keybindings.json \
+	~/Library/AppSupport/Code/User/snippets
 
 CUSTOM_UA = \
 	aria2/aria2.conf \
@@ -46,8 +51,9 @@ CUSTOM_UA = \
 completions: $(COMPLETIONS)
 jq: $(JQ_TARGETS)
 shell-files: $(SHELL_FILES)
-symlinks: $(SYMLINKS)
+symlinks: $(HOMEDIR_SYMLINKS)
 user-agent: user-agent.txt $(CUSTOM_UA)
+vscode-mac: $(VSCODE_MACOS_SYMLINKS)
 
 # ----------------------------------------------------------------------------
 # Prerequisites for targets
@@ -78,6 +84,7 @@ SKEL = .skel
 ~/.stowrc: stow/stowrc
 ~/.tmux.conf: tmux/tmux.conf
 ~/.vimrc: vim/vimrc
+$(VSCODE_MACOS_SYMLINKS): $(HOME)/Library/AppSupport/%: $(XDG_CONFIG_HOME)/%
 
 # user-agent
 
@@ -101,8 +108,11 @@ $(JQ_TARGETS):
 $(SHELL_FILES):
 	/usr/bin/install -p -m 0644 -- $< $@
 
-$(SYMLINKS):
+$(HOMEDIR_SYMLINKS):
 	/bin/ln -s .config/$< $@
+
+$(VSCODE_MACOS_SYMLINKS):
+	/bin/ln -s $< $@
 
 user-agent.txt:
 	.vscode/bin/user-agent-get.fish > $@

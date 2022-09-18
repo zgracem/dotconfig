@@ -6,10 +6,29 @@ This directory contains [user configuration][vs] for Visual Studio Code.
 
 ## Setup
 
-`settings.json`, `keybindings.json`, and `snippets/` should be symlinked into:
+VS Code's built-in [settings sync] is now reliable enough to handle merging
+platform-specific configuration without external tools like `jq`.
 
-- **Windows:** `%APPDATA%\Code\User`
-- **macOS:** `$HOME/Library/Application Support/Code/User`
+[settings sync]: https://code.visualstudio.com/docs/editor/settings-sync
+
+### macOS
+
+`settings.json`, `keybindings.json`, and `snippets/` should be symlinked into
+`$HOME/Library/Application Support/Code/User`:
+
+```sh
+cd $XDG_CONFIG_HOME
+make vscode-mac
+```
+
+### Windows
+
+`windows/Code/User/settings.json` should be symlinked into `%APPDATA%\Code\User`:
+
+```bat
+cd %USERPROFILE%\Dropbox\.config\Code\User
+mklink %APPDATA%\Code\User\settings.json windows\Code\User\settings.json
+```
 
 ## Extensions
 
