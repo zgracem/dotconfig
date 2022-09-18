@@ -17,6 +17,8 @@ platform-specific configuration without external tools like `jq`.
 `$HOME/Library/Application Support/Code/User`:
 
 ```sh
+cd ~/Library
+ln -sf "Application Support" AppSupport
 cd $XDG_CONFIG_HOME
 make vscode-mac
 ```
