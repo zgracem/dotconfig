@@ -2,7 +2,9 @@
   "version": "2.0.0",
   "presentation": {
     "reveal": "silent",
-    "showReuseMessage": false
+    "panel": "dedicated",
+    "showReuseMessage": false,
+    "clear": true
   },
   "problemMatcher": [],
   "osx": {
@@ -13,24 +15,7 @@
       }
     }
   },
-  "windows": {
-    "options": {
-      "env": {
-        "PATH": "/home/${env:USERNAME}/opt/bin:/home/${env:USERNAME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env:PATH}"
-      }
-    }
-  },
   "tasks": [
-    {
-      "label": "Launch Sublime Merge",
-      "osx": {
-        "command": "smerge ."
-      },
-      "type": "shell",
-      "presentation": {
-        "reveal": "never"
-      }
-    },
     {
       "label": "Lint POSIX shell files",
       "type": "shell",

@@ -67,11 +67,14 @@
         },
         "windows": {
           "type": "process",
-          "command": "${env:USERPROFILE}/Applications/Sublime Merge/sublime_merge.exe"
+          "command": "${env:PROGRAMFILES}/Sublime Merge/sublime_merge.exe"
         },
         "args": [
           "${workspaceFolder}"
-        ]
+        ],
+        "presentation": {
+          "reveal": "never"
+        }
       },
       {
         "label": "Dump environment",
