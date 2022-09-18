@@ -1,20 +1,12 @@
 {
   "Heading_1": {
     "prefix": "h1",
-    "body": [
-      "${1:Heading 1}",
-      "${1/./=/g}\n",
-      "$0"
-    ],
+    "body": ["${1:Heading 1}", "${1/./=/g}\n", "$0"],
     "description": "Heading 1 (Setext)"
   },
   "Heading_2": {
     "prefix": "h2",
-    "body": [
-      "${1:Heading 2}",
-      "${1/./-/g}\n",
-      "$0"
-    ],
+    "body": ["${1:Heading 2}", "${1/./-/g}\n", "$0"],
     "description": "Heading 2 (Setext)"
   },
   "inline_link": {

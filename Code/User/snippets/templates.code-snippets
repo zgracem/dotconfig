@@ -1,11 +1,7 @@
 {
   "fish_function": {
     "prefix": "ffunc",
-    "body": [
-      "function ${1:$TM_FILENAME_BASE}",
-      "\t$0",
-      "end"
-    ],
+    "body": ["function ${1:$TM_FILENAME_BASE}", "\t$0", "end"],
     "description": "fish shell function definition",
     "scope": "fish"
   },
@@ -21,29 +17,19 @@
   },
   "new_JSON": {
     "prefix": "!new",
-    "body": [
-      "{",
-      "\t$0",
-      "}\n"
-    ],
+    "body": ["{", "\t$0", "}\n"],
     "description": "Empty JSON object",
     "scope": "json,jsonc"
   },
   "shellscript_hashbang": {
     "prefix": "!env",
-    "body": [
-      "#!/usr/bin/env ${1|bash,sh|}\n\n",
-      "$0"
-    ],
+    "body": ["#!/usr/bin/env ${1|bash,sh|}\n\n", "$0"],
     "description": "Shell script hashbang line",
     "scope": "shellscript"
   },
   "new_YAML": {
     "prefix": "!new",
-    "body": [
-      "---",
-      "$0"
-    ],
+    "body": ["---", "$0"],
     "description": "Empty YAML document",
     "scope": "yaml"
   },

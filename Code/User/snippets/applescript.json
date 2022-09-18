@@ -1,8 +1,6 @@
 {
   "hashbang_applescript": {
     "prefix": "!env",
-    "body": [
-      "#!/usr/bin/env osascript\n\n"
-    ]
+    "body": ["#!/usr/bin/env osascript\n\n"]
   }
 }

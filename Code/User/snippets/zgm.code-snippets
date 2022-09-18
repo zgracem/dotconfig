@@ -27,5 +27,5 @@
     "prefix": "contains",
     "body": "contains -- ${1:cat} $${2:animals}",
     "description": "fish: contains"
-  },
+  }
 }

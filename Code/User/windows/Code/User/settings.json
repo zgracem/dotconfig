@@ -58,10 +58,7 @@
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "selection",
-  "editor.rulers": [
-    80,
-    118
-  ],
+  "editor.rulers": [80, 118],
   "editor.snippetSuggestions": "bottom",
   "editor.stickyTabStops": true,
   "editor.suggest.shareSuggestSelections": true,
@@ -107,18 +104,13 @@
   "git.defaultCloneDirectory": "C:\\cygwin64\\home\\zgm\\.local\\src",
   "git.openDiffOnClick": false,
   "git.path": "C:\\Program Files\\Git\\cmd\\git.exe",
-  "gitlens.advanced.blame.customArguments": [
-    "-w"
-  ],
+  "gitlens.advanced.blame.customArguments": ["-w"],
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
   "gitlens.blame.avatars": false,
   "gitlens.blame.heatmap.location": "left",
-  "gitlens.changes.locations": [
-    "overview",
-    "gutter"
-  ],
+  "gitlens.changes.locations": ["overview", "gutter"],
   "gitlens.codeLens.enabled": false,
   "gitlens.currentLine.enabled": true,
   "gitlens.currentLine.format": "${author, }${agoOrDate}${ (pullRequest)}${ • message|50?}",
@@ -170,9 +162,7 @@
   "search.smartCase": true,
   "search.sortOrder": "default",
   "security.workspace.trust.untrustedFiles": "open",
-  "settingsSync.ignoredExtensions": [
-    "castwide.solargraph"
-  ],
+  "settingsSync.ignoredExtensions": ["castwide.solargraph"],
   "settingsSync.ignoredSettings": [
     "code-runner.customCommand",
     "code-runner.executorMap",
@@ -191,10 +181,7 @@
   ],
   "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.enableQuickFix": true,
-  "shellcheck.exclude": [
-    "1090",
-    "1091"
-  ],
+  "shellcheck.exclude": ["1090", "1091"],
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
   "slimLint.executablePath": "/Users/zozo/.rbenv/shims/slim-lint",
@@ -213,14 +200,9 @@
   },
   "spellright.addToSystemDictionary": true,
   "spellright.configurationUpdate": false,
-  "spellright.documentTypes": [
-    "markdown",
-    "git-commit"
-  ],
+  "spellright.documentTypes": ["markdown", "git-commit"],
   "spellright.groupDictionaries": false,
-  "spellright.language": [
-    "en_CA"
-  ],
+  "spellright.language": ["en_CA"],
   "spellright.notificationClassByParser": {
     "code": "information",
     "markdown": "warning",
@@ -250,11 +232,7 @@
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.fontWeight": "300",
   "terminal.integrated.fontWeightBold": "500",
-  "terminal.integrated.ignoreProcessNames": [
-    "bash",
-    "zsh",
-    "fish"
-  ],
+  "terminal.integrated.ignoreProcessNames": ["bash", "zsh", "fish"],
   "terminal.integrated.profiles.osx": {
     "bash": {
       "icon": "terminal-bash",
