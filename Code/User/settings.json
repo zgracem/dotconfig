@@ -158,6 +158,9 @@
   "oneDarkPro.italic": true,
   "outline.problems.enabled": false,
   "papyrus.fo4.directory": "/Volumes/T7/Steam/steamapps/common/Fallout 4",
+  "prettier.bracketSameLine": true,
+  "prettier.semi": false,
+  "prettier.trailingComma": "none",
   "problems.showCurrentInStatus": true,
   "redhat.telemetry.enabled": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.rbenv/shims/ruby",
@@ -313,6 +316,9 @@
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+  "yaml.format.enable": false,
+  "yaml.format.proseWrap": "always",
+  "yaml.maxItemsComputed": 20480,
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4
@@ -337,11 +343,12 @@
     "editor.tabSize": 2
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": false
   },
   "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": false
   },
@@ -392,6 +399,7 @@
     "files.trimTrailingWhitespace": false
   },
   "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
     "editor.wordBasedSuggestions": true,
