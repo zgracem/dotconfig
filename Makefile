@@ -7,7 +7,7 @@ all:
 	@echo Target ‘$@’ not implemented.
 
 # Phony targets that we want to `make <alias>` anyway:
-.PHONY: completions jq shell-files symlinks user-agent vscode-mac dnsmasq
+.PHONY: completions jq shell-files symlinks user-agent vscode-mac dnsmasq sudoer
 
 # ----------------------------------------------------------------------------
 # Targets
@@ -56,6 +56,7 @@ completions: $(COMPLETIONS)
 dnsmasq: $(DNSMASQ_FILES)
 jq: $(JQ_TARGETS)
 shell-files: $(SHELL_FILES)
+sudoer: /etc/sudoers.d/sudoer_zozo
 symlinks: $(HOMEDIR_SYMLINKS)
 user-agent: user-agent.txt $(CUSTOM_UA)
 vscode-mac: $(VSCODE_MACOS_SYMLINKS)
@@ -123,6 +124,12 @@ $(JQ_TARGETS):
 
 /etc/resolver/test: /etc/resolver
 	sudo /usr/bin/install -p -m 0644 $< $@
+
+/etc/sudoers.d:
+	sudo /usr/bin/install -d $@
+
+/etc/sudoers.d/%: etc/% /etc/sudoers.d
+	sudo /usr/bin/install -p -m 0644 -- $< $@
 
 $(SHELL_FILES):
 	/usr/bin/install -p -m 0644 -- $< $@
