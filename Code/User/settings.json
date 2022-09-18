@@ -365,9 +365,10 @@
     "editor.tabSize": 4,
     "editor.wordBasedSuggestions": false,
     "editor.wordWrap": "bounded",
-    "files.trimTrailingWhitespace": false,
+    "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
+    "editor.autoSurround": "quotes",
     "editor.bracketPairColorization.enabled": true,
     "editor.language.colorizedBracketPairs": [
       ["[", "]"],
@@ -375,7 +376,6 @@
       ["{", "}"],
       ["<", ">"]
     ],
-    "editor.autoSurround": "quotes",
     "editor.wordBasedSuggestions": false,
     "files.insertFinalNewline": true
   },
