@@ -7,7 +7,7 @@ all:
 	@echo Target ‘$@’ not implemented.
 
 # Phony targets that we want to `make <alias>` anyway:
-.PHONY: completions jq shell-files symlinks user-agent vscode-mac
+.PHONY: completions jq shell-files symlinks user-agent vscode-mac dnsmasq
 
 # ----------------------------------------------------------------------------
 # Targets
@@ -15,6 +15,10 @@ all:
 
 COMPLETIONS = \
 	fish/completions/op.fish
+
+DNSMASQ_FILES = \
+	/usr/local/etc/dnsmasq.conf \
+	/etc/resolver/test
 
 JQ_MODULE_DIR := $(XDG_CONFIG_HOME)/jq
 JQ_MODULES = $(wildcard $(JQ_MODULE_DIR)/*.jq $(JQ_MODULE_DIR)/*.json)
@@ -49,6 +53,7 @@ CUSTOM_UA = \
 
 # Map aliases to groups of target files:
 completions: $(COMPLETIONS)
+dnsmasq: $(DNSMASQ_FILES)
 jq: $(JQ_TARGETS)
 shell-files: $(SHELL_FILES)
 symlinks: $(HOMEDIR_SYMLINKS)
@@ -62,6 +67,11 @@ vscode-mac: $(VSCODE_MACOS_SYMLINKS)
 # completions
 
 fish/completions/op.fish: /usr/local/bin/op
+
+# dnsmasq configuration
+
+/usr/local/etc/dnsmasq.conf: etc/dnsmasq.conf
+/etc/resolver/test: etc/resolver/test
 
 # jq modules
 
@@ -104,6 +114,15 @@ fish/completions/op.fish:
 
 $(JQ_TARGETS):
 	/bin/cp -a -- $< $@
+
+/usr/local/etc/dnsmasq.conf:
+	/usr/bin/install -p -m 0644 $< $@
+
+/etc/resolver:
+	sudo /usr/bin/install -d $@
+
+/etc/resolver/test: /etc/resolver
+	sudo /usr/bin/install -p -m 0644 $< $@
 
 $(SHELL_FILES):
 	/usr/bin/install -p -m 0644 -- $< $@

@@ -1,5 +1,6 @@
-# /etc/sudoers.d/sudoer_$USER
+# /etc/sudoers.d/sudoer_zozo
 
+# use Homebrew vim
 Defaults editor = "/usr/local/bin/vim"
 
 # pass important multiplexer-related variables
