@@ -110,38 +110,32 @@ $(CUSTOM_UA): user-agent.txt
 # Recipes for targets
 # ----------------------------------------------------------------------------
 
+GNU := /usr/local/opt/coreutils/libexec/gnubin
+INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
+
 fish/completions/op.fish:
 	op completion fish > $@
 
-$(HOME)/.jq:
-	/usr/bin/install -d $@
-
-$(JQ_TARGETS): | $(HOME)/.jq
-	/usr/bin/install -p -m 0644 -- $< $@
+$(JQ_TARGETS):
+	$(INSTALL) -- $< $@
 
 /usr/local/etc/dnsmasq.conf:
-	/usr/bin/install -p -m 0644 $< $@
+	$(INSTALL) -D -- $< $@
 
-/etc/resolver:
-	sudo /usr/bin/install -d $@
+/etc/resolver/test:
+	sudo $(INSTALL) -D -- $< $@
 
-/etc/resolver/test: /etc/resolver
-	sudo /usr/bin/install -p -m 0644 $< $@
-
-/etc/sudoers.d:
-	sudo /usr/bin/install -d $@
-
-/etc/sudoers.d/%: etc/% /etc/sudoers.d
-	sudo /usr/bin/install -p -m 0644 -- $< $@
+/etc/sudoers.d/%: etc/%
+	sudo $(INSTALL) -D -- $< $@
 
 $(SHELL_FILES):
-	/usr/bin/install -p -m 0644 -- $< $@
+	$(INSTALL) -- $< $@
 
 $(HOMEDIR_SYMLINKS):
-	/bin/ln -s .config/$< $@
+	$(GNU)/ln -s .config/$< $@
 
 $(VSCODE_MACOS_SYMLINKS):
-	/bin/ln -s $< $@
+	$(GNU)/ln -s $< $@
 
 user-agent.txt:
 	.vscode/bin/user-agent-get.fish > $@
