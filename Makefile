@@ -138,7 +138,7 @@ $(VSCODE_MACOS_SYMLINKS):
 	$(GNU)/ln -s $< $@
 
 user-agent.txt: /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
-	.vscode/bin/user-agent-get.fish > $@
+	bin/user-agent-get.fish > $@
 
 USER_AGENT = $(shell cat $(CURDIR)/user-agent.txt)
 

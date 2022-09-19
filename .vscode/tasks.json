@@ -19,7 +19,7 @@
     {
       "label": "Lint POSIX shell files",
       "type": "shell",
-      "command": ".vscode/bin/check_dotfiles.sh",
+      "command": "bin/check_dotfiles.sh",
       "problemMatcher": {
         "fileLocation": [
           "relative",
@@ -45,7 +45,7 @@
     {
       "label": "Lint fish files",
       "type": "shell",
-      "command": ".vscode/bin/check_fish_files.fish",
+      "command": "bin/check_fish_files.fish",
       "problemMatcher": {
         "fileLocation": [
           "relative",
@@ -66,13 +66,13 @@
     {
       "label": "Update bat syntaxes",
       "type": "shell",
-      "command": ".vscode/bin/update-bat-syntaxes.fish",
+      "command": "bin/update-bat-syntaxes.fish",
       "group": "build"
     },
     {
       "label": "Update user-agent",
       "type": "shell",
-      "command": ".vscode/bin/user-agent-update.fish",
+      "command": "bin/user-agent-update.fish",
       "group": "build"
     }
   ]
