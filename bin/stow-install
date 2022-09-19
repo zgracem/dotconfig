@@ -39,21 +39,11 @@ if not path is -d $stage_dir
     or exit
 end
 
-function _stow
-    cd $stow_dir; or exit
-    /usr/local/bin/stow --verbose $argv
-end
-
-function restow -a package
-    _stow --delete $package
-    _stow $package
-end
-
 # BSD calendars
 function install_calendar
     set -l src_dir "$stage_dir/calendars"
     set -l pkg_dir "$stow_dir/calendar/share/calendar"
-    set -l git_dir git@github.com:freebsd/calendar-data.git
+    set -l git_url git@github.com:freebsd/calendar-data.git
 
     if not path is -d $src_dir
         cd $src_dir/..
@@ -74,21 +64,22 @@ end
 # css3FontConverter <github.com/zoltan-dulac/css3FontConverter>
 function install_css3FontConverter
     set -l src_dir "$stage_dir/css3FontConverter"
-    set -l pkg_dir "$stow_dir/css3FontConverter/bin"
+    set -l pkg_dir "$stow_dir/css3FontConverter"
+    set -l git_url git@github.com:zoltan-dulac/css3FontConverter.git
 
     if not path is -d $src_dir
         cd $src_dir/..
-        and git clone git@github.com:zoltan-dulac/css3FontConverter.git
+        and git clone $git_url
     else
         cd $src_dir
         and git pull
     end
 
-    if not path is -d $pkg_dir
-        mkdir -p -v $pkg_dir
+    if not path is -d $pkg_dir/bin
+        mkdir -p -v $pkg_dir/bin
     end
 
-    ln -s -f -v {$src_dir,$pkg_dir}/convertFonts.sh
+    ln -s -f -v {$src_dir,$pkg_dir/bin}/convertFonts.sh
 end
 
 # Day One CLI utility
@@ -104,7 +95,7 @@ function install_dayone2
     and make dayone2
 end
 
-# hunspell-en_CA <http://wordlist.aspell.net/dicts/>
+# hunspell-en_CA <wordlist.aspell.net/dicts/>
 # for Sublime Merge spellchecking
 function install_hunspell
     # set -l url (wget -qO- http://wordlist.aspell.net/dicts/ | ag -o 'http://\S+-en_CA-[\d.]+.zip')
@@ -115,26 +106,25 @@ function install_hunspell
     make hunspell
 end
 
-# Markdown <https://daringfireball.net/projects/markdown>
+# Markdown <daringfireball.net/projects/markdown>
 function install_markdown
     make markdown
 end
 
-# tremc <https://github.com/tremc/tremc>
+# tremc <github.com/tremc/tremc>
 function install_tremc
-    set -g tremc_src_dir "$HOME/.local/src/github.com/tremc"
+    set -l src_dir "$HOME/.local/src/github.com/tremc"
+    set -l git_url git@github.com:tremc/tremc.git
 
-    if not path is -d $tremc_src_dir
-        cd $tremc_src_dir/..
-        and git clone git@github.com:tremc/tremc.git
-        or exit
+    if not path is -d $src_dir
+        cd $src_dir/..
+        and git clone $git_url
     else
-        cd $tremc_src_dir
+        cd $src_dir
         and git pull
-        or exit
     end
 
-    cd $tremc_src_dir
+    cd $src_dir
     and make DESTDIR=$stow_dir PREFIX=/tremc install
 end
 
@@ -146,12 +136,12 @@ end
 # youtube_dl as Python package
 # Usage: export PYTHONPATH="$HOME/opt/lib/python3.9/site-packages"
 function install_youtube_dl
-    set -l dest_dir $HOME/opt/stow/youtube_dl
+    set -l pkg_dir $HOME/opt/stow/youtube_dl
 
-    pip3 install --upgrade --prefix=$dest_dir youtube_dl
+    pip3 install --upgrade --prefix=$pkg_dir youtube_dl
 
     # This `.stow-local-ignore` file ensures only `lib/` is installed to `~/opt`.
-    and touch $dest_dir/.stow-local-ignore
+    and touch $pkg_dir/.stow-local-ignore
 end
 
 function usage
@@ -162,18 +152,18 @@ end
 
 function main
     set -l -x this (status filename)
-    set -l -x targets (cat $this | string match -rg '^function install_(\w+)')
+    set -l -x valid_targets (cat $this | string match -rg '^function install_(\w+)')
     switch $argv[1]
         case --help
             usage
         case --targets
-            printf "%s\n" $targets
+            printf "%s\n" $valid_targets
         case '-*'
             echo >&2 "invalid option: $argv[1]"
             usage >&2
             return 1
-        case $targets
-            eval "install_$argv[1]; and restow $argv[1]"
+        case $valid_targets
+            eval "install_$argv[1]; and cd $stow_dir; and stow --restow $argv[1]"
         case '*'
             set -q argv[1]; and echo >&2 "invalid target: $argv[1]"
             usage >&2
