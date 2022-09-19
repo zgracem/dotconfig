@@ -3,12 +3,11 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.applescript]
+[{*.applescript,*.scpt}]
 indent_size = 4
 indent_style = tab
 
@@ -21,6 +20,10 @@ trim_trailing_whitespace = false
 [{*.js,*.json}]
 indent_size = 2
 
+[{Makefile,*.make,*.mk}]
+indent_size = 4
+indent_style = tab
+
 [*.md]
 indent_size = 4
 trim_trailing_whitespace = false
@@ -31,10 +34,10 @@ indent_size = 2
 [*.tsv]
 indent_size = 8
 indent_style = tab
-
-[{Makefile,*.make,*.mk}]
-indent_size = 4
-indent_style = tab
+insert_final_newline = false
+trim_trailing_whitespace = false
 
 [{vimrc,.vimrc,*.vim}]
+indent_size = 2
+insert_final_newline = false
 trim_trailing_whitespace = false
