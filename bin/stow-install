@@ -136,12 +136,16 @@ end
 # youtube_dl as Python package
 # Usage: export PYTHONPATH="$HOME/opt/lib/python3.9/site-packages"
 function install_youtube_dl
-    set -l pkg_dir $HOME/opt/stow/youtube_dl
+    set -l pkg_dir $stow_dir/youtube_dl
 
     pip3 install --upgrade --prefix=$pkg_dir youtube_dl
+    or exit
 
-    # This `.stow-local-ignore` file ensures only `lib/` is installed to `~/opt`.
-    and touch $pkg_dir/.stow-local-ignore
+    if not path is -f $pkg_dir/.stow-local-ignore
+        # This `.stow-local-ignore` file ensures only `lib/` is installed to `~/opt`.
+        set ignored "\.DS_Store" "bin/.*" "etc/.*" "share/.*" "README.md"
+        printf "%s\n" $ignored > $pkg_dir/.stow-local-ignore
+    end
 end
 
 function usage
