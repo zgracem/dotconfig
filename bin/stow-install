@@ -1,0 +1,184 @@
+#!/usr/bin/env fish
+# ----------------------------------------------------------------------------
+# This script is mainly a wrapper for `make -f ../stow/Makefile`, and does a
+# few things for which GNU make is not quite sufficient (e.g. handle files w/
+# whitespace in their names, lmao)
+# ----------------------------------------------------------------------------
+
+set -gx stow_dir $HOME/opt/stow
+set -gx stage_dir $stow_dir/.staging
+
+set -gx PATH /usr/local/opt/coreutils/libexec/gnubin /usr/local/bin /usr/bin /bin
+
+if not cd $stow_dir
+    echo >&2 "stow directory not found: $stow_dir"
+    exit 66
+end
+
+function try_brew_install -a formula
+    command -v -q brew; and brew install $formula
+end
+
+command -v -q stow; or try_brew_install stow; or begin
+    echo >&2 "GNU stow not available!"
+    exit 1
+end
+
+command -v -q gmkdir; or try_brew_install coreutils; or begin
+    echo >&2 "GNU coreutils not available!"
+    exit 1
+end
+
+command -v -q wget; or try_brew_install wget; or begin
+    echo >&2 "wget not available!"
+    exit 1
+end
+
+if not path is -d $stage_dir
+    mkdir -p -v $stage_dir
+    or exit
+end
+
+function _stow
+    cd $stow_dir; or exit
+    /usr/local/bin/stow --verbose $argv
+end
+
+function restow -a package
+    _stow --delete $package
+    _stow $package
+end
+
+# BSD calendars
+function install_calendar
+    set -l src_dir "$stage_dir/calendars"
+    set -l pkg_dir "$stow_dir/calendar/share/calendar"
+    set -l git_dir git@github.com:freebsd/calendar-data.git
+
+    if not path is -d $src_dir
+        cd $src_dir/..
+        and git clone --sparse $git_url (basename $src_dir)
+    else
+        cd $src_dir
+        and git pull
+    end
+
+    install -C -D -p -m0644 -v $src_dir/calendar.* $pkg_dir/
+end
+
+# cronic-v3 <https://habilis.net/cronic/>
+function install_cronic
+    make cronic
+end
+
+# css3FontConverter <github.com/zoltan-dulac/css3FontConverter>
+function install_css3FontConverter
+    set -l src_dir "$stage_dir/css3FontConverter"
+    set -l pkg_dir "$stow_dir/css3FontConverter/bin"
+
+    if not path is -d $src_dir
+        cd $src_dir/..
+        and git clone git@github.com:zoltan-dulac/css3FontConverter.git
+    else
+        cd $src_dir
+        and git pull
+    end
+
+    if not path is -d $pkg_dir
+        mkdir -p -v $pkg_dir
+    end
+
+    ln -s -f -v {$src_dir,$pkg_dir}/convertFonts.sh
+end
+
+# Day One CLI utility
+function install_dayone2
+    set -l dayone_app "/Applications/Day One.app"
+
+    if not test -d $dayone_app
+        echo >&2 "Day One.app not found!"
+        exit 1
+    end
+
+    ln -s -f -v $dayone_app ~/Applications/DayOne.app
+    and make dayone2
+end
+
+# hunspell-en_CA <http://wordlist.aspell.net/dicts/>
+# for Sublime Merge spellchecking
+function install_hunspell
+    # set -l url (wget -qO- http://wordlist.aspell.net/dicts/ | ag -o 'http://\S+-en_CA-[\d.]+.zip')
+    # or exit
+
+    set -l -x HUNSPELL_VERSION $HUNSPELL_VERSION 2020.12.07
+    set -e HUNSPELL_VERSION[2..]
+    make hunspell
+end
+
+# Markdown <https://daringfireball.net/projects/markdown>
+function install_markdown
+    make markdown
+end
+
+# tremc <https://github.com/tremc/tremc>
+function install_tremc
+    set -g tremc_src_dir "$HOME/.local/src/github.com/tremc"
+
+    if not path is -d $tremc_src_dir
+        cd $tremc_src_dir/..
+        and git clone git@github.com:tremc/tremc.git
+        or exit
+    else
+        cd $tremc_src_dir
+        and git pull
+        or exit
+    end
+
+    cd $tremc_src_dir
+    and make DESTDIR=$stow_dir PREFIX=/tremc install
+end
+
+# ~/opt/share/dict/words
+function install_words
+    make words
+end
+
+# youtube_dl as Python package
+# Usage: export PYTHONPATH="$HOME/opt/lib/python3.9/site-packages"
+function install_youtube_dl
+    set -l dest_dir $HOME/opt/stow/youtube_dl
+
+    pip3 install --upgrade --prefix=$dest_dir youtube_dl
+
+    # This `.stow-local-ignore` file ensures only `lib/` is installed to `~/opt`.
+    and touch $dest_dir/.stow-local-ignore
+end
+
+function usage
+    set -l this (basename $this)
+    set -l options targets help
+    echo Usage: $this "<TARGET|"(string join "|" -- --$options)">"
+end
+
+function main
+    set -l -x this (status filename)
+    set -l -x targets (cat $this | string match -rg '^function install_(\w+)')
+    switch $argv[1]
+        case --help
+            usage
+        case --targets
+            printf "%s\n" $targets
+        case '-*'
+            echo >&2 "invalid option: $argv[1]"
+            usage >&2
+            return 1
+        case $targets
+            eval "install_$argv[1]; and restow $argv[1]"
+        case '*'
+            set -q argv[1]; and echo >&2 "invalid target: $argv[1]"
+            usage >&2
+            return 1
+    end
+end
+
+main $argv
