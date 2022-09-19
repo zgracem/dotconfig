@@ -21,8 +21,8 @@ DNSMASQ_FILES = \
 	/etc/resolver/test
 
 JQ_MODULE_DIR := $(XDG_CONFIG_HOME)/jq
-JQ_MODULES = $(wildcard $(JQ_MODULE_DIR)/*.jq $(JQ_MODULE_DIR)/*.json)
-JQ_TARGETS = $(patsubst $(JQ_MODULE_DIR)/%, $(HOME)/.jq/%, $(JQ_MODULES))
+JQ_MODULES := $(wildcard $(JQ_MODULE_DIR)/*.jq $(JQ_MODULE_DIR)/*.json)
+JQ_TARGETS := $(patsubst $(JQ_MODULE_DIR)/%, $(HOME)/.jq/%, $(JQ_MODULES))
 
 SHELL_FILES = \
 	~/.bash_logout \
@@ -137,7 +137,7 @@ $(HOMEDIR_SYMLINKS):
 $(VSCODE_MACOS_SYMLINKS):
 	$(GNU)/ln -s $< $@
 
-user-agent.txt:
+user-agent.txt: /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
 	.vscode/bin/user-agent-get.fish > $@
 
 USER_AGENT = $(shell cat $(CURDIR)/user-agent.txt)
