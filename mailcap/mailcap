@@ -1,0 +1,6 @@
+application/pdf; open -a Preview "%s"; test=test -z $SSH_TTY
+application/zip; open -a "The Archive Browser" "%s"; test=test -z $SSH_TTY
+audio/*;         open -a iTunes "%s";  test=test -z $SSH_TTY
+image/*;         open -a Preview "%s"; test=test -z $SSH_TTY
+text/html;       open -a Safari "%s";  test=test -z $SSH_TTY
+video/*;         open -a VLC "%s";     test=test -z $SSH_TTY
