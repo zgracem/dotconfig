@@ -9,160 +9,75 @@ MAKEFLAGS = Lr
 # -r = don't use implicit rules
 GNUMAKEFLAGS = --output-sync
 
-DOTFILES := $(CURDIR)
-
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
 
 STOW_DIR := ~/opt/stow
 
-# any ~/dotfiles/*/$dir that can be simply stowed to $HOME
-STOWED =
-
-# ~/dotfiles/config
-CONFIG  =
-CONFIG += aria2
-CONFIG += bash
-CONFIG += bat
-CONFIG += bundler
-CONFIG += curl
-CONFIG += fish
-CONFIG += git
-CONFIG += homebrew
-CONFIG += htop
-CONFIG += iterm2
-CONFIG += jq
-CONFIG += markdownlint
-CONFIG += minecraft
-CONFIG += nethack
-CONFIG += netrc
-CONFIG += npm
-CONFIG += prettier
-CONFIG += rbenv-default-gems
-CONFIG += readline
-CONFIG += rubocop
-CONFIG += ruby
-CONFIG += sh
-CONFIG += smerge
-CONFIG += st3
-CONFIG += stow
-CONFIG += syncplay
-CONFIG += tmux
-CONFIG += tremc
-CONFIG += vim
-CONFIG += vscode-mac
-CONFIG += wget
-CONFIG += xdg-basedirs
-CONFIG += xdg-user-dirs-update
-CONFIG += yt-dlp
-.PHONY: $(CONFIG)
-$(CONFIG):
-	cd ${DOTFILES}/config && stow --target ~/ $@
-all: $(CONFIG)
-STOWED += $(CONFIG:%=config/%)
-
-# ~/dotfiles/private
-PRIVATE  =
-PRIVATE += 1password/private
-PRIVATE += bash/private
-PRIVATE += fish/private
-PRIVATE += git/private
-PRIVATE += maestral/private
-PRIVATE += netrc/private
-PRIVATE += sh/private
-PRIVATE += smerge/private
-PRIVATE += ssh/private
-PRIVATE += yt-dlp/private
-
-.PHONY: $(PRIVATE)
-$(PRIVATE):
-	cd $(DOTFILES)/private && stow --target ~/ $(dir $@)
-STOWED += $(PRIVATE:%/private=private/%)
-
-# add private files as prerequisites to config files
-bash: bash/private
-fish: fish/private
-git: git/private
-netrc: netrc/private
-sh: sh/private
-smerge: smerge/private
-yt-dlp: yt-dlp/private
-
-# 1password -- top-level alias
-.PHONY: 1password
-1password: 1password/private
-all: 1password
-
-# ssh -- top-level alias
-.PHONY: ssh
-ssh: ssh/private
-all: ssh
-
-# ~/dotfiles/data
-DATA  =
-DATA += dircolors/data
-DATA += mailcap/data
-DATA += vim/data
-
-.PHONY: $(DATA)
-$(DATA): %/data: | $(XDG_DATA_HOME)/%
-$(XDG_DATA_HOME)/%:
-	cd ${DOTFILES}/data && stow --target ~/ $(notdir $@)
-STOWED += $(DATA:%/data=data/%)
-
 # ----------------------------------------------------------------------------
 
-# mailcap -- add to all
-all: mailcap/data
-
 # shells -- create empty data directories
-SHELL_DATA = bash/data fish/data sh/data
-.PHONY: $(SHELL_DATA)
-$(SHELL_DATA): %/data: | $(XDG_DATA_HOME)/%
-	mkdir -p $|
-bash: | bash/data
-fish: | fish/data
-sh: | sh/data
+SHELL_DATA  =
+SHELL_DATA += $(XDG_DATA_HOME)/sh
+SHELL_DATA += $(XDG_DATA_HOME)/bash
+SHELL_DATA += $(XDG_DATA_HOME)/fish
+.PHONY: shell/data
+$(SHELL_DATA):
+	mkdir -pv $@
+shell/data: | $(SHELL_DATA)
+all: shell/data
+
+# shells -- create symlinks in $HOME
+SHELL_FILES  =
+SHELL_FILES += ~/.bash_profile
+SHELL_FILES += ~/.bash_sessions_disable
+SHELL_FILES += ~/.bashrc
+SHELL_FILES += ~/.hushlogin
+SHELL_FILES += ~/.profile
+.PHONY: shell/files
+~/.bash_profile: bash/.bash_profile
+~/.bash_sessions_disable: bash/.bash_sessions_disable
+~/.bashrc: bash/.bashrc
+~/.hushlogin: bash/.hushlogin
+~/.profile: sh/.profile
+$(SHELL_FILES):
+	ln -sfv $< $@
+shell/files: $(SHELL_FILES)
+all: shell/files
 
 # 1password -- build fish completions
-fish/1password: $(DOTFILES)/config/fish/.config/fish/completions/op.fish
-$(DOTFILES)/config/fish/.config/fish/completions/op.fish: /usr/local/bin/op
-	/usr/local/bin/op completion fish > $@
+.PHONY: 1password/fish
+1password/fish: fish/completions/op.fish
+fish/completions/op.fish: /usr/local/bin/op
+	/usr/local/bin/op completion fish >$@
 /usr/local/bin/op:
 	brew install --cask 1password/tap/1password-cli
-fish: fish/1password
+all: 1password/fish
 
 # bat -- also install and/or (re)build syntaxes
 .PHONY: bat/syntaxes
 bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
-$(XDG_CACHE_HOME)/bat/syntaxes.bin: $(XDG_CONFIG_HOME)/bat/syntaxes | config/bat
-	${DOTFILES}/libexec/bat-syntaxes.fish
-bat: bat/syntaxes
-
-# cronic -- install
-.PHONY: cronic
-cronic: | wget
-	cd ${DOTFILES}/config/stow && $(MAKE) cronic
-all: cronic
+$(XDG_CACHE_HOME)/bat/syntaxes.bin: bat/syntaxes
+	${XDG_CONFIG_HOME}/libexec/bat-syntaxes.fish
+all: bat/syntaxes
 
 # dircolors -- also build .ls_colors files
-.PHONY: dircolors/init
-dircolors/init: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors | dircolors/data
-$(XDG_CACHE_HOME)/dircolors/%.ls_colors: $(XDG_DATA_HOME)/dircolors/%.dir_colors
-	cd $(XDG_DATA_HOME)/dircolors && make all
-all: dircolors/init
+.PHONY: dircolors
+dircolors:
+	cd ${XDG_CONFIG_HOME}/dircolors && $(MAKE) all
 
-# Maestral -- top level alias
-.PHONY: maestral
-all: maestral
+# jq -- install modules
+.PHONY: jq
+jq:
+	cd ${XDG_CONFIG_HOME}/jq && $(MAKE) all
+all: jq
 
 # Maestral -- install .mignore file
 # (Not a symlink because Maestral can't sync symlinks)
-.PHONY: maestral/config
-maestral/config: ~/Dropbox/.mignore
-~/Dropbox/.mignore: config/maestral/Dropbox/.mignore
+.PHONY: maestral
+maestral: ~/Dropbox/.mignore
+~/Dropbox/.mignore: maestral/.mignore
 	${INSTALL} -- $< $@
-maestral: maestral/config
 
 # Maestral -- install CLI w/ pip to workaround issues w/ macOS builtin Python
 # <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>
@@ -171,61 +86,65 @@ maestral/cli: /usr/local/bin/maestral
 /usr/local/bin/maestral:
 	pip3 install --upgrade 'maestral[gui]'
 maestral: maestral/cli
+all: maestral
 
-# ruby -- add support files as prereqs
-ruby: | bundler rubocop
+# mailcap -- install
+.PHONY: mailcap
+mailcap: $(XDG_DATA_HOME)/mailcap
+$(XDG_DATA_HOME)/mailcap: mailcap/mailcap
+	ln -sfv $< $@
+all: mailcap
 
-# ruby -- also install gems
+# ruby -- install gems
 .PHONY: ruby/gems
-ruby/gems: $(XDG_CONFIG_HOME)/ruby/Gemfile.lock
-$(XDG_CONFIG_HOME)/ruby/Gemfile.lock: $(XDG_CONFIG_HOME)/ruby/Gemfile | config/ruby
+ruby/gems: ruby/Gemfile.lock
+ruby/Gemfile.lock: ruby/Gemfile
 	gem install --file=$(basename $<) --lock
 all: ruby/gems
 
 # rbenv -- create dirs and files
 .PHONY: rbenv
-rbenv: rbenv-default-gems | ~/.rbenv ~/.rbenv/version
-~/.rbenv ~/.rbenv/versions:
-	mkdir -p $@
-~/.rbenv/version: ~/.rbenv/versions
+rbenv: ~/.rbenv/default-gems ~/.rbenv/version
+~/.rbenv/default-gems: rbenv/default-gems | ~/.rbenv
+	ln -sfv $< $@
+~/.rbenv/version: | ~/.rbenv/versions
 	rbenv global system
-ruby: | rbenv
+~/.rbenv ~/.rbenv/versions:
+	mkdir -pv $@
+all: rbenv
 
-# smerge -- also install spellcheck dictionary
-.PHONY: smerge/spell
-smerge/spell: $(STOW_DIR)/hunspell-en_CA/share/myspell/en_CA.dic
-$(STOW_DIR)/hunspell-en_CA/share/myspell/en_CA.dic:
-	cd ${DOTFILES}/config/stow && $(MAKE) hunspell
-smerge: smerge/spell
+# stow -- create symlink in $HOME
+.PHONY: stow
+stow: ~/.stow-global-ignore
+~/.stow-global-ignore: stow/stow-global-ignore
+	ln -sfv $< $@
+all: stow
 
-# Stardew Valley
-.PHONY: sdv
-sdv: $(XDG_CONFIG_HOME)/StardewValley
-$(XDG_CONFIG_HOME)/StardewValley: ~/Dropbox/.config/StardewValley
-	ln -sf $< $@
-all: sdv
+# tmux -- create symlink in $HOME
+.PHONY: tmux
+tmux: ~/.tmux.conf
+~/.tmux.conf: tmux/.tmux.conf
+	ln -sfv $< $@
+all: tmux
 
-# vim -- add data files as prereqs
-vim: vim/data
+# vim -- create symlink in $HOME
+.PHONY: vim
+vim: ~/.vimrc
+~/.vimrc: vim/.vimrc
+	ln -sfv $< $@
 
-# vim -- create cache dir
-vim: | $(XDG_CACHE_HOME)/vim
-$(XDG_CACHE_HOME)/vim:
-	mkdir -p $@
+# vim -- create cache & data dirs
+vim: | $(XDG_DATA_HOME)/vim $(XDG_CACHE_HOME)/vim
+$(XDG_DATA_HOME)/vim $(XDG_CACHE_HOME)/vim:
+	mkdir -pv $@
 
 # vim -- also install packages
 .PHONY: vim/pack
-vim/pack: $(XDG_DATA_HOME)/vim/pack/.installed | vim/data
+vim/pack: $(XDG_DATA_HOME)/vim/pack/.installed
 $(XDG_DATA_HOME)/vim/pack/.installed:
-	${DOTFILES}/libexec/init/vim-pack.fish && touch $@
+	${XDG_CONFIG_HOME}/libexec/init/vim-pack.fish && touch $@
 vim: vim/pack
-
-# vscode-mac -- add extension configs as prereqs
-.PHONY: vscode-extensions
-vscode-extensions: \
-	markdownlint \
-	prettier
-vscode-mac: vscode-extensions
+all: vim
 
 # ----------------------------------------------------------------------------
 
@@ -234,31 +153,19 @@ vscode-mac: vscode-extensions
 include make/user-agent.make
 
 # Install Homebrew
-.PHONY: homebrew/install
-homebrew/install: | homebrew
-	cd ${DOTFILES}/config/homebrew/init && $(MAKE) brew/install
-all: homebrew/install
+.PHONY: install/homebrew
+install/homebrew:
+	cd ${XDG_CONFIG_HOME}/brew/init && $(MAKE) brew/install
+all: install/homebrew
 
 # Install files to /etc and /usr/local/etc.
-.PHONY: etc
-etc:
-	cd ${DOTFILES}/etc && $(MAKE) all
-all: etc
+.PHONY: install/etc
+install/etc:
+	cd ${XDG_CONFIG_HOME}/etc && $(MAKE) all
+all: install/etc
 
 # Install packages to ~/opt/stow
 .PHONY: opt/stow
 opt/stow:
-	cd ${DOTFILES}/config/stow && $(MAKE) all
+	cd ${XDG_CONFIG_HOME}/stow && $(MAKE) all
 all: opt/stow
-
-# ----------------------------------------------------------------------------
-
-.PHONY: unstow-all
-unstow = cd ${DOTFILES}/$(dir $(pkg)) && stow --delete -t ~/ $(notdir $(pkg);)
-unstow-all:
-	$(foreach pkg,$(STOWED),$(unstow))
-
-.PHONY: restow-all
-restow = cd ${DOTFILES}/$(dir $(pkg)) && stow --restow -t ~/ $(notdir $(pkg);)
-restow-all:
-	$(foreach pkg,$(STOWED),$(unstow))
