@@ -9,13 +9,10 @@ set nocompatible
 " $VIM        = /usr/share/vim
 " $VIMRUNTIME = /usr/share/vim/vim74
 
-set runtimepath =$XDG_CONFIG_HOME/vim,$XDG_DATA_HOME/vim
+set runtimepath =$XDG_DATA_HOME/vim
 set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
 
 set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
-
-silent! execute pathogen#infect()
-" silent! execute pathogen#helptags()
 
 " clear all vimrc-related autocmds 
 " >> http://ruderich.org/simon/config/vimrc
@@ -47,9 +44,9 @@ set backup                      " do make backups
 set backupcopy=yes              " copy/overwrite instead of renaming
 
 if has("unix")
-  set backupdir=$HOME/var/lib/vim,$TMPDIR
+  set backupdir=$XDG_CACHE_HOME/vim,$TMPDIR
 elseif has("win32") || has("win64")
-  set backupdir=$HOME/var/lib/vim,$TEMP
+  set backupdir=$XDG_CACHE_HOME/vim,$TEMP
 endif
 
 " swap files
@@ -59,13 +56,13 @@ set updatecount=80              " update swapfile after x characters
 " swap files will be created in the first possible directory of:
 " (double slash = include %-separated path in name of swap file)
 if has("unix")
-  set directory=.,$HOME/var/lib/vim//,$TMPDIR//
+  set directory=.,$XDG_CACHE_HOME/vim//,$TMPDIR//
 elseif has("win32") || has("win64")
-  set directory=.,$HOME/var/lib/vim//,$TEMP//
+  set directory=.,$XDG_CACHE_HOME/vim//,$TEMP//
 endif
 
 " location of .netrwhist file
-let g:netrw_home=$XDG_CACHE_HOME.'/vim'
+let g:netrw_home=$XDG_DATA_HOME.'/vim'
 
 "-----------------------------------------------------------------------------
 " Behaviour
