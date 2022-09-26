@@ -1,0 +1,171 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+# http://stackoverflow.com/questions/10834765/where-to-find-a-list-of-scopes-for-sublime2-or-textmate
+# http://ruby-doc.org/core-2.2.0/Regexp.html
+
+name: terminfo(5)
+file_extensions:
+  - ti
+  - terminfo
+scope: source.terminfo
+
+variables:
+  alias: '[\w.-]+(\|)'
+  capname: '[[:alnum:]_]+'
+
+contexts:
+  main:
+    - include: keyword
+    - include: title
+    - include: capabilities
+  prototype:
+    - include: comment
+    - include: escape
+    - include: delay
+    - include: parameters
+  escape:
+    - include: ctl_seqs
+    - include: esc_seqs
+    - include: control_char
+  capabilities:
+    - include: cancelled
+    - include: booleans
+    - include: numerics
+    - include: strings
+
+  # ---------------------------------------------------------------------------
+  # Miscellaneous
+  # ---------------------------------------------------------------------------
+  
+  keyword:
+    - match: '[,=#|]'
+      scope: keyword.operator
+
+  title:
+    - match: '^{{alias}}'
+      scope: entity.name.function
+      captures:
+        1: keyword.operator
+      push:
+        - match: '{{alias}}'
+          captures:
+            1: keyword.operator
+        - match: ','
+          scope: keyword.operator
+          pop: true
+
+  comment:
+    - match: '(?<!\S)(#)(?!\{).*$\n?'
+      scope: comment.line.number-sign.shell
+      captures:
+        1: punctuation.definition.comment.shell
+
+  delay:
+    - match: '(\$)<'
+      captures:
+        1: punctuation.definition.variable
+      push:
+        - meta_scope: string.other.math
+        - match: '[\d.]'
+          scope: constant.numeric.integer
+        - match: '[*/]'
+          scope: keyword.operator
+        - match: '>'
+          pop: true
+
+  # ---------------------------------------------------------------------------
+  # Escape sequences
+  # ---------------------------------------------------------------------------
+  
+  esc_seqs:
+    # Three-digit octal characters
+    - match: '\\[0-7]{3}'
+      scope: constant.character.escape.octal
+
+    # Newline, LF, CR, tab, BS, FF, and space
+    - match: '\\[Eenlrtbfs]'
+      scope: constant.character.escape
+
+    # Literal caret, backslash, comma, and colon; and CS7 null
+    - match: '\\[^\\,:0]'
+      scope: constant.character.escape
+
+  ctl_seqs:
+    # Captures CSI, ST, OSC, and DCS
+    - match: '\\E[\[\\\]P]'
+      scope: constant.character.escape.control-char
+
+  control_char:
+    - match: '\^[[:alpha:]]'
+      scope: constant.character.escape.control-char
+
+  # ---------------------------------------------------------------------------
+  # Parameters
+  # ---------------------------------------------------------------------------
+  
+  parameters:
+    - match: "%%"
+      scope: string.other
+
+    - match: "(%)(p[1-9]|[Pg][[:alpha:]])"
+      scope: variable.other.positional
+      # captures:
+      #   1: punctuation.definition.variable
+
+    - match: "%'"
+      captures:
+        0: punctuation.definition.string.begin
+      push:
+        - meta_scope: string.quoted.single
+        - match: "'"
+          captures:
+            0: punctuation.definition.string.end
+          pop: true
+
+    - match: '%{(\d+)}'
+      scope: constant.numeric.integer
+
+    - match: "(%)[+*/m&|^!~i-]"
+      scope: keyword.operator.arithmetic
+
+    - match: "(%)[=<>AO]"
+      scope: keyword.operator.comparison
+
+    - match: '(%)[?te;]'
+      scope: keyword.control
+
+    - match: '(%)(?::-|([+# ])([-^\2]?)([^\2\3]?))?([\d.]+)?[doxXscl]'
+      scope: string.quoted.double
+      # captures:
+      #   1: punctuation.definition.variable
+
+  # ---------------------------------------------------------------------------
+  # Capabilities
+  # ---------------------------------------------------------------------------
+  
+  booleans:
+    - match: '\b{{capname}}(?=,)'
+      scope: entity.name.function
+
+  numerics:
+    - match: '\b({{capname}})(#)(\d+)(?=,)'
+      captures:
+        1: entity.name.function
+        2: keyword.operator.assign
+        3: constant.numeric.integer
+
+  strings:
+    - match: '\b({{capname}})(=)'
+      captures:
+        1: entity.name.function
+        2: keyword.operator.assign
+      push:
+        - meta_content_scope: string.unquoted
+        - match: ','
+          scope: keyword.operator
+          pop: true
+
+  cancelled:
+    - match: '(?<=\s){{capname}}@(?=,)'
+      scope: comment

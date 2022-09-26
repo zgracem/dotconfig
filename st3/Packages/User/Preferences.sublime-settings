@@ -1,0 +1,68 @@
+{
+	"always_show_minimap_viewport": true,
+	"auto_close_tags": false,
+	"auto_complete_commit_on_tab": true,
+	"auto_complete_selector": "source - comment",
+	"auto_complete_with_fields": true,
+	"auto_match_enabled": false,
+	"caret_extra_width": 0,
+	"caret_style": "blink",
+	"color_scheme": "Packages/User/ZGM/Schemes/Solarized Dark (2017).tmTheme",
+	"copy_with_empty_selection": false,
+	"default_line_ending": "unix",
+	"draw_white_space": "selection",
+	"enable_hexadecimal_encoding": true,
+	"enable_tab_scrolling": false,
+	"ensure_newline_at_eof_on_save": true,
+	"file_exclude_patterns":
+	[
+		".DS_Store",
+		"Gemfile.lock",
+		".yardoc",
+		"*.swp",
+		"*.sublime-project",
+		"*.sublime-workspace"
+	],
+	"find_selected_text": false,
+	"font_face": "IBM Plex Mono Light",
+	"font_options":
+	[
+		"no_liga",
+		"no_clig",
+		"no_calt"
+	],
+	"font_size": 14,
+	"gpu_window_buffer": "auto",
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"hot_exit": true,
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"index_files": false,
+	"match_brackets_angle": true,
+	"minimap_scroll_to_clicked_text": true,
+	"open_files_in_new_window": false,
+	"overlay_scroll_bars": "enabled",
+	"rulers":
+	[
+		80,
+		118
+	],
+	"scroll_past_end": true,
+	"shift_tab_unindent": true,
+	"show_definitions": false,
+	"show_encoding": true,
+	"show_errors_inline": false,
+	"show_full_path": true,
+	"show_line_endings": true,
+	"show_tab_close_buttons": false,
+	"spell_check": false,
+	"tab_completion": false,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": false,
+	"wrap_width": 80,
+}

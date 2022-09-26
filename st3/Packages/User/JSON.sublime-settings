@@ -1,0 +1,11 @@
+{
+	"extensions":
+	[
+		"jrnl",
+		"jrnl_config",
+		"sublime-workspace",
+		"code-workspace",
+		"code-snippets"
+	],
+	"translate_tabs_to_spaces": false
+}

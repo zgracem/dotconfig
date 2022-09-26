@@ -1,0 +1,359 @@
+%YAML 1.2
+---
+# Based on:
+#   https://github.com/carsonoid/sublime_man_page_support
+#
+# References:
+#   http://www.sublimetext.com/docs/3/syntax.html
+#   http://www.sublimetext.com/docs/3/scope_naming.html
+#   https://linux.die.net/man/7/groff
+#   https://linux.die.net/man/7/groff_man
+#   https://linux.die.net/man/5/groff_tmac
+#
+name: 'groff/troff'
+file_extensions:
+  - "man"
+  - "groff"
+  - "nroff"
+  - "troff"
+  - "1"
+  - "1m"
+  - "1ssl"
+  - "1tcl"
+  - "2"
+  - "3"
+  - "3am"
+  - "3cc"
+  - "3G"
+  - "3pcap"
+  - "3pm"
+  - "3ssl"
+  - "3tcl"
+  - "3tiff"
+  - "3x"
+  - "4"
+  - "5"
+  - "5ssl"
+  - "6"
+  - "7"
+  - "7ssl"
+  - "8"
+  - "9"
+scope: source.groff
+first_line_match: "^[.'](?:\\|TH\b|Dt\b)"
+
+variables:
+  cc: "([.'])\\s*" # control character
+  end: '^{{cc}}(\.)$'
+  token: '\S+'
+  float: '(?<=\W)-?\d*\.\d+'
+  int: '(?<=\W)-?\d+'
+  unit: '(?<=\d)[ciPpmMnuvf]'
+  num: '({{float}}|{{int}})({{unit}})?'
+  font_size: 'SM|SB'
+  font_alt: 'BI|IB|RI|IR|BR|RB'
+  font: '[BI]'
+  formatting: '({{font_size}}|{{font_alt}}|{{font}})\b'
+  headings: '(SH|SS|Sh|Ss)\b'
+  title: 'TH|Dt'
+
+contexts:
+  main:
+    - include: control
+    - include: text_line
+
+  prototype:
+    - match: '$'
+      pop: true
+    - include: comments
+    - include: escapes
+
+  literals:
+    - include: string
+    - include: numeric
+
+  # Control lines represent commands, optionally with arguments.
+  # The leading control character can be followed by a command name;
+  # any arguments are separated by blanks from the command name and each other.
+  control:
+    - match: '{{end}}'
+      scope: keyword.other.groff
+      # pop: true
+
+    - match: '^(?={{cc}})'
+      push: control_line
+
+  control_line:
+    - include: operators
+
+    # conditionals
+    - match: '{{cc}}(if|ie|el|while)\b'
+      captures:
+        1: punctuation.definition.keyword.groff
+        2: keyword.control.conditional.groff
+      push: conditional
+
+    # defines a macro
+    - match: '{{cc}}(de[1i]?)\s+({{token}})'
+      captures:
+        1: punctuation.definition.keyword.other.groff
+        2: keyword.other.groff
+        3: entity.name.function.groff
+      push: macro
+
+    # sets a numeric register
+    - match: '{{cc}}(nr)\s+({{token}})'
+      captures:
+        1: punctuation.definition.keyword.other.groff
+        2: keyword.other.groff
+        3: variable.other.groff
+      push: expression
+
+    # defines a string variable
+    - match: '{{cc}}(ds1?)\s+({{token}})\s+(.+)'
+      captures:
+        1: punctuation.definition.keyword.other.groff
+        2: keyword.other.groff
+        3: variable.other.groff
+        4: string.unquoted.groff
+
+    # # sets the man page title
+    # - match: '{{cc}}({{title}})\s+'
+    #   captures:
+    #     1: punctuation.definition.keyword.other.groff
+    #     2: keyword.other.groff
+    #   push:
+    #     - meta_scope: meta.title
+    #     - match: '({{token}})\s+({{token}})(?:.*)'
+    #       captures:
+    #         1: entity.name.namespace
+    #         2: variable.parameter
+
+    # formatting
+    - match: '(?={{cc}}({{formatting}}|{{headings}}))'
+      push: formatted
+
+    - match: '(?={{token}})'
+      push: command
+
+  conditional:
+    - meta_scope: meta.control_line.conditional.groff
+
+    - include: literals
+    - include: expression
+
+    - match: '!'
+      scope: keyword.operator.logical
+
+    # - match: \b(!?{{num}}|!?'{{token}}'{{token}}'|c.|[dmr]\S+|[eont])\b
+    - match: (!?{{token}}|'{{token}}'{{token}}'|c.|[dmr]\S+|[eont])\b\s*
+      scope: variable.language
+      push:
+        - match: '\b{{cc}}'
+          push: control_line
+
+  command:
+    - meta_scope: meta.control_line.command.groff
+    - match: '{{token}}\b'
+      scope: support.function.groff
+      push: arguments
+
+  arguments:
+    - clear_scopes: 1
+    - meta_scope: meta.control_line.keyword.groff
+    - meta_content_scope: variable.parameter.groff
+    - include: literals
+    # - match: '\b{{token}}\b'
+    #   scope: variable.parameter.groff
+
+  macro:
+    # - meta_include_prototype: false
+    # - meta_scope: meta.function.groff
+    - match: '{{end}}'
+      scope: keyword.control.groff
+      pop: true
+
+  # ---------------------------------------------------------------------------
+
+  text_line:
+    - match: "^(\\&)|[^.']"
+      captures:
+        1: constant.character.escape.groff
+      push:
+        - meta_scope: text.groff
+
+  formatted:
+    - match: '{{cc}}{{headings}}'
+      captures:
+        1: punctuation.definition.keyword.groff
+        2: support.function.groff
+      # scope: support.function.groff
+      push:
+        - meta_scope: markup.heading.groff
+        - meta_content_scope: entity.name.section.groff
+
+    - match: (?={{font}}\b)
+      push: bold_italic_macro
+
+    - match: '{{formatting}}'
+      scope: support.function.groff
+      push:
+        - meta_content_scope: text.groff
+
+  bold_italic_macro:
+    - match: 'B\b'
+      scope: support.function.groff
+      push:
+        - meta_content_scope: markup.bold.groff
+
+    - match: 'I\b'
+      scope: support.function.groff
+      push:
+        - meta_content_scope: markup.italic.groff
+
+  bold_italic_inline:
+    - match: B
+      scope: variable.other.groff
+      push:
+        - meta_content_scope: markup.bold.groff
+    - match: I
+      scope: variable.other.groff
+      push:
+        - meta_content_scope: markup.italic.groff
+
+  # ---------------------------------------------------------------------------
+
+  expression:
+    - meta_scope: meta.control_line.expression.groff
+
+    - include: numeric
+    - include: operators
+
+    - match: '[();]'
+      scope: keyword.operator.groff
+
+  comments:
+    - meta_include_prototype: false
+
+    - match: '{{cc}}ig$'
+      scope: punctuation.definition.comment.groff
+      push:
+        - meta_scope: comment.block.groff
+        - match: '{{end}}'
+          scope: punctuation.definition.comment.groff
+          pop: true
+
+    - match: '(?<=[^\\])(\\["#])'
+      scope: punctuation.definition.comment.groff
+      push:
+        - meta_scope: comment.line.groff
+        - match: '$'
+          pop: true
+
+  escapes:
+    # font-setting escapes
+    - match: '(\\{1,2}f)(?=[BI])'
+      captures:
+        1: constant.character.escape.groff
+      push: bold_italic_inline
+      with_prototype:
+        - match: (?=\\{1,2}f[RP])
+          pop: true
+
+    # with single-character argument
+    - match: '(\\{1,2}[fFgkmMnOVYz*$])([[:alnum:]*@])'
+      captures:
+        1: constant.character.escape.groff
+        2: variable.other.groff
+
+    # with two-character argument following (
+    - match: '\\{1,2}.?(\()(.{2})'
+      scope: constant.character.escape.groff
+      captures:
+        1: punctuation.definition.variable.groff
+        2: variable.other.groff
+
+    # with arbitrary-length argument inside []
+    - match: '\\{1,2}.?(\[)([^\]]*)(\])'
+      scope: constant.character.escape.groff
+      captures:
+        1: punctuation.definition.variable.groff
+        2: variable.other.groff
+        3: punctuation.definition.variable.groff
+
+    # with single-quoted argument
+    - match: "(\\\\[AbBCDhHlLNoRSvwxXZ])(')([^']+)(')"
+      captures:
+        1: constant.character.escape.groff
+        2: punctuation.definition.variable.groff
+        3: variable.other.groff
+        4: punctuation.definition.variable.groff
+
+    - match: '\\\{'
+      scope: punctuation.section.braces.begin.groff
+    - match: '\\\}'
+      scope: punctuation.section.braces.end.groff
+
+    - match: '\\.'
+      scope: constant.character.escape.groff
+
+    - match: '\\$'
+      scope: punctuation.separator.continuation.groff
+
+  numeric:
+    - match: '{{float}}({{unit}})?'
+      scope: constant.numeric.float.groff
+      captures:
+        2: keyword.other.unit.groff
+
+    - match: '{{int}}({{unit}})?'
+      scope: constant.numeric.integer.groff
+      captures:
+        2: keyword.other.unit.groff
+
+  operators:
+    - match: '[-+*/%]'
+      scope: keyword.operator.arithmetic.groff
+
+    - match: '[&:!]'
+      scope: keyword.operator.logical.groff
+
+    - match: '=|[<>]\??' # not ()
+      scope: keyword.operator.groff
+
+  # reference:
+  #   - match: '\\{1,2}'
+  #     scope: constant.character.escape.groff
+
+  string:
+    - match: '"'
+      captures:
+        0: punctuation.definition.string.begin.groff
+      push:
+        - meta_scope: string.quoted.double.groff
+        - match: '"'
+          captures:
+            0: punctuation.definition.string.end.groff
+          pop: true
+        - match: '[^\\]\n'
+          pop: true
+
+uuid: e0759277-bdaf-434b-a719-410bf3087ce5
+
+notes: |
+  .ds SV string - sets string variable SV to "string"
+  .nr           - sets number register
+  .ev           - environment storage
+  .ft           - font request
+
+
+  '\ ' '\|' '|^' '\h'    - spaces
+
+  e1>?e2
+  The maximum of e1 and e2.
+
+  e1<?e2
+  The minimum of e1 and e2.
+
+  (c;e)
+  Evaluate e using c as the default scaling indicator.

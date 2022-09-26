@@ -1,0 +1,91 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+# http://www.sublimetext.com/docs/3/scope_naming.html
+#
+name: 'Ruby (w/ Yard)'
+scope: source.ruby.yard
+
+# comment.line.number-sign.ruby
+
+variables:
+  tags: |-
+    (?xi:
+          abstract | api | attr | attr_reader | attr_writer | author
+        | deprecated | example | note | option | overload | param | private
+        | raise | return | see | since | todo | version | yield | yieldparam
+        | yieldreturn
+    )
+  directives: |-
+    (?xi:
+        attribute | endgroup | group | macro
+      | method | parse | scope | visibility
+    )
+
+  prefix: '@!?'
+
+  any_tag: '({{prefix}})({{tags}}|{{directives}})'
+
+  types: '(\[)([^\]]+)(\])'
+
+contexts:
+  main:
+    - match: ""
+      push: "Packages/Ruby/Ruby.sublime-syntax"
+      with_prototype:
+        - match: '(#)\s*(?=@!?)'
+          scope: comment.line.number-sign.ruby.yard
+          captures:
+            1: punctuation.definition.comment.ruby.yard
+          push: yardoc
+
+  yardoc:
+    - match: '$\n?'
+      pop: true
+
+    - match: '(?={{any_tag}})'
+      push: tags
+
+    - match: '\b(\w+)\s+(?={{types}})'
+      captures:
+        1: variable.parameter.ruby.yard
+
+    # - match: '\b\(see'
+    #   scope: variable.parameter.ruby.yard
+      # push:
+      # - match: '(\()(see) ([^)]+)(\))'
+      #   captures:
+      #     1: punctuation.section.parens.begin
+      #     2: punctuation.definition.variable
+      #     3: variable.parameter.ruby.yard
+      #     4: punctuation.section.parens.end
+
+    - match: '{{types}}'
+      captures:
+        1: punctuation.section.brackets.begin.ruby.yard
+        2: storage.type
+        3: punctuation.section.brackets.end.ruby.yard
+      push: comment
+
+  tags:
+    - match: '(@){{tags}}'
+      scope: keyword.ruby.yard
+    - match: '(@!){{directives}}'
+      scope: keyword.ruby.yard
+    - match: '(?=\s)'
+      pop: true
+
+  types:
+    - match: '{{types}}'
+      captures:
+        1: punctuation.section.brackets.begin.ruby.yard
+        2: storage.type
+        3: punctuation.section.brackets.end.ruby.yard
+      pop: true
+
+  comment:
+    - match: '$'
+      pop: true
+    - match: '.'
+      scope: comment.line.number-sign.ruby.yard
+

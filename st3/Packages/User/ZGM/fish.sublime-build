@@ -1,0 +1,21 @@
+{
+	"selector" : "source.shell.fish",
+	"shell_cmd" : "$file",
+	"file_regex": "^(\\u:[^:]+): line (\\d+)(): (.+)",
+	"env": {
+		"SUBLIME_BUILD": "source.shell.fish",
+		"TERM": "dumb"
+	},
+
+	"windows":
+	{
+		"shell_cmd": "",
+		"cmd" : ["Z:/usr/local/bin/fish.exe", "$file"],
+		"path" : "/home/uxhj/bin;/home/uxhj/opt/bin;/usr/local/bin;/usr/bin;/bin"
+	},
+
+	"osx":
+	{
+		"path" : "/Users/zozo/bin;/Users/zozo/opt/bin;/usr/local/bin;/usr/local/sbin;/usr/bin;/bin;/usr/sbin;/sbin"
+	}
+}

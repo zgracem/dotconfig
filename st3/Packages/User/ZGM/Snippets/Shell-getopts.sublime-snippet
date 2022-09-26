@@ -1,0 +1,37 @@
+<snippet>
+	<content><![CDATA[# process options (leading colon lets us do the error handling)
+while getopts ':${1:f:l:qvh}' OPT; do
+	case \$OPT in
+		${2:f)
+			targetFile="\$OPTARG"
+			;;
+		l)
+			logFile="\$OPTARG"
+			;;
+		q)
+			quiet=true
+			;;
+		v)
+			verbose=true
+			;;
+		h)
+			echo "Usage: $usage"
+			exit 0
+			;;}
+		'?')
+			z_scold "invalid option -- -\$OPTARG"
+			echo >&2 "Usage: $usage"
+			exit 64
+			;;
+	esac
+done
+
+# remove options, leave arguments
+shift \$((OPTIND - 1))
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>getopts</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.shell</scope>
+	<description>getopts</description>
+</snippet>

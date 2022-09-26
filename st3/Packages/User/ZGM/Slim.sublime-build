@@ -1,0 +1,31 @@
+{
+	"selector": "text.slim",
+	"file_regex": "^((?:\\u:)?[^:]+):(\\d+)():(.+)",
+	"env": {
+		"SUBLIME_BUILD": "text.slim"
+	},
+	"osx":
+	{
+		"cmd"  : [
+			"slimrb",
+				"--option", "format=:html",
+				"--option", "tabsize=2",
+				"--trace",
+				"--pretty",
+			"$file"
+		],
+		"path" : "/Users/zozo/.rbenv/shims"
+	},
+	"windows":
+	{
+		"cmd"  : [
+			"Z:/bin/ruby.exe",
+			"Z:/home/uxhj/opt/bin/slimrb",
+				"--option", "format=:html",
+				"--option", "tabsize=2",
+				"--trace",
+				"--pretty",
+			"$file"
+		]
+	}
+}

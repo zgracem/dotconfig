@@ -1,0 +1,12 @@
+// ----------------------------------------------------------------------------
+// ~zgm/.../Sublime Text 3/.../User/Preferences (OSX).sublime-settings
+// ----------------------------------------------------------------------------
+
+{
+	"font_face": "Native Light",
+	"font_size": 12,
+  // "theme_statusbar_font_xs": true,
+  // "theme_sidebar_font_xs": true,
+  // "theme_tab_size_xs": true,
+  // "theme_tab_font_xs": true,
+}
