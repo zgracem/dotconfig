@@ -66,7 +66,7 @@ all: 1password/fish
 # bat -- also install and/or (re)build syntaxes
 .PHONY: bat/syntaxes
 bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
-$(XDG_CACHE_HOME)/bat/syntaxes.bin: bat/syntaxes
+$(XDG_CACHE_HOME)/bat/syntaxes.bin:
 	${XDG_CONFIG_HOME}/libexec/bat-syntaxes.fish
 all: bat/syntaxes
 
@@ -126,7 +126,7 @@ all: rbenv
 # stow -- create symlink in $HOME
 .PHONY: stow
 stow: ~/.stow-global-ignore
-~/.stow-global-ignore: stow/stow-global-ignore
+~/.stow-global-ignore: stow/.stow-global-ignore
 	ln -sfv $< $@
 all: stow
 

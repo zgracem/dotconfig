@@ -38,7 +38,8 @@ all: etc/ssh
 .PHONY: shells
 shells: | /etc/shells /usr/local/bin/fish
 	chsh -s /usr/local/bin/fish
-all: shells
+## Not included in `all`; run this manually when needed
+# all: shells
 
 /usr/local/bin/%:
 	brew install $(notdir $@)
