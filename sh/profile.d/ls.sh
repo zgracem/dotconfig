@@ -2,7 +2,7 @@
 # default flags
 # -----------------------------------------------------------------------------
 
-_inPath exa && return
+command -v exa >/dev/null && return
 
 unalias ls ll 2>/dev/null
 

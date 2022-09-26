@@ -9,6 +9,8 @@ fi
 # LANG: used as a substitute for any unset LC_* variable.
 lang_file="$XDG_DATA_HOME/locale/LANG"
 
+mkdir -pv "$(dirname "$lang_file")"
+
 if [ -f "$lang_file" ] && [ -z "$LANG" ]; then
   read -r LANG <"$lang_file"
 fi

@@ -175,7 +175,7 @@ rl()
         ;;
 
       inputrc)
-        local inputrc="${INPUTRC:-$XDG_CONFIG_HOME/readline/inputrc}"
+        local inputrc="${INPUTRC:-$XDG_CONFIG_HOME/readline/.inputrc}"
         _z_rl_say "$inputrc"
         [[ -z $dry_run ]] && bind -f "$inputrc"
         return

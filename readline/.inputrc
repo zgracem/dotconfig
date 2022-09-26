@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# ~/.config/readline/inputrc
-# export INPUTRC=~/.config/readline/inputrc
+# ~/.config/readline/.inputrc
+# export INPUTRC=~/.config/readline/.inputrc
 # -----------------------------------------------------------------------------
 
 # vi mode

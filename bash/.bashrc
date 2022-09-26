@@ -4,9 +4,9 @@
 # -----------------------------------------------------------------------------
 
 # Source ~/.profile
-if [[ -r $HOME/.config/sh/profile.sh ]]; then
-  # shellcheck source=../sh/profile.sh
-  . "$HOME/.config/sh/profile.sh"
+if [[ -r $HOME/.profile ]]; then
+  # shellcheck source=../sh/.profile
+  . "$HOME/.profile"
 fi
 
 ### Abort if...
@@ -80,7 +80,7 @@ fi
 # Other config files
 # -----------------------------------------------------------------------------
 
-export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export INPUTRC="$XDG_CONFIG_HOME/readline/.inputrc"
 
 # Define important shell functions
 # shellcheck source=./_functions.bash
