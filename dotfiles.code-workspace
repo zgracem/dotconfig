@@ -17,9 +17,7 @@
       "bat/syntaxes/": true
     },
     "shellcheck.enable": true,
-    "shellcheck.exclude": [
-      "2148"
-    ],
+    "shellcheck.exclude": ["2148"],
     "sortJSON.orderUnderride": [
       "[applescript]",
       "[fish]",
@@ -69,9 +67,7 @@
           "type": "process",
           "command": "${env:PROGRAMFILES}/Sublime Merge/sublime_merge.exe"
         },
-        "args": [
-          "${workspaceFolder}"
-        ],
+        "args": ["${workspaceFolder}"],
         "presentation": {
           "reveal": "never"
         }
