@@ -115,16 +115,12 @@ contexts:
     - include: tag-attribute
     - include: embedded-ruby
     - match: ^(\s*)(\||')\s*
-      comment: Verbatim text (can include HTML tags and copied lines)
       push:
         - match: ^(?!(\1\s)|\s*$)
           pop: true
         - include: scope:text.html.basic
         - include: embedded-ruby
     - match: '^\s*(\.|#|[-a-zA-Z0-9]+)([\w-]+)?'
-      comment:
-        "1 - dot OR hash OR any combination of word, number; 2 - OPTIONAL any
-        combination of word, number, dash or underscore (following a . or"
       captures:
         1: entity.name.tag.slim
         2: entity.other.attribute-name.event.slim
@@ -136,16 +132,11 @@ contexts:
             2: entity.other.attribute-name.event.slim
           pop: true
         - match: '(:[\w\d]+)+'
-          comment: XML
           push:
             - meta_scope: entity.name.tag.slim
             - match: $|\s
               pop: true
         - match: '(:\s)(\.|#|[a-zA-Z0-9]+)([\w-]+)?'
-          comment:
-            Inline HTML / 1 - colon; 2 - dot OR hash OR any combination of word,
-            number; 3 - OPTIONAL any combination of word, number, dash or
-            underscore (following a . or
           captures:
             1: punctuation.definition.tag.end.slim
             2: entity.name.tag.slim
@@ -160,7 +151,6 @@ contexts:
             - include: root-class-id-tag
             - include: tag-attribute
         - match: '(\*\{)(?=.*\}|.*\|\s*$)'
-          comment: Splat attributes
           captures:
             1: punctuation.section.embedded.ruby
           push:
@@ -184,7 +174,6 @@ contexts:
         - include: embedded-ruby
         - include: scope:text.html.basic
     - match: '(?=<[\w\d\:]+)'
-      comment: Inline and root-level HTML tags
       push:
         - match: $|\/\>
           pop: true
@@ -246,11 +235,6 @@ contexts:
         2: entity.other.attribute-name.html
   rubyline:
     - match: (==|=)(<>|><|<'|'<|<|>)?|-
-      comment:
-        Hack to thwart Sublime's Ruby highlighter. It thinks do without a
-        variable continues the next line (this can be muted with a / at the end
-        of the line). For things like yields, do is unnecessary without an
-        argument, so this hack will suffice
       push:
         - meta_scope: meta.line.ruby.slim
         - meta_content_scope: source.ruby.embedded.slim
@@ -259,7 +243,6 @@ contexts:
             1: keyword.control.start-block.ruby
           pop: true
         - match: "#.*$"
-          comment: Hack to let ruby comments work in this context properly
           scope: comment.line.number-sign.ruby
         - include: continuation
         - include: scope:source.ruby.rails
