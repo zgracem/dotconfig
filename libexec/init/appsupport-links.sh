@@ -9,7 +9,7 @@ function symlink()
     local link_dir="$APPSUPPORT/$2"
     local symlink="$link_dir/$(basename "$target")"
     if [[ -L $symlink ]]; then
-        echo >&2 "symlink exists! $symlink"
+        # echo >&2 "symlink exists! $symlink"
         return
     elif [[ -e $symlink ]]; then
         echo >&2 "existing path is not a symlink! $symlink"

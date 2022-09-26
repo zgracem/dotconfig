@@ -44,7 +44,7 @@ SHELL_FILES += ~/.profile
 ~/.hushlogin: bash/.hushlogin
 ~/.profile: sh/.profile
 $(SHELL_FILES):
-	ln -sfv $< $@
+	ln -sfv .config/$< $@
 shell/files: $(SHELL_FILES)
 all: shell/files
 
@@ -99,11 +99,11 @@ maestral: maestral/cli
 all: maestral
 
 # mailcap -- install
-.PHONY: mailcap
-mailcap: $(XDG_DATA_HOME)/mailcap
-$(XDG_DATA_HOME)/mailcap: mailcap/mailcap
-	ln -sfv $< $@
-all: mailcap
+.PHONY: data/mailcap
+data/mailcap: $(XDG_DATA_HOME)/mailcap
+$(XDG_DATA_HOME)/mailcap: $(XDG_CONFIG_HOME)/mailcap/mailcap
+	ln -sfv $(realpath $<) $@
+all: data/mailcap
 
 # ruby -- install gems
 .PHONY: ruby/gems
@@ -114,8 +114,8 @@ all: ruby/gems
 
 # rbenv -- create dirs and files
 .PHONY: rbenv
-rbenv: ~/.rbenv/default-gems ~/.rbenv/version
-~/.rbenv/default-gems: rbenv/default-gems | ~/.rbenv
+rbenv: ~/.rbenv/default-gems | ~/.rbenv/version
+~/.rbenv/default-gems: $(XDG_CONFIG_HOME)/rbenv/default-gems | ~/.rbenv
 	ln -sfv $< $@
 ~/.rbenv/version: | ~/.rbenv/versions
 	rbenv global system
@@ -127,21 +127,21 @@ all: rbenv
 .PHONY: stow
 stow: ~/.stow-global-ignore
 ~/.stow-global-ignore: stow/.stow-global-ignore
-	ln -sfv $< $@
+	ln -sfv .config/$< $@
 all: stow
 
 # tmux -- create symlink in $HOME
 .PHONY: tmux
 tmux: ~/.tmux.conf
 ~/.tmux.conf: tmux/.tmux.conf
-	ln -sfv $< $@
+	ln -sfv .config/$< $@
 all: tmux
 
 # vim -- create symlink in $HOME
 .PHONY: vim
 vim: ~/.vimrc
 ~/.vimrc: vim/.vimrc
-	ln -sfv $< $@
+	ln -sfv .config/$< $@
 
 # vim -- create cache & data dirs
 vim: | $(XDG_DATA_HOME)/vim $(XDG_CACHE_HOME)/vim
@@ -160,7 +160,7 @@ all: vim
 .PHONY: install/homebrew
 install/homebrew:
 	cd ${XDG_CONFIG_HOME}/brew/init && $(MAKE) brew/install
-all: install/homebrew
+# all: install/homebrew
 
 # Install files to /etc and /usr/local/etc.
 .PHONY: install/etc
