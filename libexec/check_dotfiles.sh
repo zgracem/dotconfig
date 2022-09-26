@@ -16,20 +16,10 @@ fi
 main()
 (
   local err=0
-  _check_dotfiles_env "$@"  || ((err++))
   _check_dotfiles_sh "$@"   || ((err++))
   _check_dotfiles_bash "$@" || ((err++))
   return $(( err > 0 ))
 )
-
-_check_dotfiles_env()
-{
-  local syntax="sh"
-  local -a files=("$XDG_CONFIG_HOME/environment.sh"
-                  "$XDG_CONFIG_HOME/environment.d"/*.sh)
-  local -a opts=("$@")
-  shellcheck -s "$syntax" "${opts[@]}" "${files[@]}"
-}
 
 _check_dotfiles_sh()
 {

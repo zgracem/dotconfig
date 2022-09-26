@@ -43,14 +43,6 @@
   },
   "tasks": {
     "version": "2.0.0",
-    "osx": {
-      "options": {
-        "env": {
-          "PATH": "${env:PATH}",
-          "XDG_CONFIG_HOME": "${env:HOME}/.config"
-        }
-      }
-    },
     "presentation": {
       "reveal": "silent",
       "panel": "dedicated",
@@ -58,6 +50,14 @@
       "clear": true
     },
     "problemMatcher": [],
+    "osx": {
+      "options": {
+        "env": {
+          "PATH": "${env:HOME}/.rbenv/shims:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin",
+          "XDG_CONFIG_HOME": "${env:HOME}/.config"
+        }
+      }
+    },
     "tasks": [
       {
         "label": "Launch Sublime Merge",
