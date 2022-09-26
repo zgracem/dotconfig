@@ -3,6 +3,6 @@
 Used by command-line email clients.
 
 ```sh
-make -C ~/dotfiles data/mailcap
+make -C $XDG_CONFIG_HOME mailcap
 export MAILCAPS=$XDG_DATA_HOME/mailcap
 ```

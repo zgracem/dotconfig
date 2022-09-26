@@ -1,4 +1,4 @@
-# ~/dotfiles/libexec
+# ~/.config/libexec
 
 Scripts called by other scripts, etc., or by Visual Studio Code's [tasks], as
 defined in [`tasks.json`].

@@ -4,7 +4,6 @@
 
 .PHONY: all
 
-DOTFILES := $(CURDIR)/..
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
 
@@ -44,7 +43,7 @@ all: shells
 /usr/local/bin/%:
 	brew install $(notdir $@)
 /etc/shells:
-	${DOTFILES}/libexec/init/add-to-etc-shells.sh fish bash
+	${XDG_CONFIG_HOME}/libexec/init/add-to-etc-shells.sh fish bash
 
 # fix console spam
 .PHONY: emond
