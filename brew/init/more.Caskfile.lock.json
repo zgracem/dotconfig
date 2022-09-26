@@ -1,0 +1,216 @@
+{
+  "entries": {
+    "cask": {
+      "1password-cli": {
+        "version": "2.7.1",
+        "options": {
+          "full_name": "1password-cli"
+        }
+      },
+      "disk-drill": {
+        "version": "4.7.382",
+        "options": {
+          "full_name": "disk-drill"
+        }
+      },
+      "dotnet-sdk": {
+        "version": "6.0.401,c98d3ccf-561c-4f9b-a1d7-5debb0880031,fd1ebfbd783788649ee139c229cd48fa",
+        "options": {
+          "full_name": "dotnet-sdk"
+        }
+      },
+      "file-juicer": {
+        "version": "4.97",
+        "options": {
+          "full_name": "file-juicer"
+        }
+      },
+      "fission": {
+        "version": "2.8.1",
+        "options": {
+          "full_name": "fission"
+        }
+      },
+      "grandperspective": {
+        "version": "3.0.0",
+        "options": {
+          "full_name": "grandperspective"
+        }
+      },
+      "handbrake": {
+        "version": "1.5.1",
+        "options": {
+          "full_name": "handbrake"
+        }
+      },
+      "kid3": {
+        "version": "3.9.2",
+        "options": {
+          "full_name": "kid3"
+        }
+      },
+      "metaz": {
+        "version": "1.0.3",
+        "options": {
+          "full_name": "metaz"
+        }
+      },
+      "minecraft": {
+        "version": "1.1.26",
+        "options": {
+          "full_name": "minecraft"
+        }
+      },
+      "mpv": {
+        "version": "0.34.1",
+        "options": {
+          "full_name": "mpv"
+        }
+      },
+      "pdf-expert": {
+        "version": "3.0.26,861",
+        "options": {
+          "full_name": "pdf-expert"
+        }
+      },
+      "steam": {
+        "version": "4.0",
+        "options": {
+          "full_name": "steam"
+        }
+      },
+      "sublime-text3": {
+        "version": "3.211",
+        "options": {
+          "full_name": "zgracem/formulae/sublime-text3"
+        }
+      },
+      "syncplay": {
+        "version": "1.6.9",
+        "options": {
+          "full_name": "syncplay"
+        }
+      },
+      "transmission": {
+        "version": "3.00",
+        "options": {
+          "full_name": "transmission"
+        }
+      },
+      "transmit": {
+        "version": "5.8.10",
+        "options": {
+          "full_name": "transmit"
+        }
+      },
+      "visual-studio-code-insiders": {
+        "version": "latest",
+        "options": {
+          "full_name": "visual-studio-code-insiders"
+        }
+      },
+      "vmware-fusion": {
+        "version": "12.2.4,20071091",
+        "options": {
+          "full_name": "vmware-fusion"
+        }
+      },
+      "winclone": {
+        "version": "10.1,50060",
+        "options": {
+          "full_name": "winclone"
+        }
+      },
+      "xact": {
+        "version": "2.50",
+        "options": {
+          "full_name": "xact"
+        }
+      },
+      "betterzip": {
+        "version": "5.2",
+        "options": {
+          "full_name": "betterzip"
+        }
+      },
+      "qlcolorcode": {
+        "version": "4.1.0",
+        "options": {
+          "full_name": "qlcolorcode"
+        }
+      },
+      "qlmarkdown": {
+        "version": "1.0.15",
+        "options": {
+          "full_name": "qlmarkdown"
+        }
+      },
+      "quicklook-json": {
+        "version": "2,1.0",
+        "options": {
+          "full_name": "quicklook-json"
+        }
+      },
+      "suspicious-package": {
+        "version": "4.2.1,932",
+        "options": {
+          "full_name": "suspicious-package"
+        }
+      }
+    },
+    "tap": {
+      "zgracem/formulae": {
+        "revision": "81d5bb25c7a3b398bafc84a7ac6260005052ffd6",
+        "options": {
+          "clone_target": "file:///Users/zozo/Dropbox/Projects/homebrew-formulae"
+        }
+      }
+    },
+    "mas": {
+      "ApolloOne": {
+        "id": "1044484672",
+        "version": "3.1.5"
+      },
+      "Mactracker": {
+        "id": "430255202",
+        "version": "7.11.5"
+      },
+      "GarageBand": {
+        "id": "682658836",
+        "version": "10.4.6"
+      },
+      "iMovie": {
+        "id": "408981434",
+        "version": "10.3.4"
+      },
+      "Keynote": {
+        "id": "409183694",
+        "version": "12.1"
+      },
+      "Numbers": {
+        "id": "409203825",
+        "version": "12.1"
+      },
+      "Pages": {
+        "id": "409201541",
+        "version": "12.1"
+      },
+      "Xcode": {
+        "id": "497799835",
+        "version": "14.0"
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "monterey": {
+        "HOMEBREW_VERSION": "3.6.2",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "a7e3fdfae1c57326d4b9a3d4f7d24c3f4d3d0b09",
+        "CLT": "14.1.0.0.1.1662869207",
+        "Xcode": "14.0",
+        "macOS": "12.6"
+      }
+    }
+  }
+}
