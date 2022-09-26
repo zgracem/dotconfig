@@ -15,8 +15,11 @@ if not path is --perm=group $TMPDIR; and mount | grep -q " on $TMPDIR.*noexec,"
     mkdir -p $TMPDIR
 end
 
-for env_file in $__fish_config_dir/__env/*.fish
-    . $env_file
+# setup PATH and friends
+source "$__fish_config_dir/paths.fish"
+
+for env_file in $__fish_config_dir/env.d/*.fish
+    source $env_file
 end
 
 set -g __z_env_loaded (date +"%F %T")

@@ -120,10 +120,8 @@ end
 # -----------------------------------------------------------------------------
 
 if is-gnu ls
-    set -l ls_colors_dir $XDG_CACHE_HOME/dircolors
-    set -l ls_colors_file "$ls_colors_dir/thirty2k.ls_colors.fish"
-
-    mkdir -p $ls_colors_dir
+    set -l ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
+    mkdir -pv (dirname $ls_colors_file)
 
     if not path is -f $ls_colors_file
         pushd $XDG_CONFIG_HOME/dircolors

@@ -22,7 +22,7 @@ first available file that it finds:
 * Completion files for all users in `$__fish_sysconf_dir/completions`
 * Third-party completions in `$__fish_data_dir/vendor_completions.d`
 * Files that shipped with fish in `$__fish_data_dir/completions`
-* Auto-generated files in `~/.local/share/fish/generated_completions`
+* Auto-generated files in `$XDG_DATA_HOME/fish/generated_completions`
 
 ***
 

@@ -1,14 +1,10 @@
-# install with `cd ~/.config/ruby && bundle install`
-
 source "https://rubygems.org"
 ruby "~> 3.1.0"
 
-# -----------------------------------------------------------------------------
-# Utilities
-# -----------------------------------------------------------------------------
+# -- general -------------------------------------------------------------------
 
-# <github.com/threedaymonk/htmlentities>
-gem "htmlentities"
+# <github.com/busyloop/lolcat>
+gem "lolcat"
 
 # <github.com/rtomayko/ronn>
 gem "ronn", "~> 0.7"
@@ -19,24 +15,14 @@ gem "symbolized"
 # <github.com/lsegal/yard>
 gem "yard", ">= 0.9.20"
 
-# for Visual Studio Code
+# -- for Visual Studio Code ----------------------------------------------------
+
+# <solargraph.org>
 gem "solargraph"
+# <github.com/sds/slim-lint>
+gem "slim_lint"
 
-# -----------------------------------------------------------------------------
-# Misc.
-# -----------------------------------------------------------------------------
-
-# <github.com/busyloop/lolcat>
-gem "lolcat"
-
-# -----------------------------------------------------------------------------
-# Webdev/networking
-# -----------------------------------------------------------------------------
-
-gem "http"
-gem "net-scp"
-gem "net-ssh"
-gem "nokogiri", ">= 1.13.2"
+# -- webdev --------------------------------------------------------------------
 
 # <github.com/middleman/middleman>
 gem "middleman"
@@ -47,40 +33,20 @@ gem "sassc"
 # <github.com/slim-template/slim>
 gem "slim"
 
-# <github.com/sds/slim-lint>
-gem "slim_lint"
+# -- for pyjamas.fish ----------------------------------------------------------
 
-# -----------------------------------------------------------------------------
-# APIs
-# -----------------------------------------------------------------------------
-
-# <github.com/oauth-xx/oauth-ruby>
-gem "oauth"
-
-# <github.com/tumblr/tumblr_client>
-gem "tumblr_client"
-
-# -----------------------------------------------------------------------------
-# Script requirements
-# -----------------------------------------------------------------------------
-
-# -- for BitBar weather app
-# <github.com/trailblazer/representable>
-gem "representable"
-
-# -- for pyjamas (fish function)
 # <github.com/bleything/plist>
 gem "plist"
 # <https://github.com/emancu/toml-rb>
 gem "toml-rb"
 
-# -- for uu{char,debug,grep}
-gem "gemoji"
-gem "unicode_utils"
+# -- for Markdown-to-HTML post-processing --------------------------------------
 
-# -----------------------------------------------------------------------------
-# local gems
-# ----------------------------------------------------------------------------
+# <github.com/threedaymonk/htmlentities>
+gem "htmlentities"
 
-gem "bunter", git: "git@github.com:zgracem/bunter.git", branch: "main"
-gem "tiny_dancer", git: "git@github.com:zgracem/tiny-dancer.git", branch: "main"
+# -- local gems ----------------------------------------------------------------
+
+gem "tiny_dancer",
+    git: "git@github.com:zgracem/tiny-dancer.git",
+    branch: "main"

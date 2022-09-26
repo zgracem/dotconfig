@@ -1,17 +1,12 @@
-# https://github.com/rbenv/rbenv-default-gems
+# vim:ft=sh
+# <https://github.com/rbenv/rbenv-default-gems>
 
-# CLI
+htmlentities
 lolcat
-
-# IDE
-solargraph
-slim_lint
-
-# General
-symbolized
-yard >=0.9.20
-
-# Webdev
 middleman
+plist
 sassc
 slim
+solargraph
+symbolized
+toml-rb

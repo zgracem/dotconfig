@@ -4,13 +4,13 @@
 
 # quick navigation
 
-function ..; cd .. ; end
-function ...; cd ../.. ; end
-function ....; cd ../../.. ; end
-function .....; cd ../../../.. ; end
+abbr -a -g .. cd ..
+abbr -a -g ... cd ../..
+abbr -a -g .... cd ../../..
+abbr -a -g ..... cd ../../../..
 
 # https://fishshell.com/docs/current/faq.html#faq-cd-minus
-abbr --add --global -- '-' 'cd -'
+abbr -a -g -- '-' 'cd -'
 
 # ssh
 

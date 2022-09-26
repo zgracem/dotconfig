@@ -1,6 +1,5 @@
 set -gx MBOX ~/.mail/mbox
 set -gx DEAD ~/.mail/dead.letter
-# mkdir -p (dirname $MBOX)
 
 if not set -q MAIL
     set -gx MAIL "/var/mail/$USER"

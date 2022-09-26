@@ -3,7 +3,7 @@ function __flannel_dump
 
     set -l timestamp (gdate +%Y%m%d_%H%M%S)
 
-    for domain in $argv[2..-1]
+    for domain in $argv
         set -l yaml_file $PWD/$domain@$timestamp.yaml
 
         if path is -f $yaml_file

@@ -11,11 +11,8 @@ if fish-is-older-than 3.1
     exit 1
 end
 
-# setup PATH and friends
-source "$__fish_config_dir/paths.fish"
-
-# setup environment
-source "$__fish_config_dir/__env.fish"
+# setup environment, including PATH and friends
+source "$__fish_config_dir/env.fish"
 
 # stop here if not an interactive session
 status is-interactive; or exit
@@ -60,7 +57,7 @@ if is-cygwin
 end
 
 # See conf.d/update-lastpwd.fish
-if status is-interactive; and not string match -q vscode $TERM_PROGRAM; and path is -f $__fish_user_data_dir/last_pwd
-    read -l dir <$__fish_user_data_dir/last_pwd
+if status is-interactive; and not string match -q vscode $TERM_PROGRAM; and path is -f $XDG_CACHE_HOME/fish/last_pwd
+    read -l dir <$XDG_CACHE_HOME/fish/last_pwd
     path is -d $dir; and cd $dir
 end

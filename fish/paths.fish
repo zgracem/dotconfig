@@ -54,7 +54,9 @@ if is-macos; and in-path brew
 
     # Xcode
     set -l XCODE /Applications/Xcode.app/Contents/Developer
+    set -a PATH $XCODE/usr/bin
     set -a PATH $XCODE/Toolchains/XcodeDefault.xctoolchain/usr/bin
+    set -a MANPATH $XCODE/usr/share/man
     set -a MANPATH $XCODE/Toolchains/XcodeDefault.xctoolchain/usr/share/man
     set -a MANPATH $XCODE/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
 end
