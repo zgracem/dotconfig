@@ -9,6 +9,7 @@
     "fish": "fish -C 'set -gx TERM dumb'",
     "html": "links -html-margin 0 -dump",
     "jq": "jq --null-input --from-file",
+    "makefile": "make -f",
     "markdown": "multimarkdown --snippet --nolabels",
     "ruby": "ruby",
     "sass": "sass --no-source-map --trace",
@@ -150,7 +151,7 @@
   "oneDarkPro.editorTheme": "One Dark Pro Flat",
   "oneDarkPro.italic": true,
   "outline.problems.enabled": false,
-  "papyrus.fo4.directory": "/Volumes/T7/Steam/steamapps/common/Fallout 4",
+  "papyrus.fo4.directory": "/Volumes/T7/Steam/steamapps/common/Fallout 4/",
   "prettier.bracketSameLine": true,
   "prettier.semi": false,
   "prettier.trailingComma": "none",
@@ -298,6 +299,7 @@
   "yaml.format.enable": false,
   "yaml.format.proseWrap": "always",
   "yaml.maxItemsComputed": 20480,
+  "yaml.schemaStore.enable": false,
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4
