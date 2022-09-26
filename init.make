@@ -1,4 +1,5 @@
-.PHONY: default all
+# `make` with no arguments executes the first rule in the file.
+.PHONY: default
 default:
 	@echo Target ‘$@’ not implemented.
 
@@ -13,6 +14,8 @@ GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
 
 STOW_DIR := ~/opt/stow
+
+.PHONY: all
 
 # ----------------------------------------------------------------------------
 
@@ -45,6 +48,12 @@ $(SHELL_FILES):
 shell/files: $(SHELL_FILES)
 all: shell/files
 
+# misc -- create symlinks in $HOME/Library/Application Support
+.PHONY: appsupport
+appsupport:
+	${XDG_CONFIG_HOME}/libexec/init/appsupport-links.sh
+all: appsupport
+
 # 1password -- build fish completions
 .PHONY: 1password/fish
 1password/fish: fish/completions/op.fish
@@ -65,6 +74,7 @@ all: bat/syntaxes
 .PHONY: dircolors
 dircolors:
 	cd ${XDG_CONFIG_HOME}/dircolors && $(MAKE) all
+all: dircolors
 
 # jq -- install modules
 .PHONY: jq
@@ -146,12 +156,6 @@ $(XDG_DATA_HOME)/vim/pack/.installed:
 vim: vim/pack
 all: vim
 
-# ----------------------------------------------------------------------------
-
-# Generate a fake user-agent string to mask the activity of tools like wget.
-# (Hooks into existing targets, including `all`.)
-include make/user-agent.make
-
 # Install Homebrew
 .PHONY: install/homebrew
 install/homebrew:
@@ -169,3 +173,29 @@ all: install/etc
 opt/stow:
 	cd ${XDG_CONFIG_HOME}/stow && $(MAKE) all
 all: opt/stow
+
+# -----------------------------------------------------------------------------
+# Generate a fake user-agent string to mask the activity of tools like wget.
+# Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.
+# ----------------------------------------------------------------------------
+
+UA_OUTPUT_FILES = \
+	aria2/aria2.conf \
+	curl/.curlrc \
+	wget/wgetrc \
+	yt-dlp/config \
+	../.private/yt-dlp/config
+
+HB_FILE := /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
+UA_FILE := $(XDG_CACHE_HOME)/dotfiles/user-agent.txt
+$(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
+	${XDG_CONFIG_HOME}/libexec/user-agent-get.fish > $@
+$(XDG_CACHE_HOME)/dotfiles:
+	mkdir -pv $@
+$(UA_OUTPUT_FILES): $(UA_FILE)
+
+$(UA_OUTPUT_FILES): %: %.m4
+	m4 -D _HOME_="${HOME}" -D _USER_AGENT_="$(shell cat ${UA_FILE})" $< >$@
+
+.PHONY: user-agent
+user-agent: $(UA_OUTPUT_FILES)
