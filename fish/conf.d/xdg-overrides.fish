@@ -22,6 +22,10 @@ if in-path pip
 end
 
 # ruby
+if in-path rbenv
+    set -gx RBENV_ROOT $XDG_DATA_HOME/rbenv
+end
+
 if in-path ruby
     set -gx IRBRC $XDG_CONFIG_HOME/ruby/irbrc
 

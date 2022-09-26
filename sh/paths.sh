@@ -139,14 +139,13 @@ INFOPATH=$HOME/opt/share/info:$INFOPATH
 # rbenv
 # -----------------------------------------------------------------------------
 
-if [ -d "$HOME/.rbenv" ]; then
-  if [ -d "$HOME/.rbenv/bin" ]; then
+if [ -d "$XDG_DATA_HOME/rbenv" ]; then
+  if [ -d "$XDG_DATA_HOME/rbenv/bin" ]; then
     # non-Homebrew install
-    PATH=$HOME/.rbenv/bin:$PATH
+    PATH=$XDG_DATA_HOME/rbenv/bin:$PATH
   fi
-  PATH=$HOME/.rbenv/shims:$PATH
-  MANPATH=$HOME/.rbenv/versions/$(cat "$HOME/.rbenv/version")/share/man:$MANPATH
-  unset -v RBENV_VERSION
+  PATH=$XDG_DATA_HOME/rbenv/shims:$PATH
+  MANPATH=$XDG_DATA_HOME/rbenv/versions/$(cat "$XDG_DATA_HOME/rbenv/version")/share/man:$MANPATH
 fi
 
 # -----------------------------------------------------------------------------

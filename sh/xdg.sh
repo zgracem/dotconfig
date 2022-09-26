@@ -26,6 +26,10 @@ if command -v pip >/dev/null; then
 fi
 
 # Ruby
+if command -v rbenv >/dev/null; then
+  export RBENV_ROOT="$XDG_DATA_HOME/rbenv"
+fi
+
 if command -v ruby >/dev/null; then
   export IRBRC=$XDG_CONFIG_HOME/ruby/irbrc
   if command -v gem >/dev/null; then

@@ -1,6 +1,7 @@
-if [ -d "$HOME/.rbenv" ]; then
+
+if [ -d "$RBENV_ROOT" ]; then
   # In case it isn't installed to /usr/local/bin
-  [ -d "$HOME/.rbenv/bin" ] && PATH=$HOME/.rbenv/bin:$PATH
+  [ -d "$RBENV_ROOT/bin" ] && PATH=$RBENV_ROOT/bin:$PATH
 
   if command -v rbenv >/dev/null; then
     eval "$(rbenv init -)"

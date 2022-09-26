@@ -10,7 +10,7 @@ function local-ruby-versions --description "List all .ruby-version files and the
     set --local rv_files (fd -tf -sHFa ".ruby-version" $dirs)
     set --local rb_versions (rbenv versions --bare)
 
-    read --local global_version <~/.rbenv/version
+    read --local global_version <$RBENV_ROOT/version
 
     for rv_file in $rv_files
         read --local rb_version <$rv_file

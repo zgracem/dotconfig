@@ -114,12 +114,12 @@ all: ruby/gems
 
 # rbenv -- create dirs and files
 .PHONY: rbenv
-rbenv: ~/.rbenv/default-gems | ~/.rbenv/version
-~/.rbenv/default-gems: $(XDG_CONFIG_HOME)/rbenv/default-gems | ~/.rbenv
+rbenv: $(XDG_DATA_HOME)/rbenv/default-gems | $(XDG_DATA_HOME)/rbenv/version
+$(XDG_DATA_HOME)/rbenv/default-gems: $(XDG_CONFIG_HOME)/rbenv/default-gems | $(XDG_DATA_HOME)/rbenv
 	ln -sfv $< $@
-~/.rbenv/version: | ~/.rbenv/versions
+$(XDG_DATA_HOME)/rbenv/version: | $(XDG_DATA_HOME)/rbenv/versions
 	rbenv global system
-~/.rbenv ~/.rbenv/versions:
+$(XDG_DATA_HOME)/rbenv $(XDG_DATA_HOME)/rbenv/versions:
 	mkdir -pv $@
 all: rbenv
 

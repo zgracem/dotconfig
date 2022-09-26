@@ -3,7 +3,7 @@ function __fish_prompt_rbenv
     or return 0
 
     set -q GLOBAL_RBENV_VERSION
-    or read -g GLOBAL_RBENV_VERSION <~/.rbenv/version
+    or read -g GLOBAL_RBENV_VERSION <$XDG_DATA_HOME/rbenv/version
     set -g LOCAL_RBENV_VERSION (rbenv version | string split -f1 " ")
 
     string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"

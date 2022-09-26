@@ -81,14 +81,14 @@ set -p PATH ~/opt/bin ~/bin
 set -p MANPATH ~/opt/share/man ~/share/man
 
 # rbenv
-if path is -d ~/.rbenv
-    if path is -d ~/.rbenv/bin
+if path is -d $XDG_DATA_HOME/rbenv
+    if path is -d $XDG_DATA_HOME/rbenv/bin
         # non-Homebrew installation
-        set -p PATH ~/.rbenv/bin
+        set -p PATH $XDG_DATA_HOME/rbenv/bin
     end
-    read -l ruby_version <~/.rbenv/version
-    set -p PATH ~/.rbenv/shims
-    set -p MANPATH ~/.rbenv/versions/$ruby_version/share/man
+    read -l ruby_version <$XDG_DATA_HOME/rbenv/version
+    set -p PATH $XDG_DATA_HOME/rbenv/shims
+    set -p MANPATH $XDG_DATA_HOME/rbenv/versions/$ruby_version/share/man
 end
 
 # fish
