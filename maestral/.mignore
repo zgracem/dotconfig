@@ -1,0 +1,7 @@
+.config/iterm2
+dotfiles/data/.stow-local-ignore
+dotfiles/data/.stowrc
+dotfiles/private/.shellcheckrc
+dotfiles/private/.stowrc
+Projects/flannel/etc/functions
+Projects/flannel/etc/completions
