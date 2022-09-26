@@ -1,4 +1,5 @@
 # /etc/sudoers.d/sudoer_zozo
+# vim:ft=ssh_config
 
 # use Homebrew vim
 Defaults editor = "/usr/local/bin/vim"
