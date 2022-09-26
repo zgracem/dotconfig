@@ -90,7 +90,7 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/.inputrc"
 # shellcheck source=./_terminal.bash
 . "$XDG_CONFIG_HOME/bash/_terminal.bash"
 
-# Load direction definitions ($dir_foo)
+# Load direction definitions ($XDG_*)
 # shellcheck source=./_dirs.bash
 . "$XDG_CONFIG_HOME/bash/_dirs.bash"
 

@@ -7,7 +7,7 @@
 # shellcheck disable=SC2128
 if test "$BASH_VERSINFO"; then
   # bash >2.0, so source .bashrc
-  # shellcheck source=./bashrc.bash
+  # shellcheck source=./.bashrc
   [[ -r $HOME/.bashrc ]] && . "$HOME/.bashrc"
 else
   # bash <2.0, abort

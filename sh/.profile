@@ -5,7 +5,7 @@
 
 # Setup environment
 export ENV=~/.config/sh/env.sh
-# shellcheck source=.config/sh/env.sh
+# shellcheck source=./env.sh
 . "$ENV"
 
 # -----------------------------------------------------------------------------
