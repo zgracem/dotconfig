@@ -1,0 +1,6 @@
+---
+Label: org.inescapable.setenv
+ProgramArguments:
+- "/usr/local/bin/fish"
+- "/Users/zozo/.config/launchd/setenv.fish"
+RunAtLoad: true

@@ -19,6 +19,12 @@ STOW_DIR := ~/opt/stow
 
 # ----------------------------------------------------------------------------
 
+# environment -- load for GUI apps
+.PHONY: setenv
+setenv: $(HOME)/Library/LaunchAgents/org.inescapable.setenv.plist
+	cd ${XDG_CONFIG_HOME}/launchd && $(MAKE)
+all: setenv
+
 # shells -- create empty data directories
 SHELL_DATA  =
 SHELL_DATA += $(XDG_DATA_HOME)/sh

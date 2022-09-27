@@ -17,6 +17,7 @@ syncplay.ini
 
 # unnecessary
 .contrib/
+launchd/*.plist
 *~
 *~orig*
 *.old
