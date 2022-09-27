@@ -10,10 +10,10 @@ MAKEFLAGS = Lr
 # -r = don't use implicit rules
 GNUMAKEFLAGS = --output-sync
 
+STOW_DIR := ~/opt/stow
+
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
-
-STOW_DIR := ~/opt/stow
 
 .PHONY: all
 
@@ -79,13 +79,13 @@ all: bat/syntaxes
 # dircolors -- also build .ls_colors files
 .PHONY: dircolors
 dircolors:
-	cd ${XDG_CONFIG_HOME}/dircolors && $(MAKE) all
+	cd ${XDG_CONFIG_HOME}/dircolors && $(MAKE)
 all: dircolors
 
 # jq -- install modules
 .PHONY: jq
 jq:
-	cd ${XDG_CONFIG_HOME}/jq && $(MAKE) all
+	cd ${XDG_CONFIG_HOME}/jq && $(MAKE)
 all: jq
 
 # Maestral -- install .mignore file
@@ -165,19 +165,19 @@ all: vim
 # Install Homebrew
 .PHONY: install/homebrew
 install/homebrew:
-	cd ${XDG_CONFIG_HOME}/brew/init && $(MAKE) brew/install
+	cd ${XDG_CONFIG_HOME}/brew/init && $(MAKE)
 # all: install/homebrew
 
 # Install files to /etc and /usr/local/etc.
 .PHONY: install/etc
 install/etc:
-	cd ${XDG_CONFIG_HOME}/etc && $(MAKE) all
+	cd ${XDG_CONFIG_HOME}/etc && $(MAKE)
 all: install/etc
 
 # Install packages to ~/opt/stow
 .PHONY: opt/stow
 opt/stow:
-	cd ${XDG_CONFIG_HOME}/stow && $(MAKE) all
+	cd ${XDG_CONFIG_HOME}/stow && $(MAKE)
 all: opt/stow
 
 # -----------------------------------------------------------------------------

@@ -5,18 +5,14 @@ STAGING := $(STOW_DIR)/.staging
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --preserve-timestamps
 
-# `make` with no arguments executes the first rule in the file.
-.PHONY: default
-default:
-	@echo Target ‘$@’ not implemented.
-
-.PHONY: all
+.PHONY: stow/all
+stow/all:
 
 # -- BSD calendars -------------------------------------------------------------
 
 .PHONY: calendar
 calendar: ~/opt/share/calendar
-# all: calendar
+# stow/all: calendar
 
 ~/opt/share/calendar: $(STOW_DIR)/calendar/share/calendar
 	cd ${STOW_DIR} && stow calendar
@@ -31,7 +27,7 @@ $(STAGING)/calendars:
 
 .PHONY: cronic
 cronic: ~/opt/bin/cronic
-all: cronic
+stow/all: cronic
 
 ~/opt/bin/cronic: $(STOW_DIR)/cronic-v3/bin/cronic
 	cd ${STOW_DIR} && stow cronic
@@ -46,7 +42,7 @@ $(STAGING)/cronic:
 
 .PHONY: css3FontConverter
 css3FontConverter: ~/opt/bin/convertFonts.sh
-all: css3FontConverter
+stow/all: css3FontConverter
 
 ~/opt/bin/convertFonts.sh: $(STOW_DIR)/css3FontConverter/bin/convertFonts.sh
 	cd ${STOW_DIR} && stow css3FontConverter
@@ -61,7 +57,7 @@ $(STAGING)/css3FontConverter:
 
 .PHONY: dayone2
 dayone2: ~/opt/bin/dayone2
-all: dayone2
+stow/all: dayone2
 
 ~/opt/bin/dayone2: $(STOW_DIR)/dayone2/bin/dayone2
 	cd ${STOW_DIR} && stow dayone2
@@ -80,7 +76,7 @@ LANG = en_CA
 
 .PHONY: hunspell
 hunspell: ~/opt/share/myspell
-all: hunspell
+stow/all: hunspell
 
 ~/opt/share/myspell: $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic
 	cd ${STOW_DIR} && stow hunspell
@@ -95,7 +91,7 @@ $(STAGING)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip:
 
 .PHONY: markdown
 markdown: ~/opt/bin/Markdown.pl
-# all: markdown
+# stow/all: markdown
 
 ~/opt/bin/Markdown.pl: $(STOW_DIR)/markdown/bin/Markdown.pl
 	cd ${STOW_DIR} && stow markdown
@@ -113,7 +109,7 @@ $(STAGING)/Markdown_1.0.1.zip:
 
 .PHONY: tremc
 tremc: ~/opt/bin/tremc
-all: tremc
+stow/all: tremc
 
 ~/opt/bin/tremc: $(STOW_DIR)/tremc/bin/tremc
 	cd ${STOW_DIR} && stow tremc
@@ -128,7 +124,7 @@ $(STAGING)/tremc:
 
 .PHONY: words
 words: ~/opt/share/dict/words
-# all: words
+# stow/all: words
 
 ~/opt/share/dict/words: $(STOW_DIR)/words/share/dict/words
 	cd ${STOW_DIR} && stow words

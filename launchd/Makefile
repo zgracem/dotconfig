@@ -1,11 +1,11 @@
 SOURCE_DIR := $(CURDIR)
 DEST_DIR := $(HOME)/Library/LaunchAgents
 
-.PHONY: setenv/all
-setenv/all: $(DEST_DIR)/org.inescapable.setenv.plist
-
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --compare --mode=0644
+
+.PHONY: setenv/all
+setenv/all: $(DEST_DIR)/org.inescapable.setenv.plist
 
 $(DEST_DIR)/%.plist: $(SOURCE_DIR)/%.plist
 	launchctl unload $@ 2>/dev/null
