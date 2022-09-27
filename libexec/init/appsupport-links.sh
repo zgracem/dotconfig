@@ -9,8 +9,7 @@ function symlink()
     local link_dir="$APPSUPPORT/$2"
     local symlink="$link_dir/$(basename "$target")"
     if [[ -L $symlink ]]; then
-        # echo >&2 "symlink exists! $symlink"
-        return
+        ln -sfv "$target" "$link_dir/"
     elif [[ -e $symlink ]]; then
         echo >&2 "existing path is not a symlink! $symlink"
         return 1
@@ -22,10 +21,10 @@ function symlink()
 symlink "$XDG_CONFIG_HOME/minecraft/options.txt" minecraft
 
 # killall -v "Sublime Merge"
-symlink "$HOME/.private/smerge/License.sublime_license" "Sublime Merge/Local"
-symlink "$XDG_CONFIG_HOME/smerge/Commit Message.sublime-settings" "Sublime Merge/Packages/User"
-symlink "$XDG_CONFIG_HOME/smerge/Diff.sublime-settings" "Sublime Merge/Packages/User"
-symlink "$XDG_CONFIG_HOME/smerge/Preferences.sublime-settings" "Sublime Merge/Packages/User"
+symlink "$HOME/.private/smerge/Local/License.sublime_license" "Sublime Merge/Local"
+symlink "$XDG_CONFIG_HOME/smerge/Packages/User/Commit Message.sublime-settings" "Sublime Merge/Packages/User"
+symlink "$XDG_CONFIG_HOME/smerge/Packages/User/Diff.sublime-settings" "Sublime Merge/Packages/User"
+symlink "$XDG_CONFIG_HOME/smerge/Packages/User/Preferences.sublime-settings" "Sublime Merge/Packages/User"
 
 # killall -v "Sublime Text 3"
 symlink "$XDG_CONFIG_HOME/st3/Packages/User" "Sublime Text 3/Packages"
