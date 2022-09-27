@@ -5,18 +5,12 @@
 .PHONY: all
 
 GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
+INSTALL := $(GNU)/install --compare --mode=0644 --preserve-timestamps
 
 # dnsmasq -- enable local .test TLD
 .PHONY: dnsmasq
-dnsmasq: /usr/local/etc/dnsmasq.conf /etc/resolver/test
-all: dnsmasq
-
-/usr/local/etc/dnsmasq.conf: dnsmasq/dnsmasq.conf
-	${INSTALL} -D -- $< $@
-
-/etc/resolver/test: dnsmasq/resolver/test
-	sudo ${INSTALL} -D -- $< $@
+dnsmasq:
+	cd ${XDG_CONFIG_HOME}/etc/dnsmasq && $(MAKE) all
 
 # custom sudoers(5) config
 .PHONY: sudoers
