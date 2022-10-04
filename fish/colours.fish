@@ -122,7 +122,7 @@ end
 if is-gnu ls; and path is -d $XDG_CONFIG_HOME/dircolors
     set -l ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
     make --quiet -C $XDG_CONFIG_HOME/dircolors
-    set -gx LS_COLORS (string match -r "(?<=')(?:[^=]+=[\d;]+:)+" <$ls_colors_file)
+    set -gx LS_COLORS (string match -r "(?<=')(?:[^=]+=(?:[\d;]+|target):)+" <$ls_colors_file)
 else
     # Generated at http://geoff.greer.fm/lscolors/
     set -gx CLICOLOR 1
@@ -132,17 +132,6 @@ end
 # -----------------------------------------------------------------------------
 # other
 # -----------------------------------------------------------------------------
-
-# begin/end "bold" mode -- man page headers
-set -gx LESS_TERMCAP_md (set_color green)
-set -gx LESS_TERMCAP_me (set_color normal)
-
-# begin/end "underline" mode -- highlights man page variables
-set -gx LESS_TERMCAP_us (set_color yellow)
-set -gx LESS_TERMCAP_ue (set_color normal)
-
-# reset
-set -gx LESS_TERMEND (set_color normal)
 
 set -gx --path GCC_COLORS \
     "error="(get_color brred) \
@@ -168,87 +157,4 @@ begin
     set -l jq_arr (get_color normal)
     set -l jq_obj (get_color normal)
     set -gx --path JQ_COLORS $jq_null $jq_false $jq_true $jq_int $jq_str $jq_arr $jq_obj
-end
-
-# -----------------------------------------------------------------------------
-# exa
-# -----------------------------------------------------------------------------
-
-if in-path exa
-    set -gx --path EXA_COLORS # (string split : "$LS_COLORS" | string replace -a "=9" "=1;3")
-
-    ### Permissions & ownership
-
-    # [u]ser/[g]roup/o[t]hers +
-    #   [r]ead/[w]rite/e[x]ecute (regular)/[e]xecute (other)
-    set -a EXA_COLORS "ur="(get_color256 brgreen)
-    set -a EXA_COLORS "uw="(get_color256 bryellow)
-    set -a EXA_COLORS "ux="(get_color256 brcyan)
-    set -a EXA_COLORS "ue="(get_color256 cyan)
-    set -a EXA_COLORS "gr="(get_color256 yellow)
-    set -a EXA_COLORS "gw="(get_color256 brred)
-    set -a EXA_COLORS "gx="(get_color256 cyan)
-    set -a EXA_COLORS "tr="(get_color256 yellow)
-    set -a EXA_COLORS "tw="(get_color256 brred)
-    set -a EXA_COLORS "tx="(get_color256 cyan)
-
-    # [s]etuid/setgid/sticky bits on reg[u]lar files & other [f]iles
-    set -a EXA_COLORS "su="(get_color256 cyan)
-    set -a EXA_COLORS "sf="(get_color256 cyan)
-
-    # [U]sers & [g]roups; yo[u] or [n]ot you
-    set -a EXA_COLORS "uu="(get_color256 green)
-    set -a EXA_COLORS "un="(get_color256 yellow)
-    set -a EXA_COLORS "gu="(get_color256 cyan)
-    set -a EXA_COLORS "gn="(get_color256 yellow)
-
-    ### Attributes
-
-    # e[x]tended [a]ttributes
-    set -a EXA_COLORS "xa="(get_color256 white)
-
-    # File [s]ize: [n]umber & [b]yte unit
-    set -a EXA_COLORS "sn="(get_color256 cyan)
-    set -a EXA_COLORS "sb="(get_color256 cyan --bold)
-
-    # Number of blocks
-    set -a EXA_COLORS "bl="(get_color256 cyan)
-
-    # File date
-    set -a EXA_COLORS "da="(get_color256 white)
-
-    # inode number
-    set -a EXA_COLORS "in="(get_color256 normal)
-
-    # Device's major (df) and minor (ds) ID
-    set -a EXA_COLORS "df="(get_color256 cyan --bold)
-    set -a EXA_COLORS "ds="(get_color256 cyan)
-
-    # Hard links
-    set -a EXA_COLORS "lc="(get_color256 white)
-    set -a EXA_COLORS "lm="(get_color256 brwhite)
-
-    ### Details & metadata
-
-    # git
-    set -a EXA_COLORS "ga="(get_color256 brgreen --bold)
-    set -a EXA_COLORS "gm="(get_color256 bryellow --bold)
-    set -a EXA_COLORS "gd="(get_color256 brred)
-    set -a EXA_COLORS "gv="(get_color256 cyan)
-    set -a EXA_COLORS "gt="(get_color256 cyan)
-
-    # Path of a symlink
-    set -a EXA_COLORS "lp="(get_color256 magenta)
-
-    # Overlay style for broken symlinks
-    set -a EXA_COLORS "bO="(get_color256 black --bold)
-
-    # Header row of table
-    set -a EXA_COLORS "hd="(get_color256 white --underline)
-
-    # Punctuation
-    set -a EXA_COLORS "xx="(get_color256 brblack)
-
-    # Escape characters
-    set -a EXA_COLORS "cc="(get_color256 brblack)
 end
