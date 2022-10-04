@@ -3,8 +3,8 @@ function fish_add_manpath --description "Add paths to the MANPATH"
     argparse -x g,U -x a,p g/global U/universal p/prepend a/append -- $argv
     or return
 
-    set -l _flag_global --global
     set -l scope $_flag_global $_flag_universal
+    set -q scope[1]; or set scope -g
 
     set -l var MANPATH
 
@@ -36,54 +36,54 @@ set -gx fish_user_paths
 # ----------------------------------------------------------------------------
 
 # /usr/local
-fish_add_path -p /usr/local/bin
-fish_add_manpath -p /usr/local/share/man
+fish_add_path /usr/local/bin
+fish_add_manpath /usr/local/share/man
 
 # npm
-fish_add_path -p $XDG_DATA_HOME/npm/bin
+fish_add_path $XDG_DATA_HOME/npm/bin
 
 # Homebrew
 if in-path brew
     set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
 
     # GNU coreutils (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman
+    fish_add_path $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman
 
     # GNU findutils (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/findutils/libexec/gnubin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/findutils/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/findutils/libexec/gnubin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/findutils/share/man
 
     # GNU binutils (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/binutils/bin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/binutils/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/binutils/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/binutils/share/man
 
     # GNU inetutils (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/inetutils/libexec/gnubin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/inetutils/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/inetutils/libexec/gnubin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/inetutils/share/man
 
     # GNU grep (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/grep/libexec/gnubin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/grep/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/grep/libexec/gnubin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/grep/share/man
 
     # GNU sed (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/gnu-sed/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/gnu-sed/share/man
 
     # GNU tar (w/out `g` prefix)
-    fish_add_path -p $HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/gnu-tar/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/gnu-tar/share/man
 
     # curl
-    fish_add_path -p $HOMEBREW_PREFIX/opt/curl/bin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/curl/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/curl/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/curl/share/man
 
     # ncurses
-    fish_add_path -p $HOMEBREW_PREFIX/opt/ncurses/bin
-    fish_add_manpath -p $HOMEBREW_PREFIX/opt/ncurses/share/man
+    fish_add_path $HOMEBREW_PREFIX/opt/ncurses/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/ncurses/share/man
 
     # openjdk
-    fish_add_path -p $HOMEBREW_PREFIX/opt/openjdk/bin
+    fish_add_path $HOMEBREW_PREFIX/opt/openjdk/bin
 end
 
 # Xcode
@@ -99,17 +99,17 @@ fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/shar
 # rbenv
 if path is -d $XDG_DATA_HOME/rbenv
     # in case of non-Homebrew installation
-    fish_add_path -p $XDG_DATA_HOME/rbenv/bin
+    fish_add_path $XDG_DATA_HOME/rbenv/bin
 
-    fish_add_path -p $XDG_DATA_HOME/rbenv/shims
+    fish_add_path $XDG_DATA_HOME/rbenv/shims
 
     read -l ruby_version <$XDG_DATA_HOME/rbenv/version
-    and fish_add_manpath -p $XDG_DATA_HOME/rbenv/versions/$ruby_version/share/man
+    and fish_add_manpath $XDG_DATA_HOME/rbenv/versions/$ruby_version/share/man
 end
 
 # fish builtins
-fish_add_manpath -p $__fish_data_dir/man
+fish_add_manpath $__fish_data_dir/man
 
 # $HOME
-fish_add_path -p ~/bin ~/opt/bin
-fish_add_manpath -p ~/.local/share/man ~/opt/share/man
+fish_add_path ~/bin ~/opt/bin
+fish_add_manpath ~/.local/share/man ~/opt/share/man
