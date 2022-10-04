@@ -1,6 +1,6 @@
 is-macos; or exit
 
-function find-alias -d "Locate the destination of a Finder alias"
+function ooa -d "Locate the original of a Finder alias"
     osascript 2>/dev/null \
         -e 'tell application "Finder"' \
         -e     'set theAlias to the POSIX file "'$argv[1]'" as alias' \

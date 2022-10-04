@@ -30,9 +30,10 @@ set -g fish_package_path "$HOME/.local/config/fish" "$HOME/.private/fish"
 source "$__fish_config_dir/packages.fish"
 
 # setup abbreviations
-source "$__fish_config_dir/aliases.fish"
+source "$__fish_config_dir/abbreviations.fish"
 
 # setup keybindings
+set -p fish_function_path "$__fish_config_dir/bindings"
 source "$__fish_config_dir/bindings.fish"
 
 # setup colours

@@ -1,4 +1,13 @@
-function roll --description 'Create a new archive'
+function mkar --description 'Create a new archive'
+    argparse 'h/help' -- $argv
+    or return
+
+    set -f usage "Usage: "(status function)" archive.ext file [file ...]"
+    if set -q _flag_help
+        echo >&2 $usage
+        return
+    end
+
     set -l archive $argv[1]
     set -l contents $argv[2..-1]
 
@@ -19,8 +28,12 @@ function roll --description 'Create a new archive'
             rar -m5 -r $archive $contents
         case '*.zip'
             zip -9r $archive $contents
-        case '*'
+        case '*.*'
             echo >&2 "error: don't know how to make "(path extension $archive)" files"
+            return 1
+        case '*'
+            echo >&2 "error: invalid archive name:" $archive
+            echo >&2 $usage
             return 1
     end
 end
