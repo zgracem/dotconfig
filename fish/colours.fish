@@ -133,28 +133,33 @@ end
 # other
 # -----------------------------------------------------------------------------
 
-set -gx --path GCC_COLORS \
-    "error="(get_color brred) \
-    "warning="(get_color yellow) \
-    "note="(get_color blue) \
-    "caret="(get_color brmagenta) \
-    "locus="(get_color brblack) \
-    "quote="(get_color cyan)
+set -gx --path GCC_COLORS
+set -a GCC_COLORS "error="(get_color $fish_color_error)
+set -a GCC_COLORS "warning="(get_color yellow)
+set -a GCC_COLORS "note="(get_color blue)
+set -a GCC_COLORS "caret="(get_color brmagenta)
+set -a GCC_COLORS "locus="(get_color $fish_color_dimmed)
+set -a GCC_COLORS "quote="(get_color $fish_color_quote)
 
+# These variables are also used in functions/_wrappers/ag.fish
 set -gx __grep_match_color (get_color brmagenta --underline)
 set -gx __grep_file_color (get_color blue)
 set -gx __grep_line_color (get_color cyan)
 
-set -gx --path GREP_COLORS "se="(get_color brblack) \
-    "mt=$__grep_match_color" "fn=$__grep_file_color" "ln=$__grep_line_color"
+set -gx --path GREP_COLORS
+set -a GREP_COLORS "se="(get_color $fish_color_dimmed)
+set -a GREP_COLORS "mt=$__grep_match_color"
+set -a GREP_COLORS "fn=$__grep_file_color"
+set -a GREP_COLORS "ln=$__grep_line_color"
 
+set -gx --path JQ_COLORS
 begin
-    set -l jq_null (get_color brblack)
-    set -l jq_false (get_color brred)
-    set -l jq_true (get_color brgreen)
+    set -l jq_nil (get_color $fish_color_dimmed)
+    set -l jq_non (get_color brred)
+    set -l jq_oui (get_color brgreen)
     set -l jq_int (get_color magenta)
-    set -l jq_str (get_color cyan)
+    set -l jq_str (get_color $fish_color_quote)
     set -l jq_arr (get_color normal)
     set -l jq_obj (get_color normal)
-    set -gx --path JQ_COLORS $jq_null $jq_false $jq_true $jq_int $jq_str $jq_arr $jq_obj
+    set -a JQ_COLORS $jq_nil $jq_non $jq_oui $jq_int $jq_str $jq_arr $jq_obj
 end
