@@ -191,6 +191,7 @@ all: opt/stow
 .PHONY: shims
 shims:
 	cd ${XDG_CONFIG_HOME}/bin/shims && $(MAKE)
+all: shims
 
 # Install manpdf
 .PHONY: manpdf
