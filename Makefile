@@ -192,6 +192,15 @@ all: opt/stow
 shims:
 	cd ${XDG_CONFIG_HOME}/bin/shims && $(MAKE)
 
+# Install manpdf
+.PHONY: manpdf
+manpdf: $(HOME)/bin/manpdf | $(XDG_DATA_HOME)/doc/pdf
+$(HOME)/bin/manpdf: $(HOME)/GitHub/manpdf/manpdf.sh
+	ln -sfv $< $@
+$(XDG_DATA_HOME)/doc/pdf:
+	mkdir -pv $@
+all: manpdf
+
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
 # Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.
