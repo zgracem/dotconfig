@@ -54,12 +54,12 @@ if not set -q __zgm_init_colours
     set -U fish_prompt_color_duration --dim
     set -U fish_prompt_color_jobs yellow
     set -U fish_prompt_color_rbenv brmagenta
-    set -U fish_prompt_color_git_branch --dim # __fish_git_prompt_color_branch
-    set -U fish_prompt_color_git_stashed --dim # __fish_git_prompt_color_stashstate
-    set -U fish_prompt_color_git_needs_add red # __fish_git_prompt_color_dirtystate
-    set -U fish_prompt_color_git_needs_commit yellow # __fish_git_prompt_color_stagedstate
-    set -U fish_prompt_color_git_needs_push cyan # __fish_git_prompt_color_upstream
-    set -U fish_prompt_color_git_clean green # __fish_git_prompt_color_cleanstate
+    set -U __fish_git_prompt_color_branch --dim
+    set -U __fish_git_prompt_color_stashstate --dim
+    set -U __fish_git_prompt_color_dirtystate red
+    set -U __fish_git_prompt_color_stagedstate yellow
+    set -U __fish_git_prompt_color_upstream cyan
+    set -U __fish_git_prompt_color_cleanstate green
 
     set -U __zgm_init_colours ✓
 end
