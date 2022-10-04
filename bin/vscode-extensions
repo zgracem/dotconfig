@@ -54,6 +54,7 @@ function do_sync -d "Install, then cleanup"
 end
 
 function do_completions -d "Print fish completions"
+    echo complete -c vsx -x
     for cmd in (get_commands)
         echo complete -c vsx -n __fish_use_subcommand -a $cmd -d '"'(get_desc do_$cmd)'"'
     end

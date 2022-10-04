@@ -1,3 +1,4 @@
+complete -c vsx -x
 complete -c vsx -n __fish_use_subcommand -a install -d "Install all missing extensions in list"
 complete -c vsx -n __fish_use_subcommand -a cleanup -d "Remove all unlisted extensions"
 complete -c vsx -n __fish_use_subcommand -a list -d "List installed extensions"

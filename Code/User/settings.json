@@ -303,6 +303,7 @@
   "yaml.format.proseWrap": "always",
   "yaml.maxItemsComputed": 20480,
   "yaml.schemaStore.enable": false,
+  "yard.tags.paramNameBeforeType": true,
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4

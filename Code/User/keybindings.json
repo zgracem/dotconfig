@@ -308,5 +308,23 @@
     "key": "ctrl+b",
     "command": "papyrus.compile",
     "when": "editorTextFocus && editorLangId == 'papyrus'"
+  },
+
+  // pavlitsky.yard
+
+  {
+    "key": "alt+cmd+enter",
+    "command": "-extension.generateYard",
+    "when": "editorTextFocus && !editorReadonly && editorLangId == 'ruby'"
+  },
+  {
+    "key": "ctrl+alt+enter",
+    "command": "-extension.generateYard",
+    "when": "editorTextFocus && !editorReadonly && editorLangId == 'ruby'"
+  },
+  {
+    "key": "ctrl+shift+enter",
+    "command": "extension.generateYard",
+    "when": "editorTextFocus && !editorReadonly && editorLangId == 'ruby'"
   }
 ]
