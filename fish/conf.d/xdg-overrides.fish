@@ -11,7 +11,7 @@ in-path nethack; and set -gx NETHACKOPTIONS "@$XDG_CONFIG_HOME/nethack/nethackrc
 
 if in-path npm
     set -gx npm_config_userconfig $XDG_CONFIG_HOME/npm/npmrc
-    mkdir -p {$XDG_DATA_HOME,$XDG_CACHE_HOME,$XDG_RUNTIME_DIR}/npm
+    mkdir -p {$XDG_DATA_HOME,$XDG_CACHE_HOME}/npm
 end
 
 if in-path pip
