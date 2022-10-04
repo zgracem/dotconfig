@@ -29,10 +29,8 @@ function my --description 'Display network information'
             end
 
         case ssid
-            if is-macos
-                set -l PATH $PATH
-                set -p PATH /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources
-                command airport --getinfo 2>/dev/null | string match -rg '.*\bSSID: (.+)$'
+            if is-macos; and in-path airport
+                airport --getinfo 2>/dev/null | string match -rg '.*\bSSID: (.+)$'
             else
                 return 127
             end
