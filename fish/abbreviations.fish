@@ -21,12 +21,21 @@ abbr -a -g opal 'sfish opalstack'
 # abbreviations
 # -----------------------------------------------------------------------------
 
-abbr -a -g dirsize 'du -sh'
 abbr -a -g dr 'defaults read'
-abbr -a -g fdd 'fd --type d'
+abbr -a -g dw 'defaults write'
+in-path fd; and abbr -a -g fdd 'fd -td'
+in-path fd; and abbr -a -g fdf 'fd -tf'
+abbr -a -g r reveal
 abbr -a -g s 'set -S'
+abbr -a -g size 'du -sh'
+abbr -a -g restow 'stow --restow'
 abbr -a -g unstow 'stow --delete'
-abbr -a -g xd 'hexyl --border=none'
+
+if in-path hexyl
+    abbr -a -g xd hexyl
+else
+    abbr -a -g xd 'xxd -u -g1'
+end
 
 abbr -a -g 555 'chmod 0555'
 abbr -a -g 600 'chmod 0600'
