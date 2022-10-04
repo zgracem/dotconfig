@@ -11,9 +11,8 @@ function archive-acorn-layers
     set -l stock_dirs $HOME/{Downloads,Pictures}/unsplash
     set -l used_stock_dir /Volumes/Hub/Art/used/unsplash
 
-    function list-acorn-layers
-        $XDG_CONFIG_HOME/bin/acorn-layers.applescript $argv \
-            | string match -rg '(IMG[_ ]\d{4}|[\w-]+-[a-zA-Z0-9_-]+-unsplash)'
+    function list-acorn-layers -a file
+        strings -a -n 14 $file | ag --nocolor -o '(?<=public\.tiff).+(?=MM$)'
     end
 
     for file in $argv
