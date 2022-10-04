@@ -1,0 +1,621 @@
+# vim:ts=4:ft=dircolors
+# -----------------------------------------------------------------------------
+# thirty2k colour theme for the colour GNU ls utility.
+# Designed for dircolors (GNU coreutils) 9.1
+# Based on: https://github.com/trapd00r/LS_COLORS/blob/87e5785/LS_COLORS
+# -----------------------------------------------------------------------------
+
+# Below are TERM or COLORTERM entries, which can be glob patterns, which
+# restrict following config to systems with matching environment variables.
+TERM *-color
+TERM *-256color
+TERM ansi
+TERM console
+TERM cygwin
+TERM gnome
+TERM iTerm.app
+TERM konsole
+TERM linux
+TERM linux-c
+TERM nsterm*
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM tmux*
+TERM vt100
+TERM xterm*
+
+# =============================================================================
+# File types
+# =============================================================================
+
+RESET                 00 # reset to "normal" color
+NORMAL                00 # global default - no color
+FILE                  00 # regular file - no color
+DIR                   38;5;4 # directory - blue
+LINK                  target # symbolic link - the color of the target file
+MULTIHARDLINK         00 # regular file with more than one link - no color
+FIFO                  38;5;2;48;5;0 # pipe - green on black
+SOCK                  38;5;3;48;5;0 # socket - yellow on black
+DOOR                  38;5;5;48;5;0 # door - magenta on black
+BLK                   38;5;6;48;5;0 # block device driver - cyan on black
+CHR                   38;5;6;48;5;0 # character device driver - cyan on black
+ORPHAN                07;38;5;5 # broken and non-stat'able symlinks ... - inverse magenta
+MISSING               05;38;5;9 # ... and the files they point to - blinking bright red
+SETUID                38;5;0;48;5;1 # file that is setuid (u+s) - black on red
+SETGID                38;5;0;48;5;3 # file that is setgid (g+s) - black on yellow
+CAPABILITY            00 # file with capability (very expensive to lookup) - no color
+STICKY_OTHER_WRITABLE 38;5;15;48;5;1 # dir that is sticky & other-writable (+t,o+w) - bright white on red
+OTHER_WRITABLE        38;5;15;48;5;3 # dir that is other-writable & not sticky (-t,o+w) - bright white on yellow
+STICKY                38;5;0;48;5;4 # dir with the sticky bit set & not other-writable (+t,o-w) - black on blue
+EXEC                  38;5;1 # files with execute permission (+x) - red
+.cmd                  38;5;1 # Windows executable
+.exe                  38;5;1 # Windows executable
+.com                  38;5;1 # Windows executable
+.bat                  38;5;1 # Windows executable
+.reg                  38;5;1 # Windows executable
+.app                  38;5;1 # macOS executable
+
+# =============================================================================
+# Extensions
+# =============================================================================
+# Archives - bold green
+# ----------------------------------------------------------------------------
+
+.7z   01;38;5;2
+.ace  01;38;5;2
+.alz  01;38;5;2
+.apk  01;38;5;2
+.arc  01;38;5;2
+.arj  01;38;5;2
+.bz   01;38;5;2
+.bz2  01;38;5;2
+.cab  01;38;5;2
+.cpio 01;38;5;2
+.deb  01;38;5;2
+.dmg  01;38;5;2
+.dwm  01;38;5;2
+.dz   01;38;5;2
+.ear  01;38;5;2
+.esd  01;38;5;2
+.gem  01;38;5;2
+.gz   01;38;5;2
+.jar  01;38;5;2
+.lha  01;38;5;2
+.lrz  01;38;5;2
+.lz   01;38;5;2
+.lz4  01;38;5;2
+.lzh  01;38;5;2
+.lzma 01;38;5;2
+.lzo  01;38;5;2
+.msi  01;38;5;2
+.pkg  01;38;5;2
+.rar  01;38;5;2
+.rpm  01;38;5;2
+.rz   01;38;5;2
+.sar  01;38;5;2
+.swm  01;38;5;2
+.t7z  01;38;5;2
+.tar  01;38;5;2
+.taz  01;38;5;2
+.tbz  01;38;5;2
+.tbz2 01;38;5;2
+.tgz  01;38;5;2
+.tlz  01;38;5;2
+.tx   01;38;5;2
+.txz  01;38;5;2
+.tz   01;38;5;2
+.tzo  01;38;5;2
+.tzst 01;38;5;2
+.war  01;38;5;2
+.wim  01;38;5;2
+.xpi  01;38;5;2
+.xz   01;38;5;2
+.z    01;38;5;2
+.Z    01;38;5;2
+.zip  01;38;5;2
+.zoo  01;38;5;2
+.zst  01;38;5;2
+.a    01;38;5;2
+.s7z  01;38;5;2
+.sz   01;38;5;2
+.warc 01;38;5;2
+.WARC 01;38;5;2
+.zipx 01;38;5;2
+.zpaq 01;38;5;2
+.zstd 01;38;5;2
+.zz   01;38;5;2
+
+# Archive segments - green
+.r[0-9]{0,2}  38;5;2
+.zx[0-9]{0,2} 38;5;2
+.z[0-9]{0,2}  38;5;2
+
+# Disk images - bold bright green
+.iso         01;38;5;10
+.img         01;38;5;10
+.bin         01;38;5;10
+.nrg         01;38;5;10
+.qcow        01;38;5;10
+.fvd         01;38;5;10
+.sparseimage 01;38;5;10
+.toast       01;38;5;10
+.vcd         01;38;5;10
+.vdi         01;38;5;10
+.vhd         01;38;5;10
+.vhdx        01;38;5;10
+.vfd         01;38;5;10
+.vmdk        01;38;5;10
+
+# ----------------------------------------------------------------------------
+# Multimedia
+# ----------------------------------------------------------------------------
+
+# Images - bright green
+.bmp   38;5;10
+.cgm   38;5;10
+.dl    38;5;10
+.dvi   38;5;10
+.emf   38;5;10
+.gif   38;5;10
+.jpeg  38;5;10
+.jpg   38;5;10
+.JPG   38;5;10
+.mng   38;5;10
+.pbm   38;5;10
+.pcx   38;5;10
+.pgm   38;5;10
+.png   38;5;10
+.ppm   38;5;10
+.pps   38;5;10
+.ppsx  38;5;10
+.tga   38;5;10
+.tif   38;5;10
+.tiff  38;5;10
+.xbm   38;5;10
+.xcf   38;5;10
+.xpm   38;5;10
+.xwd   38;5;10
+.xwd   38;5;10
+.yuv   38;5;10
+.psd   38;5;10
+.dicom 38;5;10
+.cdr   38;5;10
+.flif  38;5;10
+.icns  38;5;10
+.ico   38;5;10
+.jxl   38;5;10
+.nth   38;5;10
+.pxd   38;5;10
+.pxm   38;5;10
+# Vector graphics - bold bright green
+.acorn 01;38;5;10
+.ai    01;38;5;10
+.eps   01;38;5;10
+.ps    01;38;5;10
+.svg   01;38;5;10
+.svgz  01;38;5;10
+.epsf  01;38;5;10
+.drw   01;38;5;10
+
+# Video - bright cyan
+.avi    38;5;14
+.divx   38;5;14
+.IFO    38;5;14
+.m2v    38;5;14
+.m4v    38;5;14
+.mkv    38;5;14
+.MOV    38;5;14
+.mov    38;5;14
+.mp4    38;5;14
+.mpeg   38;5;14
+.mpg    38;5;14
+.ogm    38;5;14
+.rmvb   38;5;14
+.sample 38;5;14
+.wmv    38;5;14
+.webp   38;5;14
+.qt     38;5;14
+.nuv    38;5;14
+.rm     38;5;14
+.flc    38;5;14
+.fli    38;5;14
+.gl     38;5;14
+.avif   38;5;14
+.mp4v   38;5;14
+.anx    38;5;14
+.axv    38;5;14
+.ogx    38;5;14
+# Streaming video - regular cyan
+.3g2  38;5;6
+.3gp  38;5;6
+.gp3  38;5;6
+.webm 38;5;6
+.gp4  38;5;6
+.asf  38;5;6
+.flv  38;5;6
+.ts   38;5;6
+.ogv  38;5;6
+.f4v  38;5;6
+.swf  38;5;6
+# Lossless video - bold bright cyan
+.VOB 01;38;5;14
+.vob 01;38;5;14
+
+# Audio - bright blue
+.aac  38;5;12
+.au   38;5;12
+.m4a  38;5;12
+.mka  38;5;12
+.mp3  38;5;12
+.mpa  38;5;12
+.mpc  38;5;12
+.ogg  38;5;12
+.ra   38;5;12
+.oga  38;5;12
+.opus 38;5;12
+.spx  38;5;12
+.xspf 38;5;12
+.3ga  38;5;12
+.S3M  38;5;12
+.amr  38;5;12
+.caf  38;5;12
+.dat  38;5;12
+.dts  38;5;12
+.fcm  38;5;12
+.mod  38;5;12
+.mp4a 38;5;12
+.oga  38;5;12
+.s3m  38;5;12
+.sid  38;5;12
+.wma  38;5;12
+# Lossless audio - bold bright blue
+.ape  01;38;5;12
+.aiff 01;38;5;12
+.cda  01;38;5;12
+.flac 01;38;5;12
+.alac 01;38;5;12
+.mid  01;38;5;12
+.midi 01;38;5;12
+.pcm  01;38;5;12
+.wav  01;38;5;12
+.wv   01;38;5;12
+.wvc  01;38;5;12
+
+# Subtitles - white
+.ass 38;5;7
+.srt 38;5;7
+.ssa 38;5;7
+.sub 38;5;7
+.sup 38;5;7
+.vtt 38;5;7
+
+# ----------------------------------------------------------------------------
+# Development
+# ----------------------------------------------------------------------------
+
+# Source code - bright cyan
+.scpt    38;5;14 # AppleScript
+.asm     38;5;14 # ASM
+.ahk     38;5;14 # AutoHotKey
+.c       38;5;14 # C
+.C       38;5;14 # "
+.h       38;5;14 # "
+.H       38;5;14 # "
+.tcc     38;5;14 # "
+.c++     38;5;14 # C++
+.h++     38;5;14 # "
+.hpp     38;5;14 # "
+.hxx     38;5;14 # "
+.ii      38;5;14 # "
+.cc      38;5;14 # C#
+.cp      38;5;14 # "
+.cpp     38;5;14 # "
+.cs      38;5;14 # "
+.cxx     38;5;14 # "
+.m       38;5;14 # Objective-C
+.M       38;5;14 # "
+.objc    38;5;14 # "
+.dart    38;5;14 # Dart
+.f       38;5;14 # Fortran
+.F       38;5;14 # "
+.f03     38;5;14 # "
+.F03     38;5;14 # "
+.f08     38;5;14 # "
+.F08     38;5;14 # "
+.f90     38;5;14 # "
+.F90     38;5;14 # "
+.f95     38;5;14 # "
+.F95     38;5;14 # "
+.for     38;5;14 # "
+.ftn     38;5;14 # "
+.go      38;5;14 # Golang
+.hi      38;5;14 # Haskell
+.hs      38;5;14 # "
+.lhs     38;5;14 # "
+.java    38;5;14 # Java
+.el      38;5;14 # LISP (Emacs)
+.elc     38;5;14 # "
+.eln     38;5;14 # "
+.cl      38;5;14 # LISP
+.lisp    38;5;14 # "
+.rkt     38;5;14 # "
+.lua     38;5;14 # Lua
+.s       38;5;14 # Pascal
+.S       38;5;14 # "
+.pl      38;5;14 # Perl
+.PL      38;5;14 # "
+.pm      38;5;14 # "
+.t       38;5;14 # "
+.php     38;5;14 # PHP
+.ipynb   38;5;14 # Python
+.py      38;5;14 # "
+.pyc     38;5;14 # "
+.r       38;5;14 # R
+.R       38;5;14 # "
+.gemspec 38;5;14 # ruby
+.rb      38;5;14 # "
+.rs      38;5;14 # Rust
+.msql    38;5;14 # SQL
+.mysql   38;5;14 # "
+.pgsql   38;5;14 # "
+.sql     38;5;14 # "
+.swift   38;5;14 # Swift
+.tcl     38;5;14 # Tool Command Language
+.vb      38;5;14 # VBA
+.vba     38;5;14 # "
+.vbs     38;5;14 # "
+.o       38;5;14 # *nix Object file (shared libraries, core dumps etc)
+.htm     38;5;14 # webdev
+.html    38;5;14 # "
+.shtml   38;5;14 # "
+.css     38;5;14 # "
+.less    38;5;14 # "
+.sass    38;5;14 # "
+.scss    38;5;14 # "
+.js      38;5;14 # "
+.awk     38;5;14 # shell
+.bash    38;5;14 # "
+.csh     38;5;14 # "
+.sed     38;5;14 # "
+.sh      38;5;14 # "
+.zsh     38;5;14 # "
+.vim     38;5;14 # "
+
+# Build files - orange
+.am           38;5;166 # Automake
+.in           38;5;166 # "
+.hin          38;5;166 # "
+.scan         38;5;166 # "
+.m4           38;5;166 # "
+.old          38;5;166 # "
+.out          38;5;166 # "
+.SKIP         38;5;166 # "
+*Dockerfile   38;5;166 # Docker
+.dockerignore 38;5;166 # "
+*Makefile     38;5;166 # Make
+.make         38;5;166 # "
+.mk           38;5;166 # "
+*MANIFEST     38;5;166 # "
+*pm_to_blib   38;5;166 # Perl
+.rake         38;5;166 # Ruby
+
+# Patch files - bold orange
+.diff  01;38;5;166
+.patch 01;38;5;166
+
+# Documentation - yellow
+*README       38;5;3
+*README.*     38;5;3
+*LICENSE      38;5;3
+*LICENCE      38;5;3
+*COPYING      38;5;3
+*INSTALL      38;5;3
+*COPYRIGHT    38;5;3
+*AUTHORS      38;5;3
+*HISTORY      38;5;3
+*CONTRIBUTORS 38;5;3
+*CHANGES      38;5;3
+*CHANGELOG    38;5;3
+.man          38;5;3
+.0            38;5;3
+.1            38;5;3
+.2            38;5;3
+.3            38;5;3
+.4            38;5;3
+.5            38;5;3
+.6            38;5;3
+.7            38;5;3
+.8            38;5;3
+.9            38;5;3
+.l            38;5;3
+.n            38;5;3
+.p            38;5;3
+
+# Configuration - cyan
+*config          38;5;6
+*cfg             38;5;6
+*conf            38;5;6
+*rc              38;5;6
+*authorized_keys 38;5;6
+*known_hosts     38;5;6
+.ini             38;5;6
+.plist           38;5;6
+.profile         38;5;6
+.bash_profile    38;5;6
+.bash_login      38;5;6
+.bash_logout     38;5;6
+.zshenv          38;5;6
+.zprofile        38;5;6
+.zlogin          38;5;6
+.zlogout         38;5;6
+.viminfo         38;5;6
+.last-run        38;5;6
+.sublime-*       38;5;6
+.allow           38;5;082;48;5;22 # /etc/hosts - bright green on dark green
+.deny            38;5;196;48;5;52 # /etc/hosts - bright red on dark red
+
+# Version control - bright black
+.git           38;5;8
+.gitignore     38;5;8
+.gitattributes 38;5;8
+.gitmodules    38;5;8
+.svn           38;5;8
+
+# Encrypted data - italic green
+.asc        03;38;5;2
+.gpg        03;38;5;2
+.signature  03;38;5;2
+.sig        03;38;5;2
+.pem        03;38;5;2
+.pgp        03;38;5;2
+.ppk        03;38;5;2
+*id_dsa     03;38;5;2
+*id_rsa*    03;38;5;2
+*id_ecdsa   03;38;5;2
+*id_ed25519 03;38;5;2
+
+# ----------------------------------------------------------------------------
+# Documents
+# ----------------------------------------------------------------------------
+
+# Plain text - white
+.txt      38;5;7
+.markdown 38;5;7
+.md       38;5;7
+.mkd      38;5;7
+.log      38;5;7
+.nfo      38;5;7
+.rst      38;5;7
+.pod      38;5;7
+.tex      38;5;7
+
+# Binary formats - green
+.chm     38;5;2
+.rtf     38;5;2
+.pdf     38;5;2
+.PDF     38;5;2
+.doc     38;5;2 # MS Office
+.docm    38;5;2 # "
+.docx    38;5;2 # "
+.dot     38;5;2 # "
+.dotx    38;5;2 # "
+.pps     38;5;2 # "
+.ppt     38;5;2 # "
+.pptx    38;5;2 # "
+.ppts    38;5;2 # "
+.pptxm   38;5;2 # "
+.pptsm   38;5;2 # "
+.xla     38;5;2 # "
+.xls     38;5;2 # "
+.xlsx    38;5;2 # "
+.xlsxm   38;5;2 # "
+.xltm    38;5;2 # "
+.xltx    38;5;2 # "
+.pages   38;5;2 # iWork
+.numbers 38;5;2 # "
+.keynote 38;5;2 # "
+.odb     38;5;2 # OpenLibre
+.odt     38;5;2 # "
+.odp     38;5;2 # "
+.ods     38;5;2 # "
+
+# ebooks - green
+.epub 38;5;2
+.mobi 38;5;2
+.azw  38;5;2
+.azw3 38;5;2
+.lit  38;5;2
+.cbr  38;5;2
+.cbz  38;5;2
+
+# Data - green
+.json         38;5;2
+.jsonc        38;5;2
+.jq           38;5;2
+.msg          38;5;2
+.rdf          38;5;2
+.rss          38;5;2
+.xml          38;5;2
+.toml         38;5;2
+.yaml         38;5;2
+.yml          38;5;2
+.xsd          38;5;2
+.dtd          38;5;2
+.db           38;5;2
+.localstorage 38;5;2
+.mdb          38;5;2
+.mde          38;5;2
+.sqlite       38;5;2
+.typelib      38;5;2
+.csv          38;5;2
+.tsv          38;5;2
+
+# Metadata - bright black
+.cue      38;5;8
+.m3u      38;5;8
+.m3u8     38;5;8
+.md5      38;5;8
+.pdfmarks 38;5;8
+.torrent  38;5;8
+.webloc   38;5;8
+
+# ----------------------------------------------------------------------------
+# Misc.
+# ----------------------------------------------------------------------------
+
+.dll   38;5;8 # dynamic linked library - bright black
+.lnk   38;5;5 # windows symlink - magenta
+.ics   38;5;7 # calendar information - white
+.vcard 38;5;7 # contact information - white
+.vcf   38;5;7 # contact information - white
+
+# Fonts - purple
+.afm   38;5;57
+.fon   38;5;57
+.fnt   38;5;57
+.pfb   38;5;57
+.pfm   38;5;57
+.ttf   38;5;57
+.otf   38;5;57
+.woff  38;5;57
+.woff2 38;5;57
+.PFA   38;5;57
+.pfa   38;5;57
+
+# Unimportant files - bright black
+.off                38;5;8
+.OFF                38;5;8
+.dist               38;5;8
+.DIST               38;5;8
+*,v                 38;5;8
+.DS_Store           38;5;8 # macOS
+.localized          38;5;8 # "
+.CFUserTextEncoding 38;5;8 # "
+*~                  38;5;8 # Backup files
+*#                  38;5;8 # "
+.bak                38;5;8 # "
+.BAK                38;5;8 # "
+.old                38;5;8 # "
+.OLD                38;5;8 # "
+.orig               38;5;8 # "
+.part               38;5;8 # "
+.rej                38;5;8 # "
+.swo                38;5;8 # "
+.swp                38;5;8 # "
+.tmp                38;5;8 # "
+.dpkg-dist          38;5;8 # "
+.dpkg-old           38;5;8 # "
+.ucf-dist           38;5;8 # "
+.ucf-new            38;5;8 # "
+.ucf-old            38;5;8 # "
+.rpmnew             38;5;8 # "
+.rpmorig            38;5;8 # "
+.rpmsave            38;5;8 # "
+.dump               38;5;8 # State dumps
+.stackdump          38;5;8 # "
+.zcompdump          38;5;8 # "
+.pid                38;5;8 # "
+.state              38;5;8 # "
+*lockfile           38;5;8 # "
+*lock               38;5;8 # "
