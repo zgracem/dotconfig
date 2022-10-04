@@ -12,10 +12,12 @@ set -gx XDG_RUNTIME_DIR ~/var/run
 # * https://wiki.archlinux.org/index.php/XDG_user_directories
 
 # read defaults from ~/.config/user-dirs.dirs
-set -l pattern '^(?<var>XDG_[[:upper:]]+_DIR)="(?<dir>[^"]+)"$'
-while read line
-    string match -rq $pattern "$line"; and set -gx $var $dir
-end <$XDG_CONFIG_HOME/user-dirs.dirs
+if path is -f $XDG_CONFIG_HOME/user-dirs.dirs
+    set -l pattern '^(?<var>XDG_[[:upper:]]+_DIR)="(?<dir>[^"]+)"$'
+    while read line
+        string match -rq $pattern "$line"; and set -gx $var $dir
+    end <$XDG_CONFIG_HOME/user-dirs.dirs
+end
 
 # Cygwin/MSYS
 if uname -s | string match -q '*_NT-*'

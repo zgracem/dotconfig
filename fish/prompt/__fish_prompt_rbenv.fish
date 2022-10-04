@@ -2,8 +2,14 @@ function __fish_prompt_rbenv
     in-path rbenv
     or return 0
 
-    set -q GLOBAL_RBENV_VERSION
-    or read -g GLOBAL_RBENV_VERSION <$XDG_DATA_HOME/rbenv/version
+    if not set -q GLOBAL_RBENV_VERSION
+        set -l vfile $XDG_DATA_HOME/rbenv/version
+        if not path is -f $vfile
+            mkdir -pv (dirname $vfile)
+            and rbenv global >$vfile
+        end
+        read -g GLOBAL_RBENV_VERSION <$vfile
+    end
     set -g LOCAL_RBENV_VERSION (rbenv version | string split -f1 " ")
 
     string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"
