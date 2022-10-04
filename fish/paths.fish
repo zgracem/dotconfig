@@ -39,6 +39,9 @@ set -gx fish_user_paths
 fish_add_path -p /usr/local/bin
 fish_add_manpath -p /usr/local/share/man
 
+# npm
+fish_add_path -p $XDG_DATA_HOME/npm/bin
+
 # Homebrew
 if in-path brew
     set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
@@ -51,7 +54,7 @@ if in-path brew
     fish_add_path -p $HOMEBREW_PREFIX/opt/findutils/libexec/gnubin
     fish_add_manpath -p $HOMEBREW_PREFIX/opt/findutils/share/man
 
-    # GNU binutils
+    # GNU binutils (w/out `g` prefix)
     fish_add_path -p $HOMEBREW_PREFIX/opt/binutils/bin
     fish_add_manpath -p $HOMEBREW_PREFIX/opt/binutils/share/man
 
@@ -83,18 +86,6 @@ if in-path brew
     fish_add_path -p $HOMEBREW_PREFIX/opt/openjdk/bin
 end
 
-# Linuxbrew
-if is-linux
-    for dir in ~/.linuxbrew /home/linuxbrew/.linuxbrew
-        if path is -x $dir/bin/brew
-            set -gx HOMEBREW_PREFIX $dir
-            fish_add_path -p $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
-            fish_add_manpath -p $HOMEBREW_PREFIX/share/man
-            break
-        end
-    end
-end
-
 # Xcode
 set -l XCODE /Applications/Xcode.app/Contents/Developer
 fish_add_path -a $XCODE/usr/bin
@@ -104,13 +95,6 @@ fish_add_manpath -a $XCODE/Toolchains/XcodeDefault.xctoolchain/usr/share/man
 fish_add_manpath -a $XCODE/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man
 fish_add_manpath -a /Library/Developer/CommandLineTools/usr/share/man
 fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
-
-# npm
-fish_add_path -p $XDG_DATA_HOME/npm/bin
-
-# $HOME
-fish_add_path -p ~/bin ~/opt/bin
-fish_add_manpath -p ~/.local/share/man ~/opt/share/man
 
 # rbenv
 if path is -d $XDG_DATA_HOME/rbenv
@@ -123,5 +107,9 @@ if path is -d $XDG_DATA_HOME/rbenv
     and fish_add_manpath -p $XDG_DATA_HOME/rbenv/versions/$ruby_version/share/man
 end
 
-# fish
+# fish builtins
 fish_add_manpath -p $__fish_data_dir/man
+
+# $HOME
+fish_add_path -p ~/bin ~/opt/bin
+fish_add_manpath -p ~/.local/share/man ~/opt/share/man
