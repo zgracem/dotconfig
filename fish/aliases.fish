@@ -40,9 +40,5 @@ else if in-path curl
     abbr -a -g dl 'curl -OJ'
 end
 
-if in-path code
-    abbr -a -g vsx "~/.config/bin/vscode-extensions"
-end
-
 # git
 abbr -a -g gc 'git checkout -b'

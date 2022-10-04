@@ -15,7 +15,7 @@ set extensions_file ~/.config/Code/User/extensions.json
 set desired_extensions (jq --raw-output '.recommendations[]' $extensions_file)
 set installed_extensions (code --list-extensions); or exit
 
-function do_install
+function do_install -d "Install all missing extensions in list"
     for extension in $desired_extensions
         if not contains $extension $installed_extensions
             code --install-extension $extension
@@ -23,7 +23,7 @@ function do_install
     end
 end
 
-function do_cleanup
+function do_cleanup -d "Remove all unlisted extensions"
     for extension in $installed_extensions
         if not contains $extension $desired_extensions
             code --uninstall-extension $extension
@@ -31,37 +31,60 @@ function do_cleanup
     end
 end
 
-function do_list
+function do_list -d "List installed extensions"
     printf "%s\\n" $installed_extensions
 end
 
-function do_diff
-    diff -y --suppress-common-lines (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
+function do_diff -d "Diff listed & installed extensions"
+diff -y --suppress-common-lines (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
 end
 
-function do_json
+function do_json -d "List installed extensions as JSON"
     set --local jq_script '.recommendations=($exts|rtrimstr("\n")|split("\n"))'
     jq --null-input --monochrome-output --rawfile exts (do_list | psub) $jq_script
 end
 
-function do_dump
+function do_dump -d "Update the extensions file"
     do_json | tee $extensions_file
 end
 
-function do_sync
+function do_sync -d "Install, then cleanup"
     do_install
     do_cleanup
 end
 
+function do_completions -d "Print fish completions"
+    for cmd in (get_commands)
+        echo complete -c vsx -n __fish_use_subcommand -a $cmd -d '"'(get_desc do_$cmd)'"'
+    end
+end
+
 function get_commands
-    set --local pattern '(?<=function do_)[a-z]+$'
-    ag --no-filename --no-numbers --only-matching $pattern (status filename) \
-        | sort -u
+    set --local pattern '(?<=function do_)[a-z]+'
+    ag --no-filename --no-numbers --only-matching $pattern (status filename)
+end
+
+function get_desc
+    functions -Dv $argv[1] | tail -n+5
 end
 
 function get_help
+    argparse v/verbose -- $argv
+    or return
+
+    if set -q argv[1]
+        echo "vsx $argv[1]:" (get_desc do_$argv[1])
+        return
+    end
+
     set --local commands (get_commands)
-    echo "Subcommands: $commands"
+    echo -s "Usage: vsx [" (string join "|" $commands) "]"
+
+    if set -q _flag_verbose
+        for cmd in $commands
+            echo "$cmd:" (get_desc do_$cmd)
+        end
+    end
 end
 
 function main
@@ -69,7 +92,7 @@ function main
         case (get_commands)
             eval do_$argv[1]
         case help ""
-            get_help
+            get_help $argv[2]
         case "*"
             echo >&2 "error: don't know how to $argv[1]"
             get_help >&2
