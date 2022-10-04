@@ -173,12 +173,12 @@
   {
     "key": "cmd+alt+enter",
     "command": "code-runner.run",
-    "when": "isMac"
+    "when": "isMac && editorTextFocus"
   },
   {
     "key": "ctrl+alt+enter",
     "command": "code-runner.run",
-    "when": "isWindows"
+    "when": "isWindows && editorTextFocus"
   },
 
   // Ctrl/Cmd+, = Open Settings as JSON to the side
@@ -297,11 +297,16 @@
   {
     "key": "ctrl+b",
     "command": "-papyrus.compile",
-    "when": "editorFocus"
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-papyrus.compile",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+b",
     "command": "papyrus.compile",
-    "when": "editorFocus && editorLangId == 'papyrus'"
+    "when": "editorTextFocus && editorLangId == 'papyrus'"
   }
 ]
