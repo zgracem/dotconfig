@@ -164,8 +164,8 @@ all: vim
 
 # vscode-extensions -- update fish completions
 .PHONY: vsx/fish
-vsx/fish: fish/packages/zgm-completions/completions/vsx.fish
-fish/packages/zgm-completions/completions/vsx.fish: $(XDG_CONFIG_HOME)/bin/vscode-extensions
+vsx/fish: fish/completions/vsx.fish
+fish/completions/vsx.fish: $(XDG_CONFIG_HOME)/bin/vscode-extensions
 	$< completions >$@
 all: vsx/fish
 
