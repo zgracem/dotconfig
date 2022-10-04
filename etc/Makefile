@@ -41,7 +41,7 @@ shells: | /etc/shells /usr/local/bin/fish
 /usr/local/bin/%:
 	brew install $(notdir $@)
 /etc/shells:
-	${XDG_CONFIG_HOME}/libexec/init/add-to-etc-shells.sh fish bash
+	${XDG_CONFIG_HOME}/bin/init/add-to-etc-shells.sh fish bash
 
 # fix console spam
 .PHONY: emond

@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------
 
 # avoid shadowing HOMEBREW_REPOSITORY
-HOMEBREW_REPO := $(shell ${XDG_CONFIG_HOME}/libexec/init/bootstrap-brew.sh --repo)
+HOMEBREW_REPO := $(shell ${XDG_CONFIG_HOME}/bin/init/bootstrap-brew.sh --repo)
 
 .PHONY: brew/install
 brew/install: | brew/all cask/all
@@ -11,7 +11,7 @@ brew/install: | brew/all cask/all
 .PHONY: brew/init
 brew/init: | $(HOMEBREW_REPO)/.git
 $(HOMEBREW_REPO)/.git:
-	DRY_RUN=true ${XDG_CONFIG_HOME}/libexec/init/bootstrap-brew.sh
+	DRY_RUN=true ${XDG_CONFIG_HOME}/bin/init/bootstrap-brew.sh
 
 BREWFILES  =
 BREWFILES += brewfile/core

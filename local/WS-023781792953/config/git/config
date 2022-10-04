@@ -2,4 +2,4 @@
   path = ~/.config/git/config
 
 # [core]
-#   gitproxy = ~/.config/libexec/git-socks-proxy.sh
+#   gitproxy = ~/.config/bin/git-socks-proxy.sh
