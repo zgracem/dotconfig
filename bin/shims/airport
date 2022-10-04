@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+main()
+{
+    local AIRPORT_FRAMEWORK=/System/Library/PrivateFrameworks/Apple80211.framework
+    $AIRPORT_FRAMEWORK/Versions/Current/Resources/airport "$@"
+}
+
+main "$@"

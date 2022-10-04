@@ -180,6 +180,11 @@ opt/stow:
 	cd ${XDG_CONFIG_HOME}/stow && $(MAKE)
 all: opt/stow
 
+# Install shims to ~/bin
+.PHONY: shims
+shims:
+	cd ${XDG_CONFIG_HOME}/bin/shims && $(MAKE)
+
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
 # Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.
