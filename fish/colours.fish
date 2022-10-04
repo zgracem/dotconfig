@@ -6,111 +6,60 @@ if not set -q __zgm_init_colours
         echo $message
     end
 
-    # default color
+    # https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
     set -U fish_color_normal normal
-
-    # commands
     set -U fish_color_command white --bold
-
-    # keywords
     set -U fish_color_keyword brmagenta
-
-    # quoted blocks of text
     set -U fish_color_quote cyan
-
-    # IO redirections
-    set -U fish_color_redirection yellow
-
-    # process separators like ';' and '&'
-    set -U fish_color_end yellow
-
-    # "potential errors"
-    set -U fish_color_error red
-
-    # regular command parameters
-    set -U fish_color_param white
-
-    # code comments
-    set -U fish_color_comment brblack --italics
-
-    # matching parentheses
-    set -U fish_color_match brcyan --underline
-
-    # selected text (in vi visual mode)
-    set -U fish_color_selection --background=brblack white
-
-    # history search matches (background colour)
-    set -U fish_color_search_match --background=black
-
-    # parameter expansion operators like '*', '~', and '()'
-    set -U fish_color_operator bryellow
-
-    # character escapes like '\n' and '\x70'
-    set -U fish_color_escape brred
-
-    # autosuggestions
+    set -U fish_color_redirection yellow # IO redirections like `>/dev/null`
+    set -U fish_color_end yellow # process separators like `;` and `&`
+    set -U fish_color_error brred # syntax errors
+    set -U fish_color_param normal # ordinary command parameters
+    set -U fish_color_valid_path green --underline # filename parameters (if the file exists)
+    set -U fish_color_option white # options starting with `-`
+    set -U fish_color_comment brblack --italics # comments like `# TODO`
+    set -U fish_color_selection white --background=brblack # selected text (in vi visual mode)
+    set -U fish_color_operator bryellow # parameter expansion operators like '*' and '~'
+    set -U fish_color_escape brred # character escapes like '\n' and '\x70'
     set -U fish_color_autosuggestion brblack
+    set -U fish_color_cwd brwhite # the current directory in the default prompt
+    set -U fish_color_cwd_root red # ditto, but for the root user
+    set -U fish_color_user brblack # the username in some default prompts
+    set -U fish_color_host brblack # the hostname in some default prompts
+    set -U fish_color_host_remote brblack # ditto for remote sessions (like ssh)
+    set -U fish_color_status $fish_color_error # the last command's nonzero exit code in the default prompt
+    set -U fish_color_cancel red # the '^C' indicator on a canceled command
+    set -U fish_color_search_match --background=black # history search matches & pager selections (background colour)
+    set -U fish_color_history_current blue # used by `dirh`
 
-    # the current working directory in the default prompt
-    set -U fish_color_cwd brwhite
-
-    # the current username in some default prompts
-    set -U fish_color_user brblack
-
-    # the current host system in some default prompts
-    set -U fish_color_host brblack
-    set -U fish_color_host_remote brblack
-
-    # the '^C' indicator on a canceled command
-    set -U fish_color_cancel red
-
-    # ---------------------------------------------------------------------------
     # completion highlighting
-    # ---------------------------------------------------------------------------
-
-    # the prefix string, i.e. the string that is to be completed
-    set -U fish_pager_color_prefix brblack
-
-    # the completion itself
-    set -U fish_pager_color_completion white
-
-    # the completion description
-    set -U fish_pager_color_description brblack --italics
-
-    # the progress bar at the bottom left corner
-    set -U fish_pager_color_progress blue
-
-    # every second completion's background colour
-    set -U fish_pager_color_secondary --background=normal
+    set -U fish_pager_color_progress blue # "…and 6 more rows" in the bottom left corner
+    # unselected lines
+    set -U fish_pager_color_background --background=normal # the background color of a line
+    set -U fish_pager_color_prefix brblack # the un-completed (incomplete) string
+    set -U fish_pager_color_completion normal # the proposed completion suffix
+    set -U fish_pager_color_description $fish_color_comment # the completion description
+    # selected line
+    set -U fish_pager_color_selected_background --background=brblack
+    set -U fish_pager_color_selected_prefix --dim
+    set -U fish_pager_color_selected_completion brwhite --bold
+    set -U fish_pager_color_selected_description --italics
 
     # ---------------------------------------------------------------------------
-    # undocumented
-    # ---------------------------------------------------------------------------
-
-    set -U fish_color_valid_path green --underline
-    set -U fish_color_history_current blue
-    set -U fish_color_cwd_root red
-
-    set -U fish_color_status brblue
-    set -U fish_color_dimmed brblack
-    set -U fish_color_separator brwhite
-
-    # ---------------------------------------------------------------------------
-    # prompt
+    # $__fish_config_dir/prompt
     # ---------------------------------------------------------------------------
 
     set -U fish_prompt_color_ps blue
     set -U fish_prompt_color_ps_root $fish_color_cwd_root
-    set -U fish_prompt_color_duration $fish_color_dimmed
-    set -U fish_prompt_color_exit $fish_color_error
-    set -U fish_prompt_color_git_branch $fish_color_dimmed
-    set -U fish_prompt_color_git_stashed $fish_color_dimmed
-    set -U fish_prompt_color_git_needs_add red
-    set -U fish_prompt_color_git_needs_commit yellow
-    set -U fish_prompt_color_git_needs_push cyan
-    set -U fish_prompt_color_git_clean green
+    set -U fish_prompt_color_duration --dim
     set -U fish_prompt_color_jobs yellow
-    set -U fish_prompt_color_ruby brmagenta
+    set -U fish_prompt_color_rbenv brmagenta
+    set -U fish_prompt_color_git_branch --dim # __fish_git_prompt_color_branch
+    set -U fish_prompt_color_git_stashed --dim # __fish_git_prompt_color_stashstate
+    set -U fish_prompt_color_git_needs_add red # __fish_git_prompt_color_dirtystate
+    set -U fish_prompt_color_git_needs_commit yellow # __fish_git_prompt_color_stagedstate
+    set -U fish_prompt_color_git_needs_push cyan # __fish_git_prompt_color_upstream
+    set -U fish_prompt_color_git_clean green # __fish_git_prompt_color_cleanstate
 
     set -U __zgm_init_colours ✓
 end
@@ -138,7 +87,7 @@ set -a GCC_COLORS "error="(get_color $fish_color_error)
 set -a GCC_COLORS "warning="(get_color yellow)
 set -a GCC_COLORS "note="(get_color blue)
 set -a GCC_COLORS "caret="(get_color brmagenta)
-set -a GCC_COLORS "locus="(get_color $fish_color_dimmed)
+set -a GCC_COLORS "locus="(get_color --dim)
 set -a GCC_COLORS "quote="(get_color $fish_color_quote)
 
 # These variables are also used in functions/_wrappers/ag.fish
@@ -147,14 +96,14 @@ set -gx __grep_file_color (get_color blue)
 set -gx __grep_line_color (get_color cyan)
 
 set -gx --path GREP_COLORS
-set -a GREP_COLORS "se="(get_color $fish_color_dimmed)
+set -a GREP_COLORS "se="(get_color --dim)
 set -a GREP_COLORS "mt=$__grep_match_color"
 set -a GREP_COLORS "fn=$__grep_file_color"
 set -a GREP_COLORS "ln=$__grep_line_color"
 
 set -gx --path JQ_COLORS
 begin
-    set -l jq_nil (get_color $fish_color_dimmed)
+    set -l jq_nil (get_color --dim)
     set -l jq_non (get_color brred)
     set -l jq_oui (get_color brgreen)
     set -l jq_int (get_color magenta)

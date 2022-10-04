@@ -19,7 +19,7 @@ function fish_breakpoint_prompt --description 'A prompt to be used when `breakpo
     end
     echo -n $glyph
 
-    set_color $fish_color_dimmed
+    set_color --dim
     echo -n " $function() "
 
     set_color $fish_color_status

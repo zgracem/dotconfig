@@ -22,7 +22,7 @@ function fish_prompt --description 'Display the interactive prompt'
         set_color $fish_prompt_color_ps_root
         echo -n "#"
     else if set -q fish_private_mode
-        set_color $fish_color_dimmed
+        set_color --dim
         echo -n "?"
     else
         set_color $fish_prompt_color_ps

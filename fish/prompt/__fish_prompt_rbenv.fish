@@ -15,7 +15,7 @@ function __fish_prompt_rbenv
     string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"
     and return
 
-    set_color $fish_prompt_color_ruby
+    set_color $fish_prompt_color_rbenv
     echo -n $LOCAL_RBENV_VERSION
 
     set_color normal
