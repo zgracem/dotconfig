@@ -64,10 +64,7 @@ if not set -q __zgm_init_colours
     set -U __zgm_init_colours ✓
 end
 
-# -----------------------------------------------------------------------------
 # LS_COLORS
-# -----------------------------------------------------------------------------
-
 if is-gnu ls; and path is -d $XDG_CONFIG_HOME/dircolors
     set -l ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
     make --quiet -C $XDG_CONFIG_HOME/dircolors
@@ -78,10 +75,7 @@ else
     set -gx LSCOLORS exFxdacabxgagaabadHbHd
 end
 
-# -----------------------------------------------------------------------------
-# other
-# -----------------------------------------------------------------------------
-
+# gcc
 set -gx --path GCC_COLORS
 set -a GCC_COLORS "error="(get_color $fish_color_error)
 set -a GCC_COLORS "warning="(get_color yellow)
@@ -90,17 +84,18 @@ set -a GCC_COLORS "caret="(get_color brmagenta)
 set -a GCC_COLORS "locus="(get_color --dim)
 set -a GCC_COLORS "quote="(get_color $fish_color_quote)
 
-# These variables are also used in functions/_wrappers/ag.fish
-set -gx __grep_match_color (get_color brmagenta --underline)
-set -gx __grep_file_color (get_color blue)
-set -gx __grep_line_color (get_color cyan)
+# grep -- also used in functions/_wrappers/ag.fish
+set -gx __grep_color_match (get_color brmagenta --underline)
+set -gx __grep_color_file (get_color blue)
+set -gx __grep_color_line (get_color cyan)
 
 set -gx --path GREP_COLORS
 set -a GREP_COLORS "se="(get_color --dim)
-set -a GREP_COLORS "mt=$__grep_match_color"
-set -a GREP_COLORS "fn=$__grep_file_color"
-set -a GREP_COLORS "ln=$__grep_line_color"
+set -a GREP_COLORS "mt=$__grep_color_match"
+set -a GREP_COLORS "fn=$__grep_color_file"
+set -a GREP_COLORS "ln=$__grep_color_line"
 
+# jq
 set -gx --path JQ_COLORS
 begin
     set -l jq_nil (get_color --dim)
