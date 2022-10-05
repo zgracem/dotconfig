@@ -4,7 +4,6 @@
 [core]
 	autocrlf = input
 	safecrlf = false
-	excludesfile = ~/.config/git/ignore
 	filemode = false
 
 [alias]
@@ -12,13 +11,6 @@
 
 [hub]
 	protocol = https
-
-[color]
-	ui = true
-	branch = true
-	diff = true
-	interactive = true
-	status = true
 
 [diff]
 	tool = vimdiff
