@@ -11,8 +11,4 @@ else
     set -gx TERMINFO $XDG_DATA_HOME/terminfo
 end
 
-
-if not path is -d $TERMINFO
-    set --erase TERMINFO
-    exit
-end
+path is -d $TERMINFO; or set --erase TERMINFO

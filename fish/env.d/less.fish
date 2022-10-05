@@ -3,10 +3,10 @@
 # -----------------------------------------------------------------------------
 
 set -gx LESS
-set -a LESS --QUIET # [-Q] never ring the terminal bell
-set -a LESS --ignore-case # [-i] case-insensitive searching
-set -a LESS --squeeze-blank-lines # [-s] combine consecutive blank lines
-set -a LESS --no-init # [-X] don't clear the screen on exit
+set -a LESS -Q # [--QUIET] never ring the terminal bell
+set -a LESS -i # [--ignore-case] case-insensitive searching
+set -a LESS -s # [--squeeze-blank-lines] combine consecutive blank lines
+set -a LESS -X # [--no-init] don't clear the screen on exit
 
 set -gx LESSCHARSET utf-8
 
@@ -16,7 +16,7 @@ set -gx LESSHISTFILE /dev/null
 # source highlighting
 if set -l highlighter (command -v src-hilite-lesspipe.sh 2>/dev/null)
     set -gx LESSOPEN "| $highlighter %s"
-    set -a LESS --RAW-CONTROL-CHARS # [-R] output raw ANSI (e.g. \e[1;31m)
+    set -a LESS -R # [--RAW-CONTROL-CHARS] output raw ANSI (e.g. \e[1;31m)
 end
 
 # ----------------------------------------------------------------------------
