@@ -102,7 +102,7 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "git.autoRepositoryDetection": "subFolders",
-  "git.defaultCloneDirectory": "/Users/zozo/.local/src/github",
+  "git.defaultCloneDirectory": "/Users/zozo/src/github.com",
   "git.openDiffOnClick": false,
   "git.path": "/usr/local/bin/git",
   "git.repositoryScanMaxDepth": -1,

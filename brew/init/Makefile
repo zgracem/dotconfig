@@ -2,6 +2,8 @@
 # Homebrew
 # ----------------------------------------------------------------------------
 
+.NOTPARALLEL:
+
 # avoid shadowing HOMEBREW_REPOSITORY
 HOMEBREW_REPO := $(shell ${XDG_CONFIG_HOME}/bin/init/bootstrap-brew.sh --repo)
 

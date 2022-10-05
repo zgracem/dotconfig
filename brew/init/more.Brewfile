@@ -82,5 +82,5 @@ brew "openjdk" # java(1) for Minecraft mods
 brew "screenfetch"
 
 # non-open-source stuff
-tap "zgracem/formulae", "file://#{Dir.home}/Dropbox/Projects/homebrew-formulae"
+tap "zgracem/formulae", "file://#{Dir.home}/src/dev/homebrew-formulae"
 brew "zgracem/formulae/unrar"

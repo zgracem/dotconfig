@@ -196,7 +196,7 @@ all: shims
 # Install manpdf
 .PHONY: manpdf
 manpdf: $(HOME)/bin/manpdf | $(XDG_DATA_HOME)/doc/pdf
-$(HOME)/bin/manpdf: $(HOME)/GitHub/manpdf/manpdf.sh
+$(HOME)/bin/manpdf: $(HOME)/src/github.com/zgracem/manpdf/manpdf.sh
 	ln -sfv $< $@
 $(XDG_DATA_HOME)/doc/pdf:
 	mkdir -pv $@

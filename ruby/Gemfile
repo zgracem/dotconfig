@@ -47,6 +47,4 @@ gem "htmlentities"
 
 # -- local gems ----------------------------------------------------------------
 
-gem "tiny_dancer",
-    git: "git@github.com:zgracem/tiny-dancer.git",
-    branch: "main"
+gem "tiny_dancer", path: "../../../src/github.com/zgracem/tiny_dancer"

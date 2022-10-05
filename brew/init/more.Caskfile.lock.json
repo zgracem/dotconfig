@@ -162,7 +162,7 @@
       "zgracem/formulae": {
         "revision": "81d5bb25c7a3b398bafc84a7ac6260005052ffd6",
         "options": {
-          "clone_target": "file:///Users/zozo/Dropbox/Projects/homebrew-formulae"
+          "clone_target": "file:///Users/zozo/src/dev/homebrew-formulae"
         }
       }
     },
