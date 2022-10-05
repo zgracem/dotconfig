@@ -9,7 +9,7 @@
     "fish": "fish -C 'set -gx TERM dumb'",
     "html": "links -html-margin 0 -dump",
     "jq": "jq --null-input --from-file",
-    "makefile": "make -f",
+    "makefile": "gnumake -f",
     "markdown": "multimarkdown --snippet --nolabels",
     "ruby": "ruby",
     "sass": "sass --no-source-map --trace",
