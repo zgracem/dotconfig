@@ -19,6 +19,12 @@
           "full_name": "dotnet-sdk"
         }
       },
+      "emojipedia": {
+        "version": "20190306",
+        "options": {
+          "full_name": "emojipedia"
+        }
+      },
       "file-juicer": {
         "version": "4.97",
         "options": {

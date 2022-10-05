@@ -3,6 +3,7 @@
 cask "1password-cli"
 cask "disk-drill"
 cask "dotnet-sdk"
+cask "emojipedia"
 cask "file-juicer"
 cask "fission"
 cask "grandperspective"
