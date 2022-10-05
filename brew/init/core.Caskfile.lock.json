@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "0970b180eba25d018d4248721a4b27cba5c56b97"
+        "revision": "e6159cfedf01d955444fe7f61d54b42d0eb8099e"
       },
       "homebrew/cask-versions": {
-        "revision": "f32d7e779b583f4dfe64877d1126b97d5558ec57"
+        "revision": "b3203fa0b2e5da0ff26cd44dfa7a934238880808"
       }
     },
     "cask": {
@@ -55,7 +55,7 @@
         }
       },
       "firefox": {
-        "version": "105.0.1",
+        "version": "105.0.2",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -118,7 +118,7 @@
         }
       },
       "spotify": {
-        "version": "1.1.94.872,7a9200fe,18",
+        "version": "1.1.95.893,6cf4d40c,39",
         "options": {
           "full_name": "spotify",
           "args": {
@@ -220,11 +220,11 @@
     "mas": {
       "ColorSlurp": {
         "id": "1287239339",
-        "version": "3.6.0"
+        "version": "3.7.0"
       },
       "Day One": {
         "id": "1055511498",
-        "version": "7.16"
+        "version": "7.17"
       },
       "Divvy": {
         "id": "413857545",
@@ -243,11 +243,11 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.6.2",
+        "HOMEBREW_VERSION": "3.6.4",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "0e15dfc998081c977b87037d7896f3d399584735",
-        "CLT": "14.0.0.0.1.1661618636",
-        "Xcode": "13.4.1",
+        "Homebrew/homebrew-core": "6e5f7e52122b356615ee511598bb938ef73b3c7b",
+        "CLT": "14.1.0.0.1.1663981106",
+        "Xcode": "14.0.1",
         "macOS": "12.6"
       }
     }

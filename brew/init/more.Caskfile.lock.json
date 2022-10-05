@@ -68,7 +68,7 @@
         }
       },
       "pdf-expert": {
-        "version": "3.0.26,861",
+        "version": "3.0.27,863",
         "options": {
           "full_name": "pdf-expert"
         }
@@ -197,18 +197,18 @@
       },
       "Xcode": {
         "id": "497799835",
-        "version": "14.0"
+        "version": "14.0.1"
       }
     }
   },
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.6.2",
+        "HOMEBREW_VERSION": "3.6.4",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "a7e3fdfae1c57326d4b9a3d4f7d24c3f4d3d0b09",
-        "CLT": "14.1.0.0.1.1662869207",
-        "Xcode": "14.0",
+        "Homebrew/homebrew-core": "6e5f7e52122b356615ee511598bb938ef73b3c7b",
+        "CLT": "14.1.0.0.1.1663981106",
+        "Xcode": "14.0.1",
         "macOS": "12.6"
       }
     }
