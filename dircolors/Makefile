@@ -1,5 +1,6 @@
+SHELL := /usr/local/bin/bash
 XDG_CACHE_HOME ?= ~/var/cache
-OUTDIR = $(XDG_CACHE_HOME)/dircolors
+OUTDIR := $(XDG_CACHE_HOME)/dircolors
 
 .PHONY: dircolors/all
 dircolors/all: thirty2k

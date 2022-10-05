@@ -1,6 +1,7 @@
 SOURCE_DIR := $(CURDIR)
 DEST_DIR := $(HOME)/Library/LaunchAgents
 
+SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --compare --mode=0644
 

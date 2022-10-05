@@ -2,6 +2,7 @@
 # Install files to ~/bin
 # ----------------------------------------------------------------------------
 
+SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install -D --compare --mode=0755
 BINDIR := $(HOME)/bin

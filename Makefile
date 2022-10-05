@@ -12,6 +12,7 @@ GNUMAKEFLAGS = --output-sync
 
 STOW_DIR := ~/opt/stow
 
+SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
 

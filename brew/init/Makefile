@@ -2,6 +2,7 @@
 # Homebrew
 # ----------------------------------------------------------------------------
 
+SHELL := /usr/local/bin/bash
 .NOTPARALLEL:
 
 # avoid shadowing HOMEBREW_REPOSITORY

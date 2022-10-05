@@ -1,7 +1,7 @@
-SHELL = /usr/local/bin/bash
 STOW_DIR := $(HOME)/opt/stow
 STAGING := $(STOW_DIR)/.staging
 
+SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --preserve-timestamps
 

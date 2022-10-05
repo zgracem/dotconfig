@@ -2,6 +2,7 @@
 # Install files to /etc and /usr/local/etc
 # ----------------------------------------------------------------------------
 
+SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
 INSTALL := $(GNU)/install --compare --mode=0644
 
