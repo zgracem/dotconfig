@@ -14,6 +14,7 @@ SHIMS += code
 SHIMS += code-wait
 SHIMS += lsregister
 SHIMS += PlistBuddy
+SHIMS += pyjamas
 SHIMS += trash
 SHIMS += vsx
 EASY_SHIMS = $(filter-out code-wait, $(SHIMS))
@@ -25,6 +26,16 @@ $(addprefix $(BINDIR)/, $(EASY_SHIMS)): $(BINDIR)/%: $(CURDIR)/%
 
 $(BINDIR)/code-wait: $(CURDIR)/code
 	${GNU}/ln -sf ./$(notdir $<) $@
+
+$(BINDIR)/pyjamas: | $(XDG_DATA_HOME)/npm/bin/json2cson
+$(XDG_DATA_HOME)/npm/bin/json2cson:
+	npm install -g cson
+
+.PHONY: pyjamas/gems
+$(BINDIR)/pyjamas: | pyjamas/gems
+pyjamas/gems:
+	@ruby -rplist -rtoml-rb -etrue -c >/dev/null 2>&1 \
+	|| gem install plist toml-rb
 
 .PHONY: clean
 clean:

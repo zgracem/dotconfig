@@ -1,5 +1,5 @@
 function pyjamas --description "Convert configuration files between formats"
-    argparse -x{i,o},m 'i/in=' 'o/out=' 'm/mode=' -- $argv
+    argparse -x{i,o},m -n pyjamas 'i/in=' 'o/out=' 'm/mode=' -- $argv
     or return
 
     if set -q _flag_mode
