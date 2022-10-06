@@ -1,6 +1,7 @@
 STOW_DIR := $(wildcard ~/opt/stow)
 STAGING := $(STOW_DIR)/.staging
 GIT_STAGING := $(wildcard ~/src/github.com)
+STOW := cd $(STOW_DIR) && stow
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
@@ -16,7 +17,7 @@ calendar: ~/opt/share/calendar
 # stow/all: calendar
 
 ~/opt/share/calendar: ~/opt/stow/calendar/share/calendar
-	cd ${STOW_DIR} && stow calendar
+	${STOW} calendar
 
 ~/opt/stow/calendar/share/calendar: $(STAGING)/calendars
 	${INSTALL} -m0644 -- $< $@
@@ -31,7 +32,7 @@ cronic: ~/opt/bin/cronic
 stow/all: cronic
 
 ~/opt/bin/cronic: ~/opt/stow/cronic-v3/bin/cronic
-	cd ${STOW_DIR} && stow cronic
+	${STOW} cronic
 
 ~/opt/stow/cronic-v3/bin/cronic: $(STAGING)/cronic
 	${INSTALL} -- $< $@
@@ -48,7 +49,7 @@ stow/all: css3FontConverter
 FONTCON_REPO := zoltan-dulac/css3FontConverter
 
 ~/opt/bin/convertFonts.sh: ~/opt/stow/css3FontConverter/bin/convertFonts.sh
-	cd ${STOW_DIR} && stow css3FontConverter
+	${STOW} css3FontConverter
 
 ~/opt/stow/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
 	${GNU}/ln -sf $< $@
@@ -64,7 +65,7 @@ dayone2: ~/opt/bin/dayone2
 stow/all: dayone2
 
 ~/opt/bin/dayone2: ~/opt/stow/dayone2/bin/dayone2
-	cd ${STOW_DIR} && stow dayone2
+	${STOW} dayone2
 
 ~/opt/stow/dayone2/bin/dayone2: ~/Applications/DayOne.app/Contents/Resources/dayone2
 	gzcat -v $^ >$@ && chmod -v u+x $@
@@ -83,7 +84,7 @@ hunspell: ~/opt/share/myspell
 stow/all: hunspell
 
 ~/opt/share/myspell: ~/opt/stow/hunspell-$(LANG)/share/myspell/$(LANG).dic
-	cd ${STOW_DIR} && stow hunspell
+	${STOW} hunspell
 
 ~/opt/stow/hunspell-$(LANG)/share/myspell/$(LANG).dic: $(STAGING)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip
 	unzip -u -j -d $(dir $@) $< && touch -r $< $@
@@ -98,7 +99,7 @@ markdown: ~/opt/bin/Markdown.pl
 # stow/all: markdown
 
 ~/opt/bin/Markdown.pl: ~/opt/stow/markdown/bin/Markdown.pl
-	cd ${STOW_DIR} && stow markdown
+	${STOW} markdown
 
 ~/opt/stow/markdown/bin/Markdown.pl: $(STAGING)/Markdown.pl
 	${INSTALL} -- $< $@
@@ -116,7 +117,7 @@ tremc: ~/opt/bin/tremc
 stow/all: tremc
 
 ~/opt/bin/tremc: ~/opt/stow/tremc/bin/tremc
-	cd ${STOW_DIR} && stow tremc
+	${STOW} tremc
 
 ~/opt/stow/tremc/bin/tremc: | $(GIT_STAGING)/tremc/tremc
 	cd $| && $(MAKE) DESTDIR=${STOW_DIR} PREFIX=/tremc install
@@ -131,7 +132,7 @@ words: ~/opt/share/dict/words
 # stow/all: words
 
 ~/opt/share/dict/words: ~/opt/stow/words/share/dict/words
-	cd ${STOW_DIR} && stow words
+	${STOW} words
 
 DICTS = connectives propernames web2 web2a
 DICT_FILES = $(addprefix /usr/share/dict/,$(DICTS))
