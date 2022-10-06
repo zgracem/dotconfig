@@ -4,7 +4,6 @@
 [core]
 	autocrlf = input
 	safecrlf = false
-	filemode = false
 
 [alias]
 	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
@@ -14,6 +13,7 @@
 
 [diff]
 	tool = vimdiff
+	algorithm = histogram
 
 [difftool]
 	prompt = false
