@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>amethyst</key>
+	<dict>
+		<key>colour</key>
+		<string>violet</string>
+		<key>mineral</key>
+		<string>quartz</string>
+		<key>pigment</key>
+		<array>
+			<string>iron</string>
+		</array>
+	</dict>
+	<key>diamond</key>
+	<dict>
+		<key>colour</key>
+		<string>none</string>
+		<key>mineral</key>
+		<string>carbon</string>
+		<key>pigment</key>
+		<array>
+			<string>nitrogen</string>
+			<string>boron</string>
+		</array>
+	</dict>
+	<key>emerald</key>
+	<dict>
+		<key>colour</key>
+		<string>green</string>
+		<key>mineral</key>
+		<string>beryl</string>
+		<key>pigment</key>
+		<array>
+			<string>chromium</string>
+		</array>
+	</dict>
+	<key>ruby</key>
+	<dict>
+		<key>colour</key>
+		<string>red</string>
+		<key>mineral</key>
+		<string>corundum</string>
+		<key>pigment</key>
+		<array>
+			<string>chromium</string>
+		</array>
+	</dict>
+	<key>sapphire</key>
+	<dict>
+		<key>colour</key>
+		<string>blue</string>
+		<key>mineral</key>
+		<string>corundum</string>
+		<key>pigment</key>
+		<array>
+			<string>iron</string>
+			<string>titanium</string>
+		</array>
+	</dict>
+</dict>
+</plist>

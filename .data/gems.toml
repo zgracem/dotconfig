@@ -1,0 +1,20 @@
+[amethyst]
+colour = "violet"
+mineral = "quartz"
+pigment = ["iron"]
+[diamond]
+colour = "none"
+mineral = "carbon"
+pigment = ["nitrogen", "boron"]
+[emerald]
+colour = "green"
+mineral = "beryl"
+pigment = ["chromium"]
+[ruby]
+colour = "red"
+mineral = "corundum"
+pigment = ["chromium"]
+[sapphire]
+colour = "blue"
+mineral = "corundum"
+pigment = ["iron", "titanium"]

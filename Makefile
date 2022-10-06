@@ -203,6 +203,12 @@ $(XDG_DATA_HOME)/doc/pdf:
 	mkdir -pv $@
 all: manpdf
 
+# Rebuild files in ./.data
+.PHONY: data
+data:
+	cd ${XDG_CONFIG_HOME}/.data && $(MAKE)
+all: data
+
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
 # Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.
