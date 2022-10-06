@@ -184,6 +184,7 @@
     "solargraph.commandPath",
     "spellright.configurationScope",
     "spellright.language",
+    "spellright.addToSystemDictionary",
     "window.doubleClickIconToClose"
   ],
   "settingsSync.keybindingsPerPlatform": false,
@@ -271,6 +272,8 @@
   "terminal.integrated.tabs.title": "${sequence}",
   "window.closeWhenEmpty": true,
   "window.commandCenter": true,
+  "window.enableMenuBarMnemonics": true,
+  "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "offset",
   "window.openFilesInNewWindow": "off",
   "window.openFoldersInNewWindow": "on",

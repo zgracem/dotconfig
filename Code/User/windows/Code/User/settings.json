@@ -20,6 +20,10 @@
     "slim": "slimrb.exe --option format=:html --option tabsize=2 --pretty --trace",
     "troff": "C:\\cygwin64\\bin\\man.exe -Pcat"
   },
+  "code-runner.executorMapByGlob": {
+    "*.[1-9].md": "ronn --pipe < $fullFileName | man -Pcat -Eutf8 -l -",
+    "*.ti": "tic -Lxfq $fullFileName"
+  },
   "code-runner.ignoreSelection": true,
   "code-runner.runInTerminal": false,
   "code-runner.saveFileBeforeRun": true,
@@ -36,13 +40,13 @@
   "editor.cursorStyle": "line-thin",
   "editor.find.seedSearchStringFromSelection": "never",
   "editor.foldingHighlight": false,
-  "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
-  "editor.fontSize": 13,
+  "editor.fontFamily": "Native, IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontWeight": "300",
   "editor.formatOnSaveMode": "modifications",
   "editor.guides.bracketPairs": true,
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 200,
+  "editor.insertSpaces": true,
   "editor.lightbulb.enabled": false,
   "editor.links": false,
   "editor.maxTokenizationLineLength": 40960,
@@ -78,8 +82,6 @@
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
-  "emojisense.emojiDecoratorsEnabled": false,
-  "emojisense.markupCompletionsEnabled": false,
   "explorer.incrementalNaming": "smart",
   "explorer.openEditors.visible": 0,
   "extensions.closeExtensionDetailsOnViewChange": false,
@@ -101,9 +103,11 @@
   "files.hotExit": "onExitAndWindowClose",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "git.defaultCloneDirectory": "C:\\cygwin64\\home\\zgm\\.local\\src",
+  "git.autoRepositoryDetection": "subFolders",
+  "git.defaultCloneDirectory": "C:\\cygwin64\\home\\zgm\\src",
   "git.openDiffOnClick": false,
   "git.path": "C:\\Program Files\\Git\\cmd\\git.exe",
+  "git.repositoryScanMaxDepth": -1,
   "gitlens.advanced.blame.customArguments": ["-w"],
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
@@ -128,7 +132,6 @@
   "gitlens.sortBranchesBy": "date:desc",
   "gitlens.statusBar.format": "${author, }${agoOrDate}${ (pullRequest)} · ${message}",
   "gitlens.views.branches.showBranchComparison": false,
-  "html.format.endWithNewline": true,
   "html.format.indentInnerHtml": true,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
@@ -150,11 +153,16 @@
   "oneDarkPro.editorTheme": "One Dark Pro Flat",
   "oneDarkPro.italic": true,
   "outline.problems.enabled": false,
+  "papyrus.fo4.directory": "G:\\Steam\\steamapps\\common\\Fallout 4\\",
+  "prettier.bracketSameLine": true,
+  "prettier.semi": false,
+  "prettier.trailingComma": "none",
   "problems.showCurrentInStatus": true,
   "redhat.telemetry.enabled": false,
   "ruby.interpreter.commandPath": "C:\\cygwin64\\bin\\ruby.exe",
   "ruby.pathToBundler": "C:\\cygwin64\\home\\zgm\\bin\\bundler.exe",
   "ruby.useLanguageServer": false,
+  "scm.defaultViewMode": "tree",
   "search.collapseResults": "auto",
   "search.searchEditor.defaultNumberOfContextLines": 2,
   "search.searchEditor.doubleClickBehaviour": "openLocationToSide",
@@ -172,11 +180,13 @@
     "editor.fontSize",
     "editor.fontWeight",
     "jqPlayground.binaryPath",
+    "papyrus.fo4.directory",
     "slimLint.executablePath",
     "solargraph.bundlerPath",
     "solargraph.commandPath",
     "spellright.configurationScope",
     "spellright.language",
+    "spellright.addToSystemDictionary",
     "window.doubleClickIconToClose"
   ],
   "settingsSync.keybindingsPerPlatform": false,
@@ -184,11 +194,8 @@
   "shellcheck.exclude": ["1090", "1091"],
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
-  "slimLint.executablePath": "/Users/zozo/.local/share/rbenv/shims/slim-lint",
-  "solargraph.bundlerPath": "/Users/zozo/.local/share/rbenv/shims/bundle",
-  "solargraph.commandPath": "/Users/zozo/.local/share/rbenv/shims/solargraph",
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
+  "shellformat.flag": "--func-next-line --indent=2 --case-indent --binary-next-line",
+  "shellformat.path": "/usr/local/bin/shfmt",
   "sortJSON.contextMenu": {
     "sortJSONAlphaNum": false,
     "sortJSONAlphaNumReverse": false,
@@ -198,7 +205,7 @@
     "sortJSONTypeReverse": false,
     "sortJSONValuesReverse": false
   },
-  "spellright.addToSystemDictionary": true,
+  "spellright.addToSystemDictionary": false,
   "spellright.configurationUpdate": false,
   "spellright.documentTypes": ["markdown", "git-commit"],
   "spellright.groupDictionaries": false,
@@ -245,9 +252,9 @@
   },
   "terminal.integrated.profiles.windows": {
     "Cygwin bash": {
+      "args": ["--login"],
       "icon": "terminal-bash",
-      "path": "C:\\cygwin64\\bin\\fish.exe",
-      "args": ["--login"]
+      "path": "C:\\cygwin64\\bin\\fish.exe"
     }
   },
   "terminal.integrated.rightClickBehavior": "default",
@@ -260,9 +267,8 @@
   "terminal.integrated.tabs.showActiveTerminal": "never",
   "terminal.integrated.tabs.title": "${sequence}",
   "window.closeWhenEmpty": true,
-  "window.doubleClickIconToClose": true,
   "window.commandCenter": true,
-  "window.enableMenuBarMnemonics": false,
+  "window.enableMenuBarMnemonics": true,
   "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "offset",
   "window.openFilesInNewWindow": "off",
@@ -288,6 +294,11 @@
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.enableXmlTreeViewMetadata": false,
   "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+  "yaml.format.enable": false,
+  "yaml.format.proseWrap": "always",
+  "yaml.maxItemsComputed": 20480,
+  "yaml.schemaStore.enable": false,
+  "yard.tags.paramNameBeforeType": true,
   "[applescript]": {
     "editor.insertSpaces": false,
     "editor.tabSize": 4
@@ -296,8 +307,6 @@
     "editor.defaultFormatter": "zgm.vscode-fish",
     "editor.detectIndentation": false,
     "editor.formatOnSave": false,
-    "editor.formatOnSaveMode": "file",
-    "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
   "[html]": {
@@ -312,11 +321,12 @@
     "editor.tabSize": 2
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": false
   },
   "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": false
   },
@@ -324,18 +334,27 @@
     "editor.insertSpaces": false
   },
   "[markdown]": {
+    "editor.autoSurround": "languageDefined",
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
     },
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.formatOnPaste": false,
+    "editor.tabSize": 4,
     "editor.wordBasedSuggestions": false,
     "editor.wordWrap": "bounded",
     "files.trimTrailingWhitespace": false
   },
   "[plaintext]": {
-    "editor.wordBasedSuggestions": false,
-    "files.insertFinalNewline": true
+    "editor.autoSurround": "quotes",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.language.colorizedBracketPairs": [
+      ["[", "]"],
+      ["(", ")"],
+      ["{", "}"],
+      ["<", ">"]
+    ],
+    "editor.wordBasedSuggestions": false
   },
   "[ruby]": {
     "editor.formatOnSave": true,
@@ -344,16 +363,24 @@
   "[scss]": {
     "editor.formatOnSave": false
   },
+  "[shellscript]": {
+    "editor.formatOnSave": false
+  },
   "[tsv]": {
     "editor.insertSpaces": false,
     "editor.tabCompletion": "off",
     "editor.tabSize": 8,
-    "editor.wordWrap": "off"
+    "editor.wordWrap": "off",
+    "files.insertFinalNewline": false,
+    "files.trimTrailingWhitespace": false
   },
   "[viml]": {
+    "editor.tabSize": 2,
+    "files.insertFinalNewline": false,
     "files.trimTrailingWhitespace": false
   },
   "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
     "editor.wordBasedSuggestions": true,
