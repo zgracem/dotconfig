@@ -1,5 +1,6 @@
 STOW_DIR := $(HOME)/opt/stow
 STAGING := $(STOW_DIR)/.staging
+GIT_STAGING := $(HOME)/src/github.com
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
@@ -44,14 +45,17 @@ $(STAGING)/cronic:
 css3FontConverter: ~/opt/bin/convertFonts.sh
 stow/all: css3FontConverter
 
+FONTCON_REPO := zoltan-dulac/css3FontConverter
+
 ~/opt/bin/convertFonts.sh: $(STOW_DIR)/css3FontConverter/bin/convertFonts.sh
 	cd ${STOW_DIR} && stow css3FontConverter
 
-$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: $(STAGING)/css3FontConverter/convertFonts.sh
+$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
 	${INSTALL} -C -D -- $< $@
 
-$(STAGING)/css3FontConverter:
-	cd ${STAGING} && git clone git@github.com:zoltan-dulac/css3FontConverter.git
+$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
+$(FONTCON_REPO):
+	cd ${GIT_STAGING} && git clone git@github.com:$(FONTCON_REPO).git $(FONTCON_REPO)
 
 # -- dayone2 -------------------------------------------------------------------
 
@@ -114,10 +118,10 @@ stow/all: tremc
 ~/opt/bin/tremc: $(STOW_DIR)/tremc/bin/tremc
 	cd ${STOW_DIR} && stow tremc
 
-$(STOW_DIR)/tremc/bin/tremc: | $(STAGING)/tremc
+$(STOW_DIR)/tremc/bin/tremc: | $(GIT_STAGING)/tremc/tremc
 	cd $| && $(MAKE) DESTDIR=${STOW_DIR} PREFIX=/tremc install
 
-$(STAGING)/tremc:
+$(GIT_STAGING)/tremc/tremc:
 	cd ${STAGING} && git clone git@github.com:tremc/tremc.git
 
 # -- share/words ---------------------------------------------------------------
