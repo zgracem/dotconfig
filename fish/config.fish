@@ -58,7 +58,7 @@ if is-cygwin
 end
 
 # See conf.d/update-lastpwd.fish
-if status is-interactive; and not string match -q vscode $TERM_PROGRAM; and path is -f $XDG_CACHE_HOME/fish/last_pwd
-    read -l dir <$XDG_CACHE_HOME/fish/last_pwd
+if status -i; and path is -f "$LAST_PWD_CACHE"; and not string match -q vscode $TERM_PROGRAM
+    read -l dir <$LAST_PWD_CACHE
     path is -d $dir; and cd $dir
 end
