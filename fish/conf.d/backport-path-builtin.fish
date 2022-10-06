@@ -1,9 +1,16 @@
 if not builtin -q path
-    function path -a subcmd
-        if string match -q is $subcmd
-            test $argv[2..-1]
-        else
-            return 127
+    function path
+        string match -rq '^(?:is|filter)' $argv[1]; or return 127
+        set --erase argv[1]
+        string match -q -- "-*" $argv[1]; or return 127
+        set -l switch $argv[1]
+        set --erase argv[1]
+        for arg in $argv
+            if test $switch $arg
+                echo $arg
+            else
+                false
+            end
         end
     end
 end
