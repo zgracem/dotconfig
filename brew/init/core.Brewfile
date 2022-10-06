@@ -23,6 +23,7 @@ brew "less"
 brew "rename" if OS.mac?
 brew "rsync" if OS.mac?
 brew "sf-pwgen" if OS.mac?
+brew "sponge"
 brew "the_silver_searcher"
 brew "unar" if OS.mac?
 brew "vim"

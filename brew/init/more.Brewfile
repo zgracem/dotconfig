@@ -11,7 +11,6 @@ brew "hexyl"
 brew "htop"
 brew "parallel"
 brew "source-highlight" # for less
-brew "sponge"
 
 # tmux
 brew "tmux"
