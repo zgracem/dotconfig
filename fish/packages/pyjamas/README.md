@@ -1,6 +1,7 @@
 # PYJamas
 
-Move comfortably between **P**roperty lists, **Y**AML, and **J**SON (and TOML).
+Move comfortably between **P**roperty lists, **Y**AML, and **J**SON (and TOML)
+(and CSON).
 
 ## Usage
 
@@ -20,6 +21,8 @@ cat version_4.yaml | pyjamas --mode yaml:toml >version_5.toml
 * `ruby` must be in your `PATH`.
 * Property list support requires [`plist`].
 * TOML support requires [`toml-rb`].
+* CSON support requires [`npm install cson`].
 
 [`plist`]: https://github.com/bleything/plist
 [`toml-rb`]: https://github.com/emancu/toml-rb
+[`npm install cson`]: https://github.com/bevry/cson

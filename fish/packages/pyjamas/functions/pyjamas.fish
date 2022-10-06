@@ -25,6 +25,9 @@ function pyjamas --description "Convert configuration files between formats"
     set -l libs date pathname
 
     switch "$ext_in"
+        case cson
+            set -f input "JSON.load(Open3.capture2('cson2json', stdin_data: $src.read).first)"
+            set -a libs json open3
         case json
             set -f input "JSON.load($src)"
             set -a libs json
@@ -45,6 +48,9 @@ function pyjamas --description "Convert configuration files between formats"
     set -l lang $_flag_out
 
     switch "$_flag_out"
+        case cson
+            set -f output "Open3.capture2('json2cson', stdin_data: $input.to_json).first"
+            set -a libs json open3
         case json
             set -f output "$input.to_json"
             set -a libs json
