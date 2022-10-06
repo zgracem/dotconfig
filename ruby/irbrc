@@ -6,7 +6,17 @@ require "irb"
 require "irb/completion"
 
 require "English"
-require "pathname"
+require "date"
+require "time"
+
+require "symbolized"
+
+autoload :CSV, "csv"
+autoload :JSON, "json"
+autoload :Pathname, "pathname"
+autoload :Set, "set"
+autoload :URI, "uri"
+autoload :YAML, "yaml"
 
 lib = Pathname.new("#{Dir.home}/lib/ruby").realpath.to_s
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
@@ -133,13 +143,11 @@ module Sample
 
   # @return [Set]
   def set
-    require "set"
     Set.new(arr.map(&:to_sym))
   end
 
   # @return [URI]
   def uri
-    require "uri"
     URI("https://user:p4s$w0rd@example.org:8000/path/to/resource.cgi?param=value#anchor")
   end
   alias_method :url, :uri
