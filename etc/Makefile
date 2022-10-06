@@ -4,7 +4,7 @@
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install --compare --mode=0644 --backup=existing
+INSTALL := $(GNU)/install -D --compare --mode=0644 --backup=existing --preserve-timestamps
 
 .PHONY: etc/all
 etc/all:
@@ -22,7 +22,7 @@ sudoer: /etc/sudoers.d/sudoer_zozo
 etc/all: sudoers
 
 /etc/sudoers.d/%: sudoers.d/%
-	sudo ${INSTALL} -D -- $< $@
+	sudo ${INSTALL} -- $< $@
 
 # custom ssh_config(5) and sshd_config(5)
 .PHONY: etc/ssh
@@ -30,7 +30,7 @@ etc/ssh: /etc/ssh/sshd_config.d/999-sshd.conf /etc/ssh/ssh_config.d/999-ssh.conf
 etc/all: etc/ssh
 
 /etc/ssh/%.conf: ssh/%.conf
-	sudo ${INSTALL} -D -- $< $@
+	sudo ${INSTALL} -- $< $@
 
 # allow `chsh`-ing to shells in /usr/local/bin
 .PHONY: shells

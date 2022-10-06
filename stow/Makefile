@@ -4,7 +4,7 @@ GIT_STAGING := $(HOME)/src/github.com
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install --preserve-timestamps
+INSTALL := $(GNU)/install -D --compare --preserve-timestamps
 
 .PHONY: stow/all
 stow/all:
@@ -19,7 +19,7 @@ calendar: ~/opt/share/calendar
 	cd ${STOW_DIR} && stow calendar
 
 $(STOW_DIR)/calendar/share/calendar: $(STAGING)/calendars
-	${INSTALL} -C -D -m0644 -- $< $@
+	${INSTALL} -m0644 -- $< $@
 
 $(STAGING)/calendars:
 	cd ${STAGING} && git clone --sparse git@github.com:freebsd/calendar-data.git $(notdir $@)
@@ -34,7 +34,7 @@ stow/all: cronic
 	cd ${STOW_DIR} && stow cronic
 
 $(STOW_DIR)/cronic-v3/bin/cronic: $(STAGING)/cronic
-	${INSTALL} -C -D -- $< $@
+	${INSTALL} -- $< $@
 
 $(STAGING)/cronic:
 	cd ${STAGING} && wget -q https://habilis.net/cronic/cronic
@@ -101,7 +101,7 @@ markdown: ~/opt/bin/Markdown.pl
 	cd ${STOW_DIR} && stow markdown
 
 $(STOW_DIR)/markdown/bin/Markdown.pl: $(STAGING)/Markdown.pl
-	${INSTALL} -C -D -- $< $@
+	${INSTALL} -- $< $@
 
 $(STAGING)/Markdown.pl: $(STAGING)/Markdown_1.0.1.zip
 	unzip -u -j -d $(dir $@) $< '*.pl' && touch -r $< $@

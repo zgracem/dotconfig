@@ -3,7 +3,7 @@ DEST_DIR := $(HOME)/Library/LaunchAgents
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install --compare --mode=0644 --backup=existing
+INSTALL := $(GNU)/install --compare --mode=0644 --backup=existing --preserve-timestamps
 
 .PHONY: setenv/all
 setenv/all: $(DEST_DIR)/org.inescapable.setenv.plist
