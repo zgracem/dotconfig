@@ -51,7 +51,7 @@ FONTCON_REPO := zoltan-dulac/css3FontConverter
 	cd ${STOW_DIR} && stow css3FontConverter
 
 $(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
-	${INSTALL} -C -D -- $< $@
+	${GNU}/ln -sf $< $@
 
 $(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
 $(FONTCON_REPO):
