@@ -1,6 +1,6 @@
-STOW_DIR := $(HOME)/opt/stow
+STOW_DIR := $(wildcard ~/opt/stow)
 STAGING := $(STOW_DIR)/.staging
-GIT_STAGING := $(HOME)/src/github.com
+GIT_STAGING := $(wildcard ~/src/github.com)
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
@@ -15,10 +15,10 @@ stow/all:
 calendar: ~/opt/share/calendar
 # stow/all: calendar
 
-~/opt/share/calendar: $(STOW_DIR)/calendar/share/calendar
+~/opt/share/calendar: ~/opt/stow/calendar/share/calendar
 	cd ${STOW_DIR} && stow calendar
 
-$(STOW_DIR)/calendar/share/calendar: $(STAGING)/calendars
+~/opt/stow/calendar/share/calendar: $(STAGING)/calendars
 	${INSTALL} -m0644 -- $< $@
 
 $(STAGING)/calendars:
@@ -30,10 +30,10 @@ $(STAGING)/calendars:
 cronic: ~/opt/bin/cronic
 stow/all: cronic
 
-~/opt/bin/cronic: $(STOW_DIR)/cronic-v3/bin/cronic
+~/opt/bin/cronic: ~/opt/stow/cronic-v3/bin/cronic
 	cd ${STOW_DIR} && stow cronic
 
-$(STOW_DIR)/cronic-v3/bin/cronic: $(STAGING)/cronic
+~/opt/stow/cronic-v3/bin/cronic: $(STAGING)/cronic
 	${INSTALL} -- $< $@
 
 $(STAGING)/cronic:
@@ -47,13 +47,13 @@ stow/all: css3FontConverter
 
 FONTCON_REPO := zoltan-dulac/css3FontConverter
 
-~/opt/bin/convertFonts.sh: $(STOW_DIR)/css3FontConverter/bin/convertFonts.sh
+~/opt/bin/convertFonts.sh: ~/opt/stow/css3FontConverter/bin/convertFonts.sh
 	cd ${STOW_DIR} && stow css3FontConverter
 
-$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
+~/opt/stow/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
 	${GNU}/ln -sf $< $@
 
-$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
+~/opt/stow/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
 $(FONTCON_REPO):
 	cd ${GIT_STAGING} && git clone git@github.com:$(FONTCON_REPO).git $(FONTCON_REPO)
 
@@ -63,14 +63,14 @@ $(FONTCON_REPO):
 dayone2: ~/opt/bin/dayone2
 stow/all: dayone2
 
-~/opt/bin/dayone2: $(STOW_DIR)/dayone2/bin/dayone2
+~/opt/bin/dayone2: ~/opt/stow/dayone2/bin/dayone2
 	cd ${STOW_DIR} && stow dayone2
 
-$(STOW_DIR)/dayone2/bin/dayone2: $(HOME)/Applications/DayOne.app/Contents/Resources/dayone2
+~/opt/stow/dayone2/bin/dayone2: ~/Applications/DayOne.app/Contents/Resources/dayone2
 	gzcat -v $^ >$@ && chmod -v u+x $@
 
-$(HOME)/Applications/DayOne.app/Contents/Resources/dayone2: $(HOME)/Applications/DayOne.app
-$(HOME)/Applications/DayOne.app:
+~/Applications/DayOne.app/Contents/Resources/dayone2: ~/Applications/DayOne.app
+~/Applications/DayOne.app:
 	${XDG_CONFIG_HOME}/bin/init/dayone-link.sh
 
 # -- hunspell (for Sublime Merge) ----------------------------------------------
@@ -82,10 +82,10 @@ LANG = en_CA
 hunspell: ~/opt/share/myspell
 stow/all: hunspell
 
-~/opt/share/myspell: $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic
+~/opt/share/myspell: ~/opt/stow/hunspell-$(LANG)/share/myspell/$(LANG).dic
 	cd ${STOW_DIR} && stow hunspell
 
-$(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic: $(STAGING)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip
+~/opt/stow/hunspell-$(LANG)/share/myspell/$(LANG).dic: $(STAGING)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip
 	unzip -u -j -d $(dir $@) $< && touch -r $< $@
 
 $(STAGING)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip:
@@ -97,17 +97,17 @@ $(STAGING)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip:
 markdown: ~/opt/bin/Markdown.pl
 # stow/all: markdown
 
-~/opt/bin/Markdown.pl: $(STOW_DIR)/markdown/bin/Markdown.pl
+~/opt/bin/Markdown.pl: ~/opt/stow/markdown/bin/Markdown.pl
 	cd ${STOW_DIR} && stow markdown
 
-$(STOW_DIR)/markdown/bin/Markdown.pl: $(STAGING)/Markdown.pl
+~/opt/stow/markdown/bin/Markdown.pl: $(STAGING)/Markdown.pl
 	${INSTALL} -- $< $@
 
 $(STAGING)/Markdown.pl: $(STAGING)/Markdown_1.0.1.zip
 	unzip -u -j -d $(dir $@) $< '*.pl' && touch -r $< $@
 
 $(STAGING)/Markdown_1.0.1.zip:
-	cd $(STAGING) && wget -q https://daringfireball.net/projects/downloads/Markdown_1.0.1.zip
+	cd ${STAGING} && wget -q https://daringfireball.net/projects/downloads/Markdown_1.0.1.zip
 
 # -- tremc ---------------------------------------------------------------------
 
@@ -115,10 +115,10 @@ $(STAGING)/Markdown_1.0.1.zip:
 tremc: ~/opt/bin/tremc
 stow/all: tremc
 
-~/opt/bin/tremc: $(STOW_DIR)/tremc/bin/tremc
+~/opt/bin/tremc: ~/opt/stow/tremc/bin/tremc
 	cd ${STOW_DIR} && stow tremc
 
-$(STOW_DIR)/tremc/bin/tremc: | $(GIT_STAGING)/tremc/tremc
+~/opt/stow/tremc/bin/tremc: | $(GIT_STAGING)/tremc/tremc
 	cd $| && $(MAKE) DESTDIR=${STOW_DIR} PREFIX=/tremc install
 
 $(GIT_STAGING)/tremc/tremc:
@@ -130,14 +130,14 @@ $(GIT_STAGING)/tremc/tremc:
 words: ~/opt/share/dict/words
 # stow/all: words
 
-~/opt/share/dict/words: $(STOW_DIR)/words/share/dict/words
+~/opt/share/dict/words: ~/opt/stow/words/share/dict/words
 	cd ${STOW_DIR} && stow words
 
 DICTS = connectives propernames web2 web2a
 DICT_FILES = $(addprefix /usr/share/dict/,$(DICTS))
 
-$(STOW_DIR)/words/share/dict/words: $(DICT_FILES) | $(STOW_DIR)/words/share/dict
+~/opt/stow/words/share/dict/words: $(DICT_FILES) | ~/opt/stow/words/share/dict
 	cat $^ | sort | uniq >$@
 
-$(STOW_DIR)/words/share/dict:
+~/opt/stow/words/share/dict:
 	mkdir -p $@

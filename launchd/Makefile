@@ -1,5 +1,5 @@
 SOURCE_DIR := $(CURDIR)
-DEST_DIR := $(HOME)/Library/LaunchAgents
+DEST_DIR := $(wildcard ~/Library/LaunchAgents)
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin

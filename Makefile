@@ -22,7 +22,7 @@ INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
 
 # environment -- load for GUI apps
 .PHONY: setenv
-setenv: $(HOME)/Library/LaunchAgents/org.inescapable.setenv.plist
+setenv: ~/Library/LaunchAgents/org.inescapable.setenv.plist
 	cd ${XDG_CONFIG_HOME}/launchd && $(MAKE)
 all: setenv
 
@@ -196,8 +196,8 @@ all: shims
 
 # Install manpdf
 .PHONY: manpdf
-manpdf: $(HOME)/bin/manpdf | $(XDG_DATA_HOME)/doc/pdf
-$(HOME)/bin/manpdf: $(HOME)/src/github.com/zgracem/manpdf/manpdf.sh
+manpdf: ~/bin/manpdf | $(XDG_DATA_HOME)/doc/pdf
+~/bin/manpdf: ~/src/github.com/zgracem/manpdf/manpdf.sh
 	ln -sfv $< $@
 $(XDG_DATA_HOME)/doc/pdf:
 	mkdir -pv $@
