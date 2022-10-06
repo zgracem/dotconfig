@@ -1,4 +1,4 @@
-if not fish-is-newer-than 3.5
+if not builtin -q path
     function path -a subcmd
         if string match -q is $subcmd
             test $argv[2..-1]
