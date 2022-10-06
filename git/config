@@ -20,6 +20,17 @@
 	# Be able to abort all diffs with `:cq` or `:cquit`
 	trustExitCode = true
 
+[diff "exiftool"]
+	textconv = exiftool -s2 -d "%F %T"
+	cachetextconv = true
+
+[diff "fish"]
+	xfuncname = "^\\s*(function\\s+\\S+)( -.+)?$"
+
+[diff "ps"]
+	binary = true
+	textconv = ps2ascii
+
 [push]
 	default = simple
 
@@ -34,3 +45,10 @@
 
 [init]
 	defaultBranch = main
+
+[merge]
+	tool = smerge
+
+[mergetool "smerge"]
+	cmd = smerge mergetool \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true
