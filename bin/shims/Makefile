@@ -11,19 +11,20 @@ SHIMS  =
 SHIMS += airport
 SHIMS += brew-env
 SHIMS += code
-SHIMS += code-wait
 SHIMS += lsregister
 SHIMS += PlistBuddy
 SHIMS += pyjamas
 SHIMS += trash
 SHIMS += vsx
-EASY_SHIMS = $(filter-out code-wait, $(SHIMS))
+
+TARGETS := $(addprefix $(BINDIR)/, $(SHIMS))
 
 .PHONY: bin/all
-bin/all: $(addprefix $(BINDIR)/, $(SHIMS))
-$(addprefix $(BINDIR)/, $(EASY_SHIMS)): $(BINDIR)/%: $(CURDIR)/%
+bin/all: $(TARGETS)
+$(TARGETS): $(BINDIR)/%: $(CURDIR)/%
 	${INSTALL} -- $< $@
 
+$(BINDIR)/code: $(BINDIR)/code-wait
 $(BINDIR)/code-wait: $(CURDIR)/code
 	${GNU}/ln -sf ./$(notdir $<) $@
 
@@ -39,4 +40,4 @@ pyjamas/gems:
 
 .PHONY: clean
 clean:
-	${GNU}/rm -fv $(addprefix $(BINDIR)/, $(SHIMS))
+	${GNU}/rm -fv $(TARGETS)
