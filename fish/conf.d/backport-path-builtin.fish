@@ -1,4 +1,4 @@
-if fish-is-older-than 3.5
+if not fish-is-newer-than 3.5
     function path -a subcmd
         if string match -q is $subcmd
             test $argv[2..-1]
