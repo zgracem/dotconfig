@@ -154,6 +154,8 @@
   "outline.problems.enabled": false,
   "papyrus.fo4.directory": "/Volumes/T7/Steam/steamapps/common/Fallout 4/",
   "prettier.bracketSameLine": true,
+  "prettier.proseWrap": "preserve",
+  "prettier.quoteProps": "consistent",
   "prettier.semi": false,
   "prettier.trailingComma": "none",
   "problems.showCurrentInStatus": true,
