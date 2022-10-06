@@ -5,7 +5,7 @@ for dir in $__fish_config_dir/packages/*/
     set -a fish_package_path (string trim --right --chars=/ $dir)
 end
 
-fix-path fish_package_path
+set fish_package_path (path filter -d $fish_package_path | un1q)
 
 function __package_init
     for package_dir in $fish_package_path

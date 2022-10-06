@@ -47,8 +47,8 @@ set -p fish_complete_path "$HOME/opt/etc/fish/completions"
 set -p fish_complete_path "$HOME/VS/www/vsdotcom/etc/fish/completions"
 
 # remove duplicate & nonexistent directories
-fix-path fish_function_path
-fix-path fish_complete_path
+set fish_function_path (path filter -d $fish_function_path | un1q)
+set fish_complete_path (path filter -d $fish_complete_path | un1q)
 
 if is-cygwin
     # fish_help_browser overrides the browser that may be defined by $BROWSER.
