@@ -1,0 +1,8 @@
+#!/usr/bin/sed -nf
+# Deletes duplicate non-consecutive lines from stdin
+G;
+s/\n/&&/;
+/^\([ -~]*\n\).*\n\1/d;
+s/\n//;
+h;
+P

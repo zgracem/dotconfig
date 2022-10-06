@@ -15,6 +15,7 @@ SHIMS += lsregister
 SHIMS += PlistBuddy
 SHIMS += pyjamas
 SHIMS += trash
+SHIMS += un1q
 SHIMS += vsx
 
 TARGETS := $(addprefix $(BINDIR)/, $(SHIMS))
