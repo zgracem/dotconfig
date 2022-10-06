@@ -21,8 +21,9 @@ cat version_4.yaml | pyjamas --mode yaml:toml >version_5.toml
 * `ruby` must be in your `PATH`.
 * Property list support requires [`plist`].
 * TOML support requires [`toml-rb`].
-* CSON support requires [`npm install cson`].
+* CSON support requires [`cson`] from [`npm`].
 
 [`plist`]: https://github.com/bleything/plist
 [`toml-rb`]: https://github.com/emancu/toml-rb
-[`npm install cson`]: https://github.com/bevry/cson
+[`cson`]: https://github.com/bevry/cson
+[`npm`]: https://npmjs.com/package/cson

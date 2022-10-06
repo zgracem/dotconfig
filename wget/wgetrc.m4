@@ -1,8 +1,7 @@
 # -----------------------------------------------------------------------------
 # ~/.config/wget/wgetrc
 # vim:ft=ini
-# Symlink to ~/.wgetrc
-# Generated from ~/.config/.src/wgetrc.m4
+# Generated from ~/.config/wget/wgetrc.m4
 # -----------------------------------------------------------------------------
 
 # Disguise user agent
