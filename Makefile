@@ -75,7 +75,7 @@ all: bat/syntaxes
 
 # dircolors -- also build .ls_colors files
 .PHONY: dircolors
-dircolors:
+dircolors: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
 	cd ${XDG_CONFIG_HOME}/dircolors && $(MAKE)
 all: dircolors
 
