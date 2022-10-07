@@ -36,7 +36,10 @@ set -gx fish_user_paths
 # ----------------------------------------------------------------------------
 
 # Remove duplicate and non-existent directories added by /etc/paths.d
-set PATH (path filter -d $PATH | un1q)
+set -gx PATH (path filter -d $PATH | un1q)
+
+# Basic
+set -gx MANPATH /usr/share/man
 
 # /usr/local
 fish_add_path /usr/local/bin
@@ -115,4 +118,4 @@ fish_add_manpath $__fish_data_dir/man
 
 # $HOME
 fish_add_path ~/bin ~/opt/bin
-fish_add_manpath ~/.local/share/man ~/opt/share/man
+fish_add_manpath $XDG_DATA_HOME/man ~/opt/share/man
