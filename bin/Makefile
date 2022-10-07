@@ -20,7 +20,7 @@ TARGETS := $(addprefix $(wildcard ~/bin/), $(SHIMS))
 .PHONY: bin/all
 bin/all: $(TARGETS)
 $(TARGETS): $(wildcard ~/bin)/%: $(CURDIR)/%
-	${INSTALL} -- $< $@
+	${GNUBIN}/ln -sf $(subst $(HOME),..,$<) $@
 
 ~/bin/code: ~/bin/code-wait
 ~/bin/code-wait: $(CURDIR)/code
