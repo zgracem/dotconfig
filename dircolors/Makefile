@@ -1,5 +1,5 @@
-SHELL := /usr/local/bin/bash
-XDG_CACHE_HOME ?= ~/var/cache
+include ../common.mk
+
 OUTDIR := $(XDG_CACHE_HOME)/dircolors
 
 .PHONY: dircolors/all
@@ -9,10 +9,10 @@ dircolors/all: thirty2k
 thirty2k: $(OUTDIR)/thirty2k.ls_colors $(OUTDIR)/thirty2k.ls_colors.fish
 
 $(OUTDIR)/%.ls_colors: %.dircolors | $(OUTDIR)/
-	dircolors -b $< > $@
+	dircolors -b $< >$@
 
 $(OUTDIR)/%.ls_colors.fish: %.dircolors | $(OUTDIR)/
-	dircolors -c $< > $@
+	dircolors -c $< >$@
 
 $(OUTDIR)/:
 	mkdir -p $(OUTDIR)

@@ -3,9 +3,7 @@ STAGING := $(STOW_DIR)/.staging
 GIT_STAGING := $(wildcard ~/src/github.com)
 STOW := cd $(STOW_DIR) && stow
 
-SHELL := /usr/local/bin/bash
-GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install -D --compare
+include ../common.mk
 
 .PHONY: stow/all
 stow/all:
@@ -52,7 +50,7 @@ FONTCON_REPO := zoltan-dulac/css3FontConverter
 	${STOW} css3FontConverter
 
 ~/opt/stow/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
-	${GNU}/ln -sf $< $@
+	${GNUBIN}/ln -sf $< $@
 
 ~/opt/stow/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
 $(FONTCON_REPO):

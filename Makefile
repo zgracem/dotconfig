@@ -10,11 +10,7 @@ MAKEFLAGS = Lr
 # -r = don't use implicit rules
 GNUMAKEFLAGS = --output-sync
 
-STOW_DIR := ~/opt/stow
-
-SHELL := /usr/local/bin/bash
-GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install --mode=0644 --preserve-timestamps
+include common.mk
 
 .PHONY: all
 
@@ -94,7 +90,7 @@ all: jq
 .PHONY: maestral
 maestral: ~/Dropbox/.mignore
 ~/Dropbox/.mignore: maestral/.mignore
-	${INSTALL} -- $< $@
+	${INSTALL} --mode=0644 -- $< $@
 
 # Maestral -- install CLI w/ pip to workaround issues w/ macOS builtin Python
 # <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>

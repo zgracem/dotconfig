@@ -2,9 +2,7 @@
 # Install files to /etc and /usr/local/etc
 # ----------------------------------------------------------------------------
 
-SHELL := /usr/local/bin/bash
-GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install -D --compare --mode=0644 --backup=existing
+include ../common.mk
 
 .PHONY: etc/all
 etc/all:
@@ -22,7 +20,7 @@ man/conf: /etc/man.conf
 etc/all: man/conf
 
 /etc/man.conf: man.conf
-	sudo ${INSTALL} -- $< $@
+	sudo ${INSTALL} --backup=existing --mode=0644 -- $< $@
 
 # custom sudoers(5) config
 .PHONY: sudoers
@@ -30,7 +28,7 @@ sudoer: /etc/sudoers.d/sudoer_zozo
 etc/all: sudoers
 
 /etc/sudoers.d/%: sudoers.d/%
-	sudo ${INSTALL} -- $< $@
+	sudo ${INSTALL} --mode=0644 -- $< $@
 
 # custom ssh_config(5) and sshd_config(5)
 .PHONY: etc/ssh
@@ -38,7 +36,7 @@ etc/ssh: /etc/ssh/sshd_config.d/999-sshd.conf /etc/ssh/ssh_config.d/999-ssh.conf
 etc/all: etc/ssh
 
 /etc/ssh/%.conf: ssh/%.conf
-	sudo ${INSTALL} -- $< $@
+	sudo ${INSTALL} --mode=0644 -- $< $@
 
 # allow `chsh`-ing to shells in /usr/local/bin
 .PHONY: shells

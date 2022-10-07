@@ -2,7 +2,8 @@
 # Homebrew
 # ----------------------------------------------------------------------------
 
-SHELL := /usr/local/bin/bash
+include ../../common.mk
+
 .NOTPARALLEL:
 
 # avoid shadowing HOMEBREW_REPOSITORY

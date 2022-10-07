@@ -2,9 +2,7 @@
 # Install files to ~/bin
 # ----------------------------------------------------------------------------
 
-SHELL := /usr/local/bin/bash
-GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install -D --compare --mode=0755
+include ../../common.mk
 
 SHIMS  =
 SHIMS += airport
@@ -26,7 +24,7 @@ $(TARGETS): $(wildcard ~/bin)/%: $(CURDIR)/%
 
 ~/bin/code: ~/bin/code-wait
 ~/bin/code-wait: $(CURDIR)/code
-	${GNU}/ln -sf ./$(notdir $<) $@
+	${GNUBIN}/ln -sf ./$(notdir $<) $@
 
 ~/bin/pyjamas: | $(XDG_DATA_HOME)/npm/bin/json2cson
 $(XDG_DATA_HOME)/npm/bin/json2cson:
@@ -40,4 +38,4 @@ pyjamas/gems:
 
 .PHONY: clean
 clean:
-	${GNU}/rm -fv $(TARGETS)
+	${GNUBIN}/rm -fv $(TARGETS)
