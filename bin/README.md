@@ -1,8 +1,8 @@
 # ~/.config/bin
 
-This directory contains various scripts I've written which are used in shell
-functions or config files elsewhere in this repository, or by Visual Studio
-Code's [tasks], as defined in [`tasks.json`].
+This directory contains various simple wrappers, scripts, and utilities I've
+written that should be symlinked into `~/bin`:
 
-[tasks]: https://code.visualstudio.com/docs/editor/tasks
-[`tasks.json`]: https://github.com/zgracem/dotconfig/blob/main/.vscode/tasks.json
+```sh
+make -C $XDG_CONFIG_HOME/bin
+```

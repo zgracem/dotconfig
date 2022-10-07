@@ -21,5 +21,5 @@ complate -c brew -l update-existing -d "Update outdated formulae" -n "__fish_see
 complate -c brew -l install-missing -d "Install and update missing formulae" -n "__fish_seen_subcommand_from which-update"
 complate -c brew -l max-downloads -x -d "Maximum formulae to download and update" -n "__fish_seen_subcommand_from which-update"
 
-# `brew env` (~/bin/shims/brew-env)
+# `brew env` (~/bin/brew-env)
 complete -c brew -n __fish_use_subcommand -a env -d "Print all HOMEBREW_* vars"

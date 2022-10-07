@@ -34,25 +34,25 @@ mklink %APPDATA%\Code\User\settings.json windows\Code\User\settings.json
 
 ## Extensions
 
-Use `~/.config/bin/vscode-extensions` to manage extensions against the
-`extensions.json` file in this directory.
+Use `~/.config/bin/vsx` to manage extensions against the `extensions.json` file
+in this directory.
 
 To install everything listed in `extensions.json`:
 
 ```sh
-~/.config/bin/vscode-extensions install
+vsx install
 ```
 
 To uninstall everything _not_ listed:
 
 ```sh
-~/.config/bin/vscode-extensions cleanup
+vsx cleanup
 ```
 
 To overwrite `extensions.json` with the current loadout:
 
 ```sh
-~/.config/bin/vscode-extensions dump
+vsx dump
 ```
 
 You can also copy `extensions.json` into a project's `.vscode` directory and use

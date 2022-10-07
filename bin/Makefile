@@ -2,7 +2,7 @@
 # Install files to ~/bin
 # ----------------------------------------------------------------------------
 
-include ../../common.mk
+include ../common.mk
 
 SHIMS  =
 SHIMS += airport

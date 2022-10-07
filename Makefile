@@ -54,7 +54,7 @@ all: shell/files
 # misc -- create symlinks in $HOME/Library/Application Support
 .PHONY: appsupport
 appsupport:
-	${XDG_CONFIG_HOME}/bin/init/appsupport-links.sh
+	${XDG_CONFIG_HOME}/libexec/init-appsupport.sh
 all: appsupport
 
 # 1password -- build fish completions
@@ -70,7 +70,7 @@ all: 1password/fish
 .PHONY: bat/syntaxes
 bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
 $(XDG_CACHE_HOME)/bat/syntaxes.bin:
-	${XDG_CONFIG_HOME}/bin/bat-syntaxes.fish
+	${XDG_CONFIG_HOME}/libexec/bat-syntaxes.fish
 all: bat/syntaxes
 
 # dircolors -- also build .ls_colors files
@@ -155,7 +155,7 @@ $(XDG_DATA_HOME)/vim $(XDG_CACHE_HOME)/vim:
 .PHONY: vim/pack
 vim/pack: $(XDG_DATA_HOME)/vim/pack/.installed
 $(XDG_DATA_HOME)/vim/pack/.installed:
-	${XDG_CONFIG_HOME}/bin/init/vim-pack.fish && touch $@
+	${XDG_CONFIG_HOME}/libexec/init-vim-pack.fish && touch $@
 vim: vim/pack
 all: vim
 
@@ -184,11 +184,11 @@ opt/stow:
 	cd ${XDG_CONFIG_HOME}/stow && $(MAKE)
 all: opt/stow
 
-# Install shims to ~/bin
-.PHONY: shims
-shims:
-	cd ${XDG_CONFIG_HOME}/bin/shims && $(MAKE)
-all: shims
+# Install to ~/bin
+.PHONY: bin/all
+bin/all:
+	cd ${XDG_CONFIG_HOME}/bin && $(MAKE)
+all: bin/all
 
 # Install manpdf
 .PHONY: manpdf
@@ -220,7 +220,7 @@ UA_OUTPUT_FILES = \
 HB_FILE := /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
 UA_FILE := $(XDG_CACHE_HOME)/dotfiles/user-agent.txt
 $(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
-	${XDG_CONFIG_HOME}/bin/user-agent-get.fish > $@
+	${XDG_CONFIG_HOME}/libexec/user-agent-get.fish > $@
 $(XDG_CACHE_HOME)/dotfiles:
 	mkdir -pv $@
 $(UA_OUTPUT_FILES): $(UA_FILE)

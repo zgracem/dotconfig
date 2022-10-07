@@ -70,7 +70,7 @@ stow/all: dayone2
 
 ~/Applications/DayOne.app/Contents/Resources/dayone2: ~/Applications/DayOne.app
 ~/Applications/DayOne.app:
-	${XDG_CONFIG_HOME}/bin/init/dayone-link.sh
+	${XDG_CONFIG_HOME}/libexec/init-dayone.sh
 
 # -- hunspell (for Sublime Merge) ----------------------------------------------
 

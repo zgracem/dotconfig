@@ -19,7 +19,7 @@
     {
       "label": "Lint POSIX shell files",
       "type": "shell",
-      "command": "bin/check_dotfiles.sh",
+      "command": "libexec/check_dotfiles.sh",
       "problemMatcher": {
         "fileLocation": [
           "relative",
@@ -45,7 +45,7 @@
     {
       "label": "Lint fish files",
       "type": "shell",
-      "command": "bin/check_fish_files.fish",
+      "command": "libexec/check_fish_files.fish",
       "problemMatcher": {
         "fileLocation": [
           "relative",
@@ -66,13 +66,13 @@
     {
       "label": "Update bat syntaxes",
       "type": "shell",
-      "command": "bin/bat-syntaxes.fish",
+      "command": "libexec/bat-syntaxes.fish",
       "group": "build"
     },
     {
       "label": "Update user-agent",
       "type": "shell",
-      "command": "bin/user-agent-update.fish",
+      "command": "libexec/user-agent-update.fish",
       "group": "build"
     }
   ]

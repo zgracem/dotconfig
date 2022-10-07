@@ -3,7 +3,7 @@
 # This script is called by Transmission.app when a torrent finished downloading,
 # and writes a log file to ~/var/log about it.
 #
-# defaults write -app Transmission DoneScriptPath "$XDG_CONFIG_HOME/bin/tx-postexec.fish"
+# defaults write -app Transmission DoneScriptPath "$XDG_CONFIG_HOME/libexec/tx-postexec.fish"
 
 fish_add_path --move $HOME/opt/bin
 command -sq tremc; or exit 127
