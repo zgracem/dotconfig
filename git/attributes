@@ -1,9 +1,11 @@
 # See also diff.* in ./config
 *.fish  diff=fish
+*.gif   diff=exiftool
 *.jpg   diff=exiftool
+*.png   diff=exiftool
 *.ps    diff=ps
 
-# Enable some of git's built−in patterns for recognizing the hunk header.
+# Enable some of git's built−in patterns for recognizing the hunk header
 *.c     diff=cpp
 *.h     diff=cpp
 *.c++   diff=cpp
@@ -30,3 +32,5 @@
 *.rs    diff=rust
 *.lisp  diff=lisp
 *.el    diff=lisp
+
+# code: language=gitattributes
