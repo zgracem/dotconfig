@@ -12,4 +12,4 @@ $(DEST_DIR)/%.plist: $(SOURCE_DIR)/%.plist
 	launchctl load $@
 
 $(SOURCE_DIR)/%.plist: $(SOURCE_DIR)/%.yaml
-	ruby -rplist -ryaml -e'puts YAML.safe_load(File.read("$(realpath $<)")).to_plist' >$(realpath $@)
+	pyjamas --out=plist $(realpath $<) >$(realpath $@)
