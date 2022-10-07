@@ -1,13 +1,16 @@
 #!/usr/bin/env fish
-# ----------------------------------------------------------------------------
-# `$XDG_CONFIG_HOME/yt-dlp/config` must contain
+# -----------------------------------------------------------------------------
+# This script is called by `yt-dlp` when a download finishes, and adds metadata
+# to the deleted file.
+#
+# `$XDG_CONFIG_HOME/yt-dlp/config` must contain:
 #
 #   --write-info-json
-#   --exec /path/to/this-script.fish {}
+#   --exec $XDG_CONFIG_HOME/bin/yt-dlp-postexec.fish {}
 #
-# so that `yt-dlp` will create a JSON file of metadata alongside the video
-# and call this script with the downloaded video as the only argument.
-# ----------------------------------------------------------------------------
+# so that `yt-dlp` will create a JSON file of metadata alongside the video, and
+# call this script with the downloaded video as the only argument.
+# -----------------------------------------------------------------------------
 
 function bail -d "Print an error message and exit" -a message code
     test -n "$code"; or set -l code 1
@@ -23,13 +26,11 @@ function metadata_filename -a video_filename
 
     if path is -f $metadata_file
         echo -n $metadata_file
+        set -q _flag_verbose; and echo >&2 "found metadata file: $metadata_file"
     else
-        bail "metadata not found: $metadata_file"
+        echo >&2 "metadata not found: $metadata_file"
+        exit 1
     end
-end
-
-function webpage_url -a json_file
-    jq .webpage_url $json_file
 end
 
 # `jq` extracts the value of "webpage_url" from metadata in $json_file;
@@ -37,7 +38,7 @@ end
 # `xxd` prints that binary plist as `-p`lain `-u`ppercase hex bytes;
 # `string join` removes newlines.
 function binary_plist_url -a json_file
-    plutil -convert binary1 -o - (webpage_url $json_file | psub) \
+    plutil -convert binary1 -o - (jq .webpage_url $json_file | psub) \
     | xxd -p -u \
     | string join ""
 end
@@ -51,40 +52,42 @@ function set_wherefrom -a video_file metadata_file
     test -n "$metadata_file"
     or set -l metadata_file (metadata_filename $video_file)
 
-    set -l url (webpage_url $metadata_file)
-    or bail "failed to extract URL fron $metadata_file"
+    if not set -l url (jq .webpage_url $metadata_file)
+        echo >&2 "failed to extract URL from $metadata_file"
+        exit 1
+    else if set -q _flag_verbose
+        echo >&2 "extracted URL: $url"
+    end
 
-    set -l hex_url (binary_plist_url $metadata_file)
-    or bail "failed to process: $metadata_file"
+    if not set -l hex_url (binary_plist_url $metadata_file)
+        echo >&2 "failed to process: $metadata_file"
+        exit 1
+    else if set -q _flag_verbose
+        echo >&2 "converted URL to binary plist"
+    end
 
     set -l attr com.apple.metadata:kMDItemWhereFroms
 
-    xattr -wx $attr $hex_url $video_file
-    or bail "xattr failed to set $attr to `$hex_url`"
-end
-
-function quarantine_timestamp
-    set -l hex_epoch (printf "%x" (date +%s))
-    set -l app yt-dlp
-    set -l uuid (uuidgen)
-
-    set -l timestamp_parts 0081 $hex_epoch $app $uuid
-    string join \; $timestamp_parts
+    if not xattr -wx $attr $hex_url $video_file
+        echo >&2 "xattr failed to set $attr to `$hex_url`"
+        exit 1
+    else if set -q _flag_verbose
+        echo >&2 "xattr set $attr to binary URL plist"
+    end
 end
 
 # Creates a string from the current UNIX epoch, the name of the application,
 # and a new UUID, and applies it to $file to set its quarantine attribute.
 function set_quarantine_timestamp -a file
-    set -l timestamp (quarantine_timestamp)
+    set -l timestamp "0081;"(printf "%x" (date +%s))";yt-dlp;"(uuidgen)
 
     set -l attr com.apple.quarantine
-    xattr -w $attr $timestamp $file
-    or bail "xattr failed to set $attr to `$timestamp`"
-end
-
-function cleanup
-    set -l fish_user_paths $HOME/bin
-    trash $argv
+    if not xattr -w $attr $timestamp $file
+        echo >&2 "xattr failed to set $attr to `$timestamp`"
+        exit 1
+    else if set -q _flag_verbose
+        echo >&2 "xattr set $attr = $timestamp"
+    end
 end
 
 # ----------------------------------------------------------------------------
@@ -92,14 +95,16 @@ end
 # ----------------------------------------------------------------------------
 
 function main
-    argparse keep -- $argv
+    argparse k/keep v/verbose -- $argv
     or return
+
+    set -q _flag_verbose[1]; and set -gx _flag_verbose $_flag_verbose
 
     set_quarantine_timestamp $argv[1]
     set_wherefrom $argv[1]
 
     if not set -q _flag_keep
-        cleanup $metadata_file
+        ~/bin/trash $metadata_file
     end
 end
 
