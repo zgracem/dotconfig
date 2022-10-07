@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-# Wrapper script for my fish function that converts between JSON, YAML, XML property
-# lists, TOML, and CSON; allows it to be used non-interactively.
+# Wrapper for my fish function to covert between JSON, YAML, XML property lists,
+# TOML, and CSON; allows it to be used non-interactively.
 
 set src_file $__fish_config_dir/packages/pyjamas/functions/pyjamas.fish
 
