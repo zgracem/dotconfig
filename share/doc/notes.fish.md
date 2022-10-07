@@ -1,13 +1,26 @@
 # notes.fish
 
 ```fish
-# Extract subtitles from an MKV file
+# How to upgrade various package managers
+
+brew upgrade
+
+gem update --system; and gem update
+
+npm update npm -g; and npm update -g
+and brew unlink node; and brew link --overwrite node
+
+for pkg in pip (pip list --outdated --format=freeze | string split -f1 ==)
+    pip install -U "$pkg"
+end
+
+# mkvextract: Extract subtitles
 
 set -l track_id (mkvmerge --identify $mkv_file | ag -m1 subtitles)
 and set -l sub_file (path change-extension .srt "$mkv_file")
 and mkvextract tracks $mkv_file $track_id:$sub_file
 
-# Extract 1m23s of audio from input.m4a starting at 4:56
+# ffmpeg: Extract 1m23s of audio from input.m4a starting at 4:56
 
 ffmpeg -ss 00:04:56 -i "input.m4a" -vn -c copy -t 00:01:23 "output.m4a"
 # -ss: seek here in seconds
