@@ -16,6 +16,14 @@ dnsmasq:
 	cd ${XDG_CONFIG_HOME}/etc/dnsmasq && $(MAKE) all
 etc/all: dnsmasq
 
+# custom man.conf(5)
+.PHONY: man/conf
+man/conf: /etc/man.conf
+etc/all: man/conf
+
+/etc/man.conf: man.conf
+	sudo ${INSTALL} -- $< $@
+
 # custom sudoers(5) config
 .PHONY: sudoers
 sudoer: /etc/sudoers.d/sudoer_zozo
