@@ -5,7 +5,7 @@ STOW := cd $(STOW_DIR) && stow
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install -D --compare --preserve-timestamps
+INSTALL := $(GNU)/install -D --compare
 
 .PHONY: stow/all
 stow/all:

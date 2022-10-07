@@ -2,7 +2,7 @@
 
 SHELL := /usr/local/bin/bash
 GNU := /usr/local/opt/coreutils/libexec/gnubin
-INSTALL := $(GNU)/install -D --compare --mode=0644 --backup=existing --preserve-timestamps
+INSTALL := $(GNU)/install -D --compare --mode=0644 --backup=existing
 
 .PHONY: dnsmasq/all
 dnsmasq/all:
