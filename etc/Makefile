@@ -13,7 +13,7 @@ etc/all:
 # dnsmasq -- enable local .test TLD
 .PHONY: dnsmasq
 dnsmasq:
-	cd ${XDG_CONFIG_HOME}/etc/dnsmasq && $(MAKE) all
+	cd ${XDG_CONFIG_HOME}/etc/dnsmasq && $(MAKE)
 etc/all: dnsmasq
 
 # custom man.conf(5)
