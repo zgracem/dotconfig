@@ -1,7 +1,6 @@
 # -----------------------------------------------------------------------------
 # ~/.config/wget/wgetrc
-# vim:ft=ini
-# Generated from ~/.config/wget/wgetrc.m4
+# Generated from $XDG_CONFIG_HOME/wget/wgetrc.m4
 # -----------------------------------------------------------------------------
 
 # Disguise user agent

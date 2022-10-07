@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # ~/.config/curl/.curlrc
-# export CURL_HOME=~/.config/curl
-# Generated from ~/.config/.src/curlrc.m4
+# export CURL_HOME=$XDG_CONFIG_HOME/curl
+# Generated from $XDG_CONFIG_HOME/curl/curlrc.m4
 # -----------------------------------------------------------------------------
 
 # [-#] display simple progress bar
