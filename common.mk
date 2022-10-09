@@ -1,3 +1,8 @@
+# `make` with no arguments executes the first rule in the file.
+.PHONY: default
+default:
+	@echo Target ‘$@’ not implemented.
+
 # Clear implicit suffix rules
 .SUFFIXES:
 
@@ -10,9 +15,16 @@ MAKEFLAGS = Lr
 GNUMAKEFLAGS = --output-sync
 
 # XDG base directories
-XDG_CONFIG_HOME ?= ~/.config
-XDG_DATA_HOME ?= ~/.local/share
-XDG_CACHE_HOME ?= ~/var/cache
+XDG_CONFIG_HOME ?= $(wildcard ~/.config)
+XDG_DATA_HOME ?= $(wildcard ~/.local/share)
+XDG_CACHE_HOME ?= $(wildcard ~/var/cache)
+
+# Installation directories
+prefix ?= $(HOME)
+exec_prefix ?= $(prefix)
+bindir ?= $(exec_prefix)/bin
+datarootdir ?= $(XDG_DATA_HOME)
+datadir ?= $(datarootdir)
 
 # Other important directories
 GIT_STAGING := $(wildcard ~/src/github.com)

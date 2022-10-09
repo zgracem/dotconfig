@@ -1,10 +1,15 @@
-JQ_MODULES := $(wildcard $(CURDIR)/*.jq $(CURDIR)/*.json)
-JQ_TARGETS := $(patsubst $(CURDIR)/%, $(XDG_DATA_HOME)/jq/%, $(JQ_MODULES))
+.DEFAULT_GOAL = jq/all
 
 include ../common.mk
+
+srcdir ?= $(CURDIR)
+outdir := $(datadir)/jq
+
+JQ_MODULES := $(wildcard $(srcdir)/*.jq $(srcdir)/*.json)
+JQ_TARGETS := $(patsubst $(srcdir)/%, $(outdir)/%, $(JQ_MODULES))
 
 .PHONY: jq/all
 jq/all: $(JQ_TARGETS)
 
-$(JQ_TARGETS): $(XDG_DATA_HOME)/jq/%: $(CURDIR)/%
+$(JQ_TARGETS): $(outdir)/%: $(srcdir)/%
 	$(INSTALL_DATA) -- $< $@

@@ -1,22 +1,24 @@
+.DEFAULT_GOAL = dircolors/all
+
 include ../common.mk
 
-OUTDIR := $(XDG_CACHE_HOME)/dircolors
+outdir := $(datadir)/dircolors
 
 .PHONY: dircolors/all
 dircolors/all: thirty2k
 
 .PHONY: thirty2k
-thirty2k: $(OUTDIR)/thirty2k.ls_colors $(OUTDIR)/thirty2k.ls_colors.fish
+thirty2k: $(outdir)/thirty2k.ls_colors $(outdir)/thirty2k.ls_colors.fish
 
-$(OUTDIR)/%.ls_colors: %.dircolors | $(OUTDIR)/
+$(outdir)/%.ls_colors: %.dircolors | $(outdir)/
 	dircolors -b $< >$@
 
-$(OUTDIR)/%.ls_colors.fish: %.dircolors | $(OUTDIR)/
+$(outdir)/%.ls_colors.fish: %.dircolors | $(outdir)/
 	dircolors -c $< >$@
 
-$(OUTDIR)/:
-	mkdir -p $(OUTDIR)
+$(outdir)/:
+	mkdir -pv $(outdir)
 
 .PHONY: clean
 clean:
-	rm -f $(OUTDIR)/*.ls_colors
+	rm -fv $(outdir)/*.ls_colors

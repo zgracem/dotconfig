@@ -1,13 +1,16 @@
+# ----------------------------------------------------------------------------
 # dnsmasq -- enable local .test TLD
+# ----------------------------------------------------------------------------
+
+.DEFAULT_GOAL = dnsmasq/all
 
 include ../../common.mk
 
 .PHONY: dnsmasq/all
 dnsmasq/all: | /usr/local/sbin/dnsmasq
-	sudo brew services restart dnsmasq
 
 /usr/local/sbin/dnsmasq: | /usr/local/bin/brew
-	brew install dnsmasq
+	brew install dnsmasq && sudo brew services restart dnsmasq
 
 dnsmasq/all: /usr/local/etc/dnsmasq.d/000-dnsmasq.conf
 /usr/local/etc/dnsmasq.d/000-dnsmasq.conf: dnsmasq.d/000-dnsmasq.conf

@@ -1,15 +1,17 @@
-SOURCE_DIR := $(CURDIR)
-DEST_DIR := $(wildcard ~/Library/LaunchAgents)
+.DEFAULT_GOAL = launchd/all
 
 include ../common.mk
 
-.PHONY: setenv/all
-setenv/all: $(DEST_DIR)/org.inescapable.setenv.plist
+srcdir ?= $(CURDIR)
+outdir := $(wildcard ~/Library/LaunchAgents)
 
-$(DEST_DIR)/%.plist: $(SOURCE_DIR)/%.plist
+.PHONY: launchd/all
+launchd/all: $(outdir)/org.inescapable.setenv.plist
+
+$(outdir)/%.plist: $(srcdir)/%.plist
 	launchctl unload $@ 2>/dev/null
 	$(INSTALL_DATA) --backup=existing -- $< $@
 	launchctl load $@
 
-$(SOURCE_DIR)/%.plist: $(SOURCE_DIR)/%.yaml
+$(srcdir)/%.plist: $(srcdir)/%.yaml
 	pyjamas --out=plist $(realpath $<) >$(realpath $@)

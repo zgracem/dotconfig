@@ -1,7 +1,6 @@
-# `make` with no arguments executes the first rule in the file.
-.PHONY: default
-default:
-	@echo Target ‘$@’ not implemented.
+.DEFAULT_GOAL := all
+
+datarootdir := $(XDG_DATA_HOME)
 
 include common.mk
 
@@ -12,14 +11,14 @@ include common.mk
 # environment -- load for GUI apps
 .PHONY: setenv
 setenv: ~/Library/LaunchAgents/org.inescapable.setenv.plist
-	cd ${XDG_CONFIG_HOME}/launchd && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/launchd && $(MAKE)
 all: setenv
 
 # shells -- create empty data directories
 SHELL_DATA  =
-SHELL_DATA += $(XDG_DATA_HOME)/sh
-SHELL_DATA += $(XDG_DATA_HOME)/bash
-SHELL_DATA += $(XDG_DATA_HOME)/fish
+SHELL_DATA += $(datadir)/sh
+SHELL_DATA += $(datadir)/bash
+SHELL_DATA += $(datadir)/fish
 .PHONY: shell/data
 $(SHELL_DATA):
 	mkdir -pv $@
@@ -47,7 +46,7 @@ all: shell/files
 # misc -- create symlinks in $HOME/Library/Application Support
 .PHONY: appsupport
 appsupport:
-	${XDG_CONFIG_HOME}/libexec/init-appsupport.sh
+	$(XDG_CONFIG_HOME)/libexec/init-appsupport.sh
 all: appsupport
 
 # 1password -- build fish completions
@@ -63,19 +62,19 @@ all: 1password/fish
 .PHONY: bat/syntaxes
 bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
 $(XDG_CACHE_HOME)/bat/syntaxes.bin:
-	${XDG_CONFIG_HOME}/libexec/bat-syntaxes.fish
+	$(XDG_CONFIG_HOME)/libexec/bat-syntaxes.fish
 all: bat/syntaxes
 
 # dircolors -- also build .ls_colors files
 .PHONY: dircolors
 dircolors: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
-	cd ${XDG_CONFIG_HOME}/dircolors && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
 all: dircolors
 
 # jq -- install modules
 .PHONY: jq
 jq:
-	cd ${XDG_CONFIG_HOME}/jq && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/jq && $(MAKE)
 all: jq
 
 # Maestral -- install .mignore file
@@ -96,8 +95,8 @@ all: maestral
 
 # mailcap -- install
 .PHONY: data/mailcap
-data/mailcap: $(XDG_DATA_HOME)/mailcap
-$(XDG_DATA_HOME)/mailcap: $(XDG_CONFIG_HOME)/mailcap/mailcap
+data/mailcap: $(datarootdir)/mailcap
+$(datarootdir)/mailcap: mailcap/mailcap
 	ln -sfv $(realpath $<) $@
 all: data/mailcap
 
@@ -110,12 +109,12 @@ all: ruby/gems
 
 # rbenv -- create dirs and files
 .PHONY: rbenv
-rbenv: $(XDG_DATA_HOME)/rbenv/default-gems | $(XDG_DATA_HOME)/rbenv/version
-$(XDG_DATA_HOME)/rbenv/default-gems: $(XDG_CONFIG_HOME)/rbenv/default-gems | $(XDG_DATA_HOME)/rbenv
+rbenv: $(datadir)/rbenv/default-gems | $(datadir)/rbenv/version
+$(datadir)/rbenv/default-gems: rbenv/default-gems | $(datadir)/rbenv
 	ln -sfv $< $@
-$(XDG_DATA_HOME)/rbenv/version: | $(XDG_DATA_HOME)/rbenv/versions
+$(datadir)/rbenv/version: | $(datadir)/rbenv/versions
 	rbenv global system
-$(XDG_DATA_HOME)/rbenv $(XDG_DATA_HOME)/rbenv/versions:
+$(datadir)/rbenv $(datadir)/rbenv/versions:
 	mkdir -pv $@
 all: rbenv
 
@@ -140,62 +139,62 @@ vim: ~/.vimrc
 	ln -sfv .config/$< $@
 
 # vim -- create cache & data dirs
-vim: | $(XDG_DATA_HOME)/vim $(XDG_CACHE_HOME)/vim
-$(XDG_DATA_HOME)/vim $(XDG_CACHE_HOME)/vim:
+vim: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
+$(datadir)/vim $(XDG_CACHE_HOME)/vim:
 	mkdir -pv $@
 
 # vim -- also install packages
 .PHONY: vim/pack
-vim/pack: $(XDG_DATA_HOME)/vim/pack/.installed
-$(XDG_DATA_HOME)/vim/pack/.installed:
-	${XDG_CONFIG_HOME}/libexec/init-vim-pack.fish && touch $@
+vim/pack: $(datadir)/vim/pack/.installed
+$(datadir)/vim/pack/.installed:
+	$(XDG_CONFIG_HOME)/libexec/init-vim-pack.fish && touch $@
 vim: vim/pack
 all: vim
 
 # vscode-extensions -- update fish completions
 .PHONY: vsx/fish
 vsx/fish: fish/completions/vsx.fish
-fish/completions/vsx.fish: $(XDG_CONFIG_HOME)/bin/vscode-extensions
+fish/completions/vsx.fish: bin/vsx
 	$< completions >$@
 all: vsx/fish
 
 # Install Homebrew
 .PHONY: homebrew
 homebrew:
-	cd ${XDG_CONFIG_HOME}/brew && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/brew && $(MAKE)
 # all: homebrew
 
 # Install files to /etc and /usr/local/etc.
 .PHONY: install/etc
 install/etc:
-	cd ${XDG_CONFIG_HOME}/etc && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/etc && $(MAKE)
 all: install/etc
 
 # Install packages to ~/opt/stow
 .PHONY: opt/stow
 opt/stow:
-	cd ${XDG_CONFIG_HOME}/stow && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/stow && $(MAKE)
 all: opt/stow
 
 # Install to ~/bin
 .PHONY: bin/all
 bin/all:
-	cd ${XDG_CONFIG_HOME}/bin && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/bin && $(MAKE)
 all: bin/all
 
 # Install manpdf
 .PHONY: manpdf
-manpdf: ~/bin/manpdf | $(XDG_DATA_HOME)/doc/pdf
+manpdf: ~/bin/manpdf | $(datarootdir)/doc/pdf
 ~/bin/manpdf: ~/src/github.com/zgracem/manpdf/manpdf.sh
 	ln -sfv $< $@
-$(XDG_DATA_HOME)/doc/pdf:
+$(datarootdir)/doc/pdf:
 	mkdir -pv $@
 all: manpdf
 
 # Rebuild files in ./.data
 .PHONY: data
 data:
-	cd ${XDG_CONFIG_HOME}/.data && $(MAKE)
+	cd $(XDG_CONFIG_HOME)/.data && $(MAKE)
 all: data
 
 # -----------------------------------------------------------------------------
@@ -213,14 +212,14 @@ UA_OUTPUT_FILES = \
 HB_FILE := /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
 UA_FILE := $(XDG_CACHE_HOME)/dotfiles/user-agent.txt
 $(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
-	${XDG_CONFIG_HOME}/libexec/user-agent-get.fish > $@
+	$(XDG_CONFIG_HOME)/libexec/user-agent-get.fish > $@
 $(XDG_CACHE_HOME)/dotfiles:
 	mkdir -pv $@
 $(UA_OUTPUT_FILES): $(UA_FILE)
 $(HB_FILE): | /usr/local/bin/brew
 
 $(UA_OUTPUT_FILES): %: %.m4
-	m4 -D _HOME_="${HOME}" -D _USER_AGENT_="$(shell cat ${UA_FILE})" $< >$@
+	m4 -D _HOME_="$(HOME)" -D _USER_AGENT_="$(shell cat $(UA_FILE))" $< >$@
 
 .PHONY: user-agent
 user-agent: $(UA_OUTPUT_FILES)

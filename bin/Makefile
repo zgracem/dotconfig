@@ -2,6 +2,8 @@
 # Install files to ~/bin
 # ----------------------------------------------------------------------------
 
+.DEFAULT_GOAL := bin/all
+
 include ../common.mk
 
 SHIMS  =
@@ -15,19 +17,19 @@ SHIMS += trash
 SHIMS += un1q
 SHIMS += vsx
 
-TARGETS := $(addprefix $(wildcard ~/bin/), $(SHIMS))
+TARGETS := $(addprefix $(bindir)/, $(SHIMS))
 
 .PHONY: bin/all
 bin/all: $(TARGETS)
-$(TARGETS): $(wildcard ~/bin)/%: $(CURDIR)/%
-	${GNUBIN}/ln -sf $(subst $(HOME),..,$<) $@
+$(TARGETS): $(bindir)/%: $(CURDIR)/%
+	ln -sfv $(subst $(HOME),..,$<) $@
 
 ~/bin/code: ~/bin/code-wait
 ~/bin/code-wait: $(CURDIR)/code
-	${GNUBIN}/ln -sf ./$(notdir $<) $@
+	ln -sfv ./$(notdir $<) $@
 
-~/bin/pyjamas: | $(XDG_DATA_HOME)/npm/bin/json2cson
-$(XDG_DATA_HOME)/npm/bin/json2cson:
+~/bin/pyjamas: | $(datadir)/npm/bin/json2cson
+$(datadir)/npm/bin/json2cson:
 	npm install -g cson
 
 .PHONY: pyjamas/gems
@@ -38,4 +40,4 @@ pyjamas/gems:
 
 .PHONY: clean
 clean:
-	${GNUBIN}/rm -fv $(TARGETS)
+	rm -fv $(TARGETS)

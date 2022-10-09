@@ -2,17 +2,17 @@
 # Install files to /etc and /usr/local/etc
 # ----------------------------------------------------------------------------
 
+.DEFAULT_GOAL = etc/all
+
 include ../common.mk
 
 .PHONY: etc/all
-etc/all:
-	sudo -v
 
 # dnsmasq -- enable local .test TLD
 .PHONY: dnsmasq
 dnsmasq:
-	cd ${XDG_CONFIG_HOME}/etc/dnsmasq && $(MAKE)
-etc/all: dnsmasq
+	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE)
+# etc/all: dnsmasq
 
 # custom man.conf(5)
 .PHONY: man/conf
@@ -25,14 +25,18 @@ etc/all: man/conf
 # custom pam(8) module to allow `sudo` authentication via Apple Watch
 .PHONY: pam/watchid
 pam/watchid: /etc/pam.d/sudo
-/etc/pam.d/sudo: $(CURDIR)/pam.d/sudo.patch | /usr/local/lib/pam/pam_reattach.so /usr/local/lib/pam/pam_watchid.so.2
+etc/all: pam/watchid
+
+/etc/pam.d/sudo: pam.d/sudo.patch | /usr/local/lib/pam/pam_reattach.so /usr/local/lib/pam/pam_watchid.so.2
 	sudo patch -i $< /etc/pam.d/sudo
 /usr/local/lib/pam/pam_reattach.so: | /usr/local/bin/brew
 	brew install pam-reattach
-/usr/local/lib/pam/pam_watchid.so.2: | $(GIT_STAGING)/biscuitehh/pam-watchid
+
+PAM_REPO := biscuitehh/pam-watchid
+/usr/local/lib/pam/pam_watchid.so.2: | $(GIT_STAGING)/$(PAM_REPO)
 	cd $< && sudo $(MAKE) install
-$(GIT_STAGING)/biscuitehh/pam-watchid:
-	cd ${GIT_STAGING} && git clone git@github.com:biscuitehh/pam-watchid.git biscuitehh/pam-watchid
+$(GIT_STAGING)/$(PAM_REPO):
+	cd $(GIT_STAGING) && git clone git@github.com:$(PAM_REPO).git $(PAM_REPO)
 
 # custom sudoers(5) config
 .PHONY: sudoers
@@ -60,7 +64,7 @@ shells: | /etc/shells /usr/local/bin/fish
 /usr/local/bin/fish: | /usr/local/bin/brew
 	brew install fish
 /etc/shells:
-	${XDG_CONFIG_HOME}/libexec/init-etc-shells.sh fish bash
+	$(XDG_CONFIG_HOME)/libexec/init-etc-shells.sh fish bash
 
 # fix console spam
 .PHONY: emond

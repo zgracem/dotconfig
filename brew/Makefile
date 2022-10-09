@@ -2,15 +2,17 @@
 # Homebrew
 # ----------------------------------------------------------------------------
 
+.DEFAULT_GOAL = brew/all
+
 include ../common.mk
 
 # avoid shadowing HOMEBREW_REPOSITORY
-HOMEBREW_REPO := $(shell ${XDG_CONFIG_HOME}/libexec/init-homebrew.sh --repo)
+HOMEBREW_REPO := $(shell $(XDG_CONFIG_HOME)/libexec/init-homebrew.sh --repo)
 
 .PHONY: init
 init: | $(HOMEBREW_REPO)/.git
 $(HOMEBREW_REPO)/.git:
-	DRY_RUN=false ${XDG_CONFIG_HOME}/libexec/init-homebrew.sh
+	DRY_RUN=false $(XDG_CONFIG_HOME)/libexec/init-homebrew.sh
 
 BREWFILES  =
 BREWFILES += brewfile/core
@@ -26,9 +28,7 @@ $(CASKFILES): caskfile/%: bundle/%.Caskfile.lock.json
 bundle/%.lock.json: bundle/% | init
 	brew bundle --file=$<
 
-.PHONY: brew/install
-brew/install: $(BREWFILES) $(CASKFILES)
-
-.PHONY: brewfile/all caskfile/all
-brewfile/all: $(BREWFILES)
-caskfile/all: $(CASKFILES)
+.PHONY: brew/install cask/install brew/all
+brew/install: $(BREWFILES)
+cask/install: $(CASKFILES)
+brew/all: $(BREWFILES) $(CASKFILES)
