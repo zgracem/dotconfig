@@ -22,6 +22,18 @@ etc/all: man/conf
 /etc/man.conf: man.conf
 	sudo ${INSTALL} --backup=existing --mode=0644 -- $< $@
 
+# custom pam(8) module to allow `sudo` authentication via Apple Watch
+.PHONY: pam/watchid
+pam/watchid: /etc/pam.d/sudo
+/etc/pam.d/sudo: $(CURDIR)/pam.d/sudo.patch | /usr/local/lib/pam/pam_reattach.so /usr/local/lib/pam/pam_watchid.so.2
+	sudo patch -i $< /etc/pam.d/sudo
+/usr/local/lib/pam/pam_reattach.so:
+	brew install pam-reattach
+/usr/local/lib/pam/pam_watchid.so.2: | $(GIT_STAGING)/biscuitehh/pam-watchid
+	cd $< && sudo $(MAKE) install
+$(GIT_STAGING)/biscuitehh/pam-watchid:
+	cd ${GIT_STAGING} && git clone git@github.com:biscuitehh/pam-watchid.git biscuitehh/pam-watchid
+
 # custom sudoers(5) config
 .PHONY: sudoers
 sudoer: /etc/sudoers.d/sudoer_zozo

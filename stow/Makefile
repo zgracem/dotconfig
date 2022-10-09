@@ -1,6 +1,5 @@
 STOW_DIR := $(wildcard ~/opt/stow)
 STAGING := $(STOW_DIR)/.staging
-GIT_STAGING := $(wildcard ~/src/github.com)
 STOW := cd $(STOW_DIR) && stow
 
 include ../common.mk

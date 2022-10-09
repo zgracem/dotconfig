@@ -14,6 +14,7 @@ brew "source-highlight" # for less
 
 # tmux
 brew "tmux"
+brew "pam-reattach" if OS.mac?
 brew "reattach-to-user-namespace" if OS.mac?
 
 # GNU utilities

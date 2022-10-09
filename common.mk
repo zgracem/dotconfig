@@ -10,4 +10,5 @@ SHELL := /bin/bash
 GNUBIN := /usr/bin
 endif
 
+GIT_STAGING := $(wildcard ~/src/github.com)
 INSTALL := $(GNUBIN)/install -D --compare

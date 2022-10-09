@@ -1,0 +1,7 @@
+--- /etc/pam.d/sudo.original	2022-08-24 02:59:39.000000000 -0600
++++ /etc/pam.d/sudo	2022-10-09 11:20:20.079811952 -0600
+@@ -1,2 +1,4 @@
+ # sudo: auth account password session
++auth       optional       pam_reattach.so       ignore_ssh
++auth       sufficient     pam_watchid.so        "reason=execute a command as root"
+ auth       sufficient     pam_smartcard.so
