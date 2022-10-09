@@ -13,3 +13,7 @@ jq/all: $(JQ_TARGETS)
 
 $(JQ_TARGETS): $(outdir)/%: $(srcdir)/%
 	$(INSTALL_DATA) -- $< $@
+
+.PHONY: uninstall
+uninstall:
+	rm -fv $(JQ_TARGETS)

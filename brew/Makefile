@@ -32,3 +32,7 @@ bundle/%.lock.json: bundle/% | init
 brew/install: $(BREWFILES)
 cask/install: $(CASKFILES)
 brew/all: $(BREWFILES) $(CASKFILES)
+
+.PHONY: clean
+clean:
+	rm -fv $(BREWFILES) $(CASKFILES)

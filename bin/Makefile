@@ -38,6 +38,6 @@ pyjamas/gems:
 	@ruby -rplist -rtoml-rb -etrue -c >/dev/null 2>&1 \
 	|| gem install plist toml-rb
 
-.PHONY: clean
-clean:
+.PHONY: uninstall
+uninstall:
 	rm -fv $(TARGETS)

@@ -19,6 +19,6 @@ $(outdir)/%.ls_colors.fish: %.dircolors | $(outdir)/
 $(outdir)/:
 	mkdir -pv $(outdir)
 
-.PHONY: clean
-clean:
-	rm -fv $(outdir)/*.ls_colors
+.PHONY: uninstall
+uninstall:
+	rm -fv $(outdir)/thirty2k.*

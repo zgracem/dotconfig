@@ -15,3 +15,7 @@ $(outdir)/%.plist: $(srcdir)/%.plist
 
 $(srcdir)/%.plist: $(srcdir)/%.yaml
 	pyjamas --out=plist $(realpath $<) >$(realpath $@)
+
+.PHONY: uninstall
+uninstall: $(outdir)/org.inescapable.setenv.plist
+	launchctl unload $< 2>/dev/null && rm -fv $<

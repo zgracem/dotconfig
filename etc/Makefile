@@ -7,12 +7,17 @@
 include ../common.mk
 
 .PHONY: etc/all
+.PHONY: uninstall
 
 # dnsmasq -- enable local .test TLD
 .PHONY: dnsmasq
 dnsmasq:
 	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE)
 # etc/all: dnsmasq
+
+dnsmasq/uninstall:
+	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE) uninstall
+uninstall: dnsmasq/uninstall
 
 # custom man.conf(5)
 .PHONY: man/conf
@@ -47,12 +52,21 @@ etc/all: sudoers
 	sudo $(INSTALL_DATA) -- $< $@
 
 # custom ssh_config(5) and sshd_config(5)
+SSH_FILES :=
+SSH_FILES += /etc/ssh/ssh_config.d/999-ssh.conf
+SSH_FILES += /etc/ssh/sshd_config.d/999-sshd.conf
+
 .PHONY: etc/ssh
-etc/ssh: /etc/ssh/sshd_config.d/999-sshd.conf /etc/ssh/ssh_config.d/999-ssh.conf
+etc/ssh: $(SSH_FILES)
 etc/all: etc/ssh
 
 /etc/ssh/%.conf: ssh/%.conf
 	sudo $(INSTALL_DATA) -- $< $@
+
+.PHONY: ssh/uninstall
+ssh/uninstall:
+	sudo rm -fv $(SSH_FILES)
+uninstall: ssh/uninstall
 
 # allow `chsh`-ing to shells in /usr/local/bin
 .PHONY: shells
@@ -73,3 +87,8 @@ etc/all: emond
 
 /etc/emond.d/rules/SampleRules.plist:
 	sudo /usr/libexec/PlistBuddy -c "Set 0:enabled true"
+
+.PHONY: emond/uninstall
+emond/uninstall:
+	sudo /usr/libexec/PlistBuddy -c "Set 0:enabled false"
+uninstall: emond/uninstall

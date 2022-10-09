@@ -223,3 +223,7 @@ $(UA_OUTPUT_FILES): %: %.m4
 
 .PHONY: user-agent
 user-agent: $(UA_OUTPUT_FILES)
+
+.PHONY: user-agent/clean
+user-agent/clean:
+	rm -fv $(UA_OUTPUT_FILES) $(UA_FILE)
