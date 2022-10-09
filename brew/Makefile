@@ -9,9 +9,6 @@ include ../../common.mk
 # avoid shadowing HOMEBREW_REPOSITORY
 HOMEBREW_REPO := $(shell ${XDG_CONFIG_HOME}/libexec/init-homebrew.sh --repo)
 
-.PHONY: brew/install
-brew/install: | brew/all cask/all
-
 .PHONY: brew/init
 brew/init: | $(HOMEBREW_REPO)/.git
 $(HOMEBREW_REPO)/.git:
@@ -31,8 +28,9 @@ $(CASKFILES): caskfile/%: %.Caskfile.lock.json
 %.lock.json: % | brew/init
 	brew bundle --file=$<
 
-.PHONY: brew/core brew/all cask/core cask/all
-brew/core: | brewfile/core
-brew/all: | $(BREWFILES)
-cask/core: | caskfile/core
-cask/all: | $(CASKFILES)
+.PHONY: brew/install
+brew/install: | $(BREWFILES) $(CASKFILES)
+
+.PHONY: brewfile/all caskfile/all
+brewfile/all: | $(BREWFILES)
+caskfile/all: | $(CASKFILES)

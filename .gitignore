@@ -16,7 +16,7 @@ syncplay.ini
 
 # unnecessary
 .contrib/
-brew/init/*.lock.json
+brew/**/*.lock.json
 launchd/*.plist
 *~
 *~orig*

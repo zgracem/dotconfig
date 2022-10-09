@@ -169,7 +169,7 @@ all: vsx/fish
 # Install Homebrew
 .PHONY: install/homebrew
 install/homebrew:
-	cd ${XDG_CONFIG_HOME}/brew/init && $(MAKE)
+	cd ${XDG_CONFIG_HOME}/brew && $(MAKE)
 # all: install/homebrew
 
 # Install files to /etc and /usr/local/etc.

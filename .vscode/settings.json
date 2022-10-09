@@ -1,6 +1,6 @@
 {
   "files.exclude": {
-    "brew/init/*.lock.json": true,
+    "brew/**/*.lock.json": true,
     "htop": true,
     "iterm2": true,
     "StardewValley/{ErrorLogs,Saves}": true,
