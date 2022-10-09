@@ -52,7 +52,7 @@ FONTCON_REPO := zoltan-dulac/css3FontConverter
 	${GNUBIN}/ln -sf $< $@
 
 ~/opt/stow/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
-$(FONTCON_REPO):
+$(GIT_STAGING)/$(FONTCON_REPO):
 	cd ${GIT_STAGING} && git clone git@github.com:$(FONTCON_REPO).git $(FONTCON_REPO)
 
 # -- dayone2 -------------------------------------------------------------------
