@@ -7,4 +7,4 @@ include ../common.mk
 jq/all: $(JQ_TARGETS)
 
 $(JQ_TARGETS): $(XDG_DATA_HOME)/jq/%: $(CURDIR)/%
-	${INSTALL} --mode=0644 -- $< $@
+	$(INSTALL_DATA) -- $< $@

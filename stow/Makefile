@@ -17,7 +17,7 @@ calendar: ~/opt/share/calendar
 	${STOW} calendar
 
 ~/opt/stow/calendar/share/calendar: $(STAGING)/calendars
-	${INSTALL} -m0644 -- $< $@
+	$(INSTALL_DATA) -- $< $@
 
 $(STAGING)/calendars:
 	cd ${STAGING} && git clone --sparse git@github.com:freebsd/calendar-data.git $(notdir $@)
@@ -32,7 +32,7 @@ stow/all: cronic
 	${STOW} cronic
 
 ~/opt/stow/cronic-v3/bin/cronic: $(STAGING)/cronic
-	${INSTALL} -- $< $@
+	$(INSTALL_PROGRAM) -- $< $@
 
 $(STAGING)/cronic:
 	cd ${STAGING} && wget -q https://habilis.net/cronic/cronic
@@ -99,7 +99,7 @@ markdown: ~/opt/bin/Markdown.pl
 	${STOW} markdown
 
 ~/opt/stow/markdown/bin/Markdown.pl: $(STAGING)/Markdown.pl
-	${INSTALL} -- $< $@
+	$(INSTALL_PROGRAM) -- $< $@
 
 $(STAGING)/Markdown.pl: $(STAGING)/Markdown_1.0.1.zip
 	unzip -u -j -d $(dir $@) $< '*.pl' && touch -r $< $@

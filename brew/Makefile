@@ -4,8 +4,6 @@
 
 include ../common.mk
 
-.NOTPARALLEL:
-
 # avoid shadowing HOMEBREW_REPOSITORY
 HOMEBREW_REPO := $(shell ${XDG_CONFIG_HOME}/libexec/init-homebrew.sh --repo)
 

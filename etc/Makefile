@@ -20,7 +20,7 @@ man/conf: /etc/man.conf
 etc/all: man/conf
 
 /etc/man.conf: man.conf
-	sudo ${INSTALL} --backup=existing --mode=0644 -- $< $@
+	sudo $(INSTALL_DATA) --backup=existing -- $< $@
 
 # custom pam(8) module to allow `sudo` authentication via Apple Watch
 .PHONY: pam/watchid
@@ -40,7 +40,7 @@ sudoer: /etc/sudoers.d/sudoer_zozo
 etc/all: sudoers
 
 /etc/sudoers.d/%: sudoers.d/%
-	sudo ${INSTALL} --mode=0644 -- $< $@
+	sudo $(INSTALL_DATA) -- $< $@
 
 # custom ssh_config(5) and sshd_config(5)
 .PHONY: etc/ssh
@@ -48,7 +48,7 @@ etc/ssh: /etc/ssh/sshd_config.d/999-sshd.conf /etc/ssh/ssh_config.d/999-ssh.conf
 etc/all: etc/ssh
 
 /etc/ssh/%.conf: ssh/%.conf
-	sudo ${INSTALL} --mode=0644 -- $< $@
+	sudo $(INSTALL_DATA) -- $< $@
 
 # allow `chsh`-ing to shells in /usr/local/bin
 .PHONY: shells

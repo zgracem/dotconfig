@@ -3,13 +3,6 @@
 default:
 	@echo Target ‘$@’ not implemented.
 
-.NOTPARALLEL:
-
-MAKEFLAGS = Lr
-# -L = check symlinks' mtime and not their destinations'
-# -r = don't use implicit rules
-GNUMAKEFLAGS = --output-sync
-
 include common.mk
 
 .PHONY: all
@@ -90,7 +83,7 @@ all: jq
 .PHONY: maestral
 maestral: ~/Dropbox/.mignore
 ~/Dropbox/.mignore: maestral/.mignore
-	${INSTALL} --mode=0644 -- $< $@
+	$(INSTALL_DATA) -- $< $@
 
 # Maestral -- install CLI w/ pip to workaround issues w/ macOS builtin Python
 # <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>

@@ -11,12 +11,12 @@ dnsmasq/all: | /usr/local/sbin/dnsmasq
 
 dnsmasq/all: /usr/local/etc/dnsmasq.d/000-dnsmasq.conf
 /usr/local/etc/dnsmasq.d/000-dnsmasq.conf: dnsmasq.d/000-dnsmasq.conf
-	${INSTALL} --mode=0644 -- $< $@
+	$(INSTALL_DATA) -- $< $@
 
 dnsmasq/all: /usr/local/etc/dnsmasq.d/001-resolver.conf
 /usr/local/etc/dnsmasq.d/001-resolver.conf: dnsmasq.d/001-resolver.conf
-	${INSTALL} --mode=0644 -- $< $@
+	$(INSTALL_DATA) -- $< $@
 
 dnsmasq/all: /etc/resolver/test
 /etc/resolver/test: resolver/test
-	sudo ${INSTALL} --mode=0644 -- $< $@
+	sudo $(INSTALL_DATA) -- $< $@

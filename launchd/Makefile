@@ -8,7 +8,7 @@ setenv/all: $(DEST_DIR)/org.inescapable.setenv.plist
 
 $(DEST_DIR)/%.plist: $(SOURCE_DIR)/%.plist
 	launchctl unload $@ 2>/dev/null
-	${INSTALL} --backup=existing --mode=0644 -- $< $@
+	$(INSTALL_DATA) --backup=existing -- $< $@
 	launchctl load $@
 
 $(SOURCE_DIR)/%.plist: $(SOURCE_DIR)/%.yaml
