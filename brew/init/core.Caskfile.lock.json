@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "e6159cfedf01d955444fe7f61d54b42d0eb8099e"
+        "revision": "1a079efd48e663cf58d43804cca38b047386bd3c"
       },
       "homebrew/cask-versions": {
-        "revision": "b3203fa0b2e5da0ff26cd44dfa7a934238880808"
+        "revision": "e453f862ba861058fecb9b4a713923e85b7b93ba"
       }
     },
     "cask": {
@@ -55,7 +55,7 @@
         }
       },
       "firefox": {
-        "version": "105.0.2",
+        "version": "105.0.3",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -163,7 +163,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.71.2",
+        "version": "1.72.0",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -245,7 +245,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.6.4",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "6e5f7e52122b356615ee511598bb938ef73b3c7b",
+        "Homebrew/homebrew-core": "2e679ada9441352be6d871a4122d3d042776213d",
         "CLT": "14.1.0.0.1.1663981106",
         "Xcode": "14.0.1",
         "macOS": "12.6"
