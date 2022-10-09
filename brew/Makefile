@@ -2,8 +2,6 @@
 # Homebrew
 # ----------------------------------------------------------------------------
 
-.DEFAULT_GOAL = brew/all
-
 include ../common.mk
 
 # avoid shadowing HOMEBREW_REPOSITORY
@@ -28,10 +26,11 @@ $(CASKFILES): caskfile/%: bundle/%.Caskfile.lock.json
 bundle/%.lock.json: bundle/% | init
 	brew bundle --file=$<
 
-.PHONY: brew/install cask/install brew/all
+.PHONY: brew/install cask/install
 brew/install: $(BREWFILES)
 cask/install: $(CASKFILES)
-brew/all: $(BREWFILES) $(CASKFILES)
+
+install: $(BREWFILES) $(CASKFILES)
 
 .PHONY: clean
 clean:

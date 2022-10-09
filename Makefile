@@ -1,10 +1,12 @@
-.DEFAULT_GOAL := all
-
 datarootdir := $(XDG_DATA_HOME)
+
+.PHONY: all
+all:
 
 include common.mk
 
-.PHONY: all
+install:
+	@echo Target ‘$@’ not implemented.
 
 # ----------------------------------------------------------------------------
 
@@ -47,7 +49,7 @@ all: shell/files
 .PHONY: appsupport
 appsupport:
 	$(XDG_CONFIG_HOME)/libexec/init-appsupport.sh
-all: appsupport
+# all: appsupport
 
 # 1password -- build fish completions
 .PHONY: 1password/fish

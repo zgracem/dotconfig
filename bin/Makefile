@@ -2,8 +2,6 @@
 # Install files to ~/bin
 # ----------------------------------------------------------------------------
 
-.DEFAULT_GOAL := bin/all
-
 include ../common.mk
 
 SHIMS  =
@@ -17,11 +15,10 @@ SHIMS += trash
 SHIMS += un1q
 SHIMS += vsx
 
-TARGETS := $(addprefix $(bindir)/, $(SHIMS))
+SHIM_TARGETS := $(addprefix $(bindir)/, $(SHIMS))
 
-.PHONY: bin/all
-bin/all: $(TARGETS)
-$(TARGETS): $(bindir)/%: $(CURDIR)/%
+install: $(SHIM_TARGETS)
+$(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
 	ln -sfv $(subst $(HOME),..,$<) $@
 
 ~/bin/code: ~/bin/code-wait
@@ -40,4 +37,4 @@ pyjamas/gems:
 
 .PHONY: uninstall
 uninstall:
-	rm -fv $(TARGETS)
+	rm -fv $(SHIM_TARGETS)

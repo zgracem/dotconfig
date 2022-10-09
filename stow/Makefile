@@ -1,5 +1,3 @@
-.DEFAULT_GOAL: stow/all
-
 prefix := $(wildcard ~/opt)
 datarootdir := $(prefix)/share
 
@@ -9,14 +7,11 @@ STOW_DIR := $(wildcard ~/opt/stow)
 srcdir := $(STOW_DIR)/.staging
 STOW := cd $(STOW_DIR) && stow
 
-.PHONY: stow/all
-stow/all:
-
 # -- BSD calendars -------------------------------------------------------------
 
 .PHONY: calendar
 calendar: $(datarootdir)/calendar
-# stow/all: calendar
+# install: calendar
 
 $(datarootdir)/calendar: $(STOW_DIR)/calendar/share/calendar
 	$(STOW) calendar
@@ -31,7 +26,7 @@ $(srcdir)/calendars:
 
 .PHONY: cronic
 cronic: $(bindir)/cronic
-stow/all: cronic
+install: cronic
 
 $(bindir)/cronic: $(STOW_DIR)/cronic-v3/bin/cronic
 	$(STOW) cronic
@@ -46,7 +41,7 @@ $(srcdir)/cronic:
 
 .PHONY: css3FontConverter
 css3FontConverter: $(bindir)/convertFonts.sh
-stow/all: css3FontConverter
+install: css3FontConverter
 
 FONTCON_REPO := zoltan-dulac/css3FontConverter
 
@@ -64,7 +59,7 @@ $(GIT_STAGING)/$(FONTCON_REPO):
 
 .PHONY: dayone2
 dayone2: $(bindir)/dayone2
-stow/all: dayone2
+install: dayone2
 
 $(bindir)/dayone2: $(STOW_DIR)/dayone2/bin/dayone2
 	$(STOW) dayone2
@@ -83,7 +78,7 @@ LANG = en_CA
 
 .PHONY: hunspell
 hunspell: $(datarootdir)/myspell
-stow/all: hunspell
+install: hunspell
 
 $(datarootdir)/myspell: $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic
 	$(STOW) hunspell
@@ -98,7 +93,7 @@ $(srcdir)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip:
 
 .PHONY: markdown
 markdown: $(bindir)/Markdown.pl
-# stow/all: markdown
+# install: markdown
 
 $(bindir)/Markdown.pl: $(STOW_DIR)/markdown/bin/Markdown.pl
 	$(STOW) markdown
@@ -116,7 +111,7 @@ $(srcdir)/Markdown_1.0.1.zip:
 
 .PHONY: tremc
 tremc: $(bindir)/tremc
-stow/all: tremc
+install: tremc
 
 $(bindir)/tremc: $(STOW_DIR)/tremc/bin/tremc
 	$(STOW) tremc
@@ -131,7 +126,7 @@ $(GIT_STAGING)/tremc/tremc:
 
 .PHONY: words
 words: $(datarootdir)/dict/words
-# stow/all: words
+# install: words
 
 $(datarootdir)/dict/words: $(STOW_DIR)/words/share/dict/words
 	$(STOW) words

@@ -1,12 +1,11 @@
-.DEFAULT_GOAL = launchd/all
-
 include ../common.mk
 
 srcdir ?= $(CURDIR)
 outdir := $(wildcard ~/Library/LaunchAgents)
 
-.PHONY: launchd/all
-launchd/all: $(outdir)/org.inescapable.setenv.plist
+.PHONY: setenv
+setenv: $(outdir)/org.inescapable.setenv.plist
+install: setenv
 
 $(outdir)/%.plist: $(srcdir)/%.plist
 	launchctl unload $@ 2>/dev/null

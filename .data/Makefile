@@ -1,4 +1,4 @@
-SHELL := /usr/local/bin/bash
+include ../common.mk
 
 GEM_TARGETS  =
 GEM_TARGETS += gems.cson
@@ -6,8 +6,7 @@ GEM_TARGETS += gems.json
 GEM_TARGETS += gems.plist
 GEM_TARGETS += gems.toml
 
-.PHONY: gems
-gems: $(GEM_TARGETS)
+install: $(GEM_TARGETS)
 
 $(GEM_TARGETS): gems.yaml
 
@@ -25,4 +24,5 @@ gems.toml:
 
 gems.txt: gems.json
 	{ printf '%s\n' ruby topaz; jq -r '.|keys|.[]' $<; } | shuf >$@
-gems: gems.txt
+
+install: gems.txt

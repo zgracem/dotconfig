@@ -2,12 +2,9 @@
 # dnsmasq -- enable local .test TLD
 # ----------------------------------------------------------------------------
 
-.DEFAULT_GOAL = dnsmasq/all
-
 include ../../common.mk
 
-.PHONY: dnsmasq/all
-dnsmasq/all: | /usr/local/sbin/dnsmasq
+install: | /usr/local/sbin/dnsmasq
 
 /usr/local/sbin/dnsmasq: | /usr/local/bin/brew
 	brew install dnsmasq && sudo brew services restart dnsmasq
@@ -25,7 +22,7 @@ DNSMASQ_FILES += /etc/resolver/test
 /etc/resolver/test: resolver/test
 	sudo $(INSTALL_DATA) -- $< $@
 
-dnsmasq/all: $(DNSMASQ_FILES)
+install: $(DNSMASQ_FILES)
 
 .PHONY: uninstall
 uninstall:

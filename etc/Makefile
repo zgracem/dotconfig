@@ -2,18 +2,15 @@
 # Install files to /etc and /usr/local/etc
 # ----------------------------------------------------------------------------
 
-.DEFAULT_GOAL = etc/all
-
 include ../common.mk
 
-.PHONY: etc/all
 .PHONY: uninstall
 
 # dnsmasq -- enable local .test TLD
 .PHONY: dnsmasq
 dnsmasq:
 	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE)
-# etc/all: dnsmasq
+# install: dnsmasq
 
 dnsmasq/uninstall:
 	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE) uninstall
@@ -22,7 +19,7 @@ uninstall: dnsmasq/uninstall
 # custom man.conf(5)
 .PHONY: man/conf
 man/conf: /etc/man.conf
-etc/all: man/conf
+install: man/conf
 
 /etc/man.conf: man.conf
 	sudo $(INSTALL_DATA) --backup=existing -- $< $@
@@ -30,7 +27,7 @@ etc/all: man/conf
 # custom pam(8) module to allow `sudo` authentication via Apple Watch
 .PHONY: pam/watchid
 pam/watchid: /etc/pam.d/sudo
-etc/all: pam/watchid
+install: pam/watchid
 
 /etc/pam.d/sudo: pam.d/sudo.patch | /usr/local/lib/pam/pam_reattach.so /usr/local/lib/pam/pam_watchid.so.2
 	sudo patch -i $< /etc/pam.d/sudo
@@ -46,7 +43,7 @@ $(GIT_STAGING)/$(PAM_REPO):
 # custom sudoers(5) config
 .PHONY: sudoers
 sudoer: /etc/sudoers.d/sudoer_zozo
-etc/all: sudoers
+install: sudoers
 
 /etc/sudoers.d/%: sudoers.d/%
 	sudo $(INSTALL_DATA) -- $< $@
@@ -58,7 +55,7 @@ SSH_FILES += /etc/ssh/sshd_config.d/999-sshd.conf
 
 .PHONY: etc/ssh
 etc/ssh: $(SSH_FILES)
-etc/all: etc/ssh
+install: etc/ssh
 
 /etc/ssh/%.conf: ssh/%.conf
 	sudo $(INSTALL_DATA) -- $< $@
@@ -72,8 +69,7 @@ uninstall: ssh/uninstall
 .PHONY: shells
 shells: | /etc/shells /usr/local/bin/fish
 	chsh -s /usr/local/bin/fish
-## Not included in `all`; run this manually when needed
-# etc/all: shells
+# install: shells
 
 /usr/local/bin/fish: | /usr/local/bin/brew
 	brew install fish
@@ -83,7 +79,7 @@ shells: | /etc/shells /usr/local/bin/fish
 # fix console spam
 .PHONY: emond
 emond: /etc/emond.d/rules/SampleRules.plist
-etc/all: emond
+install: emond
 
 /etc/emond.d/rules/SampleRules.plist:
 	sudo /usr/libexec/PlistBuddy -c "Set 0:enabled true"

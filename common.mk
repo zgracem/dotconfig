@@ -1,7 +1,6 @@
 # `make` with no arguments executes the first rule in the file.
-.PHONY: default
-default:
-	@echo Target ‘$@’ not implemented.
+.PHONY: install
+install:
 
 # Clear implicit suffix rules
 .SUFFIXES:
