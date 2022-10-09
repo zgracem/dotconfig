@@ -27,7 +27,7 @@ etc/all: man/conf
 pam/watchid: /etc/pam.d/sudo
 /etc/pam.d/sudo: $(CURDIR)/pam.d/sudo.patch | /usr/local/lib/pam/pam_reattach.so /usr/local/lib/pam/pam_watchid.so.2
 	sudo patch -i $< /etc/pam.d/sudo
-/usr/local/lib/pam/pam_reattach.so:
+/usr/local/lib/pam/pam_reattach.so: | /usr/local/bin/brew
 	brew install pam-reattach
 /usr/local/lib/pam/pam_watchid.so.2: | $(GIT_STAGING)/biscuitehh/pam-watchid
 	cd $< && sudo $(MAKE) install
@@ -57,8 +57,8 @@ shells: | /etc/shells /usr/local/bin/fish
 ## Not included in `all`; run this manually when needed
 # etc/all: shells
 
-/usr/local/bin/%:
-	brew install $(notdir $@)
+/usr/local/bin/fish: | /usr/local/bin/brew
+	brew install fish
 /etc/shells:
 	${XDG_CONFIG_HOME}/libexec/init-etc-shells.sh fish bash
 

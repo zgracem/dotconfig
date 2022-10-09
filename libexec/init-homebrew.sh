@@ -45,4 +45,14 @@ function install_homebrew() {
   fi
 }
 
-install_homebrew
+install_homebrew || exit
+
+# Required by Makefiles!
+if [[ "$DRY_RUN" != false ]]; then
+  echo "[DRY_RUN=$DRY_RUN] brew install bash..."
+  echo "[DRY_RUN=$DRY_RUN] brew install coreutils..."
+  return
+else
+  brew install bash
+  brew install coreutils
+fi

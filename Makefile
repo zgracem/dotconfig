@@ -62,7 +62,7 @@ all: appsupport
 1password/fish: fish/completions/op.fish
 fish/completions/op.fish: /usr/local/bin/op
 	/usr/local/bin/op completion fish >$@
-/usr/local/bin/op:
+/usr/local/bin/op: | /usr/local/bin/brew
 	brew install --cask 1password/tap/1password-cli
 all: 1password/fish
 
@@ -167,10 +167,10 @@ fish/completions/vsx.fish: $(XDG_CONFIG_HOME)/bin/vscode-extensions
 all: vsx/fish
 
 # Install Homebrew
-.PHONY: install/homebrew
-install/homebrew:
+.PHONY: homebrew
+homebrew:
 	cd ${XDG_CONFIG_HOME}/brew && $(MAKE)
-# all: install/homebrew
+# all: homebrew
 
 # Install files to /etc and /usr/local/etc.
 .PHONY: install/etc
@@ -224,6 +224,7 @@ $(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
 $(XDG_CACHE_HOME)/dotfiles:
 	mkdir -pv $@
 $(UA_OUTPUT_FILES): $(UA_FILE)
+$(HB_FILE): | /usr/local/bin/brew
 
 $(UA_OUTPUT_FILES): %: %.m4
 	m4 -D _HOME_="${HOME}" -D _USER_AGENT_="$(shell cat ${UA_FILE})" $< >$@
