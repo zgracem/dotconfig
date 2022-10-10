@@ -56,6 +56,11 @@ lsregister -v -kill -r -domain local,system,user; and killall Finder
 
 installer -pkg $HOME/Downloads/installer.pkg -target /
 
+# macOS: reinstall broken Xcode Command Line Tools
+
+sudo rm -rf /Library/Developer/CommandLineTools
+xcode-select --install
+
 # fish: list all functions without descriptions
 
 function describe -a f; functions -Dv $f | string join0 | string split0 -f5; end
@@ -63,6 +68,11 @@ for function in (functions -n)
     set -l description (describe $function)
     string match -q n/a "$description"; and echo $function
 end
+
+# npm: fix 'ERR! Invalid package name ".DS_Store"':
+
+find $XDG_DATA_HOME/npm -name .DS_Store -type f -print -delete
+
 ```
 
 ## bash: files, strings, and streams
