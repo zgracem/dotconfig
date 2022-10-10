@@ -20,7 +20,7 @@ $(STOW_DIR)/calendar/share/calendar: $(srcdir)/calendars
 	$(INSTALL_DATA) -- $< $@
 
 $(srcdir)/calendars:
-	cd $(srcdir) && git clone --sparse git@github.com:freebsd/calendar-data.git $(notdir $@)
+	cd $(@D) && git clone --sparse git@github.com:freebsd/calendar-data.git $(@F)
 
 # -- cronic --------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ $(STOW_DIR)/cronic-v3/bin/cronic: $(srcdir)/cronic
 	$(INSTALL_PROGRAM) -- $< $@
 
 $(srcdir)/cronic:
-	cd $(srcdir) && wget -q https://habilis.net/cronic/cronic
+	cd $(@D) && wget -q https://habilis.net/cronic/cronic
 
 # -- css3FontConverter ---------------------------------------------------------
 
@@ -84,10 +84,10 @@ $(datarootdir)/myspell: $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic
 	$(STOW) hunspell
 
 $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic: $(srcdir)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip
-	unzip -u -j -d $(dir $@) $< && touch -r $< $@
+	unzip -u -j -d $(@D) $< && touch -r $< $@
 
 $(srcdir)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip:
-	cd $(srcdir) && wget -q http://downloads.sourceforge.net/wordlist/$(@F)
+	cd $(@D) && wget -q http://downloads.sourceforge.net/wordlist/$(@F)
 
 # -- Markdown ------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ $(STOW_DIR)/markdown/bin/Markdown.pl: $(srcdir)/Markdown.pl
 	$(INSTALL_PROGRAM) -- $< $@
 
 $(srcdir)/Markdown.pl: $(srcdir)/Markdown_1.0.1.zip
-	unzip -u -j -d $(dir $@) $< '*.pl' && touch -r $< $@
+	unzip -u -j -d $(@D) $< '*.pl' && touch -r $< $@
 
 $(srcdir)/Markdown_1.0.1.zip:
 	cd $(srcdir) && wget -q https://daringfireball.net/projects/downloads/Markdown_1.0.1.zip

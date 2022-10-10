@@ -23,7 +23,7 @@ $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
 
 ~/bin/code: ~/bin/code-wait
 ~/bin/code-wait: $(CURDIR)/code
-	ln -sfv ./$(notdir $<) $@
+	ln -sfv ./$(<F) $@
 
 ~/bin/pyjamas: | $(datadir)/npm/bin/json2cson
 $(datadir)/npm/bin/json2cson:
