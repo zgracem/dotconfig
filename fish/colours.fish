@@ -67,7 +67,7 @@ end
 # LS_COLORS
 if is-gnu ls; and path is -d $XDG_CONFIG_HOME/dircolors
     set -l ls_colors_file "$XDG_CACHE_HOME/dircolors/thirty2k.ls_colors.fish"
-    make --quiet -C $XDG_CONFIG_HOME/dircolors
+    make -s -C $XDG_CONFIG_HOME/dircolors
     set -gx LS_COLORS (string match -r "(?<=')(?:[^=]+=(?:[\d;]+|target):)+" <$ls_colors_file)
 else
     # Generated at http://geoff.greer.fm/lscolors/
