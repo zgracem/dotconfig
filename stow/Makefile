@@ -8,6 +8,7 @@ srcdir := $(STOW_DIR)/.staging
 STOW := cd $(STOW_DIR) && stow
 
 PACKAGES  =
+PACKAGES += brightness
 PACKAGES += calendar
 PACKAGES += cronic
 PACKAGES += css3FontConverter
@@ -19,6 +20,19 @@ PACKAGES += words
 
 .PHONY: $(PACKAGES)
 install: $(PACKAGES)
+
+# -- brightness utility --------------------------------------------------------
+
+brightness: $(bindir)/brightness
+
+$(bindir)/brightness: $(STOW_DIR)/brightness/bin/brightness
+	$(STOW) $(@F)
+
+$(STOW_DIR)/brightness/bin/brightness: | $(GIT_STAGING)/nriley/brightness
+	cd $| && $(MAKE) && $(MAKE) prefix=$(STOW_DIR)/brightness install && $(MAKE) clean
+
+$(GIT_STAGING)/nriley/brightness:
+	cd $(srcdir) && git clone git@github.com:nriley/brightness.git $@
 
 # -- BSD calendars -------------------------------------------------------------
 
