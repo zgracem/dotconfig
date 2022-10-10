@@ -32,6 +32,8 @@ cask/install: $(CASKFILES)
 
 install: $(BREWFILES) $(CASKFILES)
 
+LOCK_FILES  = $(patsubst brewfile/%,bundle/%.Brewfile.lock.json,$(BREWFILES))
+LOCK_FILES += $(patsubst caskfile/%,bundle/%.Caskfile.lock.json,$(CASKFILES))
 .PHONY: clean
 clean:
-	rm -fv $(BREWFILES) $(CASKFILES)
+	rm -fv $(LOCK_FILES)
