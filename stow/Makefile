@@ -7,14 +7,25 @@ STOW_DIR := $(wildcard ~/opt/stow)
 srcdir := $(STOW_DIR)/.staging
 STOW := cd $(STOW_DIR) && stow
 
+PACKAGES  =
+PACKAGES += calendar
+PACKAGES += cronic
+PACKAGES += css3FontConverter
+PACKAGES += dayone2
+PACKAGES += hunspell
+PACKAGES += markdown
+PACKAGES += tremc
+PACKAGES += words
+
+.PHONY: $(PACKAGES)
+install: $(PACKAGES)
+
 # -- BSD calendars -------------------------------------------------------------
 
-.PHONY: calendar
-calendar: $(datarootdir)/calendar
-# install: calendar
+calendar: $(datadir)/calendar
 
-$(datarootdir)/calendar: $(STOW_DIR)/calendar/share/calendar
-	$(STOW) calendar
+$(datadir)/calendar: $(STOW_DIR)/calendar/share/calendar
+	$(STOW) $(@F)
 
 $(STOW_DIR)/calendar/share/calendar: $(srcdir)/calendars
 	$(INSTALL_DATA) -- $< $@
@@ -24,12 +35,10 @@ $(srcdir)/calendars:
 
 # -- cronic --------------------------------------------------------------------
 
-.PHONY: cronic
 cronic: $(bindir)/cronic
-install: cronic
 
 $(bindir)/cronic: $(STOW_DIR)/cronic-v3/bin/cronic
-	$(STOW) cronic
+	$(STOW) $(@F)
 
 $(STOW_DIR)/cronic-v3/bin/cronic: $(srcdir)/cronic
 	$(INSTALL_PROGRAM) -- $< $@
@@ -39,30 +48,24 @@ $(srcdir)/cronic:
 
 # -- css3FontConverter ---------------------------------------------------------
 
-.PHONY: css3FontConverter
 css3FontConverter: $(bindir)/convertFonts.sh
-install: css3FontConverter
-
-FONTCON_REPO := zoltan-dulac/css3FontConverter
 
 $(bindir)/convertFonts.sh: $(STOW_DIR)/css3FontConverter/bin/convertFonts.sh
-	$(STOW) css3FontConverter
+	$(STOW) $(@F)
 
-$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/$(FONTCON_REPO)/convertFonts.sh
+$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: $(GIT_STAGING)/zoltan-dulac/css3FontConverter/convertFonts.sh
 	ln -sfv $< $@
 
-$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/$(FONTCON_REPO)
-$(GIT_STAGING)/$(FONTCON_REPO):
-	cd $(GIT_STAGING) && git clone git@github.com:$(FONTCON_REPO).git $(FONTCON_REPO)
+$(STOW_DIR)/css3FontConverter/bin/convertFonts.sh: | $(GIT_STAGING)/zoltan-dulac/css3FontConverter
+$(GIT_STAGING)/zoltan-dulac/css3FontConverter:
+	cd $(GIT_STAGING) && git clone git@github.com:zoltan-dulac/css3FontConverter.git $@
 
 # -- dayone2 -------------------------------------------------------------------
 
-.PHONY: dayone2
 dayone2: $(bindir)/dayone2
-install: dayone2
 
 $(bindir)/dayone2: $(STOW_DIR)/dayone2/bin/dayone2
-	$(STOW) dayone2
+	$(STOW) $(@F)
 
 $(STOW_DIR)/dayone2/bin/dayone2: ~/Applications/DayOne.app/Contents/Resources/dayone2
 	gzcat -v $^ >$@ && chmod -v u+x $@
@@ -76,12 +79,10 @@ $(STOW_DIR)/dayone2/bin/dayone2: ~/Applications/DayOne.app/Contents/Resources/da
 HUNSPELL_VERSION ?= 2020.12.07
 LANG = en_CA
 
-.PHONY: hunspell
-hunspell: $(datarootdir)/myspell
-install: hunspell
+hunspell: $(datadir)/myspell
 
-$(datarootdir)/myspell: $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic
-	$(STOW) hunspell
+$(datadir)/myspell: $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic
+	$(STOW) $(@F)
 
 $(STOW_DIR)/hunspell-$(LANG)/share/myspell/$(LANG).dic: $(srcdir)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip
 	unzip -u -j -d $(@D) $< && touch -r $< $@
@@ -91,9 +92,7 @@ $(srcdir)/hunspell-$(LANG)-$(HUNSPELL_VERSION).zip:
 
 # -- Markdown ------------------------------------------------------------------
 
-.PHONY: markdown
 markdown: $(bindir)/Markdown.pl
-# install: markdown
 
 $(bindir)/Markdown.pl: $(STOW_DIR)/markdown/bin/Markdown.pl
 	$(STOW) markdown
@@ -109,27 +108,23 @@ $(srcdir)/Markdown_1.0.1.zip:
 
 # -- tremc ---------------------------------------------------------------------
 
-.PHONY: tremc
 tremc: $(bindir)/tremc
-install: tremc
 
 $(bindir)/tremc: $(STOW_DIR)/tremc/bin/tremc
-	$(STOW) tremc
+	$(STOW) $(@F)
 
 $(STOW_DIR)/tremc/bin/tremc: | $(GIT_STAGING)/tremc/tremc
 	cd $| && $(MAKE) DESTDIR=$(STOW_DIR) PREFIX=/tremc install
 
 $(GIT_STAGING)/tremc/tremc:
-	cd $(srcdir) && git clone git@github.com:tremc/tremc.git
+	cd $(srcdir) && git clone git@github.com:tremc/tremc.git $@
 
 # -- share/words ---------------------------------------------------------------
 
-.PHONY: words
-words: $(datarootdir)/dict/words
-# install: words
+words: $(datadir)/dict/words
 
-$(datarootdir)/dict/words: $(STOW_DIR)/words/share/dict/words
-	$(STOW) words
+$(datadir)/dict/words: $(STOW_DIR)/words/share/dict/words
+	$(STOW) $(@F)
 
 DICTS = connectives propernames web2 web2a
 DICT_FILES = $(addprefix /usr/share/dict/,$(DICTS))
