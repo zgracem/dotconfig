@@ -8,6 +8,7 @@ SHIMS  =
 SHIMS += airport
 SHIMS += brew-env
 SHIMS += code
+SHIMS += git-cc
 SHIMS += lsregister
 SHIMS += PlistBuddy
 SHIMS += pyjamas
