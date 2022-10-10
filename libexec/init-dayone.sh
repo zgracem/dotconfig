@@ -4,7 +4,7 @@ DAYONE_APP="/Applications/Day One.app"
 DAYONE_LINK="$HOME/Applications/DayOne.app"
 
 if [[ -L $DAYONE_LINK ]]; then
-    exit 0
+    true
 elif [[ -e $DAYONE_LINK ]]; then
     echo "Error! $DAYONE_LINK exists but is not a symbolic link!" >&2
     exit 1
@@ -14,3 +14,5 @@ else
     echo "Error! $DAYONE_APP not found!" >&2
     exit 1
 fi
+
+chflags -h hidden "$DAYONE_LINK"
