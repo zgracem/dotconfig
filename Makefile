@@ -47,6 +47,14 @@ appsupport:
 	$(XDG_CONFIG_HOME)/libexec/init-appsupport.sh
 # all: appsupport
 
+# Fix missing header file errors when building software
+.PHONY: sdk
+sdk: $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt
+dev_dir := /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
+$(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(dev_dir)/SDKs/MacOSX.sdk
+	xcrun --sdk macosx --show-sdk-path >$@
+all: sdk
+
 # 1password -- build fish completions
 fish/completions/op.fish: /usr/local/bin/op
 	/usr/local/bin/op completion fish >$@
