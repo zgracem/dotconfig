@@ -4,8 +4,6 @@
 
 include ../common.mk
 
-.PHONY: uninstall
-
 # dnsmasq -- enable local .test TLD
 .PHONY: dnsmasq
 dnsmasq:
@@ -14,20 +12,15 @@ dnsmasq:
 
 dnsmasq/uninstall:
 	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE) uninstall
-uninstall: dnsmasq/uninstall
 
 # custom man.conf(5)
-.PHONY: man/conf
-man/conf: /etc/man.conf
-install: man/conf
+install: /etc/man.conf
 
 /etc/man.conf: man.conf
 	sudo $(INSTALL_DATA) --backup=existing -- $< $@
 
 # custom pam(8) module to allow `sudo` authentication via Apple Watch
-.PHONY: pam/watchid
-pam/watchid: /etc/pam.d/sudo
-install: pam/watchid
+install: /etc/pam.d/sudo
 
 /etc/pam.d/sudo: pam.d/sudo.patch | /usr/local/lib/pam/pam_reattach.so /usr/local/lib/pam/pam_watchid.so.2
 	sudo patch -i $< /etc/pam.d/sudo
@@ -41,9 +34,7 @@ $(GIT_STAGING)/$(PAM_REPO):
 	cd $(GIT_STAGING) && git clone git@github.com:$(PAM_REPO).git $(PAM_REPO)
 
 # custom sudoers(5) config
-.PHONY: sudoers
-sudoer: /etc/sudoers.d/sudoer_zozo
-install: sudoers
+install: /etc/sudoers.d/sudoer_zozo
 
 /etc/sudoers.d/%: sudoers.d/%
 	sudo $(INSTALL_DATA) -- $< $@
@@ -53,9 +44,7 @@ SSH_FILES :=
 SSH_FILES += /etc/ssh/ssh_config.d/999-ssh.conf
 SSH_FILES += /etc/ssh/sshd_config.d/999-sshd.conf
 
-.PHONY: etc/ssh
-etc/ssh: $(SSH_FILES)
-install: etc/ssh
+install: $(SSH_FILES)
 
 /etc/ssh/%.conf: ssh/%.conf
 	sudo $(INSTALL_DATA) -- $< $@
@@ -63,7 +52,6 @@ install: etc/ssh
 .PHONY: ssh/uninstall
 ssh/uninstall:
 	sudo rm -fv $(SSH_FILES)
-uninstall: ssh/uninstall
 
 # allow `chsh`-ing to shells in /usr/local/bin
 .PHONY: shells
@@ -77,9 +65,7 @@ shells: | /etc/shells /usr/local/bin/fish
 	$(XDG_CONFIG_HOME)/libexec/init-etc-shells.sh fish bash
 
 # fix console spam
-.PHONY: emond
-emond: /etc/emond.d/rules/SampleRules.plist
-install: emond
+install: /etc/emond.d/rules/SampleRules.plist
 
 /etc/emond.d/rules/SampleRules.plist:
 	sudo /usr/libexec/PlistBuddy -c "Set 0:enabled true"
@@ -87,4 +73,3 @@ install: emond
 .PHONY: emond/uninstall
 emond/uninstall:
 	sudo /usr/libexec/PlistBuddy -c "Set 0:enabled false"
-uninstall: emond/uninstall

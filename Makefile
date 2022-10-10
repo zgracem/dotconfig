@@ -10,22 +10,20 @@ install:
 
 # ----------------------------------------------------------------------------
 
-# environment -- load for GUI apps
-.PHONY: setenv
-setenv: ~/Library/LaunchAgents/org.inescapable.setenv.plist
+# launchd -- load environment for GUI apps
+.PHONY: launchd/install
+launchd/install: ~/Library/LaunchAgents/org.inescapable.setenv.plist
 	cd $(XDG_CONFIG_HOME)/launchd && $(MAKE)
-all: setenv
+all: launchd/install
 
 # shells -- create empty data directories
 SHELL_DATA  =
 SHELL_DATA += $(datadir)/sh
 SHELL_DATA += $(datadir)/bash
 SHELL_DATA += $(datadir)/fish
-.PHONY: shell/data
 $(SHELL_DATA):
 	mkdir -pv $@
-shell/data: | $(SHELL_DATA)
-all: shell/data
+all: | $(SHELL_DATA)
 
 # shells -- create symlinks in $HOME
 SHELL_FILES  =
@@ -34,7 +32,6 @@ SHELL_FILES += ~/.bash_sessions_disable
 SHELL_FILES += ~/.bashrc
 SHELL_FILES += ~/.hushlogin
 SHELL_FILES += ~/.profile
-.PHONY: shell/files
 ~/.bash_profile: bash/.bash_profile
 ~/.bash_sessions_disable: bash/.bash_sessions_disable
 ~/.bashrc: bash/.bashrc
@@ -42,123 +39,105 @@ SHELL_FILES += ~/.profile
 ~/.profile: sh/.profile
 $(SHELL_FILES):
 	ln -sfv .config/$< $@
-shell/files: $(SHELL_FILES)
-all: shell/files
+all: $(SHELL_FILES)
 
-# misc -- create symlinks in $HOME/Library/Application Support
+# Create symlinks in $HOME/Library/Application Support
 .PHONY: appsupport
 appsupport:
 	$(XDG_CONFIG_HOME)/libexec/init-appsupport.sh
 # all: appsupport
 
 # 1password -- build fish completions
-.PHONY: 1password/fish
-1password/fish: fish/completions/op.fish
 fish/completions/op.fish: /usr/local/bin/op
 	/usr/local/bin/op completion fish >$@
 /usr/local/bin/op: | /usr/local/bin/brew
 	brew install --cask 1password/tap/1password-cli
-all: 1password/fish
+all: fish/completions/op.fish
 
-# bat -- also install and/or (re)build syntaxes
-.PHONY: bat/syntaxes
-bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
+# bat -- install and/or (re)build syntaxes
+.PHONY: bat/syntax
+bat/syntax: $(XDG_CACHE_HOME)/bat/syntaxes.bin
 $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 	$(XDG_CONFIG_HOME)/libexec/bat-syntaxes.fish
-all: bat/syntaxes
+all: bat/syntax
 
-# dircolors -- also build .ls_colors files
-.PHONY: dircolors
-dircolors: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
+# dircolors -- build .ls_colors files
+$(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish:
 	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
-all: dircolors
+all: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
 
 # jq -- install modules
-.PHONY: jq
+.PHONY: jq/install
 jq:
 	cd $(XDG_CONFIG_HOME)/jq && $(MAKE)
-all: jq
+all: jq/install
 
-# Maestral -- install .mignore file
+# Maestral
+# -- install .mignore file
 # (Not a symlink because Maestral can't sync symlinks)
-.PHONY: maestral
-maestral: ~/Dropbox/.mignore
 ~/Dropbox/.mignore: maestral/.mignore
 	$(INSTALL_DATA) -- $< $@
-
-# Maestral -- install CLI w/ pip to workaround issues w/ macOS builtin Python
+# -- install CLI w/ pip to workaround issues w/ macOS builtin Python
 # <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>
-.PHONY: maestral/cli
-maestral/cli: /usr/local/bin/maestral
 /usr/local/bin/maestral:
 	pip3 install --upgrade 'maestral[gui]'
-maestral: maestral/cli
-all: maestral
+all: ~/Dropbox/.mignore /usr/local/bin/maestral
 
 # mailcap -- install
-.PHONY: data/mailcap
-data/mailcap: $(datarootdir)/mailcap
 $(datarootdir)/mailcap: mailcap/mailcap
 	ln -sfv $(realpath $<) $@
-all: data/mailcap
+all: $(datarootdir)/mailcap
 
 # ruby -- install gems
-.PHONY: ruby/gems
-ruby/gems: ruby/Gemfile.lock
+.PHONY: ruby/install/gems
+ruby/install/gems: ruby/Gemfile.lock
 ruby/Gemfile.lock: ruby/Gemfile
 	gem install --file=$(<F) --lock
-all: ruby/gems
+all: ruby/install/gems
 
 # rbenv -- create dirs and files
-.PHONY: rbenv
-rbenv: $(datadir)/rbenv/default-gems | $(datadir)/rbenv/version
+.PHONY: rbenv/install
+rbenv/install: $(datadir)/rbenv/default-gems | $(datadir)/rbenv/version
 $(datadir)/rbenv/default-gems: rbenv/default-gems | $(datadir)/rbenv
 	ln -sfv $< $@
 $(datadir)/rbenv/version: | $(datadir)/rbenv/versions
 	rbenv global system
 $(datadir)/rbenv $(datadir)/rbenv/versions:
 	mkdir -pv $@
-all: rbenv
+all: rbenv/install
 
 # stow -- create symlink in $HOME
-.PHONY: stow
-stow: ~/.stow-global-ignore
 ~/.stow-global-ignore: stow/.stow-global-ignore
 	ln -sfv .config/$< $@
-all: stow
+all: ~/.stow-global-ignore
 
 # tmux -- create symlink in $HOME
-.PHONY: tmux
-tmux: ~/.tmux.conf
 ~/.tmux.conf: tmux/.tmux.conf
 	ln -sfv .config/$< $@
-all: tmux
+all: ~/.tmux.conf
 
-# vim -- create symlink in $HOME
-.PHONY: vim
-vim: ~/.vimrc
+# vim
+# -- create symlink in $HOME
+.PHONY: vim/install
+vim/install: ~/.vimrc
 ~/.vimrc: vim/.vimrc
 	ln -sfv .config/$< $@
-
-# vim -- create cache & data dirs
-vim: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
+# -- create cache & data dirs
+vim/install: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
 $(datadir)/vim $(XDG_CACHE_HOME)/vim:
 	mkdir -pv $@
-
-# vim -- also install packages
-.PHONY: vim/pack
-vim/pack: $(datadir)/vim/pack/.installed
+# -- also install packages
+vim/install: vim/install/pack
+.PHONY: vim/install/pack
+vim/install/pack: $(datadir)/vim/pack/.installed
 $(datadir)/vim/pack/.installed:
 	$(XDG_CONFIG_HOME)/libexec/init-vim-pack.fish && touch $@
-vim: vim/pack
-all: vim
+all: vim/install
 
 # vscode-extensions -- update fish completions
-.PHONY: vsx/fish
-vsx/fish: fish/completions/vsx.fish
 fish/completions/vsx.fish: bin/vsx
 	$< completions >$@
-all: vsx/fish
+all: fish/completions/vsx.fish
 
 # Install Homebrew
 .PHONY: homebrew
@@ -167,37 +146,29 @@ homebrew:
 # all: homebrew
 
 # Install files to /etc and /usr/local/etc.
-.PHONY: install/etc
-install/etc:
+.PHONY: etc/install
+etc/install:
 	cd $(XDG_CONFIG_HOME)/etc && $(MAKE)
-all: install/etc
+all: etc/install
 
 # Install packages to ~/opt/stow
-.PHONY: opt/stow
-opt/stow:
+.PHONY: stow/install
+stow/install:
 	cd $(XDG_CONFIG_HOME)/stow && $(MAKE)
-all: opt/stow
+all: stow/install
 
 # Install to ~/bin
-.PHONY: bin/all
-bin/all:
+.PHONY: bin/install
+bin/install:
 	cd $(XDG_CONFIG_HOME)/bin && $(MAKE)
-all: bin/all
+all: bin/install
 
 # Install manpdf
-.PHONY: manpdf
-manpdf: ~/bin/manpdf | $(datarootdir)/doc/pdf
-~/bin/manpdf: ~/src/github.com/zgracem/manpdf/manpdf.sh
+~/bin/manpdf: $(GIT_STAGING)/zgracem/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
 	ln -sfv $< $@
 $(datarootdir)/doc/pdf:
 	mkdir -pv $@
-all: manpdf
-
-# Rebuild files in ./.data
-.PHONY: data
-data:
-	cd $(XDG_CONFIG_HOME)/.data && $(MAKE)
-all: data
+all: ~/bin/manpdf
 
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
@@ -214,7 +185,7 @@ UA_OUTPUT_FILES = \
 HB_FILE := /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
 UA_FILE := $(XDG_CACHE_HOME)/dotfiles/user-agent.txt
 $(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
-	$(XDG_CONFIG_HOME)/libexec/user-agent-get.fish > $@
+	$(XDG_CONFIG_HOME)/libexec/user-agent-get.fish >$@
 $(XDG_CACHE_HOME)/dotfiles:
 	mkdir -pv $@
 $(UA_OUTPUT_FILES): $(UA_FILE)

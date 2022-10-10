@@ -3,9 +3,7 @@ include ../common.mk
 srcdir ?= $(CURDIR)
 outdir := $(wildcard ~/Library/LaunchAgents)
 
-.PHONY: setenv
-setenv: $(outdir)/org.inescapable.setenv.plist
-install: setenv
+install: $(outdir)/org.inescapable.setenv.plist
 
 $(outdir)/%.plist: $(srcdir)/%.plist
 	launchctl unload $@ 2>/dev/null
