@@ -10,6 +10,7 @@ function pyjamas --description "Convert configuration files between formats"
 
     if set -q argv[1]
         set -f src "Pathname.new(ARGV[0])"
+        set -f file $argv[1]
         set -q ext_in; or set ext_in (path extension $argv[1] | string trim -c.)
     else if not isatty stdin
         set -f src ARGF
@@ -32,6 +33,10 @@ function pyjamas --description "Convert configuration files between formats"
             set -f input "JSON.load($src)"
             set -a libs json
         case plist
+            if set -q file; and string match -q "bplist" (head -c6 $file)
+                set -f argv[1] (mktemp -t tbcopy.XXXXXX)
+                plutil -convert xml1 -o $argv[1] $file; or exit
+            end
             set -f input "Plist.parse_xml($src)"
             set -a libs plist
         case toml
