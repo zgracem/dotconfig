@@ -276,6 +276,7 @@
   "terminal.integrated.tabs.showActiveTerminal": "never",
   "terminal.integrated.tabs.title": "${sequence}",
   "window.closeWhenEmpty": true,
+  "window.commandCenter": false,
   "window.enableMenuBarMnemonics": true,
   "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "offset",
