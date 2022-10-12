@@ -1,13 +1,15 @@
 #!/usr/bin/env ruby -w
 
-# This is a Ruby script that uses AppleScript to tell the Finder to put files in
-# the trash. Why? Because using the Finder's own API enables the "Put Back"
-# feature on the trashed item(s), and using Ruby makes it easier to reformat the
-# arguments into AppleScript-acceptable syntax.
+# This Ruby script reformats its arguments into paths acceptable to an
+# AppleScript which tells the Finder to put those files in the trash. Using the
+# Finder's own API enables the "Put Back" feature on the trashed item(s).
 
 require "open3"
 
-raise ArgumentError, "Usage: trash FILE [FILE ...]" if ARGV.empty?
+if ARGV.empty?
+  warn "Usage: trash FILE [FILE ...]"
+  exit 1
+end
 
 files = begin
   ARGV.map { |f| %(the POSIX file "#{File.absolute_path(f)}") }.join(", ")
