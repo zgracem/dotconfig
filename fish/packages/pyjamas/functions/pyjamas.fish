@@ -70,7 +70,7 @@ function pyjamas --description "Convert configuration files between formats"
             return 1
     end
 
-    if isatty stdout; and in-path bat
+    if isatty stdout; and command -sq bat
         eval "function _at; cat | bat --style=plain --language=$lang; end"
     else
         function _at; cat; end
