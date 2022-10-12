@@ -71,10 +71,12 @@ function pyjamas --description "Convert configuration files between formats"
     end
 
     if isatty stdout; and command -sq bat
-        eval "function _at; cat | bat --style=plain --language=$lang; end"
+        eval "function _pager; cat | bat --style=plain --language=$lang; end"
+    else if isatty stdout; and command -sq less
+        function _pager; less; end
     else
-        function _at; cat; end
+        function _pager; cat; end
     end
 
-    ruby -r$libs -e "puts $output" $argv[1] | _at
+    ruby -r$libs -e "puts $output" $argv[1] | _pager
 end
