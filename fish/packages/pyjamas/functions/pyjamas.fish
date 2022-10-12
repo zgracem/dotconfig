@@ -38,7 +38,7 @@ function pyjamas --description "Convert configuration files between formats"
             set -f input "TomlRB.parse($src.read)"
             set -a libs toml-rb
         case yml yaml
-            set -f input "YAML.safe_load($src.read, permitted_classes: [Date, DateTime, Symbol, Time, StringIO], aliases: true)"
+            set -f input "YAML.unsafe_load($src.read)"
             set -a libs yaml
         case '*'
             echo >&2 "don't know how to read a “$ext_in” file!"
