@@ -33,7 +33,7 @@ $(datadir)/npm/bin/json2cson:
 .PHONY: pyjamas/gems
 $(bindir)/pyjamas: | pyjamas/gems
 pyjamas/gems:
-	@ruby -rplist -rtoml-rb -etrue -c >/dev/null 2>&1 \
+	@ruby -rplist -rtoml-rb -etrue >/dev/null 2>&1 \
 	|| gem install plist toml-rb
 
 .PHONY: uninstall
