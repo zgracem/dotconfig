@@ -8,6 +8,9 @@
 [alias]
 	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
 
+[github]
+	user = zgracem
+
 [hub]
 	protocol = https
 
