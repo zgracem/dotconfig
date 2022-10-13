@@ -104,7 +104,7 @@ all: $(datarootdir)/mailcap
 .PHONY: ruby/install/gems
 ruby/install/gems: ruby/Gemfile.lock
 ruby/Gemfile.lock: ruby/Gemfile
-	gem install --file=$(<F) --lock
+	gem install --file=$< --lock
 all: ruby/install/gems
 
 # rbenv -- create dirs and files

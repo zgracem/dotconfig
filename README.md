@@ -9,12 +9,12 @@ cd "$XDG_CONFIG_HOME"
 
 # Initial setup:
 make homebrew           # install Homebrew & formulae
-make appsupport         # create symlinks in ~/Library/Application Support
+make appsupport         # create symlinks from ~/Library/Application Support to ~/.config
 make all                # everything else
 
 # Targets not included in `all`:
 make user-agent         # rebuild files like .wgetrc with a fake user-agent
-make -C etc shells      # setup /etc/shells and `chsh` to /usr/local/bin/fish
+make -C etc shells      # setup /etc/shells and `chsh -s /usr/local/bin/fish`
 make -C etc dnsmasq     # install config for local *.test TLD
 make -C stow calendar   # install BSD calendar files
 make -C stow words      # concat files in /usr/share/dict to a custom words file
