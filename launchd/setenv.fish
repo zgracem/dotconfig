@@ -1,3 +1,6 @@
+killall "iTerm2"
+killall "Visual Studio Code"
+
 set -g XDG_CONFIG_HOME ~/.config
 set -g XDG_DATA_HOME ~/.local/share
 set -g XDG_CACHE_HOME ~/var/cache
