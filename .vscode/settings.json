@@ -3,6 +3,7 @@
     "brew/**/*.lock.json": true,
     "htop": true,
     "iterm2": true,
+    "putty/*.session": { "when": "$(basename).patch" },
     "StardewValley/{ErrorLogs,Saves}": true,
     "syncplay.ini": true,
     "**/*.conf": { "when": "$(basename).conf.m4" },

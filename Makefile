@@ -17,13 +17,14 @@ launchd/install: ~/Library/LaunchAgents/org.inescapable.setenv.plist
 all: launchd/install
 
 # shells -- create empty data directories
+.PHONY: shellfiles
 SHELL_DATA  =
 SHELL_DATA += $(datadir)/sh
 SHELL_DATA += $(datadir)/bash
 SHELL_DATA += $(datadir)/fish
 $(SHELL_DATA):
 	mkdir -pv $@
-all: | $(SHELL_DATA)
+shellfiles: | $(SHELL_DATA)
 
 # shells -- create symlinks in $HOME
 SHELL_FILES  =
@@ -32,14 +33,15 @@ SHELL_FILES += ~/.bash_sessions_disable
 SHELL_FILES += ~/.bashrc
 SHELL_FILES += ~/.hushlogin
 SHELL_FILES += ~/.profile
-~/.bash_profile: bash/.bash_profile
-~/.bash_sessions_disable: bash/.bash_sessions_disable
-~/.bashrc: bash/.bashrc
-~/.hushlogin: bash/.hushlogin
-~/.profile: sh/.profile
+~/.bash_profile: $(XDG_CONFIG_HOME)/bash/.bash_profile
+~/.bash_sessions_disable: $(XDG_CONFIG_HOME)/bash/.bash_sessions_disable
+~/.bashrc: $(XDG_CONFIG_HOME)/bash/.bashrc
+~/.hushlogin: $(XDG_CONFIG_HOME)/bash/.hushlogin
+~/.profile: $(XDG_CONFIG_HOME)/sh/.profile
 $(SHELL_FILES):
-	ln -sfv .config/$< $@
-all: $(SHELL_FILES)
+	ln -sfv $< $@
+shellfiles: $(SHELL_FILES)
+all: shellfiles
 
 # Create symlinks in $HOME/Library/Application Support
 .PHONY: appsupport
@@ -70,9 +72,11 @@ $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 all: bat/syntax
 
 # dircolors -- build .ls_colors files
+.PHONY: dircolors/build
 $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish:
 	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
-all: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
+dircolors/build: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
+all: dircolors/build
 
 # jq -- install modules
 .PHONY: jq/install
