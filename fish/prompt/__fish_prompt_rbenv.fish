@@ -3,7 +3,7 @@ function __fish_prompt_rbenv
     or return 0
 
     if not set -q GLOBAL_RBENV_VERSION
-        set -l vfile $XDG_DATA_HOME/rbenv/version
+        set -l vfile $RBENV_ROOT/version
         if not path is -f $vfile
             mkdir -pv (dirname $vfile)
             and rbenv global >$vfile

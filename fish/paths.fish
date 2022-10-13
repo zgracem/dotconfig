@@ -103,14 +103,14 @@ fish_add_manpath -a /Library/Developer/CommandLineTools/usr/share/man
 fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
 
 # rbenv
-if path is -d $XDG_DATA_HOME/rbenv
+if path is -d "$RBENV_ROOT"
     # in case of non-Homebrew installation
-    fish_add_path $XDG_DATA_HOME/rbenv/bin
+    fish_add_path $RBENV_ROOT/bin
 
-    fish_add_path $XDG_DATA_HOME/rbenv/shims
+    fish_add_path $RBENV_ROOT/shims
 
-    read -l ruby_version <$XDG_DATA_HOME/rbenv/version
-    and fish_add_manpath $XDG_DATA_HOME/rbenv/versions/$ruby_version/share/man
+    read -l ruby_version <$RBENV_ROOT/version
+    and fish_add_manpath $RBENV_ROOT/versions/$ruby_version/share/man
 end
 
 # fish builtins
