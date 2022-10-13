@@ -69,4 +69,4 @@
 
 # run custom post-processing script to add metadata etc.
 --write-info-json
---exec "/Users/zozo/.config/bin/yt-dlp-postexec.fish {}"
+--exec "/Users/zozo/.config/libexec/yt-dlp-postexec.fish {}"
