@@ -9,6 +9,10 @@ if command -v curl >/dev/null; then
   export CURL_HOME="$XDG_CONFIG_HOME/curl"
 fi
 
+if command -v dotnet >/dev/null; then
+  export DOTNET_CLI_HOME="$XDG_CACHE_HOME/dotnet"
+fi
+
 if command -v nethack >/dev/null; then
   export NETHACKOPTIONS="@$XDG_CONFIG_HOME/nethack/nethackrc"
 fi

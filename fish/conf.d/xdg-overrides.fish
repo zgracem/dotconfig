@@ -7,6 +7,8 @@ end
 
 in-path curl; and set -gx CURL_HOME $XDG_CONFIG_HOME/curl
 
+in-path dotnet; and set -gx DOTNET_CLI_HOME $XDG_CACHE_HOME/dotnet
+
 in-path nethack; and set -gx NETHACKOPTIONS "@$XDG_CONFIG_HOME/nethack/nethackrc"
 
 if in-path npm
