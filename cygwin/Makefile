@@ -5,9 +5,6 @@ all:
 
 include ../common.mk
 
-install:
-	@echo Target ‘$@’ not implemented.
-
 # Packages you must install:
 # - cmake
 # - fish
@@ -48,7 +45,7 @@ all: $(BASIC)
 # ----------------------------------------------------------------------------
 
 .PHONY: appdata
-all: appdata
+# all: appdata
 appdata:
 	$(XDG_CONFIG_HOME)/libexec/init-cygwin.sh
 
@@ -66,10 +63,9 @@ $(DOWNLOADS)/metapad36.zip:
 	cd $(DOWNLOADS) && curl -OJ https://liquidninja.com/metapad/downloads/$(<F)
 
 metapad: $(METAPAD_DIR)/metapad.ini
-$(METAPAD_DIR)/metapad.ini: $(XDG_CONFIG_HOME)/metapad/metapad.ini
+$(METAPAD_DIR)/metapad.ini: $(XDG_CONFIG_HOME)/metapad/metapad.ini | $(METAPAD_DIR)
 	$(INSTALL_DATA) -- $< $@
 
-metapad: | $(METAPAD_DIR)
 $(METAPAD_DIR):
 	mkdir -pv $@
 
@@ -84,7 +80,7 @@ $(WINPROFILE)/Nethack/.nethackrc: $(XDG_CONFIG_HOME)/nethack/nethackrc_windows
 # -- PuTTY ---------------------------------------------------------------------
 
 .PHONY: putty
-all: putty
+# all: putty
 putty:
 	cd $(XDG_CONFIG_HOME)/putty && $(MAKE)
 
@@ -107,6 +103,7 @@ $(bindir):
 
 $(SHIM_TARGETS): $(bindir)/%: $(XDG_CONFIG_HOME)/bin/%
 	ln -sfv $(subst $(HOME),..,$<) $@
+all: install
 
 .PHONY: pyjamas/gems
 $(bindir)/pyjamas: | pyjamas/gems
