@@ -24,7 +24,7 @@ set -p fish_function_path "$__fish_config_dir/functions"
 set -p fish_function_path "$HOME/.private/fish/functions"
 
 # load private and per-machine configuration if available
-set -g fish_package_path "$XDG_CONFIG_HOME/local/$HOSTNAME/fish" "$HOME/.private/fish"
+set -g fish_package_path "$XDG_CONFIG_HOME/local/$hostname/fish" "$HOME/.private/fish"
 set fish_package_path (path filter -d $fish_package_path)
 
 # personal minimal package manager for fish
