@@ -1,5 +1,6 @@
-[include]
-	path = ~/.private/git/config
+[user]
+	name = Amy Grace
+	email = zgracem@users.noreply.github.com
 
 [core]
 	autocrlf = input
