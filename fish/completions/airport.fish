@@ -1,3 +1,5 @@
+exit # broken
+
 function __fish_complete_airport_interfaces
     set -l interfaces (echo list | scutil \
         | string match -rg "Setup:/Network/Interface/(en\d)/AirPort")
