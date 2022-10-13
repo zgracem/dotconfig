@@ -1,5 +1,8 @@
 # fish completions for brew external commands
 
+set -l brew_comp_file /usr/local/share/fish/vendor_completions.d/brew.fish
+path is -d $brew_comp_file; and . $brew_comp_file
+
 complete -c brew -n __fish_use_subcommand -a bundle -d "Bundler for non-Ruby dependencies"
 complete -c brew -n __fish_use_subcommand -a services -d "Manage background services"
 
@@ -23,3 +26,15 @@ complate -c brew -l max-downloads -x -d "Maximum formulae to download and update
 
 # `brew env` (~/bin/brew-env)
 complete -c brew -n __fish_use_subcommand -a env -d "Print all HOMEBREW_* vars"
+
+# `brew cd` (../functions/_wrappers/brew.fish)
+set -gq __fish_complete_brew_cd; or set -g __fish_complete_brew_cd '
+    cache\t'(command brew --cache)'
+    caskroom\t'(command brew --caskroom)'
+    cellar\t'(command brew --cellar)'
+    prefix\t'(command brew --prefix)'
+    repository\t'(command brew --repository)'
+'
+
+complete -c brew -a cd -d "Change to a Homebrew directory" -n __fish_use_subcommand
+complete -c brew -x -a "$__fish_complete_brew_cd" -n '__fish_seen_subcommand_from cd'
