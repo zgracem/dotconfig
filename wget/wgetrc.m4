@@ -40,9 +40,6 @@ progress = bar
 # Continue getting a partially-downloaded file.
 continue = on
 
-# Save the original URL and the Referer HTTP header in extended attributes.
-xattr = on
-
 # -----------------------------------------------------------------------------
 # recursive options
 # -----------------------------------------------------------------------------
