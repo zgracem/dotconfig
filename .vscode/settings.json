@@ -1,6 +1,5 @@
 {
   "files.exclude": {
-    "bin/lockscreen": true,
     "brew/**/*.lock.json": true,
     "htop": true,
     "iterm2": true,

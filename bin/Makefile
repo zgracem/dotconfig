@@ -9,7 +9,6 @@ SHIMS += airport
 SHIMS += brew-env
 SHIMS += code
 SHIMS += git-cc
-SHIMS += lockscreen
 SHIMS += lsregister
 SHIMS += PlistBuddy
 SHIMS += pyjamas
@@ -26,9 +25,6 @@ $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
 $(bindir)/code: $(bindir)/code-wait
 $(bindir)/code-wait: $(CURDIR)/code
 	ln -sfv ./$(<F) $@
-
-$(CURDIR)/lockscreen: lockscreen.c
-	clang -F /System/Library/PrivateFrameworks -framework login -o $@ $<
 
 $(bindir)/pyjamas: | $(datadir)/npm/bin/json2cson
 $(datadir)/npm/bin/json2cson:

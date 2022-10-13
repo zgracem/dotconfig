@@ -16,7 +16,6 @@ syncplay.ini
 
 # unnecessary
 .contrib/
-bin/lockscreen
 brew/**/*.lock.json
 launchd/*.plist
 *~
