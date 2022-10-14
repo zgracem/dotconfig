@@ -72,11 +72,10 @@ $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 all: bat/syntax
 
 # dircolors -- build .ls_colors files
-.PHONY: dircolors/build
-$(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish:
+.PHONY: dircolors
+dircolors:
 	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
-dircolors/build: $(XDG_CACHE_HOME)/dircolors/thirty2k.ls_colors.fish
-all: dircolors/build
+all: dircolors
 
 # jq -- install modules
 .PHONY: jq/install

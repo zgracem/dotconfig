@@ -23,14 +23,14 @@ DOWNLOADS := $(WINPROFILE)/Downloads
 
 # Targets from ../Makefile that work on Cygwin
 BASIC  =
+BASIC += dircolors
 BASIC += shellfiles
-BASIC += dircolors/build
 BASIC += ~/.stow-global-ignore
 BASIC += ~/.tmux.conf
 BASIC += ~/.vimrc
 
+.PHONY: dircolors
 .PHONY: shellfiles
-.PHONY: dircolors/build
 
 .PHONY: basic
 basic: $(BASIC)
