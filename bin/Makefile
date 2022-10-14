@@ -22,7 +22,7 @@ SHIM_TARGETS := $(addprefix $(bindir)/, $(SHIMS))
 TARGETS := $(SHIM_TARGETS)
 
 $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
-	ln -sfv $(subst $(HOME),..,$<) $@
+	$(INSTALL_PROGRAM) -- $< $@
 
 $(bindir)/code: $(bindir)/code-wait
 $(bindir)/code-wait: $(CURDIR)/code
@@ -39,7 +39,7 @@ pyjamas/gems:
 	|| gem install plist toml-rb
 
 $(bindir)/manpdf: $(GIT_STAGING)/zgracem/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
-	ln -sfv $< $@
+	$(INSTALL_PROGRAM) -- $< $@
 $(datarootdir)/doc/pdf:
 	mkdir -pv $@
 TARGETS += $(bindir)/manpdf

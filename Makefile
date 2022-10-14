@@ -78,7 +78,7 @@ all: ~/Dropbox/.mignore | /usr/local/bin/maestral
 
 # mailcap -- install
 $(datarootdir)/mailcap: mailcap/mailcap
-	ln -sfv $(realpath $<) $@
+	$(INSTALL_DATA) -- $(realpath $<) $@
 all: $(datarootdir)/mailcap
 
 # ruby -- install gems
@@ -92,7 +92,7 @@ ruby/Gemfile.lock: ruby/Gemfile
 .PHONY: rbenv/install
 rbenv/install: $(datadir)/rbenv/default-gems | $(datadir)/rbenv/version
 $(datadir)/rbenv/default-gems: rbenv/default-gems | $(datadir)/rbenv
-	ln -sfv $< $@
+	$(INSTALL_DATA) -- $(realpath $<) $@
 $(datadir)/rbenv/version: | $(datadir)/rbenv/versions
 	rbenv global system
 $(datadir)/rbenv $(datadir)/rbenv/versions:
