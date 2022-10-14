@@ -35,6 +35,6 @@ make ~/Dropbox/.mignore         # (re)install Maestral ignore file
 
 # Cygwin setup:
 make -C cygwin appdata  # create symlinks from %APPDATA% to ~/.config
-make -C cygwin/putty    # install & configure portable PuTTY
+make -C putty           # install & configure portable PuTTY
 make -C cygwin          # everything else
 ```
