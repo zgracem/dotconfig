@@ -39,7 +39,6 @@ source "$__fish_config_dir/bindings.fish"
 
 # source vendor completions
 set -p fish_complete_path "$HOME/opt/etc/fish/completions"
-set -p fish_complete_path "$HOME/VS/www/vsdotcom/etc/fish/completions"
 
 # remove duplicate & nonexistent directories
 set fish_function_path (path filter -d $fish_function_path | un1q)

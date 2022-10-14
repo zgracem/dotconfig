@@ -60,7 +60,9 @@ fish/completions/op.fish: /usr/local/bin/op
 	/usr/local/bin/op completion fish >$@
 /usr/local/bin/op: | /usr/local/bin/brew
 	brew install --cask 1password/tap/1password-cli
-all: fish/completions/op.fish
+.PHONY: fish-completions
+fish-completions: fish/completions/op.fish
+all: fish-completions
 
 # bat -- install and/or (re)build syntaxes
 .PHONY: bat/syntaxes
@@ -130,7 +132,12 @@ $(datadir)/vim/pack/.installed:
 # vscode-extensions -- update fish completions
 fish/completions/vsx.fish: bin/vsx
 	$< completions >$@
-all: fish/completions/vsx.fish
+fish-completions: fish/completions/vsx.fish
+
+# vs: update/install fish completions
+fish/completions/vs.fish: ~/VS/www/vsdotcom/bin/vs.fish
+	$< complete print >$@
+fish-completions: fish/completions/vs.fish
 
 # Install Homebrew
 .PHONY: homebrew
