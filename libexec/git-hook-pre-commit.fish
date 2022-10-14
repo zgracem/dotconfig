@@ -5,17 +5,44 @@
 set -g staged_files (git diff --name-only --staged)
 
 set -g user_agent_files
-set -a user_agent_files aria2/aria2.conf.m4
-set -a user_agent_files curl/.curlrc.m4
-set -a user_agent_files wget/wgetrc.m4
-set -a user_agent_files yt-dlp/config.m4
+set -a user_agent_files aria2/aria2.conf
+set -a user_agent_files curl/.curlrc
+set -a user_agent_files wget/wgetrc
+set -a user_agent_files yt-dlp/config
 
-for file in $user_agent_files
+for file in $user_agent_files.m4
     if contains -- $file $staged_files
-        make -C $XDG_CONFIG_HOME user-agent; or exit
-        git add (path change-extension "" $user_agent_files); or exit
+        make -s -C $XDG_CONFIG_HOME user-agent; or exit
+        git add $user_agent_files; or exit
         break
     end
+end
+
+if contains -- bin/vsx $staged_files
+    make -s -C $XDG_CONFIG_HOME fish/completions/vsx.fish; or exit
+else if string match -q "bin/*" $staged_files
+    make -s -C $XDG_CONFIG_HOME/bin; or exit
+end
+
+if string match -q "dircolors/*" $staged_files
+    make -s -C $XDG_CONFIG_HOME/dircolors; or exit
+end
+
+if string match -q "jq/*" $staged_files
+    make -s -C $XDG_CONFIG_HOME/jq uninstall; or exit
+    make -s -C $XDG_CONFIG_HOME/jq install; or exit
+end
+
+if string match -q "rbenv/*" $staged_files
+    make -s -C $XDG_CONFIG_HOME rbenv/install; or exit
+end
+
+if contains -- maestral/.mignore $staged_files
+    make -s -C $XDG_CONFIG_HOME ~/Dropbox/.mignore; or exit
+end
+
+if contains -- mailcap/mailcap $staged_files
+    make -s -C $XDG_CONFIG_HOME $XDG_DATA_HOME/mailcap; or exit
 end
 
 true
