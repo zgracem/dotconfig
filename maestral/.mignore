@@ -1,3 +1,5 @@
+.config/.git/hooks/commit-msg
+.config/.git/hooks/pre-commit
 .config/iterm2
 Projects/flannel/etc/functions
 Projects/flannel/etc/completions
