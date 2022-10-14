@@ -57,9 +57,3 @@ if is-cygwin
     # N.B. This must be a GUI app; fish will use cygstart(1) to launch it.
     set -g fish_help_browser "$PROGRAMFILES\\Mozilla Firefox\\firefox.exe"
 end
-
-# See conf.d/update-lastpwd.fish
-if status -i; and path is -f "$LAST_PWD_CACHE"; and not string match -q vscode $TERM_PROGRAM
-    read -l dir <$LAST_PWD_CACHE
-    path is -d $dir; and cd $dir
-end
