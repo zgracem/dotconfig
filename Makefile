@@ -10,6 +10,10 @@ install:
 
 # ----------------------------------------------------------------------------
 
+define link-home =
+ln -sfv .config/$< $@
+endef
+
 # shells -- create empty data directories
 .PHONY: shellfiles
 SHELL_DATA  =
@@ -27,13 +31,13 @@ SHELL_FILES += ~/.bash_sessions_disable
 SHELL_FILES += ~/.bashrc
 SHELL_FILES += ~/.hushlogin
 SHELL_FILES += ~/.profile
-~/.bash_profile: $(XDG_CONFIG_HOME)/bash/.bash_profile
-~/.bash_sessions_disable: $(XDG_CONFIG_HOME)/bash/.bash_sessions_disable
-~/.bashrc: $(XDG_CONFIG_HOME)/bash/.bashrc
-~/.hushlogin: $(XDG_CONFIG_HOME)/bash/.hushlogin
-~/.profile: $(XDG_CONFIG_HOME)/sh/.profile
+~/.bash_profile: bash/.bash_profile
+~/.bash_sessions_disable: bash/.bash_sessions_disable
+~/.bashrc: bash/.bashrc
+~/.hushlogin: bash/.hushlogin
+~/.profile: sh/.profile
 $(SHELL_FILES):
-	ln -sfv $< $@
+	$(link-home)
 shellfiles: $(SHELL_FILES)
 all: shellfiles
 
@@ -101,19 +105,19 @@ all: rbenv/install
 
 # stow -- create symlink in $HOME
 ~/.stow-global-ignore: stow/.stow-global-ignore
-	ln -sfv .config/$< $@
+	$(link-home)
 all: ~/.stow-global-ignore
 
 # tmux -- create symlink in $HOME
 ~/.tmux.conf: tmux/.tmux.conf
-	ln -sfv .config/$< $@
+	$(link-home)
 all: ~/.tmux.conf
 
 # vim
 # -- create symlink in $HOME
 all: ~/.vimrc
 ~/.vimrc: vim/.vimrc
-	ln -sfv .config/$< $@
+	$(link-home)
 # -- create cache & data dirs
 all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
 $(datadir)/vim $(XDG_CACHE_HOME)/vim:
@@ -191,8 +195,11 @@ $(XDG_CACHE_HOME)/dotfiles:
 $(UA_OUTPUT_FILES): $(UA_FILE)
 $(HB_FILE): | /usr/local/bin/brew
 
+M4FLAGS  =
+M4FLAGS += -D _HOME_="$(HOME)"
+M4FLAGS += -D _USER_AGENT_="$(shell cat $(UA_FILE))"
 $(UA_OUTPUT_FILES): %: %.m4
-	m4 -D _HOME_="$(HOME)" -D _USER_AGENT_="$(shell cat $(UA_FILE))" $< >$@
+	m4 $(M4FLAGS) $< >$@
 
 .PHONY: user-agent
 user-agent: $(UA_OUTPUT_FILES)

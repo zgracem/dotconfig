@@ -13,6 +13,7 @@ make -C etc shells      # setup /etc/shells and `chsh -s /usr/local/bin/fish`
 make appsupport         # create symlinks from ~/Library/Application Support to ~/.config
 make -C etc dnsmasq     # install config for local *.test TLD
 make user-agent         # rebuild files like .wgetrc with a fake user-agent
+make ruby/install/gems  # install contents of ruby/Gemfile
 make all                # everything else
 
 # To uninstall:
@@ -27,7 +28,7 @@ make -C jq uninstall            # remove modules for `jq` from $XDG_DATA_HOME
 make -C launchd uninstall       # install LaunchAgent that sets env vars
 
 # Misc:
-make bat/syntax                 # install/update syntax files for `bat`
+make bat/syntaxes               # install/update syntax files for `bat`
 make -C brew brew/install       # install/update Homebrew formulae
 make -C brew cask/install       # install/update Homebrew Casks
 make ~/Dropbox/.mignore         # (re)install Maestral ignore file
