@@ -29,14 +29,17 @@ $(bindir)/code-wait: $(CURDIR)/code
 	ln -sfv ./$(<F) $@
 
 $(bindir)/pyjamas: | $(datadir)/npm/bin/json2cson
-$(datadir)/npm/bin/json2cson:
+$(datadir)/npm/bin/json2cson: | $(datadir)/npm/lib/node_modules/cson
 	npm install -g cson
 
+PJ_GEMS = plist toml-rb
+PJ_LIBS := $(addprefix -r,$(PJ_GEMS))
+PJ_CACHE := $(XDG_CACHE_HOME)/dotfiles/.pyjamas-gems-installed
 .PHONY: pyjamas/gems
+pyjamas/gems: $(PJ_CACHE)
 $(bindir)/pyjamas: | pyjamas/gems
-pyjamas/gems:
-	@ruby -rplist -rtoml-rb -etrue >/dev/null 2>&1 \
-	|| gem install plist toml-rb
+$(PJ_CACHE): ../fish/packages/pyjamas/functions/pyjamas.fish
+	ruby $(PJ_LIBS) -etrue 2>&1 || gem install $(PJ_GEMS) && touch $@
 
 $(bindir)/manpdf: $(GIT_STAGING)/zgracem/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
 	$(INSTALL_PROGRAM) -- $< $@
