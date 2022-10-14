@@ -47,6 +47,10 @@ $(datarootdir)/doc/pdf:
 	mkdir -pv $@
 TARGETS += $(bindir)/manpdf
 
+$(bindir)/vs: ~/VS/www/vsdotcom/bin/vs.fish
+	ln -sfv $(subst $(HOME),..,$<) $@
+TARGETS += $(bindir)/vs
+
 install: $(TARGETS)
 
 .PHONY: uninstall

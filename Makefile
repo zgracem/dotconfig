@@ -133,9 +133,11 @@ fish/completions/vsx.fish: bin/vsx
 fish-completions: fish/completions/vsx.fish
 
 # vs: update/install fish completions
-fish/completions/vs.fish: ~/VS/www/vsdotcom/bin/vs.fish
+fish/completions/vs.fish: ~/bin/vs
 	$< complete print >$@
 fish-completions: fish/completions/vs.fish
+~/bin/vs:
+	cd $(XDG_CONFIG_HOME)/bin && $(MAKE) $@
 
 # Install Homebrew
 .PHONY: homebrew
