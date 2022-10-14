@@ -10,12 +10,6 @@ install:
 
 # ----------------------------------------------------------------------------
 
-# launchd -- load environment for GUI apps
-.PHONY: launchd/install
-launchd/install: ~/Library/LaunchAgents/org.inescapable.setenv.plist
-	cd $(XDG_CONFIG_HOME)/launchd && $(MAKE)
-all: launchd/install
-
 # shells -- create empty data directories
 .PHONY: shellfiles
 SHELL_DATA  =
@@ -53,7 +47,7 @@ appsupport:
 .PHONY: sdk
 sdk: $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt
 dev_dir := /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
-$(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(dev_dir)/SDKs/MacOSX.sdk
+$(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(dev_dir)/SDKs/MacOSX.sdk | $(XDG_CACHE_HOME)/dotfiles
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
 
@@ -65,23 +59,11 @@ fish/completions/op.fish: /usr/local/bin/op
 all: fish/completions/op.fish
 
 # bat -- install and/or (re)build syntaxes
-.PHONY: bat/syntax
-bat/syntax: $(XDG_CACHE_HOME)/bat/syntaxes.bin
+.PHONY: bat/syntaxes
+bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
 $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 	$(XDG_CONFIG_HOME)/libexec/bat-syntaxes.fish
-all: bat/syntax
-
-# dircolors -- build .ls_colors files
-.PHONY: dircolors
-dircolors:
-	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
-all: dircolors
-
-# jq -- install modules
-.PHONY: jq/install
-jq:
-	cd $(XDG_CONFIG_HOME)/jq && $(MAKE)
-all: jq/install
+# all: bat/syntaxes
 
 # Maestral
 # -- install .mignore file
@@ -92,7 +74,7 @@ all: jq/install
 # <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>
 /usr/local/bin/maestral:
 	pip3 install --upgrade 'maestral[gui]'
-all: ~/Dropbox/.mignore /usr/local/bin/maestral
+all: ~/Dropbox/.mignore | /usr/local/bin/maestral
 
 # mailcap -- install
 $(datarootdir)/mailcap: mailcap/mailcap
@@ -104,7 +86,7 @@ all: $(datarootdir)/mailcap
 ruby/install/gems: ruby/Gemfile.lock
 ruby/Gemfile.lock: ruby/Gemfile
 	gem install --file=$< --lock
-all: ruby/install/gems
+# all: ruby/install/gems
 
 # rbenv -- create dirs and files
 .PHONY: rbenv/install
@@ -129,21 +111,17 @@ all: ~/.tmux.conf
 
 # vim
 # -- create symlink in $HOME
-.PHONY: vim/install
-vim/install: ~/.vimrc
+all: ~/.vimrc
 ~/.vimrc: vim/.vimrc
 	ln -sfv .config/$< $@
 # -- create cache & data dirs
-vim/install: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
+all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
 $(datadir)/vim $(XDG_CACHE_HOME)/vim:
 	mkdir -pv $@
 # -- also install packages
-vim/install: vim/install/pack
-.PHONY: vim/install/pack
-vim/install/pack: $(datadir)/vim/pack/.installed
+all: $(datadir)/vim/pack/.installed
 $(datadir)/vim/pack/.installed:
 	$(XDG_CONFIG_HOME)/libexec/init-vim-pack.fish && touch $@
-all: vim/install
 
 # vscode-extensions -- update fish completions
 fish/completions/vsx.fish: bin/vsx
@@ -156,30 +134,41 @@ homebrew:
 	cd $(XDG_CONFIG_HOME)/brew && $(MAKE)
 # all: homebrew
 
-# Install files to /etc and /usr/local/etc.
-.PHONY: etc/install
-etc/install:
-	cd $(XDG_CONFIG_HOME)/etc && $(MAKE)
-all: etc/install
-
-# Install packages to ~/opt/stow
-.PHONY: stow/install
-stow/install:
-	cd $(XDG_CONFIG_HOME)/stow && $(MAKE)
-all: stow/install
-
 # Install to ~/bin
 .PHONY: bin/install
 bin/install:
 	cd $(XDG_CONFIG_HOME)/bin && $(MAKE)
 all: bin/install
 
-# Install manpdf
-~/bin/manpdf: $(GIT_STAGING)/zgracem/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
-	ln -sfv $< $@
-$(datarootdir)/doc/pdf:
-	mkdir -pv $@
-all: ~/bin/manpdf
+# dircolors -- build .ls_colors files
+.PHONY: dircolors
+dircolors:
+	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
+all: dircolors
+
+# Install files to /etc and /usr/local/etc.
+.PHONY: etc/install
+etc/install:
+	cd $(XDG_CONFIG_HOME)/etc && $(MAKE)
+all: etc/install
+
+# jq -- install modules
+.PHONY: jq/install
+jq/install:
+	cd $(XDG_CONFIG_HOME)/jq && $(MAKE)
+all: jq/install
+
+# launchd -- load environment for GUI apps
+.PHONY: launchd/install
+launchd/install:
+	cd $(XDG_CONFIG_HOME)/launchd && $(MAKE)
+all: launchd/install
+
+# Install packages to ~/opt/stow
+.PHONY: stow/install
+stow/install:
+	cd $(XDG_CONFIG_HOME)/stow && $(MAKE)
+all: stow/install
 
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.

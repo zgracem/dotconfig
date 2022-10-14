@@ -2,6 +2,8 @@
 # Install files to ~/bin
 # ----------------------------------------------------------------------------
 
+datarootdir := $(XDG_DATA_HOME)
+
 include ../common.mk
 
 SHIMS  =
@@ -17,8 +19,8 @@ SHIMS += un1q
 SHIMS += vsx
 
 SHIM_TARGETS := $(addprefix $(bindir)/, $(SHIMS))
+TARGETS := $(SHIM_TARGETS)
 
-install: $(SHIM_TARGETS)
 $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
 	ln -sfv $(subst $(HOME),..,$<) $@
 
@@ -36,6 +38,14 @@ pyjamas/gems:
 	@ruby -rplist -rtoml-rb -etrue >/dev/null 2>&1 \
 	|| gem install plist toml-rb
 
+$(bindir)/manpdf: $(GIT_STAGING)/zgracem/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
+	ln -sfv $< $@
+$(datarootdir)/doc/pdf:
+	mkdir -pv $@
+TARGETS += $(bindir)/manpdf
+
+install: $(TARGETS)
+
 .PHONY: uninstall
 uninstall:
-	rm -fv $(SHIM_TARGETS)
+	rm -fv $(TARGETS)
