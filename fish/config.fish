@@ -33,15 +33,9 @@ set -p fish_package_path "$__fish_config_dir/prompt"
 set fish_package_path (path filter -d $fish_package_path)
 source "$__fish_config_dir/packages.fish"
 
-# setup abbreviations
-source "$__fish_config_dir/abbreviations.fish"
-
 # setup keybindings
 set -p fish_function_path "$__fish_config_dir/bindings"
 source "$__fish_config_dir/bindings.fish"
-
-# setup colours
-source "$__fish_config_dir/colours.fish"
 
 # source vendor completions
 set -p fish_complete_path "$HOME/opt/etc/fish/completions"
@@ -50,6 +44,12 @@ set -p fish_complete_path "$HOME/VS/www/vsdotcom/etc/fish/completions"
 # remove duplicate & nonexistent directories
 set fish_function_path (path filter -d $fish_function_path | un1q)
 set fish_complete_path (path filter -d $fish_complete_path | un1q)
+
+# setup abbreviations
+source "$__fish_config_dir/abbreviations.fish"
+
+# setup colours
+source "$__fish_config_dir/colours.fish"
 
 if is-cygwin
     # fish_help_browser overrides the browser that may be defined by $BROWSER.
