@@ -14,7 +14,7 @@ define link-home =
 ln -sfv .config/$< $@
 endef
 
-# shells -- create empty data directories
+# shells: create empty data directories
 .PHONY: shellfiles
 SHELL_DATA  =
 SHELL_DATA += $(datadir)/sh
@@ -24,7 +24,7 @@ $(SHELL_DATA):
 	mkdir -pv $@
 shellfiles: | $(SHELL_DATA)
 
-# shells -- create symlinks in $HOME
+# shells: create symlinks in $HOME
 SHELL_FILES  =
 SHELL_FILES += ~/.bash_profile
 SHELL_FILES += ~/.bash_sessions_disable
@@ -55,7 +55,7 @@ $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(dev_dir)/SDKs/MacOSX.sdk | $(X
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
 
-# 1password -- build fish completions
+# 1password: build fish completions
 fish/completions/op.fish: /usr/local/bin/op
 	/usr/local/bin/op completion fish >$@
 /usr/local/bin/op: | /usr/local/bin/brew
@@ -64,15 +64,14 @@ fish/completions/op.fish: /usr/local/bin/op
 fish-completions: fish/completions/op.fish
 all: fish-completions
 
-# bat -- install and/or (re)build syntaxes
+# bat: install and/or (re)build syntaxes
 .PHONY: bat/syntaxes
 bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
 $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 	$(XDG_CONFIG_HOME)/libexec/bat-syntaxes.fish
 # all: bat/syntaxes
 
-# Maestral
-# -- install .mignore file
+# Maestral: install .mignore file
 # (Not a symlink because Maestral can't sync symlinks)
 ~/Dropbox/.mignore: maestral/.mignore
 	$(INSTALL_DATA) -- $< $@
@@ -82,19 +81,19 @@ $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 	pip3 install --upgrade 'maestral[gui]'
 all: ~/Dropbox/.mignore | /usr/local/bin/maestral
 
-# mailcap -- install
+# mailcap: install
 $(datarootdir)/mailcap: mailcap/mailcap
 	$(INSTALL_DATA) -- $(realpath $<) $@
 all: $(datarootdir)/mailcap
 
-# ruby -- install gems
+# ruby: install gems
 .PHONY: ruby/install/gems
 ruby/install/gems: ruby/Gemfile.lock
 ruby/Gemfile.lock: ruby/Gemfile
 	gem install --file=$< --lock
 # all: ruby/install/gems
 
-# rbenv -- create dirs and files
+# rbenv: create dirs and files
 .PHONY: rbenv/install
 rbenv/install: $(datadir)/rbenv/default-gems | $(datadir)/rbenv/version
 $(datadir)/rbenv/default-gems: rbenv/default-gems | $(datadir)/rbenv
@@ -105,18 +104,17 @@ $(datadir)/rbenv $(datadir)/rbenv/versions:
 	mkdir -pv $@
 all: rbenv/install
 
-# stow -- create symlink in $HOME
+# stow: create symlink in $HOME
 ~/.stow-global-ignore: stow/.stow-global-ignore
 	$(link-home)
 all: ~/.stow-global-ignore
 
-# tmux -- create symlink in $HOME
+# tmux: create symlink in $HOME
 ~/.tmux.conf: tmux/.tmux.conf
 	$(link-home)
 all: ~/.tmux.conf
 
-# vim
-# -- create symlink in $HOME
+# vim: create symlink in $HOME
 all: ~/.vimrc
 ~/.vimrc: vim/.vimrc
 	$(link-home)
@@ -124,12 +122,12 @@ all: ~/.vimrc
 all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
 $(datadir)/vim $(XDG_CACHE_HOME)/vim:
 	mkdir -pv $@
-# -- also install packages
+# --  install packages
 all: $(datadir)/vim/pack/.installed
 $(datadir)/vim/pack/.installed:
 	$(XDG_CONFIG_HOME)/libexec/init-vim-pack.fish && touch $@
 
-# vscode-extensions -- update fish completions
+# vscode-extensions: update fish completions
 fish/completions/vsx.fish: bin/vsx
 	$< completions >$@
 fish-completions: fish/completions/vsx.fish
@@ -151,7 +149,7 @@ bin/install:
 	cd $(XDG_CONFIG_HOME)/bin && $(MAKE)
 all: bin/install
 
-# dircolors -- build .ls_colors files
+# dircolors: build .ls_colors files
 .PHONY: dircolors
 dircolors:
 	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
@@ -163,13 +161,13 @@ etc/install:
 	cd $(XDG_CONFIG_HOME)/etc && $(MAKE)
 all: etc/install
 
-# jq -- install modules
+# jq: install modules
 .PHONY: jq/install
 jq/install:
 	cd $(XDG_CONFIG_HOME)/jq && $(MAKE)
 all: jq/install
 
-# launchd -- load environment for GUI apps
+# launchd: load environment for GUI apps
 .PHONY: launchd/install
 launchd/install:
 	cd $(XDG_CONFIG_HOME)/launchd && $(MAKE)
