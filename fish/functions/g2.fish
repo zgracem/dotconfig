@@ -18,6 +18,7 @@ function g2 --description 'Go somewhere' -a alias
         case hub;       set dir "$HOME/src/github.com"
         case git;       set dir "$HOME/src/github.com/zgracem"
         case dev;       set dir "$HOME/src/dev"
+        case prefs;     set dir "$HOME/Library/Preferences"
         case proj;      set dir "$dropbox/Projects"
         case scripts;   set dir "$dropbox/dev/shell"
         case steam;     set dir "$steam_dir"
