@@ -5,14 +5,28 @@
 # Finder's own API enables the "Put Back" feature on the trashed item(s).
 
 require "open3"
+require "optparse"
+
+opts = { verbose: false }
+usage = "Usage: trash [-v] FILE [FILE ...]\n\n"
+
+optparser = OptionParser.new do |parser|
+  parser.banner = usage
+
+  parser.on("-v", "--verbose", "Explain what is being done") do |opt|
+    opts[:verbose] = opt
+  end
+end
+optparser.parse!(ARGV, into: opts)
 
 if ARGV.empty?
-  warn "Usage: trash FILE [FILE ...]"
+  warn usage
   exit 1
 end
 
+paths = ARGV.map { |f| File.absolute_path(f) }
 files = begin
-  ARGV.map { |f| %(the POSIX file "#{File.absolute_path(f)}") }.join(", ")
+  paths.map { |path| %(the POSIX file "#{path}") }.join(", ")
 rescue Errno::ENOENT => e
   warn e.message
   exit Errno::ENOENT::Errno
@@ -20,6 +34,10 @@ end
 
 applescript = format('tell app "Finder" to move { %<files>s } to trash', files:)
 _stdin, _stdout, stderr, thread = Open3.popen3("osascript", "-e", applescript)
+if thread.value.success?
+  paths.each { |path| puts "moved `#{path}` to Trash" } if opts[:verbose]
+else
+  warn stderr.read
+end
 
-warn stderr.read unless thread.value.success?
 exit thread.value.exitstatus
