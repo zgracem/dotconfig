@@ -1,5 +1,7 @@
 .config/.git/hooks/commit-msg
 .config/.git/hooks/pre-commit
-.config/iterm2
-Projects/flannel/etc/functions
+.config/iterm2/AppSupport
+.config/iterm2/sockets/secrets
+Projects/codex/.markdownlint.yaml
 Projects/flannel/etc/completions
+Projects/flannel/etc/functions

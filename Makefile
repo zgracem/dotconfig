@@ -75,6 +75,9 @@ $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 # (Not a symlink because Maestral can't sync symlinks)
 ~/Dropbox/.mignore: maestral/.mignore
 	$(INSTALL_DATA) -- $< $@
+maestral/.mignore:
+	maestral status | grep -Eq 'Cannot upload symlink' && \
+	cd ~/Dropbox && fd -u -ts -tl --no-follow --strip-cwd-prefix | tee $(realpath $@)
 # -- install CLI w/ pip to workaround issues w/ macOS builtin Python
 # <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>
 /usr/local/bin/maestral:
