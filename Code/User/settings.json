@@ -313,6 +313,9 @@
     "editor.insertSpaces": false,
     "editor.tabSize": 4
   },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[fish]": {
     "editor.defaultFormatter": "zgm.vscode-fish",
     "editor.detectIndentation": false,

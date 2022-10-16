@@ -184,6 +184,14 @@ stow/install:
 	cd $(XDG_CONFIG_HOME)/stow && $(MAKE)
 all: stow/install
 
+.PHONY: www/install
+www/install: www/userContent.css
+www/userContent.css: www/userContent.sass
+	sass $< >$@ && \
+	defaults write -app Safari UserStyleSheetEnabled -bool true && \
+	defaults write -app Safari UserStyleSheetLocationURLString $(realpath $@)
+all: www/install
+
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
 # Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.

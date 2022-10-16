@@ -1,0 +1,48 @@
+/* Flickr download allower */
+div.spaceball
+  display: none
+
+/* Unsplash: hide post-download popup */
+.fvlUC
+  display: none
+
+/* Tumblr: better monospace in chat posts */
+div.k31gt span.shBP8
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace
+  font-size: 90%
+  line-height: 1.75
+
+/* hide liked tweets on Twitter */
+li[data-suggestion-json*="ActivityTweet"]
+  display: none
+
+/* remove fandom.com wiki footer */
+#mixed-content-footer
+  display: none
+
+/* AO3 ratings icons */
+dd.rating a::before
+  color: #fff
+  padding: 0 1ex
+  margin-right: 1ex
+
+dd.rating a[href*="/General%20Audiences"]::before
+  content: "G"
+  background: #78a700
+
+dd.rating a[href*="/Teen"]::before
+  content: "T"
+  background: #e6d200
+  color: #000
+
+dd.rating a[href*="/Mature"]::before
+  content: "M"
+  background: #ed8115
+
+dd.rating a[href*="/Explicit"]::before
+  content: "E"
+  background: #980000
+
+dd.rating a[href*="/Not%20Rated"]::before
+  content: "NR"
+  background: #999

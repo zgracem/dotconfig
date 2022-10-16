@@ -6,6 +6,7 @@
     "putty/*.session": { "when": "$(basename).patch" },
     "StardewValley/{ErrorLogs,Saves}": true,
     "syncplay.ini": true,
+    "www/*.css": { "when": "$(basename).sass" },
     "**/*.conf": { "when": "$(basename).conf.m4" },
     "**/{*rc,config}": { "when": "$(basename).m4" }
   },

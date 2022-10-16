@@ -19,6 +19,7 @@ syncplay.ini
 .contrib/
 brew/**/*.lock.json
 launchd/*.plist
+www/*.css
 *~
 *~orig*
 *.old
