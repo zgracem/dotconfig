@@ -10,7 +10,9 @@ set nocompatible
 " $VIMRUNTIME = /usr/share/vim/vim74
 
 set runtimepath =$XDG_DATA_HOME/vim
-set runtimepath+=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after
+set runtimepath+=$VIMRUNTIME
+
+set packpath=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim/data
 
 set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
 
@@ -43,23 +45,16 @@ set cdpath=.,$HOME
 set backup                      " do make backups
 set backupcopy=yes              " copy/overwrite instead of renaming
 
-if has("unix")
-  set backupdir=$XDG_STATE_HOME/vim,$TMPDIR
-elseif has("win32") || has("win64")
-  set backupdir=$XDG_STATE_HOME/vim,$TEMP
-endif
+set backupdir=$XDG_STATE_HOME/vim/backup | call mkdir(&backupdir, 'p')
+set undodir=$XDG_STATE_HOME/vim/undo     | call mkdir(&undodir, 'p')
+set viewdir=$XDG_STATE_HOME/vim/view     | call mkdir(&viewdir, 'p')
 
 " swap files
 set swapfile                    " make swapfiles
 set updatecount=80              " update swapfile after x characters
 
-" swap files will be created in the first possible directory of:
 " (double slash = include %-separated path in name of swap file)
-if has("unix")
-  set directory=.,$XDG_STATE_HOME/vim//,$TMPDIR//
-elseif has("win32") || has("win64")
-  set directory=.,$XDG_STATE_HOME/vim//,$TEMP//
-endif
+set directory=$XDG_STATE_HOME/vim/swap//
 
 " location of .netrwhist file
 let g:netrw_home=$XDG_DATA_HOME.'/vim'

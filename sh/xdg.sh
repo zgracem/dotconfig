@@ -58,4 +58,7 @@ fi
 
 command -v tmux >/dev/null && export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 
+# shellcheck disable=SC2016
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
 command -v wget >/dev/null && export WGETRC=$XDG_CONFIG_HOME/wget/wgetrc

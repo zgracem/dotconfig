@@ -53,4 +53,6 @@ end
 
 in-path tmux; and set -gx TMUX_TMPDIR $XDG_RUNTIME_DIR
 
+set -gx VIMINIT 'let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
 in-path wget; and set -gx WGETRC $XDG_CONFIG_HOME/wget/wgetrc

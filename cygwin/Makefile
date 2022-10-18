@@ -26,7 +26,6 @@ BASIC  =
 BASIC += dircolors
 BASIC += shellfiles
 BASIC += ~/.stow-global-ignore
-BASIC += ~/.vimrc
 
 .PHONY: dircolors
 .PHONY: shellfiles

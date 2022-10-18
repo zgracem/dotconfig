@@ -112,11 +112,7 @@ all: rbenv/install
 	$(link-home)
 all: ~/.stow-global-ignore
 
-# vim: create symlink in $HOME
-all: ~/.vimrc
-~/.vimrc: vim/.vimrc
-	$(link-home)
-# -- create cache & data dirs
+# vim: create cache & data dirs
 all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim
 $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim:
 	mkdir -pv $@
