@@ -40,6 +40,9 @@ progress = bar
 # Continue getting a partially-downloaded file.
 continue = on
 
+# Specify alternate path for ~/.wget-hsts
+hsts-file = "_XDG_CACHE_HOME_/wget-hsts"
+
 # -----------------------------------------------------------------------------
 # recursive options
 # -----------------------------------------------------------------------------

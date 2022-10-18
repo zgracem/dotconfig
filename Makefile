@@ -216,6 +216,7 @@ $(HB_FILE): | /usr/local/bin/brew
 M4FLAGS  =
 M4FLAGS += -D _HOME_="$(HOME)"
 M4FLAGS += -D _USER_AGENT_="$(shell cat $(UA_FILE))"
+M4FLAGS += -D _XDG_CACHE_HOME_="$(XDG_CACHE_HOME)"
 $(UA_OUTPUT_FILES): %: %.m4
 	m4 $(M4FLAGS) $< >$@
 
