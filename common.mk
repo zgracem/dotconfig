@@ -17,6 +17,7 @@ GNUMAKEFLAGS = --output-sync
 XDG_CONFIG_HOME ?= $(wildcard ~/.config)
 XDG_DATA_HOME ?= $(wildcard ~/.local/share)
 XDG_CACHE_HOME ?= $(wildcard ~/var/cache)
+XDG_STATE_HOME ?= $(wildcard ~/var/lib)
 
 # Installation directories
 prefix ?= $(HOME)

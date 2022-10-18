@@ -44,9 +44,9 @@ set backup                      " do make backups
 set backupcopy=yes              " copy/overwrite instead of renaming
 
 if has("unix")
-  set backupdir=$XDG_CACHE_HOME/vim,$TMPDIR
+  set backupdir=$XDG_STATE_HOME/vim,$TMPDIR
 elseif has("win32") || has("win64")
-  set backupdir=$XDG_CACHE_HOME/vim,$TEMP
+  set backupdir=$XDG_STATE_HOME/vim,$TEMP
 endif
 
 " swap files
@@ -56,9 +56,9 @@ set updatecount=80              " update swapfile after x characters
 " swap files will be created in the first possible directory of:
 " (double slash = include %-separated path in name of swap file)
 if has("unix")
-  set directory=.,$XDG_CACHE_HOME/vim//,$TMPDIR//
+  set directory=.,$XDG_STATE_HOME/vim//,$TMPDIR//
 elseif has("win32") || has("win64")
-  set directory=.,$XDG_CACHE_HOME/vim//,$TEMP//
+  set directory=.,$XDG_STATE_HOME/vim//,$TEMP//
 endif
 
 " location of .netrwhist file

@@ -6,6 +6,7 @@ set -gx XDG_CONFIG_HOME ~/.config
 set -gx XDG_DATA_HOME ~/.local/share
 set -gx XDG_CACHE_HOME ~/var/cache
 set -gx XDG_RUNTIME_DIR ~/var/run
+set -gx XDG_STATE_HOME ~/var/lib
 
 mkdir -p -v $XDG_RUNTIME_DIR
 and chown $USER $XDG_RUNTIME_DIR

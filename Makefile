@@ -122,8 +122,8 @@ all: ~/.vimrc
 ~/.vimrc: vim/.vimrc
 	$(link-home)
 # -- create cache & data dirs
-all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim
-$(datadir)/vim $(XDG_CACHE_HOME)/vim:
+all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim
+$(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim:
 	mkdir -pv $@
 # --  install packages
 all: $(datadir)/vim/pack/.installed
