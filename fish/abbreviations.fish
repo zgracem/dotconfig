@@ -51,3 +51,12 @@ end
 
 # git
 abbr -a -g gc 'git checkout -b'
+
+# Homebrew
+abbr -a -g bi 'brew install'
+abbr -a -g ci 'brew install --cask'
+abbr -a -g bu 'brew uninstall'
+abbr -a -g cu 'brew uninstall --cask'
+abbr -a -g binf 'brew info'
+abbr -a -g bs 'brew search'
+abbr -a -g bcav 'brew caveats'
