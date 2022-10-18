@@ -13,9 +13,9 @@ set -gx XDG_RUNTIME_DIR ~/var/run
 
 # read defaults from ~/.config/user-dirs.dirs
 if path is -f $XDG_CONFIG_HOME/user-dirs.dirs
-    set -l pattern '^(?<var>XDG_[[:upper:]]+_DIR)="(?<dir>[^"]+)"$'
+    set -l pattern '^(?<var>[[:upper:]])="(?<dir>[^"]+)"$'
     while read line
-        string match -rq $pattern "$line"; and eval "set -gx $var $dir"
+        string match -rq $pattern "$line"; and eval "set -gx XDG_"$var"_DIR $dir"
     end <$XDG_CONFIG_HOME/user-dirs.dirs
 end
 
