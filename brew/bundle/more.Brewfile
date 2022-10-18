@@ -42,6 +42,7 @@ brew "qpdf"
 brew "atomicparsley"
 brew "id3v2"
 brew "mkvtoolnix"
+brew "mp3info"
 brew "mp4v2"
 brew "yt-dlp"
 
