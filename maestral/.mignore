@@ -2,6 +2,7 @@
 .config/.git/hooks/pre-commit
 .config/iterm2/AppSupport
 .config/iterm2/sockets/secrets
+.private/.shellcheckrc
 Projects/codex/.markdownlint.yaml
 Projects/flannel/etc/completions
 Projects/flannel/etc/functions
