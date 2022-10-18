@@ -6,6 +6,10 @@
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/var/cache"
 [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="$HOME/var/run"
 
+mkdir -p "$XDG_RUNTIME_DIR" \
+&& chown "$USER" "$XDG_RUNTIME_DIR" \
+&& chmod 0700 "$XDG_RUNTIME_DIR"
+
 # XDG user directories
 source "$XDG_CONFIG_HOME/user-dirs.dirs"
 for v in DESKTOP DOWNLOAD TEMPLATES PUBLICSHARE DOCUMENTS MUSIC PICTURES VIDEOS; do

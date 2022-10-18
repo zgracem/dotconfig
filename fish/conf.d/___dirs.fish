@@ -7,6 +7,10 @@ set -gx XDG_DATA_HOME ~/.local/share
 set -gx XDG_CACHE_HOME ~/var/cache
 set -gx XDG_RUNTIME_DIR ~/var/run
 
+mkdir -p -v $XDG_RUNTIME_DIR
+and chown $USER $XDG_RUNTIME_DIR
+and chmod 0700 $XDG_RUNTIME_DIR
+
 # XDG user directories
 # * https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
 # * https://wiki.archlinux.org/index.php/XDG_user_directories
