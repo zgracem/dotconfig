@@ -33,7 +33,7 @@ if in-path ruby
 
     if in-path gem
         set -gx GEMRC $XDG_CONFIG_HOME/ruby/gemrc
-        set -gx GEM_SPEC_CACHE $XDG_CACHE_HOME/gem/specs
+        set -gx GEM_SPEC_CACHE $XDG_DATA_HOME/gem/specs
         mkdir -p $GEM_SPEC_CACHE
     end
 
