@@ -8,7 +8,7 @@ or set -gx --path LANGUAGE en_CA en_US en
 # LANG: used as a substitute for any unset LC_* variable.
 # Some systems have 'en_CA.UTF-8', some have 'en_CA.utf8'
 # Search locales to find whichever is available, and cache the result.
-set -l lang_file $XDG_DATA_HOME/locale/LANG
+set -l lang_file $XDG_CACHE_HOME/locale/LANG
 
 if not path is -f $lang_file
     mkdir -pv (dirname $lang_file)
