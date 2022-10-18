@@ -8,10 +8,9 @@ require "open3"
 require "optparse"
 
 opts = { verbose: false }
-usage = "Usage: trash [-v] FILE [FILE ...]\n\n"
 
 optparser = OptionParser.new do |parser|
-  parser.banner = usage
+  parser.banner = "Usage: trash [-v] FILE [FILE ...]"
 
   parser.on("-v", "--verbose", "Explain what is being done") do |opt|
     opts[:verbose] = opt
@@ -20,7 +19,7 @@ end
 optparser.parse!(ARGV, into: opts)
 
 if ARGV.empty?
-  warn usage
+  warn optparser.banner
   exit 1
 end
 
