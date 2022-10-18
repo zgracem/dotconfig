@@ -185,8 +185,8 @@ rl()
         if _inTmux; then
           # Don't expand tilde
           # shellcheck disable=SC2088
-          _z_rl_say "~/.tmux.conf"
-          [[ -z $dry_run ]] && tmux source-file ~/.tmux.conf
+          _z_rl_say "~/.config/tmux/tmux.conf"
+          [[ -z $dry_run ]] && tmux source-file "$XDG_CONFIG_HOME/tmux/tmux.conf"
         fi
         ;;
     esac

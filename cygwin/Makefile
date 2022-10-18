@@ -26,7 +26,6 @@ BASIC  =
 BASIC += dircolors
 BASIC += shellfiles
 BASIC += ~/.stow-global-ignore
-BASIC += ~/.tmux.conf
 BASIC += ~/.vimrc
 
 .PHONY: dircolors

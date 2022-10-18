@@ -112,11 +112,6 @@ all: rbenv/install
 	$(link-home)
 all: ~/.stow-global-ignore
 
-# tmux: create symlink in $HOME
-~/.tmux.conf: tmux/.tmux.conf
-	$(link-home)
-all: ~/.tmux.conf
-
 # vim: create symlink in $HOME
 all: ~/.vimrc
 ~/.vimrc: vim/.vimrc
