@@ -1,11 +1,5 @@
 set -q __z_env_loaded; and exit
 
-# XDG Basedir Spec
-set -gx XDG_CONFIG_HOME ~/.config
-set -gx XDG_DATA_HOME ~/.local/share
-set -gx XDG_CACHE_HOME ~/var/cache
-set -gx XDG_RUNTIME_DIR ~/var/run
-
 set -q TMPDIR; or set -gx TMPDIR (dirname (mktemp -u))
 
 # If the current user's group doesn't own TMPDIR, check to see if it's mounted
