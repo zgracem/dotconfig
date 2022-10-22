@@ -1,6 +1,3 @@
 function __fish_complete_process_names
-    set -l re '^\s*\d+\) "([^"\(]+).*".+'
-    lsappinfo list | string match -rg $re | sort -u | while read -l proc
-        string trim -r $proc
-    end
+    killall -dm '.' | string match -rg '\bcmd:(.+?)(?=, pid:\d)' | sort -u
 end
