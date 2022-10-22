@@ -54,7 +54,7 @@ set swapfile                    " make swapfiles
 set updatecount=80              " update swapfile after x characters
 
 " (double slash = include %-separated path in name of swap file)
-set directory=$XDG_STATE_HOME/vim/swap//
+set directory=$XDG_STATE_HOME/vim/swap// | call mkdir(&directory, 'p')
 
 " location of .netrwhist file
 let g:netrw_home=$XDG_DATA_HOME.'/vim'

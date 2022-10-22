@@ -12,7 +12,7 @@ set -Ue SSH_AUTH_SOCK
 set -Ue SSH_AGENT_PID
 
 set -l keychain_dir "$XDG_RUNTIME_DIR/keychain"
-mkdir -pv $keychain_dir; or exit
+mkdir -p $keychain_dir; or exit
 set -l ssh_env $keychain_dir/.env
 
 set -l params --eval --quick --inherit any

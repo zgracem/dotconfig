@@ -13,6 +13,10 @@ launchctl setenv XDG_CACHE_HOME $XDG_CACHE_HOME
 launchctl setenv XDG_RUNTIME_DIR $XDG_RUNTIME_DIR
 launchctl setenv XDG_STATE_HOME $XDG_STATE_HOME
 
+mkdir -p "$XDG_RUNTIME_DIR"
+and chown "$USER" "$XDG_RUNTIME_DIR"
+and chmod 0700 "$XDG_RUNTIME_DIR"
+
 set -g SOLARGRAPH_CACHE $XDG_CACHE_HOME/solargraph/cache
 launchctl setenv SOLARGRAPH_CACHE $SOLARGRAPH_CACHE
 
