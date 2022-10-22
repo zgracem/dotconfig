@@ -1,0 +1,155 @@
+# See: launchd.plist(5)
+---
+# This required key uniquely identifies the job to launchd.
+Label: org.example.launchd
+
+# This optional key specifies whether the job should be loaded by default.
+# This key may be overridden through the `enable` subcommand of launchctl(3).
+Disabled: false
+
+# This optional key specifies the user to run the job as. This key is only
+# applicable for services that are loaded into the privileged system domain.
+UserName: jdoe
+
+# This optional key specifies the group to run the job as. This key is only
+# applicable for services that are loaded into the privileged system domain. If
+# `UserName` is set and `GroupName` is not, then the group will be set to the
+# primary group of the user.
+GroupName: staff
+
+# This configuration file only applies to sessions of the type(s) specified.
+LimitLoadToSessionType: Aqua
+
+# This key maps to the first argument of execv(3) and indicates the ABSOLUTE
+# path to the executable for the job. If this key is missing, then the first
+# element of `ProgramArguments` will be used instead. This key is required in
+# the absence of `ProgramArguments`.
+Program: /usr/local/bin/bash
+
+# This key maps to the second argument of execvp(3) and specifies the argument
+# vector to be passed to the job when a process is spawned. This key is required
+# in the absence of the `Program` key, in which case the first element of
+# `ProgramArguments` may be either an absolute path, or a relative path.
+ProgramArguments:
+  - bash
+  - -c
+  - "'echo ${SHELL%/*}'"
+
+# This flag causes launchd to use the glob(3) mechanism to update the program
+# arguments before invocation.
+EnableGlobbing: true
+
+# This optional key is used to control whether your job is to be kept
+# continuously running or to let demand and conditions control the invocation.
+KeepAlive:
+  # If true, the job will be restarted as long as the program exits and with an
+  # exit status of zero. If false, the job will be restarted in the inverse
+  # condition. This key implies that `RunAtLoad` is set to true, since the job
+  # needs to run at least once before an exit status can be determined.
+  SuccessfulExit: true
+  # Each key in this dictionary is a file-system path. If the value of the key
+  # is true, then the job will be kept alive as long as the path exists. If
+  # false, the job will be kept alive in the inverse condition.
+  PathState:
+    /path/to/state/file: true
+  # If true, the the job will be restarted as long as it exited due to a signal
+  # which is typically associated with a crash (SIGILL, SIGSEGV, etc.). If
+  # false, the job will be restarted in the inverse condition.
+  Crashed: false
+
+# This optional key is used to control whether your job is launched once at the
+# time the job is loaded. The default is false. This key should be avoided, as
+# speculative job launches have an adverse effect on system-boot and user-login
+# scenarios.
+RunAtLoad: true
+
+# This optional key is used to specify a directory to chdir(2) to before running
+# the job.
+WorkingDirectory: /Users/jdoe
+
+# This optional key is used to specify a dictionary of additional environmental
+# variables to be set before running the job. NOTE: Values other than strings
+# will be ignored.
+EnvironmentVariables:
+  PATH: "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+
+# This optional key specifies what value should be passed to umask(2) before
+# running the job.
+Umask: "0700"
+
+# The amount of time launchd waits between sending the SIGTERM signal and before
+# sending a SIGKILL signal when the job is to be stopped.
+ExitTimeOut: 10
+
+# Override the default throttling policy imposed on jobs by launchd. The value
+# is in seconds, and by default, jobs will not be spawned more than once every
+# 10 seconds. The principle behind this is that jobs should linger around just
+# in case they are needed again in the near future.
+ThrottleInterval: 60
+
+# This optional key causes the job to be started if any one of the listed paths
+# are modified. IMPORTANT: Use of this key is highly discouraged, as filesystem
+# event monitoring is highly race-prone, and it is entirely possible for
+# modifications to be missed. When modifications ARE caught, there is no
+# guarantee that the file will be in a consistent state when the job is
+# launched.
+WatchPaths:
+  - /Users/jdoe/etc
+
+# This optional key keeps the job alive as long as the directory or directories
+# specified are not empty.
+QueueDirectories:
+  - /Users/jdoe/etc
+
+# This optional key causes the job to be started every time a filesystem is
+# mounted.
+StartOnMount: false
+
+# This optional key causes the job to be started every N seconds. The job will
+# not be started if the system is asleep at that time, or if the job is already
+# running.
+StartInterval: 60
+
+# This optional key causes the job to be started every calendar interval as
+# specified. Missing arguments are considered to be wildcard. The semantics are
+# similar to crontab(5) in how firing dates are specified. Unlike cron, which
+# skips job invocations when the computer is asleep, launchd will start the job
+# the next time the computer wakes up. If multiple intervals transpire before
+# the computer is woken, those events will be coalesced into one event upon
+# wake from sleep.
+StartCalendarInterval:
+  - Minute: 0
+    Hour: 4
+    Day: 1 # 1..31
+    Weekday: 0 # 0..6
+    Month: 1 # 1..12
+
+# This optional key specifies that the given path should be mapped to the job’s
+# stdin(4), and that the contents of that file will be readable from the job’s
+# stdin(4).
+StandardInPath: /Users/jdoe/etc/launchd.conf
+
+# This optional key specifies that the given path should be mapped to the job’s
+# stdout(4), and that any writes to the job’s stdout(4) will go to the given
+# file. If the file does not exist, it will be created with writable permissions
+# and ownership reflecting the user and/or group specified as the `UserName`
+# and/or `GroupName`, respectively (if set) and permissions reflecting the
+# umask(2) specified by the `Umask` key, if set.
+StandardOutPath: /dev/null
+
+# This optional key specifies that the given path should be mapped to the job’s
+# stderr(4), and that any writes to the job’s stderr(4) will go to the given
+# file. If the file does not exist, it will be created with ownership reflecting
+# the user and/or group specified as the `UserName` and/or `GroupName`,
+# respectively (if set) and permissions reflecting the umask(2) specified by the
+# `Umask` key, if set.
+StandardErrorPath: /dev/null
+
+# This optional key specifies what nice(3) value should be applied to the daemon.
+Nice: 0
+
+# This optional key describes, at a high level, the intended purpose of the job.
+# The system will apply resource limits based on what kind of job it is. This
+# classification is preferable to using the `HardResourceLimits`,
+# `SoftResourceLimits` and `Nice` keys.
+ProcessType: Background # Standard|Adaptive|Interactive
