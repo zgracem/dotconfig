@@ -21,10 +21,7 @@
       "type": "shell",
       "command": "libexec/check_dotfiles.sh",
       "problemMatcher": {
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}"
-        ],
+        "fileLocation": ["relative", "${workspaceFolder}"],
         "pattern": {
           "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
           "file": 1,
@@ -47,10 +44,7 @@
       "type": "shell",
       "command": "libexec/check_fish_files.fish",
       "problemMatcher": {
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}/fish"
-        ],
+        "fileLocation": ["relative", "${workspaceFolder}/fish"],
         "pattern": {
           "regexp": "^(.+) \\(line (\\d+)\\): (.+)$",
           "file": 1,
