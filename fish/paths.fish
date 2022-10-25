@@ -60,10 +60,6 @@ if in-path brew
     fish_add_path $HOMEBREW_PREFIX/opt/findutils/libexec/gnubin
     fish_add_manpath $HOMEBREW_PREFIX/opt/findutils/share/man
 
-    # GNU binutils (w/out `g` prefix)
-    fish_add_path $HOMEBREW_PREFIX/opt/binutils/bin
-    fish_add_manpath $HOMEBREW_PREFIX/opt/binutils/share/man
-
     # GNU inetutils (w/out `g` prefix)
     fish_add_path $HOMEBREW_PREFIX/opt/inetutils/libexec/gnubin
     fish_add_manpath $HOMEBREW_PREFIX/opt/inetutils/share/man
