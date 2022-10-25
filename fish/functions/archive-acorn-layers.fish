@@ -1,11 +1,12 @@
 function archive-acorn-layers
-    argparse n/dry-run q/quiet s/silent -- $argv
+    argparse f/force n/dry-run q/quiet s/silent v/verbose -- $argv
     or return
 
     set -q _flag_silent; and set -l _flag_quiet 1
+    set -q _flag_silent; or set -q _flag_quiet; and set -e _flag_verbose
 
     set -l inboxes ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
-    set -a inboxes /Volumes/Hub/Art/inbox.old
+    # set -a inboxes /Volumes/Hub/Art/inbox.old
     set -l used_art_dir /Volumes/Hub/Art/used
 
     set -l stock_dirs $HOME/{Downloads,Pictures}/unsplash
@@ -15,19 +16,31 @@ function archive-acorn-layers
         strings -a -n 14 $file | ag --nocolor -o '(?<=public\.tiff).+(?=MM$)'
     end
 
-    for file in $argv
+    set -fx attr org.inescapable.archive-acorn-layers.archived
+
+    function add-xattr-timestamp
+        xattr -w $attr (date +%s) $argv
+        or return
+        and set -q _flag_verbose; and xattr -v -p $attr $argv
+    end
+
+    for acorn_file in $argv
+        xattr -p $attr $acorn_file >/dev/null 2>&1
+        and not set -q _flag_force; and continue
+
         if test (count $argv) -gt 1; and not set -q _flag_silent
-            echo "### Processing:" $file
+            echo "### Processing:" $acorn_file
         end
 
-        set -l layers (list-acorn-layers $file)
+        set -l layers (list-acorn-layers $acorn_file)
 
-        if test -z "$layers"; and not set -q _flag_quiet
-            echo >&2 "*** No archivable layers:" (basename $file)
+        if test -z "$layers"
+            set -q _flag_quiet; or echo >&2 "*** No archivable layers:" (basename $acorn_file)
+            add-xattr-timestamp $acorn_file
             continue
         end
 
-        for layer in (unique $layers)
+        for layer in (string replace -r '^Copy of ' '' $layers | un1q)
             switch $layer
                 case "IMG*"
                     set -f used_dir $used_art_dir
@@ -65,6 +78,10 @@ function archive-acorn-layers
             if not set -fq found[1]; and not set -q _flag_quiet
                 echo >&2 "*** File not found for layer: $layer"
             end
+        end
+
+        if not set -q _flag_dry_run
+            add-xattr-timestamp $acorn_file
         end
     end
 end
