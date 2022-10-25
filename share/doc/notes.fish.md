@@ -1,6 +1,9 @@
 # notes.fish
 
 ```fish
+# Binaries I need in ~/.rbenv/shims
+set rbenv_shims bundle erb gem rake ronn rubocop ruby slim-lint slimrb solargraph
+
 # How to upgrade various package managers
 
 brew upgrade
