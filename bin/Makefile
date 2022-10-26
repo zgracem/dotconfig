@@ -14,6 +14,7 @@ SHIMS += git-cc
 SHIMS += lsregister
 SHIMS += PlistBuddy
 SHIMS += pyjamas
+SHIMS += squirrel
 SHIMS += trash
 SHIMS += un1q
 SHIMS += vsx

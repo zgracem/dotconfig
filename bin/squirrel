@@ -1,0 +1,157 @@
+#!/usr/bin/env fish
+
+set -g inbox_dirs
+set -a inbox_dirs ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
+set -a inbox_dirs /Volumes/Hub/Art/inbox.old
+set -g stock_dirs $HOME/{Pictures,Downloads}/unsplash
+
+set -gx attr org.inescapable.squirrel.archived
+
+function unique --description "Prints only unique arguments"
+    set --local seen
+    for arg in $argv; contains -- $arg $seen; or set --append seen $arg; end
+    echo -ns $seen\n
+end
+
+function short_home --description 'Replace $HOME with ~ in a path'
+    path resolve $argv | string replace --regex "^$HOME(?=\$|/)" "~"
+end
+
+function list-acorn-layers -a file
+    strings -a -n 14 $file | command ag --nocolor -o '(?<=public\.tiff).+(?=MM$)'
+end
+
+function has-xattr-timestamp
+    xattr -p $attr $argv[1] >/dev/null 2>&1
+end
+
+function add-xattr-timestamp
+    argparse n/dry-run v/verbose -- $argv
+    or return
+
+    if set -q _flag_dry_run
+        set -q _flag_verbose
+        and echo "~~~ Would timestamp" (short_home $argv[1]): (date +%s)
+    else
+        xattr -w $attr (date +%s) $argv[1]
+        or return
+
+        if set -q _flag_verbose
+            echo -n "::: Added timestamp to" (short_home $argv[1]):
+            xattr -p $attr $argv[1]
+        end
+    end
+    true
+end
+
+function clear-xattr-timestamp
+    argparse n/dry-run v/verbose -- $argv
+    or return
+
+    if set -q _flag_dry_run
+        set -q _flag_verbose
+        and echo "~~~ Would clear timestamp:" (short_home $argv[1])
+    else
+        xattr -d $attr $argv[1] 2>/dev/null
+        and set -q _flag_verbose
+        and echo "::: Cleared timestamp:" (short_home $argv[1])
+    end
+end
+
+function main
+    argparse -xs,v -xq,v c/clear f/force n/dry-run q/quiet s/silent v/verbose -- $argv
+    or return
+
+    if test (count $argv) -lt 1
+        echo >&2 "Error! No files specified!"
+        return 1
+    end
+
+    # --silent implies --quiet
+    set -q _flag_silent; and set -f _flag_quiet --quiet
+
+    # --clear
+    if set -q _flag_clear
+        for acorn_file in $argv
+            if has-xattr-timestamp $acorn_file
+                clear-xattr-timestamp $_flag_dry_run $_flag_verbose $acorn_file
+                or return
+            else
+                set -q _flag_silent
+                or echo >&2 "*** No timestamp to clear:" (short_home $acorn_file)
+            end
+        end
+        return
+    end
+
+    for acorn_file in $argv
+        if path extension $acorn_file | string match -vq .acorn
+            echo >&2 "*** Not an Acorn file!" $acorn_file
+            continue
+        end
+
+        # --force is required to re-process timestamped files
+        if has-xattr-timestamp $acorn_file
+            set -q _flag_silent
+            or echo >&2 "+++ Already processed:" (short_home $acorn_file)
+            set -q _flag_force; or continue
+        end
+
+        # Print headers for each of multiple files, or for 1 file if --verbose
+        if test (count $argv) -gt 1; or set -q _flag_verbose
+            set -q _flag_quiet
+            or echo "### Processing:" (basename $acorn_file)
+        end
+
+        set -l layers (list-acorn-layers $acorn_file)
+
+        # Abort if no layers found
+        if test -z "$layers"
+            set -q _flag_silent
+            or echo >&2 "*** No archivable layers:" (short_home $acorn_file)
+            clear-xattr-timestamp $_flag_dry_run $_flag_verbose $acorn_file
+            continue
+        end
+
+        set -l layer_names (
+            string replace -r "^Copy of " "" $layers | path change-extension "" | un1q
+        )
+        for layer in $layer_names
+            switch $layer
+                case "IMG*"
+                    set -f layer_files (path filter $inbox_dirs/$layer.*)
+                    set -f used_dir /Volumes/Hub/Art/used
+                    set -f archived $used_dir/$layer.*
+                case "*-unsplash"
+                    set -l stock_dirs $HOME/{Downloads,Pictures}/unsplash/**/
+                    set -f layer_files (path normalize $stock_dirs/$layer.* | path filter)
+                    set -f used_dir /Volumes/Hub/Art/used/unsplash
+                    set -f archived $used_dir/$layer.*
+                case "*"
+                    set -q _flag_verbose
+                    and echo >&2 "+++ Can't archive layer:" $layer
+                    continue
+            end # switch $layer
+
+            if test -n "$archived"
+                set -q _flag_quiet
+                or echo "+++ Already archived:" $archived
+                set -q _flag_force; or continue
+            end
+
+            for layer_file in (unique $layer_files)
+                if set -q _flag_dry_run
+                    echo "~~~ Would archive:" (short_home $layer_file)
+                else
+                    /bin/mv $layer_file $used_dir; or return
+                    set -q _flag_silent
+                    or echo ">>> Archived:" (short_home $layer_file)
+                end
+            end # for layer_file in (unique $layer_files)
+        end # for layer in $layer_names
+
+        add-xattr-timestamp $_flag_dry_run $_flag_verbose $acorn_file
+    end # for acorn_file in $argv
+end
+
+main $argv
