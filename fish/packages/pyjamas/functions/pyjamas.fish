@@ -32,7 +32,7 @@ function pyjamas --description "Convert configuration files between formats"
             set -a libs json
         case plist
             if set -q file; and string match -q "bplist" (head -c6 $file)
-                set -f argv[1] (mktemp -t tbcopy.XXXXXX)
+                set -f argv[1] (mktemp -t pyjamas.XXXXXX)
                 plutil -convert xml1 -o $argv[1] $file; or exit
             end
             set -f input "Plist.parse_xml(ARGF)"
