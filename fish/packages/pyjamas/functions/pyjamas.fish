@@ -9,11 +9,9 @@ function pyjamas --description "Convert configuration files between formats"
     set -q _flag_in; and set -l ext_in $_flag_in
 
     if set -q argv[1]
-        set -f src "Pathname.new(ARGV[0])"
         set -f file $argv[1]
         set -q ext_in; or set ext_in (path extension $argv[1] | string trim -c.)
     else if not isatty stdin
-        set -f src ARGF
         if not set -q _flag_in
             echo >&2 "unknown file type! (specify with --in or --mode)"
             return 1
@@ -23,27 +21,27 @@ function pyjamas --description "Convert configuration files between formats"
         return 1
     end
 
-    set -l libs date pathname
+    set -l libs date
 
     switch "$ext_in"
         case cson
-            set -f input "JSON.load(Open3.capture2('cson2json', stdin_data: $src.read).first)"
+            set -f input "JSON.load(Open3.capture2('cson2json', stdin_data: ARGF.read).first)"
             set -a libs json open3
         case json
-            set -f input "JSON.load($src)"
+            set -f input "JSON.load(ARGF)"
             set -a libs json
         case plist
             if set -q file; and string match -q "bplist" (head -c6 $file)
                 set -f argv[1] (mktemp -t tbcopy.XXXXXX)
                 plutil -convert xml1 -o $argv[1] $file; or exit
             end
-            set -f input "Plist.parse_xml($src)"
+            set -f input "Plist.parse_xml(ARGF)"
             set -a libs plist
         case toml
-            set -f input "TomlRB.parse($src.read)"
+            set -f input "TomlRB.parse(ARGF.read)"
             set -a libs toml-rb
         case yml yaml
-            set -f input "YAML.unsafe_load($src.read)"
+            set -f input "YAML.unsafe_load(ARGF.read)"
             set -a libs yaml
         case '*'
             echo >&2 "don't know how to read a “$ext_in” file!"
@@ -76,7 +74,7 @@ function pyjamas --description "Convert configuration files between formats"
     end
 
     if isatty stdout; and command -sq bat
-        eval "function _pager; cat | bat --style=plain --language=$lang; end"
+        eval "function _pager; bat --style=plain --language=$lang; end"
     else if isatty stdout; and command -sq less
         function _pager; less; end
     else
