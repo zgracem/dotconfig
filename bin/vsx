@@ -1,6 +1,8 @@
 #!/usr/bin/env fish
 # vim:ft=fish
 
+set -gx this vsx
+
 if not command --search --quiet code
     echo >&2 "error: VS Code not found"
     exit 1
@@ -54,9 +56,9 @@ function do_sync -d "Install, then cleanup"
 end
 
 function do_completions -d "Print fish completions"
-    echo complete -c vsx -x
+    echo complete --command $this --exclusive
     for cmd in (get_commands)
-        echo complete -c vsx -n __fish_use_subcommand -a $cmd -d '"'(get_desc do_$cmd)'"'
+        echo complete -c $this -n __fish_use_subcommand -a $cmd -d '"'(get_desc do_$cmd)'"'
     end
 end
 
@@ -70,16 +72,16 @@ function get_desc
 end
 
 function get_help
-    argparse v/verbose -- $argv
+    argparse --name $this v/verbose -- $argv
     or return
 
     if set -q argv[1]
-        echo "vsx $argv[1]:" (get_desc do_$argv[1])
+        echo "$this $argv[1]:" (get_desc do_$argv[1])
         return
     end
 
     set --local commands (get_commands)
-    echo -s "Usage: vsx [" (string join "|" $commands) "]"
+    echo -s "Usage: $this [" (string join "|" $commands) "]"
 
     if set -q _flag_verbose
         for cmd in $commands

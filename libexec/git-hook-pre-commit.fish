@@ -20,6 +20,7 @@ end
 
 if contains -- bin/vsx $staged_files
     make -s -C $XDG_CONFIG_HOME fish/completions/vsx.fish; or exit
+    git add fish/completions/vsx.fish; or exit
 else if string match -q "bin/*" $staged_files
     make -s -C $XDG_CONFIG_HOME/bin; or exit
 end
