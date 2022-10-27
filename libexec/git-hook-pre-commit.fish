@@ -45,4 +45,8 @@ if contains -- mailcap/mailcap $staged_files
     make -s -C $XDG_CONFIG_HOME $XDG_DATA_HOME/mailcap; or exit
 end
 
+if contains -- www/userContent.sass $staged_files
+    make -s -C $XDG_CONFIG_HOME www/userContent.css; or exit
+end
+
 true
