@@ -37,7 +37,7 @@ $(libdir)/pam/pam_reattach.so: | /usr/local/bin/brew
 
 PAM_REPO := biscuitehh/pam-watchid
 $(libdir)/pam/pam_watchid.so.2: | $(GIT_STAGING)/$(PAM_REPO)
-	cd $< && sudo $(MAKE) install
+	cd $| && sudo $(MAKE) install
 $(GIT_STAGING)/$(PAM_REPO):
 	cd $(GIT_STAGING) && git clone git@github.com:$(PAM_REPO).git $(PAM_REPO)
 
