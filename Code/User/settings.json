@@ -5,6 +5,7 @@
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
   "code-runner.executorMap": {
+    "applescript": "osascript -ss",
     "erb": "erb -T-",
     "fish": "env TERM=dumb /usr/local/bin/fish",
     "html": "links -html-margin 0 -dump",
