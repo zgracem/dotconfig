@@ -102,6 +102,15 @@ module CleanableURI
         end
       when "open.spotify.com"
         self.query = nil
+      when /\.tumblr\.com\Z/
+        self.fragment = nil
+        if %r{(?<user>\w+)\.tumblr\.com/post/(?<post>\d+)} =~ to_s
+          self.host = "tumblr.com"
+          self.path = "/#{user}/#{post}"
+        elsif %r{(?<user>\w+)\.tumblr\.com(?:/|/page/\d+)?} =~ to_s
+          self.host = "tumblr.com"
+          self.path = "/blog/#{user}"
+        end
       when "youtube.com"
         whitelist = %w[v t]
         filter_query!(whitelist:) if path == "/watch"

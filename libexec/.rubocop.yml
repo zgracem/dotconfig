@@ -2,4 +2,4 @@ inherit_from: ../rubocop/config.yml
 
 Metrics:
   Exclude:
-    - "cleanurl.rb"
+    - "clean_uri.rb"
