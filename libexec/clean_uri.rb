@@ -102,6 +102,11 @@ module CleanableURI
         end
       when "open.spotify.com"
         self.query = nil
+      when "at.tumblr.com"
+        if %r{(?<=at\.tumblr\.com/)(?<user>\w+)/(?<post>\d+)} =~ to_s
+          self.host = "tumblr.com"
+          self.path = "/#{user}/#{post}"
+        end
       when /\.tumblr\.com\Z/
         self.fragment = nil
         if %r{(?<user>\w+)\.tumblr\.com/post/(?<post>\d+)} =~ to_s
