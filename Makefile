@@ -78,11 +78,7 @@ $(XDG_CACHE_HOME)/bat/syntaxes.bin:
 maestral/.mignore:
 	maestral status | grep -Eq 'Cannot upload symlink' && \
 	cd ~/Dropbox && fd -u -ts -tl --no-follow --strip-cwd-prefix | tee $(realpath $@)
-# -- install CLI w/ pip to workaround issues w/ macOS builtin Python
-# <https://github.com/samschott/maestral/issues/533#issuecomment-987790457>
-/usr/local/bin/maestral:
-	pip3 install --upgrade 'maestral[gui]'
-all: ~/Dropbox/.mignore | /usr/local/bin/maestral
+all: ~/Dropbox/.mignore
 
 # mailcap: install
 $(datarootdir)/mailcap: mailcap/mailcap
