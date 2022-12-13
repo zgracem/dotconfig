@@ -3,14 +3,14 @@
 set -g inbox_dirs
 set -a inbox_dirs ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
 set -a inbox_dirs /Volumes/Hub/Art/inbox.old
-set -g stock_dirs $HOME/{Pictures,Downloads}/unsplash
+set -g stock_dirs $HOME/{Pictures,Downloads}/unsplash/**/
 
 set -gx attr org.inescapable.squirrel.archived
 
 function unique --description "Prints only unique arguments"
     set --local seen
     for arg in $argv; contains -- $arg $seen; or set --append seen $arg; end
-    echo -ns $seen\n
+    printf "%s\n" $seen
 end
 
 function short_home --description 'Replace $HOME with ~ in a path'
@@ -21,36 +21,53 @@ function list-acorn-layers -a file
     strings -a -n 14 $file | command ag --nocolor -o '(?<=public\.tiff).+(?=MM$)'
 end
 
+function get-xattr-timestamp
+    xattr -p $attr $argv[1]
+end
+
+function print-xattr-timestamp
+    set -l epoch (get-xattr-timestamp $argv[1])
+    or return
+
+    gdate -d@$epoch +"%F %T"
+end
+
 function has-xattr-timestamp
-    xattr -p $attr $argv[1] >/dev/null 2>&1
+    get-xattr-timestamp $argv[1] >/dev/null 2>&1
 end
 
 function add-xattr-timestamp
-    argparse n/dry-run v/verbose -- $argv
+    argparse i/info n/dry-run v/verbose -- $argv
     or return
 
-    if set -q _flag_dry_run
-        set -q _flag_verbose
-        and echo "~~~ Would timestamp" (short_home $argv[1]): (date +%s)
+    if set -q _flag_info
+        # --info only reads, doesn't write
+        return
+    else if set -q _flag_dry_run
+        set -q _flag_quiet
+        or echo "~~~ Would timestamp:" (gdate +"%F %T")
     else
-        xattr -w $attr (date +%s) $argv[1]
+        xattr -w $attr (gdate +%s) $argv[1]
         or return
 
         if set -q _flag_verbose
             echo -n "::: Added timestamp to" (short_home $argv[1]):
-            xattr -p $attr $argv[1]
+            print-xattr-timestamp $argv[1]
         end
     end
     true
 end
 
 function clear-xattr-timestamp
-    argparse n/dry-run v/verbose -- $argv
+    argparse i/info n/dry-run v/verbose -- $argv
     or return
 
-    if set -q _flag_dry_run
-        set -q _flag_verbose
-        and echo "~~~ Would clear timestamp:" (short_home $argv[1])
+    if set -q _flag_info
+        # --info and --clear are mutually exclusive
+        return
+    else if set -q _flag_dry_run
+        set -q _flag_quiet
+        or echo "~~~ Would clear timestamp:" (short_home $argv[1])
     else
         xattr -d $attr $argv[1] 2>/dev/null
         and set -q _flag_verbose
@@ -59,48 +76,73 @@ function clear-xattr-timestamp
 end
 
 function main
-    argparse -xs,v -xq,v c/clear f/force n/dry-run q/quiet s/silent v/verbose -- $argv
+    argparse -n squirrel -x{s,q},v -xc,i \
+        c/clear i/info f/force n/dry-run q/quiet s/silent v/verbose -- $argv
     or return
 
     if test (count $argv) -lt 1
-        echo >&2 "Error! No files specified!"
+        echo >&2 "Usage: squirrel FILE [FILE ...]"
         return 1
     end
 
-    # --silent implies --quiet
+    # --silent implies -q
     set -q _flag_silent; and set -f _flag_quiet --quiet
 
-    # --clear
-    if set -q _flag_clear
-        for acorn_file in $argv
+    # --info implies -nf
+    if set -q _flag_info
+        set -f _flag_dry_run --dry-run
+        set -f _flag_force --force
+    end
+
+    if set -q _flag_info
+        set -f unarchived_prefix "Unarchived layer"
+        set -f archived_prefix "Archived layer"
+        set -f nomatch_prefix "Non-matching layer"
+    else if set -q _flag_dry_run
+        set -f unarchived_prefix "Would archive layer"
+        set -f archived_prefix "Would skip archived layer"
+        set -f nomatch_prefix "Would skip non-matching layer"
+    else
+        set -f unarchived_prefix "Archived layer"
+        set -f archived_prefix "Already archived layer"
+        set -f nomatch_prefix "Skipped non-matching layer"
+    end
+
+    for acorn_file in $argv
+        if path extension $acorn_file | string match -vq .acorn
+            set -q _flag_silent
+            or echo >&2 "××× Not an Acorn file!" $acorn_file
+            continue
+        end
+
+        # Print headers for each of multiple files, for 1 file if --info/--verbose,
+        # or never if --quiet/--silent.
+        if test (count $argv) -gt 1; or set -q _flag_verbose; or set -q _flag_info
+            set -q _flag_quiet
+            or echo "###" (short_home $acorn_file)
+        end
+
+        # --clear
+        if set -q _flag_clear
             if has-xattr-timestamp $acorn_file
                 clear-xattr-timestamp $_flag_dry_run $_flag_verbose $acorn_file
                 or return
             else
                 set -q _flag_silent
-                or echo >&2 "*** No timestamp to clear:" (short_home $acorn_file)
+                or echo >&2 "××× No timestamp to clear:" (short_home $acorn_file)
             end
-        end
-        return
-    end
-
-    for acorn_file in $argv
-        if path extension $acorn_file | string match -vq .acorn
-            echo >&2 "*** Not an Acorn file!" $acorn_file
             continue
         end
 
         # --force is required to re-process timestamped files
         if has-xattr-timestamp $acorn_file
-            set -q _flag_silent
+            set -q _flag_silent; or set -q _flag_info
             or echo >&2 "+++ Already processed:" (short_home $acorn_file)
-            set -q _flag_force; or continue
-        end
 
-        # Print headers for each of multiple files, or for 1 file if --verbose
-        if test (count $argv) -gt 1; or set -q _flag_verbose
-            set -q _flag_quiet
-            or echo "### Processing:" (basename $acorn_file)
+            set -q _flag_verbose; or set -q _flag_info
+            and echo >&2 -- "--- Processed on:" (print-xattr-timestamp $acorn_file)
+
+            set -q _flag_force; or continue
         end
 
         set -l layers (list-acorn-layers $acorn_file)
@@ -108,49 +150,55 @@ function main
         # Abort if no layers found
         if test -z "$layers"
             set -q _flag_silent
-            or echo >&2 "*** No archivable layers:" (short_home $acorn_file)
-            clear-xattr-timestamp $_flag_dry_run $_flag_verbose $acorn_file
-            continue
+            or echo >&2 "××× No layers found in file:" (short_home $acorn_file)
+
+            has-xattr-timestamp $acorn_file
+            and clear-xattr-timestamp $_flag_dry_run $_flag_info $_flag_verbose $acorn_file
         end
 
         set -l layer_names (
             string replace -r "^Copy of " "" $layers | path change-extension "" | un1q
         )
+
         for layer in $layer_names
             switch $layer
                 case "IMG*"
                     set -f layer_files (path filter $inbox_dirs/$layer.*)
                     set -f used_dir /Volumes/Hub/Art/used
-                    set -f archived $used_dir/$layer.*
                 case "*-unsplash"
-                    set -l stock_dirs $HOME/{Downloads,Pictures}/unsplash/**/
                     set -f layer_files (path normalize $stock_dirs/$layer.* | path filter)
                     set -f used_dir /Volumes/Hub/Art/used/unsplash
-                    set -f archived $used_dir/$layer.*
                 case "*"
                     set -q _flag_verbose
-                    and echo >&2 "+++ Can't archive layer:" $layer
+                    and echo -- "--- $nomatch_prefix:" $layer
                     continue
-            end # switch $layer
+                end # switch $layer
+
+            set -f archived $used_dir/$layer.*
 
             if test -n "$archived"
-                set -q _flag_quiet
-                or echo "+++ Already archived:" $archived
-                set -q _flag_force; or continue
+                set -q _flag_silent
+                or echo "+++ $archived_prefix:" $archived
+                continue
             end
 
             for layer_file in (unique $layer_files)
                 if set -q _flag_dry_run
-                    echo "~~~ Would archive:" (short_home $layer_file)
+                    set -q _flag_quiet
+                    or echo "››› $unarchived_prefix:" (short_home $layer_file)
                 else
                     /bin/mv $layer_file $used_dir; or return
-                    set -q _flag_silent
+
+                    set -q _flag_quiet
                     or echo ">>> Archived:" (short_home $layer_file)
                 end
             end # for layer_file in (unique $layer_files)
         end # for layer in $layer_names
 
-        add-xattr-timestamp $_flag_dry_run $_flag_verbose $acorn_file
+        add-xattr-timestamp $_flag_dry_run $_flag_info $_flag_verbose $acorn_file
+
+        set -q _flag_silent; or set -q _flag_info
+        or echo "... Done:" (basename $acorn_file)
     end # for acorn_file in $argv
 end
 
