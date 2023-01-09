@@ -16,7 +16,7 @@ function g2 --description 'Go somewhere' -a alias
         case private;   set dir "$HOME/.private"
         case defunct;   set dir "$HOME/old/src"
         case hub;       set dir "$HOME/src/github.com"
-        case git;       set dir "$HOME/src/github.com/zgracem"
+        case git;       set dir "$HOME/src/z"
         case dev;       set dir "$HOME/src/dev"
         case prefs;     set dir "$HOME/Library/Preferences"
         case proj;      set dir "$dropbox/Projects"

@@ -44,7 +44,7 @@ $(bindir)/pyjamas: | pyjamas/gems
 $(PJ_CACHE): ../fish/packages/pyjamas/functions/pyjamas.fish
 	ruby $(PJ_LIBS) -etrue 2>&1 || gem install $(PJ_GEMS) && touch $@
 
-$(bindir)/manpdf: $(GIT_STAGING)/zgracem/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
+$(bindir)/manpdf: $(wildcard ~/src/z)/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
 	$(INSTALL_PROGRAM) -- $< $@
 $(datarootdir)/doc/pdf:
 	mkdir -pv $@
