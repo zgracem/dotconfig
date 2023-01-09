@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+ARGF.each { |line| puts line.strip.rjust(72) }
