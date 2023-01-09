@@ -326,5 +326,23 @@
     "key": "ctrl+shift+enter",
     "command": "extension.generateYard",
     "when": "editorTextFocus && !editorReadonly && editorLangId == 'ruby'"
+  },
+
+  // Open Integrated Terminal
+
+  {
+    "key": "ctrl+`",
+    "command": "-workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+  {
+    "key": "ctrl+shift+`",
+    "command": "-workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+cmd+`",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
   }
 ]
