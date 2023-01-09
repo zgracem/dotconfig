@@ -25,6 +25,7 @@ exec_prefix ?= $(prefix)
 bindir ?= $(exec_prefix)/bin
 datarootdir ?= $(XDG_DATA_HOME)
 datadir ?= $(datarootdir)
+libdir = $(exec_prefix)/lib
 sbindir ?= $(exec_prefix)/sbin
 sysconfdir = $(prefix)/etc
 
