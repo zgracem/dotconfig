@@ -1,3 +1,5 @@
+*.applescript encoding=macroman
+
 # See also diff.* in ./config
 *.fish  diff=fish
 *.gif   diff=exiftool
