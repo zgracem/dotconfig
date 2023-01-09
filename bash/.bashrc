@@ -80,6 +80,8 @@ fi
 # Other config files
 # -----------------------------------------------------------------------------
 
+[[ -z "$XDG_CONFIG_HOME" ]] && export XDG_CONFIG_HOME="$HOME/.config"
+
 export INPUTRC="$XDG_CONFIG_HOME/readline/.inputrc"
 
 # Define important shell functions

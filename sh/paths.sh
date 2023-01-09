@@ -131,7 +131,7 @@ PATH=$XDG_DATA_HOME/npm/bin:$PATH
 # ~
 # -----------------------------------------------------------------------------
 
-PATH=$HOME/bin:$HOME/opt/bin:$PATH
+PATH=$HOME/bin:$HOME/opt/bin:$HOME/.local/bin:$PATH
 MANPATH=$HOME/opt/share/man:$HOME/share/man:$MANPATH
 INFOPATH=$HOME/opt/share/info:$INFOPATH
 
