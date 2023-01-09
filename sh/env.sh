@@ -4,10 +4,6 @@
 # Environment variables for all POSIX shells
 # -----------------------------------------------------------------------------
 
-if [ "$Z_ENV_SOURCED" = "true" ] && [ -z "$Z_RELOADING" ]; then
-  return 0
-fi
-
 # XDG Basedir Spec
 [ -f "$XDG_CONFIG_HOME/sh/xdg.sh" ] && . "$XDG_CONFIG_HOME/sh/xdg.sh"
 
