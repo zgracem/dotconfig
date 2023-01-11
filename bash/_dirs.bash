@@ -7,9 +7,11 @@
 [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="$HOME/var/run"
 [ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="$HOME/var/lib"
 
-mkdir -p "$XDG_RUNTIME_DIR" \
-&& chown "$USER" "$XDG_RUNTIME_DIR" \
-&& chmod 0700 "$XDG_RUNTIME_DIR"
+if [[ $XDG_RUNTIME_DIR == $HOME* ]]; then
+  mkdir -p "$XDG_RUNTIME_DIR" \
+  && chown "$USER" "$XDG_RUNTIME_DIR" \
+  && chmod 0700 "$XDG_RUNTIME_DIR"
+fi
 
 # XDG user directories
 source "$XDG_CONFIG_HOME/user-dirs.dirs"

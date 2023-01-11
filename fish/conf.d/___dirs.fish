@@ -2,15 +2,17 @@
 # * https://specifications.freedesktop.org/basedir-spec/latest/ar01s02.html
 # * https://wiki.archlinux.org/index.php/XDG_Base_Directory
 
-set -gx XDG_CONFIG_HOME ~/.config
-set -gx XDG_DATA_HOME ~/.local/share
-set -gx XDG_CACHE_HOME ~/var/cache
-set -gx XDG_RUNTIME_DIR ~/var/run
-set -gx XDG_STATE_HOME ~/var/lib
+set -q XDG_CONFIG_HOME[1]; or set -gx XDG_CONFIG_HOME ~/.config
+set -q XDG_DATA_HOME[1]; or set -gx XDG_DATA_HOME ~/.local/share
+set -q XDG_CACHE_HOME[1]; or set -gx XDG_CACHE_HOME ~/var/cache
+set -q XDG_RUNTIME_DIR[1]; or set -gx XDG_RUNTIME_DIR ~/var/run
+set -q XDG_STATE_HOME[1]; or set -gx XDG_STATE_HOME ~/var/lib
 
-mkdir -p -v $XDG_RUNTIME_DIR
-and chown $USER $XDG_RUNTIME_DIR
-and chmod 0700 $XDG_RUNTIME_DIR
+if string match -q "$HOME*" $XDG_RUNTIME_DIR
+    mkdir -p -v $XDG_RUNTIME_DIR
+    and chown $USER $XDG_RUNTIME_DIR
+    and chmod 0700 $XDG_RUNTIME_DIR
+end
 
 # XDG user directories
 # * https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
