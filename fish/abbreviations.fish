@@ -4,18 +4,22 @@
 
 # quick navigation
 
-abbr -a -g .. cd ..
-abbr -a -g ... cd ../..
-abbr -a -g .... cd ../../..
-abbr -a -g ..... cd ../../../..
+if fish-is-older-than 3.6
+    abbr -a -g .. cd ..
+    abbr -a -g ... cd ../..
+    abbr -a -g .... cd ../../..
+    abbr -a -g ..... cd ../../../..
+else
+    # https://github.com/fish-shell/fish-shell/releases/tag/3.6.0
+    function __cd_dotdot
+        echo -n cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+    end
+
+    abbr --add dotdot --regex '^\.\.+$' --function __cd_dotdot
+end
 
 # https://fishshell.com/docs/current/faq.html#faq-cd-minus
 abbr -a -g -- '-' 'cd -'
-
-# ssh
-
-abbr -a -g vshraya 'sfish vshraya'
-abbr -a -g opal 'sfish opalstack'
 
 # -----------------------------------------------------------------------------
 # abbreviations
@@ -56,10 +60,26 @@ end
 abbr -a -g gc 'git checkout -b'
 
 # Homebrew
-abbr -a -g bi 'brew install'
-abbr -a -g ci 'brew install --cask'
-abbr -a -g bu 'brew uninstall'
-abbr -a -g cu 'brew uninstall --cask'
-abbr -a -g binf 'brew info'
-abbr -a -g bs 'brew search'
-abbr -a -g bcav 'brew caveats'
+if in-path brew
+    abbr -a -g bi 'brew install'
+    abbr -a -g ci 'brew install --cask'
+    abbr -a -g bu 'brew uninstall'
+    abbr -a -g cu 'brew uninstall --cask'
+    abbr -a -g binf 'brew info'
+    abbr -a -g bs 'brew search'
+    abbr -a -g bcav 'brew caveats'
+    abbr -a -g bup 'brew upgrade'
+end
+
+# apt
+if in-path apt
+    abbr -a -g ai 'sudo apt install'
+    abbr -a -g ainf 'apt show'
+    abbr -a -g as 'apt search'
+    abbr -a -g aup 'sudo apt update && sudo apt upgrade'
+end
+
+# ssh
+abbr -a -g vshraya 'ssh vshraya'
+abbr -a -g opal 'ssh opalstack'
+abbr -a -g p.p 'ssh phosphor.pink'
