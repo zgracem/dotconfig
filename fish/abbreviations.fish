@@ -29,6 +29,7 @@ abbr -a -g r reveal
 abbr -a -g s 'set -S'
 abbr -a -g size 'du -sh'
 abbr -a -g ssc 'sudo systemctl'
+abbr -a -g svim 'sudo -E vim'
 abbr -a -g restow 'stow --restow'
 abbr -a -g unset 'set --erase'
 abbr -a -g unstow 'stow --delete'
