@@ -26,6 +26,13 @@ case $PLATFORM in
     XDG_DOWNLOAD_DIR="$HOME/Downloads"
     ;;
 
+  Linux)
+    for v in DESKTOP DOWNLOAD TEMPLATES PUBLICSHARE DOCUMENTS MUSIC PICTURES VIDEOS; do
+      var=XDG_${v}_DIR
+      [[ -d ${!var} ]] || unset -v $var
+    done
+    ;;
+
   windows)
     if [[ -n $USERPROFILE ]]; then
       : "${user_profile:="$(cygpath -au "$USERPROFILE")"}"

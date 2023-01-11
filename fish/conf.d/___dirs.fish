@@ -63,4 +63,8 @@ if uname -s | string match -q Linux
     set -gx XDG_DESKTOP_DIR ~/.desktop
     set -gx XDG_DOCUMENTS_DIR ~/doc
     set -gx XDG_DOWNLOAD_DIR ~/tmp
+
+    for dirvar in (set --names | string match -er '^XDG_')
+        path is -d $$dirvar; or set --erase $dirvar
+    end
 end

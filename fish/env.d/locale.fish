@@ -23,3 +23,11 @@ set -q LC_ALL; or set -gx LC_ALL "$LANG"
 
 set -q TIME_STYLE; or set -gx TIME_STYLE long-iso
 set -q TZ; or set -gx TZ America/Edmonton
+if not set -q TZDIR[1]
+    switch $PLATFORM
+    case macOS
+        set -gx TZDIR /var/db/timezone/zoneinfo
+    case Cygwin Linux
+        set -gx TZDIR /usr/*/zoneinfo
+    end
+end

@@ -26,6 +26,17 @@ if [ -z "$TZ" ]; then
   export TZ='America/Edmonton'
 fi
 
+if [ -z "$TZDIR" ]; then
+  case "$PLATFORM" in
+    mac)
+      export TZDIR=/var/db/timezone/zoneinfo
+      ;;
+    cygwin|linux)
+      export TZDIR="$(echo /usr/*/zoneinfo)"
+      ;;
+  esac
+fi
+
 if [ -z "$TIME_STYLE" ]; then
   export TIME_STYLE='long-iso'
 fi
