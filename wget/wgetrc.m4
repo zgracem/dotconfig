@@ -27,14 +27,11 @@ add_hostdir = no
 # (The default is 20!)
 tries = 3
 
-# Retry even when the connection was refused
-retry_connrefused = on
-
 # Don't check the server certificate against available certificate authorities
 check_certificate = off
 
 # Turn off verbose, but print error messages and basic information
-# verbose = off
+verbose = off
 progress = bar
 
 # Continue getting a partially-downloaded file.
