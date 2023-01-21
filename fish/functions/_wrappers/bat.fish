@@ -1,9 +1,8 @@
 in-path bat; or in-path batcat; or exit
 
 function bat --description 'A cat clone with wings'
-    set -f cmd bat
-    set -f argv_
     if is-cygwin
+        set -f argv_
         for arg in $argv
             switch "$arg"
                 case cache "-*"
@@ -12,15 +11,13 @@ function bat --description 'A cat clone with wings'
                     set -a argv_ (cygpath --windows $arg)
             end
         end
-    else
-        set -f argv_ $argv
+        set -f argv $argv_
     end
 
-    if not in-path bat; and in-path batcat
-        set -f cmd batcat
+    set -f cmd (path filter -x $PATH/bat $PATH/batcat $PATH/cat)
+    if set -q cmd[1]
+        $cmd[1] $argv
     else
-        set -f cmd cat
+        return 127
     end
-
-    command $cmd $argv_
 end
