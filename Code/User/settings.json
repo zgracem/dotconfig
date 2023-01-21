@@ -83,6 +83,14 @@
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
   "explorer.incrementalNaming": "smart",
   "explorer.openEditors.visible": 0,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.m4": "${capture}",
+    "*.sass": "${capture}.css",
+    "*.scss": "${capture}.css",
+    "*.slim": "${capture}.html"
+  },
   "extensions.closeExtensionDetailsOnViewChange": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {

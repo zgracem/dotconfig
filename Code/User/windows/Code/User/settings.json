@@ -83,6 +83,14 @@
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.m4": "${capture}",
+    "*.sass": "${capture}.css",
+    "*.scss": "${capture}.css",
+    "*.slim": "${capture}.html"
+  },
   "explorer.incrementalNaming": "smart",
   "explorer.openEditors.visible": 0,
   "extensions.closeExtensionDetailsOnViewChange": false,
