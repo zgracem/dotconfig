@@ -1,5 +1,6 @@
 AllCops:
   TargetRubyVersion: 3.1
+  NewCops: enable
 
 ### Layout ###
 
@@ -25,11 +26,6 @@ Layout/MultilineHashKeyLineBreaks:
   Enabled: true
 
 ### Metrics ###
-
-Metrics/BlockLength:
-  IgnoredMethods:
-    - helpers
-    - refine
 
 Layout/LineLength:
   Max: 118
