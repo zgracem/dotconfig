@@ -1,0 +1,221 @@
+doctype html
+html
+  head
+    title Help
+    link rel=:stylesheet type="text/css" href="helpfile.css"
+  body
+    h1 Lynx key commands
+
+    table.wide
+        caption Navigation
+        colgroup
+            col span=2
+            col span=2
+            col span=2
+            col span=2
+        tr
+            td
+                kbd u
+                ' ,
+                kbd ←
+            td Back
+            td
+                kbd ^U
+            td Forward
+            td
+                kbd ^R
+            td Reload
+            td
+                kbd z
+            td Stop
+        tr
+            td
+                kbd g
+            td Go to URL
+            td
+                kbd G
+            td Edit URL & go
+            td
+                kbd 0
+            td Go to link #
+            td
+                kbd m
+            td Home page
+
+    table
+        caption Link actions
+        colgroup
+            col span=2
+            col span=2
+        tr
+            td: kbd d
+            td Download
+            td: kbd ]
+            td Request HEAD
+        tr
+            td
+                kbd →
+                ' ,
+                kbd Ret
+            td Follow link
+            td: kbd x
+            td Follow link w/ no-cache
+        tr
+            td: kbd ,
+            td Page to external
+            td: kbd .
+            td Link to external
+        tr
+            td: kbd l
+            td List link titles
+            td: kbd A
+            td List link URLs
+
+    table
+        caption View
+        colgroup
+            col span=2
+            col span=2
+        tr
+            td: kbd = "^L"
+            td Refresh
+            td: kbd = "\\"
+            td Toggle source view
+        tr
+            td: kbd = "*"
+            td Toggle image links
+            td: kbd = "["
+            td Toggle auto alt text
+        tr
+            td: kbd = "|"
+            td Toggle line wrap
+            td: kbd = "^Q"
+            td Toggle table align
+
+    table
+        caption Search & Bookmarks
+        colgroup
+            col span=2
+            col span=2
+        tr
+            td: kbd = "/"
+            td Search
+            td: kbd a
+            td Add bookmark
+        tr
+            td: kbd n
+            td Next match
+            td: kbd r
+            td Remove bookmark
+        tr
+            td: kbd N
+            td Previous match
+            td: kbd v
+            td View bookmarks
+
+    table.wide
+        caption Browser
+        colgroup
+            col span=2
+            col span=2
+            col span=2
+            col span=2
+        tr
+            td
+                kbd h
+                ' ,
+                kbd ?
+            td View help
+            td: kbd j
+            td Open jump list
+            td: kbd = "="
+            td View page/link info
+            td: kbd ^G
+            td Cancel prompt
+        tr
+            td: kbd _
+            td Clear session auth.
+            td: kbd k
+            td View key bindings
+            td: kbd ^T
+            td Toggle tracing
+            td: kbd ;
+            td View trace log
+        tr
+            td: kbd ^K
+            td View cookie jar
+            td: kbd ^X
+            td View cache
+            td: kbd V
+            td Visited links
+            td: kbd ^H
+            td View history stack
+        tr
+            td: kbd !
+            td Open shell
+            td: kbd o
+            td Options
+            td: kbd q
+            td Quit
+            td
+                kbd Q
+                ' ,
+                kbd ^D
+            td Quit immediately
+
+    /h3 Paging
+    /dl compact=""
+      dt: kbd ^P
+      dd Scroll up 2 lines
+      dt: kbd ^N
+      dd Scroll down 2 lines
+      dt: kbd = "("
+      dd Scroll 1/2 page up
+      dt: kbd = ")"
+      dd Scroll 1/2 page down
+      dt
+        kbd b
+        ' ,
+        kbd ^B
+        ' ,
+        kbd -
+        ' ,
+        kbd Page Up
+      dd Scroll 1 page up
+      dt
+        kbd f
+        ' ,
+        kbd Space
+        ' ,
+        kbd +
+        ' ,
+        kbd Page Down
+      dd Scroll 1 page down
+      dt: kbd = "<"
+      dd Scroll up by link
+      dt: kbd = ">"
+      dd Scroll down by link
+      dt: kbd ^
+      dd Select first link on line
+      dt: kbd $
+      dd Select last link on line
+      dt: kbd = "{"
+      dd Scroll to left
+      dt: kbd = "}"
+      dd Scroll to right
+      dt: kbd ↑
+      dd Select previous link
+      dt: kbd ↓
+      dd Select next link
+      dt
+        kbd ^A
+        ' ,
+        kbd Home
+      dd Go to beginning of document
+      dt
+        kbd ^E
+        ' ,
+        kbd End
+      dd Go to end of document
+
+

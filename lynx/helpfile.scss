@@ -1,0 +1,36 @@
+body { text-align: center; }
+
+kbd {
+  padding: 0.125ex 0.75ex;
+  background-color: #e0e0e0;
+  border-width: 1px;
+  border-style: outset;
+}
+
+table {
+  margin: 0 auto;
+  border-width: 1px;
+  border-style: outset;
+  & + & { margin-top: 1rem; }
+}
+
+caption {
+  font-size: 125%;
+  font-weight: bold;
+}
+
+td {
+  border-width: 1px;
+  border-style: inset;
+  padding: 0.5ex;
+
+  &:nth-of-type(odd)  {
+    text-align: right;
+    width: 4rem;
+  }
+  &:nth-of-type(even) {
+    text-align: left;
+    width: 12rem;
+    table.wide & { width: 8rem; }
+  }
+}

@@ -13,6 +13,11 @@ if command -v dotnet >/dev/null; then
   export DOTNET_CLI_HOME="$XDG_CACHE_HOME/dotnet"
 fi
 
+if command -v lynx >/dev/null; then
+  export LYNX_CFG="$XDG_CONFIG_HOME/lynx/lynx.cfg"
+  export LYNX_LSS="$XDG_CONFIG_HOME/lynx/custom.lss"
+fi
+
 if command -v nethack >/dev/null; then
   export NETHACKOPTIONS="@$XDG_CONFIG_HOME/nethack/nethackrc"
 fi

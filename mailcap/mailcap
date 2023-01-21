@@ -1,6 +1,19 @@
-application/pdf; open -a Preview "%s"; test=test -z $SSH_TTY
-application/zip; open -a "The Archive Browser" "%s"; test=test -z $SSH_TTY
-audio/*;         open -a iTunes "%s";  test=test -z $SSH_TTY
-image/*;         open -a Preview "%s"; test=test -z $SSH_TTY
-text/html;       open -a Safari "%s";  test=test -z $SSH_TTY
-video/*;         open -a VLC "%s";     test=test -z $SSH_TTY
+# archives
+application/x-7z-compressed; open -b cx.c3.thearchivebrowser %s; test=test -z "$SSH_TTY"
+application/x-rar; open -b cx.c3.thearchivebrowser %s; test=test -z "$SSH_TTY"
+application/x-xz; open -b cx.c3.thearchivebrowser %s; test=test -z "$SSH_TTY"
+application/gzip; open -b cx.c3.thearchivebrowser %s; test=test -z "$SSH_TTY"
+application/zip; open -b cx.c3.thearchivebrowser %s; test=test -z "$SSH_TTY"
+
+# media
+audio/*; open -a VLC %s; ; test=test -z "$SSH_TTY"
+video/*; open -a VLC %s; ; test=test -z "$SSH_TTY"
+image/*; qlmanage -p %s >/dev/null 2>&1 &; ; test=test -z "$SSH_TTY"
+
+application/x-bittorrent; open -a Transmission %s; test=test -z "$SSH_TTY"
+application/pdf; open -a Preview %s; test=test -z "$SSH_TTY"
+
+# text
+text/html; open -a Firefox %s; edit=open -b com.microsoft.VSCode %s; test=test -z "$SSH_TTY"
+text/*; open -b com.microsoft.VSCode %s; edit=open -b com.microsoft.VSCode %s; test=test -z "$SSH_TTY"
+text/*; view %s; edit=vim %s; test=test -n "$SSH_TTY"; needsterminal

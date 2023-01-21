@@ -20,6 +20,9 @@ syncplay.ini
 .contrib/
 brew/**/*.lock.json
 launchd/*.plist
+lynx/helpfile.css
+lynx/helpfile.html
+lynx/lynx_bookmarks.html
 www/*.css
 *~
 *~orig*

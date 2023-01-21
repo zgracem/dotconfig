@@ -1,0 +1,97 @@
+# Lynx Stylesheet
+
+# Document Metadata
+title:		reverse:		default+reverse+bold
+link:		normal:			brightwhite
+
+# Sections
+h1:		bold:			green
+h2:		bold:			green
+h3:		bold:			green
+h4:		bold:			green
+h5:		bold:			green
+h6:		bold:			green
+address:	normal:			gray
+
+# Grouping Content
+hr:		normal:			brown
+pre:		normal:			default
+blockquote:	normal:			default
+li:		normal:			default
+
+# Text-level semantics
+a:		bold:			brightblue+underline
+em:		bold:			brown
+strong:		bold:			brown+bold
+small:		dim:			gray
+s:		dim:			red
+cite:		normal:			brown
+q:		normal:			default
+code:		normal:			cyan
+var:		normal:			brown
+samp:		normal:			cyan
+kbd:		normal:			cyan
+sub:		dim:			gray
+sup:		bold:			white
+i:		bold:			brown
+b:		bold:			brown+bold
+u:		underline:		underline
+br:		normal:			default
+
+# Edits
+ins:		bold:			green
+del:		dim:			red
+strike:		dim:			red
+
+# Embedded content
+img:		dim:			magenta
+iframe:		normal:			magenta
+
+# Tabular data
+table:		normal:			white
+caption:	reverse:		yellow:		black
+thead:		bold:			brown+underline
+td:		normal:			default
+
+# Forms
+label:		normal:			magenta
+input:		normal:			white
+select:		normal:			white
+option:		normal:			white
+
+# Special styles - not corresponding directly to HTML tags
+alert:		bold:			yellow:		red
+alink:		reverse:		lightgray+reverse:	black
+normal:		normal:			default:	black
+status:		reverse:		default+reverse
+whereis:	reverse+underline:	brightmagenta+reverse
+
+# UI
+menu.bg:	normal:			default
+menu.frame:	normal:			black:		lightgray
+menu.entry:	normal:			default
+menu.n:		normal:			black:		brightmagenta
+menu.active:	normal:			black:		white
+menu.sb:	normal:			brightred:	lightgray
+
+# `forwbackw.arrow` styles the "history" arrows in the top left
+forwbackw.arrow:	reverse
+# `hot.paste` styles the arrow(s) in the top right when scrolling horizontally
+hot.paste:	normal:			brightgreen
+
+# View Source - styles used w/ commandline option -prettysrc
+
+# The markup for HTML_ENTIRE will be emitted only once--
+# it will surround the entire file source.
+span.htmlsrc_entire:	normal:		default
+span.htmlsrc_comment:	normal:		gray
+span.htmlsrc_tag:	normal:		red
+span.htmlsrc_badtag:	normal:		red
+span.htmlsrc_attrib:	normal:		brown
+span.htmlsrc_badattr:	normal:		brown
+span.htmlsrc_attrval:	normal:		cyan
+span.htmlsrc_abracket:	normal:		white
+span.htmlsrc_entity:	normal:		brightmagenta
+span.htmlsrc_href::
+span.htmlsrc_badseq:	normal:		brightred:	red
+span.htmlsrc_sgmlspecial:	normal:	brightyellow
