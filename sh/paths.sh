@@ -67,7 +67,7 @@ if [ -x /usr/bin/xcode-select ]; then
     Erato*)
       DEVELOPER_DIR="/Library/Developer/CommandLineTools"
       ;;
-    Hiroko*)
+    Juno*)
       DEVELOPER_DIR="/Developer"
       ;;
     *)
@@ -75,8 +75,8 @@ if [ -x /usr/bin/xcode-select ]; then
       ;;
   esac
 
-  darwin_ver=$(uname -r)
-  if [ "${darwin_ver%%.*}" -ge 15 ]; then
+  darwin_ver=$(uname -r | cut -d. -f1)
+  if [ "$darwin_ver" -ge 15 ]; then
     PATH=$PATH:$DEVELOPER_DIR/usr/bin
     MANPATH=$MANPATH:$DEVELOPER_DIR/usr/share/man
     PATH=$PATH:$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin

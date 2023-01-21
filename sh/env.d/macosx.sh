@@ -1,4 +1,4 @@
-command -v xcrun >/dev/null || exit
+command -v xcrun >/dev/null || return
 
 sdk_file=$XDG_CACHE_HOME/dotfiles/MacOSX-sdk-path.txt
 

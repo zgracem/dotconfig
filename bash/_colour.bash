@@ -44,14 +44,14 @@ if [[ $TERM_COLOURDEPTH -ge 16 ]]; then
   brblue=94; brmagenta=95; brcyan=96; brwhite=97
 else
   # fall back to bold
-  brblack=1;$black
-  brred=1;$red
-  brgreen=1;$green
-  bryellow=1;$yellow
-  brblue=1;$blue
-  brmagenta=1;$magenta
-  brcyan=1;$cyan
-  brwhite=1;$white
+  brblack="1;$black"
+  brred="1;$red"
+  brgreen="1;$green"
+  bryellow="1;$yellow"
+  brblue="1;$blue"
+  brmagenta="1;$magenta"
+  brcyan="1;$cyan"
+  brwhite="1;$white"
 fi
 colours+=(brblack brred brgreen bryellow brblue brmagenta brcyan brwhite)
 
