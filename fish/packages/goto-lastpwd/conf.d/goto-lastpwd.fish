@@ -1,11 +1,13 @@
 set -gx LAST_PWD_CACHE $XDG_STATE_HOME/fish/last_pwd
 mkdir -p (path dirname $LAST_PWD_CACHE)
+set -gx PWD_HISTFILE $__fish_user_data_dir/fish_pwd_history
 
 function update-lastpwd --on-variable PWD
     string match -q vscode "$TERM_PROGRAM"
     or string match -q Visor "$ITERM_PROFILE"
     or set -q fish_private_mode; and return
     echo "$PWD" >$LAST_PWD_CACHE
+    printf "- pwd: %s\n  when: %s\n" "$PWD" (date +%s) >>$PWD_HISTFILE
 end
 
 function goto-lastpwd --on-event fish_prompt
