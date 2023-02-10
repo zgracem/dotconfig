@@ -90,17 +90,12 @@ module CleanableURI
         filter_query!(whitelist:)
       when "google.com", "google.ca"
         if %r{/search} =~ path
+          self.fragment = nil
           whitelist = %w[q]
           whitelist << "tbm" if params["tbm"] == "isch"
           filter_query!(whitelist:)
         end
-      when "instagram.com"
-        self.query = nil
-      when "ruby-doc.org"
-        if %r{/(?<area>core|stdlib)(?<_version>-\d\.\d\.\d)/(?<path>[^#?]+)} =~ to_s
-          self.path = "/#{area}/#{path}"
-        end
-      when "open.spotify.com"
+      when "instagram.com", "open.spotify.com"
         self.query = nil
       when "at.tumblr.com"
         if %r{(?<=at\.tumblr\.com/)(?<user>\w+)/(?<post>\d+)} =~ to_s
@@ -108,14 +103,13 @@ module CleanableURI
           self.path = "/#{user}/#{post}"
         end
       when /\.tumblr\.com\Z/
+        self.host = "tumblr.com"
+        self.path = if %r{(?<user>\w+)\.tumblr\.com/post/(?<post>\d+)} =~ to_s
+                      "/#{user}/#{post}"
+                    elsif %r{(?<user>\w+)\.tumblr\.com(?:/|/page/\d+)?} =~ to_s
+                      "/blog/#{user}"
+                    end
         self.fragment = nil
-        if %r{(?<user>\w+)\.tumblr\.com/post/(?<post>\d+)} =~ to_s
-          self.host = "tumblr.com"
-          self.path = "/#{user}/#{post}"
-        elsif %r{(?<user>\w+)\.tumblr\.com(?:/|/page/\d+)?} =~ to_s
-          self.host = "tumblr.com"
-          self.path = "/blog/#{user}"
-        end
       when "youtube.com"
         whitelist = %w[v t]
         filter_query!(whitelist:) if path == "/watch"
@@ -151,6 +145,9 @@ module CleanURI
     # remove silly indirection
     uri = URI(uri.query) if uri.host == "href.li"
     uri = URI(uri.params["url"]) if uri.host == "gate.sc"
+    uri = URI(uri.params["gcReferrer"]) if uri.host == "shopping.yahoo.com"
+
+    uri = URI(uri.params["url"]) if uri.host =~ /\bgoogle\b/ && uri.path == "/url"
 
     uri.clean
   rescue URI::InvalidURIError
@@ -158,6 +155,6 @@ module CleanURI
   end
 end
 
-ARGV << File.join(ENV["XDG_CONFIG_HOME"], ".data", "urls.dirty.txt") if ENV["VSCODE_PID"]
+ARGV << File.join(ENV.fetch("XDG_CONFIG_HOME"), ".data", "urls.dirty.txt") if ENV["VSCODE_PID"]
 
 ARGF.to_a.each { |arg| puts CleanURI.clean(arg) }
