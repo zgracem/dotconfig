@@ -2,11 +2,15 @@
 # Install LaunchAgents
 # ----------------------------------------------------------------------------
 
-include ../common.mk
-
 srcdir ?= $(CURDIR)
 outdir := $(wildcard ~/Library/LaunchAgents)
 
+.PHONY: build
+build: $(addsuffix .plist,$(basename $(wildcard $(srcdir)/*.yaml)))
+
+include ../common.mk
+
+.PHONY: install
 install: $(outdir)/org.inescapable.setenv.plist
 
 $(outdir)/%.plist: $(srcdir)/%.plist

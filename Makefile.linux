@@ -1,0 +1,63 @@
+datarootdir := $(XDG_DATA_HOME)
+
+.PHONY: all
+all:
+
+include common.mk
+
+install:
+	@echo Target ‘$@’ not implemented.
+
+# ----------------------------------------------------------------------------
+
+define link-home =
+ln -sfv .config/$< $@
+endef
+
+# shells: create empty data directories
+.PHONY: shellfiles
+SHELL_DATA  =
+SHELL_DATA += $(datadir)/sh
+SHELL_DATA += $(datadir)/bash
+SHELL_DATA += $(datadir)/fish
+$(SHELL_DATA):
+	mkdir -pv $@
+shellfiles: | $(SHELL_DATA)
+
+# shells: create symlinks in $HOME
+SHELL_FILES  =
+SHELL_FILES += ~/.bash_profile
+SHELL_FILES += ~/.bashrc
+SHELL_FILES += ~/.hushlogin
+SHELL_FILES += ~/.profile
+~/.bash_profile: bash/.bash_profile
+~/.bash_sessions_disable: bash/.bash_sessions_disable
+~/.bashrc: bash/.bashrc
+~/.hushlogin: bash/.hushlogin
+~/.profile: sh/.profile
+$(SHELL_FILES):
+	$(link-home)
+shellfiles: $(SHELL_FILES)
+all: shellfiles
+
+# bat: install and/or (re)build syntaxes
+.PHONY: bat/syntaxes
+bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
+$(XDG_CACHE_HOME)/bat/syntaxes.bin:
+	$(XDG_CONFIG_HOME)/libexec/bat-syntaxes.fish
+# all: bat/syntaxes
+
+# vim: create cache & data dirs
+all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim
+$(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim:
+	mkdir -pv $@
+# --  install packages
+all: $(datadir)/vim/pack/.installed
+$(datadir)/vim/pack/.installed:
+	$(XDG_CONFIG_HOME)/libexec/init-vim-pack.fish && touch $@
+
+# dircolors: build .ls_colors files
+.PHONY: dircolors
+dircolors:
+	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
+all: dircolors
