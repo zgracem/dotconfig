@@ -50,19 +50,10 @@ appsupport:
 # Fix missing header file errors when building software
 .PHONY: sdk
 sdk: $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt
-dev_dir := /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
-$(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(dev_dir)/SDKs/MacOSX.sdk | $(XDG_CACHE_HOME)/dotfiles
+sdk_dir := /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+$(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(sdk_dir)/MacOSX.sdk | $(XDG_CACHE_HOME)/dotfiles
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
-
-# 1password: build fish completions
-fish/completions/op.fish: /usr/local/bin/op
-	/usr/local/bin/op completion fish >$@
-/usr/local/bin/op: | /usr/local/bin/brew
-	brew install --cask 1password/tap/1password-cli
-.PHONY: fish-completions
-fish-completions: fish/completions/op.fish
-all: fish-completions
 
 # bat: install and/or (re)build syntaxes
 .PHONY: bat/syntaxes

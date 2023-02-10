@@ -36,16 +36,16 @@ $(GIT_STAGING)/nriley/brightness:
 
 # -- BSD calendars -------------------------------------------------------------
 
-calendar: $(datadir)/calendar
+# calendar: $(datadir)/calendar
 
-$(datadir)/calendar: $(STOW_DIR)/calendar/share/calendar
-	$(STOW) $(@F)
+# $(datadir)/calendar: $(STOW_DIR)/calendar/share/calendar
+# 	$(STOW) $(@F)
 
-$(STOW_DIR)/calendar/share/calendar: $(srcdir)/calendars
-	$(INSTALL_DATA) -- $< $@
+# $(STOW_DIR)/calendar/share/calendar: $(srcdir)/calendars
+# 	$(INSTALL_DATA) -- $< $@
 
-$(srcdir)/calendars:
-	cd $(@D) && git clone --sparse git@github.com:freebsd/calendar-data.git $(@F)
+# $(srcdir)/calendars:
+# 	cd $(@D) && git clone --sparse git@github.com:freebsd/calendar-data.git $(@F)
 
 # -- cronic --------------------------------------------------------------------
 
