@@ -1,0 +1,16 @@
+! 2020-09-16 https://coolors.co
+coolors.co##.floating-cad
+coolors.co###sticky-cad
+
+! Hide post-download popup
+unsplash.com##.fvlUC
+! Hide Unsplash+ images
+unsplash.com##figure:has(div.GIFah div.sRpHt a[href^="/plus?"])
+
+! Block annoying crap
+fandom.com##.mcf-wrapper
+fandom.com##.render-wiki-recommendations
+fandom.com##.typeform-widget
+
+! Flickr download allower
+www.flickr.com##.spaceball
