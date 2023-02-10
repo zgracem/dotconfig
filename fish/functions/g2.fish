@@ -27,7 +27,8 @@ function g2 --description 'Go somewhere' -a alias
         case stow;      set dir "$HOME/opt/stow"
         case vs9;       set dir "$HOME/VS/www/vsdotcom"
         case imprint;   set dir "$HOME/VS/www/vsbooks"
-        case lxx;       set dir "$HOME/etc/gopher/sites/lxx"
+        case finger;    set dir "$HOME/etc/finger"
+        case gopher;    set dir "$HOME/etc/gopher"
         case '*'
             echo >&2 "don't know how to go to $destination!"
             return 1

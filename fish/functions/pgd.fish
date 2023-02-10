@@ -1,4 +1,4 @@
 function pgd
-    cd ~/etc/gopher/pygopherd; or return
+    cd ~/opt/etc/pygopherd; or return
     PYTHONPATH=. bin/pygopherd conf/local.conf
 end
