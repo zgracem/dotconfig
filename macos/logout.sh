@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# This shell script is called by WaitForLogout.app
+# on (you guessed it) logout.
 
 exec >>~/var/log/logout.log 2>&1
 
