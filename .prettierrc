@@ -1,5 +1,5 @@
 # vim:ft=yaml
-# https://prettier.io/docs/en/configuration.html
+# https://prettier.io/docs/en/options.html
 ---
 # Print semicolons at the ends of statements. (default: true)
 semi: false
@@ -16,3 +16,8 @@ bracketSameLine: true
 
 # Also wrap prose (e.g. Markdown) to the print width. <preserve|always|never>
 proseWrap: "preserve"
+
+# strict = Whitespace around tags (or lack thereof) is significant.
+# ignore = Whitespace around tags (or lack thereof) is insignificant.
+# css = Use CSS `display` logic to determine significance.
+htmlWhitespaceSensitivity: strict
