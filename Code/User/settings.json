@@ -34,6 +34,7 @@
   "debug.showInlineBreakpointCandidates": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.accessibilitySupport": "off",
   "editor.colorDecorators": false,
   "editor.copyWithSyntaxHighlighting": false,
   "editor.cursorStyle": "line-thin",
@@ -80,9 +81,8 @@
   "editor.unicodeHighlight.includeStrings": false,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
+  "editor.wrappingStrategy": "advanced",
   "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
-  "explorer.incrementalNaming": "smart",
-  "explorer.openEditors.visible": 0,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
@@ -91,6 +91,8 @@
     "*.scss": "${capture}.css",
     "*.slim": "${capture}.html"
   },
+  "explorer.incrementalNaming": "smart",
+  "explorer.openEditors.visible": 0,
   "extensions.closeExtensionDetailsOnViewChange": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
@@ -98,6 +100,7 @@
     "*.YAML-tmLanguage": "yaml",
     "*.[1-9]": "troff",
     "*.cscollection": "json",
+    "*.csv": "csv",
     "*.geojson": "json",
     "*.make": "makefile",
     "*.plist": "xml",
@@ -113,6 +116,7 @@
   "git.autoRepositoryDetection": "subFolders",
   "git.defaultCloneDirectory": "/Users/zozo/src/github.com",
   "git.openDiffOnClick": false,
+  "git.openRepositoryInParentFolders": "never",
   "git.path": "/usr/local/bin/git",
   "git.repositoryScanMaxDepth": -1,
   "gitlens.advanced.blame.customArguments": ["-w"],
@@ -169,6 +173,7 @@
   "prettier.trailingComma": "none",
   "problems.showCurrentInStatus": true,
   "redhat.telemetry.enabled": false,
+  "rewrap.wholeComment": false,
   "ruby.interpreter.commandPath": "/Users/zozo/.local/share/rbenv/shims/ruby",
   "ruby.pathToBundler": "/Users/zozo/.local/share/rbenv/shims/bundle",
   "ruby.useLanguageServer": false,
@@ -357,11 +362,10 @@
     "editor.insertSpaces": false
   },
   "[markdown]": {
-    "editor.autoSurround": "languageDefined",
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
     },
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
     "editor.formatOnPaste": false,
     "editor.tabSize": 4,
     "editor.wordBasedSuggestions": false,
