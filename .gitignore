@@ -17,6 +17,7 @@ StardewValley/
 syncplay.ini
 
 # unnecessary
+.bombadillo.ini
 .contrib/
 brew/**/*.lock.json
 launchd/*.plist
@@ -27,3 +28,8 @@ www/*.css
 *~
 *~orig*
 *.old
+
+# in progress
+share/doc/*.tsv
+share/doc/*.yml
+share/doc/specimen.md
