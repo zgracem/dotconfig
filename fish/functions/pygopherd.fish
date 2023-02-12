@@ -1,4 +1,4 @@
-function pgd
+function pygopherd
     argparse s/stop -- $argv; or return
 
     if set -q _flag_stop[1]
