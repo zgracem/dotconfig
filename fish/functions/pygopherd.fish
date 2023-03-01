@@ -8,6 +8,7 @@ function pygopherd
 
     cd ~/opt/etc/pygopherd; or return
     PYTHONPATH=. bin/pygopherd conf/local.conf
+    cd -
 end
 
 function __pygopherd_stop
