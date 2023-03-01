@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby -w
 
-# This Ruby script reformats its arguments into paths acceptable to an
-# AppleScript which tells the Finder to put those files in the trash. Using the
-# Finder's own API enables the "Put Back" feature on the trashed item(s).
+# This Ruby script formats its arguments into paths acceptable to an AppleScript
+# which tells the Finder to put those files in the trash. Using the Finder's own
+# API enables the "Put Back" feature on the trashed item(s).
 
 require "open3"
 require "optparse"
