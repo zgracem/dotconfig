@@ -76,6 +76,10 @@ if in-path brew
     fish_add_path $HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin
     fish_add_manpath $HOMEBREW_PREFIX/opt/gnu-tar/share/man
 
+    # llvm
+    fish_add_path $HOMEBREW_PREFIX/opt/llvm/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/llvm/share/man
+
     # curl
     fish_add_path $HOMEBREW_PREFIX/opt/curl/bin
     fish_add_manpath $HOMEBREW_PREFIX/opt/curl/share/man

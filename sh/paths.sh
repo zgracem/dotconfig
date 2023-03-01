@@ -43,6 +43,10 @@ if [ -x /usr/local/bin/brew ]; then
   MANPATH=/usr/local/opt/gnu-tar/share/man:$MANPATH
   #INFOPATH linked to /usr/local/share/info
 
+  # llvm
+  PATH=/usr/local/opt/llvm/bin:$PATH
+  MANPATH=/usr/local/opt/llvm/share/man:$MANPATH
+
   # GNU i18n/l10n utilities
   PATH=/usr/local/opt/gettext/bin:$PATH
   MANPATH=/usr/local/opt/gettext/share/man:$MANPATH

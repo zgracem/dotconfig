@@ -1,3 +1,8 @@
+# ZGM disabled 2023-02-15 -- This seems to break Ruby builds.
+# Manually run in case of "missing header file" errors.
+# See https://stackoverflow.com/questions/51761599/cannot-find-stdio-h/60002595#60002595
+exit
+
 in-path xcrun; or exit
 
 set -l sdk_file $XDG_CACHE_HOME/dotfiles/MacOSX-sdk-path.txt
