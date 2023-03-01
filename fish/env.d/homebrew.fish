@@ -4,9 +4,6 @@ in-path brew; or exit
 # (e.g. HOMEBREW_NO_AUTO_UPDATE, HOMEBREW_NO_INSTALL_CLEANUP)
 set -gx HOMEBREW_NO_ENV_HINTS 1
 
-# Only auto-update every 15 minutes (default is 5 minutes)
-set -gx HOMEBREW_AUTO_UPDATE_SECS 900
-
 # Use `bat` for `brew cat`
 if in-path bat
     set -gx HOMEBREW_BAT 1
@@ -27,6 +24,9 @@ set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 7
 
 # Print install times for each formula
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
+
+# Use EU analytics servers
+set -gx HOMEBREW_NO_GOOGLE_ANALYTICS 1
 
 # File listing default formulae for `brew livecheck` to check
 set -gx HOMEBREW_LIVECHECK_WATCHLIST $XDG_CONFIG_HOME/brew/livecheck_watchlist
