@@ -22,6 +22,9 @@ set -gx HOMEBREW_CASK_OPTS --appdir=$HOME/Applications
 # Delete cached files after 7 days (default is 120 days)
 set -gx HOMEBREW_CLEANUP_MAX_AGE_DAYS 7
 
+# `brew install|upgrade|reinstall` will cleanup weekly (default is 30 days)
+set -gx HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS 7
+
 # Print install times for each formula
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
@@ -30,9 +33,6 @@ set -gx HOMEBREW_NO_GOOGLE_ANALYTICS 1
 
 # File listing default formulae for `brew livecheck` to check
 set -gx HOMEBREW_LIVECHECK_WATCHLIST $XDG_CONFIG_HOME/brew/livecheck_watchlist
-
-# Only lists updates to formulae with differing versions (allegedly slow)
-set -gx HOMEBREW_UPDATE_REPORT_VERSION_CHANGED_FORMULAE 1
 
 # Always use the latest stable tag (even if developer commands have been run)
 set -gx HOMEBREW_UPDATE_TO_TAG 1

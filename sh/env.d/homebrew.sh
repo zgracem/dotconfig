@@ -12,9 +12,6 @@ unset -v HOMEBREW_BREW_FILE
 # Don't display hints about setting environment variables
 export HOMEBREW_NO_ENV_HINTS=1
 
-# Only auto-update every 10 minutes (default is 5 minutes)
-export HOMEBREW_AUTO_UPDATE_SECS=600
-
 # Use `bat` for `brew cat`
 if command -v bat >/dev/null; then
   export HOMEBREW_BAT=1
@@ -33,8 +30,14 @@ export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 # Delete cached files after 7 days (default is 120 days)
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
 
+# `brew install|upgrade|reinstall` will cleanup weekly (default is 30 days)
+export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=7
+
 # Print install times for each formula
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
+
+# Use EU analytics servers
+export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
 # File listing default formulae for `brew livecheck` to check
 export HOMEBREW_LIVECHECK_WATCHLIST="$XDG_CONFIG_HOME/brew/livecheck_watchlist"
