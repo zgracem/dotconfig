@@ -21,7 +21,7 @@ timestamping = on
 adjust_extension = on
 
 # Do not generate host-prefixed directories
-add_hostdir = no
+add_hostdir = off
 
 # Retry a few times when a download fails, but don't overdo it
 # (The default is 20!)
@@ -39,6 +39,9 @@ continue = on
 
 # Specify alternate path for ~/.wget-hsts
 hsts-file = "_XDG_CACHE_HOME_/wget-hsts"
+
+# Save the original URL and Referer HTTP header in extended filesystem metadata.
+xattr = on
 
 # -----------------------------------------------------------------------------
 # recursive options

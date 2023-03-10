@@ -58,7 +58,7 @@
 # -----------------------------------------------------------------------------
 
 # disguise user agent
---user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_6_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5414.87 Safari/537.36"
+--user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.64 Safari/537.36"
 
 # -----------------------------------------------------------------------------
 # post-processing options
