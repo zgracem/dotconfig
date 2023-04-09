@@ -55,11 +55,6 @@ $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(sdk_dir)/MacOSX.sdk | $(XDG_CA
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
 
-# mailcap: install
-$(datarootdir)/mailcap: mailcap/mailcap
-	$(INSTALL_DATA) -- $(realpath $<) $@
-all: $(datarootdir)/mailcap
-
 # ruby: install gems
 .PHONY: ruby/install/gems
 ruby/install/gems: ruby/Gemfile.lock
