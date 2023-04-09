@@ -55,15 +55,6 @@ $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(sdk_dir)/MacOSX.sdk | $(XDG_CA
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
 
-# Maestral: install .mignore file
-# (Not a symlink because Maestral can't sync symlinks)
-~/Dropbox/.mignore: maestral/.mignore
-	$(INSTALL_DATA) -- $< $@
-maestral/.mignore:
-	maestral status | grep -Eq 'Cannot upload symlink' && \
-	cd ~/Dropbox && fd -u -ts -tl --no-follow --strip-cwd-prefix | tee $(realpath $@)
-all: ~/Dropbox/.mignore
-
 # mailcap: install
 $(datarootdir)/mailcap: mailcap/mailcap
 	$(INSTALL_DATA) -- $(realpath $<) $@
