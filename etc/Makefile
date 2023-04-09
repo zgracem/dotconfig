@@ -76,7 +76,7 @@ shells: | /etc/shells /usr/local/bin/fish
 /usr/local/bin/fish: | /usr/local/bin/brew
 	brew install fish
 /etc/shells:
-	$(XDG_CONFIG_HOME)/libexec/init-etc-shells.sh fish bash
+	$(XDG_CONFIG_HOME)/libexec/init/etc-shells.sh fish bash
 
 # ----------------------------------------------------------------------------
 # fix console spam

@@ -5,12 +5,12 @@
 include ../common.mk
 
 # avoid shadowing HOMEBREW_REPOSITORY
-HOMEBREW_REPO := $(shell $(XDG_CONFIG_HOME)/libexec/init-homebrew.sh --repo)
+HOMEBREW_REPO := $(shell $(XDG_CONFIG_HOME)/libexec/init/homebrew.sh --repo)
 
 .PHONY: init
 init: | $(HOMEBREW_REPO)/.git
 $(HOMEBREW_REPO)/.git:
-	DRY_RUN=false $(XDG_CONFIG_HOME)/libexec/init-homebrew.sh
+	DRY_RUN=false $(XDG_CONFIG_HOME)/libexec/init/homebrew.sh
 
 BREWFILES  =
 BREWFILES += brewfile/core

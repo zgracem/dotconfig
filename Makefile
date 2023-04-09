@@ -44,7 +44,7 @@ all: shellfiles
 # Create symlinks in $HOME/Library/Application Support
 .PHONY: appsupport
 appsupport:
-	$(XDG_CONFIG_HOME)/libexec/init-appsupport.sh
+	$(XDG_CONFIG_HOME)/libexec/init/appsupport.sh
 # all: appsupport
 
 # Fix missing header file errors when building software
@@ -106,7 +106,7 @@ $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim:
 # --  install packages
 all: $(datadir)/vim/pack/.installed
 $(datadir)/vim/pack/.installed:
-	$(XDG_CONFIG_HOME)/libexec/init-vim-pack.fish && touch $@
+	$(XDG_CONFIG_HOME)/libexec/init/vim-pack.fish && touch $@
 
 # vscode-extensions: update fish completions
 fish/completions/vsx.fish: bin/vsx
