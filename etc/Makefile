@@ -15,14 +15,6 @@ install: /etc/man.conf
 	sudo $(INSTALL_DATA) --backup=existing -- $< $@
 
 # ----------------------------------------------------------------------------
-# custom sudoers(5) config
-
-install: /etc/sudoers.d/sudoer_zozo
-
-/etc/sudoers.d/%: sudoers.d/%
-	sudo $(INSTALL_DATA) -- $< $@
-
-# ----------------------------------------------------------------------------
 # custom ssh_config(5) and sshd_config(5)
 
 SSH_FILES :=
