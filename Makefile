@@ -55,13 +55,6 @@ $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(sdk_dir)/MacOSX.sdk | $(XDG_CA
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
 
-# ruby: install gems
-.PHONY: ruby/install/gems
-ruby/install/gems: ruby/Gemfile.lock
-ruby/Gemfile.lock: ruby/Gemfile
-	gem install --file=$< --lock
-# all: ruby/install/gems
-
 # stow: create symlink in $HOME
 ~/.stow-global-ignore: stow/.stow-global-ignore
 	$(link-home)
