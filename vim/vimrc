@@ -12,7 +12,9 @@ set nocompatible
 set runtimepath =$XDG_DATA_HOME/vim
 set runtimepath+=$VIMRUNTIME
 
-set packpath=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim/data
+if v:version >= 800
+  set packpath=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim/data
+endif
 
 set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
 
