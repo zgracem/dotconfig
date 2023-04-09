@@ -46,15 +46,6 @@ all: shellfiles
 	$(link-home)
 all: ~/.stow-global-ignore
 
-# vim: create cache & data dirs
-all: | $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim
-$(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim:
-	mkdir -pv $@
-# --  install packages
-all: $(datadir)/vim/pack/.installed
-$(datadir)/vim/pack/.installed:
-	$(XDG_CONFIG_HOME)/libexec/init/vim-pack.fish && touch $@
-
 # vscode-extensions: update fish completions
 fish/completions/vsx.fish: bin/vsx
 	$< completions >$@
