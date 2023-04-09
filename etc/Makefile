@@ -7,17 +7,6 @@ prefix ?= /usr/local
 include ../common.mk
 
 # ----------------------------------------------------------------------------
-# dnsmasq -- enable local .test TLD
-
-.PHONY: dnsmasq
-dnsmasq:
-	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE)
-# install: dnsmasq
-
-dnsmasq/uninstall:
-	cd $(XDG_CONFIG_HOME)/etc/dnsmasq && $(MAKE) uninstall
-
-# ----------------------------------------------------------------------------
 # custom man.conf(5)
 
 install: /etc/man.conf

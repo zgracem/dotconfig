@@ -58,48 +58,6 @@ fish-completions: fish/completions/vs.fish
 ~/bin/vs:
 	cd $(XDG_CONFIG_HOME)/bin && $(MAKE) $@
 
-# Install Homebrew
-.PHONY: homebrew
-homebrew:
-	cd $(XDG_CONFIG_HOME)/brew && $(MAKE)
-# all: homebrew
-
-# Install to ~/bin
-.PHONY: bin/install
-bin/install:
-	cd $(XDG_CONFIG_HOME)/bin && $(MAKE)
-all: bin/install
-
-# dircolors: build .ls_colors files
-.PHONY: dircolors
-dircolors:
-	cd $(XDG_CONFIG_HOME)/dircolors && $(MAKE)
-all: dircolors
-
-# Install files to /etc and /usr/local/etc.
-.PHONY: etc/install
-etc/install:
-	cd $(XDG_CONFIG_HOME)/etc && $(MAKE)
-all: etc/install
-
-# jq: install modules
-.PHONY: jq/install
-jq/install:
-	cd $(XDG_CONFIG_HOME)/jq && $(MAKE)
-all: jq/install
-
-# launchd: load environment for GUI apps
-.PHONY: launchd/install
-launchd/install:
-	cd $(XDG_CONFIG_HOME)/launchd && $(MAKE)
-all: launchd/install
-
-# Install packages to ~/opt/stow
-.PHONY: stow/install
-stow/install:
-	cd $(XDG_CONFIG_HOME)/stow && $(MAKE)
-all: stow/install
-
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
 # Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.
