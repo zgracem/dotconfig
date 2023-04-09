@@ -55,13 +55,6 @@ $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(sdk_dir)/MacOSX.sdk | $(XDG_CA
 	xcrun --sdk macosx --show-sdk-path >$@
 all: sdk
 
-# bat: install and/or (re)build syntaxes
-.PHONY: bat/syntaxes
-bat/syntaxes: $(XDG_CACHE_HOME)/bat/syntaxes.bin
-$(XDG_CACHE_HOME)/bat/syntaxes.bin:
-	$(XDG_CONFIG_HOME)/libexec/bat-syntaxes.fish
-# all: bat/syntaxes
-
 # Maestral: install .mignore file
 # (Not a symlink because Maestral can't sync symlinks)
 ~/Dropbox/.mignore: maestral/.mignore
