@@ -14,23 +14,11 @@ platform-specific configuration without external tools like `jq`.
 ### macOS
 
 `settings.json`, `keybindings.json`, and `snippets/` should be symlinked into
-`$HOME/Library/Application Support/Code/User`:
-
-```sh
-cd ~/Library
-ln -sf "Application Support" AppSupport
-cd $XDG_CONFIG_HOME
-make vscode-mac
-```
+`$HOME/Library/Application Support/Code/User`.
 
 ### Windows
 
-`windows/Code/User/settings.json` should be symlinked into `%APPDATA%\Code\User`:
-
-```bat
-cd %USERPROFILE%\Dropbox\.config\Code\User
-mklink %APPDATA%\Code\User\settings.json windows\Code\User\settings.json
-```
+`windows/Code/User/settings.json` should be symlinked into `%APPDATA%\Code\User`.
 
 ## Extensions
 

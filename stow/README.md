@@ -1,11 +1,7 @@
 # ~/.config/stow
 
 This directory contains configuration files for [GNU stow](https://gnu.org/software/stow),
-which should be symlinked into `$HOME`:
-
-```sh
-make -C $XDG_CONFIG_HOME symlinks
-```
+which should be symlinked into `$HOME`.
 
 ***
 
