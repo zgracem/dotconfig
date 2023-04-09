@@ -184,7 +184,7 @@
   "search.showLineNumbers": true,
   "search.smartCase": true,
   "search.sortOrder": "default",
-  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.enabled": false,
   "settingsSync.ignoredExtensions": ["castwide.solargraph"],
   "settingsSync.ignoredSettings": [
     "code-runner.customCommand",
