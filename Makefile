@@ -41,18 +41,6 @@ $(SHELL_FILES):
 shellfiles: $(SHELL_FILES)
 all: shellfiles
 
-# vscode-extensions: update fish completions
-fish/completions/vsx.fish: bin/vsx
-	$< completions >$@
-fish-completions: fish/completions/vsx.fish
-
-# vs: update/install fish completions
-fish/completions/vs.fish: ~/bin/vs
-	$< complete print >$@
-fish-completions: fish/completions/vs.fish
-~/bin/vs:
-	cd $(XDG_CONFIG_HOME)/bin && $(MAKE) $@
-
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
 # Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.

@@ -56,6 +56,18 @@ TARGETS += $(bindir)/vs
 
 install: $(TARGETS)
 
+# fish completions
+
+$(XDG_CONFIG_HOME)/fish/completions/vs.fish: $(bindir)/vs
+	$< complete print >$@
+install: $(XDG_CONFIG_HOME)/fish/completions/vs.fish
+
+$(XDG_CONFIG_HOME)/fish/completions/vsx.fish: $(CURDIR)/vsx
+	$< completions >$@
+install: $(XDG_CONFIG_HOME)/fish/completions/vsx.fish
+
+# ----------------------------------------------------------------------------
+
 .PHONY: uninstall
 uninstall:
 	rm -fv $(TARGETS)
