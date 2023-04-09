@@ -62,17 +62,6 @@ ruby/Gemfile.lock: ruby/Gemfile
 	gem install --file=$< --lock
 # all: ruby/install/gems
 
-# rbenv: create dirs and files
-.PHONY: rbenv/install
-rbenv/install: $(datadir)/rbenv/default-gems | $(datadir)/rbenv/version
-$(datadir)/rbenv/default-gems: rbenv/default-gems | $(datadir)/rbenv
-	$(INSTALL_DATA) -- $(realpath $<) $@
-$(datadir)/rbenv/version: | $(datadir)/rbenv/versions
-	rbenv global system
-$(datadir)/rbenv $(datadir)/rbenv/versions:
-	mkdir -pv $@
-all: rbenv/install
-
 # stow: create symlink in $HOME
 ~/.stow-global-ignore: stow/.stow-global-ignore
 	$(link-home)
