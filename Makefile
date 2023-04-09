@@ -41,20 +41,6 @@ $(SHELL_FILES):
 shellfiles: $(SHELL_FILES)
 all: shellfiles
 
-# Create symlinks in $HOME/Library/Application Support
-.PHONY: appsupport
-appsupport:
-	$(XDG_CONFIG_HOME)/libexec/init/appsupport.sh
-# all: appsupport
-
-# Fix missing header file errors when building software
-.PHONY: sdk
-sdk: $(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt
-sdk_dir := /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
-$(XDG_CACHE_HOME)/dotfiles/MacOSX-sdk-path.txt: $(sdk_dir)/MacOSX.sdk | $(XDG_CACHE_HOME)/dotfiles
-	xcrun --sdk macosx --show-sdk-path >$@
-all: sdk
-
 # stow: create symlink in $HOME
 ~/.stow-global-ignore: stow/.stow-global-ignore
 	$(link-home)
