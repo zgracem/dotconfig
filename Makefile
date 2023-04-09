@@ -41,11 +41,6 @@ $(SHELL_FILES):
 shellfiles: $(SHELL_FILES)
 all: shellfiles
 
-# stow: create symlink in $HOME
-~/.stow-global-ignore: stow/.stow-global-ignore
-	$(link-home)
-all: ~/.stow-global-ignore
-
 # vscode-extensions: update fish completions
 fish/completions/vsx.fish: bin/vsx
 	$< completions >$@

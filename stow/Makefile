@@ -21,6 +21,11 @@ PACKAGES += words
 .PHONY: $(PACKAGES)
 install: $(PACKAGES)
 
+# create config symlink in $HOME
+~/.stow-global-ignore: .stow-global-ignore
+	ln -sfv .config/$< $@
+install: ~/.stow-global-ignore
+
 # -- brightness utility --------------------------------------------------------
 
 brightness: $(bindir)/brightness
