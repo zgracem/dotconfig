@@ -2,8 +2,8 @@
 
 set -g inbox_dirs
 set -a inbox_dirs ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
-set -a inbox_dirs /Volumes/Hub/Art/inbox.old
-set -g stock_dirs $HOME/{Pictures,Downloads}/unsplash/**/
+set -a inbox_dirs /Volumes/Hub/Art/unused/inbox
+set -g stock_dirs ~/{Pictures,Downloads}/unsplash/**/
 
 set -gx attr org.inescapable.squirrel.archived
 
@@ -164,7 +164,7 @@ function main
             switch $layer
                 case "IMG*"
                     set -f layer_files (path filter $inbox_dirs/$layer.*)
-                    set -f used_dir /Volumes/Hub/Art/used
+                    set -f used_dir /Volumes/Hub/Art/used/inbox
                 case "*-unsplash"
                     set -f layer_files (path normalize $stock_dirs/$layer.* | path filter)
                     set -f used_dir /Volumes/Hub/Art/used/unsplash
