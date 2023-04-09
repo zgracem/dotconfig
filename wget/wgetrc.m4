@@ -8,7 +8,7 @@ user_agent = "_USER_AGENT_"
 
 # Wait (0.5~1.5 * <wait>) seconds between requests to mask wget's presence
 random_wait = on
-wait = 2
+wait = 1
 
 # Ignore `robots.txt` and `<meta name=robots content=nofollow>`
 robots = off

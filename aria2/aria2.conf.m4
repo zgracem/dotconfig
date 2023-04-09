@@ -5,7 +5,7 @@ max-concurrent-downloads=8
 # The maximum number of connections to one server for each download (default: -x1)
 max-connection-per-server=2
 # Do not split files smaller than 2*SIZE (default: -k20M)
-min-split-size=5M
+min-split-size=20M
 # Completely disable netrc support
 no-netrc=true
 # Spoof user agent for HTTP(S) downloads (default: -Uaria2c/$VERSION)
