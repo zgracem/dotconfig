@@ -1,6 +1,11 @@
-.PHONY: all
-all: $(CURDIR)/helpfile.html
-all: $(CURDIR)/helpfile.css
+# ----------------------------------------------------------------------------
+# Custom help files for Lynx
+# ----------------------------------------------------------------------------
+
+include ../../common.mk
+
+install: $(CURDIR)/helpfile.html
+install: $(CURDIR)/helpfile.css
 
 SLIM_OPTS  = --option format=:html
 SLIM_OPTS += --option tabsize=2
