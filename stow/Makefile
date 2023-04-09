@@ -21,6 +21,11 @@ PACKAGES += words
 .PHONY: $(PACKAGES)
 install: $(PACKAGES)
 
+# create config symlink in $HOME
+~/.stow-global-ignore: .stow-global-ignore
+	ln -sfv .config/$< $@
+install: ~/.stow-global-ignore
+
 # -- brightness utility --------------------------------------------------------
 
 brightness: $(bindir)/brightness
@@ -86,7 +91,7 @@ $(STOW_DIR)/dayone2/bin/dayone2: ~/Applications/DayOne.app/Contents/Resources/da
 
 ~/Applications/DayOne.app/Contents/Resources/dayone2: ~/Applications/DayOne.app
 ~/Applications/DayOne.app:
-	$(XDG_CONFIG_HOME)/libexec/init-dayone.sh
+	$(XDG_CONFIG_HOME)/libexec/init/dayone.sh
 
 # -- hunspell (for Sublime Merge) ----------------------------------------------
 

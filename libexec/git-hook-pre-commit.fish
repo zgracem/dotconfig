@@ -35,15 +35,15 @@ if string match -q "jq/*" $staged_files
 end
 
 if string match -q "rbenv/*" $staged_files
-    make -s -C $XDG_CONFIG_HOME rbenv/install; or exit
+    make -s -C $XDG_CONFIG_HOME/rbenv install; or exit
 end
 
 if contains -- maestral/.mignore $staged_files
-    make -s -C $XDG_CONFIG_HOME ~/Dropbox/.mignore; or exit
+    make -s -C $XDG_CONFIG_HOME/maestral ~/Dropbox/.mignore; or exit
 end
 
 if contains -- mailcap/mailcap $staged_files
-    make -s -C $XDG_CONFIG_HOME $XDG_DATA_HOME/mailcap; or exit
+    make -s -C $XDG_CONFIG_HOME/mailcap; or exit
 end
 
 if contains -- www/userContent.sass $staged_files
