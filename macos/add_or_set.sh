@@ -1,3 +1,4 @@
+# Used by WaitForLogout.mk
 add_or_set()
 {
   local pb=/usr/libexec/PlistBuddy
