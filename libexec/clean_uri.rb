@@ -158,6 +158,9 @@ module CleanURI
   end
 end
 
-ARGV << File.join(ENV.fetch("XDG_CONFIG_HOME"), ".data", "urls.dirty.txt") if ENV["VSCODE_PID"]
+if ENV["VSCODE_PID"]
+  TESTFILE = File.join(ENV.fetch("XDG_DATA_HOME"), "data", "urls.dirty.txt").freeze
+  ARGV << TESTFILE
+end
 
 ARGF.to_a.each { |arg| puts CleanURI.clean(arg) }
