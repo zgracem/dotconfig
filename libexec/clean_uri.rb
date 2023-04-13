@@ -103,11 +103,14 @@ module CleanableURI
           self.path = "/#{user}/#{post}"
         end
       when /\.tumblr\.com\Z/
+        orig_url = to_s
         self.host = "tumblr.com"
-        self.path = if %r{(?<user>\w+)\.tumblr\.com/post/(?<post>\d+)} =~ to_s
+        self.path = if %r{(?<user>\w+)\.tumblr\.com/post/(?<post>\d+)} =~ orig_url
                       "/#{user}/#{post}"
-                    elsif %r{(?<user>\w+)\.tumblr\.com(?:/|/page/\d+)?} =~ to_s
+                    elsif %r{(?<user>\w+)\.tumblr\.com(?:/|/page/\d+)?} =~ orig_url
                       "/blog/#{user}"
+                    else
+                      "/#{path}"
                     end
         self.fragment = nil
       when "youtube.com"
