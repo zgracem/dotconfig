@@ -1,0 +1,13 @@
+[
+  { "name": "zozo", "path": "file:///Users/zozo/" },
+  { "name": "Applications", "path": "file:///Applications/" },
+  { "name": "Desktop", "path": "file:///Users/zozo/Desktop/" },
+  { "name": "Documents", "path": "file:///Users/zozo/Documents/" },
+  { "name": "Downloads", "path": "file:///Users/zozo/Downloads/" },
+  { "name": "Dropbox", "path": "file:///Users/zozo/Dropbox/" },
+  { "name": "Library", "path": "file:///Users/zozo/Library/" },
+  { "name": "Pictures", "path": "file:///Users/zozo/Pictures/" },
+  { "name": "🎨️ art", "path": "file:///Users/zozo/Desktop/%F0%9F%8E%A8%EF%B8%8F%20art/" },
+  { "name": "vsdotcom", "path": "file:///Users/zozo/VS/www/vsdotcom/" },
+  { "name": "", "path": "nwnode://domain-AirDrop" }
+]
