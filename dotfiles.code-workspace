@@ -11,11 +11,16 @@
     {
       "name": "~/.local/share/data",
       "path": "../../.local/share/data"
+    },
+    {
+      "name": "~/.local/share/doc",
+      "path": "../../.local/share/doc"
     }
   ],
   "settings": {
     "files.exclude": {
-      ".git{attributes,modules}": true
+      ".git{attributes,modules}": true,
+      "pdf/": true
     },
     "search.exclude": {
       "bat/syntaxes/": true
