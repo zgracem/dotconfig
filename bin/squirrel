@@ -44,8 +44,7 @@ function add-xattr-timestamp
         # --info only reads, doesn't write
         return
     else if set -q _flag_dry_run
-        set -q _flag_quiet
-        or echo "~~~ Would timestamp:" (gdate +"%F %T")
+        echo "~~~ Would timestamp:" (gdate +"%F %T")
     else
         xattr -w $attr (gdate +%s) $argv[1]
         or return
@@ -66,8 +65,7 @@ function clear-xattr-timestamp
         # --info and --clear are mutually exclusive
         return
     else if set -q _flag_dry_run
-        set -q _flag_quiet
-        or echo "~~~ Would clear timestamp:" (short_home $argv[1])
+        echo "~~~ Would clear timestamp:" (short_home $argv[1])
     else
         xattr -d $attr $argv[1] 2>/dev/null
         and set -q _flag_verbose
@@ -76,20 +74,30 @@ function clear-xattr-timestamp
 end
 
 function main
-    argparse -n squirrel -x{s,q},v -xc,i \
-        c/clear i/info f/force n/dry-run q/quiet s/silent v/verbose -- $argv
+    argparse -n squirrel -xs,{i,n,q,v} -xc,{i,q} \
+        c/clear i/info f/force n/dry-run q/query s/silent v/verbose h/help -- $argv
     or return
 
-    if test (count $argv) -lt 1
-        echo >&2 "Usage: squirrel FILE [FILE ...]"
+    set -f usage "Usage: squirrel [-c|-i|-q] [-fn] [-s|-v] FILE ..."
+
+    if set -q _flag_help
+        echo $usage
+        return 0
+    else if test (count $argv) -lt 1
+        echo >&2 $usage
         return 1
     end
 
-    # --silent implies -q
-    set -q _flag_silent; and set -f _flag_quiet --quiet
-
-    # --info implies -nf
+    # --info implies -nfv
     if set -q _flag_info
+        set -f _flag_dry_run --dry-run
+        set -f _flag_force --force
+        set -f _flag_verbose --verbose
+        set -f --erase _flag_silent
+    end
+
+    # --query implies -nf
+    if set -q _flag_query
         set -f _flag_dry_run --dry-run
         set -f _flag_force --force
     end
@@ -108,18 +116,22 @@ function main
         set -f nomatch_prefix "Skipped non-matching layer"
     end
 
+    set -f errored false
+
     for acorn_file in $argv
         if path extension $acorn_file | string match -vq .acorn
             set -q _flag_silent
             or echo >&2 "××× Not an Acorn file!" $acorn_file
+            set -f errored true
             continue
         end
 
-        # Print headers for each of multiple files, for 1 file if --info/--verbose,
-        # or never if --quiet/--silent.
-        if test (count $argv) -gt 1; or set -q _flag_verbose; or set -q _flag_info
-            set -q _flag_quiet
-            or echo "###" (short_home $acorn_file)
+        # Print headers for each of multiple files, for 1 file if --verbose,
+        # or never if --silent.
+        if test (count $argv) -gt 1; or set -q _flag_verbose
+            if not set -q _flag_query; and not set -q _flag_silent
+                echo "###" (short_home $acorn_file)
+            end
         end
 
         # --clear
@@ -130,19 +142,33 @@ function main
             else
                 set -q _flag_silent
                 or echo >&2 "××× No timestamp to clear:" (short_home $acorn_file)
+                set -f errored true
             end
             continue
         end
 
-        # --force is required to re-process timestamped files
         if has-xattr-timestamp $acorn_file
-            set -q _flag_silent; or set -q _flag_info
-            or echo >&2 "+++ Already processed:" (short_home $acorn_file)
+            if set -q _flag_query
+                set -q _flag_verbose
+            else
+                not set -q _flag_silent
+            end
+            and echo >&2 "+++ Already processed:" (short_home $acorn_file)
 
-            set -q _flag_verbose; or set -q _flag_info
+            set -q _flag_verbose
             and echo >&2 -- "--- Processed on:" (print-xattr-timestamp $acorn_file)
 
+            # --query skips additional processing
+            set -q _flag_query; and continue
+
+            # --force is required to re-process timestamped files
             set -q _flag_force; or continue
+        else if set -q _flag_query
+            set -q _flag_silent
+            or echo >&2 "··· Not processed:" (short_home $acorn_file)
+
+            set -f errored true
+            continue
         end
 
         set -l layers (list-acorn-layers $acorn_file)
@@ -184,12 +210,11 @@ function main
 
             for layer_file in (unique $layer_files)
                 if set -q _flag_dry_run
-                    set -q _flag_quiet
-                    or echo "››› $unarchived_prefix:" (short_home $layer_file)
+                    echo "››› $unarchived_prefix:" (short_home $layer_file)
                 else
                     /bin/mv $layer_file $used_dir; or return
 
-                    set -q _flag_quiet
+                    set -q _flag_silent
                     or echo ">>> Archived:" (short_home $layer_file)
                 end
             end # for layer_file in (unique $layer_files)
@@ -200,6 +225,12 @@ function main
         set -q _flag_silent; or set -q _flag_info
         or echo "... Done:" (basename $acorn_file)
     end # for acorn_file in $argv
+
+    if set -q _flag_query; and string match -q true $errored
+        return 1
+    else
+        return 0
+    end
 end
 
 main $argv
