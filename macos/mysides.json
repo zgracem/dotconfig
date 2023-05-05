@@ -9,5 +9,6 @@
   { "name": "Pictures", "path": "file:///Users/zozo/Pictures/" },
   { "name": "🎨️ art", "path": "file:///Users/zozo/Desktop/%F0%9F%8E%A8%EF%B8%8F%20art/" },
   { "name": "vsdotcom", "path": "file:///Users/zozo/VS/www/vsdotcom/" },
+  { "name": "zPod", "path": "file:///Volumes/Hub/Music/zPod/" },
   { "name": "", "path": "nwnode://domain-AirDrop" }
 ]
