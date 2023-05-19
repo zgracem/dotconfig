@@ -12,7 +12,7 @@ cask "discord"
 cask "fantastical"
 cask "firefox", args: { appdir: "/Applications" }
 cask "go2shell"
-cask "istat-menus"
+cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
 tap "zgracem/formulae", "file://#{Dir.home}/src/dev/homebrew-formulae"
 cask "zgracem/formulae/lockscreen"
