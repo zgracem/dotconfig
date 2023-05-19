@@ -6,7 +6,7 @@ function ls-local-ruby-versions --description "List all .ruby-version files and 
         end
     end
 
-    set --local dirs ~/Dropbox ~/www
+    set --local dirs ~/Dropbox ~/src/z ~/www
     set --local rv_files (fd -tf -sHFa ".ruby-version" $dirs)
     set --local rb_versions (rbenv versions --bare)
 
