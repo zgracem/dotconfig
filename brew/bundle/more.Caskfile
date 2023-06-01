@@ -1,5 +1,7 @@
 # vim:ft=ruby
 
+cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
+
 cask "1password-cli"
 cask "disk-drill"
 cask "dotnet-sdk"
@@ -20,7 +22,7 @@ cask "syncplay"
 cask "transmission"
 cask "transmit"
 cask "visual-studio-code-insiders"
-cask "vmware-fusion"
+cask "vmware-fusion", args: { appdir: "/Applications" }
 cask "winclone"
 cask "xact"
 
