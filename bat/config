@@ -2,6 +2,7 @@
 # shellcheck disable=SC2215
 --italic-text=always
 --pager="less -FR"
+--style=plain
 --tabs=0
 --theme=TwoDark
 
