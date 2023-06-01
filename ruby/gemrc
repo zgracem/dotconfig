@@ -1,7 +1,7 @@
 # vim:ft=yaml
 # export GEMRC=~/.config/ruby/gemrc
 ---
-install: --no-rdoc --env-shebang
-update: --no-rdoc --env-shebang --minimal-deps --conservative
+install: --no-document --env-shebang
+update: --no-document --env-shebang --minimal-deps --conservative
 uninstall: --executables
 query: --details
