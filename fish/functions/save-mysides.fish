@@ -1,4 +1,4 @@
-function save_mysides
+function save-mysides
     set -l json_file $XDG_CONFIG_HOME/macos/mysides.json
     set -l temp_file (mktemp -t mysides.XXXXXX); or return
 

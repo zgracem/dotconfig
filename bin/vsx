@@ -38,7 +38,7 @@ function do_list -d "List installed extensions"
 end
 
 function do_diff -d "Diff listed & installed extensions"
-diff -y --suppress-common-lines (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
+    diff -y --suppress-common-lines (printf "%s\\n" $desired_extensions | psub) (do_list | psub)
 end
 
 function do_json -d "List installed extensions as JSON"
