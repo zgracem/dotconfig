@@ -138,7 +138,7 @@ module CleanURI
     text.strip!
 
     # Unescape first if we find an escaped `&`, `=`, or `?`
-    if text.match(/%(?:26|3d|3f)/i)
+    if text.match(/%(?:26|3d|3f)/i) && !text.match(/\bmagnet(?:%3a|:)/i)
       require "cgi"
       text = CGI.unescape(text)
     end
@@ -147,9 +147,8 @@ module CleanURI
 
     # remove silly indirection
     uri = URI(uri.query) if uri.host == "href.li"
-    uri = URI(uri.params["url"]) if uri.host == "gate.sc"
+    uri = URI(uri.params["url"]) if %w[gate.sc mylink.cx].include?(uri.host)
     uri = URI(uri.params["gcReferrer"]) if uri.host == "shopping.yahoo.com"
-
     uri = URI(uri.params["url"]) if uri.host =~ /\bgoogle\b/ && uri.path == "/url"
 
     uri.clean
