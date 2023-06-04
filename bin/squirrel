@@ -74,12 +74,21 @@ function clear-xattr-timestamp
     end
 end
 
+# -c/--clear: remove metadata
+# -i/--info: display layers and their archival status
+# -l/--list: only list layer names
+# -f/--force: process file(s) even with the "processed" metadata flag set
+# -n/--dry-run: only show what would be done
+# -q/--query: return 0 if the "processed" flag is set on the file(s), 1 otherwise
+# -s/--silent: produce no output (only exit code)
+# -v/--verbose: produce extra output
+# -h/--help: rudimentary help
 function main
-    argparse -n squirrel -xs,{i,n,q,v} -xc,{i,q} \
-        c/clear i/info f/force n/dry-run q/query s/silent v/verbose h/help -- $argv
+    argparse -n squirrel -xs,{i,l,n,q,v} -xc,{i,l,q} \
+        c/clear i/info l/list f/force n/dry-run q/query s/silent v/verbose h/help -- $argv
     or return
 
-    set -f usage "Usage: squirrel [-c|-i|-q] [-fn] [-s|-v] FILE ..."
+    set -f usage "Usage: squirrel [-c|-i|-l|-q] [-fn] [-s|-v] FILE ..."
 
     if set -q _flag_help
         echo $usage
@@ -133,6 +142,18 @@ function main
             if not set -q _flag_query; and not set -q _flag_silent
                 echo "###" (short_home $acorn_file)
             end
+        end
+
+        # --list
+        if set -q _flag_list
+            for layer in (list-acorn-layers $acorn_file | sort -f)
+                if string match -rvq '^IMG|-unsplash' $layer
+                    set_color --dim --italic
+                end
+                echo $layer
+                set_color normal
+            end
+            continue
         end
 
         # --clear
