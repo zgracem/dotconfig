@@ -18,7 +18,8 @@ function short_home --description 'Replace $HOME with ~ in a path'
 end
 
 function list-acorn-layers -a file
-    strings -a -n 14 $file | command ag --nocolor -o '(?<=public\.tiff).+(?=MM$)'
+    # strings -a -n 14 $file | command ag --nocolor -o '(?<=public\.tiff).+(?=MM$)'
+    mdls -raw -name kMDItemLayerNames $file | string replace -rf '^\s+"(.+)",?$' '$1'
 end
 
 function get-xattr-timestamp
