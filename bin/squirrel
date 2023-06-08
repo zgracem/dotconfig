@@ -1,12 +1,23 @@
 #!/usr/bin/env fish
 
+# So this is how I make my digital art <weaknuclearforce.ca>
+#   1. Download free stock photos; create collage w/ Acorn <flyingmeat.com/acorn>
+#   2. Run that collage through various glitch apps on my phone
+#   3. Save the best glitched images to iCloud and sync them to my computer
+#   4. Create a new collage from the glitched images w/ Acorn again
+#
+# This script archives the stock photos & glitched images used in each completed
+# work so my "inbox" stays fresh. I trigger it from the Scripts menu with an
+# AppleScript that runs `squirrel --silent` on the current Acorn file. It also
+# has modes for querying Acorn files re: their un/archived status CLI-style.
+
 set -g INBOX_DIRS
 set -a INBOX_DIRS ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox/**/
 set -a INBOX_DIRS /Volumes/Hub/Art/unused/inbox/
 set -g STOCK_DIRS ~/Pictures/unsplash/**/
 
 set -g THIS squirrel
-set -g THIS_VER 2.0
+set -g THIS_VER 2.1
 set -g ATTR org.inescapable.$THIS.archived
 
 function unique --description "Prints only unique arguments"
@@ -86,37 +97,45 @@ function clear-xattr-timestamp
     return
 end
 
-set -gx usage "Usage: $THIS [-c|-i|-l|-q] [-fn] [-s|-v] FILE ..."
-# -c/--clear: remove metadata
-# -i/--info: list layers and their archival status
-# -l/--list: only list layer names
-# -q/--query: return 0 if the "processed" flag is set on the file(s), 1 otherwise
-# -f/--force: process file(s) even with the "processed" metadata flag set
-# -n/--dry-run: only show what would be done
-# -s/--silent: produce no output (only exit code)
-# -v/--verbose: produce extra output
-# -V/--version: print version and exit
-# -h/--help: rudimentary help
+set -g USAGE "Usage: $THIS [-c|-i|-l|-q] [-fn] [-s|-v] FILE ..."
+set -g HELP
+set -a HELP '-c/--clear: remove metadata from FILE(s)'
+set -a HELP '-i/--info: list layers and their archival status'
+set -a HELP '-l/--list: only list layer names'
+set -a HELP '-q/--query: return 0 if the "processed" flag is set on FILE(s), 1 otherwise'
+set -a HELP '-f/--force: process FILE(s) even with the "processed" metadata flag set'
+set -a HELP '-n/--dry-run: only show what would be done'
+set -a HELP '-s/--silent: produce no output (only exit code)'
+set -a HELP '-v/--verbose: produce extra output'
+# These two need to stay at the end.
+set -a HELP '-V/--version: print version and exit'
+set -a HELP '-h/--help: print help and exit'
+
 function main
-    set -l options \
-        c/clear i/info l/list q/query f/force n/dry-run s/silent v/verbose
+    set -l options (string replace -r '^-(./)--(.+):.*' '$1$2' -- $HELP)
 
     set -l exclusives c,i,l,q # mutually exclusive modes of operation
     set -a exclusives f,{i,l,q} # no --force w/ no-op modes
     set -a exclusives s,{i,l,n,v} # no --silent w/ modes that only output
-    set -a exclusives h,V {h,V},(string replace -r "/.+\$" "" $options)
+    set -a exclusives V,h {V,h},(string replace -r "/.+\$" "" $options[..-3])
 
-    argparse -n $THIS -x$exclusives $options h/help V/version -- $argv
+    argparse -n$THIS -x$exclusives $options -- $argv
     or return
 
+    # -h: short help
+    # --help: long help
     if set -q _flag_help
-        echo $usage
+        echo -n $USAGE\n
+        if string match -q -- "--help" $_flag_help
+            echo -ns \n Options: \n
+            echo -ns \t $HELP \n | string replace / ", " | string replace ": " \t
+        end
         return 0
     else if set -q _flag_version
         echo $THIS $THIS_VER
         return 0
     else if test (count $argv) -lt 1
-        echo >&2 $usage
+        echo >&2 $USAGE
         return 1
     end
 
@@ -133,6 +152,9 @@ function main
         set -f _flag_dry_run --dry-run
         set -f _flag_force --force
     end
+
+    # bundle flags that get exported to child functions
+    set -f _flags $_flag_dry_run $_flag_info $_flag_verbose
 
     # initialize error tracker
     set -f exit_status 0
@@ -169,7 +191,7 @@ function main
         # --clear
         if set -q _flag_clear
             if has-xattr-timestamp $acorn_file
-                clear-xattr-timestamp $_flag_dry_run $_flag_info $_flag_verbose $acorn_file
+                clear-xattr-timestamp _flags $acorn_file
                 or return
             else
                 set -q _flag_silent
@@ -210,7 +232,7 @@ function main
 
             # clear timestamp
             has-xattr-timestamp $acorn_file
-            and clear-xattr-timestamp $_flag_dry_run $_flag_info $_flag_verbose $acorn_file
+            and clear-xattr-timestamp $_flags $acorn_file
 
             set -f exit_status 1
             continue
@@ -245,6 +267,7 @@ function main
                 if set -q _flag_dry_run
                     echo ❇️ "Would archive layer:" (short_home $layer_file)
                 else
+                    # Use macOS `mv` to preserve metadata
                     if not /bin/mv $layer_file $used_dir
                         echo >&2 ⛔️ "Failed to archive:" $layer_file
                         set -f exit_status 1
@@ -261,7 +284,7 @@ function main
             echo "#️⃣" "Would timestamp:" (gdate +"%F %T")
         end
 
-        add-xattr-timestamp $_flag_dry_run $_flag_info $_flag_verbose $acorn_file
+        add-xattr-timestamp $_flags $acorn_file
 
         set -q _flag_silent; or set -q _flag_info
         or echo 🆗 "Done:" (basename $acorn_file)
