@@ -84,7 +84,7 @@ end
 # -v/--verbose: produce extra output
 # -h/--help: rudimentary help
 function main
-    argparse -n squirrel -xs,{i,l,n,q,v} -xc,{i,l,q} \
+    argparse -n squirrel -xs,{i,l,n,v} -xc,{i,l,q} \
         c/clear i/info l/list f/force n/dry-run q/query s/silent v/verbose h/help -- $argv
     or return
 
@@ -170,12 +170,9 @@ function main
         end
 
         if has-xattr-timestamp $acorn_file
-            if set -q _flag_query
-                set -q _flag_verbose
-            else
-                not set -q _flag_silent
-            end
-            and echo >&2 "+++ Already processed:" (short_home $acorn_file)
+            set -q _flag_query
+            and not set -q _flag_silent
+            and echo >&2 -e "+++ Already processed:" (short_home $acorn_file)
 
             set -q _flag_verbose
             and echo >&2 -- "--- Processed on:" (print-xattr-timestamp $acorn_file)
