@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 set -g inbox_dirs
-set -a inbox_dirs ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox
+set -a inbox_dirs ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox/**/
 set -a inbox_dirs /Volumes/Hub/Art/unused/inbox
 set -g stock_dirs ~/{Pictures,Downloads}/unsplash/**/
 
