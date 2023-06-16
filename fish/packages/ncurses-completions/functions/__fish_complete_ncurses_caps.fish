@@ -1,5 +1,5 @@
 function __fish_complete_ncurses_caps
-    # Source: ncurses-6.3/include/Caps
+    # string replace -rf '^(\w+)\t+(\w+)\t.*' '$2,$1' <ncurses-6.4/include/Caps
     set -l caps \
         bw,auto_left_margin am,auto_right_margin xsb,no_esc_ctlc \
         xhp,ceol_standout_glitch xenl,eat_newline_glitch eo,erase_overstrike \
@@ -132,7 +132,18 @@ function __fish_complete_ncurses_caps
         ehhlm,enter_horizontal_hl_mode elhlm,enter_left_hl_mode \
         elohlm,enter_low_hl_mode erhlm,enter_right_hl_mode \
         ethlm,enter_top_hl_mode evhlm,enter_vertical_hl_mode \
-        sgr1,set_a_attributes slength,set_pglen_inch
+        sgr1,set_a_attributes slength,set_pglen_inch OTi2,termcap_init2 \
+        OTrs,termcap_reset OTug,magic_cookie_glitch_ul OTbs,backspaces_with_bs \
+        OTns,crt_no_scrolling OTnc,no_correctly_working_cr \
+        OTdC,carriage_return_delay OTdN,new_line_delay OTnl,linefeed_if_not_lf \
+        OTbc,backspace_if_not_bs OTMT,gnu_has_meta_key \
+        OTNL,linefeed_is_newline OTdB,backspace_delay \
+        OTdT,horizontal_tab_delay OTkn,number_of_function_keys \
+        OTko,other_non_function_keys OTma,arrow_key_map OTpt,has_hardware_tabs \
+        OTxr,return_does_clr_eol OTG2,acs_ulcorner OTG3,acs_llcorner \
+        OTG1,acs_urcorner OTG4,acs_lrcorner OTGR,acs_ltee OTGL,acs_rtee \
+        OTGU,acs_btee OTGD,acs_ttee OTGH,acs_hline OTGV,acs_vline \
+        OTGC,acs_plus meml,memory_lock memu,memory_unlock box1,box_chars_1
 
     string replace ',' \t $caps
 end
