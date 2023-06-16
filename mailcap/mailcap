@@ -7,6 +7,7 @@ application/zip; open -b cx.c3.thearchivebrowser %s; test=test -z "$SSH_TTY"
 
 # media
 audio/*; open -a VLC %s; ; test=test -z "$SSH_TTY"
+audio/*; afplay %s &; ; test=test -n "$SSH_TTY"
 video/*; open -a VLC %s; ; test=test -z "$SSH_TTY"
 image/*; qlmanage -p %s >/dev/null 2>&1 &; ; test=test -z "$SSH_TTY"
 
