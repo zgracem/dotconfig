@@ -17,7 +17,7 @@ set -a INBOX_DIRS /Volumes/Hub/Art/unused/inbox/
 set -g STOCK_DIRS ~/Pictures/unsplash/**/
 
 set -g THIS squirrel
-set -g THIS_VER 2.1
+set -g THIS_VER 2.2
 set -g ATTR org.inescapable.$THIS.archived
 
 function unique --description "Prints only unique arguments"
@@ -61,7 +61,7 @@ function add-xattr-timestamp
         # --info only reads, doesn't write
         return
     else if set -q _flag_dry_run
-        echo "#️⃣" "Would add timestamp to" (short_home $file):
+        echo "#️⃣ " "Would add timestamp to" (short_home $file): (gdate +"%F %T")
     else
         xattr -w $ATTR (gdate +%s) $file
         or return
@@ -85,7 +85,7 @@ function clear-xattr-timestamp
         # --info and --clear are mutually exclusive
         return
     else if set -q _flag_dry_run
-        echo "#️⃣" "Would clear timestamp:" (short_home $file)
+        echo "#️⃣ " "Would clear timestamp:" (short_home $file)
     else
         xattr -d $ATTR $file 2>/dev/null
         or return
@@ -260,29 +260,35 @@ function main
             if test -n "$archived_file"
                 set -q _flag_silent
                 or echo ❎ "Already archived layer:" $archived_file
+                set -q _flag_force; or continue
+            end
+
+            set -l unique_layer_files (unique $layer_files)
+            if test -z "$unique_layer_files"
+                set -q _flag_silent
+                or echo 🛑 "No layer files found for $name"
+                set -f exit_status 1
                 continue
             end
 
-            for layer_file in (unique $layer_files)
+            for layer_file in $unique_layer_files
                 if set -q _flag_dry_run
                     echo ❇️ "Would archive layer:" (short_home $layer_file)
-                else
+                else if path is -f $layer_file
                     # Use macOS `mv` to preserve metadata
                     if not /bin/mv $layer_file $used_dir
                         echo >&2 ⛔️ "Failed to archive:" $layer_file
-                        set -f exit_status 1
-                        continue
+                        exit 1
                     end
 
                     set -q _flag_silent
                     or echo ✅ "Archived:" (short_home $layer_file)
+                else
+                    echo >&2 🛑 "Layer file not found:" «$layer_file»
+                    exit 1
                 end
             end # for layer_file in (unique $layer_files)
         end # for layer in (unique $layer_names)
-
-        if set -q _flag_dry_run; and not set -q _flag_info
-            echo "#️⃣" "Would timestamp:" (gdate +"%F %T")
-        end
 
         add-xattr-timestamp $_flags $acorn_file
 
