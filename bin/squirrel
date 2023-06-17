@@ -17,7 +17,7 @@ set -a INBOX_DIRS /Volumes/Hub/Art/unused/inbox/
 set -g STOCK_DIRS ~/Pictures/unsplash/**/
 
 set -g THIS squirrel
-set -g THIS_VER 2.2.1
+set -g THIS_VER 2.3
 set -g ATTR org.inescapable.$THIS.archived
 
 function unique --description "Prints only unique arguments"
@@ -107,6 +107,7 @@ set -a HELP '-l/--list: only list layer names'
 set -a HELP '-q/--query: return 0 if the "processed" flag is set on FILE(s), 1 otherwise'
 set -a HELP '-f/--force: process FILE(s) even with the "processed" metadata flag set'
 set -a HELP '-n/--dry-run: only show what would be done'
+set -a HELP '-C/--count: only print ct. of archived layers'
 set -a HELP '-s/--silent: produce no output (only exit code)'
 set -a HELP '-v/--verbose: produce extra output'
 # These two need to stay at the end.
@@ -155,6 +156,11 @@ function main
         set -f _flag_force --force
     end
 
+    # --count implies --silent
+    if set -q _flag_count
+        set -f _flag_silent --silent
+    end
+
     # bundle flags that get exported to child functions
     set -f _flags $_flag_dry_run $_flag_info $_flag_silent $_flag_verbose
 
@@ -162,6 +168,7 @@ function main
     set -f exit_status 0
 
     for acorn_file in $argv
+        set -l layers_archived 0
         if path extension $acorn_file | string match -vq .acorn
             set -q _flag_silent
             or echo >&2 🛑 "Not an Acorn file!" $acorn_file
@@ -293,6 +300,7 @@ function main
                     exit 1
                 end
 
+                set layers_archived (math $layers_archived + 1)
             end # for layer_file in $unique_layer_files
         end # for layer in (unique $layer_names)
 
@@ -300,6 +308,8 @@ function main
 
         set -q _flag_silent; or set -q _flag_info
         or echo 🆗 "Done:" (basename $acorn_file)
+
+        set -q _flag_count; and echo $layers_archived
     end # for acorn_file in $argv
 
     return $exit_status
