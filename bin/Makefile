@@ -13,6 +13,7 @@ SHIMS += centre
 SHIMS += code
 SHIMS += git-cc
 SHIMS += lsregister
+SHIMS += manpdf
 SHIMS += PlistBuddy
 SHIMS += pyjamas
 SHIMS += right
@@ -43,12 +44,6 @@ pyjamas/gems: $(PJ_CACHE)
 $(bindir)/pyjamas: | pyjamas/gems
 $(PJ_CACHE): ../fish/packages/pyjamas/functions/pyjamas.fish
 	ruby $(PJ_LIBS) -etrue 2>&1 || gem install $(PJ_GEMS) && touch $@
-
-$(bindir)/manpdf: $(wildcard ~/src/z)/manpdf/manpdf.sh | $(datarootdir)/doc/pdf
-	$(INSTALL_PROGRAM) -- $< $@
-$(datarootdir)/doc/pdf:
-	mkdir -pv $@
-TARGETS += $(bindir)/manpdf
 
 $(bindir)/vs: ~/VS/www/vsdotcom/bin/vs.fish
 	ln -sfv $(subst $(HOME),..,$<) $@
