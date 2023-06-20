@@ -18,7 +18,7 @@ function ls-local-ruby-versions --description "List all .ruby-version files and 
 
         printf "%s/%s\n" $rb_version $project_dir
     end \
-        | sort -u \
+        | path sort -u \
         | while read line
         set --local info (string split --max=1 / $line)
         set --local rb_version $info[1]

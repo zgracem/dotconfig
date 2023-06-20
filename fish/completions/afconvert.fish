@@ -5,7 +5,7 @@ command -sq afconvert; or return
 source (status dirname)/say.fish # for __fish_complete_pcm_formats
 
 function __fish_complete_afconvert_dataformats
-    set -l formats (afconvert -hf 2>&1 | string match -ar "'.{4}'(?! =)" | sort -u)
+    set -l formats (afconvert -hf 2>&1 | string match -ar "'.{4}'(?! =)" | path sort -u)
     printf '%s\t\n' $formats
 end
 

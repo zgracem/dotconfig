@@ -7,7 +7,7 @@ function __fish_complete_say_voices
         | string replace -ar '\s+(?=[a-z]{2}_[A-Z0-9]{2}|#)' \t \
         | string split -f1 \t \
         | string match -rv ' \(.+ \(.+\)\)$' \
-        | sort
+        | path sort
 end
 
 function __fish_complete_say_devices
@@ -22,7 +22,7 @@ function __fish_complete_say_dataformats
     set -lx LC_ALL C
     for fmt in (__fish_complete_say_formats | string split -f1 \t)
         say --file-format=$fmt --data-format=?
-    end | sort -ui | string replace -r -f '^(\w{4})\s+(.+?),.*' '$1\t$2'
+    end | path sort -u | string replace -r -f '^(\w{4})\s+(.+?),.*' '$1\t$2'
 end
 
 function __fish_complete_pcm_formats

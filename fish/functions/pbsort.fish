@@ -1,3 +1,3 @@
 function pbsort
-    pbmap sort -u
+    pbmap path sort -u
 end

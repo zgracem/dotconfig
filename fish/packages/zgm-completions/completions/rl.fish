@@ -9,7 +9,7 @@ function __fish_complete_rl
         printf "%s\\n" $__fish_config_dir/conf.d/*.fish \
             | string match -rg "^$__fish_config_dir/conf.d/(.+)\.fish"
     end \
-        | sort -u
+        | path sort -u
 end
 
 complete -c rl -xa "(__fish_complete_rl)"

@@ -21,13 +21,13 @@ end
 function __fish_complete_qlmanage_generators
     qlmanage -m plugins \
     | string replace -rf "^\s+([\w.-]+) -> (.*) \(\d[\d.]*\)" '$2'\t \
-    | sort -u
+    | path sort -u
 end
 
 function __fish_complete_qlmanage_types
     qlmanage -m plugins \
     | string replace -rf "^\s+([\w.-]+) -> (.*) \(\d[\d.]*\)" '$1'\t \
-    | sort -u
+    | path sort -u
 end
 
 set -l qlexcl -s r -s m -s t -s p -s h -s z

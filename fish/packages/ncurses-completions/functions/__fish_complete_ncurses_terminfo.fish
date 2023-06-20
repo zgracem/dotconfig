@@ -9,5 +9,5 @@ function __fish_complete_ncurses_terminfo
 
     test (count $all_ti_files) -gt 0; or return
 
-    path basename $all_ti_files | sort -u | string match -v '*+*'
+    path basename $all_ti_files | path sort -u | string match -v '*+*'
 end
