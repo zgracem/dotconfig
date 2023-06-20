@@ -4,7 +4,7 @@
     "htop": true,
     "iterm2": true,
     "putty/*.session": { "when": "$(basename).patch" },
-    "StardewValley/{ErrorLogs,Saves}": true,
+    "StardewValley": true,
     "syncplay.ini": true
   },
   "git.detectSubmodules": false
