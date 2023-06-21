@@ -18,6 +18,7 @@ SHIMS += PlistBuddy
 SHIMS += pyjamas
 SHIMS += right
 SHIMS += squirrel
+SHIMS += tbcopy
 SHIMS += trash
 SHIMS += un1q
 SHIMS += vsx
