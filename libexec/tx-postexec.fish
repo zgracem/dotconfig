@@ -1,66 +1,70 @@
 #!/usr/local/bin/fish
 
-# This script is called by Transmission.app when a torrent finished downloading,
-# and writes a log file to ~/var/log about it.
+# This script is called by Transmission.app when a torrent finishes downloading,
+# and writes a JSON log file to ~/var/log/transmission about it.
+# See: <https://github.com/transmission/transmission/blob/main/docs/Scripts.md>
 #
-# defaults write -app Transmission DoneScriptPath "$XDG_CONFIG_HOME/libexec/tx-postexec.fish"
+# To "install":
+#   defaults write -app Transmission DoneScriptPath "$XDG_CONFIG_HOME/libexec/tx-postexec.fish"
 
-fish_add_path --move $HOME/opt/bin
-command -sq tremc; or exit 127
+command -sq transmission-remote
+or exit 127
 
-if not set -q TR_TORRENT_HASH[1]
-    echo >&2 "TR_TORRENT_HASH not found in environment, aborting"
-    exit
+set -q TR_TORRENT_HASH[1]
+or exit
+
+set -gx LOG_DIR "$HOME/var/log/transmission"
+set -gx LOG_FILE $LOG_DIR/$TR_TORRENT_HASH.json
+mkdir -p $LOG_DIR
+
+function list-files -a id #=> $FILE_LIST
+    transmission-remote --torrent "$id" --info-files | tail -n+3
 end
+set -gx FILE_LIST (list-files "$TR_TORRENT_ID")
 
-set -g log_dir "$HOME/var/log/transmission"
-set -g log_file $log_dir/$TR_TORRENT_HASH.json
-mkdir -p $log_dir
-
-function list-files -a id #=> $file_list
-    tremc -- --torrent "$id" --info-files | tail -n+3
-end
-set -gx file_list (list-files "$TR_TORRENT_ID")
-
-function parse-files #=> $files_json
-    set -l file_data
+function parse-files #=> $FILES_JSON
+    set -l rxparts
+    set -a rxparts "\s+(?<file_id>\d+):"
+    set -a rxparts "\s+(?<done>[\d.%]+)"
+    set -a rxparts "\s+(?<priority>\S+)"
+    set -a rxparts "\s+(?<get>\S+)"
+    set -a rxparts "\s+(?<file_size>[0-9.]+ \SB)"
+    set -a rxparts "\s+(?<file_name>.+)\$"
+    set -l regex (string join "" $rxparts)
 
     for line in $argv
-        set -l matches (string match -r '\s+(\d+):\s+([\d.%]+)\s+(\S+)\s+(\S+)\s+([0-9.]+ \SB)\s+(.+)$' $line)
-        or continue
-
-        set -l json
-        set -a json '"file_id":%i'      $matches[2]
-        set -a json '"file_name":"%s"'  $matches[3]
-        set -a json '"file_size":"%s"'  $matches[4]
-        set -a json '"get":"%s"'        $matches[5]
-        set -a json '"priority":"%s"'   $matches[6]
-        set -a json '"done":"%s"'       $matches[7]
-
-        echo -s '{' (string join , $json) '}' | jq -cR . | jq -cr .
+        if string match -rq $regex -- $line
+            set -f json
+            set -a json (printf '"file_id":%i'      $file_id)
+            set -a json (printf '"done":"%s"'       $done)
+            set -a json (printf '"priority":"%s"'   $priority)
+            set -a json (printf '"get":"%s"'        $get)
+            set -a json (printf '"file_size":"%s"'  $file_size)
+            set -a json (printf '"file_name":"%s"'  $file_name)
+            echo -s '{' (string join , $json) '}' | jq -cR . | jq -cr .
+        else
+            continue
+        end
     end
 end
-set -gx files_json (parse-files $file_list)
+set -gx FILES_JSON (parse-files $FILE_LIST)
 
-function print-details -a id #=> $details
-    tremc -- --torrent "$id" --info
+function print-details -a id #=> $DETAILS
+    transmission-remote --torrent "$id" --info
 end
-set -gx details (print-details "$TR_TORRENT_ID")
+set -gx DETAILS (print-details "$TR_TORRENT_ID")
 
-function parse-details #=> $details_json
-    function get-detail -a pattern
-        string match -r $pattern $details
-    end
+function parse-details #=> $DETAILS_JSON
+    set -l details (print-details $TR_TORRENT_ID | string trim)
 
-    set -l mg (get-detail '(?<=\A\s{2}Magnet: )magnet:.+$')
-    set -l dl (get-detail '(?<=\A\s{2}Downloaded: )[0-9.]+ \SB\b')
-    or set dl None
-    set -l ul (get-detail '(?<=\A\s{2}Uploaded: )[0-9.]+ \SB\b')
-    or set ul None
-    set -l sz (get-detail '(?<=\A\s{2}Total size: )[0-9.]+ \SB\b')
-    set -l da (get-detail '(?<=\A\s{2}Date added: \s{6}).+$')
-    set -l ds (get-detail '(?<=\A\s{2}Date started: \s{4}).+$')
-    set -l dt (get-detail '(?<=\A\s{2}Downloading Time: \d)[^(]+\((\d+) seconds\)')[2]
+    string match -rq '\AMagnet: (?<mg>.+)' $DETAILS
+    string match -rq '\ADownloaded: (?<dl>[0-9.]+ \SB)\b' $DETAILS; or set dl None
+    string match -rq '\AUploaded: (?<ul>[0-9.]+ \SB)\b' $DETAILS; or set ul None
+    string match -rq '\ATotal size: (?<sz>[0-9.]+ \SB)\b' $DETAILS
+    string match -rq '\ADate added:\s+(?<da>.+)' $DETAILS
+    string match -rq '\ADate started:\s+(?<ds>.+)' $DETAILS
+    # set -l dt (get-detail '(?<=\A\s{2}Downloading Time: \d)[^(]+\((\d+) seconds\)')[2]
+    string match -rq '\ADownloading Time:\s+.+?(?<dt>\d+) seconds' $DETAILS
 
     set -l json
     set -a json (printf '"magnet":"%s"'         $mg)
@@ -73,31 +77,35 @@ function parse-details #=> $details_json
 
     echo -ns '{' (string join , $json) '}'
 end
-set -gx details_json (parse-details)
+set -gx DETAILS_JSON (parse-details)
 
 function basic-json-info
     set -l json
+    set -l TR_TIME_LOCALTIME (string trim $TR_TIME_LOCALTIME)
     set -a json (printf '"time":"%s"'       $TR_TIME_LOCALTIME)
     set -a json (printf '"hash":"%s"'       $TR_TORRENT_HASH)
     set -a json (printf '"name":"%s"'       $TR_TORRENT_NAME)
     set -a json (printf '"directory":"%s"'  $TR_TORRENT_DIR)
     set -a json (printf '"id":%i'           $TR_TORRENT_ID)
-    set -a json         '"client":{"name":"Transmission"}'
-    set -a json (printf '"version":"%s"'    $TR_APP_VERSION)
+    set -a json '"client":{"name":"Transmission"'
+    set -a json (printf '"version":"%s"}'   $TR_APP_VERSION)
+
+    set -l trackers (string split -n ,      $TR_TORRENT_TRACKERS)
+    set -a json (printf '"trackers":[%s]' (string join , '"'$trackers'"'))
 
     echo -ns '{' (string join , $json) '}'
 end
 
-function add-details-and-files
+function add-details-and-files # stdout | add-details-and-files | stdin
     jq \
-        --slurpfile details (printf "%s\n" $details_json | psub) \
-        --slurpfile files (printf "%s\n" $files_json | psub) \
-        '. + $details[0] + {files: $files}'
+        --slurpfile details (printf "%s\n" $DETAILS_JSON | psub) \
+        --slurpfile files (printf "%s\n" $FILES_JSON | psub) \
+        '. + $DETAILS[0] + {files: $files}'
 end
 
 function process-json
-    set -l jq_file (status dirname)/(basename (status filename) .fish)
-    jq -M --from-file $dir/$base.jq
+    set -l jq_file (status dirname)/(basename (status filename) .fish).jq
+    jq -M --from-file $jq_file
 end
 
 function print-complete-json-info
@@ -105,7 +113,7 @@ function print-complete-json-info
 end
 
 function main
-    print-complete-json-info >$log_file
+    print-complete-json-info | tee $LOG_FILE
 end
 
 main
