@@ -7,7 +7,7 @@ function update-lastpwd --on-variable PWD
     or string match -q Visor "$ITERM_PROFILE"
     or set -q fish_private_mode; and return
     echo "$PWD" >$LAST_PWD_CACHE
-    printf "- pwd: %s\n  when: %s\n" "$PWD" (date +%s) >>$PWD_HISTFILE
+    printf -- "- pwd: %s\n  when: %s\n" "$PWD" (date +%s) >>$PWD_HISTFILE
 end
 
 function goto-lastpwd --on-event fish_prompt

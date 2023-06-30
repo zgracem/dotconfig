@@ -8,8 +8,8 @@
 #
 # This script archives the stock photos & glitched images used in each completed
 # work so my "inbox" stays fresh. I trigger it from the Scripts menu with an
-# AppleScript that runs `squirrel --silent` on the current Acorn file. It also
-# has modes for querying Acorn files re: their un/archived status CLI-style.
+# AppleScript that runs `squirrel --count` on the current Acorn file. It also
+# has modes for querying Acorn files re: their un/archived status from the CLI.
 
 set -g INBOX_DIRS
 set -a INBOX_DIRS ~/Library/"Mobile Documents"/com~apple~CloudDocs/Images/_inbox/**/
