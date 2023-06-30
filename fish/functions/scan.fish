@@ -1,22 +1,22 @@
 function scan --description 'Scan for network information'
-    set -lx arity_2 file pid port
-    set -lx arity_1 fs ssh wifi
-    set -lx commands $arity_1 $arity_2
+    set -lx ARITY_2 file pid port
+    set -lx ARITY_1 fs ssh wifi
+    set -lx COMMANDS $ARITY_1 $ARITY_2
 
     function _scan_commands
-        for cmd in $commands
-            if contains -- "$cmd" $arity_2
+        for cmd in $COMMANDS
+            if contains -- "$cmd" $ARITY_2
                 echo "$cmd <$cmd>"
-            else if contains -- "$cmd" $arity_1
+            else if contains -- "$cmd" $ARITY_1
                 echo "$cmd"
             end
         end
     end
 
     function _scan_args
-        if contains -- "$argv[1]" $arity_2
+        if contains -- "$argv[1]" $ARITY_2
             set -q argv[2]; and return 0
-        else if contains -- "$argv[1]" $arity_1
+        else if contains -- "$argv[1]" $ARITY_1
             not set -q argv[2]; and return 0
         else if set -q argv[1]
             echo "invalid subcommand: $argv[1]" >&2
@@ -27,9 +27,9 @@ function scan --description 'Scan for network information'
     end
 
     function _scan_usage -a cmd
-        if contains -- "$cmd" $arity_2
+        if contains -- "$cmd" $ARITY_2
             echo "Usage: scan $cmd <$cmd>"
-        else if contains -- "$cmd" $arity_1
+        else if contains -- "$cmd" $ARITY_1
             echo "Usage: scan $cmd"
         else
             echo -s "Usage: scan [" (_scan_commands | string join "|") "]"

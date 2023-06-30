@@ -85,15 +85,15 @@ set -a GCC_COLORS "locus="(get_color --dim)
 set -a GCC_COLORS "quote="(get_color $fish_color_quote)
 
 # grep -- also used in functions/_wrappers/ag.fish
-set -gx __grep_color_match (get_color brmagenta --underline)
-set -gx __grep_color_file (get_color blue)
-set -gx __grep_color_line (get_color cyan)
+set -gx __GREP_COLOR_MATCH (get_color brmagenta --underline)
+set -gx __GREP_COLOR_FILE (get_color blue)
+set -gx __GREP_COLOR_LINE (get_color cyan)
 
 set -gx --path GREP_COLORS
 set -a GREP_COLORS "se="(get_color --dim)
-set -a GREP_COLORS "mt=$__grep_color_match"
-set -a GREP_COLORS "fn=$__grep_color_file"
-set -a GREP_COLORS "ln=$__grep_color_line"
+set -a GREP_COLORS "mt=$__GREP_COLOR_MATCH"
+set -a GREP_COLORS "fn=$__GREP_COLOR_FILE"
+set -a GREP_COLORS "ln=$__GREP_COLOR_LINE"
 
 # jq
 set -gx --path JQ_COLORS
