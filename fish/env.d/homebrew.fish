@@ -28,9 +28,6 @@ set -gx HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS 7
 # Print install times for each formula
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
-# Use EU analytics servers
-set -gx HOMEBREW_NO_GOOGLE_ANALYTICS 1
-
 # File listing default formulae for `brew livecheck` to check
 set -gx HOMEBREW_LIVECHECK_WATCHLIST $XDG_CONFIG_HOME/brew/livecheck_watchlist
 
