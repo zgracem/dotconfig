@@ -7,7 +7,7 @@ include ../../common.mk
 install: /etc/pam.d/sudo
 
 /etc/pam.d/sudo: sudo.patch | $(libdir)/pam/pam_reattach.so $(libdir)/pam/pam_watchid.so.2
-	sudo patch -i $< /etc/pam.d/sudo
+	sudo patch -i $< $@
 $(libdir)/pam/pam_reattach.so: | /usr/local/bin/brew
 	brew install pam-reattach
 
