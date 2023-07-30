@@ -43,7 +43,9 @@
       "[scss]",
       "[shellscript]",
       "[tsv]",
+      "[twee3-harlowe-3]",
       "[viml]",
+      "[xml]",
       "[yaml]"
     ],
     "workbench.colorTheme": "Better Solarized Dark Italics",
