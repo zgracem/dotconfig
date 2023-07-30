@@ -1,7 +1,6 @@
 if in-path fd
     function ff -d "Find files"
         set -p argv --type=f # files only
-        set -p argv --glob # glob-based search
         set -p argv --full-path # search against the whole path
         fd $argv
     end
