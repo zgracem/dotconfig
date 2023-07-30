@@ -1,0 +1,1038 @@
+{
+  // basics
+
+  "(set:) macro": {
+    "prefix": "set:",
+    "body": "(set: ${1:${2|num,number,str,string,bool,boolean,array,dm,datamap,ds,dataset,command,changer,colour,color,gradient,lambda,macro,datatype,codehook,even,odd,int,integer,empty,whitespace,lowercase,uppercase,anycase,alnum,alphanumeric,digit,newline,linebreak,const,any|}-type }${3:\\$varName} to ${0:value})"
+  },
+  "(put:) macro": {
+    "prefix": "put:",
+    "body": "(put: ${0:value} into ${1:\\$varName})"
+  },
+  "(move:) macro": {
+    "prefix": "move:",
+    "body": "(move: ${1:${2:\\$arr}'s ${3:1st}} into ${4:\\$var})"
+  },
+  "(print:) macro": {
+    "prefix": "print:",
+    "body": "(print: ${0:\\$var + \"s\"})"
+  },
+  "(display:) macro": {
+    "prefix": "display:",
+    "body": "(display: ${1:\"${2:Cellar}\"})"
+  },
+  "(if:) macro": {
+    "prefix": "if:",
+    "body": "(if: ${1:Boolean})[$0]"
+  },
+  "(unless:) macro": {
+    "prefix": "unless:",
+    "body": "(unless: ${1:Boolean})[$0]"
+  },
+  "(else-if:) macro": {
+    "prefix": "else-if:",
+    "body": "(else-if: ${1:Boolean})[$0]"
+  },
+  "(else:) macro": {
+    "prefix": "else:",
+    "body": "(else:)[$0]"
+  },
+  "(for:) macro, each lambda": {
+    "prefix": ["for:", "loop:", "for-each:"],
+    "body": "(for: each ${1:_item}, ${2:...${3:\\$arr}})[${0:You have the _item.}]"
+  },
+  "(for:) macro, where lambda": {
+    "prefix": ["for:", "loop:", "for-where:"],
+    "body": "(for: ${1:_ingredient} where ${2:it contains \"oil\"}, ${3:...${4:\\$ingredients}})[${0:Cook the _ingredient?}]"
+  },
+  "(either:) macro": {
+    "prefix": "either:",
+    "body": "(either: ${1:...${2:\\$array}})"
+  },
+  "(cond:) macro": {
+    "prefix": "cond:",
+    "body": "(cond: ${1:Boolean}, ${2:_ifTrue}, ${3:_ifFalse})"
+  },
+  "(nth:) macro": {
+    "prefix": "nth:",
+    "body": "(nth: ${1:\\$num}, ${2:...${3:\\$array}})"
+  },
+  "(verbatim:) macro": {
+    "prefix": ["v6m:", "verbatim:"],
+    "body": "(v6m:)[$0]"
+  },
+  "(verbatim-print:) macro": {
+    "prefix": ["v6m-print:", "verbatim-print:"],
+    "body": "(v6m-print: ${0:\"<em>Hello</em>\"})"
+  },
+  "(change:) macro": {
+    "prefix": "change:",
+    "body": "(change: ${1:?target}, ${2:(colour: red)})"
+  },
+  "(enchant:) macro": {
+    "prefix": "enchant:",
+    "body": "(enchant: ${1:?target}, ${2:(colour: red)})"
+  },
+  "(enchant-in:) macro": {
+    "prefix": "enchant-in:",
+    "body": "(enchant-in: ${1:?target}, ${2:(colour: red)})"
+  },
+  "(hooks-named:) macro": {
+    "prefix": "hooks-named:",
+    "body": "(hooks-named: ${1:\"${2:door}\"})"
+  },
+
+  // borders
+
+  "(border:) macro": {
+    "prefix": ["b4r:", "border:"],
+    "body": "(border: \"${1|none,solid,dotted,dashed,double,groove,ridge,inset,outset|}\")"
+  },
+  "(border-colour:) macro": {
+    "prefix": ["b4r-colour:", "border-colour:"],
+    "body": "(b4r-colour: \"${0:purple}\")"
+  },
+  "(border-size:) macro": {
+    "prefix": ["b4r-size:", "border-size:"],
+    "body": "(b4r-size: \"${0:4}\")"
+  },
+  "(corner-radius:) macro": {
+    "prefix": "corner-radius:",
+    "body": "(corner-radius: \"${0:8}\")"
+  },
+
+  // colours
+
+  "(hsl:) macro": {
+    "prefix": "hsl:",
+    "body": "(hsl: ${1:300}, ${2:0.8}, ${3:0.5})"
+  },
+  "(hsla:) macro": {
+    "prefix": "hsla:",
+    "body": "(hsla: ${1:300}, ${2:0.8}, ${3:0.5}, ${4:0.6})"
+  },
+  "(rgb:) macro": {
+    "prefix": "rgb:",
+    "body": "(rgb: ${1:240}, ${2:60}, ${3:120})"
+  },
+  "(rgba:) macro": {
+    "prefix": "rgba:",
+    "body": "(rgba: ${1:240}, ${2:60}, ${3:120}, ${4:0.6})"
+  },
+  "(lch:) macro": {
+    "prefix": "lch:",
+    "body": "(lch: ${1:0.6}, ${2:80}, ${3:10})"
+  },
+  "(lcha:) macro": {
+    "prefix": "lcha:",
+    "body": "(lcha: ${1:0.6}, ${2:80}, ${3:10}, ${4:0.6})"
+  },
+  "(complement:) macro": {
+    "prefix": "complement:",
+    "body": "(complement: ${0:purple})"
+  },
+  "(palette:) macro": {
+    "prefix": "palette:",
+    "body": "(palette: ${1|mono,adjacent,triad|}, ${0:purple})"
+  },
+  "(gradient:) macro": {
+    "prefix": "gradient:",
+    "body": "(gradient: ${0}90, 0,#cc4488, 0.5,#cc6644, 1,#ffaa44)"
+  },
+  "(stripes:) macro": {
+    "prefix": "stripes:",
+    "body": "(stripes: ${1:degrees}, ${2:pixels}, ${3:colour1}, ${4:colour2})"
+  },
+  "(mix:) macro": {
+    "prefix": "mix:",
+    "body": "(mix: ${1:0.5, red}, ${2:0.5, blue})"
+  },
+
+  // custom macros
+
+  "(macro:) macro": {
+    "prefix": "macro:",
+    "body": [
+      "(set: ${1:\\$macroName} to (macro: ${2:str-type ${3:_var}}, [",
+      "\t$0",
+      "]))"
+    ]
+  },
+  "(output:) macro": {
+    "prefix": ["out:", "output:"],
+    "body": "(output:)[$0]"
+  },
+  "(output-data:) macro": {
+    "prefix": ["out-data:", "output-data:"],
+    "body": "(output-data: $0)"
+  },
+  "(error:) macro": {
+    "prefix": "error:",
+    "body": "(error: ${0:\"There's a problem\"})"
+  },
+  "(datatype:) macro": {
+    "prefix": "datatype:",
+    "body": "(datatype: ${0:_anything})"
+  },
+  "(datapattern:) macro": {
+    "prefix": "datapattern:",
+    "body": "(datapattern: ${0:(a: 15, 45)})"
+  },
+  "(partial:) macro": {
+    "prefix": "partial:",
+    "body": "(set: ${1:\\$fromZeroTo} to (partial: ${2:\"${3:range}\", ${4:0}}))"
+  },
+
+  // data structure
+
+  "(array:) macro": {
+    "prefix": ["a:", "array:"],
+    "body": "(a: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})"
+  },
+  "(datamap:) macro": {
+    "prefix": ["dm:", "datamap:"],
+    "body": "(dm: ${0:\"one\", 1, \"two\", 2})"
+  },
+  "(dataset:) macro": {
+    "prefix": ["ds:", "dataset:"],
+    "body": "(ds: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})"
+  },
+  "(all-pass:) macro": {
+    "prefix": ["all-pass:", "pass:"],
+    "body": "(all-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})"
+  },
+  "(altered:) macro": {
+    "prefix": "altered:",
+    "body": "(altered: ${1:_n} via ${2:${1:_n}+1}, ${3:...${4:\\$numbers}})"
+  },
+  "(count:) macro": {
+    "prefix": "count:",
+    "body": "(count: ${1:\\$arrayOrString}, ${2:_searchTerm})"
+  },
+  "(dm-altered:) macro": {
+    "prefix": ["dm-altered:", "datamap-altered:"],
+    "body": "(dm-altered: via ${1:its value + 10 where its name is not \"deltaZ\"}, ${2:(dm: \"deltaX\", 3, \"deltaY\", 6, \"deltaZ\", 9)})"
+  },
+  "(dm-entries:) macro": {
+    "prefix": ["dm-entries:", "data-entries:", "datamap-entries:"],
+    "body": "(dm-entries: ${0:\\$datamap})"
+  },
+  "(dm-names:) macro": {
+    "prefix": ["dm-names:", "data-names:", "datamap-names:"],
+    "body": "(dm-names: ${0:\\$datamap})"
+  },
+  "(dm-values:) macro": {
+    "prefix": ["dm-values:", "data-values:", "datamap-values:"],
+    "body": "(dm-values: ${0:\\$datamap})"
+  },
+  "(find:) macro": {
+    "prefix": "find:",
+    "body": "(find: _${1:person} where ${2:_${1:person} is not \"Alice\"}, ${3:...${4:\\$people}})"
+  },
+  "(folded:) macro": {
+    "prefix": "folded:",
+    "body": "(folded: _{1:item} making _${3:total} via _${3:total} + _{1:item}'s ${2:attribute}, ${4:0}, ${3:...${4:\\$items}})"
+  },
+  "(interlaced:) macro": {
+    "prefix": "interlaced:",
+    "body": "(interlaced: ${1:(a: \"A\", \"B\", \"C\")}, ${2:(a: 1, 2, 3)})"
+  },
+  "(none-pass:) macro": {
+    "prefix": "none-pass:",
+    "body": "(none-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})"
+  },
+  "(permutations:) macro": {
+    "prefix": "permutations:",
+    "body": "(permutations: ${1:...${2:\\$array}})"
+  },
+  "(range:) macro": {
+    "prefix": "range:",
+    "body": "(range: ${1:1}, ${2:14})"
+  },
+  "(repeated:) macro": {
+    "prefix": "repeated:",
+    "body": "(repeated: ${1:5}, ${2:\"hello\"})"
+  },
+  "(reversed:) macro": {
+    "prefix": "reversed:",
+    "body": "(reversed: ${1:...${2:\\$array}})"
+  },
+  "(rotated-to:) macro": {
+    "prefix": "rotated-to:",
+    "body": "(rotated-to: where ${1:it is > 3}, ${2:...${3:\\$numbers}})"
+  },
+  "(rotated:) macro": {
+    "prefix": "rotated:",
+    "body": "(rotated: ${1:-2}, ${2:...${3:\\$array}})"
+  },
+  "(shuffled:) macro": {
+    "prefix": "shuffled:",
+    "body": "(shuffled: ${1:\"mustard\", \"mayo\", \"salsa\"})"
+  },
+  "(some-pass:) macro": {
+    "prefix": "some-pass:",
+    "body": "(some-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})"
+  },
+  "(sorted:) macro": {
+    "prefix": "sorted:",
+    "body": "(sorted: ${1:${2:via its name}, }${3:...${4:\\$creatures}})"
+  },
+  "(subarray:) macro": {
+    "prefix": "subarray:",
+    "body": "(subarray: ${1:\\$array}, ${2:3}, ${3:7})"
+  },
+  "(unique:) macro": {
+    "prefix": "unique:",
+    "body": "(unique: ${1:...${2:\\$array}})"
+  },
+  "(unpack:) macro": {
+    "prefix": "unpack:",
+    "body": "(unpack: ${1:\\$coords} into ${2:(a: \\$x, \\$y, \\$z)})"
+  },
+
+  // date and time
+
+  "(current-date:) macro": {
+    "prefix": "current-date:",
+    "body": "(current-date:)"
+  },
+  "(current-time:) macro": {
+    "prefix": "current-time:",
+    "body": "(current-time:)"
+  },
+  "(monthday:) macro": {
+    "prefix": "monthday:",
+    "body": "(monthday:)"
+  },
+  "(weekday:) macro": {
+    "prefix": "weekday:",
+    "body": "(weekday:)"
+  },
+
+  // debugging
+
+  // (ignore:)
+  // (test-true:)
+  // (test-false:)
+  "(assert:) macro": {
+    "prefix": "assert:",
+    "body": "(assert: ${1:\\$nails is <= \\$maxNails})"
+  },
+  "(assert-exists:) macro": {
+    "prefix": "assert-exists:",
+    "body": "(assert-exists: ${1|?bottomBar,\"the auroch\"|})"
+  },
+  "(debug:) macro": {
+    "prefix": "debug:",
+    "body": "(debug:)"
+  },
+  "(mock-turns:) macro": {
+    "prefix": "mock-turns:",
+    "body": "(mock-turns: ${0:3})"
+  },
+  "(mock-visits:) macro": {
+    "prefix": "mock-visits:",
+    "body": "(mock-visits: ${0:\"Living Room\", \"Bedroom\", \"Kitchen\"})"
+  },
+  "(verbatim-source:) macro": {
+    "prefix": ["v6m-source:", "verbatim-source:"],
+    "body": "(v6m-source: ${0:(open-storylets:)'s 1st})"
+  },
+
+  // game state
+
+  "(history:) macro": {
+    "prefix": "history:",
+    "body": "(history:${1: where its tags contains \"Forest\"})"
+  },
+  "(visited:) macro": {
+    "prefix": "visited:",
+    "body": "(visited: ${1|\"Cellar\",where its tags contains \"Forest\"|})"
+  },
+  "(passage:) macro": {
+    "prefix": "passage:",
+    "body": "(passage:${1:\"${2:Cellar}\"})"
+  },
+  "(passage:)'s operation": {
+    "prefix": "passage's:",
+    "body": "(passage:)'s"
+  },
+  "(passages:) macro": {
+    "prefix": "passages:",
+    "body": "(passages:${1: where its tags contains \"Forest\"})"
+  },
+  "(forget-visits:) macro": {
+    "prefix": "forget-visits:",
+    "body": "(forget-visits: ${0:-1})"
+  },
+  "(forget-undos:) macro": {
+    "prefix": "forget-undos:",
+    "body": "(forget-undos: ${0:-1})"
+  },
+  "(metadata:) macro": {
+    "prefix": "metadata:",
+    "body": "(metadata: ${1:\"danger\", 4, \"rarity\", 5})"
+  },
+  "(seed:) macro": {
+    "prefix": "seed:",
+    "body": "(seed: ${1|\"a1b2c3\",(current-date:)+(current-time:)|})"
+  },
+
+  // input and interface
+
+  "(cycling-link:) macro": {
+    "prefix": "cycling-link:",
+    "body": "(cycling-link: ${1:${2|bind,2bind|} ${3:\\$pressure}, }${0:\"Low\", \"Medium\", \"High\"})"
+  },
+  "(sequence-link:) macro": {
+    "prefix": ["seq-link:", "sequence-link:"],
+    "body": "(seq-link: ${1:${2|bind,2bind|} ${3:\\$candy}, }${0:\"Two candies\", \"One candy\", \"Some wrappers\"})"
+  },
+  "(input:) macro": {
+    "prefix": "input:",
+    "body": "(input: ${1|\"delicious sandwich\",bind _playerName\\, \"=X=\"\\, \"Carmen SanDiego\",bind _spell|})"
+  },
+  "(force-input:) macro": {
+    "prefix": "force-input:",
+    "body": "(force-input: ${1|bind _cmd\\, \"ERASE INTERNET\",bind _cmd\\, \"=X=\"\\, \"DEL WWW\",\"HELLO THERE\"|})"
+  },
+  "(input-box:) macro": {
+    "prefix": "input-box:",
+    "body": "(input-box: ${1:${2|bind,2bind|} ${3:\\$code}, }${4:\"${5:XXX=}\", }${6:${7:5}, }${8:\"${9:initial text}\"})"
+  },
+  "(force-input-box:) macro": {
+    "prefix": "force-input-box:",
+    "body": "(force-input-box: ${1:${2|bind,2bind|} ${3:\\$code}, }${4:\"${5:XXX=}\", }${6:${7:5}, }${8:\"${9:forced text}\"})"
+  },
+  "(checkbox:) macro": {
+    "prefix": "checkbox:",
+    "body": "(checkbox: ${1|bind,2bind|} ${2:\\$mode}, \"Hardcore\")"
+  },
+  "(checkbox-fullscreen:) macro": {
+    "prefix": "checkbox-fullscreen:",
+    "body": "(checkbox-fullscreen: ${1:\"Full Screen\"})"
+  },
+  "(dropdown:) macro": {
+    "prefix": "dropdown:",
+    "body": "(dropdown: ${1|bind,2bind|} ${2:\\$title}, ${3:\"Duke\", \"King\", \"Emperor\"})"
+  },
+  "(meter:) macro": {
+    "prefix": "meter:",
+    "body": "(meter: ${1|bind,2bind|} ${2:\\$hitPoints}, ${3:\\$maxHP}, \"${4:=X=}\"${5:, \"${6:Hit Points}\"}${7:, ${8:red}})"
+  },
+
+  // links
+
+  "(link:) macro": {
+    "prefix": ["link:", "link-replace:"],
+    "body": "(link: ${1:\"Stake\"})[${0:The dracula crumbles to dust.}]"
+  },
+  "(link-reveal:) macro": {
+    "prefix": ["link-reveal:", "link-append:"],
+    "body": "(link-reveal: ${1:\"Heart\"})[${0:broken}]"
+  },
+  "(link-repeat:) macro": {
+    "prefix": "link-repeat:",
+    "body": "(link-repeat: ${1:\"Add cheese\"})[${0:(set:\\$cheese to it + 1)}]"
+  },
+  "(link-rerun:) macro": {
+    "prefix": "link-rerun:",
+    "body": "(link-rerun: ${1:\"Roll dice\"})[${0:You rolled a (random:1,6).}]"
+  },
+  "(link-goto:) macro": {
+    "prefix": "link-goto:",
+    "body": "(link-goto: ${1:\"Enter the cellar\"}, ${0:\"Cellar\"})"
+  },
+  "(link-reveal-goto:) macro": {
+    "prefix": "link-reveal-goto:",
+    "body": "(link-reveal-goto: \"${1:Study English}\", \"${2:AfternoonClass}\")[${0:(set:\\$eng to it + 1)}]"
+  },
+  "(link-undo:) macro": {
+    "prefix": "link-undo:",
+    "body": "(link-undo: \"${1:Retreat}$0\"${2:, \"Can't retreat!\"})"
+  },
+  "(link-fullscreen:) macro": {
+    "prefix": "link-fullscreen:",
+    "body": "(link-fullscreen: \"${1:Fullscreen on}\", \"${2:Fullscreen off}\"${3:, \"${4:Fullscreen unavailable}\"})"
+  },
+  "(link-show:) macro": {
+    "prefix": "link-show:",
+    "body": "(link-show: ${1:\"text\"}, ${2:?hookName})"
+  },
+  "(link-storylet:) macro": {
+    "prefix": "link-storylet:",
+    "body": "(link-storylet: ${1:\"${2:Link text}\", }${3|1,where its tags contains \"episode\"|}${4:, \"${5:Unavailable}\"})"
+  },
+  "(click:) macro": {
+    "prefix": "click:",
+    "body": "(click: ${1:\"dish of water\"})[${0:Your finger gets wet.}]"
+  },
+  "(click-replace:) macro": {
+    "prefix": "click-replace:",
+    "body": "(click-replace: ${1:\"my deepest secret\"})[${0:my longing for you}]"
+  },
+  "(click-rerun:) macro": {
+    "prefix": "click-rerun:",
+    "body": "(click-rerun: ${1:\"this phrase\"})[${0:this hook}]"
+  },
+  "(click-append:) macro": {
+    "prefix": "click-append:",
+    "body": "(click-append: ${1:?toThisHook})[${0:this content}]"
+  },
+  "(click-goto:) macro": {
+    "prefix": "click-goto:",
+    "body": "(click-goto: ${1:\"click me\"}, \"${2:PassageName}\")"
+  },
+  "(click-undo:) macro": {
+    "prefix": "click-undo:",
+    "body": "(click-undo: ${1:?page})"
+  },
+  "(click-prepend:) macro": {
+    "prefix": "click-prepend:",
+    "body": "(click-prepend: \"?\")[, seriously]"
+  },
+  "(action:) macro": {
+    "prefix": "action:",
+    "body": "(action: \"${1|mouseover,mouseout,doubleclick,click|}\")"
+  },
+
+  // live
+
+  "(live:) macro": {
+    "prefix": "live:",
+    "body": [
+      "(live: ${1:0.5s})[",
+      "\t${0:(either: \"Red!\", \"Green!\", \"Blue!\")}",
+      "]"
+    ]
+  },
+  "(stop:) macro": {
+    "prefix": "stop:",
+    "body": "(stop:)"
+  },
+  "(event:) macro": {
+    "prefix": "event:",
+    "body": "(event: when ${1:time > ${2:10s}})[$0]"
+  },
+  "(after:) macro": {
+    "prefix": "after:",
+    "body": "(after: time + ${1:3s})[$0]"
+  },
+  "(after-error:) macro": {
+    "prefix": "after-error:",
+    "body": "(after-error:)[${0:Oops! Something broke!}]"
+  },
+  "(more:) macro": {
+    "prefix": "more:",
+    "body": "(more:)[$0]"
+  },
+
+  // maths
+
+  "(abs:) macro": {
+    "prefix": "abs:",
+    "body": "(abs: ${0:-4})"
+  },
+  "(cos:) macro": {
+    "prefix": "cos:",
+    "body": "(cos: ${0:3.14159265})"
+  },
+  "(exp:) macro": {
+    "prefix": "exp:",
+    "body": "(exp: ${0:6})"
+  },
+  "(log:) macro": {
+    "prefix": "log:",
+    "body": "(log: ${0:(exp:5)})"
+  },
+  "(log10:) macro": {
+    "prefix": "log10:",
+    "body": "(log10: ${0:100})"
+  },
+  "(log2:) macro": {
+    "prefix": "log2:",
+    "body": "(log2: ${0:256})"
+  },
+  "(max:) macro": {
+    "prefix": "max:",
+    "body": "(max: ${1:...${2:\\$numbers}})"
+  },
+  "(min:) macro": {
+    "prefix": "min:",
+    "body": "(min: ${1:...${2:\\$numbers}})"
+  },
+  "(pow:) macro": {
+    "prefix": "pow:",
+    "body": "(pow: ${1:2}, ${2:8})"
+  },
+  "(sign:) macro": {
+    "prefix": "sign:",
+    "body": "(sign: ${0:-4})"
+  },
+  "(sin:) macro": {
+    "prefix": "sin:",
+    "body": "(sin: ${0:3.14159265 / 2})"
+  },
+  "(sqrt:) macro": {
+    "prefix": "sqrt:",
+    "body": "(sqrt: ${0:81})"
+  },
+  "(tan:) macro": {
+    "prefix": "tan:",
+    "body": "(tan: ${0:3.14159265 / 4})"
+  },
+
+  // navigation
+
+  "(goto:) macro": {
+    "prefix": "goto:",
+    "body": "(goto: ${1:\"${2:Basement}\"})"
+  },
+  "(redirect:) macro": {
+    "prefix": "redirect:",
+    "body": "(redirect: ${1:\"${2:Basement}\"})"
+  },
+  "(undo:) macro": {
+    "prefix": "undo:",
+    "body": "(undo:${1: \"${2:Not available}\"})"
+  },
+  "(restart:) macro": {
+    "prefix": ["restart:", "reload:"],
+    "body": "(restart:)"
+  },
+
+  // numbers
+
+  "(ceil:) macro": {
+    "prefix": "ceil:",
+    "body": "(ceil: ${0:1.1})"
+  },
+  "(floor:) macro": {
+    "prefix": "floor:",
+    "body": "(floor: ${0:1.99})"
+  },
+  "(num:) macro": {
+    "prefix": "num:",
+    "body": "(num: ${0:\"25\"})"
+  },
+  "(random:) macro": {
+    "prefix": "random:",
+    "body": "(random: ${1:1}, ${2:20})"
+  },
+  "(round:) macro": {
+    "prefix": "round:",
+    "body": "(round: ${0: 1.5})"
+  },
+  "(trunc:) macro": {
+    "prefix": "trunc:",
+    "body": "(trunc: ${0:1.5})"
+  },
+
+  // patterns
+
+  "(p:) macro": {
+    "prefix": ["p:", "pattern:"],
+    "body": "(p: $0)"
+  },
+  "(p-either:) macro": {
+    "prefix": ["p-either:", "pattern-either:"],
+    "body": "(p-either: ${2:...${3:\\$array}})"
+  },
+  "(p-opt:) macro": {
+    "prefix": ["p-opt:", "pattern-opt:", "p-optional:", "pattern-optional:"],
+    "body": "(p-opt: ${0:\"Default Name\"})"
+  },
+  "(p-many:) macro": {
+    "prefix": ["p-many:", "pattern-many:"],
+    "body": "(p-many: ${1:${2:3},${3:12},}${0:lowercase})"
+  },
+  "(p-not:) macro": {
+    "prefix": ["p-not:", "pattern-not:"],
+    "body": "(p-not: $0)"
+  },
+  "(p-before:) macro": {
+    "prefix": ["p-before:", "pattern-before:"],
+    "body": "(p-before: $0)"
+  },
+  "(p-not-before:) macro": {
+    "prefix": ["p-not-before:", "pattern-not-before:"],
+    "body": "(p-not-before: $0)"
+  },
+  "(p-start:) macro": {
+    "prefix": ["p-start:", "pattern-start:"],
+    "body": "(p-start: $0)"
+  },
+  "(p-end:) macro": {
+    "prefix": ["p-end:", "pattern-end:"],
+    "body": "(p-end: $0)"
+  },
+  "(p-ins:) macro": {
+    "prefix": [
+      "p-ins:",
+      "pattern-ins:",
+      "p-insensitive:",
+      "pattern-insensitive:"
+    ],
+    "body": "(p-ins: $0)"
+  },
+
+  // popup
+
+  "(dialog:) macro": {
+    "prefix": ["dialog:", "alert:"],
+    "body": "(dialog: ${1:bind ${2:$$favColour}, }[${3:Favourite colour?}], ${4:\"Orange\", \"Magenta\", \"Aqua\"})"
+  },
+  "(confirm:) macro": {
+    "prefix": "confirm:",
+    "body": "(set: ${1:\\$makeCake} to (confirm: [${2:Transform your best friend into a cake?}$0]${3:, \"${4:Cancel}\", \"${5:OK}\"}))"
+  },
+  "(prompt:) macro": {
+    "prefix": "prompt:",
+    "body": "(set: ${1:\\$name} to (prompt: [${2:What is your name?}$0], \"Jane Doe\"${3:, \"${4:Cancel}\", \"${5:OK}\"}))"
+  },
+
+  // revision
+
+  "(replace:) macro": {
+    "prefix": "replace:",
+    "body": "(replace: ${1|\"cat\",?pet|})[$0]"
+  },
+  "(append:) macro": {
+    "prefix": "append:",
+    "body": "(append: ${1|\"string\",?hookName|})[$0]"
+  },
+  "(prepend:) macro": {
+    "prefix": "prepend:",
+    "body": "(prepend: ${1|\"string\",?hookName|})[$0]"
+  },
+  "(replace-with:) macro": {
+    "prefix": "replace-with:",
+    "body": "(replace-with: ${1|\"string\",[CodeHook]|})"
+  },
+  "(append-with:) macro": {
+    "prefix": "append-with:",
+    "body": "(append-with: ${1|\"string\",[CodeHook]|})"
+  },
+  "(prepend-with:) macro": {
+    "prefix": "prepend-with:",
+    "body": "(prepend-with: ${1|\"string\",[CodeHook]|})"
+  },
+  "(rerun:) macro": {
+    "prefix": "rerun:",
+    "body": "(rerun: ${1:?${2:hookName}})"
+  },
+
+  // saving
+
+  "(load-game:) macro": {
+    "prefix": "load-game:",
+    "body": "(load-game: ${1:\"${2:Slot A}\"})"
+  },
+  "(save-game:) macro": {
+    "prefix": "save-game:",
+    "body": "(if:(save-game:${1:\"${2:Slot A}\"}))[${3:Game saved!}](else:)[${4:Save failed!}]"
+  },
+  "(saved-games:) macro": {
+    "prefix": "saved-games:",
+    "body": "(saved-games:)"
+  },
+
+  // showing and hiding
+
+  "(hidden:) macro": {
+    "prefix": "hidden:",
+    "body": "(hidden:)${1:[$0]}"
+  },
+  "(hide:) macro": {
+    "prefix": "hide:",
+    "body": "(hide: ${1:?${2:hookName}})"
+  },
+  "(show:) macro": {
+    "prefix": "show:",
+    "body": "(show: ${1:?${2:hookName}})"
+  },
+
+  // sidebar
+
+  "(icon-undo:) macro": {
+    "prefix": "icon-undo:",
+    "body": "(icon-undo: ${1|\"←\",\"Undo\",\"←\"\\, \"Undo\"|})"
+  },
+  "(icon-redo:) macro": {
+    "prefix": "icon-redo:",
+    "body": "(icon-redo: ${1|\"→\",\"Redo\",\"→\"\\, \"Redo\"|})"
+  },
+  "(icon-fullscreen:) macro": {
+    "prefix": "icon-fullscreen:",
+    "body": "(icon-fullscreen: ${1|\"⛶\",\"Fullscreen\",\"⛶\"\\, \"Fullscreen\"|})"
+  },
+  "(icon-restart:) macro": {
+    "prefix": "icon-restart:",
+    "body": "(icon-restart: ${1|\"⟲\",\"Restart\",\"⟲\"\\, \"Restart\"|})"
+  },
+  "(icon-counter:) macro": {
+    "prefix": "icon-counter:",
+    "body": "(icon-counter: bind ${1:\\$mouseCount}, \"${2:mouse}\"${3:, \"${4:mice}\"})"
+  },
+
+  // storylets
+
+  "(storylet:) macro": {
+    "prefix": "storylet:",
+    "body": "(storylet: ${0:when \\$hour is 12})"
+  },
+  "(open-storylets:) macro": {
+    "prefix": "open-storylets:",
+    "body": "(open-storylets: ${0:where its tags contains \"quest\"})"
+  },
+  "(exclusivity:) macro": {
+    "prefix": "exclusivity:",
+    "body": "(exclusivity: ${0:2})"
+  },
+  "(urgency:) macro": {
+    "prefix": "urgency:",
+    "body": "(urgency: ${0:2})"
+  },
+
+  // strings
+
+  "(str:) macro": {
+    "prefix": ["str:", "string:", "text:"],
+    "body": "(str: $0)"
+  },
+  "(digit-format:) macro": {
+    "prefix": "digit-format:",
+    "body": "(digit-format: \"${1:##.##}$0\", ${2:35.3})"
+  },
+  "(joined:) macro": {
+    "prefix": "joined:",
+    "body": "(joined: ${1:\"-\"}, ${2:...${3:\\$strings}})"
+  },
+  "(lowercase:) macro": {
+    "prefix": "lowercase:",
+    "body": "(lowercase: \"$0\")"
+  },
+  "(lowerfirst:) macro": {
+    "prefix": "lowerfirst:",
+    "body": "(lowerfirst: \"$0\")"
+  },
+  "(plural:) macro": {
+    "prefix": "plural:",
+    "body": "(plural: ${1:2}, \"${2:elf}\"${3:, \"${4:elves}\"})"
+  },
+  "(source:) macro": {
+    "prefix": "source:",
+    "body": "(source: ${1|\\$voltage,(str-repeated: 6\\, \"HA\"),(click: ?hat),(enchant: ?passage's hooks\\, \\$style)|}$0)"
+  },
+  "(split:) macro": {
+    "prefix": ["split:", "splitted:"],
+    "body": "(split: ${1:\"-\"}, ${2:(passage:)'s name})"
+  },
+  "(str-find:) macro": {
+    "prefix": ["str-find:", "string-find:"],
+    "body": "(str-find: ${1:_pattern}, ${2:_string})"
+  },
+  "(str-nth:) macro": {
+    "prefix": ["str-nth:", "string-nth:"],
+    "body": "(str-nth:${1:_num})"
+  },
+  "(str-repeated:) macro": {
+    "prefix": ["str-repeated:", "string-repeated:"],
+    "body": "(str-repeated: ${1:_num}, ${2:_string})"
+  },
+  "(str-replaced:) macro": {
+    "prefix": ["str-replaced:", "string-replaced:", "replaced:"],
+    "body": "(str-replaced: ${1:${2:1}, }${3:_fromThing}, ${4:_toThing}, ${5:\"subject\"})"
+  },
+  "(str-reversed:) macro": {
+    "prefix": ["str-reversed:", "string-reversed:"],
+    "body": "(str-reversed: \"$0\")"
+  },
+  "(substring:) macro": {
+    "prefix": "substring:",
+    "body": "(substring: \"$0\", ${1:3}, ${2:5})"
+  },
+  "(trimmed:) macro": {
+    "prefix": "trimmed:",
+    "body": "(trimmed: ${1:${2:whitespace}, }\"$0\")"
+  },
+  "(uppercase:) macro": {
+    "prefix": "uppercase:",
+    "body": "(uppercase: \"$0\")"
+  },
+  "(upperfirst:) macro": {
+    "prefix": "upperfirst:",
+    "body": "(upperfirst: \"$0\")"
+  },
+  "(words:) macro": {
+    "prefix": "words:",
+    "body": "(words: \"$0\")"
+  },
+
+  // styling
+
+  "(align:) macro": {
+    "prefix": "align:",
+    "body": "(align: \"${1|==>,=><=,<==>,<==|}\")[$0]"
+  },
+  "(bg:) macro": {
+    "prefix": ["background:", "bg:"],
+    "body": "(bg: ${1|red,#ff0000,\"#ff0000\"|})[$0]"
+  },
+  "(box:) macro": {
+    "prefix": "box:",
+    "body": "(box: \"${1:=XX=}\"${2:, ${3:3}})[$0]"
+  },
+  "(button:) macro": {
+    "prefix": "button:",
+    "body": "(button:${1: \"${2:=XXXX=}\"})[[$0]]"
+  },
+  "(char-style:) macro": {
+    "prefix": "char-style:",
+    "body": "(char-style: ${1|(text-style: \"fidget\"),via (text-colour: (either: red\\,white\\,blue))|})[$0]"
+  },
+  "(collapse:) macro": {
+    "prefix": "collapse:",
+    "body": "(collapse:)${1:[$0]}"
+  },
+  "(css:) macro": {
+    "prefix": "css:",
+    "body": "(css: \"${1:background-color:indigo;}\")[${0:styled text}]"
+  },
+  "(float-box:) macro": {
+    "prefix": "float-box:",
+    "body": "(float-box: \"${1:X====}\",\"${2:Y====}\")[$0]"
+  },
+  "(font:) macro": {
+    "prefix": "font:",
+    "body": "(font: \"${1:Helvetica Neue}\")[$0]"
+  },
+  "(hook:) macro": {
+    "prefix": "hook:",
+    "body": "(hook: ${1:\\$name})[$0]"
+  },
+  "(hover-style:) macro": {
+    "prefix": "hover-style:",
+    "body": "(hover-style: ${1:(text-style: \"italic\")})"
+  },
+  "(line-style:) macro": {
+    "prefix": "line-style:",
+    "body": "(line-style: ${1:(b4r: \"dotted\")})[$0]"
+  },
+  "(link-style:) macro": {
+    "prefix": "link-style:",
+    "body": "(link-style: ${1:(b4r: \"dotted\")})[$0]"
+  },
+  "(opacity:) macro": {
+    "prefix": "opacity:",
+    "body": "(opacity: ${1:0.5})[$0]"
+  },
+  "(text-colour:) macro": {
+    "prefix": ["colour:", "text-color:", "color:", "text-colour:"],
+    "body": "(colour: ${1|red,orange,yellow,lime,green,aqua,cyan,blue,navy,purple,magenta,fuchsia,white,black,grey,gray,transparent|})[$0]"
+  },
+  "(text-indent:) macro": {
+    "prefix": "text-indent:",
+    "body": "(text-indent: ${1:16})[$0]"
+  },
+  "(text-rotate-x:) macro": {
+    "prefix": "text-rotate-x:",
+    "body": "(text-rotate-x: ${1:-45})[$0]"
+  },
+  "(text-rotate-y:) macro": {
+    "prefix": "text-rotate-y:",
+    "body": "(text-rotate-y: ${1:45})[$0]"
+  },
+  "(text-rotate-z:) macro": {
+    "prefix": ["text-rotate:", "text-rotate-z:"],
+    "body": "(text-rotate: ${1:45})[$0]"
+  },
+  "(text-size:) macro": {
+    "prefix": ["size:", "text-size:"],
+    "body": "(text-size: ${1:1.5})[$0]"
+  },
+  "(text-style:) macro": {
+    "prefix": "text-style:",
+    "body": "(text-style: \"${1|none,bold,italic,underline,double-underline,wavy-underline,strike,double-strike,wavy-strike,superscript,subscript,blink,shudder,mark,condense,expand,outline,shadow,emboss,smear,blur,blurrier,mirror,upside-down,tall,flat,fade-in-out,rumble,sway,buoy,fidget|}\")"
+  },
+
+  // transitions
+
+  "(transition:) macro": {
+    "prefix": ["t8n:", "transition:"],
+    "body": "(t8n: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")[$0]"
+  },
+  "(transition-delay:) macro": {
+    "prefix": ["t8n-delay:", "transition-delay:"],
+    "body": "(t8n-delay: ${0:3s})+"
+  },
+  "(transition-time:) macro": {
+    "prefix": ["t8n-time:", "transition-time:"],
+    "body": "(t8n-time: ${0:3s})+"
+  },
+  "(transition-depart:) macro": {
+    "prefix": ["t8n-depart:", "transition-depart:"],
+    "body": "(t8n-depart: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")"
+  },
+  "(transition-arrive:) macro": {
+    "prefix": ["t8n-arrive:", "transition-arrive:"],
+    "body": "(t8n-arrive: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")"
+  },
+  "(transition-skip:) macro": {
+    "prefix": ["t8n-skip:", "transition-skip:"],
+    "body": "(t8n-skip: ${0:0.5s})"
+  },
+  "(animate:) macro": {
+    "prefix": "animate:",
+    "body": "(animate: ${1:?hookName}, \"${2|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\"${3:, ${4:5s}})"
+  },
+
+  // window
+
+  "(goto-url:) macro": {
+    "prefix": "goto-url:",
+    "body": "(goto-url: \"${1:http://example.org}\")"
+  },
+  "(open-url:) macro": {
+    "prefix": "open-url:",
+    "body": "(open-url: \"${1:http://example.org}\")"
+  },
+  "(page-url:) macro": {
+    "prefix": "page-url:",
+    "body": "(page-url:)"
+  },
+  "(scroll:) macro": {
+    "prefix": "scroll:",
+    "body": "(scroll: ${1:?hookName}, ${2:0.5s})"
+  },
+
+  // not macros
+
+  "Named hook": {
+    "prefix": ">hook",
+    "body": "|${1:hook}>[$0]"
+  },
+  "Named hidden hook": {
+    "prefix": ")hook",
+    "body": "|${1:hook})[$0]"
+  },
+  "New passage": {
+    "prefix": "::newpass",
+    "body": [
+      ":: ${1:PassageName}${2: [${3|tags,header,footer,startup,script,stylesheet,debug-header,debug-footer,debug-startup|}]}",
+      "$0"
+    ]
+  },
+  "StoryData passage": {
+    "prefix": "::storydata",
+    "body": [
+      ":: StoryData\n{",
+      "\t\"ifid\": \"$UUID\",",
+      "\t\"format\": \"Harlowe\",",
+      "\t\"format-version\": \"3.3.6\",",
+      "\t\"start\": \"Start\",",
+      "\t\"zoom\": 1",
+      "}\n\n"
+    ]
+  }
+}
