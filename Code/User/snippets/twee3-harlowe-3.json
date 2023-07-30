@@ -3,149 +3,184 @@
 
   "(set:) macro": {
     "prefix": "set:",
-    "body": "(set: ${1:${2|num,number,str,string,bool,boolean,array,dm,datamap,ds,dataset,command,changer,colour,color,gradient,lambda,macro,datatype,codehook,even,odd,int,integer,empty,whitespace,lowercase,uppercase,anycase,alnum,alphanumeric,digit,newline,linebreak,const,any|}-type }${3:\\$varName} to ${0:value})"
+    "body": "(set: ${1:${2|num,number,str,string,bool,boolean,array,dm,datamap,ds,dataset,command,changer,colour,color,gradient,lambda,macro,datatype,codehook,even,odd,int,integer,empty,whitespace,lowercase,uppercase,anycase,alnum,alphanumeric,digit,newline,linebreak,const,any|}-type }${3:\\$varName} to ${0:value})",
+    "description": "Stores data values in variables."
   },
   "(put:) macro": {
     "prefix": "put:",
-    "body": "(put: ${0:value} into ${1:\\$varName})"
+    "body": "(put: ${0:value} into ${1:\\$varName})",
+    "description": "A left-to-right version of `(set:)`."
   },
   "(move:) macro": {
     "prefix": "move:",
-    "body": "(move: ${1:${2:\\$arr}'s ${3:1st}} into ${4:\\$var})"
+    "body": "(move: ${1:${2:\\$arr}'s ${3:1st}} into ${4:\\$var})",
+    "description": "A variant of `(put:)` that transfers data from a data structure, deleting the source value after copying it."
   },
   "(print:) macro": {
     "prefix": "print:",
-    "body": "(print: ${0:\\$var + \"s\"})"
+    "body": "(print: ${0:\\$var + \"s\"})",
+    "description": "This command prints out any data provided to it, as text."
   },
   "(display:) macro": {
     "prefix": "display:",
-    "body": "(display: ${1:\"${2:Cellar}\"})"
+    "body": "(display: ${1:\"${2:Cellar}\"})",
+    "description": "This command writes out the contents of the passage with the given string name."
   },
   "(if:) macro": {
     "prefix": "if:",
-    "body": "(if: ${1:Boolean})[$0]"
+    "body": "(if: ${1:Boolean})[$0]",
+    "description": "This macro accepts only booleans, and produces a changer that can be attached to hooks to hide them if the value was false."
   },
   "(unless:) macro": {
     "prefix": "unless:",
-    "body": "(unless: ${1:Boolean})[$0]"
+    "body": "(unless: ${1:Boolean})[$0]",
+    "description": "The negated form of `(if:)`."
   },
   "(else-if:) macro": {
     "prefix": "else-if:",
-    "body": "(else-if: ${1:Boolean})[$0]"
+    "body": "(else-if: ${1:Boolean})[$0]",
+    "description": "This macro's result changes depending on whether the previous hook in the passage was shown or hidden."
   },
   "(else:) macro": {
     "prefix": "else:",
-    "body": "(else:)[$0]"
+    "body": "(else:)[$0]",
+    "description": "This macro will show the attached hook if the preceding hook was hidden, and hide it otherwise."
   },
   "(for:) macro, each lambda": {
     "prefix": ["for:", "loop:", "for-each:"],
-    "body": "(for: each ${1:_item}, ${2:...${3:\\$arr}})[${0:You have the _item.}]"
+    "body": "(for: each ${1:_item}, ${2:...${3:\\$arr}})[${0:You have the _item.}]",
+    "description": "This macro repeats the attached hook, setting a temporary variable to a different value on each repeat."
   },
   "(for:) macro, where lambda": {
     "prefix": ["for:", "loop:", "for-where:"],
-    "body": "(for: ${1:_ingredient} where ${2:it contains \"oil\"}, ${3:...${4:\\$ingredients}})[${0:Cook the _ingredient?}]"
+    "body": "(for: ${1:_ingredient} where ${2:it contains \"oil\"}, ${3:...${4:\\$ingredients}})[${0:Cook the _ingredient?}]",
+    "description": "This macro repeats the attached hook, setting a temporary variable to a different value on each repeat."
   },
   "(either:) macro": {
     "prefix": "either:",
-    "body": "(either: ${1:...${2:\\$array}})"
+    "body": "(either: ${1:...${2:\\$array}})",
+    "description": "This macro takes several values separated by commas, and returns one of them randomly."
   },
   "(cond:) macro": {
     "prefix": "cond:",
-    "body": "(cond: ${1:Boolean}, ${2:_ifTrue}, ${3:_ifFalse})"
+    "body": "(cond: ${1:Boolean}, ${2:_ifTrue}, ${3:_ifFalse})",
+    "description": "This macro returns the first value paired with a true condition from a sequence of booleans paired with values."
   },
   "(nth:) macro": {
     "prefix": "nth:",
-    "body": "(nth: ${1:\\$num}, ${2:...${3:\\$array}})"
+    "body": "(nth: ${1:\\$num}, ${2:...${3:\\$array}})",
+    "description": "Given a positive whole number `n` and a sequence of values, this selects the `n`th value in the sequence."
   },
   "(verbatim:) macro": {
     "prefix": ["v6m:", "verbatim:"],
-    "body": "(v6m:)[$0]"
+    "body": "(v6m:)[$0]",
+    "description": "Render the attached hook or command as plain text instead of HTML."
   },
   "(verbatim-print:) macro": {
     "prefix": ["v6m-print:", "verbatim-print:"],
-    "body": "(v6m-print: ${0:\"<em>Hello</em>\"})"
+    "body": "(v6m-print: ${0:\"<em>Hello</em>\"})",
+    "description": "Prints out any single argument given to it as text, without rendering the resulting text as markup."
   },
   "(change:) macro": {
     "prefix": "change:",
-    "body": "(change: ${1:?target}, ${2:(colour: red)})"
+    "body": "(change: ${1:?target}, ${2:(colour: red)})",
+    "description": "Applies a changer (or `via` lambda) to every occurrence of a hook or string in a passage, once."
   },
   "(enchant:) macro": {
     "prefix": "enchant:",
-    "body": "(enchant: ${1:?target}, ${2:(colour: red)})"
+    "body": "(enchant: ${1:?target}, ${2:(colour: red)})",
+    "description": "Applies a changer (or `via` lambda) to every occurrence of a hook or string in a passage, and to any future occurrences in the same passage."
   },
   "(enchant-in:) macro": {
     "prefix": "enchant-in:",
-    "body": "(enchant-in: ${1:?target}, ${2:(colour: red)})"
+    "body": "(enchant-in: ${1:?target}, ${2:(colour: red)})",
+    "description": "Applies a changer to every occurrence of a hook or string within the attached hook."
   },
   "(hooks-named:) macro": {
     "prefix": "hooks-named:",
-    "body": "(hooks-named: ${1:\"${2:door}\"})"
+    "body": "(hooks-named: ${1:\"${2:door}\"})",
+    "description": "When given a string, this creates a HookName from it."
   },
 
   // borders
 
   "(border:) macro": {
     "prefix": ["b4r:", "border:"],
-    "body": "(border: \"${1|none,solid,dotted,dashed,double,groove,ridge,inset,outset|}\")"
+    "body": "(border: \"${1|none,solid,dotted,dashed,double,groove,ridge,inset,outset|}\")",
+    "description": "A changer macro that applies a CSS border to the hook."
   },
   "(border-colour:) macro": {
     "prefix": ["b4r-colour:", "border-colour:"],
-    "body": "(b4r-colour: \"${0:purple}\")"
+    "body": "(b4r-colour: \"${0:purple}\")",
+    "description": "When applied to a hook being changed by the `(border:)` changer, this changes the border's colour."
   },
   "(border-size:) macro": {
     "prefix": ["b4r-size:", "border-size:"],
-    "body": "(b4r-size: \"${0:4}\")"
+    "body": "(b4r-size: \"${0:4}\")",
+    "description": "When applied to a hook being changed by the `(border:)` changer, this multiplies the size of the border by a given amount."
   },
   "(corner-radius:) macro": {
     "prefix": "corner-radius:",
-    "body": "(corner-radius: \"${0:8}\")"
+    "body": "(corner-radius: \"${0:8}\")",
+    "description": "When applied to a hook, this rounds the corners by the given number of pixels."
   },
 
   // colours
 
   "(hsl:) macro": {
     "prefix": "hsl:",
-    "body": "(hsl: ${1:300}, ${2:0.8}, ${3:0.5})"
+    "body": "(hsl: ${1:300}, ${2:0.8}, ${3:0.5})",
+    "description": "This macro creates a colour using the given hue (h) angle in degrees and the given saturation (s) and lightness (l) percentages."
   },
   "(hsla:) macro": {
     "prefix": "hsla:",
-    "body": "(hsla: ${1:300}, ${2:0.8}, ${3:0.5}, ${4:0.6})"
+    "body": "(hsla: ${1:300}, ${2:0.8}, ${3:0.5}, ${4:0.6})",
+    "description": "This macro creates a colour using the given hue (h) angle in degrees, the given saturation (s) and lightness (l) percentages, and the transparency (alpha, or a) percentage."
   },
   "(rgb:) macro": {
     "prefix": "rgb:",
-    "body": "(rgb: ${1:240}, ${2:60}, ${3:120})"
+    "body": "(rgb: ${1:240}, ${2:60}, ${3:120})",
+    "description": "This macro creates a colour using the three red (r), green (g) and blue (b) values provided, whose values are numbers between 0 and 255."
   },
   "(rgba:) macro": {
     "prefix": "rgba:",
-    "body": "(rgba: ${1:240}, ${2:60}, ${3:120}, ${4:0.6})"
+    "body": "(rgba: ${1:240}, ${2:60}, ${3:120}, ${4:0.6})",
+    "description": "This macro creates a colour using the three red (r), green (g) and blue (b) values provided (0..255), and, optionally, the transparency (alpha, or a) percentage (0.0..1.0)."
   },
   "(lch:) macro": {
     "prefix": "lch:",
-    "body": "(lch: ${1:0.6}, ${2:80}, ${3:10})"
+    "body": "(lch: ${1:0.6}, ${2:80}, ${3:10})",
+    "description": "This macro creates a colour using three values in the CIELAB colour model: a lightness (l) percentage, a chroma (c) value, and a hue (h) angle in degrees."
   },
   "(lcha:) macro": {
     "prefix": "lcha:",
-    "body": "(lcha: ${1:0.6}, ${2:80}, ${3:10}, ${4:0.6})"
+    "body": "(lcha: ${1:0.6}, ${2:80}, ${3:10}, ${4:0.6})",
+    "description": "This macro creates a colour using three values in the CIELAB colour model--a lightness (l) percentage, a chroma (c) value, and a hue (h) angle in degrees--and the transparency (alpha, or a) percentage."
   },
   "(complement:) macro": {
     "prefix": "complement:",
-    "body": "(complement: ${0:purple})"
+    "body": "(complement: ${0:purple})",
+    "description": "When given a colour, this provides a complement to that colour."
   },
   "(palette:) macro": {
     "prefix": "palette:",
-    "body": "(palette: ${1|mono,adjacent,triad|}, ${0:purple})"
+    "body": "(palette: ${1|mono,adjacent,triad|}, ${0:purple})",
+    "description": "When given a string specifying a palette type, and a colour, this macro produces an array containing the given colour and three additional colours that together form a palette."
   },
   "(gradient:) macro": {
     "prefix": "gradient:",
-    "body": "(gradient: ${0}90, 0,#cc4488, 0.5,#cc6644, 1,#ffaa44)"
+    "body": "(gradient: ${0}90, 0,#cc4488, 0.5,#cc6644, 1,#ffaa44)",
+    "description": "When given a degree angle, followed by any number of number-colour pairs called 'colour stops', this macro produces a gradient that fades between those colours in the direction of the angle."
   },
   "(stripes:) macro": {
     "prefix": "stripes:",
-    "body": "(stripes: ${1:degrees}, ${2:pixels}, ${3:colour1}, ${4:colour2})"
+    "body": "(stripes: ${1:degrees}, ${2:pixels}, ${3:colour1}, ${4:colour2})",
+    "description": "When given a degree angle, a pixel distance, and two or more colours, this macro produces a gradient that draws a striped background."
   },
   "(mix:) macro": {
     "prefix": "mix:",
-    "body": "(mix: ${1:0.5, red}, ${2:0.5, blue})"
+    "body": "(mix: ${1:0.5, red}, ${2:0.5, blue})",
+    "description": "When given two pairs of values--each a number from 0 to 1 and a colour--this macro produces a mix of the two colours, using the numbers as ratios of each colour."
   },
 
   // custom macros
@@ -156,157 +191,194 @@
       "(set: ${1:\\$macroName} to (macro: ${2:str-type ${3:_var}}, [",
       "\t$0",
       "]))"
-    ]
+    ],
+    "description": "Construct your own custom macro and `(set:)` it into a variable."
   },
   "(output:) macro": {
     "prefix": ["out:", "output:"],
-    "body": "(output:)[$0]"
+    "body": "(output:)[$0]",
+    "description": "Used inside a `(macro:)` CodeHook to output This command, when run, renders the attached hook."
   },
   "(output-data:) macro": {
     "prefix": ["out-data:", "output-data:"],
-    "body": "(output-data: $0)"
+    "body": "(output-data: $0)",
+    "description": "Used inside a `(macro:)` CodeHook to output the value that the macro produces."
   },
   "(error:) macro": {
     "prefix": "error:",
-    "body": "(error: ${0:\"There's a problem\"})"
+    "body": "(error: ${0:\"There's a problem\"})",
+    "description": "Used inside a `(macro:)` to immediately produce an error with the given message string, and stops running any further code in the macro."
   },
   "(datatype:) macro": {
     "prefix": "datatype:",
-    "body": "(datatype: ${0:_anything})"
+    "body": "(datatype: ${0:_anything})",
+    "description": "Given any storeable value, returns a datatype that matches it."
   },
   "(datapattern:) macro": {
     "prefix": "datapattern:",
-    "body": "(datapattern: ${0:(a: 15, 45)})"
+    "body": "(datapattern: ${0:(a: 15, 45)})",
+    "description": "Given an array or datamap, returns an array or datamap with its values replaced with their datatypes."
   },
   "(partial:) macro": {
     "prefix": "partial:",
-    "body": "(set: ${1:\\$fromZeroTo} to (partial: ${2:\"${3:range}\", ${4:0}}))"
+    "body": "(set: ${1:\\$fromZeroTo} to (partial: ${2:\"${3:range}\", ${4:0}}))",
+    "description": "Given either the string name of a built-in macro, or a custom macro itself, followed by various values; returns a custom macro to serve as a shorthand for calling the given macro with those values, plus any additional values."
   },
 
-  // data structure
+  // data structures
 
   "(array:) macro": {
     "prefix": ["a:", "array:"],
-    "body": "(a: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})"
+    "body": "(a: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})",
+    "description": "Creates an array, which is an ordered collection of values."
   },
   "(datamap:) macro": {
     "prefix": ["dm:", "datamap:"],
-    "body": "(dm: ${0:\"one\", 1, \"two\", 2})"
+    "body": "(dm: ${0:\"one\", 1, \"two\", 2})",
+    "description": "Creates a datamap, which is a data structure that pairs string names with data values."
   },
   "(dataset:) macro": {
     "prefix": ["ds:", "dataset:"],
-    "body": "(ds: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})"
+    "body": "(ds: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})",
+    "description": "Creates a dataset, which is an unordered collection of unique values."
   },
   "(all-pass:) macro": {
     "prefix": ["all-pass:", "pass:"],
-    "body": "(all-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})"
+    "body": "(all-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})",
+    "description": "Given a `where` lambda and a series of values, this macro evaluates to true if the lambda, when run using each value, never evaluated to false."
   },
   "(altered:) macro": {
     "prefix": "altered:",
-    "body": "(altered: ${1:_n} via ${2:${1:_n}+1}, ${3:...${4:\\$numbers}})"
+    "body": "(altered: ${1:_n} via ${2:${1:_n}+1}, ${3:...${4:\\$numbers}})",
+    "description": "Given a `via` lambda and a sequence of values, returns a new array with the same values in the same order, but altered by the lambda."
   },
   "(count:) macro": {
     "prefix": "count:",
-    "body": "(count: ${1:\\$arrayOrString}, ${2:_searchTerm})"
+    "body": "(count: ${1:\\$arrayOrString}, ${2:_searchTerm})",
+    "description": "Given a string or array, followed by a value; returns the number of times any of the values are inside the string or array."
   },
   "(dm-altered:) macro": {
     "prefix": ["dm-altered:", "datamap-altered:"],
-    "body": "(dm-altered: via ${1:its value + 10 where its name is not \"deltaZ\"}, ${2:(dm: \"deltaX\", 3, \"deltaY\", 6, \"deltaZ\", 9)})"
+    "body": "(dm-altered: via ${1:its value + 10 where its name is not \"deltaZ\"}, ${2:(dm: \"deltaX\", 3, \"deltaY\", 6, \"deltaZ\", 9)})",
+    "description": "Given a `via` lambda and a single datamap (with 'name' and 'value' datanames), returns a new datamap with the same datanames, but with its values altered by the lambda."
   },
   "(dm-entries:) macro": {
     "prefix": ["dm-entries:", "data-entries:", "datamap-entries:"],
-    "body": "(dm-entries: ${0:\\$datamap})"
+    "body": "(dm-entries: ${0:\\$datamap})",
+    "description": "Given a datamap, returns an array of its name/value pairs, each as a datamap that only has 'name' and 'value' data."
   },
   "(dm-names:) macro": {
     "prefix": ["dm-names:", "data-names:", "datamap-names:"],
-    "body": "(dm-names: ${0:\\$datamap})"
+    "body": "(dm-names: ${0:\\$datamap})",
+    "description": "Given a datamap, returns an array of its data names, sorted alphabetically."
   },
   "(dm-values:) macro": {
     "prefix": ["dm-values:", "data-values:", "datamap-values:"],
-    "body": "(dm-values: ${0:\\$datamap})"
+    "body": "(dm-values: ${0:\\$datamap})",
+    "description": "Given a datamap, returns an array of its values, sorted alphabetically by their name."
   },
   "(find:) macro": {
     "prefix": "find:",
-    "body": "(find: _${1:person} where ${2:_${1:person} is not \"Alice\"}, ${3:...${4:\\$people}})"
+    "body": "(find: _${1:person} where ${2:_${1:person} is not \"Alice\"}, ${3:...${4:\\$people}})",
+    "description": "This macro searches through the given values, and produces an array of those which match the given search test. The test is expressed using a temp variable, the `where` keyword, and a boolean condition."
   },
   "(folded:) macro": {
     "prefix": "folded:",
-    "body": "(folded: _{1:item} making _${3:total} via _${3:total} + _{1:item}'s ${2:attribute}, ${4:0}, ${3:...${4:\\$items}})"
+    "body": "(folded: _{1:item} making _${3:total} via _${3:total} + _{1:item}'s ${2:attribute}, ${4:0}, ${3:...${4:\\$items}})",
+    "description": "Given a `making` lambda and a sequence of values, returns a total value created by feeding every value in the sequence to the lambda. The first value after the lambda is put into the total, which is the variable inside the lambda's `making` clause, before running the lambda on the remaining values."
   },
   "(interlaced:) macro": {
     "prefix": "interlaced:",
-    "body": "(interlaced: ${1:(a: \"A\", \"B\", \"C\")}, ${2:(a: 1, 2, 3)})"
+    "body": "(interlaced: ${1:(a: \"A\", \"B\", \"C\")}, ${2:(a: 1, 2, 3)})",
+    "description": "Given multiple arrays, pairs up each value in those arrays. Values with no matching pair are ignored."
   },
   "(none-pass:) macro": {
     "prefix": "none-pass:",
-    "body": "(none-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})"
+    "body": "(none-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})",
+    "description": "Given a `where` lambda and a series of values, this macro evaluates to true if the lambda, when run using each value, never evaluated to true."
   },
   "(permutations:) macro": {
     "prefix": "permutations:",
-    "body": "(permutations: ${1:...${2:\\$array}})"
+    "body": "(permutations: ${1:...${2:\\$array}})",
+    "description": "Given a sequence of values, returns an array containing each permutation of the order of those values, as arrays."
   },
   "(range:) macro": {
     "prefix": "range:",
-    "body": "(range: ${1:1}, ${2:14})"
+    "body": "(range: ${1:1}, ${2:14})",
+    "description": "Given `a` and `b`, returns an array containing an inclusive range of whole numbers from `a` to `b`, in ascending order."
   },
   "(repeated:) macro": {
     "prefix": "repeated:",
-    "body": "(repeated: ${1:5}, ${2:\"hello\"})"
+    "body": "(repeated: ${1:5}, ${2:\"hello\"})",
+    "description": "Given a number and a sequence of values, returns an array containing those values repeated, in order, the given number of times."
   },
   "(reversed:) macro": {
     "prefix": "reversed:",
-    "body": "(reversed: ${1:...${2:\\$array}})"
+    "body": "(reversed: ${1:...${2:\\$array}})",
+    "description": "Similar to `(a:)`, except this macro returns an array containing tje given elements in reverse order."
   },
   "(rotated-to:) macro": {
     "prefix": "rotated-to:",
-    "body": "(rotated-to: where ${1:it is > 3}, ${2:...${3:\\$numbers}})"
+    "body": "(rotated-to: where ${1:it is > 3}, ${2:...${3:\\$numbers}})",
+    "description": "Given a `where` lambda at the start, cycles the order of all subsequent values so that the first value to match the lambda is placed at the start."
   },
   "(rotated:) macro": {
     "prefix": "rotated:",
-    "body": "(rotated: ${1:-2}, ${2:...${3:\\$array}})"
+    "body": "(rotated: ${1:-2}, ${2:...${3:\\$array}})",
+    "description": "Given a number at the start, moves each subsequent item forward by that number, wrapping back to the start if they pass the end of the array."
   },
   "(shuffled:) macro": {
     "prefix": "shuffled:",
-    "body": "(shuffled: ${1:\"mustard\", \"mayo\", \"salsa\"})"
+    "body": "(shuffled: ${1:\"mustard\", \"mayo\", \"salsa\"})",
+    "description": "Returns an array of the given values, randomly rearranged."
   },
   "(some-pass:) macro": {
     "prefix": "some-pass:",
-    "body": "(some-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})"
+    "body": "(some-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})",
+    "description": "Given a `where` lambda and a series of values, this macro evaluates to true if the lambda, when run using each value, evaluated to true one or more times."
   },
   "(sorted:) macro": {
     "prefix": "sorted:",
-    "body": "(sorted: ${1:${2:via its name}, }${3:...${4:\\$creatures}})"
+    "body": "(sorted: ${1:${2:via its name}, }${3:...${4:\\$creatures}})",
+    "description": "Returns an array in which the values are sorted in English alphanumeric sort order."
   },
   "(subarray:) macro": {
     "prefix": "subarray:",
-    "body": "(subarray: ${1:\\$array}, ${2:3}, ${3:7})"
+    "body": "(subarray: ${1:\\$array}, ${2:3}, ${3:7})",
+    "description": "Given an array and two numbers, returns a new array containing only the elements whose positions are between the two numbers, inclusive."
   },
   "(unique:) macro": {
     "prefix": "unique:",
-    "body": "(unique: ${1:...${2:\\$array}})"
+    "body": "(unique: ${1:...${2:\\$array}})",
+    "description": "Given a sequence of values, returns an array containing each unique value once, in the order that they appeared."
   },
   "(unpack:) macro": {
     "prefix": "unpack:",
-    "body": "(unpack: ${1:\\$coords} into ${2:(a: \\$x, \\$y, \\$z)})"
+    "body": "(unpack: ${1:\\$coords} into ${2:(a: \\$x, \\$y, \\$z)})",
+    "description": "Given multiple values in an array, datamap, or string, the keyword `into`, and a matching data structure, puts those values into containing variables at the positions of those values."
   },
 
   // date and time
 
   "(current-date:) macro": {
     "prefix": "current-date:",
-    "body": "(current-date:)"
+    "body": "(current-date:)",
+    "description": "Returns a string of the date on the current player's system clock, in the format 'Thu Jan 01 1970'."
   },
   "(current-time:) macro": {
     "prefix": "current-time:",
-    "body": "(current-time:)"
+    "body": "(current-time:)",
+    "description": "Returns a string of the 12-hour time on the current player's system clock, in the format '12:00 AM'."
   },
   "(monthday:) macro": {
     "prefix": "monthday:",
-    "body": "(monthday:)"
+    "body": "(monthday:)",
+    "description": "Returns a number corresponding to the day of the month on the current player's system clock."
   },
   "(weekday:) macro": {
     "prefix": "weekday:",
-    "body": "(weekday:)"
+    "body": "(weekday:)",
+    "description": "Returns the name of the weekday (e.g. 'Monday', 'Tuesday') on the current player's system clock."
   },
 
   // debugging
@@ -316,184 +388,227 @@
   // (test-false:)
   "(assert:) macro": {
     "prefix": "assert:",
-    "body": "(assert: ${1:\\$nails is <= \\$maxNails})"
+    "body": "(assert: ${1:\\$nails is <= \\$maxNails})",
+    "description": "Given an expression, this debugging macro produces a helpful error whenever that expression evaluates to false."
   },
   "(assert-exists:) macro": {
     "prefix": "assert-exists:",
-    "body": "(assert-exists: ${1|?bottomBar,\"the auroch\"|})"
+    "body": "(assert-exists: ${1|?bottomBar,\"the auroch\"|})",
+    "description": "Given a hook name or passage text, produces a helpful error if that is not present in the current passage."
   },
   "(debug:) macro": {
     "prefix": "debug:",
-    "body": "(debug:)"
+    "body": "(debug:)",
+    "description": "This command, which takes no values, opens the Debug Mode panel if it wasn't open already."
   },
   "(mock-turns:) macro": {
     "prefix": "mock-turns:",
-    "body": "(mock-turns: ${0:3})"
+    "body": "(mock-turns: ${0:3})",
+    "description": "This debugging macro artificially increments the value of the `turns` keyword."
   },
   "(mock-visits:) macro": {
     "prefix": "mock-visits:",
-    "body": "(mock-visits: ${0:\"Living Room\", \"Bedroom\", \"Kitchen\"})"
+    "body": "(mock-visits: ${0:\"Living Room\", \"Bedroom\", \"Kitchen\"})",
+    "description": "This debugging macro artificially increments the value of the `visits` keyword for the given passage(s)."
   },
   "(verbatim-source:) macro": {
     "prefix": ["v6m-source:", "verbatim-source:"],
-    "body": "(v6m-source: ${0:(open-storylets:)'s 1st})"
+    "body": "(v6m-source: ${0:(open-storylets:)'s 1st})",
+    "description": "Prints out the Harlowe source code of any value given to it."
   },
 
   // game state
 
   "(history:) macro": {
     "prefix": "history:",
-    "body": "(history:${1: where its tags contains \"Forest\"})"
+    "body": "(history:${1: where its tags contains \"Forest\"})",
+    "description": "Returns an array containing the string names of all passages the player has previously visited, in the order the player visited them. An optional lambda can filter by checking each `(passage:)` datamap."
   },
   "(visited:) macro": {
     "prefix": "visited:",
-    "body": "(visited: ${1|\"Cellar\",where its tags contains \"Forest\"|})"
+    "body": "(visited: ${1|\"Cellar\",where its tags contains \"Forest\"|})",
+    "description": "Returns true if the named passage, or any passage matching the `where` lambda, has ever been visited."
   },
   "(passage:) macro": {
     "prefix": "passage:",
-    "body": "(passage:${1:\"${2:Cellar}\"})"
+    "body": "(passage:${1:\"${2:Cellar}\"})",
+    "description": "Given a passage string name, returns a datamap of information about that passage. Given no name, returns information about the current passage."
   },
   "(passage:)'s operation": {
     "prefix": "passage's:",
-    "body": "(passage:)'s"
+    "body": "(passage:)'s",
+    "description": "Queries the datamap of information about the current passage."
   },
   "(passages:) macro": {
     "prefix": "passages:",
-    "body": "(passages:${1: where its tags contains \"Forest\"})"
+    "body": "(passages:${1: where its tags contains \"Forest\"})",
+    "description": "Returns an array of datamaps containing information for all passages in the story, sorted by passage name, or for only certain passages that match the optional lambda."
   },
   "(forget-visits:) macro": {
     "prefix": "forget-visits:",
-    "body": "(forget-visits: ${0:-1})"
+    "body": "(forget-visits: ${0:-1})",
+    "description": "This macro 'forgets' all visits that occurred before the given turn number."
   },
   "(forget-undos:) macro": {
     "prefix": "forget-undos:",
-    "body": "(forget-undos: ${0:-1})"
+    "body": "(forget-undos: ${0:-1})",
+    "description": "This macro 'forgets' previous turns, preventing the player from using undo features (like `(link-undo:)`) to return to them."
   },
   "(metadata:) macro": {
     "prefix": "metadata:",
-    "body": "(metadata: ${1:\"danger\", 4, \"rarity\", 5})"
+    "body": "(metadata: ${1:\"danger\", 4, \"rarity\", 5})",
+    "description": "This macro adds the given names and values to the current passage's `(passage:)` datamap."
   },
   "(seed:) macro": {
     "prefix": "seed:",
-    "body": "(seed: ${1|\"a1b2c3\",(current-date:)+(current-time:)|})"
+    "body": "(seed: ${1|\"a1b2c3\",(current-date:)+(current-time:)|})",
+    "description": "This macro 'fixes' Harlowe's random number generator, causing all random macros and features to output predetermined values based on the given 'seed' string."
   },
 
   // input and interface
 
   "(cycling-link:) macro": {
     "prefix": "cycling-link:",
-    "body": "(cycling-link: ${1:${2|bind,2bind|} ${3:\\$pressure}, }${0:\"Low\", \"Medium\", \"High\"})"
+    "body": "(cycling-link: ${1:${2|bind,2bind|} ${3:\\$pressure}, }${0:\"Low\", \"Medium\", \"High\"})",
+    "description": "This command, when evaluated, creates a cycling link: a link which does not go anywhere, but changes its own text to the next in a looping sequence of strings, setting the optional bound variable to match the string value of the text."
   },
   "(sequence-link:) macro": {
     "prefix": ["seq-link:", "sequence-link:"],
-    "body": "(seq-link: ${1:${2|bind,2bind|} ${3:\\$candy}, }${0:\"Two candies\", \"One candy\", \"Some wrappers\"})"
+    "body": "(seq-link: ${1:${2|bind,2bind|} ${3:\\$candy}, }${0:\"Two candies\", \"One candy\", \"Some wrappers\"})",
+    "description": "This command creates a link that does not go anywhere, but changes its own text to the next in a sequence of strings, becoming plain text once the final string is reached, and setting the optional bound variable to match the text at all times."
   },
   "(input:) macro": {
     "prefix": "input:",
-    "body": "(input: ${1|\"delicious sandwich\",bind _playerName\\, \"=X=\"\\, \"Carmen SanDiego\",bind _spell|})"
+    "body": "(input: ${1|\"delicious sandwich\",bind _playerName\\, \"=X=\"\\, \"Carmen SanDiego\",bind _spell|})",
+    "description": "This command creates a single-line text input element, allowing the player to input any amount of text without newlines, to optionally be automatically stored in a variable."
   },
   "(force-input:) macro": {
     "prefix": "force-input:",
-    "body": "(force-input: ${1|bind _cmd\\, \"ERASE INTERNET\",bind _cmd\\, \"=X=\"\\, \"DEL WWW\",\"HELLO THERE\"|})"
+    "body": "(force-input: ${1|bind _cmd\\, \"ERASE INTERNET\",bind _cmd\\, \"=X=\"\\, \"DEL WWW\",\"HELLO THERE\"|})",
+    "description": "This command creates a single-line text input element which appears to offer the player a means to input text, but instead replaces every keypress inside it with characters from a pre-set string."
   },
   "(input-box:) macro": {
     "prefix": "input-box:",
-    "body": "(input-box: ${1:${2|bind,2bind|} ${3:\\$code}, }${4:\"${5:XXX=}\", }${6:${7:5}, }${8:\"${9:initial text}\"})"
+    "body": "(input-box: ${1:${2|bind,2bind|} ${3:\\$code}, }${4:\"${5:XXX=}\", }${6:${7:5}, }${8:\"${9:initial text}\"})",
+    "description": "This command creates a multi-line text input box of the given position, width (specified by the first, optional string) and height (specified by the optional number), allowing the player to input any amount of text, which can optionally be automatically stored in a variable. The final optional string specifies an initial default value for the box."
   },
   "(force-input-box:) macro": {
     "prefix": "force-input-box:",
-    "body": "(force-input-box: ${1:${2|bind,2bind|} ${3:\\$code}, }${4:\"${5:XXX=}\", }${6:${7:5}, }${8:\"${9:forced text}\"})"
+    "body": "(force-input-box: ${1:${2|bind,2bind|} ${3:\\$code}, }${4:\"${5:XXX=}\", }${6:${7:5}, }${8:\"${9:forced text}\"})",
+    "description": "This command creates a multi-line text input box of the given position, width (specified by the first, optional string) and height (specified by the optional number), which appears to offer the player a means to input text, but instead replaces every keypress inside it with characters from a pre-set string."
   },
   "(checkbox:) macro": {
     "prefix": "checkbox:",
-    "body": "(checkbox: ${1|bind,2bind|} ${2:\\$mode}, \"Hardcore\")"
+    "body": "(checkbox: ${1|bind,2bind|} ${2:\\$mode}, \"Hardcore\")",
+    "description": "This command creates a checkbox input, which sets the given bound variable to true or false, depending on its state."
   },
   "(checkbox-fullscreen:) macro": {
     "prefix": "checkbox-fullscreen:",
-    "body": "(checkbox-fullscreen: ${1:\"Full Screen\"})"
+    "body": "(checkbox-fullscreen: ${1:\"Full Screen\"})",
+    "description": "This command creates a checkbox input, which toggles the browser's fullscreen mode and windowed mode. The checkbox will automatically update to match the browser's fullscreen status. If fullscreen mode cannot be entered, the checkbox will be disabled."
   },
   "(dropdown:) macro": {
     "prefix": "dropdown:",
-    "body": "(dropdown: ${1|bind,2bind|} ${2:\\$title}, ${3:\"Duke\", \"King\", \"Emperor\"})"
+    "body": "(dropdown: ${1|bind,2bind|} ${2:\\$title}, ${3:\"Duke\", \"King\", \"Emperor\"})",
+    "description": "This command, when evaluated, creates a dropdown menu with the given strings as options. When an option is selected, the bound variable is set to match the string value of the text."
   },
   "(meter:) macro": {
     "prefix": "meter:",
-    "body": "(meter: ${1|bind,2bind|} ${2:\\$hitPoints}, ${3:\\$maxHP}, \"${4:=X=}\"${5:, \"${6:Hit Points}\"}${7:, ${8:red}})"
+    "body": "(meter: ${1|bind,2bind|} ${2:\\$hitPoints}, ${3:\\$maxHP}, \"${4:=X=}\"${5:, \"${6:Hit Points}\"}${7:, ${8:red}})",
+    "description": "This command creates a horizontal bar-graph meter, showing the current value of a number variable, relative to a maximum value, and updating it whenever that variable changes."
   },
 
   // links
 
   "(link:) macro": {
     "prefix": ["link:", "link-replace:"],
-    "body": "(link: ${1:\"Stake\"})[${0:The dracula crumbles to dust.}]"
+    "body": "(link: ${1:\"Stake\"})[${0:The dracula crumbles to dust.}]",
+    "description": "When attached to a hook, this macro replaces the hook with a link that has the given text. The link, when clicked, vanishes and reveals the hook."
   },
   "(link-reveal:) macro": {
     "prefix": ["link-reveal:", "link-append:"],
-    "body": "(link-reveal: ${1:\"Heart\"})[${0:broken}]"
+    "body": "(link-reveal: ${1:\"Heart\"})[${0:broken}]",
+    "description": "When attached to a hook, this replaces the hook with a link that has the given text. The link, when clicked, reveals the hook and becomes plain, unstyled text."
   },
   "(link-repeat:) macro": {
     "prefix": "link-repeat:",
-    "body": "(link-repeat: ${1:\"Add cheese\"})[${0:(set:\\$cheese to it + 1)}]"
+    "body": "(link-repeat: ${1:\"Add cheese\"})[${0:(set:\\$cheese to it + 1)}]",
+    "description": "When attached to a hook, this replaces the hook with a link that has the given text. The link, when clicked, reveals the hook. Further clicks will cause the hook to repeat itself."
   },
   "(link-rerun:) macro": {
     "prefix": "link-rerun:",
-    "body": "(link-rerun: ${1:\"Roll dice\"})[${0:You rolled a (random:1,6).}]"
+    "body": "(link-rerun: ${1:\"Roll dice\"})[${0:You rolled a (random:1,6).}]",
+    "description": "When attached to a hook, this replaces the hook with a link that has the given text. The link, when clicked, reveals the hook. Further clicks will cause the hook to rerun itself, as if by the effect of `(rerun:)`."
   },
   "(link-goto:) macro": {
     "prefix": "link-goto:",
-    "body": "(link-goto: ${1:\"Enter the cellar\"}, ${0:\"Cellar\"})"
+    "body": "(link-goto: ${1:\"Enter the cellar\"}, ${0:\"Cellar\"})",
+    "description": "Given a string of link text, and an optional destination passage name, creates a link that takes the player to another passage. The link functions identically to a standard link."
   },
   "(link-reveal-goto:) macro": {
     "prefix": "link-reveal-goto:",
-    "body": "(link-reveal-goto: \"${1:Study English}\", \"${2:AfternoonClass}\")[${0:(set:\\$eng to it + 1)}]"
+    "body": "(link-reveal-goto: \"${1:Study English}\", \"${2:AfternoonClass}\")[${0:(set:\\$eng to it + 1)}]",
+    "description": "This macro lets you run commands like `(set:)` just before going to another passage. The first string is the link text, and the second is the passage name. "
   },
   "(link-undo:) macro": {
     "prefix": "link-undo:",
-    "body": "(link-undo: \"${1:Retreat}$0\"${2:, \"Can't retreat!\"})"
+    "body": "(link-undo: \"${1:Retreat}$0\"${2:, \"Can't retreat!\"})",
+    "description": "Given a string of link text, produces a link that, when clicked, undoes the current turn and sends the player back to the previously visited passage. An optional second string can be provided, which is shown instead of the link if it's not possible to undo."
   },
   "(link-fullscreen:) macro": {
     "prefix": "link-fullscreen:",
-    "body": "(link-fullscreen: \"${1:Fullscreen on}\", \"${2:Fullscreen off}\"${3:, \"${4:Fullscreen unavailable}\"})"
+    "body": "(link-fullscreen: \"${1:Fullscreen on}\", \"${2:Fullscreen off}\"${3:, \"${4:Fullscreen unavailable}\"})",
+    "description": "Creates an automatically-updating link that, when clicked, toggles the browser's fullscreen mode and windowed modes. The first string is the link text used if the browser is currently in windowed mode; the second string for fullscreen mode. The optional third string is used when fullscreen mode isn't allowed by the browser."
   },
   "(link-show:) macro": {
     "prefix": "link-show:",
-    "body": "(link-show: ${1:\"text\"}, ${2:?hookName})"
+    "body": "(link-show: ${1:\"text\"}, ${2:?hookName})",
+    "description": "Creates a link that, when clicked, shows the given hidden hooks, running the code within."
   },
   "(link-storylet:) macro": {
     "prefix": "link-storylet:",
-    "body": "(link-storylet: ${1:\"${2:Link text}\", }${3|1,where its tags contains \"episode\"|}${4:, \"${5:Unavailable}\"})"
+    "body": "(link-storylet: ${1:\"${2:Link text}\", }${3|1,where its tags contains \"episode\"|}${4:, \"${5:Unavailable}\"})",
+    "description": "Creates a link to the first open storylet that matches the `where` lambda, or if a number `n` was passed in, the `n`th (or, if negative, `n`th-to-last) open storylet. The optional first string provides the link text; the default is the passage name of the storylet. The optional final string can provide text to display when no available storylet is open."
   },
   "(click:) macro": {
     "prefix": "click:",
-    "body": "(click: ${1:\"dish of water\"})[${0:Your finger gets wet.}]"
+    "body": "(click: ${1:\"dish of water\"})[${0:Your finger gets wet.}]",
+    "description": "When attached to a hook, hides it and enchants the specified target such that it visually resembles a link; clicking it causes the attached hook to be revealed."
   },
   "(click-replace:) macro": {
     "prefix": "click-replace:",
-    "body": "(click-replace: ${1:\"my deepest secret\"})[${0:my longing for you}]"
+    "body": "(click-replace: ${1:\"my deepest secret\"})[${0:my longing for you}]",
+    "description": "Makes the specified hook replace its own text with that of the attached hook whenever the specified hook is clicked."
   },
   "(click-rerun:) macro": {
     "prefix": "click-rerun:",
-    "body": "(click-rerun: ${1:\"this phrase\"})[${0:this hook}]"
+    "body": "(click-rerun: ${1:\"this phrase\"})[${0:this hook}]",
+    "description": "Creates a link on the specified hook or text (specified by the first value) that can be be activated multiple times to rerun the attached hook."
   },
   "(click-append:) macro": {
     "prefix": "click-append:",
-    "body": "(click-append: ${1:?toThisHook})[${0:this content}]"
+    "body": "(click-append: ${1:?toThisHook})[${0:this content}]",
+    "description": "Append the text of the attached hook to the specified hook or string when it's clicked."
   },
   "(click-goto:) macro": {
     "prefix": "click-goto:",
-    "body": "(click-goto: ${1:\"click me\"}, \"${2:PassageName}\")"
+    "body": "(click-goto: ${1:\"click me\"}, \"${2:PassageName}\")",
+    "description": "Makes the specified hook or bit of text into a passage link."
   },
   "(click-undo:) macro": {
     "prefix": "click-undo:",
-    "body": "(click-undo: ${1:?page})"
+    "body": "(click-undo: ${1:?page})",
+    "description": "Makes a hook or bit of text into a passage link which undoes the current turn. `(click-undo: ?1)` is equivalent to `(click: ?1)[(undo: )]`."
   },
   "(click-prepend:) macro": {
     "prefix": "click-prepend:",
-    "body": "(click-prepend: \"?\")[, seriously]"
+    "body": "(click-prepend: \"?\")[, seriously]",
+    "description": "Prepend the text of the attached hook to the specified hook or string when it's clicked."
   },
   "(action:) macro": {
     "prefix": "action:",
-    "body": "(action: \"${1|mouseover,mouseout,doubleclick,click|}\")"
+    "body": "(action: \"${1|mouseover,mouseout,doubleclick,click|}\")",
+    "description": "When attached to a link command, or given to a link-changer macro as its second value, this macro turns the link into a different kind of interaction element with a different appearance."
   },
 
   // live
@@ -504,167 +619,205 @@
       "(live: ${1:0.5s})[",
       "\t${0:(either: \"Red!\", \"Green!\", \"Blue!\")}",
       "]"
-    ]
+    ],
+    "description": "This macro makes the attached hook `live`, which means that it will rerun at the specified interval in milliseconds, replacing the source inside the hook with a newly computed version."
   },
   "(stop:) macro": {
     "prefix": "stop:",
-    "body": "(stop:)"
+    "body": "(stop:)",
+    "description": "This macro, which accepts no arguments, creates a (stop:) command which is not configurable."
   },
   "(event:) macro": {
     "prefix": "event:",
-    "body": "(event: when ${1:time > ${2:10s}})[$0]"
+    "body": "(event: when ${1:time > ${2:10s}})[$0]",
+    "description": "Hooks with this changer attached will only be run when the given condition becomes true."
   },
   "(after:) macro": {
     "prefix": "after:",
-    "body": "(after: time + ${1:3s})[$0]"
+    "body": "(after: time + ${1:3s})[$0]",
+    "description": "Hooks with this changer attached will only be run once the specified amount of time has passed since the passage was rendered. An optional second number reduces the delay by that amount when the player holds down a keyboard key or mouse button, or touches the touch device."
   },
   "(after-error:) macro": {
     "prefix": "after-error:",
-    "body": "(after-error:)[${0:Oops! Something broke!}]"
+    "body": "(after-error:)[${0:Oops! Something broke!}]",
+    "description": "This bug-specific macro hides its attached the hook and only runs it once an error occurs."
   },
   "(more:) macro": {
     "prefix": "more:",
-    "body": "(more:)[$0]"
+    "body": "(more:)[$0]",
+    "description": "Hooks with this changer attached will only be run once no other exits--links and `(click:)`-enchanted areas--are remaining in the passage, and will reveal `more` prose."
   },
 
   // maths
 
   "(abs:) macro": {
     "prefix": "abs:",
-    "body": "(abs: ${0:-4})"
+    "body": "(abs: ${0:-4})",
+    "description": "This maths macro returns the absolute value (without the sign) of the given number."
   },
   "(cos:) macro": {
     "prefix": "cos:",
-    "body": "(cos: ${0:3.14159265})"
+    "body": "(cos: ${0:3.14159265})",
+    "description": "This maths macro returns the cosine of the given number of radians."
   },
   "(exp:) macro": {
     "prefix": "exp:",
-    "body": "(exp: ${0:6})"
+    "body": "(exp: ${0:6})",
+    "description": "This maths macro raises Euler's number to the power of the given number, and returns the result."
   },
   "(log:) macro": {
     "prefix": "log:",
-    "body": "(log: ${0:(exp:5)})"
+    "body": "(log: ${0:(exp:5)})",
+    "description": "This maths macro returns the natural (base-e) logarithm of the given number."
   },
   "(log10:) macro": {
     "prefix": "log10:",
-    "body": "(log10: ${0:100})"
+    "body": "(log10: ${0:100})",
+    "description": "This maths macro returns the base-10 logarithm of the given number."
   },
   "(log2:) macro": {
     "prefix": "log2:",
-    "body": "(log2: ${0:256})"
+    "body": "(log2: ${0:256})",
+    "description": "This maths macro returns the base-2 logarithm of the given number."
   },
   "(max:) macro": {
     "prefix": "max:",
-    "body": "(max: ${1:...${2:\\$numbers}})"
+    "body": "(max: ${1:...${2:\\$numbers}})",
+    "description": "This maths macro returns the highest valued of the given numbers."
   },
   "(min:) macro": {
     "prefix": "min:",
-    "body": "(min: ${1:...${2:\\$numbers}})"
+    "body": "(min: ${1:...${2:\\$numbers}})",
+    "description": "This maths macro returns the lowest valued of the given numbers."
   },
   "(pow:) macro": {
     "prefix": "pow:",
-    "body": "(pow: ${1:2}, ${2:8})"
+    "body": "(pow: ${1:2}, ${2:8})",
+    "description": "This maths macro raises the first number to the power of the second number, and returns the result."
   },
   "(sign:) macro": {
     "prefix": "sign:",
-    "body": "(sign: ${0:-4})"
+    "body": "(sign: ${0:-4})",
+    "description": "This maths macro returns -1 when given a negative number, 0 when given 0, and 1 when given a positive number."
   },
   "(sin:) macro": {
     "prefix": "sin:",
-    "body": "(sin: ${0:3.14159265 / 2})"
+    "body": "(sin: ${0:3.14159265 / 2})",
+    "description": "This maths macro returns the sine of the given number of radians."
   },
   "(sqrt:) macro": {
     "prefix": "sqrt:",
-    "body": "(sqrt: ${0:81})"
+    "body": "(sqrt: ${0:81})",
+    "description": "This maths macro returns the square root of the given number."
   },
   "(tan:) macro": {
     "prefix": "tan:",
-    "body": "(tan: ${0:3.14159265 / 4})"
+    "body": "(tan: ${0:3.14159265 / 4})",
+    "description": "This maths macro returns the tangent of the given number of radians."
   },
 
   // navigation
 
   "(goto:) macro": {
     "prefix": "goto:",
-    "body": "(goto: ${1:\"${2:Basement}\"})"
+    "body": "(goto: ${1:\"${2:Basement}\"})",
+    "description": "This command stops passage code and sends the player to a new passage, starting a new turn as if a passage link was clicked."
   },
   "(redirect:) macro": {
     "prefix": "redirect:",
-    "body": "(redirect: ${1:\"${2:Basement}\"})"
+    "body": "(redirect: ${1:\"${2:Basement}\"})",
+    "description": "This command stops passage code and sends the player to a new passage, but does not start a new turn. Undoing after this will send the player to the turn before the redirect occurred."
   },
   "(undo:) macro": {
     "prefix": "undo:",
-    "body": "(undo:${1: \"${2:Not available}\"})"
+    "body": "(undo:${1: \"${2:Not available}\"})",
+    "description": "This command stops passage code and undoes the current turn, sending the player to the previously visited passage and forgetting any variable changes that occurred in this passage. The optional string is displayed if undos aren't available."
   },
   "(restart:) macro": {
     "prefix": ["restart:", "reload:"],
-    "body": "(restart:)"
+    "body": "(restart:)",
+    "description": "When this command is used, the player's browser will immediately attempt to reload the page, in effect restarting the entire story."
   },
 
   // numbers
 
   "(ceil:) macro": {
     "prefix": "ceil:",
-    "body": "(ceil: ${0:1.1})"
+    "body": "(ceil: ${0:1.1})",
+    "description": "This macro rounds the given number upward to a whole number. If a whole number is provided, it returns the number as-is."
   },
   "(floor:) macro": {
     "prefix": "floor:",
-    "body": "(floor: ${0:1.99})"
+    "body": "(floor: ${0:1.99})",
+    "description": "This macro rounds the given number downward to a whole number. If a whole number is provided, it returns the number as-is."
   },
   "(num:) macro": {
     "prefix": "num:",
-    "body": "(num: ${0:\"25\"})"
+    "body": "(num: ${0:\"25\"})",
+    "description": "This macro converts strings to numbers by reading the digits in the entire string. It can handle decimal fractions and negative numbers."
   },
   "(random:) macro": {
     "prefix": "random:",
-    "body": "(random: ${1:1}, ${2:20})"
+    "body": "(random: ${1:1}, ${2:20})",
+    "description": "This macro returns a randomly selected integer between the two given integers (or, if the second number is absent, between 0 and the first number), inclusive."
   },
   "(round:) macro": {
     "prefix": "round:",
-    "body": "(round: ${0: 1.5})"
+    "body": "(round: ${0: 1.5})",
+    "description": "This macro rounds the given number to the nearest whole number: downward if its decimals are smaller than 0.5, and upward otherwise. If a whole number is provided, it returns the number as-is."
   },
   "(trunc:) macro": {
     "prefix": "trunc:",
-    "body": "(trunc: ${0:1.5})"
+    "body": "(trunc: ${0:1.5})",
+    "description": "This macro rounds the given number towards zero by truncating the fractional portion of the number, leaving just the whole portion."
   },
 
   // patterns
 
   "(p:) macro": {
     "prefix": ["p:", "pattern:"],
-    "body": "(p: $0)"
+    "body": "(p: $0)",
+    "description": "Creates a string pattern, a special kind of datatype that can match complex string structures. The pattern matches the entire sequence of strings or datatypes given, in order."
   },
   "(p-either:) macro": {
     "prefix": ["p-either:", "pattern-either:"],
-    "body": "(p-either: ${2:...${3:\\$array}})"
+    "body": "(p-either: ${2:...${3:\\$array}})",
+    "description": "Creates a string pattern that matches any of the single strings or datatypes given."
   },
   "(p-opt:) macro": {
     "prefix": ["p-opt:", "pattern-opt:", "p-optional:", "pattern-optional:"],
-    "body": "(p-opt: ${0:\"Default Name\"})"
+    "body": "(p-opt: ${0:\"Default Name\"})",
+    "description": "Creates a string pattern that either matches the sequence of strings or datatypes given, or the empty string."
   },
   "(p-many:) macro": {
     "prefix": ["p-many:", "pattern-many:"],
-    "body": "(p-many: ${1:${2:3},${3:12},}${0:lowercase})"
+    "body": "(p-many: ${1:${2:3},${3:12},}${0:lowercase})",
+    "description": "Creates a string pattern that matches the given sequence of strings and datatypes, repeated the given minimum and maximum number of times--or, if these aren't provided, repeated any number of times."
   },
   "(p-not:) macro": {
     "prefix": ["p-not:", "pattern-not:"],
-    "body": "(p-not: $0)"
+    "body": "(p-not: $0)",
+    "description": "Given any number of single characters or non-spread datatypes, this creates a string pattern that matches any one character that doesn't match any of those values."
   },
   "(p-before:) macro": {
     "prefix": ["p-before:", "pattern-before:"],
-    "body": "(p-before: $0)"
+    "body": "(p-before: $0)",
+    "description": "Creates a string pattern that matches the empty string *only* if it is followed by the given sequence of strings or datatypes."
   },
   "(p-not-before:) macro": {
     "prefix": ["p-not-before:", "pattern-not-before:"],
-    "body": "(p-not-before: $0)"
+    "body": "(p-not-before: $0)",
+    "description": "Creates a string pattern that matches the empty string *unless* it is followed by the given sequence of strings or datatypes."
   },
   "(p-start:) macro": {
     "prefix": ["p-start:", "pattern-start:"],
-    "body": "(p-start: $0)"
+    "body": "(p-start: $0)",
+    "description": "Identical to `(p:)`, except that when used with macros that search for substrings in strings, like `(str-find:)`, `(str-replaced:)` and `(trimmed:)`, this only matches if the given strings or datatypes appear at the very start of the string."
   },
   "(p-end:) macro": {
     "prefix": ["p-end:", "pattern-end:"],
-    "body": "(p-end: $0)"
+    "body": "(p-end: $0)",
+    "description": "Identical to `(p:)`, except that when used with macros that search for substrings in strings, like `(str-find:)`, `(str-replaced:)` and `(trimmed:)`, this only matches if the given strings or datatypes appear at the very end of the string."
   },
   "(p-ins:) macro": {
     "prefix": [
@@ -673,355 +826,434 @@
       "p-insensitive:",
       "pattern-insensitive:"
     ],
-    "body": "(p-ins: $0)"
+    "body": "(p-ins: $0)",
+    "description": "Creates a string pattern that matches the sequence of strings or datatypes given, case-insensitively."
   },
 
   // popup
 
   "(dialog:) macro": {
     "prefix": ["dialog:", "alert:"],
-    "body": "(dialog: ${1:bind ${2:$$favColour}, }[${3:Favourite colour?}], ${4:\"Orange\", \"Magenta\", \"Aqua\"})"
+    "body": "(dialog: ${1:bind ${2:$$favColour}, }[${3:Favourite colour?}], ${4:\"Orange\", \"Magenta\", \"Aqua\"})",
+    "description": "This command displays a pop-up dialog box with the given string or codehook displayed, and a number of button-shaped links labeled with the remaining other strings. If an optional bound variable is provided, that variable is updated to match the pressed button."
   },
   "(confirm:) macro": {
     "prefix": "confirm:",
-    "body": "(set: ${1:\\$makeCake} to (confirm: [${2:Transform your best friend into a cake?}$0]${3:, \"${4:Cancel}\", \"${5:OK}\"}))"
+    "body": "(set: ${1:\\$makeCake} to (confirm: [${2:Transform your best friend into a cake?}$0]${3:, \"${4:Cancel}\", \"${5:OK}\"}))",
+    "description": "This command creates a pop-up dialog box with the given string displayed, as well as two links to confirm or cancel the statement. When submitted, it evaluates to the boolean `true` if the confirm link had been clicked, and `false` if the cancel link had."
   },
   "(prompt:) macro": {
     "prefix": "prompt:",
-    "body": "(set: ${1:\\$name} to (prompt: [${2:What is your name?}$0], \"Jane Doe\"${3:, \"${4:Cancel}\", \"${5:OK}\"}))"
+    "body": "(set: ${1:\\$name} to (prompt: [${2:What is your name?}$0], \"Jane Doe\"${3:, \"${4:Cancel}\", \"${5:OK}\"}))",
+    "description": "This command creates a browser pop-up dialog box with the first string displayed, a text entry box containing the second string(as a default value, a confirm link, and a cancel link. If the confirm link is clicked, it evaluates to the string in the text entry box. If the cancel link is clicked, it evaluates to the default value, regardless of the entry box's contents."
   },
 
   // revision
 
   "(replace:) macro": {
     "prefix": "replace:",
-    "body": "(replace: ${1|\"cat\",?pet|})[$0]"
+    "body": "(replace: ${1|\"cat\",?pet|})[$0]",
+    "description": "Replaces the given target with the contents of the attached hook."
   },
   "(append:) macro": {
     "prefix": "append:",
-    "body": "(append: ${1|\"string\",?hookName|})[$0]"
+    "body": "(append: ${1|\"string\",?hookName|})[$0]",
+    "description": "Appends the contents of the attached hook to the given target."
   },
   "(prepend:) macro": {
     "prefix": "prepend:",
-    "body": "(prepend: ${1|\"string\",?hookName|})[$0]"
+    "body": "(prepend: ${1|\"string\",?hookName|})[$0]",
+    "description": "Prepends the contents of the attached hook to the given target."
   },
   "(replace-with:) macro": {
     "prefix": "replace-with:",
-    "body": "(replace-with: ${1|\"string\",[CodeHook]|})"
+    "body": "(replace-with: ${1|\"string\",[CodeHook]|})",
+    "description": "Replaces the entirety of the attached hook with the contents of the given string or CodeHook."
   },
   "(append-with:) macro": {
     "prefix": "append-with:",
-    "body": "(append-with: ${1|\"string\",[CodeHook]|})"
+    "body": "(append-with: ${1|\"string\",[CodeHook]|})",
+    "description": "Appends the contents of the given target to the attached hook."
   },
   "(prepend-with:) macro": {
     "prefix": "prepend-with:",
-    "body": "(prepend-with: ${1|\"string\",[CodeHook]|})"
+    "body": "(prepend-with: ${1|\"string\",[CodeHook]|})",
+    "description": "Prepends the contents of the given target to the attached hook."
   },
   "(rerun:) macro": {
     "prefix": "rerun:",
-    "body": "(rerun: ${1:?${2:hookName}})"
+    "body": "(rerun: ${1:?${2:hookName}})",
+    "description": "Reruns the given hooks, restoring them to their original contents, and running the macros within them again."
   },
 
   // saving
 
   "(load-game:) macro": {
     "prefix": "load-game:",
-    "body": "(load-game: ${1:\"${2:Slot A}\"})"
+    "body": "(load-game: ${1:\"${2:Slot A}\"})",
+    "description": "This command attempts to load a saved game from the specified slot, ending the current game and replacing it with the loaded one, completely and instantly replacing the variables and move history with that of the save, and going to the passage where that save was made."
   },
   "(save-game:) macro": {
     "prefix": "save-game:",
-    "body": "(if:(save-game:${1:\"${2:Slot A}\"}))[${3:Game saved!}](else:)[${4:Save failed!}]"
+    "body": "(if:(save-game:${1:\"${2:Slot A}\"}))[${3:Game saved!}](else:)[${4:Save failed!}]",
+    "description": "This macro saves the current game's state in browser storage, in the specified save slot, with an optionally specified filename. It can then be restored using (load-game:)."
   },
   "(saved-games:) macro": {
     "prefix": "saved-games:",
-    "body": "(saved-games:)"
+    "body": "(saved-games:)",
+    "description": "Returns a datamap containing the names of currently occupied save game slots."
   },
 
   // showing and hiding
 
   "(hidden:) macro": {
     "prefix": "hidden:",
-    "body": "(hidden:)${1:[$0]}"
+    "body": "(hidden:)${1:[$0]}",
+    "description": "This macro returns a changer that will hide any attached hook."
   },
   "(hide:) macro": {
     "prefix": "hide:",
-    "body": "(hide: ${1:?${2:hookName}})"
+    "body": "(hide: ${1:?${2:hookName}})",
+    "description": "Hides a visible hook or hooks without fully erasing them or their contained macro calls."
   },
   "(show:) macro": {
     "prefix": "show:",
-    "body": "(show: ${1:?${2:hookName}})"
+    "body": "(show: ${1:?${2:hookName}})",
+    "description": "Reveals a hidden hook or hooks, running the code within if it hasn't been shown yet."
   },
 
   // sidebar
 
   "(icon-undo:) macro": {
     "prefix": "icon-undo:",
-    "body": "(icon-undo: ${1|\"←\",\"Undo\",\"←\"\\, \"Undo\"|})"
+    "body": "(icon-undo: ${1|\"←\",\"Undo\",\"←\"\\, \"Undo\"|})",
+    "description": "Create an icon that, if visible and clicked, undoes the current turn and returns to the previous passage, as if by `(undo:)`."
   },
   "(icon-redo:) macro": {
     "prefix": "icon-redo:",
-    "body": "(icon-redo: ${1|\"→\",\"Redo\",\"→\"\\, \"Redo\"|})"
+    "body": "(icon-redo: ${1|\"→\",\"Redo\",\"→\"\\, \"Redo\"|})",
+    "description": "Create an icon that, if visible and clicked, redoes a turn that was undone."
   },
   "(icon-fullscreen:) macro": {
     "prefix": "icon-fullscreen:",
-    "body": "(icon-fullscreen: ${1|\"⛶\",\"Fullscreen\",\"⛶\"\\, \"Fullscreen\"|})"
+    "body": "(icon-fullscreen: ${1|\"⛶\",\"Fullscreen\",\"⛶\"\\, \"Fullscreen\"|})",
+    "description": "Create an icon that, if visible and clicked, toggles fullscreen mode."
   },
   "(icon-restart:) macro": {
     "prefix": "icon-restart:",
-    "body": "(icon-restart: ${1|\"⟲\",\"Restart\",\"⟲\"\\, \"Restart\"|})"
+    "body": "(icon-restart: ${1|\"⟲\",\"Restart\",\"⟲\"\\, \"Restart\"|})",
+    "description": "Create an icon that, if visible and clicked, reloads the whole page, restarting the story from the beginning."
   },
   "(icon-counter:) macro": {
     "prefix": "icon-counter:",
-    "body": "(icon-counter: bind ${1:\\$mouseCount}, \"${2:mouse}\"${3:, \"${4:mice}\"})"
+    "body": "(icon-counter: bind ${1:\\$mouseCount}, \"${2:mouse}\"${3:, \"${4:mice}\"})",
+    "description": "This command creates a numeric counter element with a text label, designed to fit in the sidebar, displaying the contents of a number variable (rounded by `(trunc:)`), and updating it whenever another macro changes the value."
   },
 
   // storylets
 
   "(storylet:) macro": {
     "prefix": "storylet:",
-    "body": "(storylet: ${0:when \\$hour is 12})"
+    "body": "(storylet: ${0:when \\$hour is 12})",
+    "description": "When placed in a passage, this macro marks that passage as the beginning of a storylet, using the lambda as the condition upon which it's available to the player."
   },
   "(open-storylets:) macro": {
     "prefix": "open-storylets:",
-    "body": "(open-storylets: ${0:where its tags contains \"quest\"})"
+    "body": "(open-storylets: ${0:where its tags contains \"quest\"})",
+    "description": "Returns an array of datamaps for every passage whose `(storylet:)` lambda produced true, sorted by their 'urgency' metadata value, then by passage name; filtered by the optional lambda."
   },
   "(exclusivity:) macro": {
     "prefix": "exclusivity:",
-    "body": "(exclusivity: ${0:2})"
+    "body": "(exclusivity: ${0:2})",
+    "description": "This macro marks the current passage as being more or less exclusive, meaning that if it's open, it will prevent storylets with lesser exclusivity from appearing in `(open-storylets:)`."
   },
   "(urgency:) macro": {
     "prefix": "urgency:",
-    "body": "(urgency: ${0:2})"
+    "body": "(urgency: ${0:2})",
+    "description": "This macro marks the current passage as being more or less urgent, meaning that `(open-storylets:)` will sort it earlier or later than other passages."
   },
 
   // strings
 
   "(str:) macro": {
     "prefix": ["str:", "string:", "text:"],
-    "body": "(str: $0)"
+    "body": "(str: $0)",
+    "description": "This macro accepts any amount of values and tries to convert them all to a single String."
   },
   "(digit-format:) macro": {
     "prefix": "digit-format:",
-    "body": "(digit-format: \"${1:##.##}$0\", ${2:35.3})"
+    "body": "(digit-format: \"${1:##.##}$0\", ${2:35.3})",
+    "description": "Given a special formatting string, followed by a number, this macro converts the number into a string using the formatter as a guide."
   },
   "(joined:) macro": {
     "prefix": "joined:",
-    "body": "(joined: ${1:\"-\"}, ${2:...${3:\\$strings}})"
+    "body": "(joined: ${1:\"-\"}, ${2:...${3:\\$strings}})",
+    "description": "Using the first string as a separator value, this macro takes all of the other strings given to it, and joins them into a single string."
   },
   "(lowercase:) macro": {
     "prefix": "lowercase:",
-    "body": "(lowercase: \"$0\")"
+    "body": "(lowercase: \"$0\")",
+    "description": "This macro produces a lowercase version of the given string."
   },
   "(lowerfirst:) macro": {
     "prefix": "lowerfirst:",
-    "body": "(lowerfirst: \"$0\")"
+    "body": "(lowerfirst: \"$0\")",
+    "description": "This macro produces a version of the given string, where the first alphanumeric character is lowercase, and other characters are left as-is."
   },
   "(plural:) macro": {
     "prefix": "plural:",
-    "body": "(plural: ${1:2}, \"${2:elf}\"${3:, \"${4:elves}\"})"
+    "body": "(plural: ${1:2}, \"${2:elf}\"${3:, \"${4:elves}\"})",
+    "description": "Given a whole number and a string, converts the number to a string, joins them up with a space character, and pluralises the string if the number wasn't 1 or -1."
   },
   "(source:) macro": {
     "prefix": "source:",
-    "body": "(source: ${1|\\$voltage,(str-repeated: 6\\, \"HA\"),(click: ?hat),(enchant: ?passage's hooks\\, \\$style)|}$0)"
+    "body": "(source: ${1|\\$voltage,(str-repeated: 6\\, \"HA\"),(click: ?hat),(enchant: ?passage's hooks\\, \\$style)|}$0)",
+    "description": "Given almost any data value, this will produce a string representation of Harlowe source code that can, when run, create that value exactly."
   },
   "(split:) macro": {
     "prefix": ["split:", "splitted:"],
-    "body": "(split: ${1:\"-\"}, ${2:(passage:)'s name})"
+    "body": "(split: ${1:\"-\"}, ${2:(passage:)'s name})",
+    "description": "Splits the second given value into an array of substrings as separated by the first string/pattern."
   },
   "(str-find:) macro": {
     "prefix": ["str-find:", "string-find:"],
-    "body": "(str-find: ${1:_pattern}, ${2:_string})"
+    "body": "(str-find: ${1:_pattern}, ${2:_string})",
+    "description": "Given a string pattern and a string, this macro produces an array of every matching substring within the string."
   },
   "(str-nth:) macro": {
     "prefix": ["str-nth:", "string-nth:"],
-    "body": "(str-nth:${1:_num})"
+    "body": "(str-nth:${1:_num})",
+    "description": "Given a whole number, converts it to a string comprising an English ordinal abbreviation (e.g. '1st', '22nd', etc.)"
   },
   "(str-repeated:) macro": {
     "prefix": ["str-repeated:", "string-repeated:"],
-    "body": "(str-repeated: ${1:_num}, ${2:_string})"
+    "body": "(str-repeated: ${1:_num}, ${2:_string})",
+    "description": "This accepts a single string and duplicates it the given number of times."
   },
   "(str-replaced:) macro": {
     "prefix": ["str-replaced:", "string-replaced:", "replaced:"],
-    "body": "(str-replaced: ${1:${2:1}, }${3:_fromThing}, ${4:_toThing}, ${5:\"subject\"})"
+    "body": "(str-replaced: ${1:${2:1}, }${3:_fromThing}, ${4:_toThing}, ${5:\"subject\"})",
+    "description": "This macro return a copy of the last string given, with all instances of the first specified search string (or pattern) replaced with the second specified string (or altered by a `via` lambda that constructs a replacement string). Specifying an optional number `n` replaces only the first `n` instances."
   },
   "(str-reversed:) macro": {
     "prefix": ["str-reversed:", "string-reversed:"],
-    "body": "(str-reversed: \"$0\")"
+    "body": "(str-reversed: \"$0\")",
+    "description": "Reverses the given string. (.gnirts nevig eht sesreveR)"
   },
   "(substring:) macro": {
     "prefix": "substring:",
-    "body": "(substring: \"$0\", ${1:3}, ${2:5})"
+    "body": "(substring: \"$0\", ${1:3}, ${2:5})",
+    "description": "Returns a substring of the given string from the two (inclusive) number positions."
   },
   "(trimmed:) macro": {
     "prefix": "trimmed:",
-    "body": "(trimmed: ${1:${2:whitespace}, }\"$0\")"
+    "body": "(trimmed: ${1:${2:whitespace}, }\"$0\")",
+    "description": "Given one string (the last value), returns a copy with every character matching the given pattern (the first value) removed from its start and end. If no first argument is given, it defaults to the `whitespace` pseudo-datatype."
   },
   "(uppercase:) macro": {
     "prefix": "uppercase:",
-    "body": "(uppercase: \"$0\")"
+    "body": "(uppercase: \"$0\")",
+    "description": "This macro produces an uppercase version of the given string."
   },
   "(upperfirst:) macro": {
     "prefix": "upperfirst:",
-    "body": "(upperfirst: \"$0\")"
+    "body": "(upperfirst: \"$0\")",
+    "description": "This macro produces a version of the given string where the first alphanumeric character is uppercase, and other characters are left as-is."
   },
   "(words:) macro": {
     "prefix": "words:",
-    "body": "(words: \"$0\")"
+    "body": "(words: \"$0\")",
+    "description": "Given a string, returns an array of each word (i.e. sequence of non-whitespace characters) in that string."
   },
 
   // styling
 
   "(align:) macro": {
     "prefix": "align:",
-    "body": "(align: \"${1|==>,=><=,<==>,<==|}\")[$0]"
+    "body": "(align: \"${1|==>,=><=,<==>,<==|}\")[$0]",
+    "description": "This styling changer changes the alignment of text in the attached hook."
   },
   "(bg:) macro": {
     "prefix": ["background:", "bg:"],
-    "body": "(bg: ${1|red,#ff0000,\"#ff0000\"|})[$0]"
+    "body": "(bg: ${1|red,#ff0000,\"#ff0000\"|})[$0]",
+    "description": "This styling changer alters the background colour or background image of the attached hook."
   },
   "(box:) macro": {
     "prefix": "box:",
-    "body": "(box: \"${1:=XX=}\"${2:, ${3:3}})[$0]"
+    "body": "(box: \"${1:=XX=}\"${2:, ${3:3}})[$0]",
+    "description": "This macro's attached hook becomes a 'box', with a given width proportional to the containing element's width, an optional number of lines tall, and a scroll bar if the text inside is longer than its height can contain."
   },
   "(button:) macro": {
     "prefix": "button:",
-    "body": "(button:${1: \"${2:=XXXX=}\"})[[$0]]"
+    "body": "(button:${1: \"${2:=XXXX=}\"})[[$0]]",
+    "description": "This changer styles the attached link so it resembles a button. The optional sizing string lets you specify width and horizontal margins for the button."
   },
   "(char-style:) macro": {
     "prefix": "char-style:",
-    "body": "(char-style: ${1|(text-style: \"fidget\"),via (text-colour: (either: red\\,white\\,blue))|})[$0]"
+    "body": "(char-style: ${1|(text-style: \"fidget\"),via (text-colour: (either: red\\,white\\,blue))|})[$0]",
+    "description": "This macro styles all of the individual non-whitespace characters inside the hook (those that would be selected by `?page's chars`) using the specified changer."
   },
   "(collapse:) macro": {
     "prefix": "collapse:",
-    "body": "(collapse:)${1:[$0]}"
+    "body": "(collapse:)${1:[$0]}",
+    "description": "This macro collapses all whitespace within the attached hook, in the same manner as the {collapsing whitespace} markup."
   },
   "(css:) macro": {
     "prefix": "css:",
-    "body": "(css: \"${1:background-color:indigo;}\")[${0:styled text}]"
+    "body": "(css: \"${1:background-color:indigo;}\")[${0:styled text}]",
+    "description": "Given a string of inline CSS, applies it to the attached hook, as if it were a HTML `style` property."
   },
   "(float-box:) macro": {
     "prefix": "float-box:",
-    "body": "(float-box: \"${1:X====}\",\"${2:Y====}\")[$0]"
+    "body": "(float-box: \"${1:X====}\",\"${2:Y====}\")[$0]",
+    "description": "This macro's attached hook becomes a floating box, placed at a given spot in the window, sized proportionally to the window's dimensions, and with a scroll bar if the text inside is longer than its height can contain."
   },
   "(font:) macro": {
     "prefix": "font:",
-    "body": "(font: \"${1:Helvetica Neue}\")[$0]"
+    "body": "(font: \"${1:Helvetica Neue}\")[$0]",
+    "description": "This styling changer changes the font used to display the text of the attached hook."
   },
   "(hook:) macro": {
     "prefix": "hook:",
-    "body": "(hook: ${1:\\$name})[$0]"
+    "body": "(hook: ${1:\\$name})[$0]",
+    "description": "This macro gives the attached hook the specified (computed) nametag."
   },
   "(hover-style:) macro": {
     "prefix": "hover-style:",
-    "body": "(hover-style: ${1:(text-style: \"italic\")})"
+    "body": "(hover-style: ${1:(text-style: \"italic\")})",
+    "description": "Given a style-altering changer, returns a changer which only applies when the attached hook or command is hovered over with the mouse pointer, and is removed when hovering off."
   },
   "(line-style:) macro": {
     "prefix": "line-style:",
-    "body": "(line-style: ${1:(b4r: \"dotted\")})[$0]"
+    "body": "(line-style: ${1:(b4r: \"dotted\")})[$0]",
+    "description": "Styles all lines of prose inside the attached hook using the specified changer."
   },
   "(link-style:) macro": {
     "prefix": "link-style:",
-    "body": "(link-style: ${1:(b4r: \"dotted\")})[$0]"
+    "body": "(link-style: ${1:(b4r: \"dotted\")})[$0]",
+    "description": "Styles all of the links inside the attached hook using the specified changer."
   },
   "(opacity:) macro": {
     "prefix": "opacity:",
-    "body": "(opacity: ${1:0.5})[$0]"
+    "body": "(opacity: ${1:0.5})[$0]",
+    "description": "Changes the opacity of the attached hook to a value between 0 and 1 (0 is invisible, 1 is fully opaque)."
   },
   "(text-colour:) macro": {
     "prefix": ["colour:", "text-color:", "color:", "text-colour:"],
-    "body": "(colour: ${1|red,orange,yellow,lime,green,aqua,cyan,blue,navy,purple,magenta,fuchsia,white,black,grey,gray,transparent|})[$0]"
+    "body": "(colour: ${1|red,orange,yellow,lime,green,aqua,cyan,blue,navy,purple,magenta,fuchsia,white,black,grey,gray,transparent|})[$0]",
+    "description": "Changes the colour used by the text in the attached hook."
   },
   "(text-indent:) macro": {
     "prefix": "text-indent:",
-    "body": "(text-indent: ${1:16})[$0]"
+    "body": "(text-indent: ${1:16})[$0]",
+    "description": "Indents the attached hook by the given number of pixels."
   },
   "(text-rotate-x:) macro": {
     "prefix": "text-rotate-x:",
-    "body": "(text-rotate-x: ${1:-45})[$0]"
+    "body": "(text-rotate-x: ${1:-45})[$0]",
+    "description": "Visually rotates the attached hook clockwise around the X axis (horizontal) by the given number of degrees, making it appear to lean into the page."
   },
   "(text-rotate-y:) macro": {
     "prefix": "text-rotate-y:",
-    "body": "(text-rotate-y: ${1:45})[$0]"
+    "body": "(text-rotate-y: ${1:45})[$0]",
+    "description": "Visually rotates the attached hook clockwise around the Y axis (vertical) by the given number of degrees, making it appear to lean into the page."
   },
   "(text-rotate-z:) macro": {
     "prefix": ["text-rotate:", "text-rotate-z:"],
-    "body": "(text-rotate: ${1:45})[$0]"
+    "body": "(text-rotate: ${1:45})[$0]",
+    "description": "Visually rotates the attached hook clockwise by a given number of degrees."
   },
   "(text-size:) macro": {
     "prefix": ["size:", "text-size:"],
-    "body": "(text-size: ${1:1.5})[$0]"
+    "body": "(text-size: ${1:1.5})[$0]",
+    "description": "Changes the text size of the attached hook by the given fraction. Numbers greater than 1 enlarge the text; numbers less than 1 shrink it."
   },
   "(text-style:) macro": {
     "prefix": "text-style:",
-    "body": "(text-style: \"${1|none,bold,italic,underline,double-underline,wavy-underline,strike,double-strike,wavy-strike,superscript,subscript,blink,shudder,mark,condense,expand,outline,shadow,emboss,smear,blur,blurrier,mirror,upside-down,tall,flat,fade-in-out,rumble,sway,buoy,fidget|}\")"
+    "body": "(text-style: \"${1|none,bold,italic,underline,double-underline,wavy-underline,strike,double-strike,wavy-strike,superscript,subscript,blink,shudder,mark,condense,expand,outline,shadow,emboss,smear,blur,blurrier,mirror,upside-down,tall,flat,fade-in-out,rumble,sway,buoy,fidget|}\")",
+    "description": "Applies one or more selected built-in text styles to the attached hook's text."
   },
 
   // transitions
 
   "(transition:) macro": {
     "prefix": ["t8n:", "transition:"],
-    "body": "(t8n: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")[$0]"
+    "body": "(t8n: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")[$0]",
+    "description": "Applies a built-in CSS transition to a hook as it appears."
   },
   "(transition-delay:) macro": {
     "prefix": ["t8n-delay:", "transition-delay:"],
-    "body": "(t8n-delay: ${0:3s})+"
+    "body": "(t8n-delay: ${0:3s})+",
+    "description": "When added to a `(transition:)` changer, delays the start of the transition by a given time."
   },
   "(transition-time:) macro": {
     "prefix": ["t8n-time:", "transition-time:"],
-    "body": "(t8n-time: ${0:3s})+"
+    "body": "(t8n-time: ${0:3s})+",
+    "description": "When added to a `(transition:)` changer, adjusts the time of the transition."
   },
   "(transition-depart:) macro": {
     "prefix": ["t8n-depart:", "transition-depart:"],
-    "body": "(t8n-depart: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")"
+    "body": "(t8n-depart: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")",
+    "description": "Alters the fade-out animation of passage links, `(link-goto:)` links, and most every other kind of link."
   },
   "(transition-arrive:) macro": {
     "prefix": ["t8n-arrive:", "transition-arrive:"],
-    "body": "(t8n-arrive: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")"
+    "body": "(t8n-arrive: \"${1|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\")",
+    "description": "Alters the fade-in animation of passage links, `(link-goto:)` links, and most every other kind of link."
   },
   "(transition-skip:) macro": {
     "prefix": ["t8n-skip:", "transition-skip:"],
-    "body": "(t8n-skip: ${0:0.5s})"
+    "body": "(t8n-skip: ${0:0.5s})",
+    "description": "When added to a `(transition:)` changer, allows the player to skip or accelerate the transition by holding down a keyboard key or mouse button, or by touching the touch device."
   },
   "(animate:) macro": {
     "prefix": "animate:",
-    "body": "(animate: ${1:?hookName}, \"${2|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\"${3:, ${4:5s}})"
+    "body": "(animate: ${1:?hookName}, \"${2|instant,dissolve,fade,rumble,shudder,pulse,zoom,flicker,slide-left,slide-right,slide-up,slide-down,fade-left,fade-right,fade-up,fade-down|}\"${3:, ${4:5s}})",
+    "description": "Briefly animates the attached hook as if a `(transition:)` was applied to it. The length of the animation can be optionally specified."
   },
 
   // window
 
   "(goto-url:) macro": {
     "prefix": "goto-url:",
-    "body": "(goto-url: \"${1:http://example.org}\")"
+    "body": "(goto-url: \"${1:http://example.org}\")",
+    "description": "When this command is used, the player's browser will immediately attempt to leave the story's page and navigate to the given URL in the same tab. If this succeeds, then the story session will end."
   },
   "(open-url:) macro": {
     "prefix": "open-url:",
-    "body": "(open-url: \"${1:http://example.org}\")"
+    "body": "(open-url: \"${1:http://example.org}\")",
+    "description": "When this command is used, the player's browser will immediately attempt to open a new tab with the given URL. This will usually require confirmation from the player; most browsers block JavaScript from opening tabs by default."
   },
   "(page-url:) macro": {
     "prefix": "page-url:",
-    "body": "(page-url:)"
+    "body": "(page-url:)",
+    "description": "This macro produces the full URL of the story's HTML page, as it is in the player's browser."
   },
   "(scroll:) macro": {
     "prefix": "scroll:",
-    "body": "(scroll: ${1:?hookName}, ${2:0.5s})"
+    "body": "(scroll: ${1:?hookName}, ${2:0.5s})",
+    "description": "Given a HookName followed by a fraction between 0 and 1, will change the scroll position of every hook with that name to the percentage of its height signified by the fraction. Given a second HookName, will scroll the first hook until the second is visible."
   },
 
   // not macros
 
   "Named hook": {
     "prefix": ">hook",
-    "body": "|${1:hook}>[$0]"
+    "body": "|${1:hook}>[$0]",
+    "description": "A visible hook with an attached nametag."
   },
   "Named hidden hook": {
     "prefix": ")hook",
-    "body": "|${1:hook})[$0]"
+    "body": "|${1:hook})[$0]",
+    "description": "A hidden hook with an attached nametag."
   },
   "New passage": {
     "prefix": "::newpass",
     "body": [
       ":: ${1:PassageName}${2: [${3|tags,header,footer,startup,script,stylesheet,debug-header,debug-footer,debug-startup|}]}",
       "$0"
-    ]
+    ],
+    "description": "A new empty passage with optional tag(s)."
   },
   "StoryData passage": {
     "prefix": "::storydata",
@@ -1033,6 +1265,7 @@
       "\t\"start\": \"Start\",",
       "\t\"zoom\": 1",
       "}\n\n"
-    ]
+    ],
+    "description": "JSON to populate the `StoryData` passage expected by Twine."
   }
 }
