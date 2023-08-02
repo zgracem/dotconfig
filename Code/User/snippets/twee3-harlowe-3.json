@@ -197,7 +197,7 @@
   "(output:) macro": {
     "prefix": ["out:", "output:"],
     "body": "(output:)[$0]",
-    "description": "Used inside a `(macro:)` CodeHook to output This command, when run, renders the attached hook."
+    "description": "Used inside a `(macro:)` CodeHook to output the attached hook."
   },
   "(output-data:) macro": {
     "prefix": ["out-data:", "output-data:"],
