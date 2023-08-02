@@ -106,6 +106,7 @@
     "*.[1-9]": "troff",
     "*.cscollection": "json",
     "*.csv": "csv",
+    "*.env": "shellscript",
     "*.geojson": "json",
     "*.make": "makefile",
     "*.plist": "xml",

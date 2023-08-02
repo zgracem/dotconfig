@@ -1,7 +1,0 @@
-if command -v gs >/dev/null; then
-  export GS_OPTIONS="-q -dBATCH -dNOPAUSE -dNOSAFER"
-  # -q = Suppress startup messages
-  # -dBATCH = Suppress other output too ("batch file mode")
-  # -dNOPAUSE = Disable the prompt and pause after each page
-  # -dNOSAFER = Do not restrict file operations
-fi
