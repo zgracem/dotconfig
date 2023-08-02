@@ -11,12 +11,6 @@ if contains 0 $user_groups; or contains 544 $user_groups
     set -gx WINDOWS_ADMIN true
 end
 
-# File extensions considered "executable" by cmd.com (minimal set)
-set -q PATHEXT; or set -gx PATHEXT ".COM;.EXE;.BAT"
-
-# Disable logging by Windows' Component Servicing Infrastructure
-set -gx windows_tracing_flags 0
-
 # -----------------------------------------------------------------------------
 # Import/adjust settings from CYGWIN environment variable
 # -----------------------------------------------------------------------------

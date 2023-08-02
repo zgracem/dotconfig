@@ -1,4 +1,4 @@
-# ~/.config/environment.d
+# ~/.config/sh/env.d
 
 `*.sh` files in this directory are sourced during the startup of any POSIX shell
-to produce a consistent environment.
+after the contents of `~/.config/env.d`.

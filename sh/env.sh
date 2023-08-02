@@ -52,4 +52,6 @@ done
 
 unset -v env_file
 
+unset -v GIT_EDITOR SUDO_EDITOR
+
 export Z_ENV_SOURCED=true

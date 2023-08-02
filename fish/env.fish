@@ -16,4 +16,6 @@ for env_file in $XDG_CONFIG_HOME/env.d/*.env $__fish_config_dir/env.d/*.fish
     source $env_file
 end
 
+set --erase GIT_EDITOR SUDO_EDITOR
+
 set -g __z_env_loaded (date +"%F %T")

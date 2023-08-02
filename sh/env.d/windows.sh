@@ -1,13 +1,5 @@
 [ "$PLATFORM" = "windows" ] || return
 
-# File extensions considered "executable" by cmd.com (minimal set)
-if [ -z "$PATHEXT" ]; then
-  PATHEXT=".COM;.EXE;.BAT"
-fi
-
-# Disable logging by Windows' Component Servicing Infrastructure
-export windows_tracing_flags=0
-
 # -----------------------------------------------------------------------------
 # Import/adjust settings from CYGWIN environment variable
 # -----------------------------------------------------------------------------
