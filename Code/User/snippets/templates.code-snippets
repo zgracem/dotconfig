@@ -3,7 +3,8 @@
     "prefix": "ffunc",
     "body": ["function ${1:$TM_FILENAME_BASE}", "\t$0", "end"],
     "description": "fish shell function definition",
-    "scope": "fish"
+    "scope": "fish",
+    "isFileTemplate": true
   },
   "new_Gemfile": {
     "prefix": "!new",
@@ -13,7 +14,8 @@
       "$0"
     ],
     "description": "Empty Gemfile",
-    "scope": "gemfile"
+    "scope": "gemfile",
+    "isFileTemplate": true
   },
   "new_JSON": {
     "prefix": "!new",
@@ -31,7 +33,8 @@
     "prefix": "!new",
     "body": ["---", "$0"],
     "description": "Empty YAML document",
-    "scope": "yaml"
+    "scope": "yaml",
+    "isFileTemplate": true
   },
   "YAML_frontmatter": {
     "prefix": "!front",
@@ -42,6 +45,7 @@
       "$0"
     ],
     "description": "YAML frontmatter",
-    "scope": "markdown,slim"
+    "scope": "markdown,slim",
+    "isFileTemplate": true
   }
 }
