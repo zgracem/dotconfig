@@ -1,7 +1,7 @@
 # vim:ft=sh
 DESKTOP=$HOME/Desktop
 DOWNLOAD=$HOME/Downloads
-TEMPLATES=$HOME/.local/share/skel
+TEMPLATES=$HOME/etc/skel
 PUBLICSHARE=$HOME/Public
 DOCUMENTS=$HOME/Documents
 MUSIC=$HOME/Music
