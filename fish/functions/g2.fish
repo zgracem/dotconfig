@@ -1,8 +1,8 @@
 function g2 --description 'Go somewhere' -a alias
     set -l destination (string split / --max=1 -- $alias)
 
+    set -l icloud_docs "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
     set -l steam_dir "$HOME/Library/Application Support/Steam"
-    set -l dropbox "$HOME/Dropbox"
 
     set -l dir
     switch $destination[1]
@@ -11,8 +11,9 @@ function g2 --description 'Go somewhere' -a alias
         case desktop;   set dir "$XDG_DESKTOP_DIR"
         case docs;      set dir "$XDG_DOCUMENTS_DIR"
         case dl;        set dir "$XDG_DOWNLOAD_DIR"
-        case icloud;    set dir "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+        case icloud;    set dir "$icloud_docs"
         case dev;       set dir "$HOME/Developer"
+        case dropbox;   set dir "$HOME/Dropbox"
         case tmp;       set dir "$HOME/tmp"
         case local;     set dir "$HOME/.local"
         case private;   set dir "$HOME/.private"
@@ -28,10 +29,12 @@ function g2 --description 'Go somewhere' -a alias
         case imprint;   set dir "$HOME/VS/www/vsbooks"
         case finger;    set dir "$HOME/etc/finger"
         case gopher;    set dir "$HOME/etc/gopher"
-        case art;       set dir "$HOME/Art/acorn"
+        case art;       set dir "$icloud_dir/Images/art"
+        case acorn;     set dir "$HOME/Art/acorn"
         case fonts;     set dir "$HOME/misc/Fonts"
         case music;     set dir "$HOME/Music/Music/Media.localized/Music"
         case twee;      set dir "$HOME/Documents/Twine/twee"
+        case zpod;      set dir "/Volumes/Hub/Music/zPod"
         case '*'
             echo >&2 "don't know how to go to $destination!"
             return 1
