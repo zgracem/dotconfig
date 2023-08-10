@@ -1,5 +1,17 @@
-function g2 --description 'Go somewhere' -a alias
-    set -l destination (string split / --max=1 -- $alias)
+function g2 --description 'Go somewhere'
+    argparse l/list h/help -- $argv
+    or return
+
+    if set -q _flag_help[1]
+        echo "Usage:" (status function) DESTINATION
+        echo "`"(status function)" --list` for all DESTINATION values"
+        return
+    else if set -q _flag_list[1]
+        string replace -fr '^\s+case ([^;]+);\s+set dir "?([^"]+)"?' '$1 → $2' <(status filename) | sort
+        return
+    end
+
+    set -l destination (string split / --max=1 -- $argv[1])
 
     set -l icloud_docs "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
     set -l steam_dir "$HOME/Library/Application Support/Steam"
