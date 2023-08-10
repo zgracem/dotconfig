@@ -2,3 +2,4 @@
 reporters:
 # - require_not_found
 - rubocop
+# - typecheck
