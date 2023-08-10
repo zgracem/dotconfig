@@ -1,4 +1,4 @@
-# See also: $XDG_CONFIG_HOME/homebrew/brew.env
+# See also: $XDG_CONFIG_HOME/env.d/homebrew.env
 in-path brew; or exit
 
 # Check for macOS/iOS terminal clients w/ emoji support
@@ -13,9 +13,4 @@ switch $TERM_PROGRAM
         end
     case "*"
         set -gx HOMEBREW_NO_EMOJI 1
-end
-
-if set -q SSH_CONNECTION
-    # make `brew home` et al. print the URL instead of launching a browser
-    set -gx HOMEBREW_BROWSER (command -v echo)
 end
