@@ -18,9 +18,9 @@ autoload :Set, "set"
 autoload :URI, "uri"
 autoload :YAML, "yaml"
 
-lib = Pathname.new("#{Dir.home}/lib/ruby").realpath.to_s
+lib = Pathname.new("#{Dir.home}/Dropbox/lib/ruby").realpath.to_s
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "zgm/colour"
+require "zgm_colour"
 
 # -----------------------------------------------------------------------------
 # settings
@@ -42,28 +42,25 @@ IRB.conf[:BACK_TRACE_LIMIT] = 5
 # prompt
 # -----------------------------------------------------------------------------
 
-off = Colour.reset.to_s
-dim = Colour.dim
-context = "#{Colour.italic}%m#{Colour.noitalic}"
-chevron = "#{Colour.blue}>#{off}"
+sigil = "#{Colour.blue}>#{Colour.reset}"
 
 IRB.conf[:PROMPT] ||= {}
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{dim}#{context}:%03n#{off} #{chevron} ",
+  PROMPT_I: "#{Colour.dim.italic}%m#{Colour.noitalic}:%03n#{Colour.reset} #{sigil} ",
 
   # prompt when indenting code
-  PROMPT_N: "%i#{dim}│#{off}  ",
+  PROMPT_N: "%i#{Colour.dim}│#{Colour.reset}  ",
 
   # prompt for continuing strings
-  PROMPT_S: "%i#{dim}│%l#{off} ",
+  PROMPT_S: "%i#{Colour.dim}│%l#{Colour.reset} ",
 
   # prompt for continuing statement
-  PROMPT_C: "%i#{dim}├#{off} ",
+  PROMPT_C: "%i#{Colour.dim}├#{Colour.reset} ",
 
   # prefix to statement output
-  RETURN:   "#{Colour.brightwhite}=>#{off} %s\n"
+  RETURN:   "#{Colour.brightwhite}=>#{Colour.reset} %s\n"
 }
 
 IRB.conf[:PROMPT_MODE] = :ZGM
