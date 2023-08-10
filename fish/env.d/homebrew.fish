@@ -1,5 +1,9 @@
-# See also: $XDG_CONFIG_HOME/env.d/homebrew.env
 in-path brew; or exit
+
+# Read brew.env
+while read line
+    eval (string replace -rf '(HOMEBREW_[^=]+)=(.*)' 'set -gx $1 $2' $line)
+end <"$XDG_CONFIG_HOME/homebrew/brew.env"
 
 # Check for macOS/iOS terminal clients w/ emoji support
 switch $TERM_PROGRAM
