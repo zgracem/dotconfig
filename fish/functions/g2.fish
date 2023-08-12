@@ -41,7 +41,7 @@ function g2 --description 'Go somewhere'
         case imprint;   set dir "$HOME/VS/www/vsbooks"
         case finger;    set dir "$HOME/etc/finger"
         case gopher;    set dir "$HOME/etc/gopher"
-        case art;       set dir "$icloud_dir/Images/art"
+        case art;       set dir "$icloud_docs/Images/art"
         case acorn;     set dir "$HOME/Art/acorn"
         case fonts;     set dir "$HOME/misc/Fonts"
         case music;     set dir "$HOME/Music/Music/Media.localized/Music"
