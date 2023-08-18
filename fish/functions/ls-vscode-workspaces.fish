@@ -1,4 +1,4 @@
-function all-vscode-workspaces
+function ls-vscode-workspaces
     set -f dir ~/Library/"Application Support"/Code/User/workspaceStorage
 
     for folder in $dir/*/
