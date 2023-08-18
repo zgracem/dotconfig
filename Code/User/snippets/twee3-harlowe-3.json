@@ -3,7 +3,7 @@
 
   "(set: ...VariableToValue) → Instant": {
     "prefix": "set:",
-    "body": "(set: ${1:${2|num,number,str,string,bool,boolean,array,dm,datamap,ds,dataset,command,changer,colour,color,gradient,lambda,macro,datatype,codehook,even,odd,int,integer,empty,whitespace,lowercase,uppercase,anycase,alnum,alphanumeric,digit,newline,linebreak,const,any|}-type }${3:\\$varName} to ${0:value})",
+    "body": "(set: ${1|num,number,str,string,bool,boolean,array,dm,datamap,ds,dataset,command,changer,colour,color,gradient,lambda,macro,datatype,codehook,even,odd,int,integer,empty,whitespace,lowercase,uppercase,anycase,alnum,alphanumeric,digit,newline,linebreak,const,any|}-type ${2:\\$varName} to ${0:value})",
     "description": "Stores data values in variables."
   },
   "(put: ...VariableToValue) → Instant": {
@@ -13,7 +13,7 @@
   },
   "(move: ...VariableToValue) → Instant": {
     "prefix": "move:",
-    "body": "(move: ${1:${2:\\$arr}'s ${3:1st}} into ${4:\\$var})",
+    "body": "(move: ${1:\\$array's 1st} into ${0:\\$var})",
     "description": "A variant of `(put:)` that transfers data from a data structure, deleting the source value after copying it."
   },
   "(print: Any) → Command": {
@@ -23,22 +23,22 @@
   },
   "(display: String) → Command": {
     "prefix": "display:",
-    "body": "(display: ${1:\"${2:Cellar}\"})",
+    "body": "(display: ${1:\"${0:Cellar}\"})",
     "description": "Writes out the contents of the passage with the given string name."
   },
   "(if: Boolean) → Changer": {
     "prefix": "if:",
-    "body": "(if: ${1:Boolean})[$0]",
+    "body": "(if: ${1:condition})[$0]",
     "description": "Accepts only booleans, and produces a changer that can be attached to hooks to hide them if the value was false."
   },
   "(unless: Boolean) → Changer": {
     "prefix": "unless:",
-    "body": "(unless: ${1:Boolean})[$0]",
+    "body": "(unless: ${1:condition})[$0]",
     "description": "The negated form of `(if:)`."
   },
   "(else-if: Boolean) → Changer": {
     "prefix": "else-if:",
-    "body": "(else-if: ${1:Boolean})[$0]",
+    "body": "(else-if: ${1:condition})[$0]",
     "description": "This macro's result changes depending on whether the previous hook in the passage was shown or hidden."
   },
   "(else:) → Changer": {
@@ -48,27 +48,27 @@
   },
   "(for: eachLambda, [...Any]) → Changer": {
     "prefix": ["for:", "loop:", "for-each:"],
-    "body": "(for: each ${1:_item}, ${2:...${3:\\$arr}})[${0:You have the _item.}]",
+    "body": "(for: each ${1:_item}, ${3:...${2:\\$array}})[${0:You have the _item.}]",
     "description": "Repeats the attached hook, setting a temporary variable to a different value on each repeat."
   },
   "(for: whereLambda, [...Any]) → Changer": {
     "prefix": ["for:", "loop:", "for-where:"],
-    "body": "(for: ${1:_ingredient} where ${2:it contains \"oil\"}, ${3:...${4:\\$ingredients}})[${0:Cook the _ingredient?}]",
+    "body": "(for: ${1:_ingredient} where ${2:it contains \"oil\"}, ${4:...${3:\\$ingredients}})[${0:Cook the _ingredient?}]",
     "description": "Repeats the attached hook, setting a temporary variable to a different value on each repeat."
   },
   "(either: ...Any) → Any": {
     "prefix": "either:",
-    "body": "(either: ${1:...${2:\\$array}})",
+    "body": "(either: ${2:...${1:\\$array}})",
     "description": "Takes several values separated by commas, and returns one of them randomly."
   },
   "(cond: Boolean, Any, ...Any) → Any": {
     "prefix": "cond:",
-    "body": "(cond: ${1:Boolean}, ${2:_ifTrue}, ${3:_ifFalse})",
+    "body": "(cond: ${1:condition}, ${2:_ifTrue}, ${3:_ifFalse})",
     "description": "Returns the first value paired with a true condition from a sequence of booleans paired with values."
   },
   "(nth: Number, ...Any) → Any": {
     "prefix": "nth:",
-    "body": "(nth: ${1:\\$num}, ${2:...${3:\\$array}})",
+    "body": "(nth: ${1:\\$num}, ${3:...${2:\\$array}})",
     "description": "Given a positive whole number `n` and a sequence of values, this selects the `n`th value in the sequence."
   },
   "(verbatim:) → Changer": {
@@ -93,12 +93,12 @@
   },
   "(enchant-in: HookName or String, Changer or Lambda) → Changer": {
     "prefix": "enchant-in:",
-    "body": "(enchant-in: ${1:?target}, ${2:(colour: red)})",
+    "body": "(enchant-in: ${1:?target}, ${0:(colour: red)})",
     "description": "Applies a changer to every occurrence of a hook or string within the attached hook."
   },
   "(hooks-named: String) → HookName": {
     "prefix": "hooks-named:",
-    "body": "(hooks-named: ${1:\"${2:door}\"})",
+    "body": "(hooks-named: ${1:\"${0:door}\"})",
     "description": "When given a string, this creates a HookName from it."
   },
 
@@ -188,7 +188,7 @@
   "(macro: [...TypedVar], CodeHook) → CustomMacro": {
     "prefix": "macro:",
     "body": [
-      "(set: ${1:\\$macroName} to (macro: ${2:str-type ${3:_var}}, [",
+      "(set: ${1:\\$macroName} to (macro: ${3:str-type ${2:_var}}, [",
       "\t$0",
       "]))"
     ],
@@ -229,27 +229,27 @@
 
   "(array: [...Any]) → Array": {
     "prefix": ["a:", "array:"],
-    "body": "(a: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})",
+    "body": "(a: ${0:\"gold\", \"frankincense\", \"myrrh\"})",
     "description": "Creates an array, which is an ordered collection of values."
   },
   "(datamap: [...Any]) → Datamap": {
     "prefix": ["dm:", "datamap:"],
-    "body": "(dm: ${0:\"one\", 1, \"two\", 2})",
+    "body": "(dm: ${0:\"Cute\", 4, \"Wit\", 7})",
     "description": "Creates a datamap, which is a data structure that pairs string names with data values."
   },
   "(dataset: [...Any]) → Dataset": {
     "prefix": ["ds:", "dataset:"],
-    "body": "(ds: ${1:${2:\"\"}, ${3:\"\"}, ${4:\"\"}})",
+    "body": "(ds: ${0:\"gold\", \"frankincense\", \"myrrh\"})",
     "description": "Creates a dataset, which is an unordered collection of unique values."
   },
   "(all-pass: Lambda, [...Any]) → Boolean": {
     "prefix": ["all-pass:", "pass:"],
-    "body": "(all-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})",
+    "body": "(all-pass: ${1:_num where _num > 1}, ${3:...${2:\\$numbers}})",
     "description": "Given a `where` lambda and a series of values, this macro evaluates to true if the lambda, when run using each value, never evaluated to false."
   },
   "(altered: Lambda, [...Any]) → Array": {
     "prefix": "altered:",
-    "body": "(altered: ${1:_n} via ${2:${1:_n}+1}, ${3:...${4:\\$numbers}})",
+    "body": "(altered: ${1:_n} via ${2:${1:_n}+1}, ${4:...${3:\\$numbers}})",
     "description": "Given a `via` lambda and a sequence of values, returns a new array with the same values in the same order, but altered by the lambda."
   },
   "(count: Array or String, ...Any) → Number": {
@@ -279,12 +279,12 @@
   },
   "(find: Lambda, [...Any]) → Array": {
     "prefix": "find:",
-    "body": "(find: _${1:person} where ${2:_${1:person} is not \"Alice\"}, ${3:...${4:\\$people}})",
+    "body": "(find: _${1:person} where ${2:_${1:person} is not \"Alice\"}, ${4:...${3:\\$people}})",
     "description": "Searches through the given values, and produces an array of those which match the given search test. The test is expressed using a temp variable, the `where` keyword, and a boolean condition."
   },
   "(folded: Lambda, ...Any) → Any": {
     "prefix": "folded:",
-    "body": "(folded: _{1:item} making _${3:total} via _${3:total} + _{1:item}'s ${2:attribute}, ${4:0}, ${3:...${4:\\$items}})",
+    "body": "(folded: _{1:item} making _${3:total} via _${3:total} + _{1:item}'s ${2:attribute}, ${4:0}, ${6:...${5:\\$items}})",
     "description": "Given a `making` lambda and a sequence of values, returns a total value created by feeding every value in the sequence to the lambda. The first value after the lambda is put into the total, which is the variable inside the lambda's `making` clause, before running the lambda on the remaining values."
   },
   "(interlaced: Array, ...Array) → Array": {
@@ -294,12 +294,12 @@
   },
   "(none-pass: Lambda, ...Any) → Boolean": {
     "prefix": "none-pass:",
-    "body": "(none-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})",
+    "body": "(none-pass: ${1:_num where _num > 1}, ${3:...${2:\\$numbers}})",
     "description": "Given a `where` lambda and a series of values, this macro evaluates to true if the lambda, when run using each value, never evaluated to true."
   },
   "(permutations: ...Any) → Array": {
     "prefix": "permutations:",
-    "body": "(permutations: ${1:...${2:\\$array}})",
+    "body": "(permutations: ${2:...${1:\\$array}})",
     "description": "Given a sequence of values, returns an array containing each permutation of the order of those values, as arrays."
   },
   "(range: Number, Number) → Array": {
@@ -309,22 +309,22 @@
   },
   "(repeated: Number, ...Any) → Array": {
     "prefix": "repeated:",
-    "body": "(repeated: ${1:5}, ${2:\"hello\"})",
+    "body": "(repeated: ${1:5}, ${0:\"hello\"})",
     "description": "Given a number and a sequence of values, returns an array containing those values repeated, in order, the given number of times."
   },
   "(reversed: [...Any]) → Array": {
     "prefix": "reversed:",
-    "body": "(reversed: ${1:...${2:\\$array}})",
+    "body": "(reversed: ${2:...${1:\\$array}})",
     "description": "Similar to `(a:)`, except this macro returns an array containing tje given elements in reverse order."
   },
   "(rotated-to: Lambda, [...Any]) → Array": {
     "prefix": "rotated-to:",
-    "body": "(rotated-to: where ${1:it is > 3}, ${2:...${3:\\$numbers}})",
+    "body": "(rotated-to: where ${1:it is > 3}, ${3:...${2:\\$numbers}})",
     "description": "Given a `where` lambda at the start, cycles the order of all subsequent values so that the first value to match the lambda is placed at the start."
   },
   "(rotated: Number, ...Any) → Array": {
     "prefix": "rotated:",
-    "body": "(rotated: ${1:-2}, ${2:...${3:\\$array}})",
+    "body": "(rotated: ${1:-2}, ${3:...${2:\\$array}})",
     "description": "Given a number at the start, moves each subsequent item forward by that number, wrapping back to the start if they pass the end of the array."
   },
   "(shuffled: ...Any) → Array": {
@@ -334,12 +334,12 @@
   },
   "(some-pass: Lambda, ...Any) → Boolean": {
     "prefix": "some-pass:",
-    "body": "(some-pass: ${1:_num where _num > 1}, ${2:...${3:\\$numbers}})",
+    "body": "(some-pass: ${1:_num where _num > 1}, ${3:...${2:\\$numbers}})",
     "description": "Given a `where` lambda and a series of values, this macro evaluates to true if the lambda, when run using each value, evaluated to true one or more times."
   },
   "(sorted: [Lambda], ...Any) → Array": {
     "prefix": "sorted:",
-    "body": "(sorted: ${1:${2:via its name}, }${3:...${4:\\$creatures}})",
+    "body": "(sorted: ${1:${2:via its name}, }${4:...${3:\\$creatures}})",
     "description": "Returns an array in which the values are sorted in English alphanumeric sort order."
   },
   "(subarray: Array, Number, Number) → Array": {
@@ -349,7 +349,7 @@
   },
   "(unique: ...Any) → Array": {
     "prefix": "unique:",
-    "body": "(unique: ${1:...${2:\\$array}})",
+    "body": "(unique: ${2:...${1:\\$array}})",
     "description": "Given a sequence of values, returns an array containing each unique value once, in the order that they appeared."
   },
   "(unpack: ...VariableToValue) → Instant": {
@@ -441,7 +441,7 @@
   },
   "(passages: [Lambda]) → Array": {
     "prefix": "passages:",
-    "body": "(passages:${1: where its tags contains \"Forest\"})",
+    "body": "(passages:${0: where its tags contains \"Forest\"})",
     "description": "Returns an array of datamaps containing information for all passages in the story, sorted by passage name, or for only certain passages that match the optional lambda."
   },
   "(forget-visits: Number) → Command": {
@@ -456,7 +456,7 @@
   },
   "(metadata: [...Any]) → Metadata": {
     "prefix": "metadata:",
-    "body": "(metadata: ${1:\"danger\", 4, \"rarity\", 5})",
+    "body": "(metadata: ${0:\"danger\", 4, \"rarity\", 5})",
     "description": "Adds the given names and values to the current passage's `(passage:)` datamap."
   },
   "(seed: String) → Command": {
@@ -682,12 +682,12 @@
   },
   "(max: ...Number) → Number": {
     "prefix": "max:",
-    "body": "(max: ${1:...${2:\\$numbers}})",
+    "body": "(max: ${2:...${1:\\$numbers}})",
     "description": "This maths macro returns the highest valued of the given numbers."
   },
   "(min: ...Number) → Number": {
     "prefix": "min:",
-    "body": "(min: ${1:...${2:\\$numbers}})",
+    "body": "(min: ${2:...${1:\\$numbers}})",
     "description": "This maths macro returns the lowest valued of the given numbers."
   },
   "(pow: Number, Number) → Number": {
@@ -763,7 +763,7 @@
   },
   "(round: Number) → Number": {
     "prefix": "round:",
-    "body": "(round: ${0: 1.5})",
+    "body": "(round: ${0:1.5})",
     "description": "Rounds the given number to the nearest whole number: downward if its decimals are smaller than 0.5, and upward otherwise. If a whole number is provided, it returns the number as-is."
   },
   "(trunc: Number) → Number": {
@@ -781,7 +781,7 @@
   },
   "(p-either: ...String or Datatype) → Datatype": {
     "prefix": ["p-either:", "pattern-either:"],
-    "body": "(p-either: ${2:...${3:\\$array}})",
+    "body": "(p-either: ${2:...${1:\\$array}})",
     "description": "Creates a string pattern that matches any of the single strings or datatypes given."
   },
   "(p-opt: ...String or Datatype) → Datatype": {
@@ -987,7 +987,7 @@
   },
   "(joined: ...String) → String": {
     "prefix": "joined:",
-    "body": "(joined: ${1:\"-\"}, ${2:...${3:\\$strings}})",
+    "body": "(joined: ${1:\"-\"}, ${3:...${2:\\$strings}})",
     "description": "Using the first string as a separator value, this macro takes all of the other strings given to it, and joins them into a single string."
   },
   "(lowercase: String) → String": {
