@@ -1,5 +1,7 @@
 #!/usr/local/bin/fish
 
+# TODO: Currently broken, diagnosis unclear.
+
 # This script is called by Transmission.app when a torrent finishes downloading,
 # and writes a JSON log file to ~/var/log/transmission about it.
 # See: <https://github.com/transmission/transmission/blob/main/docs/Scripts.md>

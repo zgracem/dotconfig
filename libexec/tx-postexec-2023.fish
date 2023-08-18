@@ -29,7 +29,7 @@ function main
     transmission-remote --torrent $TR_TORRENT_ID --info-files
 end
 
-main | tee $LOG_FILE
+main #| tee $LOG_FILE
 
-# also generate JSON
-eval (status dirname)/tx-postexec.fish
+# # also generate JSON (script is broken)
+# eval (status dirname)/tx-postexec.fish
