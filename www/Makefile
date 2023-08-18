@@ -5,7 +5,7 @@
 include ../common.mk
 
 userContent.css: userContent.sass
-	sass $< >$@ && \
-	defaults write -app Safari UserStyleSheetEnabled -bool true && \
-	defaults write -app Safari UserStyleSheetLocationURLString $(realpath $@)
+	sass $< >$@ &&
 install: userContent.css
+	defaults write -app Safari UserStyleSheetEnabled -bool true && \
+	defaults write -app Safari UserStyleSheetLocationURLString $(realpath $<)

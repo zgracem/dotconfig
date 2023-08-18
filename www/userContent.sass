@@ -6,6 +6,10 @@ div.spaceball
 .fvlUC
   display: none
 
+/* Unsplash: hide Unsplash+ images */
+figure:has(div.GIFah div.sRpHt a[href^="/plus?"])
+  display: none !important
+
 /* Tumblr: better monospace in chat posts */
 div.k31gt span.shBP8
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace
@@ -15,6 +19,14 @@ div.k31gt span.shBP8
 /* remove fandom.com crap */
 .mcf-wrapper, .render-wiki-recommendations, .typeform-widget
   display: none
+
+/* hides empty (adblocked) container */
+.sb-fad-unit.sidebar-item
+  display: none !important
+
+/* Kickass: block stupid VPN ad */
+div.tabs:has(div > a[href="/1"]), hr.tabsSeparator ~ div:has(div > a[href="/1"])
+  display: none !important
 
 /* AO3 ratings icons */
 dd.rating a::before
