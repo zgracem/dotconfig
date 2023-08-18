@@ -11,6 +11,5 @@ install: ~/Dropbox/.mignore
 	$(INSTALL_DATA) -- $< $@
 
 .mignore:
-	maestral status | grep -Eq 'Cannot upload symlink' && \
 	cd ~/Dropbox && fd -u -ts -tl --no-follow --strip-cwd-prefix | \
 	tee $(realpath $@)
