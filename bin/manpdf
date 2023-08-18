@@ -20,53 +20,14 @@ function man_page_title
     path basename $man_file | string replace -rf '\.([^.]+)(?:\.gz)?$' '.$1'
 end
 
-# The first sed call implements these commands, in order:
-#   - Set PDF Title metadata from the man page's nicely-formatted title
-#     - Based on args to the man(7) `.TH` or mdoc(7) `.Dt` macro
-#   - Set PDF Subject metadata to the man page's short description
-#     - First try:  The line after the `.SH NAME` man macro
-#     - Second try: Args to the `.Nd` mdoc macro
-#   - Create 1st-level bookmarks for all 1st-level headings
-#     - From all mdoc `.Sh` or man `.SH` macros
-#   - Create 2nd-level bookmarks for all 2nd-level headings
-#     - From all `.SS` macros
-#   - Set PDF options (at top of file):
-#     - .pdfview /PageMode /UseOutlines <- Show bookmarks panel when opened
-#     -          /Page 1                <- Open to first page
-#     -          /View [/Fit]           <- Zoom to fit page to window
-#     - .nr PDFOUTLINE.FOLDLEVEL 1      <- Collapse all nested bookmarks
-#     - .nr PDFHREF.VIEW.LEADING 30.0p  <- Set bookmark targets 30 points
-#                                          above the text so the window won't
-#                                          cut it off
-#   - Call the `.pdfsync` macro to apply the metadata commands
-set -g sed_script '
-s#^\.(TH|Dt) "?(\S+)"? "?(\S+)"?#.pdfinfo /Title \L\2(\3)\E\n&#g;
-/^\.SH "?NAME"?/{n;s#^[^[:space:]]+ \\?- (.+)$#&\n.pdfinfo \/Subject \1#g;};
-s#^\.Nd (.+)$#&\n.pdfinfo /Subject \1#g;
-s#^\.S[hH] (.+)$#.pdfbookmark 1 \1\n&#g;
-s#^\.SS (.+)$#.pdfbookmark 2 \1\n&#g;
-1s#.*#.pdfview /PageMode /UseOutlines /Page 1 /View [/Fit]\n.nr PDFOUTLINE.FOLDLEVEL 1\n.nr PDFHREF.VIEW.LEADING 30.0p\n&#;
-$s#.*#&\n.pdfsync#;
-'
-# The second sed call removes unsightly and unnecessary escape sequences
-# from bookmark titles, which aren't present to be removed until the first
-# set of commands is complete, and converts arguments to the `.so` (source)
-# macro to absolute paths [test case: zshall(1)].
-set -g sed_script_2 '
-/^\.pdfbookmark/s/\\?f([BIRP]|\[[CRV]?\])//g
-/^\.pdfbookmark/s/\\s-?[0-9]//g
-/^\.pdfbookmark/s/\\//g
-/^\.pdfbookmark/s/\\?\[[ac]q\]/\'/g
-s#^\.so ([^/].*)$#.so '(path dirname $man_path)'/../\1#p
-'
-
 function process_man_file -a man_path processed_man_path
     # `gunzip -c` sends the decompressed file to standard output, leaving the
     # original file intact; when `-c` is combined with `-f`, gunzip will pass
     # non-gzipped files through unchanged instead of throwing an error.
     gunzip -c -f $man_path \
-    | sed -E -f (string trim $sed_script | psub) \
-    | sed -E -f (string trim $sed_script_2 | psub) \
+    | sed -E -f $XDG_CONFIG_HOME/libexec/manpdf_add_metadata.sed \
+    | sed -E -f $XDG_CONFIG_HOME/libexec/manpdf_cleanup_bookmarks.sed \
+    | sed -E -e 's#^\.so ([^/].*)$#.so '(path dirname $man_path)'/../\1#p;' \
     > $processed_man_path
 end
 
@@ -105,16 +66,16 @@ function main
         exit 1
     end
 
-    set -f man_path (command man -w $argv)
+    set -fx man_path (command man -w $argv)
     or exit
 
     set -f man_title (man_page_title $man_path)
     set -f pdf_file $MANPDF_DIR/$man_title.pdf
 
     if path is -v -f $pdf_file; or set -q _flag_force
-        if set -f temp_dir (mktemp -d -t $this.XXXXXX)
+        if set -fx temp_dir (mktemp -d -t $this.XXXXXX)
             # unformatted man page with pdfmark inserts
-            set -f man_file $temp_dir/$man_title
+            set -fx man_file $temp_dir/$man_title
 
             # PostScript file with extra PDF instructions
             set -f ps_file $temp_dir/$man_title.ps
