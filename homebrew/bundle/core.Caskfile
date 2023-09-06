@@ -14,7 +14,7 @@ cask "firefox", args: { appdir: "/Applications" }
 cask "go2shell"
 cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
-tap "zgracem/formulae", "file://#{Dir.home}/Developer/Homebrew/homebrew-formulae"
+tap "zgracem/formulae"
 cask "zgracem/formulae/lockscreen"
 cask "maestral"
 cask "name-mangler"

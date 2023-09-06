@@ -58,6 +58,11 @@ if [ -x /usr/local/bin/brew ]; then
   # ncurses
   PATH=/usr/local/opt/ncurses/bin:$PATH
   MANPATH=/usr/local/opt/ncurses/share/man:$MANPATH
+
+  # calendar
+  PATH=/usr/local/opt/calendar/bin:$PATH
+  MANPATH=/usr/local/opt/calendar/share/man:$MANPATH
+  export CALENDAR_DIR=$HOME/Developer/share/calendar/src
 fi
 
 # Xcode

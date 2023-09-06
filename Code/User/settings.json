@@ -343,6 +343,10 @@
     "editor.insertSpaces": false,
     "editor.tabSize": 4
   },
+  "[bsdcalendar]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 8
+  },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

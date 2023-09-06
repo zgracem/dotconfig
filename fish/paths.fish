@@ -88,6 +88,11 @@ if in-path brew
     fish_add_path $HOMEBREW_PREFIX/opt/ncurses/bin
     fish_add_manpath $HOMEBREW_PREFIX/opt/ncurses/share/man
 
+    # calendar
+    fish_add_path $HOMEBREW_PREFIX/opt/calendar/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/calendar/share/man
+    set -gx CALENDAR_DIR ~/Developer/share/calendar/src
+
     # openjdk
     fish_add_path $HOMEBREW_PREFIX/opt/openjdk/bin
 end

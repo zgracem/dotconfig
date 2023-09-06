@@ -29,6 +29,7 @@
     "shellcheck.exclude": ["2148"],
     "sortJSON.orderUnderride": [
       "[applescript]",
+      "[bsdcalendar]",
       "[css]",
       "[fish]",
       "[html]",

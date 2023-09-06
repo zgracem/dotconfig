@@ -83,6 +83,7 @@ brew "nethack"
 brew "openjdk" # java(1) for Minecraft mods
 brew "screenfetch"
 
-# non-open-source stuff
-tap "zgracem/formulae", "file://#{Dir.home}/Developer/Homebrew/homebrew-formulae"
+# other stuff
+tap "zgracem/formulae"
+brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/unrar"
