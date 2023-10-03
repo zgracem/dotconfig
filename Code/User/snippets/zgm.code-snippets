@@ -28,5 +28,16 @@
     "body": "contains -- ${1:cat} $${2:animals}",
     "description": "fish: contains",
     "scope": "fish"
+  },
+  "Disable spellcheck": {
+    "prefix": "nospell",
+    "body": "<!-- spellcheck-off -->",
+    "description": "Disable spellright spellchecking"
+  },
+  "Disable markdownlint": {
+    "prefix": "nomdlint",
+    "body": "<!-- markdownlint-disable-file -->",
+    "description": "Disable markdownlint for this file",
+    "scope": "markdown"
   }
 }
