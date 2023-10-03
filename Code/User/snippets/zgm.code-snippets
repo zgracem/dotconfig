@@ -26,6 +26,7 @@
   "fish_contains": {
     "prefix": "contains",
     "body": "contains -- ${1:cat} $${2:animals}",
-    "description": "fish: contains"
+    "description": "fish: contains",
+    "scope": "fish"
   }
 }
