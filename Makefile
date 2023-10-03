@@ -1,18 +1,11 @@
 datarootdir := $(XDG_DATA_HOME)
 
-.PHONY: all
-all:
-
 include common.mk
 
 install:
 	@echo Target ‘$@’ not implemented.
 
 # ----------------------------------------------------------------------------
-
-define link-home =
-ln -sfv .config/$< $@
-endef
 
 # shells: create empty data directories
 .PHONY: shellfiles
@@ -37,9 +30,8 @@ SHELL_FILES += ~/.profile
 ~/.hushlogin: bash/.hushlogin
 ~/.profile: sh/.profile
 $(SHELL_FILES):
-	$(link-home)
+	ln -sfv .config/$< $@
 shellfiles: $(SHELL_FILES)
-all: shellfiles
 
 # -----------------------------------------------------------------------------
 # Generate a fake user-agent string to mask the activity of tools like wget.
@@ -60,7 +52,6 @@ $(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
 $(XDG_CACHE_HOME)/dotfiles:
 	mkdir -pv $@
 $(UA_OUTPUT_FILES): $(UA_FILE)
-$(HB_FILE): | /usr/local/bin/brew
 
 M4FLAGS  =
 M4FLAGS += -D _HOME_="$(HOME)"

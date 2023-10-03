@@ -2,17 +2,20 @@
 # custom pam(8) module to allow `sudo` authentication via Apple Watch
 # ----------------------------------------------------------------------------
 
+prefix ?= /usr/local
+
 include ../../common.mk
 
 install: /etc/pam.d/sudo
 
-/etc/pam.d/sudo: sudo.patch | $(libdir)/pam/pam_reattach.so $(libdir)/pam/pam_watchid.so.2
+PAM_DIR := $(libdir)/pam
+/etc/pam.d/sudo: sudo.patch $(PAM_DIR)/pam_reattach.so $(PAM_DIR)/pam_watchid.so.2
 	sudo patch -i $< $@
-$(libdir)/pam/pam_reattach.so: | /usr/local/bin/brew
+$(PAM_DIR)/pam_reattach.so:
 	brew install pam-reattach
 
 PAM_REPO := biscuitehh/pam-watchid
-$(libdir)/pam/pam_watchid.so.2: | $(GIT_STAGING)/$(PAM_REPO)
+$(PAM_DIR)/pam_watchid.so.2: $(GIT_STAGING)/$(PAM_REPO)/pam_watchid.so
 	cd $| && sudo $(MAKE) install
-$(GIT_STAGING)/$(PAM_REPO):
-	cd $(GIT_STAGING) && git clone git@github.com:$(PAM_REPO).git $(PAM_REPO)
+$(GIT_STAGING)/$(PAM_REPO)/pam_watchid.so:
+	git -C $(GIT_STAGING) clone git@github.com:$(PAM_REPO).git $(PAM_REPO)

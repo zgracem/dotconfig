@@ -2,7 +2,7 @@
 # Custom help files for Lynx
 # ----------------------------------------------------------------------------
 
-include ../../common.mk
+include ../common.mk
 
 install: $(CURDIR)/helpfile.html
 install: $(CURDIR)/helpfile.css

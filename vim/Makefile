@@ -5,8 +5,9 @@
 include ../common.mk
 
 # create cache & data dirs
-install: | $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim
-$(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim:
+vim_dirs = $(datadir)/vim $(XDG_CACHE_HOME)/vim $(XDG_STATE_HOME)/vim
+install: | $(vim_dirs)
+$(vim_dirs):
 	mkdir -pv $@
 
 # packages

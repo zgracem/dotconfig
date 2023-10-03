@@ -1,15 +1,10 @@
 # ----------------------------------------------------------------------------
-# dnsmasq -- enable local .test TLD
+# dnsmasq: enable local .test TLD
 # ----------------------------------------------------------------------------
 
 prefix ?= /usr/local
 
 include ../../common.mk
-
-install: | $(sbindir)/dnsmasq
-
-$(sbindir)/dnsmasq: | /usr/local/bin/brew
-	brew install dnsmasq && sudo brew services restart dnsmasq
 
 DNSMASQ_FILES =
 DNSMASQ_FILES += $(sysconfdir)/dnsmasq.d/000-dnsmasq.conf

@@ -40,7 +40,7 @@ $(GIT_STAGING)/nriley/brightness:
 	cd $(srcdir) && git clone git@github.com:nriley/brightness.git $@
 
 # -- BSD calendars -------------------------------------------------------------
-
+# TODO: update!!!
 # calendar: $(datadir)/calendar
 
 # $(datadir)/calendar: $(STOW_DIR)/calendar/share/calendar
