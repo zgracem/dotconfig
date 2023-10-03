@@ -131,7 +131,7 @@ function main
         echo -n $USAGE\n
         if string match -q -- "--help" $_flag_help
             echo -ns \n Options: \n
-            echo -ns \t $HELP \n | string replace / ", " | string replace ": " \t
+            echo -ns \t$HELP\n | string replace / ", " | string replace ": " \t
         end
         return 0
     else if set -q _flag_version
