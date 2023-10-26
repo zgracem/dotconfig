@@ -186,9 +186,25 @@
   "problems.showCurrentInStatus": true,
   "redhat.telemetry.enabled": false,
   "rewrap.wholeComment": false,
-  "ruby.interpreter.commandPath": "/Users/zozo/.local/share/rbenv/shims/ruby",
-  "ruby.pathToBundler": "/Users/zozo/.local/share/rbenv/shims/bundle",
-  "ruby.useLanguageServer": false,
+  "rubyLsp.enabledFeatures": {
+    "codeActions": true,
+    "codeLens": true,
+    "completion": true,
+    "definition": true,
+    "diagnostics": true,
+    "documentHighlights": true,
+    "documentLink": false,
+    "documentSymbols": true,
+    "foldingRanges": true,
+    "formatting": true,
+    "hover": true,
+    "inlayHint": true,
+    "onTypeFormatting": true,
+    "references": true,
+    "selectionRanges": true,
+    "semanticHighlighting": true,
+    "workspaceSymbol": true
+  },
   "scm.defaultViewMode": "tree",
   "search.collapseResults": "auto",
   "search.searchEditor.defaultNumberOfContextLines": 2,
@@ -229,8 +245,6 @@
   "slimLint.executablePath": "/Users/zozo/.local/share/rbenv/shims/slim-lint",
   "solargraph.bundlerPath": "/Users/zozo/.local/share/rbenv/shims/bundle",
   "solargraph.commandPath": "/Users/zozo/.local/share/rbenv/shims/solargraph",
-  "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
   "sortJSON.contextMenu": {
     "sortJSONAlphaNum": false,
     "sortJSONAlphaNumReverse": false,
@@ -408,6 +422,7 @@
   },
   "[ruby]": {
     "editor.formatOnSave": true,
+    "editor.semanticHighlighting.enabled": true,
     "editor.tabSize": 2
   },
   "[scss]": {
