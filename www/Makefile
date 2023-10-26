@@ -5,7 +5,7 @@
 include ../common.mk
 
 userContent.css: userContent.sass
-	sass $< >$@ &&
+	sass $< >$@
 
 install: userContent.css
 	defaults write -app Safari UserStyleSheetEnabled -bool true && \
