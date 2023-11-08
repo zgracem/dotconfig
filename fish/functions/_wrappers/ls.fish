@@ -1,7 +1,7 @@
 # Overrides $__fish_data_dir/functions/ls.fish
-if in-path exa
-    function ls --wraps exa --description 'List files'
-        exa $argv
+if in-path eza
+    function ls --wraps eza --description 'List files'
+        eza $argv
     end
 else
     function ls --description 'List files'

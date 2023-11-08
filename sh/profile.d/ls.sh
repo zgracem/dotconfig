@@ -2,7 +2,7 @@
 # default flags
 # -----------------------------------------------------------------------------
 
-command -v exa >/dev/null && return
+command -v eza >/dev/null && return
 
 unalias ls ll 2>/dev/null
 

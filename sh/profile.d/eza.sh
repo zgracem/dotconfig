@@ -1,16 +1,16 @@
-command -v exa >/dev/null || return
+command -v eza >/dev/null || return
 
 unalias ls ll 2>/dev/null
 unset -f ls ll lsf
 
-exa()
+eza()
 {
-  command exa "$@"
+  command eza "$@"
 }
 
 ls()
 {
-  exa --all "$@"
+  eza --all "$@"
 }
 
 ll()
