@@ -1,5 +1,8 @@
 #!/usr/bin/env fish
 
+# See also ../libexec/manpdf_add_metadata.sed
+# and ../libexec/manpdf_cleanup_bookmarks.sed
+
 set -gx this manpdf
 
 # MANPDF_DIR is the path to the directory where we will save generated PDFs.
