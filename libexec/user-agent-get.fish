@@ -20,12 +20,7 @@ function get-chrome-version -a chrome_path
 end
 
 function get-chrome-version-macos
-    set -l chrome_cask "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb"
-    if not path is -f $chrome_cask
-        printf >&2 "failure in %s: file not found at %s\n" (status function) $chrome_cask
-        exit 1
-    end
-    gsed -nE 's/^\s+version "([0-9.]+).*"/\1/p' $chrome_cask
+    brew info --json=v2 --cask google-chrome | jq -r '.casks[0].version'
 end
 
 function get-chrome-version-linux

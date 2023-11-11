@@ -45,9 +45,8 @@ UA_OUTPUT_FILES = \
 	yt-dlp/config \
 	../.private/yt-dlp/config
 
-HB_FILE := /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb
 UA_FILE := $(XDG_CACHE_HOME)/dotfiles/user-agent.txt
-$(UA_FILE): $(HB_FILE) | $(XDG_CACHE_HOME)/dotfiles
+$(UA_FILE): | $(XDG_CACHE_HOME)/dotfiles
 	$(XDG_CONFIG_HOME)/libexec/user-agent-get.fish >$@
 $(XDG_CACHE_HOME)/dotfiles:
 	mkdir -pv $@
