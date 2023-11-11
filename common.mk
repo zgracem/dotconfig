@@ -15,19 +15,19 @@ GNUMAKEFLAGS = --output-sync
 
 # XDG base directories
 XDG_CONFIG_HOME ?= $(wildcard ~/.config)
-XDG_DATA_HOME ?= $(wildcard ~/.local/share)
-XDG_CACHE_HOME ?= $(wildcard ~/var/cache)
-XDG_STATE_HOME ?= $(wildcard ~/var/lib)
+XDG_DATA_HOME   ?= $(wildcard ~/.local/share)
+XDG_CACHE_HOME  ?= $(wildcard ~/var/cache)
+XDG_STATE_HOME  ?= $(wildcard ~/var/lib)
 
 # Installation directories
-prefix ?= $(HOME)
+prefix      ?= $(HOME)
 exec_prefix ?= $(prefix)
-bindir ?= $(exec_prefix)/bin
+bindir      ?= $(exec_prefix)/bin
 datarootdir ?= $(XDG_DATA_HOME)
-datadir ?= $(datarootdir)
-libdir = $(exec_prefix)/lib
-sbindir ?= $(exec_prefix)/sbin
-sysconfdir = $(prefix)/etc
+datadir     ?= $(datarootdir)
+libdir       = $(exec_prefix)/lib
+sbindir     ?= $(exec_prefix)/sbin
+sysconfdir   = $(prefix)/etc
 
 # Other important directories
 GIT_STAGING := $(wildcard ~/src/github.com)
