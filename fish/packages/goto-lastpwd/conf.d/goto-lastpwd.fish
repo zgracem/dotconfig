@@ -1,13 +1,9 @@
-set -gx LAST_PWD_CACHE $XDG_STATE_HOME/fish/last_pwd
-mkdir -p (path dirname $LAST_PWD_CACHE)
-set -gx PWD_HISTFILE $__fish_user_data_dir/fish_pwd_history
-
 function update-lastpwd --on-variable PWD
     string match -q vscode "$TERM_PROGRAM"
     or string match -q Visor "$ITERM_PROFILE"
     or set -q fish_private_mode; and return
-    echo "$PWD" >$LAST_PWD_CACHE
-    printf -- "- pwd: %s\n  when: %s\n" "$PWD" (date +%s) >>$PWD_HISTFILE
+
+    set --universal LAST_PWD $PWD
 end
 
 function goto-lastpwd --on-event fish_prompt
@@ -22,37 +18,23 @@ function goto-lastpwd --on-event fish_prompt
     set -q fish_private_mode
     and return 0
 
-    # Abort if the cache file can't be found
-    path is --type=file "$LAST_PWD_CACHE"
-    or begin
-        echo -s (set_color --dim --italic) "file not found: $LAST_PWD_CACHE" (set_color normal) >&2
-        return 0
-    end
+    # Abort if the variable can't be found
+    set -qU LAST_PWD
+    or return 0
 
     # Abort if running in VSCode's integrated terminal or iTerm in dropdown mode
     string match -q vscode "$TERM_PROGRAM"
     or string match -q Visor "$ITERM_PROFILE"
-    and begin
-        # echo -s (set_color --dim --italic) "skipping lastpwd..." (set_color normal) >&2
-        return 0
-    end
-
-    read -l LWD <$LAST_PWD_CACHE
+    and return 0
 
     # Abort if we'd be moving to the same directory
-    string match -q $PWD "$LWD"
-    and begin
-        #echo -s (set_color --dim --italic) "lastpwd was pwd..." (set_color normal) >&2
-        return 0
-    end
+    string match -q $PWD $LAST_PWD
+    and return 0
 
     # Abort if the directory doesn't exist anymore
-    path is --type=dir "$LWD"
-    or begin
-        #echo -s (set_color --dim --italic) "lastpwd not found: $LWD" (set_color normal) >&2
-        return 0
-    end
+    path is --type=dir $LAST_PWD
+    or return 0
 
     # Should be OK now
-    cd $LWD
+    cd $LAST_PWD
 end
