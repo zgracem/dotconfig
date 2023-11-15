@@ -64,7 +64,7 @@ end
 
 function get_commands
     set --local pattern '(?<=function do_)[a-z]+'
-    rg --no-filename --no-line-number --only-matching $pattern (status filename)
+    rg --pcre2 --no-filename --no-line-number --only-matching $pattern (status filename)
 end
 
 function get_desc

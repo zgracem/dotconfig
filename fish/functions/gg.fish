@@ -1,7 +1,7 @@
 if in-path rg
     # Use ripgrep
     function gg --wraps rg -d "Plainest search"
-        rg --no-colors --no-filename --no-line-number --only-matching $argv
+        rg --color=never --no-filename --no-line-number --only-matching $argv
     end
 else if in-path ag
     # Use the Silver Searcher

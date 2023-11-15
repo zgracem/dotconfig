@@ -27,6 +27,7 @@
 --colors=line:fg:cyan
 
 # custom types for -t and -T
---type-add=web:*.{htm,html,php,slim,css,js}*
+--type-add=web:*.{htm,html,php,slim}*
 --type-add=text:*.{txt,md,mdown,markdown}*
 --type-add=data:*.{csv,json,tsv,yml,yaml}*
+--type-add=img:*.{jpg,gif,png}*

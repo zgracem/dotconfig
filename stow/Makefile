@@ -15,6 +15,7 @@ PACKAGES += css3FontConverter
 PACKAGES += dayone2
 PACKAGES += hunspell
 PACKAGES += markdown
+PACKAGES += ocr-cli
 PACKAGES += tremc
 PACKAGES += words
 
@@ -124,6 +125,19 @@ $(srcdir)/Markdown.pl: $(srcdir)/Markdown_1.0.1.zip
 
 $(srcdir)/Markdown_1.0.1.zip:
 	cd $(srcdir) && wget -q https://daringfireball.net/projects/downloads/Markdown_1.0.1.zip
+
+# -- command line OCR-----------------------------------------------------------
+
+ocr-cli: $(bindir)/ocr-cli
+
+$(bindir)/ocr-cli: $(STOW_DIR)/ocr-cli/bin/ocr-cli
+	$(STOW) $(@F)
+
+$(STOW_DIR)/ocr-cli/bin/ocr-cli: $(GIT_STAGING)/latorante/cli-macos-ocr/.build/release/ocr-cli
+	$(INSTALL_PROGRAM) -- $< $@
+
+$(GIT_STAGING)/latorante/cli-macos-ocr/.build/release/ocr-cli:
+	cd $(GIT_STAGING)/latorante/cli-macos-ocr && swift build
 
 # -- tremc ---------------------------------------------------------------------
 
