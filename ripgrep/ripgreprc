@@ -1,0 +1,32 @@
+# vim:ft=sh
+# shellcheck disable=SC2211,SC2215
+# export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/ripgreprc
+
+# smart case sensitivity
+--smart-case
+
+# truncate too-long lines
+--max-columns=132
+--max-columns-preview
+
+# don't group matches by file
+--no-heading
+--with-filename
+
+# search .hidden dotfiles
+--hidden
+
+# respect .ignore, but not .gitignore
+--no-ignore-vcs
+
+# see also $__fish_config_dir/colours.fish
+--colors=match:none
+--colors=match:style:intense
+--colors=match:fg:magenta
+--colors=path:fg:blue
+--colors=line:fg:cyan
+
+# custom types for -t and -T
+--type-add=web:*.{htm,html,php,slim,css,js}*
+--type-add=text:*.{txt,md,mdown,markdown}*
+--type-add=data:*.{csv,json,tsv,yml,yaml}*

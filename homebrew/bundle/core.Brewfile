@@ -21,6 +21,7 @@ brew "jq"
 brew "keychain"
 brew "less"
 brew "rename" if OS.mac?
+brew "ripgrep"
 brew "rsync" if OS.mac?
 brew "sf-pwgen" if OS.mac?
 brew "sponge"
