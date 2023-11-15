@@ -2,21 +2,18 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "b7efa70bed04e9bbb78317c04c6d93ee899b9c92"
+        "revision": "d6831aee7752f4f7930f1de095aef9f0baf5c64b"
       },
       "homebrew/cask-versions": {
-        "revision": "118fc63faa799ecf1f8dc607e5820a38fdfc9883"
+        "revision": "1a7f130e878068e2263c0d7a12cb9f017a978682"
       },
       "zgracem/formulae": {
-        "revision": "e9fbe3806d38f56ef5f82d0451c393cc4bf06cd2",
-        "options": {
-          "clone_target": "file:///Users/zozo/src/dev/homebrew-formulae"
-        }
+        "revision": "3a77167fc42e9025bff3aa06dc023b2b541e736e"
       }
     },
     "cask": {
       "1password7": {
-        "version": "7.9.6",
+        "version": "7.9.11",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -25,7 +22,7 @@
         }
       },
       "acorn": {
-        "version": "7.2,16105",
+        "version": "7.4.3",
         "options": {
           "full_name": "acorn",
           "args": {
@@ -34,7 +31,7 @@
         }
       },
       "alfred": {
-        "version": "5.0.3,2087",
+        "version": "5.1.4,2195",
         "options": {
           "full_name": "alfred",
           "args": {
@@ -43,7 +40,7 @@
         }
       },
       "discord": {
-        "version": "0.0.268",
+        "version": "0.0.284",
         "options": {
           "full_name": "discord",
           "args": {
@@ -52,7 +49,7 @@
         }
       },
       "fantastical": {
-        "version": "3.7.1,1512",
+        "version": "3.8.7",
         "options": {
           "full_name": "fantastical",
           "args": {
@@ -61,7 +58,7 @@
         }
       },
       "firefox": {
-        "version": "105.0.3",
+        "version": "119.0.1",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -70,7 +67,7 @@
         }
       },
       "go2shell": {
-        "version": "2.5,25",
+        "version": "2.5",
         "options": {
           "full_name": "go2shell",
           "args": {
@@ -79,16 +76,16 @@
         }
       },
       "istat-menus": {
-        "version": "6.62",
+        "version": "6.73",
         "options": {
-          "full_name": "istat-menus",
           "args": {
-            "appdir": "~/Applications"
-          }
+            "appdir": "/Applications"
+          },
+          "full_name": "istat-menus"
         }
       },
       "iterm2": {
-        "version": "3.4.16",
+        "version": "3.4.22",
         "options": {
           "full_name": "iterm2",
           "args": {
@@ -97,7 +94,7 @@
         }
       },
       "maestral": {
-        "version": "1.6.3",
+        "version": "1.8.0",
         "options": {
           "full_name": "maestral",
           "args": {
@@ -106,7 +103,7 @@
         }
       },
       "name-mangler": {
-        "version": "3.8,3339",
+        "version": "3.8",
         "options": {
           "full_name": "name-mangler",
           "args": {
@@ -115,7 +112,7 @@
         }
       },
       "soundsource": {
-        "version": "5.5.4",
+        "version": "5.6.3",
         "options": {
           "full_name": "soundsource",
           "args": {
@@ -124,7 +121,7 @@
         }
       },
       "spotify": {
-        "version": "1.1.96.785,464c973a,1288",
+        "version": "1.2.24.756,7a7fc7f0,642",
         "options": {
           "full_name": "spotify",
           "args": {
@@ -133,7 +130,7 @@
         }
       },
       "sublime-merge": {
-        "version": "2077",
+        "version": "2091",
         "options": {
           "full_name": "sublime-merge",
           "args": {
@@ -142,7 +139,7 @@
         }
       },
       "superduper": {
-        "version": "3.6.2,125",
+        "version": "3.8,132",
         "options": {
           "full_name": "superduper",
           "args": {
@@ -151,7 +148,7 @@
         }
       },
       "swiftbar": {
-        "version": "1.4.3",
+        "version": "1.4.4",
         "options": {
           "full_name": "swiftbar",
           "args": {
@@ -160,7 +157,7 @@
         }
       },
       "the-unarchiver": {
-        "version": "4.3.5,139,1652457131",
+        "version": "4.3.6,143,1697809946",
         "options": {
           "full_name": "the-unarchiver",
           "args": {
@@ -169,7 +166,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.72.2",
+        "version": "1.84.2",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -178,7 +175,7 @@
         }
       },
       "vlc": {
-        "version": "3.0.17.3",
+        "version": "3.0.20",
         "options": {
           "full_name": "vlc",
           "args": {
@@ -187,7 +184,7 @@
         }
       },
       "lockscreen": {
-        "version": "1.0.0b1",
+        "version": null,
         "options": {
           "full_name": "zgracem/formulae/lockscreen",
           "args": {
@@ -203,6 +200,16 @@
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
           "files": {
+            "arm64_sonoma": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:7b11bfefcb43e9a423ff301f7bbc29b0fb86044bf93442f243c5a8a67d8d4869",
+              "sha256": "7b11bfefcb43e9a423ff301f7bbc29b0fb86044bf93442f243c5a8a67d8d4869"
+            },
+            "arm64_ventura": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:e49511dd1283813c4420aec9fc3b3167d18f9fdbb51d82b1e479b628d5312342",
+              "sha256": "e49511dd1283813c4420aec9fc3b3167d18f9fdbb51d82b1e479b628d5312342"
+            },
             "arm64_monterey": {
               "cellar": ":any_skip_relocation",
               "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:379d46e2657be295321f1603dc1df28130ea0b5b264ceb192a9ba488d77c7a98",
@@ -212,6 +219,16 @@
               "cellar": ":any_skip_relocation",
               "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:918a1484de106940f7bebc936e1ded87d7b65652054b09204887ad0651937ec4",
               "sha256": "918a1484de106940f7bebc936e1ded87d7b65652054b09204887ad0651937ec4"
+            },
+            "sonoma": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:24e3057991ea1eed52eb4a27c0f17d794106770621e5a8bb975477dae135b82d",
+              "sha256": "24e3057991ea1eed52eb4a27c0f17d794106770621e5a8bb975477dae135b82d"
+            },
+            "ventura": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/mas/blobs/sha256:6ef7788e28c46cdc0f916812f49dfeb1fabf2240a8c36f33ce34bcfb9df1502f",
+              "sha256": "6ef7788e28c46cdc0f916812f49dfeb1fabf2240a8c36f33ce34bcfb9df1502f"
             },
             "monterey": {
               "cellar": ":any_skip_relocation",
@@ -264,6 +281,14 @@
         "CLT": "14.0.0.0.1.1661618636",
         "Xcode": "14.0.1",
         "macOS": "12.6"
+      },
+      "sonoma": {
+        "HOMEBREW_VERSION": "4.1.20",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "api",
+        "CLT": "15.0.0.0.1.1694021235",
+        "Xcode": "15.0.1",
+        "macOS": "14.1.1"
       }
     }
   }

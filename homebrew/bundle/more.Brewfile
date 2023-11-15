@@ -6,7 +6,6 @@ tap "zgracem/caveats"
 brew "bash"
 brew "dtrx"
 brew "hub"
-brew "mysides" if OS.mac?
 brew "ncurses"
 brew "hexyl"
 brew "htop"
