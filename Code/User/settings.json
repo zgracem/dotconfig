@@ -334,7 +334,6 @@
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabCloseButton": "off",
   "workbench.editor.tabSizing": "shrink",
-  "workbench.editor.untitled.hint": "hidden",
   "workbench.editor.untitled.labelFormat": "content",
   "workbench.fontAliasing": "default",
   "workbench.iconTheme": "eq-material-theme-icons",
