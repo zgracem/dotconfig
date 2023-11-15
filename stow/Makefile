@@ -9,7 +9,6 @@ STOW := cd $(STOW_DIR) && stow
 
 PACKAGES  =
 PACKAGES += brightness
-PACKAGES += calendar
 PACKAGES += cronic
 PACKAGES += css3FontConverter
 PACKAGES += dayone2
@@ -39,19 +38,6 @@ $(STOW_DIR)/brightness/bin/brightness: | $(GIT_STAGING)/nriley/brightness
 
 $(GIT_STAGING)/nriley/brightness:
 	cd $(srcdir) && git clone git@github.com:nriley/brightness.git $@
-
-# -- BSD calendars -------------------------------------------------------------
-# TODO: update!!!
-# calendar: $(datadir)/calendar
-
-# $(datadir)/calendar: $(STOW_DIR)/calendar/share/calendar
-# 	$(STOW) $(@F)
-
-# $(STOW_DIR)/calendar/share/calendar: $(srcdir)/calendars
-# 	$(INSTALL_DATA) -- $< $@
-
-# $(srcdir)/calendars:
-# 	cd $(@D) && git clone --sparse git@github.com:freebsd/calendar-data.git $(@F)
 
 # -- cronic --------------------------------------------------------------------
 
