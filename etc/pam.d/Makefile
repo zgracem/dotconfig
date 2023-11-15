@@ -16,8 +16,7 @@ install: /etc/pam.d/sudo
 $(PAM_DIR)/pam_reattach.so:
 	brew unlink pam-reattach && brew link pam-reattach
 $(PAM_DIR)/pam_watchid.so.2: | $(GIT_STAGING)/$(PAM_REPO)/pam_watchid.so
-	cd $(|D) && sudo $(MAKE) install
+	cd $(GIT_STAGING)/$(PAM_REPO) && sudo $(MAKE) install
 
 $(GIT_STAGING)/$(PAM_REPO)/pam_watchid.so:
-	git -C $(GIT_STAGING) clone git@github.com:$(PAM_REPO).git $(PAM_REPO) \
-	&& git checkout build-with-sdk
+	cd $(GIT_STAGING)/$(PAM_REPO) && $(MAKE)
