@@ -25,6 +25,9 @@
     "search.exclude": {
       "bat/syntaxes/": true
     },
+    "explorer.fileNesting.patterns": {
+      "*.plist": "${capture}.yaml"
+    },
     "shellcheck.enable": true,
     "shellcheck.exclude": ["2148"],
     "sortJSON.orderUnderride": [

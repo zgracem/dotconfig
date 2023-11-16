@@ -15,20 +15,17 @@ mozilla/*.moz
 StardewValley/
 syncplay.ini
 
-# unnecessary
-.bombadillo.ini
-.contrib/
+# generated
 brew/**/*.lock.json
 launchd/*.plist
 lynx/helpfile.css
 lynx/helpfile.html
-lynx/lynx_bookmarks.html
 www/*.css
+
+# unnecessary
+.bombadillo.ini
+.contrib/
+lynx/lynx_bookmarks.html
 *~
 *~orig*
 *.old
-
-# in progress
-share/doc/*.tsv
-share/doc/*.yml
-share/doc/specimen.md
