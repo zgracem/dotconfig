@@ -18,53 +18,6 @@
   },
   "tasks": [
     {
-      "label": "Lint POSIX shell files",
-      "type": "shell",
-      "command": "libexec/check_dotfiles.sh",
-      "problemMatcher": {
-        "fileLocation": ["relative", "${workspaceFolder}"],
-        "pattern": {
-          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-          "file": 1,
-          "line": 2,
-          "column": 3,
-          "severity": 4,
-          "message": 5
-        }
-      },
-      "presentation": {
-        "revealProblems": "onProblem"
-      },
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      }
-    },
-    {
-      "label": "Lint fish files",
-      "type": "shell",
-      "command": "libexec/check_fish_files.fish",
-      "problemMatcher": {
-        "fileLocation": ["relative", "${workspaceFolder}/fish"],
-        "pattern": {
-          "regexp": "^(.+) \\(line (\\d+)\\): (.+)$",
-          "file": 1,
-          "line": 2,
-          "message": 3
-        }
-      },
-      "presentation": {
-        "revealProblems": "onProblem"
-      },
-      "group": "test"
-    },
-    {
-      "label": "Update bat syntaxes",
-      "type": "shell",
-      "command": "libexec/bat-syntaxes.fish",
-      "group": "build"
-    },
-    {
       "label": "Update user-agent",
       "type": "shell",
       "command": "libexec/user-agent-update.fish",

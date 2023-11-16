@@ -78,7 +78,7 @@ $(STOW_DIR)/dayone2/bin/dayone2: ~/Applications/DayOne.app/Contents/Resources/da
 
 ~/Applications/DayOne.app/Contents/Resources/dayone2: ~/Applications/DayOne.app
 ~/Applications/DayOne.app:
-	$(XDG_CONFIG_HOME)/libexec/init/dayone.sh
+	ln -sf "/Applications/Day One.app" $(HOME)/Applications/DayOne.app
 
 # -- hunspell (for Sublime Merge) ----------------------------------------------
 

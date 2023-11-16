@@ -45,7 +45,7 @@ all: $(BASIC)
 .PHONY: appdata
 # all: appdata
 appdata:
-	$(XDG_CONFIG_HOME)/libexec/init/cygwin.sh
+	$(XDG_CONFIG_HOME)/cygwin/install.sh
 
 # -- metapad -------------------------------------------------------------------
 

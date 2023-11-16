@@ -5,7 +5,7 @@
 # See: <https://github.com/transmission/transmission/blob/main/docs/Scripts.md>
 #
 # To "install":
-#   defaults write -app Transmission DoneScriptPath "$XDG_CONFIG_HOME/libexec/tx-postexec-2023.fish"
+#   defaults write -app Transmission DoneScriptPath "$XDG_CONFIG_HOME/libexec/postexec-tx.fish"
 
 set -gx LOG_DIR "$HOME/var/log/transmission"
 set -gx TIMESTAMP (gdate +%Y%m%d_%H%M%S) # for errors

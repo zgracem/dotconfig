@@ -1,4 +1,5 @@
 #!/usr/bin/sed -f
+# Used by ../bin/manpdf
 
 # Removes unsightly and unnecessary escape sequences from bookmark titles. These
 # sequences aren't present to be removed until the previous sed script is

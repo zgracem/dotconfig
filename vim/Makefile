@@ -13,4 +13,4 @@ $(vim_dirs):
 # packages
 install: $(datadir)/vim/pack/.installed
 $(datadir)/vim/pack/.installed:
-	$(XDG_CONFIG_HOME)/libexec/init/vim-pack.fish && touch $@
+	$(XDG_CONFIG_HOME)/vim/install.fish && touch $@

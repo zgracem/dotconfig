@@ -1,4 +1,5 @@
 #!/usr/bin/sed -f
+# Used by ../bin/manpdf
 
 # Set PDF Title metadata from the man page's nicely-formatted title
 # based on args to the man(7) `.TH` or mdoc(7) `.Dt` macro

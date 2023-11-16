@@ -15,5 +15,5 @@ install: sdk
 # Create symlinks in $HOME/Library/Application Support
 .PHONY: appsupport
 appsupport:
-	$(XDG_CONFIG_HOME)/libexec/init/appsupport.sh
+	$(XDG_CONFIG_HOME)/macos/appsupport.sh
 install: appsupport
