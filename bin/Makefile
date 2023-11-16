@@ -54,13 +54,14 @@ install: $(TARGETS)
 
 # fish completions
 
-$(XDG_CONFIG_HOME)/fish/completions/vs.fish: $(bindir)/vs
+FISH_COMP_DIR = $(XDG_CONFIG_HOME)/fish/packages/zgm-completions/completions
+$(FISH_COMP_DIR)/vs.fish: $(bindir)/vs
 	$< complete print >$@
-install: $(XDG_CONFIG_HOME)/fish/completions/vs.fish
+install: $(FISH_COMP_DIR)/vs.fish
 
-$(XDG_CONFIG_HOME)/fish/completions/vsx.fish: $(CURDIR)/vsx
+$(FISH_COMP_DIR)/vsx.fish: $(CURDIR)/vsx
 	$< completions >$@
-install: $(XDG_CONFIG_HOME)/fish/completions/vsx.fish
+install: $(FISH_COMP_DIR)/vsx.fish
 
 # ----------------------------------------------------------------------------
 

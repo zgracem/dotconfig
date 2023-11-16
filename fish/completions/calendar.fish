@@ -1,4 +1,5 @@
 # calendar
+# vim:ft=fish
 
 complete -c calendar -s A -s l -d "Today + N days forward"
 complete -c calendar -s a -d "Process all users' calendars and mail the results"
