@@ -11,9 +11,9 @@ if [[ ! -e /Library/Developer/CommandLineTools ]]; then
     xcode-select --install || exit
 fi
 
-# AUTO: Set important environment variable
-SDKROOT=$(xcrun --sdk macosx --show-sdk-path) || exit
-export SDKROOT
+## AUTO: Set important environment variable
+#SDKROOT=$(xcrun --sdk macosx --show-sdk-path) || exit
+#export SDKROOT
 
 # ⚠️ MANUAL: Install Dropbox.app & complete first sync
 export DROPBOX=$HOME/Dropbox
@@ -30,9 +30,6 @@ ln -sfv "Dropbox/.private" "$HOME/.private" || exit
 # AUTO: Complete installation
 cd "$XDG_CONFIG_HOME" || exit
 
-make homebrew       # install Homebrew
-make -C etc shells  # setup /etc/shells and `chsh -s /usr/local/bin/fish`
-make appsupport     # create symlinks from ~/Library/Application Support to ~/.config
-make -C etc dnsmasq # install config for local *.test TLD
-make user-agent     # rebuild files like .wgetrc with a fake user-agent
-make all            # everything else
+# ⚠️ MANUAL: Other installation and setup steps (not exhaustive)
+make -C homebrew        # install Homebrew
+./macos/appsupport.sh   # create symlinks in ~/Library/Application Support
