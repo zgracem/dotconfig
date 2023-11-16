@@ -2,6 +2,7 @@
   { "name": "zozo", "path": "file:///Users/zozo/" },
   { "name": "Applications", "path": "file:///Applications/" },
   { "name": "Desktop", "path": "file:///Users/zozo/Desktop/" },
+  { "name": "Developer", "path": "file:///Users/zozo/Developer/" },
   { "name": "Documents", "path": "file:///Users/zozo/Documents/" },
   { "name": "Downloads", "path": "file:///Users/zozo/Downloads/" },
   { "name": "Dropbox", "path": "file:///Users/zozo/Dropbox/" },
