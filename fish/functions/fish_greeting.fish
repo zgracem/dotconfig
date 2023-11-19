@@ -1,7 +1,6 @@
 # Overrides $__fish_data_dir/functions/fish_greeting.fish
 function fish_greeting --description 'Prints a greeting message on startup'
     status is-interactive; or return
-    fish-is-newer-than 3.0; or return
 
     if set -q SSH_CONNECTION
         set -f clr 08b 09a 58d a8f d9f

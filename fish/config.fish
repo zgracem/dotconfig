@@ -8,7 +8,7 @@ if fish-is-older-than 3.1
         echo "*** These configuration files should not run on fish $version ***"
         set_color normal
     end >&2
-    exit 1
+    kill $fish_pid
 end
 
 # setup environment, including PATH and friends

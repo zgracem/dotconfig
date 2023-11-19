@@ -3,7 +3,7 @@
 #
 #     Set-Service ssh-agent -StartupType Manual
 #
-fish-is-newer-than 2.5; and status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
+status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
 or exit
 
 set -l keys id_{ed25519,rsa_2020}
