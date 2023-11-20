@@ -9,14 +9,13 @@ include ../common.mk
 SHIMS  =
 SHIMS += airport
 SHIMS += brew-env
-SHIMS += centre
 SHIMS += code
 SHIMS += git-cc
 SHIMS += lsregister
 SHIMS += manpdf
 SHIMS += PlistBuddy
 SHIMS += pyjamas
-SHIMS += right
+SHIMS += reldate
 SHIMS += squirrel
 SHIMS += tbcopy
 SHIMS += trash

@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-
-ARGF.each { |line| puts line.strip.center(72) }
