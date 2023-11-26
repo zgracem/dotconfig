@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+
+# Usage:
+# Returns the relative path to FILE from DIR (or PWD if no DIR is specified).
+
+require "optparse"
+require "pathname"
+
+opts = {}
+parser = OptionParser.new do |parser|
+  parser.banner = "Usage: relpath [-v] FILE [DIR]\n\n"
+  parser.separator "Options:"
+  parser.on("-v", "--verbose", "Print more verbose output")
+end
+parser.parse!(ARGV, into: opts)
+
+# @param reference_file [Pathname]
+# @param base_directory [Pathname]
+# @return [void] prints the relative path
+def find_relative_path(reference_file, base_directory, **opts)
+  verbose = opts.keys.include?(:verbose)
+
+  base_directory = base_directory.dirname if base_directory.file?
+
+  if base_directory.absolute?
+    reference_file = reference_file.expand_path if reference_file.relative?
+  else # if base_directory.relative?
+    base_directory = base_directory.expand_path if reference_file.absolute?
+  end
+
+  relative_path = reference_file.relative_path_from(base_directory)
+
+  if verbose
+    puts "PATH: #{relative_path}"
+    puts "REFR: #{reference_file.sub(ENV['HOME'], "~")}"
+    puts "BASE: #{base_directory.sub(ENV['HOME'], "~")}"
+    puts "FULL: #{base_directory}/#{relative_path}"
+  else
+    puts relative_path
+  end
+end
+
+begin
+  pn_subject = Pathname(ARGV[0])
+  pn_compare = Pathname(ARGV[1] || Pathname.pwd)
+  find_relative_path(pn_subject, pn_compare, **opts)
+rescue => e
+  warn "error: #{e.message}"
+  exit 1
+end

@@ -17,6 +17,7 @@ SHIMS += PlistBuddy
 SHIMS += pre-rg
 SHIMS += pyjamas
 SHIMS += reldate
+SHIMS += relpath
 SHIMS += squirrel
 SHIMS += tbcopy
 SHIMS += trash
@@ -27,11 +28,11 @@ SHIM_TARGETS := $(addprefix $(bindir)/, $(SHIMS))
 TARGETS := $(SHIM_TARGETS)
 
 $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
-	$(INSTALL_PROGRAM) -- $< $@
+	ln -sf $(shell $(CURDIR)/relpath $< $(bindir)) $@
 
 $(bindir)/code: $(bindir)/code-wait
 $(bindir)/code-wait: $(CURDIR)/code
-	ln -sfv ./$(<F) $@
+	ln -sf ./$(<F) $@
 
 $(bindir)/pyjamas: | $(datadir)/npm/bin/json2cson
 $(datadir)/npm/bin/json2cson: | $(datadir)/npm/lib/node_modules/cson
