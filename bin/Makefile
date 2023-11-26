@@ -14,6 +14,7 @@ SHIMS += git-cc
 SHIMS += lsregister
 SHIMS += manpdf
 SHIMS += PlistBuddy
+SHIMS += pre-rg
 SHIMS += pyjamas
 SHIMS += reldate
 SHIMS += squirrel

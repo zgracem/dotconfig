@@ -19,6 +19,11 @@
 # respect .ignore, but not .gitignore
 --no-ignore-vcs
 
+# pre-processing (see ../bin/pre-rg)
+--pre=pre-rg
+--pre-glob=*.pdf
+--pre-glob=*.{jpg,gif,png}
+
 # see also $__fish_config_dir/colours.fish
 --colors=match:none
 --colors=match:style:intense
