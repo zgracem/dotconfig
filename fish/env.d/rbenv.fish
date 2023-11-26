@@ -1,8 +1,6 @@
-# RBENV_ROOT set in conf.d/xdg.fish
+# RBENV_ROOT set in ~/.config/env.d/rbenv.env
 if path is -d $RBENV_ROOT; and in-path rbenv
-    set -l OLD_PATH $PATH
-    source (rbenv init - | psub) # adds duplicate shims dir to PATH
-    set -gx PATH $OLD_PATH
+    source (rbenv init - | psub)
 
     set -l rbenv_version_file $RBENV_ROOT/version
 
