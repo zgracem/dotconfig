@@ -47,6 +47,10 @@ if [ -x /usr/local/bin/brew ]; then
   PATH=/usr/local/opt/llvm/bin:$PATH
   MANPATH=/usr/local/opt/llvm/share/man:$MANPATH
 
+  # curl
+  PATH=/usr/local/opt/curl/bin:$PATH
+  MANPATH=/usr/local/opt/curl/share/man:$MANPATH
+
   # GNU i18n/l10n utilities
   PATH=/usr/local/opt/gettext/bin:$PATH
   MANPATH=/usr/local/opt/gettext/share/man:$MANPATH
