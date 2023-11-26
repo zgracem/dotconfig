@@ -25,6 +25,8 @@ www/*.css
 # unnecessary
 .bombadillo.ini
 .contrib/
+bin/*.fish
+bin/*.sh
 lynx/lynx_bookmarks.html
 *~
 *~orig*
