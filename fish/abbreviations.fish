@@ -57,26 +57,27 @@ else if in-path curl
 end
 
 # git
-abbr -a -g gc 'git checkout -b'
+abbr -a -g gco 'git checkout -b'
 
 # Homebrew
 if in-path brew
-    abbr -a -g bi 'brew install'
-    abbr -a -g ci 'brew install --cask'
-    abbr -a -g bu 'brew uninstall'
-    abbr -a -g cu 'brew uninstall --cask'
-    abbr -a -g binf 'brew info'
-    abbr -a -g bs 'brew search'
-    abbr -a -g bcav 'brew caveats'
-    abbr -a -g bup 'brew upgrade'
+    abbr -a -g br 'brew'
+    abbr -a -g brins 'brew install'
+    abbr -a -g brrm 'brew uninstall'
+    abbr -a -g brinf 'brew info'
+    abbr -a -g brs 'brew search'
+    abbr -a -g brcav 'brew caveats'
+    abbr -a -g bro 'brew outdated'
+    abbr -a -g bru 'brew update'
+    abbr -a -g brup 'brew upgrade'
 end
 
 # apt
 if in-path apt
-    abbr -a -g ai 'sudo apt install'
-    abbr -a -g ainf 'apt show'
-    abbr -a -g as 'apt search'
-    abbr -a -g aup 'sudo apt update && sudo apt upgrade'
+    abbr -a -g aptins 'sudo apt install'
+    abbr -a -g aptinf 'apt show'
+    abbr -a -g apts 'apt search'
+    abbr -a -g aptup 'sudo apt update && sudo apt upgrade'
 end
 
 # ssh
