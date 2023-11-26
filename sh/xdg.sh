@@ -3,13 +3,13 @@
 # Refer to $XDG_CONFIG_HOME/fish/conf.d/xdg.fish for the fish equivalent.
 
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config" \
-    && . "$XDG_CONFIG_HOME/bash/_dirs.bash"
+  && . "$XDG_CONFIG_HOME/bash/_dirs.bash"
 
 if command -v bundle >/dev/null; then
-    export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle/config"
-    export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundler"
-    export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundler"
-    mkdir -p "$BUNDLE_USER_CACHE" "$BUNDLE_USER_PLUGIN"
+  export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle/config"
+  export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundler"
+  export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundler"
+  mkdir -p "$BUNDLE_USER_CACHE" "$BUNDLE_USER_PLUGIN"
 fi
 
 if command -v curl >/dev/null; then
@@ -30,8 +30,8 @@ if command -v nethack >/dev/null; then
 fi
 
 if command -v npm >/dev/null; then
-    export npm_config_userconfig=$XDG_CONFIG_HOME/npm/npmrc
-    mkdir -p "$XDG_DATA_HOME/npm" "$XDG_CACHE_HOME/npm" "$XDG_RUNTIME_DIR/npm"
+  export npm_config_userconfig=$XDG_CONFIG_HOME/npm/npmrc
+  mkdir -p "$XDG_DATA_HOME/npm" "$XDG_CACHE_HOME/npm" "$XDG_RUNTIME_DIR/npm"
 fi
 
 # You can't use environment variables like $HOME in pip.conf
@@ -63,9 +63,9 @@ if command -v ruby >/dev/null; then
 fi
 
 if command -v screen >/dev/null; then
-    export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
-    export SCREENDIR=$XDG_RUNTIME_DIR/screen
-    mkdir -p "$XDG_RUNTIME_DIR/screen"
+  export SCREENRC=$XDG_CONFIG_HOME/screen/screenrc
+  export SCREENDIR=$XDG_RUNTIME_DIR/screen
+  mkdir -p "$XDG_RUNTIME_DIR/screen"
 fi
 
 command -v tmux >/dev/null && export TMUX_TMPDIR=$XDG_RUNTIME_DIR
