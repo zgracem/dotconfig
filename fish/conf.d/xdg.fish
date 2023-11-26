@@ -1,3 +1,7 @@
+# This file sets environment variables where possible to ensure certain programs
+# conform to the XDG basedir spec. Variables initialized in ./___dirs.fish.
+# Refer to $XDG_CONFIG_HOME/sh/xdg.sh for the POSIX equivalent.
+
 if in-path bundle
     set -gx BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle/config
     set -gx BUNDLE_USER_CACHE $XDG_CACHE_HOME/bundler

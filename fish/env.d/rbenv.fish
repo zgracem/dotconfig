@@ -1,4 +1,4 @@
-# RBENV_ROOT set in conf.d/xdg-overrides.fish
+# RBENV_ROOT set in conf.d/xdg.fish
 if path is -d $RBENV_ROOT; and in-path rbenv
     set -l OLD_PATH $PATH
     source (rbenv init - | psub) # adds duplicate shims dir to PATH

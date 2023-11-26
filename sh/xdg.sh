@@ -1,3 +1,10 @@
+# This file sets environment variables where possible to ensure certain programs
+# conform to the XDG basedir spec.
+# Refer to $XDG_CONFIG_HOME/fish/conf.d/xdg.fish for the fish equivalent.
+
+[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config" \
+    && . "$XDG_CONFIG_HOME/bash/_dirs.bash"
+
 if command -v bundle >/dev/null; then
     export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle/config"
     export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundler"
