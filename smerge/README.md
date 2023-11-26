@@ -3,8 +3,8 @@
 Setup:
 
 ```bash
-conf="$HOME/Dropbox/.config/smerge"
-priv="$HOME/Dropbox/.private/smerge"
+conf="$XDG_CONFIG_HOME/smerge"
+priv="$XDG_CONFIG_HOME/../.private/smerge"
 apps="$HOME/Library/Application Support/Sublime Merge"
 
 ln -sf "$priv/Local/License.sublime_license" "$apps/Local"
