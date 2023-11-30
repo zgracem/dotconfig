@@ -39,7 +39,7 @@ abbr -a -g unstow 'stow --delete'
 
 if in-path hexyl
     abbr -a -g xd hexyl
-else
+else if in-path xxd
     abbr -a -g xd 'xxd -u -g1'
 end
 
