@@ -1,4 +1,4 @@
-function ctty -d "Check the status of TTYs"
+function chktty -d "Check the status of TTYs"
     for fd in stdout stdin stderr
         if isatty $fd
             set_color green

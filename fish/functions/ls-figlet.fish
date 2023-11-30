@@ -1,4 +1,4 @@
-function figspec -d "Print a phrase in all available figlet(1) fonts"
+function ls-figlet -d "Print a phrase in all available figlet(1) fonts"
     argparse w/width= -- $argv; or return
 
     set -q _flag_width[1]; or set -f _flag_width $COLUMNS

@@ -1,4 +1,4 @@
-function ls-vscode-workspaces
+function ls-vscode -d "List all Visual Studio Code workspaces"
     set -f dir ~/Library/"Application Support"/Code/User/workspaceStorage
 
     for folder in $dir/*/

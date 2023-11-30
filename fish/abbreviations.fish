@@ -31,7 +31,6 @@ in-path fd; and abbr -a -g fdd 'fd -td'
 in-path fd; and abbr -a -g fdf 'fd -tf'
 abbr -a -g r reveal
 abbr -a -g s 'set -S'
-abbr -a -g size 'du -sh'
 abbr -a -g ssc 'sudo systemctl'
 abbr -a -g svim 'sudo -E vim'
 abbr -a -g restow 'stow --restow'
@@ -55,9 +54,6 @@ if in-path wget
 else if in-path curl
     abbr -a -g dl 'curl -OJ'
 end
-
-# git
-abbr -a -g gco 'git checkout -b'
 
 # Homebrew
 if in-path brew
