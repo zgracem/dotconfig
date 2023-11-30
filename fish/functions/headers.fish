@@ -2,21 +2,16 @@ function headers -d "Print HTTP response headers for a URL"
     argparse -xw,c w/wget c/curl -- $argv
     or return
 
+    set -l wget_args --server-response --spider --no-verbose
+    set -l curl_args --head --silent --show-error
+
     if set -q _flag_wget
-        _headers_wget $argv
+        wget $wget_args $argv
     else if set -q _flag_curl
-        _headers_curl $argv
+        curl $curl_args $argv
     else if in-path wget
-        _headers_wget $argv
+        wget $wget_args $argv
     else if in-path curl
-        _headers_curl $argv
+        curl $curl_args $argv
     end
-end
-
-function _headers_wget
-    wget --server-response --spider --no-verbose $argv
-end
-
-function _headers_curl
-    curl --head --silent --show-error $argv
 end
