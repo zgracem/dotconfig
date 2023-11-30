@@ -10,7 +10,7 @@ f()
       "$(cygpath --windir)/explorer" "$(cygpath -w "$here")"
       ;;
     *)
-      scold 'not available on this system'
+      echo >&2 'not available on this system'
       return 1
       ;;
   esac

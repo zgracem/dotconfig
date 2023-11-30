@@ -40,14 +40,14 @@ _z_whence()
   [[ -t 1 ]] && printf '\n'
 )
 
-ef()
+funced()
 { # find and edit shell functions
   [[ $# -eq 1 ]] || return 1
 
   local func=$1
   local dir="$XDG_CONFIG_HOME/bash"
 
-  if ! _isFunction "$func"; then
+  if ! declare -f "$func" >/dev/null; then
     local file="$dir/functions.d/$func.bash"
 
     if [[ -f $file ]]; then
@@ -87,6 +87,29 @@ if [[ ${BASH_VERSINFO[0]} -lt 4 ]]; then
   alias rl='. $XDG_CONFIG_HOME/bash/profile.bash'
   return
 fi
+
+verbose()
+{ #: -- prints a message, conditional on the value of $VERBOSITY
+  #
+  #: $ verbose [level] "message"
+  #
+  # Examples:
+  #    verbose 1 "be slightly verbose"
+  #    verbose 2 "more verbose"
+  #    verbose 3 "quite verbose"
+  #    verbose "any level except zero"
+
+  local level=1
+
+  if [[ $1 == +([0-9]) ]]; then
+    level=$1
+    shift
+  fi
+
+  if [[ $VERBOSITY -ge $level ]]; then
+    printf '%b\n' "$@"
+  fi
+}
 
 rl()
 { # note: requires extglob, globstar, nullglob
@@ -182,7 +205,7 @@ rl()
         ;;
 
       tmux)
-        if _inTmux; then
+        if [[ -S "${TMUX%%,*}" ]]; then
           # Don't expand tilde
           # shellcheck disable=SC2088
           _z_rl_say "~/.config/tmux/tmux.conf"

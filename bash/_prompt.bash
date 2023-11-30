@@ -82,7 +82,7 @@ _z_PS1_compress_pwd()
       c)  keep_chars="$OPTARG" ;;
       i)  indicator="$OPTARG" ;;
     '?')
-          scold "-$OPTARG: invalid option"
+          echo >&2 "-$OPTARG: invalid option"
           return 1
                    ;;
     esac

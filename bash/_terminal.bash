@@ -15,10 +15,10 @@ OSC=$'\e]'  # Operating System Command
 DCS_ante=""
 DCS_post=""
 
-if _inTmux || [[ $PTERM == tmux-256color ]]; then
+if [[ -S "${TMUX%%,*}" ]] || [[ $PTERM == tmux-256color ]]; then
   DCS_ante="${DCS}tmux;\\e"
   DCS_post="${ST}"
-elif _inScreen || [[ $PTERM == screen-256color ]]; then
+elif [[ -n "$STY" && -p "$SCREENDIR/$STY" ]] || [[ $PTERM == screen-256color ]]; then
   DCS_ante="${DCS}"
   DCS_post="${ST}"
 fi

@@ -10,7 +10,7 @@ reveal()
       "$(cygpath --windir)/explorer" /select, "$(cygpath -w "$target")"
       ;;
     *)
-      scold 'not available on this system'
+      echo >&2 'not available on this system'
       return 1
       ;;
   esac
