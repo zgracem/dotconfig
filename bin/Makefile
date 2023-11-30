@@ -10,6 +10,7 @@ SHIMS  =
 SHIMS += airport
 SHIMS += brew-env
 SHIMS += code
+SHIMS += git-browse
 SHIMS += git-cc
 SHIMS += lsregister
 SHIMS += manpdf
