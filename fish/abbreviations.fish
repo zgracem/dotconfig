@@ -48,6 +48,8 @@ abbr -a -g 600 'chmod 0600'
 abbr -a -g 644 'chmod 0644'
 abbr -a -g 700 'chmod 0700'
 abbr -a -g 755 'chmod 0755'
+abbr -a -g 'ux' 'chmod u+x'
+abbr -a -g 'gorx' 'chmod go+rx'
 
 if in-path wget
     abbr -a -g dl wget
