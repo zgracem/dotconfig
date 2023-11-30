@@ -75,6 +75,17 @@ else
     set -gx LSCOLORS exFxdacabxgagaabadHbHd
 end
 
+# less: begin/end "bold" mode (man page headers)
+set -gx LESS_TERMCAP_md (set_color green)
+set -gx LESS_TERMCAP_me (set_color normal)
+
+# less: begin/end "underline" mode (man page variables)
+set -gx LESS_TERMCAP_us (set_color yellow)
+set -gx LESS_TERMCAP_ue (set_color normal)
+
+# less: reset
+set -gx LESS_TERMEND (set_color normal)
+
 # gcc
 set -gx --path GCC_COLORS
 set -a GCC_COLORS "error="(get_color $fish_color_error)

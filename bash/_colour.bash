@@ -297,6 +297,20 @@ GCC_COLORS+="caret=${brmagenta}:"
 GCC_COLORS+="locus=${colour_dim}:"
 GCC_COLORS+="quote=${cyan}"
 
+# less: begin/end "bold" mode (man page headers)
+LESS_TERMCAP_md="${esc_green}"
+LESS_TERMCAP_me="${esc_reset}"
+
+# less: begin/end "underline" mode (man page variables)
+LESS_TERMCAP_us="${esc_yellow}"
+LESS_TERMCAP_ue="${esc_reset}"
+
+# less: reset
+LESS_TERMEND="${esc_reset}"
+
+# shellcheck disable=SC2086
+export ${!LESS_TERM*}
+
 # -----------------------------------------------------------------------------
 # cleanup
 # -----------------------------------------------------------------------------
