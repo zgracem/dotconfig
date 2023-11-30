@@ -21,19 +21,9 @@ unset -v PROMPT_DIRTRIM
 # If false, skip all the colour setup so the prompt prints plain
 : "${Z_PROMPT_COLOUR:=true}"
 
-# If true, print the exit status of the last command aligned right in red
-: "${Z_PROMPT_EXIT:=true}"
-
-# If true, make a slow call to `git` every time the prompt refreshes,
-# in exchange for info about the current git situation ("gituation")
-: "${Z_PROMPT_GIT:=true}"
-
 # If false, display the hostname in the prompt only when connected via SSH.
 # If true, always display the hostname in the prompt, even in local sessions.
 : "${Z_PROMPT_HOST:=false}"
-
-# If true, the prompt will display an indication of any active jobs
-: "${Z_PROMPT_JOBS:=true}"
 
 # If true, set window/tab title to "host@username: pwd"
 : "${Z_SET_WINTITLE:=true}"
@@ -92,7 +82,7 @@ _z_PS1_compress_pwd()
       c)  keep_chars="$OPTARG" ;;
       i)  indicator="$OPTARG" ;;
     '?')
-          scold "-$OPTARG: invalid option"
+          echo >&2 "-$OPTARG: invalid option"
           return 1
                    ;;
     esac
@@ -166,134 +156,6 @@ _z_PS1_compress_pwd()
       printf "%s" "~"
     fi
     printf "/%s" "${out_parts[@]}" "${end_parts[@]}"
-  fi
-}
-
-_z_PS1_print_exit()
-{ # Print non-zero exit codes on the far right of the screen (zsh envy...)
-  local last_exit=$?
-  local gutter=1
-  local sigspec
-
-  [[ $Z_PROMPT_EXIT == true ]] || return $last_exit
-  [[ $1 =~ ^[[:digit:]]+$ ]] && last_exit=$1
-  [[ $last_exit -eq 0 ]] && return 0
-
-  # If terminated from a signal (128 >= $? >= 165), get signal name from `kill`
-  # (`-l` = list) and print that instead.
-  if [[ $last_exit -gt 128 ]] && sigspec=$(builtin kill -l "$last_exit" 2>/dev/null); then
-    last_exit=${sigspec#SIG}
-  elif [[ $last_exit -ge 64 ]] && [[ $last_exit -le 78 ]]; then
-    # Someone's been reading sysexits(3)... ;)
-    local -ra exits=( [64]="USAGE"    [65]="DATAERR"     [66]="NOINPUT"
-      [67]="NOUSER"   [68]="NOHOST"   [69]="UNAVAILABLE" [70]="SOFTWARE"
-      [71]="OSERR"    [72]="OSFILE"   [73]="CANTCREAT"   [74]="IOERR"
-      [75]="TEMPFAIL" [76]="PROTOCOL" [77]="NOPERM"      [78]="CONFIG" )
-    last_exit=${exits[$last_exit]}
-  fi
-
-  local screen_dimensions; read -r -a screen_dimensions < <(stty size)
-  local screen_width=${screen_dimensions[1]}
-  local padding=$((screen_width - gutter))
-
-  # print exit code & return to beginning of line
-  printf '%*s\r' $padding "$last_exit"
-}
-
-_z_PS1_git_info()
-{
-  [[ $Z_PROMPT_GIT != true ]] && return
-
-  local status="" branch="" icons=""
-  local ahead=0 behind=0 unstaged=0 untracked=0 dirty=false
-
-  # bail immediately if we're not in a git repo
-  git rev-parse --is-inside-work-tree &>/dev/null || return
-
-  # get info on current branch
-  status=$(git status --branch --porcelain 2>/dev/null)
-
-  # get name of branch
-  local re_br='^## ([[:graph:]]+)…'
-  if [[ ${status/.../…} =~ $re_br ]]; then
-    branch="${BASH_REMATCH[1]}"
-  elif [[ $status =~ ${re_br%…} ]]; then
-    branch="${BASH_REMATCH[1]}"
-  else
-    return 1
-  fi
-
-  # count unstaged files (by counting newlines)
-  unstaged=${status//[^$'\n']/}
-  unstaged=${#unstaged}
-
-  # count untracked files
-  local re_ut=$'\n''(\? | \?|\?\?)'
-  if [[ $status =~ $re_ut ]]; then
-    untracked=$((${#BASH_REMATCH[@]} - 1))
-  fi
-
-  if [[ $unstaged -gt 0 ]] || [[ $untracked -gt 0 ]]; then
-    dirty=true
-  fi
-
-  # get commits ahead (if any)
-  local re_ah='\[ahead ([[:digit:]]+)'
-  if [[ $status =~ $re_ah ]]; then
-    ahead="${BASH_REMATCH[1]}"
-  fi
-
-  # get commits behind (if any)
-  local re_bh='behind ([[:digit:]]+)\]'
-  if [[ $status =~ $re_bh ]]; then
-    behind="${BASH_REMATCH[1]}"
-  fi
-
-  # add '*' if there's anything to commit
-  if [[ $dirty == true ]]; then
-    icons+=${esc_reset:-}
-    icons+=${esc_false:-}
-    icons+="*"
-  fi
-
-  # # add '*' if there are untracked files
-  # if [[ $untracked -gt 0 ]]; then
-  #   icons+=${esc_reset:-}
-  #   icons+=${esc_green:-}
-  #   icons+="*"
-  # fi
-
-  # add '+' if we're ahead of origin, '−' if behind, '±' if both
-  if [[ $((ahead + behind)) -gt 0 ]]; then
-    icons+=${esc_reset:-}
-    icons+=${esc_yellow:-}
-    if [[ $ahead -gt 0 ]] && [[ $behind -eq 0 ]]; then
-      icons+="+"
-    elif [[ $ahead -eq 0 ]] && [[ $behind -gt 0 ]]; then
-      icons+="−"
-    elif [[ $ahead -gt 0 ]] && [[ $behind -gt 0 ]]; then
-      icons+='±'
-    fi
-  fi
-
-  printf "${esc_reset}%b" \
-    " ${esc_dim}${branch}" \
-    "${icons-}${esc_reset}"
-}
-
-_z_PS1_jobs()
-{
-  [[ $Z_PROMPT_JOBS != true ]] && return
-
-  local jobs; jobs="$(jobs)"
-  [[ -n $jobs ]] || return
-
-  # count newlines
-  jobs="${jobs//[^$'\n']/}"
-  local job_count=$((${#jobs} + 1)) # no trailing newline at EOT
-
-  if [[ $job_count -gt 0 ]]; then
-    printf ' %d' "${job_count}"
   fi
 }
 
@@ -467,5 +329,7 @@ _z_prompt_cmd_add()
 
 # append to HISTFILE
 _z_prompt_cmd_add -p "history -a"
+_z_prompt_cmd_add _z_PS1_update_cwd
+_z_prompt_cmd_add _z_PS1_update_titles
 
 unset -f _z_prompt_cmd_add

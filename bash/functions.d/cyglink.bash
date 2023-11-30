@@ -14,7 +14,7 @@ cyglink()
   fi
 
   if [[ ! -d $target ]]; then
-    scold "not a directory: $target"
+    echo >&2 "not a directory: $target"
     return 1
   fi
 

@@ -6,6 +6,3 @@ alias    ..='cd ..'
 alias   ...='cd ../..'
 alias  ....='cd ../../..'
 alias .....='cd ../../../..'
-
-alias bye='exit'
-alias which='builtin type'
