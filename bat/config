@@ -2,7 +2,6 @@
 # shellcheck disable=SC2215
 --italic-text=always
 --pager="less --quit-if-one-screen --RAW-CONTROL-CHARS"
---style=plain
 --tabs=0
 --theme=TwoDark
 
