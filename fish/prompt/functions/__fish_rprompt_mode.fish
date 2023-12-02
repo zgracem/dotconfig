@@ -10,6 +10,8 @@ function __fish_rprompt_mode --description 'Display the current mode for the pro
             case replace_one
                 set_color yellow
                 echo -n r
+            case replace
+                set_color bryellow
             case visual
                 set_color brblue
                 echo -n v
