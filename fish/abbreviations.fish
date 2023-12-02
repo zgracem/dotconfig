@@ -1,9 +1,8 @@
 # -----------------------------------------------------------------------------
-# aliases & abbreviations
+# abbreviations
 # -----------------------------------------------------------------------------
 
 # quick navigation
-
 if fish-is-older-than 3.6
     abbr -a .. cd ..
     abbr -a ... cd ../..
@@ -22,7 +21,7 @@ end
 abbr -a -- '-' 'cd -'
 
 # -----------------------------------------------------------------------------
-# abbreviations
+# shortcuts
 # -----------------------------------------------------------------------------
 
 abbr -a dr 'defaults read'
@@ -43,11 +42,6 @@ else if in-path xxd
     abbr -a xd 'xxd -u -g1'
 end
 
-abbr -a 555 'chmod 0555'
-abbr -a 600 'chmod 0600'
-abbr -a 644 'chmod 0644'
-abbr -a 700 'chmod 0700'
-abbr -a 755 'chmod 0755'
 abbr -a 'ux' 'chmod u+x'
 abbr -a 'gorx' 'chmod go+rx'
 
