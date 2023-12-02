@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# Placing this script in $PATH will enable the command `brew env`, which lists
-# all `HOMEBREW_*` environment variables visible to Homebrew while it's running.
+#:  * `env`
+#:
+#:  List all `HOMEBREW_*` variables in Homebrew's environment.
+#:
 
 env | grep '^HOMEBREW_' | sort
