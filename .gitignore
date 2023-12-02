@@ -4,7 +4,6 @@
 
 # private
 .op/
-TODO.*
 
 # not intended for human interaction
 fish/fish_variables*
