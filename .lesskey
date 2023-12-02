@@ -1,0 +1,33 @@
+# vim:ft=sh
+
+#env
+
+# -i/--ignore-case: case-insensitive searching
+# -s/--squeeze-blank-lines: combine consecutive blank lines
+# -Q/--QUIET: never ring the terminal bell
+# -R/--RAW-CONTROL-CHARS: output raw ANSI (e.g. \e[1;31m)
+# -X/--no-init: don't clear the screen on exit
+LESS=-isQRX
+LESSCHARSET=utf-8
+LESSHISTFILE=/dev/null
+
+# requires `brew install source-highlight`
+# and `--RAW-CONTROL-CHARS` in $LESS
+LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
+
+# reset all modes
+LESS_TERMEND="(B[m"
+# begin "blink"
+LESS_TERMCAP_mb="[35m"
+# begin bold (man page headers)
+LESS_TERMCAP_md="[32m"
+# end attributes
+LESS_TERMCAP_me="(B[m"
+# begin standout (info box)
+LESS_TERMCAP_so="[7m"
+# end standout
+LESS_TERMCAP_se="(B[m"
+# begin underline (man page variables)
+LESS_TERMCAP_us="[33m"
+# end underline
+LESS_TERMCAP_ue="(B[m"
