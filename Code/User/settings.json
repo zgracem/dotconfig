@@ -327,7 +327,7 @@
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootName}",
   "window.titleSeparator": " • ",
   "workbench.activityBar.iconClickBehavior": "focus",
-  "workbench.colorTheme": "Community Material Theme Palenight",
+  "workbench.colorTheme": "Material Theme Palenight",
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.labelFormat": "default",
