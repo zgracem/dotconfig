@@ -1,0 +1,4 @@
+fish
+unrar
+yt-dlp
+zgracem/formulae/calendar
