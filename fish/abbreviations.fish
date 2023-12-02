@@ -5,10 +5,10 @@
 # quick navigation
 
 if fish-is-older-than 3.6
-    abbr -a -g .. cd ..
-    abbr -a -g ... cd ../..
-    abbr -a -g .... cd ../../..
-    abbr -a -g ..... cd ../../../..
+    abbr -a .. cd ..
+    abbr -a ... cd ../..
+    abbr -a .... cd ../../..
+    abbr -a ..... cd ../../../..
 else
     # https://github.com/fish-shell/fish-shell/releases/tag/3.6.0
     function __cd_dotdot
@@ -19,66 +19,66 @@ else
 end
 
 # https://fishshell.com/docs/current/faq.html#faq-cd-minus
-abbr -a -g -- '-' 'cd -'
+abbr -a -- '-' 'cd -'
 
 # -----------------------------------------------------------------------------
 # abbreviations
 # -----------------------------------------------------------------------------
 
-abbr -a -g dr 'defaults read'
-abbr -a -g dw 'defaults write'
-in-path fd; and abbr -a -g fdd 'fd -td'
-in-path fd; and abbr -a -g fdf 'fd -tf'
-abbr -a -g r reveal
-abbr -a -g s 'set -S'
-abbr -a -g ssc 'sudo systemctl'
-abbr -a -g svim 'sudo -E vim'
-abbr -a -g restow 'stow --restow'
-abbr -a -g unset 'set --erase'
-abbr -a -g unstow 'stow --delete'
+abbr -a dr 'defaults read'
+abbr -a dw 'defaults write'
+in-path fd; and abbr -a fdd 'fd -td'
+in-path fd; and abbr -a fdf 'fd -tf'
+abbr -a r reveal
+abbr -a s 'set -S'
+abbr -a ssc 'sudo systemctl'
+abbr -a svim 'sudo -E vim'
+abbr -a restow 'stow --restow'
+abbr -a unset 'set --erase'
+abbr -a unstow 'stow --delete'
 
 if in-path hexyl
-    abbr -a -g xd hexyl
+    abbr -a xd hexyl
 else if in-path xxd
-    abbr -a -g xd 'xxd -u -g1'
+    abbr -a xd 'xxd -u -g1'
 end
 
-abbr -a -g 555 'chmod 0555'
-abbr -a -g 600 'chmod 0600'
-abbr -a -g 644 'chmod 0644'
-abbr -a -g 700 'chmod 0700'
-abbr -a -g 755 'chmod 0755'
-abbr -a -g 'ux' 'chmod u+x'
-abbr -a -g 'gorx' 'chmod go+rx'
+abbr -a 555 'chmod 0555'
+abbr -a 600 'chmod 0600'
+abbr -a 644 'chmod 0644'
+abbr -a 700 'chmod 0700'
+abbr -a 755 'chmod 0755'
+abbr -a 'ux' 'chmod u+x'
+abbr -a 'gorx' 'chmod go+rx'
 
 if in-path wget
-    abbr -a -g dl wget
+    abbr -a dl wget
 else if in-path curl
-    abbr -a -g dl 'curl -OJ'
+    abbr -a dl 'curl -OJ'
 end
 
 # Homebrew
 if in-path brew
-    abbr -a -g br 'brew'
-    abbr -a -g brins 'brew install'
-    abbr -a -g brrm 'brew uninstall'
-    abbr -a -g brinf 'brew info'
-    abbr -a -g brs 'brew search'
-    abbr -a -g brcav 'brew caveats'
-    abbr -a -g bro 'brew outdated'
-    abbr -a -g bru 'brew update'
-    abbr -a -g brup 'brew upgrade'
+    abbr -a br 'brew'
+    abbr -a brins 'brew install'
+    abbr -a brrm 'brew uninstall'
+    abbr -a brinf 'brew info'
+    abbr -a brs 'brew search'
+    abbr -a brcav 'brew caveats'
+    abbr -a bro 'brew outdated'
+    abbr -a bru 'brew update'
+    abbr -a brup 'brew upgrade'
 end
 
 # apt
 if in-path apt
-    abbr -a -g aptins 'sudo apt install'
-    abbr -a -g aptinf 'apt show'
-    abbr -a -g apts 'apt search'
-    abbr -a -g aptup 'sudo apt update && sudo apt upgrade'
+    abbr -a aptins 'sudo apt install'
+    abbr -a aptinf 'apt show'
+    abbr -a apts 'apt search'
+    abbr -a aptup 'sudo apt update && sudo apt upgrade'
 end
 
 # ssh
-abbr -a -g vshraya 'ssh vshraya'
-abbr -a -g opal 'ssh opalstack'
-abbr -a -g p.p 'ssh phosphor.pink'
+abbr -a vshraya 'ssh vshraya'
+abbr -a opal 'ssh opalstack'
+abbr -a p.p 'ssh phosphor.pink'
