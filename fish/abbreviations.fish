@@ -8,6 +8,7 @@ if fish-is-older-than 3.6
     abbr -a ... cd ../..
     abbr -a .... cd ../../..
     abbr -a ..... cd ../../../..
+    return
 else
     # https://github.com/fish-shell/fish-shell/releases/tag/3.6.0
     function __cd_dotdot
