@@ -1,25 +1,28 @@
-function hfind -d "Search fish's command history"
-    set -l term (string match -er -- '\A\w' $argv)
-    set -l bat_pager "'less -FR -p\"$term\"'"
+# Adds timestamps and syntax highlighting
+function hfind -d "Search the command history"
+    # Discard potential --options (but pass them through to `history`)
+    set -l query (string match -er -- '\A\w' $argv)
+    set -l hist_opts
+
+    # Set up pager
+    set -lx PAGER less --quit-if-one-screen --RAW-CONTROL-CHARS --pattern="$query"
 
     if isatty stdout; and in-path bat
-        set -l bat_opts --language=fish --style=plain --pager=$bat_pager
-        eval "function _at; cat | bat $bat_opts; end"
+        eval "function _hpager; cat | bat -lfish --plain --pager='$PAGER'; end"
+    else if isatty stdout
+        eval "function _hpager; cat | $PAGER; end"
     else
-        eval "function _at; cat | $bat_pager; end"
+        eval "function _hpager; cat; end"
     end
-
-    # Show results oldest to newest
-    set -l hist_opts --reverse
 
     # Use custom time format
     set -a hist_opts --show-time="# %F %T%n"
 
-    # Do a case-sensitive search only if the search term has uppercase letters
+    # Do a case-sensitive search only if the search query has uppercase letters
     # (use `-C` to force a case-sensitive search of lowercase strings)
-    if string match -rq -- '\A[[:upper:]]|\A\w+[[:upper:]]' $argv
+    if string match -rq -- "\A\w*[[:upper:]]" $argv
         set -a hist_opts --case-sensitive
     end
 
-    history search $hist_opts $argv | _at
+    history search $hist_opts $argv | _hpager
 end
