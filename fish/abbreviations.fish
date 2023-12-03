@@ -57,6 +57,9 @@ abbr --add fd "fd $_fd_default_flags" # --hidden --follow --no-ignore
 abbr --add fdd "fd $_fd_default_flags -td"
 abbr --add fdf "fd $_fd_default_flags -tf"
 
+in-path manpdf; and not set -q SSH_CONNECTION
+and abbr --add manpdf "manpdf -o"
+
 # -----------------------------------------------------------------------------
 # shortcuts
 # -----------------------------------------------------------------------------
