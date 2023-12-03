@@ -18,6 +18,7 @@ SHIMS += PlistBuddy
 SHIMS += pre-rg
 SHIMS += reldate
 SHIMS += relpath
+SHIMS += rot13
 SHIMS += squirrel
 SHIMS += tbcopy
 SHIMS += trash
