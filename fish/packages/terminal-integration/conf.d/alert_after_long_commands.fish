@@ -1,13 +1,16 @@
 set --local SUPPORTED_TERMS iTerm.app
 contains -- $TERM_PROGRAM $SUPPORTED_TERMS; or exit
-# Set LONG_CMD_DURATION to whatever threshold (in milliseconds) makes me switch
-# to another tab from boredom.
-set -q LONG_CMD_DURATION[1]; or set --global LONG_CMD_DURATION 30000
-# Set LONG_COMMANDS to an exclusive list of commands to monitor for long runs.
-set -q LONG_COMMANDS[1]; or set --global LONG_COMMANDS brew tinyjpg tinypng
+
+# Set `long_cmd_duration` to whatever threshold (in ms) makes me switch to
+# another tab from boredom.
+set -q long_cmd_duration[1]; or set --global long_cmd_duration 30000
+
+# Set `long_commands` to an exclusive list of commands to monitor for long runs.
+set -q long_commands[1]; or set --global long_commands brew tinyjpg tinypng
+
 function __iterm_alert_after_long_commands -a commandline --on-event fish_postexec
-    if test $CMD_DURATION -ge $LONG_CMD_DURATION
-        string match -rq "(?:^|(?:and|or|;|[&|]{2})\s*)("(string join "|" $LONG_COMMANDS)")" $commandline
+    if test $CMD_DURATION -ge $long_cmd_duration
+        string match -rq "(?:^|(?:and|or|;|[&|]{2})\s*)("(string join "|" $long_commands)")" $commandline
         or return
 
         set -l duration (__fish_human_readable_ms $CMD_DURATION)
