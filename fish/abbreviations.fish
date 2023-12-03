@@ -17,8 +17,9 @@ else
     abbr --add dotdot --regex '^\.\.+$' --function __cd_dotdot
 end
 
-# https://fishshell.com/docs/current/faq.html#faq-cd-minus
-abbr -a -- '-' 'cd -'
+# `-` and `--` go back and forth in dir history
+abbr --add -- "-" prevd
+abbr --add -- "--" nextd
 
 # ----------------------------------------------------------------------------
 # default options
