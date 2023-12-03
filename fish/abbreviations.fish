@@ -71,17 +71,8 @@ abbr -a svim 'sudo -E vim'
 abbr -a unset 'set --erase'
 
 # Homebrew
-if in-path brew
-    abbr -a br 'brew'
-    abbr -a brins 'brew install'
-    abbr -a brrm 'brew uninstall'
-    abbr -a brinf 'brew info'
-    abbr -a brs 'brew search'
-    abbr -a brcav 'brew caveats'
-    abbr -a bro 'brew outdated'
-    abbr -a bru 'brew update'
-    abbr -a brup 'brew upgrade'
-end
+in-path brew
+and abbr -a br "brew"
 
 # apt
 if in-path apt
@@ -92,9 +83,9 @@ if in-path apt
 end
 
 # ssh
-abbr -a vshraya 'ssh vshraya'
+abbr -a vssh 'ssh vshraya'
 abbr -a opal 'ssh opalstack'
-abbr -a p.p 'ssh phosphor.pink'
+abbr -a ppink 'ssh phosphor.pink'
 
 # dl
 if in-path wget
@@ -120,4 +111,5 @@ else
 end
 
 # uuid
-in-path uuidgen; and abbr --add uuid "uuidgen | string lower | tbcopy"
+in-path uuidgen
+and abbr --add uuid "uuidgen | string lower | tbcopy"
