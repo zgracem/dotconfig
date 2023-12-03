@@ -20,6 +20,7 @@ end
 
 # read defaults from ~/.config/user-dirs.dirs
 if path is -f $XDG_CONFIG_HOME/user-dirs.dirs
+    set -l dir
     set -l pattern '^(?<var>[[:upper:]]+)="?(?<dir>.+)"?$'
     while read line
         string match -rq $pattern "$line"; and eval "set -gx XDG_"$var"_DIR $dir"
