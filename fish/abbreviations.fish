@@ -8,7 +8,6 @@ if fish-is-older-than 3.6
     abbr -a ... cd ../..
     abbr -a .... cd ../../..
     abbr -a ..... cd ../../../..
-    return
 else
     # https://github.com/fish-shell/fish-shell/releases/tag/3.6.0
     function __cd_dotdot
@@ -113,3 +112,33 @@ end
 # uuid
 in-path uuidgen
 and abbr --add uuid "uuidgen | string lower | tbcopy"
+
+# ----------------------------------------------------------------------------
+# advanced
+# ----------------------------------------------------------------------------
+
+fish-is-newer-than 3.6; or return
+
+# "set --verbose"
+# sv.files → `set files %; set -S files`
+function __abbr_setv
+    set -l varname (string replace "sv." "" $argv[1])
+    echo "set $varname %; set -S $varname"
+end
+abbr -a setv --regex "sv\..+" --set-cursor --function __abbr_setv
+
+# quick for loop
+# for.thing → `for thing in $things; %; end`
+function __abbr_for_var
+    set -l varname (string replace "for." "" $argv[1])
+    echo "for $varname in \$"$varname"s; %; end"
+end
+abbr -a for_var --regex "for\..+" --set-cursor --function __abbr_for_var
+
+# bash-like quick history substitution
+# ^string1^string2 → repeats the last command, replacing string1 with string2
+function __abbr_history_subst
+    string match -rq "\^(?<str1>.+)\^(?<str2>.+)" $argv; or return
+    string replace $str1 $str2 $history[1]
+end
+abbr -a history_subst --regex "\^(.+)\^(.+)" --set-cursor --function __abbr_history_subst
