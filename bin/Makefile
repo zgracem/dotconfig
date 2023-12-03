@@ -16,7 +16,6 @@ SHIMS += lsregister
 SHIMS += manpdf
 SHIMS += PlistBuddy
 SHIMS += pre-rg
-SHIMS += pyjamas
 SHIMS += reldate
 SHIMS += relpath
 SHIMS += squirrel
@@ -34,19 +33,6 @@ $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/%
 $(bindir)/code: $(bindir)/code-wait
 $(bindir)/code-wait: $(CURDIR)/code
 	ln -sf ./$(<F) $@
-
-$(bindir)/pyjamas: | $(datadir)/npm/bin/json2cson
-$(datadir)/npm/bin/json2cson: | $(datadir)/npm/lib/node_modules/cson
-	npm install -g cson
-
-PJ_GEMS = plist toml-rb
-PJ_LIBS := $(addprefix -r,$(PJ_GEMS))
-PJ_CACHE := $(XDG_CACHE_HOME)/dotfiles/.pyjamas-gems-installed
-.PHONY: pyjamas/gems
-pyjamas/gems: $(PJ_CACHE)
-$(bindir)/pyjamas: | pyjamas/gems
-$(PJ_CACHE): ../fish/packages/pyjamas/functions/pyjamas.fish
-	ruby $(PJ_LIBS) -etrue 2>&1 || gem install $(PJ_GEMS) && touch $@
 
 $(bindir)/vs: ~/VS/www/vsdotcom/bin/vs.fish
 	ln -sfv $(subst $(HOME),..,$<) $@

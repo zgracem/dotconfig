@@ -47,4 +47,5 @@ gem "htmlentities"
 
 # -- local gems ----------------------------------------------------------------
 
+gem "pyjamas", path: "../../../Developer/ruby/pyjamas"
 gem "tiny_dancer", path: "../../../src/z/tiny_dancer"
