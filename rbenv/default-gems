@@ -2,7 +2,6 @@
 # <https://github.com/rbenv/rbenv-default-gems>
 
 htmlentities
-lolcat
 middleman
 plist
 sassc
@@ -10,3 +9,4 @@ slim
 solargraph
 symbolized
 toml-rb
+yard
