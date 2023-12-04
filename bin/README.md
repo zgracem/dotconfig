@@ -10,7 +10,6 @@ make -C $XDG_CONFIG_HOME/bin install
 ## Utilities
 
 * `manpdf` creates nice PDF man pages, with bookmarks and everything.
-* `pyjamas` converts between property lists, JSON, YAML, TOML, and CSON.
 * `tbcopy` combines `tee` and `pbcopy`: it reads from standard input and writes
   to both standard output and macOS's clipboard.
 * `trash` uses the Finder's own API, enabling "Put Back" on trashed items.
