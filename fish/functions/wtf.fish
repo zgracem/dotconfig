@@ -5,39 +5,28 @@ function wtf -d "Display information about commands"
         for type in (type -at $subject 2>/dev/null)
             switch $type
                 case function
-                    set -l srcfile (functions -D $subject)
-                    if test $srcfile != "stdin"
-                        if in-path eza
-                            eza -l $srcfile
-                        else
-                            ll $srcfile
-                        end
-                    end
                     functions $subject
                 case builtin
-                    set_color --bold --italic brcyan
+                    set_color --underline --italic $fish_color_keyword
                     echo -ns $subject
                     set_color normal
                     echo " is a builtin"
                 case file
+                    set -l paths (type -aP $subject)
                     if in-path eza
-                        eza --long --sort none (type -aP $subject)
+                        eza --long --sort none $paths
                     else
-                        ll (type -aP $subject)
+                        ls -lh $paths
                     end
             end
         end; and return
 
-        set -l abbrs (abbr --list)
-        if contains -- $subject $abbrs
-            set_color --bold --italic brmagenta
+        if contains -- $subject (abbr --list)
+            set_color --underline --italic brcyan
             echo -ns $subject
             set_color normal
-            echo -n " is an abbreviation for "
-            set_color brwhite
-            abbr -s | string replace -fr "abbr -a -g -- $subject '?(.+?)'?\$" '$1'
-            set_color normal
-
+            echo " is an abbreviation"
+            abbr -s | string match -e -- "-- $subject" | command bat -pp -lfish
             return
         end
 
