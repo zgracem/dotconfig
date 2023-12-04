@@ -1,24 +1,26 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
 # Like `tee`, this reads from stdin and writes to both stdout and the clipboard.
 
-function make_temp_file
-    if command -s -q gmktemp
+function make_temp_file {
+    if type -P gmktemp >/dev/null; then
         gmktemp -t tbcopy.XXXXXXXX
     else
         mktemp -t tbcopy
-    end
-end
+    fi
+}
 
-function main
-    if command -s -q pbcopy
-        set -l temp_file (make_temp_file); or return
-        cat >$temp_file
-        pbcopy <$temp_file
-        cat $temp_file
-    else if path is -w /dev/clipboard
+function main {
+    if type -P pbcopy >/dev/null; then
+        local temp_file
+        temp_file="$(make_temp_file)" || return
+
+        cat >"$temp_file"
+        pbcopy <"$temp_file"
+        cat "$temp_file"
+    elif [[ -w /dev/clipboard ]]; then
         tee /dev/clipboard
-    end
-end
+    fi
+}
 
 main
