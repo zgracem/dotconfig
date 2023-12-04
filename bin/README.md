@@ -10,6 +10,7 @@ make -C $XDG_CONFIG_HOME/bin install
 ## Utilities
 
 * `manpdf` creates nice PDF man pages, with bookmarks and everything.
+* `relpath` prints the relative path to a file from a given directory.
 * `tbcopy` combines `tee` and `pbcopy`: it reads from standard input and writes
   to both standard output and macOS's clipboard.
 * `trash` uses the Finder's own API, enabling "Put Back" on trashed items.
@@ -19,6 +20,8 @@ make -C $XDG_CONFIG_HOME/bin install
 
 * `brew-env` enables `brew env`, which prints the complete environment as seen
   by Homebrew.
+* `git-browse` enables `git browse`, which prints the URL of the repo's origin
+  (usually on GitHub).
 * `git-cc` enables `git cc $user/$repo` as shorthand for
   `git clone git@github.com:$user/$repo.git $user/$repo`.
 
