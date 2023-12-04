@@ -46,11 +46,13 @@ abbr --add chmod "chmod $_chmod_verbose_flag"
 abbr --add "ux" "chmod $_chmod_verbose_flag u+x"
 abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
+functions --erase ll ls
 if in-path eza
     abbr --add ll "eza -l"
     abbr --add ls "eza"
 else
-    abbr --add ll "ls -lh"
+    abbr --add ll "ls -lhA"
+    abbr --add ls "ls -A"
 end
 
 set -l _fd_default_flags "-HLI"
