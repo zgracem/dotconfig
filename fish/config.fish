@@ -23,6 +23,10 @@ set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
 set -p fish_function_path "$__fish_config_dir/functions"
 set -p fish_function_path "$HOME/.private/fish/functions"
 
+# load latest upstream completions right before main user completions
+set -p fish_complete_path "$HOME/src/github.com/kidonng/fishion/completions/fishion"
+set -p fish_complete_path "$__fish_config_dir/completions"
+
 # load private and per-machine configuration if available
 set -ga fish_package_path "$XDG_CONFIG_HOME/local/$hostname/fish"
 set -ga fish_package_path "$HOME/.private/fish"
