@@ -1,5 +1,7 @@
 # ----------------------------------------------------------------------------
 # Terminal–shell integration for fish
+# See: iTerm.app/Contents/Resources/iterm2_shell_integration.fish
+# and  `code --locate-shell-integration-path fish`
 # ----------------------------------------------------------------------------
 
 # Don't run in scripts, non-GUI clients, or more than once per session.
@@ -26,8 +28,8 @@ function __si_initialize --on-event fish_prompt
 
     set --global __si_Ps 133
 
-    # Marks the beginning of command output.
     # Sent after accepting, but before executing, an interactive command.
+    # Marks the beginning of command output.
     function __si_cmd_executed --on-event fish_preexec
         # Ignore commands with leading spaces or in private mode
         if string match --quiet -- " *" "$argv"; or set --query fish_private_mode
@@ -47,8 +49,8 @@ function __si_initialize --on-event fish_prompt
         set --global __si_cmd_active
     end
 
-    # Marks the end of command output.
     # Sent right after an interactive command has finished executing.
+    # Marks the end of command output.
     function __si_cmd_finished --on-event fish_postexec
         switch $TERM_PROGRAM
             case vscode
@@ -58,8 +60,8 @@ function __si_initialize --on-event fish_prompt
         end
     end
 
-    # Updates the current working directory, etc.
     # Sent whenever a new fish prompt is about to be displayed.
+    # Updates the current working directory, etc.
     function __si_update_cwd --on-event fish_prompt
         set -q __si_hostname; or set -g __si_hostname (hostname 2>/dev/null)
         switch $TERM_PROGRAM
@@ -72,8 +74,8 @@ function __si_initialize --on-event fish_prompt
         end
     end
 
-    # Marks the cleared line with neither success nor failure.
     # Sent when a command line is cleared or reset, but no command was run.
+    # Marks the cleared line with neither success nor failure.
     function __si_cmd_cancelled --on-event fish_cancel
         switch $TERM_PROGRAM
             case vscode
@@ -84,8 +86,8 @@ function __si_initialize --on-event fish_prompt
         end
     end
 
-    # Marks the line as cancelled if no command was actually run.
     # Runs whenever a new fish prompt is about to be displayed.
+    # Marks the line as cancelled if no command was actually run.
     function __si_cmd_check --on-event fish_prompt
         if set --query __si_cmd_active
             set --erase __si_cmd_active

@@ -1,3 +1,5 @@
+# `breakpoint` doesn't work in scripts
+# See https://github.com/fish-shell/fish-shell/issues/4823
 function fish_breakpoint_prompt --description 'A prompt to be used when `breakpoint` is executed'
     set -l last_exit $status
     set -l glyph Ϟ
