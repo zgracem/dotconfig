@@ -1,5 +1,5 @@
 # Escapes backslashes, newlines, and semicolons.
-function __vsc_escape_cmd -d "Serialize the command line"
+function __vsc_escape_value -d "Serialize the command line"
     set --local commandline "$argv"
     # `string replace` automatically breaks its input apart on any newlines.
     # Then `string join` at the end will bring it all back together.

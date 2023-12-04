@@ -37,7 +37,7 @@ function __si_initialize --on-event fish_prompt
         switch $TERM_PROGRAM
             case vscode
                 __vsc_esc C
-                __vsc_esc E (__vsc_escape_cmd "$argv")
+                __vsc_esc E (__vsc_escape_value "$argv")
             case iTerm.app
                 __si_esc C \r
             case '*'
@@ -64,7 +64,8 @@ function __si_initialize --on-event fish_prompt
         set -q __si_hostname; or set -g __si_hostname (hostname 2>/dev/null)
         switch $TERM_PROGRAM
             case vscode
-                __vsc_esc P "Cwd=$PWD"
+                __vsc_esc P "Cwd="(__vsc_escape_value $PWD)
+                __si_cmd_check
             case iTerm.app
                 __iterm_esc "RemoteHost=$USER@$__si_hostname"
                 __iterm_esc "CurrentDir=$PWD"
