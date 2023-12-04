@@ -17,3 +17,6 @@ bind \c_ 'commandline -f repaint'
 bind \e\[C bind_smart_forward
 # Shift-Right Arrow accepts the entire autosuggestion
 bind -k sright forward-char
+
+# Disable bindings from $__fish_data_dir/functions/__fish_shared_key_bindings.fish
+bind --erase \cx \cv
