@@ -1,9 +1,10 @@
 # vim:ft=sh
-DESKTOP=$HOME/Desktop
-DOWNLOAD=$HOME/Downloads
-TEMPLATES=$HOME/etc/skel
-PUBLICSHARE=$HOME/Public
-DOCUMENTS=$HOME/Documents
-MUSIC=$HOME/Music
-PICTURES=$HOME/Pictures
-VIDEOS=$HOME/Movies
+# https://cgit.freedesktop.org/xdg/xdg-user-dirs/tree/user-dirs.defaults
+DESKTOP=Desktop
+DOWNLOAD=Downloads
+TEMPLATES=Developer/skel
+PUBLICSHARE=Public
+DOCUMENTS=Documents
+MUSIC=Music
+PICTURES=Pictures
+VIDEOS=Movies

@@ -18,7 +18,7 @@ fi
 # XDG user directories
 source "$XDG_CONFIG_HOME/user-dirs.dirs"
 for v in DESKTOP DOWNLOAD TEMPLATES PUBLICSHARE DOCUMENTS MUSIC PICTURES VIDEOS; do
-  export XDG_${v}_DIR=${!v}
+  export XDG_${v}_DIR="${HOME}/${!v}"
   unset -v v $v
 done
 
