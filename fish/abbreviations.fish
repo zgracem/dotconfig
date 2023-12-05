@@ -48,8 +48,8 @@ abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
 functions --erase ll ls
 if in-path eza
-    abbr --add ll "eza -l"
-    abbr --add ls "eza"
+    abbr --add ll "eza -lA"
+    abbr --add ls "eza -A"
 else
     abbr --add ll "ls -lhA"
     abbr --add ls "ls -A"
