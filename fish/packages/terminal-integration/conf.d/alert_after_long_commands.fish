@@ -9,6 +9,7 @@ set -q long_cmd_duration[1]; or set --global long_cmd_duration 30000
 set -q long_commands[1]; or set --global long_commands brew tinyjpg tinypng
 
 function __iterm_alert_after_long_commands -a commandline --on-event fish_postexec
+    not string match -q "iTerm.app" "$TERM_PROGRAM"; and return
     if test $CMD_DURATION -ge $long_cmd_duration
         string match -rq "(?:^|(?:and|or|;|[&|]{2})\s*)("(string join "|" $long_commands)")" $commandline
         or return
