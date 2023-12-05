@@ -8,6 +8,13 @@ set -q XDG_CACHE_HOME[1]; or set -gx XDG_CACHE_HOME ~/var/cache
 set -q XDG_RUNTIME_DIR[1]; or set -gx XDG_RUNTIME_DIR ~/var/run
 set -q XDG_STATE_HOME[1]; or set -gx XDG_STATE_HOME ~/var/lib
 
+if set -q XDG_DATA_DIRS[1]
+    set -gx --path XDG_DATA_DIRS $XDG_DATA_DIRS
+    set -p XDG_DATA_DIRS $XDG_DATA_HOME
+else
+    set -gx --path XDG_DATA_DIRS "$XDG_DATA_HOME:/usr/local/share:/usr/share"
+end
+
 if string match -q "$HOME*" $XDG_RUNTIME_DIR
     mkdir -p -v $XDG_RUNTIME_DIR
     and chown $USER $XDG_RUNTIME_DIR
