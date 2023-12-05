@@ -1,3 +1,3 @@
 function __iterm_alert
-    echo -ens "\e]9;$argv\a"
+    term_alert $argv
 end
