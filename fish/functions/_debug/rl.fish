@@ -3,6 +3,7 @@ function rl --description "Reload configuration files"
 
     set --global _rl_errors 0
     set --erase --local files_to_reload
+    set --local files_to_reload
     set -q _flag_verbose; and set -lx verbose 1
 
     # Prints arguments to standard error
@@ -93,6 +94,8 @@ function rl --description "Reload configuration files"
     end
 
     for arg in $argv
+        set --erase --local checked_files
+
         # Some reloads require other actions first
         switch "$arg"
             case colours
@@ -102,9 +105,9 @@ function rl --description "Reload configuration files"
             case keychain
                 killall -v ssh-agent
                 set --erase -g SSH_AGENT_PID
+            case prompt
+                set --prepend checked_files $__fish_config_dir/prompt/{conf.d,functions}/*.fish
         end
-
-        set --erase --local checked_files
 
         # Search config dirs
         set --local dirs_to_check "$__fish_config_dir" "$__fish_config_dir"/conf.d
