@@ -1,7 +1,9 @@
-in-path eza; or exit
+in-path eza
+and not set -q __zgm_init_colours
+or exit
 
 # Disable built-in colour mapping
-set -gx --path EZA_COLORS reset
+set -Ux --path EZA_COLORS reset
 
 # Symbolic links (eza doesn't support "target")
 set -a EZA_COLORS "ln="(get_color256 magenta)

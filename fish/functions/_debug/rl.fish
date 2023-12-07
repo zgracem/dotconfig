@@ -96,10 +96,9 @@ function rl --description "Reload configuration files"
         # Some reloads require other actions first
         switch "$arg"
             case colours
-                set -l colour_vars (set -Un \
-                    | string match -rg '(fish_(?:[a-z]+_)*color_\w+)')
-                set --erase -U $colour_vars
-                set --erase -U __zgm_init_colours
+                set -l colour_vars (set -n \
+                    | string match -rg '(fish_(?:[a-z]+_)*color_\w+)|([[:upper:]]+_COLORS)')
+                set --erase -U $colour_vars __zgm_init_colours
             case keychain
                 killall -v ssh-agent
                 set --erase -g SSH_AGENT_PID
