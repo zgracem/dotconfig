@@ -15,12 +15,11 @@ function __fish_prompt_rbenv
         read -gx LOCAL_RBENV_VERSION <$vfile
     else
         return
-        ## this is very slow!
-        # set -gx LOCAL_RBENV_VERSION (rbenv version | string split -f1 " ")
     end
 
-    # string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"
-    # and return
+    # GLOBAL_RBENV_VERSION set in $__fish_config_dir/env.d/rbenv.fish
+    string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"
+    and return
 
     set_color $fish_prompt_color_rbenv
     echo -n $LOCAL_RBENV_VERSION
