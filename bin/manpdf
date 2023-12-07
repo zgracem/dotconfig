@@ -44,7 +44,8 @@ function man_to_ps -a man_file ps_file
     #   -c          = Disables colour output, because getting ANSI colours
     #                 into a PostScript file is considerably outside the scope
     #                 of this already-ambitious script
-    groff -t -Tps -m mandoc -m pdfmark -c $man_file > $ps_file
+    #   -Wbreak     = New in groff 1.23: silences warnings about too-wide tables
+    groff -t -Tps -m mandoc -m pdfmark -c -Wbreak $man_file > $ps_file
     or exit
 
     # It's possible for groff to return 0 while failing to produce any output,
