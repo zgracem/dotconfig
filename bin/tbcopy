@@ -18,6 +18,7 @@ function main {
         cat >"$temp_file"
         pbcopy <"$temp_file"
         cat "$temp_file"
+        rm "$temp_file"
     elif [[ -w /dev/clipboard ]]; then
         tee /dev/clipboard
     fi
