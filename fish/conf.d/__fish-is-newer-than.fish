@@ -22,6 +22,7 @@ function fish-is-newer-than -a test_version
 
     set -l this_ver (__fish_versinfo $version)
     set -l that_ver (__fish_versinfo $test_version)
+    functions --erase __fish_versinfo
 
     # Any version of fish is considered "newer" than itself because this
     # function is mostly used for feature gatekeeping.

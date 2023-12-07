@@ -10,11 +10,11 @@ if fish-is-older-than 3.6
     abbr -a ..... cd ../../../..
 else
     # https://github.com/fish-shell/fish-shell/releases/tag/3.6.0
-    function __cd_dotdot
+    function __abbr_cd_dotdot
         echo -n cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
     end
 
-    abbr --add dotdot --regex '^\.\.+$' --function __cd_dotdot
+    abbr --add cd_dotdot --regex '^\.\.+$' --function __abbr_cd_dotdot
 end
 
 # `-` and `--` go back and forth in dir history

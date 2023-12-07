@@ -97,7 +97,7 @@ function __si_initialize --on-event fish_prompt
     end
 
     # Preserve the user's existing prompt to wrap in escape sequences.
-    functions --copy fish_prompt __original_fish_prompt
+    functions --copy fish_prompt __si_original_fish_prompt
 
     # Only override fish_mode_prompt if it is non-empty.
     if __fish_has_mode_prompt
@@ -109,13 +109,13 @@ function __si_initialize --on-event fish_prompt
         end
 
         function fish_prompt
-            __original_fish_prompt
+            __si_original_fish_prompt
             __si_cmd_start
         end
     else
         function fish_prompt
             __si_prompt_start
-            __original_fish_prompt
+            __si_original_fish_prompt
             __si_cmd_start
         end
     end

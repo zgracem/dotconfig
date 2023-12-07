@@ -17,5 +17,6 @@ for env_file in $XDG_CONFIG_HOME/env.d/*.env $__fish_config_dir/env.d/*.fish
 end
 
 set --erase GIT_EDITOR SUDO_EDITOR
+functions --erase __terlar_git_prompt # why does this hang around???
 
 set -g __z_env_loaded (date +"%F %T")
