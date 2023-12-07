@@ -145,6 +145,6 @@ abbr -a for_var --regex "for\..+" --set-cursor --function __abbr_for_var
 # ^string1^string2 → repeats the last command, replacing string1 with string2
 function __abbr_history_subst
     string match -rq "\^(?<str1>.+)\^(?<str2>.+)" $argv; or return
-    string replace $str1 $str2 $history[1]
+    string replace -a $str1 $str2 $history[1]
 end
 abbr -a history_subst --regex "\^(.+)\^(.+)" --set-cursor --function __abbr_history_subst
