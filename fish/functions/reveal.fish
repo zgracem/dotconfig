@@ -4,8 +4,7 @@ function reveal --description 'Reveal $1 in Finder/Explorer' -a target
     if is-macos
         open -R $target
     else if is-cygwin
-        set -l windir (cygpath --windir)
-        "$windir/explorer" /select, (cygpath -w $target)
+        explorer /select, (cygpath --windows $target)
     else
         echo >&2 "not available on this system"
         return 1
