@@ -1,14 +1,15 @@
-# `breakpoint` doesn't work in scripts
+# N.B. `breakpoint` doesn't work in scripts!
 # See https://github.com/fish-shell/fish-shell/issues/4823
 function fish_breakpoint_prompt --description 'A prompt to be used when `breakpoint` is executed'
     set -l last_exit $status
-    set -l glyph Ϟ
+    set -l glyph ‼
 
-    set -l function (status -L0 function)
+    # -L/--level is an undocumented option to `status`
+    set -l function (status --level=2 function)
 
-    # # These do not return useful information as of fish 3.0.2 -- ZGM 2019-03-03
-    # set -l lineno (status -L0 line-number)
-    # set -l filename (status -L0 filename | string split /)[-1]
+    ## These still don't work as of fish 3.6.4 :/ -- ZGM 2023-12-07
+    #set -l filename (status -L2 filename | path basename)
+    #set -l lineno (status -L2 line-number)
 
     if test -z "$function" -o "$function" = 'Not a function'
         set function main
@@ -17,14 +18,14 @@ function fish_breakpoint_prompt --description 'A prompt to be used when `breakpo
     if test $last_exit -ne 0
         set_color $fish_color_error
     else
-        set_color $fish_color_status
+        set_color brcyan
     end
     echo -n $glyph
 
     set_color --dim
     echo -n " $function() "
 
-    set_color $fish_color_status
+    set_color cyan
     echo -n "»"
     set_color normal
     echo -n " "
