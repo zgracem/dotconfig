@@ -75,9 +75,11 @@ abbr -a ssc 'sudo systemctl'
 abbr -a svim 'sudo -E vim'
 abbr -a unset 'set --erase'
 
-# Homebrew
-in-path brew
-and abbr -a br "brew"
+if is-macos
+    functions --erase f reveal
+    abbr --add f "open -a Finder"
+    abbr --add reveal "open -R"
+end
 
 # apt
 if in-path apt
