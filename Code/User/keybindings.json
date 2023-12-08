@@ -297,12 +297,16 @@
   {
     "key": "ctrl+b",
     "command": "-papyrus.compile",
-    "when": "editorTextFocus"
+    "when": "editorFocus"
   },
   {
     "key": "cmd+b",
     "command": "-papyrus.compile",
-    "when": "editorTextFocus"
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+cmd+b",
+    "command": "-papyrus.compiledefault"
   },
 
   // pavlitsky.yard
@@ -341,12 +345,12 @@
     "when": "terminal.active"
   },
   {
-    "key": "cmd+b",
-    "command": "-papyrus.compile",
-    "when": "editorFocus"
+    "key": "ctrl+f",
+    "command": "-cursorRight",
+    "when": "textInputFocus"
   },
   {
-    "key": "shift+cmd+b",
-    "command": "-papyrus.compiledefault"
+    "key": "ctrl+f",
+    "command": "toggle.window.commandCenter"
   }
 ]
