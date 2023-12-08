@@ -343,14 +343,5 @@
     "key": "ctrl+cmd+`",
     "command": "workbench.action.terminal.toggleTerminal",
     "when": "terminal.active"
-  },
-  {
-    "key": "ctrl+f",
-    "command": "-cursorRight",
-    "when": "textInputFocus"
-  },
-  {
-    "key": "ctrl+f",
-    "command": "toggle.window.commandCenter"
   }
 ]
