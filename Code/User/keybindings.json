@@ -304,11 +304,6 @@
     "command": "-papyrus.compile",
     "when": "editorTextFocus"
   },
-  {
-    "key": "ctrl+b",
-    "command": "papyrus.compile",
-    "when": "editorTextFocus && editorLangId == 'papyrus'"
-  },
 
   // pavlitsky.yard
 
@@ -344,5 +339,14 @@
     "key": "ctrl+cmd+`",
     "command": "workbench.action.terminal.toggleTerminal",
     "when": "terminal.active"
+  },
+  {
+    "key": "cmd+b",
+    "command": "-papyrus.compile",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+cmd+b",
+    "command": "-papyrus.compiledefault"
   }
 ]
