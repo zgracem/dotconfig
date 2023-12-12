@@ -34,6 +34,7 @@
   "editor.copyWithSyntaxHighlighting": false,
   "editor.experimentalWhitespaceRendering": "off",
   "editor.find.seedSearchStringFromSelection": "never",
+  "editor.foldingHighlight": false,
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
   "editor.fontSize": 13,
   "editor.fontWeight": "300",
