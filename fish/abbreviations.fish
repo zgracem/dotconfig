@@ -26,13 +26,13 @@ abbr --add -- "--" nextd
 # ----------------------------------------------------------------------------
 
 abbr --add file "file -p" # don't touch last-accessed time
-abbr --add hexyl "hexyl --border=none"
 abbr --add killall "killall -v"
 abbr --add ln "ln -v"
 abbr --add mkdir "mkdir -pv"
 abbr --add rename "rename -v"
 abbr --add stow "stow -v"
 abbr --add restow "stow -v --restow"
+abbr --add trash "trash -v"
 abbr --add unstow "stow -v --delete"
 abbr --add xxd "xxd -u -g1" # -u = uppercase; -g1 = 1 octet per group
 
@@ -50,13 +50,13 @@ functions --erase ll ls
 if in-path eza
     abbr --add ll "eza -lA"
     abbr --add ls "eza -A"
-else
-    abbr --add ll "ls -lhA"
-    abbr --add ls "ls -A"
+else if is-gnu ls
+    abbr --add ll "ls -lhA --color"
+    abbr --add ls "ls -A --color"
 end
 
-set -l _fd_default_flags "-HLI"
-abbr --add fd "fd $_fd_default_flags" # --hidden --follow --no-ignore
+set -l _fd_default_flags "-HLI" # --hidden --follow --no-ignore
+abbr --add fd "fd $_fd_default_flags"
 abbr --add fdd "fd $_fd_default_flags -td"
 abbr --add fdf "fd $_fd_default_flags -tf"
 
@@ -77,7 +77,7 @@ abbr -a unset 'set --erase'
 
 if is-macos
     functions --erase f reveal
-    abbr --add f "open -a Finder"
+    abbr --add f "open -a Finder ."
     abbr --add reveal "open -R"
 end
 
