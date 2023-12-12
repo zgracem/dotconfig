@@ -18,6 +18,8 @@ if ! [[ $- == *i* ]]; then
 elif shopt -q restricted_shell; then
   echo >&2 "restricted shell -- aborting .bashrc"
   return
+elif [[ $HOSTNAME =~ "opalstack" ]]; then
+  exec ~/opt/bin/fish --login
 else
   export Z_IN_BASHRC=true
 fi
