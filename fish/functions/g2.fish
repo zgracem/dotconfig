@@ -44,6 +44,7 @@ function g2 --description 'Go somewhere'
         case gopher;    set dir "$HOME/etc/gopher"
         case art;       set dir "$icloud_docs/Images/art"
         case acorn;     set dir "$HOME/Art/acorn"
+        case qfd;       set dir "$HOME/www/2022/qfd"
         case fonts;     set dir "$HOME/misc/Fonts"
         case music;     set dir "$HOME/Music/Music/Media.localized/Music"
         case twee;      set dir "$HOME/Developer/twee"
