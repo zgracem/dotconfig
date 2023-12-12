@@ -81,12 +81,12 @@
         "label": "Launch Sublime Merge",
         "osx": {
           "type": "shell",
-          "command": "smerge ${workspaceFolder} && smerge ${workspaceFolder}/../.private"
+          "command": "smerge ${workspaceFolder}/../.private && smerge ${workspaceFolder}"
         },
         "windows": {
           "type": "process",
           "command": "${env:PROGRAMFILES}/Sublime Merge/sublime_merge.exe",
-          "args": ["${workspaceFolder}", "${workspaceFolder}/../.private"]
+          "args": ["${workspaceFolder}/../.private", "${workspaceFolder}"]
         },
         "presentation": {
           "reveal": "never"
