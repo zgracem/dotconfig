@@ -1,10 +1,10 @@
 # ~/.config/jq
 
 This directory contains my personal modules for the command-line JSON processor
-[`jq`], and should be copied to `~/.jq`:
+[`jq`], and should be symlinked to `~/.jq`:
 
 ```sh
-make -C $XDG_CONFIG_HOME/jq install
+ln -s $XDG_CONFIG_HOME/jq ~/.jq
 ```
 
 [`jq`]: https://stedolan.github.io/jq/
