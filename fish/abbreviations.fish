@@ -72,12 +72,13 @@ and abbr --add manpdf "manpdf -o"
 
 abbr -a dr 'defaults read'
 abbr -a dw 'defaults write'
-abbr -a r reveal
+abbr -a mime 'file --brief --mime-type'
 abbr -a s 'set -S'
 abbr -a ssc 'sudo systemctl'
 abbr -a svim 'sudo -E vim'
 abbr -a unset 'set --erase'
 
+# f + reveal
 if is-macos
     functions --erase f reveal
     abbr --add f "open -a Finder ."
