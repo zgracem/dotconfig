@@ -1,4 +1,4 @@
-function f --description 'Open a Finder/Explorer window for $PWD/$1' -a target
+function f --description 'Open an Explorer window for $PWD/$1' -a target
     set -q target[1]; or set target (pwd)
 
     if is-cygwin

@@ -1,4 +1,4 @@
-function reveal --description 'Reveal $1 in Finder/Explorer' -a target
+function reveal --description 'Reveal $PWD/$1 in Explorer' -a target
     set -q target[1]; or set target (pwd)
 
     if is-cygwin
