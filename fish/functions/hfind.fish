@@ -7,10 +7,8 @@ function hfind -d "Search the command history"
     # Set up pager
     set -lx PAGER less --quit-if-one-screen --RAW-CONTROL-CHARS --pattern="$query"
 
-    if isatty stdout; and in-path bat
-        eval "function _hpager; cat | bat -lfish --plain --pager='$PAGER'; end"
-    else if isatty stdout
-        eval "function _hpager; cat | $PAGER; end"
+    if isatty stdout
+        eval "function _hpager; cat | fish_indent --ansi | $PAGER; end"
     else
         eval "function _hpager; cat; end"
     end
