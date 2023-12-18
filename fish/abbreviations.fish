@@ -55,10 +55,13 @@ else if is-gnu ls
     abbr --add ls "ls -A --color"
 end
 
-set -l _fd_default_flags "-HLI" # --hidden --follow --no-ignore
-abbr --add fd "fd $_fd_default_flags"
-abbr --add fdd "fd $_fd_default_flags -td"
-abbr --add fdf "fd $_fd_default_flags -tf"
+if in-path fd
+    set -l _fd_default_flags "-HLI" # --hidden --follow --no-ignore
+    abbr --add fd "fd $_fd_default_flags"
+    abbr --add fdd "fd $_fd_default_flags -td"
+    abbr --add fdf "fd $_fd_default_flags -tf"
+    abbr --add ff "fd $_fd_default_flags -tf --full-path"
+end
 
 in-path manpdf; and not set -q SSH_CONNECTION
 and abbr --add manpdf "manpdf -o"
@@ -126,6 +129,14 @@ and abbr --add uuid "uuidgen | string lower | tbcopy"
 # ----------------------------------------------------------------------------
 
 fish-is-newer-than 3.6; or return
+
+# imitate `cd -P`
+# cdp → cd (path resolve %)
+functions --erase cdp
+function __abbr_cdp
+    echo "cd (path resolve %)"
+end
+abbr -a cdp --set-cursor --function __abbr_cdp
 
 # "set --verbose"
 # sv.files → `set files %; set -S files`
