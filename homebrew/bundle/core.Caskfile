@@ -6,7 +6,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-versions"
 
 cask "1password7", args: { appdir: "/Applications" }
-cask "acorn"
+cask "zgracem/formulae/acorn-latest7"
 cask "alfred"
 cask "discord"
 cask "fantastical"
@@ -14,7 +14,6 @@ cask "firefox", args: { appdir: "/Applications" }
 cask "go2shell"
 cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
-tap "zgracem/formulae"
 cask "zgracem/formulae/lockscreen"
 cask "maestral"
 cask "name-mangler"

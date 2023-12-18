@@ -8,6 +8,8 @@ brew "openssh"
 # essentials
 brew "fish"
 brew "stow"
+brew "vim"
+brew "wget"
 
 # GNU utilities
 brew "coreutils" if OS.mac?
@@ -25,10 +27,7 @@ brew "ripgrep"
 brew "rsync" if OS.mac?
 brew "sf-pwgen" if OS.mac?
 brew "sponge"
-brew "the_silver_searcher"
 brew "unar" if OS.mac?
-brew "vim"
-brew "wget"
 
 # ruby
 brew "rbenv"

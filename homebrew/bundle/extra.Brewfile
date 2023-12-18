@@ -13,7 +13,6 @@ end
 # internet stuff
 brew "links"
 brew "lynx"
-brew "youtube-dl"
 
 # ruby
 brew "taglib" # for taglib-ruby gem
@@ -21,7 +20,6 @@ brew "taglib" # for taglib-ruby gem
 # images
 brew "exif"
 brew "exiftool"
-brew "pngcrush"
 
 # ffmpeg with options
 brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
@@ -38,6 +36,5 @@ brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
 
 # fun, games
 brew "cowsay"
-brew "ponysay"
 brew "fortune"
 brew "figlet"

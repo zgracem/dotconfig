@@ -4,8 +4,6 @@ tap "homebrew/command-not-found"
 tap "zgracem/caveats"
 
 brew "bash"
-brew "dtrx"
-brew "hub"
 brew "ncurses"
 brew "hexyl"
 brew "htop"
@@ -79,10 +77,8 @@ brew "shfmt"
 # fun, games
 brew "lolcat"
 brew "nethack"
-brew "openjdk" # java(1) for Minecraft mods
 brew "screenfetch"
 
 # other stuff
-tap "zgracem/formulae"
 brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/unrar"

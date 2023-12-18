@@ -2,7 +2,7 @@
   "entries": {
     "cask": {
       "1password-cli": {
-        "version": "2.22.0",
+        "version": "2.24.0",
         "options": {
           "full_name": "1password-cli",
           "args": {
@@ -23,15 +23,6 @@
         "version": "8.0.100,27a7ece8-f6cd-4cab-89cf-987e85ae6805,2c9ab2cb294143b0533f005640c393da",
         "options": {
           "full_name": "dotnet-sdk",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
-      },
-      "emojipedia": {
-        "version": "20190306",
-        "options": {
-          "full_name": "emojipedia",
           "args": {
             "appdir": "~/Applications"
           }
@@ -65,7 +56,7 @@
         }
       },
       "handbrake": {
-        "version": "1.6.1",
+        "version": "1.7.1",
         "options": {
           "full_name": "handbrake",
           "args": {
@@ -91,26 +82,17 @@
           }
         }
       },
-      "minecraft": {
-        "version": "1.1.26",
+      "mysides": {
+        "version": "1.0.1",
         "options": {
-          "full_name": "minecraft",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
-      },
-      "mpv": {
-        "version": "0.36.0",
-        "options": {
-          "full_name": "mpv",
+          "full_name": "mysides",
           "args": {
             "appdir": "~/Applications"
           }
         }
       },
       "pdf-expert": {
-        "version": "3.6,989",
+        "version": "3.7.1,999",
         "options": {
           "full_name": "pdf-expert",
           "args": {
@@ -121,29 +103,23 @@
       "steam": {
         "version": "4.0",
         "options": {
-          "full_name": "steam",
           "args": {
-            "appdir": "~/Applications"
-          }
+            "appdir": "/Applications"
+          },
+          "full_name": "steam"
         }
       },
-      "sublime-text3": {
+      "sublime-text-3": {
         "version": "3.211",
         "options": {
-          "full_name": "zgracem/formulae/sublime-text3"
-        }
-      },
-      "syncplay": {
-        "version": "1.7.0",
-        "options": {
-          "full_name": "syncplay",
+          "full_name": "zgracem/formulae/sublime-text-3",
           "args": {
             "appdir": "~/Applications"
           }
         }
       },
       "transmission": {
-        "version": "4.0.4",
+        "version": "4.0.5",
         "options": {
           "full_name": "transmission",
           "args": {
@@ -155,15 +131,6 @@
         "version": "5.10.3",
         "options": {
           "full_name": "transmit",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
-      },
-      "visual-studio-code-insiders": {
-        "version": "latest",
-        "options": {
-          "full_name": "visual-studio-code-insiders",
           "args": {
             "appdir": "~/Applications"
           }
@@ -240,44 +207,17 @@
             "appdir": "~/Applications"
           }
         }
-      },
-      "mactracker": {
-        "version": "7.11.5",
-        "options": {
-          "full_name": "mactracker"
-        }
-      },
-      "mysides": {
-        "version": "1.0.1",
-        "options": {
-          "full_name": "mysides",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
-      },
-      "sublime-text-3": {
-        "version": "3.211",
-        "options": {
-          "full_name": "zgracem/formulae/sublime-text-3",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
       }
     },
     "tap": {
       "zgracem/formulae": {
-        "revision": "3a77167fc42e9025bff3aa06dc023b2b541e736e",
-        "options": {
-          "clone_target": "file:///Users/zozo/Developer/Homebrew/homebrew-formulae"
-        }
+        "revision": "852545366530e7755346f7a6fc558f01d06b417c"
       }
     },
     "mas": {
       "ApolloOne": {
         "id": "1044484672",
-        "version": "3.3.5"
+        "version": "3.3.6"
       },
       "Mactracker": {
         "id": "430255202",
@@ -285,11 +225,11 @@
       },
       "GarageBand": {
         "id": "682658836",
-        "version": "10.4.9"
+        "version": "10.4.10"
       },
       "iMovie": {
         "id": "408981434",
-        "version": "10.3.10"
+        "version": "10.4"
       },
       "Keynote": {
         "id": "409183694",
@@ -305,27 +245,19 @@
       },
       "Xcode": {
         "id": "497799835",
-        "version": "15.0.1"
+        "version": "15.1"
       }
     }
   },
   "system": {
     "macos": {
-      "monterey": {
-        "HOMEBREW_VERSION": "3.6.6",
-        "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "af0056b4243b00dff46f291d0db35180a4729508",
-        "CLT": "14.0.0.0.1.1661618636",
-        "Xcode": "14.0.1",
-        "macOS": "12.6"
-      },
       "sonoma": {
-        "HOMEBREW_VERSION": "4.1.20",
+        "HOMEBREW_VERSION": "4.1.25",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
-        "CLT": "15.0.0.0.1.1694021235",
-        "Xcode": "15.0.1",
-        "macOS": "14.1.1"
+        "CLT": "15.1.0.0.1.1700200546",
+        "Xcode": "15.1",
+        "macOS": "14.2"
       }
     }
   }
