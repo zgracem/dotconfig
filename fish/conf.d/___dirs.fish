@@ -15,10 +15,8 @@ else
     set -gx --path XDG_DATA_DIRS "$XDG_DATA_HOME:/usr/local/share:/usr/share"
 end
 
-if string match -q "$HOME*" $XDG_RUNTIME_DIR
-    mkdir -p -v $XDG_RUNTIME_DIR
-    and chown $USER $XDG_RUNTIME_DIR
-    and chmod 0700 $XDG_RUNTIME_DIR
+if not fish_is_root_user; and string match -q "$HOME*" $XDG_RUNTIME_DIR
+    mkdir -p -v -m 0700 $XDG_RUNTIME_DIR
 end
 
 # XDG user directories

@@ -43,6 +43,7 @@ else
     set _chmod_verbose_flag "-v" # show all operations
 end
 abbr --add chmod "chmod $_chmod_verbose_flag"
+abbr --add chown "chown $_chmod_verbose_flag"
 abbr --add "ux" "chmod $_chmod_verbose_flag u+x"
 abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
