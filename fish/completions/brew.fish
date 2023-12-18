@@ -26,3 +26,14 @@ complete -c brew -l max-downloads -x -d "Maximum formulae to download and update
 
 # `brew env` (~/bin/brew-env)
 complete -c brew -n __fish_use_subcommand -a env -d "Print all HOMEBREW_* vars"
+
+# `brew cd` ($__fish_config_dir/functions/_wrappers/brew.fish)
+set -l brew_cd_options "
+    cache\t$(brew --cache)
+    caskroom\t$(brew --caskroom)
+    cellar\t$(brew --cellar)
+    prefix\t$(brew --prefix)
+    repo\t$(brew --repo)
+"
+complete -c brew -n __fish_use_subcommand -a cd -d "Change to a Homebrew directory"
+complete -c brew -n "__fish_seen_subcommand_from cd" -xa $brew_cd_options
