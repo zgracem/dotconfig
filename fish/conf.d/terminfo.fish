@@ -1,4 +1,4 @@
-string match -q dumb "$TERM"; and exit
+string match -q dumb "$TERM"; and return
 
 # TERMCAP will override TERMINFO if set (e.g. by GNU screen)
 set --erase TERMCAP

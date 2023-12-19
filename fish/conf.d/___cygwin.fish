@@ -1,4 +1,4 @@
-string match -q "CYGWIN*" (/usr/bin/uname -s); or exit
+string match -q "CYGWIN*" (/usr/bin/uname -s); or return
 
 # When launched in e.g. VSCode's integrated terminal, only Windows' %PATH% will
 # be present, and all other config files will error out because they can't find

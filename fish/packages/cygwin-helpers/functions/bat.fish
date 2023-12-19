@@ -1,4 +1,4 @@
-in-path bat; or exit
+in-path bat; or return
 
 function bat --description 'A cat clone with wings'
     set -f argv_

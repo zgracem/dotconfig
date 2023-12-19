@@ -8,14 +8,14 @@ if fish-is-older-than 3.1
         echo "*** These configuration files should not run on fish $version ***"
         set_color normal
     end >&2
-    kill $fish_pid
+    exit 127
 end
 
 # setup environment, including PATH and friends
 source "$__fish_config_dir/env.fish"
 
 # stop here if not an interactive session
-status is-interactive; or exit
+status is-interactive; or return
 
 # function subdirectories
 set -p fish_function_path "$__fish_config_dir/functions/_debug"

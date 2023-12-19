@@ -1,4 +1,4 @@
-set -q __z_env_loaded; and exit
+set -q __z_env_loaded; and return
 
 set -q TMPDIR; or set -gx TMPDIR (dirname (mktemp -u))
 
