@@ -14,8 +14,6 @@ cask "metaz"
 cask "mysides"
 cask "pdf-expert"
 cask "steam", args: { appdir: "/Applications" }
-tap "zgracem/formulae"
-cask "zgracem/formulae/sublime-text-3"
 cask "transmission"
 cask "transmit"
 cask "vmware-fusion", args: { appdir: "/Applications" }

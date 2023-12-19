@@ -92,7 +92,7 @@
         }
       },
       "pdf-expert": {
-        "version": "3.7.1,999",
+        "version": "3.8,1002",
         "options": {
           "full_name": "pdf-expert",
           "args": {
@@ -128,7 +128,7 @@
         }
       },
       "transmit": {
-        "version": "5.10.3",
+        "version": "5.10.4",
         "options": {
           "full_name": "transmit",
           "args": {
@@ -252,7 +252,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.1.25",
+        "HOMEBREW_VERSION": "4.2.0",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.1.0.0.1.1700200546",

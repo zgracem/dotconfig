@@ -3,7 +3,6 @@
 cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 
 tap "homebrew/cask"
-tap "homebrew/cask-versions"
 
 cask "1password7", args: { appdir: "/Applications" }
 cask "zgracem/formulae/acorn-latest7"

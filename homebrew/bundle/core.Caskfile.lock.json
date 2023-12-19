@@ -2,10 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "eb0b3ca130c206fea3f2c94e89393c6608f9a02a"
+        "revision": "7bd9102939321135219c01616bd43a0ad52d3160"
       },
       "homebrew/cask-versions": {
-        "revision": "d3ed2c5ac1c6e42d5afa6d241ebb59fa03cc52c1"
+        "revision": "5464f0f1499ec990369dbb05cf6c837d122f6643"
       }
     },
     "cask": {
@@ -55,7 +55,7 @@
         }
       },
       "firefox": {
-        "version": "120.0.1",
+        "version": "121.0",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -272,7 +272,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.1.25",
+        "HOMEBREW_VERSION": "4.2.0",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.1.0.0.1.1700200546",
