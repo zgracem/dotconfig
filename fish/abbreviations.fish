@@ -25,6 +25,7 @@ abbr --add -- "--" nextd
 # default options
 # ----------------------------------------------------------------------------
 
+abbr --add cp "cp -aiv" # preserve attributes; ask before clobbering; verbose
 abbr --add file "file -p" # don't touch last-accessed time
 abbr --add killall "killall -v"
 abbr --add ln "ln -v"
@@ -47,13 +48,18 @@ abbr --add chown "chown $_chmod_verbose_flag"
 abbr --add "ux" "chmod $_chmod_verbose_flag u+x"
 abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
-functions --erase ll ls
+functions --erase ls ll
 if in-path eza
-    abbr --add ll "eza -lA"
     abbr --add ls "eza -A"
+    abbr --add ll "eza -lA"
+    functions --erase lsf
+    abbr --add lsf "eza -lAgi@"
 else if is-gnu ls
-    abbr --add ll "ls -lhA --color"
     abbr --add ls "ls -A --color"
+    abbr --add ll "ls -lhA --color"
+else
+    abbr --add ls "ls -AG"
+    abbr --add ll "ls -lAG"
 end
 
 if in-path fd
@@ -65,7 +71,20 @@ if in-path fd
 end
 
 in-path manpdf; and not set -q SSH_CONNECTION
-and abbr --add manpdf "manpdf -o"
+and abbr --add manpdf "manpdf -o -f"
+
+if is-macos
+    # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
+    abbr --add mv "/bin/mv -iv"
+else
+    abbr --add mv "mv -iv"
+end
+
+if is-gnu rm
+    abbr --add rm "rm -Iv" # -I = prompt before large operations
+else
+    abbr --add rm "rm -iv" # -i = request confirmation before each file
+end
 
 # -----------------------------------------------------------------------------
 # shortcuts
