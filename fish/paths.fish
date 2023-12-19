@@ -108,7 +108,7 @@ fish_add_manpath -a /Library/Developer/CommandLineTools/usr/share/man
 fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
 
 # rbenv
-if path is -d "$RBENV_ROOT"
+if source $XDG_CONFIG_HOME/env.d/rbenv.env
     # in case of non-Homebrew installation
     fish_add_path $RBENV_ROOT/bin
 
