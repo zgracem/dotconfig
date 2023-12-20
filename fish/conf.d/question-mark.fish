@@ -1,6 +1,4 @@
-if fish-is-older-than 3.0
-    exit
-end
+fish-is-older-than 3.0; and return
 
 # As of fish 3.0, this requires `set -Ua fish_features qmark-noglob` to work
 # like it does in bash -- i.e. as a bare `?`, not a quoted `"?"`

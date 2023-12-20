@@ -1,5 +1,5 @@
 set --local SUPPORTED_TERMS iTerm.app
-contains -- $TERM_PROGRAM $SUPPORTED_TERMS; or exit
+contains -- $TERM_PROGRAM $SUPPORTED_TERMS; or return
 
 # Set `long_cmd_duration` to whatever threshold (in ms) makes me switch to
 # another tab from boredom.

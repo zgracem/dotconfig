@@ -1,6 +1,6 @@
 in-path eza
 and not set -q __zgm_init_colours
-or exit
+or return
 
 # Disable built-in colour mapping
 set -Ux --path EZA_COLORS reset

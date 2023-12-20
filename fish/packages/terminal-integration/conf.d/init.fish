@@ -8,7 +8,7 @@
 status is-interactive
 and set --query TERM_PROGRAM
 and ! set --query SHELL_INTEGRATION
-or exit
+or return
 
 set --global --export SHELL_INTEGRATION $TERM_PROGRAM
 switch $TERM_PROGRAM
@@ -16,7 +16,7 @@ switch $TERM_PROGRAM
         set --global VSCODE_SHELL_INTEGRATION 1
     case iTerm.app
         string match -q screen "$ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX$TERM"
-        and exit
+        and return
         set --global --export ITERM_SHELL_INTEGRATION_INSTALLED Yes
     case '*'
         set --erase SHELL_INTEGRATION

@@ -1,5 +1,5 @@
 set -q __zgm_init_colours
-and exit
+and return
 
 set -l message "Sourcing colours…"
 if in-path lolcat

@@ -1,4 +1,4 @@
-string match -q "*_NT-*" (uname -s); or exit
+string match -q "*_NT-*" (uname -s); or return
 
 # -----------------------------------------------------------------------------
 # Shell variables
