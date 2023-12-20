@@ -27,6 +27,7 @@ set -U fish_color_autosuggestion brblack
 set -U fish_color_cwd brwhite # the current directory in the default prompt
 set -U fish_color_cwd_root red # ditto, but for the root user
 set -U fish_color_user brblack # the username in some default prompts
+set -U fish_color_at normal # the '@' in 'user@host'
 set -U fish_color_host brblack # the hostname in some default prompts
 set -U fish_color_host_remote brblack # ditto for remote sessions (like ssh)
 set -U fish_color_status $fish_color_error # the last command's nonzero exit code in the default prompt
