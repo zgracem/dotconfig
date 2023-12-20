@@ -1,5 +1,4 @@
 fish
-unrar
 yt-dlp
 zgracem/formulae/acorn-latest7
 zgracem/formulae/calendar
