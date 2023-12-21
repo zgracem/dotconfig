@@ -1,25 +1,30 @@
 # Overrides $__fish_data_dir/functions/prompt_pwd.fish
 function prompt_pwd --description 'Print a shortened version of a given path'
     # This function compresses a path (for use in `fish_prompt`) in a
-    # slightly clearer (and more clever) way than the default version.
+    # slightly clearer (and more clever/complicated) way than the stock version.
     #
-    # * Skip compressing dirnames already under a given length (--min-part)
-    # * Force compressing dirnames longer than a given length (--max-part)
-    # * Stop compressing the path once it's under a given length (--max-path)
+    # * Skips compressing dirnames already under a given length (--min-part)
+    # * Always truncate dirnames longer than a given length (--max-part)
+    # * Stops compressing the path once it's under a given length (--max-path)
     # * Stop compressing before the end of the path (--keep-dirs)
+    #   * Works left to right, stopping at MAX_PATH by default
     # * Indicate which dirnames have been compressed (--glyph)
     #
     # Given the following path:
     #     /usr/local/Homebrew/Library/Homebrew/extend/os/mac/utils
-    # The default `prompt_pwd` produces:
+    # The vanilla `prompt_pwd` produces:
     #     /u/l/H/L/H/e/o/m/utils
     # This version produces:
     #     /usr/loc…/Hom…/Lib…/Hom…/extend/os/mac/utils
-    # For default behaviour:
-    #     prompt_pwd -G -k1 -m1 -M1 -P1
+    # It can mimic vanilla behaviour:
+    #     prompt_pwd --vanilla # = -k1 -m1 -M1 -P1 -G
+    set -l options g/glyph= G/no-glyph
+    set -a options k/keep-dirs=
+    set -a options m/min-part= M/max-part= P/max-path=
+    set -a options V/vanilla
+    set -l exclusives V,{g,G,k,m,M,P}
 
-    set -f options g/glyph= G/no-glyph k/keep-dirs= m/min-part= M/max-part= P/max-path=
-    argparse -n (status function) $options -- $argv
+    argparse -n (status function) -x$exclusives $options -- $argv
     or return
 
     set -q argv[1]
@@ -53,6 +58,14 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     set -q _flag_no_glyph
     and set -f fish_prompt_pwd_glyph ""
 
+    if set -q _flag_vanilla
+        set -f fish_prompt_pwd_min_part 1
+        set -f fish_prompt_pwd_max_part 1
+        set -f fish_prompt_pwd_max_path 1
+        set -f fish_prompt_pwd_keep_dirs 1
+        set -f fish_prompt_pwd_glyph ""
+    end
+
     # Replace leading $HOME w/ '~', and split PWD into a list of dirnames
     set -f path (string replace -r "^$HOME" "~" $argv[1] | string split /)
     set -f pathc (seq (math (count $path) - $fish_prompt_pwd_keep_dirs))
@@ -69,7 +82,9 @@ function prompt_pwd --description 'Print a shortened version of a given path'
         end
     end
 
-    # Truncate dirnames longer than MIN_PART, left to right
+    # Truncate dirnames longer than MIN_PART, left to right, but only if it
+    # would actually shorten the string: avoids usr → us…, data → # dat…
+    # etc., which obfuscates for no benefit.
     set -f min_actual_part (math $fish_prompt_pwd_min_part + (string length $fish_prompt_pwd_glyph))
     for i in $pathc
         # Stop if PWD is already MAX_PATH or shorter
