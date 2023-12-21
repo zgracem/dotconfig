@@ -92,6 +92,7 @@ end
 
 abbr -a dr 'defaults read'
 abbr -a dw 'defaults write'
+abbr -a e 'echo'
 abbr -a mime 'file --brief --mime-type'
 abbr -a s 'set -S'
 abbr -a ssc 'sudo systemctl'
@@ -120,9 +121,9 @@ abbr -a ppink 'ssh phosphor.pink'
 
 # dl
 if in-path wget
-    abbr -a dl "wget"
+    abbr -a dl "cd ~/Downloads; wget"
 else if in-path curl
-    abbr -a dl "curl -OJ"
+    abbr -a dl "cd ~/Downloads; curl -OJ"
 end
 
 # flushdns
@@ -158,6 +159,10 @@ function __abbr_cdp
     echo "cd (path resolve %)"
 end
 abbr -a cdp --set-cursor --function __abbr_cdp
+
+# copy to clipboard, then print in columns
+# Cc → `% | tbcopy | column`
+abbr -a CC --position=anywhere --set-cursor "% | tbcopy | column"
 
 # "set --verbose"
 # sv.files → `set files %; set -S files`
