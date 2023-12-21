@@ -9,9 +9,9 @@ function headers -d "Print HTTP response headers for a URL"
         wget $wget_args $argv
     else if set -q _flag_curl
         curl $curl_args $argv
-    else if in-path wget
+    else if command -q wget
         wget $wget_args $argv
-    else if in-path curl
+    else if command -q curl
         curl $curl_args $argv
     end
 end

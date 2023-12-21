@@ -49,7 +49,7 @@ fish_add_manpath /usr/local/share/man
 fish_add_path $XDG_DATA_HOME/npm/bin
 
 # Homebrew
-if in-path brew
+if command -q brew
     set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
 
     # GNU coreutils (w/out `g` prefix)

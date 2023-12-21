@@ -20,7 +20,7 @@ function my --description 'Display network information'
             end
 
         case router
-            if in-path netstat
+            if command -q netstat
                 netstat -rn | string match -rg '^(?:default|0\.0\.0\.0) +([\d.]+).*$'
             else if is-cygwin
                 ipconfig | string match -rg '.*Default Gateway.*: ([\d.]+).*'
@@ -29,7 +29,7 @@ function my --description 'Display network information'
             end
 
         case ssid
-            if is-macos; and in-path airport
+            if is-macos; and command -q airport
                 airport --getinfo 2>/dev/null | string match -rg '.*\bSSID: (.+)$'
             else
                 return 127

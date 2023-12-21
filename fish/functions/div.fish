@@ -8,7 +8,7 @@ function div --description 'Print a divider across the terminal'
     end
 
     set -l line (string repeat -N -n$COLUMNS $symbol)
-    if in-path lolcat
+    if command -q lolcat
         echo $line | lolcat --spread 8 $_flag_force
     else
         set_color brwhite

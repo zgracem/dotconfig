@@ -49,7 +49,7 @@ abbr --add "ux" "chmod $_chmod_verbose_flag u+x"
 abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
 functions --erase ls ll
-if in-path eza
+if command -q eza
     abbr --add ls "eza -A"
     abbr --add ll "eza -lA"
     functions --erase lsf
@@ -62,7 +62,7 @@ else
     abbr --add ll "ls -lAG"
 end
 
-if in-path fd
+if command -q fd
     set -l _fd_default_flags "-HLI" # --hidden --follow --no-ignore
     abbr --add fd "fd $_fd_default_flags"
     abbr --add fdd "fd $_fd_default_flags -td"
@@ -70,7 +70,7 @@ if in-path fd
     abbr --add ff "fd $_fd_default_flags -tf --full-path"
 end
 
-in-path manpdf; and not set -q SSH_CONNECTION
+command -q manpdf; and not set -q SSH_CONNECTION
 and abbr --add manpdf "manpdf -o -f"
 
 if is-macos
@@ -107,7 +107,7 @@ if is-macos
 end
 
 # apt
-if in-path apt
+if command -q apt
     abbr -a aptins 'sudo apt install'
     abbr -a aptinf 'apt show'
     abbr -a apts 'apt search'
@@ -120,9 +120,9 @@ abbr -a opal 'ssh opalstack'
 abbr -a ppink 'ssh phosphor.pink'
 
 # dl
-if in-path wget
+if command -q wget
     abbr -a dl "cd ~/Downloads; wget"
-else if in-path curl
+else if command -q curl
     abbr -a dl "cd ~/Downloads; curl -OJ"
 end
 
@@ -134,7 +134,7 @@ else if is-cygwin
 end
 
 # today/thisweek
-if in-path fd
+if command -q fd
     abbr --add today "fd --changed-within 24h"
     abbr --add thisweek "fd --changed-within 7d"
 else
@@ -143,7 +143,7 @@ else
 end
 
 # uuid
-in-path uuidgen
+command -q uuidgen
 and abbr --add uuid "uuidgen | string lower | tbcopy"
 
 # ----------------------------------------------------------------------------

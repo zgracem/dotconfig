@@ -1,6 +1,6 @@
 function ls-rbenv --description "List all .ruby-version files and their values"
     for req in fd rbenv
-        if not in-path $req
+        if not command -q $req
             echo >&2 "fatal error: this command requires `$req`"
             return 127
         end

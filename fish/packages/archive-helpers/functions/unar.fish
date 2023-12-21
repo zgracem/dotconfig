@@ -1,4 +1,4 @@
-in-path unar; and return
+command -q unar; and return
 
 function unar --description 'Extract most kinds of archives'
     for archive in $argv

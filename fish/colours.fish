@@ -2,7 +2,7 @@ set -q __zgm_init_colours
 and return
 
 set -l message "Sourcing colours…"
-if in-path lolcat
+if command -q lolcat
     echo $message | lolcat --animate
 else
     echo $message

@@ -1,5 +1,5 @@
 # RBENV_ROOT set in ~/.config/env.d/rbenv.env
-if path is -d $RBENV_ROOT; and in-path rbenv
+if path is -d $RBENV_ROOT; and command -q rbenv
     # first line sets PATH; redundant w/ paths.fish
     source (rbenv init - | tail -n+2 | psub)
 

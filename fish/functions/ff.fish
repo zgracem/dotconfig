@@ -1,4 +1,4 @@
-in-path fd; and return
+command -q fd; and return
 fish-is-older-than 3.6; or return
 
 function ff -d "Find files"

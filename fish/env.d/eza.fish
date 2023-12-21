@@ -1,4 +1,4 @@
-in-path eza
+command -q eza
 and not set -q __zgm_init_colours
 or return
 

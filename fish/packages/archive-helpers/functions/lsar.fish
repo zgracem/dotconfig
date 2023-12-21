@@ -1,4 +1,4 @@
-in-path lsar; and return
+command -q lsar; and return
 
 function lsar --description 'List the contents of archives'
     for archive in $argv

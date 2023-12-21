@@ -1,5 +1,5 @@
 function __fish_prompt_rbenv
-    in-path rbenv
+    command -q rbenv
     or return 0
 
     set -l vfile (

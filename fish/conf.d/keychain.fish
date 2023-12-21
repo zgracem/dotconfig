@@ -3,7 +3,7 @@
 #
 #     Set-Service ssh-agent -StartupType Manual
 #
-status is-interactive; and in-path keychain; and not set -gq SSH_AGENT_PID
+status is-interactive; and command -q keychain; and not set -gq SSH_AGENT_PID
 or return
 
 set -l keys id_{ed25519,rsa_2020}

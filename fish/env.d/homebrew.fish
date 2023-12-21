@@ -1,4 +1,4 @@
-in-path brew; or return
+command -q brew; or return
 
 # Read brew.env
 while read line

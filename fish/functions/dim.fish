@@ -1,5 +1,5 @@
 function dim --description 'Get the pixel dimensions of an image' -a image
-    if in-path sips
+    if command -q sips
         set -l sips_rx "^\s+\w+: (.+)"
         set -f width (sips --getProperty pixelWidth $image | string match -rg $sips_rx)
         or return

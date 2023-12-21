@@ -13,7 +13,7 @@ function wtf -d "Display information about commands"
                     echo " is a builtin"
                 case file
                     set -l paths (type -aP $subject)
-                    if in-path eza
+                    if command -q eza
                         eza --long --sort none $paths
                     else
                         ls -lh $paths
