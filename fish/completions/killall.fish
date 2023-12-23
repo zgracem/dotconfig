@@ -1,6 +1,14 @@
 # macOS `killall`
 
 if uname -s | string match -q Darwin
+    function __fish_complete_process_names
+        killall -dm '.' | string match -rg '\bcmd:(.+?)(?=, pid:\d)' | path sort -u
+    end
+
+    function __fish_complete_ttys
+        ps a -o tty | tail -n+2 | path sort -u
+    end
+
     complete -c killall --erase
 
     complete -c killall -n "__fish_is_first_token" -xa "(__fish_complete_process_names)"
