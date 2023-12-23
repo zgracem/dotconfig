@@ -1,3 +1,4 @@
+# Used by `infocmp`, `tic`, and `tput`
 function __fish_complete_ncurses_terminfo
     set -l terminfo_dirs $TERMINFO_DIRS
     if test -z "$terminfo_dirs"
