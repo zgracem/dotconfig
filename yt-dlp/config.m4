@@ -27,8 +27,12 @@
 # download options
 # -----------------------------------------------------------------------------
 
-# use aria2 for downloads (`brew install aria2`)
---downloader aria2c
+# use ffmpeg for regular downloads
+--downloader ffmpeg
+--downloader-args "ffmpeg:-nostats -loglevel warning"
+
+# use aria2c for DASH(mpd) and HLS(m3u8) downloads
+--downloader "dash,m3u8:aria2c"
 
 # download multiple fragments of a dash/hlsnative video concurrently
 --concurrent-fragments 2
