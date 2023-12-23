@@ -94,7 +94,7 @@ abbr -a dr 'defaults read'
 abbr -a dw 'defaults write'
 abbr -a e 'echo'
 abbr -a mime 'file --brief --mime-type'
-abbr -a s 'set -S'
+abbr -a s 'set --show'
 abbr -a ssc 'sudo systemctl'
 abbr -a svim 'sudo -E vim'
 abbr -a unset 'set --erase'
@@ -161,7 +161,7 @@ end
 abbr -a cdp --set-cursor --function __abbr_cdp
 
 # copy to clipboard, then print in columns
-# Cc → `% | tbcopy | column`
+# CC → `% | tbcopy | column`
 abbr -a CC --position=anywhere --set-cursor "% | tbcopy | column"
 
 # "set --verbose"

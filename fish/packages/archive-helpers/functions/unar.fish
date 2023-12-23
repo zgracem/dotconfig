@@ -20,7 +20,7 @@ function unar --description 'Extract most kinds of archives'
             case '*.jar'
                 jar xf $archive
             case '*.pkg'
-                pkgutil --expand $archive (basename $archive '.pkg')
+                pkgutil --expand $archive (path change-extension $archive "")/
             case '*.rar'
                 unrar x $archive
             case '*.tar'
