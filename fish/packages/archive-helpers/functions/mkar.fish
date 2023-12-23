@@ -4,7 +4,7 @@ function mkar --description 'Create a new archive'
 
     set -f usage "Usage: "(status function)" archive.ext file [file ...]"
     if set -q _flag_help
-        echo >&2 $usage
+        echo $usage
         return
     end
 
