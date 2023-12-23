@@ -68,7 +68,7 @@ function get_commands
 end
 
 function get_desc
-    functions -Dv $argv[1] | tail -n+5
+    functions -Dv $argv[1] | string join0 | string split0 -f5
 end
 
 function get_help
