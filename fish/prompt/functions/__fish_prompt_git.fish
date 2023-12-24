@@ -11,7 +11,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     or return 0
 
     # fail if we're not inside a git repo
-    set -l git_dir (command git rev-parse --git-dir 2>/dev/null)
+    set -l git_root (command git rev-parse --show-toplevel 2>/dev/null)
     or return 0
 
     set -l git_status (git status --branch --porcelain=v2 2>/dev/null)
@@ -24,7 +24,7 @@ function __fish_prompt_git --description 'Display git info in the fish prompt'
     set_color normal
 
     # stash icon
-    if path is -r $git_dir/refs/stash
+    if path is -r $git_root/.git/refs/stash
         set_color $__fish_git_prompt_color_stashstate
         echo -n $icon_stash
     end
