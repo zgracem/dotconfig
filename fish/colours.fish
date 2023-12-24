@@ -57,7 +57,7 @@ set -U fish_prompt_color_ps_root $fish_color_cwd_root
 set -U fish_prompt_color_duration --dim
 set -U fish_prompt_color_jobs yellow
 set -U fish_prompt_color_rbenv brmagenta
-set -U __fish_git_prompt_color_branch --dim
+set -U __fish_git_prompt_color_branch --dim --italics
 set -U __fish_git_prompt_color_stashstate --dim
 set -U __fish_git_prompt_color_dirtystate red
 set -U __fish_git_prompt_color_stagedstate yellow
