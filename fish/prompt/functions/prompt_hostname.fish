@@ -1,10 +1,12 @@
-# Overrides $__fish_data_dir/functions/prompt_hostname.fish
+if not functions -q __fish_prompt_hostname
+    source $__fish_data_dir/functions/prompt_hostname.fish
+    functions --copy prompt_hostname __fish_prompt_hostname
+end
 function prompt_hostname --description 'short hostname for the prompt'
-    set -l domain (string split -m1 -f2 -r "." $hostname)
-    switch $domain
-        case local pink
+    switch (path extension $hostname)
+        case .pink
             echo -n $hostname
         case '*'
-            string replace -r "\..*" "" $hostname
+            __fish_prompt_hostname
     end
 end
