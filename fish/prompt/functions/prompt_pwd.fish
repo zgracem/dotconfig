@@ -31,69 +31,58 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     or set argv $PWD
 
     # Never shorten dirnames this long (or shorter)
-    set -q _flag_min_part
-    and set -f fish_prompt_pwd_min_part $_flag_min_part
-    or set -f fish_prompt_pwd_min_part 3
+    set -q _flag_min_part; or set -f _flag_min_part 3
 
     # Always shorten dirnames this long (or longer)
-    set -q _flag_max_part
-    and set -f fish_prompt_pwd_max_part $_flag_max_part
-    or set -f fish_prompt_pwd_max_part 11
+    set -q _flag_max_part; or set -f _flag_max_part 11
 
     # Stop shortening when PWD is this length (or shorter)
-    set -q _flag_max_path
-    and set -f fish_prompt_pwd_max_path $_flag_max_path
-    or set -f fish_prompt_pwd_max_path 44
+    set -q _flag_max_path; or set -f _flag_max_path 44
 
     # Always leave this many trailing dirnames unshortened
-    set -q _flag_keep_dirs
-    and set -f fish_prompt_pwd_keep_dirs $_flag_keep_dirs
-    or set -f fish_prompt_pwd_keep_dirs 1
+    set -q _flag_keep_dirs; or set -f _flag_keep_dirs 1
 
     # Mark shortened dirnames
-    set -q _flag_glyph
-    and set -f fish_prompt_pwd_glyph "$_flag_glyph"
-    or set -f fish_prompt_pwd_glyph "…"
+    set -q _flag_glyph; or set -f _flag_glyph "…"
 
-    set -q _flag_no_glyph
-    and set -f fish_prompt_pwd_glyph ""
+    set -q _flag_no_glyph; and set -f _flag_glyph ""
 
     if set -q _flag_vanilla
-        set -f fish_prompt_pwd_min_part 1
-        set -f fish_prompt_pwd_max_part 1
-        set -f fish_prompt_pwd_max_path 1
-        set -f fish_prompt_pwd_keep_dirs 1
-        set -f fish_prompt_pwd_glyph ""
+        set -f _flag_min_part 1
+        set -f _flag_max_part 1
+        set -f _flag_max_path 1
+        set -f _flag_keep_dirs 1
+        set -f _flag_glyph ""
     end
 
     # Replace leading $HOME w/ '~', and split PWD into a list of dirnames
     set -f path (string replace -r "^$HOME" "~" $argv[1] | string split /)
-    set -f pathc (seq (math (count $path) - $fish_prompt_pwd_keep_dirs))
+    set -f pathc (seq (math (count $path) - $_flag_keep_dirs))
 
     # Truncate dirnames longer than MAX_PART
     for i in $pathc
         # Stop if PWD is already MAX_PATH or shorter
-        test (string length "$path") -le $fish_prompt_pwd_max_path; and break
+        test (string length "$path") -le $_flag_max_path; and break
 
         set -l part $path[$i]
-        if test (string length $part) -gt $fish_prompt_pwd_max_part
-            set path[$i] (string sub -l$fish_prompt_pwd_max_part $part | string trim)
-            set path[$i] "$path[$i]$fish_prompt_pwd_glyph"
+        if test (string length $part) -gt $_flag_max_part
+            set path[$i] (string sub -l$_flag_max_part $part | string trim)
+            set path[$i] "$path[$i]$_flag_glyph"
         end
     end
 
     # Truncate dirnames longer than MIN_PART, left to right, but only if it
     # would actually shorten the string: avoids usr → us…, data → # dat…
     # etc., which obfuscates for no benefit.
-    set -f min_actual_part (math $fish_prompt_pwd_min_part + (string length $fish_prompt_pwd_glyph))
+    set -f actual_min_part (math $_flag_min_part + (string length $_flag_glyph))
     for i in $pathc
         # Stop if PWD is already MAX_PATH or shorter
-        test (string length "$path") -le $fish_prompt_pwd_max_path; and break
+        test (string length "$path") -le $_flag_max_path; and break
 
         set -l part $path[$i]
-        if test (string length $part) -gt $min_actual_part
-            set path[$i] (string sub -l$fish_prompt_pwd_min_part $part | string trim)
-            set path[$i] "$path[$i]$fish_prompt_pwd_glyph"
+        if test (string length $part) -gt $actual_min_part
+            set path[$i] (string sub -l$_flag_min_part $part | string trim)
+            set path[$i] "$path[$i]$_flag_glyph"
         end
     end
 
