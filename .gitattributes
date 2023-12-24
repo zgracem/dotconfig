@@ -2,4 +2,4 @@
 * text=auto
 
 # git/ignore has `\r` characters to match macOS resource files
-git/ignore text eol=crlf
+git/ignore binary
