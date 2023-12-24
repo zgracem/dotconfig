@@ -24,7 +24,7 @@ switch $TERM_PROGRAM
 end
 
 function __si_initialize --on-event fish_prompt
-    functions --erase __si_initialize
+    functions --erase (status current-function)
 
     set --global __si_Ps 133
 

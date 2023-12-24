@@ -1,7 +1,6 @@
 function fish_prompt --description 'Display the interactive prompt'
     if set -q SSH_CONNECTION
-        prompt_login
-        echo -n :
+        echo -ns (prompt_login) :
     end
 
     set_color $fish_color_cwd

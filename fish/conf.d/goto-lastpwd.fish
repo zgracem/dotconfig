@@ -8,7 +8,7 @@ end
 
 function goto-lastpwd --on-event fish_prompt
     # Only run once
-    functions --erase goto-lastpwd
+    functions --erase (status current-function)
 
     # Abort if not running interactively
     status is-interactive
