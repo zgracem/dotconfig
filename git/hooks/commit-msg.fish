@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-# ln -sfv ../../libexec/git-hook-commit-msg.fish $XDG_CONFIG_HOME/.git/hooks/commit-msg
+# ln -sfv ../../git/hooks/commit-msg.fish $XDG_CONFIG_HOME/.git/hooks/commit-msg
 
 function main -a commit_msg_file
     set -l pattern "\S+: .+"

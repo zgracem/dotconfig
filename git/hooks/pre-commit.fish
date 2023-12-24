@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-# ln -sfv ../../libexec/git-hook-pre-commit.fish $XDG_CONFIG_HOME/.git/hooks/pre-commit
+# ln -sfv ../../git/hooks/pre-commit.fish $XDG_CONFIG_HOME/.git/hooks/pre-commit
 
 set -g staged_files (git diff --name-only --staged)
 

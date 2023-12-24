@@ -6,7 +6,7 @@
 # `$XDG_CONFIG_HOME/yt-dlp/config` must contain:
 #
 #   --write-info-json
-#   --exec $XDG_CONFIG_HOME/libexec/postexec-yt-dlp.fish {}
+#   --exec $XDG_CONFIG_HOME/yt-dlp/postexec.fish {}
 #
 # so that `yt-dlp` will create a JSON file of metadata alongside the video, and
 # call this script with the downloaded video as the only argument.
