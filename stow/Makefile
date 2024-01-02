@@ -143,13 +143,13 @@ $(GIT_STAGING)/tremc/tremc:
 words: $(datadir)/dict/words
 
 $(datadir)/dict/words: $(STOW_DIR)/words/share/dict/words
-	$(STOW) $(@F)
+	$(STOW) --delete $(@F) && stow $(@F)
 
 DICTS = connectives propernames web2 web2a
 DICT_FILES = $(addprefix /usr/share/dict/,$(DICTS))
 
 $(STOW_DIR)/words/share/dict/words: $(DICT_FILES) | $(STOW_DIR)/words/share/dict
-	cat $^ | sort | uniq >$@
+	cat $^ | sort -u >$@
 
 $(STOW_DIR)/words/share/dict:
 	mkdir -pv $@

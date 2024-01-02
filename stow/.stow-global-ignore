@@ -7,7 +7,9 @@
 \.DS_Store
 \.git.*
 \.pep8
+.*Makefile.*
 README.*
 ^/LICEN[SC]E.*
 ^/COPYING
 ^/NEWS.*
+.*\.old$
