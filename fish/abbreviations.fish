@@ -50,10 +50,10 @@ abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
 functions --erase ls ll
 if command -q eza
-    abbr --add ls "eza -A"
-    abbr --add ll "eza -lA"
+    abbr --add ls "eza -a"
+    abbr --add ll "eza -la"
     functions --erase lsf
-    abbr --add lsf "eza -lAgi@"
+    abbr --add lsf "eza -lagi@"
 else if is-gnu ls
     abbr --add ls "ls -A --color"
     abbr --add ll "ls -lhA --color"
@@ -63,10 +63,11 @@ else
 end
 
 if command -q fd
-    set -l _fd_default_flags "-HLI" # --hidden --follow --no-ignore
+    set -l _fd_default_flags "-L" # --follow
     abbr --add fd "fd $_fd_default_flags"
     abbr --add fdd "fd $_fd_default_flags -td"
     abbr --add fdf "fd $_fd_default_flags -tf"
+    abbr --add fda "fd $_fd_default_flags -u" # --unrestricted = --hidden --no-ignore
     abbr --add ff "fd $_fd_default_flags -tf --full-path"
 end
 
@@ -162,21 +163,22 @@ abbr -a cdp --set-cursor --function __abbr_cdp
 
 # copy to clipboard, then print in columns
 # CC → `% | tbcopy | column`
-abbr -a CC --position=anywhere --set-cursor "% | tbcopy | column"
+abbr -a CC --position anywhere --set-cursor "% | tbcopy | column"
 
 # "set --verbose"
 # sv.files → `set files %; set -S files`
 function __abbr_setv
-    set -l varname (string replace "sv." "" $argv[1])
+    set -l varname (string split -f2 . $argv[1])
     echo "set $varname %; set -S $varname"
 end
 abbr -a setv --regex "sv\..+" --set-cursor --function __abbr_setv
 
 # quick for loop
-# for.thing → `for thing in $things; %; end`
+# for.thing → `for t in $things; %; end`
 function __abbr_for_var
-    set -l varname (string replace "for." "" $argv[1])
-    echo "for $varname in \$"$varname"s; %; end"
+    set -l varname (string split -f2 . $argv[1])
+    set -l v (string sub -l1 $varname)
+    echo "for $v in \$$varname; %; end"
 end
 abbr -a for_var --regex "for\..+" --set-cursor --function __abbr_for_var
 
@@ -186,4 +188,4 @@ function __abbr_history_subst
     string match -rq "\^(?<str1>.+)\^(?<str2>.+)" $argv; or return
     string replace -a $str1 $str2 $history[1]
 end
-abbr -a history_subst --regex "\^(.+)\^(.+)" --set-cursor --function __abbr_history_subst
+abbr -a history_subst --regex "\^.+\^.+" --function __abbr_history_subst
