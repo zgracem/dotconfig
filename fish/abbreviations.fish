@@ -131,13 +131,6 @@ else if command -q curl
     abbr -a dl "cd ~/Downloads; curl -OJ"
 end
 
-# flushdns
-if is-macos
-    abbr --add flushdns "sudo dscacheutil -flushcache; and sudo killall -HUP mDNSResponder"
-else if is-cygwin
-    abbr --add flushdns "ipconfig /flushdns"
-end
-
 # today/thisweek
 if command -q fd
     abbr --add today "fd --changed-within 24h"
