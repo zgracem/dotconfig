@@ -30,7 +30,8 @@ require "zgm_colour"
 
 IRB.conf[:AUTO_INDENT]  = true
 
-IRB.conf[:USE_READLINE] = true
+IRB.conf[:USE_READLINE] = false
+IRB.conf[:USE_MULTILINE] = true
 
 IRB.conf[:HISTORY_FILE] = File.join(ENV.fetch("XDG_STATE_HOME"), "irb", "irb_history")
 IRB.conf[:EVAL_HISTORY] = 2**10
@@ -43,27 +44,39 @@ IRB.conf[:BACK_TRACE_LIMIT] = 5
 # -----------------------------------------------------------------------------
 
 sigil = "#{Colour.blue}>#{Colour.reset}"
+main_prompt = "#{Colour.dim.italic}%m#{Colour.noitalic}:%03n:%i#{Colour.reset}"
 
 IRB.conf[:PROMPT] ||= {}
 
 IRB.conf[:PROMPT][:ZGM] = {
   # normal prompt
-  PROMPT_I: "#{Colour.dim.italic}%m#{Colour.noitalic}:%03n#{Colour.reset} #{sigil} ",
-
-  # prompt when indenting code
-  PROMPT_N: "%i#{Colour.dim}│#{Colour.reset}  ",
+  PROMPT_I: "#{main_prompt} #{sigil} ",
 
   # prompt for continuing strings
-  PROMPT_S: "%i#{Colour.dim}│%l#{Colour.reset} ",
+  PROMPT_S: "#{main_prompt} #{Colour.blue}%l#{Colour.reset} ",
 
   # prompt for continuing statement
-  PROMPT_C: "%i#{Colour.dim}├#{Colour.reset} ",
+  PROMPT_C: "#{main_prompt} #{sigil} ",
 
   # prefix to statement output
   RETURN:   "#{Colour.brightwhite}=>#{Colour.reset} %s\n"
 }
 
 IRB.conf[:PROMPT_MODE] = :ZGM
+
+# ----------------------------------------------------------------------------
+# autocomplete dropdown
+# ----------------------------------------------------------------------------
+
+require "reline"
+
+if defined?(Reline::Face)
+  Reline::Face.config(:completion_dialog) do |conf|
+    conf.define :default,   foreground: :white, background: :black
+    conf.define :enhanced,  foreground: :black, background: :white, style: :bold
+    conf.define :scrollbar, foreground: :bright_black, background: :black
+  end
+end
 
 # -----------------------------------------------------------------------------
 # helper methods
