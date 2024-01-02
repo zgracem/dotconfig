@@ -100,6 +100,10 @@ abbr -a ssc 'sudo systemctl'
 abbr -a svim 'sudo -E vim'
 abbr -a unset 'set --erase'
 
+abbr -a 'comp?' compsrc
+abbr -a 'func?' funcsrc
+abbr -a 'man?' command man -aw
+
 # f + reveal
 if is-macos
     functions --erase f reveal
@@ -189,3 +193,11 @@ function __abbr_history_subst
     string replace -a $str1 $str2 $history[1]
 end
 abbr -a history_subst --regex "\^.+\^.+" --function __abbr_history_subst
+
+# zsh-style expansion
+# =fish → `/usr/local/bin/fish`
+function __abbr_zequals
+    set -l cmdname (string replace "=" "" $argv[1])
+    command -s $cmdname
+end
+abbr -a zequals --position anywhere --regex "=\w+" --function __abbr_zequals
