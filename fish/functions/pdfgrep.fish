@@ -1,3 +1,5 @@
 function pdfgrep -d "Search PDFs with ripgrep"
-    command rg --type=pdf --pre=pre-rg $argv
+    set -p argv --pre=pre-rg --pre-glob="*.pdf"
+    set -p argv --type-add="pdf:*.pdf" --type=pdf
+    command rg $argv
 end

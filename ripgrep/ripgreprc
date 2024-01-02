@@ -20,9 +20,9 @@
 --no-ignore-vcs
 
 # pre-processing (see ../bin/pre-rg)
---pre=pre-rg
---pre-glob=*.pdf
---pre-glob=*.{jpg,gif,png}
+#--pre=pre-rg
+#--pre-glob=*.pdf
+#--pre-glob=*.{jpg,gif,png}
 
 # see also $__fish_config_dir/colours.fish
 --colors=match:none
@@ -35,4 +35,4 @@
 --type-add=web:*.{htm,html,php,slim}
 --type-add=text:*.{txt,md,mdown,markdown}
 --type-add=data:*.{csv,json,tsv,yml,yaml}
---type-add=img:*.{jpg,gif,png}
+#--type-add=img:*.{jpg,gif,png}
