@@ -9,6 +9,10 @@
 
 [ -z "$XDG_DATA_DIRS" ] && export XDG_DATA_DIRS="$XDG_DATA_HOME:/usr/local/share:/usr/share"
 
+if [[ ! -w "$XDG_CACHE_HOME" && -w "$HOME/.cache" ]]; then
+  export XDG_CACHE_HOME="$HOME/.cache"
+fi
+
 if [[ $XDG_RUNTIME_DIR == $HOME* ]]; then
   mkdir -p "$XDG_RUNTIME_DIR" \
   && chown "$USER" "$XDG_RUNTIME_DIR" \

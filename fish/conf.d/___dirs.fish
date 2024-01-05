@@ -8,6 +8,10 @@ set -q XDG_CACHE_HOME[1]; or set -gx XDG_CACHE_HOME ~/var/cache
 set -q XDG_RUNTIME_DIR[1]; or set -gx XDG_RUNTIME_DIR ~/var/run
 set -q XDG_STATE_HOME[1]; or set -gx XDG_STATE_HOME ~/var/lib
 
+if path is --invert -dw $XDG_CACHE_HOME; and path is -dw ~/.cache
+    set -gx XDG_CACHE_HOME ~/.cache
+end
+
 if set -q XDG_DATA_DIRS[1]
     set -gx --path XDG_DATA_DIRS $XDG_DATA_DIRS
     set -p XDG_DATA_DIRS $XDG_DATA_HOME
