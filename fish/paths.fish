@@ -49,6 +49,13 @@ fish_add_manpath /usr/local/share/man
 fish_add_path $XDG_DATA_HOME/npm/bin
 
 # Homebrew
+if path is -d /home/linuxbrew/.linuxbrew
+    set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
+    fish_add_path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+    fish_add_manpath $HOMEBREW_PREFIX/share/man
+end
+
+# Homebrew
 if command -q brew
     set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
 
