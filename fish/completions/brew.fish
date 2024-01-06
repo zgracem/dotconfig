@@ -1,4 +1,5 @@
 # fish completions for brew external commands
+command -q brew; or return
 
 set -l brew_comp_file /usr/local/share/fish/vendor_completions.d/brew.fish
 path is -f $brew_comp_file; and . $brew_comp_file
