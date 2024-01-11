@@ -6,8 +6,8 @@
 # video format options
 # -----------------------------------------------------------------------------
 
-# get best MP4 video when possible
---format bestvideo*[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/bestvideo*+bestaudio/best
+# get MP4 video (most compatible)
+--format mp4
 
 # do not download the DASH manifest on YouTube videos
 --no-youtube-include-dash-manifest
