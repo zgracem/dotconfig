@@ -141,7 +141,7 @@ module Sample
 
   # @return [Pathname]
   def pathname
-    Pathname("/Users/zozo/Documents/mesons_and_gluons.pdf")
+    Pathname("~/Documents/blankpage.pdf").expand_path
   end
   alias_method :path, :pathname
 
