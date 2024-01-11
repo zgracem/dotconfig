@@ -13,3 +13,7 @@ end
 function is-wsl --description 'Returns true if running on Windows Subsystem for Linux'
     uname -s | string match -q "Microsoft"
 end
+
+function is-deck --description 'Returns true if running on SteamOS'
+    uname -r | string match -q "*-valve*"
+end

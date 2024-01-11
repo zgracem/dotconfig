@@ -267,6 +267,16 @@
   "terminal.integrated.fontWeightBold": "500",
   "terminal.integrated.hideOnStartup": "whenEmpty",
   "terminal.integrated.ignoreProcessNames": ["bash", "zsh", "fish"],
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "icon": "terminal-bash",
+      "path": "/usr/bin/bash"
+    },
+    "fish": {
+      "icon": "terminal",
+      "path": "/home/linuxbrew/.linuxbrew/bin/fish"
+    }
+  },
   "terminal.integrated.profiles.osx": {
     "bash": {
       "icon": "terminal-bash",

@@ -123,6 +123,7 @@ end
 abbr -a vssh 'ssh vshraya'
 abbr -a opal 'ssh opalstack'
 abbr -a ppink 'ssh phosphor.pink'
+abbr -a alyx 'ssh Alyx'
 
 # dl
 if command -q wget
