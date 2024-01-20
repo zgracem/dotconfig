@@ -59,7 +59,7 @@
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "boundary",
   "editor.rulers": [80, 118],
-  "editor.snippetSuggestions": "bottom",
+  "editor.snippetSuggestions": "top",
   "editor.suggest.filterGraceful": false,
   "editor.suggest.showSnippets": true,
   "editor.suggest.snippetsPreventQuickSuggestions": true,
