@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# cross-platform (macOS, Cygwin, Linux) clipboard wrapper
+
+if command -v pbcopy >/dev/null; then # macOS
+  cat | pbcopy "$@"
+elif command -v qdbus >/dev/null; then # Linux + KDE
+  if ! tty -s && stdin=$(</dev/stdin) && [[ -n "$stdin" ]]; then
+    cat | qdbus org.kde.klipper /klipper setClipboardContents "$stdin"
+  else
+    echo >&2 "error: no clipboard input found"
+    exit 1
+  fi
+elif command -v putclip >/dev/null; then # cygwin utility
+  putclip
+elif [[ -w /dev/clipboard ]]; then # cygwin fallback
+  cat > /dev/clipboard
+else
+  echo >&2 "error: failed to access clipboard"
+  exit 1
+fi
