@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # cross-platform (macOS, Cygwin, Linux) clipboard wrapper
 
-if command -v pbpaste >/dev/null; then # macOS
-  pbpaste "$@"
-elif command -v qdbus >/dev/null; then # Linux + KDE
+if [[ -x /usr/bin/pbpaste ]]; then # macOS
+  cat | /usr/bin/pbpaste "$@"
+elif [[ -x /bin/qdbus ]]; then # Linux + KDE
   qdbus org.kde.klipper /klipper getClipboardContents
-elif command -v getclip >/dev/null; then # cygwin utility
-  getclip
+elif [[ -x /bin/getclip ]]; then # cygwin utility
+  /bin/getclip
 elif [[ -r /dev/clipboard ]]; then # cygwin fallback
   cat /dev/clipboard
 else
