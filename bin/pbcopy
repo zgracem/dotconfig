@@ -5,7 +5,7 @@ if command -v pbcopy >/dev/null; then # macOS
   cat | pbcopy "$@"
 elif command -v qdbus >/dev/null; then # Linux + KDE
   if ! tty -s && stdin=$(</dev/stdin) && [[ -n "$stdin" ]]; then
-    cat | qdbus org.kde.klipper /klipper setClipboardContents "$stdin"
+    qdbus org.kde.klipper /klipper setClipboardContents "$stdin"
   else
     echo >&2 "error: no clipboard input found"
     exit 1
