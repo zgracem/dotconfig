@@ -43,7 +43,7 @@
   "editor.hideCursorInOverviewRuler": true,
   "editor.inlineSuggest.suppressSuggestions": true,
   "editor.insertSpaces": true,
-  "editor.lightbulb.enabled": false,
+  "editor.lightbulb.enabled": "off",
   "editor.links": false,
   "editor.maxTokenizationLineLength": 40960,
   "editor.minimap.renderCharacters": false,
