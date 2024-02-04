@@ -4,7 +4,10 @@
 if [[ -x /usr/bin/pbcopy ]]; then # macOS
   cat | /usr/bin/pbcopy "$@"
 elif [[ -x /bin/qdbus ]]; then # Linux + KDE
-  if ! tty -s && stdin=$(</dev/stdin) && [[ -n "$stdin" ]]; then
+  if ! qdbus org.kde.klipper >/dev/null; then
+    echo >&2 "error: KDE environment not accessible"
+    exit 1
+  elif ! tty -s && stdin=$(</dev/stdin) && [[ -n "$stdin" ]]; then
     qdbus org.kde.klipper /klipper setClipboardContents "$stdin"
   else
     echo >&2 "error: no clipboard input found"
