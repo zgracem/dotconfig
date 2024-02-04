@@ -1,4 +1,4 @@
-# vim:ts=4:ft=dircolors
+# vim:ft=dircolors:ts=4
 # -----------------------------------------------------------------------------
 # thirty2k colour theme for the colour GNU ls utility.
 # Designed for dircolors (GNU coreutils) 9.1

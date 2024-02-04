@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
-# vim:ft=fish
 
 set -gx this vsx
 

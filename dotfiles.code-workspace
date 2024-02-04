@@ -18,6 +18,11 @@
     }
   ],
   "settings": {
+    "files.associations": {
+      "**/ssh*/*.conf": "ssh_config",
+      "**/tmux/*.conf": "shellscript",
+      "**/vim/vimrc": "viml"
+    },
     "files.exclude": {
       ".git{attributes,modules}": true,
       "pdf/": true
@@ -30,6 +35,9 @@
     },
     "shellcheck.enable": true,
     "shellcheck.exclude": ["2148"],
+    "shellcheck.ignorePatterns": {
+      "**/tmux/*.conf": true
+    },
     "sortJSON.orderUnderride": [
       "[applescript]",
       "[bsdcalendar]",
