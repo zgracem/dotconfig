@@ -174,9 +174,9 @@ abbr -a setv --regex "sv\..+" --set-cursor --function __abbr_setv
 # quick for loop
 # for.thing → `for t in $things; %; end`
 function __abbr_for_var
-    set -l varname (string split -f2 . $argv[1])
+    set -l varname (string split -f2 . $argv[1] | string trim -cs -r)
     set -l v (string sub -l1 $varname)
-    echo "for $v in \$$varname; %; end"
+    echo "for $v in \$"$varname"s; %; end"
 end
 abbr -a for_var --regex "for\..+" --set-cursor --function __abbr_for_var
 
