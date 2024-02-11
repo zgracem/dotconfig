@@ -104,6 +104,8 @@ abbr -a 'comp?' compsrc
 abbr -a 'func?' funcsrc
 abbr -a 'man?' command man -aw
 
+abbr -a rank -p anywhere 'sort | uniq -c | sort -nr'
+
 # f + reveal
 if is-macos
     functions --erase f reveal
