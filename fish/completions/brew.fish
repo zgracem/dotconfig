@@ -25,10 +25,10 @@ complete -c brew -l update-existing -d "Update outdated formulae" -n "__fish_see
 complete -c brew -l install-missing -d "Install and update missing formulae" -n "__fish_seen_subcommand_from which-update"
 complete -c brew -l max-downloads -x -d "Maximum formulae to download and update" -n "__fish_seen_subcommand_from which-update"
 
-# `brew env` (~/bin/brew-env)
+# brew env (~/bin/brew-env)
 complete -c brew -n __fish_use_subcommand -a env -d "Print all HOMEBREW_* vars"
 
-# `brew cd` ($__fish_config_dir/functions/_wrappers/brew.fish)
+# brew cd ($__fish_config_dir/functions/_wrappers/brew.fish)
 set -l brew_cd_options "
     cache\t$(brew --cache)
     caskroom\t$(brew --caskroom)
@@ -38,3 +38,6 @@ set -l brew_cd_options "
 "
 complete -c brew -n __fish_use_subcommand -a cd -d "Change to a Homebrew directory"
 complete -c brew -n "__fish_seen_subcommand_from cd" -xa $brew_cd_options
+
+# brew url (~/bin/brew-env)
+complete -c brew -n __fish_use_subcommand -a url -d "Print the homepage URL of a given formula or cask"
