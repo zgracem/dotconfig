@@ -14,7 +14,7 @@ end
 
 set extensions_file ~/.config/Code/User/extensions.json
 set desired_extensions (jq --raw-output '.recommendations[]' $extensions_file)
-set installed_extensions (code --list-extensions); or exit
+set installed_extensions (code --list-extensions 2>/dev/null); or exit
 
 function do_install -d "Install all missing extensions in list"
     for extension in $desired_extensions
