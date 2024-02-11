@@ -74,6 +74,7 @@
   },
   "editor.unicodeHighlight.includeComments": false,
   "editor.unicodeHighlight.includeStrings": false,
+  "editor.unicodeHighlight.nonBasicASCII": false,
   "editor.wordBasedSuggestionsMode": "currentDocument",
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
