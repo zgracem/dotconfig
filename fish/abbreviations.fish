@@ -121,6 +121,20 @@ if command -q apt
     abbr -a aptup 'sudo apt update && sudo apt upgrade'
 end
 
+# Homebrew
+if command -q brew
+    abbr -a brin 'brew info'
+    abbr -a brins 'brew install'
+    abbr -a brs 'brew search'
+    abbr -a brhome 'brew home'
+    abbr -a brrm 'brew uninstall'
+    abbr -a brre 'brew reinstall'
+    abbr -a brls 'brew list'
+    abbr -a brwh 'brew which-formula'
+    abbr -a brupg 'brew upgrade'
+    abbr -a brupd 'brew update'
+end
+
 # ssh
 abbr -a vssh 'ssh vshraya'
 abbr -a opal 'ssh opalstack'
@@ -197,3 +211,11 @@ function __abbr_zequals
     command -s $cmdname
 end
 abbr -a zequals --position anywhere --regex "=\w+" --function __abbr_zequals
+
+# quick Homebrew Cask
+# cask.info → brew info --cask
+function __brew_cask
+    set -l cmd (string split -f2 . $argv[1])
+    echo "brew $cmd --cask"
+end
+abbr -a brew_cask --regex "cask\..+" --function __brew_cask
