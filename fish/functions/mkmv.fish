@@ -1,4 +1,4 @@
 function mkmv --description 'Create a directory, then move files into it'
-    command mkdir -p $argv[-1]
-    and mv $argv
+    mkdir -pv $argv[-1]
+    and /bin/mv -iv $argv
 end

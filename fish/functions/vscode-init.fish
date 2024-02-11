@@ -3,7 +3,7 @@ function vscode-init --description 'Initialize directory for use with VS Code'
     set -l skel $HOME/Developer/skel/vscode
     set -q argv[1]; and set dir $argv[1]/.vscode
 
-    mkdir -p "$dir"
+    mkdir -pv "$dir"
 
     if not path is -f $dir/settings.json
         echo '{}' >"$dir/settings.json"
@@ -14,6 +14,6 @@ function vscode-init --description 'Initialize directory for use with VS Code'
     end
 
     if not path is -f $dir/tasks.json; and path is -d $skel
-        cp -a $skel/tasks.json $dir/tasks.json
+        cp -aiv $skel/tasks.json $dir/tasks.json
     end
 end
