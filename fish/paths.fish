@@ -116,7 +116,7 @@ fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/shar
 
 # Cygwin
 set -q LOCALAPPDATA
-and fish_add_path -a "$LOCALAPPDATA/Programs/Microsoft VS Code/bin"
+and fish_add_path -a (cygpath -au "$LOCALAPPDATA")"/Programs/Microsoft VS Code/bin"
 
 # rbenv
 if source $XDG_CONFIG_HOME/env.d/rbenv.env
