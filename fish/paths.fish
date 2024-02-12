@@ -114,6 +114,10 @@ fish_add_manpath -a $XCODE/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/u
 fish_add_manpath -a /Library/Developer/CommandLineTools/usr/share/man
 fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
 
+# Cygwin
+set -q LOCALAPPDATA
+and fish_add_path -a "$LOCALAPPDATA/Programs/Microsoft VS Code/bin"
+
 # rbenv
 if source $XDG_CONFIG_HOME/env.d/rbenv.env
     # in case of non-Homebrew installation
