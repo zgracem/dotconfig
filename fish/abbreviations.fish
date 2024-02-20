@@ -179,6 +179,9 @@ abbr -a cdp --set-cursor --function __abbr_cdp
 # CC → `% | tbcopy | column`
 abbr -a CC --position anywhere --set-cursor "% | tbcopy | column"
 
+# DD = extremely fast dump-to-desktop
+abbr -a DD --position anywhere --set-cursor "| tee ~/Desktop/%.txt"
+
 # "set --verbose"
 # sv.files → `set files %; set -S files`
 function __abbr_setv
