@@ -118,6 +118,7 @@
   "git.repositoryScanMaxDepth": -1,
   "gitlens.advanced.blame.customArguments": ["-w"],
   "gitlens.advanced.messages": {
+    "suppressCreatePullRequestPrompt": true,
     "suppressLineUncommittedWarning": true
   },
   "gitlens.blame.avatars": false,
@@ -194,7 +195,12 @@
   "search.showLineNumbers": true,
   "search.smartCase": true,
   "security.workspace.trust.enabled": false,
-  "settingsSync.ignoredExtensions": ["castwide.solargraph"],
+  "settingsSync.ignoredExtensions": [
+    "esbenp.prettier-vscode",
+    "castwide.solargraph",
+    "foxundermoon.shell-format",
+    "timonwong.shellcheck"
+  ],
   "settingsSync.ignoredSettings": [
     "code-runner.customCommand",
     "code-runner.executorMap",
