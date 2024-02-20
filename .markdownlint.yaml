@@ -82,8 +82,7 @@ no-trailing-punctuation:
 no-blanks-blockquote: false
 
 # MD029: Ordered list item prefix
-ol-prefix:
-  style: ordered
+ol-prefix: false
 
 # MD030: Spaces after list markers
 # list-marker-space: true
