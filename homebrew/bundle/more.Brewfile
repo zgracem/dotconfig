@@ -4,9 +4,9 @@ tap "homebrew/command-not-found"
 tap "zgracem/caveats"
 
 brew "bash"
+brew "btop"
 brew "ncurses"
 brew "hexyl"
-brew "htop"
 brew "parallel"
 brew "source-highlight" # for less
 

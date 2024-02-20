@@ -8,7 +8,6 @@
 # not intended for human interaction
 fish/fish_variables*
 fish/fishd.*
-htop
 iterm2/
 mozilla/*.moz
 StardewValley/
