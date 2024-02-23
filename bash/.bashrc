@@ -3,8 +3,6 @@
 # Executed by bash(1) on interactive shell startup
 # -----------------------------------------------------------------------------
 
-echo "### .bashrc" >&2
-
 export Z_IN_BASHRC=true
 
 # Source ~/.profile, unless it's sourcing this file
