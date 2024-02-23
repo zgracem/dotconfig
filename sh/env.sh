@@ -4,6 +4,8 @@
 # Environment variables for all POSIX shells
 # -----------------------------------------------------------------------------
 
+[ -n "$Z_ENV_SOURCED" ] && return
+
 # XDG Basedir Spec
 [ -f "$XDG_CONFIG_HOME/sh/xdg.sh" ] && . "$XDG_CONFIG_HOME/sh/xdg.sh"
 

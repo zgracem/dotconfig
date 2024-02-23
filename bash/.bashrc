@@ -3,8 +3,12 @@
 # Executed by bash(1) on interactive shell startup
 # -----------------------------------------------------------------------------
 
-# Source ~/.profile
-if [[ -r $HOME/.profile ]]; then
+echo "### .bashrc" >&2
+
+export Z_IN_BASHRC=true
+
+# Source ~/.profile, unless it's sourcing this file
+if [[ -r $HOME/.profile && -z "$Z_IN_PROFILE" ]]; then
   # shellcheck source=../sh/.profile
   . "$HOME/.profile"
 fi
@@ -20,8 +24,6 @@ elif shopt -q restricted_shell; then
   return
 elif [[ $HOSTNAME =~ "opalstack" ]]; then
   LD_LIBRARY_PATH=$HOME/opt/lib64 exec ~/opt/bin/fish --login
-else
-  export Z_IN_BASHRC=true
 fi
 
 # -----------------------------------------------------------------------------

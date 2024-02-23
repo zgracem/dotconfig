@@ -31,3 +31,10 @@ for file in ~/.config/sh/profile.d/*; do
   [ -r "$file" ] && . "$file"
   unset -v file
 done
+
+# Source ~/.bashrc, unless it's sourcing this file
+if [[ -z "$Z_IN_BASHRC" ]]; then
+  export Z_IN_PROFILE=true
+  [[ -r $HOME/.bashrc ]] && . $HOME/.bashrc
+  unset -v Z_IN_PROFILE
+fi
