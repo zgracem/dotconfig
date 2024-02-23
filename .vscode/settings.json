@@ -2,8 +2,6 @@
   "files.exclude": {
     "brew/**/*.lock.json": true,
     "iterm2": true,
-    "minecraft": true,
-    "putty/*.session": { "when": "$(basename).patch" },
     "StardewValley": true,
     "syncplay.ini": true
   },
