@@ -1,4 +1,7 @@
 {
+  "accessibility.signals.terminalBell": {
+    "sound": "off"
+  },
   "code-runner.clearPreviousOutput": true,
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
@@ -267,8 +270,8 @@
   "terminal.integrated.defaultProfile.osx": "fish",
   "terminal.integrated.defaultProfile.windows": "Cygwin bash",
   "terminal.integrated.drawBoldTextInBrightColors": false,
-  "terminal.integrated.enableBell": true,
   "terminal.integrated.enableFileLinks": "off",
+  "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontSize": 13,
   "terminal.integrated.fontWeight": "300",
   "terminal.integrated.fontWeightBold": "500",
