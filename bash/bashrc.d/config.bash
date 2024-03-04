@@ -188,7 +188,7 @@ rl()
         ;;
 
       keychain)
-        _inPath keychain || return
+        type -P keychain >/dev/null || return
         verbose "> deleting ssh-agent keys..."
         [[ -z $dry_run ]] && keychain --quiet --clear
         verbose "> killing all currently running agent processes..."

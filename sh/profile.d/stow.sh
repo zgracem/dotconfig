@@ -1,4 +1,4 @@
-if _inPath stow; then
+if command -v stow >/dev/null; then
   stow()
   {
     command stow --verbose "$@"

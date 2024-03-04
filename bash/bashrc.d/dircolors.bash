@@ -2,7 +2,7 @@
 # use dircolors(1) to set LS_COLORS
 # -----------------------------------------------------------------------------
 
-_inPath dircolors || return
+type -P dircolors >/dev/null || return
 
 if [[ -z $LS_COLORS || -n $Z_RELOADING ]]; then
   dc_cache="$XDG_DATA_HOME/dircolors/thirty2k.ls_colors"

@@ -8,17 +8,7 @@ export ENV=~/.config/sh/env.sh
 # shellcheck source=./env.sh
 . "$ENV"
 
-# -----------------------------------------------------------------------------
-# Support functions
-# -----------------------------------------------------------------------------
-
-_inPath()
-{ #: -- exits 0 if $1 is installed in $PATH
-  type -P "$1" >/dev/null
-  # command -v "$1" >/dev/null # ← returns true for functions, etc.
-
-}
-
+# Support function
 _isGNU()
 { #: -- exits 0 if $1 uses GNU switches
   command "$1" --version >/dev/null 2>&1
