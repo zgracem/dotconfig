@@ -1,5 +1,5 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+* text eol=lf
 
 # git/ignore has `\r` characters to match macOS resource files
 git/ignore binary
