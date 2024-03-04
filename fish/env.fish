@@ -12,7 +12,7 @@ end
 # setup PATH and friends
 source "$__fish_config_dir/paths.fish"
 
-for env_file in $XDG_CONFIG_HOME/env.d/*.env $__fish_config_dir/env.d/*.fish
+for env_file in $XDG_CONFIG_HOME/env.d/*.env $HOME/.private/env.d/*.env $__fish_config_dir/env.d/*.fish
     source $env_file
 end
 
