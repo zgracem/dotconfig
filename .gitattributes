@@ -3,3 +3,6 @@
 
 # git/ignore has `\r` characters to match macOS resource files
 git/ignore binary
+
+# Don't worry about image files
+*.png binary
