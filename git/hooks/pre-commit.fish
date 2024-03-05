@@ -29,11 +29,6 @@ if string match -q "dircolors/*" $staged_files
     make -s -C $XDG_CONFIG_HOME/dircolors; or exit
 end
 
-if string match -q "jq/*" $staged_files
-    make -s -C $XDG_CONFIG_HOME/jq uninstall; or exit
-    make -s -C $XDG_CONFIG_HOME/jq install; or exit
-end
-
 if string match -q "rbenv/*" $staged_files
     make -s -C $XDG_CONFIG_HOME/rbenv install; or exit
 end
@@ -44,10 +39,6 @@ end
 
 if contains -- mailcap/mailcap $staged_files
     make -s -C $XDG_CONFIG_HOME/mailcap; or exit
-end
-
-if contains -- www/userContent.sass $staged_files
-    make -s -C $XDG_CONFIG_HOME www/userContent.css; or exit
 end
 
 true
