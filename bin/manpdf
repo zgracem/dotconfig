@@ -10,7 +10,7 @@ set -gx this manpdf
 if path is -d "$MANPDF_DIR"
     true
 else if path is -d "$XDG_DATA_HOME"
-    set -gx MANPDF_DIR $XDG_DATA_HOME/doc/pdf
+    set -gx MANPDF_DIR $XDG_DATA_HOME/doc/manpdf
 else
     set -gx MANPDF_DIR $HOME/.manpath
 end

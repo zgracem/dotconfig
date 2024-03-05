@@ -14,7 +14,7 @@
     },
     {
       "name": "~/.local/share/doc",
-      "path": "../../.local/share/doc"
+      "path": "../.local/share/doc"
     }
   ],
   "settings": {
