@@ -36,6 +36,7 @@ Set-Alias man Get-Help
 Set-Alias open Start-Process
 Set-Alias pbpaste Get-Clipboard
 Set-Alias rm Remove-ItemSafely
+Set-Alias sudo Invoke-Elevated
 Set-Alias wget Invoke-WebRequest
 
 function ListFilesWide { Get-ChildItem -Force $args | Format-Wide -AutoSize }
@@ -58,7 +59,8 @@ $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_TELEMETRY_OPTOUT = 1
 
 $global:IsAdmin = if ([OperatingSystem]::IsWindows()) {
-    ([Principal.WindowsPrincipal][Principal.WindowsIdentity]::GetCurrent()).IsInRole([Principal.WindowsBuiltInRole]::Administrator)
+    $local:CurrentUser = [Principal.WindowsPrincipal][Principal.WindowsIdentity]::GetCurrent()
+    $local:CurrentUser.IsInRole([Principal.WindowsBuiltInRole]::Administrator)
 } elseif ([OperatingSystem]::IsMacOS() -or [OperatingSystem]::IsLinux()) {
     $(id -u) -eq 0
 }
@@ -73,10 +75,15 @@ $PSDefaultParameterValues += @{
 # ----------------------------------------------------------------------------
 
 function Prompt {
-    $prefix = ($PSStyle.Foreground.Blue + "PS" + $PSStyle.Reset + " ")
-    # $body = $(Get-Location)
-    $suffix = ('>' * ($nestedPromptLevel + 1)) + " "
-    Return ($prefix + $PWD + $suffix)
+    $local:colour = if ($global:IsAdmin -eq $true) {
+        $PSStyle.Foreground.Red
+    } else {
+        $PSStyle.Foreground.Blue
+    }
+    $local:prefix = ($local:colour + "PS" + $PSStyle.Reset + " ")
+    # $local:body = $(Get-Location)
+    $local:suffix = ('>' * ($nestedPromptLevel + 1)) + " "
+    Return ($local:prefix + $PWD + $local:suffix)
 }
 
 function CustomizeConsole {
