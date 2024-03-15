@@ -27,6 +27,7 @@
       ".git{attributes,modules}": true,
       "pdf/": true
     },
+    "powershell.cwd": "~/.config",
     "search.exclude": {
       "bat/syntaxes/": true
     },
