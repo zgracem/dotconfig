@@ -10,27 +10,9 @@ using namespace System.Text
 # Locale
 [CultureInfo]::CurrentCulture = "en-CA"
 
-# Setup PSReadline
-if ($host.Name -eq 'ConsoleHost') {
-    Import-Module PSReadLine
-    # $PSReadLineOptions = @{
-    #     PredictionSource = "HistoryAndPlugin"
-    #     PredictionViewStyle = "ListView"
-    #     HistoryNoDuplicates = $true
-    #     HistorySearchCursorMovesToEnd = $true
-    #     ShowTooltips = $false
-    #     EditMode = "Windows"
-    #     BellStyle = "None"
-    # }
-    # Set-PSReadLineOption @PSReadLineOptions
-    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-}
-
-# Add VS Code CLI to path
-$env:Path = $env:Path, "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin" -join ';'
-
 # ----------------------------------------------------------------------------
+
+$env:XDG_CONFIG_HOME = "D:\cygwin\home\$env:USERNAME\.config"
 
 $PSDefaultParameterValues += @{
     'Get-Help:ShowWindow' = $true
@@ -56,11 +38,15 @@ function myip { Write-Host (Invoke-WebRequest ifconfig.me/ip).Content.Trim() }
 function Open-ExplorerHere { explorer.exe $args[0] }
 Set-Alias f Open-ExplorerHere
 
-function reveal { explorer.exe /reveal $args[0] } # doesn't work
+# function reveal { explorer.exe /reveal $args[0] } # doesn't work
 
 function unpack { process { $_ | Select-Object * } }
 
 function about { process { $_ | Get-Member } }
+
+function which { Get-Command -Name $args[0] -All -ErrorAction SilentlyContinue }
+
+function how { Get-Command -Name $args[0] -Syntax -ErrorAction SilentlyContinue }
 
 function .. { Set-Location .. }
 
@@ -82,6 +68,24 @@ $global:IsAdmin = if ($IsWindows) {
 
 # ----------------------------------------------------------------------------
 
+$global:promptSigil = [string] ">"
+$global:promptSigilColour = $PSStyle.Foreground.Blue
+$global:promptText = $promptSigilColour, $promptSigil, $PSStyle.Reset, " " -join ""
+
+# Setup PSReadline
+if ($host.Name -eq 'ConsoleHost') {
+    Import-Module PSReadLine
+    $PSReadLineOptions = @{
+        BellStyle = "Visual"
+        EditMode = "Emacs"
+        HistorySearchCursorMovesToEnd = $true
+        PredictionSource = "HistoryAndPlugin"
+    }
+    Set-PSReadLineOption @PSReadLineOptions
+    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+}
+
 function Prompt {
     $local:path = [string] ""
     $local:pathColour = $PSStyle.Foreground.BrightBlack
@@ -101,14 +105,17 @@ function Prompt {
     if ("$path" -eq "$Home") {
         $path = $path.Replace($Home, '~')
     } else {
+        $local:baseDir = Get-Item $path | Split-Path -Leaf
         $local:parentDir = Get-Item $path | Split-Path -Parent
         if ($parentDir -like "$Home*") { $parentDir = $parentDir.Replace($Home, '~') }
-        $local:baseDir = Get-Item $path | Split-Path -Leaf
         $local:pathSep = [System.IO.Path]::DirectorySeparatorChar
-        $path = $PSStyle.Foreground.BrightBlack + $parentDir + $pathSep + $PSStyle.Reset + $baseDir
+        $path = $PSStyle.Foreground.BrightBlack + $parentDir + $PSStyle.Reset + $baseDir
     }
 
-    if ($global:IsAdmin -eq $true) { $sigilColour = $PSStyle.Foreground.Blue }
+    if ($global:IsAdmin -eq $true) {
+        $sigil = "#"
+        $sigilColour = $PSStyle.Foreground.Red
+    }
 
     $sigil = $sigilColour + ($sigil * ($nestedPromptLevel + 1)) + $PSStyle.Reset
 
