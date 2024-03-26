@@ -10,11 +10,15 @@ using namespace System.Text
 # Locale
 [CultureInfo]::CurrentCulture = "en-CA"
 
+# $historyFile = $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+
 # ----------------------------------------------------------------------------
 
-$env:XDG_CONFIG_HOME = "D:\cygwin\home\$env:USERNAME\.config"
+$env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
 
 $PSDefaultParameterValues += @{
+    'Format-*:AutoSize' = $true
+    'Format-*:Wrap' = $true
     'Get-Help:ShowWindow' = $true
     'Out-File:Encoding' = 'utf8'
     'Remove-Item:Confirm' = $true
@@ -28,17 +32,17 @@ Set-Alias rm Remove-Item
 Set-Alias sudo Invoke-Elevated
 Set-Alias wget Invoke-WebRequest
 
-function Get-AllItemsWide { Get-ChildItem -Force @Args | Format-Wide -AutoSize }
+function Get-AllItemsWide { Get-ChildItem -Force @Args | Format-Wide }
 Set-Alias ls Get-AllItemsWide
 function Get-AllItemsLong { Get-ChildItem -Force @Args }
 Set-Alias ll Get-AllItemsLong
 
-function myip { Write-Host (Invoke-WebRequest ifconfig.me/ip).Content.Trim() }
-
 function Open-ExplorerHere { explorer.exe $args[0] }
 Set-Alias f Open-ExplorerHere
 
-# function reveal { explorer.exe /reveal $args[0] } # doesn't work
+function reveal { explorer.exe "/select,$args[0]" }
+
+function myip { Write-Host (Invoke-WebRequest ifconfig.me/ip).Content.Trim() }
 
 function unpack { process { $_ | Select-Object * } }
 
@@ -49,6 +53,8 @@ function which { Get-Command -Name $args[0] -All -ErrorAction SilentlyContinue }
 function how { Get-Command -Name $args[0] -Syntax -ErrorAction SilentlyContinue }
 
 function .. { Set-Location .. }
+function ... { Set-Location ..\.. }
+function .... { Set-Location ..\..\.. }
 
 # ----------------------------------------------------------------------------
 
@@ -68,10 +74,6 @@ $global:IsAdmin = if ($IsWindows) {
 
 # ----------------------------------------------------------------------------
 
-$global:promptSigil = [string] ">"
-$global:promptSigilColour = $PSStyle.Foreground.Blue
-$global:promptText = $promptSigilColour, $promptSigil, $PSStyle.Reset, " " -join ""
-
 # Setup PSReadline
 if ($host.Name -eq 'ConsoleHost') {
     Import-Module PSReadLine
@@ -87,14 +89,12 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 
 function Prompt {
-    $local:path = [string] ""
-    $local:pathColour = $PSStyle.Foreground.BrightBlack
-    $local:pathParentColour = $PSStyle.Foreground.BrightBlack
-    $local:sigil = [string] ">"
-    $local:sigilColour = $PSStyle.Foreground.Blue
+    $local:CurrentPath = [string] ""
+    $local:Sigil = [string] ">"
+    $local:SigilColour = $PSStyle.Foreground.Blue
 
     # Use ProviderPath if there's no drive defined for the location provider.
-    $path = if ($executionContext.SessionState.Path.CurrentLocation.Drive) {
+    $CurrentPath = if ($executionContext.SessionState.Path.CurrentLocation.Drive) {
         $executionContext.SessionState.Path.CurrentLocation.Path
     }
     else {
@@ -102,27 +102,18 @@ function Prompt {
     }
 
     # Replace path to home directory with `~`
-    if ("$path" -eq "$Home") {
-        $path = $path.Replace($Home, '~')
-    } else {
-        $local:baseDir = Get-Item $path | Split-Path -Leaf
-        $local:parentDir = Get-Item $path | Split-Path -Parent
-        if ($parentDir -like "$Home*") { $parentDir = $parentDir.Replace($Home, '~') }
-        $local:pathSep = [System.IO.Path]::DirectorySeparatorChar
-        $path = $PSStyle.Foreground.BrightBlack + $parentDir + $PSStyle.Reset + $baseDir
-    }
+    if ($CurrentPath -like "$Home*") { $CurrentPath = $CurrentPath.Replace($Home, '~') }
+    # Reverse backslashes
+    $CurrentPath = $CurrentPath.Replace([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
 
-    if ($global:IsAdmin -eq $true) {
-        $sigil = "#"
-        $sigilColour = $PSStyle.Foreground.Red
-    }
+    if ($global:IsAdmin -eq $true) { $SigilColour = $PSStyle.Foreground.Blue }
 
-    $sigil = $sigilColour + ($sigil * ($nestedPromptLevel + 1)) + $PSStyle.Reset
+    $Sigil = $SigilColour + ($Sigil * ($nestedPromptLevel + 1)) + $PSStyle.Reset
 
-    Return ($PSStyle.Reset + $path + " " + $sigil + " ")
+    Return ($PSStyle.Reset + $CurrentPath + " " + $Sigil + " ")
 }
 
 function CustomizeConsole {
-    $Host.UI.RawUI.WindowTitle = ($ShellId + " " + $PSVersionTable.PSVersion)
+    $Host.UI.RawUI.WindowTitle = ($ShellId, $PSVersionTable.PSVersion -join " ")
 }
 CustomizeConsole

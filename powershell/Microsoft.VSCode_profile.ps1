@@ -4,5 +4,5 @@
 #   Mac/Linux: ~/.config/powershell/Microsoft.VSCode_profile.ps1
 # ----------------------------------------------------------------------------
 
-# $ActualProfile = "D:\cygwin\home\$env:USERNAME\.config\powershell\Microsoft.VSCode_profile.ps1"
+# $ActualProfile = "$env:USERPROFILE\.config\powershell\Microsoft.VSCode_profile.ps1"
 # if (Test-Path($ActualProfile)) { . "$ActualProfile" }
