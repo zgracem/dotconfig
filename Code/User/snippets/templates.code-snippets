@@ -23,6 +23,13 @@
     "description": "Empty JSON object",
     "scope": "json,jsonc"
   },
+  "new_pwsh": {
+    "prefix": "!new",
+    "body": ["[CmdletBinding()]", "param ()", "process {$0}", "end {}"],
+    "description": "Empty PowerShell script",
+    "scope": "powershell",
+    "isFileTemplate": true
+  },
   "shellscript_hashbang": {
     "prefix": "!env",
     "body": ["#!/usr/bin/env ${1|bash,sh|}\n\n", "$0"],

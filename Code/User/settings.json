@@ -168,6 +168,7 @@
   },
   "oneDarkPro.editorTheme": "One Dark Pro Flat",
   "oneDarkPro.italic": true,
+  "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
   "prettier.bracketSameLine": true,
   "prettier.quoteProps": "consistent",
   "prettier.semi": false,
@@ -268,7 +269,7 @@
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.defaultProfile.osx": "fish",
-  "terminal.integrated.defaultProfile.windows": "Cygwin bash",
+  "terminal.integrated.defaultProfile.windows": "PowerShell 7",
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.enableFileLinks": "off",
   "terminal.integrated.enableVisualBell": true,
@@ -302,6 +303,10 @@
       "args": ["--login"],
       "icon": "terminal-bash",
       "path": "C:\\cygwin64\\bin\\fish.exe"
+    },
+    "PowerShell 7": {
+      "icon": "terminal-powershell",
+      "path": "${env:USERPROFILE}\\Applications\\PowerShell\\pwsh.exe"
     }
   },
   "terminal.integrated.rightClickBehavior": "default",
@@ -410,6 +415,9 @@
     ],
     "editor.wordBasedSuggestions": "off",
     "workbench.editor.languageDetection": false
+  },
+  "[powershell]": {
+    "editor.wordWrapColumn": 115
   },
   "[ruby]": {
     "editor.formatOnSave": true,
