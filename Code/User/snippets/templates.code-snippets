@@ -17,6 +17,13 @@
     "scope": "gemfile",
     "isFileTemplate": true
   },
+  "new_jqpg": {
+    "prefix": "!new",
+    "body": ["jq '", ".", "'", "Untitled-2"],
+    "description": "Empty playground",
+    "scope": "jqqg",
+    "isFileTemplate": true
+  },
   "new_JSON": {
     "prefix": "!new",
     "body": ["{", "\t$0", "}\n"],
