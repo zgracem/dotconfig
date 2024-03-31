@@ -1,5 +1,6 @@
 function update-lastpwd --on-variable PWD
-    string match -q vscode "$TERM_PROGRAM"
+    not status is-interactive
+    or string match -q vscode "$TERM_PROGRAM"
     or string match -q Visor "$ITERM_PROFILE"
     or set -q fish_private_mode; and return
 
