@@ -11,7 +11,7 @@ build: $(addsuffix .plist,$(basename $(wildcard $(srcdir)/*.yaml)))
 include ../common.mk
 
 .PHONY: install
-install: $(outdir)/org.inescapable.setenv.plist
+install: $(outdir)/pink.phosphor.setenv.plist
 
 $(outdir)/%.plist: $(srcdir)/%.plist
 	launchctl unload $@ 2>/dev/null
@@ -19,8 +19,8 @@ $(outdir)/%.plist: $(srcdir)/%.plist
 	launchctl load $@
 
 $(srcdir)/%.plist: $(srcdir)/%.yaml
-	pyjamas --out=plist $(realpath $<) >$(realpath $@)
+	pyjamas --in=yaml --out=plist $(realpath $<) >$(realpath $@)
 
 .PHONY: uninstall
-uninstall: $(outdir)/org.inescapable.setenv.plist
+uninstall: $(outdir)/pink.phosphor.setenv.plist
 	launchctl unload $< 2>/dev/null && rm -fv $<

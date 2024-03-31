@@ -1,5 +1,5 @@
 ---
-Label: org.inescapable.setenv
+Label: pink.phosphor.setenv
 ProgramArguments:
 - "/usr/local/bin/fish"
 - "/Users/zozo/.config/launchd/setenv.fish"

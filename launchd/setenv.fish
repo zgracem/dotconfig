@@ -20,7 +20,4 @@ and chmod 0700 "$XDG_RUNTIME_DIR"
 set -g SOLARGRAPH_CACHE $XDG_CACHE_HOME/solargraph/cache
 launchctl setenv SOLARGRAPH_CACHE $SOLARGRAPH_CACHE
 
-set -g VSCODE_EXTENSIONS $XDG_DATA_HOME/vscode/extensions
-launchctl setenv VSCODE_EXTENSIONS $VSCODE_EXTENSIONS
-
 launchctl setenv Z_ENV (date '+%F %T')
