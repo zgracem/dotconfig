@@ -4,5 +4,5 @@
 command -q un1q; and return
 
 function un1q -d "Delete duplicate, nonconsecutive lines from stdin"
-    cat | sed -nf $HOME/.config/bin/un1q
+    cat $argv | sed -nf $HOME/.config/bin/un1q
 end
