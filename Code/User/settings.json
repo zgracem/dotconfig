@@ -203,7 +203,8 @@
     "esbenp.prettier-vscode",
     "castwide.solargraph",
     "foxundermoon.shell-format",
-    "timonwong.shellcheck"
+    "timonwong.shellcheck",
+    "shopify.ruby-lsp"
   ],
   "settingsSync.ignoredSettings": [
     "code-runner.customCommand",
@@ -215,12 +216,7 @@
     "editor.fontWeight",
     "jqPlayground.binaryPath",
     "papyrus.fo4.directory",
-    "shellformat.path",
     "slimLint.executablePath",
-    "solargraph.bundlerPath",
-    "solargraph.commandPath",
-    "solargraph.diagnostics",
-    "solargraph.formatting",
     "spellright.addToSystemDictionary",
     "spellright.configurationScope",
     "spellright.language",
@@ -299,7 +295,7 @@
     }
   },
   "terminal.integrated.profiles.windows": {
-    "Cygwin bash": {
+    "Cygwin fish": {
       "args": ["--login"],
       "icon": "terminal-bash",
       "path": "C:\\cygwin64\\bin\\fish.exe"
@@ -421,6 +417,7 @@
   },
   "[ruby]": {
     "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
     "editor.semanticHighlighting.enabled": true,
     "editor.tabSize": 2
   },
