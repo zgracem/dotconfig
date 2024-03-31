@@ -200,7 +200,6 @@
   "search.smartCase": true,
   "security.workspace.trust.enabled": false,
   "settingsSync.ignoredExtensions": [
-    "esbenp.prettier-vscode",
     "castwide.solargraph",
     "foxundermoon.shell-format",
     "timonwong.shellcheck",
@@ -426,6 +425,9 @@
   },
   "[shellscript]": {
     "editor.formatOnSave": false
+  },
+  "[snippets]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[tsv]": {
     "editor.insertSpaces": false,
