@@ -181,21 +181,21 @@ abbr -a CC --position anywhere --set-cursor "% | tbcopy | column"
 abbr -a DD --position anywhere --set-cursor "| tee ~/Desktop/%.txt"
 
 # "set --verbose"
-# sv.files → `set files %; set -S files`
+# sv:files → `set files %; set -S files`
 function __abbr_setv
-    set -l varname (string split -f2 . $argv[1])
+    set -l varname (string split -f2 : $argv[1])
     echo "set $varname %; set -S $varname"
 end
-abbr -a setv --regex "sv\..+" --set-cursor --function __abbr_setv
+abbr -a setv --regex "sv:.+" --set-cursor --function __abbr_setv
 
 # quick for loop
-# for.thing → `for t in $things; %; end`
+# for:thing → `for t in $things; %; end`
 function __abbr_for_var
-    set -l varname (string split -f2 . $argv[1] | string trim -cs -r)
+    set -l varname (string split -f2 : $argv[1] | string trim -cs -r)
     set -l v (string sub -l1 $varname)
     echo "for $v in \$"$varname"s; %; end"
 end
-abbr -a for_var --regex "for\..+" --set-cursor --function __abbr_for_var
+abbr -a for_var --regex "for:.+" --set-cursor --function __abbr_for_var
 
 # bash-like quick history substitution
 # ^string1^string2 → repeats the last command, replacing string1 with string2
@@ -214,9 +214,9 @@ end
 abbr -a zequals --position anywhere --regex "=\w+" --function __abbr_zequals
 
 # quick Homebrew Cask
-# cask.info → brew info --cask
+# cask:info → brew info --cask
 function __brew_cask
-    set -l cmd (string split -f2 . $argv[1])
+    set -l cmd (string split -f2 : $argv[1])
     echo "brew $cmd --cask"
 end
-abbr -a brew_cask --regex "cask\..+" --function __brew_cask
+abbr -a brew_cask --regex "cask:.+" --function __brew_cask
