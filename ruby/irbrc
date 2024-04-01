@@ -82,9 +82,9 @@ end
 # helper methods
 # -----------------------------------------------------------------------------
 
-# Excludes methods common to all Ruby {Object}s 🐵
-# @return [Array<Symbol>]
 class Object
+  # Excludes methods common to all Ruby {Object}s 🐵
+  # @return [Array<Symbol>]
   def my_methods
     (methods - common_methods).sort
   end

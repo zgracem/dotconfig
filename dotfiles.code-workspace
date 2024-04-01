@@ -18,6 +18,9 @@
     }
   ],
   "settings": {
+    "explorer.fileNesting.patterns": {
+      "*.plist": "${capture}.yaml"
+    },
     "files.associations": {
       "**/ssh*/*.conf": "ssh_config",
       "**/tmux/*.conf": "shellscript",
@@ -30,9 +33,6 @@
     "powershell.cwd": "~/.config",
     "search.exclude": {
       "bat/syntaxes/": true
-    },
-    "explorer.fileNesting.patterns": {
-      "*.plist": "${capture}.yaml"
     },
     "shellcheck.enable": true,
     "shellcheck.exclude": ["2148"],
