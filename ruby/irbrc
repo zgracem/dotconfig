@@ -18,9 +18,7 @@ autoload :Set, "set"
 autoload :URI, "uri"
 autoload :YAML, "yaml"
 
-lib = Pathname.new("#{Dir.home}/Dropbox/lib/ruby").realpath.to_s
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "zgm_colour"
+require "#{ENV.fetch('HOME', nil)}/Developer/ruby/zcolour/zcolour"
 
 # -----------------------------------------------------------------------------
 # settings
@@ -107,26 +105,21 @@ module Sample
   end
   alias_method :str, :string
 
-  # @return [Integer]
-  alias_method :original_hash, :hash
-
   # @return [Hash]
-  def hash
+  def hsh
     {
       red:    "ruby",
       green:  "emerald",
       blue:   "sapphire",
       violet: "amethyst",
-      white:  %w[diamond glass]
+      white:  "diamond"
     }
   end
-  alias_method :hsh, :hash
 
   # @return [Array<String>]
   def array
-    hash.values.flatten
+    hsh.values
   end
-  alias_method :ary, :array
 
   # @return [Integer]
   def integer
@@ -149,7 +142,6 @@ module Sample
   def regex
     /\A\h+\z/i
   end
-  alias_method :regexp, :regex
 
   # @return [Set]
   def set
@@ -168,19 +160,7 @@ end
 # ----------------------------------------------------------------------------
 
 # Get just the version number
-irb_v, ruby_v = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
+irb_ver, rb_ver = [IRB.version, RUBY_DESCRIPTION].map { |s| s.split(/[ (]/)[1] }
 
-# Format string for #printf call
-welcome_string = "Welcome to %<i>sIRB %<i_v>s#{irb_v}%<x>s. " \
-                 "You are using %<r>sruby %<r_v>s#{ruby_v}%<x>s.\n"
-
-# Arguments for #printf call
-fancy_colours = {
-  i:   Colour.green.to_s,
-  i_v: Colour.brightgreen.to_s,
-  r:   Colour.magenta.to_s,
-  r_v: Colour.brightmagenta.to_s,
-  x:   Colour.reset.to_s
-}
-
-printf(welcome_string, fancy_colours)
+puts "Welcome to #{Colour.green}IRB #{Colour.brightgreen}#{irb_ver}#{Colour.reset}. " \
+     "You are using #{Colour.magenta}ruby #{Colour.brightmagenta}#{rb_ver}#{Colour.reset}."
