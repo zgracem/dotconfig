@@ -56,7 +56,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     end
 
     # Replace leading $HOME w/ '~', and split PWD into a list of dirnames
-    set -f path (string replace -r "^$HOME" "~" $argv[1] | string split /)
+    set -f path (string replace -i -r "^$HOME" "~" $argv[1] | string split /)
     set -f pathc (seq (math (count $path) - $_flag_keep_dirs))
 
     # Truncate dirnames longer than MAX_PART
