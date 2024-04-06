@@ -6,7 +6,7 @@
 status is-interactive; and command -q keychain; and not set -gq SSH_AGENT_PID
 or return
 
-set -l keys id_{ed25519,rsa_2020}
+set -l keys id_ed25519
 
 set -Ue SSH_AUTH_SOCK
 set -Ue SSH_AGENT_PID
