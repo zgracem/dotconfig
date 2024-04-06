@@ -6,5 +6,6 @@ function confupdate -d "Update configuration directories from GitHub"
     cd $oldpwd
 
     # This server doesn't like `~/.ssh` (or any of its contents) being a symlink
-    cp -afv ~/src/github.com/zgracem/dotprivate/ssh/* ~/.ssh; or return
+    cp -af ~/src/github.com/zgracem/dotprivate/ssh/* ~/.ssh; or return
+    chmod 600 ~/.ssh/*
 end
