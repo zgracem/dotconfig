@@ -21,6 +21,7 @@ end
 
 if not fish_is_root_user; and string match -q "$HOME*" $XDG_RUNTIME_DIR
     mkdir -p -v -m 0700 $XDG_RUNTIME_DIR
+    mkdir -p -v -m 0700 $XDG_RUNTIME_DIR/ssh
 end
 
 # XDG user directories
