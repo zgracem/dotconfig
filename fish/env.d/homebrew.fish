@@ -7,7 +7,7 @@ end <"$XDG_CONFIG_HOME/homebrew/brew.env"
 
 # Check for macOS/iOS terminal clients w/ emoji support
 switch $TERM_PROGRAM
-    case Apple_Terminal 'iTerm*' Prompt_2 vscode
+    case Apple_Terminal 'iTerm*' Prompt_{2,3} vscode
         switch (date +%B)
             case October
                 # https://twitter.com/MacHomebrew/status/783028298351730688
