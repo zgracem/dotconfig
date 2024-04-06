@@ -6,7 +6,7 @@ if fish-is-older-than 3.1
     begin
         echo -e '\e[1;7;91m'
         echo "*** These configuration files should not run on fish $version ***"
-        set_color normal
+        echo -e '\e[0m'
     end >&2
     exit 127
 end
