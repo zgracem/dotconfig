@@ -104,6 +104,10 @@ abbr -a 'comp?' compsrc
 abbr -a 'func?' funcsrc
 abbr -a 'man?' command man -aw
 
+abbr -a xcl 'sudo xcodebuild -license'
+abbr -a xcp 'xcode-select --print-path'
+abbr -a xcs 'sudo xcode-select --switch'
+
 # f + reveal
 if is-macos
     functions --erase f reveal
