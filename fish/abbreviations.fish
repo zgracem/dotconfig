@@ -158,11 +158,11 @@ end
 abbr -a cdp --set-cursor --function __abbr_cdp
 
 # copy to clipboard, then print in columns
-# CC → `% | tbcopy | column`
-abbr -a CC --position anywhere --set-cursor "% | tbcopy | column"
+# :cc → `% | tbcopy | column`
+abbr -a :cc --position anywhere --set-cursor "% | tbcopy | column"
 
-# DD = extremely fast dump-to-desktop
-abbr -a DD --position anywhere --set-cursor "| tee ~/Desktop/%.txt"
+# :dd = extremely fast dump-to-desktop
+abbr -a :dd --position anywhere --set-cursor "| tee ~/Desktop/%.txt"
 
 # "set --verbose"
 # sv:files → `set files %; set -S files`
