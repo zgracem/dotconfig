@@ -25,16 +25,16 @@ abbr --add -- "--" nextd
 # default options
 # ----------------------------------------------------------------------------
 
-abbr --add cp "cp -aiv" # preserve attributes; ask before clobbering; verbose
+abbr --add cp "cp -vai" # preserve attributes; ask before clobbering; verbose
 abbr --add file "file -p" # don't touch last-accessed time
 abbr --add killall "killall -v"
 abbr --add ln "ln -v"
 abbr --add mkdir "mkdir -pv"
 abbr --add rename "rename -v"
 abbr --add stow "stow -v"
-abbr --add restow "stow -v --restow"
+abbr --add restow "stow --restow -v"
 abbr --add trash "trash -v"
-abbr --add unstow "stow -v --delete"
+abbr --add unstow "stow --delete -v"
 abbr --add xxd "xxd -u -g1" # -u = uppercase; -g1 = 1 octet per group
 
 set -l _chmod_verbose_flag
@@ -55,11 +55,11 @@ if command -q eza
     functions --erase lsf
     abbr --add lsf "eza -lagi@"
 else if is-gnu ls
-    abbr --add ls "ls -A --color"
-    abbr --add ll "ls -lhA --color"
+    abbr --add ls "ls --color -A"
+    abbr --add ll "ls --color -lhA"
 else
-    abbr --add ls "ls -AG"
-    abbr --add ll "ls -lAG"
+    abbr --add ls "ls -GA"
+    abbr --add ll "ls -GlA"
 end
 
 if command -q fd
@@ -68,23 +68,23 @@ if command -q fd
     abbr --add fdd "fd $_fd_default_flags -td"
     abbr --add fdf "fd $_fd_default_flags -tf"
     abbr --add fda "fd $_fd_default_flags -u" # --unrestricted = --hidden --no-ignore
-    abbr --add ff "fd $_fd_default_flags -tf --full-path"
+    abbr --add ff "fd $_fd_default_flags --full-path -tf"
 end
 
 command -q manpdf; and not set -q SSH_CONNECTION
-and abbr --add manpdf "manpdf -o -f"
+and abbr --add manpdf "manpdf -of"
 
 if is-macos
     # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
-    abbr --add mv "/bin/mv -iv"
+    abbr --add mv "/bin/mv -vi"
 else
-    abbr --add mv "mv -iv"
+    abbr --add mv "mv -vi"
 end
 
 if is-gnu rm
-    abbr --add rm "rm -Iv" # -I = prompt before large operations
+    abbr --add rm "rm -vI" # -I = prompt before large operations
 else
-    abbr --add rm "rm -iv" # -i = request confirmation before each file
+    abbr --add rm "rm -vi" # -i = request confirmation before each file
 end
 
 # -----------------------------------------------------------------------------
