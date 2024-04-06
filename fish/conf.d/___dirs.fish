@@ -75,7 +75,7 @@ if uname -s | string match -q Linux
     set -gx XDG_DOCUMENTS_DIR ~/doc
     set -gx XDG_DOWNLOAD_DIR ~/tmp
 
-    for dirvar in (set --names | string match -er '^XDG_')
-        path is -d $$dirvar; or set --erase $dirvar
+    for xdgdir in (set --names | string match -er '^XDG_')
+        path is -d $$xdgdir; or set --erase $xdgdir
     end
 end

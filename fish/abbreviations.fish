@@ -123,26 +123,6 @@ if command -q apt
     abbr -a aptup 'sudo apt update && sudo apt upgrade'
 end
 
-# Homebrew
-if command -q brew
-    abbr -a brin 'brew info'
-    abbr -a brins 'brew install'
-    abbr -a brs 'brew search'
-    abbr -a brhome 'brew home'
-    abbr -a brrm 'brew uninstall'
-    abbr -a brre 'brew reinstall'
-    abbr -a brls 'brew list'
-    abbr -a brwh 'brew which-formula'
-    abbr -a brupg 'brew upgrade'
-    abbr -a brupd 'brew update'
-end
-
-# ssh
-abbr -a vssh 'ssh vshraya'
-abbr -a opal 'ssh opalstack'
-abbr -a ppink 'ssh phosphor.pink'
-abbr -a alyx 'ssh Alyx'
-
 # dl
 if command -q wget
     abbr -a dl "cd ~/Downloads; wget"
