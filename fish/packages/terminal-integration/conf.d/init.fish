@@ -5,10 +5,11 @@
 # ----------------------------------------------------------------------------
 
 # Don't run in scripts, non-GUI clients, or more than once per session.
+# Native OSC 133 injection was added in fish 3.8: fish-shell/fish-shell#10352
 status is-interactive
 and set --query TERM_PROGRAM
 and ! set --query SHELL_INTEGRATION
-or return
+and fish-is-older-than 3.8
 
 set --global --export SHELL_INTEGRATION $TERM_PROGRAM
 switch $TERM_PROGRAM
