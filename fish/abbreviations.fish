@@ -49,18 +49,22 @@ abbr --add "ux" "chmod $_chmod_verbose_flag u+x"
 abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
 
 functions --erase ls ll
+set -l _ls_command
+set -l _ll_command
 if command -q eza
-    abbr --add ls "eza -a"
-    abbr --add ll "eza -la"
+    set _ls_command "eza -a"
+    set _ll_command "eza -la"
     functions --erase lsf
     abbr --add lsf "eza -lagi@"
 else if is-gnu ls
-    abbr --add ls "ls --color -A"
-    abbr --add ll "ls --color -lhA"
+    set _ls_command "ls --color -A"
+    set _ll_command "ls --color -lhA"
 else
-    abbr --add ls "ls -GA"
-    abbr --add ll "ls -GlA"
+    set _ls_command "ls -GA"
+    set _ll_command "ls -GlA"
 end
+abbr --add ls $_ls_command
+abbr --add ll $_ll_command
 
 if command -q fd
     set -l _fd_default_flags "-L" # --follow
@@ -153,6 +157,10 @@ fish-is-newer-than 3.6; or return
 # cdp → cd (path resolve %)
 functions --erase cdp
 abbr -a cdp --set-cursor "cd (path resolve %)"
+
+# cdls → cd %; ls
+abbr -a cdls --set-cursor "cd %; $_ls_command"
+abbr -a cdll --set-cursor "cd %; $_ll_command"
 
 # copy to clipboard, then print in columns
 # :cc → `% | tbcopy | column`
