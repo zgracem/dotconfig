@@ -152,10 +152,7 @@ fish-is-newer-than 3.6; or return
 # imitate `cd -P`
 # cdp → cd (path resolve %)
 functions --erase cdp
-function __abbr_cdp
-    echo "cd (path resolve %)"
-end
-abbr -a cdp --set-cursor --function __abbr_cdp
+abbr -a cdp --set-cursor "cd (path resolve %)"
 
 # copy to clipboard, then print in columns
 # :cc → `% | tbcopy | column`
@@ -177,7 +174,7 @@ abbr -a setv --regex "sv:.+" --set-cursor --function __abbr_setv
 function __abbr_for_var
     set -l varname (string split -f2 : $argv[1] | string trim -cs -r)
     set -l v (string sub -l1 $varname)
-    echo "for $v in \$"$varname"s; %; end"
+    string join \n "for $v in \$"$varname"s" "%" "end"
 end
 abbr -a for_var --regex "for:.+" --set-cursor --function __abbr_for_var
 
@@ -192,7 +189,7 @@ abbr -a history_subst --regex "\^.+\^.+" --function __abbr_history_subst
 # zsh-style expansion
 # =fish → `/usr/local/bin/fish`
 function __abbr_zequals
-    set -l cmdname (string replace "=" "" $argv[1])
+    set -l cmdname (string trim -c= -l $argv[1])
     command -s $cmdname
 end
 abbr -a zequals --position anywhere --regex "=\w+" --function __abbr_zequals
