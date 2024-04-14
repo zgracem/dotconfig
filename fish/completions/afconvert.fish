@@ -39,7 +39,7 @@ function __fish_complete_afconvert_layouts
 end
 
 set -l afconvert_channel_opts '
-    -1\tsilent output
+    -1\tsilent\ output
     0\t
     1\t
 '
