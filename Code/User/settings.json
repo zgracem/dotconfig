@@ -78,11 +78,9 @@
   "editor.unicodeHighlight.includeComments": false,
   "editor.unicodeHighlight.includeStrings": false,
   "editor.unicodeHighlight.nonBasicASCII": false,
-  "editor.wordBasedSuggestionsMode": "currentDocument",
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "editor.wrappingStrategy": "advanced",
-  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
@@ -197,7 +195,9 @@
   },
   "rubyLsp.formatter": "rubocop",
   "rubyLsp.pullDiagnosticsOn": "save",
-  "rubyLsp.rubyVersionManager": "rbenv",
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "rbenv"
+  },
   "search.collapseResults": "auto",
   "search.showLineNumbers": true,
   "search.smartCase": true,
@@ -331,7 +331,6 @@
   "workbench.editor.pinnedTabSizing": "shrink",
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabActionCloseVisibility": false,
-  "workbench.editor.tabCloseButton": "off",
   "workbench.editor.tabSizing": "shrink",
   "workbench.iconTheme": "eq-material-theme-icons",
   "workbench.startupEditor": "none",

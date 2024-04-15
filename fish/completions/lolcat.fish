@@ -1,13 +1,13 @@
 # lolcat v100.0.1 <https://github.com/busyloop/lolcat>
 
 set -l lolcat_spread '
-    0.1\talmost vertical
+    0.1\talmost\ vertical
     3.0\tdefault
-    1000\talmost horizontal
+    1000\talmost\ horizontal
 '
 
 set -l lolcat_freq '
-    0.0001\talmost monochrome
+    0.0001\talmost\ monochrome
     0.1\tdefault
 '
 

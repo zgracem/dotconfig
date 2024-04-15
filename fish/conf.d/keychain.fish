@@ -8,8 +8,8 @@ or return
 
 set -l keys id_ed25519
 
-set -Ue SSH_AUTH_SOCK
-set -Ue SSH_AGENT_PID
+set -Uge SSH_AUTH_SOCK
+set -Uge SSH_AGENT_PID
 
 set -l keychain_dir "$XDG_RUNTIME_DIR/keychain"
 mkdir -p $keychain_dir; or return
@@ -19,8 +19,8 @@ set -l params --eval --quick --inherit any
 set -a params --dir "$keychain_dir" --absolute
 set -a params --quiet --ignore-missing
 
-set -lx SHELL (status fish-path 2>/dev/null; or command -s fish)
-set -p PATH ~/opt/bin /usr/local/bin
+set -lx SHELL (status fish-path)
+set -lx PATH ~/opt/bin /usr/local/bin /usr/bin /bin
 keychain $params $keys >$ssh_env
 
 if test -s $ssh_env # ssh-agent loaded, or existing agent found

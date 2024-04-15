@@ -3,8 +3,8 @@
 command -sq afplay; or return
 
 set -l afplay_quality_opts '
-    0\tdefault: low quality
-    1\thigh quality
+    0\tdefault:\ low\ quality
+    1\thigh\ quality
 '
 
 complete -c afplay -s v -l volume -x -d "Set playback volume"

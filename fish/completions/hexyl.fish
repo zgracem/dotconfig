@@ -12,15 +12,15 @@ set -l hexyl_colors '
 '
 
 set -l hexyl_character_tables '
-    default\tuse Unicode chars for non-ASCII
-    ascii\tuse only ASCII chars
-    codepage-437\tuse cp437 for non-ASCII
+    default\tuse\ Unicode\ chars\ for\ non-ASCII
+    ascii\tuse\ only\ ASCII\ chars
+    codepage-437\tuse\ cp437\ for\ non-ASCII
 '
 
 set -l hexyl_panels '
     2\tdefault
     1\t
-    auto\tbased on terminal width
+    auto\tbased\ on\ terminal\ width
 '
 
 set -l hexyl_group_sizes '
