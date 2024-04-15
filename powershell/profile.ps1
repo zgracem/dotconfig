@@ -117,3 +117,9 @@ function CustomizeConsole {
     $Host.UI.RawUI.WindowTitle = ($ShellId, $PSVersionTable.PSVersion -join " ")
 }
 CustomizeConsole
+
+# ----------------------------------------------------------------------------
+
+if (Test-Path -Type Container $PSScriptRoot/../../.private/powershell) {
+    . "$PSScriptRoot/../../.private/powershell/profile.ps1"
+}
