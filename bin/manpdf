@@ -31,6 +31,7 @@ function process_man_file -a man_path processed_man_path
     | sed -E -f $XDG_CONFIG_HOME/libexec/manpdf_add_metadata.sed \
     | sed -E -f $XDG_CONFIG_HOME/libexec/manpdf_cleanup_bookmarks.sed \
     | sed -E -e 's#^\.so ([^/].*)$#.so '(path dirname $man_path)'/../\1#p;' \
+    | sed -E -e 's#\\\?\[u201[cd]\]#"#g;' \
     > $processed_man_path
 end
 
