@@ -10,7 +10,7 @@ using namespace System.Text
 # Locale
 [CultureInfo]::CurrentCulture = "en-CA"
 
-# $historyFile = $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+# $HistoryFile = $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 
 # ----------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ function Prompt {
 }
 
 function CustomizeConsole {
-    $Host.UI.RawUI.WindowTitle = ($ShellId, $PSVersionTable.PSVersion -join " ")
+    $Host.UI.RawUI.WindowTitle = ("Windows PowerShell", $PSVersionTable.PSVersion -join " ")
 }
 CustomizeConsole
 
