@@ -18,9 +18,6 @@
     }
   ],
   "settings": {
-    "explorer.fileNesting.patterns": {
-      "*.plist": "${capture}.yaml"
-    },
     "files.associations": {
       "**/ssh*/*.conf": "ssh_config",
       "**/tmux/*.conf": "shellscript",
