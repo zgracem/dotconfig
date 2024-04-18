@@ -1,5 +1,0 @@
-inherit_from: ../rubocop/config.yml
-
-Metrics:
-  Exclude:
-    - "clean_uri.rb"
