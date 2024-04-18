@@ -1,1 +1,44 @@
-{}
+{
+    "colorcolumn": 80,
+    "detectlimit": 16,
+    "diffgutter": true,
+    "divchars": "│─",
+    "ft:fish": {
+        "tabsize": 4
+    },
+    "ft:makefile": {
+        "tabsize": 8,
+        "tabstospaces": false
+    },
+    "ft:markdown": {
+        "rmtrailingws": false,
+        "softwrap": true,
+        "tabsize": 4
+    },
+    "ft:tsv": {
+        "tabsize": 8,
+        "tabstospaces": false
+    },
+    "hlsearch": true,
+    "hltaberrors": true,
+    "hltrailingws": true,
+    "indentchar": "·",
+    "initlua": true,
+    "keepautoindent": true,
+    "linter": false,
+    "matchbracestyle": "highlight",
+    "mkparents": true,
+    "paste": true,
+    "rmtrailingws": true,
+    "savehistory": false,
+    "scrollbar": true,
+    "scrollbarchar": "│",
+    "statusformatl": " $(filename):$(line):$(col) $(modified)",
+    "statusformatr": "$(percentage)% | $(opt:encoding) | $(opt:fileformat) | $(opt:filetype) ",
+    "tabhighlight": true,
+    "tabmovement": true,
+    "tabreverse": false,
+    "tabsize": 2,
+    "tabstospaces": true,
+    "wordwrap": true
+}
