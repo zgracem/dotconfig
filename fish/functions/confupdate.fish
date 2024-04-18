@@ -1,3 +1,3 @@
-function confupdate -d "Update configuration directories from GitHub"
+function confupdate -d "Update configuration from GitHub"
     _confupdate
 end
