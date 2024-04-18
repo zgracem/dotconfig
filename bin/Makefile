@@ -17,7 +17,6 @@ SHIMS += git-browse
 SHIMS += git-cc
 SHIMS += lsregister
 SHIMS += makemp3
-SHIMS += manpdf
 SHIMS += mkvtrim
 SHIMS += nocolor
 SHIMS += PlistBuddy

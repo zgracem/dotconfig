@@ -9,7 +9,6 @@ make -C $XDG_CONFIG_HOME/bin install
 
 ## Utilities
 
-* `manpdf` creates nice PDF man pages, with bookmarks and everything.
 * `relpath` prints the relative path to a file from a given directory.
 * `tbcopy` combines `tee` and `pbcopy`: it reads from standard input and writes
   to both standard output and macOS's clipboard.
