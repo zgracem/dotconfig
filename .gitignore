@@ -17,6 +17,7 @@ brew/**/*.lock.json
 launchd/*.plist
 lynx/helpfile.css
 lynx/helpfile.html
+micro/buffers/
 www/*.css
 
 # unnecessary

@@ -22,6 +22,7 @@ brew "fd"
 brew "jq"
 brew "keychain"
 brew "less"
+brew "micro"
 brew "rename" if OS.mac?
 brew "ripgrep"
 brew "rsync" if OS.mac?
