@@ -7,6 +7,10 @@
 DIR="$(dirname "$(readlink -e "$0")")"
 
 case "$(/usr/bin/uname -a)" in
+  CYGWIN*)
+    echo "Not compatible with this system!" >&2
+    exit 1
+    ;;
   *arm64*)
     HOMEBREW_REPO=/opt/homebrew
     ;;
@@ -53,8 +57,8 @@ for pkg in "${required_pkgs[@]}"; do
   if [[ "$DRY_RUN" != false ]]; then
     echo "[DRY_RUN=$DRY_RUN] brew install $pkg..."
   elif [[ -x $HOMEBREW_REPO/../Cellar/$pkg ]]; then
-    echo "$pkg already installed."
+    echo "$pkg already installed!"
   else
-    brew install $pkg
+    brew install "$pkg"
   fi
 done
