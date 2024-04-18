@@ -2,7 +2,7 @@
   "entries": {
     "cask": {
       "1password-cli": {
-        "version": "2.24.0",
+        "version": "2.27.0",
         "options": {
           "full_name": "1password-cli",
           "args": {
@@ -11,7 +11,7 @@
         }
       },
       "disk-drill": {
-        "version": "5.3.1313",
+        "version": "5.4.1426",
         "options": {
           "full_name": "disk-drill",
           "args": {
@@ -20,7 +20,7 @@
         }
       },
       "dotnet-sdk": {
-        "version": "8.0.100,27a7ece8-f6cd-4cab-89cf-987e85ae6805,2c9ab2cb294143b0533f005640c393da",
+        "version": "8.0.204,7bcf1329-6691-45e9-8fdd-96c65bcabd1f,cb618d2620974fc029e4f758eb267452",
         "options": {
           "full_name": "dotnet-sdk",
           "args": {
@@ -29,7 +29,7 @@
         }
       },
       "file-juicer": {
-        "version": "4.98",
+        "version": "4.99",
         "options": {
           "full_name": "file-juicer",
           "args": {
@@ -56,7 +56,7 @@
         }
       },
       "handbrake": {
-        "version": "1.7.1",
+        "version": "1.7.3",
         "options": {
           "full_name": "handbrake",
           "args": {
@@ -65,7 +65,7 @@
         }
       },
       "kid3": {
-        "version": "3.9.4",
+        "version": "3.9.5",
         "options": {
           "full_name": "kid3",
           "args": {
@@ -92,7 +92,7 @@
         }
       },
       "pdf-expert": {
-        "version": "3.8,1002",
+        "version": "3.10,1039",
         "options": {
           "full_name": "pdf-expert",
           "args": {
@@ -137,7 +137,7 @@
         }
       },
       "vmware-fusion": {
-        "version": "13.5.0,22583790",
+        "version": "13.5.1,23298085",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -155,7 +155,7 @@
         }
       },
       "xact": {
-        "version": "2.50",
+        "version": "2.55",
         "options": {
           "full_name": "xact",
           "args": {
@@ -200,7 +200,7 @@
         }
       },
       "suspicious-package": {
-        "version": "4.3.3,1065.5",
+        "version": "4.4,1088",
         "options": {
           "full_name": "suspicious-package",
           "args": {
@@ -217,15 +217,15 @@
     "mas": {
       "ApolloOne": {
         "id": "1044484672",
-        "version": "3.3.6"
+        "version": "3.4.0"
       },
       "Mactracker": {
         "id": "430255202",
-        "version": "7.12.12"
+        "version": "7.12.14"
       },
       "GarageBand": {
         "id": "682658836",
-        "version": "10.4.10"
+        "version": "10.4.11"
       },
       "iMovie": {
         "id": "408981434",
@@ -233,31 +233,31 @@
       },
       "Keynote": {
         "id": "409183694",
-        "version": "13.2"
+        "version": "14.0"
       },
       "Numbers": {
         "id": "409203825",
-        "version": "13.2"
+        "version": "14.0"
       },
       "Pages": {
         "id": "409201541",
-        "version": "13.2"
+        "version": "14.0"
       },
       "Xcode": {
         "id": "497799835",
-        "version": "15.1"
+        "version": "15.3"
       }
     }
   },
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.0",
+        "HOMEBREW_VERSION": "4.2.18",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
-        "CLT": "15.1.0.0.1.1700200546",
-        "Xcode": "15.1",
-        "macOS": "14.2"
+        "CLT": "15.3.0.0.1.1708646388",
+        "Xcode": "15.3",
+        "macOS": "14.4.1"
       }
     }
   }
