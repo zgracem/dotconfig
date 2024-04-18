@@ -7,6 +7,11 @@ STOW_DIR := $(wildcard ~/opt/stow)
 srcdir := $(STOW_DIR)/.staging
 STOW := cd $(STOW_DIR) && stow
 
+# create config symlink in $HOME
+~/.stow-global-ignore: .stow-global-ignore
+	ln -sfv .config/$< $@
+install: ~/.stow-global-ignore
+
 PACKAGES  =
 PACKAGES += brightness
 PACKAGES += cronic
@@ -20,11 +25,6 @@ PACKAGES += words
 
 .PHONY: $(PACKAGES)
 install: $(PACKAGES)
-
-# create config symlink in $HOME
-~/.stow-global-ignore: .stow-global-ignore
-	ln -sfv .config/$< $@
-install: ~/.stow-global-ignore
 
 # -- brightness utility --------------------------------------------------------
 
