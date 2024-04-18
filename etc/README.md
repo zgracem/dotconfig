@@ -5,7 +5,7 @@ by various `Makefile`s.
 
 ## man.conf(5)
 
-Install custom paths and tools for [`man.conf(5)`] in `/etc`.
+Installs custom paths and tools for [man.conf(5)] in `/etc`.
 
 macOS-only; assumes Homebrew installed in `/usr/local` w/ a bunch of packages.
 
@@ -13,7 +13,7 @@ macOS-only; assumes Homebrew installed in `/usr/local` w/ a bunch of packages.
 make -C $XDG_CONFIG_HOME/etc/man.conf install
 ```
 
-[`man.conf(5)`]: https://man.openbsd.org/man.conf.5
+[man.conf(5)]: https://man.openbsd.org/man.conf.5
 
 ## dnsmasq
 
@@ -27,7 +27,7 @@ make -C $XDG_CONFIG_HOME/etc/dnsmasq install
 
 ## pam-watchid
 
-Installs a [PAM plugin] to allow `sudo` authentication via Apple Watch.
+Installs a [PAM plugin] to allow `sudo` authentication via Apple Watch. ⌚️
 
 Must be re-installed after every OS update.
 
@@ -39,20 +39,22 @@ make -C $XDG_CONFIG_HOME/etc/pam.d install
 
 ## ssh_config(5) & sshd_config(5)
 
-Installs custom SSH configuration into `/etc/{ssh,sshd}_config.d`, mostly as recommended by [this venerable wisdom][sssh].
+Installs custom [ssh_config(5)] and [sshd_config(5)] files into `/etc/{ssh,sshd}_config.d`, mostly per [this venerable wisdom][sssh].
 
 ```sh
 make -C $XDG_CONFIG_HOME/etc/ssh install
 ```
 
+[ssh_config(5)]: https://linux.die.net/man/5/ssh_config
+[sshd_config(5)]: https://linux.die.net/man/5/sshd_config
 [sssh]: https://stribika.github.io/2015/01/04/secure-secure-shell.html
 
 ## sudoers(5)
 
-Installs a custom [`sudoers(5)`] configuration for me in `/etc/sudoers.d`.
+Installs a custom [sudoers(5)] configuration for me in `/etc/sudoers.d`.
 
 ```sh
 make -C $XDG_CONFIG_HOME/etc/sudoers.d install
 ```
 
-[`sudoers(5)`]: https://linux.die.net/man/5/sudoers
+[sudoers(5)]: https://linux.die.net/man/5/sudoers
