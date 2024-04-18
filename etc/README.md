@@ -7,10 +7,10 @@ by various `Makefile`s.
 
 Install custom paths and tools for [`man.conf(5)`] in `/etc`.
 
-macOS-only; assumes Homebrew installed in `/usr/local` + a bunch of packages.
+macOS-only; assumes Homebrew installed in `/usr/local` w/ a bunch of packages.
 
 ```sh
-make -C $XDG_CONFIG_HOME/etc install
+make -C $XDG_CONFIG_HOME/etc/man.conf install
 ```
 
 [`man.conf(5)`]: https://man.openbsd.org/man.conf.5
