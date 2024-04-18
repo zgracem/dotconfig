@@ -1,4 +1,58 @@
 # ~/.config/etc
 
-This folder contains files that are installed to `/etc/` and `/usr/local/etc`
+This folder contains files that are installed to `/etc` and `/usr/local/etc`
 by various `Makefile`s.
+
+## man.conf(5)
+
+Install custom paths and tools for [`man.conf(5)`] in `/etc`.
+
+macOS-only; assumes Homebrew installed in `/usr/local` + a bunch of packages.
+
+```sh
+make -C $XDG_CONFIG_HOME/etc install
+```
+
+[`man.conf(5)`]: https://man.openbsd.org/man.conf.5
+
+## dnsmasq
+
+Installs [dnsmasq] configuration to `/etc/dnsmasq.d` and `/etc/resolver` which enables a local `.test` TLD on my home network. My browser history is much more navigable with `foo.test`, `bar.test`, `baz.test` vs. a billion entries all under `localhost`.
+
+```sh
+make -C $XDG_CONFIG_HOME/etc/dnsmasq install
+```
+
+[dnsmasq]: https://dnsmasq.org/doc.html
+
+## pam-watchid
+
+Installs a [PAM plugin] to allow `sudo` authentication via Apple Watch.
+
+Must be re-installed after every OS update.
+
+```sh
+make -C $XDG_CONFIG_HOME/etc/pam.d install
+```
+
+[PAM plugin]: https://github.com/zgracem/pam-watchid
+
+## ssh_config(5) & sshd_config(5)
+
+Installs custom SSH configuration into `/etc/{ssh,sshd}_config.d`, mostly as recommended by [this venerable wisdom][sssh].
+
+```sh
+make -C $XDG_CONFIG_HOME/etc/ssh install
+```
+
+[sssh]: https://stribika.github.io/2015/01/04/secure-secure-shell.html
+
+## sudoers(5)
+
+Installs a custom [`sudoers(5)`] configuration for me in `/etc/sudoers.d`.
+
+```sh
+make -C $XDG_CONFIG_HOME/etc/sudoers.d install
+```
+
+[`sudoers(5)`]: https://linux.die.net/man/5/sudoers
