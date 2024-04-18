@@ -1,7 +1,9 @@
 # ~/.config/etc
 
-This folder contains files that are installed to `/etc` and `/usr/local/etc`
-by various `Makefile`s.
+<!-- spellcheck-off -->
+
+This folder contains files that are installed to `/etc` and `/usr/local/etc` by
+various `Makefile`s.
 
 ## man.conf(5)
 
@@ -17,7 +19,10 @@ make -C $XDG_CONFIG_HOME/etc/man.conf install
 
 ## dnsmasq
 
-Installs [dnsmasq] configuration to `/etc/dnsmasq.d` and `/etc/resolver` which enables a local `.test` TLD on my home network. My browser history is much more navigable with `foo.test`, `bar.test`, `baz.test` vs. a billion entries all under `localhost`.
+Installs [dnsmasq] configuration to `/etc/dnsmasq.d` and `/etc/resolver` which
+enables a local `.test` TLD on my home network. My browser history is much more
+navigable with `foo.test`, `bar.test`, `baz.test` vs. a billion entries all
+under `localhost`.
 
 ```sh
 make -C $XDG_CONFIG_HOME/etc/dnsmasq install
@@ -39,7 +44,8 @@ make -C $XDG_CONFIG_HOME/etc/pam.d install
 
 ## ssh_config(5) & sshd_config(5)
 
-Installs custom [ssh_config(5)] and [sshd_config(5)] files into `/etc/{ssh,sshd}_config.d`, mostly per [this venerable wisdom][sssh].
+Installs custom [ssh_config(5)] and [sshd_config(5)] files into
+`/etc/{ssh,sshd}_config.d`, mostly per [this venerable wisdom][sssh].
 
 ```sh
 make -C $XDG_CONFIG_HOME/etc/ssh install
