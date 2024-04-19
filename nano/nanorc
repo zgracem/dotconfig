@@ -1,0 +1,16 @@
+# ~/.config/nano/nanorc
+
+set atblanks # soft wrap at whitespace
+set autoindent
+set linenumbers
+set mouse
+set noconvert
+set nohelp
+set quickblank
+set smarthome
+set softwrap
+set tabsize 4
+set tabstospaces
+set trimblanks
+set whitespace "→⋅"
+unset breaklonglines
