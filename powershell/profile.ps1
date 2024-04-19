@@ -10,8 +10,6 @@ using namespace System.Text
 # Locale
 [CultureInfo]::CurrentCulture = "en-CA"
 
-# $HistoryFile = $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
-
 # ----------------------------------------------------------------------------
 
 $env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
@@ -66,7 +64,7 @@ $global:IsAdmin = if ($IsWindows) {
     $local:CurrentUser.IsInRole([Principal.WindowsBuiltInRole]::Administrator)
 } elseif ($IsMacOS) {
     $local:uid = $(id -u)
-    $local:uid -eq 0 -or $local:uid -eq 501
+    $local:uid -eq 0 # -or $local:uid -eq 501
 } elseif ($IsLinux) {
     $local:uid = $(id -u)
     $local:uid -eq 0
@@ -89,12 +87,12 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 
 function Prompt {
-    $local:CurrentPath = [string] ""
+    $local:ThisDir = [string] ""
     $local:Sigil = [string] ">"
     $local:SigilColour = $PSStyle.Foreground.Blue
 
     # Use ProviderPath if there's no drive defined for the location provider.
-    $CurrentPath = if ($executionContext.SessionState.Path.CurrentLocation.Drive) {
+    $ThisDir = if ($executionContext.SessionState.Path.CurrentLocation.Drive) {
         $executionContext.SessionState.Path.CurrentLocation.Path
     }
     else {
@@ -102,15 +100,25 @@ function Prompt {
     }
 
     # Replace path to home directory with `~`
-    if ($CurrentPath -like "$Home*") { $CurrentPath = $CurrentPath.Replace($Home, '~') }
+    if ($ThisDir -like "$Home*") {
+        $ThisDir = $ThisDir.Replace($Home, '~')
+    }
     # Reverse backslashes
-    $CurrentPath = $CurrentPath.Replace([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+    $ThisDir = $ThisDir.Replace(
+        [System.IO.Path]::DirectorySeparatorChar,
+        [System.IO.Path]::AltDirectorySeparatorChar)
 
-    if ($global:IsAdmin -eq $true) { $SigilColour = $PSStyle.Foreground.Blue }
+    if ($global:IsAdmin -eq $true) {
+        $Sigil = "!>"
+        $SigilColour = $PSStyle.Foreground.Red
+    }
 
-    $Sigil = $SigilColour + ($Sigil * ($nestedPromptLevel + 1)) + $PSStyle.Reset
+    $ThisDir = $PSStyle.Foreground.White + $ThisDir + $PSStyle.Reset
 
-    Return ($PSStyle.Reset + $CurrentPath + " " + $Sigil + " ")
+    # $Sigil = $SigilColour + ($Sigil * ($nestedPromptLevel + 1)) + $PSStyle.Reset
+    $Sigil = $SigilColour + $Sigil + $PSStyle.Reset
+
+    Return ($PSStyle.Reset + $ThisDir + " " + $Sigil + " ")
 }
 
 function CustomizeConsole {
