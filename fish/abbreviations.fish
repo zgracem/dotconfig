@@ -28,7 +28,7 @@ abbr --add -- "--" nextd
 abbr --add cp "cp -vai" # preserve attributes; ask before clobbering; verbose
 abbr --add file "file -p" # don't touch last-accessed time
 abbr --add killall "killall -v"
-abbr --add ln "ln -v"
+abbr --add ln "ln -sv"
 abbr --add mkdir "mkdir -pv"
 abbr --add rename "rename -v"
 abbr --add stow "stow -v"
