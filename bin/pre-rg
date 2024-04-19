@@ -2,8 +2,10 @@
 
 switch $argv[1]
     case '*.pdf'
+        # `brew install poppler`
         exec pdftotext $argv[1] -
     case '*.jpg' '*.gif' '*.png'
+        # <https://github.com/latorante/cli-macos-ocr>
         exec ocr-cli --accurate --language-correction $argv[1]
     case '*'
         exec cat $argv
