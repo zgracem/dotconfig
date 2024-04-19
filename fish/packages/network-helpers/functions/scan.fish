@@ -54,9 +54,6 @@ function scan --description 'Scan for network information'
         case ssh
             # List all SSH-enabled hosts on the current domain
             dns-sd -B _ssh._tcp
-        case wifi
-            # List all public SSIDs nearby
-            airport -s
         case ''
             _scan_usage $argv[1]
             return 1
