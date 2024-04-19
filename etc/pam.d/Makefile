@@ -6,7 +6,7 @@ prefix ?= /usr/local
 
 include ../../common.mk
 
-PAM_DIR := $(libdir)/pam
+PAM_DIR := $(libdir)/pam # /usr/local/lib/pam
 PAM_REPO := zgracem/pam-watchid
 
 install: /etc/pam.d/sudo

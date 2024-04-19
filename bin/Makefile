@@ -7,6 +7,7 @@ datarootdir := $(XDG_DATA_HOME)
 include ../common.mk
 
 SHIMS  =
+SHIMS += bat
 SHIMS += brew-env
 SHIMS += brew-url
 SHIMS += code

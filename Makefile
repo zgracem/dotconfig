@@ -1,5 +1,3 @@
-datarootdir := $(XDG_DATA_HOME)
-
 include common.mk
 
 install:
