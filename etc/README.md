@@ -3,15 +3,16 @@
 <!-- spellcheck-off -->
 
 This folder contains files that are installed to `/etc` and `/usr/local/etc` by
-various `Makefile`s.
+various Makefiles.
 
 ## man.conf(5)
 
 Installs custom paths and tools for [man.conf(5)] in `/etc`.
 
-macOS-only; assumes Homebrew installed in `/usr/local` w/ a bunch of packages.
+macOS-only; assumes Homebrew installed in `/usr/local`.
 
 ```sh
+brew install diffutils groff less xz
 make -C $XDG_CONFIG_HOME/etc/man.conf install
 ```
 
@@ -25,6 +26,7 @@ navigable with `foo.test`, `bar.test`, `baz.test` vs. a billion entries all
 under `localhost`.
 
 ```sh
+brew install dnsmasq
 make -C $XDG_CONFIG_HOME/etc/dnsmasq install
 ```
 
