@@ -34,7 +34,7 @@ make -C $XDG_CONFIG_HOME/etc/dnsmasq install
 
 ## pam-watchid
 
-Installs a [PAM plugin] to allow `sudo` authentication via Apple Watch. ⌚️
+Installs a [pam(8) plugin] to allow `sudo` authentication via Apple Watch. ⌚️
 
 Must be re-installed after every OS update.
 
@@ -42,7 +42,7 @@ Must be re-installed after every OS update.
 make -C $XDG_CONFIG_HOME/etc/pam.d install
 ```
 
-[PAM plugin]: https://github.com/zgracem/pam-watchid
+[pam(8) plugin]: https://github.com/zgracem/pam-watchid
 
 ## ssh_config(5) & sshd_config(5)
 
