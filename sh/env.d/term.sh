@@ -17,18 +17,12 @@ else
   # Darwin's full-screen system console
   if [ "$OLDTERM" = "vt100" ] && [ "$PLATFORM" = "mac" ] && [ "$(tty)" = "/dev/console" ]; then
     TERM=xnuppc
-    export HV_DISABLE_PP=1
   fi
 
   # mintty
   if [ "$OLDTERM" = "mintty-256color" ] || [ "$MSYSCON" = "mintty.exe" ] || command ps -p "$PPID" 2>&1 | grep -q mintty; then
     TERM_PROGRAM=mintty
-    TERM=xterm-256color
-  fi
-
-  # Cathode.app
-  if [ "$TERMKIT_HOST_APP" = "Cathode" ]; then
-    TERM_PROGRAM="Cathode"
+    TERM=mintty
   fi
 
   # Visual Studio Code
@@ -77,9 +71,7 @@ else
 
     # iTerm.app
     elif [ "$TERM_PROGRAM" = "iTerm.app" ] && [ "$OLDTERM" != "iTerm.app" ]; then
-      ### ZGM disabled 2018-10-07 -- terminfo is broken :(
-      # TERM="iTerm2.app"
-      TERM="xterm-256color"
+      TERM="iTerm2.app"
     fi
   fi
 
@@ -104,7 +96,7 @@ if [ -z "$PTERM" ]; then
         PTERM=iTerm2.app
         ;;
       mintty)
-        PTERM=xterm-256color
+        PTERM=mintty
         ;;
       PuTTY)
         PTERM=putty-256color
