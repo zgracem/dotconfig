@@ -24,8 +24,7 @@
       "**/vim/vimrc": "viml"
     },
     "files.exclude": {
-      ".git{attributes,modules}": true,
-      "pdf/": true
+      ".git{attributes,modules}": true
     },
     "powershell.cwd": "~/.config",
     "rubyLsp.enabledFeatures": {},

@@ -7,5 +7,4 @@ function httpserve --description "Start an HTTP server in the current directory"
     set -l url "http://localhost:$port"
     echo "Starting server at $url ..."
     ruby -run -e httpd -- --port $port .
-    set -q SSH_CONNECTION; or open $url
 end
