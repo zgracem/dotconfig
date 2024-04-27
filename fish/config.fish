@@ -27,7 +27,8 @@ set -p fish_function_path "$HOME/.private/fish/functions"
 set -p fish_complete_path "$__fish_config_dir/completions"
 
 # load private and per-machine configuration if available
-set -ga fish_package_path "$XDG_CONFIG_HOME/local/$hostname/fish"
+set -l short_host (string replace -r '\.local$' '' $hostname)
+set -ga fish_package_path "$XDG_CONFIG_HOME/local/$short_host/fish"
 set -ga fish_package_path "$HOME/.private/fish"
 
 # activate custom prompt
