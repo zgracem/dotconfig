@@ -1,8 +1,12 @@
-# `~/.local/share/mailcap`
+# `~/.config/mailcap/mailcap`
 
 Used by command-line email clients.
 
 ```sh
-make -C $XDG_CONFIG_HOME/mailcap install
-export MAILCAPS=$XDG_DATA_HOME/mailcap
+export MAILCAPS=$XDG_CONFIG_HOME/mailcap/mailcap
 ```
+
+## Reference
+
+* <https://man.archlinux.org/man/mailcap.5.en>
+* <https://lynx.invisible-island.net/lynx2.8.9/breakout/samples/mailcap>

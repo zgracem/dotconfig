@@ -37,8 +37,4 @@ if contains -- maestral/.mignore $staged_files
     make -s -C $XDG_CONFIG_HOME/maestral ~/Dropbox/.mignore; or exit
 end
 
-if contains -- mailcap/mailcap $staged_files
-    make -s -C $XDG_CONFIG_HOME/mailcap; or exit
-end
-
 true

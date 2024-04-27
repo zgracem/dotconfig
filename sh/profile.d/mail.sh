@@ -8,7 +8,7 @@ else
   unset -v MAIL
 fi
 
-MAILCAPS="$XDG_DATA_HOME/mailcap"
+MAILCAPS="$XDG_CONFIG_HOME/mailcap/mailcap"
 if [ -d "$MAILCAPS" ]; then
   export MAILCAPS
 else
