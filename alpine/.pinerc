@@ -1,0 +1,652 @@
+# -----------------------------------------------------------------------------
+# Alpine configuration file
+# Individual mail accounts are specified in ~/.private/alpine/.pinerc-*
+# -----------------------------------------------------------------------------
+
+sort-key=tHread/Reverse
+incoming-startup-rule=first
+pruning-rule=no-no
+folder-reopen-rule=yes-yes
+threading-index-style=coll
+display-character-set=UTF-8
+editor=/usr/local/bin/micro
+speller="/usr/local/bin/aspell -c -x"
+composer-wrap-column=80
+reply-leadin="On _DATEISO_ at _TIME24_, _FROM_ wrote:_NEWLINE_"
+index-format=FULLSTATUS MSGNO SMARTDATETIME24 FROMORTO(33%) SIZENARROW SUBJKEYTEXT(67%)
+opening-text-separator-chars=" -- "
+mail-check-interval=60
+mailcap-search-path=$MAILCAPS
+mimetype-search-path=~/opt/etc/pygopherd/conf/mime.types:/etc/pygopherd/mime.types:/etc/mime.types
+user-certs-path=/usr/local/etc/ca-certificates
+user-certs-file=/usr/local/etc/ca-certificates/cert.pem
+url-viewers=/usr/local/bin/lynx
+dead-letter-files=0
+address-book=~/.private/alpine/addressbook
+user-input-timeout=1
+color-style=force-xterm-256color
+current-indexline-style=flip-colors
+titlebar-color-style=default
+mailcap-check-interval=5
+
+last-version-used=6.26
+last-time-prune-questioned=124.4
+
+# List of features; see Alpine's Setup/options menu for the current set.
+# e.g. feature-list= select-without-confirm, signature-at-bottom
+# Default condition for all of the features is no-.
+feature-list=no-alternate-compose-menu,
+	busy-cue-spinner-only,
+	compose-cut-from-cursor,
+	compose-rejects-unqualified-addrs,
+	compose-send-offers-first-filter,
+	convert-dates-to-localtime,
+	copy-to-address-to-from-if-it-is-us,
+	disable-sender,
+	enable-alternate-editor-cmd,
+	no-enable-alternate-editor-implicitly,
+	enable-background-sending,
+	enable-cruise-mode,
+	enable-dot-files,
+	enable-full-header-and-text,
+	enable-mail-check-cue,
+	enable-mouse-in-xterm,
+	enable-msg-view-addresses,
+	enable-msg-view-attachments,
+	enable-msg-view-urls,
+	enable-suspend,
+	expose-hidden-config,
+	expunge-only-manually,
+	expunge-without-confirm-everywhere,
+	expunge-without-confirm,
+	no-force-arrow-cursor,
+	no-include-text-in-reply,
+	mark-fcc-seen,
+	mark-for-cc,
+	prefer-plain-text,
+	quell-charset-warning,
+	quell-dead-letter-on-cancel,
+	no-quell-empty-directories,
+	quell-status-message-beeping,
+	quell-user-lookup-in-passwd-file,
+	quit-without-confirm,
+	quote-replace-nonflowed,
+	reply-always-uses-reply-to,
+	return-to-inbox-without-confirm,
+	save-aggregates-copy-sequence,
+	show-cursor,
+	show-plain-text-internally,
+	signature-at-bottom,
+	single-column-folder-list,
+	slash-collapses-entire-thread,
+	smime-dont-do-smime,
+	strip-from-sigdashes-on-reply,
+	strip-whitespace-before-send,
+	thread-index-shows-important-color,
+	thread-sorts-by-arrival,
+	vertical-folder-list,
+	warn-if-blank-subject
+
+threading-display-style=struct
+
+# Choose: black, blue, green, cyan, red, magenta, yellow, or white.
+normal-foreground-color=transparent
+normal-background-color=transparent
+reverse-foreground-color=
+reverse-background-color=
+title-foreground-color=black
+title-background-color=white
+title-closed-foreground-color=black
+title-closed-background-color=255,000,000
+folder-foreground-color=
+folder-background-color=
+directory-foreground-color=
+directory-background-color=
+folder-list-text-foreground-color=
+folder-list-text-background-color=
+status-foreground-color=
+status-background-color=
+keylabel-foreground-color=
+keylabel-background-color=
+keyname-foreground-color=255,255,255
+keyname-background-color=000,000,000
+selectable-item-foreground-color=
+selectable-item-background-color=
+meta-message-foreground-color=black
+meta-message-background-color=blue
+quote1-foreground-color=blue
+quote1-background-color=transparent
+quote2-foreground-color=green
+quote2-background-color=transparent
+quote3-foreground-color=magenta
+quote3-background-color=transparent
+incoming-unseen-foreground-color=
+incoming-unseen-background-color=
+signature-foreground-color=255,255,255
+signature-background-color=transparent
+prompt-foreground-color=
+prompt-background-color=
+header-general-foreground-color=255,255,255
+header-general-background-color=transparent
+index-to-me-foreground-color=000,255,255
+index-to-me-background-color=transparent
+index-important-foreground-color=255,255,000
+index-important-background-color=transparent
+index-deleted-foreground-color=174,000,000
+index-deleted-background-color=transparent
+index-answered-foreground-color=000,255,000
+index-answered-background-color=transparent
+index-new-foreground-color=000,000,255
+index-new-background-color=transparent
+index-recent-foreground-color=
+index-recent-background-color=
+index-forward-foreground-color=
+index-forward-background-color=
+index-unseen-foreground-color=
+index-unseen-background-color=
+index-highpriority-foreground-color=
+index-highpriority-background-color=
+index-lowpriority-foreground-color=
+index-lowpriority-background-color=
+index-arrow-foreground-color=
+index-arrow-background-color=
+index-subject-foreground-color=
+index-subject-background-color=
+index-from-foreground-color=
+index-from-background-color=
+index-opening-foreground-color=064,064,064
+index-opening-background-color=transparent
+
+# ----------------------------------------------------------------------------
+# defaults
+# ----------------------------------------------------------------------------
+
+# Over-rides your full name from Unix password file. Required for PC-Alpine.
+personal-name=
+
+# Sets domain part of From: and local addresses in outgoing mail.
+user-domain=
+
+# List of SMTP servers for sending mail. If blank: Unix Alpine uses sendmail.
+smtp-server=
+
+# NNTP server for posting news. Also sets news-collections for news reading.
+nntp-server=
+
+# Path of (local or remote) INBOX, e.g. ={mail.somewhere.edu}inbox
+# Normal Unix default is the local INBOX (usually /usr/spool/mail/$USER).
+inbox-path=
+
+# List of folder pairs; the first indicates a folder to archive, and the
+# second indicates the folder read messages in the first should
+# be moved to.
+incoming-archive-folders=
+
+# List of folders, assumed to be in first folder collection,
+# offered for pruning each month.  For example: mumble
+pruned-folders=
+
+# Over-rides default path for sent-mail folder, e.g. =old-mail (using first
+# folder collection dir) or ={host2}sent-mail or ="" (to suppress saving).
+# Default: sent-mail (Unix) or SENTMAIL.MTX (PC) in default folder collection.
+default-fcc=
+
+# Over-rides default path for saved-msg folder, e.g. =saved-messages (using 1st
+# folder collection dir) or ={host2}saved-mail or ="" (to suppress saving).
+# Default: saved-messages (Unix) or SAVEMAIL.MTX (PC) in default collection.
+default-saved-msg-folder=
+
+# Over-rides default path for postponed messages folder, e.g. =pm (which uses
+# first folder collection dir) or ={host4}pm (using home dir on host4).
+# Default: postponed-msgs (Unix) or POSTPOND.MTX (PC) in default fldr coltn.
+postponed-folder=
+
+# If set, specifies where already-read messages will be moved upon quitting.
+read-message-folder=
+
+# If set, specifies where form letters should be stored.
+form-letter-folder=
+
+# If set, specifies where trash is moved to in Web Alpine.
+trash-folder=
+
+# Contains the actual signature contents as opposed to the signature filename.
+# If defined, this overrides the signature-file. Default is undefined.
+literal-signature=
+
+# Over-rides default path for signature file. Default is ~/.signature
+signature-file=
+
+# Alpine executes these keys upon startup (e.g. to view msg 13: i,j,1,3,CR,v)
+initial-keystroke-list=
+
+# Only show these headers (by default) when composing messages
+default-composer-hdrs=
+
+# Add these customized headers (and possible default values) when composing
+customized-hdrs=
+
+# When viewing messages, include this list of headers
+viewer-hdrs=
+
+# When viewing messages, number of blank spaces between left display edge and text
+viewer-margin-left=
+
+# When viewing messages, number of blank spaces between right display edge and text
+viewer-margin-right=
+
+# When viewing messages, number of lines of quote displayed before suppressing
+quote-suppression-threshold=
+
+# Determines default folder name for Saves...
+# Choices: default-folder, by-sender, by-from, by-recipient, last-folder-used.
+# Default: "default-folder", i.e. "saved-messages" (Unix) or "SAVEMAIL" (PC).
+saved-msg-name-rule=
+
+# Determines default name for Fcc...
+# Choices: default-fcc, by-recipient, last-fcc-used.
+# Default: "default-fcc" (see also "default-fcc=" variable.)
+fcc-name-rule=
+
+# Sets presentation order of address book entries. Choices: dont-sort,
+# fullname-with-lists-last, fullname, nickname-with-lists-last, nickname
+# Default: "fullname-with-lists-last".
+addrbook-sort-rule=
+
+# Sets presentation order of folder list entries. Choices: alphabetical,
+# alpha-with-dirs-last, alpha-with-dirs-first.
+# Default: "alpha-with-directories-last".
+folder-sort-rule=
+
+# Sets the default folder and collection offered at the Goto Command's prompt.
+goto-default-rule=
+
+# When threading, character used to indicate collapsed messages underneath.
+threading-indicator-character=
+
+# When threading, character used to indicate expanded messages underneath.
+threading-expanded-character=
+
+# When threading, character used to indicate this is the last reply
+# to the parent of this message.
+threading-lastreply-character=
+
+# Reflects capabilities of the keyboard you have.
+# If unset, the default is to use the same value
+# used for the display-character-set.
+keyboard-character-set=
+
+# Defaults to UTF-8. This is used for outgoing messages.
+# It is usually correct to leave this unset.
+posting-character-set=
+
+# Defaults to nothing, which is equivalent to US-ASCII. This is used for
+# unlabeled incoming messages. It is ok to leave this unset but if you receive
+# unlabeled mail that is usually in some known character set, set that here.
+unknown-character-set=
+
+# Specifies the string to insert when replying to a message.
+reply-indent-string=
+
+# Specifies the string to replace quotes with when viewing a message.
+quote-replace-string=
+
+# When these characters appear in the middle of a word in the composer
+# the forward word function will stop at the first text following (as happens
+# with SPACE characters by default)
+composer-word-separators=
+
+# Specifies the string to use when sending a  message with no to or cc.
+empty-header-message=
+
+# Program to view images (e.g. GIF or TIFF attachments).
+image-viewer=
+
+# If "user-domain" not set, strips hostname in FROM address. (Unix only)
+use-only-domain-name=
+
+# This variable takes a list of programs that message text is piped into
+# after MIME decoding, prior to display.
+display-filters=
+
+# This defines a program that message text is piped into before MIME
+# encoding, prior to sending
+sending-filters=
+
+# A list of alternate addresses the user is known by
+alt-addresses=
+
+# A list of keywords for use in categorizing messages
+keywords=
+
+# Characters which surround keywords in SUBJKEY token.
+# Default is "{" "} "
+keyword-surrounding-chars=
+
+# This is a list of formats for address books.  Each entry in the list is made
+# up of space-delimited tokens telling which fields are displayed and in
+# which order.  See help text
+addressbook-formats=
+
+# The number of lines of overlap when scrolling through message text
+viewer-overlap=
+
+# Number of lines from top and bottom of screen where single
+# line scrolling occurs.
+scroll-margin=
+
+# The number of seconds to sleep after writing a status message
+status-message-delay=
+
+# Number of times per-second to update busy cue messages
+busy-cue-rate=
+
+# The approximate number of seconds between checks for new mail in folders
+# other than the current folder and inbox.
+# Default is same as mail-check-interval
+mail-check-interval-noncurrent=
+
+# The minimum number of seconds between checks for new mail in a Mail Drop.
+# This is always effectively at least as large as the mail-check-interval
+maildrop-check-minimum=
+
+# For newsgroups accessed using NNTP, only messages numbered in the range
+# lastmsg-range+1 to lastmsg will be considered
+nntp-range=
+
+# Full path and name of NEWSRC file
+newsrc-path=
+
+# Path and filename of news configuration's active file.
+# The default is typically "/usr/lib/news/active".
+news-active-file-path=
+
+# Directory containing system's news data.
+# The default is typically "/usr/spool/news"
+news-spool-directory=
+
+# Path and filename of the program used to upload text from your terminal
+# emulator's into Alpine's composer.
+upload-command=
+
+# Text sent to terminal emulator prior to invoking the program defined by
+# the upload-command variable.
+# Note: _FILE_ will be replaced with the temporary file used in the upload.
+upload-command-prefix=
+
+# Path and filename of the program used to download text via your terminal
+# emulator from Alpine's export and save commands.
+download-command=
+
+# Text sent to terminal emulator prior to invoking the program defined by
+# the download-command variable.
+# Note: _FILE_ will be replaced with the temporary file used in the download.
+download-command-prefix=
+
+# Sets the path for the system ssl certificates issued by a trusted
+# certificate authority. Note that this could be a list of paths, if the same
+# pinerc is used in different systems. Alpine always chooses the first one that
+# it finds. Value must be an absolute path.
+system-certs-path=
+
+# Sets the path for the system ssl file container of certificates issued by a
+# certificate authority. Note that this could be a list of container files,
+# if the same pinerc is used in different systems. Alpine always chooses the,
+# first one that it finds. Value must be an absolute path.
+system-certs-file=
+
+# Colon separated list of ciphers that should be negotiated with the remote
+# ssl server upon connection.
+ssl-ciphers=
+
+# List of directories that are preferred locations to save or export attachments.
+default-directories=
+
+# The maximum number of non-stayopen remote connections that Alpine will use
+max-remote-connections=
+
+# A list of folders that should be left open once opened (INBOX is implicit)
+stay-open-folders=
+
+# Sets the time in seconds that Alpine will attempt to open a network
+# connection when checking for new unseen messages in an incoming folder.
+#  The default is 5.
+incoming-check-timeout=
+
+# Sets the approximate number of seconds between checks for unseen messages
+# in incoming folders. The default is 180.
+incoming-check-interval=
+
+# Sets the approximate number of seconds between checks for unseen messages
+# for other than local or IMAP folders. The default is 180.
+incoming-check-interval-secondary=
+
+# List of incoming folders to check for unseen messages. The default if left
+# blank is to check all incoming folders.
+incoming-check-list=
+
+# Sets the filename for the newmail fifo (named pipe). Unix only.
+newmail-fifo-path=
+
+# Sets the width for the NewMail screen.
+newmail-window-width=
+
+# List of incoming msg folders besides INBOX, e.g. ={host2}inbox, {host3}inbox
+# Syntax: optnl-label {optnl-imap-host-name}folder-path
+incoming-folders=
+
+# List of directories where saved-message folders may be. First one is
+# the default for Saves. Example: Main {host1}mail/[], Desktop mail\[]
+# Syntax: optnl-label {optnl-imap-hostname}optnl-directory-path[]
+folder-collections=
+
+# List, only needed if nntp-server not set, or news is on a different host
+# than used for NNTP posting. Examples: News *[] or News *{host3/nntp}[]
+# Syntax: optnl-label *{news-host/protocol}[]
+news-collections=
+
+# List of file or path names for global/shared addressbook(s).
+# Default: none
+# Syntax: optnl-label path-name
+global-address-book=
+
+# This names the path to an alternative program, and any necessary arguments,
+# to be used in posting mail messages.  Example:
+#                    /usr/lib/sendmail -oem -t -oi
+# or,
+#                    /usr/local/bin/sendit.sh
+# The latter a script found in Alpine distribution's contrib/util directory.
+# NOTE: The program MUST read the message to be posted on standard input,
+#       AND operate in the style of sendmail's "-t" option.
+sendmail-path=
+
+# This names the root of the tree to which the user is restricted when reading
+# and writing folders and files.  For example, on Unix ~/work confines the
+# user to the subtree beginning with their work subdirectory.
+# (Note: this alone is not sufficient for preventing access.  You will also
+# need to restrict shell access and so on, see Alpine Technical Notes.)
+# Default: not set (so no restriction)
+operating-dir=
+
+# Sets the time in seconds that Alpine will attempt to open a network
+# connection.  The default is 30, the minimum is 5, and the maximum is
+# system defined (typically 75).
+tcp-open-timeout=
+
+# Network read warning timeout. The default is 15, the minimum is 5, and the
+# maximum is 1000.
+tcp-read-warning-timeout=
+
+# Network write warning timeout. The default is 0 (unset), the minimum
+# is 5 (if not 0), and the maximum is 1000.
+tcp-write-warning-timeout=
+
+# If this much time has elapsed at the time of a tcp read or write
+# timeout, Alpine will ask if you want to break the connection.
+# Default is 60 seconds, minimum is 5, maximum is 1000.
+tcp-query-timeout=
+
+# If this much time has elapsed at the time of a tcp read or write timeout,
+# Alpine will close the connection automatically without user intervention.
+# Setting this value to zero (the default) disables this. Setting this variable
+# to a smaller value than tcp-query-timeout will close the connection
+# automatically, and you will never be asked if you want to wait.
+close-connection-timeout=
+
+# Sets the format of the command used to open a UNIX remote
+# shell connection.  The default is "%s %s -l %s exec /etc/r%sd"
+# NOTE: the 4 (four) "%s" entries MUST exist in the provided command
+# where the first is for the command's path, the second is for the
+# host to connect to, the third is for the user to connect as, and the
+# fourth is for the connection method (typically "imap")
+rsh-command=
+
+# Sets the name of the command used to open a UNIX remote shell connection.
+# The default is typically /usr/ucb/rsh.
+rsh-path=
+
+# Sets the time in seconds that Alpine will attempt to open a UNIX remote
+# shell connection.  The default is 15, min is 5, and max is unlimited.
+# Zero disables rsh altogether.
+rsh-open-timeout=
+
+# Sets the format of the command used to open a UNIX secure
+# shell connection.  The default is "%s %s -l %s exec /etc/r%sd"
+# NOTE: the 4 (four) "%s" entries MUST exist in the provided command
+# where the first is for the command's path, the second is for the
+# host to connect to, the third is for the user to connect as, and the
+# fourth is for the connection method (typically "imap")
+ssh-command=
+
+# Sets the name of the command used to open a UNIX secure shell connection.
+# Typically this is /usr/bin/ssh.
+ssh-path=
+
+# Sets the time in seconds that Alpine will attempt to open a UNIX secure
+# shell connection.  The default is 15, min is 5, and max is unlimited.
+# Zero disables ssh altogether.
+ssh-open-timeout=
+
+# Sets the version number Alpine will use as a threshold for offering
+# its new version message on startup.
+new-version-threshold=
+
+# List of mail drivers to disable.
+disable-these-drivers=
+
+# List of SASL authenticators to disable.
+disable-these-authenticators=
+
+# A range in the form min,max that sets the minimum amd maximum versions of the
+# SSL protocol that Alpine will use when connecting to a secure server.
+encryption-protocol-range=
+
+# Set by Alpine; contains data for caching remote address books.
+remote-abook-metafile=
+
+# How many extra copies of remote address book should be kept. Default: 3
+remote-abook-history=
+
+# Minimum number of minutes between checks for remote address book changes.
+# 0 means never check except when opening a remote address book.
+# -1 means never check. Default: 5
+remote-abook-validity=
+
+# Your default printer selection
+printer=
+
+# List of special print commands
+personal-print-command=
+
+# Which category default print command is in
+personal-print-category=
+
+# Your client-id and client-secret information to authenticate using XOAUTH2
+xoauth2-info=
+
+# Patterns and their actions are stored here.
+patterns-roles=
+
+# Patterns and their actions are stored here.
+patterns-filters2=
+
+# Patterns and their actions are stored here.
+patterns-scores2=
+
+# Patterns and their actions are stored here.
+patterns-indexcolors=
+
+# Patterns and their actions are stored here.
+patterns-other=
+
+# Patterns and their actions are stored here.
+patterns-search=
+
+# Colors in which tokens will be displayed in the index screen
+index-token-colors=
+
+# When viewing messages, these are the header colors
+viewer-hdr-colors=
+
+# Colors used to display keywords in the index
+keyword-colors=
+
+# Public certificates are kept in files in this directory. The files should
+# contain certificates in PEM format. The name of each file should look
+# like <emailaddress>.crt. The default directory is .alpine-smime/public.
+smime-public-cert-directory=
+
+# If this option is set then public certificates are kept in a single container
+# "file" similar to a remote configuration file instead of in the
+# smime-publiccert-directory. The value can be a remote or local folder
+# specification like for a non-standard pinerc value. The default
+# is that it is not set.
+smime-public-cert-container=
+
+# Private keys are kept in files in this directory. The files are in PEM format.
+# The name of a file should look like <emailaddress>.key.
+# The default directory is .alpine-smime/private.
+smime-private-key-directory=
+
+# If this option is set then private keys are kept in a single container
+# "file" similar to a remote configuration file instead of in the
+# private-key-directory. The value can be a remote or local folder
+# specification like for a non-standard pinerc value. The default
+# is that it is not set.
+smime-private-key-container=
+
+# Certificate Authority certificates (in addition to the normal CACerts for the
+# system) are kept in files in this directory. The files are in PEM format.
+# Filenames should end with .crt. The default directory is .alpine-smime/ca.
+smime-cacert-directory=
+
+# If this option is set then CAcerts are kept in a single container
+# "file" similar to a remote configuration file instead of in the
+# ca-cert-directory. The value can be a remote or local folder
+# specification like for a non-standard pinerc value. The default
+# is that it is not set.
+smime-cacert-container=
+
+# LDAP servers for looking up addresses.
+ldap-servers=
+
+# RSS News feed
+rss-news=
+
+# RSS Weather feed
+rss-weather=
+
+# Web Alpine index table row height
+wp-indexheight=
+
+# Web Alpine number of index lines in table
+wp-indexlines=
+
+# Web Alpine aggregate operations tab state
+wp-aggstate=
+
+# Web Alpine various aspects of cross-session state
+wp-state=
+
+# Web Alpine preferred width for message display in characters
+wp-columns=
