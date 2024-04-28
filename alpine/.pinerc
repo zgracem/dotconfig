@@ -3,6 +3,7 @@
 # Individual mail accounts are specified in ~/.private/alpine/.pinerc-*
 # -----------------------------------------------------------------------------
 
+personal-name=Amy Grace
 sort-key=tHread/Reverse
 incoming-startup-rule=first
 pruning-rule=no-no
@@ -12,12 +13,12 @@ display-character-set=UTF-8
 editor=/usr/local/bin/micro
 speller="/usr/local/bin/aspell -c -x"
 composer-wrap-column=80
-reply-leadin="On _DATEISO_ at _TIME24_, _FROM_ wrote:_NEWLINE_"
-index-format=FULLSTATUS MSGNO SMARTDATETIME24 FROMORTO(33%) SIZENARROW SUBJKEYTEXT(67%)
+reply-leadin="On _DATEISO_ at _TIME24_, _FROM_ <_ADDRESS_> wrote:_NEWLINE_"
+index-format=FULLSTATUS MSGNO SMARTDATETIME24 FROMORTO(33%) SIZENARROW SUBJKEY(67%)
 opening-text-separator-chars=" -- "
 mail-check-interval=60
 mailcap-search-path=$MAILCAPS
-mimetype-search-path=~/opt/etc/pygopherd/conf/mime.types:/etc/pygopherd/mime.types:/etc/mime.types
+mimetype-search-path=~/etc/mime.types:/etc/pygopherd/mime.types:/etc/mime.types
 user-certs-path=/usr/local/etc/ca-certificates
 user-certs-file=/usr/local/etc/ca-certificates/cert.pem
 url-viewers=/usr/local/bin/lynx
@@ -160,9 +161,6 @@ index-opening-background-color=transparent
 # ----------------------------------------------------------------------------
 # defaults
 # ----------------------------------------------------------------------------
-
-# Over-rides your full name from Unix password file. Required for PC-Alpine.
-personal-name=
 
 # Sets domain part of From: and local addresses in outgoing mail.
 user-domain=

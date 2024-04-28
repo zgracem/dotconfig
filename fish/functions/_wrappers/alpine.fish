@@ -7,5 +7,10 @@ function alpine
     set -fx PINERC $XDG_CONFIG_HOME/alpine/.pinerc
     set -lx PINERCEX ~/.private/alpine/.pinerc-$_flag_with
 
-    command alpine -i -p$PINERC -x$PINERCEX $argv
+    if not path is -f $PINERC
+        echo >&2 "not found: $PINERC"
+        return 1
+    end
+
+    command alpine -p$PINERC -x$PINERCEX $argv
 end
