@@ -4,12 +4,14 @@ function alpine
 
     set -q _flag_with[1]; or set -f _flag_with pink
 
-    set -fx PINERC $XDG_CONFIG_HOME/alpine/.pinerc
-    set -lx PINERCEX ~/.private/alpine/.pinerc-$_flag_with
+    set -f PINERC $XDG_CONFIG_HOME/alpine/.pinerc
+    set -f PINERCEX ~/.private/alpine/.pinerc-$_flag_with
 
-    if not path is -f $PINERC
-        echo >&2 "not found: $PINERC"
-        return 1
+    for p in $PINERC $PINERCEX
+        if not path is -f $p
+            echo >&2 "not found: $p"
+            return 1
+        end
     end
 
     command alpine -p$PINERC -x$PINERCEX $argv
