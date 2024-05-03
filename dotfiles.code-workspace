@@ -19,6 +19,7 @@
   ],
   "settings": {
     "files.associations": {
+      "**/alpine/.pinerc*": "ini",
       "**/ssh*/*.conf": "ssh_config",
       "**/tmux/*.conf": "shellscript",
       "**/vim/vimrc": "viml"

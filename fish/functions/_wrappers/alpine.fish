@@ -1,9 +1,10 @@
 function alpine
-    argparse 'w/with=' -- $argv
+    argparse -i 'w/with=' -- $argv
     or return
 
     set -q _flag_with[1]; or set -f _flag_with pink
 
+    # These are the environment variables used by PC-Alpine
     set -f PINERC $XDG_CONFIG_HOME/alpine/.pinerc
     set -f PINERCEX ~/.private/alpine/.pinerc-$_flag_with
 
