@@ -13,6 +13,7 @@ using namespace System.Text
 # ----------------------------------------------------------------------------
 
 $env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
+$env:XDG_DATA_HOME = "$env:USERPROFILE\.local\share"
 
 $PSDefaultParameterValues += @{
     'Format-*:AutoSize' = $true
@@ -25,6 +26,7 @@ $PSDefaultParameterValues += @{
 Set-Alias clear Clear-Host
 Set-Alias man Get-Help
 Set-Alias open Invoke-Item
+Set-Alias pbcopy Set-Clipboard
 Set-Alias pbpaste Get-Clipboard
 Set-Alias rm Remove-Item
 Set-Alias sudo Invoke-Elevated
@@ -73,11 +75,13 @@ $global:IsAdmin = if ($IsWindows) {
 # ----------------------------------------------------------------------------
 
 # Setup PSReadline
-if ($host.Name -eq 'ConsoleHost') {
+if ($Host.Name -eq 'ConsoleHost') {
     Import-Module PSReadLine
-    $PSReadLineOptions = @{
+    $local:PSReadLineOptions = @{
         BellStyle = "Visual"
         EditMode = "Emacs"
+        HistoryNoDuplicates = $true
+        HistorySavePath = "$env:XDG_DATA_HOME\powershell\PSReadLine\ConsoleHost_history.txt"
         HistorySearchCursorMovesToEnd = $true
         PredictionSource = "HistoryAndPlugin"
     }
@@ -128,6 +132,7 @@ CustomizeConsole
 
 # ----------------------------------------------------------------------------
 
-if (Test-Path -Type Container $PSScriptRoot/../../.private/powershell) {
-    . "$PSScriptRoot/../../.private/powershell/profile.ps1"
+$local:PrivatePSDir = "$PSScriptRoot/../../.private/powershell"
+if (Test-Path -Type Container $PrivatePSDir) {
+    . "$PrivatePSDir/profile.ps1"
 }
