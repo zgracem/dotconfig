@@ -89,7 +89,7 @@ if ($host.Name -eq 'ConsoleHost') {
 function Prompt {
     $local:ThisDir = [string] ""
     $local:Sigil = [string] ">"
-    $local:SigilColour = $PSStyle.Foreground.Blue
+    $local:SigilColour = $PSStyle.Foreground.BrightBlue
 
     # Use ProviderPath if there's no drive defined for the location provider.
     $ThisDir = if ($executionContext.SessionState.Path.CurrentLocation.Drive) {
