@@ -1,0 +1,14 @@
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4F97sIQBYuRv9z1Cfus0UyRbmIwgo3eIW9faaIjVW4
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = allowed_signers
+
+# vim:ft=gitconfig
