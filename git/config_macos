@@ -9,6 +9,6 @@
 
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-	allowedSignersFile = allowed_signers
+	allowedSignersFile = ~/.config/git/allowed_signers
 
 # vim:ft=gitconfig
