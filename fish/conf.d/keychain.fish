@@ -1,6 +1,6 @@
 if path is -x /Applications/1Password.app/Contents/MacOS/op-ssh-sign
     set -Uge SSH_AUTH_SOCK
-    set -Ux SSH_AUTH_SOCK ~/var/run/ssh/1password.agent.sock
+    set -Ux SSH_AUTH_SOCK ~/Library/"Group Containers"/2BUA8C4S2C.com.1password/t/agent.sock
     return
 end
 
