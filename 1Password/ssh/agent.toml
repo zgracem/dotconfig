@@ -1,0 +1,6 @@
+# https://developer.1password.com/docs/ssh/agent/config
+[[ssh-keys]]
+vault = "Personal"
+
+[[ssh-keys]]
+vault = "V.S."

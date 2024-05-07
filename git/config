@@ -1,6 +1,7 @@
 [user]
 	name = Amy Grace
 	email = zgracem@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO4F97sIQBYuRv9z1Cfus0UyRbmIwgo3eIW9faaIjVW4
 
 [core]
 	autocrlf = input
@@ -14,6 +15,9 @@
 
 [hub]
 	protocol = https
+
+[commit]
+	gpgsign = true
 
 [diff]
 	tool = vimdiff
@@ -56,3 +60,12 @@
 [mergetool "smerge"]
 	cmd = smerge mergetool \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
 	trustExitCode = true
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.config/git/allowed_signers
+
+# vim:ft=gitconfig
