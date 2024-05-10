@@ -10,21 +10,12 @@ fish/fish_variables*
 fish/fishd.*
 iterm2/
 StardewValley/
-syncplay.ini
 
 # generated
-brew/**/*.lock.json
 lynx/helpfile.css
 lynx/helpfile.html
 micro/buffers/
-www/*.css
 
 # unnecessary
 .bombadillo.ini
-.contrib/
-bin/*.fish
-bin/*.sh
 lynx/lynx_bookmarks.html
-*~
-*~orig*
-*.old

@@ -1,9 +1,7 @@
 {
   "files.exclude": {
-    "brew/**/*.lock.json": true,
     "iterm2": true,
-    "StardewValley": true,
-    "syncplay.ini": true
+    "StardewValley": true
   },
   "git.detectSubmodules": false
 }
