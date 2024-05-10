@@ -44,9 +44,15 @@ function reveal { explorer.exe "/select,$args[0]" }
 
 function myip { Write-Host (Invoke-WebRequest ifconfig.me/ip).Content.Trim() }
 
-function unpack { process { $_ | Select-Object * } }
+function Write-DidYouMean {
+    Write-Host ("Did you mean " + $PSStyle.Underline + $args[0] + $PSStyle.Reset + "?")
+}
 
-function about { process { $_ | Get-Member } }
+function objects { process { $_ | Select-Object * } }
+function unpack { Write-DidYouMean "objects" }
+
+function members { process { $_ | Get-Member } }
+function about { Write-DidYouMean "members" }
 
 function which { Get-Command -Name $args[0] -All -ErrorAction SilentlyContinue }
 
