@@ -20,7 +20,7 @@ brew "bat"
 brew "eza"
 brew "fd"
 brew "jq"
-brew "keychain"
+brew "keychain" unless OS.mac?
 brew "less"
 brew "micro"
 brew "rename" if OS.mac?

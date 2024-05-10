@@ -4,7 +4,6 @@ cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 
 cask "1password-cli"
 cask "disk-drill"
-cask "dotnet-sdk"
 cask "file-juicer"
 cask "fission"
 cask "grandperspective"
@@ -20,7 +19,6 @@ cask "vmware-fusion", args: { appdir: "/Applications" }
 cask "winclone"
 cask "xact"
 
-cask "betterzip"
 cask "qlcolorcode"
 cask "qlmarkdown"
 cask "quicklook-json"

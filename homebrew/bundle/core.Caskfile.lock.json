@@ -2,10 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "a35e973ab11e8efe325633d645d2ec64eed35072"
-      },
-      "homebrew/cask-versions": {
-        "revision": "5464f0f1499ec990369dbb05cf6c837d122f6643"
+        "revision": "a4e5b72ee974ae75aabd5c1297c12cf271112ca9"
       }
     },
     "cask": {
@@ -37,7 +34,7 @@
         }
       },
       "discord": {
-        "version": "0.0.301",
+        "version": "0.0.304",
         "options": {
           "full_name": "discord",
           "args": {
@@ -46,7 +43,7 @@
         }
       },
       "fantastical": {
-        "version": "3.8.15",
+        "version": "3.8.16",
         "options": {
           "full_name": "fantastical",
           "args": {
@@ -55,7 +52,7 @@
         }
       },
       "firefox": {
-        "version": "125.0.1",
+        "version": "125.0.3",
         "options": {
           "args": {
             "appdir": "/Applications"
@@ -100,7 +97,7 @@
         }
       },
       "maestral": {
-        "version": "1.9.2",
+        "version": "1.9.3",
         "options": {
           "full_name": "maestral",
           "args": {
@@ -109,9 +106,18 @@
         }
       },
       "name-mangler": {
-        "version": "3.8",
+        "version": "3.9",
         "options": {
           "full_name": "name-mangler",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "obsidian": {
+        "version": "1.5.12",
+        "options": {
+          "full_name": "obsidian",
           "args": {
             "appdir": "~/Applications"
           }
@@ -127,7 +133,7 @@
         }
       },
       "spotify": {
-        "version": "1.2.35.663,b699649e,5726",
+        "version": "1.2.37.701,e66eb7bc,1227",
         "options": {
           "full_name": "spotify",
           "args": {
@@ -136,7 +142,7 @@
         }
       },
       "sublime-merge": {
-        "version": "2091",
+        "version": "2096",
         "options": {
           "full_name": "sublime-merge",
           "args": {
@@ -172,7 +178,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.88.1",
+        "version": "1.89.1",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -272,7 +278,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.18",
+        "HOMEBREW_VERSION": "4.2.21",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",

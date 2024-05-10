@@ -4,16 +4,15 @@ tap "homebrew/command-not-found"
 tap "zgracem/caveats"
 
 brew "bash"
-brew "btop"
 brew "ncurses"
 brew "hexyl"
+brew "htop"
 brew "parallel"
 brew "source-highlight" # for less
 
 # tmux
 brew "tmux"
 brew "pam-reattach" if OS.mac?
-brew "reattach-to-user-namespace" if OS.mac?
 
 # GNU utilities
 if OS.mac?
@@ -75,9 +74,9 @@ brew "shellcheck"
 brew "shfmt"
 
 # fun, games
+brew "fastfetch"
 brew "lolcat"
 brew "nethack"
-brew "screenfetch"
 
 # other stuff
 brew "zgracem/formulae/calendar"

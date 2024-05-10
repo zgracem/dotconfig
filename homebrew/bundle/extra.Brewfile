@@ -15,7 +15,7 @@ brew "links"
 brew "lynx"
 
 # ruby
-brew "taglib" # for taglib-ruby gem
+brew "taglib" # for `taglib-ruby` gem
 
 # images
 brew "exif"

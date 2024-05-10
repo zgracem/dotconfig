@@ -2,7 +2,7 @@
   "entries": {
     "cask": {
       "1password-cli": {
-        "version": "2.27.0",
+        "version": "2.28.0",
         "options": {
           "full_name": "1password-cli",
           "args": {
@@ -11,18 +11,9 @@
         }
       },
       "disk-drill": {
-        "version": "5.4.1426",
+        "version": "5.5.1517",
         "options": {
           "full_name": "disk-drill",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
-      },
-      "dotnet-sdk": {
-        "version": "8.0.204,7bcf1329-6691-45e9-8fdd-96c65bcabd1f,cb618d2620974fc029e4f758eb267452",
-        "options": {
-          "full_name": "dotnet-sdk",
           "args": {
             "appdir": "~/Applications"
           }
@@ -92,7 +83,7 @@
         }
       },
       "pdf-expert": {
-        "version": "3.10,1039",
+        "version": "3.10.1,1044",
         "options": {
           "full_name": "pdf-expert",
           "args": {
@@ -107,15 +98,6 @@
             "appdir": "/Applications"
           },
           "full_name": "steam"
-        }
-      },
-      "sublime-text-3": {
-        "version": "3.211",
-        "options": {
-          "full_name": "zgracem/formulae/sublime-text-3",
-          "args": {
-            "appdir": "~/Applications"
-          }
         }
       },
       "transmission": {
@@ -163,15 +145,6 @@
           }
         }
       },
-      "betterzip": {
-        "version": "5.3.4",
-        "options": {
-          "full_name": "betterzip",
-          "args": {
-            "appdir": "~/Applications"
-          }
-        }
-      },
       "qlcolorcode": {
         "version": "4.1.0",
         "options": {
@@ -209,11 +182,6 @@
         }
       }
     },
-    "tap": {
-      "zgracem/formulae": {
-        "revision": "852545366530e7755346f7a6fc558f01d06b417c"
-      }
-    },
     "mas": {
       "ApolloOne": {
         "id": "1044484672",
@@ -221,7 +189,7 @@
       },
       "Mactracker": {
         "id": "430255202",
-        "version": "7.12.14"
+        "version": "7.12.15"
       },
       "GarageBand": {
         "id": "682658836",
@@ -252,7 +220,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.18",
+        "HOMEBREW_VERSION": "4.2.21",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
