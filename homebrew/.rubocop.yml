@@ -1,4 +1,4 @@
-# These rules prevent unwanted auto-formatting of bundle/*.{Brew,Cask}file
+# These rules prevent unwanted Ruby linting/formatting in Brewfiles
 inherit_from: ../rubocop/config.yml
 
 Naming/FileName:
