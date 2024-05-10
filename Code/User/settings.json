@@ -85,9 +85,11 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "*.m4": "${capture}",
+    "*.ppk": "${capture}.pub",
     "*.sass": "${capture}.css",
     "*.scss": "${capture}.css",
-    "*.slim": "${capture}.html"
+    "*.slim": "${capture}.html",
+    "*": "${capture}.pub"
   },
   "explorer.incrementalNaming": "smart",
   "explorer.openEditors.visible": 1,

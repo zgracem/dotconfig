@@ -56,3 +56,9 @@
 [mergetool "smerge"]
 	cmd = smerge mergetool \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
 	trustExitCode = true
+
+# macOS only
+[includeIf "gitdir:/Users/zozo/"]
+	path = config_macos
+
+# vim:ft=gitconfig

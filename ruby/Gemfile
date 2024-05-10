@@ -9,6 +9,7 @@ gem "symbolized"
 # <github.com/lsegal/yard>
 gem "yard", ">= 0.9.20"
 
+gem "haml", ">= 5.0.0"
 gem "reline", "~> 0.5.0"
 
 # -- for Visual Studio Code ----------------------------------------------------
@@ -41,8 +42,3 @@ gem "toml-rb"
 
 # <github.com/threedaymonk/htmlentities>
 gem "htmlentities"
-
-# -- local gems ----------------------------------------------------------------
-
-gem "pyjamas", path: "../../../Developer/ruby/pyjamas"
-gem "tiny_dancer", path: "../../../Developer/ruby/tiny_dancer"

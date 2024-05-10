@@ -1,12 +1,18 @@
+if path is -x /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+    set -Uge SSH_AUTH_SOCK
+    set -Ux SSH_AUTH_SOCK ~/Library/"Group Containers"/2BUA8C4S2C.com.1password/t/agent.sock
+    return
+end
+
 # On Windows 10 v.1803 >= Build 17134.48 (Update KB4103721, 2018-05-08), you
 # must also execute the following in a PowerShell session w/ admin privileges:
 #
 #     Set-Service ssh-agent -StartupType Manual
 #
-status is-interactive; and command -q keychain; and not set -gq SSH_AGENT_PID
+status is-interactive; and command -q keychain; and not set -gq SSH_AUTH_SOCK
 or return
 
-set -l keys id_ed25519
+set -l keys id_ed25519@{Alyx,opal7,phosphor,vshraya} id_rsa@Juno id_zgracem@github
 
 set -Uge SSH_AUTH_SOCK
 set -Uge SSH_AGENT_PID
