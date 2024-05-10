@@ -1,9 +1,0 @@
-#!/usr/bin/env fish
-
-# Runs bat(1) even if it's installed as batcat(1).
-set -f cmd (path filter -x $PATH/batcat $PATH/bat $PATH/cat)
-if set -q cmd[1]
-    exec $cmd[1] $argv
-else
-    exit 127
-end

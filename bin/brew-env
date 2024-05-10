@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-#:  * `env`
-#:
-#:  List all `HOMEBREW_*` variables in Homebrew's environment.
-#:
-
-env | grep '^HOMEBREW_' | sort | bat -lsh

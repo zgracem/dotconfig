@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-#:  * `url` <formula>
-#:
-#:  Print the homepage URL of a given <formula> (or cask).
-#:
-
-brew info --json=v2 "$1" | jq -r '.casks[] // .formulae[] | .homepage'
