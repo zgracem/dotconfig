@@ -1,0 +1,263 @@
+# ----------------------------------------------------------------------------
+# brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
+# vim:ft=ruby
+# ----------------------------------------------------------------------------
+
+tap "homebrew/command-not-found"
+tap "nrlquaker/createzap" # `brew createzap` command
+
+# GNU utilities
+if OS.mac?
+  brew "binutils"
+  brew "coreutils"
+  brew "diffutils"
+  brew "findutils"
+  brew "gawk"
+  brew "gnu-sed"
+  brew "gnu-tar"
+  brew "grep"
+  brew "inetutils"
+end
+
+# essential utilities
+brew "bat"
+brew "eza"
+brew "fd"
+brew "fish"
+brew "jq"
+brew "keychain" unless OS.mac?
+brew "less"
+brew "micro"
+brew "openssh"
+brew "openssl@3"
+brew "readline"
+brew "rename" if OS.mac?
+brew "ripgrep"
+brew "rsync" if OS.mac?
+brew "stow"
+brew "tmux"
+brew "pam-reattach" if OS.mac? # for tmux
+brew "unar" if OS.mac?
+brew "vim"
+
+# more utilities
+brew "bash"
+brew "btop"
+brew "hexyl"
+brew "lsusb"
+brew "ncurses"
+brew "parallel"
+brew "PotatoLabs/git-redate/git-redate"
+brew "sf-pwgen" if OS.mac?
+brew "source-highlight" # for less
+brew "sponge"
+brew "tree"
+
+# text & documentation
+brew "alhadis/troff/man-db" if OS.mac?
+brew "dos2unix"
+brew "ghostscript"
+brew "groff"
+brew "help2man"
+brew "multimarkdown"
+brew "pandoc"
+brew "par"
+brew "poppler"
+brew "qpdf"
+brew "recode"
+
+# audio/video
+brew "atomicparsley"
+brew "bchunk"
+brew "id3v2"
+brew "mkvtoolnix"
+brew "mp3info"
+brew "mp4v2"
+brew "yt-dlp"
+brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
+  HEAD
+  with-fdk-aac
+  with-libssh
+  with-openh264
+  with-openssl
+  with-rtmpdump
+  with-two-lame
+  with-webp
+  with-xvid
+]
+
+# images
+brew "exif"
+brew "exiftool"
+brew "imagemagick"
+brew "imagesnap" if OS.mac?
+brew "webkit2png" if OS.mac?
+brew "webp"
+
+# internet stuff
+tap "homebrew/services"
+brew "alpine"
+brew "aria2"
+brew "bombadillo"
+brew "curl"
+brew "dnsmasq", restart_service: :changed if OS.mac?
+brew "links"
+brew "lynx"
+brew "ssh-copy-id", link: true
+brew "transmission-cli"
+brew "wget"
+
+# ----------------------------------------------------------------------------
+# development
+# ----------------------------------------------------------------------------
+
+brew "git"
+brew "mercurial"
+brew "subversion"
+
+brew "gcc" if OS.linux? # for Linuxbrew
+
+if OS.mac?
+  brew "autoconf"
+  brew "cmake"
+  brew "glib"
+  brew "llvm"
+  brew "texinfo"
+end
+
+# ruby
+brew "rbenv"
+brew "rbenv-bundler"
+brew "rbenv-default-gems"
+brew "ruby-build"
+brew "taglib" # for `taglib-ruby` gem
+
+# JavaScript
+brew "node"
+brew "coffeescript"
+brew "typescript"
+brew "yarn"
+
+# VS Code extensions
+brew "shellcheck"
+brew "shfmt"
+
+# (Dart) Sass
+brew "sass/sass/sass"
+
+# web fonts
+brew "fontforge"
+brew "bramstein/webfonttools/sfnt2woff-zopfli"
+brew "bramstein/webfonttools/sfnt2woff"
+brew "bramstein/webfonttools/woff2"
+
+# ----------------------------------------------------------------------------
+# fun & games
+# ----------------------------------------------------------------------------
+
+brew "cowsay"
+brew "fastfetch"
+brew "figlet"
+brew "fortune"
+brew "lolcat"
+brew "nethack"
+brew "toilet"
+
+# ----------------------------------------------------------------------------
+# my stuff
+# ----------------------------------------------------------------------------
+
+tap "zgracem/caveats"
+brew "zgracem/formulae/calendar"
+brew "zgracem/formulae/zgm-calendar-data"
+brew "zgracem/formulae/unrar"
+
+# ----------------------------------------------------------------------------
+# casks
+# ----------------------------------------------------------------------------
+
+cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
+
+# essentials
+cask "1password", args: { appdir: "/Applications" }
+cask "1password/tap/1password-cli"
+cask "alfred"
+cask "fantastical"
+cask "firefox", args: { appdir: "/Applications" }
+cask "istat-menus", args: { appdir: "/Applications" }
+cask "iterm2"
+cask "maestral"
+cask "name-mangler"
+cask "obsidian"
+cask "steam", args: { appdir: "/Applications" }
+cask "sublime-merge"
+cask "superduper"
+cask "swiftbar"
+cask "the-unarchiver"
+cask "transmission"
+cask "transmit"
+cask "visual-studio-code"
+
+# more
+cask "discord"
+cask "disk-drill"
+cask "go2shell"
+cask "grandperspective"
+cask "inform"
+cask "mysides"
+cask "pdf-expert"
+cask "powershell"
+cask "suspicious-package"
+cask "twine"
+cask "vmware-fusion", args: { appdir: "/Applications" }
+cask "winclone"
+
+# multimedia
+cask "file-juicer"
+cask "fission"
+cask "handbrake"
+cask "kid3"
+cask "metaz"
+cask "soundsource"
+cask "spotify"
+cask "vlc"
+cask "xact"
+
+# QuickLook
+cask "qlcolorcode"
+cask "qlmarkdown"
+cask "quicklook-json"
+cask "suspicious-package"
+
+# my stuff
+cask "zgracem/formulae/acorn-latest7"
+cask "zgracem/formulae/lockscreen"
+
+# ----------------------------------------------------------------------------
+# Mac App Store
+# ----------------------------------------------------------------------------
+
+brew "mas"
+
+# essentials
+mas "1Password for Safari", id: 1569813296
+mas "ColorSlurp", id: 1287239339
+mas "Day One", id: 1055511498
+mas "Divvy", id: 413857545
+mas "Mactracker", id: 430255202
+mas "The Archive Browser", id: 510232205
+mas "Things", id: 904280696
+
+# more
+mas "ApolloOne", id: 1044484672
+mas "Prompt", id: 1594420480
+mas "Steam Link", id: 1246969117
+
+# Apple stuff
+mas "Apple Configurator", id: 1037126344
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Xcode", id: 497799835
