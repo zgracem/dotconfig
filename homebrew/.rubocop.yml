@@ -1,3 +1,4 @@
+# These rules prevent unwanted auto-formatting of bundle/*.{Brew,Cask}file
 inherit_from: ../rubocop/config.yml
 
 Naming/FileName:
