@@ -1,4 +1,5 @@
 {
+    "backup": false,
     "colorcolumn": 80,
     "detectlimit": 16,
     "diffgutter": true,
