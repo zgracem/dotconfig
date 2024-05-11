@@ -103,7 +103,10 @@ endif
 " Appearance
 " ----------------------------------------------------------------------------
 
-silent! colorscheme zgm-colours " TODO: FIX THIS
+syntax on               " syntax highlighting
+silent! colorscheme zgm-colours
+filetype plugin indent on " load language-specific plugin and indentation files
+set background=dark
 
 set cmdheight=2         " fewer 'Press ENTER to continue' messages
 set cursorline          " highlight current line
