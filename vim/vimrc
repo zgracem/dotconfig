@@ -131,10 +131,9 @@ if has("statusline")
   set titlestring+=%F           " full path to file
   set titlestring+=%(\ [%M%R]%) " modified/readonly flags
 
-  if $TERM_PROGRAM == "iTerm.app" || $TERM_PROGRAM == "Apple_Terminal"
+  if $TERM_PROGRAM == "iTerm.app"
     let &t_ts = "\e]7;"
     let &t_fs = "\x07"
-    set titlestring="file://" . expand("$HOSTNAME") . UrlEncode("%F")
   elseif expand($TMUX) != ""
     let &t_ts = "\ePtmux;\e\e]0;"
     let &t_fs = "\x07\e\\"
