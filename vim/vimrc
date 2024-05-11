@@ -25,7 +25,8 @@ set viminfo='1000,f0,<500,h,n$XDG_DATA_HOME/vim/.viminfo
 "   h = disable 'hlsearch' highlight on start
 "   n = use this name for the file
 
-" set packpath=$XDG_CONFIG_HOME/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$XDG_CONFIG_HOME/vim/after
+" location for third-party plugins
+set packpath+=$XDG_DATA_HOME/vim
 
 " disable clutter
 set nobackup

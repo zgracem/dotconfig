@@ -11,6 +11,10 @@ fish/fishd.*
 iterm2/
 StardewValley/
 
+# downloaded
+vim/pack/*/
+!vim/pack/zgm/
+
 # generated
 lynx/helpfile.css
 lynx/helpfile.html
