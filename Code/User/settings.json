@@ -451,6 +451,7 @@
     "editor.tabSize": 2
   },
   "[viml]": {
+    "editor.autoClosingQuotes": "never",
     "editor.tabSize": 2,
     "files.insertFinalNewline": false,
     "files.trimTrailingWhitespace": false
