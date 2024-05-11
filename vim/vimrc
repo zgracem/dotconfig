@@ -93,6 +93,12 @@ silent! set cpoptions+=;" skip current char when ;-repeating a t-search
 nnoremap / /\v
 vnoremap / /\v
 
+" autocompletion
+if has("wildmenu")
+  set wildmenu          " show all matches for command completion
+  set wildmode=list:longest,full " complete only to the point of ambiguity
+endif
+
 " ----------------------------------------------------------------------------
 " Appearance
 " ----------------------------------------------------------------------------
