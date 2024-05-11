@@ -1,176 +1,118 @@
-"-----------------------------------------------------------------------------
-" ~/.config/vimrc
-" vim: ft=vim:tw=0:sw=2:ts=2:sts=2
-"-----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
+" ~/.vimrc : 2024 edition
+" export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+" ----------------------------------------------------------------------------
+" files & directories
+" ----------------------------------------------------------------------------
 
-" use vim settings, rather than vi settings
-set nocompatible
+" ~/.vim et al.
+" → https://vimdoc.sourceforge.net/htmldoc/options.html#'runtimepath'
+" Each can have subfolders like colors/, ftplugin/, plugin/, syntax/, etc.
+set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+" $HOME/.vim
+"     Personal stuff: ~/.vim/{colors,ftplugin,plugin}
+" $VIM/vimfiles
+"     Files installed by third-party packages (e.g. cmake)
+" $VIMRUNTIME
+"     Default files for the current version of vim
 
-" $VIM        = /usr/share/vim
-" $VIMRUNTIME = /usr/share/vim/vim74
+" ~/.viminfo 
+" → https://vimdoc.sourceforge.net/htmldoc/options.html#'viminfo'
+set viminfo='1000,f0,<500,h,n$XDG_DATA_HOME/vim/.viminfo
+"   ' = how many files to save info for
+"   f = store global marks (1 for yes, 0 for no)
+"   < = how many lines are saved for each register
+"   h = disable 'hlsearch' highlight on start
+"   n = use this name for the file
 
-set runtimepath =$XDG_DATA_HOME/vim
-set runtimepath+=$VIMRUNTIME
+" set packpath=$XDG_CONFIG_HOME/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$XDG_CONFIG_HOME/vim/after
 
-if v:version >= 800
-  set packpath=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim/data
-endif
+" disable clutter
+set nobackup
+set noswapfile
+set noundofile
 
-set viminfo+=n$XDG_DATA_HOME/vim/.viminfo
+" ----------------------------------------------------------------------------
+" Options
+" ----------------------------------------------------------------------------
 
-" clear all vimrc-related autocmds 
-" >> http://ruderich.org/simon/config/vimrc
-if has("autocmd")
-  augroup vimrc
-    autocmd!
-  augroup END
-endif
+set nocompatible        " use vim settings, rather than vi settings
 
-"-----------------------------------------------------------------------------
-" Preferences
-"-----------------------------------------------------------------------------
+let mapleader=","       " use `,` as leader
+set history=1024        " keep lots of history
+set undolevels=1024     " keep lots of undo
+set encoding=utf-8      " Unicode files
+set termencoding=utf-8  " Unicode terminal
 
-set history=640                 " lots of history
-set termencoding=utf-8          " Unicode terminal
+set autoread            " reload files changed outside vim
+set confirm             " ask about unsaved changes instead of aborting
+set hidden              " don't unload abandoned buffers
+set noerrorbells        " shut up
+set visualbell t_vb=    " really, shut up
+set shortmess+=I        " don't display startup message either
+set splitright          " open new vertical panes to the right
 
-" spellcheck dictionaries
-if has("spell")
-  set spelllang=en_ca           " Canadian English
-  set spellfile=$XDG_DATA_HOME/vim/spell/en.utf-8.add
-endif
+" editing
+set backspace=indent,eol,start " backspace over everything in insert mode
+set fileformats=unix    " LF line endings
+set fixendofline        " make sure last line in file has <EOL>
 
-" paths
-set path=.,$HOME
-set cdpath=.,$HOME
+" indents and spacing
+set wrap                " visually wrap long lines
+set textwidth=79        " force EoL after < x chars
+set autoindent          " carry indent to new line
+set breakindent         " wrapped line repeats indent
+set linebreak           " visually break at word boundaries
 
-" backups
-set backup                      " do make backups
-set backupcopy=yes              " copy/overwrite instead of renaming
-
-set backupdir=$XDG_STATE_HOME/vim/backup " | call mkdir(&backupdir, 'p', 'm777')
-set undodir=$XDG_STATE_HOME/vim/undo     " | call mkdir(&undodir, 'p', 'm777')
-set viewdir=$XDG_STATE_HOME/vim/view     " | call mkdir(&viewdir, 'p', 'm777')
-
-" swap files
-set swapfile                    " make swapfiles
-set updatecount=80              " update swapfile after x characters
-
-" (double slash = include %-separated path in name of swap file)
-set directory=$XDG_STATE_HOME/vim/swap// " | call mkdir(&directory, 'p', 'm777')
-
-" location of .netrwhist file
-let g:netrw_home=$XDG_DATA_HOME.'/vim'
-
-"-----------------------------------------------------------------------------
-" Behaviour
-"-----------------------------------------------------------------------------
-
-let mapleader=","               " use `,` as leader
-set autoread                    " reload files changed outside vim
-set confirm                     " ask on unsaved changes instead of aborting
-set hidden                      " don't unload abandoned buffers
-set noerrorbells                " shut up
-set visualbell t_vb=            " really, shut up
-set shortmess+=I                " don't display startup message either
-
-" autocompletion
-if has("wildmenu")
-  set wildmenu                  " show all matches for command completion
-  set wildmode=list:longest,full " complete only to the point of ambiguity
-  set wildignore=*.jpg,*.gif,*.png,*.tif,
-  set wildignore+=*.mp3,*.m4a,
-  set wildignore+=*.swp,*~,
-endif
+" tabs
+set expandtab           " use spaces, not tabs
+set shiftwidth=0        " size of each (autoindent) step; 0 = use 'tabstop'
+set tabstop=4           " one <Tab> is equivalent to 4 spaces
+set shiftround          " always indent to a multiple of 'shiftwidth'
+set smarttab            " backspace over blanks at BoL
+set softtabstop=-1      " <0 = use 'shiftwidth' instead
 
 " mousing
 if has("mouse")
-  " set mouse=""                  " disable mouse
-  set mouse=a                 " to enable mouse in all modes
-  set ttymouse=xterm2           " xterm-style mouse + enable dragging
-  if has("gui_running")
-    set mousehide               " hide pointer when typing
-    set mousemodel=popup_setpos " right-click moves cursor + opens menu
-  endif
+  set mouse=a           " enable mouse in all modes
+  set ttymouse=xterm2   " xterm-style mouse + enable dragging
 endif
 
 " searching
-set ignorecase                  " case-insensitive
-set smartcase                   " ...unless the pattern is mixed-case
-set incsearch                   " incremental
-set wrapscan                    " searches wrap around the end of the file
-set shortmess+=s                " don't notify when search wraps
-set hlsearch                    " highlight last pattern
-silent! set cpoptions+=;        " skip current char when ;-repeating a t-search
-set gdefault                    " apply substitutions globally on lines
+set gdefault            " apply substitutions globally on lines
+set hlsearch            " highlight last pattern
+set ignorecase          " case-insensitive...
+set smartcase           " ...unless the pattern is mixed-case
+set incsearch           " incremental search
+set wrapscan            " searches wrap around the end of the file
+set shortmess+=s        " don't notify when search wraps
+silent! set cpoptions+=;" skip current char when ;-repeating a t-search
 
 " use normal regexes when searching
 nnoremap / /\v
 vnoremap / /\v
 
-"-----------------------------------------------------------------------------
-" Editing
-"-----------------------------------------------------------------------------
-
-set backspace=indent,eol,start  " backspace over everything in insert mode
-set undolevels=640              " lots of undo
-set fileformats=unix            " LF line endings
-set encoding=utf-8              " Unicode files
-
-if v:version >= 800
-  set fixendofline              " make sure last line in file has <EOL>
-  set breakindent               " wrapped line repeats indent
-endif
-
-" wrapping
-set wrap                        " visually wrap long lines
-set linebreak                   " visually break at word boundaries
-set textwidth=79                " force EoL after < x chars
-
-set nojoinspaces                " two spaces after sentences is an abomination
-set formatoptions+=n            " format numbered lists w/ hanging indent
-set formatoptions+=1            " break before one-letter words where possible
-set formatoptions-=o            " [don't] comment new lines opened with o/O
-set formatoptions+=q            " gq can format comments
-
-" indentation
-set autoindent
-set expandtab                   " use spaces, not tabs
-set smarttab                    " backspace over blanks at BoL
-
-" tabs
-set tabstop=4                   " shouldn't matter
-set shiftwidth=0                " 0 = use 'tabstop' instead
-set softtabstop=-1              " negative = use 'shiftwidth' instead
-set shiftround                  " always indent to a multiple of 4
-
-"-----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 " Appearance
-"-----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 
-silent! colorscheme zgm-colours
+silent! colorscheme zgm-colours " TODO: FIX THIS
 
-set cursorline                  " highlight current line
-set lazyredraw                  " don't redraw screen while executing macros
-set number                      " display line numbers
-if v:version >= 703
-  set relativenumber            " ...relative to current line
-endif
-set scrolloff=3                 " keep x lines of context at edge of screen
-set showcmd                     " display partial commands
-set splitright                  " open new vertical panes to the right
-set ttyfast                     " faster redraw
-set winminheight=0              " windows can be 0 lines high
-set cmdheight=2                 " fewer 'Press ENTER to continue' messages
+set cmdheight=2         " fewer 'Press ENTER to continue' messages
+set cursorline          " highlight current line
+set lazyredraw          " don't redraw screen while executing macros
+set number              " display line numbers...
+set relativenumber      " ...relative to current line
+set scrolloff=3         " keep x lines of context at edge of screen
+set showcmd             " display partial commands
+set ttyfast             " faster redraw
+set winminheight=0      " windows can be 0 lines high
 
+" for 'list' mode and the ':list' command
 set listchars=eol:¶,tab:→\ ,trail:·,extends:»,precedes:«,nbsp:¬
 let &showbreak = '» '
 
-" disable concealing
-if v:version >= 703
-  set conceallevel=0
-  let g:vim_json_syntax_conceal = 0
-endif
-
+" cursor shape
 if $TERM_PROGRAM == "iTerm.app"
   if expand($TMUX) != ""
     let &t_SI = "\e[3 q"
@@ -181,40 +123,15 @@ if $TERM_PROGRAM == "iTerm.app"
   endif
 endif
 
-"-----------------------------------------------------------------------------
-" Colours and syntax highlighting
-"-----------------------------------------------------------------------------
-
-set t_Co=256                    " use 256-colour display
-set t_ut=                       " disable BCE
-
-syntax on                       " syntax highlighting
-filetype plugin indent on       " filetype detection + plugins + indent prefs
-
-set background=dark
-
-"-----------------------------------------------------------------------------
-" Window title and status line
-"-----------------------------------------------------------------------------
-
 if has("statusline")
   " window title
   set title
-
-  if has("gui_running")
-    set titlestring=
-  else
-    "let s:hostname = system("hostname -s")
-    let &titleold = expand("$USER") . "@" . system("hostname -s") . ": " . expand("$PWD")
-    set titlestring=
-  endif
-
   set titlestring+=%(%h\ %)     " help flag
   set titlestring+=%F           " full path to file
   set titlestring+=%(\ [%M%R]%) " modified/readonly flags
 
-  if $TERM_PROGRAM == "Apple_Terminal"
-    let &t_ts = "\e]6;"
+  if $TERM_PROGRAM == "iTerm.app" || $TERM_PROGRAM == "Apple_Terminal"
+    let &t_ts = "\e]7;"
     let &t_fs = "\x07"
     set titlestring="file://" . expand("$HOSTNAME") . UrlEncode("%F")
   elseif expand($TMUX) != ""
@@ -226,13 +143,12 @@ if has("statusline")
   endif
 
   " status line
-  set laststatus=2                " always show statusline (overrides ruler)
+  set laststatus=2            " always show statusline (overrides ruler)
 
-  " set statusline=%<%t\          " tail of the filename, front-truncated
-  set statusline=%F\              " full path to file
-  set statusline+=%([%M%R]%)      " modified & readonly flags
+  set statusline=%F\          " full path to file
+  set statusline+=%([%M%R]%)  " modified & readonly flags
 
-  set statusline+=%=              " start of right side
+  set statusline+=%=          " start of right side
 
   " display a warning if file encoding isn't utf-8
   set statusline+=%#StatusLineErr#
@@ -252,102 +168,25 @@ if has("statusline")
   set statusline+=\ %5.(%3.p%%\ %)
 endif
 
-"-----------------------------------------------------------------------------
-" GUI
-"-----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
+" autocmds
+" ----------------------------------------------------------------------------
 
-if has("gui_running")
-  set columns=167
-  set lines=52
-
-  set guioptions+=a             " use system clipboard in visual mode
-  set guioptions+=c             " use console dialogs for simple choices
-  set guioptions-=m             " no menu
-  set guioptions-=r             " no right-hand scrollbar
-  set guioptions-=L             " no left-hand scrollbar either
-  set guioptions-=T             " no toolbar
-
-  set guicursor=a:blinkoff0-block
-
-  set clipboard=unnamed
-
-  " Windows fonts
-  if has('win32') || has('win64')
-    set guifont=Source\ Code\ Pro\ Medium:h9,Powerline\ Consolas:h10,Courier\ New:h10
-    if v:version >= 800
-      set renderoptions=type:directx
-    endif
-  endif
-
-  " macOS fonts
-  if has("unix")
-    let s:uname = system("uname")
-    if s:uname == "Darwin\n"
-    set guifont=Source\ Code\ Pro\ Medium:h9,Powerline\ Consolas:h12,Menlo:h12
-    endif
-  endif
+" clear all autocmds in "vimrc" group <http://ruderich.org/simon/config/vimrc>
+if has("autocmd")
+  augroup vimrc
+    autocmd!
+  augroup END
 endif
-
-"-----------------------------------------------------------------------------
-" Filetypes
-"-----------------------------------------------------------------------------
 
 if exists("#vimrc")
   augroup vimrc
-    " default to plain text
+    " default to plain text, LF endings
     autocmd BufNewFile * if &ff == "dos" | setlocal ff=unix | endif
-    " ↑ why doesn't this work on Win32 gvim? :(
     autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
     " treat *.md as Markdown, not Modula-2
     autocmd BufNewFile,BufReadPost *.md 
       \ setlocal ft=markdown
-
-    " journaling
-    autocmd BufNewFile,BufRead dayone*.md
-      \ setlocal ft=markdown fo-=t fo-=a fo-=c textwidth=0
   augroup END
 endif
-
-"-----------------------------------------------------------------------------
-" Abbreviations
-"-----------------------------------------------------------------------------
-
-abbr #div\ # ----------------------------------------------------------------------------<CR>
-abbr #box\ # ----------------------------------------------------------------------------<Esc>yyPO#
-abbr "box\ "-----------------------------------------------------------------------------<Esc>yyPO"
-
-abbr tdy <C-R>=strftime("%Y-%m-%d")<CR>
-
-abbr +/-    <C-K>+-
-abbr ?x     <C-K>*X
-abbr ssec   <C-K>SE
-abbr ppara  <C-K>PI
-abbr ddeg   <BS><C-K>DG
-abbr mdd    <C-K>.M
-abbr 8th\   <C-K>u266a
-abbr 8ths\  <C-V>u266b
-abbr sstar  <C-V>u2605
-abbr ccheck <C-V>u2713
-abbr nnd    <BS><C-V>u2013
-abbr mmd    <BS><C-V>u2014
-abbr <<-    <C-V>u2190
-abbr ->>    <C-V>u2192
-abbr ?-     <C-V>u2212
-
-"-----------------------------------------------------------------------------
-" diff mode
-"-----------------------------------------------------------------------------
-
-if &diff
-  set shell=/bin/bash " prevents weird job-stop behaviour on bash-4.4
-  set diffopt=filler,context:3,iwhite
-
-  " disable localizations
-  let g:diff_translations = 0
-endif
-
-" -----------------------------------------------------------------------------
-
-" " source :Man() function (no vertical option...)
-" source $VIMRUNTIME/ftplugin/man.vim
