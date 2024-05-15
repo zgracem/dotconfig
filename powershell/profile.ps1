@@ -18,19 +18,20 @@ $env:XDG_DATA_HOME = "$env:USERPROFILE\.local\share"
 $PSDefaultParameterValues += @{
     'Format-*:AutoSize' = $true
     'Format-*:Wrap' = $true
-    'Get-Help:ShowWindow' = $true
     'Out-File:Encoding' = 'utf8'
     'Remove-Item:Confirm' = $true
 }
 
 Set-Alias clear Clear-Host
-Set-Alias man Get-Help
 Set-Alias open Invoke-Item
 Set-Alias pbcopy Set-Clipboard
 Set-Alias pbpaste Get-Clipboard
 Set-Alias rm Remove-Item
 Set-Alias sudo Invoke-Elevated
 Set-Alias wget Invoke-WebRequest
+
+function Get-HelpWindow { Get-Help -Name $args[0] -ShowWindow }
+Set-Alias man Get-HelpWindow
 
 function Get-AllItemsWide { Get-ChildItem -Force @Args | Format-Wide }
 Set-Alias ls Get-AllItemsWide
