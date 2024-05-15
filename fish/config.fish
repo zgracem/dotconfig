@@ -39,7 +39,6 @@ set fish_package_path (path filter -d $fish_package_path)
 source "$__fish_config_dir/packages.fish"
 
 # setup keybindings
-set -p fish_function_path "$__fish_config_dir/bindings"
 source "$__fish_config_dir/bindings.fish"
 
 # source vendor completions
