@@ -19,7 +19,6 @@ $PSDefaultParameterValues += @{
     'Format-*:AutoSize' = $true
     'Format-*:Wrap' = $true
     'Out-File:Encoding' = 'utf8'
-    'Remove-Item:Confirm' = $true
 }
 
 Set-Alias clear Clear-Host
