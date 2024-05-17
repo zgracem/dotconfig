@@ -88,7 +88,7 @@ if ($Host.Name -eq 'ConsoleHost') {
         BellStyle = "Visual"
         EditMode = "Emacs"
         HistoryNoDuplicates = $true
-        HistorySavePath = "$env:XDG_DATA_HOME\powershell\PSReadLine\ConsoleHost_history.txt"
+        HistorySavePath = "$env:XDG_DATA_HOME\powershell\PSReadLine\$( $Host.Name )_history.txt"
         HistorySearchCursorMovesToEnd = $true
         PredictionSource = "HistoryAndPlugin"
     }
