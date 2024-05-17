@@ -136,6 +136,9 @@ $Host.UI.RawUI.WindowTitle = ("Windows PowerShell", $PSVersionTable.PSVersion -j
 
 # ----------------------------------------------------------------------------
 
+$local:FunctionFiles = Get-ChildItem $PSScriptRoot\functions\*.ps1
+ForEach ($FunctionFile in $FunctionFiles) { . $FunctionFile }
+
 $local:PrivatePSDir = "$PSScriptRoot/../../.private/powershell"
 if (Test-Path -Type Container $PrivatePSDir) {
     . "$PrivatePSDir/profile.ps1"
