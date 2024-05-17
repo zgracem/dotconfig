@@ -10,6 +10,14 @@ using namespace System.Text
 # Locale
 [CultureInfo]::CurrentCulture = "en-CA"
 
+# Remove folder under "My Documents" if it has a network path
+$PSModulePaths = [System.Collections.ArrayList]$env:PSModulePath.Split(";")
+$PSMyDocuments = ("{0}\PowerShell\Modules" -f [System.Environment]::GetFolderPath("MyDocuments"))
+if (($PSMyDocuments.StartsWith("\\")) -and ($PSMyDocuments -in $PSModulePaths)) {
+    $PSModulePaths.Remove($PSMyDocuments)
+    $env:PSModulePath = $PSModulePaths -join ";"
+}
+
 # ----------------------------------------------------------------------------
 
 $env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
