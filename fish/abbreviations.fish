@@ -147,6 +147,17 @@ end
 command -q uuidgen
 and abbr --add uuid "uuidgen | string lower | tbcopy"
 
+# git
+abbr -a ga "git add"
+abbr -a gc "git commit"
+abbr -a gcm "git commit -m \"%\"" --set-cursor
+abbr -a gca "git commit --amend --no-edit"
+abbr -a gd "git diff"
+abbr -a gf "git fetch --prune --all"
+abbr -a gpl "git fetch --prune; git merge --ff-only"
+abbr -a gps "git push"
+abbr -a gs "git status"
+
 # ----------------------------------------------------------------------------
 # advanced
 # ----------------------------------------------------------------------------
