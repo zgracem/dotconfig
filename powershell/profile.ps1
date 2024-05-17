@@ -37,6 +37,9 @@ Set-Alias pbpaste Get-Clipboard
 Set-Alias sudo Invoke-Elevated
 Set-Alias wget Invoke-WebRequest
 
+# Shortcuts
+Set-Alias gh Get-Help
+
 # Functions
 function Get-HelpWindow { Get-Help -Name $args[0] -ShowWindow }
 Set-Alias man Get-HelpWindow
