@@ -16,19 +16,20 @@ $env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
 $env:XDG_DATA_HOME = "$env:USERPROFILE\.local\share"
 
 $PSDefaultParameterValues += @{
-    'Format-*:AutoSize' = $true
+    'Format-*:AutoSize' = $true # adjusts column size and number based on the width of the data
     'Format-*:Wrap' = $true
     'Out-File:Encoding' = 'utf8'
 }
 
+# Mac/Linux-like aliases
 Set-Alias clear Clear-Host
 Set-Alias open Invoke-Item
 Set-Alias pbcopy Set-Clipboard
 Set-Alias pbpaste Get-Clipboard
-Set-Alias rm Remove-Item
 Set-Alias sudo Invoke-Elevated
 Set-Alias wget Invoke-WebRequest
 
+# Functions
 function Get-HelpWindow { Get-Help -Name $args[0] -ShowWindow }
 Set-Alias man Get-HelpWindow
 
@@ -44,18 +45,10 @@ function reveal { explorer.exe "/select,$args[0]" }
 
 function myip { Write-Host (Invoke-WebRequest ifconfig.me/ip).Content.Trim() }
 
-function Write-DidYouMean {
-    Write-Host ("Did you mean " + $PSStyle.Underline + $args[0] + $PSStyle.Reset + "?")
-}
-
 function objects { process { $_ | Select-Object * } }
-function unpack { Write-DidYouMean "objects" }
-
 function members { process { $_ | Get-Member } }
-function about { Write-DidYouMean "members" }
 
 function which { Get-Command -Name $args[0] -All -ErrorAction SilentlyContinue }
-
 function how { Get-Command -Name $args[0] -Syntax -ErrorAction SilentlyContinue }
 
 function .. { Set-Location .. }
@@ -131,10 +124,7 @@ function Prompt {
     Return ($PSStyle.Reset + $ThisDir + " " + $Sigil + " ")
 }
 
-function CustomizeConsole {
-    $Host.UI.RawUI.WindowTitle = ("Windows PowerShell", $PSVersionTable.PSVersion -join " ")
-}
-CustomizeConsole
+$Host.UI.RawUI.WindowTitle = ("Windows PowerShell", $PSVersionTable.PSVersion -join " ")
 
 # ----------------------------------------------------------------------------
 
