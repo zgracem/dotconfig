@@ -1,5 +1,6 @@
 function ls-vscode -d "List all Visual Studio Code workspaces"
     set -f dir ~/Library/"Application Support"/Code/User/workspaceStorage
+    path is -d $dir; or return 1
 
     for folder in $dir/*/
         set json_file (path resolve $folder/workspace.json)

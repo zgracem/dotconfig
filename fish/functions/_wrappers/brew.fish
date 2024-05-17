@@ -1,6 +1,5 @@
-command -q brew; or return
-
 function brew --description 'The missing package manager for macOS'
+    command -q brew; or return 127
     switch $argv[1]
         case cd
             # Implement `brew cd <location>` to quickly move to Homebrew dirs.
