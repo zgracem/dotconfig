@@ -66,12 +66,12 @@ set breakindent         " wrapped line repeats indent
 set linebreak           " visually break at word boundaries
 
 " tabs
-set expandtab           " use spaces, not tabs
-set shiftwidth=0        " size of each (autoindent) step; 0 = use 'tabstop'
 set tabstop=4           " one <Tab> is equivalent to 4 spaces
-set shiftround          " always indent to a multiple of 'shiftwidth'
+set shiftwidth=0        " size of each (autoindent) step; 0 = use &tabstop
+set softtabstop=-1      " Backspace deletes n spaces; <0 = use &shiftwidth
+set expandtab           " Tab key inputs &tabstop spaces
+set shiftround          " always indent to a multiple of &shiftwidth (&tabstop)
 set smarttab            " backspace over blanks at BoL
-set softtabstop=-1      " <0 = use 'shiftwidth' instead
 
 " mousing
 if has("mouse")
