@@ -136,6 +136,7 @@
   "gitlens.heatmap.toggleMode": "file",
   "gitlens.hovers.annotations.over": "annotation",
   "gitlens.hovers.currentLine.enabled": false,
+  "gitlens.launchpad.indicator.enabled": false,
   "gitlens.menus": false,
   "gitlens.mode.statusBar.enabled": false,
   "gitlens.plusFeatures.enabled": false,
@@ -415,7 +416,8 @@
     "workbench.editor.languageDetection": false
   },
   "[powershell]": {
-    "editor.wordWrapColumn": 115
+    "editor.wordWrapColumn": 115,
+    "files.trimTrailingWhitespace": true
   },
   "[ruby]": {
     "editor.defaultFormatter": "castwide.solargraph",
