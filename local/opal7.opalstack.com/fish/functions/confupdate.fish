@@ -3,8 +3,11 @@ function confupdate -d "Update configuration from GitHub"
     set -gx USER_CONFIG_DIRS (path resolve ~/.{config,private})
 
     for dir in $USER_CONFIG_DIRS
-        pushd $dir; and git pull; and popd
-        or return
+        if pushd $dir; and git pull
+            popd
+        else
+            return
+        end
     end
 
     # This server doesn't like `~/.ssh` (or any of its contents) being a symlink
