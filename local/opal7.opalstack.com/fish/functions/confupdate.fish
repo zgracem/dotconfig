@@ -4,9 +4,8 @@ function confupdate -d "Update configuration from GitHub"
 
     for dir in $USER_CONFIG_DIRS
         pushd $dir; and git pull; and popd
-        or break
+        or return
     end
-    or return
 
     # This server doesn't like `~/.ssh` (or any of its contents) being a symlink
     cp -af $USER_CONFIG_DIRS[2]/ssh/* $HOME/.ssh
