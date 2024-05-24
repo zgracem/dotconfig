@@ -213,9 +213,10 @@
   "security.workspace.trust.enabled": false,
   "settingsSync.ignoredExtensions": [
     "castwide.solargraph",
+    "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
-    "timonwong.shellcheck",
-    "shopify.ruby-lsp"
+    "shopify.ruby-lsp",
+    "timonwong.shellcheck"
   ],
   "settingsSync.ignoredSettings": [
     "code-runner.customCommand",
@@ -225,11 +226,24 @@
     "editor.fontFamily",
     "editor.fontSize",
     "editor.fontWeight",
+    "fish.path.fish_indent",
+    "fish.path.fish",
+    "git.defaultCloneDirectory",
+    "git.path",
     "jqPlayground.binaryPath",
     "papyrus.fo4.directory",
     "powershell.powerShellAdditionalExePaths",
     "powershell.powerShellDefaultVersion",
+    "ruby.interpreter.commandPath",
+    "ruby.pathToBundler",
+    "security.allowedUNCHosts",
+    "shellcheck.executablePath",
+    "shellformat.path",
     "slimLint.executablePath",
+    "solargraph.bundlerPath",
+    "solargraph.commandPath",
+    "solargraph.diagnostics",
+    "solargraph.formatting",
     "spellright.addToSystemDictionary",
     "spellright.configurationScope",
     "spellright.language",
@@ -288,6 +302,16 @@
   "terminal.integrated.fontWeightBold": "500",
   "terminal.integrated.hideOnStartup": "whenEmpty",
   "terminal.integrated.ignoreProcessNames": ["bash", "zsh", "fish"],
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "icon": "terminal-bash",
+      "path": "/usr/bin/bash"
+    },
+    "fish": {
+      "icon": "terminal",
+      "path": "/home/linuxbrew/.linuxbrew/bin/fish"
+    }
+  },
   "terminal.integrated.profiles.osx": {
     "bash": {
       "icon": "terminal-bash",
@@ -466,6 +490,7 @@
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
     "editor.renderWhitespace": "trailing",
+    "editor.wordBasedSuggestions": "currentDocument",
     "editor.wordWrapColumn": 80
   }
 }
