@@ -4,7 +4,7 @@ function cygsetup --description 'Launch the Cygwin installer'
   set -l pkg_dir (cygpath -aw "$installer_dir/pkg")
   set -l log_dir "$HOME/var/log/cygwin"
 
-  set -l cyg_root (cygpath -aw "/" | string escape)
+  set -l cyg_root (cygpath -aw "/cygdrive/c/cygwin64" | string escape)
 
   set -l params
   # Root installation directory (-R)
