@@ -15,5 +15,5 @@ function confupdate -d "Update configuration from GitHub"
 
     # This server doesn't like `~/.ssh` (or any of its contents) being a symlink
     cp -af $USER_CONFIG_DIRS[2]/ssh/* $HOME/.ssh
-    and chmod -R -c go-rwx $HOME/.ssh
+    and chmod -R go-rwx $HOME/.ssh
 end
