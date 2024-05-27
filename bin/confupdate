@@ -1,12 +1,5 @@
 #!/usr/bin/env fish
 
-if string match -rq "^$HOME/bin" (status filename)
-    echo installed
-else
-    echo not installed
-end
-exit
-
 function git-sync -a user_dir
     switch $hostname
         case "Citadel.*"
