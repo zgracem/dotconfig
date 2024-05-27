@@ -3,10 +3,13 @@ function confupdate -d "Update configuration from GitHub"
     set -gx USER_CONFIG_DIRS (path resolve ~/.{config,private})
 
     for dir in $USER_CONFIG_DIRS
-        if pushd $dir; and git fetch --prune; and git merge --ff-only
+        pushd $dir; or return
+        if git pull
             popd
+            continue
         else
-            return
+            popd
+            return 1
         end
     end
 
