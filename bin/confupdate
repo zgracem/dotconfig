@@ -1,0 +1,59 @@
+#!/usr/bin/env fish
+
+if string match -rq "^$HOME/bin" (status filename)
+    echo installed
+else
+    echo not installed
+end
+exit
+
+function git-sync -a user_dir
+    switch $hostname
+        case "Citadel.*"
+            # Primary machine
+            git -C $user_dir push
+            return
+        case "*.opalstack.com"
+            # Servers where `git` is so old it doesn't support the `-C` flag
+            pushd $user_dir; or return
+            if git pull
+                popd
+                return 0
+            else
+                popd
+                return 1
+            end
+        case "*"
+            git -C $user_dir fetch --prune
+            and git -C $user_dir merge --ff-only
+    end
+end
+
+function post-confupdate
+    switch $hostname
+        # Servers that don't like `~/.ssh` (or any of its contents) as a symlink
+        case "*.opalstack.com" "WS-*"
+            cp -af $USER_CONFIG_DIRS[2]/ssh/* ~/.ssh
+            and chmod -R go-rwx ~/.ssh
+        case "*"
+            return
+    end
+end
+
+function main -d "Update configuration from GitHub"
+    switch $hostname
+        case Alyx
+            set -gx USER_CONFIG_DIRS ~/src/**/dot{config,private}
+        case "*"
+            set -gx USER_CONFIG_DIRS ~/.{config,private}
+    end
+
+    for dir in $USER_CONFIG_DIRS
+        git-sync (path resolve $dir)
+        or break
+    end
+
+    post-confupdate
+end
+
+main $argv

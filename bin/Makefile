@@ -7,6 +7,7 @@ datarootdir := $(XDG_DATA_HOME)
 include ../common.mk
 
 SHIMS  =
+SHIMS += confupdate
 SHIMS += pre-rg
 SHIMS += relpath
 SHIMS += tbcopy
