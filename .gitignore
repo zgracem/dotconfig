@@ -6,6 +6,7 @@
 .op/
 
 # not intended for human interaction
+btop/btop.log
 fish/fish_variables*
 fish/fishd.*
 iterm2/
