@@ -7,15 +7,9 @@ function git-sync -a user_dir
             git -C $user_dir push
             return
         case "*.opalstack.com"
-            # Servers where `git` is so old it doesn't support the `-C` flag
-            pushd $user_dir; or return
-            if git pull
-                popd
-                return 0
-            else
-                popd
-                return 1
-            end
+            # Regular `/usr/bin/git` is so old it doesn't support the `-C` flag
+            scl enable rh-git227 "git -C $user_dir fetch --prune"
+            and scl enable rh-git227 "git -C $user_dir merge --ff-only"
         case "*"
             git -C $user_dir fetch --prune
             and git -C $user_dir merge --ff-only
@@ -41,8 +35,8 @@ function main -d "Update configuration from GitHub"
             set -gx USER_CONFIG_DIRS ~/.{config,private}
     end
 
-    for dir in $USER_CONFIG_DIRS
-        git-sync (path resolve $dir)
+    for user_dir in (path resolve $USER_CONFIG_DIRS)
+        git-sync $user_dir
         or break
     end
 
