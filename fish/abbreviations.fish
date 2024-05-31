@@ -69,10 +69,10 @@ abbr --add ll $_ll_command
 if command -q fd
     set -l _fd_default_flags "-L" # --follow
     abbr --add fd "fd $_fd_default_flags"
-    abbr --add fdd "fd $_fd_default_flags -td"
-    abbr --add fdf "fd $_fd_default_flags -tf"
+    abbr --add fdd "fd -td $_fd_default_flags"
+    abbr --add ff "fd -tf $_fd_default_flags"
     abbr --add fda "fd $_fd_default_flags -u" # --unrestricted = --hidden --no-ignore
-    abbr --add ff "fd $_fd_default_flags --full-path -tf"
+    abbr --add fff "fd $_fd_default_flags --full-path"
 end
 
 command -q manpdf; and not set -q SSH_CONNECTION
