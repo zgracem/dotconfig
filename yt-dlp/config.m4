@@ -73,4 +73,4 @@
 
 # run custom post-processing script to add metadata etc.
 --write-info-json
---exec "_HOME_/.config/yt-dlp/postexec.fish {}"
+--exec "_XDG_CONFIG_HOME_/yt-dlp/postexec.fish {}"

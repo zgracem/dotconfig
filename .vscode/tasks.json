@@ -16,12 +16,5 @@
       }
     }
   },
-  "tasks": [
-    {
-      "label": "Update user-agent",
-      "type": "shell",
-      "command": "libexec/user-agent-update.fish",
-      "group": "build"
-    }
-  ]
+  "tasks": []
 }

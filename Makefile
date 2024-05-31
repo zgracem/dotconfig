@@ -32,34 +32,26 @@ $(SHELL_FILES):
 shellfiles: $(SHELL_FILES)
 
 # -----------------------------------------------------------------------------
-# Generate a fake user-agent string to mask the activity of tools like wget.
-# Use Homebrew's recipe for Google Chrome to avoid installing Chrome itself.
+# Send a fake user-agent string to mask the activity of tools like wget.
 # ----------------------------------------------------------------------------
 
-UA_OUTPUT_FILES = \
+USER_AGENT_VER = 126.0
+USER_AGENT = Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:$(USER_AGENT_VER)) Gecko/20100101 Firefox/$(USER_AGENT_VER)
+
+M4_OUTPUT_FILES = \
 	aria2/aria2.conf \
 	curl/.curlrc \
 	wget/wgetrc \
 	yt-dlp/config \
 	../.private/yt-dlp/config
 
-UA_FILE := $(XDG_CACHE_HOME)/dotfiles/user-agent.txt
-$(UA_FILE): | $(XDG_CACHE_HOME)/dotfiles
-	$(XDG_CONFIG_HOME)/libexec/user-agent-get.fish >$@
-$(XDG_CACHE_HOME)/dotfiles:
-	mkdir -pv $@
-$(UA_OUTPUT_FILES): $(UA_FILE)
-
 M4FLAGS  =
-M4FLAGS += -D _HOME_="$(HOME)"
-M4FLAGS += -D _USER_AGENT_="$(shell cat $(UA_FILE))"
-M4FLAGS += -D _XDG_CACHE_HOME_="$(XDG_CACHE_HOME)"
-$(UA_OUTPUT_FILES): %: %.m4
+M4FLAGS += -D _HOME_="$(HOME)" # yt-dlp only
+M4FLAGS += -D _XDG_CONFIG_HOME_="$(XDG_CONFIG_HOME)" # yt-dlp only
+M4FLAGS += -D _XDG_CACHE_HOME_="$(XDG_CACHE_HOME)" # wget only
+M4FLAGS += -D _USER_AGENT_="$(USER_AGENT)"
+$(M4_OUTPUT_FILES): %: %.m4
 	m4 $(M4FLAGS) $< >$@
 
 .PHONY: user-agent
-user-agent: $(UA_OUTPUT_FILES)
-
-.PHONY: user-agent/clean
-user-agent/clean:
-	rm -fv $(UA_OUTPUT_FILES) $(UA_FILE)
+user-agent: $(M4_OUTPUT_FILES)
