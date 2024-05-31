@@ -102,6 +102,9 @@ if command -q brew
 
     # openjdk
     fish_add_path $HOMEBREW_PREFIX/opt/openjdk/bin
+
+    # m4
+    fish_add_path $HOMEBREW_PREFIX/opt/m4/bin
 end
 
 # Xcode

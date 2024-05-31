@@ -67,6 +67,9 @@ if [ -x /usr/local/bin/brew ]; then
   PATH=/usr/local/opt/calendar/bin:$PATH
   MANPATH=/usr/local/opt/calendar/share/man:$MANPATH
   export CALENDAR_DIR=$HOME/Developer/share/calendar/src
+
+  # m4
+  PATH=/usr/local/opt/m4/bin:$PATH
 fi
 
 # Xcode
