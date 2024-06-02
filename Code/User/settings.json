@@ -13,6 +13,8 @@
     "jq": "jq --null-input --from-file",
     "makefile": "cd $dir && gnumake -n",
     "markdown": "multimarkdown --snippet --nolabels",
+    "powershell": "pwsh -ExecutionPolicy ByPass -File",
+    "python": "python3",
     "ruby": "ruby",
     "sass": "sass --no-source-map --trace",
     "scss": "sass --no-source-map --trace",
