@@ -6,7 +6,7 @@ function ls-rbenv --description "List all .ruby-version files and their values"
         end
     end
 
-    set --local dirs ~/Developer/{ruby,src} ~/Dropbox ~/VS/www ~/www
+    set --local dirs ~/Developer/{libexec,ruby} ~/Dropbox ~/VS/www ~/www
     set --local rv_files (fd -tf -sHFa ".ruby-version" $dirs)
     set --local rb_versions (rbenv versions --bare)
 

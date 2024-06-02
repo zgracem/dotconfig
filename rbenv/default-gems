@@ -2,10 +2,9 @@
 # <https://github.com/rbenv/rbenv-default-gems>
 
 htmlentities
-middleman
 plist
-sassc
-slim
+rubocop
+ruby-lsp
 solargraph
 symbolized
 toml-rb
