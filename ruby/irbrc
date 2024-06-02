@@ -11,10 +11,14 @@ require "time"
 
 require "symbolized"
 
+autoload :CGI, "cgi"
 autoload :CSV, "csv"
+autoload :HTMLEntities, "htmlentities"
 autoload :JSON, "json"
+autoload :Open3, "open3"
 autoload :Pathname, "pathname"
 autoload :Set, "set"
+autoload :TagLib, "taglib"
 autoload :URI, "uri"
 autoload :YAML, "yaml"
 
