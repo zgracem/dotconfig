@@ -18,7 +18,18 @@ autoload :Set, "set"
 autoload :URI, "uri"
 autoload :YAML, "yaml"
 
-require "#{ENV.fetch('HOME', nil)}/Developer/ruby/zcolour/zcolour"
+begin
+  require "#{ENV.fetch('HOME', nil)}/Developer/ruby/zcolour/zcolour"
+rescue LoadError => e
+  warn e.message
+  require "singleton"
+  class Colour
+    include Singleton
+    def self.method_missing(*) = Colour.instance
+    def method_missing(*) = Colour.instance
+    def to_s = ""
+  end
+end
 
 # -----------------------------------------------------------------------------
 # settings
