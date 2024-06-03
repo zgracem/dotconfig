@@ -1,13 +1,9 @@
+# vim:ft=yaml
 # https://bundler.io/man/bundle-config.1.html
+# export BUNDLE_USER_CONFIG=$XDG_CONFIG_HOME/bundle/config
 ---
-BUNDLE_GEM__TEST: "false"
-BUNDLE_GEM__MIT: "true"
-BUNDLE_GEM__COC: "true"
 BUNDLE_BUILD__NOKOGIRI: "nil"
 BUNDLE_CLEAN: "false"
 BUNDLE_UPDATE_REQUIRES_ALL_FLAG: "true"
 BUNDLE_IGNORE_MESSAGES__HTTPARTY: "true"
-BUNDLE_GEM__CI: "false"
-BUNDLE_GEM__CHANGELOG: "true"
-BUNDLE_GEM__LINTER: "rubocop"
 BUNDLE_GLOBAL_GEM_CACHE: "false"
