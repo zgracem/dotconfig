@@ -7,7 +7,7 @@
 	safecrlf = false
 
 [alias]
-	hist = log --pretty=format:'[%h] %ad | %s%d' --graph --date=short
+	hist = log --pretty=format:'[%h] %ai | %s%d' --graph --date=short
 
 [github]
 	user = zgracem
