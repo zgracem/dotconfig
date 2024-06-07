@@ -18,6 +18,10 @@ if (($PSMyDocuments.StartsWith("\\")) -and ($PSMyDocuments -in $PSModulePaths)) 
     $env:PSModulePath = $PSModulePaths -join ";"
 }
 
+# Load custom functions
+$local:FunctionFiles = Get-ChildItem $PSScriptRoot\functions\*.ps1
+ForEach ($FunctionFile in $FunctionFiles) { . $FunctionFile }
+
 # ----------------------------------------------------------------------------
 
 $env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
@@ -102,16 +106,13 @@ if ($Host.Name -eq 'ConsoleHost') {
 
 function Prompt {
     $local:ThisDir = [string] ""
+    $local:ThisDirStyled = [string] ""
     $local:Sigil = [string] ">"
+    $local:SigilPrefix = [string] ""
     $local:SigilColour = $PSStyle.Foreground.BrightBlue
+    $local:SigilStyled = [string] ""
 
-    # Use ProviderPath if there's no drive defined for the location provider.
-    $ThisDir = if ($executionContext.SessionState.Path.CurrentLocation.Drive) {
-        $executionContext.SessionState.Path.CurrentLocation.Path
-    }
-    else {
-        $executionContext.SessionState.Path.CurrentLocation.ProviderPath
-    }
+    $ThisDir = $executionContext.SessionState.Path.CurrentLocation.Path
 
     # Replace path to home directory with `~`
     if ($ThisDir -like "$Home*") {
@@ -122,25 +123,21 @@ function Prompt {
         [System.IO.Path]::DirectorySeparatorChar,
         [System.IO.Path]::AltDirectorySeparatorChar)
 
+    $ThisDirStyled = $PSStyle.Foreground.White + $ThisDir + $PSStyle.Reset
+
     if ($global:IsAdmin -eq $true) {
-        $Sigil = "!>"
-        $SigilColour = $PSStyle.Foreground.Red
+        $SigilPrefix = "!"
+        $SigilColour = $PSStyle.Foreground.BrightRed
     }
+    $Sigil = $SigilPrefix + ($Sigil * ($nestedPromptLevel + 1))
+    $SigilStyled = $SigilColour + $Sigil + $PSStyle.Reset
 
-    $ThisDir = $PSStyle.Foreground.White + $ThisDir + $PSStyle.Reset
+    Update-WindowTitle $ThisDir
 
-    # $Sigil = $SigilColour + ($Sigil * ($nestedPromptLevel + 1)) + $PSStyle.Reset
-    $Sigil = $SigilColour + $Sigil + $PSStyle.Reset
-
-    Return ($PSStyle.Reset + $ThisDir + " " + $Sigil + " ")
+    Return ($PSStyle.Reset + "$ThisDirStyled $SigilStyled ")
 }
 
-$Host.UI.RawUI.WindowTitle = ("Windows PowerShell", $PSVersionTable.PSVersion -join " ")
-
 # ----------------------------------------------------------------------------
-
-$local:FunctionFiles = Get-ChildItem $PSScriptRoot\functions\*.ps1
-ForEach ($FunctionFile in $FunctionFiles) { . $FunctionFile }
 
 $local:PrivatePSDir = "$PSScriptRoot/../../.private/powershell"
 if (Test-Path -Type Container $PrivatePSDir) {
