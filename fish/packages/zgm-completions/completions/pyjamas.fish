@@ -1,7 +1,5 @@
 function __pyjamas_formats
-    set --local function_file (status filename | string replace completions functions)
-    set --local pj_formats (string match -rg '^\s*case ((?:\w+) ?)+$' <$function_file | path sort -u)
-    echo -ns $pj_formats\t\n
+    pyjamas --list
 end
 
 function __pyjamas_modes
@@ -10,5 +8,10 @@ function __pyjamas_modes
 end
 
 complete -c pyjamas -s i -l in -x -a "(__pyjamas_formats)" -d "Specify input format"
-complete -c pyjamas -s o -l out -x -a "(__pyjamas_formats)" -d "Specify output format (req'd)"
-complete -c pyjamas -s m -l mode -x -a "(__pyjamas_modes)" -d "Mode (INPUT:OUTPUT)"
+complete -c pyjamas -s o -l out -x -a "(__pyjamas_formats)" -d "Specify output format"
+complete -c pyjamas -s m -l mode -x -a "(__pyjamas_modes)" -d "Specify INPUT:OUTPUT"
+complete -c pyjamas -s p -l pager -x -a "(__fish_complete_subcommand)" -d "Send output to PAGER"
+complete -c pyjamas -s l -l list -d "List supported formats"
+complete -c pyjamas -s I -l install-gems -d "Install required gems"
+complete -c pyjamas -s d -l debug -d "Debug mode"
+complete -c pyjamas -s h -l help -d "Display help"

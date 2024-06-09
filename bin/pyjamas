@@ -1,17 +1,52 @@
 #!/usr/bin/env fish
 
+function _pyjamas_help
+    echo "Usage: pyjamas [-lIh] [[-i IN_MODE] [-o OUT_MODE] | -m IN_MODE:OUT_MODE] [FILE] [OUTFILE]"
+    echo \n"Options:"
+    echo \t"-i, --in=IN_MODE        Specify input format"
+    echo \t"-o, --out=OUT_MODE      Specify output format"
+    echo \t"-m, --mode=MODESPEC     Specify formats as `IN_MODE:OUT_MODE`"
+    echo \t"-p, --pager=PAGER       Send output to PAGER"
+    echo \t"-l, --list              List supported formats"
+    echo \t"-I, --install           Install required Ruby/NPM modules"
+    echo \t"-h, --help              Display this help"
+end
+
+function _pyjamas_list
+    string match -rg '^\s*case ((?:\w+) ?)+$' <(status filename) | path sort -u
+end
+
 function main --description "Convert configuration files between formats"
-    argparse -x{i,o},m -n pyjamas 'i/in=' 'o/out=' 'm/mode=' -- $argv
+    argparse -n pyjamas -x{i,o},m -x{l,I,h},{i,o,m,p,d} -xl,I,h \
+        'i/in=' 'o/out=' 'm/mode=' 'p/pager=' 'd/debug' \
+        'l/list' 'c/complete' 'I/install' 'h/help' -- $argv
     or return
+
+    if set -q _flag_help
+        _pyjamas_help
+        exit
+    else if set -q _flag_list
+        set -l fmts (_pyjamas_list)
+        isatty stdout; or set fmts $fmts\t
+        echo -ns $fmts\n
+        exit
+    else if set -q _flag_install
+        gem install plist
+        gem install toml-rb
+        gem install xml-simple
+        npm install -g cson
+        exit
+    end
 
     if set -q _flag_mode
         string split ":" $_flag_mode | read -L _flag_in _flag_out
     end
 
+    # input
+
     set -q _flag_in; and set -l ext_in $_flag_in
 
     if set -q argv[1]
-        set -f file $argv[1]
         set -q ext_in; or set ext_in (path extension $argv[1] | string trim -c.)
     else if not isatty stdin
         if not set -q _flag_in
@@ -33,24 +68,36 @@ function main --description "Convert configuration files between formats"
             set -f input "JSON.load(ARGF)"
             set -a libs json
         case plist
-            if set -q file; and string match -q "bplist" (head -c6 $file)
+            if set -q argv[1]; and string match -q "bplist" (head -c6 $argv[1])
+                set -f original_file $argv[1]
                 set -f argv[1] (mktemp -t pyjamas.XXXXXX)
-                plutil -convert xml1 -o $argv[1] $file; or exit
+                plutil -convert xml1 -o $argv[1] $original_file; or exit
             end
             set -f input "Plist.parse_xml(ARGF)"
             set -a libs plist
         case toml
             set -f input "TomlRB.parse(ARGF.read)"
             set -a libs toml-rb
+        case xml
+            set -f input "XmlSimple.xml_in(ARGF.read, ForceArray: false)"
+            set -a libs xmlsimple
         case yml yaml
             set -f input "YAML.unsafe_load(ARGF.read)"
             set -a libs yaml
         case '*'
-            echo >&2 "don't know how to read a “$ext_in” file!"
+            echo >&2 "don't know how to read a '$ext_in' file!"
             return 1
     end
 
-    set -l lang $_flag_out
+    # output
+
+    if set -q argv[2]
+        set -f out_file $argv[2]
+        set -q _flag_out
+        or set _flag_out (path extension $argv[2] | string trim -c.)
+    end
+
+    set -f lang $_flag_out
 
     switch "$_flag_out"
         case cson
@@ -60,30 +107,50 @@ function main --description "Convert configuration files between formats"
             set -f output "$input.to_json"
             set -a libs json
         case plist
-            set lang xml
+            set -f lang xml
             set -f output "$input.to_plist"
             set -a libs plist
         case toml
             set -f output "TomlRB.dump($input)"
             set -a libs toml-rb
+        case xml
+            set -f output "XmlSimple.xml_out($input, XmlDeclaration: true)"
+            set -a libs xmlsimple
         case yml yaml
-            set lang yaml
+            set -f lang yaml
             set -f output "$input.to_yaml"
             set -a libs yaml
         case '*'
-            echo >&2 "don't know how to make a “$_flag_out” file!"
+            echo >&2 "don't know how to make a '$_flag_out' file!"
             return 1
     end
 
-    if isatty stdout; and command -sq bat
-        eval "function _pager; bat --style=plain --language=$lang; end"
-    else if isatty stdout; and command -sq less
-        function _pager; less; end
+    if set -q out_file
+        set -f rb_script "Pathname('$out_file').expand_path.open('w+') { _1.write($output) }"
+        set -a libs pathname
     else
-        function _pager; cat; end
+        set -f rb_script "puts $output"
     end
 
-    ruby -r$libs -e "puts $output" $argv[1] | _pager
+    if set -q _flag_debug
+        echo $rb_script | bat -pp -lruby
+        exit
+    end
+
+    if isatty stdout
+        if string match -q bat "$_flag_pager"
+            eval "function _pager; bat --plain --language=$lang; end"
+        else if command -sq "$_flag_pager"
+            eval "function _pager; $_flag_pager; end"
+        else if set -q _flag_pager
+            echo >&2 "pager not found: $_flag_pager"
+            return 127
+        else
+            function _pager; cat $argv; end
+        end
+    end
+
+    ruby -r$libs -e"$rb_script" $argv[1] | _pager
 end
 
 main $argv
