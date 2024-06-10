@@ -39,7 +39,7 @@
     "scope": "ruby"
   },
   "YARD tag: @param": {
-    "body": "$LINE_COMMENT @param ${1:url} [${2:String}] ${0:the URL to download}",
+    "body": "$LINE_COMMENT @param ${1:name} [${2:String}] ${0}",
     "prefix": "# @param",
     "scope": "ruby"
   },
@@ -54,7 +54,7 @@
     "scope": "ruby"
   },
   "YARD tag: @return": {
-    "body": "$LINE_COMMENT @return [${1:Array<String>}] ${0:a list of files}",
+    "body": "$LINE_COMMENT @return [${1:Array<String>}] ${0}",
     "prefix": "# @return",
     "scope": "ruby"
   },
