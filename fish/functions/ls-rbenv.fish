@@ -25,13 +25,13 @@ function ls-rbenv --description "List all .ruby-version files and their values"
         set --local project_dir $info[2]
 
         if not contains $rb_version $rb_versions
-            # highlight uninstalled versions
-            set rb_version (set_color red)$rb_version(set_color normal)
+            # de-emphasize uninstalled versions
+            set rb_version (set_color --dim)"\e[9m"$rb_version"\e[29m"(set_color normal)
         else if string match -q $rb_version $global_version
-            # also highlight default version
-            set rb_version (set_color cyan)$rb_version(set_color normal)
+            # emphasize default version
+            set rb_version (set_color --bold white)$rb_version(set_color normal)
         end
 
-        printf "[%s] %s\n" $rb_version $project_dir
+        echo -e "[$rb_version] $project_dir"
     end
 end
