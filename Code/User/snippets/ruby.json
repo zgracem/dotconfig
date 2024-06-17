@@ -1,32 +1,10 @@
 {
-  "class": {
-    "prefix": "class",
-    "body": [
-      "class ${1:KlassName}",
-      "\t# @return [${4:String}] ${5:the name of the thing}",
-      "\tattr_reader :${3:name}\n",
-      "\t# @return [${7:Symbol}] ${8:the type of the thing}",
-      "\tattr_reader :${6:type}\n",
-      "\t# @return [${10:URI}] ${11:the URL to the thing}",
-      "\tattr_reader :${9:url}\n",
-      "\t# @param ${3} [${4}] ${5}",
-      "\t# @param ${6} [${7}] ${8}",
-      "\t# @param ${9} [${10}] ${11}",
-      "\tdef initialize(${3}:, ${6}:, ${9}:)",
-      "\t\t@${3} = ${3}",
-      "\t\t@${6} = ${6}",
-      "\t\t@${9} = ${9}",
-      "\tend",
-      "end"
-    ],
-    "description": "Class definition"
-  },
   "def_inspect": {
     "prefix": "def inspect",
     "body": [
       "# @return [String]",
       "def inspect",
-      "  %(#<#{self.class.name}:#{${1:title}}>)",
+      "  %(#<#{self.class.name}:#{${1:self}}>)",
       "end"
     ],
     "description": "#inspect"
@@ -39,6 +17,16 @@
       "end"
     ],
     "description": "#new"
+  },
+  "def_to_h": {
+    "prefix": "def to_h",
+    "body": [
+      "# @return [Hash]",
+      "def to_h",
+      "\t{$0}",
+      "end"
+    ],
+    "description": "#to_h"
   },
   "frozen_string_literal": {
     "prefix": "frozen",

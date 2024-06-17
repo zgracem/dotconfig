@@ -21,7 +21,7 @@
     "prefix": "!new",
     "body": ["jq '", ".", "'", "Untitled-2"],
     "description": "Empty playground",
-    "scope": "jqqg",
+    "scope": "jq,jqqg",
     "isFileTemplate": true
   },
   "new_JSON": {
