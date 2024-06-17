@@ -64,6 +64,12 @@ function main --description "Convert configuration files between formats"
         case cson
             set -f input "JSON.load(Open3.capture2('cson2json', stdin_data: ARGF.read).first)"
             set -a libs json open3
+        case csv
+            set -f input "CSV.parse(ARGF.read, headers: true).map(&:to_h)"
+            set -a libs csv
+        case tsv
+            set -f input "CSV.parse(ARGF.read, headers: true, row_sep: \"\t\").map(&:to_h)"
+            set -a libs csv
         case json
             set -f input "JSON.load(ARGF)"
             set -a libs json
@@ -137,16 +143,17 @@ function main --description "Convert configuration files between formats"
         exit
     end
 
+    function _pager; cat $argv; end
     if isatty stdout
         if string match -q bat "$_flag_pager"
+            functions -e _pager
             eval "function _pager; bat --plain --language=$lang; end"
         else if command -sq "$_flag_pager"
+            functions -e _pager
             eval "function _pager; $_flag_pager; end"
         else if set -q _flag_pager
             echo >&2 "pager not found: $_flag_pager"
             return 127
-        else
-            function _pager; cat $argv; end
         end
     end
 
