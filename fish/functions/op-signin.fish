@@ -16,5 +16,5 @@ function op-signin --description "Sign into 1Password's CLI tool"
         return
     end
 
-    set -gx $op_env_var (eval "op signin --account personal --raw")
+    set -gx $op_env_var (eval "op signin --account my --raw")
 end
