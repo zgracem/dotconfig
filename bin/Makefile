@@ -7,7 +7,6 @@ include ../common.mk
 SHIMS  =
 SHIMS += confupdate
 SHIMS += pre-rg
-SHIMS += pyjamas
 SHIMS += relpath
 SHIMS += tbcopy
 SHIMS += trash
