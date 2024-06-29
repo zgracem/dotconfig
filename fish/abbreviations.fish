@@ -75,9 +75,6 @@ if command -q fd
     abbr --add fff "fd $_fd_default_flags --full-path"
 end
 
-command -q manpdf; and not set -q SSH_CONNECTION
-and abbr --add manpdf "manpdf -of"
-
 if is-macos
     # http://brettterpstra.com/2014/07/04/how-to-lose-your-tags/
     abbr --add mv "/bin/mv -vi"
