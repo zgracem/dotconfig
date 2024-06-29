@@ -33,7 +33,6 @@ abbr --add mkdir "mkdir -pv"
 abbr --add rename "rename -v"
 abbr --add stow "stow -v"
 abbr --add restow "stow --restow -v"
-abbr --add trash "trash -v"
 abbr --add unstow "stow --delete -v"
 abbr --add xxd "xxd -u -g1" # -u = uppercase; -g1 = 1 octet per group
 

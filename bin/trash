@@ -1,42 +1,50 @@
-#!/usr/bin/env ruby -w
+#!/usr/bin/env osascript
 
-# This Ruby script formats its arguments into paths acceptable to an AppleScript
-# which tells the Finder to put those files in the trash. Using the Finder's own
-# API enables the "Put Back" feature on the trashed item(s).
+on run argv
+	set verbosity to false
+	set usage_message to "Usage: trash [-v] FILE [FILE ...]"
 
-require "open3"
-require "optparse"
+	if the length of argv is 0 then
+		log usage_message
+	else if item 1 of argv is "-v" or item 1 of argv is "--verbose" then
+		if the length of argv <= 1 then
+			set argv to {}
+			log usage_message
+		else
+			set verbosity to true
+			set argv to items 2 thru -1 of argv
+		end if
+	end if
 
-opts = { verbose: false }
+	set files_to_trash to {}
+	set verbose_output to {}
 
-optparser = OptionParser.new do |parser|
-  parser.banner = "Usage: trash [-v] FILE [FILE ...]"
+	tell application "Finder"
+		repeat with each_item in argv
+			if each_item does not start with "/" then
+				set each_item to (do shell script "pwd") & "/" & each_item
+			end if
 
-  parser.on("-v", "--verbose", "Explain what is being done") do |opt|
-    opts[:verbose] = opt
-  end
-end
-optparser.parse!(ARGV, into: opts)
+			if exists each_item as POSIX file then
+				set the_alias to (each_item as POSIX file) as alias
+				set the end of files_to_trash to the_alias
+				set the end of verbose_output to "Moved `" & (the POSIX path of the_alias) & "` to Trash"
+			else
+				set the end of verbose_output to "Does not exist: `" & each_item & "`"
+			end if
+		end repeat
 
-if ARGV.empty?
-  warn optparser.banner
-  exit 1
-end
+		move files_to_trash to trash
+	end tell
 
-paths = ARGV.map { |f| File.absolute_path(f) }
-files = begin
-  paths.map { |path| %(the POSIX file "#{path}") }.join(", ")
-rescue Errno::ENOENT => e
-  warn e.message
-  exit Errno::ENOENT::Errno
-end
+	if verbosity is true and length of verbose_output > 0 then
+		copy join_list(verbose_output, "\n") to stdout
+	end if
+end run
 
-applescript = format('tell app "Finder" to move { %<files>s } to trash', files:)
-_stdin, _stdout, stderr, thread = Open3.popen3("osascript", "-e", applescript)
-if thread.value.success?
-  paths.each { |path| puts "moved `#{path}` to Trash" } if opts[:verbose]
-else
-  warn stderr.read
-end
-
-exit thread.value.exitstatus
+on join_list(the_list, the_delimiter)
+	set AppleScript's text item delimiters to the_delimiter
+	set the_string to the_list as string
+	set AppleScript's text item delimiters to ""
+	return the_string
+end join_list
