@@ -154,6 +154,9 @@ abbr -a gpl "git fetch --prune; git merge --ff-only"
 abbr -a gps "git push"
 abbr -a gs "git status"
 
+# Homebrew Cask
+abbr -a cask --set-cursor "brew % --cask"
+
 # ----------------------------------------------------------------------------
 # advanced
 # ----------------------------------------------------------------------------
@@ -208,11 +211,3 @@ function __abbr_zequals
     command -s $cmdname
 end
 abbr -a zequals --position anywhere --regex "=\w+" --function __abbr_zequals
-
-# quick Homebrew Cask
-# cask:info → brew info --cask
-function __brew_cask
-    set -l cmd (string split -f2 : $argv[1])
-    echo "brew $cmd --cask"
-end
-abbr -a brew_cask --regex "cask:.+" --function __brew_cask
