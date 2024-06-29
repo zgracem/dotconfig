@@ -4,18 +4,9 @@ install:
 	@echo Target ‘$@’ not implemented.
 
 # ----------------------------------------------------------------------------
+# Create symlinks in $HOME
+# ----------------------------------------------------------------------------
 
-# shells: create empty data directories
-.PHONY: shellfiles
-SHELL_DATA  =
-SHELL_DATA += $(datadir)/sh
-SHELL_DATA += $(datadir)/bash
-SHELL_DATA += $(datadir)/fish
-$(SHELL_DATA):
-	mkdir -pv $@
-shellfiles: | $(SHELL_DATA)
-
-# shells: create symlinks in $HOME
 SHELL_FILES  =
 SHELL_FILES += ~/.bash_profile
 SHELL_FILES += ~/.bash_sessions_disable
@@ -27,8 +18,10 @@ SHELL_FILES += ~/.profile
 ~/.bashrc: bash/.bashrc
 ~/.hushlogin: bash/.hushlogin
 ~/.profile: sh/.profile
+
 $(SHELL_FILES):
 	ln -sfv .config/$< $@
+
 shellfiles: $(SHELL_FILES)
 
 # -----------------------------------------------------------------------------
@@ -52,6 +45,8 @@ M4FLAGS += -D _XDG_CACHE_HOME_="$(XDG_CACHE_HOME)" # wget only
 M4FLAGS += -D _USER_AGENT_="$(USER_AGENT)"
 $(M4_OUTPUT_FILES): %: %.m4
 	m4 $(M4FLAGS) $< >$@
+
+$(M4_OUTPUT_FILES): $(CURDIR)/Makefile
 
 .PHONY: user-agent
 user-agent: $(M4_OUTPUT_FILES)
