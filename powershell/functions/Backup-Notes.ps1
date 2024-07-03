@@ -1,9 +1,10 @@
 function Backup-Notes
 {
     $NotesDir = "$env:OneDrive\Notes"
+    # $DateStamp = Get-Date -Format "yyyy-MM-dd"
+    # $ArchiveName = "Notes_$DateStamp.zip"
+    $ArchiveName = "Notes_{0}.zip" -f (Get-Date -Format "yyyy-MM-dd")
     $MyDesktop = [System.Environment]::GetFolderPath("Desktop")
-    $DateStamp = Get-Date -Format "yyyy-MM-dd"
-    $ArchiveName = "Notes_$DateStamp.zip"
     $NotesArchive = Join-Path -Path $MyDesktop -Child $ArchiveName
 
     [System.IO.Compression.ZipFile]::CreateFromDirectory($NotesDir, $NotesArchive, "Optimal", $False)
