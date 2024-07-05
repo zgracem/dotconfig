@@ -24,9 +24,5 @@ function brew --description 'The missing package manager for macOS'
             end
     end
 
-    if command -q op; and string match -q 1 $OP_PLUGIN_ALIASES_SOURCED
-        op plugin run -- brew $argv
-    else
-        command brew $argv
-    end
+    command brew $argv
 end
