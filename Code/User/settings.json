@@ -34,6 +34,7 @@
   "code-runner.showRunCommandInExplorerContextMenu": false,
   "code-runner.showRunIconInEditorTitleMenu": false,
   "debug.showInlineBreakpointCandidates": false,
+  "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.accessibilitySupport": "off",
@@ -63,7 +64,7 @@
   },
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
-  "editor.renderWhitespace": "trailing",
+  "editor.renderWhitespace": "boundary",
   "editor.rulers": [80, 118],
   "editor.snippetSuggestions": "top",
   "editor.suggest.filterGraceful": false,
@@ -478,6 +479,9 @@
       "strings": "off"
     },
     "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[viml]": {
     "editor.autoClosingQuotes": "never",
