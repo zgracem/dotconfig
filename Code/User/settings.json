@@ -251,7 +251,8 @@
     "spellright.addToSystemDictionary",
     "spellright.configurationScope",
     "spellright.language",
-    "window.doubleClickIconToClose"
+    "window.doubleClickIconToClose",
+    "workbench.externalBrowser"
   ],
   "settingsSync.keybindingsPerPlatform": false,
   "shellcheck.exclude": ["1090", "1091"],
@@ -342,6 +343,7 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.stickyScroll.enabled": true,
   "terminal.integrated.stickyScroll.maxLineCount": 2,
+  "terminal.integrated.suggest.enabled": true,
   "terminal.integrated.tabs.description": "${process}",
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.separator": " • ",
@@ -361,6 +363,8 @@
   "workbench.editor.revealIfOpen": true,
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editor.tabSizing": "shrink",
+  "workbench.experimental.enableNewProfilesUI": true,
+  "workbench.externalBrowser": "firefox",
   "workbench.iconTheme": "eq-material-theme-icons",
   "workbench.startupEditor": "none",
   "workbench.tree.renderIndentGuides": "always",
