@@ -139,6 +139,9 @@ function Prompt {
 
 # ----------------------------------------------------------------------------
 
+# Fast Node Manager
+if (Get-Command -ErrorAction SilentlyContinue fnm) { fnm env | Invoke-Expression }
+
 $local:PrivatePSDir = "$PSScriptRoot/../../.private/powershell"
 if (Test-Path -Type Container $PrivatePSDir) {
     . "$PrivatePSDir/profile.ps1"
