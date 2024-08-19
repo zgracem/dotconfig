@@ -251,6 +251,7 @@
     "spellright.addToSystemDictionary",
     "spellright.configurationScope",
     "spellright.language",
+    "typescript.tsserver.nodePath",
     "window.doubleClickIconToClose",
     "workbench.externalBrowser"
   ],
@@ -348,6 +349,8 @@
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.separator": " • ",
   "terminal.integrated.tabs.title": "${sequence}",
+  "typescript.tsserver.web.projectWideIntellisense.enabled": true,
+  "typescript.tsserver.web.typeAcquisition.enabled": true,
   "window.closeWhenEmpty": true,
   "window.enableMenuBarMnemonics": true,
   "window.menuBarVisibility": "toggle",
