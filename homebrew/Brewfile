@@ -31,6 +31,7 @@ brew "less"
 brew "micro"
 brew "openssh"
 brew "openssl@3"
+brew "p7zip"
 brew "readline"
 brew "rename" if OS.mac?
 brew "ripgrep"
@@ -44,6 +45,7 @@ brew "vim"
 # more utilities
 brew "bash"
 brew "btop"
+brew "entr"
 brew "hexyl"
 brew "lsusb"
 brew "ncurses"
@@ -157,7 +159,7 @@ brew "bramstein/webfonttools/woff2"
 # fun & games
 # ----------------------------------------------------------------------------
 
-brew "cowsay"
+brew "cowsay-org/cowsay/cowsay-org"
 brew "fastfetch"
 brew "figlet"
 brew "fortune"
@@ -202,6 +204,7 @@ cask "transmit"
 cask "visual-studio-code"
 
 # more
+cask "chatterino"
 cask "discord"
 cask "disk-drill"
 cask "go2shell"
