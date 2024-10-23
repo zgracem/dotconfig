@@ -172,6 +172,7 @@ brew "toilet"
 # ----------------------------------------------------------------------------
 
 tap "zgracem/caveats"
+tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
 brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/zgm-calendar-data"
 brew "zgracem/formulae/unrar"
@@ -194,6 +195,7 @@ cask "iterm2"
 cask "maestral"
 cask "name-mangler"
 cask "obsidian"
+cask "retrobatch"
 cask "steam", args: { appdir: "/Applications" }
 cask "sublime-merge"
 cask "superduper"
