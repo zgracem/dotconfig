@@ -28,7 +28,7 @@ shellfiles: $(SHELL_FILES)
 # Send a fake user-agent string to mask the activity of tools like wget.
 # ----------------------------------------------------------------------------
 
-USER_AGENT_VER = 126.0
+USER_AGENT_VER = 131.0
 USER_AGENT = Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:$(USER_AGENT_VER)) Gecko/20100101 Firefox/$(USER_AGENT_VER)
 
 M4_OUTPUT_FILES = \
