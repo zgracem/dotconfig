@@ -66,13 +66,11 @@ abbr --add ls $_ls_command
 abbr --add ll $_ll_command
 
 if command -q fd
-    set -l _fd_default_flags "-L" # --follow
-    abbr --add fd "fd $_fd_default_flags"
-    abbr --add fdd "fd --type=d $_fd_default_flags"
-    abbr --add fdf "fd --type=f $_fd_default_flags"
-    abbr --add fde "fd $_fd_default_flags --extension"
-    abbr --add fda "fd --unrestricted $_fd_default_flags" # --unrestricted = --hidden --no-ignore
-    abbr --add fff "fd --full-path $_fd_default_flags"
+    abbr --add fdd "fd --type=d"
+    abbr --add fdf "fd --type=f"
+    abbr --add fde "fd --extension"
+    abbr --add fda "fd --unrestricted --follow" # --unrestricted = --hidden --no-ignore
+    abbr --add fff "fd --full-path"
 end
 
 if is-macos

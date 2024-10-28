@@ -6,7 +6,7 @@ function headers -d "Print HTTP response headers for a URL"
         return 127
     end
 
-    set -l wget_args --server-response --spider --no-verbose
+    set -l wget_args --server-response --spider --no-verbose --no-timestamping
     set -l curl_args --head --silent --show-error
 
     if set -q _flag_wget
