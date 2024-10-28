@@ -107,6 +107,11 @@ abbr -a xcl 'sudo xcodebuild -license'
 abbr -a xcp 'xcode-select --print-path'
 abbr -a xcs 'sudo xcode-select --switch'
 
+# newsboat RSS reader
+if command -q newsboat
+    abbr --add nb "newsboat -q"
+end
+
 # f + reveal
 if is-macos
     functions --erase f reveal

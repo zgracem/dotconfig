@@ -1,0 +1,45 @@
+# ----------------------------------------------------------------------------
+# ~/.config/newsboat/config
+# ----------------------------------------------------------------------------
+
+# https://newsboat.org/releases/2.37/docs/newsboat.html#_configuration
+browser "/usr/bin/open -a Firefox %u"
+cleanup-on-quit no
+confirm-mark-feed-read no
+cookie-cache ~/.local/share/newsboat/cookies.txt
+datetime-format "%e %b %y  %H:%M"
+error-log ~/.local/share/newsboat/error.log
+feed-sort-order title
+refresh-on-startup yes
+reload-only-visible-feeds yes
+save-path ~/Downloads
+
+# https://newsboat.org/releases/2.37/docs/newsboat.html#_colors
+# https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+color background          default   black
+color title               black     white     bold
+color listnormal          default   black
+color listnormal_unread   color15   black     bold
+color listfocus           color15   blue
+color listfocus_unread    color15   blue      bold
+color info                white     black     reverse
+color hint-key            black     white     bold
+color article             default   black
+color end-of-text-marker  black     black
+
+# https://newsboat.org/releases/2.37/docs/newsboat.html#_format_strings
+articlelist-format        "%4i %f %D  %?T?|%-17T| ?%t"
+feedlist-title-format     " %N %V%?T? > #%T?%?F? > %F?%> %u unread, %t total "
+articlelist-title-format  " %N %V > %T%?F? > %F?%> %u unread, %t total "
+itemview-title-format     " %N %V > %F > %T%> %u unread, %t total "
+dialogs-title-format      " %N %V > Dialogs"
+help-title-format         " %N %V > Help"
+selectfilter-title-format " %N %V > Filters"
+selecttag-title-format    " %N %V > Tags"
+urlview-title-format      " %N %V > URLs"
+filebrowser-title-format  " %N %V > %?O?Open File&Save File? > %f"
+dirbrowser-title-format   " %N %V > %?O?Open Directory&Save File? > %f"
+
+# https://newsboat.org/releases/2.37/docs/newsboat.html#_key_bindings
+bind-key LEFT quit
+bind-key RIGHT open
