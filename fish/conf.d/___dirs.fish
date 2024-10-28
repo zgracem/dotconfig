@@ -6,7 +6,7 @@ set -q XDG_CONFIG_HOME[1]; or set -gx XDG_CONFIG_HOME ~/.config
 set -q XDG_DATA_HOME[1]; or set -gx XDG_DATA_HOME ~/.local/share
 set -q XDG_CACHE_HOME[1]; or set -gx XDG_CACHE_HOME ~/var/cache
 set -q XDG_RUNTIME_DIR[1]; or set -gx XDG_RUNTIME_DIR ~/var/run
-set -q XDG_STATE_HOME[1]; or set -gx XDG_STATE_HOME ~/var/lib
+set -q XDG_STATE_HOME[1]; or set -gx XDG_STATE_HOME ~/.local/state
 
 if path is --invert -dw $XDG_CACHE_HOME; and path is -dw ~/.cache
     set -gx XDG_CACHE_HOME ~/.cache
