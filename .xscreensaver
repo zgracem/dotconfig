@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.06 for zozo on Tue Oct 22 09:05:41 2024.
+# Written by xscreensaver-settings 6.06 for deck on Thu Oct 31 11:40:09 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:30:00
@@ -42,7 +42,7 @@ settingsGeom:	0,29 0,29
 programs:								      \
 -				maze --root				    \n\
 - GL: 				superquadrics --root			    \n\
-				attraction --root			    \n\
+				attraction --root --orbit		    \n\
 -				blitspin --root				    \n\
 -				greynetic --root			    \n\
 -				helix --root				    \n\
@@ -51,18 +51,18 @@ programs:								      \
 -				noseguy --root				    \n\
 -				pyro --root				    \n\
 -				qix --root				    \n\
-				rocks --root --delay 7258 --speed 51	      \
+				rocks --root --delay 7258 --speed 50	      \
 				  --no-rotate --no-move			    \n\
 -				rorschach --root			    \n\
 -				decayscreen --root			    \n\
 -				flame --root				    \n\
-				halo --root				    \n\
+				halo --root --mode ramp --animate	    \n\
 -				slidescreen --root			    \n\
 -				pedal --root				    \n\
 				bouboule --root				    \n\
 -				braid --root				    \n\
 -				coral --root				    \n\
-				deco --root --delay 60 --smooth-colors	      \
+				deco --root --delay 30 --smooth-colors	      \
 				  --golden-ratio			    \n\
 -				drift --root				    \n\
 				fadeplot --root				    \n\
@@ -115,7 +115,8 @@ programs:								      \
 -				bumps --root				    \n\
 -				ccurve --root				    \n\
 -				compass --root				    \n\
--				deluxe --root				    \n\
+				deluxe --root --delay 0 --count 14	      \
+				  --ncolors 120				    \n\
 -				demon --root				    \n\
 - GL: 				extrusion --root			    \n\
 -				loop --root				    \n\
@@ -128,7 +129,8 @@ programs:								      \
 - GL: 				sierpinski3d --root			    \n\
 -				spotlight --root			    \n\
 -				squiral --root				    \n\
-				wander --root				    \n\
+				wander --root --delay 0 --density 1	      \
+				  --reset 3000000 --length 100		    \n\
 -				xflame --root				    \n\
 -				xmatrix --root				    \n\
 - GL: 				gflux --root				    \n\
@@ -144,10 +146,10 @@ programs:								      \
 - GL: 				menger --root				    \n\
 - GL: 				molecule --root				    \n\
 -				rotzoomer --root			    \n\
-				scooter --root --delay 11290		    \n\
+				scooter --root --delay 11290 --size 165	    \n\
 -				speedmine --root			    \n\
 - GL: 				starwars --root				    \n\
-- GL: 				stonerview --root			    \n\
+  GL: 				stonerview --root			    \n\
 				vermiculate --root			    \n\
 				whirlwindwarp --root --points 816 --tails     \
 				  16					    \n\
@@ -168,7 +170,7 @@ programs:								      \
 -				polyominoes --root			    \n\
 - GL: 				queens --root				    \n\
 - GL: 				sballs --root				    \n\
-- GL: 				spheremonics --root			    \n\
+  GL: 				spheremonics --root --wireframe		    \n\
 -				twang --root				    \n\
 - GL: 				antspotlight --root			    \n\
 -				apple2 --root				    \n\
@@ -191,7 +193,9 @@ programs:								      \
 - GL: 				jigglypuff --root			    \n\
 -				metaballs --root			    \n\
 - GL: 				mirrorblob --root			    \n\
-				piecewise --root			    \n\
+				piecewise --root --delay 0 --count 56	      \
+				  --colorspeed 26 --minradius 0.089	      \
+				  --maxradius 0.374			    \n\
   GL: 				polytopes --root			    \n\
 				pong --root --clock			    \n\
 -				popsquares --root			    \n\
@@ -203,9 +207,10 @@ programs:								      \
 -				fireworkx --root			    \n\
 -				fuzzyflakes --root			    \n\
 -				interaggregate --root			    \n\
-				intermomentary --root			    \n\
+				intermomentary --root --draw-delay 14516      \
+				  --num-discs 126			    \n\
 -				memscroller --root			    \n\
-- GL: 				noof --root				    \n\
+  GL: 				noof --root				    \n\
 				pacman --root				    \n\
 - GL: 				pinion --root				    \n\
 - GL: 				polyhedra --root			    \n\
@@ -241,15 +246,16 @@ programs:								      \
 - GL: 				skytentacles --root			    \n\
 - GL: 				rubikblocks --root			    \n\
 - GL: 				companioncube --root			    \n\
-  GL: 				hilbert --root --delay 0 --speed 0.352	      \
-				  --thickness 0.01 --no-spin		    \n\
+  GL: 				hilbert --root --mode 3d --delay 0	      \
+				  --speed 0.352 --thickness 0.01	      \
+				  --no-spin				    \n\
 - GL: 				tronbit --root				    \n\
 - GL: 				geodesic --root				    \n\
 				hexadrop --root				    \n\
 - GL: 				kaleidocycle --root			    \n\
 - GL: 				quasicrystal --root			    \n\
 - GL: 				unknownpleasures --root			    \n\
--				binaryring --root			    \n\
+				binaryring --root			    \n\
 - GL: 				cityflow --root				    \n\
 - GL: 				geodesicgears --root			    \n\
 - GL: 				projectiveplane --root			    \n\
@@ -258,14 +264,15 @@ programs:								      \
 - GL: 				winduprobot --root			    \n\
 - GL: 				splitflap --root			    \n\
 - GL: 				cubestack --root			    \n\
-  GL: 				cubetwist --root			    \n\
+  GL: 				cubetwist --root --delay 0		    \n\
 - GL: 				discoball --root			    \n\
 - GL: 				dymaxionmap --root			    \n\
 - GL: 				energystream --root			    \n\
 - GL: 				hexstrut --root				    \n\
 - GL: 				hydrostat --root			    \n\
 - GL: 				raverhoop --root			    \n\
-- GL: 				splodesic --root			    \n\
+  GL: 				splodesic --root --delay 15323 --speed	      \
+				  0.500					    \n\
 - GL: 				unicrud --root				    \n\
 - GL: 				esper --root				    \n\
 - GL: 				vigilance --root			    \n\
@@ -277,7 +284,7 @@ programs:								      \
 - GL: 				peepers --root				    \n\
 - GL: 				razzledazzle --root			    \n\
 -				vfeedback --root			    \n\
-- GL: 				deepstars --root			    \n\
+  GL: 				deepstars --root			    \n\
 - GL: 				gravitywell --root			    \n\
 - GL: 				beats --root				    \n\
 - GL: 				covid19 --root				    \n\
