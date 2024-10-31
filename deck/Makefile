@@ -11,17 +11,22 @@ HOME_FILES += ~/.hushlogin
 HOME_FILES += ~/.bash_profile
 HOME_FILES += ~/.profile
 HOME_DIRS   =
+HOME_DIRS  += ~/.config/sh
 HOME_DIRS  += ~/.private
 HOME_DIRS  += ~/.ssh
 
 all: $(HOME_DIRS) $(HOME_FILES)
 ~/.hushlogin: # $(CONFIG_SRC)/bash/.hushlogin
 	touch $@
+
+~/.config/sh: $(CONFIG_SRC)/sh
 ~/.private: $(realpath $(dir $(CONFIG_SRC))/dotprivate)
-~/.bash_profile: ~/.config/deck/.bash_profile
-~/.profile: ~/.config/sh/.profile
 ~/.ssh: ~/.private/ssh | ~/.private
-~/.private ~/.bash_profile ~/.profile ~/.ssh:
+
+~/.bash_profile: $(CONFIG_SRC)/deck/.bash_profile
+~/.profile: ~/.config/sh/.profile | ~/.config/sh
+
+~/.config/sh ~/.private ~/.ssh ~/.bash_profile ~/.profile:
 	ln -sf $< $@
 
 CONFIG_FILES  =
