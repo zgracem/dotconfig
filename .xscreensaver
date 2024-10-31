@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.06 for deck on Thu Oct 31 11:40:09 2024.
+# Written by xscreensaver-settings 6.06 for deck on Thu Oct 31 13:24:27 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:30:00
@@ -26,18 +26,18 @@ dpmsOff:	4:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: False
-imageDirectory:
+imageDirectory:	
 
 mode:		random
 selected:	-1
 
 textMode:	program
 textLiteral:	XScreenSaver
-textFile:
+textFile:	
 textProgram:	/home/linuxbrew/.linuxbrew/bin/fortune
 textURL:	https://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss
 dialogTheme:	default
-settingsGeom:	0,29 0,29
+settingsGeom:	0,28 0,28
 
 programs:								      \
 -				maze --root				    \n\
@@ -238,7 +238,8 @@ programs:								      \
   GL: 				lockward --root --delay 0		    \n\
 -				m6502 --root				    \n\
 - GL: 				moebiusgears --root			    \n\
-- GL: 				voronoi --root				    \n\
+- GL: 				voronoi --root --delay 11290 --points 35      \
+				  --point-speed 0 --point-delay 0.05	    \n\
 - GL: 				hypnowheel --root			    \n\
 - GL: 				klein --root				    \n\
 -				lcdscrub --root				    \n\
