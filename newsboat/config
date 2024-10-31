@@ -3,16 +3,17 @@
 # ----------------------------------------------------------------------------
 
 # https://newsboat.org/releases/2.37/docs/newsboat.html#_configuration
-browser "/usr/bin/open -a Firefox %u"
+browser "/usr/bin/open -a Firefox %u &"
 cleanup-on-quit no
 confirm-mark-feed-read no
 cookie-cache ~/.local/share/newsboat/cookies.txt
 datetime-format "%e %b %y  %H:%M"
 error-log ~/.local/share/newsboat/error.log
-feed-sort-order title
+feed-sort-order lastupdated
 refresh-on-startup yes
 reload-only-visible-feeds yes
 save-path ~/Downloads
+suppress-first-reload yes
 
 # https://newsboat.org/releases/2.37/docs/newsboat.html#_colors
 # https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
