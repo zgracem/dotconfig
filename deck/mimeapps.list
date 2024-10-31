@@ -1,0 +1,17 @@
+[Added Associations]
+text/css=com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/csv=com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/csv-schema=com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/html=org.mozilla.firefox.desktop;com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/markdown=okularApplication_md.desktop;com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/plain=com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+
+[Default Applications]
+text/css=com.visualstudio.code.desktop;
+text/csv=com.visualstudio.code.desktop;
+text/csv-schema=com.visualstudio.code.desktop;
+text/html=org.mozilla.firefox.desktop;
+text/markdown=okularApplication_md.desktop;
+text/plain=com.visualstudio.code.desktop;
+x-scheme-handler/nxm=vortex.desktop;
+x-scheme-handler/nxm-protocol=vortex.desktop;
