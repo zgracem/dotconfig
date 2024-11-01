@@ -85,7 +85,7 @@ GEM
       uglifier (~> 3.0)
       webrick
     minitest (5.22.3)
-    nokogiri (1.16.4-x86_64-darwin)
+    nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
     padrino-helpers (0.15.3)
       i18n (>= 0.6.7, < 2)
@@ -111,7 +111,7 @@ GEM
       io-console (~> 0.5)
     reverse_markdown (2.1.1)
       nokogiri
-    rexml (3.2.6)
+    rexml (3.3.9)
     rubocop (1.63.4)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -169,7 +169,7 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
-    webrick (1.8.1)
+    webrick (1.8.2)
     yard (0.9.36)
 
 PLATFORMS
@@ -180,8 +180,10 @@ DEPENDENCIES
   haml (>= 5.0.0)
   htmlentities
   middleman
+  nokogiri (~> 1.16.5)
   plist
   reline (~> 0.5.0)
+  rexml (~> 3.3.9)
   sassc
   slim
   slim_lint
@@ -189,4 +191,5 @@ DEPENDENCIES
   symbolized
   thin (~> 1.8.2)
   toml-rb
+  webrick (~> 1.8.2)
   yard (>= 0.9.20)
