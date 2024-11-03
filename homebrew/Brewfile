@@ -233,9 +233,16 @@ cask "xact"
 
 # QuickLook
 cask "qlcolorcode"
+cask "qldds"
 cask "qlmarkdown"
+cask "qlprettypatch"
+cask "qlstephen" # extensionless text files like README
 cask "quicklook-json"
-cask "suspicious-package"
+cask "quicknfo"
+cask "scriptql" # AppleScript
+cask "suspicious-package" # .pkg files
+cask "syntax-highlight"
+cask "webpquicklook"
 
 # my stuff
 cask "zgracem/formulae/acorn-latest7"

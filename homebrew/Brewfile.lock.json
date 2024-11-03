@@ -5238,6 +5238,69 @@
             "appdir": "~/Applications"
           }
         }
+      },
+      "qldds": {
+        "version": "1.33",
+        "options": {
+          "full_name": "qldds",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "qlprettypatch": {
+        "version": "1.0",
+        "options": {
+          "full_name": "qlprettypatch",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "qlstephen": {
+        "version": "1.5.1",
+        "options": {
+          "full_name": "qlstephen",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "quicknfo": {
+        "version": "1.2",
+        "options": {
+          "full_name": "quicknfo",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "scriptql": {
+        "version": "1.1",
+        "options": {
+          "full_name": "scriptql",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "syntax-highlight": {
+        "version": "2.1.24",
+        "options": {
+          "full_name": "syntax-highlight",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
+      },
+      "webpquicklook": {
+        "version": "1.0",
+        "options": {
+          "full_name": "webpquicklook",
+          "args": {
+            "appdir": "~/Applications"
+          }
+        }
       }
     },
     "mas": {
@@ -5334,7 +5397,7 @@
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.4.3-83-g6dffecd",
+        "HOMEBREW_VERSION": "4.4.3-85-g4d0deeb",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "16.1.0.0.1.1729049160",
