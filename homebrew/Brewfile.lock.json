@@ -2,13 +2,13 @@
   "entries": {
     "tap": {
       "homebrew/command-not-found": {
-        "revision": "3e86f510454010911037e6d8708549c69448a329"
+        "revision": "ccf1dc0ca28277832e4106e77bd985548fe0592d"
       },
       "nrlquaker/createzap": {
         "revision": "08249a9211606dbde1c18b891b595ffead5f15a0"
       },
       "homebrew/services": {
-        "revision": "598a837d2c37efb9b338e43f17b8098a5a30e1c3"
+        "revision": "5c3ebbb9ad1b9f28c1c2f5628a01d9c03f445f6e"
       },
       "zgracem/caveats": {
         "revision": "e4bfaca43303dd3854d3a44775e8fbbdbc24bd3b"
@@ -4889,7 +4889,7 @@
         }
       },
       "iterm2": {
-        "version": "3.5.5",
+        "version": "3.5.6",
         "options": {
           "full_name": "iterm2",
           "args": {
@@ -5111,15 +5111,6 @@
           "args": {
             "appdir": "~/Applications"
           }
-        }
-      },
-      "vmware-fusion": {
-        "version": "13.6.1,24319021",
-        "options": {
-          "args": {
-            "appdir": "/Applications"
-          },
-          "full_name": "vmware-fusion"
         }
       },
       "winclone": {

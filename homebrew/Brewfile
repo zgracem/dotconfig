@@ -218,7 +218,6 @@ cask "pdf-expert"
 cask "powershell"
 cask "suspicious-package"
 cask "twine"
-cask "vmware-fusion", args: { appdir: "/Applications" }
 cask "winclone"
 
 # multimedia
