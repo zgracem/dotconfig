@@ -20,16 +20,16 @@ suppress-first-reload yes
 
 # https://newsboat.org/releases/2.37/docs/newsboat.html#_colors
 # https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-color background          default   black
+color background          default   default
 color title               black     white     bold
-color listnormal          default   black
-color listnormal_unread   color15   black     bold
+color listnormal          default   default
+color listnormal_unread   color15   default   bold
 color listfocus           color15   blue
 color listfocus_unread    color15   blue      bold
 color info                white     black     reverse
 color hint-key            black     white     bold
-color article             default   black
-color end-of-text-marker  black     black
+color article             default   default
+color end-of-text-marker  default   default   invis
 
 # https://newsboat.org/releases/2.37/docs/newsboat.html#_format_strings
 articlelist-format        "%4i %f %D  %?T?|%-17T| ?%t"
