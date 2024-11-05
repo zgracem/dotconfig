@@ -1,4 +1,4 @@
-function update-xscreensaver
+function update-xscreensaver-settings
     set -l actual_file ~/.xscreensaver
     set -l config_dir ~/src/github.com/zgracem/dotconfig
     set -l config_file $config_dir/.xscreensaver
