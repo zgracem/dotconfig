@@ -214,4 +214,4 @@ function __abbr_zequals
     set -l cmdname (string trim -c= -l $argv[1])
     command -s $cmdname
 end
-abbr -a zequals --position anywhere --regex "=\w+" --function __abbr_zequals
+abbr -a zequals --position anywhere --regex "=\S+" --function __abbr_zequals
