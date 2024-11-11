@@ -88,6 +88,13 @@ brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
   with-webp
   with-xvid
 ]
+cask "fission"
+cask "handbrake"
+cask "kid3"
+cask "metaz"
+cask "spotify"
+cask "vlc"
+cask "xact"
 
 # images
 brew "exif"
@@ -97,6 +104,9 @@ brew "imageoptim-cli"
 brew "imagesnap" if OS.mac?
 brew "webkit2png" if OS.mac?
 brew "webp"
+cask "zgracem/formulae/acorn-latest7"
+cask "imageoptim", args: { appdir: "/Applications" }
+cask "retrobatch"
 
 # internet stuff
 tap "homebrew/services"
@@ -107,9 +117,14 @@ brew "curl"
 brew "dnsmasq", restart_service: :changed if OS.mac?
 brew "links"
 brew "lynx"
+brew "newsboat"
 brew "ssh-copy-id", link: true
 brew "transmission-cli"
 brew "wget"
+cask "chatterino"
+cask "discord"
+cask "transmission"
+cask "transmit"
 
 # ----------------------------------------------------------------------------
 # development
@@ -166,6 +181,9 @@ brew "fortune"
 brew "lolcat"
 brew "nethack"
 brew "toilet"
+cask "inform"
+cask "steam", args: { appdir: "/Applications" }
+cask "twine"
 
 # ----------------------------------------------------------------------------
 # my stuff
@@ -176,6 +194,7 @@ tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
 brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/zgm-calendar-data"
 brew "zgracem/formulae/unrar"
+cask "zgracem/formulae/lockscreen"
 
 # ----------------------------------------------------------------------------
 # casks
@@ -185,51 +204,31 @@ cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 
 # essentials
 cask "1password", args: { appdir: "/Applications" }
-cask "1password/tap/1password-cli"
 cask "alfred"
 cask "fantastical"
 cask "firefox", args: { appdir: "/Applications" }
-cask "imageoptim", args: { appdir: "/Applications" }
+cask "go2shell"
 cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
 cask "maestral"
 cask "name-mangler"
 cask "obsidian"
-cask "retrobatch"
-cask "steam", args: { appdir: "/Applications" }
 cask "sublime-merge"
 cask "superduper"
 cask "swiftbar"
 cask "the-unarchiver"
-cask "transmission"
-cask "transmit"
 cask "visual-studio-code"
 cask "xscreensaver"
 
 # more
-cask "chatterino"
-cask "discord"
+cask "1password/tap/1password-cli"
 cask "disk-drill"
-cask "go2shell"
+cask "file-juicer"
 cask "grandperspective"
-cask "inform"
 cask "mysides"
 cask "pdf-expert"
 cask "powershell"
-cask "suspicious-package"
-cask "twine"
 cask "winclone"
-
-# multimedia
-cask "file-juicer"
-cask "fission"
-cask "handbrake"
-cask "kid3"
-cask "retrobatch"
-cask "metaz"
-cask "spotify"
-cask "vlc"
-cask "xact"
 
 # QuickLook
 cask "qlcolorcode"
@@ -243,10 +242,6 @@ cask "scriptql" # AppleScript
 cask "suspicious-package" # .pkg files
 cask "syntax-highlight"
 cask "webpquicklook"
-
-# my stuff
-cask "zgracem/formulae/acorn-latest7"
-cask "zgracem/formulae/lockscreen"
 
 # ----------------------------------------------------------------------------
 # Mac App Store
