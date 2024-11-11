@@ -44,13 +44,17 @@ brew "vim"
 
 # more utilities
 brew "bash"
+brew "bchunk" # Convert CD images from .bin/.cue to .iso/.cdr
+brew "bfs" # Breadth-first version of find
 brew "btop"
+brew "duti" if OS.mac?
 brew "entr"
 brew "hexyl"
 brew "lsusb"
 brew "ncurses"
 brew "parallel"
 brew "PotatoLabs/git-redate/git-redate"
+brew "qrencode"
 brew "sf-pwgen" if OS.mac?
 brew "source-highlight" # for less
 brew "sponge"
@@ -101,6 +105,7 @@ brew "exif"
 brew "exiftool"
 brew "imagemagick"
 brew "imageoptim-cli"
+brew "mozjpeg"
 brew "imagesnap" if OS.mac?
 brew "webkit2png" if OS.mac?
 brew "webp"
@@ -117,14 +122,26 @@ brew "curl"
 brew "dnsmasq", restart_service: :changed if OS.mac?
 brew "links"
 brew "lynx"
+brew "netcat"
 brew "newsboat"
+brew "pure-ftpd"
 brew "ssh-copy-id", link: true
+brew "streamlink"
+brew "tnftpd"
 brew "transmission-cli"
 brew "wget"
 cask "chatterino"
 cask "discord"
+cask "streamlink-twitch-gui"
 cask "transmission"
 cask "transmit"
+
+# security
+brew "gnupg"
+brew "pinentry-mac" if OS.mac?
+brew "ykman"
+cask "yubico-authenticator"
+cask "yubico-yubikey-manager"
 
 # ----------------------------------------------------------------------------
 # development
@@ -157,6 +174,9 @@ brew "coffeescript"
 brew "typescript"
 brew "yarn"
 
+# Python
+brew "pyenv"
+
 # VS Code extensions
 brew "shellcheck"
 brew "shfmt"
@@ -175,6 +195,7 @@ brew "bramstein/webfonttools/woff2"
 # ----------------------------------------------------------------------------
 
 brew "cowsay-org/cowsay/cowsay-org"
+brew "dosbox-x"
 brew "fastfetch"
 brew "figlet"
 brew "fortune"
