@@ -18,7 +18,7 @@ HOME_DIRS  += ~/.ssh
 all: $(HOME_DIRS) $(HOME_FILES)
 ~/.hushlogin:
 	touch $@
-~/.bash_profile: $(CONFIG_SRC)/deck/.bash_profile
+~/.bash_profile: $(CONFIG_SRC)/local/Alyx/.bash_profile
 ~/.bashrc: $(CONFIG_SRC)/bash/.bashrc
 ~/.profile: $(CONFIG_SRC)/sh/.profile
 
