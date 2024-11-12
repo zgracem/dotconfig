@@ -30,8 +30,4 @@ if string match -q "rbenv/*" $staged_files
     make -s -C $XDG_CONFIG_HOME/rbenv install; or exit
 end
 
-if contains -- maestral/.mignore $staged_files
-    make -s -C $XDG_CONFIG_HOME/maestral ~/Dropbox/.mignore; or exit
-end
-
 true
