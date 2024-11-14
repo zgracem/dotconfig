@@ -27,10 +27,6 @@
 # download options
 # -----------------------------------------------------------------------------
 
-# use ffmpeg for regular downloads
---downloader ffmpeg
---downloader-args "ffmpeg:-nostats -loglevel warning"
-
 # use aria2c for DASH(mpd) and HLS(m3u8) downloads
 --downloader "dash,m3u8:aria2c"
 
@@ -67,9 +63,6 @@
 # -----------------------------------------------------------------------------
 # post-processing options
 # -----------------------------------------------------------------------------
-
-# location of the ffmpeg binary
---ffmpeg-location /usr/local/bin/ffmpeg
 
 # run custom post-processing script to add metadata etc.
 --write-info-json
