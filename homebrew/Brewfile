@@ -210,7 +210,6 @@ cask "twine"
 # my stuff
 # ----------------------------------------------------------------------------
 
-tap "zgracem/caveats"
 tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
 brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/zgm-calendar-data"

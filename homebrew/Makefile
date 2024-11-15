@@ -14,6 +14,10 @@ Brewfile.lock.json: Brewfile | $(HOMEBREW_REPO)/README.md
 	brew bundle --file=$<
 install: Brewfile.lock.json
 
+vscode_Brewfile.lock.json: vscode_Brewfile | $(HOMEBREW_REPO)/README.md
+	brew bundle --file=$<
+install: vscode_Brewfile.lock.json
+
 .PHONY: clean
 clean:
 	rm -fv Brewfile.lock.json

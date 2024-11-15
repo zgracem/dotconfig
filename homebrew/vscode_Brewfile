@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile_vscode
+# brew bundle --file=$XDG_CONFIG_HOME/homebrew/vscode_Brewfile
 # vim:ft=ruby
 # ----------------------------------------------------------------------------
 
@@ -50,6 +50,7 @@ vscode "redhat.vscode-xml"
 vscode "redhat.vscode-yaml"
 vscode "rickvansloten.bbcode"
 vscode "Scrivener07.papyrus"
+vscode "secretlab.yarn-spinner"
 vscode "sianglim.slim"
 vscode "syler.sass-indented"
 vscode "tamasfe.even-better-toml"
@@ -61,6 +62,7 @@ vscode "zgm.vscode-sed"
 
 # themes
 vscode "amodio.amethyst-theme"
+vscode "atomiks.moonlight"
 vscode "EliverLara.andromeda"
 vscode "enkia.tokyo-night"
 vscode "equinusocio.vsc-material-theme-icons"
@@ -71,9 +73,11 @@ vscode "monokai.theme-monokai-pro-vscode"
 vscode "PKief.material-icon-theme"
 vscode "RobbOwen.synthwave-vscode"
 vscode "SethCox.ocean-eyes"
+vscode "thudgin13.barbie-rave"
 vscode "zhuangtongfa.material-theme"
 
 # linters and formatters
+vscode "adpyke.vscode-sql-formatter"
 vscode "aliariff.slim-lint"
 vscode "ban.spellright"
 vscode "DavidAnson.vscode-markdownlint"

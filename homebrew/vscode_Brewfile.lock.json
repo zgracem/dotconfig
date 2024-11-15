@@ -73,18 +73,22 @@
       "timonwong.shellcheck": null,
       "castwide.solargraph": null,
       "redhat.vscode-commons": null,
-      "Shopify.ruby-lsp": null
+      "Shopify.ruby-lsp": null,
+      "secretlab.yarn-spinner": null,
+      "atomiks.moonlight": null,
+      "thudgin13.barbie-rave": null,
+      "adpyke.vscode-sql-formatter": null
     }
   },
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.21",
+        "HOMEBREW_VERSION": "4.4.5-35-gcd8f476",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
-        "CLT": "15.3.0.0.1.1708646388",
-        "Xcode": "15.3",
-        "macOS": "14.4.1"
+        "CLT": "16.1.0.0.1.1729049160",
+        "Xcode": "16.1",
+        "macOS": "14.7"
       }
     }
   }
