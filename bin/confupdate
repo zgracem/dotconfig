@@ -16,16 +16,16 @@ function git-sync -a user_dir
     end
 end
 
-function post-confupdate
-    switch $hostname
-        # Servers that don't like `~/.ssh` (or any of its contents) as a symlink
-        case "*.opalstack.com" "WS-*"
-            cp -af $USER_CONFIG_DIRS[2]/ssh/* ~/.ssh
-            and chmod -R go-rwx ~/.ssh
-        case "*"
-            return
-    end
-end
+# function post-confupdate
+#     switch $hostname
+#         # Servers that don't like `~/.ssh` (or any of its contents) as a symlink
+#         case "*.opalstack.com" "WS-*"
+#             cp -af $USER_CONFIG_DIRS[2]/ssh/* ~/.ssh
+#             and chmod -R go-rwx ~/.ssh
+#         case "*"
+#             return
+#     end
+# end
 
 function main -d "Update configuration from GitHub"
     switch $hostname
@@ -40,7 +40,7 @@ function main -d "Update configuration from GitHub"
         or break
     end
 
-    post-confupdate
+    # post-confupdate
 end
 
 main $argv
