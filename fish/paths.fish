@@ -45,20 +45,16 @@ set -gx MANPATH /usr/share/man
 fish_add_path /usr/local/bin
 fish_add_manpath /usr/local/share/man
 
-# npm
-fish_add_path $XDG_DATA_HOME/npm/bin
-
 # Homebrew
 if path is -d /home/linuxbrew/.linuxbrew
     set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
-    fish_add_path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
-    fish_add_manpath $HOMEBREW_PREFIX/share/man
+else if path is -d /usr/local/Homebrew /opt/homebrew
+    set -gx HOMEBREW_PREFIX (brew --prefix)
 end
+fish_add_path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+fish_add_manpath $HOMEBREW_PREFIX/share/man
 
-# Homebrew
 if command -q brew
-    set -q HOMEBREW_PREFIX; or set -gx HOMEBREW_PREFIX (brew --prefix)
-
     # GNU coreutils (w/out `g` prefix)
     fish_add_path $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
     fish_add_manpath $HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman
@@ -106,6 +102,9 @@ if command -q brew
     # m4
     fish_add_path $HOMEBREW_PREFIX/opt/m4/bin
 end
+
+# npm
+fish_add_path $XDG_DATA_HOME/npm/bin
 
 # Xcode
 set -l XCODE /Applications/Xcode.app/Contents/Developer

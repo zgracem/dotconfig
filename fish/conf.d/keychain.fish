@@ -26,7 +26,7 @@ set -a params --dir "$keychain_dir" --absolute
 set -a params --quiet --ignore-missing
 
 set -lx SHELL (status fish-path)
-set -lx PATH ~/opt/bin /usr/local/bin /usr/bin /bin
+set -lx PATH ~/opt/bin $HOMEBREW_PREFIX/bin /usr/bin /bin
 keychain $params $keys >$ssh_env
 
 if test -s $ssh_env # ssh-agent loaded, or existing agent found

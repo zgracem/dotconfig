@@ -9,7 +9,7 @@ unset -v TERMCAP
 if [ ! -d "$TERMINFO" ]; then
   unset -v TERMINFO
 else
-  export TERMINFO_DIRS="$TERMINFO:/usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo"
+  export TERMINFO_DIRS="$TERMINFO:$HOMEBREW_PREFIX/opt/ncurses/share/terminfo:/usr/share/terminfo"
   TERMINFO_DIRS="$(fixpath "$TERMINFO_DIRS")"
 
   OLDTERM="$TERM"

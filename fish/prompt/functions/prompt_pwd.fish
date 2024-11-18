@@ -11,11 +11,11 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # * Indicate which dirnames have been compressed (--glyph)
     #
     # Given the following path:
-    #     /usr/local/Homebrew/Library/Homebrew/extend/os/mac/utils
+    #     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
     # The vanilla `prompt_pwd` produces:
-    #     /u/l/H/L/H/e/o/m/utils
+    #     /L/D/C/S/M/u/s/man
     # This version produces:
-    #     /usr/loc…/Hom…/Lib…/Hom…/extend/os/mac/utils
+    #     /Lib…/Dev…/Com…/SDKs/Mac…/usr/share/man
     # It can mimic vanilla behaviour:
     #     prompt_pwd --vanilla # = -k1 -m1 -M1 -P1 -G
     set -l options g/glyph= G/no-glyph

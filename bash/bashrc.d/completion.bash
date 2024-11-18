@@ -4,8 +4,8 @@
 
 BASH_COMPLETION_DIR="$XDG_CONFIG_HOME/bash/bash_completion.d"
 
-if [[ -d /usr/local ]]; then
-  export HOMEBREW_COMPLETION="/usr/local/etc/bash_completion.d"
+if [[ -d $HOMEBREW_PREFIX ]]; then
+  export HOMEBREW_COMPLETION="$HOMEBREW_PREFIX/etc/bash_completion.d"
 fi
 
 # -----------------------------------------------------------------------------

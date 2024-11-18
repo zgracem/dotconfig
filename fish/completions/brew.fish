@@ -1,7 +1,7 @@
 # fish completions for brew external commands
 command -q brew; or return
 
-set -l brew_comp_file /usr/local/share/fish/vendor_completions.d/brew.fish
+set -l brew_comp_file $HOMEBREW_PREFIX/share/fish/vendor_completions.d/brew.fish
 path is -f $brew_comp_file; and . $brew_comp_file
 
 complete -c brew -n __fish_use_subcommand -a bundle -d "Bundler for non-Ruby dependencies"

@@ -14,10 +14,14 @@ end
 
 if set -q XDG_DATA_DIRS[1]
     set -gx --path XDG_DATA_DIRS $XDG_DATA_DIRS
-    set -p XDG_DATA_DIRS $XDG_DATA_HOME
 else
-    set -gx --path XDG_DATA_DIRS "$XDG_DATA_HOME:/usr/local/share:/usr/share"
+    set -gx --path XDG_DATA_DIRS /usr/share
+    if command -v brew >/dev/null
+        set -l HOMEBREW_PREFIX (brew --prefix)
+        set -p XDG_DATA_DIRS $HOMEBREW_PREFIX/share
+    end
 end
+set -p XDG_DATA_DIRS $XDG_DATA_HOME
 
 if not fish_is_root_user; and string match -q "$HOME*" $XDG_RUNTIME_DIR
     mkdir -p -v -m 0700 $XDG_RUNTIME_DIR
