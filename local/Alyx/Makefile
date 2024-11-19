@@ -13,7 +13,6 @@ HOME_FILES += ~/.bashrc
 HOME_FILES += ~/.profile
 HOME_DIRS   =
 HOME_DIRS  += ~/.private
-HOME_DIRS  += ~/.ssh
 
 all: $(HOME_DIRS) $(HOME_FILES)
 ~/.hushlogin:
@@ -23,9 +22,8 @@ all: $(HOME_DIRS) $(HOME_FILES)
 ~/.profile: $(CONFIG_SRC)/sh/.profile
 
 ~/.private: $(realpath $(dir $(CONFIG_SRC))/dotprivate)
-~/.ssh: ~/.private/ssh | ~/.private
 
-~/.bash_profile ~/.bashrc ~/.profile ~/.private ~/.ssh:
+~/.bash_profile ~/.bashrc ~/.profile ~/.private:
 	ln -sf $< $@
 
 CONFIG_FILES  =

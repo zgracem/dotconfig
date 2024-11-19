@@ -32,7 +32,7 @@ FIGNORE="DS_Store:~:.swp:Application Scripts"
 COMP_WORDBREAKS=${COMP_WORDBREAKS//:/}
 
 # complete hostnames from this file
-HOSTFILE="$XDG_CONFIG_HOME/ssh/hosts"
+HOSTFILE="$HOME/.ssh/hosts"
 
 # -----------------------------------------------------------------------------
 # support functions
