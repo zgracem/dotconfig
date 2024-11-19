@@ -103,6 +103,7 @@ cask "xact"
 # images
 brew "exif"
 brew "exiftool"
+brew "folderify" if OS.mac?
 brew "imagemagick"
 brew "imageoptim-cli"
 brew "mozjpeg"
