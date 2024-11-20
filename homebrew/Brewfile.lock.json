@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/command-not-found": {
-        "revision": "5a6eccc094f9534555567080e0f697c501ca5e48"
+        "revision": "96540bc325f26975a473dee7774410cbd00fb2b0"
       },
       "nrlquaker/createzap": {
         "revision": "08249a9211606dbde1c18b891b595ffead5f15a0"
@@ -3673,40 +3673,40 @@
         }
       },
       "mercurial": {
-        "version": "6.8.2",
+        "version": "6.9",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
           "files": {
             "arm64_sequoia": {
               "cellar": "/opt/homebrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:e7ab83b1fa5f9b85f8d7ab985e00e8aec959c61d19395e4e2663761a37589dca",
-              "sha256": "e7ab83b1fa5f9b85f8d7ab985e00e8aec959c61d19395e4e2663761a37589dca"
+              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:da5b687457ce8d760b8690ba36e43c5ab41ce01805e979a8ba2ecfc8a2b1b670",
+              "sha256": "da5b687457ce8d760b8690ba36e43c5ab41ce01805e979a8ba2ecfc8a2b1b670"
             },
             "arm64_sonoma": {
               "cellar": "/opt/homebrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:c4decc0e943ab7a497d1906a985556d64e276a2b9116614e78c9dc4edd939efc",
-              "sha256": "c4decc0e943ab7a497d1906a985556d64e276a2b9116614e78c9dc4edd939efc"
+              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:3d4ccb397b16f32cf8b3d5970bf275925deead6785da4bc8acbb9e1a60df6ac7",
+              "sha256": "3d4ccb397b16f32cf8b3d5970bf275925deead6785da4bc8acbb9e1a60df6ac7"
             },
             "arm64_ventura": {
               "cellar": "/opt/homebrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:51d0aa6639c255906e37797b5a28466ee3709dc840e7e1fd06786cbdb9de7a0c",
-              "sha256": "51d0aa6639c255906e37797b5a28466ee3709dc840e7e1fd06786cbdb9de7a0c"
+              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:2966f3590deb854aa3d7999faf5913e08546d306cc762cfea3117f9f622374a9",
+              "sha256": "2966f3590deb854aa3d7999faf5913e08546d306cc762cfea3117f9f622374a9"
             },
             "sonoma": {
               "cellar": "/usr/local/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:aaddb3929f17c083b4df9e6c1195791a49ee09ec7cd518abf675967d5bd61323",
-              "sha256": "aaddb3929f17c083b4df9e6c1195791a49ee09ec7cd518abf675967d5bd61323"
+              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:0bd87913912c5a3e62fbec0b8f514dde3a600714ae00a66c41cfc2f527e04198",
+              "sha256": "0bd87913912c5a3e62fbec0b8f514dde3a600714ae00a66c41cfc2f527e04198"
             },
             "ventura": {
               "cellar": "/usr/local/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:6791ce7dcbc978b44d592c20ee722103ca8e9a9a6c8e81f4e308fd52fefc55d3",
-              "sha256": "6791ce7dcbc978b44d592c20ee722103ca8e9a9a6c8e81f4e308fd52fefc55d3"
+              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:2841f1c8832d1f9cd8c69f2933b5cf9e5e7451100c7700aa9ae002a9e507a894",
+              "sha256": "2841f1c8832d1f9cd8c69f2933b5cf9e5e7451100c7700aa9ae002a9e507a894"
             },
             "x86_64_linux": {
               "cellar": "/home/linuxbrew/.linuxbrew/Cellar",
-              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:06437df4e61c669885759009f801947886f92775b4600a70d66d7d41cb26455b",
-              "sha256": "06437df4e61c669885759009f801947886f92775b4600a70d66d7d41cb26455b"
+              "url": "https://ghcr.io/v2/homebrew/core/mercurial/blobs/sha256:5afa0ff24aa33ec5d64af3a69e9e79347a9b7b7d5bc117b4db892b65b5449fe6",
+              "sha256": "5afa0ff24aa33ec5d64af3a69e9e79347a9b7b7d5bc117b4db892b65b5449fe6"
             }
           }
         }
@@ -5483,7 +5483,7 @@
         }
       },
       "fantastical": {
-        "version": "4.0",
+        "version": "4.0.1",
         "options": {
           "full_name": "fantastical",
           "args": {
@@ -5690,7 +5690,7 @@
         }
       },
       "pdf-expert": {
-        "version": "3.10.8,1074",
+        "version": "3.10.9,1084",
         "options": {
           "full_name": "pdf-expert",
           "args": {
@@ -6005,7 +6005,7 @@
         "macOS": "14.7"
       },
       "sequoia": {
-        "HOMEBREW_VERSION": "4.4.5-59-gcc0b5d6",
+        "HOMEBREW_VERSION": "4.4.6-23-g0b25b5c",
         "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "16.1.0.0.1.1729049160",

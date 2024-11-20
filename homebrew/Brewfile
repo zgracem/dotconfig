@@ -56,7 +56,6 @@ brew "parallel"
 brew "PotatoLabs/git-redate/git-redate"
 brew "qrencode"
 brew "sf-pwgen" if OS.mac?
-brew "source-highlight" # for less
 brew "sponge"
 brew "tree"
 
