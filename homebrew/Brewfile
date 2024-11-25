@@ -225,6 +225,7 @@ cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 # essentials
 cask "1password", args: { appdir: "/Applications" }
 cask "alfred"
+cask "bettermouse"
 cask "fantastical"
 cask "firefox", args: { appdir: "/Applications" }
 cask "go2shell"
@@ -241,7 +242,7 @@ cask "visual-studio-code"
 cask "xscreensaver"
 
 # more
-cask "1password/tap/1password-cli"
+cask "appcleaner"
 cask "disk-drill"
 cask "file-juicer"
 cask "grandperspective"
