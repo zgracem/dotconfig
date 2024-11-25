@@ -100,18 +100,17 @@ abbr -a ssc 'sudo systemctl'
 abbr -a svim 'sudo -E vim'
 abbr -a unset 'set --erase'
 
-abbr -a 'comp?' compsrc
-abbr -a 'func?' funcsrc
-abbr -a 'man?' command man -aw
+abbr -a 'c?' compsrc
+abbr -a 'f?' funcsrc
+abbr -a 'm?' command man -aw
 
 abbr -a xcl 'sudo xcodebuild -license'
 abbr -a xcp 'xcode-select --print-path'
 abbr -a xcs 'sudo xcode-select --switch'
 
 # newsboat RSS reader
-if command -q newsboat
-    abbr --add nb "newsboat -q"
-end
+command -q newsboat
+and abbr --add nb "newsboat -q"
 
 # f + reveal
 if is-macos
