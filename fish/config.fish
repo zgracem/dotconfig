@@ -51,7 +51,7 @@ source "$__fish_config_dir/packages.fish"
 source "$__fish_config_dir/bindings.fish"
 
 # source vendor completions
-set -p fish_complete_path "$HOME/opt/etc/fish/completions"
+set -p fish_complete_path "$HOME/opt/share/fish/vendor_completions.d"
 
 # remove duplicate & nonexistent directories
 set fish_function_path (path filter -d $fish_function_path | un1q)
