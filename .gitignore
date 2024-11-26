@@ -2,9 +2,6 @@
 # ~/.config/.gitignore
 # -----------------------------------------------------------------------------
 
-# private
-.op/
-
 # not intended for human interaction
 btop/btop.log
 fish/fish_variables*
