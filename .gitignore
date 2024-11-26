@@ -4,7 +4,6 @@
 
 # private
 .op/
-newsboat/urls
 
 # not intended for human interaction
 btop/btop.log
