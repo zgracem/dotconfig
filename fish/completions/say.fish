@@ -1,24 +1,41 @@
 # say (macOS speech synthesizer)
 
-command -sq say; or return
-
 function __fish_complete_say_voices
+    # `say -v?` lists all voices like:
+    #     ...
+    #     Eddy (Chinese (China mainland)) zh_CN    # 你好！我叫Eddy。
+    #     Eddy (Chinese (Taiwan)) zh_TW    # 你好，我叫Eddy。
+    #     Ellen               nl_BE    # Hallo! Mijn naam is Ellen.
+    #     Flo (German (Germany)) de_DE    # Hallo! Ich heiße Flo.
+    #     Flo (English (UK))  en_GB    # Hello! My name is Flo.
+    #     ...
+    # Where "Eddy", "Ellen", and "Flo" are all acceptable arguments to `-v`
     say -v? \
         | string replace -ar '\s+(?=[a-z]{2}_[A-Z0-9]{2}|#)' \t \
         | string split -f1 \t \
-        | string match -rv ' \(.+ \(.+\)\)$' \
-        | path sort
+        | string replace -ar ' \(.+ \(.+\)\)$' '' \
+        | path sort -u
 end
 
 function __fish_complete_say_devices
+    # `say -a?` outputs like:
+    #    113 iMac Speakers
+    # So both `say -a 113` and `say -a "iMac Speakers"` are acceptable.
     say -a? | string replace -r '^\s+(\d+)\s+(.+)$' '$1\t$2\n$2\t$1'
 end
 
 function __fish_complete_say_formats
+    # `say --file-format=?` outputs like:
+    #     ...
+    #     Sd2f  Sound Designer II    (.sd2) [lpcm]
+    #     W64f  Wave64               (.w64) [lpcm,ulaw,alaw]
+    #     ...
+    # Where `Sd2f` and `W64f` are the appropriate arguments to `--file-format`.
     say --file-format=? | string replace -r -f '^(\w{4})\s+(.+?) \(.*' '$1\t$2'
 end
 
 function __fish_complete_say_dataformats
+    # Queries `say` for acceptable data formats.
     set -lx LC_ALL C
     for fmt in (__fish_complete_say_formats | string split -f1 \t)
         say --file-format=$fmt --data-format=?
@@ -26,6 +43,9 @@ function __fish_complete_say_dataformats
 end
 
 function __fish_complete_pcm_formats
+    # Endians: BE, LE, or none (native)
+    # Data types: F (float), I (signed int), UI (unsigned int)
+    # Sample rates: 8, 16, 24, 32, 64
     set -l data_formats {BE,LE,}{F,I,UI}{8,16,24,32,64}
     set -l format_descs {{big,little}" endian, ",}{float,integer,unsigned int}", "{8,16,24,32,64}" samples"
     set -l x (count $data_formats)

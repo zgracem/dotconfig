@@ -1,7 +1,5 @@
 # afplay (macOS)
 
-command -sq afplay; or return
-
 set -l afplay_quality_opts '
     0\tdefault:\ low\ quality
     1\thigh\ quality

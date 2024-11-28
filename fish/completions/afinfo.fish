@@ -1,7 +1,5 @@
 # afinfo (macOS)
 
-command -sq afinfo; or return
-
 complete -c afinfo -s h -l help -d "Print help"
 complete -c afinfo -s b -l brief -d "Print a one-line description"
 complete -c afinfo -s r -l real -d "Get estimated duration"

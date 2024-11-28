@@ -52,8 +52,6 @@ set -l sips_prof_props_all $sips_prof_props_ro\n$sips_prof_props_rw
 set -l sips_props_rw $sips_img_props_rw\n$sips_prof_props_rw
 set -l sips_props_all $sips_img_props_all\n$sips_prof_props_all
 
-complete --erase sips
-
 # Profile query functions
 complete -c sips -s g -l getProperty -x -a "$sips_props_all" -d "Output value for KEY"
 complete -c sips -s X -l extractTag -x -d "Write TAG to FILE"

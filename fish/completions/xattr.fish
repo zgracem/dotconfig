@@ -1,8 +1,5 @@
 # xattr
 
-# reset built-in completions
-complete --erase -c xattr
-
 complete -c xattr -s p -x -d "Print value of attr_name"
 complete -c xattr -s w -x -d "Write to attr_name with attr_value"
 complete -c xattr -s d -x -d "Delete attr_name"

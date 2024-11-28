@@ -1,10 +1,5 @@
 # comm
 
-command -sq comm; or return
-
-# reset built-in completions
-complete --erase -c comm
-
 complete -c comm -s 1 -d "Suppress lines unique to FILE1"
 complete -c comm -s 2 -d "Suppress lines unique to FILE2"
 complete -c comm -s 3 -d "Suppress lines common to both files"

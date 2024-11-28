@@ -1,10 +1,6 @@
 # sc_auth (macOS smart card manager)
 
-command -sq sc_auth; or return
-
-# reset built-in completions
-complete --erase -c sc_auth
-complete --no-files -c xcrun
+complete --no-files -c sc_auth
 
 set -l sc_auth_algorithms '
     sha1\tSHA-1

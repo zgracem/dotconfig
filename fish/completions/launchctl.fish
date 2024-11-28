@@ -5,7 +5,6 @@
 function __fish_complete_launchctl_service_targets
     launchctl print - 2>&1 | string match -r "^(?:gui|pid|system|user)/.+"
 end
-set -l launchctl_domain_service_cmds bootstrap bootout enable disable kickstart attach debug blame print
 
 #=> gui/501/
 function __fish_complete_launchctl_domain_targets
@@ -13,14 +12,15 @@ function __fish_complete_launchctl_domain_targets
         | string match -r "^(?:system/|(?:gui|pid|user)/\d+/)" \
         | sort -u
 end
-set -l launchctl_domain_cmds print-disabled
 
 #=> com.apple.example
 function __fish_complete_launchctl_service_names
     launchctl list | string split -n -f3 \t
 end
-set -l launchctl_label_cmds remove start stop list
 
+set -l launchctl_domain_service_cmds bootstrap bootout enable disable kickstart attach debug blame print
+set -l launchctl_domain_cmds print-disabled
+set -l launchctl_label_cmds remove start stop list
 set -l launchctl_sessiontypes '
     Aqua\tdefault
     Background
@@ -70,11 +70,11 @@ complete -c launchctl -n "__fish_seen_subcommand_from resolveport" -x -a "(__fis
 complete -c launchctl -n __fish_use_subcommand -xa examine -d "Run an analysis tool"
 complete -c launchctl -n "__fish_seen_subcommand_from examine" -rF
 complete -c launchctl -n __fish_use_subcommand -xa config -d "Modify config params for domains"
-complete -c launchctl -n "__fish_seen_subcommand_from config" -xa "system user" -d "domain"
+complete -c launchctl -n "__fish_seen_subcommand_from config" -xa "system user" -d domain
 complete -c launchctl -n __fish_use_subcommand -xa reboot -d "Initiate a system reboot"
-complete -c launchctl -n "__fish_seen_subcommand_from reboot" -xa "system userspace halt logout apps" -d "reboot"
+complete -c launchctl -n "__fish_seen_subcommand_from reboot" -xa "system userspace halt logout apps" -d reboot
 complete -c launchctl -n __fish_use_subcommand -xa error -d "Describe error"
-complete -c launchctl -n "__fish_seen_subcommand_from error" -xa "posix mach bootstrap" -d "subsystem"
+complete -c launchctl -n "__fish_seen_subcommand_from error" -xa "posix mach bootstrap" -d subsystem
 complete -c launchctl -n __fish_use_subcommand -xa variant -d "Print launchd variant"
 complete -c launchctl -n __fish_use_subcommand -xa version -d "Print launchd version"
 
@@ -90,8 +90,8 @@ complete -c launchctl -n "__fish_seen_subcommand_from load unload" -s S -xa "$la
 complete -c launchctl -n "__fish_seen_subcommand_from load unload" -s D -xa "system local all" -d "Search path"
 complete -c launchctl -n "__fish_seen_subcommand_from load unload; and __fish_seen_argument -s S" -s D -xa "system local user all" -d "Search path"
 complete -c launchctl -n __fish_use_subcommand -xa submit -d "Submit a basic job"
-complete -c launchctl -n "__fish_seen_subcommand_from submit" -s l -x -d "Label"
-complete -c launchctl -n "__fish_seen_subcommand_from submit" -s p -rF -d "Program"
+complete -c launchctl -n "__fish_seen_subcommand_from submit" -s l -x -d Label
+complete -c launchctl -n "__fish_seen_subcommand_from submit" -s p -rF -d Program
 complete -c launchctl -n "__fish_seen_subcommand_from submit" -s o -rF -d "Path to stdout"
 complete -c launchctl -n "__fish_seen_subcommand_from submit" -s e -rF -d "Path to stderr"
 complete -c launchctl -n __fish_use_subcommand -xa remove -d "Unload service"
@@ -104,7 +104,7 @@ complete -c launchctl -n __fish_use_subcommand -xa getenv -d "Get value of envir
 complete -c launchctl -n "__fish_seen_subcommand_from setenv unsetenv getenv" -xa "(set --names)"
 complete -c launchctl -n __fish_use_subcommand -xa export -d "Export all environment variables"
 complete -c launchctl -n __fish_use_subcommand -xa limit -d "Read or modify launchd resource limits"
-complete -c launchctl -n "__fish_seen_subcommand_from limit" -xa "cpu filesize data stack core rss memlock maxproc maxfiles" -d "Resource"
+complete -c launchctl -n "__fish_seen_subcommand_from limit" -xa "cpu filesize data stack core rss memlock maxproc maxfiles" -d Resource
 complete -c launchctl -n __fish_use_subcommand -xa bsexec -d "Execute program in another context"
 complete -c launchctl -n "__fish_seen_subcommand_from bsexec" -x -a "(__fish_complete_pids)"
 complete -c launchctl -n __fish_use_subcommand -xa asuser -d "Execute program in a user's context"

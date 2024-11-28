@@ -1,7 +1,5 @@
 # completion for defaults (macOS)
 
-# reset built-in completions
-complete --erase -c defaults
 complete --no-files -c defaults
 
 function __fish_defaults_domains

@@ -1,9 +1,5 @@
 # ssh-keygen
 
-command -sq ssh-keygen; or return
-
-# reset built-in completions
-complete --erase -c ssh-keygen
 complete --no-files -c ssh-keygen
 
 set -l ssh_keygen_kdf_rounds '

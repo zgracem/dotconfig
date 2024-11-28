@@ -1,11 +1,5 @@
 # xcrun (macOS)
 
-command -sq xcrun; or return
-
-# reset built-in completions
-complete --erase -c xcrun
-complete --no-files -c xcrun
-
 function __fish_complete_xcrun_sdks
     xcodebuild -showsdks | string replace -f -r -- '^\s+(.+?)\s+-sdk (.+)$' '$2'\t'$1'
 end
