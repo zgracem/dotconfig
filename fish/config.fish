@@ -62,3 +62,7 @@ source "$__fish_config_dir/abbreviations.fish"
 
 # setup colours
 source "$__fish_config_dir/colours.fish"
+
+# manually install VS Code shell integration (otherwise it clobbers my prompt)
+string match -q "$TERM_PROGRAM" "vscode"
+and . (code --locate-shell-integration-path fish 2>/dev/null)
