@@ -21,7 +21,7 @@ complete -c defaults -n "__fish_seen_subcommand_from $defaults_domain_cmds" -o a
 complete -c defaults -n "__fish_seen_subcommand_from $defaults_domain_cmds" -s g -o globalDomain
 
 # write
-complete -c defaults -n __fish_use_subcommand -a write -d 'Writes domain or or a key in the domain'
+complete -c defaults -n __fish_use_subcommand -a write -d 'Writes domain or a key in the domain'
 complete -c defaults -n '__fish_seen_subcommand_from write' -o string -d 'String'
 complete -c defaults -n '__fish_seen_subcommand_from write' -o data -d 'Raw data bytes'
 complete -c defaults -n '__fish_seen_subcommand_from write' -o int -d 'Integer'
