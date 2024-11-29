@@ -47,3 +47,7 @@ dirbrowser-title-format   " %N %V > %?O?Open Directory&Save File? > %f"
 # https://newsboat.org/releases/2.37/docs/newsboat.html#_key_bindings
 bind-key LEFT quit
 bind-key RIGHT open
+
+# https://newsboat.org/releases/2.37/docs/newsboat.html#_killfiles
+ignore-mode "display"
+`cat ~/.config/newsboat/killfile`
