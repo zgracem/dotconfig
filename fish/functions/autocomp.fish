@@ -1,3 +1,5 @@
+# Uses the builtin `fish_update_completions` tool to create a completions file
+# for a single COMMAND, from a specific MAN_PATH, in the current working dir.
 function autocomp -a cmd manpath
     if not set -q cmd[1]; or not set -q manpath[1]
         echo >&2 "Usage: autocomp COMMAND MAN_PATH"
