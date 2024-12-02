@@ -3,7 +3,7 @@
 Files related to installing and configuring [Homebrew](https://brew.sh).
 
 ```sh
-make -C $XDG_CONFIG_HOME/homebrew install
+brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 ```
 
 ## See also
