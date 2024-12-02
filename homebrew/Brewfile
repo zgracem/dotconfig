@@ -194,7 +194,7 @@ brew "bramstein/webfonttools/woff2"
 # fun & games
 # ----------------------------------------------------------------------------
 
-brew "cowsay-org/cowsay/cowsay-org"
+brew "cowsay"
 brew "dosbox-x"
 brew "fastfetch"
 brew "figlet"
@@ -223,7 +223,6 @@ cask "zgracem/formulae/lockscreen"
 cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 
 # essentials
-cask "1password", args: { appdir: "/Applications" }
 cask "alfred"
 cask "bettermouse"
 cask "fantastical"
@@ -271,9 +270,7 @@ cask "webpquicklook"
 brew "mas"
 
 # essentials
-mas "1Password for Safari", id: 1569813296
 mas "ColorSlurp", id: 1287239339
-mas "Day One", id: 1055511498
 mas "Divvy", id: 413857545
 mas "Mactracker", id: 430255202
 mas "Soulver 3", id: 1508732804
