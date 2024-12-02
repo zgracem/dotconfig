@@ -19,6 +19,8 @@ if [[ $XDG_RUNTIME_DIR == $HOME* ]]; then
   && chmod 0700 "$XDG_RUNTIME_DIR"
 fi
 
+[ -z "$XDG_BIN_HOME" ] && export XDG_BIN_HOME="$HOME/.local/bin"
+
 # XDG user directories
 source "$XDG_CONFIG_HOME/user-dirs.dirs"
 for v in DESKTOP DOWNLOAD TEMPLATES PUBLICSHARE DOCUMENTS MUSIC PICTURES VIDEOS; do

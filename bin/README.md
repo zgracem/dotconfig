@@ -1,7 +1,7 @@
 # ~/.config/bin
 
 This directory contains various bits and pieces I've written that should be
-symlinked into `~/bin`:
+symlinked into `~/.local/bin`:
 
 ```sh
 make -C $XDG_CONFIG_HOME/bin install

@@ -28,6 +28,9 @@ if not fish_is_root_user; and string match -q "$HOME*" $XDG_RUNTIME_DIR
     mkdir -p -v -m 0700 $XDG_RUNTIME_DIR/ssh
 end
 
+set -q XDG_BIN_HOME[1]; or set -gx XDG_BIN_HOME (path resolve $XDG_DATA_HOME/../bin)
+path is -d $XDG_BIN_HOME; or set -ge XDG_BIN_HOME
+
 # XDG user directories
 # * https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
 # * https://wiki.archlinux.org/index.php/XDG_user_directories

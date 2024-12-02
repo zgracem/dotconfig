@@ -135,7 +135,7 @@ end
 fish_add_manpath $__fish_data_dir/man
 
 # $HOME
-fish_add_path ~/bin ~/opt/bin ~/.local/bin
+fish_add_path $XDG_BIN_HOME ~/opt/bin
 fish_add_manpath $XDG_DATA_HOME/man ~/opt/share/man
 
 # Clean up
