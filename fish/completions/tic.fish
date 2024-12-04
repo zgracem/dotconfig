@@ -41,7 +41,7 @@ complete -c tic -s T -d "Remove size restrictions on output"
 complete -c tic -s t -d "Discard commented-out capabilities"
 complete -c tic -s U -d "Do not post-process entries"
 complete -c tic -s V -n __fish_is_first_arg -d "Print ncurses version and exit"
-complete -c tic -s v -a "(seq 1 10)" -d Verbosity
+complete -c tic -s v -a "(seq 10)" -d Verbosity
 complete -c tic -s w -x -d "Change the output to WIDTH characters"
 complete -c tic -s W -n "__fish_seen_argument -s w" -d "Wrap long strings"
 complete -c tic -s x -d "Unknown capabilities are user-defined"

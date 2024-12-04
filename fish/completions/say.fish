@@ -49,7 +49,7 @@ function __fish_complete_pcm_formats
     set -l data_formats {BE,LE,}{F,I,UI}{8,16,24,32,64}
     set -l format_descs {{big,little}" endian, ",}{float,integer,unsigned int}", "{8,16,24,32,64}" samples"
     set -l x (count $data_formats)
-    for i in (seq 1 $x)
+    for i in (seq $x)
         echo -s $data_formats[$i] \t "PCM: $format_descs[$i]"
     end
 end

@@ -31,7 +31,7 @@ function __fish_complete_afconvert_layouts
         Atmos_9_1_6 Logic_{4_0,6_0,7_1,7_1_SDDS}_{A,B,C} \
         Logic_{5_0,5_1,6_1}_{A,B,C,D} Logic_Atmos_{5,7}_1_{2,4} \
         Logic_Atmos_5_1_{2,4} Logic_Atmos_7_1_{2,4_A,4_B,6} DiscreteInOrder \
-        CICP_(seq 1 20) {Begin,End}Reserved Unknown
+        CICP_(seq 20) {Begin,End}Reserved Unknown
 
     printf '%s\t\n' $layouts
 end
