@@ -1,3 +1,5 @@
 function short_home --description 'Replace $HOME with ~ in a path'
-    string replace --regex "^$HOME(?=\$|/)" "~" $argv
+    for path in $argv
+        string replace --regex "^$HOME(?=\$|/)" "~" $path
+    end
 end
