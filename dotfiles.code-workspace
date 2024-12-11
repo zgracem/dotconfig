@@ -9,10 +9,6 @@
       "path": "../.private"
     },
     {
-      "name": "~/Developer/share/data",
-      "path": "../Developer/share/data"
-    },
-    {
       "name": "~/.local/share/doc",
       "path": "../.local/share/doc"
     }
