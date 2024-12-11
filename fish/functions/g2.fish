@@ -23,6 +23,7 @@ function g2 --description 'Go somewhere'
         case desktop;   set dir "$XDG_DESKTOP_DIR"
         case docs;      set dir "$XDG_DOCUMENTS_DIR"
         case dl;        set dir "$XDG_DOWNLOAD_DIR"
+        case bin;       set dir "$XDG_BIN_DIR"
         case icloud;    set dir "$icloud_docs"
         case dev;       set dir "$HOME/Developer"
         case tmp;       set dir "$HOME/var/tmp"
