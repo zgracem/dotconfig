@@ -69,7 +69,9 @@ set -U __fish_git_prompt_color_cleanstate green
 # ----------------------------------------------------------------------------
 
 # LS_COLORS
-if is-gnu ls; and path is -d $XDG_CONFIG_HOME/dircolors
+if command -q eza
+    set --erase LS_COLORS EXA_COLORS EZA_COLORS
+else if is-gnu ls; and path is -d $XDG_CONFIG_HOME/dircolors
     set -l ls_colors_file "$XDG_DATA_HOME/dircolors/thirty2k.ls_colors.fish"
     make -s -C $XDG_DATA_HOME/dircolors
     set -Ux LS_COLORS (string match -r "(?<=')(?:[^=]+=(?:[\d;]+|target):)+" <$ls_colors_file)
@@ -107,8 +109,5 @@ begin
     set -l jq_obj (get_color normal)
     set -a JQ_COLORS $jq_nil $jq_non $jq_oui $jq_int $jq_str $jq_arr $jq_obj
 end
-
-# eza
-source $__fish_config_dir/env.d/eza.fish
 
 set -U __zgm_init_colours ✓

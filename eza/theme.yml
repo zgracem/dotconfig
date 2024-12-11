@@ -1,0 +1,102 @@
+colourful: true
+
+filekinds:
+  # normal: {foreground: Default}
+  directory: {foreground: Blue, is_bold: false}
+  symlink: {foreground: BrightMagenta, is_italic: true}
+  # pipe: {foreground: Yellow}
+  block_device: {foreground: Yellow, is_bold: false}
+  char_device: {foreground: Yellow, is_bold: false}
+  socket: {foreground: Red, is_bold: false}
+  # special: {foreground: Yellow}
+  executable: {foreground: Green, is_bold: false}
+  mount_point: {foreground: Blue, is_bold: false, is_underlined: false}
+
+perms:
+  user_read: {foreground: BrightGreen, is_bold: false}
+  user_write: {foreground: BrightYellow, is_bold: false}
+  user_execute_file: {foreground: BrightCyan, is_bold: false, is_underlined: false}
+  user_execute_other: {foreground: Cyan, is_bold: false}
+  # group_read: {foreground: Yellow}
+  group_write: {foreground: BrightRed}
+  group_execute: {foreground: Cyan}
+  # other_read: {foreground: Yellow}
+  other_write: {foreground: BrightRed}
+  other_execute: {foreground: Cyan}
+  special_user_file: {foreground: Cyan}
+  special_other: {foreground: Cyan}
+  # attribute: {foreground: Default}
+
+size:
+  major: {foreground: Cyan, is_bold: false}
+  minor: {foreground: Cyan}
+  number_byte: {foreground: Cyan, is_bold: false}
+  number_kilo: {foreground: Cyan, is_bold: false}
+  number_mega: {foreground: Cyan, is_bold: false}
+  number_giga: {foreground: Cyan, is_bold: false}
+  number_huge: {foreground: Cyan, is_bold: false}
+  unit_byte: {foreground: Cyan}
+  unit_kilo: {foreground: Cyan}
+  unit_mega: {foreground: Cyan}
+  unit_giga: {foreground: Cyan}
+  unit_huge: {foreground: Cyan}
+
+users:
+  user_you: {foreground: Green, is_bold: false}
+  user_root: {foreground: Red}
+  user_other: {foreground: Yellow}
+  group_yours: {foreground: Cyan, is_bold: false}
+  group_root: {foreground: Red}
+  group_other: {foreground: Yellow}
+
+links:
+  normal: {foreground: White, is_bold: false}
+  multi_link_file: {foreground: BrightWhite, background: Default}
+
+git:
+  new: {foreground: BrightGreen, is_bold: true}
+  modified: {foreground: BrightYellow, is_bold: true}
+  deleted: {foreground: BrightRed}
+  renamed: {foreground: Cyan}
+  typechange: {foreground: Cyan}
+  # ignored: {foreground: Default, is_dimmed: true}
+  # conflicted: {foreground: Red}
+
+# git_repo:
+#   branch_main: {foreground: Green}
+#   branch_other: {foreground: Yellow}
+#   git_clean: {foreground: Green}
+#   git_dirty: {foreground: Yellow}
+
+# security_context:
+#   colon: {foreground: Default, is_dimmed: true}
+#   user: {foreground: Blue}
+#   role: {foreground: Green}
+#   typ: {foreground: Yellow}
+#   range: {foreground: Cyan}
+
+file_type:
+  # image: {foreground: Purple}
+  video: {foreground: Purple, is_bold: false}
+  # music: {foreground: Cyan}
+  lossless: {foreground: Cyan, is_bold: false}
+  crypto: {foreground: Green, is_bold: false}
+  # document: {foreground: Green}
+  # compressed: {foreground: Red}
+  # temp: {foreground: White}
+  # compiled: {foreground: Yellow}
+  build: {foreground: Yellow, is_bold: false}
+  source: {foreground: Yellow, is_bold: false}
+
+punctuation: {foreground: BrightBlack}
+date: {foreground: White}
+inode: {foreground: Default}
+# blocks: {foreground: Cyan}
+header: {foreground: White, is_underlined: true}
+# octal: {foreground: Purple}
+# flags: {foreground: Default}
+
+symlink_path: {foreground: Magenta}
+control_char: {foreground: BrightBlack}
+broken_symlink: {foreground: Black, background: Red}
+broken_path_overlay: {foreground: BrightRed, is_bold: true, is_underlined: false}
