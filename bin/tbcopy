@@ -2,23 +2,9 @@
 
 # Like `tee`, this reads from stdin and writes to both stdout and the clipboard.
 
-function make_temp_file {
-    if type -P gmktemp >/dev/null; then
-        gmktemp -t tbcopy.XXXXXXXX
-    else
-        mktemp -t tbcopy
-    fi
-}
-
 function main {
     if type -P pbcopy >/dev/null; then
-        local temp_file
-        temp_file="$(make_temp_file)" || return
-
-        cat >"$temp_file"
-        pbcopy <"$temp_file"
-        cat "$temp_file"
-        rm "$temp_file"
+        cat | pbcopy && pbpaste
     elif [[ -w /dev/clipboard ]]; then
         tee /dev/clipboard
     fi
