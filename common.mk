@@ -18,11 +18,12 @@ XDG_CONFIG_HOME ?= $(wildcard ~/.config)
 XDG_DATA_HOME   ?= $(wildcard ~/.local/share)
 XDG_CACHE_HOME  ?= $(wildcard ~/var/cache)
 XDG_STATE_HOME  ?= $(wildcard ~/.local/state)
+XDG_BIN_HOME    ?= $(abspath $(wildcard $(XDG_DATA_HOME)/../bin))
 
 # Installation directories
 prefix      ?= $(HOME)
 exec_prefix ?= $(prefix)
-bindir      ?= $(exec_prefix)/bin
+bindir      ?= $(XDG_BIN_HOME)
 datarootdir ?= $(XDG_DATA_HOME)
 datadir     ?= $(datarootdir)
 libdir       = $(exec_prefix)/lib
