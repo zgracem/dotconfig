@@ -21,7 +21,11 @@ function man --description 'Display manual pages' # in a new window with colours
     end
 
     # Get a nice title for the window.
-    set -l title (__man_title $argv); or return
+    set -f manfile (command man -w $argv)
+    and begin
+        set -f title (path basename $manfile | string replace -rf '\.([^.]+)(?:\.gz)?$' '($1)')
+    end
+    or set -f title "man $argv"
 
     if in-tmux
         tmux new-window -n $title "env MANLESS= man $argv"
