@@ -40,7 +40,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     set -q _flag_max_part; or set -f _flag_max_part 11
 
     # Stop shortening when PWD is this length (or shorter)
-    set -q _flag_max_path; or set -f _flag_max_path 44
+    set -q _flag_max_path; or set -f _flag_max_path 40
 
     # Always leave this many trailing dirnames unshortened
     set -q _flag_keep_dirs; or set -f _flag_keep_dirs 1
