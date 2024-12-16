@@ -11,7 +11,7 @@ brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 To set up [command aliases](https://github.com/Homebrew/homebrew-aliases):
 
 ```sh
-test -L ~/.brew-aliases || ln -sv $XDG_CONFIG_HOME/homebrew/aliases ~/.brew-aliases
+test -L ~/.config/brew-aliases || ln -sv ~/.config/homebrew/aliases ~/.config/brew-aliases
 ```
 
 ## See also

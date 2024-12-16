@@ -1,5 +1,6 @@
 {
   "files.exclude": {
+    "brew-aliases": true,
     "iterm2": true,
     "StardewValley": true
   },

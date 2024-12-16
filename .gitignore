@@ -14,6 +14,7 @@ vim/pack/*/
 !vim/pack/zgm/
 
 # generated
+brew-aliases
 lynx/helpfile.css
 lynx/helpfile.html
 micro/buffers/
