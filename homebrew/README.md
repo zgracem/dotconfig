@@ -2,6 +2,8 @@
 
 Files related to installing and configuring [Homebrew](https://brew.sh).
 
+To install everything in [`Brewfile`](https://github.com/Homebrew/homebrew-bundle#usage):
+
 ```sh
 brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 ```
@@ -14,4 +16,5 @@ test -L ~/.brew-aliases || ln -sv $XDG_CONFIG_HOME/homebrew/aliases ~/.brew-alia
 
 ## See also
 
-[`../env.d/homebrew.env`](https://github.com/zgracem/dotconfig/blob/main/env.d/homebrew.env)
+* [`../env.d/homebrew.env`](https://github.com/zgracem/dotconfig/blob/main/env.d/homebrew.env)
+* [`../homebrew/brew.env`](https://github.com/zgracem/dotconfig/blob/main/homebrew/brew.env)
