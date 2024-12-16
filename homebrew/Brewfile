@@ -58,6 +58,7 @@ brew "qrencode"
 brew "sf-pwgen" if OS.mac?
 brew "sponge"
 brew "tree"
+brew "tzdb" if OS.mac?
 
 # text & documentation
 brew "alhadis/troff/man-db" if OS.mac?
