@@ -5,12 +5,12 @@
 
 # general functionality
 vscode "chrislajoie.vscode-modelines"
-vscode "eamodio.gitlens"
 vscode "EditorConfig.EditorConfig"
 vscode "formulahendry.code-runner"
 vscode "heaths.vscode-guid"
 vscode "HookyQR.minify"
 vscode "maptz.regionfolder"
+vscode "mk12.better-git-line-blame"
 vscode "ms-vscode.hexeditor"
 vscode "plus5keen.word-counter"
 vscode "richie5um2.vscode-sort-json"
