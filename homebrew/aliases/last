@@ -1,0 +1,6 @@
+#! /usr/local/bin/bash
+# alias: brew last
+#:  * `last` [args...]
+#:    `brew last` is an alias for `brew last-update`
+brew last-update $*
+

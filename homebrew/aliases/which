@@ -1,0 +1,6 @@
+#! /usr/local/bin/bash
+# alias: brew which
+#:  * `which` [args...]
+#:    `brew which` is an alias for `brew which-formula`
+brew which-formula $*
+

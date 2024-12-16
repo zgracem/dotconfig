@@ -1,0 +1,6 @@
+#! /usr/local/bin/bash
+# alias: brew what
+#:  * `what` [args...]
+#:    `brew what` is an alias for `brew which-command`
+brew which-command $*
+

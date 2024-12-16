@@ -3,6 +3,7 @@
 # vim:ft=ruby
 # ----------------------------------------------------------------------------
 
+tap "homebrew/aliases"
 tap "homebrew/command-not-found"
 tap "nrlquaker/createzap" # `brew createzap` command
 
