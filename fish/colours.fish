@@ -92,10 +92,10 @@ set -a GCC_COLORS "quote="(get_color $fish_color_quote)
 
 # grep
 set -Ux --path GREP_COLORS
-set -a GREP_COLORS "se="(get_color --dim)
-set -a GREP_COLORS "mt="(get_color brmagenta --underline)
-set -a GREP_COLORS "fn="(get_color blue)
-set -a GREP_COLORS "ln="(get_color cyan)
+set -Ua GREP_COLORS "se="(get_color --dim)
+set -Ua GREP_COLORS "mt="(get_color brmagenta --underline)
+set -Ua GREP_COLORS "fn="(get_color blue)
+set -Ua GREP_COLORS "ln="(get_color cyan)
 
 # jq
 set -Ux --path JQ_COLORS
@@ -107,7 +107,7 @@ begin
     set -l jq_str (get_color $fish_color_quote)
     set -l jq_arr (get_color normal)
     set -l jq_obj (get_color normal)
-    set -a JQ_COLORS $jq_nil $jq_non $jq_oui $jq_int $jq_str $jq_arr $jq_obj
+    set -Ua JQ_COLORS $jq_nil $jq_non $jq_oui $jq_int $jq_str $jq_arr $jq_obj
 end
 
 set -U __zgm_init_colours ✓
