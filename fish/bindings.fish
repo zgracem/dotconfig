@@ -16,7 +16,7 @@ bind \c_ 'commandline -f repaint'
 # Right Arrow (→) accepts a single word from the autosuggestion
 bind \e\[C bind_smart_forward
 # Shift-Right Arrow accepts the entire autosuggestion
-bind -k sright forward-char
+bind \e\[1\;2C forward-char
 
 # Disable bindings from $__fish_data_dir/functions/__fish_shared_key_bindings.fish
 bind --erase \cx \cv
