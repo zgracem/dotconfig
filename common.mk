@@ -26,9 +26,9 @@ exec_prefix ?= $(prefix)
 bindir      ?= $(XDG_BIN_HOME)
 datarootdir ?= $(XDG_DATA_HOME)
 datadir     ?= $(datarootdir)
-libdir       = $(exec_prefix)/lib
+libdir      ?= $(exec_prefix)/lib
 sbindir     ?= $(exec_prefix)/sbin
-sysconfdir   = $(prefix)/etc
+sysconfdir  ?= $(prefix)/etc
 
 # Other important directories
 GIT_STAGING := $(wildcard ~/src/github.com)
