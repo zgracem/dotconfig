@@ -19,7 +19,7 @@ $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/% | $(bindir)
 	ln -sf $(shell $(CURDIR)/relpath $< $(bindir)) $@
 
 $(bindir):
-	mkdir -p $(bindir)
+	$(MKDIR) $(bindir)
 
 install: $(TARGETS)
 

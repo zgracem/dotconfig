@@ -13,4 +13,4 @@ $(datadir)/rbenv/version: | $(datadir)/rbenv/versions
 	rbenv global system
 
 $(datadir)/rbenv $(datadir)/rbenv/versions:
-	mkdir -pv $@
+	$(MKDIR) $@

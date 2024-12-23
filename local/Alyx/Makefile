@@ -53,7 +53,7 @@ all: ~/.local/config
 ~/.local/config: ~/.config/local/Alyx | ~/.config/local
 	ln -sf $< $@
 ~/.config/local:
-	mkdir -p $@
+	$(MKDIR) $@
 
 DECK_FILES  =
 DECK_FILES += ~/.config/mimeapps.list

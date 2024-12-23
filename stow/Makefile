@@ -152,4 +152,4 @@ $(STOW_DIR)/words/share/dict/words: $(DICT_FILES) | $(STOW_DIR)/words/share/dict
 	cat $^ | sort -u >$@
 
 $(STOW_DIR)/words/share/dict:
-	mkdir -pv $@
+	$(MKDIR) $@

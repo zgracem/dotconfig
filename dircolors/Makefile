@@ -15,7 +15,7 @@ $(outdir)/%.ls_colors.fish: %.dircolors | $(outdir)
 	dircolors -c $< >$@
 
 $(outdir):
-	mkdir -pv $(outdir)
+	$(MKDIR) $(outdir)
 
 .PHONY: uninstall
 uninstall:

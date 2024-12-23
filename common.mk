@@ -57,3 +57,6 @@ INSTALL := $(GNUBIN)/install
 # installation, for executables and non-executables respectively.
 INSTALL_PROGRAM := $(INSTALL) -D --compare
 INSTALL_DATA := $(INSTALL) -D --compare -m 644
+
+# Additional commands
+MKDIR := mkdir -p
