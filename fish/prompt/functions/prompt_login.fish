@@ -4,8 +4,10 @@ function prompt_login --description "display user and host names for the prompt"
     if string match -vq "$PRIMARY_USER" $USER
         set_color $fish_color_user
         echo -n $USER
-        set_color $fish_color_at
-        echo -n @
+        if set -q SSH_CONNECTION
+            set_color $fish_color_at
+            echo -n @
+        end
     end
 
     if set -q SSH_CONNECTION

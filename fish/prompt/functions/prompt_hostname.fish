@@ -7,6 +7,6 @@ function prompt_hostname --description 'short hostname for the prompt'
         case .pink
             echo -n $hostname
         case '*'
-            __fish_prompt_hostname
+            echo -n (__fish_prompt_hostname)
     end
 end
