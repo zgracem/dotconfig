@@ -1,4 +1,4 @@
 function eza
-    # See ~/.config/env.d/eza.env
+    # See $XDG_CONFIG_HOME/env.d/eza.env
     command eza -I$EZA_IGNORE $argv
 end
