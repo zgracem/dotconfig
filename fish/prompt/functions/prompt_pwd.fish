@@ -1,7 +1,7 @@
 # Overrides $__fish_data_dir/functions/prompt_pwd.fish
 function prompt_pwd --description 'Print a shortened version of a given path'
-    # This function compresses a path (for use in `fish_prompt`) in a
-    # slightly clearer (and more clever/complicated) way than the stock version.
+    # This function compresses a path (for use in `fish_prompt`) in a slightly
+    # clearer (and more clever/complicated) way than the stock version.
     #
     # * Skips compressing dirnames already under a given length (--min-part)
     # * Always truncate dirnames longer than a given length (--max-part)

@@ -1,4 +1,4 @@
-function fish_window_title --description 'Update the window title'
+function fish_title_window --description 'Update the window title'
     set -q long_hostname
     or set -g long_hostname (prompt_hostname)
     or set -g long_hostname $hostname

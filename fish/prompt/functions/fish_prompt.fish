@@ -14,7 +14,7 @@ function fish_prompt --description 'Display the interactive prompt'
     echo -n " "
 
     __fish_prompt_rbenv
-    __fish_prompt_git
+    fish_git_prompt
     __fish_prompt_jobs
 
     if fish_is_root_user

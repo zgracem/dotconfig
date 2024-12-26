@@ -1,4 +1,5 @@
-function __fish_prompt_git --description 'Display git info in the fish prompt'
+# Overrides $__fish_data_dir/functions/fish_git_prompt.fish
+function fish_git_prompt --description 'Display git info in the fish prompt'
     set -l icon_stash "+"
     set -l icon_dirty "•"
     set -l icon_clean "✓"
