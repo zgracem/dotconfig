@@ -1,7 +1,7 @@
 # Overrides $__fish_data_dir/functions/prompt_login.fish
 function prompt_login --description "display user and host names for the prompt"
-    # DEFAULT_USER set in ~/.private/fish/conf.d/default_user.fish
-    if string match -vq "$DEFAULT_USER" $USER
+    # PRIMARY_USER set in ~/.private/fish/conf.d/primary_user.fish
+    if string match -vq "$PRIMARY_USER" $USER
         set_color $fish_color_user
         echo -n $USER
         set_color $fish_color_at

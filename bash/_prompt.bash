@@ -260,7 +260,7 @@ PS1=""
 # one we usually log in with.
 if [[ -n $SSH_CONNECTION || $Z_PROMPT_HOST == true ]]; then
   case $USER in
-    "$DEFAULT_USER")
+    "$PRIMARY_USER")
       PS1+="${PS1_dim}"
       ;;
     *)
