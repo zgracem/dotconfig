@@ -176,6 +176,10 @@ abbr -a cdp --set-cursor "cd (path resolve %)"
 abbr -a cdls --set-cursor "cd %; $_ls_command"
 abbr -a cdll --set-cursor "cd %; $_ll_command"
 
+# print in columns
+# :c → `% | column`
+abbr -a :c --position anywhere --set-cursor "%| column"
+
 # copy to clipboard, then print in columns
 # :cc → `% | tbcopy | column`
 abbr -a :cc --position anywhere --set-cursor "% | tbcopy | column"
