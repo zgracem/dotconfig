@@ -11,16 +11,17 @@ if fish-is-older-than 3.1
     exit 127
 end
 
-set -l fish_beta ~/opt/stow/fish-4.0b1/bin/fish
-string match -v -q (status fish-path) (path resolve $fish_beta)
-and test -x $fish_beta
-and exec $fish_beta
-
 # setup environment, including PATH and friends
 source "$__fish_config_dir/env.fish"
 
 # stop here if not an interactive session
 status is-interactive; or return
+
+# launch 4.0 beta if present
+set -l fish_beta ~/opt/stow/fish-4.0b1/bin/fish
+string match -v -q (status fish-path) (path resolve $fish_beta)
+and test -x $fish_beta
+and exec $fish_beta
 
 # function subdirectories
 set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
