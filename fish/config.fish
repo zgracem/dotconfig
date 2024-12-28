@@ -11,6 +11,11 @@ if fish-is-older-than 3.1
     exit 127
 end
 
+set -l fish_beta ~/opt/stow/fish-4.0b1/bin/fish
+string match -v -q (status fish-path) (path resolve $fish_beta)
+and test -x $fish_beta
+and exec $fish_beta
+
 # setup environment, including PATH and friends
 source "$__fish_config_dir/env.fish"
 
