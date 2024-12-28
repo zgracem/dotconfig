@@ -67,9 +67,3 @@ source "$__fish_config_dir/abbreviations.fish"
 
 # setup colours
 source "$__fish_config_dir/colours.fish"
-
-# manually install VS Code shell integration (otherwise it clobbers my prompt)
-# and enable experimental terminal suggestions w/ `VSCODE_SUGGEST`
-string match -q "$TERM_PROGRAM" "vscode"
-and set -lx VSCODE_SUGGEST 1
-and . (code --locate-shell-integration-path fish 2>/dev/null)

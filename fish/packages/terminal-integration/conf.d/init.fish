@@ -5,17 +5,21 @@
 # ----------------------------------------------------------------------------
 
 # Don't run in scripts, non-GUI clients, or more than once per session.
-# Native OSC 133 injection was added in fish 3.8: fish-shell/fish-shell#10352
+# Native OSC 133 injection in fish 4.0 (#10352) isn't quite there yet.
+# VS Code integration is installed manually in $__fish_config_dir/config.fish.
 status is-interactive
 and set --query TERM_PROGRAM
 and ! set --query SHELL_INTEGRATION
-and fish-is-older-than 3.8
 or return
 
 set --global --export SHELL_INTEGRATION $TERM_PROGRAM
 switch $TERM_PROGRAM
     case vscode
-        set --global VSCODE_SHELL_INTEGRATION 1
+        # Manually install integration (otherwise it clobbers my prompt)
+        # and enable experimental terminal suggestions w/ `VSCODE_SUGGEST`
+        set -lx VSCODE_SUGGEST 1
+        source (code --locate-shell-integration-path fish 2>/dev/null)
+        return
     case iTerm.app
         string match -q screen "$ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX$TERM"
         and return
