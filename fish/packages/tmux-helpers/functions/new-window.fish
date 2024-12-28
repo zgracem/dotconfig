@@ -1,5 +1,5 @@
-function newwin --description 'Open a command in a new tmux window'
-    argparse --name=newwin 't/title=' -- $argv
+function new-window --description 'Open a command in a new tmux window'
+    argparse --name=new-window 't/title=' -- $argv
 
     if not in-tmux
         eval $argv

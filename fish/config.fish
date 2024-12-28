@@ -23,7 +23,6 @@ source "$__fish_config_dir/env.fish"
 status is-interactive; or return
 
 # function subdirectories
-set -p fish_function_path "$__fish_config_dir/functions/_debug"
 set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
 set -p fish_function_path "$__fish_config_dir/functions"
 set -p fish_function_path "$HOME/.private/fish/functions"
