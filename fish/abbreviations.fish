@@ -46,6 +46,9 @@ abbr --add chmod "chmod $_chmod_verbose_flag"
 abbr --add chown "chown $_chmod_verbose_flag"
 abbr --add "ux" "chmod $_chmod_verbose_flag u+x"
 abbr --add "gorx" "chmod $_chmod_verbose_flag go+rx"
+for mode in 400 600 700 644 755
+    abbr --add mode "chmod $_chmod_verbose_flag $mode"
+end
 
 functions --erase ls ll
 set -l _ls_command
