@@ -3,15 +3,11 @@
 # XDG base directories
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="$HOME/.config"
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="$HOME/.local/share"
-[ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/var/cache"
+[ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="$HOME/.cache"
 [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="$HOME/var/run"
 [ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="$HOME/.local/state"
 
 [ -z "$XDG_DATA_DIRS" ] && export XDG_DATA_DIRS="$XDG_DATA_HOME:/usr/local/share:/usr/share"
-
-if [[ ! -w "$XDG_CACHE_HOME" && -w "$HOME/.cache" ]]; then
-  export XDG_CACHE_HOME="$HOME/.cache"
-fi
 
 if [[ $XDG_RUNTIME_DIR == $HOME* ]]; then
   mkdir -p "$XDG_RUNTIME_DIR" \
