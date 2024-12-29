@@ -52,9 +52,6 @@ set -p fish_package_path "$__fish_config_dir/prompt"
 set fish_package_path (path filter -d $fish_package_path)
 source "$__fish_config_dir/packages.fish"
 
-# setup keybindings
-source "$__fish_config_dir/bindings.fish"
-
 # source vendor completions
 set -p fish_complete_path "$HOME/opt/share/fish/vendor_completions.d"
 
