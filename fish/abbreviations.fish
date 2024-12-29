@@ -170,11 +170,6 @@ abbr -a cask --set-cursor "brew % --cask"
 
 fish-is-newer-than 3.6; or return
 
-# imitate `cd -P`
-# cdp → cd (path resolve %)
-functions --erase cdp
-abbr -a cdp --set-cursor "cd (path resolve %)"
-
 # cdls → cd %; ls
 abbr -a cdls --set-cursor "cd %; $_ls_command"
 abbr -a cdll --set-cursor "cd %; $_ll_command"

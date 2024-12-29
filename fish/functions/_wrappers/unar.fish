@@ -1,6 +1,10 @@
-command -q unar; and return
-
 function unar --description 'Extract most kinds of archives'
+    # brew install unar
+    if command -q unar
+        command unar $argv
+        return
+    end
+
     for archive in $argv
         switch $archive
             case '*.tar.bz2' '*.tbz2'

@@ -1,6 +1,10 @@
-command -q lsar; and return
-
 function lsar --description 'List the contents of archives'
+    # brew install unar
+    if command -q lsar
+        command lsar $argv
+        return
+    end
+
     for archive in $argv
         switch $archive
             case '*.7z'
