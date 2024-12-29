@@ -5,7 +5,7 @@
 --tabs=0
 --theme=TwoDark
 
---map-syntax="*.[1-9]:troff"
---map-syntax="*.plist:xml"
---map-syntax="*.sublime-syntax:yaml"
---map-syntax="*ignore:ignore"
+--map-syntax="*.[1-9]:groff/troff"
+--map-syntax="*.plist:XML"
+--map-syntax="*.sublime-syntax:YAML"
+--map-syntax="*ignore:Git Ignore"
