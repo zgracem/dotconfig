@@ -4,6 +4,11 @@ function wtf -d "Display information about commands"
 
     for subject in $argv
         set -l types (type -at $subject 2>/dev/null)
+        if test (count $types) -eq 0
+            echo >&2 "not found: $subject"
+            return 1
+        end
+
         if contains -- $subject $all_abbr
             set --prepend types abbreviation
         end
@@ -30,9 +35,6 @@ function wtf -d "Display information about commands"
                     echo " is an abbreviation"
                     abbr -s | string match -er -- "-- $subject\b" | fish_indent --ansi
             end
-        end; and return
-
-        echo >&2 "not found: $subject"
-        return 1
+        end
     end
 end
