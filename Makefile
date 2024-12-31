@@ -22,7 +22,11 @@ SHELL_FILES += ~/.profile
 $(SHELL_FILES):
 	ln -sfv .config/$< $@
 
+.PHONY: shellfiles
 shellfiles: $(SHELL_FILES)
+
+~/.basilisk_ii_prefs: .basilisk_ii_prefs
+	cp -af $< $@
 
 # -----------------------------------------------------------------------------
 # Send a fake user-agent string to mask the activity of tools like wget.

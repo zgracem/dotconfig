@@ -1,0 +1,47 @@
+# ~/.basilisk_ii_prefs <https://www.emaculation.com/doku.php/basilisk_ii>
+#
+#    make -C $XDG_CONFIG_HOME ~/.basilisk_ii_prefs
+#
+disk /Users/zozo/vm/mac/System7/MacOS7.dsk
+extfs /Users/zozo/vm/mac/BasiliskII/shared
+screen win/1024/768
+seriala
+serialb
+ether slirp
+udptunnel false
+udpport 6066
+rom /Users/zozo/vm/mac/rom/PERFORMA.ROM
+bootdrive 0
+bootdriver 0
+ramsize 268435456
+frameskip 0
+modelid 14
+cpu 4
+fpu true
+nocdrom false
+nosound false
+noclipconversion false
+nogui false
+jit false
+jitfpu true
+jitdebug false
+jitcachesize 8192
+jitlazyflush true
+jitinline true
+keyboardtype 5
+keycodes true
+keycodefile /Users/zozo/vm/mac/BasiliskII/keycodes
+mousewheelmode 1
+mousewheellines 1
+dsp
+mixer
+ignoresegv true
+idlewait true
+title System 7.5.3
+# enlarge BasiliskII window while preserving guest screen resolution
+mag_rate 1
+# scale_integer + scale_nearest = hard-edged pixels
+scale_integer true
+scale_nearest true
+
+# vim:ft=sh
