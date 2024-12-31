@@ -1,11 +1,10 @@
 set -q __zgm_init_colours
 and return
 
-set -l message "Sourcing colours…"
-if command -q lolcat
-    echo $message | lolcat --animate
+echo "Sourcing colours…" | if command -q lolcat
+    lolcat --animate
 else
-    echo $message
+    cat
 end
 
 # https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
