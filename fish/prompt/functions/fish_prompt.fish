@@ -23,6 +23,9 @@ function fish_prompt --description 'Display the interactive prompt'
     else if set -q fish_private_mode
         set_color --dim
         echo -n "?"
+    else if is-raspi
+        set_color $fish_prompt_color_ps
+        echo -n "π"
     else
         set_color $fish_prompt_color_ps
         echo -n "¶"

@@ -17,3 +17,7 @@ end
 function is-deck --description 'Returns true if running on SteamOS'
     uname -r | string match -q "*-valve*"
 end
+
+function is-raspi --description 'Returns true if running on a Raspberry Pi'
+    uname -r | string match -q "*-rpi*"
+end
