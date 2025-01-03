@@ -4,7 +4,7 @@
 GNUMAKEFLAGS = --output-sync
 MAKEFLAGS = L # check symlinks' mtime and not their destinations'
 
-HOSTNAME   ?= pomona
+HOSTNAME   ?= Pomona
 
 CONFIG_SRC := $(HOME)/src/github.com/zgracem/dotconfig
 
