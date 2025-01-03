@@ -4,6 +4,8 @@
 GNUMAKEFLAGS = --output-sync
 MAKEFLAGS = L # check symlinks' mtime and not their destinations'
 
+HOSTNAME   ?= Alyx
+
 CONFIG_SRC := $(HOME)/src/github.com/zgracem/dotconfig
 
 HOME_FILES  =
@@ -17,7 +19,7 @@ HOME_DIRS  += ~/.private
 all: $(HOME_DIRS) $(HOME_FILES)
 ~/.hushlogin:
 	touch $@
-~/.bash_profile: $(CONFIG_SRC)/local/Alyx/.bash_profile
+~/.bash_profile: $(CONFIG_SRC)/local/$(HOSTNAME)/.bash_profile
 ~/.bashrc: $(CONFIG_SRC)/bash/.bashrc
 ~/.profile: $(CONFIG_SRC)/sh/.profile
 
@@ -50,7 +52,7 @@ all: $(CONFIG_DIRS) $(CONFIG_FILES)
 	ln -sf $< $@
 
 all: ~/.local/config
-~/.local/config: ~/.config/local/Alyx | ~/.config/local
+~/.local/config: ~/.config/local/$(HOSTNAME) | ~/.config/local
 	ln -sf $< $@
 ~/.config/local:
 	$(MKDIR) $@
@@ -60,7 +62,7 @@ DECK_FILES += ~/.config/mimeapps.list
 DECK_FILES += ~/.xscreensaver
 
 all: $(DECK_FILES)
-~/.config/mimeapps.list: $(CONFIG_SRC)/local/Alyx/mimeapps.list
+~/.config/mimeapps.list: $(CONFIG_SRC)/local/$(HOSTNAME)/mimeapps.list
 	ln -sf $< $@
 ~/.xscreensaver: $(CONFIG_SRC)/.xscreensaver
 	cp -af $< $@
