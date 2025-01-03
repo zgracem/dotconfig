@@ -29,7 +29,7 @@ end
 
 function main -d "Update configuration from GitHub"
     switch $hostname
-        case Alyx
+        case Alyx pomona
             set -gx USER_CONFIG_DIRS ~/src/**/dot{config,private}
         case "*"
             set -gx USER_CONFIG_DIRS ~/.{config,private}
