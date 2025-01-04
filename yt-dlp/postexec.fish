@@ -104,7 +104,7 @@ function main
     set_wherefrom $argv[1]
 
     if not set -q _flag_keep
-        ~/.local/bin/trash $metadata_file
+        $XDG_BIN_HOME/trash $metadata_file
     end
 end
 

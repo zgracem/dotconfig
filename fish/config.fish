@@ -18,7 +18,7 @@ source "$__fish_config_dir/env.fish"
 status is-interactive; or return
 
 # launch 4.0 beta if present
-set -l fish_beta ~/.local/bin/fish
+set -l fish_beta $XDG_BIN_HOME/fish
 string match -v -q (status fish-path) (path resolve $fish_beta)
 and test -x $fish_beta
 and exec $fish_beta
