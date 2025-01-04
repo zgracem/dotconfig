@@ -1,3 +1,4 @@
+# TODO: is this still necessary?
 set -gx --path PERLLIB $PERLLIB
 set -p PERLLIB $XDG_DATA_HOME/perl
 set -p PERLLIB $HOME/opt/share/perl
