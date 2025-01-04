@@ -17,11 +17,11 @@ source "$__fish_config_dir/env.fish"
 # stop here if not an interactive session
 status is-interactive; or return
 
-# launch 4.0 beta if present
-set -l fish_beta $XDG_BIN_HOME/fish
-string match -v -q (status fish-path) (path resolve $fish_beta)
-and test -x $fish_beta
-and exec $fish_beta
+# launch development build if present
+set -l local_fish "$XDG_BIN_HOME/fish"
+string match -v -q (status fish-path) (path resolve $local_fish)
+and test -x $local_fish
+and exec $local_fish
 
 # function subdirectories
 set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
