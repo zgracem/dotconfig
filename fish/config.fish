@@ -2,7 +2,7 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-if fish-is-older-than 3.1
+if fish-is-older-than 3.2 # released Mar 2021
     begin
         echo -e '\e[1;7;91m'
         echo "*** These configuration files should not run on fish $version ***"

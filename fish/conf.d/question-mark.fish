@@ -1,7 +1,9 @@
-fish-is-older-than 3.0; and return
+# Version check because it's located in `conf.d`
+fish-is-older-than 3.0 # released Dec 2018
+and return
 
-# As of fish 3.0, this requires `set -Ua fish_features qmark-noglob` to work
-# like it does in bash -- i.e. as a bare `?`, not a quoted `"?"`
+# Requires `set -Ua fish_features qmark-noglob` to work like it does in bash --
+# i.e. as a bare `?`, not a quoted `"?"`
 status test-feature qmark-noglob
 or set -Ua fish_features qmark-noglob
 

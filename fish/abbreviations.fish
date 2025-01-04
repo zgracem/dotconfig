@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 # quick navigation
-if fish-is-older-than 3.6
+if fish-is-older-than 3.6 # released Jan 2023
     abbr -a .. cd ..
     abbr -a ... cd ../..
     abbr -a .... cd ../../..
@@ -168,7 +168,8 @@ abbr -a cask --set-cursor "brew % --cask"
 # advanced
 # ----------------------------------------------------------------------------
 
-fish-is-newer-than 3.6; or return
+fish-is-newer-than 3.6 # released Jan 2023
+or return
 
 # cdls → cd %; ls
 abbr -a cdls --set-cursor "cd %; $_ls_command"
