@@ -18,7 +18,7 @@ source "$__fish_config_dir/env.fish"
 status is-interactive; or return
 
 # launch 4.0 beta if present
-set -l fish_beta ~/opt/stow/fish-4.0b1/bin/fish
+set -l fish_beta ~/.local/bin/fish
 string match -v -q (status fish-path) (path resolve $fish_beta)
 and test -x $fish_beta
 and exec $fish_beta
@@ -29,7 +29,8 @@ set -p fish_function_path "$__fish_config_dir/functions"
 set -p fish_function_path "$HOME/.private/fish/functions"
 
 # load vendor & user completions
-set -p fish_complete_path "$HOME/opt/share/fish/vendor_completions.d"
+set -p fish_complete_path "$HOMEBREW_PREFIX/opt/fish/share/fish/completions"
+set -p fish_complete_path "$XDG_DATA_HOME/fish/vendor_completions.d"
 set -p fish_complete_path "$__fish_config_dir/completions"
 
 # set up per-machine config directory
