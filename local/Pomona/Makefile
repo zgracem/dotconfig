@@ -40,7 +40,6 @@ CONFIG_DIRS  += ~/.config/btop
 CONFIG_DIRS  += ~/.config/env.d
 CONFIG_DIRS  += ~/.config/fastfetch
 CONFIG_DIRS  += ~/.config/fish
-CONFIG_DIRS  += ~/.config/homebrew
 CONFIG_DIRS  += ~/.config/micro
 CONFIG_DIRS  += ~/.config/ripgrep
 CONFIG_DIRS  += ~/.config/sh
@@ -56,10 +55,3 @@ all: ~/.local/config
 	ln -sf $< $@
 ~/.config/local:
 	$(MKDIR) $@
-
-PI_FILES  =
-PI_FILES += ~/.config/mimeapps.list
-
-all: $(PI_FILES)
-~/.config/mimeapps.list: $(CONFIG_SRC)/local/$(HOSTNAME)/mimeapps.list
-	ln -sf $< $@
