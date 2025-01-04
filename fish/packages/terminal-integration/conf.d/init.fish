@@ -6,9 +6,7 @@
 
 # Don't run in scripts, non-GUI clients, or more than once per session.
 # Native OSC 133 injection in fish 4.0 (#10352) isn't quite there yet.
-# VS Code integration is installed manually in $__fish_config_dir/config.fish.
 status is-interactive
-and set --query TERM_PROGRAM
 and ! set --query SHELL_INTEGRATION
 or return
 
