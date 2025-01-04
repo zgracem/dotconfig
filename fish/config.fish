@@ -28,7 +28,8 @@ set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
 set -p fish_function_path "$__fish_config_dir/functions"
 set -p fish_function_path "$HOME/.private/fish/functions"
 
-# load user completions
+# load vendor & user completions
+set -p fish_complete_path "$HOME/opt/share/fish/vendor_completions.d"
 set -p fish_complete_path "$__fish_config_dir/completions"
 
 # set up per-machine config directory
@@ -51,9 +52,6 @@ set -p fish_package_path "$__fish_config_dir/prompt"
 # personal minimal package manager for fish
 set fish_package_path (path filter -d $fish_package_path)
 source "$__fish_config_dir/packages.fish"
-
-# source vendor completions
-set -p fish_complete_path "$HOME/opt/share/fish/vendor_completions.d"
 
 # remove duplicate & nonexistent directories
 set fish_function_path (path filter -d $fish_function_path | un1q)
