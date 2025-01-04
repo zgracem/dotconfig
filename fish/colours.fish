@@ -52,7 +52,6 @@ set -U fish_pager_color_selected_description --italics
 # ---------------------------------------------------------------------------
 
 set -U fish_prompt_color_ps blue
-is-raspi; and set -U fish_prompt_color_ps magenta
 set -U fish_prompt_color_ps_root $fish_color_cwd_root
 set -U fish_prompt_color_duration --dim
 set -U fish_prompt_color_jobs yellow

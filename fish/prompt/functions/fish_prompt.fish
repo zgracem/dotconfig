@@ -24,7 +24,7 @@ function fish_prompt --description 'Display the interactive prompt'
         set_color --dim
         echo -n "?"
     else if is-raspi
-        set_color $fish_prompt_color_ps
+        set_color --bold --italics magenta
         echo -n "π"
     else
         set_color $fish_prompt_color_ps
