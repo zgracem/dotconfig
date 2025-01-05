@@ -127,7 +127,7 @@ if command -q apt
     abbr -a aptins 'sudo apt install'
     abbr -a aptinf 'apt show'
     abbr -a apts 'apt search'
-    abbr -a aptup 'sudo apt update && sudo apt upgrade'
+    abbr -a aptup 'sudo apt update && sudo apt -y upgrade'
 end
 
 # dl
@@ -163,6 +163,13 @@ abbr -a gs "git status"
 
 # Homebrew Cask
 abbr -a cask --set-cursor "brew % --cask"
+
+# Raspberry Pi
+abbr -a rpc "sudo raspi-config"
+
+# AdGuardHome
+path is -x /opt/AdGuardHome/AdGuardHome
+and abbr --add agh "sudo /opt/AdGuardHome/AdGuardHome -s"
 
 # ----------------------------------------------------------------------------
 # advanced
