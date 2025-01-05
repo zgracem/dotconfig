@@ -10,7 +10,7 @@ or set -Ua fish_features qmark-noglob
 function '?' --description 'Prints the exit status of the last command'
     set -l last_exit $status
 
-    if test $last_exit -eq 0
+    if test $last_exit -eq 0x00
         set_color brgreen
         echo -n OK
         set_color green
@@ -25,10 +25,10 @@ function '?' --description 'Prints the exit status of the last command'
 
     set_color brred
 
-    if test $last_exit -gt 128 -a $last_exit -le 159
+    if test $last_exit -gt 0x80 -a $last_exit -lt 0xA0
         echo -ns (fish_status_to_signal $last_exit)
-    else if test $last_exit -ge 64 -a $last_exit -le 78
-        echo -ns EX_ $sysexits[(math "$last_exit - 63")]
+    else if test $last_exit -gt 0x3F -a $last_exit -lt 0x4F
+        echo -ns EX_ $sysexits[(math "$last_exit - 0x3F")]
     else
         echo -ns false
     end
