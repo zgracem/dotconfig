@@ -54,3 +54,7 @@ $(M4_OUTPUT_FILES): $(CURDIR)/Makefile
 
 .PHONY: user-agent
 user-agent: $(M4_OUTPUT_FILES)
+
+.PHONY: print-user-agent
+print-user-agent:
+	@echo "$(USER_AGENT)"
