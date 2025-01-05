@@ -3,6 +3,9 @@ function fish_user_key_bindings
     bind '!' bind_bang
     bind '$' bind_dollar
 
+    # `xyz ??` -> `xyz; ?`
+    bind '?' bind_qmark
+
     # Ctrl-D exits if pressed multiple times quickly (like bash)
     bind \cd bind_eof_exit
 
