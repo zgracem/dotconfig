@@ -17,6 +17,9 @@ function my --description 'Display network information'
             else if is-cygwin
                 set -l pattern '.*IPv4 Address.*: ([\d.]+).*'
                 ipconfig | string match -rg $pattern
+            else if is-linux
+                command -q ip; and command -q jq
+                and ip -j -4 a | jq -r '.[] | select(.flags[]|contains("BROADCAST")) | .addr_info | .[].local'
             end
 
         case router
