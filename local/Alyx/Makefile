@@ -38,7 +38,6 @@ CONFIG_DIRS  += ~/.config/bash
 CONFIG_DIRS  += ~/.config/bin
 CONFIG_DIRS  += ~/.config/btop
 CONFIG_DIRS  += ~/.config/env.d
-CONFIG_DIRS  += ~/.config/fastfetch
 CONFIG_DIRS  += ~/.config/fish
 CONFIG_DIRS  += ~/.config/homebrew
 CONFIG_DIRS  += ~/.config/micro
@@ -59,10 +58,15 @@ all: ~/.local/config
 
 DECK_FILES  =
 DECK_FILES += ~/.config/mimeapps.list
+DECK_FILES += ~/.config/fastfetch/config.jsonc
 DECK_FILES += ~/.xscreensaver
 
 all: $(DECK_FILES)
 ~/.config/mimeapps.list: $(CONFIG_SRC)/local/$(HOSTNAME)/mimeapps.list
 	ln -sf $< $@
+
+~/.config/fastfetch/config.jsonc: ~/.local/config/fastfetch/config.jsonc | ~/.local/config
+	ln -sf $< $@
+
 ~/.xscreensaver: $(CONFIG_SRC)/.xscreensaver
 	cp -af $< $@

@@ -55,3 +55,10 @@ all: ~/.local/config
 	ln -sf $< $@
 ~/.config/local:
 	$(MKDIR) $@
+
+PI_FILES  =
+PI_FILES += ~/.config/fastfetch/config.jsonc
+
+all: $(PI_FILES)
+~/.config/fastfetch/config.jsonc: ~/.local/config/fastfetch/config.jsonc | ~/.local/config
+	ln -sf $< $@
