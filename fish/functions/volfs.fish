@@ -1,5 +1,5 @@
 function volfs -d "Convert paths to and from volfs format"
-    command -q GetFileInfo; or return
+    command -q GetFileInfo; or return 127
     for path in $argv
         if string match -q "/.vol/*" $path
             GetFileInfo $path 2>/dev/null \
