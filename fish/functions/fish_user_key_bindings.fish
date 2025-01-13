@@ -10,7 +10,12 @@ function fish_user_key_bindings
     bind \cd bind_eof_exit
 
     # Ctrl-/ redraws current line, not whole screen
-    bind \c_ 'commandline -f repaint'
+    set -l redraw_cmd 'commandline -f repaint'
+    if fish-is-newer-than 3.7
+        bind ctrl-/ $redraw_cmd
+    else
+        bind \c_ $redraw_cmd
+    end
 
     # Source: https://github.com/fish-shell/fish-shell/issues/8336#issuecomment-937370264
     # Right Arrow (→) accepts a single word from the autosuggestion
