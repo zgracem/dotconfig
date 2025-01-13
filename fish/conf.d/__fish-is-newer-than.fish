@@ -1,5 +1,5 @@
 function fish-is-newer-than -a test_version
-    # This function splits fish's $version into an array like $BASH_VERSINFO.
+    # __fish_versinfo splits fish's $version into an array like $BASH_VERSINFO.
     # Released fish versions are in the format `X.Y.Z` (even X.0.0 and X.Y.0).
     # Dev build versions are `X.Y.Z-A-gH`, where `X.Y.Z` is the last release,
     # `A` is the count of commits since x.y.z, `g` is literally the letter g,
