@@ -11,10 +11,16 @@ function fish_user_key_bindings
 
     # Ctrl-/ redraws current line, not whole screen
     set -l redraw_cmd 'commandline -f repaint'
-    if fish-is-newer-than 3.7
+    if fish-is-newer-than 3.7.1
         bind ctrl-/ $redraw_cmd
     else
         bind \c_ $redraw_cmd
+    end
+
+    # Ctrl-C cancels without erasing the commandline (restores pre-4.0 behaviour)
+    # Source: https://github.com/fish-shell/fish-shell/issues/10935
+    if fish-is-newer-than 3.7.1
+        bind ctrl-c __fish_cancel_commandline
     end
 
     # Source: https://github.com/fish-shell/fish-shell/issues/8336#issuecomment-937370264
