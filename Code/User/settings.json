@@ -20,6 +20,7 @@
     "sass": "sass --no-source-map --trace",
     "scss": "sass --no-source-map --trace",
     "sed": "pbpaste | gsed -E -f",
+    "shellscript": "/usr/local/bin/bash",
     "troff": "man -Pcat"
   },
   "code-runner.executorMapByGlob": {
@@ -34,6 +35,7 @@
   "code-runner.showRunCommandInEditorContextMenu": false,
   "code-runner.showRunCommandInExplorerContextMenu": false,
   "code-runner.showRunIconInEditorTitleMenu": false,
+  "code-runner.respectShebang": false,
   "debug.showInlineBreakpointCandidates": false,
   "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
@@ -119,6 +121,8 @@
   "files.insertFinalNewline": true,
   "files.readonlyFromPermissions": true,
   "files.trimTrailingWhitespace": true,
+  "fish.path.fish": "/usr/local/bin/fish",
+  "fish.path.fish_indent": "/usr/local/bin/fish_indent",
   "git.defaultCloneDirectory": "/Users/zozo/src/github.com",
   "git.openDiffOnClick": false,
   "git.openRepositoryInParentFolders": "never",
