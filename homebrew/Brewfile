@@ -250,6 +250,8 @@ cask "grandperspective"
 cask "mysides"
 cask "pdf-expert"
 cask "powershell"
+cask "raspberry-pi-imager"
+cask "vnc-viewer"
 cask "winclone"
 
 # QuickLook
