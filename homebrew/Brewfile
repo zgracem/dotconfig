@@ -195,6 +195,9 @@ brew "bramstein/webfonttools/woff2"
 # Flipper Zero
 brew "ufbt"
 
+# virtual machines
+brew "icoutils" # Extract resources from Windows binaries
+
 # ----------------------------------------------------------------------------
 # fun & games
 # ----------------------------------------------------------------------------
