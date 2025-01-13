@@ -19,7 +19,8 @@ status is-interactive; or return
 
 # launch development build if present
 set -l local_fish "$XDG_BIN_HOME/fish"
-string match -v -q (status fish-path) (path resolve $local_fish)
+test $SHLVL -le 1
+and string match -v -q (status fish-path) (path resolve $local_fish)
 and test -x $local_fish
 and exec $local_fish
 
