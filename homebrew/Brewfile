@@ -51,7 +51,7 @@ brew "btop"
 brew "duti" if OS.mac?
 brew "entr"
 brew "hexyl"
-brew "lsusb"
+brew "lsusb-laniksj" if OS.mac?
 brew "ncurses"
 brew "parallel"
 brew "PotatoLabs/git-redate/git-redate"
@@ -76,7 +76,6 @@ brew "recode"
 
 # audio/video
 brew "atomicparsley"
-brew "bchunk"
 brew "id3v2"
 brew "mkvtoolnix"
 brew "mp3info"
@@ -126,7 +125,6 @@ brew "links"
 brew "lynx"
 brew "netcat"
 brew "newsboat"
-brew "pure-ftpd"
 brew "ssh-copy-id", link: true
 brew "streamlink"
 brew "tnftpd"
@@ -262,17 +260,10 @@ cask "vnc-viewer"
 cask "winclone"
 
 # QuickLook
-cask "qlcolorcode"
-cask "qldds"
+cask "qldds" # Deprecated!
 cask "qlmarkdown"
-cask "qlprettypatch"
-cask "qlstephen" # extensionless text files like README
-cask "quicklook-json"
-cask "quicknfo"
-cask "scriptql" # AppleScript
 cask "suspicious-package" # .pkg files
 cask "syntax-highlight"
-cask "webpquicklook"
 
 # ----------------------------------------------------------------------------
 # Mac App Store
