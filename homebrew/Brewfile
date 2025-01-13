@@ -27,14 +27,14 @@ brew "eza"
 brew "fd"
 brew "fish"
 brew "jq"
-brew "keychain" unless OS.mac?
+brew "keychain"
 brew "less"
 brew "micro"
 brew "openssh"
 brew "openssl@3"
 brew "p7zip"
 brew "readline"
-brew "rename" if OS.mac?
+brew "rename"
 brew "ripgrep"
 brew "rsync" if OS.mac?
 brew "stow"
@@ -192,6 +192,7 @@ brew "bramstein/webfonttools/woff2"
 
 # Flipper Zero
 brew "ufbt"
+cask "qflipper"
 
 # virtual machines
 brew "icoutils" # Extract resources from Windows binaries
@@ -254,7 +255,6 @@ cask "grandperspective"
 cask "mysides"
 cask "pdf-expert"
 cask "powershell"
-cask "qflipper"
 cask "raspberry-pi-imager"
 cask "vnc-viewer"
 cask "winclone"
