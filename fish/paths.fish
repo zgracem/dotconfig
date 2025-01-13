@@ -120,6 +120,11 @@ fish_add_manpath -a /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/shar
 set -q LOCALAPPDATA
 and fish_add_path -a (cygpath -au "$LOCALAPPDATA")"/Programs/Microsoft VS Code/bin"
 
+# RasPi server
+if is-raspi
+    fish_add_path /usr/sbin
+end
+
 # rbenv
 if source $XDG_CONFIG_HOME/env.d/rbenv.env
     # in case of non-Homebrew installation
