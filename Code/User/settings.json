@@ -113,6 +113,7 @@
     "*.plist": "xml",
     "*.sublime-syntax": "yaml",
     "*.sublime-{settings,build,keymap}": "json",
+    "*.txt": "plaintext",
     "*ignore": "ignore"
   },
   "files.defaultLanguage": "${activeEditorLanguage}",

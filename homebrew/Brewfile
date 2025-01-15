@@ -191,6 +191,7 @@ brew "bramstein/webfonttools/sfnt2woff"
 brew "bramstein/webfonttools/woff2"
 
 # Flipper Zero
+brew "minicom"
 brew "ufbt"
 cask "qflipper"
 

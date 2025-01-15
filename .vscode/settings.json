@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     "brew-aliases": true,
+    "flipperdevices.com": true,
     "iterm2": true,
     "StardewValley": true
   },
