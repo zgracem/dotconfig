@@ -4,6 +4,7 @@
 # -----------------------------------------------------------------------------
 
 export Z_IN_BASHRC=true
+chmod -c 400 ~/.bashrc
 
 # Source ~/.profile, unless it's sourcing this file
 if [[ -r $HOME/.profile && -z "$Z_IN_PROFILE" ]]; then
