@@ -4,5 +4,9 @@ function fish_should_add_to_history
     string match -rq '^[\s#]' $argv
     and return 1
 
+    # don't save common query commands
+    string match -q "wtf *" $argv
+    and return 1
+
     return 0
 end
