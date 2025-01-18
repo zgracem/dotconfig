@@ -21,7 +21,11 @@ SHELL_FILES += ~/.profile
 
 SYMLINKS  =
 SYMLINKS += ~/.minirc.dfl
+SYMLINKS += ~/.rbenv
+SYMLINKS += ~/.stow-global-ignore
 ~/.minirc.dfl: minicom/minirc.dfl
+~/.rbenv: ../.local/share/rbenv
+~/.stow-global-ignore: stow/.stow-global-ignore
 
 $(SHELL_FILES) $(SYMLINKS):
 	ln -sfrv .config/$< $@
