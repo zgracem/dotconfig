@@ -19,11 +19,16 @@ SHELL_FILES += ~/.profile
 ~/.hushlogin: bash/.hushlogin
 ~/.profile: sh/.profile
 
-$(SHELL_FILES):
-	ln -sfv .config/$< $@
+SYMLINKS  =
+SYMLINKS += ~/.minirc.dfl
+~/.minirc.dfl: minicom/minirc.dfl
 
-.PHONY: shellfiles
+$(SHELL_FILES) $(SYMLINKS):
+	ln -sfrv .config/$< $@
+
+.PHONY: shellfiles symlinks
 shellfiles: $(SHELL_FILES)
+symlinks: $(SYMLINKS)
 
 ~/.basilisk_ii_prefs: .basilisk_ii_prefs
 	cp -af $< $@
