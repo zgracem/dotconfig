@@ -10,6 +10,9 @@ function fish_greeting --description 'Prints a greeting message on startup'
         set -f fish_colours f3a f28 f66 f80 fa0
     end
 
+    tput el1 # clear to beginning of line
+    tput cr  # carriage return
+
     for n in (seq (count $fish_parts))
         set_color $fish_colours[$n]
         echo -ns $fish_parts[$n]
