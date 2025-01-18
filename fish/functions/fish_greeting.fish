@@ -3,15 +3,17 @@ function fish_greeting --description 'Prints a greeting message on startup'
     status is-interactive; or return
 
     if set -q SSH_CONNECTION
-        set -f fish_parts ">" "<" "(((" "°" ">"
-        set -f fish_colours 08b 09a 58d a8f d9f
+        set -gx fish_parts ">" "<" "(((" "°" ">"
+        set -gx fish_colours 08b 09a 58d a8f d9f
     else
-        set -f fish_parts "<" "°" ")))" ">" "<"
-        set -f fish_colours f3a f28 f66 f80 fa0
+        set -gx fish_parts "<" "°" ")))" ">" "<"
+        set -gx fish_colours f3a f28 f66 f80 fa0
     end
 
     tput el1 # clear to beginning of line
     tput cr  # carriage return
+
+    functions -q motd; and motd; and return
 
     for n in (seq (count $fish_parts))
         set_color $fish_colours[$n]
