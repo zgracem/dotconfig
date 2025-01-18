@@ -16,7 +16,7 @@ SHIM_TARGETS := $(addprefix $(bindir)/, $(SHIMS))
 TARGETS := $(SHIM_TARGETS)
 
 $(SHIM_TARGETS): $(bindir)/%: $(CURDIR)/% | $(bindir)
-	ln -sf $(shell $(CURDIR)/relpath $< $(bindir)) $@
+	$(LN) $(shell $(CURDIR)/relpath $< $(bindir)) $@
 
 $(bindir):
 	$(MKDIR) $(bindir)

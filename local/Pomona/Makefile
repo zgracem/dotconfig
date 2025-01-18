@@ -1,8 +1,4 @@
-.PHONY: all
-
-.NOTPARALLEL:
-GNUMAKEFLAGS = --output-sync
-MAKEFLAGS = L # check symlinks' mtime and not their destinations'
+include ../../common.mk
 
 HOSTNAME   ?= Pomona
 
@@ -16,6 +12,7 @@ HOME_FILES += ~/.profile
 HOME_DIRS   =
 HOME_DIRS  += ~/.private
 
+.PHONY: all
 all: $(HOME_DIRS) $(HOME_FILES)
 ~/.hushlogin:
 	touch $@
@@ -26,7 +23,7 @@ all: $(HOME_DIRS) $(HOME_FILES)
 ~/.private: $(realpath $(dir $(CONFIG_SRC))/dotprivate)
 
 ~/.bash_profile ~/.bashrc ~/.profile ~/.private:
-	ln -sf $< $@
+	$(LN) $< $@
 
 CONFIG_FILES  =
 CONFIG_FILES += ~/.config/locale.conf
@@ -48,11 +45,11 @@ CONFIG_DIRS  += ~/.config/wget
 
 all: $(CONFIG_DIRS) $(CONFIG_FILES)
 ~/.config/%: $(CONFIG_SRC)/%
-	ln -sf $< $@
+	$(LN) $< $@
 
 all: ~/.local/config
 ~/.local/config: ~/.config/local/$(HOSTNAME) | ~/.config/local
-	ln -sf $< $@
+	$(LN) $< $@
 ~/.config/local:
 	$(MKDIR) $@
 
@@ -61,4 +58,4 @@ PI_FILES += ~/.config/fastfetch/config.jsonc
 
 all: $(PI_FILES)
 ~/.config/fastfetch/config.jsonc: ~/.local/config/fastfetch/config.jsonc | ~/.local/config
-	ln -sf $< $@
+	$(LN) $< $@

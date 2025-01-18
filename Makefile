@@ -28,14 +28,14 @@ SYMLINKS += ~/.stow-global-ignore
 ~/.stow-global-ignore: stow/.stow-global-ignore
 
 $(SHELL_FILES) $(SYMLINKS):
-	ln -sfrv .config/$< $@
+	$(LN) .config/$< $@
 
 .PHONY: shellfiles symlinks
 shellfiles: $(SHELL_FILES)
 symlinks: $(SYMLINKS)
 
 ~/.basilisk_ii_prefs: .basilisk_ii_prefs
-	cp -af $< $@
+	$(INSTALL_DATA) -- $< $@
 
 # -----------------------------------------------------------------------------
 # Send a fake user-agent string to mask the activity of tools like wget.

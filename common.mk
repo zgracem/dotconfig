@@ -59,4 +59,5 @@ INSTALL_PROGRAM := $(INSTALL) -D --compare
 INSTALL_DATA := $(INSTALL) -D --compare -m 644
 
 # Additional commands
-MKDIR := mkdir -p
+MKDIR := $(GNUBIN)/mkdir -p
+LN := $(GNUBIN)/ln -s -r -f

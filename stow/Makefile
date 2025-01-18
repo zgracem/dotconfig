@@ -2,7 +2,7 @@ include ../common.mk
 
 # create config symlink in $HOME
 ~/.stow-global-ignore: .stow-global-ignore
-	ln -sfv .config/stow/$< $@
+	$(LN) .config/stow/$< $@
 install: ~/.stow-global-ignore
 
 PACKAGES  =
@@ -38,7 +38,7 @@ $(bindir)/cronic:
 css3FontConverter: $(bindir)/convertFonts.sh
 
 $(bindir)/convertFonts.sh: $(GIT_STAGING)/zoltan-dulac/css3FontConverter/convertFonts.sh
-	ln -sfv $< $@
+	$(LN) $< $@
 
 $(GIT_STAGING)/zoltan-dulac/css3FontConverter/convertFonts.sh: | $(GIT_STAGING)/zoltan-dulac/css3FontConverter
 $(GIT_STAGING)/zoltan-dulac/css3FontConverter:
