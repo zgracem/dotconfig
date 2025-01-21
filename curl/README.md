@@ -1,0 +1,5 @@
+# ~/.config/curl
+
+```sh
+export CURL_HOME="$XDG_CONFIG_HOME/curl"
+```
