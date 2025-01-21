@@ -23,7 +23,7 @@ elif shopt -q restricted_shell; then
   return
 elif [[ $HOSTNAME =~ "opalstack" ]]; then
   LD_LIBRARY_PATH=$HOME/opt/lib64 exec ~/opt/bin/fish --login
-elif [[ $HOSTNAME =~ "WS-01" ]]; then
+elif [[ $HOSTNAME =~ "WS-01" && $SHLVL -lt 2 ]]; then
   exec /usr/bin/fish --login
 fi
 
