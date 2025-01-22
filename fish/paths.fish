@@ -126,7 +126,7 @@ if is-raspi
 end
 
 # rbenv
-if source $XDG_CONFIG_HOME/env.d/rbenv.env
+if path is -d $RBENV_ROOT
     # in case of non-Homebrew installation
     fish_add_path $RBENV_ROOT/bin
 
