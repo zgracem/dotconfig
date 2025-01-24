@@ -31,8 +31,6 @@ function main -d "Update configuration from GitHub"
         git-sync $user_dir
         or break
     end
-
-    # post-confupdate
 end
 
 main $argv
