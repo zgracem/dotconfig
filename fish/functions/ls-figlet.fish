@@ -5,8 +5,8 @@ function ls-figlet -d "Print a phrase in all available figlet(1) fonts"
     set -q _flag_width[1]; or set -f _flag_width $COLUMNS
     set -q _flag_width[1]; or set -f _flag_width 80
 
-    set -lx FIGLET_FONTDIR $HOMEBREW_PREFIX/share/figlet/fonts
-    set -l figfonts $FIGLET_FONTDIR/*.flf
+    set -lx FIGLET_FONTDIR (path filter /usr/share/figlet $HOMEBREW_PREFIX/share/figlet/fonts)
+    set -l figfonts $FIGLET_FONTDIR[1]/*.flf
 
     set -q argv[1]; or set -f argv hello world
 
