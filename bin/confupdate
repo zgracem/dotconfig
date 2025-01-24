@@ -16,17 +16,6 @@ function git-sync -a user_dir
     end
 end
 
-# function post-confupdate
-#     switch $hostname
-#         # Servers that don't like `~/.ssh` (or any of its contents) as a symlink
-#         case "*.opalstack.com" "WS-*"
-#             cp -af $USER_CONFIG_DIRS[2]/ssh/* ~/.ssh
-#             and chmod -R go-rwx ~/.ssh
-#         case "*"
-#             return
-#     end
-# end
-
 function main -d "Update configuration from GitHub"
     switch $hostname
         case Alyx Pomona
@@ -34,6 +23,9 @@ function main -d "Update configuration from GitHub"
         case "*"
             set -gx USER_CONFIG_DIRS ~/.{config,private}
     end
+
+    string match -q Pomona $hostname
+    and set -ga USER_CONFIG_DIRS /srv/www/cgit/repos/dot{config,private}
 
     for user_dir in (path resolve $USER_CONFIG_DIRS)
         git-sync $user_dir
