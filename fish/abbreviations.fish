@@ -111,6 +111,8 @@ abbr -a xcl 'sudo xcodebuild -license'
 abbr -a xcp 'xcode-select --print-path'
 abbr -a xcs 'sudo xcode-select --switch'
 
+abbr -a ds_ 'rm -fv **/.DS_Store'
+
 # newsboat RSS reader
 command -q newsboat
 and abbr --add nb "newsboat -q"
@@ -118,7 +120,8 @@ and abbr --add nb "newsboat -q"
 # f + reveal
 if is-macos
     functions --erase f reveal
-    abbr --add f "open -a Finder ."
+    abbr --add f "open -a Finder"
+    abbr --add f. "open -a Finder ."
     abbr --add reveal "open -R"
 end
 
@@ -170,6 +173,10 @@ abbr -a rpc "sudo raspi-config"
 # AdGuardHome
 path is -x /opt/AdGuardHome/AdGuardHome
 and abbr --add agh "sudo /opt/AdGuardHome/AdGuardHome -s"
+
+# command-not-found
+path is -x /usr/lib/command-not-found
+and abbr --add how "/usr/lib/command-not-found --"
 
 # ----------------------------------------------------------------------------
 # advanced
