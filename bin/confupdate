@@ -24,9 +24,6 @@ function main -d "Update configuration from GitHub"
             set -gx USER_CONFIG_DIRS ~/.{config,private}
     end
 
-    string match -q Pomona $hostname
-    and set -ga USER_CONFIG_DIRS /srv/www/cgit/repos/dot{config,private}
-
     for user_dir in (path resolve $USER_CONFIG_DIRS)
         git-sync $user_dir
         or break
