@@ -37,6 +37,20 @@
     "scope": "powershell",
     "isFileTemplate": true
   },
+  "new_slim": {
+    "prefix": "!new",
+    "body": [
+      "doctype html",
+      "html lang=\"en-CA\"",
+      "\thead",
+      "\t\tmeta charset=\"utf-8\"",
+      "\tbody",
+      "\t\t"
+    ],
+    "description": "Empty Slim document",
+    "scope": "slim",
+    "isFileTemplate": true
+  },
   "shellscript_hashbang": {
     "prefix": "!env",
     "body": ["#!/usr/bin/env ${1|bash,sh|}\n\n", "$0"],
