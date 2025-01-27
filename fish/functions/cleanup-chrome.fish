@@ -6,7 +6,7 @@ function cleanup-chrome -d "Cleanup Google Chrome files"
     for dir in $detritus
         if path is -d $dir
             command rm -rfv $dir
-            or sudo command rm -rfv $dir
+            or sudo rm -rfv $dir
         end
     end
 end
