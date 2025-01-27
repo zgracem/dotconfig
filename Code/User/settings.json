@@ -105,6 +105,7 @@
     "*.JSON-tmLanguage": "json",
     "*.YAML-tmLanguage": "yaml",
     "*.[1-9]": "troff",
+    "*.cgi": "shellscript",
     "*.cscollection": "json",
     "*.csv": "csv",
     "*.env": "shellscript",
