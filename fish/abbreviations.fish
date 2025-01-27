@@ -169,6 +169,7 @@ abbr -a cask --set-cursor "brew % --cask"
 
 # Raspberry Pi
 abbr -a rpc "sudo raspi-config"
+abbr -a a2r "sudo service apache2 restart"
 
 # AdGuardHome
 path is -x /opt/AdGuardHome/AdGuardHome
