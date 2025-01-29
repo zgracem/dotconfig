@@ -96,7 +96,8 @@
     "*.ppk": "${capture}.pub",
     "*.sass": "${capture}.css",
     "*.scss": "${capture}.css",
-    "*.slim": "${capture}.html"
+    "*.slim": "${capture}.html",
+    "*.html.slim": "${capture}.html"
   },
   "explorer.incrementalNaming": "smart",
   "explorer.openEditors.visible": 1,
