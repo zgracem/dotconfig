@@ -25,17 +25,17 @@
   },
   "code-runner.executorMapByGlob": {
     "*.[1-9].md": "ronn --pipe < $fullFileName | man -Pcat -Eutf8 -l -",
-    "*.ti": "tic -Lxfq $fullFileName",
     "*.html.slim": "slimrb --option format=:html --option tabsize=2 --option sort_attrs=false --pretty --trace",
+    "*.ti": "tic -Lxfq $fullFileName",
     "*.xml.slim": "slimrb --option format=:xml --option tabsize=2 --option sort_attrs=false --pretty --trace"
   },
   "code-runner.fileDirectoryAsCwd": true,
   "code-runner.ignoreSelection": true,
+  "code-runner.respectShebang": true,
   "code-runner.saveFileBeforeRun": true,
   "code-runner.showRunCommandInEditorContextMenu": false,
   "code-runner.showRunCommandInExplorerContextMenu": false,
   "code-runner.showRunIconInEditorTitleMenu": false,
-  "code-runner.respectShebang": true,
   "debug.showInlineBreakpointCandidates": false,
   "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
@@ -92,12 +92,12 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "*": "${capture}.pub",
+    "*.html.slim": "${capture}.html",
     "*.m4": "${capture}",
     "*.ppk": "${capture}.pub",
     "*.sass": "${capture}.css",
     "*.scss": "${capture}.css",
-    "*.slim": "${capture}.html",
-    "*.html.slim": "${capture}.html"
+    "*.slim": "${capture}.html"
   },
   "explorer.incrementalNaming": "smart",
   "explorer.openEditors.visible": 1,
