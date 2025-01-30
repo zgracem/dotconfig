@@ -191,7 +191,6 @@
     "workspaceSymbol": true
   },
   "rubyLsp.formatter": "rubocop",
-  "rubyLsp.pullDiagnosticsOn": "save",
   "rubyLsp.rubyVersionManager": {
     "identifier": "rbenv"
   },
@@ -228,10 +227,6 @@
     "shellcheck.executablePath",
     "shellformat.path",
     "slimLint.executablePath",
-    "solargraph.bundlerPath",
-    "solargraph.commandPath",
-    "solargraph.diagnostics",
-    "solargraph.formatting",
     "spellright.addToSystemDictionary",
     "spellright.configurationScope",
     "spellright.language",
