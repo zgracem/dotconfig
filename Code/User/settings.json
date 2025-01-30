@@ -191,6 +191,7 @@
     "workspaceSymbol": true
   },
   "rubyLsp.formatter": "rubocop",
+  "rubyLsp.linters": ["rubocop"],
   "rubyLsp.rubyVersionManager": {
     "identifier": "rbenv"
   },
@@ -434,7 +435,6 @@
     "files.trimTrailingWhitespace": true
   },
   "[ruby]": {
-    "editor.defaultFormatter": "castwide.solargraph",
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file",
     "editor.semanticHighlighting.enabled": true,

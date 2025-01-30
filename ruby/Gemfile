@@ -14,8 +14,8 @@ gem "reline", "~> 0.5.0"
 
 # -- for Visual Studio Code ----------------------------------------------------
 
-# <solargraph.org>
-gem "solargraph"
+# <shopify.github.io/ruby-lsp>
+gem "ruby-lsp"
 # <github.com/sds/slim-lint>
 gem "slim_lint"
 

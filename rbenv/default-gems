@@ -5,7 +5,6 @@ htmlentities
 plist
 rubocop
 ruby-lsp
-solargraph
 symbolized
 toml-rb
 yard

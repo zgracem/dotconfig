@@ -1,12 +1,9 @@
 AllCops:
   NewCops: enable
 
-### Layout ###
-
-# Left-align keys, rockets, and values
-Layout/HashAlignment:
-  EnforcedHashRocketStyle: table
-  EnforcedColonStyle: table
+# ----------------------------------------------------------------------------
+# Layout
+# ----------------------------------------------------------------------------
 
 # Enforce order of definitions within a class body
 Layout/ClassStructure:
@@ -18,27 +15,55 @@ Layout/FirstArrayElementLineBreak:
 Layout/FirstHashElementLineBreak:
   Enabled: true
 
+# Left-align keys, rockets, and values
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+# Don't enforce maximum line length
+Layout/LineLength:
+  Enabled: false
+
 # Each item must start on a separate line
 Layout/MultilineArrayLineBreaks:
   Enabled: true
 Layout/MultilineHashKeyLineBreaks:
   Enabled: true
 
-### Metrics ###
+# ----------------------------------------------------------------------------
+# Lint
+# ----------------------------------------------------------------------------
 
-Layout/LineLength:
-  Max: 118
-
-Metrics/AbcSize:
-  CountRepeatedAttributes: false
-Metrics/MethodLength:
+# `it`` calls without arguments refer to the first block param in Ruby 3.4
+Lint/ItWithoutArgumentsInBlock:
   Enabled: false
 
-### Style ###
+# Use literal symbols where possible
+Lint/SymbolConversion:
+  EnforcedStyle: strict
 
-# Always use `alias_method` for methods of modules and classes at runtime
+# ----------------------------------------------------------------------------
+# Metrics
+# ----------------------------------------------------------------------------
+
+Metrics:
+  Enabled: false
+
+# ----------------------------------------------------------------------------
+# Security
+# ----------------------------------------------------------------------------
+
+# Allow unsafe loading of YAML data
+Security/YAMLLoad:
+  Enabled: false
+
+# ----------------------------------------------------------------------------
+# Style
+# ----------------------------------------------------------------------------
+
+# Always use `alias` for methods of modules and classes at runtime
 Style/Alias:
-  EnforcedStyle: prefer_alias_method
+  EnforcedStyle: prefer_alias
 
 # Suggest auto-cleaning versions of methods when available
 Style/AutoResourceCleanup:
@@ -52,6 +77,10 @@ Style/AsciiComments:
 Style/BlockComments:
   Enabled: false
 
+# Allow @@class_variable syntax (watch for inheritance!)
+Style/ClassVars:
+  Enabled: false
+
 # Prefer e.g. `find` to `detect` and `reduce` to `inject`
 Style/CollectionMethods:
   Enabled: true
@@ -59,6 +88,10 @@ Style/CollectionMethods:
 # Use Time over DateTime
 Style/DateTime:
   Enabled: true
+
+# Allow double-negatives to convert booleany values to booleans
+Style/DoubleNegation:
+  Enabled: false
 
 # Don't enforce the presence or absence of frozen_string_literal
 Style/FrozenStringLiteralComment:
@@ -68,14 +101,34 @@ Style/FrozenStringLiteralComment:
 Style/HashSyntax:
   EnforcedStyle: ruby19_no_mixed_keys
 
+# Don't enforce freezing constants
+Style/MutableConstant:
+  Enabled: false
+
+# Don't allow too many numbered parameters in blocks
+Style/NumberedParametersLimit:
+  Max: 3
+
+# Require underscores only in longer numbers
+Style/NumericLiterals:
+  MinDigits: 6
+
 # Use %() for strings and defaults for everything else
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     default: "()"
 
+# Allow `rescue` as a modifier
+Style/RescueModifier:
+  Enabled: false
+
 # Allow rescuing without specifying an error class
 Style/RescueStandardError:
   EnforcedStyle: implicit
+
+# Because Hash#grep is not equivalent to Hash#select
+Style/SelectByRegexp:
+  Enabled: false
 
 # Prefer symbols instead of strings as hash keys
 Style/StringHashKeys:
