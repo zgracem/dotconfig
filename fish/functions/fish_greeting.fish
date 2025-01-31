@@ -13,8 +13,6 @@ function fish_greeting --description 'Prints a greeting message on startup'
     tput el1 # clear to beginning of line
     tput cr  # carriage return
 
-    functions -q motd; and motd; and return
-
     for n in (seq (count $fish_parts))
         set_color $fish_colours[$n]
         echo -ns $fish_parts[$n]
