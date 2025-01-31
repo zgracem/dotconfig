@@ -242,9 +242,7 @@
   "shellformat.flag": "--func-next-line --indent=2 --case-indent --binary-next-line",
   "shellformat.path": "/usr/local/bin/shfmt",
   "slimLint.executablePath": "/Users/zozo/.local/share/rbenv/shims/slim-lint",
-  "solargraph.bundlerPath": "/Users/zozo/.local/share/rbenv/shims/bundle",
-  "solargraph.commandPath": "/Users/zozo/.local/share/rbenv/shims/solargraph",
-  "solargraph.formatting": true,
+  "solargraph.formatting": false,
   "sortJSON.contextMenu": {
     "sortJSONAlphaNum": false,
     "sortJSONAlphaNumReverse": false,
