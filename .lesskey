@@ -9,7 +9,7 @@
 # -Q/--QUIET: never ring the terminal bell
 # -R/--RAW-CONTROL-CHARS: output raw ANSI (e.g. \e[1;31m)
 # -X/--no-init: don't clear screen on exit (breaks mouse scrolling)
-LESS=-isFQRX
+LESS=-isFQR #X
 LESSCHARSET=utf-8
 LESSHISTFILE=/dev/null
 
