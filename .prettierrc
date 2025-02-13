@@ -1,21 +1,25 @@
 # vim:ft=yaml
-# https://prettier.io/docs/en/options.html
+# https://prettier.io/docs/options
+# https://prettier.io/docs/configuration
 ---
 # Print semicolons at the ends of statements. (default: true)
 semi: false
 
 # Change when properties in objects are quoted. <as-needed|consistent|preserve>
-quoteProps: "consistent"
+quoteProps: consistent
 
 # Print trailing commas in multi-line syntactic structures. <es5|none|all>
-trailingComma: "none"
+trailingComma: none
 
 # Put the `>` of a multi-line HTML element at the end of the last line instead
 # of being alone on the next line. (default: false)
 bracketSameLine: true
 
 # Also wrap prose (e.g. Markdown) to the print width. <preserve|always|never>
-proseWrap: "preserve"
+proseWrap: preserve
+
+# Keep object literals multi-line.
+objectWrap: preserve
 
 # strict = Whitespace around tags (or lack thereof) is significant.
 # ignore = Whitespace around tags (or lack thereof) is insignificant.
