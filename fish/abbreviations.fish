@@ -226,9 +226,20 @@ end
 abbr -a history_subst --regex "\^.+\^.+" --function __abbr_history_subst
 
 # zsh-style expansion
-# =fish → `/usr/local/bin/fish`
+# =fish → `/usr/local/bin/fish` for executables
+# =p → `~/.config/fish/functions/p.fish` for functions
 function __abbr_zequals
     set -l cmdname (string trim -c= -l $argv[1])
-    command -s $cmdname
+    if functions -q $cmdname
+        set -l funcpath (functions -D $cmdname)
+        if path is -f $funcpath
+            short_home $funcpath
+            return 0
+        end
+    else if set -l cmdpath (command -s $cmdname)
+        short_home $cmdpath
+        return 0
+    end
+    return 1
 end
 abbr -a zequals --position anywhere --regex "=\S+" --function __abbr_zequals
