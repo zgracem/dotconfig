@@ -35,6 +35,9 @@ set -gx fish_user_paths
 
 # ----------------------------------------------------------------------------
 
+# Check $HOME for missing args to `cd`
+set -gx CDPATH . ~
+
 # Remove duplicate and non-existent directories added by /etc/paths.d
 set -gx PATH (path filter -d $PATH | un1q)
 
