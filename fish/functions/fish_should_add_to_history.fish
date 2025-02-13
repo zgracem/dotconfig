@@ -5,7 +5,7 @@ function fish_should_add_to_history
     and return 1
 
     # don't save common query commands
-    string match -q "wtf *" $argv
+    string match -rq "^(art|wtf)\b" $argv
     and return 1
 
     return 0
