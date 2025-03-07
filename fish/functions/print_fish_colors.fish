@@ -1,4 +1,4 @@
-function print-fish-colors --description 'Shows the various fish colors being used'
+function print_fish_colors --description 'Shows the various fish colors being used'
     # Based on <https://github.com/fish-shell/fish-shell/issues/3443#issuecomment-253838672>
     set -l width 38
     set -l padded (math $width + 2)

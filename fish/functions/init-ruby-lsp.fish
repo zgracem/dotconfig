@@ -1,4 +1,4 @@
-function ruby-init -d "Initialize directory for use with ruby-lsp"
+function init-ruby-lsp -d "Initialize directory for use with ruby-lsp"
     set -l skel ~/Developer/skel/ruby
 
     path is -f $PWD/.rubocop.yml
