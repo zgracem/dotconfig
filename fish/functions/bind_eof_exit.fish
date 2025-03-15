@@ -1,8 +1,12 @@
 set --erase --global __eof_press __eof_count __eof_timer
 
 function bind_eof_exit
-    set -l ignore_eof 3
-    set -l timeout_eof 5
+    set -f ignore_eof 3
+    set -f timeout_eof 5
+
+    if string match -erq '^\d+$' $IGNOREEOF
+        set -f ignore_eof (math $IGNOREEOF + 1)
+    end
 
     set -l msg "Press Ctrl+D $ignore_eof times in $timeout_eof seconds to exit."
 
