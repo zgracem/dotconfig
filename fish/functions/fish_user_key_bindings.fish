@@ -40,6 +40,6 @@ function fish_user_key_bindings
     end
 
     # Disable bindings from $__fish_data_dir/functions/__fish_shared_key_bindings.fish
-    bind --erase \cx
-    bind --erase \cv
+    bind --erase --preset \cX
+    bind --erase --preset \cV
 end
