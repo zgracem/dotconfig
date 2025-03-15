@@ -225,6 +225,17 @@ function __abbr_history_subst
 end
 abbr -a history_subst --regex "\^.+\^.+" --function __abbr_history_subst
 
+# bash-like substitution of arguments from the current commandline
+# !#:4 → the 4th token on the existing command line
+function __abbr_bang_hash
+    set -l token_index (string split -f2 : $argv[1])
+    set -l tokens (commandline -cx; commandline -ct)
+    set -q tokens[$token_index]; or return
+    commandline -f backward-delete-char
+    commandline --insert "$tokens[$token_index] "
+end
+abbr --add bang_hash --position anywhere --regex "!#:\d+" --function __abbr_bang_hash
+
 # zsh-style expansion
 # =fish → `/usr/local/bin/fish` for executables
 # =p → `~/.config/fish/functions/p.fish` for functions
