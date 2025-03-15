@@ -7,7 +7,7 @@ function fish_user_key_bindings
     bind '?' bind_qmark
 
     # Ctrl-D exits if pressed multiple times quickly (like bash)
-    bind \cd bind_eof_exit
+    bind \cD bind_eof_exit
 
     # Ctrl-/ redraws current line, not whole screen
     set -l redraw_cmd 'commandline -f repaint'
@@ -24,14 +24,20 @@ function fish_user_key_bindings
     # Ctrl-C cancels without erasing the commandline (restores pre-4.0 behaviour)
     # Source: https://github.com/fish-shell/fish-shell/issues/10935
     if fish-is-newer-than 4.0
-        bind ctrl-c __fish_cancel_commandline
+        bind \cC __fish_cancel_commandline
     end
 
     # Source: https://github.com/fish-shell/fish-shell/issues/8336#issuecomment-937370264
-    # Right Arrow (→) accepts a single word from the autosuggestion
-    bind \e\[C bind_smart_forward
-    # Shift-Right Arrow accepts the entire autosuggestion
-    bind \e\[1\;2C forward-char
+    if fish-is-newer-than 4.0
+        # Right Arrow (→) accepts a single word from the autosuggestion
+        bind right bind_smart_forward
+        # Shift-Right Arrow accepts the entire autosuggestion
+        bind shift-right forward-char
+    else
+        # backwards compatible, but hard to read
+        bind \e\[C bind_smart_forward
+        bind \e\[1\;2C forward-char
+    end
 
     # Disable bindings from $__fish_data_dir/functions/__fish_shared_key_bindings.fish
     bind --erase \cx

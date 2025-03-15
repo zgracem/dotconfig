@@ -3,8 +3,7 @@ function bind_qmark
     switch (commandline --current-token)[-1]
         case "?"
             commandline --function backward-delete-char backward-delete-char
-            commandline --append "; ?"
-            commandline --function end-of-line repaint
+            commandline --insert "; ?"
         case "*"
             commandline --insert "?"
     end
