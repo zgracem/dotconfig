@@ -105,7 +105,7 @@ abbr -a unset 'set --erase'
 
 abbr -a 'c?' compsrc
 abbr -a 'f?' funcsrc
-abbr -a 'm?' command man -aw
+abbr -a 'm?' mansrc
 
 abbr -a xcl 'sudo xcodebuild -license'
 abbr -a xcp 'xcode-select --print-path'
