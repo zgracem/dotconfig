@@ -1,4 +1,4 @@
-if not builtin -q path
+if fish-is-older-than 3.5 # released June 2022
     function path
         string match -rq '^(?:is|filter)' $argv[1]; or return 127
         set --erase argv[1]
