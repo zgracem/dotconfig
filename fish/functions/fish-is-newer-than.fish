@@ -1,5 +1,5 @@
 function fish-is-newer-than -a test_version
-    # __fish_versinfo splits fish's $version into an array like $BASH_VERSINFO.
+    # fish_versinfo splits fish's $version into an array like $BASH_VERSINFO.
     #
     # Released fish versions are in the format `X.Y.Z` (even X.0.0 and X.Y.0).
     #
@@ -9,7 +9,8 @@ function fish-is-newer-than -a test_version
     #
     # Beta releases look like `X.YbB`, where uppercase B is the beta number,
     # and post-beta dev versions look like `X.YbB-A-gH`.
-    function __fish_versinfo -a fish_ver
+    function fish_versinfo -a fish_ver
+        set -q fish_ver[1]; or set -f fish_ver $version
         set -f version_info (string split "." $fish_ver | string split "-")
 
         # Discard git commit hash (which can't be easily compared)
@@ -38,9 +39,8 @@ function fish-is-newer-than -a test_version
     # Account for broken builds and assume they're bleeding-edge
     string match -q unknown "$version"; and return 0
 
-    set -l this_ver (__fish_versinfo $version)
-    set -l that_ver (__fish_versinfo $test_version)
-    functions --erase __fish_versinfo
+    set -l this_ver (fish_versinfo $version)
+    set -l that_ver (fish_versinfo $test_version)
 
     # Any version of fish is considered "newer" than itself because this
     # function is mostly used for feature gatekeeping.
