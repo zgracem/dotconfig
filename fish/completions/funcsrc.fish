@@ -1,0 +1,1 @@
+complete -c funcsrc -x -a '(functions -n)'
