@@ -9,4 +9,3 @@ function commandline_parser
     echo "tokens-expanded: "(commandline -x | string join $joint)
     echo "tokens-raw:      "(commandline --tokens-raw | string join $joint)
 end
-bind ctrl-o commandline_parser repaint

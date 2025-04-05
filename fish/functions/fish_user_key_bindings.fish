@@ -9,6 +9,9 @@ function fish_user_key_bindings
     # Ctrl-D exits if pressed multiple times quickly (like bash)
     bind \cD bind_eof_exit
 
+    # From $__fish_config_dir/conf.d/commandline_parser.fish
+    bind \cO commandline_parser repaint
+
     # Ctrl-/ redraws current line, not whole screen
     set -l redraw_cmd 'commandline -f repaint'
     if fish-is-newer-than 4.0
