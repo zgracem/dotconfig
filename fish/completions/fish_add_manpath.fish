@@ -1,0 +1,5 @@
+complete -c fish_add_manpath -s g -l global -n "not __fish_seen_argument -s U -l universal" -d "Use a global \$MANPATH"
+complete -c fish_add_manpath -s U -l universal -n "not __fish_seen_argument -s g -l global" -d "Use a universal \$MANPATH"
+complete -c fish_add_manpath -s p -l prepend -n "not __fish_seen_argument -s a -l append" -d "Add path to the front (default)"
+complete -c fish_add_manpath -s a -l append -n "not __fish_seen_argument -s p -l prepend" -d "Add path to the end"
+complete -c fish_add_manpath -s v -l verbose -d "Print the set command(s) used"
