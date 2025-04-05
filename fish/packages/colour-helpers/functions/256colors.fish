@@ -1,4 +1,4 @@
-function 256colours -d "Print supported terminal colours"
+function 256colors -d "Print supported terminal colours"
     argparse -xb,g b/basic g/grey -- $argv
     or return
 
