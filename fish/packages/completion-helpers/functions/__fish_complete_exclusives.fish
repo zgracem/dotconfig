@@ -12,4 +12,5 @@ function __fish_complete_exclusives
                 __fish_seen_argument -l $arg; and return 1
         end
     end
+    return 0
 end
