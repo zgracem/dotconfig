@@ -4,7 +4,12 @@ function swatch -d "Create a colour swatch"
     argparse 's/size=' -- $argv
     or return
 
-    set -f colour $argv[1]
+    set -f colour $argv[1] # must be in `rrggbb` or `#rrggbb` format
+    if not string match -irq '^#?[0-9a-f]{6}$' $colour
+        echo >&2 "invalid colour: $colour"
+        return 1
+    end
+
     set -f output $argv[2]
     set -q output[1]; or set -f output swatch_(string replace "#" "" $colour).png
 
