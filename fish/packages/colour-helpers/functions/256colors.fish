@@ -4,18 +4,16 @@ function 256colors -d "Print supported terminal colours"
 
     if set -q _flag_basic
         set -f colours (seq 0 15)
-        set -f width 64
+        set -f width (math "2 * 32")
     else if set -q _flag_grey
         set -f colours (seq 232 255)
-        set -f width 128
+        set -f width (math "4 * 32")
     else
         set -f colours (seq 16 231)
-        set -f width 192
+        set -f width (math "6 * 32")
     end
 
     for n in $colours
-        set -l nnn (printf "%03d" $n)
-        # set -l nnn "█▓▒░ ░▒▓█"
-        echo -e "\e[7;38;5;$n;48;5;16m" $nnn "\e[0m"
+        printf "\e[38;5;16;48;5;%dm %03d \e[0m\n" $n $n
     end | column -c $width
 end
