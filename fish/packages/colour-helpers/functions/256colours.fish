@@ -2,7 +2,7 @@
 # https://www.robmeerman.co.uk/_media/unix/256colors2.pl
 
 function __256colours_system
-    argparse --ignore-unknown N/numbers -- $argv
+    argparse N/numbers -- $argv
     or return
 
     set -l long_format "\e[48;5;%dm%'3d"
@@ -32,7 +32,7 @@ function __256colours_system
 end
 
 function __256colours_cube
-    argparse --ignore-unknown N/numbers -- $argv
+    argparse N/numbers -- $argv
     or return
 
     echo "Colour cube, 6×6×6:"
@@ -53,7 +53,7 @@ function __256colours_cube
 end
 
 function __256colours_grey
-    argparse --ignore-unknown N/numbers -- $argv
+    argparse N/numbers -- $argv
     or return
 
     echo "Greyscale ramp:"
@@ -69,10 +69,11 @@ function __256colours_grey
     echo -ne "\e[0m\n"
 end
 
-function 256colours
+function 256colours -d "Print terminal colours"
     argparse s/system c/cube g/grey N/numbers -- $argv
     or return
 
+    # No flags is the same as `-s -c -g`
     if string match -q xx x"$_flag_system$_flag_cube$_flag_grey"x
         set -f _flag_system 1
         set -f _flag_cube 1
