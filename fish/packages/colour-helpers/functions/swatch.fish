@@ -1,7 +1,7 @@
 command -q magick; or return
 
 function swatch -d "Create a colour swatch"
-    argparse 's/size=' -- $argv
+    argparse 's/size=' 'v/verbose' -- $argv
     or return
 
     set -f colour $argv[1] # must be in `rrggbb` or `#rrggbb` format
@@ -19,6 +19,8 @@ function swatch -d "Create a colour swatch"
 
     magick -size $_flag_size"x"$_flag_size "canvas:$colour" "$output"
     or return
+
+    set -q _flag_verbose; and echo $output
 
     return 0
 end
