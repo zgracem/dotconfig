@@ -20,7 +20,7 @@ Prompt-related functions live here to avoid cluttering up `../functions`. The
 path to this directory must be added to `$fish_package_path` so everything can
 auto-load.
 
-[Screenshot]: https://raw.githubusercontent.com/zgracem/dotconfig/master/fish/prompt/prompt.png
+[Screenshot]: https://raw.githubusercontent.com/zgracem/dotconfig/main/fish/prompt/prompt.png
 
 ## `fish_title` → `fish_title_window` + `fish_title_tab`
 
