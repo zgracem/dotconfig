@@ -167,6 +167,7 @@
   "powershell.integratedConsole.suppressStartupBanner": true,
   "powershell.scriptAnalysis.enable": false,
   "prettier.bracketSameLine": true,
+  "prettier.printWidth": 118,
   "prettier.quoteProps": "consistent",
   "prettier.semi": false,
   "prettier.trailingComma": "none",
