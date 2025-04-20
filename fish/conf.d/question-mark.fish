@@ -23,9 +23,15 @@ function '?' --description 'Prints the exit status of the last command'
     set -l sysexits USAGE DATAERR NOINPUT NOUSER NOHOST UNAVAILABLE SOFTWARE \
         OSERR OSFILE CANTCREAT IOERR TEMPFAIL PROTOCOL NOPERM CONFIG
 
+    # Source: `src/builtins/shared.rs`
+    set -l fishexits EXPAND_ERROR READ_TOO_MUCH ILLEGAL_CMD UNMATCHED_WILDCARD \
+        unused NOT_EXECUTABLE CMD_UNKNOWN
+
     set_color brred
 
-    if test $last_exit -gt 0x80 -a $last_exit -lt 0xA0
+    if test $last_exit -gt 0x78 -a $last_exit -lt 0x80
+        echo -ns STATUS_ $fishexits[(math "$last_exit - 0x78")]
+    else if test $last_exit -gt 0x80 -a $last_exit -lt 0xA0
         echo -ns (fish_status_to_signal $last_exit)
     else if test $last_exit -gt 0x3F -a $last_exit -lt 0x4F
         echo -ns EX_ $sysexits[(math "$last_exit - 0x3F")]
