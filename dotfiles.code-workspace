@@ -11,6 +11,9 @@
     {
       "name": "~/.local/share/doc",
       "path": "../.local/share/doc"
+    },
+    {
+      "path": "../Developer/fish/tacklebox"
     }
   ],
   "settings": {
