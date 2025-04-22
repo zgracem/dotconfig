@@ -50,8 +50,8 @@
 # verbosity/simulation options
 # -----------------------------------------------------------------------------
 
-# display progress in console titlebar
---console-title
+# display progress bar
+--progress
 
 # -----------------------------------------------------------------------------
 # workarounds
