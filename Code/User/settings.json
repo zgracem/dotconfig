@@ -343,7 +343,6 @@
   "workbench.enableExperiments": false,
   "workbench.experimental.enableNewProfilesUI": true,
   "workbench.externalBrowser": "firefox",
-  "workbench.iconTheme": "eq-material-theme-icons",
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.startupEditor": "none",
   "workbench.tree.renderIndentGuides": "always",
