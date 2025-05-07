@@ -1,6 +1,6 @@
 # Machine-generated file - use setup menu in minicom to change parameters.
 pu port             /dev/cu.usbmodemflip_Hinomo5a1
-pu lock             /usr/local/Cellar/minicom/2.9/var
+pu lock             /usr/local/opt/minicom/var
 pu downdir          /Users/zozo/Downloads
 pu escape-key       Escape (Meta)
 pu mfcolor          WHITE
