@@ -1,6 +1,9 @@
-# ----------------------------------------------------------------------------
-# brew bundle --file=$XDG_CONFIG_HOME/homebrew/vscode_Brewfile
 # vim:ft=ruby
+# ----------------------------------------------------------------------------
+# Export to stdout:
+#   brew bundle dump --vscode --file=-
+# Install:
+#   brew bundle --file=$XDG_CONFIG_HOME/homebrew/vscode_Brewfile
 # ----------------------------------------------------------------------------
 
 # general functionality

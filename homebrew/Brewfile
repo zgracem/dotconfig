@@ -1,6 +1,9 @@
-# ----------------------------------------------------------------------------
-# brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 # vim:ft=ruby
+# ----------------------------------------------------------------------------
+# Export to stdout:
+#   brew bundle dump --file=-
+# Import:
+#   brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 # ----------------------------------------------------------------------------
 
 tap "homebrew/aliases"
