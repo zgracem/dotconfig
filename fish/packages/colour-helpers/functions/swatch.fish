@@ -5,7 +5,7 @@ function swatch -d "Create a colour swatch"
     or return
 
     set -f colour $argv[1] # must be in `rrggbb` or `#rrggbb` format
-    if not string match -irq '^#?[0-9a-f]{6}$' $colour
+    if not string match -irq '^#?[0-9a-f]{6}([0-9a-f]{2})?$' $colour
         echo >&2 "invalid colour: $colour"
         return 1
     end
