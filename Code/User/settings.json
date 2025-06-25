@@ -76,11 +76,12 @@
   "editor.suggestOnTriggerCharacters": false,
   "editor.tabCompletion": "off",
   "editor.unicodeHighlight.allowedCharacters": {
-    "×": true,
+    "–": true,
     "‘": true,
     "’": true,
     "“": true,
-    "”": true
+    "”": true,
+    "×": true
   },
   "editor.unicodeHighlight.includeComments": false,
   "editor.unicodeHighlight.includeStrings": false,
