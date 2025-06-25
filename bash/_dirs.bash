@@ -7,8 +7,6 @@
 [ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="$HOME/var/run"
 [ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="$HOME/.local/state"
 
-[ -z "$XDG_DATA_DIRS" ] && export XDG_DATA_DIRS="$XDG_DATA_HOME:/usr/local/share:/usr/share"
-
 if [[ $XDG_RUNTIME_DIR == $HOME* ]]; then
   mkdir -p "$XDG_RUNTIME_DIR" \
   && chown "$USER" "$XDG_RUNTIME_DIR" \
