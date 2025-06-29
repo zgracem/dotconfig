@@ -13,6 +13,17 @@
       "$0"
     ]
   },
+  "Script header": {
+    "prefix": "hhead",
+    "body": [
+      "${LINE_COMMENT:#} ----------------------------------------------------------------------------",
+      "${LINE_COMMENT:#} Name: $1",
+      "${LINE_COMMENT:#} Date: ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
+      "${LINE_COMMENT:#} Synopsis: $0",
+      "${LINE_COMMENT:#} ----------------------------------------------------------------------------\n"
+    ],
+    "description": "Header with metadata for basic scripts"
+  },
   "Today": {
     "prefix": "ttoday",
     "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",

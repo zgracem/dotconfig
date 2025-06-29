@@ -38,7 +38,7 @@
   "hashbang_ruby": {
     "prefix": "!env",
     "body": [
-      "#!/usr/bin/env ruby\n\n"
+      "#!${1|/usr/bin/env ruby,/usr/local/opt/ruby/bin/ruby|}\n\n"
     ]
   },
   "rubocop_disable_enable": {
