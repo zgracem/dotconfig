@@ -168,6 +168,11 @@ module Sample
     URI("https://user:p4s$w0rd@example.org:8000/path/to/resource.cgi?param=value#anchor")
   end
   alias_method :url, :uri
+
+  # @return [Range]
+  def range
+    (4..20)
+  end
 end
 
 # ----------------------------------------------------------------------------
