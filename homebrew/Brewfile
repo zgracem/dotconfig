@@ -51,6 +51,7 @@ brew "bash"
 brew "bchunk" # Convert CD images from .bin/.cue to .iso/.cdr
 brew "bfs" # Breadth-first version of find
 brew "btop"
+brew "ddrescue"
 brew "duti" if OS.mac?
 brew "entr"
 brew "hexyl"
@@ -79,10 +80,14 @@ brew "recode"
 
 # audio/video
 brew "atomicparsley"
+brew "bbc/audiowaveform/audiowaveform"
+brew "cdrdao"
 brew "id3v2"
 brew "mkvtoolnix"
 brew "mp3info"
 brew "mp4v2"
+brew "nicotine-plus"
+brew "sox"
 brew "yt-dlp"
 brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
   HEAD
@@ -102,18 +107,18 @@ cask "metaz"
 cask "spotify"
 cask "vlc"
 cask "xact"
+cask "xld"
 
 # images
 brew "exif"
 brew "exiftool"
 brew "folderify" if OS.mac?
-brew "imagemagick"
+brew "zgracem/formulae/imagemagick"
 brew "imageoptim-cli"
 brew "mozjpeg"
 brew "imagesnap" if OS.mac?
-brew "webkit2png" if OS.mac?
 brew "webp"
-cask "zgracem/formulae/acorn-latest7"
+cask "zgracem/formulae/acorn@preview"
 cask "imageoptim", args: { appdir: "/Applications" }
 cask "retrobatch"
 
@@ -205,7 +210,7 @@ brew "icoutils" # Extract resources from Windows binaries
 # fun & games
 # ----------------------------------------------------------------------------
 
-brew "cowsay"
+brew "cowsay-org/cowsay/cowsay"
 brew "dosbox-x"
 brew "fastfetch"
 brew "figlet"
@@ -238,7 +243,7 @@ cask "alfred"
 cask "bettermouse"
 cask "fantastical"
 cask "firefox", args: { appdir: "/Applications" }
-cask "go2shell"
+cask "go2shell" # deprecated but still works
 cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
 cask "maestral"
@@ -256,15 +261,15 @@ cask "appcleaner"
 cask "disk-drill"
 cask "file-juicer"
 cask "grandperspective"
-cask "mysides"
 cask "pdf-expert"
+cask "pearcleaner"
 cask "powershell"
 cask "raspberry-pi-imager"
 cask "vnc-viewer"
 cask "winclone"
 
 # QuickLook
-cask "qldds" # Deprecated!
+cask "qldds" # deprecated but still works
 cask "qlmarkdown"
 cask "suspicious-package" # .pkg files
 cask "syntax-highlight"
@@ -288,6 +293,7 @@ mas "1Blocker", id: 1365531024
 mas "ApolloOne", id: 1044484672
 mas "MacFamilyTree 10", id: 1567970985
 mas "Prompt", id: 1594420480
+mas "Sirds", id: 547093431
 mas "Steam Link", id: 1246969117
 mas "Vinegar", id: 1591303229
 mas "Wipr", id: 1320666476
