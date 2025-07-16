@@ -22,18 +22,11 @@ autoload :TagLib, "taglib"
 autoload :URI, "uri"
 autoload :YAML, "yaml"
 
-begin
-  require "#{ENV.fetch('HOME', nil)}/Developer/ruby/zcolour/zcolour"
-rescue LoadError => e
-  warn e.message
-  require "singleton"
-  class Colour
-    include Singleton
-    def self.method_missing(*) = Colour.instance
-    def method_missing(*) = Colour.instance
-    def to_s = ""
-  end
-end
+$LOAD_PATH.prepend("#{__dir__}/lib")
+$LOAD_PATH.uniq!
+require "object"
+require "sample"
+require "colour"
 
 # -----------------------------------------------------------------------------
 # settings
@@ -88,90 +81,6 @@ if defined?(Reline::Face)
     conf.define :default,   foreground: :white, background: :black
     conf.define :enhanced,  foreground: :black, background: :white, style: :bold
     conf.define :scrollbar, foreground: :bright_black, background: :black
-  end
-end
-
-# -----------------------------------------------------------------------------
-# helper methods
-# -----------------------------------------------------------------------------
-
-class Object
-  # Excludes methods common to all Ruby {Object}s 🐵
-  # @return [Array<Symbol>]
-  def my_methods
-    (methods - common_methods).sort
-  end
-
-  private
-
-  # @return [Array<Symbol>]
-  def common_methods
-    (Object.methods + Object.instance_methods)
-  end
-end
-
-# Create misc. objects for testing
-module Sample
-  module_function
-
-  # @return [String]
-  def string
-    "Hëllo, wórld!\n"
-  end
-  alias_method :str, :string
-
-  # @return [Hash]
-  def hsh
-    {
-      red:    "ruby",
-      green:  "emerald",
-      blue:   "sapphire",
-      violet: "amethyst",
-      white:  "diamond"
-    }
-  end
-
-  # @return [Array<String>]
-  def array
-    hsh.values
-  end
-
-  # @return [Integer]
-  def integer
-    rand(10..1000)
-  end
-  alias_method :int, :integer
-
-  # @return [Float]
-  def float
-    rand(10.0..100.0)
-  end
-
-  # @return [Pathname]
-  def pathname
-    Pathname("~/Documents/blankpage.pdf").expand_path
-  end
-  alias_method :path, :pathname
-
-  # @return [Regexp]
-  def regex
-    /\A\h+\z/i
-  end
-
-  # @return [Set]
-  def set
-    Set.new(arr.map(&:to_sym))
-  end
-
-  # @return [URI]
-  def uri
-    URI("https://user:p4s$w0rd@example.org:8000/path/to/resource.cgi?param=value#anchor")
-  end
-  alias_method :url, :uri
-
-  # @return [Range]
-  def range
-    (4..20)
   end
 end
 
