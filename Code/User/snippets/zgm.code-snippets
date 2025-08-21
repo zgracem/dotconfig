@@ -14,25 +14,15 @@
     ]
   },
   "Script header": {
-    "prefix": "hhead",
+    "prefix": "!head",
     "body": [
       "${LINE_COMMENT:#} ----------------------------------------------------------------------------",
-      "${LINE_COMMENT:#} Name: $1",
-      "${LINE_COMMENT:#} Date: ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
+      "${LINE_COMMENT:#} Name:     $1",
+      "${LINE_COMMENT:#} Date:     ${2:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE}",
       "${LINE_COMMENT:#} Synopsis: $0",
       "${LINE_COMMENT:#} ----------------------------------------------------------------------------\n"
     ],
     "description": "Header with metadata for basic scripts"
-  },
-  "Today": {
-    "prefix": "ttoday",
-    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
-    "description": "Current date (YYYY-MM-DD)"
-  },
-  "Timestamp": {
-    "prefix": "nnow",
-    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-    "description": "Current time (YYYY-MM-DD hh:mm:ss)"
   },
   "fish_contains": {
     "prefix": "contains",
