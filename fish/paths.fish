@@ -115,6 +115,12 @@ if path is -d $RBENV_ROOT
     and fish_add_manpath $RBENV_ROOT/versions/$ruby_version/share/man
 end
 
+# Perl local::lib
+if path is -d $HOME/perl5
+    fish_add_manpath $HOME/perl5/man
+    eval "$(SHELL=fish perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+end
+
 # fish builtins
 fish_add_manpath $__fish_data_dir/man
 
