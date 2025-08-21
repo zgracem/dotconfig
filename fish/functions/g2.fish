@@ -37,7 +37,7 @@ function g2 --description 'Go somewhere'
         case steamuser; set dir "$steam_dir/userdata"
         case stow;      set dir "$HOME/opt/stow"
         case vs9;       set dir "$HOME/VS/www/vsdotcom"
-        case vsbuild;   set dir "$HOME/etc/www/vsdotcom9-build"
+        case vsbuild;   set dir "$HOME/var/www/vsdotcom9-build"
         case imprint;   set dir "$HOME/VS/www/vsarts24"
         case finger;    set dir "$HOME/etc/finger"
         case gopher;    set dir "$HOME/etc/gopher"
