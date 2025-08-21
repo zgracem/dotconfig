@@ -33,6 +33,7 @@ set -p fish_function_path "$HOME/.private/fish/functions"
 set -p fish_complete_path "$HOMEBREW_PREFIX/share/fish/"{completions,vendor_completions.d}
 set -p fish_complete_path "$HOMEBREW_PREFIX/opt/fish/share/fish/completions"
 set -p fish_complete_path "$XDG_DATA_HOME/fish/vendor_completions.d"
+set -p fish_complete_path "$HOME/opt/share/fish/vendor_completions.d"
 set -p fish_complete_path "$__fish_config_dir/completions"
 
 # set up per-machine config directory
