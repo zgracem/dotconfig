@@ -5,10 +5,6 @@
 # smart case sensitivity
 --smart-case
 
-# truncate too-long lines
---max-columns=132
---max-columns-preview
-
 # don't group matches by file
 --no-heading
 --with-filename
