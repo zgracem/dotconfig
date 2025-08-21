@@ -4,7 +4,6 @@ string match -q dumb "$TERM"; and return
 set --erase TERMCAP
 
 set -gx --path TERMINFO_DIRS
-set -a TERMINFO_DIRS $XDG_DATA_HOME/terminfo
 set -a TERMINFO_DIRS {$HOME,}/Applications/iTerm.app/Contents/Resources/terminfo
 set -a TERMINFO_DIRS $HOMEBREW_PREFIX/opt/ncurses/share/terminfo
 set -a TERMINFO_DIRS /usr/share/terminfo
