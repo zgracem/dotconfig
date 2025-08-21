@@ -1,6 +1,7 @@
 # vim:ft=ruby
+# export IRBRC=~/.config/ruby/irbrc
 # If this file fails to load, debug by executing as a normal Ruby file:
-#   ruby ~/.config/ruby/irbrc
+#   ruby $IRBRC
 
 require "irb"
 require "irb/completion"
