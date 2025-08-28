@@ -1,4 +1,5 @@
 fish
 yt-dlp
-zgracem/formulae/acorn-latest7
+zgracem/formulae/acorn@preview
 zgracem/formulae/calendar
+zgracem/formulae/imagemagick

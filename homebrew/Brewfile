@@ -80,7 +80,7 @@ brew "recode"
 
 # audio/video
 brew "atomicparsley"
-brew "bbc/audiowaveform/audiowaveform"
+brew "audiowaveform"
 brew "cdrdao"
 brew "id3v2"
 brew "mkvtoolnix"
