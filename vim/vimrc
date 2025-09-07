@@ -18,7 +18,7 @@ set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.
 
 " ~/.viminfo 
 " → https://vimdoc.sourceforge.net/htmldoc/options.html#'viminfo'
-set viminfo='1000,f0,<500,h,n$XDG_DATA_HOME/vim/.viminfo
+set viminfo='1000,f0,<500,h,n$XDG_STATE_HOME/vim/viminfo
 "   ' = how many files to save info for
 "   f = store global marks (1 for yes, 0 for no)
 "   < = how many lines are saved for each register
