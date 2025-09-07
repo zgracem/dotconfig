@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.06 for deck on Thu Oct 31 13:24:27 2024.
+# Written by xscreensaver-settings 6.09 for deck on Wed Sep  3 11:21:56 2025.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:30:00
@@ -56,7 +56,7 @@ programs:								      \
 -				rorschach --root			    \n\
 -				decayscreen --root			    \n\
 -				flame --root				    \n\
-				halo --root --mode ramp --animate	    \n\
+-				halo --root --mode ramp --animate	    \n\
 -				slidescreen --root			    \n\
 -				pedal --root				    \n\
 				bouboule --root				    \n\
@@ -78,7 +78,7 @@ programs:								      \
 - GL: 				morph3d --root				    \n\
 				mountain --root --delay 0 --ncolors 210	    \n\
 -				munch --root				    \n\
--				penrose --root				    \n\
+				penrose --root				    \n\
 - GL: 				pipes --root				    \n\
 -				rdbomb --root				    \n\
 - GL: 				rubik --root				    \n\
@@ -86,11 +86,11 @@ programs:								      \
 -				slip --root				    \n\
 - GL: 				sproingies --root			    \n\
 -				starfish --root				    \n\
--				strange --root				    \n\
+				strange --root				    \n\
 -				swirl --root				    \n\
 -				triangle --root				    \n\
 -				xjack --root				    \n\
--				xlyap --root				    \n\
+				xlyap --root				    \n\
 - GL: 				atlantis --root				    \n\
 -				bsod --root				    \n\
 - GL: 				bubble3d --root				    \n\
@@ -128,7 +128,7 @@ programs:								      \
 -				shadebobs --root			    \n\
 - GL: 				sierpinski3d --root			    \n\
 -				spotlight --root			    \n\
--				squiral --root				    \n\
+				squiral --root				    \n\
 				wander --root --delay 0 --density 1	      \
 				  --reset 3000000 --length 100		    \n\
 -				xflame --root				    \n\
@@ -136,7 +136,7 @@ programs:								      \
 - GL: 				gflux --root				    \n\
 -				nerverot --root				    \n\
 				xrayswarm --root --delay 8065		    \n\
--				xspirograph --root			    \n\
+				xspirograph --root			    \n\
 - GL: 				circuit --root				    \n\
 - GL: 				dangerball --root			    \n\
 - GL: 				dnalogo --root				    \n\
@@ -193,13 +193,13 @@ programs:								      \
 - GL: 				jigglypuff --root			    \n\
 -				metaballs --root			    \n\
 - GL: 				mirrorblob --root			    \n\
-				piecewise --root --delay 0 --count 56	      \
+-				piecewise --root --delay 0 --count 56	      \
 				  --colorspeed 26 --minradius 0.089	      \
 				  --maxradius 0.374			    \n\
   GL: 				polytopes --root			    \n\
 				pong --root --clock			    \n\
--				popsquares --root			    \n\
-- GL: 				surfaces --root				    \n\
+				popsquares --root			    \n\
+  GL: 				surfaces --root				    \n\
 -				xanalogtv --root			    \n\
 -				abstractile --root			    \n\
 				anemotaxis --root			    \n\
@@ -211,7 +211,7 @@ programs:								      \
 				  --num-discs 126			    \n\
 -				memscroller --root			    \n\
   GL: 				noof --root				    \n\
-				pacman --root				    \n\
+-				pacman --root				    \n\
 - GL: 				pinion --root				    \n\
 - GL: 				polyhedra --root			    \n\
 - GL: 				providence --root			    \n\
@@ -250,7 +250,7 @@ programs:								      \
   GL: 				hilbert --root --mode 3d --delay 0	      \
 				  --speed 0.352 --thickness 0.01	      \
 				  --no-spin				    \n\
-- GL: 				tronbit --root				    \n\
+  GL: 				tronbit --root				    \n\
 - GL: 				geodesic --root				    \n\
 				hexadrop --root				    \n\
 - GL: 				kaleidocycle --root			    \n\
@@ -260,12 +260,12 @@ programs:								      \
 - GL: 				cityflow --root				    \n\
 - GL: 				geodesicgears --root			    \n\
 - GL: 				projectiveplane --root			    \n\
-- GL: 				romanboy --root				    \n\
+  GL: 				romanboy --root				    \n\
 -				tessellimage --root			    \n\
 - GL: 				winduprobot --root			    \n\
 - GL: 				splitflap --root			    \n\
 - GL: 				cubestack --root			    \n\
-  GL: 				cubetwist --root --delay 0		    \n\
+- GL: 				cubetwist --root --delay 0		    \n\
 - GL: 				discoball --root			    \n\
 - GL: 				dymaxionmap --root			    \n\
 - GL: 				energystream --root			    \n\
@@ -292,8 +292,8 @@ programs:								      \
 - GL: 				etruscanvenus --root			    \n\
 - GL: 				gibson --root				    \n\
 - GL: 				headroom --root				    \n\
-- GL: 				sphereeversion --root			    \n\
-				binaryhorizon --root			    \n\
+  GL: 				sphereeversion --root			    \n\
+-				binaryhorizon --root			    \n\
 -				marbling --root				    \n\
 - GL: 				chompytower --root			    \n\
   GL: 				hextrail --root --delay 0 --speed 0.666	      \
@@ -301,6 +301,12 @@ programs:								      \
 - GL: 				mapscroller --root			    \n\
 - GL: 				nakagin --root				    \n\
 - GL: 				squirtorus --root			    \n\
+  GL: 				cubocteversion --root			    \n\
+				droste --root				    \n\
+  GL: 				papercube --root			    \n\
+  GL: 				skulloop --root				    \n\
+  GL: 				highvoltage --root			    \n\
+  GL: 				kallisti --root				    \n\
 
 
 pointerHysteresis:  10
