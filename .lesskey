@@ -26,6 +26,6 @@ LESS_TERMCAP_so=\e[1;4m
 # end standout
 LESS_TERMCAP_se=\e\(B\e[m
 # begin "underline" (man page variables)
-LESS_TERMCAP_us=\e[4;33m
+LESS_TERMCAP_us=\e[3;93m
 # end underline
 LESS_TERMCAP_ue=\e\(B\e[m
