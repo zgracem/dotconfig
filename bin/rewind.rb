@@ -5,7 +5,7 @@ module Rewind
   # @return [Regexp]
   DATETIME_RX = /
     (?!<\d)                 # start of a sequence of digits
-    (?<year>(?:19|20)\d{2}) # valid years are 1900-2099
+    (?<year>(?:19|20)\d\d)  # valid years are 1900-2099
     \D?                     # ---
     (?<month>[01]\d)        # valid months are 01-12
     \D?                     # ---
@@ -18,18 +18,18 @@ module Rewind
       (?:                   # optional second
         \D?                 # ---
         (?<second>[0-5]\d)  # valid secs are 00-59
-        (?:\D?              # ---
-        (?<ms>              # optional fractional seconds
-          \d+               # any number of trailing digits, will be discarded
-        ))?
+        (?:\D?\d+)?         # optional fractional seconds, will be discarded
         (?<zone>            # optional time zone like -06.00 or Z
           Z
           |
-          [+-]\d{2}\D?\d{2}
+          [+-]\d\d\D?\d\d
         )?
       )
     )?                      # end optional time-of-day
   /x
+
+  # @return [Array<Symbol>] the names of the capture groups in {DATETIME_RX}
+  DATETIME_CAPTURES = %i[year month day hour minute second zone]
 
   # Matches epoch dates from 1000000000..1999999999 (2001-09-08..2033-05-17)
   # @return [Regexp]
@@ -42,10 +42,11 @@ module Rewind
   # @param filename [String]
   # @return [Time]
   def parse_date_from_file(filename)
-    if DATETIME_RX.match(filename)
+    case filename
+    when DATETIME_RX
       md = $LAST_MATCH_INFO.named_captures(symbolize_names: true)
-      Time.new(*md.fetch_values(*%i[year month day hour minute second zone]))
-    elsif EPOCH_RX.match(filename)
+      Time.new(*md.fetch_values(*DATETIME_CAPTURES))
+    when EPOCH_RX
       # epoch seconds
       Time.at($LAST_MATCH_INFO.to_s.to_i)
     else

@@ -1,15 +1,36 @@
+# Resets a file's last-modified time to its time of creation on the file system,
+# the creation date in its `--exif` data (if available), or the timestamp in the
+# `--filename` (if parseable).
+#
+# Requires:
+#   brew install gnu-sed coreutils exiftool
+#
 function rewind --description 'Copy birth time (et al.) to last-modified time'
-    argparse -xe,f n/dry-run h/help v/verbose e/exif f/filename -- $argv
+    argparse -xe,f -xh,{n,v,e,f} e/exif f/filename n/dry-run h/help v/verbose -- $argv
     or return
 
-    command -q gtouch; or return 127
+    if not command -q exiftool
+        echo >&2 "missing requirement: exiftool"
+        return 127
+    end
+
+    for bin in sed stat touch
+        if not command -sq g$bin
+            if command -q $bin; and $bin --version >/dev/null 2>&1
+                # /usr/bin/foo is the GNU version
+                function g$bin; $bin $argv; end
+            else
+                echo >&2 "missing requirement: GNU $bin"
+                return 127
+            end
+        end
+    end
 
     set -f exit 0
 
-    if set -q _flag_help[1]; or test -z "$argv"
-        set -f exit 2
+    if test -z "$argv"; or set -q _flag_help[1]
         echo >&2 "Usage: rewind [-e|-f] [-n] [-v] [-h] FILE [FILE ...]"
-        set -q _flag_help[1]; and set -f exit 0
+        set -q _flag_help[1]; or set -f exit 2
     end
 
     for file in $argv
