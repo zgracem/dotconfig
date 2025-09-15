@@ -2,7 +2,9 @@
   "accessibility.signals.terminalBell": {
     "sound": "off"
   },
+  "chat.agent.enabled": false,
   "chat.commandCenter.enabled": false,
+  "chat.disableAIFeatures": true,
   "code-runner.clearPreviousOutput": true,
   "code-runner.customCommand": "echo $PATH",
   "code-runner.enableAppInsights": false,
