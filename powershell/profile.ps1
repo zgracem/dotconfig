@@ -24,8 +24,14 @@ ForEach ($FunctionFile in $FunctionFiles) { . $FunctionFile }
 
 # ----------------------------------------------------------------------------
 
-$env:XDG_CONFIG_HOME = "$env:USERPROFILE\.config"
-$env:XDG_DATA_HOME = "$env:USERPROFILE\.local\share"
+$UserHomeDir = if ($IsWindows) {
+    $env:USERPROFILE
+} else {
+    $env:HOME
+}
+
+$env:XDG_CONFIG_HOME = "$UserHomeDir/.config"
+$env:XDG_DATA_HOME = "$UserHomeDir/.local/share"
 
 $PSDefaultParameterValues += @{
     'Format-*:AutoSize' = $true # adjusts column size and number based on the width of the data
@@ -95,7 +101,7 @@ if ($Host.Name -eq 'ConsoleHost') {
         BellStyle = "Visual"
         EditMode = "Emacs"
         HistoryNoDuplicates = $true
-        HistorySavePath = "$env:XDG_DATA_HOME\powershell\PSReadLine\$( $Host.Name )_history.txt"
+        HistorySavePath = "$env:XDG_DATA_HOME/powershell/PSReadLine/$( $Host.Name )_history.txt"
         HistorySearchCursorMovesToEnd = $true
         PredictionSource = "HistoryAndPlugin"
     }
