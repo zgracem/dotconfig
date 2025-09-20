@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 # -----------------------------------------------------------------------------
-# This script is called by `yt-dlp` when a download finishes, and adds metadata
-# to the deleted file.
+# This script is called by `yt-dlp` when a download finishes, and adds media and
+# filesystem metadata to the downloaded file.
 #
 # `$XDG_CONFIG_HOME/yt-dlp/config` must contain:
 #

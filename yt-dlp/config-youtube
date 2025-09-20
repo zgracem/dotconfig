@@ -26,11 +26,11 @@
 # embed thumbnail in the video as cover art
 --embed-thumbnail
 
-# embed metadata in the video file
---embed-chapters
-
-# embed chapter markers
+# embed metadata (including chapter markers) in the video file
 --embed-metadata
+
+# do not embed the infojson as an attachment to mkv/mka video files
+--no-embed-info-json
 
 # write metadata to the file's xattrs
 --xattrs
