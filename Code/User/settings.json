@@ -353,6 +353,7 @@
   "xml.server.preferBinary": true,
   "xml.server.vmargs": "-Xmx1g",
   "xml.server.workDir": "~/var/tmp/redhat.vscode-xml",
+  "xmlTools.enableXmlTreeView": false,
   "xmlTools.enableXmlTreeViewCursorSync": true,
   "xmlTools.persistXPathQuery": false,
   "xmlTools.splitXmlnsOnFormat": false,
