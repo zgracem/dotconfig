@@ -83,6 +83,7 @@ brew "atomicparsley"
 brew "audiowaveform"
 brew "cdrdao"
 brew "id3v2"
+brew "media-info"
 brew "mkvtoolnix"
 brew "mp3info"
 brew "mp4v2"
@@ -220,6 +221,7 @@ brew "nethack"
 brew "toilet"
 cask "inform"
 cask "steam", args: { appdir: "/Applications" }
+cask "steamre/tools/depotdownloader"
 cask "twine"
 
 # ----------------------------------------------------------------------------
@@ -246,6 +248,7 @@ cask "firefox", args: { appdir: "/Applications" }
 cask "go2shell" # deprecated but still works
 cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
+cask "little-snitch", args: { appdir: "/Applications" }
 cask "maestral"
 cask "name-mangler"
 cask "obsidian"
@@ -265,6 +268,7 @@ cask "pdf-expert"
 cask "pearcleaner"
 cask "powershell"
 cask "raspberry-pi-imager"
+cask "soulver-cli"
 cask "vnc-viewer"
 cask "winclone"
 
