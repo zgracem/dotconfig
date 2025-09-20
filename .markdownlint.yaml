@@ -1,53 +1,54 @@
+# Use (and override) this in other files with:
+#   extends: ../../.config/.markdownlint.yaml
 ---
-# Enable all rules
-default: true
+# Enable all rules (default behaviour)
+# default: true
 
 # MD001: Heading levels should only increment by one level at a time
 # heading-increment: true
 
-# MD003: Heading style
-# heading-style:
-#   style: consistent
+# MD002: DNE
+
+# MD003: Heading style consistency
+# heading-style: true
 
 # MD004: Unordered list style
-# ul-style:
-#   style: consistent
+# ul-style: true
 
 # MD005: Inconsistent indentation for list items at the same level
-# list-indent: true
+list-indent: true
+
+# MD006: DNE
 
 # MD007: Unordered list indentation
 ul-indent:
   indent: 4
 
+# MD008: DNE
+
 # MD009: Trailing spaces
 no-trailing-spaces:
-  br_spaces: 2
   list_item_empty_lines: true
   strict: true
 
 # MD010: Hard tabs
 no-hard-tabs:
   code_blocks: false
+  spaces_per_tab: 4
 
 # MD011: Reversed link syntax
 # no-reversed-links: true
 
 # MD012: Multiple consecutive blank lines
-# no-multiple-blanks:
-#   maximum: 1
+# no-multiple-blanks: true
 
 # MD013: Line length
 line-length: false
-  # line_length: 80
-  # headings: false
-  # code_blocks: true
-  # code_block_line_length: 118
-  # tables: false
-  # stern: true
 
 # MD014: Dollar signs used before commands without showing output
 # commands-show-output: true
+
+# MD015-17: DNE
 
 # MD018-021: No/multiple spaces after/inside hash on atx-style heading
 # no-missing-space-atx: true
@@ -56,9 +57,7 @@ line-length: false
 # no-multiple-space-closed-atx: true
 
 # MD022: Headings should be surrounded by blank lines
-# blanks-around-headings:
-#   lines_above: 1
-#   lines_below: 1
+# blanks-around-headings: true
 
 # MD023: Headings must start at the beginning of the line
 # heading-start-left: true
@@ -72,8 +71,7 @@ single-title:
   front_matter_title: ^\s*(title|subject)\s*[:=]
 
 # MD026: Trailing punctuation in heading
-no-trailing-punctuation:
-  punctuation: ".,;"
+no-trailing-punctuation: false
 
 # MD027: Multiple spaces after blockquote
 # no-multiple-space-blockquote: true
@@ -95,18 +93,13 @@ blanks-around-fences:
 # blanks-around-lists: true
 
 # MD033: Inline HTML
-no-inline-html:
-  allowed_elements:
-    - img
-    - span
-    - wbr
+no-inline-html: false
 
 # MD034: Bare URL used
 # no-bare-urls: true
 
 # MD035: Horizontal rule style
-# hr-style:
-#   style: consistent
+# hr-style: true
 
 # MD036: Emphasis used instead of a heading
 no-emphasis-as-heading: false
@@ -117,7 +110,7 @@ no-emphasis-as-heading: false
 # no-space-in-links: true
 
 # MD040: Fenced code blocks should have a language specified
-# fenced-code-language: true
+fenced-code-language: false
 
 # MD041: First line in file should be a top level heading
 first-line-heading: false
@@ -132,15 +125,48 @@ first-line-heading: false
 # proper-names: false
 
 # MD045: Images should have alternate text (alt text)
-# no-alt-text: true
+no-alt-text: false
 
 # MD046: Code block style
-code-block-style:
-  style: fenced
+# code-block-style: true
 
 # MD047: Files should end with a single newline character
 # single-trailing-newline: true
 
 # MD048: Code fence style
-code-fence-style:
-  style: backtick
+# code-fence-style: true
+
+# MD049: Emphasis style
+# emphasis-style: true
+
+# MD050: Strong style
+# strong-style: true
+
+# MD051: Link fragments should be valid
+link-fragments:
+  ignore_case: true
+
+# MD052: Reference links and images should use a label that is defined
+# reference-links-images: true
+
+# MD053: Link and image reference definitions should be needed
+# link-image-reference-definitions: true
+
+# MD054: Link and image style
+link-image-style:
+  collapsed: false
+
+# MD055: Table pipe style
+table-pipe-style:
+  style: leading_and_trailing
+
+# MD056: Table column count
+# table-column-count: true
+
+# MD057: DNE
+
+# MD058: Tables should be surrounded by blank lines
+# blanks-around-tables: true
+
+# MD059: Link text should be descriptive
+descriptive-link-text: false
