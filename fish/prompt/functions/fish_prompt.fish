@@ -1,4 +1,6 @@
 function fish_prompt --description 'Display the interactive prompt'
+    __term_prompt_start
+
     if set -q SSH_CONNECTION
         echo -ns (prompt_login) :
     end
@@ -33,4 +35,6 @@ function fish_prompt --description 'Display the interactive prompt'
 
     set_color normal
     echo -n " "
+
+    __term_prompt_end
 end

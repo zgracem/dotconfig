@@ -9,6 +9,7 @@ function bind_eof_exit
     end
 
     set -l msg "Press Ctrl+D $ignore_eof times in $timeout_eof seconds to exit."
+    emit fish_cancel
 
     # set timestamp
     set -l now (date +%s)

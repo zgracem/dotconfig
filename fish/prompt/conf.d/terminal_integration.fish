@@ -1,0 +1,140 @@
+# ----------------------------------------------------------------------------
+# Severely simplified shell integration for iTerm.app and VS Code.
+#
+# Requires manual installation:
+#   - Add `__term_prompt_start` as the very first command in fish_prompt
+#     (or fish_mode_prompt)
+#   - Add `__term_prompt_end` as the very last command in fish_prompt
+#   - Ensure this file is sourced somewhere in config.fish
+#
+# Improvements:
+#   - Manual installation does not clobber any existing fish_prompt or
+#     fish_mode_prompt function(s)
+#   - Except for `__term_prompt_start` and `__term_prompt_end`, all control
+#     sequences are triggered by appropriate event handlers
+#   - Supports `--final-rendering` for transient prompts (new in fish 4.1)
+#
+# References:
+#   - https://code.visualstudio.com/docs/terminal/shell-integration
+#   - https://iterm2.com/documentation-shell-integration.html
+#   - https://iterm2.com/documentation-escape-codes.html
+#   - https://fishshell.com/docs/current/language.html#event
+#   - https://fishshell.com/docs/current/prompt.html#transient-prompt
+#   - https://sw.kovidgoyal.net/kitty/shell-integration/#manual-shell-integration
+#   - /Applications/iTerm.app/Contents/Resources/iterm2_shell_integration.fish
+#   - `code --locate-shell-integration-path fish`
+#
+# Structure:
+#   <A>prompt<B>command
+#   <C>output 1
+#   output 2<D>
+#   <A>prompt<B>
+# ----------------------------------------------------------------------------
+
+# Don't run in scripts
+status is-interactive; or return
+# Don't run in non-GUI clients
+contains -- "$TERM" dumb linux {screen,tmux}-256color; and return
+# Don't run more than once
+functions -q __term_osc; and return
+
+# Prevent iTerm & VS Code's builtin shell integrations from running after this
+# by setting the conditions they check for.
+function iterm2_status; end
+set -g VSCODE_SHELL_INTEGRATION 1
+
+# Manually install kitty's shell integration
+if set -q KITTY_INSTALLATION_DIR
+    # Stub these out so fish_prompt will just ignore them
+    function __term_prompt_start; end
+    function __term_prompt_end; end
+    set -g KITTY_SHELL_INTEGRATION enabled
+    source "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/kitty-shell-integration.fish"
+    set -p fish_complete_path "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_completions.d"
+    return
+end
+
+# ----------------------------------------------------------------------------
+
+function __term_osc -d "Emit an operating system command"
+    argparse c/command= -- $argv
+    or return
+
+    if not set -q _flag_command[1]
+        if string match -q vscode $TERM_PROGRAM
+            set -f _flag_command 633
+        else
+            set -f _flag_command 133
+        end
+    end
+
+    if set -q DEBUG_PROMPT
+        set -l cmd "$_flag_command;"(string escape --style=script -- $argv | string join ";")
+        echo -ns (set_color brmagenta) "<" $cmd ">" (set_color normal)
+    end
+
+    echo -ens "\e]" $_flag_command ";" (string join ";" -- $argv) "\a"
+end
+
+function __vsc_escape -d "Escape backslashes, semicolons and newlines"
+    # Used for VS Code's 'P' ("Property") and 'E' ("Command Line") sequences
+    string replace -a '\\' '\\\\' $argv \
+        | string replace -a ';' '\\x3b' \
+        | string join "\x0a"
+end
+
+function __term_prompt_start -d "Mark the start of the prompt"
+    __term_osc A
+end
+
+function __term_prompt_end -d "Mark the end of the prompt and the start of user input"
+    __term_osc B
+end
+
+function __term_command_exec -e fish_preexec -d "Mark the end of user input and the start of command output"
+    set -l commandline $argv[1]
+    switch $TERM_PROGRAM
+        case vscode
+            __term_osc E (__vsc_escape $commandline) $VSCODE_NONCE
+            __term_osc C
+        case iTerm.app
+            __term_osc C \r
+        case '*'
+            __term_osc C
+    end
+end
+
+function __term_status -e fish_postexec -d "Mark the end of command output"
+    __term_osc D $status
+end
+
+function __fish_update_cwd -e fish_prompt -d "Notify terminal of the current directory, user and host"
+    set -q -g term_hostname
+    or set -g term_hostname (hostname -f 2>/dev/null || hostname)
+    switch $TERM_PROGRAM
+        case vscode
+            __term_osc P "Cwd="(__vsc_escape $PWD)
+        case iTerm.app
+            __term_osc -c 1337 "RemoteHost=$USER@$term_hostname"
+            __term_osc -c 1337 "CurrentDir=$PWD"
+    end
+end
+
+# Sent when a command line is cleared or reset and no command was executed
+function __term_cancel_command -e fish_cancel -d "Mark the line with neither success nor failure"
+    switch $TERM_PROGRAM
+        case vscode
+            __term_osc E "" $VSCODE_NONCE
+            __term_osc C
+            __term_osc D
+        case '*'
+            __term_osc D
+    end
+end
+
+switch $TERM_PROGRAM
+    case vscode
+        __term_osc P HasRichCommandDetection=True
+    case iTerm.app
+        __term_osc -c 1337 ShellIntegrationVersion=420 shell=fish
+end
