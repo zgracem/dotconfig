@@ -65,12 +65,18 @@ function prompt_pwd --description 'Print a shortened version of a given path'
 
     # Replace leading $HOME w/ '~', and split PWD into a list of dirnames
     set -f path (string replace -i -r "^$HOME" "~" $argv[1] | string split /)
+    set -f original_path $path
     set -f pathc (seq (math (count $path) - $_flag_keep_dirs))
 
     # Truncate dirnames longer than MAX_PART
     for i in $pathc
         # Stop if PWD is already MAX_PATH or shorter
         test (string length "$path") -le $_flag_max_path; and break
+
+        # Skip if PWD is the root of a git repo
+        set -q _flag_repo
+        and __prompt_dir_is_git_repo $original_path[1..$i]
+        and continue
 
         set -l part $path[$i]
         if test (string length $part) -gt $_flag_max_part
@@ -88,10 +94,9 @@ function prompt_pwd --description 'Print a shortened version of a given path'
         test (string length "$path") -le $_flag_max_path; and break
 
         # Skip if PWD is the root of a git repo
-        if set -q _flag_repo
-            set -l git_dir (string join / $path[1..$i] | string replace -r '^~' $HOME)/.git
-            path is -d $git_dir; and continue
-        end
+        set -q _flag_repo
+        and __prompt_dir_is_git_repo $original_path[1..$i]
+        and continue
 
         set -l part $path[$i]
         if test (string length $part) -gt $actual_min_part
@@ -101,4 +106,9 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     end
 
     string join / -- $path
+end
+
+function __prompt_dir_is_git_repo
+    set -l cwd (string join / $argv | string replace -r '^~' $HOME)
+    path is -d $cwd/.git
 end
