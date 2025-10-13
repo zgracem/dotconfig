@@ -5,5 +5,5 @@ function fish_title_window --description 'Update the window title'
 
     string match -q vscode "$TERM_PROGRAM"
     or printf "%s@%s: " $USER $long_hostname
-    short_home $PWD
+    prompt_pwd -Z $PWD
 end

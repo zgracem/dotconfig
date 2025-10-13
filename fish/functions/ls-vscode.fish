@@ -35,9 +35,9 @@ function ls-vscode -d "List all Visual Studio Code workspaces"
                 continue
         end
         if path is $path
-            echo -s (set_color brgreen) 200 (set_color green) \t (short_home $path) (set_color normal)
+            echo -s (set_color brgreen) 200 (set_color green) \t (prompt_pwd -Z $path) (set_color normal)
         else
-            echo -s (set_color brred) 404 (set_color red) \t \e"[9m" (short_home $path) (set_color normal)
+            echo -s (set_color brred) 404 (set_color red) \t \e"[9m" (prompt_pwd -Z $path) (set_color normal)
         end
     end
 end

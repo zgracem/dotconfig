@@ -47,7 +47,7 @@ function rl --description "Reload configuration files"
         for file in $argv
             if path is -f $file
                 if source "$file"
-                    set -q VERBOSE; and short_home $file
+                    set -q VERBOSE; and prompt_pwd -Z $file
                     continue
                 else
                     set errcode $status

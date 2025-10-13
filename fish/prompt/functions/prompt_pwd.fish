@@ -3,14 +3,16 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # This function compresses a path (for use in `fish_prompt`) in a slightly
     # clearer (and more clever/complicated) way than the stock version.
     #
-    # * Skips compressing dirnames already under a given length (--min-part)
-    # * Always truncate dirnames longer than a given length (--max-part)
-    #   * Use --collapse with -M0 to condense all fully compressed parts
-    # * Stops compressing the path once it's under a given length (--max-path)
-    # * Stop compressing before the end of the path (--keep-dirs)
+    # * Skips compressing dirnames already under a given length (-m/--min-part)
+    # * Always truncate dirnames longer than a given length (-M/--max-part)
+    #   * Use -c/--collapse with -M0 to condense all fully compressed parts
+    # * Stops compressing the path once it's under a given length (-P/--max-path)
+    # * Stop compressing before the end of the path (-k/--keep-dirs)
     #   * Works left to right, stopping at MAX_PATH by default
-    # * Skip compressing the root of a git repo (--repo)
-    # * Indicate which dirnames have been compressed (--glyph)
+    # * Skip compressing the root of a git repo (-r/--repo)
+    # * Indicate which dirnames have been compressed (-g/--glyph)
+    # * Disable automatic HOME shortening (-H/--no-keep-home)
+    # * Disable shortening entirely (-Z/--no-short)
     #
     # Given the following path:
     #     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
@@ -19,15 +21,17 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # This version produces:
     #     /Lib…/Dev…/Com…/SDKs/Mac…/usr/share/man
     # It can mimic vanilla behaviour:
-    #     prompt_pwd --vanilla # = -k1 -m1 -M1 -P1 -G -R
+    #     prompt_pwd --vanilla # = -k1 -m1 -M1 -P1 -G -R -H
+
     set -l options g/glyph= G/no-glyph
     set -a options k/keep-dirs=
+    set -a options h/keep-home H/no-keep-home
     set -a options m/min-part= M/max-part= P/max-path=
     set -a options c/collapse
     set -a options r/repo R/no-repo
-    set -a options V/vanilla
-    set -l exclusives V,{g,G,k,m,M,P,r,R}
-    set -a exclusives g,G r,R
+    set -a options V/vanilla Z/no-short
+    set -l exclusives V,{g,G,k,h,H,m,M,P,r,R}
+    set -a exclusives g,G h,H r,R
 
     argparse -n (status function) -x$exclusives $options -- $argv
     or return
@@ -47,62 +51,78 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # Always leave this many trailing dirnames unshortened
     set -q _flag_keep_dirs; or set -f _flag_keep_dirs 1
 
+    # Always skip shortening leading `~`
+    set -q _flag_keep_home; or set -f _flag_keep_home 1
+
     # Mark shortened dirnames
     set -q _flag_glyph; or set -f _flag_glyph "…"
 
     # Skip compressing git repos by default
     set -f _flag_repo 1
 
-    set -q _flag_no_glyph; and set -f _flag_glyph ""
-    set -q _flag_no_repo; and set -e _flag_repo
-
     if set -q _flag_vanilla
         set -f _flag_min_part 1
         set -f _flag_max_part 1
         set -f _flag_max_path 1
         set -f _flag_keep_dirs 1
-        set -f _flag_glyph ""
-        set -e _flag_repo
+        set -f _flag_no_glyph 1
+        set -f _flag_no_repo 1
+        set -f _flag_no_keep_home 1
     end
 
+    set -q _flag_no_glyph; and set -f _flag_glyph ""
+    set -q _flag_no_repo; and set -e _flag_repo
+    set -q _flag_no_keep_home; and set -e _flag_keep_home
+
     # Replace leading $HOME w/ '~', and split PWD into a list of dirnames
-    set -f path (string replace -i -r "^$HOME" "~" $argv[1] | string split /)
-    set -f original_path $path
+    set -f original_path (
+        if set -q _flag_no_keep_home
+            string split / $argv[1]
+        else
+            string replace -i -r "^$HOME(?=\$|/)" "~" $argv[1] | string split /
+        end
+    )
+    set -f path $original_path
     set -f pathc (seq (math (count $path) - $_flag_keep_dirs))
+    set -q _flag_no_short; and set -f -e pathc
 
     # Truncate dirnames longer than MAX_PART
     for i in $pathc
         # Stop if PWD is already MAX_PATH or shorter
         test (string length "$path") -le $_flag_max_path; and break
 
+        # Don't compress leading tilde
+        set -q _flag_keep_home; and string match -q '~' $path[$i]; and continue
+
         # Skip if PWD is the root of a git repo
         set -q _flag_repo
         and __prompt_dir_is_git_repo $original_path[1..$i]
         and continue
 
-        set -l part $path[$i]
-        if test (string length $part) -gt $_flag_max_part
-            set path[$i] (string sub -l$_flag_max_part $part | string trim)
+        if test (string length $path[$i]) -gt $_flag_max_part
+            set path[$i] (string sub -l$_flag_max_part $path[$i] | string trim)
             set path[$i] "$path[$i]$_flag_glyph"
         end
     end
 
     # Truncate dirnames longer than MIN_PART, left to right, but only if it
-    # would actually shorten the string: avoids usr → us…, data → # dat…
-    # etc., which obfuscates for no benefit.
+    # would actually shorten the string: avoids usr → us…, data → dat…, etc.,
+    # which obfuscates for no benefit.
     set -f actual_min_part (math $_flag_min_part + (string length $_flag_glyph))
     for i in $pathc
         # Stop if PWD is already MAX_PATH or shorter
         test (string length "$path") -le $_flag_max_path; and break
+
+        # Don't compress leading tilde
+        set -q _flag_keep_home; and string match -q '~' $path[$i]; and continue
 
         # Skip if PWD is the root of a git repo
         set -q _flag_repo
         and __prompt_dir_is_git_repo $original_path[1..$i]
         and continue
 
-        set -l part $path[$i]
-        if test (string length $part) -gt $actual_min_part
-            set path[$i] (string sub -l$_flag_min_part $part | string trim)
+        if test (string length $path[$i]) -gt $actual_min_part
+            set path[$i] (string sub -l$_flag_min_part $path[$i] | string trim)
             set path[$i] "$path[$i]$_flag_glyph"
         end
     end

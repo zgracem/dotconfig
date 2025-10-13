@@ -238,11 +238,11 @@ function __abbr_zequals
     if functions -q $cmdname
         set -l funcpath (functions -D $cmdname)
         if path is -f $funcpath
-            short_home $funcpath
+            prompt_pwd -Z $funcpath
             return 0
         end
     else if set -l cmdpath (command -s $cmdname)
-        short_home $cmdpath
+        prompt_pwd -Z $cmdpath
         return 0
     end
     return 1
