@@ -12,14 +12,14 @@
 #     fish_mode_prompt function(s)
 #   - Except for `__term_prompt_start` and `__term_prompt_end`, all control
 #     sequences are triggered by appropriate event handlers
+#     <https://fishshell.com/docs/current/language.html#event>
 #   - Supports `--final-rendering` for transient prompts (new in fish 4.1)
+#     <https://fishshell.com/docs/current/prompt.html#transient-prompt>
 #
 # References:
 #   - https://code.visualstudio.com/docs/terminal/shell-integration
-#   - https://iterm2.com/documentation-shell-integration.html
-#   - https://iterm2.com/documentation-escape-codes.html
-#   - https://fishshell.com/docs/current/language.html#event
-#   - https://fishshell.com/docs/current/prompt.html#transient-prompt
+#   - https://iterm2.com/documentation-shell-integration.html#:~:text=Features,-Shell%20Integration
+#   - https://iterm2.com/documentation-escape-codes.html#:~:text=Shell%20Integration,-/FinalTerm
 #   - https://sw.kovidgoyal.net/kitty/shell-integration/#manual-shell-integration
 #   - /Applications/iTerm.app/Contents/Resources/iterm2_shell_integration.fish
 #   - `code --locate-shell-integration-path fish`
@@ -62,12 +62,15 @@ function __term_osc -d "Emit an operating system command"
 
     if not set -q _flag_command[1]
         if string match -q vscode $TERM_PROGRAM
+            # Placing this logic here means we only have to write special cases
+            # where VS Code's control sequences deviate from the "standard".
             set -f _flag_command 633
         else
             set -f _flag_command 133
         end
     end
 
+    # `set -gx DEBUG_PROMPT 1` to see the placement of escape sequences.
     if set -q DEBUG_PROMPT
         set -l cmd "$_flag_command;"(string escape --style=script -- $argv | string join ";")
         echo -ns (set_color brmagenta) "<" $cmd ">" (set_color normal)
@@ -76,8 +79,9 @@ function __term_osc -d "Emit an operating system command"
     echo -ens "\e]" $_flag_command ";" (string join ";" -- $argv) "\a"
 end
 
+# Used for VS Code's 'P' ("Property") and 'E' ("Command Line") sequences
 function __vsc_escape -d "Escape backslashes, semicolons and newlines"
-    # Used for VS Code's 'P' ("Property") and 'E' ("Command Line") sequences
+    # `string replace` splits $argv on newlines
     string replace -a '\\' '\\\\' $argv \
         | string replace -a ';' '\\x3b' \
         | string join "\x0a"
@@ -117,6 +121,9 @@ function __fish_update_cwd -e fish_prompt -d "Notify terminal of the current dir
         case iTerm.app
             __term_osc -c 1337 "RemoteHost=$USER@$term_hostname"
             __term_osc -c 1337 "CurrentDir=$PWD"
+        # # fish does this automatically:
+        # case '*'
+        #     __term_osc -c 7 "file://$hostname"(string escape --style=url $PWD)
     end
 end
 
