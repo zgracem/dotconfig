@@ -5,6 +5,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     #
     # * Skips compressing dirnames already under a given length (--min-part)
     # * Always truncate dirnames longer than a given length (--max-part)
+    #   * Use --collapse with -M0 to condense all fully compressed parts
     # * Stops compressing the path once it's under a given length (--max-path)
     # * Stop compressing before the end of the path (--keep-dirs)
     #   * Works left to right, stopping at MAX_PATH by default
@@ -22,6 +23,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     set -l options g/glyph= G/no-glyph
     set -a options k/keep-dirs=
     set -a options m/min-part= M/max-part= P/max-path=
+    set -a options c/collapse
     set -a options r/repo R/no-repo
     set -a options V/vanilla
     set -l exclusives V,{g,G,k,m,M,P,r,R}
@@ -105,7 +107,11 @@ function prompt_pwd --description 'Print a shortened version of a given path'
         end
     end
 
-    string join / -- $path
+    if set -q _flag_collapse
+        string join / -- $path | string replace -ar "($_flag_glyph/)+" '\\1'
+    else
+        string join / -- $path
+    end
 end
 
 function __prompt_dir_is_git_repo
