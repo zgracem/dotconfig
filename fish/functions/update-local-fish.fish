@@ -25,7 +25,7 @@ function update-local-fish -a fishver
 
     cd (mktemp -d)
     and wget $url
-    and unxz -k $package
+    and unxz -ck $package | tar xf -
     and install -D -C ./fish $XDG_BIN_HOME/fish
     and cd ~
     and exec $XDG_BIN_HOME/fish
