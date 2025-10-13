@@ -21,8 +21,8 @@ if ! [[ $- == *i* ]]; then
 elif shopt -q restricted_shell; then
   echo >&2 "restricted shell -- aborting .bashrc"
   return
-elif [[ $HOSTNAME =~ "opalstack" ]]; then
-  LD_LIBRARY_PATH=$HOME/opt/lib64 exec ~/opt/bin/fish --login
+elif [[ $HOSTNAME =~ "opalstack" && -x ~/.local/bin/fish ]]; then
+  exec ~/.local/bin/fish --login
 elif [[ $HOSTNAME =~ "WS-01" && $SHLVL -lt 2 ]]; then
   exec /usr/bin/fish --login
 fi
