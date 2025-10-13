@@ -354,5 +354,9 @@
   {
     "key": "ctrl+q",
     "command": "workbench.action.quickOpenWithModes"
+  },
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.togglePanel"
   }
 ]

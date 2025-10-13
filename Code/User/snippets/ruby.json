@@ -1,4 +1,18 @@
 {
+  "new_class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:Thing}",
+      "\t# @return [String]",
+      "\tattr_reader :name",
+      "",
+      "\tdef initialize(*args)",
+      "\t\t${0:@name = name}",
+      "\tend",
+      "end"
+    ],
+    "description": "New class definition"
+  },
   "def_inspect": {
     "prefix": "def inspect",
     "body": [
