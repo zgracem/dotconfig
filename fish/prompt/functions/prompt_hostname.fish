@@ -1,5 +1,5 @@
 # Overrides $__fish_data_dir/functions/prompt_hostname.fish
-if not functions -q __fish_prompt_hostname
+if functions -q prompt_hostname; and not functions -q __fish_prompt_hostname
     source $__fish_data_dir/functions/prompt_hostname.fish
     functions --copy prompt_hostname __fish_prompt_hostname
 end
