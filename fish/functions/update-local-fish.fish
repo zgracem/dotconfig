@@ -12,11 +12,9 @@ function update-local-fish -a fishver
         return 1
     end
 
-    if path is -x $XDG_BIN_HOME/fish
-        if string match -q "*$fishver" ($XDG_BIN_HOME/fish --version)
-            echo >&2 "fish $fishver is already installed!"
-            return 1
-        end
+    if path is -x $XDG_BIN_HOME/fish; and $XDG_BIN_HOME/fish --version | string match -q "*$fishver"
+        echo >&2 "fish $fishver is already installed!"
+        return 1
     end
 
     set -f arch (uname -m)
@@ -24,7 +22,7 @@ function update-local-fish -a fishver
     set -f url "https://github.com/fish-shell/fish-shell/releases/download/$fishver/$package"
 
     cd (mktemp -d)
-    and wget $url
+    and wget --quiet --no-config $url
     and unxz -ck $package | tar xf -
     and install -D -C ./fish $XDG_BIN_HOME/fish
     and cd ~
