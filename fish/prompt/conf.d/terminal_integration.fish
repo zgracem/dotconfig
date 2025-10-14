@@ -113,13 +113,11 @@ function __term_status -e fish_postexec -d "Mark the end of command output"
 end
 
 function __fish_update_cwd -e fish_prompt -d "Notify terminal of the current directory, user and host"
-    set -q -g term_hostname
-    or set -g term_hostname (hostname -f 2>/dev/null || hostname)
     switch $TERM_PROGRAM
         case vscode
             __term_osc P "Cwd="(__vsc_escape $PWD)
         case iTerm.app
-            __term_osc -c 1337 "RemoteHost=$USER@$term_hostname"
+            __term_osc -c 1337 "RemoteHost=$USER@$hostname"
             __term_osc -c 1337 "CurrentDir=$PWD"
         # # fish does this automatically:
         # case '*'
