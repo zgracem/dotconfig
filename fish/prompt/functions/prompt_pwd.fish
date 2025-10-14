@@ -128,7 +128,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     end
 
     if set -q _flag_collapse
-        string join / -- $path | string replace -ar "($_flag_glyph/)+" '\\1'
+        string join / -- $path | string replace -ar "($_flag_glyph/)+" '$1'
     else
         string join / -- $path
     end
