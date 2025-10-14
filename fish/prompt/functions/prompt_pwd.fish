@@ -51,7 +51,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # Always leave this many trailing dirnames unshortened
     set -q _flag_keep_dirs; or set -f _flag_keep_dirs 1
 
-    # Always skip shortening leading `~`
+    # Don't skip shortening leading `~`
     set -q _flag_keep_home; or set -f _flag_keep_home 1
 
     # Mark shortened dirnames
@@ -74,13 +74,13 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     set -q _flag_no_repo; and set -e _flag_repo
     set -q _flag_no_keep_home; and set -e _flag_keep_home
 
-    # Replace leading $HOME w/ '~', and split PWD into a list of dirnames
+    # Optionally replace leading $HOME w/ '~', and split PWD into a list of dirnames
     set -f original_path (
         if set -q _flag_no_keep_home
-            string split / $argv[1]
+            echo $argv[1]
         else
-            string replace -i -r "^$HOME(?=\$|/)" "~" $argv[1] | string split /
-        end
+            string replace -i -r "^$HOME(?=\$|/)" "~" $argv[1]
+        end | string split /
     )
     set -f path $original_path
     set -f pathc (seq (math (count $path) - $_flag_keep_dirs))
