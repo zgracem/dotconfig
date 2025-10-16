@@ -24,6 +24,7 @@ micro/buffers/
 # unnecessary
 .bombadillo.ini
 lynx/lynx_bookmarks.html
+ruby/Gemfile.lock
 
 # etc.
 newsboat/killfile
