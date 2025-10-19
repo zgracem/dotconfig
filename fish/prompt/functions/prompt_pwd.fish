@@ -13,6 +13,7 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # * Indicate which dirnames have been compressed (-g/--glyph)
     # * Disable automatic HOME shortening (-H/--no-keep-home)
     # * Disable shortening entirely (-Z/--no-short)
+    # * Compress everything except leading `~` and final dirname (-z/--shortest)
     #
     # Given the following path:
     #     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
@@ -29,9 +30,9 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     set -a options m/min-part= M/max-part= P/max-path=
     set -a options c/collapse
     set -a options r/repo R/no-repo
-    set -a options V/vanilla Z/no-short
-    set -l exclusives V,{g,G,k,h,H,m,M,P,r,R}
-    set -a exclusives g,G h,H r,R
+    set -a options V/vanilla Z/no-short z/shortest
+    set -l exclusives V,{g,G,k,h,H,m,M,P,r,R,Z,z}
+    set -a exclusives g,G h,H r,R z,Z
 
     argparse -n (status function) -x$exclusives $options -- $argv
     or return
@@ -68,6 +69,13 @@ function prompt_pwd --description 'Print a shortened version of a given path'
         set -f _flag_no_glyph 1
         set -f _flag_no_repo 1
         set -f _flag_no_keep_home 1
+    else if set -q _flag_shortest
+        set -f _flag_min_part 0
+        set -f _flag_max_part 0
+        set -f _flag_max_path 1
+        set -f _flag_keep_dirs 1
+        set -f _flag_no_repo 1
+        set -f _flag_collapse 1
     end
 
     set -q _flag_no_glyph; and set -f _flag_glyph ""
