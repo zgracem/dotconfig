@@ -5,6 +5,7 @@ for dir in $__fish_config_dir/packages/*/
     set -a fish_package_path (string trim --right --chars=/ $dir)
 end
 
+# remove duplicate & nonexistent directories
 set fish_package_path (path filter -d $fish_package_path | un1q)
 
 for package_dir in $fish_package_path
@@ -15,8 +16,8 @@ for package_dir in $fish_package_path
             for file in $package_dir/conf.d/*.fish
                 source $file
                 # If anything in conf.d/*.fish exits 101, the package is
-                # assumed to have "bootstrapped" itself and auto-loading
-                # immediately stops.
+                # is assumed to have "bootstrapped" itself, and auto-loading
+                # immediately stops. No functions or completions will be added.
                 if test $status -eq 101
                     set bootstrapped 1
                     break

@@ -1,21 +1,21 @@
 # Overrides $__fish_data_dir/functions/prompt_pwd.fish
 function prompt_pwd --description 'Print a shortened version of a given path'
-    # This function compresses a path (for use in `fish_prompt`) in a slightly
-    # clearer (and more clever/complicated) way than the stock version.
+    # This function shortens a path (for use in `fish_prompt`) in a slightly
+    # more legible (and clever/complicated) way than the default fish function.
     #
-    # * Skips compressing dirnames already under a given length (-m/--min-part)
-    # * Always truncate dirnames longer than a given length (-M/--max-part)
-    #   * Use -c/--collapse with -M0 to condense all fully compressed parts
-    # * Stops compressing the path once it's under a given length (-P/--max-path)
-    # * Stop compressing before the end of the path (-k/--keep-dirs)
-    #   * Works left to right, stopping at MAX_PATH by default
-    # * Skip compressing the root of a git repo (-r/--repo)
-    # * Indicate which dirnames have been compressed (-g/--glyph)
-    # * Disable automatic HOME shortening (-H/--no-keep-home)
-    # * Disable shortening entirely (-Z/--no-short)
+    # * Skip shortening dirnames of ≤N chars (-m/--min-part)
+    # * Always shorten dirnames of ≥N chars (-M/--max-part)
+    #   * With -M0, turn e.g. `~/…/…/…/dir` to `~/…/dir` (-c/--collapse)
+    # * Stop shortening PWD at ≤N chars total (-P/--max-path)
+    # * Keep ≥N trailing dirnames unshortened (-k/--keep-dirs)
+    # * Skip shortening the root directory of a git repo (-r/--repo)
+    # * Indicate which dirnames have been shortened (-g/--glyph)
+    # * Disable automatic HOME-to-tilde shortening (-H/--no-keep-home)
+    # * Disable path shortening, but not HOME shortening (-Z/--no-short)
+    #   * This means `prompt_pwd -Z -H` is effectively a no-op
     # * Compress everything except leading `~` and final dirname (-z/--shortest)
     #
-    # Given the following path:
+    # Given the following PWD:
     #     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
     # The vanilla `prompt_pwd` produces:
     #     /L/D/C/S/M/u/s/man
