@@ -45,6 +45,6 @@ gem "htmlentities"
 
 # -- for security --------------------------------------------------------------
 
-gem "nokogiri", "~> 1.16.5"
-gem "rexml", "~> 3.3.9"
+gem "nokogiri", ">= 1.18.9"
+gem "rexml", ">= 3.4.2"
 gem "webrick", "~> 1.8.2"
