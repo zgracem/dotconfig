@@ -320,7 +320,11 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.stickyScroll.enabled": true,
   "terminal.integrated.stickyScroll.maxLineCount": 2,
-  "terminal.integrated.suggest.enabled": true,
+  "terminal.integrated.suggest.cdPath": "off",
+  "terminal.integrated.suggest.providers": {
+    "lsp": false,
+    "terminal-suggest": false
+  },
   "terminal.integrated.tabs.description": "${process}",
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.separator": " • ",
