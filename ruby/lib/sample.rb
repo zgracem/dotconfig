@@ -6,7 +6,6 @@ module Sample
   def string
     "Hëllő, wøŕ𝓁d!\n"
   end
-  alias_method :str, :string
 
   # @return [Hash]
   def hsh
@@ -28,7 +27,6 @@ module Sample
   def integer
     rand(10..1000)
   end
-  alias_method :int, :integer
 
   # @return [Float]
   def float
@@ -39,7 +37,6 @@ module Sample
   def pathname
     Pathname("~/Documents/blankpage.pdf").expand_path
   end
-  alias_method :path, :pathname
 
   # @return [Regexp]
   def regex
@@ -48,7 +45,7 @@ module Sample
 
   # @return [Set]
   def set
-    Set.new(arr.map(&:to_sym))
+    Set.new(array.map(&:to_sym))
   end
 
   # @return [URI]
