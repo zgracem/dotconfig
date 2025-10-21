@@ -9,7 +9,7 @@ function fish_prompt --description 'Display the interactive prompt'
     if fish_is_root_user # root gets an unobscured path
         echo -n (pwd)
     else
-        echo -n (prompt_pwd)
+        echo -n (my-prompt-pwd)
     end
 
     set_color normal

@@ -1,7 +1,6 @@
-# Overrides $__fish_data_dir/functions/prompt_pwd.fish
-function prompt_pwd --description 'Print a shortened version of a given path'
+function my-prompt-pwd --description 'Print a shortened version of a given path'
     # This function shortens a path (for use in `fish_prompt`) in a slightly
-    # more legible (and clever/complicated) way than the default fish function.
+    # more legible (and clever/complicated) way than the default `prompt_pwd`.
     #
     # * Skip shortening dirnames of ≤N chars (-m/--min-part)
     # * Always shorten dirnames of ≥N chars (-M/--max-part)
@@ -12,17 +11,17 @@ function prompt_pwd --description 'Print a shortened version of a given path'
     # * Indicate which dirnames have been shortened (-g/--glyph)
     # * Disable automatic HOME-to-tilde shortening (-H/--no-keep-home)
     # * Disable path shortening, but not HOME shortening (-Z/--no-short)
-    #   * This means `prompt_pwd -Z -H` is effectively a no-op
+    #   * This means `my-prompt-pwd -Z -H` is effectively a no-op
     # * Compress everything except leading `~` and final dirname (-z/--shortest)
     #
     # Given the following PWD:
     #     /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man
     # The vanilla `prompt_pwd` produces:
     #     /L/D/C/S/M/u/s/man
-    # This version produces:
+    # `my-prompt-pwd` produces:
     #     /Lib…/Dev…/Com…/SDKs/Mac…/usr/share/man
     # It can mimic vanilla behaviour:
-    #     prompt_pwd --vanilla # = -k1 -m1 -M1 -P1 -G -R -H
+    #     my-prompt-pwd --vanilla # -k1 -m1 -M1 -P1 -GRH
 
     set -l options g/glyph= G/no-glyph
     set -a options k/keep-dirs=
