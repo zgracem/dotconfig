@@ -1,4 +1,3 @@
-# Overrides $__fish_data_dir/functions/__fish_print_pipestatus.fish
 function my-prompt-right-status -a code
     test $code -ne 0; or return
 

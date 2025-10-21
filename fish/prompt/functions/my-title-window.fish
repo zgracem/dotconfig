@@ -1,4 +1,4 @@
-function fish_title_window --description "Output the window title"
+function my-title-window --description "Output the window title"
     switch $TERM_PROGRAM
     case vscode
         my-prompt-pwd -Z $PWD

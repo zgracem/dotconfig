@@ -22,15 +22,14 @@ auto-load.
 
 [Screenshot]: https://raw.githubusercontent.com/zgracem/dotconfig/main/fish/prompt/prompt.png
 
-## `fish_title` → `fish_title_window` + `fish_title_tab`
+## `fish_title` → `my-title-window` + `my-title-tab`
 
 The code supporting [`fish_title`][1] writes simultaneously to both the terminal
-"window" and "icon" titles. I prefer to set those separately; hence
-[`set_terminal_title.fish`][2], which allows separate [`fish_title_window`][3]
-and [`fish_title_tab`][4] functions, the output of which will appear in the
-terminal window or tab title, respectively, each time the prompt is displayed.
+"window" and "icon" titles. I prefer to set those separately; hence separate
+[`my-title-window`][2] and [`my-title-tab`][3] functions, the output of which
+will appear in the terminal window or tab title, respectively, each time the
+prompt is displayed.
 
 [1]: https://fishshell.com/docs/current/cmds/fish_title.html
-[2]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/set_terminal_title.fish
-[3]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/fish_title_window.fish
-[4]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/fish_title_tab.fish
+[2]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/my-title-window.fish
+[3]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/my-title-tab.fish

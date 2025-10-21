@@ -151,8 +151,8 @@ end
 # function to both the terminal's "window" title and "tab" (or "icon") title.
 # But many terminals, including PuTTY and iTerm, allow setting separate values
 # for window and tab titles using `OSC 2` and `OSC 1` respectively. This
-# reimplementation does that with the outputs of `fish_title_window` and
-# `fish_title_tab` instead, while `fish_title` is disabled elsewhere by setting
+# reimplementation does that with the outputs of `my-title-window` and
+# `my-title-tab` instead, while `fish_title` is disabled elsewhere by setting
 # it to an empty function.
 # ----------------------------------------------------------------------------
 
@@ -172,6 +172,6 @@ function __term_set_title
 end
 
 function __term_update_titles --on-event fish_prompt
-    functions -q fish_title_window; and __term_set_title --window (fish_title_window)
-    functions -q fish_title_tab; and __term_set_title --tab (fish_title_tab)
+    functions -q my-title-window; and __term_set_title --window (my-title-window)
+    functions -q my-title-tab; and __term_set_title --tab (my-title-tab)
 end
