@@ -2,7 +2,7 @@
 # ~/.config/fish/config.fish
 # -----------------------------------------------------------------------------
 
-if fish-is-older-than 3.2 # released Mar 2021
+if fish-is-older-than 3.6 # released Jan 2023
     begin
         echo -e '\e[1;7;91m'
         echo "*** These configuration files should not run on fish $version ***"
@@ -17,7 +17,7 @@ source "$__fish_config_dir/env.fish"
 # stop here if not an interactive session
 status is-interactive; or return
 
-# launch development build if present
+# launch standalone or dev build if present
 set -l local_fish "$XDG_BIN_HOME/fish"
 test $SHLVL -le 1
 and string match -v -q (status fish-path) (path resolve $local_fish)
