@@ -1,9 +1,8 @@
-function fish_title_window --description 'Update the window title'
-    set -q long_hostname
-    or set -g long_hostname (prompt_hostname)
-    or set -g long_hostname $hostname
-
-    string match -q vscode "$TERM_PROGRAM"
-    or printf "%s@%s: " $USER $long_hostname
-    prompt_pwd -Z $PWD
+function fish_title_window --description "Output the window title"
+    switch $TERM_PROGRAM
+    case vscode
+        prompt_pwd -Z $PWD
+    case '*'
+        printf "%s@%s: %s" $USER $hostname (prompt_pwd -Z $PWD)
+    end
 end

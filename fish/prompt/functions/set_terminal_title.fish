@@ -1,32 +1,24 @@
 function set_terminal_title --description 'Set the xterm-compatible terminal title'
-    argparse -n set_terminal_title --min-args 1 --exclusive window,tab,both w/window t/tab b/both -- $argv
+    argparse -N1 -xw,t,b w/window t/tab b/both -- $argv
+    or return
 
-    set -l BEL "\a"
-    set -l DCS "\eP"
-    set -l OSC "\e]"
-    set -l ST "\e\\"
-
-    set -l dcs_ante ""
-    set -l dcs_post ""
-
-    if in-tmux
-        set dcs_ante $DCS "tmux;\\e"
-        set dcs_post $ST
-    end
+    set -f command "\e]"
 
     if set -q _flag_window
-        set -f Ps 2
+        set -a command 2
     else if set -q _flag_tab
-        set -f Ps 1
-    else if set -q _flag_both
-        set -f Ps 0
-    else
-        echo >&2 "failed to specify which title to set"
-        return 121
+        set -a command 1
+    else # if set -q _flag_both
+        set -a command 0
     end
 
-    set -l tcap_ts $dcs_ante $OSC "$Ps;"
-    set -l tcap_fs $BEL $dcs_post
+    set -a command ";" "$argv" "\a"
 
-    echo -ens $tcap_ts $argv[1] $tcap_fs
+    # Add a Device Control String so tmux passes the escape sequences through
+    if test -S (string split -f1 "," "$TMUX")
+        set -p command "\ePtmux;\\e"
+        set -a command "\e\\"
+    end
+
+    echo -ens $command
 end
