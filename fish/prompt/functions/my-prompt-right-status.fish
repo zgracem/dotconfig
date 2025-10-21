@@ -1,5 +1,5 @@
 # Overrides $__fish_data_dir/functions/__fish_print_pipestatus.fish
-function __fish_print_pipestatus -a code
+function my-prompt-right-status -a code
     test $code -ne 0; or return
 
     if test $code -eq 141 # SIGPIPE is not always an error

@@ -1,4 +1,4 @@
-function __fish_prompt_rbenv
+function my-prompt-rbenv
     command -q rbenv
     or return 0
 

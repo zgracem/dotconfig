@@ -1,4 +1,4 @@
-function __fish_prompt_jobs --description 'Helper function for fish_prompt'
+function my-prompt-jobs --description 'Helper function for fish_prompt'
     set -l job_count (builtin jobs -g | count)
     or return 0
 

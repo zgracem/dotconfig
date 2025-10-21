@@ -1,4 +1,4 @@
-function fish_mode_rprompt --description 'Display the current mode for the prompt'
+function my-prompt-right-mode --description 'Display the current mode for the prompt'
     if string match -rq "fish_(vi|hybrid)_key_bindings" "$fish_key_bindings"
         switch $fish_bind_mode
             case default

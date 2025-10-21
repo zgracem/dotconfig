@@ -2,7 +2,7 @@ function fish_prompt --description 'Display the interactive prompt'
     __term_prompt_start
 
     if set -q SSH_CONNECTION
-        echo -ns (prompt_login) :
+        echo -ns (my-prompt-login) :
     end
 
     set_color $fish_color_cwd
@@ -15,9 +15,9 @@ function fish_prompt --description 'Display the interactive prompt'
     set_color normal
     echo -n " "
 
-    __fish_prompt_rbenv
-    fish_git_prompt
-    __fish_prompt_jobs
+    my-prompt-rbenv
+    my-prompt-git
+    my-prompt-jobs
 
     if fish_is_root_user
         set_color $fish_prompt_color_ps_root
