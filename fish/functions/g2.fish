@@ -47,9 +47,9 @@ function g2 --description 'Go somewhere'
         case fonts;     set dir "$HOME/misc/Fonts"
         case music;     set dir "$HOME/Music/Music/Media.localized/Music"
         case twee;      set dir "$HOME/Developer/twee"
-        case zpod;      set dir "/Volumes/Hub/Music/zPod"
+        case zpod;      set dir "/Volumes/Ultra/Media/Music/zPod"
         case fish;      set dir "$__fish_config_dir"
-        case hd;        set dir "/Volumes/Hub/Music/HD"
+        case hd;        set dir "/Volumes/Ultra/Media/Music/HD"
         case hddb;      set dir "$HOME/Developer/www/hddb"
         case '*'
             echo >&2 "don't know how to go to $destination!"
