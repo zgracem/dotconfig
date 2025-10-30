@@ -33,24 +33,30 @@
 
 # Don't run in scripts
 status is-interactive; or return
-# Don't run in non-GUI clients
-contains -- "$TERM" dumb linux {screen,tmux}-256color; and return
 # Don't run more than once
 functions -q __term_osc; and return
 
+# Stub these out so `fish_prompt` will ignore them if they remain undefined.
+function __term_prompt_start; end
+function __term_prompt_end; end
+
+# Don't run in non-GUI clients
+contains -- "$TERM" dumb linux vt100 {screen,tmux}-256color; and return
+
 # Prevent iTerm & VS Code's builtin shell integrations from running after this
 # by setting the conditions they check for.
-function iterm2_status; end
-set -g VSCODE_SHELL_INTEGRATION 1
+switch $TERM_PROGRAM
+    case iTerm.app
+        function iterm2_status; end
+    case vscode
+        set -g VSCODE_SHELL_INTEGRATION 1
+end
 
 # Manually install kitty's shell integration
 if set -q KITTY_INSTALLATION_DIR
-    # Stub these out so fish_prompt will just ignore them
-    function __term_prompt_start; end
-    function __term_prompt_end; end
-    set -g KITTY_SHELL_INTEGRATION enabled
-    source "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/kitty-shell-integration.fish"
-    set -p fish_complete_path "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_completions.d"
+    set -p fish_complete_path $KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_completions.d
+    source $KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/kitty-shell-integration.fish
+    and set -g KITTY_SHELL_INTEGRATION enabled
     return
 end
 
