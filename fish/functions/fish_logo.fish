@@ -1,56 +1,66 @@
-function fish_logo --description 'Display the fish logo'
-    __fish_logo_v4
+function fish_logo --description "Display the fish logo"
+    argparse v#version -- $argv
+    or return
+
+    # set -f palette "#f00" "#f00" "#f80" "#ff0"
+    # set -f palette "#809" "#908" "#d58" "#fec"
+    # set -f palette "#05a" "#08f" "#3db" "#5d3"
+    # set -f palette "#08b" "#58d" "#a8f" "#d9f"
+    set -f palette "#f3a" "#f28" "#f80" "#fa0"
+
+    set -fx C0 (set_color $palette[1])
+    set -fx C1 (set_color $palette[2])
+    set -fx C2 (set_color $palette[3])
+    set -fx C3 (set_color $palette[4])
+
+    switch $_flag_version
+        case 3 2 1
+            __fish_logo_v3
+        case 4
+            __fish_logo_v4
+        case 5 6 7 8 9
+            echo >&2 "invalid fish version: $_flag_version"
+            return 1
+        case '*' # default
+            __fish_logo_v4
+    end
     set_color normal
 end
 
 function __fish_logo_v3
-    set -l red (set_color f00)
-    set -l ora (set_color f80)
-    set -l yel (set_color ff0)
-
-    echo '                 '$red'___
-  ___======____='$ora'-'$yel'-'$ora'-='$red')
-/T            \_'$yel'--='$ora'=='$red')
-[ \ '$ora'('$yel'0'$ora')   '$red'\~    \_'$yel'-='$ora'='$red')
- \      / )J'$ora'~~    \\'$yel'-='$red')
-  \\\\___/  )JJ'$ora'~'$yel'~~   '$red'\)
-   \_____/JJJ'$ora'~~'$yel'~~    '$red'\\
-   '$ora'/ '$yel'\  '$yel', \\'$red'J'$ora'~~~'$yel'~~     '$ora'\\
-  (-'$yel'\)'$red'\='$ora'|'$yel'\\\\\\'$ora'~~'$yel'~~       '$ora'L_'$yel'_
-  '$ora'('$red'\\'$ora'\\)  ('$yel'\\'$ora'\\\)'$red'_           '$yel'\=='$ora'__
-   '$red'\V    '$ora'\\\\'$red'\) =='$ora'=_____   '$yel'\\\\\\\\'$ora'\\\\
-          '$red'\V)     \_) '$ora'\\\\'$yel'\\\\JJ\\'$ora'J\)
-                      '$red'/'$ora'J'$yel'\\'$ora'J'$red'T\\'$ora'JJJ'$red'J)
-                      (J'$ora'JJ'$red'| \UUU)
+    echo '                 '$C1'___
+  ___======____='$C2'-'$C3'-'$C2'-='$C1')
+/T            \_'$C3'--='$C2'=='$C1')
+[ \ '$C2'('$C3'0'$C2')   '$C1'\~    \_'$C3'-='$C2'='$C1')
+ \      / )J'$C2'~~    \\'$C3'-='$C1')
+  \\\\___/  )JJ'$C2'~'$C3'~~   '$C1'\)
+   \_____/JJJ'$C2'~~'$C3'~~    '$C1'\\
+   '$C2'/ '$C3'\  '$C3', \\'$C1'J'$C2'~~~'$C3'~~     '$C2'\\
+  (-'$C3'\)'$C1'\='$C2'|'$C3'\\\\\\'$C2'~~'$C3'~~       '$C2'L_'$C3'_
+  '$C2'('$C1'\\'$C2'\\)  ('$C3'\\'$C2'\\\)'$C1'_           '$C3'\=='$C2'__
+   '$C0'\V    '$C2'\\\\'$C0'\) =='$C2'=_____   '$C3'\\\\\\\\'$C2'\\\\
+          '$C0'\V)     \_) '$C2'\\\\'$C3'\\\\JJ\\'$C2'J\)
+                      '$C0'/'$C2'J'$C3'\\'$C2'J'$C0'T\\'$C2'JJJ'$C0'J)
+                      (J'$C2'JJ'$C0'| \UUU)
                        (UU)
 '
 end
 
 function __fish_logo_v4
-    # set -l palette "#810793" "#9d0287" "#dd4f8f" "#fff0a8"
-    # set -l palette "#0055aa" "#0088ff" "#33ddbb" "#55dd33"
-    # set -l palette "#0088bb" "#5588dd" "#aa88ff" "#dd99ff"
-    set -l palette "#ff33aa" "#ff2288" "#ff8800" "#ffaa00"
-
-    set -l shadow (set_color $palette[1])
-    set -l lolite (set_color $palette[2])
-    set -l hilite (set_color $palette[3])
-    set -l accent (set_color $palette[4])
-
     echo '
-                                 '$lolite'__~'$hilite'’
-                               '$lolite'_/,'$hilite'~\
-                             '$lolite'_-'$hilite' _~}
-        '$lolite',/'$hilite'/}-__             '$lolite'/'$hilite'  __~}
-       '$lolite'//'$hilite'‘,/ /,}-_         '$lolite'/ '$hilite' __~/
-   '$lolite'__-/ ('$hilite'-,/'$lolite'_'$hilite',/ /,}      '$hilite'_'$lolite'/  '$hilite'_~‘}
-  '$lolite'/           '$lolite'‘—'$hilite'/'$lolite'_'$hilite'/}'$lolite'__-_/   '$lolite'..'$hilite'=<
-'$accent'O'$lolite')    ('$accent'O'$lolite')                    '$hilite'~_}
-'$lolite'|   o       )   '$hilite'.....'$lolite'_===--==_ '$hilite'~_\
-'$lolite'\        '$hilite'..'$lolite') '$hilite'....'$lolite'=='$shadow'=/        '$lolite'\-_~>
-  '$lolite'\-_ '$hilite'....'$lolite'//'$hilite'....'$lolite'=='$shadow'='$hilite'\\'$shadow'’
-     '$lolite'|\\'$shadow'====`'$lolite'|\_'$shadow'=‘’’'$hilite'\}
-     '$lolite'| '$hilite'}    '$lolite'\ '$hilite'~}
-             '$lolite'\\'$hilite'_}
+                                 '$C1'__~'$C2'’
+                               '$C1'_/,'$C2'~\
+                             '$C1'_-'$C2' _~}
+        '$C1',/'$C2'/}-__             '$C1'/'$C2'  __~}
+       '$C1'//'$C2'‘,/ /,}-_         '$C1'/ '$C2' __~/
+   '$C1'__-/ ('$C2'-,/'$C1'_'$C2',/ /,}      '$C2'_'$C1'/  '$C2'_~‘}
+  '$C1'/           '$C1'‘—'$C2'/'$C1'_'$C2'/}'$C1'__-_/   '$C1'..'$C2'=<
+'$C3'O'$C1')    ('$C3'O'$C1')                    '$C2'~_}
+'$C1'|   o       )   '$C2'.....'$C1'_===--==_ '$C2'~_\
+'$C1'\        '$C2'..'$C1') '$C2'....'$C1'=='$C0'=/        '$C1'\-_~>
+  '$C1'\-_ '$C2'....'$C1'//'$C2'....'$C1'=='$C0'='$C2'\\'$C0'’
+     '$C1'|\\'$C0'====`'$C1'|\_'$C0'=‘’’'$C2'\}
+     '$C1'| '$C2'}    '$C1'\ '$C2'~}
+             '$C1'\\'$C2'_}
 '
 end
