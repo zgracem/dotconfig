@@ -1,3 +1,3 @@
-function tt --wraps tmux --description 'Open tmux'
+function ttmux --wraps tmux --description 'Open tmux'
     tmux new-session -A $argv
 end
