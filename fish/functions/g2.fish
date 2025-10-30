@@ -44,7 +44,7 @@ function g2 --description 'Go somewhere'
         case art;       set dir "$icloud_docs/Images/art"
         case acorn;     set dir "$HOME/Art/acorn"
         case qfd;       set dir "$HOME/www/2022/qfd"
-        case fonts;     set dir "$HOME/misc/Fonts"
+        case fonts;     set dir "$HOME/etc/Fonts"
         case music;     set dir "$HOME/Music/Music/Media.localized/Music"
         case twee;      set dir "$HOME/Developer/twee"
         case zpod;      set dir "/Volumes/Ultra/Media/Music/zPod"
