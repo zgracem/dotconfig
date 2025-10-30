@@ -8,40 +8,29 @@ status test-feature qmark-noglob
 or set -Ua fish_features qmark-noglob
 
 function '?' --description 'Prints the exit status of the last command'
-    set -l last_exit $status
+    set -f code $status
 
-    if test $last_exit -eq 0x00
-        set_color brgreen
-        echo -n OK
-        set_color green
-        echo " ($last_exit)"
-        set_color normal
-        return
-    end
-
-    # Source: `man 3 sysexits`
-    set -l sysexits USAGE DATAERR NOINPUT NOUSER NOHOST UNAVAILABLE SOFTWARE \
-        OSERR OSFILE CANTCREAT IOERR TEMPFAIL PROTOCOL NOPERM CONFIG
-
-    # Source: `src/builtins/shared.rs`
-    set -l fishexits EXPAND_ERROR READ_TOO_MUCH ILLEGAL_CMD UNMATCHED_WILDCARD \
-        unused NOT_EXECUTABLE CMD_UNKNOWN
-
-    set_color brred
-
-    if test $last_exit -gt 0x78 -a $last_exit -lt 0x80
-        echo -ns STATUS_ $fishexits[(math "$last_exit - 0x78")]
-    else if test $last_exit -gt 0x80 -a $last_exit -lt 0xA0
-        echo -ns (fish_status_to_signal $last_exit)
-    else if test $last_exit -gt 0x3F -a $last_exit -lt 0x4F
-        echo -ns EX_ $sysexits[(math "$last_exit - 0x3F")]
+    if test $code -eq 0
+        set -f color green
+    else if test $code -eq 141
+        # SIGPIPE is not always an error
+        set -f color yellow
     else
-        echo -ns false
+        set -f color red
     end
 
-    set_color red
-    echo " ($last_exit)"
-    set_color normal
+    set_color "br$color"
 
-    return $last_exit
+    if test $code -eq 0
+        echo -n OK
+    else
+        echo -n (my-status-to-signal $code)
+    end
+
+    set_color $color
+    echo -n " ($code)"
+    set_color normal
+    echo
+
+    return $code
 end
