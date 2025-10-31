@@ -22,7 +22,7 @@ else
   HISTFILESIZE=$((2 ** 15))   # store 2^15 lines in $HISTFILE
 fi
 
-HISTDIR="$XDG_STATE_HOME/bash"
+HISTDIR="${XDG_STATE_HOME:-$HOME/.local/state}/bash"
 mkdir -pv "$HISTDIR"
 HISTFILE="$HISTDIR/bash_history"
 
