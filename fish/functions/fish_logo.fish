@@ -7,7 +7,8 @@ function fish_logo --description "Display the fish logo"
     set -f summer_palette "#05a" "#08f" "#3db" "#5d3"
     set -f soft_palette "#08b" "#58d" "#a8f" "#d9f"
     set -f pink_palette "#f3a" "#f28" "#f80" "#fa0"
-    set -f palette $pink_palette
+    set -f new_palette "#04f" "#0ff" "#80f" "#f0b"
+    set -f palette $new_palette
 
     set -fx C0 (set_color $palette[1])
     set -fx C1 (set_color $palette[2])
@@ -48,18 +49,19 @@ function __fish_logo_v3
 end
 
 function __fish_logo_v4
+    # C0 = blue, C1 = cyan, C2 = purple, C3 = pink
     echo -s '
                                  ' $C1 '__~' $C2 '’
-                               ' $C1 '_/,' $C2 '~\
+                               ' $C1 '_/' $C3 ',' $C2 '~\
                              ' $C1 _- $C2 ' _~}
         ' $C1 ',/' $C2 '/}-__             ' $C1 / $C2 '  __~}
        ' $C1 // $C2 '‘,/ /,}-_         ' $C1 '/ ' $C2 ' __~/
    ' $C1 '__-/ (' $C2 '-,/' $C1 _ $C2 ',/ /,}      ' $C2 _ $C1 '/  ' $C2 '_~‘}
-  ' $C1 '/           ' $C1 '‘—' $C2 / $C1 _ $C2 '/}' $C1 '__-_/   ' $C1 '..' $C2 '=<
+  ' $C1 '/           ' $C1 '‘' $C3 '—' $C2 / $C3 _ $C2 '/}' $C1 '__-_/   ' $C3 '..' $C2 '=<
 ' $C3 O $C1 ')    (' $C3 O $C1 ')                    ' $C2 '~_}
 ' $C1 '|   o       )   ' $C2 '.....' $C1 '_==-’-==_ ' $C2 '~_\
-' $C1 '\        ' $C2 '..' $C1 ') ' $C2 '....' $C1 '==' $C0 '=/        ' $C1 '\-_~>
-  ' $C1 '\-_ ' $C2 '....' $C1 // $C2 '....' $C1 '==' $C0 '=' $C2 '\\' $C0 '’
+' $C1 '\        ' $C2 '..' $C1 ') ' $C2 '....' $C3 '==' $C0 '=/        ' $C1 '\-_~>
+  ' $C1 '\-_ ' $C2 '....' $C1 // $C2 '....' $C3 '==' $C0 '=' $C2 '\\' $C0 '’
      ' $C1 '|\\' $C0 '====`' $C1 '|\_' $C0 '=‘’’' $C2 '\}
      ' $C1 '| ' $C2 '}    ' $C1 '\ ' $C2 '~}
              ' $C1 '\\' $C2 '_}
