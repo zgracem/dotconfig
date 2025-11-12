@@ -23,8 +23,6 @@ elif shopt -q restricted_shell; then
   return
 elif [[ $HOSTNAME =~ "opalstack" && -x ~/.local/bin/fish ]]; then
   exec ~/.local/bin/fish --login
-elif [[ $HOSTNAME =~ "WS-01" && $SHLVL -lt 2 ]]; then
-  exec /usr/bin/fish --login
 fi
 
 # -----------------------------------------------------------------------------
