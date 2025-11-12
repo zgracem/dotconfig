@@ -64,7 +64,8 @@
     "terminal.integrated.cwd": ".",
     "workbench.colorTheme": "Better Solarized Dark Italics",
     "yaml.schemas": {
-      "http://json.schemastore.org/prettierrc": ["*.prettierrc"]
+      "http://json.schemastore.org/prettierrc": ["*.prettierrc"],
+      "../.local/share/doc/hosts-schema.yaml": [".local/share/doc/hosts.yaml"],
     }
   },
   "tasks": {
