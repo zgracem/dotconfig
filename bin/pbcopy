@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # cross-platform (macOS, Cygwin, Linux) clipboard wrapper
 
-if [[ -x /usr/bin/pbcopy ]]; then # macOS
+if [[ -n $SSH_CONNECTION ]]; then
+  printf "\033]52;c;%s\007" "$(base64 | tr -d '\n')"
+  exit 0
+elif [[ -x /usr/bin/pbcopy ]]; then # macOS
   cat | /usr/bin/pbcopy "$@"
 elif [[ -x /bin/qdbus ]]; then # Linux + KDE
   if ! qdbus org.kde.klipper >/dev/null; then
