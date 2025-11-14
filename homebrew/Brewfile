@@ -6,9 +6,10 @@
 #   brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 # ----------------------------------------------------------------------------
 
-tap "homebrew/aliases"
 tap "homebrew/command-not-found"
 tap "nrlquaker/createzap" # `brew createzap` command
+
+cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 
 # GNU utilities
 if OS.mac?
@@ -25,7 +26,7 @@ if OS.mac?
 end
 
 # essential utilities
-brew "bat"
+brew "bat", postinstall: "${HOMEBREW_PREFIX}/bin/bat cache --build"
 brew "eza"
 brew "fd"
 brew "fish"
@@ -102,7 +103,7 @@ brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
   with-xvid
 ]
 cask "fission"
-cask "handbrake"
+cask "handbrake-app"
 cask "kid3"
 cask "metaz"
 cask "spotify"
@@ -124,7 +125,6 @@ cask "imageoptim", args: { appdir: "/Applications" }
 cask "retrobatch"
 
 # internet stuff
-tap "homebrew/services"
 brew "alpine"
 brew "aria2"
 brew "bombadillo"
@@ -222,7 +222,7 @@ brew "toilet"
 cask "inform"
 cask "steam", args: { appdir: "/Applications" }
 cask "steamre/tools/depotdownloader"
-cask "twine"
+cask "twine-app"
 
 # ----------------------------------------------------------------------------
 # my stuff
@@ -231,14 +231,11 @@ cask "twine"
 tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
 brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/zgm-calendar-data"
-brew "zgracem/formulae/unrar"
 cask "zgracem/formulae/lockscreen"
 
 # ----------------------------------------------------------------------------
 # casks
 # ----------------------------------------------------------------------------
-
-cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 
 # essentials
 cask "alfred"
@@ -269,6 +266,7 @@ cask "pearcleaner"
 cask "powershell"
 cask "raspberry-pi-imager"
 cask "soulver-cli"
+cask "ungoogled-chromium"
 cask "vnc-viewer"
 cask "winclone"
 
@@ -294,7 +292,6 @@ mas "Things", id: 904280696
 
 # more
 mas "1Blocker", id: 1365531024
-mas "ApolloOne", id: 1044484672
 mas "MacFamilyTree 10", id: 1567970985
 mas "Prompt", id: 1594420480
 mas "Sirds", id: 547093431
@@ -309,4 +306,3 @@ mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Xcode", id: 497799835
