@@ -21,15 +21,3 @@ path to this directory must be added to `$fish_package_path` so everything can
 auto-load.
 
 [Screenshot]: https://raw.githubusercontent.com/zgracem/dotconfig/main/fish/prompt/prompt.png
-
-## `fish_title` → `my-title-window` + `my-title-tab`
-
-The code supporting [`fish_title`][1] writes simultaneously to both the terminal
-"window" and "icon" titles. I prefer to set those separately; hence separate
-[`my-title-window`][2] and [`my-title-tab`][3] functions, the output of which
-will appear in the terminal window or tab title, respectively, each time the
-prompt is displayed.
-
-[1]: https://fishshell.com/docs/current/cmds/fish_title.html
-[2]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/my-title-window.fish
-[3]: https://github.com/zgracem/dotconfig/blob/main/fish/prompt/functions/my-title-tab.fish

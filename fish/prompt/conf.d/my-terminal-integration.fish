@@ -177,7 +177,9 @@ function __term_set_title
     __term_osc -c $Ps "$argv"
 end
 
-function __term_update_titles --on-event fish_prompt
-    functions -q my-title-window; and __term_set_title --window (my-title-window)
-    functions -q my-title-tab; and __term_set_title --tab (my-title-tab)
+if fish-is-older-than 4.2
+    function __term_update_titles --on-event fish_prompt
+        functions -q my-title-window; and __term_set_title --window (my-title-window)
+        functions -q my-title-tab; and __term_set_title --tab (my-title-tab)
+    end
 end

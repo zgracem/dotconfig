@@ -1,3 +1,3 @@
 function my-title-tab --description "Output the tab title"
-    echo -ns (my-prompt-hostname) ":" (my-prompt-pwd -z)
+    fish_tab_title
 end
