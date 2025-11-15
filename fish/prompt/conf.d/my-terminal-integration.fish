@@ -153,12 +153,12 @@ end
 # ----------------------------------------------------------------------------
 # Window and tab titles
 # ----------------------------------------------------------------------------
-# fish's default behaviour uses `OSC 0` to write the output of the `fish_title`
+# Until v4.2, fish used `OSC 0` to write the output of the `fish_title`
 # function to both the terminal's "window" title and "tab" (or "icon") title.
 # But many terminals, including PuTTY and iTerm, allow setting separate values
 # for window and tab titles using `OSC 2` and `OSC 1` respectively. This
 # reimplementation does that with the outputs of `my-title-window` and
-# `my-title-tab` instead, while `fish_title` is disabled elsewhere by setting
+# `my-title-tab` instead, while `fish_title` was disabled elsewhere by setting
 # it to an empty function.
 # ----------------------------------------------------------------------------
 
