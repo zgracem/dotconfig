@@ -143,6 +143,7 @@ function __term_cancel_command -e fish_cancel -d "Mark the line with neither suc
     end
 end
 
+# Tell clients terminal integration has been initialized
 switch $TERM_PROGRAM
     case vscode
         __term_osc P HasRichCommandDetection=True
@@ -160,6 +161,8 @@ end
 # reimplementation does that with the outputs of `my-title-window` and
 # `my-title-tab` instead, while `fish_title` was disabled elsewhere by setting
 # it to an empty function.
+#
+# Since v4.2, fish does this properly using `fish_title` and `fish_tab_title`.
 # ----------------------------------------------------------------------------
 
 function __term_set_title
@@ -182,4 +185,18 @@ if fish-is-older-than 4.2
         functions -q my-title-window; and __term_set_title --window (my-title-window)
         functions -q my-title-tab; and __term_set_title --tab (my-title-tab)
     end
+end
+
+# ----------------------------------------------------------------------------
+# Hyperlinks
+# ----------------------------------------------------------------------------
+
+# Example: __term_href "https://youtu.be/E4WlUXrJgy4" "Click here"
+function __term_href -d "Display a hyperlink in the terminal"
+    set -l url $argv[1]
+    set -l text $argv[2]
+
+    __term_osc -c 8 "" "$url"
+    echo -n $text
+    __term_osc -c 8 "" ""
 end
