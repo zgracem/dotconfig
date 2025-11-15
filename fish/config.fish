@@ -40,10 +40,8 @@ set -p fish_complete_path "$__fish_config_dir/completions"
 set -l short_host (string replace -r '\.local$' '' $hostname)
 set -l local_config_dir (path resolve "$XDG_CONFIG_HOME/local/$short_host")
 set -l local_config_link "$XDG_DATA_HOME/../config"
-if path is -d $local_config_dir
-    if not path is -l $local_config_link
-        ln -sv $local_config_dir $local_config_link
-    end
+if path is -d $local_config_dir; and not path is -l $local_config_link
+    ln -sv $local_config_dir $local_config_link
 end
 
 # load private and per-machine configuration if available
