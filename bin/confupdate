@@ -2,10 +2,6 @@
 
 function git-sync -a user_dir
     switch $hostname
-        case "Citadel.*"
-            # Primary machine
-            git -C $user_dir push
-            return
         case "*.opalstack.com"
             # Regular `/usr/bin/git` is so old it doesn't support the `-C` flag
             scl enable rh-git227 "git -C $user_dir fetch --prune"
@@ -18,7 +14,10 @@ end
 
 function main -d "Update configuration from GitHub"
     switch $hostname
-        case Alyx Pomona
+        case Citadel.local Pomona
+            echo -s "No need for " (set_color $fish_color_command) (status basename) (set_color normal) " on this host :)"
+            return
+        case Alyx phosphor.pink
             set -gx USER_CONFIG_DIRS ~/src/**/dot{config,private}
         case "*"
             set -gx USER_CONFIG_DIRS ~/.{config,private}
