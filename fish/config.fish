@@ -52,7 +52,6 @@ set -ga fish_package_path "$HOME/.private/fish"
 set -p fish_package_path "$__fish_config_dir/prompt"
 
 # personal minimal package manager for fish
-set fish_package_path (path filter -d $fish_package_path)
 source "$__fish_config_dir/packages.fish"
 
 # remove duplicate & nonexistent directories
