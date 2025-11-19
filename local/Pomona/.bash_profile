@@ -1,4 +1,4 @@
-if [[ $- == *i* ]]; then
+if [[ $- == *i* && $SHLVL -lt 2 ]]; then
   # Launch fish (while keeping /bin/bash as login shell)
   SHELL=$XDG_BIN_HOME/fish
   [[ -x "$SHELL" ]] && exec "$SHELL" --login
