@@ -17,8 +17,8 @@ function map --description 'Apply a command to each item in a list'
         end
     end
 
-    for argument in $cmd_argv
-        eval (string escape -- $cmd) (string escape -- $argument)
+    for cmd_arg in $cmd_argv
+        eval (string escape -- $cmd) (string escape -- $cmd_arg)
         or return
     end
 end

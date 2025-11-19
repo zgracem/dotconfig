@@ -3,7 +3,7 @@ function cleanup-office -d "Cleanup Microsoft Office files"
     set -a dirs /Library/{LaunchAgents,LaunchDaemons,Preferences}
     set -a dirs ~/Library/{Application Support,Caches,Preferences}
 
-    for file in $dirs/*{Microsoft,microsoft}*
+    for file in (path filter $dirs/*{Microsoft,microsoft}*)
         string match -q "*VSCode*" $file; and continue
         command rm -rfv $file
         or sudo rm -rfv $file

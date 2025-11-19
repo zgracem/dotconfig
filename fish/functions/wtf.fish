@@ -1,5 +1,6 @@
 function wtf -d "Display information about commands"
     set -q argv[1]; or return 1
+    set -f reset (set_color $fish_color_normal)
 
     for subject in $argv
         set -l types (type -at $subject 2>/dev/null)
@@ -16,10 +17,10 @@ function wtf -d "Display information about commands"
                 case function
                     functions $subject
                 case builtin
-                    echo -ns (set_color -iu brmagenta) $subject (set_color normal)
+                    echo -ns (set_color -iu $fish_color_keyword) $subject $reset
                     echo " is a builtin"
                 case file
-                    echo -ns (set_color -iu brblue) $subject (set_color normal)
+                    echo -ns (set_color -iu $fish_color_valid_path) $subject $reset
                     echo " is a file"
                     set -l paths (type -aP $subject)
                     if command -q eza
@@ -28,11 +29,11 @@ function wtf -d "Display information about commands"
                         ls -lh $paths
                     end
                 case abbreviation
-                    echo -ns (set_color -iu brcyan) $subject (set_color normal)
+                    echo -ns (set_color -iu $fish_color_quote) $subject $reset
                     echo " is an abbreviation"
                     abbr --show | string match -er -- "-- $subject\b" | fish_indent --ansi
                 case variable
-                    echo -ns (set_color -i bryellow) $subject (set_color normal)
+                    echo -ns (set_color -iu $fish_color_operator) $subject $reset
                     echo " is a variable"
                     set --show $subject
             end
