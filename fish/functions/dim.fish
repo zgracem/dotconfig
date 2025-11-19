@@ -3,7 +3,8 @@
 #
 # Requires:
 #   /usr/bin/sips (macOS)
-#   brew install mediainfo
+#   brew install mediainfo mp4v2
+#   brew install --cask soulver soulver-cli
 #
 function dim --description 'Get the pixel dimensions of images or video'
     command -q sips; and command -q mediainfo; or return 127
@@ -28,6 +29,10 @@ function dim --description 'Get the pixel dimensions of images or video'
                 set -f dims (mediainfo --Output="Video;%Width% %Height%" $file | string split " ")
             case .$audio_formats
                 set -f dims (mediainfo --Output="Audio;%Duration/String3%" $file)
+                set -f output_format '%s'
+            case .m4a
+                set -f secs (mp4info $file | string match -r '\d+\.\d+ secs')
+                set -f dims (soulver "$secs[1] as laptime")
                 set -f output_format '%s'
             case '*'
                 echo >&2 "$file: don't know how to read $ext files"
