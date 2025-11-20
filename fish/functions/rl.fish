@@ -53,7 +53,7 @@ function rl --description "Reload configuration files"
 
         # Is it a special case?
         switch $item
-            case cygwin dirs
+            case dirs
                 set -f found (math "$found+1")
                 _rl_source $_flag_verbose $__fish_config_dir/conf.d/___$item.fish
         end
