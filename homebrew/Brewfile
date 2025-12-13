@@ -135,13 +135,11 @@ brew "lynx"
 brew "netcat"
 brew "newsboat"
 brew "ssh-copy-id", link: true
-brew "streamlink"
 brew "tnftpd"
 brew "transmission-cli"
 brew "wget"
 cask "chatterino"
 cask "discord"
-cask "streamlink-twitch-gui"
 cask "transmission"
 cask "transmit"
 
