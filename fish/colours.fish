@@ -70,6 +70,7 @@ end
 
 # LS_COLORS
 if command -q eza
+    # Colours set in $XDG_CONFIG_HOME/eza/theme.yml
     set --erase LS_COLORS EXA_COLORS EZA_COLORS
 else if is-gnu ls; and path is -d $XDG_CONFIG_HOME/dircolors
     set -l ls_colors_file "$XDG_DATA_HOME/dircolors/thirty2k.ls_colors.fish"
