@@ -43,6 +43,11 @@ function __term_prompt_end; end
 # Don't run in non-GUI clients
 contains -- "$TERM" dumb linux vt100 {screen,tmux}-256color; and return
 
+# Disable builtin prompt marking
+if not contains no-mark-prompt $fish_features
+    set -Ua fish_features no-mark-prompt
+end
+
 # Prevent iTerm & VS Code's builtin shell integrations from running after this
 # by setting the conditions they check for.
 switch $TERM_PROGRAM
