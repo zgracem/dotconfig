@@ -50,23 +50,26 @@ for mode in 400 600 700 644 744 755
     abbr --add mode "chmod $_chmod_verbose_flag $mode"
 end
 
-functions --erase ls ll
+functions --erase ls ll lsf
 set -l _ls_command
 set -l _ll_command
+set -l _lf_command
 if command -q eza
     set _ls_command "eza -a"
     set _ll_command "eza -la"
-    functions --erase lsf
-    abbr --add lsf "eza -lagi@"
+    set _lf_command "eza -lagi@"
 else if is-gnu ls
     set _ls_command "ls --color -A"
     set _ll_command "ls --color -lhA"
+    set _lf_command "ls --color -lAi"
 else
     set _ls_command "ls -GA"
     set _ll_command "ls -GlA"
+    set _lf_command "ls -lAi@OG"
 end
 abbr --add ls $_ls_command
 abbr --add ll $_ll_command
+abbr --add lsf $_lf_command
 
 if command -q fd
     abbr --add fdd "fd --type=d"
@@ -164,11 +167,9 @@ abbr -a gpl "git fetch --prune; git merge --ff-only"
 abbr -a gps "git push"
 abbr -a gs "git status"
 
-# Homebrew Cask
-abbr -a cask --set-cursor "brew % --cask"
-
 # Raspberry Pi
-abbr -a rpc "sudo raspi-config"
+is-raspi
+and abbr -a rpc "sudo raspi-config"
 
 # AdGuardHome
 path is -x /opt/AdGuardHome/AdGuardHome
@@ -185,6 +186,9 @@ and abbr --add how "/usr/lib/command-not-found --"
 fish-is-newer-than 3.6 # released Jan 2023
 or return
 
+# Homebrew Cask
+abbr -a cask --set-cursor "brew % --cask"
+
 # cdls → cd %; ls
 abbr -a cdls --set-cursor "cd %; $_ls_command"
 abbr -a cdll --set-cursor "cd %; $_ll_command"
@@ -198,7 +202,7 @@ abbr -a :c --position anywhere --set-cursor "%| column"
 abbr -a :cc --position anywhere --set-cursor "% | tbcopy | column"
 
 # :dd = extremely fast dump-to-desktop
-abbr -a :dd --position anywhere --set-cursor "| tee ~/Desktop/%.txt"
+abbr -a :dd --position anywhere --set-cursor "| tee $XDG_DESKTOP_DIR/%.txt"
 
 # "set --verbose"
 # sv:files → `set files %; set -S files`
