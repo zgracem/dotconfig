@@ -96,6 +96,7 @@ end
 # shortcuts
 # -----------------------------------------------------------------------------
 
+abbr -a cronl 'crontab -l | bat -lcrontab -pp'
 abbr -a dr 'defaults read'
 abbr -a dw 'defaults write'
 abbr -a e 'echo'
