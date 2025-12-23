@@ -31,7 +31,7 @@ titlebar-color-style=default
 mailcap-check-interval=5
 
 last-version-used=6.26
-last-time-prune-questioned=124.4
+last-time-prune-questioned=125.12
 
 # List of features; see Alpine's Setup/options menu for the current set.
 # e.g. feature-list= select-without-confirm, signature-at-bottom
@@ -218,7 +218,7 @@ literal-signature=
 signature-file=
 
 # Alpine executes these keys upon startup (e.g. to view msg 13: i,j,1,3,CR,v)
-initial-keystroke-list=
+initial-keystroke-list=i
 
 # Only show these headers (by default) when composing messages
 default-composer-hdrs=
