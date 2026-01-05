@@ -101,8 +101,7 @@ function _rl_reset
             case colours
                 set -l colour_vars (set -n \
                     | string match -rg '(fish_(?:[a-z]+_)*color_\w+)|([[:upper:]]+_COLORS)')
-                set -q _flag_verbose[1]; and echo '[RESET] $__zgm_init_colours' '$'$colour_vars
-                set -U --erase __zgm_init_colours $colour_vars
+                set -g --erase $colour_vars
             case keychain
                 if set -q _flag_verbose[1]
                     killall -v ssh-agent
