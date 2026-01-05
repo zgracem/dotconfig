@@ -19,13 +19,13 @@ function my-prompt-git --description 'Display git info in the fish prompt'
 
     # branch name
     set -l git_branch (string match -r '(?<=branch.head ).*' $git_status)
-    set_color $__fish_git_prompt_color_branch
+    set_color $fish_color_git_branch
     echo -n $git_branch
     set_color normal
 
     # stash icon
     if path is -r $git_root/.git/refs/stash
-        set_color $__fish_git_prompt_color_stashstate
+        set_color $fish_color_git_stashstate
         echo -n $icon_stash
     end
 
@@ -35,13 +35,13 @@ function my-prompt-git --description 'Display git info in the fish prompt'
     set -l untracked (count (string match -ar '^\?' $git_status))
 
     if test (math "$unstaged + $untracked") -gt 0
-        set_color $__fish_git_prompt_color_dirtystate
+        set_color $fish_color_git_dirtystate
         echo -n $icon_dirty
     else if test $staged -gt 0
-        set_color $__fish_git_prompt_color_stagedstate
+        set_color $fish_color_git_stagedstate
         echo -n $icon_dirty
     else if set -q __fish_prompt_show_git_clean
-        set_color $__fish_git_prompt_color_cleanstate
+        set_color $fish_color_git_cleanstate
         echo -n $icon_clean
     end
 
@@ -56,7 +56,7 @@ function my-prompt-git --description 'Display git info in the fish prompt'
     or set behind 0
 
     if test $ahead -gt 0 -o $behind -gt 0
-        set_color $__fish_git_prompt_color_upstream
+        set_color $fish_color_git_upstream
         if test $behind -eq 0
             echo -n $icon_ahead
         else if test $ahead -eq 0

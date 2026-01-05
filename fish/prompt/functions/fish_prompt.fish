@@ -20,7 +20,7 @@ function fish_prompt --description 'Display the interactive prompt'
     my-prompt-jobs
 
     if fish_is_root_user
-        set_color $fish_prompt_color_ps_root
+        set_color $fish_color_prompt_ps_root
         echo -n "#"
     else if set -q fish_private_mode
         set_color --dim
@@ -29,7 +29,7 @@ function fish_prompt --description 'Display the interactive prompt'
         set_color --bold --italics magenta
         echo -n "π"
     else
-        set_color $fish_prompt_color_ps
+        set_color $fish_color_prompt_ps
         echo -n "¶"
     end
 

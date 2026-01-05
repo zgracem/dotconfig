@@ -8,7 +8,7 @@ function fish_job_summary -a job_id is_foreground cmd_line signal_or_end_name si
     set cmd_line (string shorten -m$max_cmd_len -- $cmd_line | string collect)
 
     # formatting
-    set job_id (set_color $fish_prompt_color_jobs)"#$job_id"(set_color normal)
+    set job_id (set_color $fish_color_prompt_jobs)"#$job_id"(set_color normal)
     set cmd_line (echo $cmd_line | fish_indent -i --ansi | string join "; ")
     set signal_or_end_print (set_color $fish_color_status)$signal_or_end_name(set_color normal)
 

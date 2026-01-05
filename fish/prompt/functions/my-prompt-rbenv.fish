@@ -21,7 +21,7 @@ function my-prompt-rbenv
     string match -q "$GLOBAL_RBENV_VERSION" "$LOCAL_RBENV_VERSION"
     and return
 
-    set_color $fish_prompt_color_rbenv
+    set_color $fish_color_prompt_rbenv
     echo -n $LOCAL_RBENV_VERSION
 
     set_color normal

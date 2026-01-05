@@ -1,5 +1,5 @@
 function my-prompt-right-timer -a ms
-    set_color $fish_prompt_color_duration
+    set_color $fish_color_prompt_duration
     __fish_human_readable_ms $ms
 
     set_color normal

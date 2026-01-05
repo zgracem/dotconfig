@@ -42,17 +42,17 @@ set -g fish_pager_color_selected_description --italics
 # $__fish_config_dir/prompt
 # ----------------------------------------------------------------------------
 
-set -g fish_prompt_color_ps blue
-set -g fish_prompt_color_ps_root $fish_color_cwd_root
-set -g fish_prompt_color_duration --dim
-set -g fish_prompt_color_jobs yellow
-set -g fish_prompt_color_rbenv brmagenta
-set -g __fish_git_prompt_color_branch --dim --italics
-set -g __fish_git_prompt_color_stashstate --dim
-set -g __fish_git_prompt_color_dirtystate red
-set -g __fish_git_prompt_color_stagedstate yellow
-set -g __fish_git_prompt_color_upstream cyan
-set -g __fish_git_prompt_color_cleanstate green
+set -g fish_color_prompt_ps blue
+set -g fish_color_prompt_ps_root $fish_color_cwd_root
+set -g fish_color_prompt_duration --dim
+set -g fish_color_prompt_jobs yellow
+set -g fish_color_prompt_rbenv brmagenta
+set -g fish_color_git_branch --dim --italics
+set -g fish_color_git_stashstate --dim
+set -g fish_color_git_dirtystate red
+set -g fish_color_git_stagedstate yellow
+set -g fish_color_git_upstream cyan
+set -g fish_color_git_cleanstate green
 
 # ----------------------------------------------------------------------------
 # other
