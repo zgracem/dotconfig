@@ -1,58 +1,18 @@
-# https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
-set -g fish_color_normal normal
-set -g fish_color_command white --bold
-set -g fish_color_keyword brmagenta
-set -g fish_color_quote cyan
-set -g fish_color_redirection yellow # IO redirections like `>/dev/null`
-set -g fish_color_end yellow # process separators like `;` and `&`
-set -g fish_color_error brred # syntax errors
-set -g fish_color_param normal # ordinary command parameters
-set -g fish_color_valid_path green --underline # filename parameters (if the file exists)
-set -g fish_color_option white # options starting with `-`
-set -g fish_color_comment brblack --italics # comments like `# TODO`
-set -g fish_color_selection white --background=brblack # selected text (in vi visual mode)
-set -g fish_color_operator bryellow # parameter expansion operators like '*' and '~'
-set -g fish_color_escape brred # character escapes like '\n' and '\x70'
-set -g fish_color_autosuggestion brblack
-set -g fish_color_cwd brwhite # the current directory in the default prompt
-set -g fish_color_cwd_root red # ditto, but for the root user
-set -g fish_color_user brblack # the username in some default prompts
-set -g fish_color_at normal # the '@' in 'user@host'
-set -g fish_color_host brblack # the hostname in some default prompts
-set -g fish_color_host_remote brblack # ditto for remote sessions (like ssh)
-set -g fish_color_status $fish_color_error # the last command's nonzero exit code in the default prompt
-set -g fish_color_cancel red # the '^C' indicator on a canceled command
-set -g fish_color_search_match --background=black # history search matches & pager selections (background colour)
-set -g fish_color_history_current blue # used by `dirh`
+set -l fish_theme thirty2k
 
-# completion highlighting
-set -g fish_pager_color_progress blue # "…and 6 more rows" in the bottom left corner
-# unselected lines
-set -g fish_pager_color_background --background=normal # the background color of a line
-set -g fish_pager_color_prefix brblack # the un-completed (incomplete) string
-set -g fish_pager_color_completion normal # the proposed completion suffix
-set -g fish_pager_color_description $fish_color_comment # the completion description
-# selected line
-set -g fish_pager_color_selected_background --background=brblack
-set -g fish_pager_color_selected_prefix --dim
-set -g fish_pager_color_selected_completion brwhite --bold
-set -g fish_pager_color_selected_description --italics
+if fish-is-newer-than 4.3
+    fish_config theme choose $fish_theme
+else
+    set -l fish_theme_file $__fish_config_dir/themes/$fish_theme.theme
+    set -l __fish_color_rx '^fish_(?:pager_)?color_\w+ (.*)$'
 
-# ----------------------------------------------------------------------------
-# $__fish_config_dir/prompt
-# ----------------------------------------------------------------------------
-
-set -g fish_color_prompt_ps blue
-set -g fish_color_prompt_ps_root $fish_color_cwd_root
-set -g fish_color_prompt_duration --dim
-set -g fish_color_prompt_jobs yellow
-set -g fish_color_prompt_rbenv brmagenta
-set -g fish_color_git_branch --dim --italics
-set -g fish_color_git_stashstate --dim
-set -g fish_color_git_dirtystate red
-set -g fish_color_git_stagedstate yellow
-set -g fish_color_git_upstream cyan
-set -g fish_color_git_cleanstate green
+    while read line
+        string match -rq $__fish_color_rx $line; or continue
+        set -l varname (string split -f1 " " $line)
+        set -l vardef (string match -rg $__fish_color_rx $line | string split " ")
+        set -gx $varname $vardef
+    end <$__fish_config_dir/themes/$fish_theme.theme
+end
 
 # ----------------------------------------------------------------------------
 # other
