@@ -16,6 +16,8 @@ vim/pack/*/
 
 # generated
 brew-aliases
+fish/conf.d/fish_frozen_theme.fish
+fish/conf.d/fish_frozen_key_bindings.fish
 flipperdevices.com
 lynx/helpfile.css
 lynx/helpfile.html

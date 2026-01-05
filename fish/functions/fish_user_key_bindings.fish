@@ -46,3 +46,11 @@ function fish_user_key_bindings
     bind --erase --preset \cX
     bind --erase --preset \cV
 end
+
+# fish <4.3 shipped an event handler that runs
+#   `set --universal fish_key_bindings fish_default_key_bindings`
+# whenever the fish_key_bindings variable is erased.
+# As a workaround, erase the universal variable at every shell startup.
+if fish-is-older-than 4.3
+    set -U --erase fish_key_bindings
+end
