@@ -30,6 +30,13 @@ if path is -f $XDG_CONFIG_HOME/user-dirs.dirs
     end <$XDG_CONFIG_HOME/user-dirs.dirs
 end
 
+# Homebrew
+if path is -d /home/linuxbrew/.linuxbrew
+    set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
+else if path is -d /usr/local/Homebrew /opt/homebrew; and command -q brew
+    set -gx HOMEBREW_PREFIX (brew --prefix)
+end
+
 # Cygwin/MSYS
 if uname -s | string match -q '*_NT-*'
     set user_profile
