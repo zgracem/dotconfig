@@ -2,7 +2,7 @@
 # ~/.config/newsboat/config
 # ----------------------------------------------------------------------------
 
-# https://newsboat.org/releases/2.37/docs/newsboat.html#_configuration
+# https://newsboat.org/releases/2.42/docs/newsboat.html#_configuration
 browser "/usr/bin/open -a Firefox %u &"
 cleanup-on-quit no
 confirm-mark-feed-read no
@@ -12,13 +12,15 @@ error-log ~/.local/share/newsboat/error.log
 feed-sort-order lastupdated
 reload-only-visible-feeds yes
 save-path ~/Downloads
+openbrowser-and-mark-jumps-to-next-unread yes
+toggleitemread-jumps-to-next no
 
 auto-reload yes
 reload-time 60
 refresh-on-startup no
 suppress-first-reload yes
 
-# https://newsboat.org/releases/2.37/docs/newsboat.html#_colors
+# https://newsboat.org/releases/2.42/docs/newsboat.html#_colors
 # https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 color background          default   default
 color title               black     white     bold
@@ -31,7 +33,7 @@ color hint-key            black     white     bold
 color article             default   default
 color end-of-text-marker  default   default   invis
 
-# https://newsboat.org/releases/2.37/docs/newsboat.html#_format_strings
+# https://newsboat.org/releases/2.42/docs/newsboat.html#_format_strings
 articlelist-format        "%4i %f %D  %?T?|%-17T| ?%t"
 feedlist-title-format     " %N %V%?T? > #%T?%?F? > %F?%> %u unread, %t total "
 articlelist-title-format  " %N %V > %T%?F? > %F?%> %u unread, %t total "
@@ -44,10 +46,10 @@ urlview-title-format      " %N %V > URLs"
 filebrowser-title-format  " %N %V > %?O?Open File&Save File? > %f"
 dirbrowser-title-format   " %N %V > %?O?Open Directory&Save File? > %f"
 
-# https://newsboat.org/releases/2.37/docs/newsboat.html#_key_bindings
+# https://newsboat.org/releases/2.42/docs/newsboat.html#_key_bindings
 bind-key LEFT quit
 bind-key RIGHT open
 
-# https://newsboat.org/releases/2.37/docs/newsboat.html#_killfiles
+# https://newsboat.org/releases/2.42/docs/newsboat.html#_killfiles
 ignore-mode "display"
 `cat ~/.config/newsboat/killfile`
