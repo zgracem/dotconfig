@@ -1,7 +1,7 @@
 set -l fish_theme thirty2k
 
 if fish-is-newer-than 4.3
-    fish_config theme choose $fish_theme
+    fish_config theme choose --color-theme=dark $fish_theme
 else
     set -l fish_theme_file $__fish_config_dir/themes/$fish_theme.theme
     set -l __fish_color_rx '^fish_(?:pager_)?color_\w+ (.*)$'
