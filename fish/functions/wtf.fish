@@ -46,9 +46,8 @@ function __wtf_file
         return 1
     end
 
-    # `test -L` returns true for orphaned symlinks; `path is -l` does not
     if test -L $file
-        if path is -l $file
+        if test -e $file
             set -l target (path resolve $file)
             printf "%s is a symlink to %s\n" (__wtf_print -u cyan $file) (__wtf_print $fish_color_valid_path $target)
             set -f file $target
@@ -59,26 +58,25 @@ function __wtf_file
         end
     end
 
+    set -f type (gstat -c "%F" $file)
     set -f fileinfo (file -bp $file | string split ", " | string trim)
     set -f print_file (__wtf_print $fish_color_valid_path $file)
 
-    if test -b $file
-        printf "%s is a block (buffered) special file\n" $print_file
-    else if test -c $file
-        printf "%s is a character (unbuffered) special file\n" $print_file
+    if test -b $file; or test -c $file
+        set -l devices (gstat -c "%Hr,%Lr" $file | string split ,)
+        printf "%s is a %s (%d,%d)\n" $print_file $type $devices
     else if test -p $file
-        printf "%s is a named pipe (FIFO)\n" $print_file
+        printf "%s is a %s (named pipe)\n" $print_file $type
     else if test -S $file
-        printf "%s is a socket\n" $print_file
-    else if path is -d $file
-        printf "%s is a directory\n" $print_file
+        set -l devices (gstat -c "%Hd,%Ld" $file | string split ,)
+        printf "%s is a %s (%d,%d)\n" $print_file $type $devices
+    else if test -d $file
+        printf "%s is a %s\n" $print_file $type
         string match -q directory $fileinfo[2]; and set -e fileinfo[2]
-    else if path is -f $file
-        set -l whatisit "a file"
-        path is -x $file; and set -l whatisit "an executable file"
+    else if test -f $file
         string match -q "*sticky*" $fileinfo[1]; and set -f -e fileinfo[1]
         string match -q "set*id" $fileinfo[1]; and set -f -e fileinfo[1]
-        printf "%s is %s (%s)\n" $print_file $whatisit $fileinfo[1]
+        printf "%s is a %s (%s)\n" $print_file $type $fileinfo[1]
     else
         echo >&2 "unknown type: $file"
         return 1
@@ -91,7 +89,6 @@ function __wtf_file
         set -l bullet (__wtf_print normal --dim "*")
         printf "$bullet %s\n" $fileinfo[2..]
     end
-    # __wtf_list $file
 end
 
 function __wtf_list
