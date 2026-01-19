@@ -83,6 +83,7 @@ brew "recode"
 brew "atomicparsley"
 brew "audiowaveform"
 brew "cdrdao"
+brew "ffmpeg-full"
 brew "id3v2"
 brew "media-info"
 brew "mkvtoolnix"
@@ -91,17 +92,7 @@ brew "mp4v2"
 brew "nicotine-plus"
 brew "sox"
 brew "yt-dlp"
-brew "homebrew-ffmpeg/ffmpeg/ffmpeg", args: %w[
-  HEAD
-  with-fdk-aac
-  with-libssh
-  with-openh264
-  with-openssl
-  with-rtmpdump
-  with-two-lame
-  with-webp
-  with-xvid
-]
+
 cask "fission"
 cask "handbrake-app"
 cask "kid3"
@@ -115,7 +106,7 @@ cask "xld"
 brew "exif"
 brew "exiftool"
 brew "folderify" if OS.mac?
-brew "zgracem/formulae/imagemagick"
+brew "imagemagick-full"
 brew "imageoptim-cli"
 brew "mozjpeg"
 brew "imagesnap" if OS.mac?
