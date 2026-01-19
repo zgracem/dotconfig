@@ -7,7 +7,7 @@ function wtf -d "Display information about commands"
         contains -- $subject (abbr --list); and set -p types abbreviation
         contains -- $subject (set --names); and set -p types variable
 
-        if test (count $types) -eq 0
+        if test (count $filetypes) -eq 0
             if path is $subject; or test -L $subject
                 __wtf_file $subject; or return
                 continue
@@ -17,8 +17,8 @@ function wtf -d "Display information about commands"
             end
         end
 
-        for type in $types
-            switch $type
+        for type in $filetypes
+            switch $filetype
                 case function
                     functions $subject
                 case builtin
@@ -46,41 +46,47 @@ function __wtf_file
         return 1
     end
 
-    if test -L $file
-        if test -e $file
+    set -l filetype (gstat -c "%F" $file)
+    set -l fileinfo (file -bp $file | string split ", " | string trim)
+    set -l print_file (__wtf_print $fish_color_valid_path $file)
+
+    if string match -q "symbolic link" $filetype
+        if path is $file
             set -l target (path resolve $file)
             printf "%s is a symlink to %s\n" (__wtf_print -u cyan $file) (__wtf_print $fish_color_valid_path $target)
-            set -f file $target
+            set -l file $target
+            set -l filetype (gstat -c "%F" $target)
+            set -l fileinfo (file -bp $target | string split ", " | string trim)
         else
-            set -l target (file -bp $file | string match -rg "broken symbolic link to (.+)")
+            set -l target (string match -rg "broken symbolic link to (.+)" $fileinfo[1])
             printf "%s is a broken symlink to %s\n" (__wtf_print -u cyan $file) (__wtf_print $fish_color_error $target)
             return
         end
     end
 
-    set -f type (gstat -c "%F" $file)
-    set -f fileinfo (file -bp $file | string split ", " | string trim)
-    set -f print_file (__wtf_print $fish_color_valid_path $file)
-
-    if test -b $file; or test -c $file
-        set -l devices (gstat -c "%Hr,%Lr" $file | string split ,)
-        printf "%s is a %s (%d,%d)\n" $print_file $type $devices
-    else if test -p $file
-        printf "%s is a %s (named pipe)\n" $print_file $type
-    else if test -S $file
-        set -l devices (gstat -c "%Hd,%Ld" $file | string split ,)
-        printf "%s is a %s (%d,%d)\n" $print_file $type $devices
-    else if test -d $file
-        printf "%s is a %s\n" $print_file $type
-        string match -q directory $fileinfo[2]; and set -e fileinfo[2]
-    else if test -f $file
-        string match -q "*sticky*" $fileinfo[1]; and set -f -e fileinfo[1]
-        string match -q "set*id" $fileinfo[1]; and set -f -e fileinfo[1]
-        printf "%s is a %s (%s)\n" $print_file $type $fileinfo[1]
-    else
-        echo >&2 "unknown type: $file"
-        return 1
+    switch $filetype
+        case "* special file"
+            set -l devices (gstat -c "%Hr,%Lr" $file | string split ,)
+            printf "%s is a %s (%d,%d)\n" $print_file $filetype $devices
+        case socket
+            set -l devices (gstat -c "%Hd,%Ld" $file | string split ,)
+            printf "%s is a %s (%d,%d)\n" $print_file $filetype $devices
+        case fifo
+            printf "%s is a %s (named pipe)\n" $print_file $filetype
+        case directory
+            printf "%s is a %s\n" $print_file $filetype
+            string match -q directory $fileinfo[2]; and set -e fileinfo[2]
+        case "regular file"
+            string match -q "*sticky*" $fileinfo[1]; and set -f -e fileinfo[1]
+            string match -q "set*id" $fileinfo[1]; and set -f -e fileinfo[1]
+            printf "%s is a %s (%s)\n" $print_file $filetype $fileinfo[1]
+        case "symbolic link"
+            : # handled above
+        case "*"
+            echo >&2 "$file: unknown type: $filetype"
+            return 1
     end
+
     test -g $file; and set -f -a fileinfo "set-group-ID bit set"
     test -u $file; and set -f -a fileinfo "set-user-ID bit set"
     test -k $file; and set -f -a fileinfo "sticky bit set"
