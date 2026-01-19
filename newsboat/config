@@ -12,7 +12,6 @@ error-log ~/.local/share/newsboat/error.log
 feed-sort-order lastupdated
 reload-only-visible-feeds yes
 save-path ~/Downloads
-openbrowser-and-mark-jumps-to-next-unread yes
 toggleitemread-jumps-to-next no
 
 auto-reload yes
