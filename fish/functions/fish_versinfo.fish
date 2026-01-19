@@ -8,6 +8,8 @@
 #
 # Beta releases look like `X.YbB`, where uppercase B is the beta number,
 # and post-beta dev versions look like `X.YbB-A-gH`.
+#
+# See also $__fish_config_dir/conf.d/fish_versinfo.fish
 function fish_versinfo -a fish_ver
     set -q fish_ver[1]; or set -f fish_ver $version
     set -f version_info (string split "." $fish_ver | string split "-")
