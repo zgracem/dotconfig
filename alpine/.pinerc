@@ -650,3 +650,5 @@ wp-state=
 
 # Web Alpine preferred width for message display in characters
 wp-columns=
+
+# vim:ft=ini
