@@ -6,7 +6,6 @@
 #   brew bundle --file=$XDG_CONFIG_HOME/homebrew/Brewfile
 # ----------------------------------------------------------------------------
 
-tap "homebrew/command-not-found"
 tap "nrlquaker/createzap" # `brew createzap` command
 
 cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
