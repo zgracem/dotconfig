@@ -17,7 +17,7 @@ function update-local-fish -a fishver
         return 1
     end
 
-    set -f arch (uname -m)
+    set -f arch (uname -m) # available: aarch64 | x86_64
     set -f package "fish-$fishver-linux-$arch.tar.xz"
     set -f url "https://github.com/fish-shell/fish-shell/releases/download/$fishver/$package"
 
