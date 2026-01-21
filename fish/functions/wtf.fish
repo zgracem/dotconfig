@@ -7,18 +7,18 @@ function wtf -d "Display information about commands"
         contains -- $subject (abbr --list); and set -p types abbreviation
         contains -- $subject (set --names); and set -p types variable
 
-        if test (count $filetypes) -eq 0
+        if test (count $types) -eq 0
             if path is $subject; or test -L $subject
                 __wtf_file $subject; or return
                 continue
             else
-                echo >&2 "not found: $subject"
+                echo >&2 "subject not found: $subject"
                 return 1
             end
         end
 
-        for type in $filetypes
-            switch $filetype
+        for type in $types
+            switch $type
                 case function
                     functions $subject
                 case builtin
@@ -42,7 +42,7 @@ function __wtf_file
     set -f file (path normalize $argv[1])
 
     if not path is $file; and not test -L $file
-        echo >&2 "not found: $file"
+        echo >&2 "file not found: $file"
         return 1
     end
 
