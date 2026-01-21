@@ -120,8 +120,8 @@ end
 fish_add_manpath $__fish_data_dir/man
 
 # $HOME
-fish_add_path $XDG_BIN_HOME ~/opt/bin
-fish_add_manpath $XDG_DATA_HOME/man ~/opt/share/man
+fish_add_path $XDG_BIN_HOME
+fish_add_manpath $XDG_DATA_HOME/man
 
 # Clean up
 set PATH (path filter -d $PATH | un1q)

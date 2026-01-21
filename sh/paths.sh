@@ -147,9 +147,9 @@ PATH=$XDG_DATA_HOME/npm/bin:$PATH
 # ~
 # -----------------------------------------------------------------------------
 
-PATH=$XDG_BIN_HOME:$HOME/opt/bin:$PATH
-MANPATH=$HOME/opt/share/man:$HOME/share/man:$MANPATH
-INFOPATH=$HOME/opt/share/info:$INFOPATH
+PATH=$XDG_BIN_HOME:$PATH
+MANPATH=$XDG_DATA_HOME/man:$MANPATH
+INFOPATH=$XDG_DATA_HOME/info:$INFOPATH
 
 # -----------------------------------------------------------------------------
 # rbenv

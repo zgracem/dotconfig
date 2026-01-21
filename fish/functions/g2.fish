@@ -35,7 +35,7 @@ function g2 --description 'Go somewhere'
         case steam;     set dir "$steam_dir"
         case steamapps; set dir "$steam_dir/steamapps"
         case steamuser; set dir "$steam_dir/userdata"
-        case stow;      set dir "$HOME/opt/stow"
+        case stow;      set dir "$HOME/.local/stow"
         case vs9;       set dir "$HOME/VS/www/vsdotcom"
         case vsbuild;   set dir "$HOME/var/www/vsdotcom9-build"
         case imprint;   set dir "$HOME/VS/www/vsarts24"
