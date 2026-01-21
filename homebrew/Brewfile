@@ -32,6 +32,7 @@ brew "fish"
 brew "jq"
 brew "keychain"
 brew "less"
+brew "make" if OS.linux?
 brew "micro"
 brew "openssh"
 brew "openssl@3"
@@ -74,7 +75,7 @@ brew "help2man"
 brew "multimarkdown"
 brew "pandoc"
 brew "par"
-brew "poppler"
+brew "poppler" # PDF rendering library
 brew "qpdf"
 brew "recode"
 
@@ -105,10 +106,11 @@ cask "xld"
 brew "exif"
 brew "exiftool"
 brew "folderify" if OS.mac?
-brew "imagemagick-full"
-brew "imageoptim-cli"
-brew "mozjpeg"
+brew "zgracem/formulae/imagemagick", link: true
+brew "imageoptim-cli" if OS.mac?
 brew "imagesnap" if OS.mac?
+brew "mozjpeg"
+brew "pngquant"
 brew "webp"
 cask "zgracem/formulae/acorn@preview"
 cask "imageoptim", args: { appdir: "/Applications" }
@@ -155,6 +157,7 @@ if OS.mac?
   brew "cmake"
   brew "glib"
   brew "llvm"
+  brew "openjdk", postinstall: "sudo ln -sfn ${HOMEBREW_PREFIX}/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk"
   brew "texinfo"
 end
 
@@ -211,6 +214,7 @@ cask "inform"
 cask "steam", args: { appdir: "/Applications" }
 cask "steamre/tools/depotdownloader"
 cask "twine-app"
+cask "unity-hub"
 
 # ----------------------------------------------------------------------------
 # my stuff
@@ -234,7 +238,6 @@ cask "go2shell" # deprecated but still works
 cask "istat-menus", args: { appdir: "/Applications" }
 cask "iterm2"
 cask "little-snitch", args: { appdir: "/Applications" }
-cask "maestral"
 cask "name-mangler"
 cask "obsidian"
 cask "sublime-merge"
@@ -294,3 +297,17 @@ mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+
+# ----------------------------------------------------------------------------
+# flatpak
+# ----------------------------------------------------------------------------
+
+flatpak "com.transmissionbt.Transmission"
+flatpak "com.usebottles.bottles"
+flatpak "com.valvesoftware.SteamLink"
+flatpak "com.vscodium.codium"
+flatpak "io.github.zyedidia.micro"
+flatpak "org.gnome.FileRoller"
+flatpak "org.kde.filelight"
+flatpak "org.mozilla.firefox"
+flatpak "org.videolan.VLC"
