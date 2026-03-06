@@ -1,3 +1,3 @@
 function hlep -d "Pretty-prints --help output"
-    $argv[1] --help 2>&1 | bat -pp -l help
+    $argv[1] --help 2>&1 | bat -p -l help
 end
