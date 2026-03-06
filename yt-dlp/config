@@ -64,7 +64,7 @@
 # post-processing options
 # -----------------------------------------------------------------------------
 
---ffmpeg-location /usr/local/bin/ffmpeg
+--ffmpeg-location /usr/local/opt/ffmpeg-full/bin/ffmpeg
 
 # run custom post-processing script to add metadata etc.
 --write-info-json
