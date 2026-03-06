@@ -42,7 +42,7 @@ symlinks: $(SYMLINKS)
 # ----------------------------------------------------------------------------
 
 # /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" /Applications/Firefox.app/Contents/Info.plist
-USER_AGENT_VER = 142.0
+USER_AGENT_VER = 148.0
 USER_AGENT = Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:$(USER_AGENT_VER)) Gecko/20100101 Firefox/$(USER_AGENT_VER)
 
 M4_OUTPUT_FILES = \
