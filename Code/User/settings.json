@@ -55,6 +55,7 @@
   "editor.hideCursorInOverviewRuler": true,
   "editor.inlineSuggest.suppressSuggestions": true,
   "editor.insertSpaces": true,
+  "editor.largeFileOptimizations": true,
   "editor.lightbulb.enabled": "off",
   "editor.links": false,
   "editor.maxTokenizationLineLength": 40960,
