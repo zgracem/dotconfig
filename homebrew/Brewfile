@@ -84,6 +84,7 @@ brew "tree"
 brew "dos2unix"
 brew "ghostscript"
 brew "groff"
+brew "zgracem/formulae/groff-pdfmark"
 brew "help2man"
 brew "alhadis/troff/man-db" if OS.mac?
 brew "multimarkdown"
