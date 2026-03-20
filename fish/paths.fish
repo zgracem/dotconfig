@@ -75,6 +75,9 @@ if path is -d $HOMEBREW_PREFIX # set in conf.d/___dirs.fish
 
     # m4
     fish_add_path $HOMEBREW_PREFIX/opt/m4/bin
+
+    # ffmpeg-full (even w/out regular ffmpeg installed)
+    fish_add_path $HOMEBREW_PREFIX/opt/ffmpeg-full/bin
 end
 
 # npm
