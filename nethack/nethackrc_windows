@@ -36,7 +36,6 @@ OPTIONS=boulder:0
 # SYMBOLS=S_boulder:0
 SYMBOLS=S_ghost:X
 SYMBOLS=S_mimic_def:m
-SYMBOLS=S_hodoor:▪,S_vodoor:▪
 
 OPTIONS=statuslines:3
 OPTIONS=player_selection:prompts
@@ -138,11 +137,11 @@ OPTIONS=menucolors
 
 MENUCOLOR=" blessed "=green
 MENUCOLOR=" cursed "=red
-MENUCOLOR=" cursed .* (being worn)"=orange&underline
+MENUCOLOR=" cursed .* (being worn)"=orange
 
 MENUCOLOR=" holy water"=cyan
 MENUCOLOR=" blessed clear potion"=cyan
 MENUCOLOR=" unholy water"=orange
 MENUCOLOR=" cursed clear potion"=orange
 
-MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=underline&magenta
+MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=red&bold

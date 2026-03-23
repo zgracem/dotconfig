@@ -20,15 +20,21 @@ OPTIONS=standout,use_inverse,use_darkgray
 OPTIONS=runmode:teleport
 
 OPTIONS=symset:curses
+#OPTIONS=windowtype:curses
+#OPTIONS=align_message:bottom
+#OPTIONS=perm_invent
+#OPTIONS=popup_dialog 
+#OPTIONS=statuslines:3
+#OPTIONS=term_cols:132
+#OPTIONS=term_rows:40
+#OPTIONS=windowborders:2
 OPTIONS=roguesymset:RogueEpyx
 
 OPTIONS=boulder:0
 # SYMBOLS=S_boulder:0
 SYMBOLS=S_ghost:X
 SYMBOLS=S_mimic_def:m
-SYMBOLS=S_hodoor:▪,S_vodoor:▪
 
-OPTIONS=statuslines:3
 OPTIONS=player_selection:prompts
 OPTIONS=!legacy,!news,!splash_screen,suppress_alert:3.4.3
 OPTIONS=!cmdassist,extmenu
@@ -128,11 +134,11 @@ OPTIONS=menucolors
 
 MENUCOLOR=" blessed "=green
 MENUCOLOR=" cursed "=red
-MENUCOLOR=" cursed .* (being worn)"=orange&underline
+MENUCOLOR=" cursed .* (being worn)"=orange
 
 MENUCOLOR=" holy water"=cyan
 MENUCOLOR=" blessed clear potion"=cyan
 MENUCOLOR=" unholy water"=orange
 MENUCOLOR=" cursed clear potion"=orange
 
-MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=underline&magenta
+MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=red&bold
