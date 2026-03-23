@@ -19,6 +19,7 @@
   "settings": {
     "files.associations": {
       "**/alpine/.pinerc*": "ini",
+      "**/nethack/{*.nh,nethackrc*}": "ini",
       "**/ssh/config.d/*": "ssh_config",
       "**/tmux/*.conf": "shellscript",
       "**/vim/vimrc": "viml"
