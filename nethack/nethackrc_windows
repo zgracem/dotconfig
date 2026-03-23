@@ -1,181 +1,119 @@
 # -----------------------------------------------------------------------------
 # %USERPROFILE%\NetHack\.nethackrc
+# vim:ft=ini
 # -----------------------------------------------------------------------------
 
 OPTIONS=name:Zozo
 OPTIONS=gender:female
-
-# rename slime mold
 OPTIONS=fruit:pomegranate
-
-# preferred pet type
 OPTIONS=pettype:cat
-
-# names
 OPTIONS=catname:Catface Meowmers
 OPTIONS=dogname:Toby
 OPTIONS=horsename:Silver
+OPTIONS=hilite_pet,safe_pet
 
-# -----------------------------------------------------------------------------
-# system
-# -----------------------------------------------------------------------------
-
-# save game state after each level change
-OPTIONS=checkpoint
-
-# disable in-game mail delivery
-OPTIONS=!mail
-
-# -----------------------------------------------------------------------------
-# display
-# -----------------------------------------------------------------------------
-
-# display colour
 OPTIONS=color
-
-# use "0" for boulders
-BOULDER=48
-
-# show corridor squares seen by night vision or a light source as lit
 OPTIONS=lit_corridor
+OPTIONS=!sparkle
+OPTIONS=standout,use_inverse,use_darkgray
+OPTIONS=runmode:teleport
 
-# display a sparkly effect when you or a monster resists an attack
-OPTIONS=sparkle
+# ----------------------------------------------------------------------------
+# Windows only
+OPTIONS=symset:IBMgraphics_2
+OPTIONS=mouse_support:2
+OPTIONS=map_mode:ascii10x18,scroll_margin:10
+OPTIONS=font_message:Arial,font_size_message:10,align_message:top
+OPTIONS=font_menu:Arial,font_size_menu:10
+OPTIONS=font_text:Consolas,font_size_text:12
+OPTIONS=font_status:Consolas,font_size_status:12
+OPTIONS=windowcolors:status white/trueblack
+# ----------------------------------------------------------------------------
 
-# visually distinguish pets from similar animals
-OPTIONS=hilite_pet
+OPTIONS=roguesymset:RogueEpyx
 
-# -----------------------------------------------------------------------------
-# interface
-# -----------------------------------------------------------------------------
+OPTIONS=boulder:0
+# SYMBOLS=S_boulder:0
+SYMBOLS=S_ghost:X
+SYMBOLS=S_mimic_def:m
+SYMBOLS=S_hodoor:▪,S_vodoor:▪
 
-# prompt for character selection
+OPTIONS=statuslines:3
 OPTIONS=player_selection:prompts
-
-# prompt before praying, removing single items, attacking peaceful
-OPTIONS=paranoid_confirmation:pray Remove attack
-
-# disable command assistance for new players
-OPTIONS=!cmdassist
-
-# quiet startup
 OPTIONS=!legacy,!news,!splash_screen,suppress_alert:3.4.3
-
-# show accumulated XP and score and elapsed turns
+OPTIONS=!cmdassist,extmenu
 OPTIONS=showexp,showscore,time
-
-# save 100 top line messages (and recall with ^P)
-OPTIONS=msghistory:100
-
-# display two recall messages single-line, then go full window
-OPTIONS=msg_window:combination
-
-# extended commands appear in pop-up menu
-OPTIONS=extmenu
-
-# inventory letters stick when objects are dropped
+OPTIONS=msg_window:reverse,msghistory:250
+OPTIONS=menustyle:full,force_invmenu
 OPTIONS=fixinv
-
-# score list at end of game
+OPTIONS=disclose:yi ya yv yg yc yo
 OPTIONS=scores:5 top/2 around/own
+OPTIONS=pile_limit:4
 
-# display a menu of object classes, then a menu of matching objects
-OPTIONS=menustyle:Full
+OPTIONS=confirm,prayconfirm,paranoid_confirmation:pray Remove attack
+OPTIONS=pickup_burden:burdened
 
-# -----------------------------------------------------------------------------
-# gameplay
-# -----------------------------------------------------------------------------
+OPTIONS=number_pad:1
+OPTIONS=autodig,autoquiver,!pushweapon,!rest_on_space
+OPTIONS=autopickup,pickup_types=$,pickup_thrown
 
-# 0 = use [yuhjklbn] to move
-# 1 = use number pad to move
-OPTIONS=number_pad=1
+MSGTYPE=stop "The .+ swings itself around you!"
+MSGTYPE=stop "The python grabs you!"
+MSGTYPE=stop "You don't feel very well"
+MSGTYPE=stop "You('re| are) turning .+"
+MSGTYPE=stop "Your limbs are (getting oozy|stiffening)"
+MSGTYPE=stop "Your skin begins to peel away"
+MSGTYPE=stop "You are slowing down"
+MSGTYPE=stop "It constricts you"
+MSGTYPE=stop "You find it hard to breathe"
+MSGTYPE=stop "You're gasping for air"
+MSGTYPE=stop "Your blood is having trouble reaching your brain"
+MSGTYPE=stop "You can no longer breathe"
+MSGTYPE=stop "Your consciousness is fading"
+MSGTYPE=stop "You feel deathly sick"
+MSGTYPE=stop "You feel (much|even) worse"
+MSGTYPE=stop "You feel feverish"
+MSGTYPE=stop "You regain consciousness"
 
-# do not make the spacebar a synonym for `.` (rest)
-OPTIONS=!rest_on_space
+MSGTYPE=stop "wave of psychic energy"
+MSGTYPE=stop "steals? |stole"
+MSGTYPE=stop "The Wizard of Yendor steals .*"
+MSGTYPE=stop "flicks a bullwhip towards your"
+MSGTYPE=stop "wraps around the"
+MSGTYPE=stop "yanks the"
+MSGTYPE=stop "hand spasms"
+MSGTYPE=stop "disintegrat"
+MSGTYPE=stop "(wields|swings) .*Vorpal Blade"
+MSGTYPE=stop "zaps .* with wand of teleportation"
+MSGTYPE=stop "You feel a malignant aura surround you"
+MSGTYPE=stop "(thorough|utter|total)ly digest"
+MSGTYPE=stop "(feel sad|have a( peculiarly)? (sad|melancholy) feeling) for a moment"
+MSGTYPE=stop ".* starves"
+MSGTYPE=stop "Run away! Run away!"
+MSGTYPE=stop "Watch out! Bad things can happen on Friday the 13th"
+MSGTYPE=stop "You see here a c(hi|o)ckatrice corpse" 
 
-# auto-dig when wielding a digging tool
-OPTIONS=autodig
-
-# (don't) autopickup gold
-OPTIONS=!autopickup,pickup_types=$
-
-# automatically fill when `f`iring with empty quiver
-OPTIONS=autoquiver
-
-# confirm attacks on peaceful creatures
-OPTIONS=confirm
-
-# confirm praying
-OPTIONS=prayconfirm
-
-# push primary weapon to secondary slot on `w`ielding new primary
-OPTIONS=pushweapon
-
-# commands that ask for an inventory item open a menu
-OPTIONS=force_invmenu
-
-# prevent attacks on pets
-OPTIONS=safe_pet
-
-# display compass coordinates when looking around the map with commands
-OPTIONS=whatis_coord:c
-
-# -----------------------------------------------------------------------------
-# messages
-# -----------------------------------------------------------------------------
-
-# delayed instadeaths <https://github.com/majutsushi/etc/blob/master/nethackrc>
-MSGTYPE=stop "^The .+ swings itself around you!"
-MSGTYPE=stop "^The python grabs you!"
-MSGTYPE=stop "^You don't feel very well."
-MSGTYPE=stop "^You are turning a little green."
-MSGTYPE=stop "^Your limbs are getting oozy."
-MSGTYPE=stop "^Your skin begins to peel away."
-MSGTYPE=stop "^You are turning into a green slime."
-MSGTYPE=stop "^You are slowing down."
-MSGTYPE=stop "^Your limbs are stiffening."
-MSGTYPE=stop "^It constricts your throat!"
-MSGTYPE=stop "^You find it hard to breathe."
-MSGTYPE=stop "^You're gasping for air."
-MSGTYPE=stop "^Your blood is having trouble reaching your brain."
-MSGTYPE=stop "^You can no longer breathe."
-MSGTYPE=stop "^You're turning blue."
-MSGTYPE=stop "^Your consciousness is fading."
-MSGTYPE=stop "^You feel deathly sick."
-MSGTYPE=stop "^You feel (much|even) worse."
-MSGTYPE=stop "^You regain consciousness."
-
-# near-deaths <https://github.com/sartak/conf/blob/master/nethackrc>
 MSGTYPE=stop "You hear the (wai|how)ling of the (CwnAnnwn|Banshee)"
 MSGTYPE=stop ".*, your life force is running out"
 MSGTYPE=stop ".*, all your powers will be lost"
 MSGTYPE=stop ".* is about to die"
 
-# vibrating square
-MSGTYPE=stop "^You feel a strange vibration "
-# time to #enhance
-MSGTYPE=stop "^You feel more confident "
-# potential inventory cursing
-MSGTYPE=stop "^You feel a malignant aura surround "
+MSGTYPE=stop "You feel a strange vibration"
+MSGTYPE=stop "You feel more confident"
+MSGTYPE=stop "You feel a malignant aura surround"
 
-# status effects
 MSGTYPE=stop "^You.* feel hungry"
 MSGTYPE=stop "munchies"
 MSGTYPE=stop "^You( are beginning to)? feel weak"
 MSGTYPE=stop ".* needs food, badly!"
 MSGTYPE=stop "^You faint from lack of food."
 
-# silent when climbing stairs
 MSGTYPE=hide "You descend .*"
 MSGTYPE=hide "You climb .*"
-
-# -----------------------------------------------------------------------------
-# statushilites
-# -----------------------------------------------------------------------------
+MSGTYPE=hide "With great effort you move the boulder"
 
 OPTIONS=statushilites
 
-# HP
 OPTIONS=hilite_status:hitpoints/100%/gray&normal
 OPTIONS=hilite_status:hitpoints/<100%/green&normal
 OPTIONS=hilite_status:hitpoints/<66%/yellow&normal
@@ -183,79 +121,28 @@ OPTIONS=hilite_status:hitpoints/<50%/orange&normal
 OPTIONS=hilite_status:hitpoints/<33%/red&bold
 OPTIONS=hilite_status:hitpoints/<15%/red&inverse
 
-## Pw
 OPTIONS=hilite_status:power/100%/gray&normal
 OPTIONS=hilite_status:power/<100%/green&normal
 OPTIONS=hilite_status:power/<66%/yellow&normal
 OPTIONS=hilite_status:power/<50%/orange&normal
 OPTIONS=hilite_status:power/<33%/red&bold
 
-## Carry
 OPTIONS=hilite_status:cap/burdened/yellow/stressed/orange/strained/red&bold/overtaxed/red&inverse/overloaded/red&inverse&blink
-
-## Hunger
 OPTIONS=hilite_status:hunger/satiated/yellow/hungry/orange/weak/red&bold/fainting/red&inverse/fainted/red&inverse&blink
-
-## Mental
-OPTIONS=hilite_status:condition/hallu/yellow
-OPTIONS=hilite_status:condition/conf/orange
-OPTIONS=hilite_status:condition/stun/red&bold
-
-## Health
-OPTIONS=hilite_status:condition/termill/red&inverse
-OPTIONS=hilite_status:condition/foodpois/red&inverse
-OPTIONS=hilite_status:condition/slime/red&inverse
-
-# gold
+OPTIONS=hilite_status:condition/hallu/lightmagenta&bold/conf/orange&bold/stun/red&bold
+OPTIONS=hilite_status:condition/termill/red&inverse/foodpois/red&inverse/slime/red&inverse
 OPTIONS=hilite_status:gold/up/yellow/down/brown
-
-# St, Dx, Co, In, Wi, Ch
 OPTIONS=hilite_status:characteristics/up/green/down/red
-
-# -----------------------------------------------------------------------------
-# menucolors
-# -----------------------------------------------------------------------------
 
 OPTIONS=menucolors
 
-# blessed items in green
-MENUCOLOR=" blessed " = green
-# holy water in green
-MENUCOLOR=" holy " = green
-# cursed items in red
-MENUCOLOR=" cursed " = red
-# unholy water in red
-MENUCOLOR=" unholy " = red
-# cursed worn items in orange and underlined
-MENUCOLOR=" cursed .* (being worn)" = orange&underline
+MENUCOLOR=" blessed "=green
+MENUCOLOR=" cursed "=red
+MENUCOLOR=" cursed .* (being worn)"=orange&underline
 
-# ----------------------------------------------------------------------------
-# win32 port
-# ----------------------------------------------------------------------------
+MENUCOLOR=" holy water"=cyan
+MENUCOLOR=" blessed clear potion"=cyan
+MENUCOLOR=" unholy water"=orange
+MENUCOLOR=" cursed clear potion"=orange
 
-# use IBM extended characters
-OPTIONS=symset:IBMgraphics_2,roguesymset:RogueEpyx
-
-# mouse support (no OS adjustments)
-OPTIONS=mouse_support:2
-
-# game window settings
-# map_mode : tiles, ascii4x6, ascii6x8, ascii8x8, ascii16x8, ascii7x12,
-#            ascii8x12, ascii16x12, ascii12x16, ascii10x18, fit_to_screen,
-#            ascii_fit_to_screen, tiles_fit_to_screen
-OPTIONS=map_mode:ascii10x18,scroll_margin:10
-
-# message window settings
-OPTIONS=font_message:Arial,font_size_message:10,align_message:top
-
-# menu settings
-OPTIONS=font_menu:Arial,font_size_menu:10
-
-# text settings
-OPTIONS=font_text:Consolas,font_size_text:12
-
-# status window settings
-OPTIONS=font_status:Consolas,font_size_status:12
-
-# "Nethack mode" colors
-OPTIONS=windowcolors:status white/trueblack
+MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=underline&magenta
