@@ -72,12 +72,15 @@ if path is -d $HOMEBREW_PREFIX # set in conf.d/___dirs.fish
 
     # openjdk
     fish_add_path $HOMEBREW_PREFIX/opt/openjdk/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/openjdk/share/man
 
     # m4
     fish_add_path $HOMEBREW_PREFIX/opt/m4/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/m4/share/man
 
     # ffmpeg-full (even w/out regular ffmpeg installed)
     fish_add_path $HOMEBREW_PREFIX/opt/ffmpeg-full/bin
+    fish_add_manpath $HOMEBREW_PREFIX/opt/ffmpeg-full/share/man
 end
 
 # npm
