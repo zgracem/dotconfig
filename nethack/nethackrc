@@ -14,44 +14,54 @@ OPTIONS=horsename:Silver
 OPTIONS=hilite_pet,safe_pet
 
 OPTIONS=color
-OPTIONS=lit_corridor
+OPTIONS=dark_room,lit_corridor
 OPTIONS=!sparkle
 OPTIONS=standout,use_inverse,use_darkgray
 OPTIONS=runmode:teleport
+OPTIONS=hitpointbar
 
+# curses interface
 OPTIONS=symset:curses
-#OPTIONS=windowtype:curses
-#OPTIONS=align_message:bottom
-#OPTIONS=perm_invent
-#OPTIONS=popup_dialog 
-#OPTIONS=statuslines:3
-#OPTIONS=term_cols:132
-#OPTIONS=term_rows:40
-#OPTIONS=windowborders:2
-OPTIONS=roguesymset:RogueEpyx
+OPTIONS=windowtype:curses
+OPTIONS=align_message:top
+OPTIONS=popup_dialog 
+OPTIONS=statuslines:3
+OPTIONS=windowborders:2
 
-OPTIONS=boulder:0
-# SYMBOLS=S_boulder:0
+OPTIONS=roguesymset:RogueIBM
+
+SYMBOLS=S_boulder:0
+SYMBOLS=S_eel:7
 SYMBOLS=S_ghost:X
+SYMBOLS=S_golem:9
 SYMBOLS=S_mimic_def:m
+SYMBOLS=S_lava:~
+SYMBOLS=S_pool:~
+SYMBOLS=S_water:~
 
 OPTIONS=player_selection:prompts
-OPTIONS=!legacy,!news,!splash_screen,suppress_alert:3.4.3
-OPTIONS=!cmdassist,extmenu
+OPTIONS=!cmdassist,!legacy,!news,!splash_screen,suppress_alert:3.4.3
 OPTIONS=showexp,showscore,time
 OPTIONS=msg_window:reverse,msghistory:250
-OPTIONS=menustyle:full,force_invmenu
+OPTIONS=menustyle:combination
+OPTIONS=!implicit_uncursed
 OPTIONS=fixinv
-OPTIONS=disclose:yi ya yv yg yc yo
-OPTIONS=scores:5 top/2 around/own
-OPTIONS=pile_limit:4
+OPTIONS=disclose:yi ya nv yg yc yo
+OPTIONS=scores:5t 2a o
 
-OPTIONS=confirm,prayconfirm,paranoid_confirmation:pray Remove attack
+OPTIONS=confirm,paranoid_confirmation:pray Remove attack quit wand
 OPTIONS=pickup_burden:burdened
 
 OPTIONS=number_pad:1
 OPTIONS=autodig,autoquiver,!pushweapon,!rest_on_space
-OPTIONS=autopickup,pickup_types=$,pickup_thrown
+OPTIONS=autopickup,pickup_thrown,pickup_types:$
+
+AUTOPICKUP_EXCEPTION=">:0)"
+AUTOPICKUP_EXCEPTION=">scare monster"
+AUTOPICKUP_EXCEPTION="<create monster"
+AUTOPICKUP_EXCEPTION="<(silver bell|Bell of Opening)"
+AUTOPICKUP_EXCEPTION="<[cC]andelabrum"
+AUTOPICKUP_EXCEPTION="<(Book of the Dead|papyrus spellbook)"
 
 MSGTYPE=stop "The .+ swings itself around you!"
 MSGTYPE=stop "The python grabs you!"
@@ -71,42 +81,47 @@ MSGTYPE=stop "You feel (much|even) worse"
 MSGTYPE=stop "You feel feverish"
 MSGTYPE=stop "You regain consciousness"
 
+MSGTYPE=stop "You feel vaguely nervous"
+MSGTYPE=stop "You notice a black glow surrounding you"
 MSGTYPE=stop "wave of psychic energy"
 MSGTYPE=stop "steals? |stole"
-MSGTYPE=stop "The Wizard of Yendor steals .*"
+MSGTYPE=stop "The Wizard of Yendor steals"
 MSGTYPE=stop "flicks a bullwhip towards your"
 MSGTYPE=stop "wraps around the"
 MSGTYPE=stop "yanks the"
 MSGTYPE=stop "hand spasms"
 MSGTYPE=stop "disintegrat"
 MSGTYPE=stop "(wields|swings) .*Vorpal Blade"
-MSGTYPE=stop "zaps .* with wand of teleportation"
-MSGTYPE=stop "You feel a malignant aura surround you"
+MSGTYPE=stop "zaps .+ with wand of teleportation"
+MSGTYPE=stop "You feel a malignant aura"
 MSGTYPE=stop "(thorough|utter|total)ly digest"
 MSGTYPE=stop "(feel sad|have a( peculiarly)? (sad|melancholy) feeling) for a moment"
-MSGTYPE=stop ".* starves"
+MSGTYPE=stop ".+ starves"
 MSGTYPE=stop "Run away! Run away!"
 MSGTYPE=stop "Watch out! Bad things can happen on Friday the 13th"
-MSGTYPE=stop "You see here a c(hi|o)ckatrice corpse"
+MSGTYPE=stop "c(hi|o)ckatrice (corpse|egg)"
 
 MSGTYPE=stop "You hear the (wai|how)ling of the (CwnAnnwn|Banshee)"
 MSGTYPE=stop ".*, your life force is running out"
 MSGTYPE=stop ".*, all your powers will be lost"
 MSGTYPE=stop ".* is about to die"
 
+MSGTYPE=stop "A voice booms out"
 MSGTYPE=stop "You feel a strange vibration"
 MSGTYPE=stop "You feel more confident"
 MSGTYPE=stop "You feel a malignant aura surround"
 
-MSGTYPE=stop "^You.* feel hungry"
+MSGTYPE=stop "You.* feel hungry"
 MSGTYPE=stop "munchies"
-MSGTYPE=stop "^You( are beginning to)? feel weak"
+MSGTYPE=stop "You( are beginning to)? feel weak"
 MSGTYPE=stop ".* needs food, badly!"
-MSGTYPE=stop "^You faint from lack of food."
+MSGTYPE=stop "You faint from lack of food"
 
 MSGTYPE=hide "You descend .*"
 MSGTYPE=hide "You climb .*"
 MSGTYPE=hide "With great effort you move the boulder"
+MSGTYPE=hide "Where do you want to travel to\?"
+MSGTYPE=hide "For instructions type"
 
 OPTIONS=statushilites
 
@@ -125,20 +140,41 @@ OPTIONS=hilite_status:power/<33%/red&bold
 
 OPTIONS=hilite_status:cap/burdened/yellow/stressed/orange/strained/red&bold/overtaxed/red&inverse/overloaded/red&inverse&blink
 OPTIONS=hilite_status:hunger/satiated/yellow/hungry/orange/weak/red&bold/fainting/red&inverse/fainted/red&inverse&blink
-OPTIONS=hilite_status:condition/hallu/lightmagenta&bold/conf/orange&bold/stun/red&bold
-OPTIONS=hilite_status:condition/termill/red&inverse/foodpois/red&inverse/slime/red&inverse
+
+OPTIONS=hilite_status:condition/blind/red
+OPTIONS=hilite_status:condition/deaf/red
+OPTIONS=hilite_status:condition/stun/orange&bold
+OPTIONS=hilite_status:condition/conf/orange&bold
+OPTIONS=hilite_status:condition/hallu/lightmagenta&bold
+OPTIONS=hilite_status:condition/major_troubles/red&bold&inverse
+OPTIONS=hilite_status:condition/movement/lightcyan
+
+OPTIONS=hilite_status:alignment/changed/orange&inverse
+OPTIONS=hilite_status:armor-class/up/cyan/down/orange
+OPTIONS=hilite_status:experience-level/up/cyan/down/orange
 OPTIONS=hilite_status:gold/up/yellow/down/brown
 OPTIONS=hilite_status:characteristics/up/green/down/red
 
 OPTIONS=menucolors
 
+MENUCOLOR="piece of cloth|opera cloak|ornamental cope|tattered cape|conical hat"=magenta
+MENUCOLOR="(plumed|etched|crested|visored) helmet"=magenta
+MENUCOLOR="(old|padded|riding|fencing) gloves"=magenta
+MENUCOLOR="(mud|buckled|riding|snow|hiking|combat|jungle) boots"=magenta
+MENUCOLOR="opposite alignment|dunce cap|fumbl(e|ing)"=orange
+
+MENUCOLOR=" (lit)"=white
 MENUCOLOR=" blessed "=green
 MENUCOLOR=" cursed "=red
-MENUCOLOR=" cursed .* (being worn)"=orange
+MENUCOLOR=" cursed .* \(being worn\)"=orange
 
 MENUCOLOR=" holy water"=cyan
 MENUCOLOR=" blessed clear potion"=cyan
 MENUCOLOR=" unholy water"=orange
 MENUCOLOR=" cursed clear potion"=orange
 
-MENUCOLOR="loadstone\|wand \(of\|called\) cancellation"=red&bold
+MENUCOLOR="loadstone|wand (of|called) cancel"=red&bold
+MENUCOLOR="(bag of|sack called) holding"=magenta
+MENUCOLOR="blessed bag of holding"=lightmagenta
+MENUCOLOR="the bag of holding"=gray
+MENUCOLOR="unpaid"=orange
