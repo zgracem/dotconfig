@@ -1,10 +1,6 @@
 function compsrc -d 'Display completion source file(s)'
     if test -z "$argv"
-        if isatty stdout
-            short_home $fish_complete_path
-        else
-            echo -ns $fish_complete_path\n
-        end
+        echo -ns $fish_complete_path\n
         return
     end
     set -f found nothing

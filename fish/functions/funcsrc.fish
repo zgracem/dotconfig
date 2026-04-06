@@ -1,10 +1,6 @@
 function funcsrc -d 'Display function source file(s)'
     if test -z "$argv"
-        if isatty stdout
-            short_home $fish_function_path
-        else
-            echo -ns $fish_function_path\n
-        end
+        echo -ns $fish_function_path\n
         return
     end
     set -f found nothing
