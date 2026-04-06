@@ -63,9 +63,7 @@ OPTIONS=wizweight
 AUTOPICKUP_EXCEPTION=">:0)"
 AUTOPICKUP_EXCEPTION=">scare monster"
 AUTOPICKUP_EXCEPTION="<create monster"
-AUTOPICKUP_EXCEPTION="<(silver bell|Bell of Opening)"
-AUTOPICKUP_EXCEPTION="<[cC]andelabrum"
-AUTOPICKUP_EXCEPTION="<(Book of the Dead|papyrus spellbook)"
+AUTOPICKUP_EXCEPTION="<(silver bell|Bell of Opening|[cC]andelabrum|papyrus spellbook|Book of the Dead)"
 
 MSGTYPE=stop "The .+ swings itself around you!"
 MSGTYPE=stop "The python grabs you!"
