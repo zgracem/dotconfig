@@ -239,7 +239,7 @@ brew "fastfetch"
 brew "figlet"
 brew "fortune"
 brew "lolcat"
-brew "nethack"
+brew "zgracem/formulae/nethack-custom"
 brew "toilet"
 
 if OS.mac?

@@ -20,6 +20,7 @@ OPTIONS=standout,use_inverse,use_darkgray
 OPTIONS=runmode:teleport
 OPTIONS=hitpointbar
 OPTIONS=pile_limit:6
+OPTIONS=mail
 
 # curses interface
 OPTIONS=symset:curses
