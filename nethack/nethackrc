@@ -19,6 +19,7 @@ OPTIONS=!sparkle
 OPTIONS=standout,use_inverse,use_darkgray
 OPTIONS=runmode:teleport
 OPTIONS=hitpointbar
+OPTIONS=pile_limit:6
 
 # curses interface
 OPTIONS=symset:curses
@@ -39,7 +40,7 @@ SYMBOLS=S_lava:~
 SYMBOLS=S_pool:~
 SYMBOLS=S_water:~
 
-OPTIONS=player_selection:prompts
+OPTIONS=player_selection:prompts,selectsaved
 OPTIONS=!cmdassist,!legacy,!news,!splash_screen,suppress_alert:3.4.3
 OPTIONS=showexp,showscore,time
 OPTIONS=msg_window:reverse,msghistory:250
@@ -55,6 +56,9 @@ OPTIONS=pickup_burden:burdened
 OPTIONS=number_pad:1
 OPTIONS=autodig,autoquiver,!pushweapon,!rest_on_space
 OPTIONS=autopickup,pickup_thrown,pickup_types:$
+
+# Debug/wizard mode only
+OPTIONS=wizweight
 
 AUTOPICKUP_EXCEPTION=">:0)"
 AUTOPICKUP_EXCEPTION=">scare monster"
