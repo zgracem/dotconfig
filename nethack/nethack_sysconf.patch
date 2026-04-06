@@ -1,0 +1,11 @@
+--- /usr/local/opt/nethack/libexec/sysconf_sample	2023-02-15 14:52:57.000000000 -0700
++++ /usr/local/opt/nethack/libexec/sysconf	2026-04-03 16:38:29.834346655 -0600
+@@ -38 +38 @@
+-GENERICUSERS=play player game games nethack nethacker
++GENERICUSERS=zozo
+@@ -58 +58 @@
+-#RECOVER=Run the recover program.
++RECOVER=Run /usr/local/opt/nethack/libexec/recover
+@@ -106 +106 @@
+-#DUMPLOGFILE=/tmp/nethack.%n.%d.log
++DUMPLOGFILE=/Users/zozo/var/log/nethack/nethack.%n.%d.log
