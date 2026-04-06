@@ -170,13 +170,15 @@ OPTIONS=hilite_status:characteristics/up/green/down/red
 
 OPTIONS=menucolors
 
-MENUCOLOR="piece of cloth|opera cloak|ornamental cope|tattered cape|conical hat"=magenta
-MENUCOLOR="(plumed|etched|crested|visored) helmet"=magenta
-MENUCOLOR="(old|padded|riding|fencing) gloves"=magenta
-MENUCOLOR="(mud|buckled|riding|snow|hiking|combat|jungle) boots"=magenta
+MENUCOLOR="piece of cloth|opera cloak|ornamental cope|tattered cape|conical hat"=nocolor&dim
+MENUCOLOR="(plumed|etched|crested|visored) helmet"=nocolor&dim
+MENUCOLOR="(old|padded|riding|fencing) gloves"=nocolor&dim
+MENUCOLOR="(mud|buckled|riding|snow|hiking|combat|jungle) boots"=nocolor&dim
+MENUCOLOR="scroll labeled [A-Z]"=nocolor&dim
+MENUCOLOR="gray stones?$"=nocolor&dim
+MENUCOLOR="(spellbook|amulet|ring|wand)s?$"=nocolor&dim
 MENUCOLOR="opposite alignment|dunce cap|fumbl(e|ing)"=orange
 
-MENUCOLOR=" (lit)"=white
 MENUCOLOR=" blessed "=green
 MENUCOLOR=" cursed "=red
 MENUCOLOR=" cursed .* \(being worn\)"=orange
@@ -186,10 +188,13 @@ MENUCOLOR=" blessed clear potion"=cyan
 MENUCOLOR=" unholy water"=orange
 MENUCOLOR=" cursed clear potion"=orange
 
-MENUCOLOR="loadstone|wand (of|called) cancel"=red&bold
-MENUCOLOR="(bag of|sack called) holding"=magenta
-MENUCOLOR="blessed bag of holding"=lightmagenta
+MENUCOLOR="loadstone|wand (of|called) cancel|bag of tricks"=red&bold
+MENUCOLOR="bag (of|called) holding"=magenta
 MENUCOLOR="the bag of holding"=gray
+MENUCOLOR="(silver bell|Bell of Opening|[cC]andelabrum|papyrus spellbook|Book of the Dead)"=white
+MENUCOLOR="unicorn horn"=white
+MENUCOLOR=" \(lit\)$"=white&bold
+MENUCOLOR="no charge"=nocolor&dim
 MENUCOLOR="unpaid"=orange
 
 # Lines after a section marker belong to that section, and are ignored unless
