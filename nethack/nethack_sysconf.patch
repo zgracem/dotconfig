@@ -3,9 +3,6 @@
 @@ -38 +38 @@
 -GENERICUSERS=play player game games nethack nethacker
 +GENERICUSERS=zozo
-@@ -58 +58 @@
--#RECOVER=Run the recover program.
-+RECOVER=Run /usr/local/opt/nethack/libexec/recover
 @@ -106 +106 @@
 -#DUMPLOGFILE=/tmp/nethack.%n.%d.log
 +DUMPLOGFILE=/Users/zozo/var/log/nethack/nethack.%n.%d.log
