@@ -178,3 +178,15 @@ MENUCOLOR="(bag of|sack called) holding"=magenta
 MENUCOLOR="blessed bag of holding"=lightmagenta
 MENUCOLOR="the bag of holding"=gray
 MENUCOLOR="unpaid"=orange
+
+# Lines after a section marker belong to that section, and are ignored unless
+# a CHOOSE statement was used to select that section.
+[windows]
+OPTIONS=symset:IBMgraphics_2
+OPTIONS=mouse_support:2
+OPTIONS=map_mode:ascii10x18,scroll_margin:10
+OPTIONS=font_message:Arial,font_size_message:10,align_message:top
+OPTIONS=font_menu:Arial,font_size_menu:10
+OPTIONS=font_text:Consolas,font_size_text:12
+OPTIONS=font_status:Consolas,font_size_status:12
+OPTIONS=windowcolors:status white/trueblack
