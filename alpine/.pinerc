@@ -31,7 +31,7 @@ titlebar-color-style=default
 mailcap-check-interval=5
 
 last-version-used=6.26
-last-time-prune-questioned=126.2
+last-time-prune-questioned=126.4
 
 # List of features; see Alpine's Setup/options menu for the current set.
 # e.g. feature-list= select-without-confirm, signature-at-bottom

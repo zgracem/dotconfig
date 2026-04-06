@@ -24,7 +24,7 @@ OPTIONS=hitpointbar
 OPTIONS=symset:curses
 OPTIONS=windowtype:curses
 OPTIONS=align_message:top
-OPTIONS=popup_dialog 
+OPTIONS=popup_dialog
 OPTIONS=statuslines:3
 OPTIONS=windowborders:2
 

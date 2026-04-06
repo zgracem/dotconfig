@@ -12,9 +12,9 @@
       "name": "~/.local/share/doc",
       "path": "../.local/share/doc"
     },
-    {
-      "path": "../Developer/fish/tacklebox"
-    }
+    // {
+    //   "path": "../Developer/fish/tacklebox"
+    // }
   ],
   "settings": {
     "files.associations": {
