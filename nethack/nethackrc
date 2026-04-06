@@ -152,8 +152,17 @@ OPTIONS=hilite_status:power/<66%/yellow&normal
 OPTIONS=hilite_status:power/<50%/orange&normal
 OPTIONS=hilite_status:power/<33%/red&bold
 
-OPTIONS=hilite_status:cap/burdened/yellow/stressed/orange/strained/red&bold/overtaxed/red&inverse/overloaded/red&inverse&blink
-OPTIONS=hilite_status:hunger/satiated/orange/hungry/yellow/weak/orange&bold/fainting/red&inverse/fainted/red&inverse&blink
+OPTIONS=hilite_status:carrying-capacity/burdened/yellow
+OPTIONS=hilite_status:carrying-capacity/stressed/orange
+OPTIONS=hilite_status:carrying-capacity/strained/red&bold
+OPTIONS=hilite_status:carrying-capacity/overtaxed/red&inverse
+OPTIONS=hilite_status:carrying-capacity/overloaded/red&inverse&blink
+
+OPTIONS=hilite_status:hunger/satiated/orange
+OPTIONS=hilite_status:hunger/hungry/yellow
+OPTIONS=hilite_status:hunger/weak/orange&bold
+OPTIONS=hilite_status:hunger/fainting/red&inverse
+OPTIONS=hilite_status:hunger/fainted/red&inverse&blink
 
 OPTIONS=hilite_status:condition/blind/black&bold
 OPTIONS=hilite_status:condition/deaf/red
