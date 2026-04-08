@@ -139,8 +139,8 @@
   "git.repositoryScanMaxDepth": -1,
   "html.format.wrapLineLength": 0,
   "insertGuid.showCodeSnippets": false,
-  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "jqPlayground.binaryPath": "/usr/local/bin/jq",
+  "js.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
   "json.maxItemsComputed": 16384,
   "maptz.regionfolder": {
     "[fish]": {
@@ -324,14 +324,14 @@
   "terminal.integrated.suggest.cdPath": "off",
   "terminal.integrated.suggest.providers": {
     "lsp": false,
-    "terminal-suggest": false
+    "vscode.terminal-suggest": false
   },
   "terminal.integrated.tabs.description": "${process}",
   "terminal.integrated.tabs.focusMode": "singleClick",
   "terminal.integrated.tabs.separator": " • ",
   "terminal.integrated.tabs.title": "${sequence}",
-  "typescript.tsserver.web.projectWideIntellisense.enabled": true,
-  "typescript.tsserver.web.typeAcquisition.enabled": true,
+  "ts.tsserver.web.projectWideIntellisense.enabled": true,
+  "ts.tsserver.web.typeAcquisition.enabled": true,
   "window.closeWhenEmpty": true,
   "window.enableMenuBarMnemonics": true,
   "window.menuBarVisibility": "toggle",
