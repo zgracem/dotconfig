@@ -120,6 +120,9 @@ MSGTYPE=stop "A voice booms out"
 MSGTYPE=stop "You feel a strange vibration"
 MSGTYPE=stop "You feel more confident"
 
+# mail daemons
+MSGTYPE=stop "Pardon me!|Excuse me\.|I'm outta here\.|! I have some mail for you\.|Catch!"
+
 MSGTYPE=stop "You feel (very )?(charismatic|tough|agile|smart|strong|wise)!"
 MSGTYPE=stop "You feel (very )?(repulsive|fragile|clumsy|stupid|weak|foolish)!"
 MSGTYPE=stop "You.* feel hungry"
