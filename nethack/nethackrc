@@ -144,16 +144,18 @@ OPTIONS=statushilites
 
 OPTIONS=hilite_status:hitpoints/100%/gray&normal
 OPTIONS=hilite_status:hitpoints/<100%/green&normal
-OPTIONS=hilite_status:hitpoints/<66%/yellow&normal
+OPTIONS=hilite_status:hitpoints/<75%/yellow&normal
 OPTIONS=hilite_status:hitpoints/<50%/orange&normal
-OPTIONS=hilite_status:hitpoints/<33%/red&bold
-OPTIONS=hilite_status:hitpoints/<15%/red&inverse
+OPTIONS=hilite_status:hitpoints/<25%/red&bold
+OPTIONS=hilite_status:hitpoints/<13%/red&inverse&blink
+OPTIONS=hilite_status:hitpoints-max/up/cyan&bold/down/orange&bold
 
 OPTIONS=hilite_status:power/100%/gray&normal
 OPTIONS=hilite_status:power/<100%/green&normal
-OPTIONS=hilite_status:power/<66%/yellow&normal
+OPTIONS=hilite_status:power/<75%/yellow&normal
 OPTIONS=hilite_status:power/<50%/orange&normal
-OPTIONS=hilite_status:power/<33%/red&bold
+OPTIONS=hilite_status:power/<25%/red&bold
+OPTIONS=hilite_status:power-max/up/cyan&bold/down/orange&bold
 
 OPTIONS=hilite_status:carrying-capacity/burdened/yellow
 OPTIONS=hilite_status:carrying-capacity/stressed/orange
@@ -167,15 +169,22 @@ OPTIONS=hilite_status:hunger/weak/orange&bold
 OPTIONS=hilite_status:hunger/fainting/red&inverse
 OPTIONS=hilite_status:hunger/fainted/red&inverse&blink
 
+# minor_troubles
 OPTIONS=hilite_status:condition/blind/black&bold
 OPTIONS=hilite_status:condition/deaf/red
 OPTIONS=hilite_status:condition/stun/orange&bold
 OPTIONS=hilite_status:condition/conf/orange&bold
 OPTIONS=hilite_status:condition/hallu/lightmagenta&bold
-OPTIONS=hilite_status:condition/major_troubles/red&bold&inverse
+# major_troubles
+OPTIONS=hilite_status:condition/stone/gray&bold&inverse&blink
+OPTIONS=hilite_status:condition/slime/lightgreen&bold&inverse&blink
+OPTIONS=hilite_status:condition/strngl/orange&bold&inverse&blink
+OPTIONS=hilite_status:condition/foodpois/green&bold&inverse&blink
+OPTIONS=hilite_status:condition/termill/red&bold&inverse&blink
+# movement: alias for lev, fly, and ride
 OPTIONS=hilite_status:condition/movement/lightcyan
 
-OPTIONS=hilite_status:alignment/changed/orange&inverse
+OPTIONS=hilite_status:alignment/changed/orange&inverse&blink
 OPTIONS=hilite_status:armor-class/up/orange/down/cyan
 OPTIONS=hilite_status:experience-level/up/cyan/down/orange
 OPTIONS=hilite_status:gold/up/yellow/down/brown
