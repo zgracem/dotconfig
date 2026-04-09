@@ -21,8 +21,12 @@ if ! [[ $- == *i* ]]; then
 elif shopt -q restricted_shell; then
   echo >&2 "restricted shell -- aborting .bashrc"
   return
-elif [[ $HOSTNAME =~ "opalstack" && $SHLVL -lt 2 && -x ~/.local/bin/fish ]]; then
-  exec ~/.local/bin/fish --login
+elif [[ $SHLVL -lt 2 ]]; then
+  if [[ $HOSTNAME =~ "opalstack" && -x ~/.local/bin/fish ]]; then
+    exec ~/.local/bin/fish --login
+  elif [[ -x /usr/bin/fish ]]; then
+    exec /usr/bin/fish --login
+  fi
 fi
 
 # -----------------------------------------------------------------------------
