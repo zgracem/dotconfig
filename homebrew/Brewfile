@@ -8,6 +8,9 @@ if OS.mac?
   cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 end
 
+tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
+tap "zgracem/formulae", "~/Developer/Homebrew/homebrew-formulae"
+
 # ----------------------------------------------------------------------------
 # essentials
 # ----------------------------------------------------------------------------
@@ -62,7 +65,6 @@ if OS.mac?
   brew "bash"
   brew "bchunk" # Convert CD images from .bin/.cue to .iso/.cdr
   brew "duti"
-  brew "lsusb-laniksj"
   brew "ncurses"
   brew "qrencode"
   brew "sf-pwgen"
@@ -71,6 +73,7 @@ end
 
 brew "bfs" # Breadth-first version of find
 brew "btop"
+brew "cyme"
 brew "ddrescue"
 brew "entr"
 brew "hexyl"
@@ -115,7 +118,6 @@ if OS.mac?
   cask "metaz", args: { appdir: "~/Applications" }
   cask "spotify"
   cask "vlc"
-  cask "xact"
   cask "xld"
 end
 
@@ -170,7 +172,6 @@ if OS.mac?
   brew "pinentry-mac"
   brew "ykman"
   cask "yubico-authenticator"
-  cask "yubico-yubikey-manager"
 end
 
 # ----------------------------------------------------------------------------
@@ -254,10 +255,8 @@ end
 # my stuff
 # ----------------------------------------------------------------------------
 
-tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
 brew "zgracem/formulae/calendar"
 brew "zgracem/formulae/zgm-calendar-data"
-cask "zgracem/formulae/lockscreen" if OS.mac?
 
 # ----------------------------------------------------------------------------
 # casks
@@ -268,10 +267,10 @@ if OS.mac?
   cask "bettermouse"
   cask "fantastical"
   cask "firefox", args: { appdir: "/Applications" }
-  cask "go2shell" # deprecated but still works
   cask "istat-menus", args: { appdir: "/Applications" }
   cask "iterm2"
   cask "little-snitch", args: { appdir: "/Applications" }
+  cask "zgracem/formulae/lockscreen"
   cask "name-mangler"
   cask "obsidian"
   cask "sublime-merge"
