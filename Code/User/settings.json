@@ -42,9 +42,7 @@
   "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
-  "editor.accessibilitySupport": "off",
   "editor.copyWithSyntaxHighlighting": false,
-  "editor.experimentalWhitespaceRendering": "off",
   "editor.find.seedSearchStringFromSelection": "never",
   "editor.foldingHighlight": false,
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
@@ -52,8 +50,6 @@
   "editor.fontWeight": "300",
   "editor.formatOnSaveMode": "modifications",
   "editor.guides.bracketPairs": true,
-  "editor.hideCursorInOverviewRuler": true,
-  "editor.inlineSuggest.suppressSuggestions": true,
   "editor.insertSpaces": true,
   "editor.largeFileOptimizations": true,
   "editor.lightbulb.enabled": "off",
@@ -63,11 +59,6 @@
   "editor.minimap.showSlider": "always",
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": "off",
-  "editor.quickSuggestions": {
-    "comments": "on",
-    "other": "on",
-    "strings": "on"
-  },
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "boundary",
@@ -76,8 +67,6 @@
   "editor.suggest.filterGraceful": false,
   "editor.suggest.showSnippets": true,
   "editor.suggest.snippetsPreventQuickSuggestions": true,
-  "editor.suggestOnTriggerCharacters": false,
-  "editor.tabCompletion": "off",
   "editor.unicodeHighlight.allowedCharacters": {
     "×": true,
     "–": true,
@@ -321,7 +310,6 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.stickyScroll.enabled": true,
   "terminal.integrated.stickyScroll.maxLineCount": 2,
-  "terminal.integrated.suggest.cdPath": "off",
   "terminal.integrated.suggest.providers": {
     "lsp": false,
     "vscode.terminal-suggest": false
