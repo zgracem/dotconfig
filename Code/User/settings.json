@@ -42,7 +42,9 @@
   "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.colorDecoratorsActivatedOn": "click",
   "editor.copyWithSyntaxHighlighting": false,
+  "editor.experimentalWhitespaceRendering": "off",
   "editor.find.seedSearchStringFromSelection": "never",
   "editor.foldingHighlight": false,
   "editor.fontFamily": "IBM Plex Mono, Office Code Pro, Consolas, monospace",
@@ -50,6 +52,7 @@
   "editor.fontWeight": "300",
   "editor.formatOnSaveMode": "modifications",
   "editor.guides.bracketPairs": true,
+  "editor.hideCursorInOverviewRuler": true,
   "editor.insertSpaces": true,
   "editor.largeFileOptimizations": true,
   "editor.lightbulb.enabled": "off",
@@ -310,6 +313,8 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "terminal.integrated.stickyScroll.enabled": true,
   "terminal.integrated.stickyScroll.maxLineCount": 2,
+  "terminal.integrated.suggest.enabled": false,
+  "terminal.integrated.suggest.inlineSuggestion": "off",
   "terminal.integrated.suggest.providers": {
     "lsp": false,
     "vscode.terminal-suggest": false
