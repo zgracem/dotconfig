@@ -240,7 +240,8 @@ brew "fastfetch"
 brew "figlet"
 brew "fortune"
 brew "lolcat"
-brew "zgracem/formulae/nethack-custom"
+brew "zgracem/formulae/nethack@3.67"
+brew "nethack"
 brew "toilet"
 
 if OS.mac?

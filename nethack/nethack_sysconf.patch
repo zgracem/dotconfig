@@ -1,7 +1,7 @@
 --- /usr/local/opt/nethack/libexec/sysconf_sample	2023-02-15 14:52:57.000000000 -0700
-+++ /usr/local/opt/nethack/libexec/sysconf	2026-04-03 16:38:29.834346655 -0600
++++ /usr/local/opt/nethack/libexec/sysconf	2026-05-06 11:37:24.273754389 -0600
 @@ -38 +38 @@
--GENERICUSERS=play player game games nethack nethacker
+-GENERICUSERS=play player game games nethack nethacker ec2-user
 +GENERICUSERS=zozo
 @@ -106 +106 @@
 -#DUMPLOGFILE=/tmp/nethack.%n.%d.log

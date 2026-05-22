@@ -23,7 +23,7 @@ OPTIONS=pile_limit:6
 OPTIONS=mail
 
 # curses interface
-OPTIONS=symset:Enhanced1
+OPTIONS=symset:curses
 OPTIONS=windowtype:curses
 OPTIONS=align_message:top
 OPTIONS=popup_dialog
@@ -36,26 +36,27 @@ SYMBOLS=S_boulder:0
 SYMBOLS=S_eel:7
 SYMBOLS=S_ghost:X
 SYMBOLS=S_golem:9
-SYMBOLS=S_mimic_def:U+1E41
+SYMBOLS=S_mimic_def:m
+SYMBOLS=S_lava:~
+SYMBOLS=S_pool:~
+SYMBOLS=S_water:~
 
 OPTIONS=player_selection:prompts,selectsaved
-OPTIONS=!cmdassist,!legacy,!news,!splash_screen,suppress_alert:3.4.3,!tips,!tutorial
-OPTIONS=showexp,showscore,time,showdamage
+OPTIONS=!cmdassist,!legacy,!news,!splash_screen,suppress_alert:3.4.3
+OPTIONS=showexp,showscore,time
 OPTIONS=msg_window:reverse,msghistory:250
 OPTIONS=menustyle:combination
-OPTIONS=menu_headings:white&underline
-OPTIONS=query_menu
 OPTIONS=!implicit_uncursed
 OPTIONS=fixinv
 OPTIONS=disclose:yi ya nv yg yc yo
 OPTIONS=scores:5t 2a o
 
-OPTIONS=confirm,paranoid_confirmation:pray Remove attack quit wand swim trap
+OPTIONS=confirm,paranoid_confirmation:pray Remove attack quit wand
 OPTIONS=pickup_burden:burdened
 
 OPTIONS=number_pad:1
 OPTIONS=autodig,autoquiver,!pushweapon,!rest_on_space
-OPTIONS=autopickup,pickup_thrown,pickup_stolen,dropped_nopick,pickup_types:$
+OPTIONS=autopickup,pickup_thrown,pickup_types:$
 
 # Debug/wizard mode only
 OPTIONS=wizweight
