@@ -55,7 +55,7 @@ brew "micro"
 brew "ripgrep"
 brew "stow"
 brew "tmux"
-brew "vim"
+brew "vim-classic"
 
 # ----------------------------------------------------------------------------
 # more utilities
@@ -116,7 +116,6 @@ if OS.mac?
   cask "handbrake-app"
   cask "kid3"
   cask "metaz", args: { appdir: "~/Applications" }
-  cask "spotify"
   cask "vlc"
   cask "xld"
 end
@@ -143,6 +142,7 @@ end
 
 brew "aria2"
 brew "curl"
+brew "netcat"
 brew "wget"
 
 brew "alpine"
@@ -150,9 +150,6 @@ brew "bombadillo"
 brew "links"
 brew "lynx"
 brew "newsboat"
-
-brew "netcat"
-brew "ssh-copy-id", link: true
 
 if OS.mac?
   brew "dnsmasq", restart_service: :changed
@@ -181,6 +178,8 @@ end
 brew "git"
 brew "mercurial"
 brew "subversion"
+
+brew "powershell"
 
 if OS.mac?
   brew "autoconf"
@@ -212,7 +211,7 @@ brew "shellcheck"
 brew "shfmt"
 
 # (Dart) Sass
-brew "sass/sass/sass"
+brew "dart-sass"
 
 # web fonts
 brew "fontforge"
@@ -278,7 +277,6 @@ if OS.mac?
   cask "sublime-merge"
   cask "superduper"
   cask "swiftbar"
-  cask "the-unarchiver"
   cask "visual-studio-code"
   cask "xscreensaver"
 
@@ -288,7 +286,6 @@ if OS.mac?
   cask "grandperspective"
   cask "pdf-expert"
   cask "pearcleaner"
-  cask "powershell"
   cask "raspberry-pi-imager"
   cask "soulver-cli"
   cask "ungoogled-chromium"
