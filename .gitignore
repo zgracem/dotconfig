@@ -30,5 +30,6 @@ lynx/lynx_bookmarks.html
 ruby/Gemfile.lock
 
 # etc.
+*.bak
 newsboat/killfile
 newsboat/urls
