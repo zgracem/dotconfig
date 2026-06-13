@@ -16,6 +16,7 @@ vim/pack/*/
 
 # generated
 brew-aliases
+homebrew/trust.json.lock
 fish/conf.d/fish_frozen_theme.fish
 fish/conf.d/fish_frozen_key_bindings.fish
 flipperdevices.com

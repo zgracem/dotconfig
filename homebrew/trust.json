@@ -1,0 +1,12 @@
+{
+  "trustedtaps": [
+    "/Users/zozo/Developer/homebrew/homebrew-commands",
+    "/Users/zozo/Developer/homebrew/homebrew-formulae",
+    "alhadis/troff",
+    "bramstein/webfonttools",
+    "cowsay-org/cowsay",
+    "nrlquaker/createzap",
+    "potatolabs/git-redate",
+    "steamre/tools"
+  ]
+}

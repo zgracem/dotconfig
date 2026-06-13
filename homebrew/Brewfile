@@ -4,12 +4,12 @@
 # ----------------------------------------------------------------------------
 
 if OS.mac?
-  tap "nrlquaker/createzap" # `brew createzap` command
+  tap "nrlquaker/createzap", trusted: true # `brew createzap` command
   cask_args appdir: "~/Applications" # also set in HOMEBREW_CASK_OPTS
 end
 
-tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands"
-tap "zgracem/formulae", "~/Developer/Homebrew/homebrew-formulae"
+tap "zgracem/commands", "~/Developer/Homebrew/homebrew-commands", trusted: true
+tap "zgracem/formulae", "~/Developer/Homebrew/homebrew-formulae", trusted: true
 
 # ----------------------------------------------------------------------------
 # essentials
@@ -78,7 +78,7 @@ brew "ddrescue"
 brew "entr"
 brew "hexyl"
 brew "parallel"
-brew "PotatoLabs/git-redate/git-redate"
+brew "PotatoLabs/git-redate/git-redate", trusted: true
 brew "sponge"
 brew "tree"
 
@@ -87,9 +87,9 @@ brew "tree"
 brew "dos2unix"
 brew "ghostscript"
 brew "groff"
-brew "zgracem/formulae/groff-pdfmark"
+brew "zgracem/formulae/groff-pdfmark", trusted: true
 brew "help2man"
-brew "alhadis/troff/man-db" if OS.mac?
+brew "alhadis/troff/man-db", trusted: true if OS.mac?
 brew "multimarkdown"
 brew "pandoc"
 brew "par"
@@ -216,6 +216,7 @@ brew "sass/sass/sass"
 
 # web fonts
 brew "fontforge"
+tap "bramstein/webfonttools", trusted: true
 brew "bramstein/webfonttools/sfnt2woff-zopfli"
 brew "bramstein/webfonttools/sfnt2woff"
 brew "bramstein/webfonttools/woff2"
@@ -234,7 +235,7 @@ end
 # fun & games
 # ----------------------------------------------------------------------------
 
-brew "cowsay-org/cowsay/cowsay"
+brew "cowsay-org/cowsay/cowsay", trusted: true
 brew "dosbox-x"
 brew "fastfetch"
 brew "figlet"
