@@ -50,7 +50,8 @@ module Sample
 
   # @return [URI]
   def uri
-    URI("https://user:p4s$w0rd@host.example.org:8443/path/to/resource.cgi?param=value#anchor")
+    require "uri"
+    URI("https://host.example.org:8443/path/to/resource.cgi?param=value#anchor")
   end
   alias_method :url, :uri
 
