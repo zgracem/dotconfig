@@ -124,7 +124,7 @@ end
 
 brew "exif"
 brew "exiftool"
-brew "zgracem/formulae/imagemagick", link: true
+brew "zgracem/formulae/imagemagick-full-plus", link: true
 brew "mozjpeg"
 brew "pngquant"
 brew "webp"
