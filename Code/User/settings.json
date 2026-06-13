@@ -18,7 +18,7 @@
     "markdown": "multimarkdown --snippet --nolabels",
     "powershell": "pwsh -ExecutionPolicy ByPass -File",
     "python": "python3",
-    "ruby": "/usr/local/opt/ruby/bin/ruby",
+    "ruby": "/Users/zozo/.local/share/rbenv/shims/ruby",
     "sass": "sass --no-source-map --trace",
     "scss": "sass --no-source-map --trace",
     "sed": "pbpaste | gsed -E -f",
@@ -254,6 +254,7 @@
   },
   "synthwave84.disableGlow": true,
   "task.saveBeforeRun": "never",
+  "telemetry.editStats.enabled": false,
   "telemetry.telemetryLevel": "off",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.automationProfile.osx": {
@@ -316,8 +317,7 @@
   "terminal.integrated.suggest.enabled": false,
   "terminal.integrated.suggest.inlineSuggestion": "off",
   "terminal.integrated.suggest.providers": {
-    "lsp": false,
-    "vscode.terminal-suggest": false
+    "lsp": false
   },
   "terminal.integrated.tabs.description": "${process}",
   "terminal.integrated.tabs.focusMode": "singleClick",
@@ -334,6 +334,7 @@
   "window.title": "${dirty}${activeEditorShort}${separator}${activeFolderMedium}${separator}${rootNameShort}",
   "window.titleSeparator": " • ",
   "workbench.colorTheme": "Monokai Pro (Filter Octagon)",
+  "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "shrink",
