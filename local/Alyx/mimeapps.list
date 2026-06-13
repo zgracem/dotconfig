@@ -7,6 +7,7 @@ text/markdown=okularApplication_md.desktop;com.visualstudio.code.desktop;org.kde
 text/plain=com.visualstudio.code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
 
 [Default Applications]
+inode/directory=org.kde.dolphin.desktop;org.kde.filelight.desktop
 text/css=com.visualstudio.code.desktop;
 text/csv=com.visualstudio.code.desktop;
 text/csv-schema=com.visualstudio.code.desktop;
