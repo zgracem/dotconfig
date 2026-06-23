@@ -17,7 +17,6 @@ tap "zgracem/formulae", "~/Developer/Homebrew/homebrew-formulae", trusted: true
 
 if OS.mac?
   # GNU utilities
-  brew "binutils"
   brew "coreutils"
   brew "diffutils"
   brew "findutils"
@@ -25,7 +24,6 @@ if OS.mac?
   brew "gnu-sed"
   brew "gnu-tar"
   brew "grep"
-  brew "inetutils"
   brew "m4"
 
   # etc.
@@ -36,7 +34,6 @@ if OS.mac?
   brew "rename"
   brew "rsync"
   brew "pam-reattach" # for tmux
-  brew "unar"
 end
 
 if OS.linux?
@@ -49,7 +46,7 @@ brew "eza"
 brew "fd"
 brew "fish"
 brew "jq"
-brew "keychain"
+brew "keychain" unless OS.mac?
 brew "less"
 brew "micro"
 brew "ripgrep"
@@ -247,7 +244,7 @@ brew "toilet"
 if OS.mac?
   cask "inform"
   cask "steam", args: { appdir: "/Applications" }
-  cask "steamre/tools/depotdownloader"
+  # cask "steamre/tools/depotdownloader", trusted: true
   cask "twine-app"
   cask "unity-hub"
 end
