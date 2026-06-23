@@ -1,5 +1,3 @@
 fish
-yt-dlp
 zgracem/formulae/acorn@preview
 zgracem/formulae/calendar
-zgracem/formulae/imagemagick
