@@ -187,6 +187,13 @@ and abbr --add how "/usr/lib/command-not-found --"
 fish-is-newer-than 3.6 # released Jan 2023
 or return
 
+# `cd` resolves symlinks
+if fish-is-older-than 3.8 # released Jun 2026
+    abbr -a cdp --set-cursor "cd (path resolve %)"
+else
+    abbr -a cdp "cd -P"
+end
+
 # Homebrew Cask
 abbr -a cask --set-cursor "brew % --cask"
 
