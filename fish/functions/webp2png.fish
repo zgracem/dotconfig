@@ -4,8 +4,11 @@ function webp2png
     else if not set -q argv[1]
         return 2
     else
-        for img in $argv
-            dwebp -mt -o (path change-extension .png $img) $img
+        for webp_img in $argv
+            set -l png_img (path change-extension .png $webp_img)
+            dwebp -mt -o $png_img $webp_img
+            and touch -r $webp_img $png_img
+            or break
         end
     end
 end
