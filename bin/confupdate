@@ -17,7 +17,7 @@ function main -d "Update configuration from GitHub"
         case Citadel.local Pomona
             echo -s "No need for " (set_color $fish_color_command) (status basename) (set_color normal) " on this host :)"
             return
-        case Alyx phosphor.pink
+        case Alyx GlaDOS phosphor.pink
             set -gx USER_CONFIG_DIRS ~/src/**/dot{config,private}
         case "*"
             set -gx USER_CONFIG_DIRS ~/.{config,private}
