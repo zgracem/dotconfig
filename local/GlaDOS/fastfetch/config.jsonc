@@ -1,0 +1,53 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/refs/heads/dev/doc/json_schema.json",
+  "logo": {
+    "type": "builtin",
+    "source": "SteamOS",
+    "color": {
+      "1": "3;38;2;26;159;255"
+
+    }
+  },
+  "display": {
+    "color": "3;38;2;26;159;255",
+    "separator": "  ",
+    "size": {
+      "binaryPrefix": "jedec",
+      "ndigits": 1
+    }
+  },
+  "modules": [
+    {
+      "type": "title",
+      "fqdn": true
+    },
+    "separator", // -----------------------------------------------------------
+    "host",
+    "os",
+    "kernel",
+    "shell",
+    "terminal",
+    "wallpaper",
+    {
+      "type": "cpu",
+      "showPeCoreCount": true,
+      "temp": true
+    },
+    "packages", // added for Alyx
+    {
+      "type": "gpu",
+      "driverSpecific": true,
+      "temp": true
+    },
+    {
+      "type": "localip",
+      "showPrefixLen": false,
+      "showMac": true
+    },
+    {
+      "type": "publicip",
+      "timeout": 1000
+    },
+    "uptime"
+  ]
+}
