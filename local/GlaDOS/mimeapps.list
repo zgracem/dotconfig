@@ -1,0 +1,16 @@
+[Added Associations]
+text/css=com.vscodium.codium.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/csv=com.vscodium.codium.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/csv-schema=com.vscodium.codium.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/html=org.mozilla.firefox.desktop;com.vscodium.codium.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/markdown=okularApplication_md.desktop;com.vscodium.codium.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+text/plain=com.vscodium.codium.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;vim.desktop;
+
+[Default Applications]
+inode/directory=org.kde.dolphin.desktop;org.kde.filelight.desktop
+text/css=com.vscodium.codium.desktop;
+text/csv=com.vscodium.codium.desktop;
+text/csv-schema=com.vscodium.codium.desktop;
+text/html=org.mozilla.firefox.desktop;
+text/markdown=okularApplication_md.desktop;
+text/plain=com.vscodium.codium.desktop;
