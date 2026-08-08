@@ -20,9 +20,9 @@ status is-interactive; or return
 # launch standalone or dev build if present
 set -l local_fish (path filter $XDG_BIN_HOME/fish /home/linuxbrew/.linuxbrew/bin/fish)
 and test $SHLVL -lt 2
-and string match -v -q (status fish-path) (path resolve $local_fish)
-and test -x $local_fish
-and exec $local_fish
+and string match -v -q (status fish-path) (path resolve $local_fish[-1])
+and test -x $local_fish[-1]
+and exec $local_fish[-1]
 
 # function subdirectories
 set -p fish_function_path "$__fish_config_dir/functions/_wrappers"
