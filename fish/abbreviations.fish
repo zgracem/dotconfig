@@ -180,6 +180,9 @@ and abbr --add agh "sudo /opt/AdGuardHome/AdGuardHome -s"
 path is -x /usr/lib/command-not-found
 and abbr --add how "/usr/lib/command-not-found --"
 
+command -q com.github.Matoking.protontricks
+and abbr --add protontricks com.github.Matoking.protontricks
+
 # ----------------------------------------------------------------------------
 # advanced
 # ----------------------------------------------------------------------------
