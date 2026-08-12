@@ -1,0 +1,1 @@
+../../../Alyx/fish/functions/update-decky.fish
