@@ -342,6 +342,9 @@
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.useModal": "off",
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  },
   "workbench.enableExperiments": false,
   "workbench.experimental.enableNewProfilesUI": true,
   "workbench.externalBrowser": "firefox",
