@@ -97,8 +97,6 @@ end
 # -----------------------------------------------------------------------------
 
 abbr -a cronl 'crontab -l | bat -lcrontab -pp'
-abbr -a dr 'defaults read'
-abbr -a dw 'defaults write'
 abbr -a e 'echo'
 abbr -a mime 'file --brief --mime-type'
 abbr -a pman 'manpdf -o'
@@ -111,9 +109,13 @@ abbr -a 'c?' compsrc
 abbr -a 'f?' funcsrc
 abbr -a 'm?' mansrc
 
-abbr -a xcl 'sudo xcodebuild -license'
-abbr -a xcp 'xcode-select --print-path'
-abbr -a xcs 'sudo xcode-select --switch'
+if is-macos
+    abbr -a dr 'defaults read'
+    abbr -a dw 'defaults write'
+    abbr -a xcl 'sudo xcodebuild -license'
+    abbr -a xcp 'xcode-select --print-path'
+    abbr -a xcs 'sudo xcode-select --switch'
+end
 
 abbr -a ds_ 'rm -fv **/.DS_Store'
 
