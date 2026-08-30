@@ -14,7 +14,7 @@ function is-wsl --description 'Returns true if running on Windows Subsystem for 
     uname -s | string match -q "Microsoft"
 end
 
-function is-deck --description 'Returns true if running on SteamOS'
+function is-steamos --description 'Returns true if running on SteamOS'
     uname -r | string match -q "*-valve*"
 end
 
