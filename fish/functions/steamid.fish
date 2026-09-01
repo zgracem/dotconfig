@@ -1,10 +1,19 @@
 function steamid
     argparse l/list s/search h/help -- $argv
     or return
-    set -f usage "steamid [-l|--list] [-s|--search] [id ...]"
 
-    __steamid_find_folders
-    or return
+    set -f usage "steamid [-l|--list] [-s|--search NAME] [ID ...]"
+
+    if is-macos
+        set -f steam_folders "$HOME/Library/Application Support/Steam/SteamApps"
+        set -a steam_folders /Volumes/*/Steam/steamapps
+    else if is-steamos
+        set -f steam_folders $HOME/.local/share/Steam/steamapps
+        set -a steam_folders /run/media/deck/*/steamapps
+    else
+        return 71
+    end
+    set -f steam_folders (path filter -d $steam_folders)
 
     if set -q _flag_list[1]
         __steamid_list_all $steam_folders
@@ -16,7 +25,7 @@ function steamid
         echo "Usage: $usage"
         return
     else if not set -q argv[1]
-        echo "Usage: $usage"
+        echo >&2 "Usage: $usage"
         return 2
     end
 
@@ -33,37 +42,22 @@ function steamid
     end
 end
 
-function __steamid_list_all
+function __steamid_list_all -d 'List all game IDs and their titles'
     set -f manifests $argv/appmanifest_*.acf
     if not set -q manifests[1]
-        echo >&2 "No manifests found: $argv"
+        echo >&2 "No manifests found in any folder: $argv"
         return 1
     end
+    echo -s (set_color -u) "ID" (set_color normal) \t (set_color -u) "Name" (set_color normal)
     for file in $manifests
-        set -l id (__steamid_id_from_file $file)
-        set -l name (__steamid_name_from_file $file)
-        printf "%d\t%s\n" $id $name
+        printf "%d\t%s\n" (__steamid_id_from_file $file) (__steamid_name_from_file $file)
     end | sort -nu
 end
 
-function __steamid_find_folders
-    set -q -g steam_folders[1]; and return 0
-    if is-macos
-        set -gx steam_folders "$HOME/Library/Application Support/Steam/SteamApps"
-        set -a steam_folders /Volumes/*/Steam/steamapps
-    else if is-steamos
-        set -gx steam_folders $HOME/.local/share/Steam/steamapps
-        set -a steam_folders /run/media/deck/*/steamapps
-    else
-        return 71
-    end
-    set -gx steam_folders (path filter -d $steam_folders)
-end
-
-function __steamid_id_from_file
+function __steamid_id_from_file -d 'Extract ID from manifest filename'
     string match -rg 'appmanifest_(\d+)\.acf' $argv
 end
 
-function __steamid_name_from_file
+function __steamid_name_from_file -d 'Extract name from manifest file contents'
     string match -rg '"name"\s+"(.+)"$' <$argv[1] | uniq
 end
