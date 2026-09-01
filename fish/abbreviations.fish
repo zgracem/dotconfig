@@ -206,6 +206,13 @@ abbr -a cask --set-cursor "brew % --cask"
 abbr -a cdls --set-cursor "cd %; $_ls_command"
 abbr -a cdll --set-cursor "cd %; $_ll_command"
 
+# Dolphin file explorer
+if is-steamos
+    abbr -a f --position anywhere --set-cursor "dolphin % &"
+    abbr -a f. "dolphin . &"
+    abbr -a reveal --position anywhere --set-cursor "dolphin --select % &"
+end
+
 # print in columns
 # :c → `% | column`
 abbr -a :c --position anywhere --set-cursor "%| column"
