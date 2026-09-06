@@ -1,8 +1,8 @@
 function steamid
-    argparse l/list s/search h/help -- $argv
+    argparse d/dirs l/list s/search h/help -- $argv
     or return
 
-    set -f usage "steamid [-l|--list] [-s|--search NAME] [ID ...]"
+    set -f usage "steamid [-d|--dirs] [-l|--list] [-s|--search NAME] [ID ...]"
 
     if is-macos
         set -f steam_folders "$HOME/Library/Application Support/Steam/SteamApps"
@@ -15,7 +15,10 @@ function steamid
     end
     set -f steam_folders (path filter -d $steam_folders)
 
-    if set -q _flag_list[1]
+    if set -q _flag_dirs[1]
+        echo -ns $steam_folders\n
+        return
+    else if set -q _flag_list[1]
         __steamid_list_all $steam_folders
         return
     else if set -q _flag_search[1]
